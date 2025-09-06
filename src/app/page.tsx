@@ -92,162 +92,293 @@ export default function HomePage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      {/* Hero Section - TechRadar Style */}
-      <section className="bg-white border-b">
-        <div className="container mx-auto px-4 py-8">
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Main Hero Article */}
+    <main className="min-h-screen bg-white" style={{ fontFamily: '"Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+      {/* TechRadar-style Hero Grid */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            
+            {/* Large Hero Article - TechRadar Style */}
             <div className="lg:col-span-2">
               <Link href={heroArticle.href}>
-                <article className="group cursor-pointer">
-                  <div className="aspect-video bg-gradient-to-br from-blue-100 to-indigo-200 rounded-lg mb-4 relative overflow-hidden">
+                <article className="group cursor-pointer relative">
+                  <div className="relative aspect-[16/10] bg-gradient-to-br from-slate-800 to-slate-900 rounded-sm overflow-hidden">
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-20 h-20 bg-white/20 rounded-xl flex items-center justify-center">
-                        <span className="text-4xl">📱</span>
+                      <div className="w-24 h-24 bg-white/10 rounded-lg flex items-center justify-center">
+                        <span className="text-5xl opacity-60">📱</span>
                       </div>
                     </div>
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-red-600 text-white text-sm font-medium rounded">
+                    {/* TechRadar-style Category Tag */}
+                    <div className="absolute top-3 left-3">
+                      <span className="px-2 py-1 bg-red-600 text-white text-xs font-bold uppercase tracking-wide">
                         {heroArticle.category}
                       </span>
                     </div>
-                  </div>
-                  <div className="space-y-3">
-                    <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
-                      {heroArticle.title}
-                    </h1>
-                    <p className="text-gray-600 leading-relaxed">
-                      {heroArticle.description}
-                    </p>
-                    <div className="flex items-center gap-4 text-sm text-gray-500">
-                      <span>By {heroArticle.author}</span>
-                      <span>•</span>
-                      <span>{new Date(heroArticle.publishedAt).toLocaleDateString()}</span>
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    {/* Article info overlay */}
+                    <div className="absolute bottom-4 left-4 right-4 text-white">
+                      <h1 className="text-xl lg:text-2xl font-bold mb-2 leading-tight group-hover:text-blue-200 transition-colors">
+                        {heroArticle.title}
+                      </h1>
+                      <div className="flex items-center gap-3 text-sm opacity-90">
+                        <span>{heroArticle.author}</span>
+                        <span>•</span>
+                        <span>{new Date(heroArticle.publishedAt).toLocaleDateString()}</span>
+                      </div>
                     </div>
                   </div>
                 </article>
               </Link>
             </div>
 
-            {/* Sidebar - Latest News */}
-            <div className="space-y-6">
-              <div>
-                <h2 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
-                  Latest News
-                </h2>
-                <div className="space-y-4">
-                  {newsArticles.map((article, index) => (
+            {/* Secondary Featured Articles - TechRadar Grid Style */}
+            <div className="lg:col-span-2 grid grid-cols-1 gap-4">
+              {featuredArticles.slice(0, 2).map((article, index) => (
+                <Link key={index} href={article.href}>
+                  <article className="group cursor-pointer flex gap-4 p-3 hover:bg-gray-50 transition-colors">
+                    <div className="flex-shrink-0 w-24 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded relative overflow-hidden">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-lg opacity-60">📱</span>
+                      </div>
+                      <div className="absolute top-1 left-1">
+                        <span className="px-1.5 py-0.5 bg-blue-600 text-white text-xs font-bold uppercase">
+                          {article.category.substring(0, 3)}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-sm text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">
+                        {article.title}
+                      </h3>
+                      <p className="text-xs text-gray-600 line-clamp-2 mb-2">
+                        {article.description}
+                      </p>
+                      <div className="text-xs text-gray-500">
+                        {new Date(article.publishedAt).toLocaleDateString()}
+                      </div>
+                    </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TechRadar-style Navigation Bar */}
+      <section className="bg-slate-800 text-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between py-3">
+            <div className="flex items-center space-x-6">
+              {[
+                { name: "REVIEWS", href: "/reviews", active: false },
+                { name: "BUYING GUIDES", href: "/best", active: false },
+                { name: "NEWS", href: "/news", active: true },
+                { name: "VERSUS", href: "/compare", active: false },
+                { name: "HOW TO", href: "/guides", active: false }
+              ].map((nav) => (
+                <Link key={nav.name} href={nav.href}>
+                  <span className={`text-sm font-bold uppercase tracking-wide hover:text-blue-300 transition-colors ${nav.active ? 'text-blue-300 border-b-2 border-blue-300 pb-3' : ''}`}>
+                    {nav.name}
+                  </span>
+                </Link>
+              ))}
+            </div>
+            <div className="hidden md:flex items-center space-x-4">
+              <span className="text-xs text-gray-300">TRENDING:</span>
+              <Link href="/news/iphone-16-leak" className="text-xs text-blue-300 hover:underline">iPhone 16 Pro</Link>
+              <Link href="/news/galaxy-s25" className="text-xs text-blue-300 hover:underline">Galaxy S25</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content Area - TechRadar 3-Column Layout */}
+      <section className="py-8">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            
+            {/* Left Column - Main Content */}
+            <div className="lg:col-span-3">
+              
+              {/* Latest Reviews Section */}
+              <div className="mb-10">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-gray-900 uppercase tracking-wide">Latest Reviews</h2>
+                  <Link href="/reviews" className="text-sm font-bold text-blue-600 hover:text-blue-800 uppercase tracking-wide">
+                    All Reviews
+                  </Link>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {featuredArticles.map((article, index) => (
                     <Link key={index} href={article.href}>
-                      <article className="group cursor-pointer pb-4 border-b border-gray-100 last:border-b-0">
-                        <div className="flex items-start gap-2 mb-2">
-                          <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded">
-                            {article.category}
-                          </span>
-                          <span className="text-xs text-gray-500">
-                            {new Date(article.publishedAt).toLocaleDateString()}
-                          </span>
+                      <article className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+                        <div className="relative aspect-[16/10] bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-16 h-16 bg-gray-300 rounded-lg flex items-center justify-center">
+                              <span className="text-2xl opacity-60">📱</span>
+                            </div>
+                          </div>
+                          <div className="absolute top-3 left-3">
+                            <span className="px-2 py-1 bg-green-600 text-white text-xs font-bold uppercase">
+                              {article.category}
+                            </span>
+                          </div>
+                          {/* TechRadar-style rating badge */}
+                          <div className="absolute top-3 right-3 bg-black/70 text-white px-2 py-1 rounded">
+                            <div className="flex items-center gap-1">
+                              <span className="text-yellow-400 text-sm">★</span>
+                              <span className="text-xs font-bold">4.5</span>
+                            </div>
+                          </div>
                         </div>
-                        <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug">
-                          {article.title}
-                        </h3>
-                        <p className="text-sm text-gray-600 leading-relaxed">
-                          {article.description}
-                        </p>
+                        <div className="p-4">
+                          <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2 text-lg">
+                            {article.title}
+                          </h3>
+                          <p className="text-gray-600 text-sm line-clamp-2 mb-3">
+                            {article.description}
+                          </p>
+                          <div className="flex items-center justify-between text-xs text-gray-500">
+                            <span>{new Date(article.publishedAt).toLocaleDateString()}</span>
+                            <span className="font-bold uppercase tracking-wide">Read Review</span>
+                          </div>
+                        </div>
                       </article>
                     </Link>
                   ))}
                 </div>
               </div>
 
-              {/* Best Of Guides */}
-              <div>
-                <h2 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">
-                  Best Of 2025
-                </h2>
-                <div className="space-y-3">
-                  {bestGuides.map((guide, index) => (
-                    <Link key={index} href={guide.href}>
-                      <div className="flex items-center gap-3 p-3 bg-white rounded-lg hover:shadow-sm transition-shadow cursor-pointer">
-                        <span className="text-2xl">{guide.icon}</span>
-                        <div>
-                          <h3 className="font-semibold text-gray-900 hover:text-blue-600 transition-colors">
-                            {guide.title}
-                          </h3>
-                          <p className="text-sm text-gray-500">{guide.count}</p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
+              {/* Breaking News Strip */}
+              <div className="mb-8">
+                <div className="bg-red-600 text-white p-4 rounded-sm">
+                  <div className="flex items-center gap-4">
+                    <span className="font-bold uppercase text-sm bg-white text-red-600 px-2 py-1 rounded">Breaking</span>
+                    <span className="font-bold">Apple Vision Pro 2 confirmed for Q4 2025 with major price reduction</span>
+                    <Link href="/news/vision-pro-2" className="ml-auto text-sm underline hover:no-underline">Read More</Link>
+                  </div>
                 </div>
               </div>
+              
+            </div>
+
+            {/* Right Sidebar - TechRadar Style */}
+            <div className="lg:col-span-1">
+              
+              {/* Popular Stories */}
+              <div className="mb-8">
+                <div className="bg-gray-900 text-white p-4 mb-4">
+                  <h2 className="text-lg font-bold uppercase tracking-wide">Popular Stories</h2>
+                </div>
+                <div className="bg-white border border-gray-200 p-4">
+                  <div className="space-y-4">
+                    {newsArticles.map((article, index) => (
+                      <Link key={index} href={article.href}>
+                        <article className="group cursor-pointer pb-4 border-b border-gray-100 last:border-b-0">
+                          <div className="flex items-start gap-2 mb-2">
+                            <span className="px-2 py-1 bg-red-600 text-white text-xs font-bold uppercase">
+                              {article.category}
+                            </span>
+                          </div>
+                          <h3 className="font-bold text-sm text-gray-900 group-hover:text-blue-600 transition-colors mb-1 leading-tight">
+                            {article.title}
+                          </h3>
+                          <div className="text-xs text-gray-500">
+                            {new Date(article.publishedAt).toLocaleDateString()}
+                          </div>
+                        </article>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Best Of Guides - TechRadar Style */}
+              <div className="mb-8">
+                <div className="bg-blue-600 text-white p-4 mb-4">
+                  <h2 className="text-lg font-bold uppercase tracking-wide">Best Of 2025</h2>
+                </div>
+                <div className="bg-white border border-gray-200 p-4">
+                  <div className="space-y-3">
+                    {bestGuides.map((guide, index) => (
+                      <Link key={index} href={guide.href}>
+                        <div className="group flex items-center gap-3 p-3 hover:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100 last:border-b-0">
+                          <span className="text-2xl">{guide.icon}</span>
+                          <div>
+                            <h3 className="font-bold text-sm text-gray-900 group-hover:text-blue-600 transition-colors">
+                              {guide.title}
+                            </h3>
+                            <p className="text-xs text-gray-500">{guide.count}</p>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Newsletter Signup - TechRadar Style */}
+              <div className="mb-8">
+                <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-6 text-center">
+                  <h3 className="font-bold text-lg mb-2 uppercase tracking-wide">Stay Updated</h3>
+                  <p className="text-sm mb-4 opacity-90">Get the latest tech reviews and news delivered to your inbox</p>
+                  <div className="space-y-2">
+                    <input 
+                      type="email" 
+                      placeholder="Enter your email"
+                      className="w-full px-3 py-2 text-gray-900 text-sm rounded"
+                    />
+                    <button className="w-full bg-white text-purple-600 font-bold py-2 px-4 rounded text-sm uppercase tracking-wide hover:bg-gray-100 transition-colors">
+                      Subscribe
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Trending Topics */}
+              <div>
+                <div className="bg-gray-800 text-white p-4 mb-4">
+                  <h2 className="text-lg font-bold uppercase tracking-wide">Trending</h2>
+                </div>
+                <div className="bg-white border border-gray-200 p-4">
+                  <div className="flex flex-wrap gap-2">
+                    {["iPhone 16 Pro", "Galaxy S25", "Pixel 9", "Vision Pro 2", "MacBook Air", "Tesla Phone"].map((tag) => (
+                      <Link key={tag} href={`/search?q=${encodeURIComponent(tag)}`}>
+                        <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-bold uppercase tracking-wide hover:bg-blue-100 hover:text-blue-700 transition-colors cursor-pointer">
+                          {tag}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Reviews Grid */}
-      <section className="py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Featured Reviews</h2>
-            <Link href="/reviews" className="text-blue-600 hover:text-blue-800 font-medium text-sm">
-              All Reviews →
-            </Link>
+      {/* Bottom Newsletter Section - TechRadar Style */}
+      <section className="py-12 bg-slate-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-4 uppercase tracking-wide">Get the Latest Tech News</h2>
+          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+            Join thousands of tech enthusiasts who trust Trends Today for unbiased reviews, breaking news, and expert buying advice.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+            <input 
+              type="email"
+              placeholder="Your email address"
+              className="flex-1 px-4 py-3 text-gray-900 rounded-sm"
+            />
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-sm uppercase tracking-wide transition-colors">
+              Subscribe Free
+            </button>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredArticles.map((article, index) => (
-              <Link key={index} href={article.href}>
-                <article className="group cursor-pointer bg-white rounded-lg overflow-hidden hover:shadow-md transition-shadow">
-                  <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 relative">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-12 h-12 bg-gray-300 rounded-lg flex items-center justify-center">
-                        <span className="text-xl">📱</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded">
-                        {article.category}
-                      </span>
-                      <span className="text-xs text-gray-500">
-                        {new Date(article.publishedAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                    <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
-                      {article.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm line-clamp-3">
-                      {article.description}
-                    </p>
-                  </div>
-                </article>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Categories Strip */}
-      <section className="py-8 bg-white border-t">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { name: "Reviews", href: "/reviews", icon: "⭐", color: "bg-red-50 text-red-600" },
-              { name: "Comparisons", href: "/compare", icon: "⚖️", color: "bg-blue-50 text-blue-600" },
-              { name: "Buying Guides", href: "/best", icon: "🛒", color: "bg-green-50 text-green-600" },
-              { name: "News", href: "/news", icon: "📰", color: "bg-purple-50 text-purple-600" }
-            ].map((category) => (
-              <Link key={category.name} href={category.href}>
-                <div className={`${category.color} rounded-lg p-4 text-center hover:shadow-sm transition-shadow cursor-pointer`}>
-                  <div className="text-2xl mb-2">{category.icon}</div>
-                  <h3 className="font-semibold">{category.name}</h3>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <p className="text-xs text-gray-400 mt-4">No spam. Unsubscribe anytime.</p>
         </div>
       </section>
     </main>
