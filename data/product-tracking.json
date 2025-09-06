@@ -1,0 +1,88 @@
+{
+  "products": [
+    {
+      "name": "iPhone 16 Pro Max",
+      "brand": "Apple",
+      "category": "smartphones",
+      "source": "Apple Newsroom",
+      "sourceUrl": "https://www.apple.com/newsroom/",
+      "announcementType": "official",
+      "discoveredAt": "2025-09-06T23:43:50.153Z",
+      "status": "announced",
+      "confidence": 9,
+      "details": {
+        "specifications": [
+          "Advanced processor",
+          "Improved camera system",
+          "Enhanced battery life"
+        ],
+        "pricing": "$999",
+        "availability": "Expected Q2 2025",
+        "keyFeatures": [
+          "Pro camera system",
+          "All-day battery",
+          "Premium design"
+        ],
+        "targetMarket": "Tech enthusiasts and professionals"
+      }
+    },
+    {
+      "name": "Galaxy S25 Ultra",
+      "brand": "Samsung",
+      "category": "smartphones",
+      "source": "Samsung News",
+      "sourceUrl": "https://news.samsung.com/us/",
+      "announcementType": "official",
+      "discoveredAt": "2025-09-06T23:43:50.153Z",
+      "status": "rumored",
+      "confidence": 7,
+      "details": {
+        "specifications": [
+          "Advanced processor",
+          "Improved camera system",
+          "Enhanced battery life"
+        ],
+        "pricing": "$999",
+        "availability": "Expected Q2 2025",
+        "keyFeatures": [
+          "Pro camera system",
+          "All-day battery",
+          "Premium design"
+        ],
+        "targetMarket": "Tech enthusiasts and professionals"
+      }
+    },
+    {
+      "name": "Pixel 9 Pro XL",
+      "brand": "Google",
+      "category": "smartphones",
+      "source": "Google Blog",
+      "sourceUrl": "https://blog.google/",
+      "announcementType": "official",
+      "discoveredAt": "2025-09-06T23:43:50.153Z",
+      "status": "announced",
+      "confidence": 8,
+      "details": {
+        "specifications": [
+          "Advanced processor",
+          "Improved camera system",
+          "Enhanced battery life"
+        ],
+        "pricing": "$999",
+        "availability": "Expected Q2 2025",
+        "keyFeatures": [
+          "Pro camera system",
+          "All-day battery",
+          "Premium design"
+        ],
+        "targetMarket": "Tech enthusiasts and professionals"
+      }
+    }
+  ],
+  "lastUpdated": "2025-09-06T23:43:56.170Z",
+  "stats": {
+    "total": 3,
+    "new": 3,
+    "updated": 0
+  }
+}

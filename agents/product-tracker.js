@@ -82,8 +82,8 @@ class ProductTracker {
           discoveries.push(...products);
         }
 
-        // Rate limiting
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        // Rate limiting (reduced for testing)
+        await new Promise(resolve => setTimeout(resolve, 500));
 
       } catch (error) {
         console.log(`Error scanning ${source.name}: ${error.message}`);
@@ -251,7 +251,7 @@ class ProductTracker {
           'Authorization': `Bearer ${this.perplexityApiKey}`,
         },
         body: JSON.stringify({
-          model: 'llama-3.1-sonar-large-128k-online',
+          model: 'sonar',
           messages: [
             {
               role: 'system',
@@ -419,8 +419,8 @@ class ProductTracker {
           const enhancedProduct = { ...discovery, details };
           newProducts.push(enhancedProduct);
           
-          // Rate limiting for API calls
-          await new Promise(resolve => setTimeout(resolve, 2000));
+          // Rate limiting for API calls (reduced for testing)
+          await new Promise(resolve => setTimeout(resolve, 500));
         }
       }
 

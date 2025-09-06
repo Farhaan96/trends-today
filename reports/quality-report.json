@@ -1,0 +1,122 @@
+{
+  "generatedAt": "2025-09-06T23:47:31.833Z",
+  "summary": {
+    "totalFiles": 10,
+    "validFiles": 6,
+    "invalidFiles": 4,
+    "totalIssues": 6,
+    "averageScore": 81.5
+  },
+  "issues": {
+    "critical": 1,
+    "warning": 0,
+    "good": 9
+  },
+  "files": [
+    {
+      "path": "news\\first-of-its-kind-ai-settlement-anthropic-to-pay-authors-1-5.mdx",
+      "contentType": "news",
+      "isValid": false,
+      "score": 55,
+      "issuesCount": 3,
+      "warningsCount": 3,
+      "topIssues": [
+        "Title too long: 72 chars (max 60)",
+        "Description too long: 176 chars (max 160)",
+        "Content too short: 256 words (min 300)"
+      ]
+    },
+    {
+      "path": "reviews\\google-pixel-8-pro-review.mdx",
+      "contentType": "reviews",
+      "isValid": false,
+      "score": 80,
+      "issuesCount": 1,
+      "warningsCount": 2,
+      "topIssues": [
+        "Title too long: 66 chars (max 60)"
+      ]
+    },
+    {
+      "path": "reviews\\google-pixel-9-pro-review.mdx",
+      "contentType": "reviews",
+      "isValid": true,
+      "score": 90,
+      "issuesCount": 0,
+      "warningsCount": 2,
+      "topIssues": []
+    },
+    {
+      "path": "reviews\\iphone-15-pro-max-review.mdx",
+      "contentType": "reviews",
+      "isValid": false,
+      "score": 80,
+      "issuesCount": 1,
+      "warningsCount": 2,
+      "topIssues": [
+        "Title too long: 64 chars (max 60)"
+      ]
+    },
+    {
+      "path": "reviews\\iphone-15-pro-review.mdx",
+      "contentType": "reviews",
+      "isValid": true,
+      "score": 85,
+      "issuesCount": 0,
+      "warningsCount": 3,
+      "topIssues": []
+    },
+    {
+      "path": "reviews\\iphone-16-pro-review.mdx",
+      "contentType": "reviews",
+      "isValid": true,
+      "score": 85,
+      "issuesCount": 0,
+      "warningsCount": 3,
+      "topIssues": []
+    },
+    {
+      "path": "reviews\\macbook-air-m3-review.mdx",
+      "contentType": "reviews",
+      "isValid": true,
+      "score": 85,
+      "issuesCount": 0,
+      "warningsCount": 3,
+      "topIssues": []
+    },
+    {
+      "path": "reviews\\oneplus-12-review.mdx",
+      "contentType": "reviews",
+      "isValid": true,
+      "score": 85,
+      "issuesCount": 0,
+      "warningsCount": 3,
+      "topIssues": []
+    },
+    {
+      "path": "reviews\\samsung-galaxy-s24-ultra-review.mdx",
+      "contentType": "reviews",
+      "isValid": false,
+      "score": 80,
+      "issuesCount": 1,
+      "warningsCount": 2,
+      "topIssues": [
+        "Title too long: 63 chars (max 60)"
+      ]
+    },
+    {
+      "path": "reviews\\xiaomi-14-ultra-review.mdx",
+      "contentType": "reviews",
+      "isValid": true,
+      "score": 90,
+      "issuesCount": 0,
+      "warningsCount": 2,
+      "topIssues": []
+    }
+  ],
+  "recommendations": [
+    "Fix 4 files with critical issues",
+    "Improve 1 files with low quality scores",
+    "Address common issues: Title too long, Description too long, Content too short"
+  ]
+}

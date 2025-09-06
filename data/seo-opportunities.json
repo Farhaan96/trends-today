@@ -1,0 +1,57 @@
+{
+  "zeroVolumeKeywords": [
+    {
+      "keyword": "spatial computing setup guide",
+      "analysis": "Limited existing content for this emerging technology. Good opportunity for informational content.",
+      "intent": "informational",
+      "competition": "low",
+      "potential": 8,
+      "contentType": "how-to",
+      "foundAt": "2025-09-06T23:43:46.871Z"
+    },
+    {
+      "keyword": "AI assistant vs smart speaker",
+      "analysis": "Emerging comparison topic with moderate interest but limited comprehensive comparisons.",
+      "intent": "comparison",
+      "competition": "low",
+      "potential": 7,
+      "contentType": "comparison",
+      "foundAt": "2025-09-06T23:43:46.872Z"
+    },
+    {
+      "keyword": "neural processor worth it",
+      "analysis": "New technology adoption questions are underserved in current content landscape.",
+      "intent": "commercial",
+      "competition": "low",
+      "potential": 8,
+      "contentType": "review",
+      "foundAt": "2025-09-06T23:43:46.872Z"
+    }
+  ],
+  "trendingTopics": [
+    {
+      "topic": "Spatial Computing",
+      "description": "Next-generation interface technology combining AR/VR",
+      "potential": 9,
+      "suggestedKeywords": [
+        "spatial computing how to use",
+        "spatial computing vs VR",
+        "spatial computing setup guide"
+      ],
+      "foundAt": "2025-09-06T23:43:46.872Z"
+    },
+    {
+      "topic": "Neural Processing Units",
+      "description": "Specialized chips for AI computations in consumer devices",
+      "potential": 8,
+      "suggestedKeywords": [
+        "neural processor review",
+        "NPU vs CPU",
+        "neural processing worth it"
+      ],
+      "foundAt": "2025-09-06T23:43:46.872Z"
+    }
+  ],
+  "lastUpdated": "2025-09-06T23:43:46.872Z",
+  "totalOpportunities": 5
+}

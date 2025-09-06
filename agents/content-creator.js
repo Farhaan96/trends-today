@@ -128,7 +128,7 @@ class SmartContentCreator {
           'Authorization': `Bearer ${this.perplexityApiKey}`,
         },
         body: JSON.stringify({
-          model: 'llama-3.1-sonar-large-128k-online',
+          model: 'sonar pro',
           messages: [
             { role: 'system', content: systemPrompt },
             { role: 'user', content: userPrompt }
@@ -598,8 +598,8 @@ images:
           const result = await this.createNewsArticle(item);
           if (result) results.push(result);
           
-          // Rate limiting
-          await new Promise(resolve => setTimeout(resolve, 3000));
+          // Rate limiting (reduced for testing)
+          await new Promise(resolve => setTimeout(resolve, 500));
         }
       } else if (type === 'howto') {
         const keywords = opportunities.seo.zeroVolumeKeywords
@@ -610,8 +610,8 @@ images:
           const result = await this.createHowToGuide(keyword);
           if (result) results.push(result);
           
-          // Rate limiting
-          await new Promise(resolve => setTimeout(resolve, 3000));
+          // Rate limiting (reduced for testing)
+          await new Promise(resolve => setTimeout(resolve, 500));
         }
       }
 
