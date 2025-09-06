@@ -1,0 +1,63 @@
+{
+  "research": {
+    "specs": {
+      "display": "6.1-inch display",
+      "processor": "Advanced chip",
+      "camera": "Multi-lens system"
+    },
+    "pros": [
+      "Great performance",
+      "Good build quality",
+      "Nice design"
+    ],
+    "cons": [
+      "Expensive",
+      "Battery could be better"
+    ],
+    "priceRange": "$699-$999",
+    "competitorComparisons": [
+      "Competitor A",
+      "Competitor B"
+    ],
+    "sources": [
+      "manufacturer.com",
+      "techsite.com"
+    ],
+    "productName": "MacBook Air M3"
+  },
+  "keywordData": [
+    {
+      "keyword": "MacBook Pro 14 review",
+      "volume": 6700,
+      "kd": 71,
+      "intent": "commercial",
+      "cpc": 3.12
+    },
+    {
+      "keyword": "Dell XPS 13 review",
+      "volume": 4200,
+      "kd": 68,
+      "intent": "commercial",
+      "cpc": 2.87
+    },
+    {
+      "keyword": "best laptops 2025",
+      "volume": 18900,
+      "kd": 78,
+      "intent": "commercial",
+      "cpc": 3.89
+    }
+  ],
+  "competitorUrls": [
+    "https://example.com/review1",
+    "https://example.com/review2"
+  ],
+  "scrapedContent": [
+    {
+      "success": true,
+      "data": {
+        "markdown": "Demo competitor content about product features and performance..."
+      }
+    }
+  ]
+}
