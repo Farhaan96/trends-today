@@ -1,0 +1,16 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Host
+Host: https://trendstoday.ca
+
+# Sitemaps
+Sitemap: https://trendstoday.ca/sitemap.xml
+Sitemap: https://trendstoday.ca/news-sitemap.xml

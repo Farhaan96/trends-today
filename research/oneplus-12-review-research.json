@@ -1,0 +1,86 @@
+{
+  "research": {
+    "specs": {
+      "display": "6.82-inch LTPO AMOLED",
+      "processor": "Snapdragon 8 Gen 3",
+      "camera": "50MP Main, 64MP Periscope, 48MP Ultra Wide",
+      "battery": "5400mAh with 100W SuperVOOC",
+      "storage": "256GB, 512GB",
+      "charging": "100W wired, 50W wireless"
+    },
+    "pros": [
+      "Blazing fast 100W charging",
+      "Excellent price-to-performance ratio",
+      "Smooth OxygenOS experience",
+      "Great display quality",
+      "Strong flagship performance"
+    ],
+    "cons": [
+      "Camera quality behind Pixel/iPhone",
+      "No wireless charging in base model",
+      "Limited availability in some regions",
+      "OxygenOS bugs occasionally present"
+    ],
+    "priceRange": "$799-$899",
+    "competitorComparisons": [
+      "iPhone 15",
+      "Galaxy S24",
+      "Pixel 8"
+    ],
+    "sources": [
+      "oneplus.com",
+      "gsmarena.com",
+      "androidauthority.com"
+    ],
+    "productName": "OnePlus 12"
+  },
+  "keywordData": [
+    {
+      "keyword": "iPhone 15 Pro review",
+      "volume": 8100,
+      "kd": 68,
+      "intent": "commercial",
+      "cpc": 2.45
+    },
+    {
+      "keyword": "Samsung Galaxy S24 review",
+      "volume": 5400,
+      "kd": 72,
+      "intent": "commercial",
+      "cpc": 2.12
+    },
+    {
+      "keyword": "Google Pixel 8 Pro review",
+      "volume": 2900,
+      "kd": 58,
+      "intent": "commercial",
+      "cpc": 1.87
+    },
+    {
+      "keyword": "OnePlus 12 review",
+      "volume": 1800,
+      "kd": 54,
+      "intent": "commercial",
+      "cpc": 1.65
+    },
+    {
+      "keyword": "best smartphones 2025",
+      "volume": 14800,
+      "kd": 76,
+      "intent": "commercial",
+      "cpc": 3.21
+    }
+  ],
+  "competitorUrls": [
+    "https://example.com/review1",
+    "https://example.com/review2"
+  ],
+  "scrapedContent": [
+    {
+      "success": true,
+      "data": {
+        "markdown": "Demo competitor content about product features and performance..."
+      }
+    }
+  ]
+}

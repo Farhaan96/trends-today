@@ -1,0 +1,232 @@
+export { FirecrawlClient, firecrawl } from './firecrawl';
+export { PerplexityClient, perplexity } from './perplexity';
+export { DataForSEOClient, dataForSEO } from './dataforseo';
+export { demoKeywordData, demoProductData, demoNewsData, isDemoMode, getDemoModeWarning, simulateApiDelay } from './demo-data';
+
+export class MCPClient {
+  public firecrawl: FirecrawlClient;
+  public perplexity: PerplexityClient;
+  public dataForSEO: DataForSEOClient;
+
+  constructor(options?: {
+    firecrawlKey?: string;
+    perplexityKey?: string;
+    dataForSEOLogin?: string;
+    dataForSEOPassword?: string;
+  }) {
+    this.firecrawl = new FirecrawlClient(options?.firecrawlKey);
+    this.perplexity = new PerplexityClient(options?.perplexityKey);
+    this.dataForSEO = new DataForSEOClient(options?.dataForSEOLogin, options?.dataForSEOPassword);
+  }
+
+  async healthCheck(): Promise<{
+    firecrawl: boolean;
+    perplexity: boolean;
+    dataForSEO: boolean;
+    errors: string[];
+  }> {
+    const errors: string[] = [];
+    let firecrawlHealthy = false;
+    let perplexityHealthy = false;
+    let dataForSEOHealthy = false;
+
+    try {
+      await this.firecrawl.scrapeUrl('https://example.com');
+      firecrawlHealthy = true;
+    } catch (error) {
+      errors.push(`Firecrawl: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+
+    try {
+      await this.perplexity.chat([
+        { role: 'user', content: 'Hello' }
+      ], { max_tokens: 10 });
+      perplexityHealthy = true;
+    } catch (error) {
+      errors.push(`Perplexity: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+
+    try {
+      await this.dataForSEO.getKeywordData(['test'], { locationCode: 2840 });
+      dataForSEOHealthy = true;
+    } catch (error) {
+      errors.push(`DataForSEO: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+
+    return {
+      firecrawl: firecrawlHealthy,
+      perplexity: perplexityHealthy,
+      dataForSEO: dataForSEOHealthy,
+      errors,
+    };
+  }
+
+  async getComprehensiveProductData(productName: string, category: string): Promise<{
+    research: any;
+    keywordData: any[];
+    competitorUrls: string[];
+    scrapedContent: any[];
+  }> {
+    const { isDemoMode, demoProductData, demoKeywordData, simulateApiDelay, getDemoModeWarning } = await import('./demo-data');
+    
+    if (isDemoMode()) {
+      console.log(getDemoModeWarning());
+      console.log(`🔍 Demo: Researching ${productName}...`);
+      
+      // Simulate API delay
+      await simulateApiDelay();
+      
+      // Use demo data
+      const research = demoProductData[productName as keyof typeof demoProductData] || {
+        specs: { display: '6.1-inch display', processor: 'Advanced chip', camera: 'Multi-lens system' },
+        pros: ['Great performance', 'Good build quality', 'Nice design'],
+        cons: ['Expensive', 'Battery could be better'],
+        priceRange: '$699-$999',
+        competitorComparisons: ['Competitor A', 'Competitor B'],
+        sources: ['manufacturer.com', 'techsite.com']
+      };
+      
+      const keywordData = demoKeywordData[category as keyof typeof demoKeywordData] || demoKeywordData.smartphones;
+      
+      return {
+        research: { ...research, productName },
+        keywordData: keywordData.slice(0, 5),
+        competitorUrls: ['https://example.com/review1', 'https://example.com/review2'],
+        scrapedContent: [
+          { success: true, data: { markdown: 'Demo competitor content about product features...' } }
+        ],
+      };
+    }
+
+    try {
+      // Step 1: Research product with Perplexity
+      const research = await this.perplexity.researchProduct(productName, category);
+      
+      // Step 2: Get keyword data for product + category
+      const keywords = [
+        `${productName} review`,
+        `${productName} vs`,
+        `best ${category} 2025`,
+        `${productName} specs`,
+        `${productName} price`,
+      ];
+      
+      const keywordData = await this.dataForSEO.batchKeywordAnalysis(keywords);
+      
+      // Step 3: Get competitor URLs from SERP
+      const serpData = await this.dataForSEO.getSERPAnalysis(`${productName} review`);
+      const competitorUrls = serpData.topPages.slice(0, 5).map(page => page.url);
+      
+      // Step 4: Scrape competitor content for insights
+      const scrapedContent = await this.firecrawl.scrapeMultipleUrls(
+        competitorUrls,
+        { formats: ['markdown'], concurrency: 2 }
+      );
+      
+      return {
+        research,
+        keywordData,
+        competitorUrls,
+        scrapedContent,
+      };
+    } catch (error) {
+      console.error('Comprehensive product data gathering failed:', error);
+      throw error;
+    }
+  }
+
+  async generateContentIdeas(category: string, count: number = 10): Promise<{
+    reviews: string[];
+    comparisons: string[];
+    buyingGuides: string[];
+    news: string[];
+    keywordOpportunities: any[];
+  }> {
+    try {
+      // Generate keyword clusters
+      const clusters = await this.perplexity.generateKeywordClusters(category, count);
+      
+      // Analyze keyword opportunities
+      const allKeywords = clusters.clusters.flatMap(cluster => cluster.keywords);
+      const keywordOpportunities = await this.dataForSEO.batchKeywordAnalysis(allKeywords);
+      
+      // Categorize content ideas
+      const reviews: string[] = [];
+      const comparisons: string[] = [];
+      const buyingGuides: string[] = [];
+      const news: string[] = [];
+      
+      clusters.clusters.forEach(cluster => {
+        cluster.keywords.forEach(keyword => {
+          if (keyword.includes('review') && !keyword.includes('vs')) {
+            reviews.push(keyword);
+          } else if (keyword.includes('vs') || keyword.includes('compare')) {
+            comparisons.push(keyword);
+          } else if (keyword.includes('best') || keyword.includes('guide')) {
+            buyingGuides.push(keyword);
+          } else if (keyword.includes('news') || keyword.includes('update') || keyword.includes('announcement')) {
+            news.push(keyword);
+          }
+        });
+      });
+      
+      return {
+        reviews: reviews.slice(0, count),
+        comparisons: comparisons.slice(0, count),
+        buyingGuides: buyingGuides.slice(0, count),
+        news: news.slice(0, count),
+        keywordOpportunities: keywordOpportunities.filter(kw => 
+          kw.volume >= 200 && kw.kd <= 60
+        ).sort((a, b) => b.volume - a.volume),
+      };
+    } catch (error) {
+      console.error('Content idea generation failed:', error);
+      throw error;
+    }
+  }
+
+  async auditCompetitors(competitors: string[]): Promise<{
+    [domain: string]: {
+      domainMetrics: any;
+      topContent: string[];
+      seoAudit?: any;
+    };
+  }> {
+    const results: { [domain: string]: any } = {};
+    
+    for (const competitor of competitors) {
+      try {
+        // Get domain analytics
+        const domainMetrics = await this.dataForSEO.getCompetitorAnalysis(competitor);
+        
+        // Get top performing content URLs
+        const topContent = domainMetrics.topKeywords
+          .slice(0, 10)
+          .map(kw => `https://${competitor}/search?q=${encodeURIComponent(kw.keyword)}`);
+        
+        // Optionally audit their site (rate limited)
+        let seoAudit;
+        try {
+          seoAudit = await this.firecrawl.auditSite(`https://${competitor}`);
+        } catch (error) {
+          console.warn(`SEO audit failed for ${competitor}:`, error);
+        }
+        
+        results[competitor] = {
+          domainMetrics,
+          topContent,
+          seoAudit,
+        };
+      } catch (error) {
+        console.error(`Competitor analysis failed for ${competitor}:`, error);
+        results[competitor] = {
+          error: error instanceof Error ? error.message : 'Unknown error',
+        };
+      }
+    }
+    
+    return results;
+  }
+}
+
+export const mcp = new MCPClient();
