@@ -11,7 +11,7 @@ export default function HomePage() {
     href: "/reviews/iphone-15-pro-max-review",
     category: "Reviews",
     publishedAt: "2025-01-15",
-    image: "/images/iphone-15-pro-hero.jpg",
+    image: "/file.svg",
     author: "Trends Today Editorial"
   };
 
@@ -22,7 +22,7 @@ export default function HomePage() {
       href: "/reviews/samsung-galaxy-s24-ultra-review", 
       category: "Reviews",
       publishedAt: "2025-01-14",
-      image: "/images/galaxy-s24-ultra.jpg"
+      image: "/file.svg"
     },
     {
       title: "iPhone 15 Pro vs Galaxy S24: Ultimate Flagship Battle", 
@@ -30,7 +30,7 @@ export default function HomePage() {
       href: "/compare/iphone-15-pro-vs-samsung-galaxy-s24",
       category: "Comparisons", 
       publishedAt: "2025-01-13",
-      image: "/images/iphone-vs-samsung.jpg"
+      image: "/file.svg"
     },
     {
       title: "Google Pixel 8 Pro Review: AI Photography Perfected",
@@ -38,7 +38,7 @@ export default function HomePage() {
       href: "/reviews/google-pixel-8-pro-review",
       category: "Reviews",
       publishedAt: "2025-01-12", 
-      image: "/images/pixel-8-pro.jpg"
+      image: "/file.svg"
     },
     {
       title: "OnePlus 12 Review: Speed Demon Returns",
@@ -46,7 +46,7 @@ export default function HomePage() {
       href: "/reviews/oneplus-12-review",
       category: "Reviews", 
       publishedAt: "2025-01-11",
-      image: "/images/oneplus-12.jpg"
+      image: "/file.svg"
     }
   ];
 
@@ -234,7 +234,7 @@ export default function HomePage() {
                   {featuredArticles.map((article, index) => (
                     <Link key={index} href={article.href}>
                       <article className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
-                        <div className="relative aspect-[16/10] rounded-sm overflow-hidden" style={{ backgroundImage: `url(${heroArticle.image})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+                        <div className="relative aspect-[16/10] rounded-sm overflow-hidden" style={{ backgroundImage: `url(${article.image})`, backgroundSize: "cover", backgroundPosition: "center" }}>
                           <Image src={'/file.svg'} alt={article.title} fill sizes="(max-width: 1280px) 100vw, 33vw" className="object-cover" loading="lazy" />
                           <div className="absolute inset-0 flex items-center justify-center hidden">
                             <div className="w-16 h-16 bg-gray-300 rounded-lg flex items-center justify-center hidden">
