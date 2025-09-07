@@ -96,7 +96,7 @@ export default async function BestPage() {
         <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
           Best Tech Products 2025
         </h1>
-        <p className="text-xl text-gray-800 max-w-3xl mx-auto">
+        <p className="text-xl text-gray-900 max-w-3xl mx-auto">
           Discover the best technology products across every category. 
           Our expert recommendations help you choose the right tech for your needs and budget.
         </p>
@@ -120,7 +120,7 @@ export default async function BestPage() {
                   <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600">
                     {category.title}
                   </h3>
-                  <p className="text-gray-800">
+                  <p className="text-gray-900">
                     {category.description}
                   </p>
                 </div>
@@ -160,7 +160,7 @@ export default async function BestPage() {
                       {guide.frontmatter.title}
                     </Link>
                   </h3>
-                  <p className="text-gray-800 mb-4">
+                  <p className="text-gray-900 mb-4">
                     {guide.frontmatter.description}
                   </p>
                   <div className="flex items-center justify-between text-sm text-gray-900">
@@ -183,7 +183,7 @@ export default async function BestPage() {
               <span className="text-2xl">🧪</span>
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">Extensive Testing</h3>
-            <p className="text-gray-800">
+            <p className="text-gray-900">
               We personally test every product for weeks, running real-world scenarios and benchmarks.
             </p>
           </div>
@@ -192,7 +192,7 @@ export default async function BestPage() {
               <span className="text-2xl">💰</span>
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">Value Analysis</h3>
-            <p className="text-gray-800">
+            <p className="text-gray-900">
               We evaluate price-to-performance ratio and recommend options for every budget.
             </p>
           </div>
@@ -201,7 +201,7 @@ export default async function BestPage() {
               <span className="text-2xl">🔄</span>
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">Regular Updates</h3>
-            <p className="text-gray-800">
+            <p className="text-gray-900">
               Our guides are continuously updated as new products launch and prices change.
             </p>
           </div>

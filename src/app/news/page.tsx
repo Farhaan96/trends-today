@@ -60,7 +60,7 @@ export default async function NewsPage() {
         <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
           Tech News
         </h1>
-        <p className="text-xl text-gray-800 max-w-3xl mx-auto">
+        <p className="text-xl text-gray-900 max-w-3xl mx-auto">
           Breaking news, product launches, and industry insights from the world of technology.
           Stay ahead with the latest developments.
         </p>
@@ -85,7 +85,7 @@ export default async function NewsPage() {
                         {article.frontmatter.title}
                       </Link>
                     </h3>
-                    <p className="text-gray-800 mb-2">
+                    <p className="text-gray-900 mb-2">
                       {article.frontmatter.description}
                     </p>
                     <div className="flex items-center gap-2 text-sm text-gray-900">
@@ -133,7 +133,7 @@ export default async function NewsPage() {
                       {article.frontmatter.title}
                     </Link>
                   </h3>
-                  <p className="text-gray-800 mb-4">
+                  <p className="text-gray-900 mb-4">
                     {article.frontmatter.description}
                   </p>
                   <div className="flex items-center justify-between text-sm text-gray-900">
@@ -178,7 +178,7 @@ export default async function NewsPage() {
                     {article.frontmatter.title}
                   </Link>
                 </h3>
-                <p className="text-gray-800 mb-4 line-clamp-3">
+                <p className="text-gray-900 mb-4 line-clamp-3">
                   {article.frontmatter.description}
                 </p>
                 <div className="flex items-center justify-between">
@@ -221,15 +221,15 @@ export default async function NewsPage() {
         <div className="grid md:grid-cols-3 gap-6">
           <div>
             <div className="text-3xl font-bold text-blue-600">{articles.length}+</div>
-            <div className="text-gray-800">News Articles</div>
+            <div className="text-gray-900">News Articles</div>
           </div>
           <div>
             <div className="text-3xl font-bold text-blue-600">24/7</div>
-            <div className="text-gray-800">Coverage</div>
+            <div className="text-gray-900">Coverage</div>
           </div>
           <div>
             <div className="text-3xl font-bold text-blue-600">Breaking</div>
-            <div className="text-gray-800">First Reports</div>
+            <div className="text-gray-900">First Reports</div>
           </div>
         </div>
       </section>

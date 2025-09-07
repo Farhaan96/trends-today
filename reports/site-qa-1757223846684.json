@@ -1,0 +1,726 @@
+{
+  "baseUrl": "https://trendstoday.ca",
+  "pagesScanned": 40,
+  "brokenImages": 30,
+  "brokenLinks": 74,
+  "lowContrastPages": 37,
+  "durationSeconds": 22.9,
+  "details": {
+    "scanned": [
+      "https://trendstoday.ca/",
+      "https://trendstoday.ca/authors",
+      "https://trendstoday.ca/how-we-test",
+      "https://trendstoday.ca/editorial-standards",
+      "https://trendstoday.ca/contact",
+      "https://trendstoday.ca/reviews",
+      "https://trendstoday.ca/best",
+      "https://trendstoday.ca/news",
+      "https://trendstoday.ca/compare",
+      "https://trendstoday.ca/guides",
+      "https://trendstoday.ca/reviews?category=smartphones",
+      "https://trendstoday.ca/reviews?category=laptops",
+      "https://trendstoday.ca/reviews?category=headphones",
+      "https://trendstoday.ca/reviews?category=gaming",
+      "https://trendstoday.ca/reviews?category=smart-home",
+      "https://trendstoday.ca/reviews/iphone-15-pro-max-review",
+      "https://trendstoday.ca/reviews/samsung-galaxy-s24-ultra-review",
+      "https://trendstoday.ca/compare/iphone-15-pro-vs-samsung-galaxy-s24",
+      "https://trendstoday.ca/news/iphone-16-leak",
+      "https://trendstoday.ca/news/galaxy-s25",
+      "https://trendstoday.ca/reviews/google-pixel-8-pro-review",
+      "https://trendstoday.ca/reviews/oneplus-12-review",
+      "https://trendstoday.ca/news/vision-pro-2",
+      "https://trendstoday.ca/news/iphone-17-air-announcement-what-to-expect",
+      "https://trendstoday.ca/demo-article",
+      "https://trendstoday.ca/best/smartphones/2025",
+      "https://trendstoday.ca/best/laptops/2025",
+      "https://trendstoday.ca/best/headphones/2025",
+      "https://trendstoday.ca/search?q=iPhone%2016%20Pro",
+      "https://trendstoday.ca/search?q=Galaxy%20S25",
+      "https://trendstoday.ca/search?q=Pixel%209",
+      "https://trendstoday.ca/search?q=Vision%20Pro%202",
+      "https://trendstoday.ca/search?q=MacBook%20Air",
+      "https://trendstoday.ca/search?q=Tesla%20Phone",
+      "https://trendstoday.ca/comparisons",
+      "https://trendstoday.ca/buying-guides",
+      "https://trendstoday.ca/affiliate-disclosure",
+      "https://trendstoday.ca/subscribe",
+      "https://trendstoday.ca/deals",
+      "https://trendstoday.ca/newsletter"
+    ],
+    "brokenImages": [
+      {
+        "page": "https://trendstoday.ca/",
+        "src": "https://trendstoday.ca/_next/image?url=%2Fimages%2Fproducts%2Fiphone-15-pro-max-hero.jpg&amp;w=3840&amp;q=75",
+        "status": 400
+      },
+      {
+        "page": "https://trendstoday.ca/",
+        "src": "https://trendstoday.ca/_next/image?url=%2Fimages%2Fproducts%2Foneplus-12-hero.jpg&amp;w=3840&amp;q=75",
+        "status": 400
+      },
+      {
+        "page": "https://trendstoday.ca/",
+        "src": "https://trendstoday.ca/_next/image?url=%2Fimages%2Fproducts%2Fiphone-15-pro-hero.jpg&amp;w=3840&amp;q=75",
+        "status": 400
+      },
+      {
+        "page": "https://trendstoday.ca/",
+        "src": "https://trendstoday.ca/_next/image?url=%2Fimages%2Fproducts%2Fsamsung-galaxy-s24-hero.jpg&amp;w=3840&amp;q=75",
+        "status": 400
+      },
+      {
+        "page": "https://trendstoday.ca/",
+        "src": "https://trendstoday.ca/_next/image?url=%2Fimages%2Fproducts%2Fgoogle-pixel-8-pro-hero.jpg&amp;w=3840&amp;q=75",
+        "status": 400
+      },
+      {
+        "page": "https://trendstoday.ca/reviews",
+        "src": "https://trendstoday.ca/images/products/samsung-galaxy-s24-ultra-hero.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/news",
+        "src": "https://trendstoday.ca/images/news/iphone-17-air-concept.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/reviews?category=smartphones",
+        "src": "https://trendstoday.ca/images/products/samsung-galaxy-s24-ultra-hero.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/reviews?category=laptops",
+        "src": "https://trendstoday.ca/images/products/samsung-galaxy-s24-ultra-hero.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/reviews?category=headphones",
+        "src": "https://trendstoday.ca/images/products/samsung-galaxy-s24-ultra-hero.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/reviews?category=gaming",
+        "src": "https://trendstoday.ca/images/products/samsung-galaxy-s24-ultra-hero.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/reviews?category=smart-home",
+        "src": "https://trendstoday.ca/images/products/samsung-galaxy-s24-ultra-hero.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/reviews/iphone-15-pro-max-review",
+        "src": "https://trendstoday.ca/_next/image?url=%2Fimages%2Fproducts%2Fiphone-15-pro-max-hero.jpg&amp;w=3840&amp;q=75",
+        "status": 400
+      },
+      {
+        "page": "https://trendstoday.ca/reviews/iphone-15-pro-max-review",
+        "src": "https://trendstoday.ca/images/reviews/iphone-15-pro-max-review/camera-comparison.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/reviews/iphone-15-pro-max-review",
+        "src": "https://trendstoday.ca/images/reviews/iphone-15-pro-max-review/titanium-design.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/reviews/iphone-15-pro-max-review",
+        "src": "https://trendstoday.ca/images/reviews/iphone-15-pro-max-review/performance-benchmarks.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/reviews/samsung-galaxy-s24-ultra-review",
+        "src": "https://trendstoday.ca/_next/image?url=%2Fimages%2Fproducts%2Fsamsung-galaxy-s24-ultra-hero.jpg&amp;w=3840&amp;q=75",
+        "status": 400
+      },
+      {
+        "page": "https://trendstoday.ca/reviews/samsung-galaxy-s24-ultra-review",
+        "src": "https://trendstoday.ca/images/reviews/samsung-galaxy-s24-ultra-review/camera-system.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/reviews/samsung-galaxy-s24-ultra-review",
+        "src": "https://trendstoday.ca/images/reviews/samsung-galaxy-s24-ultra-review/display-comparison.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/reviews/samsung-galaxy-s24-ultra-review",
+        "src": "https://trendstoday.ca/images/reviews/samsung-galaxy-s24-ultra-review/s-pen-productivity.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/reviews/google-pixel-8-pro-review",
+        "src": "https://trendstoday.ca/_next/image?url=%2Fimages%2Fproducts%2Fgoogle-pixel-8-pro-hero.jpg&amp;w=3840&amp;q=75",
+        "status": 400
+      },
+      {
+        "page": "https://trendstoday.ca/reviews/oneplus-12-review",
+        "src": "https://trendstoday.ca/_next/image?url=%2Fimages%2Fproducts%2Foneplus-12-hero.jpg&amp;w=3840&amp;q=75",
+        "status": 400
+      },
+      {
+        "page": "https://trendstoday.ca/news/iphone-17-air-announcement-what-to-expect",
+        "src": "https://trendstoday.ca/_next/image?url=%2Fimages%2Fnews%2Fiphone-17-air-concept.jpg&amp;w=3840&amp;q=75",
+        "status": 400
+      },
+      {
+        "page": "https://trendstoday.ca/news/iphone-17-air-announcement-what-to-expect",
+        "src": "https://trendstoday.ca/images/news/apple-watch-airpods-2025.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/news/iphone-17-air-announcement-what-to-expect",
+        "src": "https://trendstoday.ca/images/news/iphone-17-air-thin-profile.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/news/iphone-17-air-announcement-what-to-expect",
+        "src": "https://trendstoday.ca/images/news/iphone-17-air-analysis.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/news/iphone-17-air-announcement-what-to-expect",
+        "src": "https://trendstoday.ca/images/news/iphone-17-air-engineering.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/news/iphone-17-air-announcement-what-to-expect",
+        "src": "https://trendstoday.ca/images/news/apple-event-how-to-watch.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/news/iphone-17-air-announcement-what-to-expect",
+        "src": "https://trendstoday.ca/images/news/iphone-17-lineup-comparison.jpg",
+        "status": 404
+      },
+      {
+        "page": "https://trendstoday.ca/news/iphone-17-air-announcement-what-to-expect",
+        "src": "https://trendstoday.ca/images/news/ios-26-features.jpg",
+        "status": 404
+      }
+    ],
+    "brokenLinks": [
+      {
+        "from": "https://trendstoday.ca/",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/authors",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/authors",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/how-we-test",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/how-we-test",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/editorial-standards",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/editorial-standards",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/contact",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/contact",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/best",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/best",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/news",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/news",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/compare",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/compare",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/guides",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/guides",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews?category=smartphones",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews?category=smartphones",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews?category=laptops",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews?category=laptops",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews?category=headphones",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews?category=headphones",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews?category=gaming",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews?category=gaming",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews?category=smart-home",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews?category=smart-home",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews/iphone-15-pro-max-review",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews/iphone-15-pro-max-review",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews/samsung-galaxy-s24-ultra-review",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews/samsung-galaxy-s24-ultra-review",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/compare/iphone-15-pro-vs-samsung-galaxy-s24",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/compare/iphone-15-pro-vs-samsung-galaxy-s24",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews/google-pixel-8-pro-review",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews/google-pixel-8-pro-review",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews/oneplus-12-review",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/reviews/oneplus-12-review",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/news/iphone-17-air-announcement-what-to-expect",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/news/iphone-17-air-announcement-what-to-expect",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/demo-article",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/demo-article",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/best/smartphones/2025",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/best/smartphones/2025",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/best/laptops/2025",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/best/laptops/2025",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/best/headphones/2025",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/best/headphones/2025",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/search?q=iPhone%2016%20Pro",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/search?q=iPhone%2016%20Pro",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/search?q=Galaxy%20S25",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/search?q=Galaxy%20S25",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/search?q=Pixel%209",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/search?q=Pixel%209",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/search?q=Vision%20Pro%202",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/search?q=Vision%20Pro%202",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/search?q=MacBook%20Air",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/search?q=MacBook%20Air",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/search?q=Tesla%20Phone",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/search?q=Tesla%20Phone",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/comparisons",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/comparisons",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/buying-guides",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/buying-guides",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/affiliate-disclosure",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/affiliate-disclosure",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/subscribe",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/subscribe",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/deals",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/deals",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/newsletter",
+        "to": "https://trendstoday.ca/contact",
+        "status": 404
+      },
+      {
+        "from": "https://trendstoday.ca/newsletter",
+        "to": "https://trendstoday.ca/guides",
+        "status": 404
+      }
+    ],
+    "contrastFlags": [
+      {
+        "page": "https://trendstoday.ca/",
+        "count": 14
+      },
+      {
+        "page": "https://trendstoday.ca/authors",
+        "count": 36
+      },
+      {
+        "page": "https://trendstoday.ca/how-we-test",
+        "count": 74
+      },
+      {
+        "page": "https://trendstoday.ca/editorial-standards",
+        "count": 38
+      },
+      {
+        "page": "https://trendstoday.ca/contact",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/reviews",
+        "count": 36
+      },
+      {
+        "page": "https://trendstoday.ca/best",
+        "count": 26
+      },
+      {
+        "page": "https://trendstoday.ca/news",
+        "count": 24
+      },
+      {
+        "page": "https://trendstoday.ca/compare",
+        "count": 36
+      },
+      {
+        "page": "https://trendstoday.ca/guides",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/reviews?category=smartphones",
+        "count": 36
+      },
+      {
+        "page": "https://trendstoday.ca/reviews?category=laptops",
+        "count": 36
+      },
+      {
+        "page": "https://trendstoday.ca/reviews?category=headphones",
+        "count": 36
+      },
+      {
+        "page": "https://trendstoday.ca/reviews?category=gaming",
+        "count": 36
+      },
+      {
+        "page": "https://trendstoday.ca/reviews?category=smart-home",
+        "count": 36
+      },
+      {
+        "page": "https://trendstoday.ca/reviews/iphone-15-pro-max-review",
+        "count": 12
+      },
+      {
+        "page": "https://trendstoday.ca/reviews/samsung-galaxy-s24-ultra-review",
+        "count": 12
+      },
+      {
+        "page": "https://trendstoday.ca/compare/iphone-15-pro-vs-samsung-galaxy-s24",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/reviews/google-pixel-8-pro-review",
+        "count": 12
+      },
+      {
+        "page": "https://trendstoday.ca/reviews/oneplus-12-review",
+        "count": 12
+      },
+      {
+        "page": "https://trendstoday.ca/news/iphone-17-air-announcement-what-to-expect",
+        "count": 12
+      },
+      {
+        "page": "https://trendstoday.ca/demo-article",
+        "count": 25
+      },
+      {
+        "page": "https://trendstoday.ca/best/smartphones/2025",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/best/laptops/2025",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/best/headphones/2025",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/search?q=iPhone%2016%20Pro",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/search?q=Galaxy%20S25",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/search?q=Pixel%209",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/search?q=Vision%20Pro%202",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/search?q=MacBook%20Air",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/search?q=Tesla%20Phone",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/comparisons",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/buying-guides",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/affiliate-disclosure",
+        "count": 8
+      },
+      {
+        "page": "https://trendstoday.ca/subscribe",
+        "count": 12
+      },
+      {
+        "page": "https://trendstoday.ca/deals",
+        "count": 6
+      },
+      {
+        "page": "https://trendstoday.ca/newsletter",
+        "count": 6
+      }
+    ]
+  }
+}

@@ -110,7 +110,7 @@ export default async function ComparePage() {
         <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
           Product Comparisons
         </h1>
-        <p className="text-xl text-gray-800 max-w-3xl mx-auto">
+        <p className="text-xl text-gray-900 max-w-3xl mx-auto">
           Make informed decisions with our detailed product comparisons. 
           We break down specs, features, and value to help you choose the perfect tech.
         </p>
@@ -129,7 +129,7 @@ export default async function ComparePage() {
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
                   {category.title}
                 </h3>
-                <p className="text-gray-800 mb-4">
+                <p className="text-gray-900 mb-4">
                   {category.description}
                 </p>
                 <div className="space-y-1">
@@ -176,7 +176,7 @@ export default async function ComparePage() {
                       {comparison.frontmatter.title}
                     </Link>
                   </h3>
-                  <p className="text-gray-800 mb-4">
+                  <p className="text-gray-900 mb-4">
                     {comparison.frontmatter.description}
                   </p>
                   <div className="flex items-center justify-between text-sm text-gray-900">
@@ -210,7 +210,7 @@ export default async function ComparePage() {
               <span className="text-2xl">📋</span>
             </div>
             <h3 className="text-lg font-bold text-gray-900 mb-2">Spec Analysis</h3>
-            <p className="text-gray-800 text-sm">
+            <p className="text-gray-900 text-sm">
               Detailed breakdown of technical specifications
             </p>
           </div>
@@ -219,7 +219,7 @@ export default async function ComparePage() {
               <span className="text-2xl">⚡</span>
             </div>
             <h3 className="text-lg font-bold text-gray-900 mb-2">Performance</h3>
-            <p className="text-gray-800 text-sm">
+            <p className="text-gray-900 text-sm">
               Real-world testing and benchmark results
             </p>
           </div>
@@ -228,7 +228,7 @@ export default async function ComparePage() {
               <span className="text-2xl">💰</span>
             </div>
             <h3 className="text-lg font-bold text-gray-900 mb-2">Value</h3>
-            <p className="text-gray-800 text-sm">
+            <p className="text-gray-900 text-sm">
               Price-to-performance analysis
             </p>
           </div>
@@ -237,7 +237,7 @@ export default async function ComparePage() {
               <span className="text-2xl">🏆</span>
             </div>
             <h3 className="text-lg font-bold text-gray-900 mb-2">Winner</h3>
-            <p className="text-gray-800 text-sm">
+            <p className="text-gray-900 text-sm">
               Clear recommendation for different use cases
             </p>
           </div>
@@ -275,19 +275,19 @@ export default async function ComparePage() {
         <div className="grid md:grid-cols-4 gap-6">
           <div>
             <div className="text-3xl font-bold text-blue-600">{comparisons.length || 50}+</div>
-            <div className="text-gray-800">Detailed Comparisons</div>
+            <div className="text-gray-900">Detailed Comparisons</div>
           </div>
           <div>
             <div className="text-3xl font-bold text-blue-600">100+</div>
-            <div className="text-gray-800">Products Analyzed</div>
+            <div className="text-gray-900">Products Analyzed</div>
           </div>
           <div>
             <div className="text-3xl font-bold text-blue-600">50+</div>
-            <div className="text-gray-800">Spec Categories</div>
+            <div className="text-gray-900">Spec Categories</div>
           </div>
           <div>
             <div className="text-3xl font-bold text-blue-600">Weekly</div>
-            <div className="text-gray-800">New Comparisons</div>
+            <div className="text-gray-900">New Comparisons</div>
           </div>
         </div>
       </section>
