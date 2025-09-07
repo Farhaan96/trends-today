@@ -129,7 +129,9 @@ export default function AuthorBox({
             </div>
             
             {author.bio && (
-              <p className="text-gray-700 text-sm mt-2 leading-relaxed">{author.bio}</p>
+              <p className="text-gray-700 text-sm mt-2 leading-relaxed">
+                {typeof author.bio === 'string' ? author.bio : String(author.bio)}
+              </p>
             )}
             
             {/* Credentials */}

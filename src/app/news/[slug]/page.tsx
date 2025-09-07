@@ -7,6 +7,7 @@ import matter from 'gray-matter';
 import AuthorBox from '@/components/content/AuthorBox';
 import CitationsList from '@/components/content/CitationsList';
 import StructuredData from '@/components/seo/StructuredData';
+import ImageWithFallback from '@/components/ui/ImageWithFallback';
 
 interface NewsPageProps {
   params: {
@@ -75,13 +76,13 @@ export async function generateMetadata({ params }: NewsPageProps): Promise<Metad
     title: frontmatter.title + ' | Trends Today',
     description: frontmatter.description,
     keywords: frontmatter.tags?.join(', '),
-    authors: [{ name: frontmatter.author || 'Trends Today Editorial' }],
+    authors: [{ name: (typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || 'Trends Today Editorial' }],
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
       type: 'article',
       publishedTime: frontmatter.publishedAt,
-      authors: [frontmatter.author || 'Trends Today Editorial'],
+      authors: [(typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || 'Trends Today Editorial'],
       images: frontmatter.image ? [
         {
           url: frontmatter.image,
@@ -120,7 +121,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
     "dateModified": frontmatter.updatedAt || frontmatter.publishedAt,
     "author": {
       "@type": "Person",
-      "name": frontmatter.author || "Trends Today Editorial"
+      "name": (typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || "Trends Today Editorial"
     },
     "publisher": {
       "@type": "Organization",
@@ -165,7 +166,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
           <div className="flex items-center gap-4 text-gray-500 border-b pb-6">
             <div className="flex items-center gap-2">
               <span className="font-medium text-gray-900">
-                {frontmatter.author || 'Trends Today Editorial'}
+                {(typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || 'Trends Today Editorial'}
               </span>
             </div>
             <span>•</span>
@@ -189,13 +190,11 @@ export default async function NewsPage({ params }: NewsPageProps) {
         {frontmatter.image && (
           <div className="mb-8">
             <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
-              <img
+              <ImageWithFallback
                 src={frontmatter.image}
                 alt={frontmatter.title}
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.currentTarget.src = '/file.svg';
-                }}
+                fallbackSrc="/file.svg"
               />
             </div>
           </div>
@@ -227,7 +226,11 @@ export default async function NewsPage({ params }: NewsPageProps) {
           
           {/* Author Box */}
           {frontmatter.author && (
-            <AuthorBox author={frontmatter.author} />
+            <AuthorBox 
+              author={frontmatter.author} 
+              publishedAt={frontmatter.publishedAt}
+              lastUpdated={frontmatter.updatedAt}
+            />
           )}
           
           {/* Citations */}
