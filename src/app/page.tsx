@@ -120,9 +120,9 @@ export default function HomePage() {
             <div className="lg:col-span-2">
               <Link href={heroArticle.href}>
                 <article className="group cursor-pointer relative">
-                  <div className="relative aspect-[16/10] bg-gradient-to-br from-slate-800 to-slate-900 rounded-sm overflow-hidden">
+                  <div className="relative aspect-[16/10] rounded-sm overflow-hidden" style={{ backgroundImage: `url(${heroArticle.image})`, backgroundSize: "cover", backgroundPosition: "center" }}>
                     <Image src={'/file.svg'} alt={heroArticle.title} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
-                    <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="absolute inset-0 flex items-center justify-center hidden">
                       <div className="w-24 h-24 bg-white/10 rounded-lg flex items-center justify-center">
                         <span className="text-5xl opacity-60">📱</span>
                       </div>
@@ -157,7 +157,7 @@ export default function HomePage() {
                 <Link key={index} href={article.href}>
                   <article className="group cursor-pointer flex gap-4 p-3 hover:bg-gray-50 transition-colors">
                     <div className="flex-shrink-0 w-24 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded relative overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="absolute inset-0 flex items-center justify-center hidden">
                         <span className="text-lg opacity-60">📱</span>
                       </div>
                       <div className="absolute top-1 left-1">
@@ -234,10 +234,10 @@ export default function HomePage() {
                   {featuredArticles.map((article, index) => (
                     <Link key={index} href={article.href}>
                       <article className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
-                        <div className="relative aspect-[16/10] overflow-hidden">
+                        <div className="relative aspect-[16/10] rounded-sm overflow-hidden" style={{ backgroundImage: `url(${heroArticle.image})`, backgroundSize: "cover", backgroundPosition: "center" }}>
                           <Image src={'/file.svg'} alt={article.title} fill sizes="(max-width: 1280px) 100vw, 33vw" className="object-cover" loading="lazy" />
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-16 h-16 bg-gray-300 rounded-lg flex items-center justify-center">
+                          <div className="absolute inset-0 flex items-center justify-center hidden">
+                            <div className="w-16 h-16 bg-gray-300 rounded-lg flex items-center justify-center hidden">
                               <span className="text-2xl opacity-60">📱</span>
                             </div>
                           </div>
