@@ -4,9 +4,21 @@ import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import TrustBadges from '@/components/ui/TrustBadges';
 import StructuredData from '@/components/seo/StructuredData';
 import { getAllBaseSchemas } from '@/lib/schema';
+import { getHomepageContent, Article } from '@/lib/content';
 
-export default function HomePage() {
-  const heroArticle = {
+export default async function HomePage() {
+  // Load dynamic content
+  const content = await getHomepageContent();
+  // Use dynamic hero article or fallback
+  const heroArticle = content.heroArticle ? {
+    title: content.heroArticle.frontmatter.title,
+    description: content.heroArticle.frontmatter.description || content.heroArticle.frontmatter.summary,
+    href: content.heroArticle.href,
+    category: content.heroArticle.frontmatter.category || content.heroArticle.type,
+    publishedAt: content.heroArticle.frontmatter.publishedAt || content.heroArticle.frontmatter.datePublished || new Date().toISOString(),
+    image: content.heroArticle.frontmatter.image || "/images/products/iphone-15-pro-max-hero.jpg",
+    author: content.heroArticle.frontmatter.author?.name || content.heroArticle.frontmatter.author || "Trends Today Editorial"
+  } : {
     title: "iPhone 15 Pro Max Review: Apple's Most Advanced Phone Yet",
     description: "After two weeks of testing, we dive deep into Apple's flagship to see if the titanium design, A17 Pro chip, and 5x zoom camera justify the premium price tag.",
     href: "/reviews/iphone-15-pro-max-review",
@@ -16,92 +28,32 @@ export default function HomePage() {
     author: "Trends Today Editorial"
   };
 
-  const featuredArticles = [
-    {
-      title: "Samsung Galaxy S24 Ultra Review: Android Excellence",
-      description: "Samsung's latest flagship brings incredible camera capabilities and S Pen productivity to challenge the iPhone 15 Pro Max.",
-      href: "/reviews/samsung-galaxy-s24-ultra-review", 
-      category: "Reviews",
-      publishedAt: "2025-09-05",
-      image: "/images/products/samsung-galaxy-s24-hero.jpg"
-    },
-    {
-      title: "iPhone 15 Pro vs Galaxy S24: Ultimate Flagship Battle", 
-      description: "We compare Apple and Samsung's flagship phones across camera, performance, battery, and value.",
-      href: "/compare/iphone-15-pro-vs-samsung-galaxy-s24",
-      category: "Comparisons", 
-      publishedAt: "2025-09-05",
-      image: "/images/products/iphone-15-pro-hero.jpg"
-    },
-    {
-      title: "Google Pixel 8 Pro Review: AI Photography Perfected",
-      description: "Google's computational photography reaches new heights with the Pixel 8 Pro's advanced AI features.",
-      href: "/reviews/google-pixel-8-pro-review",
-      category: "Reviews",
-      publishedAt: "2025-09-05", 
-      image: "/images/products/google-pixel-8-pro-hero.jpg"
-    },
-    {
-      title: "OnePlus 12 Review: Speed Demon Returns",
-      description: "OnePlus is back with blazing fast charging, flagship performance, and competitive pricing.",
-      href: "/reviews/oneplus-12-review",
-      category: "Reviews", 
-      publishedAt: "2025-09-05",
-      image: "/images/products/oneplus-12-hero.jpg"
-    }
-  ];
+  // Convert dynamic articles to the format expected by the UI
+  const featuredArticles = content.latestReviews.slice(0, 4).map(article => ({
+    title: article.frontmatter.title,
+    description: article.frontmatter.description || article.frontmatter.summary,
+    href: article.href,
+    category: article.frontmatter.category || article.type,
+    publishedAt: article.frontmatter.publishedAt || article.frontmatter.datePublished || new Date().toISOString(),
+    image: article.frontmatter.image || "/images/products/default-hero.jpg"
+  }));
 
-  const newsArticles = [
-    {
-      title: "iPhone 17 Air: Apple's Ultra-Thin Revolution Unveiled",
-      description: "Apple's September 9 event reveals iPhone 17 Air - the thinnest iPhone ever. Complete lineup details, features, and what to expect from Apple's boldest design.",
-      href: "/news/iphone-17-air-announcement-what-to-expect",
-      publishedAt: "2025-09-05",
-      category: "Breaking"
-    },
-    {
-      title: "Apple Vision Pro 2 Development Confirmed for Late 2025",
-      description: "Sources confirm Apple is working on a lighter, cheaper second-generation Vision Pro with improved displays.",
-      href: "/demo-article",
-      publishedAt: "2025-09-05",
-      category: "Breaking"
-    },
-    {
-      title: "Samsung Galaxy S25 Series Launch Date Leaked",
-      description: "Reliable leakers suggest Samsung will unveil the Galaxy S25 lineup in February with major AI upgrades.",
-      href: "/demo-article",
-      publishedAt: "2025-09-05", 
-      category: "News"
-    },
-    {
-      title: "Google Pixel 9 Pro Design Revealed in Leaked Renders",
-      description: "New leaked renders show a redesigned camera bar and refined design language for Google's next flagship.",
-      href: "/demo-article",
-      publishedAt: "2025-09-05",
-      category: "Leaks"
-    }
-  ];
+  // Convert dynamic news articles to the format expected by the UI
+  const newsArticles = content.featuredNews.slice(0, 4).map(article => ({
+    title: article.frontmatter.title,
+    description: article.frontmatter.description || article.frontmatter.summary,
+    href: article.href,
+    publishedAt: article.frontmatter.publishedAt || article.frontmatter.datePublished || new Date().toISOString(),
+    category: article.frontmatter.category || "News"
+  }));
 
-  const bestGuides = [
-    { 
-      title: "Best Smartphones 2025", 
-      href: "/best/smartphones/2025", 
-      count: "12 tested",
-      icon: "📱"
-    },
-    { 
-      title: "Best Laptops 2025", 
-      href: "/best/laptops/2025", 
-      count: "8 tested", 
-      icon: "💻"
-    },
-    { 
-      title: "Best Headphones 2025", 
-      href: "/best/headphones/2025", 
-      count: "15 tested",
-      icon: "🎧"
-    }
-  ];
+  // Convert dynamic best guides to the format expected by the UI
+  const bestGuides = content.bestGuides.slice(0, 3).map(article => ({
+    title: article.frontmatter.title,
+    href: article.href,
+    count: article.frontmatter.count || "Tested",
+    icon: article.frontmatter.icon || "📱"
+  }));
 
   return (
     <main className="min-h-screen bg-white" style={{ fontFamily: '"Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
