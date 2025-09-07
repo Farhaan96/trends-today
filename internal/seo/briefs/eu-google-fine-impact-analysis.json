@@ -1,0 +1,63 @@
+{
+  "slug": "eu-google-fine-impact-analysis",
+  "primary_keyword": "EU Google $3.5 billion fine impact analysis",
+  "secondary_keywords": [
+    "Google EU antitrust fine 2025",
+    "Google adtech abuse penalty",
+    "EU Google advertising fine details",
+    "Google antitrust settlement impact"
+  ],
+  "search_intent": "informational",
+  "angle": "Deep analysis of regulatory impact on tech industry",
+  "urgency": "high",
+  "publish_date": "2025-09-07",
+  "outline": {
+    "title": "EU Hits Google with $3.5B Fine: Complete Impact Analysis",
+    "h2_sections": [
+      {
+        "heading": "Breaking: EU's Largest Tech Fine Against Google",
+        "content_focus": "Fine details, charges, Google's response"
+      },
+      {
+        "heading": "What Google Did Wrong: Adtech Abuse Explained",
+        "content_focus": "Specific violations, market manipulation, evidence"
+      },
+      {
+        "heading": "Financial Impact on Alphabet and Google",
+        "content_focus": "Stock impact, quarterly earnings effect, investor reaction"
+      },
+      {
+        "heading": "Implications for Other Tech Giants",
+        "content_focus": "Amazon, Apple, Meta exposure, future investigations"
+      },
+      {
+        "heading": "Changes Google Must Make",
+        "content_focus": "Required business practice changes, compliance timeline"
+      },
+      {
+        "heading": "What This Means for Digital Advertising",
+        "content_focus": "Industry changes, advertiser impact, market effects"
+      }
+    ],
+    "faq_section": [
+      "Why was Google fined $3.5 billion by the EU?",
+      "Will Google appeal the EU fine?",
+      "How does this affect Google's advertising business?",
+      "What other tech companies could face similar fines?",
+      "Will this change how online advertising works?"
+    ]
+  },
+  "internal_links": [
+    "/content/news/tech-regulation-2025",
+    "/content/analysis/google-antitrust-cases",
+    "/content/business/digital-advertising-trends"
+  ],
+  "target_sources": [
+    "https://techcrunch.com/2025/09/06/eu-fines-google-3-5b-over-adtech-abuse/",
+    "https://ec.europa.eu/commission/presscorner/",
+    "https://blog.google/outreach-initiatives/public-policy/"
+  ],
+  "content_length": "2200-2800 words",
+  "publish_priority": 9,
+  "expiry_date": "2025-12-31"
+}

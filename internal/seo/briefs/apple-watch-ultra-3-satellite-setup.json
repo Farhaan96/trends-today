@@ -1,0 +1,63 @@
+{
+  "slug": "apple-watch-ultra-3-satellite-setup",
+  "primary_keyword": "Apple Watch Ultra 3 satellite messaging setup",
+  "secondary_keywords": [
+    "Apple Watch Ultra 3 satellite features",
+    "how to use Apple Watch satellite messaging",
+    "Apple Watch Ultra 3 emergency features",
+    "satellite connectivity Apple Watch"
+  ],
+  "search_intent": "tutorial",
+  "angle": "Step-by-step guide to setting up and using satellite features",
+  "urgency": "medium",
+  "publish_date": "2025-09-10",
+  "outline": {
+    "title": "Apple Watch Ultra 3 Satellite Messaging: Complete Setup Guide",
+    "h2_sections": [
+      {
+        "heading": "Apple Watch Ultra 3 Satellite Features Overview",
+        "content_focus": "What satellite messaging does, emergency vs regular messaging"
+      },
+      {
+        "heading": "Requirements: Compatible Carriers and Regions",
+        "content_focus": "Supported countries, carrier partnerships, data plans"
+      },
+      {
+        "heading": "Step-by-Step Setup Process",
+        "content_focus": "Initial configuration, account setup, testing connection"
+      },
+      {
+        "heading": "How to Send Satellite Messages",
+        "content_focus": "Message composition, delivery confirmation, limitations"
+      },
+      {
+        "heading": "Emergency Satellite Features",
+        "content_focus": "SOS functionality, location sharing, emergency contacts"
+      },
+      {
+        "heading": "Troubleshooting Common Issues",
+        "content_focus": "Connection problems, message failures, battery impact"
+      }
+    ],
+    "faq_section": [
+      "Which countries support Apple Watch Ultra 3 satellite messaging?",
+      "Do I need a special cellular plan for satellite features?",
+      "How much battery does satellite messaging use?",
+      "Can I send regular texts via satellite?",
+      "What happens if satellite messaging fails?"
+    ]
+  },
+  "internal_links": [
+    "/content/reviews/apple-watch-ultra-3-review",
+    "/content/guides/apple-watch-emergency-features",
+    "/content/comparisons/apple-watch-ultra-vs-series"
+  ],
+  "target_sources": [
+    "https://support.apple.com/apple-watch",
+    "https://www.apple.com/apple-watch-ultra/",
+    "https://support.apple.com/guide/watch/"
+  ],
+  "content_length": "1400-1800 words",
+  "publish_priority": 3,
+  "expiry_date": "2026-03-31"
+}

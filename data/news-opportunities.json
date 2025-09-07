@@ -6,7 +6,7 @@
     "publishedAt": "Fri, 05 Sep 2025 20:26:03 +0000",
     "source": "https://arstechnica.com/feed/",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:37.512Z",
+    "scannedAt": "2025-09-07T06:43:53.243Z",
     "potential": 9
   },
   {
@@ -26,7 +26,7 @@
     "publishedAt": "Sat, 06 Sep 2025 21:30:22 +0000",
     "source": "https://techcrunch.com/feed/",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:32.906Z",
+    "scannedAt": "2025-09-07T06:43:48.682Z",
     "potential": 7
   },
   {
@@ -36,7 +36,7 @@
     "publishedAt": "Sat, 06 Sep 2025 17:06:03 +0000",
     "source": "https://techcrunch.com/feed/",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:32.906Z",
+    "scannedAt": "2025-09-07T06:43:48.683Z",
     "potential": 7
   },
   {
@@ -46,7 +46,7 @@
     "publishedAt": "Fri, 05 Sep 2025 23:19:12 +0000",
     "source": "https://techcrunch.com/feed/",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:32.906Z",
+    "scannedAt": "2025-09-07T06:43:48.683Z",
     "potential": 7
   },
   {
@@ -56,7 +56,7 @@
     "publishedAt": "Fri, 05 Sep 2025 19:27:47 +0000",
     "source": "https://techcrunch.com/feed/",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:32.906Z",
+    "scannedAt": "2025-09-07T06:43:48.683Z",
     "potential": 7
   },
   {
@@ -66,7 +66,7 @@
     "publishedAt": "Fri, 05 Sep 2025 19:21:45 +0000",
     "source": "https://techcrunch.com/feed/",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:32.906Z",
+    "scannedAt": "2025-09-07T06:43:48.683Z",
     "potential": 7
   },
   {
@@ -76,7 +76,7 @@
     "publishedAt": "Fri, 05 Sep 2025 19:54:46 +0000",
     "source": "https://arstechnica.com/feed/",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:37.512Z",
+    "scannedAt": "2025-09-07T06:43:53.243Z",
     "potential": 7
   },
   {
@@ -86,7 +86,7 @@
     "publishedAt": "Fri, 05 Sep 2025 19:17:30 +0000",
     "source": "https://arstechnica.com/feed/",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:37.512Z",
+    "scannedAt": "2025-09-07T06:43:53.243Z",
     "potential": 7
   },
   {
@@ -96,7 +96,7 @@
     "publishedAt": "Fri, 05 Sep 2025 19:04:59 +0000",
     "source": "https://arstechnica.com/feed/",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:37.512Z",
+    "scannedAt": "2025-09-07T06:43:53.243Z",
     "potential": 7
   },
   {
@@ -106,7 +106,7 @@
     "publishedAt": "Fri, 05 Sep 2025 18:47:32 +0000",
     "source": "https://arstechnica.com/feed/",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:37.512Z",
+    "scannedAt": "2025-09-07T06:43:53.243Z",
     "potential": 7
   },
   {
@@ -116,7 +116,7 @@
     "publishedAt": "Sat, 06 Sep 2025 22:00:25 +0000",
     "source": "https://gizmodo.com/rss",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:44.891Z",
+    "scannedAt": "2025-09-07T06:44:00.474Z",
     "potential": 7
   },
   {
@@ -126,7 +126,7 @@
     "publishedAt": "Sat, 06 Sep 2025 21:30:34 +0000",
     "source": "https://gizmodo.com/rss",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:44.891Z",
+    "scannedAt": "2025-09-07T06:44:00.474Z",
     "potential": 7
   },
   {
@@ -136,7 +136,7 @@
     "publishedAt": "Sat, 06 Sep 2025 21:00:21 +0000",
     "source": "https://gizmodo.com/rss",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:44.891Z",
+    "scannedAt": "2025-09-07T06:44:00.474Z",
     "potential": 7
   },
   {
@@ -146,9 +146,21 @@
     "publishedAt": "2025-09-07T03:22:13.000Z",
     "source": "https://www.reddit.com/r/apple.json",
     "type": "reddit",
-    "upvotes": 43,
-    "comments": 61,
-    "scannedAt": "2025-09-07T05:02:52.033Z",
+    "upvotes": 75,
+    "comments": 82,
+    "scannedAt": "2025-09-07T06:44:07.879Z",
+    "potential": 7
+  },
+  {
+    "title": "iPhone 17 series leak: 8x zoom cameras, 8K recording, vapor chamber cooling, A19 Pro chip, bigger batteries, and new colours",
+    "link": "https://reddit.com/r/apple/comments/1nak7gt/iphone_17_series_leak_8x_zoom_cameras_8k/",
+    "description": "",
+    "publishedAt": "2025-09-07T04:42:33.000Z",
+    "source": "https://www.reddit.com/r/apple.json",
+    "type": "reddit",
+    "upvotes": 242,
+    "comments": 84,
+    "scannedAt": "2025-09-07T06:44:07.878Z",
     "potential": 7
   },
   {
@@ -158,7 +170,7 @@
     "publishedAt": "Sat, 06 Sep 2025 19:02:53 +0000",
     "source": "https://www.engadget.com/rss.xml",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:40.315Z",
+    "scannedAt": "2025-09-07T06:43:55.971Z",
     "potential": 5
   },
   {
@@ -168,7 +180,7 @@
     "publishedAt": "Sat, 06 Sep 2025 18:00:35 +0000",
     "source": "https://www.engadget.com/rss.xml",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:40.315Z",
+    "scannedAt": "2025-09-07T06:43:55.971Z",
     "potential": 5
   },
   {
@@ -178,7 +190,7 @@
     "publishedAt": "Sat, 06 Sep 2025 17:33:33 +0000",
     "source": "https://www.engadget.com/rss.xml",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:40.315Z",
+    "scannedAt": "2025-09-07T06:43:55.971Z",
     "potential": 5
   },
   {
@@ -188,7 +200,7 @@
     "publishedAt": "Sat, 06 Sep 2025 17:09:40 +0000",
     "source": "https://www.engadget.com/rss.xml",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:40.315Z",
+    "scannedAt": "2025-09-07T06:43:55.971Z",
     "potential": 5
   },
   {
@@ -198,7 +210,7 @@
     "publishedAt": "Sat, 06 Sep 2025 15:15:35 +0000",
     "source": "https://www.engadget.com/rss.xml",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:40.315Z",
+    "scannedAt": "2025-09-07T06:43:55.971Z",
     "potential": 5
   },
   {
@@ -208,7 +220,7 @@
     "publishedAt": "Sat, 06 Sep 2025 13:00:00 +0000",
     "source": "https://www.wired.com/feed/rss",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:42.429Z",
+    "scannedAt": "2025-09-07T06:43:58.078Z",
     "potential": 5
   },
   {
@@ -218,7 +230,7 @@
     "publishedAt": "Sat, 06 Sep 2025 11:33:00 +0000",
     "source": "https://www.wired.com/feed/rss",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:42.429Z",
+    "scannedAt": "2025-09-07T06:43:58.078Z",
     "potential": 5
   },
   {
@@ -228,7 +240,7 @@
     "publishedAt": "Sat, 06 Sep 2025 11:32:00 +0000",
     "source": "https://www.wired.com/feed/rss",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:42.429Z",
+    "scannedAt": "2025-09-07T06:43:58.078Z",
     "potential": 5
   },
   {
@@ -238,7 +250,7 @@
     "publishedAt": "Sat, 06 Sep 2025 11:00:00 +0000",
     "source": "https://www.wired.com/feed/rss",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:42.429Z",
+    "scannedAt": "2025-09-07T06:43:58.078Z",
     "potential": 5
   },
   {
@@ -248,7 +260,7 @@
     "publishedAt": "Fri, 05 Sep 2025 17:35:47 +0000",
     "source": "https://gizmodo.com/rss",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:44.891Z",
+    "scannedAt": "2025-09-07T06:44:00.474Z",
     "potential": 5
   },
   {
@@ -258,7 +270,7 @@
     "publishedAt": "Sat, 06 Sep 2025 20:30:20 +0000",
     "source": "https://gizmodo.com/rss",
     "type": "rss",
-    "scannedAt": "2025-09-07T05:02:44.891Z",
+    "scannedAt": "2025-09-07T06:44:00.474Z",
     "potential": 5
   },
   {
@@ -268,9 +280,19 @@
     "publishedAt": "2025-09-06T11:38:29.000Z",
     "source": "https://www.reddit.com/r/android.json",
     "type": "reddit",
-    "upvotes": 58,
-    "comments": 87,
-    "scannedAt": "2025-09-07T05:02:54.540Z",
+    "upvotes": 56,
+    "comments": 90,
+    "scannedAt": "2025-09-07T06:44:10.410Z",
+    "potential": 5
+  },
+  {
+    "title": "6 Best Phones You Can’t Buy in the US (2025), Tested and Reviewed",
+    "link": "https://www.wired.com/gallery/best-phones-you-cant-buy-in-the-united-states/",
+    "description": "Wondering what you’re missing out on? Here are our favorite smartphones not officially sold stateside but are available in markets like the UK and Europe.",
+    "publishedAt": "Sun, 07 Sep 2025 06:00:00 +0000",
+    "source": "https://www.wired.com/feed/rss",
+    "type": "rss",
+    "scannedAt": "2025-09-07T06:43:58.078Z",
     "potential": 5
   }
 ]
