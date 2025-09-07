@@ -51,8 +51,8 @@ export default async function HomePage() {
   const bestGuides = content.bestGuides.slice(0, 3).map(article => ({
     title: article.frontmatter.title,
     href: article.href,
-    count: article.frontmatter.count || "Tested",
-    icon: article.frontmatter.icon || "📱"
+    count: article.frontmatter.count || "Top Picks",
+    icon: article.frontmatter.icon || "🏆"
   }));
 
   return (
@@ -94,17 +94,11 @@ export default async function HomePage() {
                       </span>
                     </div>
                     {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
                     {/* Article info overlay */}
-                    <div className="absolute bottom-4 left-4 right-4 text-white">
-                      <h1 className="text-xl lg:text-2xl font-bold mb-2 leading-tight group-hover:text-blue-200 transition-colors">
-                        {heroArticle.title}
-                      </h1>
-                      <div className="flex items-center gap-3 text-sm opacity-90">
-                        <span>{heroArticle.author}</span>
-                        <span>•</span>
-                        <span>{new Date(heroArticle.publishedAt).toLocaleDateString()}</span>
-                      </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h2 className="text-white text-2xl font-bold mb-1 line-clamp-2">{heroArticle.title}</h2>
+                      <p className="text-white/90 text-sm line-clamp-2">{heroArticle.description}</p>
                     </div>
                   </div>
                 </article>
@@ -112,30 +106,30 @@ export default async function HomePage() {
             </div>
 
             {/* Secondary Featured Articles - TechRadar Grid Style */}
-            <div className="lg:col-span-2 grid grid-cols-1 gap-4">
-              {featuredArticles.slice(0, 2).map((article, index) => (
+            <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-2 gap-4">
+              {featuredArticles.slice(0, 4).map((article, index) => (
                 <Link key={index} href={article.href}>
-                  <article className="group cursor-pointer flex gap-4 p-3 hover:bg-gray-50 transition-colors">
-                    <div className="flex-shrink-0 w-24 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded relative overflow-hidden">
+                  <article className="group cursor-pointer relative bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
+                    <div className="relative aspect-[16/10] overflow-hidden">
                       <div className="absolute inset-0 flex items-center justify-center hidden">
-                        <span className="text-lg opacity-60">📱</span>
+                        <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
+                          <span className="text-lg opacity-60">📱</span>
+                        </div>
                       </div>
-                      <div className="absolute top-1 left-1">
+                      <div className="absolute top-3 left-3">
                         <span className="px-1.5 py-0.5 bg-blue-600 text-white text-xs font-bold uppercase">
-                          {article.category.substring(0, 3)}
+                          {article.category}
                         </span>
                       </div>
+                      <ImageWithFallback src={article.image} alt={article.title} fill sizes="(max-width: 1280px) 100vw, 33vw" className="object-cover" />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-sm text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">
+                    <div className="p-3">
+                      <h3 className="font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors line-clamp-2">
                         {article.title}
                       </h3>
-                      <p className="text-xs text-gray-700 line-clamp-2 mb-2">
+                      <p className="text-gray-700 text-xs line-clamp-2">
                         {article.description}
                       </p>
-                      <div className="text-xs text-gray-600">
-                        {new Date(article.publishedAt).toLocaleDateString()}
-                      </div>
                     </div>
                   </article>
                 </Link>
@@ -410,3 +404,4 @@ export default async function HomePage() {
     </main>
   );
 }
+

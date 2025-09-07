@@ -24,10 +24,10 @@ export default function ImageWithFallback({ src, fallbackSrc = "/file.svg", alt,
   // If we have an error and no fallback, show a placeholder
   if (hasError && imgSrc === fallbackSrc) {
     return (
-      <div className={`bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center rounded-lg ${className}`}>
-        <div className="text-center p-8">
-          <div className="text-4xl mb-2">📷</div>
-          <p className="text-gray-600 text-sm font-medium">Image not available</p>
+      <div className={`bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center rounded-sm ${className}`} aria-label="Image not available">
+        <div className="text-center p-6 select-none">
+          <div className="text-3xl mb-1" aria-hidden>📷</div>
+          <p className="text-gray-600 text-xs font-medium">Image not available</p>
         </div>
       </div>
     );
