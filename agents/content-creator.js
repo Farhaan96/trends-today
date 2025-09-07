@@ -5,6 +5,7 @@ require('dotenv').config({ path: '.env.local' });
 
 const fs = require('fs').promises;
 const path = require('path');
+const { getCachedOrFetch } = require('../utils/api-cache');
 
 class EngagingContentCreator {
   constructor() {
@@ -84,74 +85,69 @@ class EngagingContentCreator {
     }
   }
 
-  // Completely rewritten research with specific prompting for engaging content
+  // Enhanced research with intelligent caching
   async enhancedResearch(topic, contentType) {
-    if (!this.perplexityApiKey) {
-      return this.getDemoResearch(topic, contentType);
+    const systemPrompt = `You are a world-class tech journalist writing for TechCrunch/The Verge audience. 
+    Your goal is to uncover fascinating, little-known details and present them in an engaging way. 
+    Focus on: surprising facts, insider insights, human stories behind the tech, unexpected implications, 
+    controversy, and dramatic developments. Avoid generic corporate speak.`;
+
+    let userPrompt = '';
+    switch (contentType) {
+      case 'news':
+        userPrompt = `Research this tech news story: "${topic}". Find:
+        1. The shocking/surprising elements most people missed
+        2. Behind-the-scenes drama or controversy
+        3. Who wins/loses from this development  
+        4. Unexpected consequences or ripple effects
+        5. Industry insider reactions and secret opinions
+        6. Connection to larger tech power struggles
+        7. What this reveals about future trends
+        Make it feel like breaking exclusive insider information.`;
+        break;
+        
+      case 'review':
+        userPrompt = `Research for an honest, no-bullshit review of: "${topic}". Find:
+        1. What the marketing doesn't tell you (hidden flaws/limitations)
+        2. Real-world performance issues users actually face
+        3. Who this is REALLY for vs who companies claim
+        4. Unexpected use cases or creative applications
+        5. Long-term durability and update concerns
+        6. Better alternatives at different price points
+        7. The one thing that makes or breaks this product
+        Focus on authentic user experiences, not press release specs.`;
+        break;
+        
+      case 'comparison':
+        userPrompt = `Research for a detailed comparison: "${topic}". Find:
+        1. The deciding factor most comparisons ignore
+        2. Hidden costs and gotchas for each option
+        3. Which performs better in real-world scenarios
+        4. Surprising advantages of the "underdog" option
+        5. Deal-breakers that eliminate options immediately
+        6. Long-term ownership experience differences
+        7. Which companies actually support their products
+        Focus on practical decision-making, not just spec sheets.`;
+        break;
+        
+      case 'howto':
+        userPrompt = `Research for a practical how-to guide: "${topic}". Find:
+        1. The common mistakes everyone makes (and how to avoid them)
+        2. Pro tips that make the process 10x easier
+        3. Tools/apps that actually work (vs overhyped ones)
+        4. Warning signs when things go wrong
+        5. Advanced techniques for power users
+        6. Time-saving shortcuts the experts use
+        7. When NOT to do this (important limitations)
+        Focus on actionable advice from real experience, not theory.`;
+        break;
+        
+      default:
+        userPrompt = `Research this topic with investigative depth: "${topic}". Uncover surprising insights, hidden details, and engaging human stories.`;
     }
 
-    try {
-      console.log(`🔍 Conducting enhanced research for: ${topic}`);
-
-      const systemPrompt = `You are a world-class tech journalist writing for TechCrunch/The Verge audience. 
-      Your goal is to uncover fascinating, little-known details and present them in an engaging way. 
-      Focus on: surprising facts, insider insights, human stories behind the tech, unexpected implications, 
-      controversy, and dramatic developments. Avoid generic corporate speak.`;
-
-      let userPrompt = '';
-      switch (contentType) {
-        case 'news':
-          userPrompt = `Research this tech news story: "${topic}". Find:
-          1. The shocking/surprising elements most people missed
-          2. Behind-the-scenes drama or controversy
-          3. Who wins/loses from this development  
-          4. Unexpected consequences or ripple effects
-          5. Industry insider reactions and secret opinions
-          6. Connection to larger tech power struggles
-          7. What this reveals about future trends
-          Make it feel like breaking exclusive insider information.`;
-          break;
-          
-        case 'review':
-          userPrompt = `Research for an honest, no-bullshit review of: "${topic}". Find:
-          1. What the marketing doesn't tell you (hidden flaws/limitations)
-          2. Real-world performance issues users actually face
-          3. Who this is REALLY for vs who companies claim
-          4. Unexpected use cases or creative applications
-          5. Long-term durability and update concerns
-          6. Better alternatives at different price points
-          7. The one thing that makes or breaks this product
-          Focus on authentic user experiences, not press release specs.`;
-          break;
-          
-        case 'comparison':
-          userPrompt = `Research for a detailed comparison: "${topic}". Find:
-          1. The deciding factor most comparisons ignore
-          2. Hidden costs and gotchas for each option
-          3. Which performs better in real-world scenarios
-          4. Surprising advantages of the "underdog" option
-          5. Deal-breakers that eliminate options immediately
-          6. Long-term ownership experience differences
-          7. Which companies actually support their products
-          Focus on practical decision-making, not just spec sheets.`;
-          break;
-          
-        case 'howto':
-          userPrompt = `Research for a practical how-to guide: "${topic}". Find:
-          1. The common mistakes everyone makes (and how to avoid them)
-          2. Pro tips that make the process 10x easier
-          3. Tools/apps that actually work (vs overhyped ones)
-          4. Warning signs when things go wrong
-          5. Advanced techniques for power users
-          6. Time-saving shortcuts the experts use
-          7. When NOT to do this (important limitations)
-          Focus on actionable advice from real experience, not theory.`;
-          break;
-          
-        default:
-          userPrompt = `Research this topic with investigative depth: "${topic}". Uncover surprising insights, hidden details, and engaging human stories.`;
-      }
-
+    // Use cached API call with fallback
+    const fetchResearch = async (query) => {
       const response = await fetch('https://api.perplexity.ai/chat/completions', {
         method: 'POST',
         headers: {
@@ -162,10 +158,10 @@ class EngagingContentCreator {
           model: 'sonar-pro',
           messages: [
             { role: 'system', content: systemPrompt },
-            { role: 'user', content: userPrompt }
+            { role: 'user', content: query }
           ],
           max_tokens: 1200,
-          temperature: 0.4  // Increased for more creative content
+          temperature: 0.4
         }),
       });
 
@@ -174,7 +170,22 @@ class EngagingContentCreator {
       }
 
       const data = await response.json();
-      const research = data.choices?.[0]?.message?.content || '';
+      return data.choices?.[0]?.message?.content || '';
+    };
+
+    try {
+      console.log(`🔍 Conducting enhanced research for: ${topic}`);
+      
+      const cacheType = contentType === 'news' ? 'news' : 'research';
+      const research = await getCachedOrFetch(
+        userPrompt, 
+        fetchResearch,
+        { 
+          type: cacheType, 
+          api: 'perplexity',
+          fallback: this.getDemoResearch(topic, contentType).research 
+        }
+      );
 
       return {
         research,

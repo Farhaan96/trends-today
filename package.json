@@ -35,6 +35,11 @@
         "agents:maintenance": "node agents/orchestrator.js maintenance",
         "agents:discovery": "node agents/orchestrator.js discovery",
         "agents:content": "node agents/orchestrator.js content",
+        "agents:batch": "node agents/orchestrator.js batch",
+        "agents:morning": "node agents/orchestrator.js morning",
+        "agents:midday": "node agents/orchestrator.js midday",
+        "agents:evening": "node agents/orchestrator.js evening",
+        "agents:enhance": "node agents/orchestrator.js enhance",
         "qa:site": "node scripts/qa-site.js",
         "qa:fix-images": "node scripts/qa-fix-images.js"
     },

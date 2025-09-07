@@ -250,6 +250,105 @@ class AgentOrchestrator {
     console.log('\n✅ Content creation cycle completed');
   }
 
+  async runBatchContent() {
+    console.log('\n📦 BATCH CONTENT - 5 Premium Articles');
+    console.log('Generating 5 high-quality articles with full quality gates...\n');
+    
+    const batchStart = Date.now();
+    const maxBatchTime = 90 * 60 * 1000; // 90 minutes in milliseconds
+    
+    try {
+      // Step 1: Discover opportunities
+      console.log('🔍 Step 1: Topic Discovery');
+      await this.runAgent('news-scanner');
+      await this.delay(3000);
+      
+      // Step 2: Generate 5 articles
+      console.log('✍️ Step 2: Content Creation (5 articles)');
+      await this.runAgent('content-creator');
+      await this.delay(5000);
+      
+      // Step 3: Quality validation
+      console.log('🔍 Step 3: Quality Validation');
+      await this.runAgent('quality-check');
+      await this.delay(2000);
+      
+      // Step 4: Enhancement phase
+      console.log('✨ Step 4: Content Enhancement');
+      await this.runAgent('image-hunter');
+      await this.delay(3000);
+      await this.runAgent('trust-builder');
+      
+      const batchDuration = Date.now() - batchStart;
+      
+      if (batchDuration > maxBatchTime) {
+        console.log('⚠️ Batch exceeded 90-minute limit');
+      }
+      
+      console.log(`\n✅ Batch completed in ${(batchDuration / 1000 / 60).toFixed(1)} minutes`);
+      
+    } catch (error) {
+      console.log('⚠️ Batch content generation had issues');
+      throw error;
+    }
+  }
+
+  async runMorningBatch() {
+    console.log('\n🌅 MORNING BATCH - Breaking News & Trending Topics');
+    console.log('Focus: 2 news + 2 reviews + 1 guide (5 total)\n');
+    
+    // Set environment variable for content focus
+    process.env.BATCH_FOCUS = 'morning';
+    process.env.CONTENT_MIX = 'news:2,reviews:2,guides:1';
+    
+    await this.runBatchContent();
+  }
+
+  async runMiddayBatch() {
+    console.log('\n☀️ MIDDAY BATCH - Deep Dives & Comparisons');
+    console.log('Focus: 3 reviews + 1 comparison + 1 buying guide (5 total)\n');
+    
+    // Set environment variable for content focus  
+    process.env.BATCH_FOCUS = 'midday';
+    process.env.CONTENT_MIX = 'reviews:3,comparisons:1,guides:1';
+    
+    await this.runBatchContent();
+  }
+
+  async runEveningBatch() {
+    console.log('\n🌆 EVENING BATCH - Analysis & Evergreen Content');
+    console.log('Focus: 2 analysis + 2 niche reviews + 1 how-to (5 total)\n');
+    
+    // Set environment variable for content focus
+    process.env.BATCH_FOCUS = 'evening'; 
+    process.env.CONTENT_MIX = 'analysis:2,reviews:2,how-to:1';
+    
+    await this.runBatchContent();
+  }
+
+  async runEnhancementCycle() {
+    console.log('\n✨ ENHANCEMENT CYCLE - Polish & Trust Signals');
+    console.log('Adding images, trust signals, and final quality checks...\n');
+    
+    try {
+      // Image enhancement
+      await this.runAgent('image-hunter');
+      await this.delay(3000);
+      
+      // Trust signal enhancement
+      await this.runAgent('trust-builder');
+      await this.delay(2000);
+      
+      // Final quality validation
+      await this.runAgent('quality-check');
+      
+      console.log('\n✅ Enhancement cycle completed');
+      
+    } catch (error) {
+      console.log('⚠️ Enhancement cycle had issues');
+    }
+  }
+
   async delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -321,6 +420,26 @@ class AgentOrchestrator {
         await this.runContentCreationCycle();
         break;
         
+      case 'batch':
+        await this.runBatchContent();
+        break;
+        
+      case 'morning':
+        await this.runMorningBatch();
+        break;
+        
+      case 'midday':
+        await this.runMiddayBatch();
+        break;
+        
+      case 'evening':
+        await this.runEveningBatch();
+        break;
+        
+      case 'enhance':
+        await this.runEnhancementCycle();
+        break;
+        
       default:
         console.log(`Usage: node orchestrator.js [command]
         
@@ -329,7 +448,12 @@ Commands:
   emergency     - Run emergency fixes only
   maintenance   - Run daily maintenance cycle
   discovery     - Run content discovery cycle
-  content       - Run content creation cycle`);
+  content       - Run content creation cycle
+  batch         - Generate 5 premium articles with quality gates
+  morning       - Morning batch: 2 news + 2 reviews + 1 guide
+  midday        - Midday batch: 3 reviews + 1 comparison + 1 guide  
+  evening       - Evening batch: 2 analysis + 2 reviews + 1 how-to
+  enhance       - Enhancement cycle: images + trust signals + QA`);
         process.exit(1);
     }
   }

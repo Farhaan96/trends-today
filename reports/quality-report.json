@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2025-09-07T15:39:39.087Z",
+  "generatedAt": "2025-09-07T16:17:35.667Z",
   "summary": {
-    "totalFiles": 16,
-    "validFiles": 8,
-    "invalidFiles": 8,
-    "totalIssues": 13,
-    "averageScore": 76.5625
+    "totalFiles": 19,
+    "validFiles": 9,
+    "invalidFiles": 10,
+    "totalIssues": 16,
+    "averageScore": 77.10526315789474
   },
   "issues": {
     "critical": 0,
-    "warning": 7,
-    "good": 9
+    "warning": 8,
+    "good": 11
   },
   "files": [
     {
@@ -43,6 +43,38 @@
       "warningsCount": 2,
       "topIssues": [
         "Invalid publishedAt date format"
+      ]
+    },
+    {
+      "path": "news\\iphone-17-series-leak-8x-zoom-cameras-8k-recording-vapor-cha.mdx",
+      "contentType": "news",
+      "isValid": false,
+      "score": 70,
+      "issuesCount": 2,
+      "warningsCount": 2,
+      "topIssues": [
+        "Title too long: 124 chars (max 60)",
+        "Description too long: 191 chars (max 160)"
+      ]
+    },
+    {
+      "path": "news\\live-updates-from-apple-s-awe-dropping-iphone-17-event.mdx",
+      "contentType": "news",
+      "isValid": true,
+      "score": 90,
+      "issuesCount": 0,
+      "warningsCount": 2,
+      "topIssues": []
+    },
+    {
+      "path": "news\\why-is-an-amazon-backed-ai-startup-making-orson-welles-fan-f.mdx",
+      "contentType": "news",
+      "isValid": false,
+      "score": 80,
+      "issuesCount": 1,
+      "warningsCount": 2,
+      "topIssues": [
+        "Title too long: 67 chars (max 60)"
       ]
     },
     {
@@ -180,7 +212,7 @@
     }
   ],
   "recommendations": [
-    "Fix 8 files with critical issues",
+    "Fix 10 files with critical issues",
     "Improve 3 files with low quality scores",
     "Address common issues: Title too long, Missing required frontmatter field, Content too short"
   ]

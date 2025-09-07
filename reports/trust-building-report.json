@@ -1,52 +1,28 @@
 {
-  "timestamp": "2025-09-07T15:39:37.982Z",
+  "timestamp": "2025-09-07T16:17:25.811Z",
   "enhancements": [
     {
-      "file": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\content\\news\\how-to-watch-apple-s-iphone-17-announcement-and-what-to-expe.mdx",
+      "file": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\content\\news\\iphone-17-series-leak-8x-zoom-cameras-8k-recording-vapor-cha.mdx",
       "issues": 2,
       "status": "Enhanced",
-      "timestamp": "2025-09-07T15:39:37.967Z"
+      "timestamp": "2025-09-07T16:17:25.799Z"
     },
     {
-      "file": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\content\\reviews\\google-pixel-9-pro-review-why-this-changes-everything-or-doe.mdx",
+      "file": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\content\\news\\live-updates-from-apple-s-awe-dropping-iphone-17-event.mdx",
       "issues": 2,
       "status": "Enhanced",
-      "timestamp": "2025-09-07T15:39:37.970Z"
+      "timestamp": "2025-09-07T16:17:25.801Z"
     },
     {
-      "file": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\content\\reviews\\iphone-15-pro-max-review.mdx",
-      "issues": 1,
-      "status": "Enhanced",
-      "timestamp": "2025-09-07T15:39:37.972Z"
-    },
-    {
-      "file": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\content\\reviews\\iphone-16-pro-max-review-surprising-results-from-real-world-.mdx",
+      "file": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\content\\news\\why-is-an-amazon-backed-ai-startup-making-orson-welles-fan-f.mdx",
       "issues": 2,
       "status": "Enhanced",
-      "timestamp": "2025-09-07T15:39:37.975Z"
-    },
-    {
-      "file": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\content\\reviews\\iphone-16-pro-max-review-the-review-that-breaks-the-echo-cha.mdx",
-      "issues": 2,
-      "status": "Enhanced",
-      "timestamp": "2025-09-07T15:39:37.977Z"
-    },
-    {
-      "file": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\content\\reviews\\samsung-galaxy-s24-ultra-review.mdx",
-      "issues": 1,
-      "status": "Enhanced",
-      "timestamp": "2025-09-07T15:39:37.980Z"
-    },
-    {
-      "file": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\content\\reviews\\samsung-galaxy-s25-ultra-review-surprising-results-from-real.mdx",
-      "issues": 2,
-      "status": "Enhanced",
-      "timestamp": "2025-09-07T15:39:37.981Z"
+      "timestamp": "2025-09-07T16:17:25.803Z"
     }
   ],
   "errors": [],
   "summary": {
-    "totalEnhancements": 7,
+    "totalEnhancements": 3,
     "totalErrors": 0,
     "success": true
   }

@@ -1,24 +1,24 @@
 # Quality Report Summary
 
-Generated: 2025-09-07, 8:39:39 a.m.
+Generated: 2025-09-07, 9:17:35 a.m.
 
 ## Overview
 
-- **Total Files**: 16
-- **Valid Files**: 8
-- **Invalid Files**: 8
-- **Total Issues**: 13
+- **Total Files**: 19
+- **Valid Files**: 9
+- **Invalid Files**: 10
+- **Total Issues**: 16
 - **Average Score**: 77/100
 
 ## Quality Distribution
 
-- 🟢 **Good (80+)**: 9 files
-- 🟡 **Warning (60-79)**: 7 files  
+- 🟢 **Good (80+)**: 11 files
+- 🟡 **Warning (60-79)**: 8 files  
 - 🔴 **Critical (<60)**: 0 files
 
 ## Recommendations
 
-- Fix 8 files with critical issues
+- Fix 10 files with critical issues
 - Improve 3 files with low quality scores
 - Address common issues: Title too long, Missing required frontmatter field, Content too short
 
@@ -26,6 +26,8 @@ Generated: 2025-09-07, 8:39:39 a.m.
 
 - **news\how-to-watch-apple-s-iphone-17-announcement-and-what-to-expe.mdx** (Score: 70) - 2 issues
 - **news\iphone-17-air-announcement-what-to-expect.mdx** (Score: 80) - 1 issues
+- **news\iphone-17-series-leak-8x-zoom-cameras-8k-recording-vapor-cha.mdx** (Score: 70) - 2 issues
+- **news\why-is-an-amazon-backed-ai-startup-making-orson-welles-fan-f.mdx** (Score: 80) - 1 issues
 - **reviews\google-pixel-9-pro-review-why-this-changes-everything-or-doe.mdx** (Score: 65) - 2 issues
 - **reviews\iphone-15-pro-max-review.mdx** (Score: 70) - 1 issues
 - **reviews\iphone-16-pro-max-review-surprising-results-from-real-world-.mdx** (Score: 65) - 2 issues
