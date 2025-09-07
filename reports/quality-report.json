@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2025-09-06T23:54:53.671Z",
+  "generatedAt": "2025-09-07T03:17:29.559Z",
   "summary": {
-    "totalFiles": 10,
-    "validFiles": 10,
+    "totalFiles": 11,
+    "validFiles": 11,
     "invalidFiles": 0,
     "totalIssues": 0,
-    "averageScore": 87
+    "averageScore": 86.81818181818181
   },
   "issues": {
     "critical": 0,
     "warning": 0,
-    "good": 10
+    "good": 11
   },
   "files": [
     {
@@ -20,6 +20,15 @@
       "score": 80,
       "issuesCount": 0,
       "warningsCount": 4,
+      "topIssues": []
+    },
+    {
+      "path": "news\\iphone-17-air-announcement-what-to-expect.mdx",
+      "contentType": "news",
+      "isValid": true,
+      "score": 85,
+      "issuesCount": 0,
+      "warningsCount": 3,
       "topIssues": []
     },
     {
