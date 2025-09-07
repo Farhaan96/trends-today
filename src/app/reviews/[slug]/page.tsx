@@ -216,27 +216,26 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
 
         {/* Content */}
         <article className="px-8 pb-8">
-          <div className="prose prose-lg prose-slate max-w-none 
-            prose-headings:text-gray-900 prose-headings:font-bold prose-headings:tracking-tight
-            prose-h1:text-4xl prose-h1:mb-6 prose-h1:mt-8
-            prose-h2:text-3xl prose-h2:mb-4 prose-h2:mt-8 prose-h2:border-b prose-h2:border-gray-200 prose-h2:pb-2
-            prose-h3:text-2xl prose-h3:mb-3 prose-h3:mt-6
-            prose-h4:text-xl prose-h4:mb-2 prose-h4:mt-4
-            prose-p:text-gray-800 prose-p:leading-relaxed prose-p:mb-4 prose-p:text-base
-            prose-strong:text-gray-900 prose-strong:font-semibold
-            prose-em:text-gray-700 prose-em:italic
-            prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-a:font-medium
-            prose-ul:text-gray-800 prose-ul:mb-4 prose-ul:pl-6
-            prose-ol:text-gray-800 prose-ol:mb-4 prose-ol:pl-6
-            prose-li:text-gray-800 prose-li:mb-2 prose-li:leading-relaxed
-            prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-700 prose-blockquote:bg-blue-50 prose-blockquote:py-4 prose-blockquote:pr-4 prose-blockquote:rounded-r-lg
-            prose-code:text-sm prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-gray-800 prose-code:font-mono
-            prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto
-            prose-img:rounded-lg prose-img:shadow-md prose-img:mb-6 prose-img:mx-auto
-            prose-table:text-sm prose-table:mb-6
-            prose-th:bg-gray-100 prose-th:font-semibold prose-th:text-gray-900 prose-th:px-4 prose-th:py-2
-            prose-td:px-4 prose-td:py-2 prose-td:text-gray-800 prose-td:border-t prose-td:border-gray-200
-            prose-hr:border-gray-300 prose-hr:my-8">
+          <div className="prose prose-lg max-w-none text-gray-900 article-content
+            [&>h1]:text-4xl [&>h1]:font-bold [&>h1]:text-gray-900 [&>h1]:mb-6 [&>h1]:mt-8 [&>h1]:tracking-tight
+            [&>h2]:text-3xl [&>h2]:font-bold [&>h2]:text-gray-900 [&>h2]:mb-4 [&>h2]:mt-8 [&>h2]:border-b [&>h2]:border-gray-200 [&>h2]:pb-2 [&>h2]:tracking-tight
+            [&>h3]:text-2xl [&>h3]:font-bold [&>h3]:text-gray-900 [&>h3]:mb-3 [&>h3]:mt-6 [&>h3]:tracking-tight
+            [&>h4]:text-xl [&>h4]:font-bold [&>h4]:text-gray-900 [&>h4]:mb-2 [&>h4]:mt-4 [&>h4]:tracking-tight
+            [&>p]:text-gray-900 [&>p]:leading-relaxed [&>p]:mb-4 [&>p]:text-base [&>p]:font-normal
+            [&>strong]:text-gray-900 [&>strong]:font-semibold
+            [&>em]:text-gray-800 [&>em]:italic
+            [&>a]:text-blue-600 [&>a]:no-underline hover:[&>a]:underline [&>a]:font-medium
+            [&>ul]:text-gray-900 [&>ul]:mb-4 [&>ul]:pl-6
+            [&>ol]:text-gray-900 [&>ol]:mb-4 [&>ol]:pl-6
+            [&>li]:text-gray-900 [&>li]:mb-2 [&>li]:leading-relaxed
+            [&>blockquote]:border-l-4 [&>blockquote]:border-blue-500 [&>blockquote]:pl-6 [&>blockquote]:italic [&>blockquote]:text-gray-800 [&>blockquote]:bg-blue-50 [&>blockquote]:py-4 [&>blockquote]:pr-4 [&>blockquote]:rounded-r-lg
+            [&>code]:text-sm [&>code]:bg-gray-100 [&>code]:px-2 [&>code]:py-1 [&>code]:rounded [&>code]:text-gray-900 [&>code]:font-mono
+            [&>pre]:bg-gray-900 [&>pre]:text-gray-100 [&>pre]:p-4 [&>pre]:rounded-lg [&>pre]:overflow-x-auto
+            [&>img]:rounded-lg [&>img]:shadow-md [&>img]:mb-6 [&>img]:mx-auto
+            [&>table]:text-sm [&>table]:mb-6
+            [&>th]:bg-gray-100 [&>th]:font-semibold [&>th]:text-gray-900 [&>th]:px-4 [&>th]:py-2
+            [&>td]:px-4 [&>td]:py-2 [&>td]:text-gray-900 [&>td]:border-t [&>td]:border-gray-200
+            [&>hr]:border-gray-300 [&>hr]:my-8">
             <MDXRemote 
               source={content} 
               components={{

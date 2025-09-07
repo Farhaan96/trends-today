@@ -24,10 +24,10 @@ export default function ImageWithFallback({ src, fallbackSrc = "/file.svg", alt,
   // If we have an error and no fallback, show a placeholder
   if (hasError && imgSrc === fallbackSrc) {
     return (
-      <div className={`bg-gray-200 flex items-center justify-center ${className}`}>
+      <div className={`bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center rounded-lg ${className}`}>
         <div className="text-center p-8">
           <div className="text-4xl mb-2">📷</div>
-          <p className="text-gray-500 text-sm">Image not available</p>
+          <p className="text-gray-600 text-sm font-medium">Image not available</p>
         </div>
       </div>
     );

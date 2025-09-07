@@ -120,3 +120,39 @@ html {
   background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
   background-size: 200px 100%;
 }
+
+/* Article content styling - ensure proper text colors */
+.article-content {
+  color: #111827 !important; /* text-gray-900 */
+}
+
+.article-content p {
+  color: #111827 !important; /* text-gray-900 */
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6 {
+  color: #111827 !important; /* text-gray-900 */
+  font-weight: 700;
+}
+
+.article-content strong {
+  color: #111827 !important; /* text-gray-900 */
+  font-weight: 600;
+}
+
+.article-content li {
+  color: #111827 !important; /* text-gray-900 */
+}
+
+.article-content ul,
+.article-content ol {
+  color: #111827 !important; /* text-gray-900 */
+}
