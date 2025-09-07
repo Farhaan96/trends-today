@@ -52,6 +52,13 @@ export default function HomePage() {
 
   const newsArticles = [
     {
+      title: "iPhone 17 Air: Apple's Ultra-Thin Revolution Unveiled",
+      description: "Apple's September 9 event reveals iPhone 17 Air - the thinnest iPhone ever. Complete lineup details, features, and what to expect from Apple's boldest design.",
+      href: "/news/iphone-17-air-announcement-what-to-expect",
+      publishedAt: "2025-01-15",
+      category: "Breaking"
+    },
+    {
       title: "Apple Vision Pro 2 Development Confirmed for Late 2025",
       description: "Sources confirm Apple is working on a lighter, cheaper second-generation Vision Pro with improved displays.",
       href: "/demo-article",
