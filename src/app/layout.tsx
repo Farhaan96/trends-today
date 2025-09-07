@@ -9,6 +9,7 @@ import ReadingProgressBar from '@/components/ui/ReadingProgressBar';
 import WebVitals, { PerformanceObserver, ResourcePreloader, LayoutStabilizer } from '@/components/seo/WebVitals';
 import { OrganizationSchema, WebsiteSchema } from '@/components/seo/SchemaMarkup';
 import Script from 'next/script';
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -195,6 +196,8 @@ export default function RootLayout({
         </main>
         <Footer />
         <BackToTop />
+        {/* Vercel Web Analytics */}
+        <Analytics />
         
         {/* Revenue Tracking Script */}
         <Script id="revenue-tracking" strategy="afterInteractive">
