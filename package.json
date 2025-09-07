@@ -20,7 +20,21 @@
     "test:mcp": "node scripts/test-mcp.js",
     "sitemaps": "next-sitemap",
     "postbuild": "next-sitemap",
-    "prepare": "husky"
+    "prepare": "husky",
+    "agent:news": "node agents/news-scanner.js",
+    "agent:content": "node agents/content-creator.js",
+    "agent:seo": "node agents/seo-finder.js",
+    "agent:quality": "node agents/quality-check.js",
+    "agent:products": "node agents/product-tracker.js",
+    "agent:links": "node agents/link-healer.js",
+    "agent:images": "node agents/image-hunter.js",
+    "agent:refresh": "node agents/content-refresher.js",
+    "agent:trust": "node agents/trust-builder.js",
+    "agents:all": "node agents/orchestrator.js full",
+    "agents:emergency": "node agents/orchestrator.js emergency",
+    "agents:maintenance": "node agents/orchestrator.js maintenance",
+    "agents:discovery": "node agents/orchestrator.js discovery",
+    "agents:content": "node agents/orchestrator.js content"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

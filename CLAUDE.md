@@ -6,6 +6,46 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Trends Today is a production-ready tech blog platform built with Next.js 14, featuring live content generation through API integrations, TechRadar-style design, and comprehensive SEO optimization. The platform generates reviews, comparisons, buying guides, and news articles using real-time data sources.
 
+## 🤖 AGENT-DRIVEN AUTOMATION SYSTEM
+
+### Active Agents (Located in `/agents/` directory)
+
+#### Core Content Agents
+- **news-scanner.js** - Discovers trending tech news from RSS, Reddit, and newsrooms
+- **content-creator.js** - Generates articles using Perplexity API research
+- **seo-finder.js** - Identifies zero-volume keywords and opportunities
+- **product-tracker.js** - Monitors product launches and updates
+- **quality-check.js** - Validates content quality and SEO compliance
+
+#### New Automation Agents (In Development)
+- **link-healer.js** - Fixes broken links and 404 errors automatically
+- **image-hunter.js** - Sources and optimizes images from APIs
+- **content-refresher.js** - Updates outdated content and prices
+- **trust-builder.js** - Adds author bios and credibility signals
+- **orchestrator.js** - Master controller for all agent coordination
+
+### Agent Execution Commands
+```bash
+# Individual agent runs
+npm run agent:news         # Run news scanner
+npm run agent:content      # Create content from opportunities  
+npm run agent:seo          # Find SEO opportunities
+npm run agent:quality      # Check content quality
+npm run agent:products     # Track product updates
+
+# Orchestrated runs
+npm run agents:all         # Run full pipeline
+npm run agents:daily       # Daily maintenance tasks
+npm run agents:hourly      # Hourly discovery tasks
+```
+
+### Critical Issues Being Fixed by Agents
+1. **Broken Links (404s)** - link-healer.js fixing routing issues
+2. **Placeholder Images** - image-hunter.js replacing /file.svg
+3. **Outdated Content** - content-refresher.js updating dates/specs
+4. **Missing Trust Signals** - trust-builder.js adding author info
+5. **Content Gaps** - content-creator.js generating new articles
+
 ## 🚀 ULTRA TRANSFORMATION PLAN: Trends Today → Tech Blog Domination
 
 ### Current Status: Foundation Complete ✅

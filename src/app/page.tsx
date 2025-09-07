@@ -10,8 +10,8 @@ export default function HomePage() {
     description: "After two weeks of testing, we dive deep into Apple's flagship to see if the titanium design, A17 Pro chip, and 5x zoom camera justify the premium price tag.",
     href: "/reviews/iphone-15-pro-max-review",
     category: "Reviews",
-    publishedAt: "2025-01-15",
-    image: "/file.svg",
+    publishedAt: "Update to current date",
+    image: "/images/products/iphone-15-pro-max-hero.jpg",
     author: "Trends Today Editorial"
   };
 
@@ -21,32 +21,32 @@ export default function HomePage() {
       description: "Samsung's latest flagship brings incredible camera capabilities and S Pen productivity to challenge the iPhone 15 Pro Max.",
       href: "/reviews/samsung-galaxy-s24-ultra-review", 
       category: "Reviews",
-      publishedAt: "2025-01-14",
-      image: "/file.svg"
+      publishedAt: "2025-09-05",
+      image: "/images/products/iphone-15-pro-max-hero.jpg"
     },
     {
       title: "iPhone 15 Pro vs Galaxy S24: Ultimate Flagship Battle", 
       description: "We compare Apple and Samsung's flagship phones across camera, performance, battery, and value.",
       href: "/compare/iphone-15-pro-vs-samsung-galaxy-s24",
       category: "Comparisons", 
-      publishedAt: "2025-01-13",
-      image: "/file.svg"
+      publishedAt: "2025-09-05",
+      image: "/images/products/iphone-15-pro-max-hero.jpg"
     },
     {
       title: "Google Pixel 8 Pro Review: AI Photography Perfected",
       description: "Google's computational photography reaches new heights with the Pixel 8 Pro's advanced AI features.",
       href: "/reviews/google-pixel-8-pro-review",
       category: "Reviews",
-      publishedAt: "2025-01-12", 
-      image: "/file.svg"
+      publishedAt: "2025-09-05", 
+      image: "/images/products/iphone-15-pro-max-hero.jpg"
     },
     {
       title: "OnePlus 12 Review: Speed Demon Returns",
       description: "OnePlus is back with blazing fast charging, flagship performance, and competitive pricing.",
       href: "/reviews/oneplus-12-review",
       category: "Reviews", 
-      publishedAt: "2025-01-11",
-      image: "/file.svg"
+      publishedAt: "2025-09-05",
+      image: "/images/products/iphone-15-pro-max-hero.jpg"
     }
   ];
 
@@ -55,28 +55,28 @@ export default function HomePage() {
       title: "iPhone 17 Air: Apple's Ultra-Thin Revolution Unveiled",
       description: "Apple's September 9 event reveals iPhone 17 Air - the thinnest iPhone ever. Complete lineup details, features, and what to expect from Apple's boldest design.",
       href: "/news/iphone-17-air-announcement-what-to-expect",
-      publishedAt: "2025-01-15",
+      publishedAt: "2025-09-05",
       category: "Breaking"
     },
     {
       title: "Apple Vision Pro 2 Development Confirmed for Late 2025",
       description: "Sources confirm Apple is working on a lighter, cheaper second-generation Vision Pro with improved displays.",
       href: "/demo-article",
-      publishedAt: "2025-01-15",
+      publishedAt: "2025-09-05",
       category: "Breaking"
     },
     {
       title: "Samsung Galaxy S25 Series Launch Date Leaked",
       description: "Reliable leakers suggest Samsung will unveil the Galaxy S25 lineup in February with major AI upgrades.",
       href: "/demo-article",
-      publishedAt: "2025-01-14", 
+      publishedAt: "2025-09-05", 
       category: "News"
     },
     {
       title: "Google Pixel 9 Pro Design Revealed in Leaked Renders",
       description: "New leaked renders show a redesigned camera bar and refined design language for Google's next flagship.",
       href: "/demo-article",
-      publishedAt: "2025-01-13",
+      publishedAt: "2025-09-05",
       category: "Leaks"
     }
   ];
@@ -128,7 +128,7 @@ export default function HomePage() {
               <Link href={heroArticle.href}>
                 <article className="group cursor-pointer relative">
                   <div className="relative aspect-[16/10] rounded-sm overflow-hidden" style={{ backgroundImage: `url(${heroArticle.image})`, backgroundSize: "cover", backgroundPosition: "center" }}>
-                    <Image src={'/file.svg'} alt={heroArticle.title} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                    <Image src={'/images/products/iphone-15-pro-max-hero.jpg'} alt={heroArticle.title} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                     <div className="absolute inset-0 flex items-center justify-center hidden">
                       <div className="w-24 h-24 bg-white/10 rounded-lg flex items-center justify-center">
                         <span className="text-5xl opacity-60">📱</span>
@@ -242,7 +242,7 @@ export default function HomePage() {
                     <Link key={index} href={article.href}>
                       <article className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
                         <div className="relative aspect-[16/10] rounded-sm overflow-hidden" style={{ backgroundImage: `url(${article.image})`, backgroundSize: "cover", backgroundPosition: "center" }}>
-                          <Image src={'/file.svg'} alt={article.title} fill sizes="(max-width: 1280px) 100vw, 33vw" className="object-cover" loading="lazy" />
+                          <Image src={'/images/products/iphone-15-pro-max-hero.jpg'} alt={article.title} fill sizes="(max-width: 1280px) 100vw, 33vw" className="object-cover" loading="lazy" />
                           <div className="absolute inset-0 flex items-center justify-center hidden">
                             <div className="w-16 h-16 bg-gray-300 rounded-lg flex items-center justify-center hidden">
                               <span className="text-2xl opacity-60">📱</span>
