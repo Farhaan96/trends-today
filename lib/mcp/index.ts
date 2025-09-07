@@ -1,5 +1,9 @@
 export { FirecrawlClient, firecrawl } from './firecrawl';
 export { PerplexityClient, perplexity } from './perplexity';
+import type { FirecrawlClient as FirecrawlClientType } from './firecrawl';
+import type { PerplexityClient as PerplexityClientType } from './perplexity';
+import { FirecrawlClient as FirecrawlClientCtor } from './firecrawl';
+import { PerplexityClient as PerplexityClientCtor } from './perplexity';
 export { demoKeywordData, demoProductData, demoNewsData, isDemoMode, getDemoModeWarning, simulateApiDelay } from './demo-data';
 
 class DataForSEOLite {
@@ -16,13 +20,13 @@ class DataForSEOLite {
 }
 
 export class MCPClient {
-  public firecrawl: FirecrawlClient;
-  public perplexity: PerplexityClient;
+  public firecrawl: FirecrawlClientType;
+  public perplexity: PerplexityClientType;
   public dataForSEO: DataForSEOLite;
 
   constructor(options?: { firecrawlKey?: string; perplexityKey?: string }) {
-    this.firecrawl = new FirecrawlClient(options?.firecrawlKey);
-    this.perplexity = new PerplexityClient(options?.perplexityKey);
+    this.firecrawl = new FirecrawlClientCtor(options?.firecrawlKey);
+    this.perplexity = new PerplexityClientCtor(options?.perplexityKey);
     this.dataForSEO = new DataForSEOLite();
   }
 
@@ -82,4 +86,3 @@ export class MCPClient {
 }
 
 export const mcp = new MCPClient();
-
