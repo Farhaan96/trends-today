@@ -128,7 +128,7 @@ export default function HomePage() {
               <Link href={heroArticle.href}>
                 <article className="group cursor-pointer relative">
                   <div className="relative aspect-[16/10] rounded-sm overflow-hidden" style={{ backgroundImage: `url(${heroArticle.image})`, backgroundSize: "cover", backgroundPosition: "center" }}>
-                    <Image src={'/images/products/iphone-15-pro-max-hero.jpg'} alt={heroArticle.title} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                    <Image src={heroArticle.image} alt={heroArticle.title} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                     <div className="absolute inset-0 flex items-center justify-center hidden">
                       <div className="w-24 h-24 bg-white/10 rounded-lg flex items-center justify-center">
                         <span className="text-5xl opacity-60">📱</span>
@@ -242,7 +242,7 @@ export default function HomePage() {
                     <Link key={index} href={article.href}>
                       <article className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
                         <div className="relative aspect-[16/10] rounded-sm overflow-hidden" style={{ backgroundImage: `url(${article.image})`, backgroundSize: "cover", backgroundPosition: "center" }}>
-                          <Image src={'/images/products/iphone-15-pro-max-hero.jpg'} alt={article.title} fill sizes="(max-width: 1280px) 100vw, 33vw" className="object-cover" loading="lazy" />
+                          <Image src={article.image} alt={article.title} fill sizes="(max-width: 1280px) 100vw, 33vw" className="object-cover" loading="lazy" />
                           <div className="absolute inset-0 flex items-center justify-center hidden">
                             <div className="w-16 h-16 bg-gray-300 rounded-lg flex items-center justify-center hidden">
                               <span className="text-2xl opacity-60">📱</span>
