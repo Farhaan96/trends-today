@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { BellIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 
@@ -75,7 +77,7 @@ export default function DealAlert({
       
       // Track conversion
       if (typeof window !== 'undefined') {
-        window.gtag?.('event', 'deal_alert_signup', {
+        (window as any).gtag?.('event', 'deal_alert_signup', {
           event_category: 'monetization',
           event_label: productName,
           value: targetPrice

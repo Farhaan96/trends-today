@@ -11,7 +11,7 @@ import {
   DocumentTextIcon,
   CpuChipIcon,
   CameraIcon,
-  BatteryIcon,
+  Battery0Icon as BatteryIcon,
   SignalIcon
 } from '@heroicons/react/24/outline';
 

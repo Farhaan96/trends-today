@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef } from 'react';
 
 interface AdPlaceholderProps {
@@ -27,9 +29,9 @@ export default function AdPlaceholder({
 
   useEffect(() => {
     // Initialize Google AdSense when ready
-    if (typeof window !== 'undefined' && window.adsbygoogle && adRef.current) {
+    if (typeof window !== 'undefined' && (window as any).adsbygoogle && adRef.current) {
       try {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
       } catch (error) {
         console.error('AdSense error:', error);
       }

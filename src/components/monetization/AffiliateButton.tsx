@@ -1,6 +1,6 @@
 import React from 'react';
 import { AffiliateProvider } from '@/types/monetization';
-import { ShoppingCartIcon, ExternalLinkIcon } from '@heroicons/react/24/outline';
+import { ShoppingCartIcon, ArrowTopRightOnSquareIcon as ExternalLinkIcon } from '@heroicons/react/24/outline';
 
 interface AffiliateButtonProps {
   provider: AffiliateProvider;
@@ -86,7 +86,7 @@ export default function AffiliateButton({
     // Track affiliate click
     if (typeof window !== 'undefined') {
       // Send tracking event
-      window.gtag?.('event', 'affiliate_click', {
+      (window as any).gtag?.('event', 'affiliate_click', {
         event_category: 'monetization',
         event_label: `${provider}_${productName}`,
         value: price || 0

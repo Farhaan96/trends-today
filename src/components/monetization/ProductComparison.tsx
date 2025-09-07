@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { ProductComparison as ProductComparisonType, AffiliateProvider } from '@/types/monetization';
 import AffiliateButton from './AffiliateButton';

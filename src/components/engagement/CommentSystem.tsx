@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { HeartIcon, ReplyIcon, FlagIcon } from '@heroicons/react/24/outline';
+import { HeartIcon, ArrowUturnLeftIcon as ReplyIcon, FlagIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';
 
 interface Comment {
@@ -92,8 +92,8 @@ export default function CommentSystem({ articleId, articleTitle }: CommentSystem
       setNewComment('');
 
       // Track comment submission
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'comment_submit', {
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'comment_submit', {
           event_category: 'engagement',
           event_label: articleId,
           value: 1
@@ -171,8 +171,8 @@ export default function CommentSystem({ articleId, articleTitle }: CommentSystem
       }
 
       // Track like
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'comment_like', {
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'comment_like', {
           event_category: 'engagement',
           event_label: commentId,
           value: 1

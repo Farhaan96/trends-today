@@ -40,8 +40,8 @@ export default function RatingSystem({
       setHasRated(true);
 
       // Track rating
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'article_rating', {
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'article_rating', {
           event_category: 'engagement',
           event_label: articleId,
           value: rating

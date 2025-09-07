@@ -1,6 +1,6 @@
 import React from 'react';
 import { StarIcon, CheckIcon } from '@heroicons/react/24/solid';
-import { CrownIcon } from '@heroicons/react/24/outline';
+import { SparklesIcon as CrownIcon } from '@heroicons/react/24/outline';
 
 interface PremiumFeature {
   name: string;
@@ -66,7 +66,7 @@ export default function PremiumUpgrade({
   const handleUpgrade = (tierName: string) => {
     // Track premium conversion attempt
     if (typeof window !== 'undefined') {
-      window.gtag?.('event', 'premium_upgrade_click', {
+      (window as any).gtag?.('event', 'premium_upgrade_click', {
         event_category: 'monetization',
         event_label: tierName,
         value: tierName.includes('Yearly') ? 39.99 : 4.99
