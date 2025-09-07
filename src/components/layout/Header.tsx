@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import { useState } from 'react';
 import DarkModeToggle from '../ui/DarkModeToggle';
 import NotificationSystem from '../ui/NotificationSystem';
@@ -53,20 +54,17 @@ export default function Header() {
       <nav className="bg-white border-b-2 border-slate-800">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center h-20">
-            {/* TechRadar-style Logo */}
+            {/* Brand Logo */}
             <div className="flex items-center">
-              <Link href="/" className="flex-shrink-0">
+              <Link href="/" className="flex-shrink-0" aria-label="Trends Today Home">
                 <div className="flex items-center">
-                  <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-sm mr-2">
-                    <span className="text-xl font-bold uppercase tracking-wide">T</span>
-                  </div>
-                  <div>
-                    <span className="text-2xl font-bold text-slate-900 uppercase tracking-tight">Trends</span>
-                    <span className="text-2xl font-bold text-blue-600 uppercase tracking-tight">Today</span>
-                    <div className="text-xs text-gray-900 uppercase tracking-widest font-bold -mt-1">
-                      Tech Reviews & News
-                    </div>
-                  </div>
+                  <ImageWithFallback
+                    src="/images/brand/trends-today-logo.png"
+                    alt="Trends Today — Tech Reviews & News"
+                    width={200}
+                    height={48}
+                    className="h-12 w-auto"
+                  />
                 </div>
               </Link>
             </div>
