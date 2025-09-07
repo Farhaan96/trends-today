@@ -1,5 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import TrustBadges from '@/components/ui/TrustBadges';
+import StructuredData from '@/components/seo/StructuredData';
+import { getAllBaseSchemas } from '@/lib/schema';
 
 export default function HomePage() {
   const heroArticle = {
@@ -51,21 +54,21 @@ export default function HomePage() {
     {
       title: "Apple Vision Pro 2 Development Confirmed for Late 2025",
       description: "Sources confirm Apple is working on a lighter, cheaper second-generation Vision Pro with improved displays.",
-      href: "/news/apple-vision-pro-2-development",
+      href: "/demo-article",
       publishedAt: "2025-01-15",
       category: "Breaking"
     },
     {
       title: "Samsung Galaxy S25 Series Launch Date Leaked",
       description: "Reliable leakers suggest Samsung will unveil the Galaxy S25 lineup in February with major AI upgrades.",
-      href: "/news/galaxy-s25-launch-date",
+      href: "/demo-article",
       publishedAt: "2025-01-14", 
       category: "News"
     },
     {
       title: "Google Pixel 9 Pro Design Revealed in Leaked Renders",
       description: "New leaked renders show a redesigned camera bar and refined design language for Google's next flagship.",
-      href: "/news/pixel-9-pro-design-leak",
+      href: "/demo-article",
       publishedAt: "2025-01-13",
       category: "Leaks"
     }
@@ -94,6 +97,20 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-white" style={{ fontFamily: '"Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+      {/* SEO: H1 + JSON-LD */}
+      <h1 className="sr-only">Trends Today - Tech Reviews, Comparisons & Buying Guides</h1>
+      <StructuredData data={getAllBaseSchemas()} />
+      <StructuredData
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: "Trends Today - Tech Reviews, Comparisons & Buying Guides",
+          url: "https://trendstoday.ca/",
+          description:
+            "Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides.",
+          isPartOf: { "@type": "WebSite", url: "https://trendstoday.ca" }
+        }}
+      />
       {/* TechRadar-style Hero Grid */}
       <section className="bg-white">
         <div className="max-w-7xl mx-auto px-4 py-6">
@@ -104,6 +121,7 @@ export default function HomePage() {
               <Link href={heroArticle.href}>
                 <article className="group cursor-pointer relative">
                   <div className="relative aspect-[16/10] bg-gradient-to-br from-slate-800 to-slate-900 rounded-sm overflow-hidden">
+                    <Image src={'/file.svg'} alt={heroArticle.title} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="w-24 h-24 bg-white/10 rounded-lg flex items-center justify-center">
                         <span className="text-5xl opacity-60">📱</span>
@@ -216,7 +234,8 @@ export default function HomePage() {
                   {featuredArticles.map((article, index) => (
                     <Link key={index} href={article.href}>
                       <article className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
-                        <div className="relative aspect-[16/10] bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
+                        <div className="relative aspect-[16/10] overflow-hidden">
+                          <Image src={'/file.svg'} alt={article.title} fill sizes="(max-width: 1280px) 100vw, 33vw" className="object-cover" loading="lazy" />
                           <div className="absolute inset-0 flex items-center justify-center">
                             <div className="w-16 h-16 bg-gray-300 rounded-lg flex items-center justify-center">
                               <span className="text-2xl opacity-60">📱</span>
