@@ -193,11 +193,30 @@ export default async function NewsPage({ params }: NewsPageProps) {
             <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
               <ImageWithFallback
                 src={frontmatter.image}
-                alt={frontmatter.title}
+                alt={frontmatter.imageAlt || frontmatter.title}
                 className="w-full h-full object-cover"
                 fallbackSrc="/file.svg"
               />
             </div>
+            {(frontmatter.imageCredit || frontmatter.imageIsConcept) && (
+              <div className="mt-2 text-xs text-gray-600 flex items-center gap-2">
+                {frontmatter.imageIsConcept && (
+                  <span className="inline-flex items-center px-2 py-0.5 bg-yellow-100 text-yellow-800 font-semibold rounded-sm">Concept render</span>
+                )}
+                {frontmatter.imageCredit && (
+                  <span>
+                    Image credit: {frontmatter.imageCredit.url ? (
+                      <a href={frontmatter.imageCredit.url} target="_blank" rel="noopener noreferrer" className="underline">
+                        {frontmatter.imageCredit.name || 'Source'}
+                      </a>
+                    ) : (
+                      frontmatter.imageCredit.name || 'Source'
+                    )}
+                    {frontmatter.imageLicense ? ` · ${frontmatter.imageLicense}` : ''}
+                  </span>
+                )}
+              </div>
+            )}
           </div>
         )}
         
