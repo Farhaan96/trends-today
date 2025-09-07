@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { StarIcon, CheckIcon } from '@heroicons/react/24/solid';
 import { SparklesIcon as CrownIcon } from '@heroicons/react/24/outline';

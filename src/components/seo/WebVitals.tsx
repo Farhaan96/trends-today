@@ -136,14 +136,18 @@ export function PerformanceObserver() {
 
         // Resource timing
         const resourceObserver = new window.PerformanceObserver((list) => {
-          const slowResources = list.getEntries()
-            .filter(entry => entry.duration > 1000) // Resources taking more than 1s
-            .map(entry => ({
-              name: entry.name,
-              duration: entry.duration,
-              size: entry.transferSize || 0,
-              type: getResourceType(entry.name)
-            }));
+          const slowResources = list
+            .getEntries()
+            .filter((entry) => entry.duration > 1000) // Resources taking more than 1s
+            .map((entry) => {
+              const res = entry as PerformanceResourceTiming;
+              return {
+                name: res.name,
+                duration: res.duration,
+                size: (res as any).transferSize ?? 0,
+                type: getResourceType(res.name),
+              };
+            });
 
           if (slowResources.length > 0) {
             fetch('/api/analytics', {

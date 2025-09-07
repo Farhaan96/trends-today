@@ -129,34 +129,40 @@ export function generateReviewSchema(data: {
     cons?: string[];
   };
 }): ReviewSchema {
+  const itemReviewed: any = {
+    "@type": "Product",
+    "name": data.product.name,
+    "category": data.product.category,
+    "brand": {
+      "@type": "Brand",
+      "name": data.product.brand
+    },
+    "model": data.product.model,
+    "description": data.product.description,
+    "sku": data.product.sku,
+    "gtin": data.product.gtin,
+    "mpn": data.product.mpn,
+    "offers": data.product.price
+      ? {
+          "@type": "AggregateOffer",
+          "priceCurrency": data.product.currency || "USD",
+          "lowPrice": data.product.price.split('-')[0].replace(/[^0-9.]/g, ''),
+          "highPrice": data.product.price.includes('-')
+            ? data.product.price.split('-')[1].replace(/[^0-9.]/g, '')
+            : data.product.price.replace(/[^0-9.]/g, ''),
+          "availability": `https://schema.org/${data.product.availability || 'InStock'}`,
+          "offerCount": "5",
+        }
+      : undefined,
+  };
+  if (data.product.image) {
+    itemReviewed.image = data.product.image;
+  }
+
   return {
     "@context": "https://schema.org",
     "@type": "Review",
-    "itemReviewed": {
-      "@type": "Product",
-      "name": data.product.name,
-      "category": data.product.category,
-      "brand": {
-        "@type": "Brand",
-        "name": data.product.brand
-      },
-      "model": data.product.model,
-      "description": data.product.description,
-      "image": data.product.image,
-      "sku": data.product.sku,
-      "gtin": data.product.gtin,
-      "mpn": data.product.mpn,
-      "offers": data.product.price ? {
-        "@type": "AggregateOffer",
-        "priceCurrency": data.product.currency || "USD",
-        "lowPrice": data.product.price.split('-')[0].replace(/[^0-9.]/g, ''),
-        "highPrice": data.product.price.includes('-') ? 
-          data.product.price.split('-')[1].replace(/[^0-9.]/g, '') : 
-          data.product.price.replace(/[^0-9.]/g, ''),
-        "availability": `https://schema.org/${data.product.availability || 'InStock'}`,
-        "offerCount": "5"
-      } : undefined
-    },
+    "itemReviewed": itemReviewed,
     "reviewRating": {
       "@type": "Rating",
       "ratingValue": data.review.rating,
@@ -313,10 +319,7 @@ export function generatePersonSchema(data: {
     "image": data.avatar,
     "url": data.url,
     "jobTitle": data.jobTitle,
-    "worksFor": data.worksFor ? {
-      "@type": "Organization",
-      "name": data.worksFor
-    } : organizationSchema,
+    "worksFor": data.worksFor ? data.worksFor : organizationSchema,
     "sameAs": data.sameAs
   };
 }

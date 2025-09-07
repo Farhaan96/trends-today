@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { AffiliateProvider } from '@/types/monetization';
 import { ShoppingCartIcon, ArrowTopRightOnSquareIcon as ExternalLinkIcon } from '@heroicons/react/24/outline';

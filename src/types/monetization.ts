@@ -83,7 +83,7 @@ export interface ProductComparison {
   rating: number;
   pros: string[];
   cons: string[];
-  affiliateLinks: Record<AffiliateProvider, string>;
+  affiliateLinks: Partial<Record<AffiliateProvider, string>>;
   image: string;
   isRecommended?: boolean;
   dealScore?: number;

@@ -1,7 +1,7 @@
 // Schema.org TypeScript definitions for structured data
 
 export interface BaseSchema {
-  "@context": "https://schema.org";
+  "@context"?: "https://schema.org"; // optional to allow nested objects without @context
   "@type": string;
 }
 
@@ -178,7 +178,7 @@ export interface ProductSchema extends BaseSchema {
   mpn?: string;
   offers?: OfferSchema;
   aggregateRating?: AggregateRatingSchema;
-  review?: ReviewSchema[];
+  review?: Partial<ReviewSchema>[];
   manufacturer?: OrganizationSchema;
   releaseDate?: string;
 }
