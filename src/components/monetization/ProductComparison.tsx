@@ -97,6 +97,7 @@ export default function ProductComparison({
                 {/* Product Image */}
                 <div className="flex-shrink-0">
                   <img
+                    loading="lazy"
                     src={product.image}
                     alt={product.name}
                     className="w-20 h-20 md:w-24 md:h-24 object-cover rounded-lg bg-gray-100"

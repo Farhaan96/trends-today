@@ -4,8 +4,13 @@ const fs = require('fs').promises;
 const path = require('path');
 const { execSync } = require('child_process');
 
-// Import MCP clients - using demo version for immediate testing
-const { mcp, isDemoMode } = require('../lib/mcp/demo.js');
+// Import MCP clients (uses live MCP when keys configured; falls back to demo)
+let mcp, isDemoMode;
+try {
+  ({ mcp, isDemoMode } = require('../lib/mcp/index.ts'));
+} catch (e) {
+  ({ mcp, isDemoMode } = require('../lib/mcp/demo.js'));
+}
 
 const REVIEW_TEMPLATE = `---
 title: "{title}"
