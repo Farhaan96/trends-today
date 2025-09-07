@@ -137,7 +137,7 @@ export default function AuthorBox({
             {/* Credentials */}
             {author.credentials && author.credentials.length > 0 && (
               <div className="mt-3">
-                <div className="flex items-center text-xs text-gray-600 mb-1">
+                <div className="flex items-center text-xs text-gray-800 mb-1">
                   <AcademicCapIcon className="w-3 h-3 mr-1" />
                   <span className="font-semibold">Credentials:</span>
                 </div>
@@ -151,7 +151,7 @@ export default function AuthorBox({
                     </span>
                   ))}
                   {author.credentials.length > 2 && (
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
                       +{author.credentials.length - 2} more
                     </span>
                   )}
@@ -171,7 +171,7 @@ export default function AuthorBox({
                   </span>
                 ))}
                 {author.expertise.length > 4 && (
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
                     +{author.expertise.length - 4} more
                   </span>
                 )}
@@ -188,7 +188,7 @@ export default function AuthorBox({
               Testing Metrics
             </h4>
             {reviewMetrics ? (
-              <div className="space-y-1 text-xs text-gray-600">
+              <div className="space-y-1 text-xs text-gray-800">
                 {reviewMetrics.testingPeriod && (
                   <div>Testing period: <span className="font-medium">{reviewMetrics.testingPeriod}</span></div>
                 )}
@@ -203,7 +203,7 @@ export default function AuthorBox({
                 )}
               </div>
             ) : (
-              <p className="text-xs text-gray-600">Comprehensive real-world testing performed</p>
+              <p className="text-xs text-gray-800">Comprehensive real-world testing performed</p>
             )}
           </div>
           
@@ -212,7 +212,7 @@ export default function AuthorBox({
               <CalendarIcon className="w-4 h-4 mr-1" />
               Publication Info
             </h4>
-            <div className="space-y-1 text-xs text-gray-600">
+            <div className="space-y-1 text-xs text-gray-800">
               <div>Published: <span className="font-medium">{new Date(publishedAt).toLocaleDateString('en-US', { 
                 year: 'numeric', 
                 month: 'long', 

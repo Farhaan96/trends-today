@@ -55,7 +55,7 @@ export default function ScoreCard({ overallScore, breakdown }: ScoreCardProps) {
         <div className="mt-2">
           {renderStars(overallScore)}
         </div>
-        <p className="text-sm text-gray-600 mt-1">Overall Score</p>
+        <p className="text-sm text-gray-800 mt-1">Overall Score</p>
       </div>
 
       {breakdown && (

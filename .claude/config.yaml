@@ -1,0 +1,123 @@
+# Claude Code Agent Configuration
+# Trends Today Tech Blog Automation System
+
+project:
+  name: "Trends Today"
+  type: "tech-blog"
+  framework: "nextjs"
+  deployment: "vercel"
+
+agents:
+  # Critical maintenance agents (can run in parallel)
+  maintenance:
+    - name: "link-healer"
+      priority: "CRITICAL"
+      parallel: true
+      timeout: 300
+      
+    - name: "image-hunter"  
+      priority: "HIGH"
+      parallel: true
+      timeout: 600
+      dependencies: ["unsplash-api"]
+      
+    - name: "content-refresher"
+      priority: "HIGH" 
+      parallel: true
+      timeout: 400
+      dependencies: ["perplexity-api"]
+      
+    - name: "trust-builder"
+      priority: "MEDIUM"
+      parallel: true
+      timeout: 300
+
+  # Quality and discovery agents (sequential)
+  enhancement:
+    - name: "quality-check"
+      priority: "MEDIUM"
+      parallel: false
+      timeout: 200
+      
+    - name: "news-scanner"
+      priority: "LOW"
+      parallel: true
+      timeout: 600
+      
+    - name: "seo-finder"
+      priority: "LOW"
+      parallel: true
+      timeout: 400
+
+pipelines:
+  emergency:
+    description: "Critical fixes for broken functionality"
+    agents: ["link-healer", "image-hunter", "content-refresher"]
+    execution: "parallel"
+    max_time: 120 # seconds
+    
+  enhancement:
+    description: "Quality and credibility improvements"
+    agents: ["trust-builder", "quality-check"]
+    execution: "sequential"
+    max_time: 300
+    
+  discovery:
+    description: "Content opportunities and SEO"
+    agents: ["news-scanner", "seo-finder"]
+    execution: "parallel"
+    max_time: 600
+    
+  full:
+    description: "Complete automation cycle"
+    pipelines: ["emergency", "enhancement", "discovery"]
+    execution: "sequential"
+    max_time: 900
+
+execution:
+  # Parallel execution settings
+  max_concurrent: 4
+  retry_attempts: 2
+  retry_delay: 5000 # ms
+  
+  # Error handling
+  continue_on_error: true
+  critical_failure_threshold: 2
+  
+  # Reporting
+  generate_reports: true
+  report_directory: "./reports"
+  
+  # Performance monitoring
+  track_execution_time: true
+  benchmark_mode: false
+
+apis:
+  unsplash:
+    rate_limit: 50 # requests per hour
+    fallback: "demo-images"
+    
+  perplexity:
+    rate_limit: 100 # requests per hour  
+    fallback: "cached-data"
+    
+  firecrawl:
+    rate_limit: 200 # requests per hour
+    fallback: "skip"
+
+monitoring:
+  health_checks:
+    - "build-success"
+    - "zero-404-errors" 
+    - "all-images-loaded"
+    - "acceptable-contrast"
+    
+  performance_targets:
+    build_time: 180 # seconds
+    agent_success_rate: 0.95
+    parallel_efficiency: 3.0 # vs sequential
+    
+  alerts:
+    critical_failure: true
+    performance_degradation: true
+    api_quota_exceeded: true

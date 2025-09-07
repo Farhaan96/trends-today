@@ -107,7 +107,7 @@ export default function AffiliateButton({
         disabled
         className={`
           ${sizeClasses[size]}
-          bg-gray-300 text-gray-500 cursor-not-allowed rounded-lg font-medium
+          bg-gray-300 text-gray-700 cursor-not-allowed rounded-lg font-medium
           flex items-center justify-center gap-2 w-full
           ${className}
         `}
@@ -146,7 +146,7 @@ export default function AffiliateButton({
       </button>
       
       {/* Affiliate disclosure */}
-      <p className="text-xs text-gray-500 mt-1 text-center">
+      <p className="text-xs text-gray-700 mt-1 text-center">
         <span className="text-yellow-600">*</span> We earn a commission if you make a purchase
       </p>
     </div>

@@ -159,11 +159,11 @@ export default async function NewsPage({ params }: NewsPageProps) {
             {frontmatter.title}
           </h1>
           
-          <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+          <p className="text-xl text-gray-800 mb-6 leading-relaxed">
             {frontmatter.description}
           </p>
           
-          <div className="flex items-center gap-4 text-gray-500 border-b pb-6">
+          <div className="flex items-center gap-4 text-gray-700 border-b pb-6">
             <div className="flex items-center gap-2">
               <span className="font-medium text-gray-900">
                 {(typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || 'Trends Today Editorial'}

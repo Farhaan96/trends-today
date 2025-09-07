@@ -184,7 +184,7 @@ export default function NotificationSystem() {
       {/* Notification Bell */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+        className="relative p-2 text-gray-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
         aria-label="Notifications"
       >
         <BellIcon className="w-5 h-5" />
@@ -214,7 +214,7 @@ export default function NotificationSystem() {
               )}
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-md"
+                className="p-1 text-gray-700 hover:text-gray-800 dark:hover:text-gray-300 rounded-md"
               >
                 <XMarkIcon className="w-4 h-4" />
               </button>
@@ -225,8 +225,8 @@ export default function NotificationSystem() {
           <div className="max-h-96 overflow-y-auto">
             {notifications.length === 0 ? (
               <div className="p-8 text-center">
-                <BellIcon className="w-8 h-8 text-gray-300 dark:text-gray-600 mx-auto mb-2" />
-                <p className="text-gray-500 dark:text-gray-400">No notifications yet</p>
+                <BellIcon className="w-8 h-8 text-gray-300 dark:text-gray-800 mx-auto mb-2" />
+                <p className="text-gray-700 dark:text-gray-700">No notifications yet</p>
               </div>
             ) : (
               notifications.map((notification) => (
@@ -246,18 +246,18 @@ export default function NotificationSystem() {
                         </p>
                         <button
                           onClick={() => removeNotification(notification.id)}
-                          className="flex-shrink-0 p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-md"
+                          className="flex-shrink-0 p-1 text-gray-700 hover:text-gray-800 dark:hover:text-gray-300 rounded-md"
                         >
                           <XMarkIcon className="w-3 h-3" />
                         </button>
                       </div>
                       
-                      <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mt-1">
+                      <p className="text-sm text-gray-800 dark:text-gray-300 line-clamp-2 mt-1">
                         {notification.message}
                       </p>
                       
                       <div className="flex items-center justify-between mt-2">
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                        <span className="text-xs text-gray-700 dark:text-gray-700">
                           {formatTime(notification.timestamp)}
                         </span>
                         

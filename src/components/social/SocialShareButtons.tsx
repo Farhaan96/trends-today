@@ -153,7 +153,7 @@ export default function SocialShareButtons({
   return (
     <div className={getContainerClasses()}>
       {variant !== 'floating' && (
-        <span className="text-sm font-medium text-gray-600 mr-2">Share:</span>
+        <span className="text-sm font-medium text-gray-800 mr-2">Share:</span>
       )}
       
       {socialButtons.map(({ platform, icon }) => (

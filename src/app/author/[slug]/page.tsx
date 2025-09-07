@@ -104,15 +104,15 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
             <h2 className="text-xl text-blue-600 font-semibold mb-4">{author.title}</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-sm">
-              <div className="flex items-center text-gray-600">
+              <div className="flex items-center text-gray-800">
                 <MapPinIcon className="w-4 h-4 mr-2" />
                 {author.location}
               </div>
-              <div className="flex items-center text-gray-600">
+              <div className="flex items-center text-gray-800">
                 <CalendarIcon className="w-4 h-4 mr-2" />
                 {yearsAtTrends} years at Trends Today
               </div>
-              <div className="flex items-center text-gray-600">
+              <div className="flex items-center text-gray-800">
                 <DocumentTextIcon className="w-4 h-4 mr-2" />
                 {author.reviewCount} reviews published
               </div>
@@ -172,7 +172,7 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
           <section>
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Recent Reviews</h3>
             <div className="bg-gray-50 rounded-lg p-6">
-              <p className="text-gray-600 text-center py-8">
+              <p className="text-gray-800 text-center py-8">
                 Loading recent reviews by {author.name}...
               </p>
               <div className="text-center">
@@ -230,7 +230,7 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
 
           <div className="bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-6">
             <h4 className="text-lg font-semibold text-gray-900 mb-3">Contact {author.name.split(' ')[0]}</h4>
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-sm text-gray-800 mb-4">
               Have questions about a review or want to suggest a product for testing?
             </p>
             {author.socialMedia.email && (

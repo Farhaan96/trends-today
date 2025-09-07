@@ -68,7 +68,7 @@ export default function ComparisonTable({ productAName, productBName, comparison
         </tbody>
       </table>
       
-      <div className="mt-4 text-sm text-gray-600">
+      <div className="mt-4 text-sm text-gray-800">
         <div className="flex items-center space-x-4">
           <div className="flex items-center">
             <CheckIcon className="w-4 h-4 text-green-500 mr-1" />

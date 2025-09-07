@@ -83,7 +83,7 @@ export default function NewsletterSignup({
         <h3 className={`text-xl font-bold mb-2 ${isFooterVariant ? 'text-white' : 'text-slate-900'}`}>
           Welcome to Trends Today!
         </h3>
-        <p className={`text-sm ${isFooterVariant ? 'text-gray-300' : 'text-gray-600'}`}>
+        <p className={`text-sm ${isFooterVariant ? 'text-gray-300' : 'text-gray-800'}`}>
           Check your email for confirmation and {showLeadMagnet ? 'your free guide!' : 'your first newsletter!'}
         </p>
       </div>
@@ -142,7 +142,7 @@ export default function NewsletterSignup({
           </p>
         )}
 
-        <p className={`text-xs ${isFooterVariant ? 'text-gray-400' : 'text-white/70'}`}>
+        <p className={`text-xs ${isFooterVariant ? 'text-gray-700' : 'text-white/70'}`}>
           No spam, unsubscribe at any time. By subscribing, you agree to our privacy policy.
         </p>
       </form>

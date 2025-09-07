@@ -90,7 +90,7 @@ function RelatedArticleCard({ link }: RelatedArticleCardProps) {
       case 'comparison': return 'text-blue-600 bg-blue-100'; 
       case 'guide': return 'text-purple-600 bg-purple-100';
       case 'news': return 'text-red-600 bg-red-100';
-      default: return 'text-gray-600 bg-gray-100';
+      default: return 'text-gray-800 bg-gray-100';
     }
   };
 
@@ -108,7 +108,7 @@ function RelatedArticleCard({ link }: RelatedArticleCardProps) {
           {link.text}
         </h3>
         
-        <div className="flex items-center justify-between text-sm text-gray-500">
+        <div className="flex items-center justify-between text-sm text-gray-700">
           <span className="line-clamp-1">{link.context}</span>
           <svg className="w-4 h-4 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -264,11 +264,11 @@ export function Breadcrumbs({ items, className = "mb-6" }: BreadcrumbsProps) {
 
   return (
     <nav className={className} aria-label="Breadcrumb">
-      <ol className="flex items-center space-x-2 text-sm text-gray-600">
+      <ol className="flex items-center space-x-2 text-sm text-gray-800">
         {items.map((item, index) => (
           <li key={index} className="flex items-center">
             {index > 0 && (
-              <svg className="w-4 h-4 mx-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-4 h-4 mx-2 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 111.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
               </svg>
             )}

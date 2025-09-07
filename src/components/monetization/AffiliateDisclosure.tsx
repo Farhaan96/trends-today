@@ -12,7 +12,7 @@ export default function AffiliateDisclosure({
 }: AffiliateDisclosureProps) {
   if (variant === 'inline') {
     return (
-      <span className={`text-xs text-gray-500 ${className}`}>
+      <span className={`text-xs text-gray-700 ${className}`}>
         <span className="text-yellow-600">*</span> We earn a commission if you make a purchase
       </span>
     );

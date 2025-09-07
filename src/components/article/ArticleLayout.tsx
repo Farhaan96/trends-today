@@ -31,14 +31,14 @@ export default function ArticleLayout({
         </h1>
         
         {description && (
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
+          <p className="text-xl text-gray-800 dark:text-gray-300 mb-6">
             {description}
           </p>
         )}
 
         {/* Article Meta */}
         <div className="flex items-center justify-between mb-6 pb-6 border-b border-gray-200 dark:border-gray-700">
-          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+          <div className="flex items-center text-sm text-gray-700 dark:text-gray-700">
             {publishedAt && (
               <time dateTime={publishedAt}>
                 {new Date(publishedAt).toLocaleDateString('en-US', {

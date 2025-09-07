@@ -163,11 +163,11 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
           </h1>
           
           {/* Description */}
-          <p className="text-xl text-gray-600 mb-6">
+          <p className="text-xl text-gray-800 mb-6">
             {frontmatter.description}
           </p>
           
-          <div className="flex items-center gap-4 text-gray-500 border-b pb-6">
+          <div className="flex items-center gap-4 text-gray-700 border-b pb-6">
             <div className="flex items-center gap-2">
               <span className="font-medium text-gray-900">
                 {(typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || 'Trends Today Editorial'}

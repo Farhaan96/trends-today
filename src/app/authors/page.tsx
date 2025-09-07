@@ -57,7 +57,7 @@ export default function AuthorsPage() {
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
           Our Editorial Team
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+        <p className="text-xl text-gray-800 max-w-3xl mx-auto mb-8">
           Meet the experienced technology journalists and industry experts who bring you 
           in-depth reviews, comprehensive testing, and trustworthy recommendations.
         </p>
@@ -65,15 +65,15 @@ export default function AuthorsPage() {
         <div className="grid md:grid-cols-3 gap-6 max-w-2xl mx-auto">
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
             <div className="text-2xl font-bold text-blue-600">{totalExperience}+</div>
-            <div className="text-sm text-gray-600">Combined Years of Experience</div>
+            <div className="text-sm text-gray-800">Combined Years of Experience</div>
           </div>
           <div className="bg-green-50 border border-green-200 rounded-lg p-4">
             <div className="text-2xl font-bold text-green-600">{totalReviews}+</div>
-            <div className="text-sm text-gray-600">Published Reviews</div>
+            <div className="text-sm text-gray-800">Published Reviews</div>
           </div>
           <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
             <div className="text-2xl font-bold text-purple-600">{authors.length}</div>
-            <div className="text-sm text-gray-600">Expert Reviewers</div>
+            <div className="text-sm text-gray-800">Expert Reviewers</div>
           </div>
         </div>
       </header>
@@ -104,7 +104,7 @@ export default function AuthorsPage() {
                     <h3 className="text-xl font-bold text-gray-900 mb-1">{author.name}</h3>
                     <p className="text-blue-600 font-semibold text-sm mb-3">{author.title}</p>
                     
-                    <div className="grid grid-cols-2 gap-3 mb-4 text-xs text-gray-600">
+                    <div className="grid grid-cols-2 gap-3 mb-4 text-xs text-gray-800">
                       <div className="flex items-center">
                         <MapPinIcon className="w-3 h-3 mr-1" />
                         {author.location}
@@ -115,7 +115,7 @@ export default function AuthorsPage() {
                       </div>
                     </div>
 
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-gray-800 text-sm leading-relaxed mb-4 line-clamp-3">
                       {author.bio}
                     </p>
                     
@@ -129,14 +129,14 @@ export default function AuthorsPage() {
                         </span>
                       ))}
                       {author.expertise.length > 3 && (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
                           +{author.expertise.length - 3} more
                         </span>
                       )}
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center text-xs text-gray-500">
+                      <div className="flex items-center text-xs text-gray-700">
                         <AcademicCapIcon className="w-3 h-3 mr-1" />
                         {author.credentials.length} credentials
                       </div>
@@ -164,7 +164,7 @@ export default function AuthorsPage() {
               <AcademicCapIcon className="w-6 h-6 text-blue-600" />
             </div>
             <h3 className="font-semibold text-gray-900 mb-2">Industry Expertise</h3>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-800">
               Our team includes former engineers from Apple, Samsung, Google, and other leading tech companies.
             </p>
           </div>
@@ -174,7 +174,7 @@ export default function AuthorsPage() {
               <CheckBadgeIcon className="w-6 h-6 text-green-600" />
             </div>
             <h3 className="font-semibold text-gray-900 mb-2">Rigorous Testing</h3>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-800">
               Every product undergoes weeks of real-world testing using professional equipment and standardized methodologies.
             </p>
           </div>
@@ -184,7 +184,7 @@ export default function AuthorsPage() {
               <DocumentTextIcon className="w-6 h-6 text-purple-600" />
             </div>
             <h3 className="font-semibold text-gray-900 mb-2">Transparent Process</h3>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-800">
               We document our testing methodology, cite our sources, and maintain editorial independence from manufacturers.
             </p>
           </div>

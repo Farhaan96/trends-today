@@ -166,7 +166,7 @@ export default function HowWeTestPage() {
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
           How We Test
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+        <p className="text-xl text-gray-800 max-w-3xl mx-auto mb-8">
           Our rigorous testing methodology ensures every review is thorough, objective, 
           and trustworthy. Here's exactly how we evaluate every product that comes through our lab.
         </p>
@@ -175,22 +175,22 @@ export default function HowWeTestPage() {
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
             <ClockIcon className="w-8 h-8 text-blue-600 mx-auto mb-2" />
             <div className="text-lg font-bold text-blue-600">2-4 Weeks</div>
-            <div className="text-sm text-gray-600">Average Testing Period</div>
+            <div className="text-sm text-gray-800">Average Testing Period</div>
           </div>
           <div className="bg-green-50 border border-green-200 rounded-lg p-4">
             <BeakerIcon className="w-8 h-8 text-green-600 mx-auto mb-2" />
             <div className="text-lg font-bold text-green-600">50+ Tests</div>
-            <div className="text-sm text-gray-600">Per Product Category</div>
+            <div className="text-sm text-gray-800">Per Product Category</div>
           </div>
           <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
             <CheckBadgeIcon className="w-8 h-8 text-purple-600 mx-auto mb-2" />
             <div className="text-lg font-bold text-purple-600">100% Independent</div>
-            <div className="text-sm text-gray-600">No Manufacturer Influence</div>
+            <div className="text-sm text-gray-800">No Manufacturer Influence</div>
           </div>
           <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
             <DocumentTextIcon className="w-8 h-8 text-orange-600 mx-auto mb-2" />
             <div className="text-lg font-bold text-orange-600">Full Transparency</div>
-            <div className="text-sm text-gray-600">Published Methodology</div>
+            <div className="text-sm text-gray-800">Published Methodology</div>
           </div>
         </div>
       </header>
@@ -201,7 +201,7 @@ export default function HowWeTestPage() {
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white border border-gray-200 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-3">Real-World Focus</h3>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-800 text-sm">
               We test products the way you'll actually use them, not just in synthetic benchmarks. 
               Our reviewers use devices as their primary tools for weeks to understand real-world performance.
             </p>
@@ -209,7 +209,7 @@ export default function HowWeTestPage() {
           
           <div className="bg-white border border-gray-200 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-3">Standardized Methods</h3>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-800 text-sm">
               Every product category follows standardized testing procedures, ensuring consistency 
               and allowing meaningful comparisons between similar products.
             </p>
@@ -217,7 +217,7 @@ export default function HowWeTestPage() {
           
           <div className="bg-white border border-gray-200 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-3">Professional Equipment</h3>
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-800 text-sm">
               We invest in professional-grade testing equipment used by manufacturers and certification labs, 
               providing measurements you can trust.
             </p>
@@ -240,7 +240,7 @@ export default function HowWeTestPage() {
                     </div>
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-gray-900 mb-1">{category.title}</h3>
-                      <p className="text-gray-600 mb-2">{category.description}</p>
+                      <p className="text-gray-800 mb-2">{category.description}</p>
                       <div className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
                         <ClockIcon className="w-4 h-4 mr-1" />
                         {category.duration} testing period
@@ -301,7 +301,7 @@ export default function HowWeTestPage() {
                 </div>
                 <ul className="space-y-1">
                   {criteria.factors.map((factor, factorIndex) => (
-                    <li key={factorIndex} className="text-xs text-gray-600">
+                    <li key={factorIndex} className="text-xs text-gray-800">
                       • {factor}
                     </li>
                   ))}
@@ -315,27 +315,27 @@ export default function HowWeTestPage() {
           <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
             <div className="text-2xl font-bold text-red-600 mb-1">1.0-1.9</div>
             <div className="text-sm text-red-700 font-medium">Poor</div>
-            <div className="text-xs text-gray-600">Significant flaws</div>
+            <div className="text-xs text-gray-800">Significant flaws</div>
           </div>
           <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 text-center">
             <div className="text-2xl font-bold text-orange-600 mb-1">2.0-2.9</div>
             <div className="text-sm text-orange-700 font-medium">Fair</div>
-            <div className="text-xs text-gray-600">Below expectations</div>
+            <div className="text-xs text-gray-800">Below expectations</div>
           </div>
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-center">
             <div className="text-2xl font-bold text-yellow-600 mb-1">3.0-3.9</div>
             <div className="text-sm text-yellow-700 font-medium">Good</div>
-            <div className="text-xs text-gray-600">Meets expectations</div>
+            <div className="text-xs text-gray-800">Meets expectations</div>
           </div>
           <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
             <div className="text-2xl font-bold text-green-600 mb-1">4.0-4.9</div>
             <div className="text-sm text-green-700 font-medium">Excellent</div>
-            <div className="text-xs text-gray-600">Exceeds expectations</div>
+            <div className="text-xs text-gray-800">Exceeds expectations</div>
           </div>
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
             <div className="text-2xl font-bold text-blue-600 mb-1">5.0</div>
             <div className="text-sm text-blue-700 font-medium">Outstanding</div>
-            <div className="text-xs text-gray-600">Best in class</div>
+            <div className="text-xs text-gray-800">Best in class</div>
           </div>
         </div>
       </section>
@@ -400,7 +400,7 @@ export default function HowWeTestPage() {
 
       <section className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-8 text-center">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Have Questions About Our Testing?</h2>
-        <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+        <p className="text-gray-800 mb-6 max-w-2xl mx-auto">
           We believe in complete transparency. If you have questions about our testing methodology 
           or want to suggest improvements, we'd love to hear from you.
         </p>

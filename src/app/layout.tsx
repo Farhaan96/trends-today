@@ -6,7 +6,6 @@ import Footer from '@/components/layout/Footer';
 import StickyNavigation from '@/components/ui/StickyNavigation';
 import BackToTop from '@/components/ui/BackToTop';
 import ReadingProgressBar from '@/components/ui/ReadingProgressBar';
-import NewsletterModal from '@/components/newsletter/NewsletterModal';
 import WebVitals, { PerformanceObserver, ResourcePreloader, LayoutStabilizer } from '@/components/seo/WebVitals';
 import { OrganizationSchema, WebsiteSchema } from '@/components/seo/SchemaMarkup';
 import Script from 'next/script';
@@ -196,7 +195,6 @@ export default function RootLayout({
         </main>
         <Footer />
         <BackToTop />
-        <NewsletterModal />
         
         {/* Revenue Tracking Script */}
         <Script id="revenue-tracking" strategy="afterInteractive">

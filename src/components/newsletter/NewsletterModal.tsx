@@ -47,7 +47,7 @@ export default function NewsletterModal() {
           onClick={() => setIsOpen(false)}
           className="absolute -top-2 -right-2 z-10 flex items-center justify-center w-8 h-8 bg-white rounded-full shadow-lg hover:bg-gray-50"
         >
-          <XMarkIcon className="w-5 h-5 text-gray-600" />
+          <XMarkIcon className="w-5 h-5 text-gray-800" />
         </button>
         
         <div className="bg-white rounded-lg shadow-2xl overflow-hidden">
@@ -73,15 +73,15 @@ export default function NewsletterModal() {
             <div className="mt-6 grid grid-cols-3 gap-4 text-center text-sm">
               <div>
                 <div className="text-2xl font-bold text-blue-600">50K+</div>
-                <div className="text-gray-600">Subscribers</div>
+                <div className="text-gray-800">Subscribers</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-blue-600">Weekly</div>
-                <div className="text-gray-600">Updates</div>
+                <div className="text-gray-800">Updates</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-blue-600">No</div>
-                <div className="text-gray-600">Spam</div>
+                <div className="text-gray-800">Spam</div>
               </div>
             </div>
           </div>

@@ -59,7 +59,7 @@ export default function PriceComparison({
           💰 Price Comparison
         </h3>
         <div className="flex items-center gap-2">
-          <label htmlFor="sort-select" className="text-sm text-gray-600">Sort by:</label>
+          <label htmlFor="sort-select" className="text-sm text-gray-800">Sort by:</label>
           <select
             id="sort-select"
             value={sortBy}
@@ -138,7 +138,7 @@ export default function PriceComparison({
                   
                   {savings && (
                     <>
-                      <span className="text-sm text-gray-500 line-through">
+                      <span className="text-sm text-gray-700 line-through">
                         {formatCurrency(price.originalPrice!, price.currency)}
                       </span>
                       <span className="text-sm bg-red-100 text-red-800 px-2 py-1 rounded">
@@ -149,18 +149,18 @@ export default function PriceComparison({
                 </div>
 
                 {price.shipping && (
-                  <p className="text-xs text-gray-600 mt-1">
+                  <p className="text-xs text-gray-800 mt-1">
                     🚚 {price.shipping}
                   </p>
                 )}
                 
                 {price.availability && (
-                  <p className="text-xs text-gray-600 mt-1">
+                  <p className="text-xs text-gray-800 mt-1">
                     📦 {price.availability}
                   </p>
                 )}
                 
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-gray-700 mt-1">
                   Updated: {new Date(price.lastUpdated).toLocaleDateString()}
                 </p>
               </div>
@@ -203,7 +203,7 @@ export default function PriceComparison({
 
       {/* Affiliate Disclaimer */}
       <div className="mt-4 pt-4 border-t border-gray-200">
-        <p className="text-xs text-gray-500 text-center">
+        <p className="text-xs text-gray-700 text-center">
           <span className="text-yellow-600">*</span> Trends Today may earn a commission from purchases made through our affiliate links. 
           This helps support our independent testing and reviews at no extra cost to you.
         </p>

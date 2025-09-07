@@ -177,10 +177,10 @@ export default function HomePage() {
                       <h3 className="font-bold text-sm text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">
                         {article.title}
                       </h3>
-                      <p className="text-xs text-gray-600 line-clamp-2 mb-2">
+                      <p className="text-xs text-gray-800 line-clamp-2 mb-2">
                         {article.description}
                       </p>
-                      <div className="text-xs text-gray-500">
+                      <div className="text-xs text-gray-700">
                         {new Date(article.publishedAt).toLocaleDateString()}
                       </div>
                     </div>
@@ -265,10 +265,10 @@ export default function HomePage() {
                           <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2 text-lg">
                             {article.title}
                           </h3>
-                          <p className="text-gray-600 text-sm line-clamp-2 mb-3">
+                          <p className="text-gray-800 text-sm line-clamp-2 mb-3">
                             {article.description}
                           </p>
-                          <div className="flex items-center justify-between text-xs text-gray-500">
+                          <div className="flex items-center justify-between text-xs text-gray-700">
                             <span>{new Date(article.publishedAt).toLocaleDateString()}</span>
                             <span className="font-bold uppercase tracking-wide">Read Review</span>
                           </div>
@@ -313,7 +313,7 @@ export default function HomePage() {
                           <h3 className="font-bold text-sm text-gray-900 group-hover:text-blue-600 transition-colors mb-1 leading-tight">
                             {article.title}
                           </h3>
-                          <div className="text-xs text-gray-500">
+                          <div className="text-xs text-gray-700">
                             {new Date(article.publishedAt).toLocaleDateString()}
                           </div>
                         </article>
@@ -338,7 +338,7 @@ export default function HomePage() {
                             <h3 className="font-bold text-sm text-gray-900 group-hover:text-blue-600 transition-colors">
                               {guide.title}
                             </h3>
-                            <p className="text-xs text-gray-500">{guide.count}</p>
+                            <p className="text-xs text-gray-700">{guide.count}</p>
                           </div>
                         </div>
                       </Link>
@@ -395,7 +395,7 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Why Millions Trust Trends Today
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-gray-800 max-w-3xl mx-auto mb-8">
               Our expert team of technology professionals brings decades of combined experience 
               from companies like Apple, Samsung, Google, and leading tech publications.
             </p>
@@ -407,19 +407,19 @@ export default function HomePage() {
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-600 mb-2">25+</div>
               <div className="text-lg font-semibold text-gray-900 mb-1">Years Combined Experience</div>
-              <div className="text-sm text-gray-600">Former engineers from Apple, Samsung, Google</div>
+              <div className="text-sm text-gray-800">Former engineers from Apple, Samsung, Google</div>
             </div>
             
             <div className="text-center">
               <div className="text-3xl font-bold text-green-600 mb-2">150+</div>
               <div className="text-lg font-semibold text-gray-900 mb-1">Products Reviewed</div>
-              <div className="text-sm text-gray-600">Rigorous testing with professional equipment</div>
+              <div className="text-sm text-gray-800">Rigorous testing with professional equipment</div>
             </div>
             
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-600 mb-2">100%</div>
               <div className="text-lg font-semibold text-gray-900 mb-1">Editorial Independence</div>
-              <div className="text-sm text-gray-600">No manufacturer influence on our reviews</div>
+              <div className="text-sm text-gray-800">No manufacturer influence on our reviews</div>
             </div>
           </div>
           
@@ -451,7 +451,7 @@ export default function HomePage() {
               Subscribe Free
             </button>
           </div>
-          <p className="text-xs text-gray-400 mt-4">No spam. Unsubscribe anytime.</p>
+          <p className="text-xs text-gray-700 mt-4">No spam. Unsubscribe anytime.</p>
         </div>
       </section>
     </main>

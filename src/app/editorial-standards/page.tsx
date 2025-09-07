@@ -134,7 +134,7 @@ export default function EditorialStandardsPage() {
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
           Editorial Standards
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+        <p className="text-xl text-gray-800 max-w-3xl mx-auto mb-8">
           Our commitment to independent, ethical, and transparent technology journalism. 
           These standards guide every review, comparison, and recommendation we publish.
         </p>
@@ -189,7 +189,7 @@ export default function EditorialStandardsPage() {
               <div key={index} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
                 <div className="bg-gray-50 p-6 border-b border-gray-200">
                   <div className="flex items-center">
-                    <IconComponent className="w-6 h-6 text-gray-600 mr-3" />
+                    <IconComponent className="w-6 h-6 text-gray-800 mr-3" />
                     <h3 className="text-xl font-bold text-gray-900">{policy.title}</h3>
                   </div>
                 </div>
@@ -221,28 +221,28 @@ export default function EditorialStandardsPage() {
                 <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-1">1</div>
                 <div>
                   <div className="font-medium text-gray-900">Author Research & Testing</div>
-                  <div className="text-sm text-gray-600">Comprehensive testing period with documented methodology</div>
+                  <div className="text-sm text-gray-800">Comprehensive testing period with documented methodology</div>
                 </div>
               </div>
               <div className="flex items-start">
                 <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-1">2</div>
                 <div>
                   <div className="font-medium text-gray-900">Fact-Checking & Verification</div>
-                  <div className="text-sm text-gray-600">Independent verification of all claims and measurements</div>
+                  <div className="text-sm text-gray-800">Independent verification of all claims and measurements</div>
                 </div>
               </div>
               <div className="flex items-start">
                 <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-1">3</div>
                 <div>
                   <div className="font-medium text-gray-900">Editorial Review</div>
-                  <div className="text-sm text-gray-600">Senior editor review for accuracy, clarity, and standards compliance</div>
+                  <div className="text-sm text-gray-800">Senior editor review for accuracy, clarity, and standards compliance</div>
                 </div>
               </div>
               <div className="flex items-start">
                 <div className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-1">4</div>
                 <div>
                   <div className="font-medium text-gray-900">Publication & Monitoring</div>
-                  <div className="text-sm text-gray-600">Post-publication monitoring for reader feedback and corrections</div>
+                  <div className="text-sm text-gray-800">Post-publication monitoring for reader feedback and corrections</div>
                 </div>
               </div>
             </div>
@@ -255,28 +255,28 @@ export default function EditorialStandardsPage() {
                 <CheckBadgeIcon className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                 <div>
                   <div className="text-sm font-medium text-gray-900">Open Corrections Policy</div>
-                  <div className="text-xs text-gray-600">Errors are corrected quickly and transparently</div>
+                  <div className="text-xs text-gray-800">Errors are corrected quickly and transparently</div>
                 </div>
               </li>
               <li className="flex items-start">
                 <CheckBadgeIcon className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                 <div>
                   <div className="text-sm font-medium text-gray-900">Reader Feedback Integration</div>
-                  <div className="text-xs text-gray-600">We actively seek and respond to reader concerns</div>
+                  <div className="text-xs text-gray-800">We actively seek and respond to reader concerns</div>
                 </div>
               </li>
               <li className="flex items-start">
                 <CheckBadgeIcon className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                 <div>
                   <div className="text-sm font-medium text-gray-900">Regular Audits</div>
-                  <div className="text-xs text-gray-600">Quarterly reviews of our editorial processes and standards</div>
+                  <div className="text-xs text-gray-800">Quarterly reviews of our editorial processes and standards</div>
                 </div>
               </li>
               <li className="flex items-start">
                 <CheckBadgeIcon className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                 <div>
                   <div className="text-sm font-medium text-gray-900">Staff Training</div>
-                  <div className="text-xs text-gray-600">Ongoing training on ethics, accuracy, and best practices</div>
+                  <div className="text-xs text-gray-800">Ongoing training on ethics, accuracy, and best practices</div>
                 </div>
               </li>
             </ul>
@@ -291,21 +291,21 @@ export default function EditorialStandardsPage() {
           <div className="grid md:grid-cols-3 gap-6 mb-6">
             <div className="bg-white rounded-lg p-4">
               <h3 className="font-semibold text-gray-900 mb-2">Affiliate Programs</h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-800">
                 We participate in affiliate programs with retailers. Commissions from purchases made through our links help support our editorial operations.
               </p>
             </div>
             
             <div className="bg-white rounded-lg p-4">
               <h3 className="font-semibold text-gray-900 mb-2">Display Advertising</h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-800">
                 We display advertisements from various technology companies. Advertisers have no influence over our editorial content or reviews.
               </p>
             </div>
             
             <div className="bg-white rounded-lg p-4">
               <h3 className="font-semibold text-gray-900 mb-2">Editorial Budget</h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-800">
                 Revenue funds our independent product purchases, professional testing equipment, and staff salaries to maintain editorial independence.
               </p>
             </div>
@@ -322,7 +322,7 @@ export default function EditorialStandardsPage() {
 
       <section className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg p-8 text-center">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Questions About Our Standards?</h2>
-        <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+        <p className="text-gray-800 mb-6 max-w-2xl mx-auto">
           We believe in complete transparency and welcome questions about our editorial practices. 
           If you have concerns about our coverage or suggestions for improvement, please reach out.
         </p>
@@ -343,7 +343,7 @@ export default function EditorialStandardsPage() {
         </div>
         
         <div className="mt-8 pt-6 border-t border-gray-200">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-700">
             These editorial standards were last updated on September 7, 2024. 
             We review and update our policies regularly to ensure they reflect best practices in technology journalism.
           </p>

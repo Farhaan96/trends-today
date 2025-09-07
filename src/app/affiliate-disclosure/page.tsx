@@ -19,7 +19,7 @@ export default function AffiliateDisclosurePage() {
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Affiliate Disclosure & Transparency Policy
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <p className="text-xl text-gray-800 max-w-3xl mx-auto">
           At Trends Today, we believe in complete transparency about how we fund our independent 
           reviews and maintain editorial integrity. Here's everything you need to know about our 
           monetization and affiliate partnerships.
@@ -86,7 +86,7 @@ export default function AffiliateDisclosurePage() {
       </div>
 
       {/* Last Updated */}
-      <div className="mt-12 text-center text-sm text-gray-500">
+      <div className="mt-12 text-center text-sm text-gray-700">
         <p>
           This disclosure policy was last updated on {new Date().toLocaleDateString('en-US', {
             year: 'numeric',

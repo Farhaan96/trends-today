@@ -114,7 +114,7 @@ export default function PremiumUpgrade({
             Unlock Premium Content
           </h2>
         </div>
-        <p className="text-gray-600">
+        <p className="text-gray-800">
           Get the complete Trends Today experience with exclusive features and ad-free reading
         </p>
       </div>
@@ -156,7 +156,7 @@ export default function PremiumUpgrade({
                 <span className="text-4xl font-bold text-gray-900">
                   ${tier.price}
                 </span>
-                <span className="text-gray-600">
+                <span className="text-gray-800">
                   /{tier.duration === 'yearly' ? 'year' : 'month'}
                 </span>
               </div>
@@ -185,7 +185,7 @@ export default function PremiumUpgrade({
                       ? 'text-purple-900 font-medium' 
                       : feature.included 
                         ? 'text-gray-700' 
-                        : 'text-gray-400 line-through'
+                        : 'text-gray-700 line-through'
                     }
                   `}>
                     {feature.name}
@@ -207,7 +207,7 @@ export default function PremiumUpgrade({
               {tier.duration === 'yearly' ? 'Start Annual Plan' : 'Start Monthly Plan'}
             </button>
 
-            <p className="text-xs text-gray-500 text-center mt-3">
+            <p className="text-xs text-gray-700 text-center mt-3">
               7-day free trial • Cancel anytime
             </p>
           </div>
@@ -223,21 +223,21 @@ export default function PremiumUpgrade({
           <div className="text-center p-4 bg-gray-50 rounded-lg">
             <div className="text-2xl mb-2">🚫</div>
             <h4 className="font-medium text-gray-900">Ad-Free Experience</h4>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm text-gray-800 mt-1">
               Enjoy distraction-free reading with no ads or pop-ups
             </p>
           </div>
           <div className="text-center p-4 bg-gray-50 rounded-lg">
             <div className="text-2xl mb-2">⚡</div>
             <h4 className="font-medium text-gray-900">Early Access</h4>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm text-gray-800 mt-1">
               Get reviews and comparisons 24-48 hours before everyone else
             </p>
           </div>
           <div className="text-center p-4 bg-gray-50 rounded-lg">
             <div className="text-2xl mb-2">🎯</div>
             <h4 className="font-medium text-gray-900">Premium Tools</h4>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm text-gray-800 mt-1">
               Advanced comparison tools and personalized recommendations
             </p>
           </div>
@@ -246,10 +246,10 @@ export default function PremiumUpgrade({
 
       {/* Trust Signals */}
       <div className="mt-6 pt-4 border-t border-gray-200 text-center">
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-700">
           Join 10,000+ tech enthusiasts who trust Trends Today Pro for their buying decisions
         </p>
-        <div className="flex justify-center items-center gap-4 mt-2 text-xs text-gray-400">
+        <div className="flex justify-center items-center gap-4 mt-2 text-xs text-gray-700">
           <span>🔒 Secure Payment</span>
           <span>•</span>
           <span>💳 No Hidden Fees</span>

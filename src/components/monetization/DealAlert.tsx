@@ -158,7 +158,7 @@ export default function DealAlert({
           </label>
           <div className="flex items-center gap-2">
             <div className="relative flex-1">
-              <span className="absolute left-3 top-2 text-gray-500">$</span>
+              <span className="absolute left-3 top-2 text-gray-700">$</span>
               <input
                 id="target-price"
                 type="number"

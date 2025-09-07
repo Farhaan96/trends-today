@@ -58,9 +58,9 @@ function MetricCard({ title, value, change, icon, color, subtitle }: MetricCardP
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-gray-600">{title}</p>
+          <p className="text-sm font-medium text-gray-800">{title}</p>
           <p className="text-2xl font-bold text-gray-900">{value}</p>
-          {subtitle && <p className="text-sm text-gray-500 mt-1">{subtitle}</p>}
+          {subtitle && <p className="text-sm text-gray-700 mt-1">{subtitle}</p>}
         </div>
         <div className={`p-3 rounded-full ${color}`}>{icon}</div>
       </div>
@@ -119,7 +119,7 @@ export default function RevenueDashboard({ className = '', period = '30d' }: Rev
       <div className={`bg-gray-50 rounded-lg p-8 ${className}`}>
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="text-gray-600 mt-2">Loading revenue data...</p>
+          <p className="text-gray-800 mt-2">Loading revenue data...</p>
         </div>
       </div>
     );
@@ -138,7 +138,7 @@ export default function RevenueDashboard({ className = '', period = '30d' }: Rev
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Revenue Dashboard</h2>
-          <p className="text-gray-600">Performance metrics for Trends Today monetization</p>
+          <p className="text-gray-800">Performance metrics for Trends Today monetization</p>
         </div>
         <div className="flex items-center gap-2">
           <select
@@ -191,19 +191,19 @@ export default function RevenueDashboard({ className = '', period = '30d' }: Rev
         <div className="bg-white rounded-lg border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-gray-900">Affiliate Performance</h3>
-            <ArrowTrendingUpIcon className="w-5 h-5 text-gray-500" />
+            <ArrowTrendingUpIcon className="w-5 h-5 text-gray-700" />
           </div>
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
-              <p className="text-sm text-gray-600">Clicks</p>
+              <p className="text-sm text-gray-800">Clicks</p>
               <p className="text-lg font-semibold">{formatNumber(metrics.affiliateRevenue.clicks)}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-600">Conversions</p>
+              <p className="text-sm text-gray-800">Conversions</p>
               <p className="text-lg font-semibold">{formatNumber(metrics.affiliateRevenue.conversions)}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-600">Conversion Rate</p>
+              <p className="text-sm text-gray-800">Conversion Rate</p>
               <p className="text-lg font-semibold">{metrics.affiliateRevenue.conversionRate}%</p>
             </div>
           </div>
@@ -223,23 +223,23 @@ export default function RevenueDashboard({ className = '', period = '30d' }: Rev
         <div className="bg-white rounded-lg border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-gray-900">Premium + Ads</h3>
-            <EyeIcon className="w-5 h-5 text-gray-500" />
+            <EyeIcon className="w-5 h-5 text-gray-700" />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-sm text-gray-600">Subscriptions</p>
+              <p className="text-sm text-gray-800">Subscriptions</p>
               <p className="text-lg font-semibold">{formatNumber(metrics.premiumRevenue.subscriptions)}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-600">MRR</p>
+              <p className="text-sm text-gray-800">MRR</p>
               <p className="text-lg font-semibold">{formatCurrency(metrics.premiumRevenue.mrr)}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-600">Churn</p>
+              <p className="text-sm text-gray-800">Churn</p>
               <p className="text-lg font-semibold">{metrics.premiumRevenue.churn}%</p>
             </div>
             <div>
-              <p className="text-sm text-gray-600">Ad RPM</p>
+              <p className="text-sm text-gray-800">Ad RPM</p>
               <p className="text-lg font-semibold">{metrics.adRevenue.rpm.toFixed(2)}</p>
             </div>
           </div>
