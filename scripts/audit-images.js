@@ -70,11 +70,15 @@ function main() {
     const rel = path.relative(CONTENT_DIR, file).replace(/\\/g, '/');
     const imgCheck = checkImage(data.image);
     const missingMeta = [];
+    // Require alt everywhere for accessibility
     if (!data.imageAlt) missingMeta.push('imageAlt');
-    if (!data.imageCredit || (!data.imageCredit.name && !data.imageCredit.url)) missingMeta.push('imageCredit');
-    if (!data.imageLicense) missingMeta.push('imageLicense');
-    // For news, prefer explicit concept labeling when product is unreleased
-    if (rel.startsWith('news/') && typeof data.imageIsConcept === 'undefined') missingMeta.push('imageIsConcept');
+    // Credits/licenses are recommended but only required for news posts
+    const isNews = rel.startsWith('news/');
+    if (isNews) {
+      if (!data.imageCredit || (!data.imageCredit.name && !data.imageCredit.url)) missingMeta.push('imageCredit');
+      if (!data.imageLicense) missingMeta.push('imageLicense');
+      if (typeof data.imageIsConcept === 'undefined') missingMeta.push('imageIsConcept');
+    }
 
     if (!imgCheck.ok || missingMeta.length) {
       issues.push({ file: rel, image: imgCheck, missingMeta });
@@ -99,4 +103,3 @@ function main() {
 }
 
 main();
-
