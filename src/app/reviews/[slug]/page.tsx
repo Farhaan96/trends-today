@@ -215,7 +215,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
 
         {/* Content */}
         <article className="px-8 pb-8">
-          <div className="prose prose-slate prose-lg prose-slate prose-blue max-w-4xl mx-auto">
+          <div className="prose prose-lg prose-blue max-w-4xl mx-auto prose-headings:text-gray-900 prose-p:text-gray-900 prose-strong:text-gray-900 prose-li:text-gray-900">
             <MDXRemote source={content} />
           </div>
         </article>

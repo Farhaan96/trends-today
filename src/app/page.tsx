@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import TrustBadges from '@/components/ui/TrustBadges';
 import StructuredData from '@/components/seo/StructuredData';
 import { getAllBaseSchemas } from '@/lib/schema';
@@ -22,7 +23,7 @@ export default function HomePage() {
       href: "/reviews/samsung-galaxy-s24-ultra-review", 
       category: "Reviews",
       publishedAt: "2025-09-05",
-      image: "/images/products/samsung-galaxy-s24-ultra-hero.jpg"
+      image: "/images/products/samsung-galaxy-s24-hero.jpg"
     },
     {
       title: "iPhone 15 Pro vs Galaxy S24: Ultimate Flagship Battle", 
@@ -30,7 +31,7 @@ export default function HomePage() {
       href: "/compare/iphone-15-pro-vs-samsung-galaxy-s24",
       category: "Comparisons", 
       publishedAt: "2025-09-05",
-      image: "/images/products/iphone-vs-galaxy-comparison.jpg"
+      image: "/images/products/iphone-15-pro-hero.jpg"
     },
     {
       title: "Google Pixel 8 Pro Review: AI Photography Perfected",
@@ -128,7 +129,7 @@ export default function HomePage() {
               <Link href={heroArticle.href}>
                 <article className="group cursor-pointer relative">
                   <div className="relative aspect-[16/10] rounded-sm overflow-hidden" style={{ backgroundImage: `url(${heroArticle.image})`, backgroundSize: "cover", backgroundPosition: "center" }}>
-                    <Image src={heroArticle.image} alt={heroArticle.title} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                    <ImageWithFallback src={heroArticle.image} alt={heroArticle.title} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                     <div className="absolute inset-0 flex items-center justify-center hidden">
                       <div className="w-24 h-24 bg-white/10 rounded-lg flex items-center justify-center">
                         <span className="text-5xl opacity-60">📱</span>
@@ -177,7 +178,7 @@ export default function HomePage() {
                       <h3 className="font-bold text-sm text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">
                         {article.title}
                       </h3>
-                      <p className="text-xs text-gray-800 line-clamp-2 mb-2">
+                      <p className="text-xs text-gray-900 line-clamp-2 mb-2">
                         {article.description}
                       </p>
                       <div className="text-xs text-gray-900">
@@ -242,7 +243,7 @@ export default function HomePage() {
                     <Link key={index} href={article.href}>
                       <article className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
                         <div className="relative aspect-[16/10] rounded-sm overflow-hidden" style={{ backgroundImage: `url(${article.image})`, backgroundSize: "cover", backgroundPosition: "center" }}>
-                          <Image src={article.image} alt={article.title} fill sizes="(max-width: 1280px) 100vw, 33vw" className="object-cover" loading="lazy" />
+                          <ImageWithFallback src={article.image} alt={article.title} fill sizes="(max-width: 1280px) 100vw, 33vw" className="object-cover" loading="lazy" />
                           <div className="absolute inset-0 flex items-center justify-center hidden">
                             <div className="w-16 h-16 bg-gray-300 rounded-lg flex items-center justify-center hidden">
                               <span className="text-2xl opacity-60">📱</span>
@@ -265,7 +266,7 @@ export default function HomePage() {
                           <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2 text-lg">
                             {article.title}
                           </h3>
-                          <p className="text-gray-800 text-sm line-clamp-2 mb-3">
+                          <p className="text-gray-900 text-sm line-clamp-2 mb-3">
                             {article.description}
                           </p>
                           <div className="flex items-center justify-between text-xs text-gray-900">
