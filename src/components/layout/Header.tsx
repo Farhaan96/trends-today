@@ -59,11 +59,11 @@ export default function Header() {
               <Link href="/" className="flex-shrink-0" aria-label="Trends Today Home">
                 <div className="flex items-center">
                   <ImageWithFallback
-                    src="/images/brand/trends-today-logo.png"
+                    src="/images/brand/trends-today-logo-tight.png"
                     alt="Trends Today — Tech Reviews & News"
-                    width={320}
-                    height={80}
-                    className="h-16 w-auto object-contain"
+                    width={480}
+                    height={120}
+                    className="h-20 w-auto object-contain"
                     priority
                   />
                 </div>
