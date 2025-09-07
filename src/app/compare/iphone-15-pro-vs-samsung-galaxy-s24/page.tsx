@@ -18,7 +18,7 @@ export default function Page() {
   const data = loadData();
   if (!data) {
     return (
-      <main className="max-w-5xl mx-auto px-4 py-12">
+      <main className="max-w-6xl mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold text-gray-900 mb-4">iPhone 15 Pro vs Samsung Galaxy S24</h1>
         <p className="text-gray-900">Comparison data not found. Return to <Link className="text-blue-600 underline" href="/compare">Comparisons</Link>.</p>
       </main>
@@ -26,7 +26,7 @@ export default function Page() {
   }
 
   return (
-    <main className="max-w-5xl mx-auto px-4 py-12">
+    <main className="max-w-6xl mx-auto px-4 py-12">
       <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">iPhone 15 Pro vs Samsung Galaxy S24</h1>
       {data.summary && <p className="text-lg text-gray-900 mb-8">{data.summary}</p>}
 

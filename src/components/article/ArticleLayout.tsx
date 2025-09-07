@@ -23,7 +23,7 @@ export default function ArticleLayout({
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Article Header */}
       <header className="mb-8">
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">

@@ -1,34 +1,46 @@
 {
-  "generatedAt": "2025-09-07T05:03:50.952Z",
+  "generatedAt": "2025-09-07T15:39:39.087Z",
   "summary": {
-    "totalFiles": 11,
-    "validFiles": 10,
-    "invalidFiles": 1,
-    "totalIssues": 1,
-    "averageScore": 87.27272727272727
+    "totalFiles": 16,
+    "validFiles": 8,
+    "invalidFiles": 8,
+    "totalIssues": 13,
+    "averageScore": 76.5625
   },
   "issues": {
     "critical": 0,
-    "warning": 0,
-    "good": 11
+    "warning": 7,
+    "good": 9
   },
   "files": [
     {
       "path": "news\\first-of-its-kind-ai-settlement-anthropic-to-pay-authors-1-5.mdx",
       "contentType": "news",
       "isValid": true,
-      "score": 85,
+      "score": 80,
       "issuesCount": 0,
-      "warningsCount": 3,
+      "warningsCount": 4,
       "topIssues": []
+    },
+    {
+      "path": "news\\how-to-watch-apple-s-iphone-17-announcement-and-what-to-expe.mdx",
+      "contentType": "news",
+      "isValid": false,
+      "score": 70,
+      "issuesCount": 2,
+      "warningsCount": 2,
+      "topIssues": [
+        "Title too long: 63 chars (max 60)",
+        "Content too short: 295 words (min 300)"
+      ]
     },
     {
       "path": "news\\iphone-17-air-announcement-what-to-expect.mdx",
       "contentType": "news",
       "isValid": false,
-      "score": 85,
+      "score": 80,
       "issuesCount": 1,
-      "warningsCount": 1,
+      "warningsCount": 2,
       "topIssues": [
         "Invalid publishedAt date format"
       ]
@@ -37,28 +49,42 @@
       "path": "reviews\\google-pixel-8-pro-review.mdx",
       "contentType": "reviews",
       "isValid": true,
-      "score": 90,
+      "score": 85,
       "issuesCount": 0,
-      "warningsCount": 2,
+      "warningsCount": 3,
       "topIssues": []
+    },
+    {
+      "path": "reviews\\google-pixel-9-pro-review-why-this-changes-everything-or-doe.mdx",
+      "contentType": "reviews",
+      "isValid": false,
+      "score": 65,
+      "issuesCount": 2,
+      "warningsCount": 3,
+      "topIssues": [
+        "Missing required frontmatter field: author",
+        "Title too long: 67 chars (max 60)"
+      ]
     },
     {
       "path": "reviews\\google-pixel-9-pro-review.mdx",
       "contentType": "reviews",
       "isValid": true,
-      "score": 90,
+      "score": 85,
       "issuesCount": 0,
-      "warningsCount": 2,
+      "warningsCount": 3,
       "topIssues": []
     },
     {
       "path": "reviews\\iphone-15-pro-max-review.mdx",
       "contentType": "reviews",
-      "isValid": true,
-      "score": 90,
-      "issuesCount": 0,
-      "warningsCount": 2,
-      "topIssues": []
+      "isValid": false,
+      "score": 70,
+      "issuesCount": 1,
+      "warningsCount": 4,
+      "topIssues": [
+        "Title too long: 63 chars (max 60)"
+      ]
     },
     {
       "path": "reviews\\iphone-15-pro-review.mdx",
@@ -70,12 +96,36 @@
       "topIssues": []
     },
     {
+      "path": "reviews\\iphone-16-pro-max-review-surprising-results-from-real-world-.mdx",
+      "contentType": "reviews",
+      "isValid": false,
+      "score": 65,
+      "issuesCount": 2,
+      "warningsCount": 3,
+      "topIssues": [
+        "Missing required frontmatter field: author",
+        "Title too long: 64 chars (max 60)"
+      ]
+    },
+    {
+      "path": "reviews\\iphone-16-pro-max-review-the-review-that-breaks-the-echo-cha.mdx",
+      "contentType": "reviews",
+      "isValid": false,
+      "score": 65,
+      "issuesCount": 2,
+      "warningsCount": 3,
+      "topIssues": [
+        "Missing required frontmatter field: author",
+        "Title too long: 65 chars (max 60)"
+      ]
+    },
+    {
       "path": "reviews\\iphone-16-pro-review.mdx",
       "contentType": "reviews",
       "isValid": true,
-      "score": 85,
+      "score": 80,
       "issuesCount": 0,
-      "warningsCount": 3,
+      "warningsCount": 4,
       "topIssues": []
     },
     {
@@ -99,24 +149,39 @@
     {
       "path": "reviews\\samsung-galaxy-s24-ultra-review.mdx",
       "contentType": "reviews",
-      "isValid": true,
-      "score": 90,
-      "issuesCount": 0,
+      "isValid": false,
+      "score": 70,
+      "issuesCount": 1,
+      "warningsCount": 4,
+      "topIssues": [
+        "Title too long: 64 chars (max 60)"
+      ]
+    },
+    {
+      "path": "reviews\\samsung-galaxy-s25-ultra-review-surprising-results-from-real.mdx",
+      "contentType": "reviews",
+      "isValid": false,
+      "score": 70,
+      "issuesCount": 2,
       "warningsCount": 2,
-      "topIssues": []
+      "topIssues": [
+        "Missing required frontmatter field: author",
+        "Title too long: 71 chars (max 60)"
+      ]
     },
     {
       "path": "reviews\\xiaomi-14-ultra-review.mdx",
       "contentType": "reviews",
       "isValid": true,
-      "score": 90,
+      "score": 85,
       "issuesCount": 0,
-      "warningsCount": 2,
+      "warningsCount": 3,
       "topIssues": []
     }
   ],
   "recommendations": [
-    "Fix 1 files with critical issues",
-    "Address common issues: Invalid publishedAt date format"
+    "Fix 8 files with critical issues",
+    "Improve 3 files with low quality scores",
+    "Address common issues: Title too long, Missing required frontmatter field, Content too short"
   ]
 }

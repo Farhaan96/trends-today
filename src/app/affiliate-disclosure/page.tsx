@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function AffiliateDisclosurePage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
+    <div className="max-w-6xl mx-auto px-4 py-12">
       {/* Header */}
       <div className="text-center mb-12">
         <div className="flex justify-center mb-4">

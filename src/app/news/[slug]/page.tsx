@@ -202,7 +202,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
         )}
         
         {/* Article Content */}
-        <article className="max-w-4xl mx-auto mb-12">
+        <article className="max-w-6xl mx-auto mb-12">
           <div className="prose prose-lg max-w-none text-gray-900 article-content
             [&>h1]:text-4xl [&>h1]:font-bold [&>h1]:text-gray-900 [&>h1]:mb-6 [&>h1]:mt-8 [&>h1]:tracking-tight
             [&>h2]:text-3xl [&>h2]:font-bold [&>h2]:text-gray-900 [&>h2]:mb-4 [&>h2]:mt-8 [&>h2]:border-b [&>h2]:border-gray-200 [&>h2]:pb-2 [&>h2]:tracking-tight
