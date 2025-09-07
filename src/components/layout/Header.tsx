@@ -61,9 +61,10 @@ export default function Header() {
                   <ImageWithFallback
                     src="/images/brand/trends-today-logo.png"
                     alt="Trends Today — Tech Reviews & News"
-                    width={200}
-                    height={48}
-                    className="h-12 w-auto"
+                    width={320}
+                    height={80}
+                    className="h-16 w-auto object-contain"
+                    priority
                   />
                 </div>
               </Link>
