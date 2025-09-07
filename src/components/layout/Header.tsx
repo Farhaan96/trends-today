@@ -53,7 +53,7 @@ export default function Header() {
       {/* Main Header */}
       <nav className="bg-white border-b-2 border-slate-800">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-24">
             {/* Brand Logo */}
             <div className="flex items-center">
               <Link href="/" className="flex-shrink-0" aria-label="Trends Today Home">
