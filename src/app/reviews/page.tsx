@@ -47,11 +47,16 @@ export const metadata: Metadata = {
   keywords: 'tech reviews, smartphone reviews, laptop reviews, gadget reviews, product reviews',
 };
 
-export default async function ReviewsPage() {
+export default async function ReviewsPage({ searchParams }: { searchParams?: { category?: string } }) {
   const reviews = await getAllReviews();
+  const activeCategory = (searchParams?.category || '').toLowerCase();
   
   // Group reviews by category
-  const reviewsByCategory = reviews.reduce((acc, review) => {
+  const filtered = activeCategory
+    ? reviews.filter(r => (r.frontmatter.category || '').toLowerCase() === activeCategory)
+    : reviews;
+
+  const reviewsByCategory = filtered.reduce((acc, review) => {
     const category = review.frontmatter.category || 'Other';
     if (!acc[category]) {
       acc[category] = [];
@@ -61,15 +66,15 @@ export default async function ReviewsPage() {
   }, {} as Record<string, Review[]>);
   
   const categories = Object.keys(reviewsByCategory);
-  const featuredReviews = reviews.filter(review => review.frontmatter.featured);
-  const recentReviews = reviews.slice(0, 6);
+  const featuredReviews = filtered.filter(review => review.frontmatter.featured);
+  const recentReviews = filtered.slice(0, 6);
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
       {/* Header */}
       <header className="mb-12 text-center">
         <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-          Tech Reviews
+          {activeCategory ? `${activeCategory.replace('-', ' ')} Reviews` : 'Tech Reviews'}
         </h1>
         <p className="text-xl text-gray-800 max-w-3xl mx-auto">
           Expert reviews and analysis of the latest technology products. 

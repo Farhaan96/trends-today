@@ -202,7 +202,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
         {/* Featured Image */}
         {frontmatter.image && (
           <div className="mb-8">
-            <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
+            <div className="relative aspect-video bg-gray-200 rounded-lg overflow-hidden">
               <ImageWithFallback
                 src={frontmatter.image}
                 alt={frontmatter.title}
