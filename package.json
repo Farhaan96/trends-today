@@ -34,7 +34,8 @@
     "agents:emergency": "node agents/orchestrator.js emergency",
     "agents:maintenance": "node agents/orchestrator.js maintenance",
     "agents:discovery": "node agents/orchestrator.js discovery",
-    "agents:content": "node agents/orchestrator.js content"
+    "agents:content": "node agents/orchestrator.js content",
+    "qa:site": "node scripts/qa-site.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -69,3 +70,4 @@
     "typescript": "^5"
   }
 }
+

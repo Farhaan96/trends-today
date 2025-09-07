@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
+import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import { Metadata } from 'next';
 
 interface Review {
@@ -183,11 +184,12 @@ export default async function ReviewsPage() {
                 {reviewsByCategory[category].slice(0, 4).map((review) => (
                   <article key={review.slug} className="flex gap-4 bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors">
                     {review.frontmatter.image && (
-                      <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
-                        <img
+                      <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0 relative">
+                        <ImageWithFallback
                           src={review.frontmatter.image}
                           alt={review.frontmatter.title}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover"
                         />
                       </div>
                     )}
@@ -197,7 +199,7 @@ export default async function ReviewsPage() {
                           {review.frontmatter.title}
                         </Link>
                       </h4>
-                      <p className="text-sm text-gray-800 mb-2 line-clamp-2">
+                      <p className="text-sm text-gray-900 mb-2 line-clamp-2">
                         {review.frontmatter.description}
                       </p>
                       <div className="flex items-center gap-2 text-xs text-gray-900">
@@ -222,15 +224,15 @@ export default async function ReviewsPage() {
         <div className="grid md:grid-cols-3 gap-6">
           <div>
             <div className="text-3xl font-bold text-blue-600">{reviews.length}+</div>
-            <div className="text-gray-800">Expert Reviews</div>
+            <div className="text-gray-900">Expert Reviews</div>
           </div>
           <div>
             <div className="text-3xl font-bold text-blue-600">{categories.length}</div>
-            <div className="text-gray-800">Product Categories</div>
+            <div className="text-gray-900">Product Categories</div>
           </div>
           <div>
             <div className="text-3xl font-bold text-blue-600">100%</div>
-            <div className="text-gray-800">Unbiased Testing</div>
+            <div className="text-gray-900">Unbiased Testing</div>
           </div>
         </div>
       </section>
