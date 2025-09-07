@@ -41,7 +41,7 @@ export default function AdPlaceholder({
   return (
     <div className={`ad-container ${className}`}>
       {label && (
-        <p className="text-xs text-gray-700 text-center mb-2 uppercase tracking-wide">
+        <p className="text-xs text-gray-900 text-center mb-2 uppercase tracking-wide">
           {label}
         </p>
       )}
@@ -49,7 +49,7 @@ export default function AdPlaceholder({
       {/* AdSense placeholder - will be activated when AdSense is approved */}
       <div 
         ref={adRef}
-        className="flex items-center justify-center border border-gray-200 rounded bg-gray-50 text-gray-700 text-sm"
+        className="flex items-center justify-center border border-gray-200 rounded bg-gray-50 text-gray-900 text-sm"
         style={{ width: `${width}px`, height: `${height}px`, maxWidth: '100%' }}
       >
         {/* Development placeholder */}
@@ -70,7 +70,7 @@ export default function AdPlaceholder({
         data-full-width-responsive="true"
       />
       
-      <p className="text-xs text-gray-700 text-center mt-1">
+      <p className="text-xs text-gray-900 text-center mt-1">
         <span className="text-yellow-600">*</span> Advertisement
       </p>
     </div>

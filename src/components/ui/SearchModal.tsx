@@ -126,7 +126,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         <div className="relative w-full max-w-2xl bg-white dark:bg-gray-800 rounded-lg shadow-2xl">
           {/* Search Header */}
           <div className="flex items-center p-4 border-b border-gray-200 dark:border-gray-700">
-            <MagnifyingGlassIcon className="w-5 h-5 text-gray-700 mr-3" />
+            <MagnifyingGlassIcon className="w-5 h-5 text-gray-900 mr-3" />
             <input
               ref={inputRef}
               type="text"
@@ -137,7 +137,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             />
             <button
               onClick={onClose}
-              className="p-2 text-gray-700 hover:text-gray-800 dark:hover:text-gray-300 rounded-md"
+              className="p-2 text-gray-900 hover:text-gray-800 dark:hover:text-gray-300 rounded-md"
             >
               <XMarkIcon className="w-5 h-5" />
             </button>
@@ -147,7 +147,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           <div className="max-h-96 overflow-y-auto">
             {isSearching && (
               <div className="flex items-center justify-center py-8">
-                <div className="flex items-center gap-3 text-gray-700">
+                <div className="flex items-center gap-3 text-gray-900">
                   <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin" />
                   Searching...
                 </div>
@@ -156,13 +156,13 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
             {!isSearching && query.length >= 2 && results.length === 0 && (
               <div className="p-8 text-center">
-                <div className="text-gray-700 mb-2">
+                <div className="text-gray-900 mb-2">
                   <MagnifyingGlassIcon className="w-8 h-8 mx-auto" />
                 </div>
-                <p className="text-gray-800 dark:text-gray-700">
+                <p className="text-gray-800 dark:text-gray-900">
                   No results found for "{query}"
                 </p>
-                <p className="text-sm text-gray-700 mt-1">
+                <p className="text-sm text-gray-900 mt-1">
                   Try different keywords or check spelling
                 </p>
               </div>
@@ -192,7 +192,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                         <span>{getTypeIcon(result.type)}</span>
                         {result.type.charAt(0).toUpperCase() + result.type.slice(1)}
                       </span>
-                      <span className="text-xs text-gray-700">
+                      <span className="text-xs text-gray-900">
                         {new Date(result.publishedAt).toLocaleDateString()}
                       </span>
                     </div>
@@ -201,7 +201,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                       {result.title}
                     </h3>
                     
-                    <p className="text-sm text-gray-800 dark:text-gray-700 line-clamp-2">
+                    <p className="text-sm text-gray-800 dark:text-gray-900 line-clamp-2">
                       {result.excerpt}
                     </p>
                   </div>
@@ -213,7 +213,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           {/* Search Footer */}
           {!isSearching && query.length < 2 && (
             <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-              <div className="flex items-center justify-between text-sm text-gray-700">
+              <div className="flex items-center justify-between text-sm text-gray-900">
                 <span>Type to search articles and reviews</span>
                 <div className="flex items-center gap-2">
                   <kbd className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs">↑↓</kbd>

@@ -151,7 +151,7 @@ export default async function BestPage() {
                     <span className="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">
                       Buying Guide
                     </span>
-                    <span className="text-sm text-gray-700">
+                    <span className="text-sm text-gray-900">
                       {guide.frontmatter.category}
                     </span>
                   </div>
@@ -163,7 +163,7 @@ export default async function BestPage() {
                   <p className="text-gray-800 mb-4">
                     {guide.frontmatter.description}
                   </p>
-                  <div className="flex items-center justify-between text-sm text-gray-700">
+                  <div className="flex items-center justify-between text-sm text-gray-900">
                     <span>Updated {new Date(guide.frontmatter.publishedAt).toLocaleDateString()}</span>
                     <span>💰 Budget options included</span>
                   </div>
@@ -242,19 +242,19 @@ export default async function BestPage() {
         <div className="grid md:grid-cols-4 gap-6">
           <div>
             <div className="text-4xl font-bold mb-2">500+</div>
-            <div className="text-blue-100">Products Tested</div>
+            <div className="text-blue-200">Products Tested</div>
           </div>
           <div>
             <div className="text-4xl font-bold mb-2">8+</div>
-            <div className="text-blue-100">Years Experience</div>
+            <div className="text-blue-200">Years Experience</div>
           </div>
           <div>
             <div className="text-4xl font-bold mb-2">100%</div>
-            <div className="text-blue-100">Unbiased Reviews</div>
+            <div className="text-blue-200">Unbiased Reviews</div>
           </div>
           <div>
             <div className="text-4xl font-bold mb-2">50K+</div>
-            <div className="text-blue-100">Happy Readers</div>
+            <div className="text-blue-200">Happy Readers</div>
           </div>
         </div>
       </section>

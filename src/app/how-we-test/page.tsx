@@ -255,7 +255,7 @@ export default function HowWeTestPage() {
                       <h4 className="font-semibold text-gray-900 mb-3">Testing Procedures</h4>
                       <ul className="space-y-2">
                         {category.tests.map((test, testIndex) => (
-                          <li key={testIndex} className="flex items-start text-sm text-gray-700">
+                          <li key={testIndex} className="flex items-start text-sm text-gray-900">
                             <CheckBadgeIcon className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                             {test}
                           </li>
@@ -267,7 +267,7 @@ export default function HowWeTestPage() {
                       <h4 className="font-semibold text-gray-900 mb-3">Professional Equipment</h4>
                       <ul className="space-y-2">
                         {category.equipment.map((equipment, equipIndex) => (
-                          <li key={equipIndex} className="flex items-start text-sm text-gray-700">
+                          <li key={equipIndex} className="flex items-start text-sm text-gray-900">
                             <BeakerIcon className="w-4 h-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
                             {equipment}
                           </li>
@@ -287,7 +287,7 @@ export default function HowWeTestPage() {
         
         <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-8 mb-8">
           <h3 className="text-xl font-semibold text-gray-900 mb-4">Our 5.0 Rating System</h3>
-          <p className="text-gray-700 mb-6">
+          <p className="text-gray-900 mb-6">
             Each product receives scores in four key categories, weighted to reflect their importance 
             to the average user. The overall score is calculated using these weighted averages.
           </p>
@@ -346,7 +346,7 @@ export default function HowWeTestPage() {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-white border border-gray-200 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Review Process</h3>
-            <div className="space-y-3 text-sm text-gray-700">
+            <div className="space-y-3 text-sm text-gray-900">
               <div className="flex items-center">
                 <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3">1</div>
                 <span>Initial product evaluation and setup</span>
@@ -372,7 +372,7 @@ export default function HowWeTestPage() {
           
           <div className="bg-white border border-gray-200 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Editorial Standards</h3>
-            <ul className="space-y-2 text-sm text-gray-700">
+            <ul className="space-y-2 text-sm text-gray-900">
               <li className="flex items-start">
                 <CheckBadgeIcon className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                 All products purchased independently or loaned without conditions
@@ -413,7 +413,7 @@ export default function HowWeTestPage() {
           </Link>
           <Link 
             href="/authors"
-            className="inline-flex items-center px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+            className="inline-flex items-center px-6 py-3 bg-white border border-gray-300 text-gray-900 rounded-lg hover:bg-gray-50 transition-colors font-medium"
           >
             Meet Our Team
           </Link>

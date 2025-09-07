@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2025-09-07T03:17:29.559Z",
+  "generatedAt": "2025-09-07T05:03:50.952Z",
   "summary": {
     "totalFiles": 11,
-    "validFiles": 11,
-    "invalidFiles": 0,
-    "totalIssues": 0,
-    "averageScore": 86.81818181818181
+    "validFiles": 10,
+    "invalidFiles": 1,
+    "totalIssues": 1,
+    "averageScore": 87.27272727272727
   },
   "issues": {
     "critical": 0,
@@ -17,19 +17,21 @@
       "path": "news\\first-of-its-kind-ai-settlement-anthropic-to-pay-authors-1-5.mdx",
       "contentType": "news",
       "isValid": true,
-      "score": 80,
+      "score": 85,
       "issuesCount": 0,
-      "warningsCount": 4,
+      "warningsCount": 3,
       "topIssues": []
     },
     {
       "path": "news\\iphone-17-air-announcement-what-to-expect.mdx",
       "contentType": "news",
-      "isValid": true,
+      "isValid": false,
       "score": 85,
-      "issuesCount": 0,
-      "warningsCount": 3,
-      "topIssues": []
+      "issuesCount": 1,
+      "warningsCount": 1,
+      "topIssues": [
+        "Invalid publishedAt date format"
+      ]
     },
     {
       "path": "reviews\\google-pixel-8-pro-review.mdx",
@@ -113,5 +115,8 @@
       "topIssues": []
     }
   ],
-  "recommendations": []
+  "recommendations": [
+    "Fix 1 files with critical issues",
+    "Address common issues: Invalid publishedAt date format"
+  ]
 }

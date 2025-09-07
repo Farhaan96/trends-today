@@ -23,7 +23,7 @@ export default function SubscribePage() {
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Upgrade to Trends Today Pro
             </h1>
-            <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-purple-200 mb-8 max-w-2xl mx-auto">
               Get the complete tech experience with ad-free reading, early access to reviews, 
               and exclusive content that helps you make smarter buying decisions.
             </p>
@@ -54,7 +54,7 @@ export default function SubscribePage() {
             <h2 className="text-2xl font-bold mb-4">
               Ready to Upgrade Your Tech Experience?
             </h2>
-            <p className="text-purple-100 mb-6">
+            <p className="text-purple-200 mb-6">
               Join thousands of tech enthusiasts who trust Trends Today Pro for their buying decisions.
             </p>
             <a 

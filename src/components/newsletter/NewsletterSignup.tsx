@@ -142,7 +142,7 @@ export default function NewsletterSignup({
           </p>
         )}
 
-        <p className={`text-xs ${isFooterVariant ? 'text-gray-700' : 'text-white/70'}`}>
+        <p className={`text-xs ${isFooterVariant ? 'text-gray-900' : 'text-white/70'}`}>
           No spam, unsubscribe at any time. By subscribing, you agree to our privacy policy.
         </p>
       </form>

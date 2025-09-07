@@ -11,7 +11,7 @@ export default function DemoArticle() {
     >
       <div className="space-y-6">
         <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg border-l-4 border-blue-500">
-          <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">
+          <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-200 mb-2">
             Our Verdict
           </h3>
           <p className="text-blue-800 dark:text-blue-200">
@@ -46,19 +46,19 @@ export default function DemoArticle() {
           <h3 className="text-lg font-semibold mb-4">Performance Benchmarks</h3>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <div className="text-sm text-gray-800 dark:text-gray-700">Geekbench 6 (Single-Core)</div>
+              <div className="text-sm text-gray-800 dark:text-gray-900">Geekbench 6 (Single-Core)</div>
               <div className="text-2xl font-bold text-blue-600">2,914</div>
             </div>
             <div>
-              <div className="text-sm text-gray-800 dark:text-gray-700">Geekbench 6 (Multi-Core)</div>
+              <div className="text-sm text-gray-800 dark:text-gray-900">Geekbench 6 (Multi-Core)</div>
               <div className="text-2xl font-bold text-blue-600">7,238</div>
             </div>
             <div>
-              <div className="text-sm text-gray-800 dark:text-gray-700">3DMark Wild Life Extreme</div>
+              <div className="text-sm text-gray-800 dark:text-gray-900">3DMark Wild Life Extreme</div>
               <div className="text-2xl font-bold text-blue-600">3,648</div>
             </div>
             <div>
-              <div className="text-sm text-gray-800 dark:text-gray-700">AnTuTu v10</div>
+              <div className="text-sm text-gray-800 dark:text-gray-900">AnTuTu v10</div>
               <div className="text-2xl font-bold text-blue-600">1,641,883</div>
             </div>
           </div>

@@ -60,7 +60,7 @@ function MetricCard({ title, value, change, icon, color, subtitle }: MetricCardP
         <div>
           <p className="text-sm font-medium text-gray-800">{title}</p>
           <p className="text-2xl font-bold text-gray-900">{value}</p>
-          {subtitle && <p className="text-sm text-gray-700 mt-1">{subtitle}</p>}
+          {subtitle && <p className="text-sm text-gray-900 mt-1">{subtitle}</p>}
         </div>
         <div className={`p-3 rounded-full ${color}`}>{icon}</div>
       </div>
@@ -191,7 +191,7 @@ export default function RevenueDashboard({ className = '', period = '30d' }: Rev
         <div className="bg-white rounded-lg border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-gray-900">Affiliate Performance</h3>
-            <ArrowTrendingUpIcon className="w-5 h-5 text-gray-700" />
+            <ArrowTrendingUpIcon className="w-5 h-5 text-gray-900" />
           </div>
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
@@ -208,11 +208,11 @@ export default function RevenueDashboard({ className = '', period = '30d' }: Rev
             </div>
           </div>
           <div>
-            <p className="text-sm font-medium text-gray-700 mb-2">Top Providers</p>
+            <p className="text-sm font-medium text-gray-900 mb-2">Top Providers</p>
             <div className="space-y-2">
               {metrics.affiliateRevenue.topProviders.map((p) => (
                 <div key={p.provider} className="flex items-center justify-between text-sm">
-                  <span className="text-gray-700 capitalize">{p.provider}</span>
+                  <span className="text-gray-900 capitalize">{p.provider}</span>
                   <span className="text-gray-900 font-medium">{formatCurrency(p.revenue)}</span>
                 </div>
               ))}
@@ -223,7 +223,7 @@ export default function RevenueDashboard({ className = '', period = '30d' }: Rev
         <div className="bg-white rounded-lg border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-gray-900">Premium + Ads</h3>
-            <EyeIcon className="w-5 h-5 text-gray-700" />
+            <EyeIcon className="w-5 h-5 text-gray-900" />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>

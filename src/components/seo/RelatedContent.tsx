@@ -108,7 +108,7 @@ function RelatedArticleCard({ link }: RelatedArticleCardProps) {
           {link.text}
         </h3>
         
-        <div className="flex items-center justify-between text-sm text-gray-700">
+        <div className="flex items-center justify-between text-sm text-gray-900">
           <span className="line-clamp-1">{link.context}</span>
           <svg className="w-4 h-4 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -203,7 +203,7 @@ export function TopicClusterNav({
 
       {clusterPages.length > 0 && (
         <div>
-          <h4 className="font-semibold text-gray-700 mb-2">Related Topics:</h4>
+          <h4 className="font-semibold text-gray-900 mb-2">Related Topics:</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {clusterPages.map((link, index) => (
               <Link
@@ -214,7 +214,7 @@ export function TopicClusterNav({
                 <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium mr-2 ${getTypeColor(link.type)}`}>
                   {getTypeIcon(link.type)}
                 </span>
-                <span className="text-sm font-medium text-gray-700 hover:text-blue-700 line-clamp-1">
+                <span className="text-sm font-medium text-gray-900 hover:text-blue-700 line-clamp-1">
                   {link.text}
                 </span>
               </Link>
@@ -243,7 +243,7 @@ export function TopicClusterNav({
       case 'review': return 'text-green-700 bg-green-100';
       case 'comparison': return 'text-blue-700 bg-blue-100'; 
       case 'guide': return 'text-purple-700 bg-purple-100';
-      default: return 'text-gray-700 bg-gray-100';
+      default: return 'text-gray-900 bg-gray-100';
     }
   }
 }
@@ -268,7 +268,7 @@ export function Breadcrumbs({ items, className = "mb-6" }: BreadcrumbsProps) {
         {items.map((item, index) => (
           <li key={index} className="flex items-center">
             {index > 0 && (
-              <svg className="w-4 h-4 mx-2 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-4 h-4 mx-2 text-gray-900" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 111.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
               </svg>
             )}

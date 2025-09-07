@@ -90,7 +90,7 @@ export default function PremiumUpgrade({
           <CrownIcon className="w-8 h-8 text-yellow-300" />
           <div className="flex-1">
             <h3 className="font-semibold">Upgrade to Trends Today Pro</h3>
-            <p className="text-sm text-purple-100">
+            <p className="text-sm text-purple-200">
               Ad-free reading, early access, and exclusive content
             </p>
           </div>
@@ -184,8 +184,8 @@ export default function PremiumUpgrade({
                     ${feature.highlight 
                       ? 'text-purple-900 font-medium' 
                       : feature.included 
-                        ? 'text-gray-700' 
-                        : 'text-gray-700 line-through'
+                        ? 'text-gray-900' 
+                        : 'text-gray-900 line-through'
                     }
                   `}>
                     {feature.name}
@@ -207,7 +207,7 @@ export default function PremiumUpgrade({
               {tier.duration === 'yearly' ? 'Start Annual Plan' : 'Start Monthly Plan'}
             </button>
 
-            <p className="text-xs text-gray-700 text-center mt-3">
+            <p className="text-xs text-gray-900 text-center mt-3">
               7-day free trial • Cancel anytime
             </p>
           </div>
@@ -246,10 +246,10 @@ export default function PremiumUpgrade({
 
       {/* Trust Signals */}
       <div className="mt-6 pt-4 border-t border-gray-200 text-center">
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-gray-900">
           Join 10,000+ tech enthusiasts who trust Trends Today Pro for their buying decisions
         </p>
-        <div className="flex justify-center items-center gap-4 mt-2 text-xs text-gray-700">
+        <div className="flex justify-center items-center gap-4 mt-2 text-xs text-gray-900">
           <span>🔒 Secure Payment</span>
           <span>•</span>
           <span>💳 No Hidden Fees</span>

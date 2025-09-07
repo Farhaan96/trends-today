@@ -22,7 +22,7 @@ export default function HomePage() {
       href: "/reviews/samsung-galaxy-s24-ultra-review", 
       category: "Reviews",
       publishedAt: "2025-09-05",
-      image: "/images/products/iphone-15-pro-max-hero.jpg"
+      image: "/images/products/samsung-galaxy-s24-ultra-hero.jpg"
     },
     {
       title: "iPhone 15 Pro vs Galaxy S24: Ultimate Flagship Battle", 
@@ -30,7 +30,7 @@ export default function HomePage() {
       href: "/compare/iphone-15-pro-vs-samsung-galaxy-s24",
       category: "Comparisons", 
       publishedAt: "2025-09-05",
-      image: "/images/products/iphone-15-pro-max-hero.jpg"
+      image: "/images/products/iphone-vs-galaxy-comparison.jpg"
     },
     {
       title: "Google Pixel 8 Pro Review: AI Photography Perfected",
@@ -38,7 +38,7 @@ export default function HomePage() {
       href: "/reviews/google-pixel-8-pro-review",
       category: "Reviews",
       publishedAt: "2025-09-05", 
-      image: "/images/products/iphone-15-pro-max-hero.jpg"
+      image: "/images/products/google-pixel-8-pro-hero.jpg"
     },
     {
       title: "OnePlus 12 Review: Speed Demon Returns",
@@ -46,7 +46,7 @@ export default function HomePage() {
       href: "/reviews/oneplus-12-review",
       category: "Reviews", 
       publishedAt: "2025-09-05",
-      image: "/images/products/iphone-15-pro-max-hero.jpg"
+      image: "/images/products/oneplus-12-hero.jpg"
     }
   ];
 
@@ -180,7 +180,7 @@ export default function HomePage() {
                       <p className="text-xs text-gray-800 line-clamp-2 mb-2">
                         {article.description}
                       </p>
-                      <div className="text-xs text-gray-700">
+                      <div className="text-xs text-gray-900">
                         {new Date(article.publishedAt).toLocaleDateString()}
                       </div>
                     </div>
@@ -268,7 +268,7 @@ export default function HomePage() {
                           <p className="text-gray-800 text-sm line-clamp-2 mb-3">
                             {article.description}
                           </p>
-                          <div className="flex items-center justify-between text-xs text-gray-700">
+                          <div className="flex items-center justify-between text-xs text-gray-900">
                             <span>{new Date(article.publishedAt).toLocaleDateString()}</span>
                             <span className="font-bold uppercase tracking-wide">Read Review</span>
                           </div>
@@ -313,7 +313,7 @@ export default function HomePage() {
                           <h3 className="font-bold text-sm text-gray-900 group-hover:text-blue-600 transition-colors mb-1 leading-tight">
                             {article.title}
                           </h3>
-                          <div className="text-xs text-gray-700">
+                          <div className="text-xs text-gray-900">
                             {new Date(article.publishedAt).toLocaleDateString()}
                           </div>
                         </article>
@@ -338,7 +338,7 @@ export default function HomePage() {
                             <h3 className="font-bold text-sm text-gray-900 group-hover:text-blue-600 transition-colors">
                               {guide.title}
                             </h3>
-                            <p className="text-xs text-gray-700">{guide.count}</p>
+                            <p className="text-xs text-gray-900">{guide.count}</p>
                           </div>
                         </div>
                       </Link>
@@ -374,7 +374,7 @@ export default function HomePage() {
                   <div className="flex flex-wrap gap-2">
                     {["iPhone 16 Pro", "Galaxy S25", "Pixel 9", "Vision Pro 2", "MacBook Air", "Tesla Phone"].map((tag) => (
                       <Link key={tag} href={`/search?q=${encodeURIComponent(tag)}`}>
-                        <span className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-bold uppercase tracking-wide hover:bg-blue-100 hover:text-blue-700 transition-colors cursor-pointer">
+                        <span className="px-2 py-1 bg-gray-100 text-gray-900 text-xs font-bold uppercase tracking-wide hover:bg-blue-100 hover:text-blue-700 transition-colors cursor-pointer">
                           {tag}
                         </span>
                       </Link>
@@ -451,7 +451,7 @@ export default function HomePage() {
               Subscribe Free
             </button>
           </div>
-          <p className="text-xs text-gray-700 mt-4">No spam. Unsubscribe anytime.</p>
+          <p className="text-xs text-gray-900 mt-4">No spam. Unsubscribe anytime.</p>
         </div>
       </section>
     </main>

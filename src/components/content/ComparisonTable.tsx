@@ -53,13 +53,13 @@ export default function ComparisonTable({ productAName, productBName, comparison
               </td>
               <td className="px-4 py-4 border-r border-gray-200">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-700">{comparison.productA}</span>
+                  <span className="text-sm text-gray-900">{comparison.productA}</span>
                   {getWinnerIcon(comparison.winner, 'productA')}
                 </div>
               </td>
               <td className="px-4 py-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-700">{comparison.productB}</span>
+                  <span className="text-sm text-gray-900">{comparison.productB}</span>
                   {getWinnerIcon(comparison.winner, 'productB')}
                 </div>
               </td>

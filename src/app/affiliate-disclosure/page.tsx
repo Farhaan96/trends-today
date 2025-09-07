@@ -37,8 +37,8 @@ export default function AffiliateDisclosurePage() {
             <ShieldCheckIcon className="w-6 h-6 text-blue-600 mr-2" />
             Our Commitment to Editorial Independence
           </h2>
-          <div className="prose prose-gray max-w-none">
-            <p className="text-gray-700 leading-relaxed mb-4">
+          <div className="prose prose-slate prose-slate max-w-none">
+            <p className="text-gray-900 leading-relaxed mb-4">
               Editorial independence is the foundation of everything we do at Trends Today. 
               Our review process, recommendations, and editorial decisions are never influenced 
               by affiliate partnerships, advertising relationships, or manufacturer incentives.
@@ -86,7 +86,7 @@ export default function AffiliateDisclosurePage() {
       </div>
 
       {/* Last Updated */}
-      <div className="mt-12 text-center text-sm text-gray-700">
+      <div className="mt-12 text-center text-sm text-gray-900">
         <p>
           This disclosure policy was last updated on {new Date().toLocaleDateString('en-US', {
             year: 'numeric',

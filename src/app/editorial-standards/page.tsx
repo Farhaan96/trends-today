@@ -160,13 +160,13 @@ export default function EditorialStandardsPage() {
                     </div>
                     <h3 className="text-xl font-bold text-gray-900">{value.title}</h3>
                   </div>
-                  <p className="text-gray-700">{value.description}</p>
+                  <p className="text-gray-900">{value.description}</p>
                 </div>
                 
                 <div className="p-6">
                   <ul className="space-y-2">
                     {value.details.map((detail, detailIndex) => (
-                      <li key={detailIndex} className="flex items-start text-sm text-gray-700">
+                      <li key={detailIndex} className="flex items-start text-sm text-gray-900">
                         <CheckBadgeIcon className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                         {detail}
                       </li>
@@ -199,7 +199,7 @@ export default function EditorialStandardsPage() {
                     {policy.content.map((item, itemIndex) => (
                       <div key={itemIndex}>
                         <h4 className="font-semibold text-gray-900 mb-2">{item.subtitle}</h4>
-                        <p className="text-gray-700 text-sm leading-relaxed">{item.text}</p>
+                        <p className="text-gray-900 text-sm leading-relaxed">{item.text}</p>
                       </div>
                     ))}
                   </div>
@@ -336,14 +336,14 @@ export default function EditorialStandardsPage() {
           </Link>
           <Link 
             href="/how-we-test"
-            className="inline-flex items-center px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+            className="inline-flex items-center px-6 py-3 bg-white border border-gray-300 text-gray-900 rounded-lg hover:bg-gray-50 transition-colors font-medium"
           >
             Testing Methodology
           </Link>
         </div>
         
         <div className="mt-8 pt-6 border-t border-gray-200">
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-gray-900">
             These editorial standards were last updated on September 7, 2024. 
             We review and update our policies regularly to ensure they reflect best practices in technology journalism.
           </p>

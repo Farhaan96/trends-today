@@ -83,7 +83,7 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
   const yearsAtTrends = new Date().getFullYear() - joinYear;
 
   return (
-    <article className="max-w-4xl mx-auto px-4 py-8">
+    <article className="max-w-6xl mx-auto px-4 py-8">
       <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-8 mb-8">
         <div className="flex flex-col md:flex-row items-start gap-8">
           <div className="flex-shrink-0">
@@ -118,7 +118,7 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
               </div>
             </div>
 
-            <p className="text-gray-700 leading-relaxed mb-6">{author.bio}</p>
+            <p className="text-gray-900 leading-relaxed mb-6">{author.bio}</p>
             
             <div className="flex flex-wrap gap-3">
               {socialLinks.map((link, index) => (
@@ -127,7 +127,7 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
                   href={link.url!}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-3 py-1 bg-white border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                  className="inline-flex items-center px-3 py-1 bg-white border border-gray-300 rounded-full text-sm font-medium text-gray-900 hover:bg-gray-50 transition-colors"
                 >
                   <span className="mr-2">{link.icon}</span>
                   {link.platform}
@@ -145,9 +145,9 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
               <UserIcon className="w-6 h-6 mr-2 text-blue-600" />
               About {author.name.split(' ')[0]}
             </h3>
-            <div className="prose prose-gray max-w-none">
+            <div className="prose prose-slate prose-slate max-w-none">
               {author.longBio.split('\n\n').map((paragraph, index) => (
-                <p key={index} className="text-gray-700 leading-relaxed mb-4">
+                <p key={index} className="text-gray-900 leading-relaxed mb-4">
                   {paragraph}
                 </p>
               ))}
@@ -163,7 +163,7 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
               {author.credentials.map((credential, index) => (
                 <div key={index} className="flex items-start">
                   <CheckBadgeIcon className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">{credential}</span>
+                  <span className="text-gray-900">{credential}</span>
                 </div>
               ))}
             </div>
@@ -194,7 +194,7 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
               {author.expertise.map((skill, index) => (
                 <div key={index} className="flex items-center">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                  <span className="text-gray-700 text-sm">{skill}</span>
+                  <span className="text-gray-900 text-sm">{skill}</span>
                 </div>
               ))}
             </div>
@@ -221,7 +221,7 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
             </h4>
             <div className="space-y-1">
               {author.languages.map((language, index) => (
-                <div key={index} className="text-gray-700 text-sm">
+                <div key={index} className="text-gray-900 text-sm">
                   {language}
                 </div>
               ))}

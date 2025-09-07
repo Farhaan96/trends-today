@@ -88,7 +88,7 @@ export default async function NewsPage() {
                     <p className="text-gray-800 mb-2">
                       {article.frontmatter.description}
                     </p>
-                    <div className="flex items-center gap-2 text-sm text-gray-700">
+                    <div className="flex items-center gap-2 text-sm text-gray-900">
                       <time dateTime={article.frontmatter.publishedAt}>
                         {new Date(article.frontmatter.publishedAt).toLocaleDateString()}
                       </time>
@@ -136,7 +136,7 @@ export default async function NewsPage() {
                   <p className="text-gray-800 mb-4">
                     {article.frontmatter.description}
                   </p>
-                  <div className="flex items-center justify-between text-sm text-gray-700">
+                  <div className="flex items-center justify-between text-sm text-gray-900">
                     <span>{(typeof article.frontmatter.author === 'string' ? article.frontmatter.author : article.frontmatter.author?.name) || 'Editorial Team'}</span>
                     <time dateTime={article.frontmatter.publishedAt}>
                       {new Date(article.frontmatter.publishedAt).toLocaleDateString()}
@@ -169,7 +169,7 @@ export default async function NewsPage() {
                   <span className="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
                     {article.frontmatter.category || 'News'}
                   </span>
-                  <time className="text-sm text-gray-700" dateTime={article.frontmatter.publishedAt}>
+                  <time className="text-sm text-gray-900" dateTime={article.frontmatter.publishedAt}>
                     {new Date(article.frontmatter.publishedAt).toLocaleDateString()}
                   </time>
                 </div>
@@ -182,7 +182,7 @@ export default async function NewsPage() {
                   {article.frontmatter.description}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-700">
+                  <span className="text-sm text-gray-900">
                     By {(typeof article.frontmatter.author === 'string' ? article.frontmatter.author : article.frontmatter.author?.name) || 'Editorial Team'}
                   </span>
                   <Link 
@@ -201,7 +201,7 @@ export default async function NewsPage() {
       {/* Newsletter Signup */}
       <section className="bg-blue-600 text-white rounded-lg p-8 text-center">
         <h2 className="text-2xl font-bold mb-4">Never Miss a Story</h2>
-        <p className="text-blue-100 mb-6">
+        <p className="text-blue-200 mb-6">
           Get the latest tech news delivered to your inbox. Join 50,000+ readers.
         </p>
         <div className="flex max-w-md mx-auto gap-4">

@@ -123,20 +123,20 @@ export default function AuthorsPage() {
                       {author.expertise.slice(0, 3).map((skill, index) => (
                         <span
                           key={index}
-                          className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700"
+                          className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-900"
                         >
                           {skill}
                         </span>
                       ))}
                       {author.expertise.length > 3 && (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-900">
                           +{author.expertise.length - 3} more
                         </span>
                       )}
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center text-xs text-gray-700">
+                      <div className="flex items-center text-xs text-gray-900">
                         <AcademicCapIcon className="w-3 h-3 mr-1" />
                         {author.credentials.length} credentials
                       </div>

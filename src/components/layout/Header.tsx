@@ -39,11 +39,11 @@ export default function Header() {
           </div>
           <div className="hidden md:flex items-center space-x-4 text-xs">
             <Link href="/authors" className="text-gray-300 hover:text-white">Our Team</Link>
-            <span className="text-gray-700">|</span>
+            <span className="text-gray-900">|</span>
             <Link href="/how-we-test" className="text-gray-300 hover:text-white">How We Test</Link>
-            <span className="text-gray-700">|</span>
+            <span className="text-gray-900">|</span>
             <Link href="/editorial-standards" className="text-gray-300 hover:text-white">Standards</Link>
-            <span className="text-gray-700">|</span>
+            <span className="text-gray-900">|</span>
             <Link href="/contact" className="text-gray-300 hover:text-white">Contact</Link>
           </div>
         </div>
@@ -63,7 +63,7 @@ export default function Header() {
                   <div>
                     <span className="text-2xl font-bold text-slate-900 uppercase tracking-tight">Trends</span>
                     <span className="text-2xl font-bold text-blue-600 uppercase tracking-tight">Today</span>
-                    <div className="text-xs text-gray-700 uppercase tracking-widest font-bold -mt-1">
+                    <div className="text-xs text-gray-900 uppercase tracking-widest font-bold -mt-1">
                       Tech Reviews & News
                     </div>
                   </div>
@@ -138,13 +138,13 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="text-sm text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                    className="text-sm text-gray-900 hover:text-blue-600 font-medium transition-colors"
                   >
                     {item.name}
                   </Link>
                 ))}
               </div>
-              <div className="text-xs text-gray-700 uppercase tracking-wide">
+              <div className="text-xs text-gray-900 uppercase tracking-wide">
                 Updated Daily
               </div>
             </div>

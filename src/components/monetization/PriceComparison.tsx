@@ -138,7 +138,7 @@ export default function PriceComparison({
                   
                   {savings && (
                     <>
-                      <span className="text-sm text-gray-700 line-through">
+                      <span className="text-sm text-gray-900 line-through">
                         {formatCurrency(price.originalPrice!, price.currency)}
                       </span>
                       <span className="text-sm bg-red-100 text-red-800 px-2 py-1 rounded">
@@ -160,7 +160,7 @@ export default function PriceComparison({
                   </p>
                 )}
                 
-                <p className="text-xs text-gray-700 mt-1">
+                <p className="text-xs text-gray-900 mt-1">
                   Updated: {new Date(price.lastUpdated).toLocaleDateString()}
                 </p>
               </div>
@@ -203,7 +203,7 @@ export default function PriceComparison({
 
       {/* Affiliate Disclaimer */}
       <div className="mt-4 pt-4 border-t border-gray-200">
-        <p className="text-xs text-gray-700 text-center">
+        <p className="text-xs text-gray-900 text-center">
           <span className="text-yellow-600">*</span> Trends Today may earn a commission from purchases made through our affiliate links. 
           This helps support our independent testing and reviews at no extra cost to you.
         </p>

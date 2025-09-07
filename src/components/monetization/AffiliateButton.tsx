@@ -80,8 +80,8 @@ export default function AffiliateButton({
 
   const variantClasses = {
     primary: `${info.color} ${info.textColor} shadow-lg transform hover:scale-105 transition-all duration-200`,
-    secondary: 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50',
-    minimal: 'bg-transparent border border-gray-300 text-gray-700 hover:border-gray-400'
+    secondary: 'bg-white border border-gray-300 text-gray-900 hover:bg-gray-50',
+    minimal: 'bg-transparent border border-gray-300 text-gray-900 hover:border-gray-400'
   };
 
   const handleClick = () => {
@@ -107,7 +107,7 @@ export default function AffiliateButton({
         disabled
         className={`
           ${sizeClasses[size]}
-          bg-gray-300 text-gray-700 cursor-not-allowed rounded-lg font-medium
+          bg-gray-300 text-gray-900 cursor-not-allowed rounded-lg font-medium
           flex items-center justify-center gap-2 w-full
           ${className}
         `}
@@ -146,7 +146,7 @@ export default function AffiliateButton({
       </button>
       
       {/* Affiliate disclosure */}
-      <p className="text-xs text-gray-700 mt-1 text-center">
+      <p className="text-xs text-gray-900 mt-1 text-center">
         <span className="text-yellow-600">*</span> We earn a commission if you make a purchase
       </p>
     </div>

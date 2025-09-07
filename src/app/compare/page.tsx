@@ -134,7 +134,7 @@ export default async function ComparePage() {
                 </p>
                 <div className="space-y-1">
                   {category.examples.map((example, idx) => (
-                    <div key={idx} className="text-sm text-gray-700 flex items-center">
+                    <div key={idx} className="text-sm text-gray-900 flex items-center">
                       <span className="w-2 h-2 bg-gray-400 rounded-full mr-2"></span>
                       {example}
                     </div>
@@ -167,7 +167,7 @@ export default async function ComparePage() {
                     <span className="px-3 py-1 bg-orange-100 text-orange-800 text-sm font-medium rounded-full">
                       Comparison
                     </span>
-                    <span className="text-sm text-gray-700">
+                    <span className="text-sm text-gray-900">
                       {comparison.frontmatter.category}
                     </span>
                   </div>
@@ -179,7 +179,7 @@ export default async function ComparePage() {
                   <p className="text-gray-800 mb-4">
                     {comparison.frontmatter.description}
                   </p>
-                  <div className="flex items-center justify-between text-sm text-gray-700">
+                  <div className="flex items-center justify-between text-sm text-gray-900">
                     <span>Updated {new Date(comparison.frontmatter.publishedAt).toLocaleDateString()}</span>
                     <span>📊 Detailed specs</span>
                   </div>
@@ -193,7 +193,7 @@ export default async function ComparePage() {
       {/* Comparison Tool CTA */}
       <section className="mb-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl p-8 text-center">
         <h2 className="text-3xl font-bold mb-4">Can't Find What You're Looking For?</h2>
-        <p className="text-xl text-blue-100 mb-6">
+        <p className="text-xl text-blue-200 mb-6">
           Request a custom comparison and we'll create it for you
         </p>
         <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">

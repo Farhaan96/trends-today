@@ -111,7 +111,7 @@ export default async function ReviewsPage() {
                   <p className="text-gray-800 mb-4">
                     {review.frontmatter.description}
                   </p>
-                  <div className="flex items-center justify-between text-sm text-gray-700">
+                  <div className="flex items-center justify-between text-sm text-gray-900">
                     <span>{review.frontmatter.category}</span>
                     <time dateTime={review.frontmatter.publishedAt}>
                       {new Date(review.frontmatter.publishedAt).toLocaleDateString()}
@@ -158,7 +158,7 @@ export default async function ReviewsPage() {
                 <p className="text-gray-800 mb-4">
                   {review.frontmatter.description}
                 </p>
-                <div className="flex items-center justify-between text-sm text-gray-700">
+                <div className="flex items-center justify-between text-sm text-gray-900">
                   <span>{(typeof review.frontmatter.author === 'string' ? review.frontmatter.author : review.frontmatter.author?.name) || 'Editorial Team'}</span>
                   <time dateTime={review.frontmatter.publishedAt}>
                     {new Date(review.frontmatter.publishedAt).toLocaleDateString()}
@@ -200,7 +200,7 @@ export default async function ReviewsPage() {
                       <p className="text-sm text-gray-800 mb-2 line-clamp-2">
                         {review.frontmatter.description}
                       </p>
-                      <div className="flex items-center gap-2 text-xs text-gray-700">
+                      <div className="flex items-center gap-2 text-xs text-gray-900">
                         {review.frontmatter.rating && (
                           <span className="text-yellow-500">★ {review.frontmatter.rating}/10</span>
                         )}

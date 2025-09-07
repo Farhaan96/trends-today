@@ -38,7 +38,7 @@ export default function ArticleLayout({
 
         {/* Article Meta */}
         <div className="flex items-center justify-between mb-6 pb-6 border-b border-gray-200 dark:border-gray-700">
-          <div className="flex items-center text-sm text-gray-700 dark:text-gray-700">
+          <div className="flex items-center text-sm text-gray-900 dark:text-gray-900">
             {publishedAt && (
               <time dateTime={publishedAt}>
                 {new Date(publishedAt).toLocaleDateString('en-US', {
@@ -61,7 +61,7 @@ export default function ArticleLayout({
       </header>
 
       {/* Article Content */}
-      <article className="prose prose-lg max-w-none dark:prose-invert mb-12">
+      <article className="prose prose-slate prose-lg prose-slate max-w-none dark:prose-invert mb-12">
         {children}
       </article>
 

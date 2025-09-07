@@ -141,7 +141,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
     <main className="min-h-screen bg-white">
       <StructuredData data={articleStructuredData} />
       
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Article Header */}
         <header className="mb-8">
           <div className="mb-4">
@@ -163,7 +163,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
             {frontmatter.description}
           </p>
           
-          <div className="flex items-center gap-4 text-gray-700 border-b pb-6">
+          <div className="flex items-center gap-4 text-gray-900 border-b pb-6">
             <div className="flex items-center gap-2">
               <span className="font-medium text-gray-900">
                 {(typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || 'Trends Today Editorial'}
@@ -201,7 +201,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
         )}
         
         {/* Article Content */}
-        <article className="prose prose-lg max-w-none mb-12">
+        <article className="prose prose-slate prose-lg prose-slate max-w-4xl mx-auto mb-12">
           <MDXRemote source={content} />
         </article>
         
@@ -215,7 +215,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
                 {frontmatter.tags.map((tag: string) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200 transition-colors"
+                    className="px-3 py-1 bg-gray-100 text-gray-900 text-sm rounded-full hover:bg-gray-200 transition-colors"
                   >
                     {tag}
                   </span>

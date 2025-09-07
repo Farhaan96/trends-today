@@ -59,7 +59,7 @@ export default function NewsletterModal() {
               </svg>
             </div>
             <h2 className="text-2xl font-bold mb-2">Wait! Don't Miss Out</h2>
-            <p className="text-blue-100">Join 50,000+ tech enthusiasts getting our weekly insights</p>
+            <p className="text-blue-200">Join 50,000+ tech enthusiasts getting our weekly insights</p>
           </div>
           
           <div className="p-6">

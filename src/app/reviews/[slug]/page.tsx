@@ -139,7 +139,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
   };
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-8">
+    <main className="max-w-7xl mx-auto px-4 py-8">
       <StructuredData data={reviewStructuredData} />
       
       <div className="bg-white rounded-lg shadow-sm">
@@ -167,7 +167,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
             {frontmatter.description}
           </p>
           
-          <div className="flex items-center gap-4 text-gray-700 border-b pb-6">
+          <div className="flex items-center gap-4 text-gray-900 border-b pb-6">
             <div className="flex items-center gap-2">
               <span className="font-medium text-gray-900">
                 {(typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || 'Trends Today Editorial'}
@@ -215,7 +215,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
 
         {/* Content */}
         <article className="px-8 pb-8">
-          <div className="prose prose-lg prose-blue max-w-none">
+          <div className="prose prose-slate prose-lg prose-slate prose-blue max-w-4xl mx-auto">
             <MDXRemote source={content} />
           </div>
         </article>
@@ -225,12 +225,12 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
           {/* Tags */}
           {frontmatter.tags && frontmatter.tags.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-sm font-semibold text-gray-700 mb-2">Tags</h3>
+              <h3 className="text-sm font-semibold text-gray-900 mb-2">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {frontmatter.tags.map((tag: string) => (
                   <span
                     key={tag}
-                    className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
+                    className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-900 hover:bg-gray-200 transition-colors"
                   >
                     {tag}
                   </span>

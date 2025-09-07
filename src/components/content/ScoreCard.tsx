@@ -30,7 +30,7 @@ export default function ScoreCard({ overallScore, breakdown }: ScoreCardProps) {
         {[...Array(emptyStars)].map((_, i) => (
           <StarOutlineIcon key={`empty-${i}`} className="w-5 h-5 text-gray-300" />
         ))}
-        <span className="ml-2 text-sm font-medium text-gray-700">
+        <span className="ml-2 text-sm font-medium text-gray-900">
           {score.toFixed(1)}/5
         </span>
       </div>
@@ -62,7 +62,7 @@ export default function ScoreCard({ overallScore, breakdown }: ScoreCardProps) {
         <div className="space-y-3">
           {Object.entries(breakdown).map(([category, score]) => (
             <div key={category} className="flex items-center justify-between">
-              <span className="text-sm font-medium text-gray-700 capitalize">
+              <span className="text-sm font-medium text-gray-900 capitalize">
                 {category}
               </span>
               <div className="flex items-center">

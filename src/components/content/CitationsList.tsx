@@ -31,7 +31,7 @@ export default function CitationsList({ sources }: CitationsListProps) {
               <span className="text-gray-800"> - {source.publisher}</span>
             )}
             {source.accessDate && (
-              <span className="text-gray-700 text-xs">
+              <span className="text-gray-900 text-xs">
                 {' '}(Accessed: {source.accessDate})
               </span>
             )}

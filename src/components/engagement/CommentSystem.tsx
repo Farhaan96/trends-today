@@ -231,19 +231,19 @@ export default function CommentSystem({ articleId, articleTitle }: CommentSystem
                 <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
             )}
-            <span className="text-xs text-gray-700">
+            <span className="text-xs text-gray-900">
               {formatDate(comment.createdAt)}
             </span>
           </div>
           
-          <p className="text-gray-700 dark:text-gray-300 text-sm mb-3">
+          <p className="text-gray-900 dark:text-gray-300 text-sm mb-3">
             {comment.content}
           </p>
           
           <div className="flex items-center space-x-4 text-xs">
             <button
               onClick={() => handleLike(comment.id, isReply, parentId)}
-              className="flex items-center space-x-1 text-gray-700 hover:text-red-500 transition-colors"
+              className="flex items-center space-x-1 text-gray-900 hover:text-red-500 transition-colors"
             >
               {comment.isLiked ? (
                 <HeartSolid className="w-4 h-4 text-red-500" />
@@ -256,14 +256,14 @@ export default function CommentSystem({ articleId, articleTitle }: CommentSystem
             {!isReply && (
               <button
                 onClick={() => setReplyTo(replyTo === comment.id ? null : comment.id)}
-                className="flex items-center space-x-1 text-gray-700 hover:text-blue-500 transition-colors"
+                className="flex items-center space-x-1 text-gray-900 hover:text-blue-500 transition-colors"
               >
                 <ReplyIcon className="w-4 h-4" />
                 <span>Reply</span>
               </button>
             )}
             
-            <button className="flex items-center space-x-1 text-gray-700 hover:text-gray-700 transition-colors">
+            <button className="flex items-center space-x-1 text-gray-900 hover:text-gray-900 transition-colors">
               <FlagIcon className="w-4 h-4" />
               <span>Report</span>
             </button>
@@ -327,7 +327,7 @@ export default function CommentSystem({ articleId, articleTitle }: CommentSystem
         </h3>
         
         <div className="flex items-center space-x-2">
-          <span className="text-sm text-gray-700">Sort by:</span>
+          <span className="text-sm text-gray-900">Sort by:</span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
@@ -352,7 +352,7 @@ export default function CommentSystem({ articleId, articleTitle }: CommentSystem
           />
           
           <div className="flex justify-between items-center mt-3">
-            <p className="text-xs text-gray-700">
+            <p className="text-xs text-gray-900">
               Be respectful and constructive in your comments.
             </p>
             <button
@@ -374,12 +374,12 @@ export default function CommentSystem({ articleId, articleTitle }: CommentSystem
 
         {comments.length === 0 && (
           <div className="text-center py-8">
-            <div className="text-gray-700 mb-2">
+            <div className="text-gray-900 mb-2">
               <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
               </svg>
             </div>
-            <p className="text-gray-700">No comments yet. Be the first to share your thoughts!</p>
+            <p className="text-gray-900">No comments yet. Be the first to share your thoughts!</p>
           </div>
         )}
       </div>

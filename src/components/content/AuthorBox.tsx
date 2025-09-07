@@ -63,7 +63,7 @@ export default function AuthorBox({
       {trustSignals && (
         <div className="bg-white border-b border-blue-200 px-6 py-3">
           <div className="flex flex-wrap items-center gap-4 text-xs">
-            <span className="font-semibold text-gray-700">Trust Indicators:</span>
+            <span className="font-semibold text-gray-900">Trust Indicators:</span>
             {trustSignals.independentPurchase && (
               <div className="flex items-center text-green-700">
                 <CheckBadgeIcon className="w-3 h-3 mr-1" />
@@ -129,7 +129,7 @@ export default function AuthorBox({
             </div>
             
             {author.bio && (
-              <p className="text-gray-700 text-sm mt-2 leading-relaxed">
+              <p className="text-gray-900 text-sm mt-2 leading-relaxed">
                 {typeof author.bio === 'string' ? author.bio : String(author.bio)}
               </p>
             )}
@@ -165,13 +165,13 @@ export default function AuthorBox({
                 {author.expertise.slice(0, 4).map((skill, index) => (
                   <span
                     key={index}
-                    className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-white text-gray-700 border border-gray-200"
+                    className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-white text-gray-900 border border-gray-200"
                   >
                     {skill}
                   </span>
                 ))}
                 {author.expertise.length > 4 && (
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-900">
                     +{author.expertise.length - 4} more
                   </span>
                 )}
@@ -183,7 +183,7 @@ export default function AuthorBox({
         {/* Review Metrics & Dates */}
         <div className="grid md:grid-cols-2 gap-6 mt-6 pt-4 border-t border-blue-200">
           <div>
-            <h4 className="text-sm font-semibold text-gray-700 mb-2 flex items-center">
+            <h4 className="text-sm font-semibold text-gray-900 mb-2 flex items-center">
               <ClockIcon className="w-4 h-4 mr-1" />
               Testing Metrics
             </h4>
@@ -208,7 +208,7 @@ export default function AuthorBox({
           </div>
           
           <div>
-            <h4 className="text-sm font-semibold text-gray-700 mb-2 flex items-center">
+            <h4 className="text-sm font-semibold text-gray-900 mb-2 flex items-center">
               <CalendarIcon className="w-4 h-4 mr-1" />
               Publication Info
             </h4>

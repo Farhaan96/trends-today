@@ -101,7 +101,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             
             <button
               onClick={onClose}
-              className="p-2 text-gray-700 hover:text-gray-700 dark:text-gray-700 dark:hover:text-gray-200 rounded-md"
+              className="p-2 text-gray-900 hover:text-gray-900 dark:text-gray-900 dark:hover:text-gray-200 rounded-md"
             >
               <XMarkIcon className="w-6 h-6" />
             </button>
@@ -116,7 +116,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   className="flex flex-col items-center p-3 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                 >
                   <span className="text-xl mb-1">{action.icon}</span>
-                  <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                  <span className="text-xs font-medium text-gray-900 dark:text-gray-300">
                     {action.name}
                   </span>
                 </button>
@@ -138,7 +138,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       <span className="font-medium text-gray-900 dark:text-white">{item.name}</span>
                     </div>
                     <svg
-                      className={`w-5 h-5 text-gray-700 transition-transform ${
+                      className={`w-5 h-5 text-gray-900 transition-transform ${
                         activeSection === item.name ? 'rotate-180' : ''
                       }`}
                       fill="none"
@@ -163,7 +163,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                           key={category.name}
                           href={category.href}
                           onClick={onClose}
-                          className="block p-2 text-sm text-gray-800 dark:text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
+                          className="block p-2 text-sm text-gray-800 dark:text-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
                         >
                           {category.name}
                         </Link>
@@ -180,28 +180,28 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 <Link
                   href="/authors"
                   onClick={onClose}
-                  className="flex items-center p-2 text-sm text-gray-800 dark:text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
+                  className="flex items-center p-2 text-sm text-gray-800 dark:text-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
                 >
                   Our Team
                 </Link>
                 <Link
                   href="/how-we-test"
                   onClick={onClose}
-                  className="flex items-center p-2 text-sm text-gray-800 dark:text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
+                  className="flex items-center p-2 text-sm text-gray-800 dark:text-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
                 >
                   How We Test
                 </Link>
                 <Link
                   href="/editorial-standards"
                   onClick={onClose}
-                  className="flex items-center p-2 text-sm text-gray-800 dark:text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
+                  className="flex items-center p-2 text-sm text-gray-800 dark:text-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
                 >
                   Editorial Standards
                 </Link>
                 <Link
                   href="/contact"
                   onClick={onClose}
-                  className="flex items-center p-2 text-sm text-gray-800 dark:text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
+                  className="flex items-center p-2 text-sm text-gray-800 dark:text-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
                 >
                   Contact Us
                 </Link>
@@ -211,7 +211,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
           {/* Newsletter Signup */}
           <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-            <div className="text-xs text-gray-700 dark:text-gray-700 mb-3">
+            <div className="text-xs text-gray-900 dark:text-gray-900 mb-3">
               Stay updated with the latest tech news
             </div>
             <NewsletterSignup variant="footer" />

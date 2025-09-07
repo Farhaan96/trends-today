@@ -143,7 +143,7 @@ export default function ProductComparison({
                         </span>
                         {savings && (
                           <>
-                            <span className="text-sm text-gray-700 line-through">
+                            <span className="text-sm text-gray-900 line-through">
                               {formatCurrency(product.originalPrice!)}
                             </span>
                             <span className="text-sm bg-red-100 text-red-800 px-2 py-1 rounded">
@@ -234,7 +234,7 @@ export default function ProductComparison({
 
       {/* Affiliate Disclaimer */}
       <div className="p-4 bg-gray-50 border-t border-gray-200">
-        <p className="text-xs text-gray-700 text-center">
+        <p className="text-xs text-gray-900 text-center">
           <span className="text-yellow-600">*</span> Trends Today earns commission from purchases made through our affiliate links. 
           Prices and availability are subject to change.
         </p>

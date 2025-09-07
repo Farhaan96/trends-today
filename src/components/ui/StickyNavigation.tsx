@@ -62,7 +62,7 @@ export default function StickyNavigation() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="text-sm font-medium text-gray-900 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 {link.name}
               </Link>

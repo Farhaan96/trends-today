@@ -214,7 +214,7 @@ export default function NotificationSystem() {
               )}
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 text-gray-700 hover:text-gray-800 dark:hover:text-gray-300 rounded-md"
+                className="p-1 text-gray-900 hover:text-gray-800 dark:hover:text-gray-300 rounded-md"
               >
                 <XMarkIcon className="w-4 h-4" />
               </button>
@@ -226,7 +226,7 @@ export default function NotificationSystem() {
             {notifications.length === 0 ? (
               <div className="p-8 text-center">
                 <BellIcon className="w-8 h-8 text-gray-300 dark:text-gray-800 mx-auto mb-2" />
-                <p className="text-gray-700 dark:text-gray-700">No notifications yet</p>
+                <p className="text-gray-900 dark:text-gray-900">No notifications yet</p>
               </div>
             ) : (
               notifications.map((notification) => (
@@ -246,7 +246,7 @@ export default function NotificationSystem() {
                         </p>
                         <button
                           onClick={() => removeNotification(notification.id)}
-                          className="flex-shrink-0 p-1 text-gray-700 hover:text-gray-800 dark:hover:text-gray-300 rounded-md"
+                          className="flex-shrink-0 p-1 text-gray-900 hover:text-gray-800 dark:hover:text-gray-300 rounded-md"
                         >
                           <XMarkIcon className="w-3 h-3" />
                         </button>
@@ -257,7 +257,7 @@ export default function NotificationSystem() {
                       </p>
                       
                       <div className="flex items-center justify-between mt-2">
-                        <span className="text-xs text-gray-700 dark:text-gray-700">
+                        <span className="text-xs text-gray-900 dark:text-gray-900">
                           {formatTime(notification.timestamp)}
                         </span>
                         

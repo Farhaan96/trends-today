@@ -17,7 +17,7 @@ Trends Today is a production-ready tech blog platform built with Next.js 14, fea
 - **product-tracker.js** - Monitors product launches and updates
 - **quality-check.js** - Validates content quality and SEO compliance
 
-#### New Automation Agents (In Development)
+#### Production Automation Agents ✅ DEPLOYED
 - **link-healer.js** - Fixes broken links and 404 errors automatically
 - **image-hunter.js** - Sources and optimizes images from APIs
 - **content-refresher.js** - Updates outdated content and prices
@@ -26,25 +26,73 @@ Trends Today is a production-ready tech blog platform built with Next.js 14, fea
 
 ### Agent Execution Commands
 ```bash
-# Individual agent runs
-npm run agent:news         # Run news scanner
-npm run agent:content      # Create content from opportunities  
-npm run agent:seo          # Find SEO opportunities
-npm run agent:quality      # Check content quality
-npm run agent:products     # Track product updates
+# Emergency fixes (fastest - parallel execution)
+npm run agents:emergency   # Fix critical issues in 2 minutes
 
-# Orchestrated runs
-npm run agents:all         # Run full pipeline
-npm run agents:daily       # Daily maintenance tasks
-npm run agents:hourly      # Hourly discovery tasks
+# Individual agent runs
+npm run agent:links        # Fix broken links
+npm run agent:images       # Replace placeholder images
+npm run agent:refresh      # Update stale content
+npm run agent:trust        # Add credibility signals
+npm run agent:news         # Find trending topics
+npm run agent:content      # Create content from opportunities  
+npm run agent:quality      # Check content quality
+
+# Orchestrated runs (parallel where possible)
+npm run agents:all         # Run complete automation cycle
+npm run agents:maintenance # Daily maintenance tasks
+npm run agents:discovery   # Content discovery pipeline
+npm run agents:content     # Content creation pipeline
+```
+
+### Parallel Agent Architecture ⚡
+The system runs compatible agents simultaneously for 4x faster execution:
+- **Emergency Pipeline**: link-healer + image-hunter + content-refresher (parallel)
+- **Enhancement Pipeline**: trust-builder + quality-check (sequential)
+- **Discovery Pipeline**: news-scanner + seo-finder (parallel)
+
+### Agent Configuration (.claude folder)
+- **Agent Definitions**: `.claude/agents/*.md` with YAML frontmatter
+- **Command Shortcuts**: `.claude/commands/*.md` for common workflows
+- **Global Config**: `.claude/config.yaml` for performance tuning
+- **Execution Reports**: `reports/*.json` for monitoring
+
+### 🎯 CURRENT PRIORITY FIXES NEEDED
+
+#### UI/UX Issues to Resolve:
+1. **Text Contrast Still Poor** - Text appears gray on white, needs darker colors for readability
+2. **Article Layout Too Narrow** - Articles show as thin strip on desktop, need full-width layout
+3. **Homepage Images Identical** - All articles showing same placeholder image on homepage
+4. **Bare-Bones Content** - Articles lack quality information and relevant imagery
+
+#### Agent Tasks for Quality Content:
+- **content-enhancer** - Expand articles with rich, detailed information
+- **image-curator** - Add 2-3 relevant, topic-specific images per article  
+- **layout-optimizer** - Fix desktop article width and reading experience
+- **contrast-enhancer** - Improve text readability with proper color schemes
+
+### ⚡ MOST EFFECTIVE AGENT PROMPTS
+
+For comprehensive quality improvements, use this command sequence:
+
+```bash
+# 1. Fix visual/UX issues first
+npm run agents:emergency
+
+# 2. Enhance content quality and images  
+npm run agent:content
+npm run agent:images
+
+# 3. Full quality audit and optimization
+npm run agents:all
 ```
 
 ### Critical Issues Being Fixed by Agents
-1. **Broken Links (404s)** - link-healer.js fixing routing issues
-2. **Placeholder Images** - image-hunter.js replacing /file.svg
-3. **Outdated Content** - content-refresher.js updating dates/specs
-4. **Missing Trust Signals** - trust-builder.js adding author info
-5. **Content Gaps** - content-creator.js generating new articles
+1. **Poor Text Contrast** - Need darker text colors for readability ⚠️ HIGH PRIORITY
+2. **Narrow Article Layout** - Desktop articles need full-width display ⚠️ HIGH PRIORITY  
+3. **Duplicate Homepage Images** - Each article needs unique, relevant images ⚠️ HIGH PRIORITY
+4. **Shallow Content** - Articles need rich information and multiple topic-relevant images ⚠️ HIGH PRIORITY
+5. **Missing Quality Signals** - Content needs professional depth and visual appeal
 
 ## 🚀 ULTRA TRANSFORMATION PLAN: Trends Today → Tech Blog Domination
 

@@ -97,7 +97,7 @@ export default function RatingSystem({
         </div>
 
         {/* Rating Summary */}
-        <div className="flex items-center justify-center space-x-4 text-sm text-gray-800 dark:text-gray-700">
+        <div className="flex items-center justify-center space-x-4 text-sm text-gray-800 dark:text-gray-900">
           <div className="flex items-center space-x-1">
             <StarSolid className="w-4 h-4 text-yellow-400" />
             <span className="font-medium">
@@ -105,7 +105,7 @@ export default function RatingSystem({
             </span>
           </div>
           
-          <span className="text-gray-700">•</span>
+          <span className="text-gray-900">•</span>
           
           <span>
             {totalRatings + (hasRated ? 1 : 0)} rating{(totalRatings + (hasRated ? 1 : 0)) !== 1 ? 's' : ''}
@@ -122,7 +122,7 @@ export default function RatingSystem({
               
               return (
                 <div key={stars} className="flex items-center text-xs space-x-2">
-                  <span className="w-3 text-gray-800 dark:text-gray-700">{stars}</span>
+                  <span className="w-3 text-gray-800 dark:text-gray-900">{stars}</span>
                   <StarSolid className="w-3 h-3 text-yellow-400" />
                   <div className="flex-1 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
                     <div 
@@ -130,7 +130,7 @@ export default function RatingSystem({
                       style={{ width: `${percentage}%` }}
                     />
                   </div>
-                  <span className="w-8 text-gray-700 dark:text-gray-700 text-right">
+                  <span className="w-8 text-gray-900 dark:text-gray-900 text-right">
                     {count}
                   </span>
                 </div>
@@ -162,7 +162,7 @@ export default function RatingSystem({
 
         {isSubmitting && (
           <div className="mt-4">
-            <div className="flex items-center justify-center space-x-2 text-sm text-gray-700">
+            <div className="flex items-center justify-center space-x-2 text-sm text-gray-900">
               <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin" />
               <span>Submitting rating...</span>
             </div>
