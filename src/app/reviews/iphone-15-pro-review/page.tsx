@@ -6,7 +6,15 @@ import ScoreCard from '@/components/content/ScoreCard';
 import CitationsList from '@/components/content/CitationsList';
 import AuthorBox from '@/components/content/AuthorBox';
 import StructuredData from '@/components/seo/StructuredData';
+import AffiliateButton from '@/components/monetization/AffiliateButton';
+import PriceComparison from '@/components/monetization/PriceComparison';
+import DealAlert from '@/components/monetization/DealAlert';
+import PremiumUpgrade from '@/components/monetization/PremiumUpgrade';
+import AdPlaceholder from '@/components/monetization/AdPlaceholder';
+import ProductComparison from '@/components/monetization/ProductComparison';
 import reviewData from '../../../../content/reviews/iphone-15-pro-review.json';
+import { samplePriceData, sampleProductComparisons } from '@/data/monetization-sample';
+import { AffiliateProvider } from '@/types/monetization';
 
 export const metadata: Metadata = {
   title: reviewData.seo?.metaTitle || reviewData.title,
@@ -103,6 +111,16 @@ export default function ReviewPage() {
           </div>
         </div>
 
+        {/* Top Ad Placement */}
+        <div className="mb-8">
+          <AdPlaceholder 
+            adSlot="3456789012" 
+            format="banner" 
+            label="Advertisement" 
+            className="mx-auto" 
+          />
+        </div>
+
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <section className="mb-8">
@@ -112,6 +130,14 @@ export default function ReviewPage() {
                   {reviewData.verdict}
                 </p>
               </div>
+            </section>
+
+            {/* Price Comparison Section */}
+            <section className="mb-8">
+              <PriceComparison 
+                productName={reviewData.product.name}
+                prices={samplePriceData}
+              />
             </section>
 
             <section className="mb-8">
@@ -167,6 +193,16 @@ export default function ReviewPage() {
               </p>
             </section>
 
+            {/* Mid-Content Ad */}
+            <div className="mb-8">
+              <AdPlaceholder 
+                adSlot="4567890123" 
+                format="rectangle" 
+                label="Advertisement" 
+                className="mx-auto" 
+              />
+            </div>
+
             <ProsCons 
               pros={reviewData.prosAndCons?.pros || []}
               cons={reviewData.prosAndCons?.cons || []}
@@ -207,19 +243,22 @@ export default function ReviewPage() {
               </div>
             </section>
 
-            {reviewData.alternatives && (
-              <section className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Alternatives to Consider</h2>
-                <div className="space-y-4">
-                  {reviewData.alternatives.map((alt, index) => (
-                    <div key={index} className="border border-gray-200 rounded-lg p-4">
-                      <h3 className="font-semibold text-gray-900">{alt.name}</h3>
-                      <p className="text-gray-600 text-sm mt-1">{alt.reason}</p>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
+            {/* Product Comparison Section */}
+            <section className="mb-8">
+              <ProductComparison 
+                products={sampleProductComparisons}
+                title="📱 Alternative Smartphones to Consider"
+              />
+            </section>
+
+            {/* Deal Alert Section */}
+            <section className="mb-8">
+              <DealAlert 
+                productName={reviewData.product.name}
+                currentPrice={reviewData.product.price.amount}
+                currency={reviewData.product.price.currency}
+              />
+            </section>
 
             <CitationsList sources={reviewData.sources} />
           </div>
@@ -243,14 +282,47 @@ export default function ReviewPage() {
                 </dl>
                 
                 <div className="mt-4 pt-4 border-t border-gray-200">
-                  <div className="text-center">
+                  <div className="text-center mb-4">
                     <span className="text-2xl font-bold text-gray-900">
                       ${reviewData.product.price.amount}
                     </span>
                     <p className="text-sm text-gray-600">Starting price</p>
                   </div>
+                  
+                  {/* Primary Buy Now Button */}
+                  <div className="space-y-2">
+                    <AffiliateButton
+                      provider={AffiliateProvider.AMAZON}
+                      affiliateUrl={samplePriceData[0].affiliateUrl}
+                      productName={reviewData.product.name}
+                      price={samplePriceData[0].currentPrice}
+                      originalPrice={samplePriceData[0].originalPrice}
+                      currency={samplePriceData[0].currency}
+                      size="md"
+                      variant="primary"
+                    />
+                    <AffiliateButton
+                      provider={AffiliateProvider.BESTBUY}
+                      affiliateUrl={samplePriceData[1].affiliateUrl}
+                      productName={reviewData.product.name}
+                      price={samplePriceData[1].currentPrice}
+                      currency={samplePriceData[1].currency}
+                      size="sm"
+                      variant="secondary"
+                    />
+                  </div>
                 </div>
               </div>
+
+              {/* Sidebar Ad */}
+              <AdPlaceholder 
+                adSlot="2345678901" 
+                format="rectangle" 
+                label="Advertisement" 
+              />
+
+              {/* Premium Upgrade Compact */}
+              <PremiumUpgrade compact={true} />
             </div>
           </div>
         </div>
@@ -258,10 +330,51 @@ export default function ReviewPage() {
         {reviewData.author && (
           <AuthorBox 
             author={reviewData.author}
-            publishedAt={reviewData.lastUpdated}
+            publishedAt={reviewData.publishedDate || reviewData.lastUpdated}
             lastUpdated={reviewData.lastUpdated}
+            reviewMetrics={reviewData.reviewMetrics}
+            trustSignals={reviewData.trustSignals}
           />
         )}
+
+        {/* Premium Upgrade Full */}
+        <section className="mt-12 mb-8">
+          <PremiumUpgrade />
+        </section>
+
+        {/* Bottom Ad Placement */}
+        <div className="mt-8 mb-4">
+          <AdPlaceholder 
+            adSlot="5678901234" 
+            format="banner" 
+            label="Advertisement" 
+            className="mx-auto" 
+          />
+        </div>
+
+        {/* Affiliate Disclosure */}
+        <div className="mt-8 p-6 bg-yellow-50 border border-yellow-200 rounded-lg">
+          <h3 className="text-lg font-semibold text-yellow-800 mb-3">🔍 Transparency & Affiliate Disclosure</h3>
+          <div className="text-sm text-yellow-700 space-y-2">
+            <p>
+              <strong>Independent Testing:</strong> We purchased this iPhone 15 Pro with our own funds for completely independent testing. 
+              Apple did not provide this device, and our review is not influenced by any manufacturer relationships.
+            </p>
+            <p>
+              <strong>Affiliate Links:</strong> This page contains affiliate links to retailers like Amazon, Best Buy, and others. 
+              When you purchase through these links, Trends Today earns a small commission at no extra cost to you. 
+              This helps support our independent testing and detailed reviews.
+            </p>
+            <p>
+              <strong>Price Updates:</strong> Prices and availability are updated regularly but may change. 
+              We recommend checking the retailer's website for the most current information.
+            </p>
+            <p className="font-medium">
+              Our affiliate partnerships never influence our editorial opinions or recommendations. 
+              We only recommend products we would buy ourselves.
+            </p>
+          </div>
+        </div>
       </article>
     </>
   );

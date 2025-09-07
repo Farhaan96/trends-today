@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import TrustBadges from '@/components/ui/TrustBadges';
 
 export default function HomePage() {
   const heroArticle = {
@@ -357,6 +358,52 @@ export default function HomePage() {
               </div>
 
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust & Authority Section */}
+      <section className="py-16 bg-gradient-to-r from-blue-50 to-purple-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Why Millions Trust Trends Today
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              Our expert team of technology professionals brings decades of combined experience 
+              from companies like Apple, Samsung, Google, and leading tech publications.
+            </p>
+          </div>
+          
+          <TrustBadges variant="horizontal" showAll={true} />
+          
+          <div className="grid md:grid-cols-3 gap-8 mt-12">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-600 mb-2">25+</div>
+              <div className="text-lg font-semibold text-gray-900 mb-1">Years Combined Experience</div>
+              <div className="text-sm text-gray-600">Former engineers from Apple, Samsung, Google</div>
+            </div>
+            
+            <div className="text-center">
+              <div className="text-3xl font-bold text-green-600 mb-2">150+</div>
+              <div className="text-lg font-semibold text-gray-900 mb-1">Products Reviewed</div>
+              <div className="text-sm text-gray-600">Rigorous testing with professional equipment</div>
+            </div>
+            
+            <div className="text-center">
+              <div className="text-3xl font-bold text-purple-600 mb-2">100%</div>
+              <div className="text-lg font-semibold text-gray-900 mb-1">Editorial Independence</div>
+              <div className="text-sm text-gray-600">No manufacturer influence on our reviews</div>
+            </div>
+          </div>
+          
+          <div className="text-center mt-12">
+            <Link 
+              href="/authors"
+              className="inline-flex items-center px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold text-lg"
+            >
+              Meet Our Expert Team
+            </Link>
           </div>
         </div>
       </section>

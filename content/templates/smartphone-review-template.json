@@ -1,0 +1,390 @@
+{
+  "title": "[Product Name] Review: [Main Selling Point or Key Feature]",
+  "slug": "[product-name-review]",
+  "product": {
+    "name": "[Product Name]",
+    "brand": "[Brand]",
+    "model": "[Model Number]",
+    "category": "Smartphone",
+    "price": {
+      "amount": 0,
+      "currency": "USD",
+      "date": "YYYY-MM-DD"
+    },
+    "specs": {
+      "display": "[Size] [Technology] [Resolution]",
+      "processor": "[Processor Name]",
+      "storage": "[Storage Options]",
+      "camera": "[Main Camera] + [Additional Cameras]",
+      "battery": "[Battery Capacity/Life Claim]",
+      "materials": "[Frame Material], [Back Material]"
+    },
+    "images": [
+      {
+        "url": "/images/[product-slug]-main.jpg",
+        "alt": "[Product Name] in [Color]",
+        "caption": "[Product Name] showcasing [key feature]"
+      }
+    ]
+  },
+  "score": {
+    "overall": 0.0,
+    "breakdown": {
+      "design": 0.0,
+      "performance": 0.0,
+      "camera": 0.0,
+      "battery": 0.0,
+      "value": 0.0
+    }
+  },
+  "testedClaims": [
+    {
+      "claim": "[Manufacturer claim to test]",
+      "result": "[Test result]",
+      "methodology": "[How you tested it]",
+      "evidence": "[Specific data or observations]"
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "[Positive aspect 1]",
+      "[Positive aspect 2]",
+      "[Positive aspect 3]",
+      "[Positive aspect 4]",
+      "[Positive aspect 5]"
+    ],
+    "cons": [
+      "[Negative aspect 1]",
+      "[Negative aspect 2]",
+      "[Negative aspect 3]",
+      "[Negative aspect 4]",
+      "[Negative aspect 5]"
+    ]
+  },
+  "howWeTested": {
+    "overview": "We tested the [Product Name] for [X] days as a primary device, conducting over [X] hours of comprehensive testing across multiple scenarios and conditions.",
+    "testingEnvironment": "All tests were conducted in controlled environments with calibrated equipment, ensuring consistent and reproducible results.",
+    "methodology": {
+      "performance": {
+        "description": "CPU and GPU performance tested using industry-standard benchmarks",
+        "tools": ["Geekbench 6", "3DMark Wild Life Extreme", "AnTuTu Benchmark", "GFXBench Manhattan"],
+        "testConditions": "Room temperature (22°C), 50% battery, background apps closed, multiple test runs averaged",
+        "realWorldTests": [
+          "[Real-world performance test 1]",
+          "[Real-world performance test 2]",
+          "[Real-world performance test 3]",
+          "[Real-world performance test 4]"
+        ]
+      },
+      "camera": {
+        "description": "Comprehensive camera testing across various scenarios and lighting conditions",
+        "scenarios": [
+          "Golden hour outdoor portraits",
+          "Indoor low-light photography (1-10 lux)",
+          "Night mode performance (0.1-1 lux)",
+          "Action photography (sports, moving subjects)",
+          "Macro photography detail testing",
+          "Video stabilization at [highest resolution]"
+        ],
+        "equipment": "Professional color checker, calibrated monitor, tripod for consistency",
+        "comparison": "Side-by-side with [competitor 1], [competitor 2], [competitor 3]"
+      },
+      "battery": {
+        "description": "Real-world battery life testing under various usage patterns",
+        "testProfiles": [
+          "Heavy usage: Gaming, streaming, GPS navigation",
+          "Moderate usage: Social media, texting, light photography", 
+          "Light usage: Calls, basic apps, minimal screen time"
+        ],
+        "measurements": "Screen-on time, standby drain, charging speeds (wired and wireless)",
+        "conditions": "50% screen brightness, Wi-Fi and cellular enabled, all notifications on"
+      },
+      "buildQuality": {
+        "description": "Physical durability and premium feel assessment",
+        "tests": [
+          "Drop test from 1.5m onto concrete (with and without case)",
+          "Water resistance testing ([IP rating] verification)",
+          "Scratch resistance on [frame material] and [screen material]",
+          "Button responsiveness and tactile feedback over time",
+          "Precision weight measurements across multiple units"
+        ]
+      }
+    }
+  },
+  "detailedReview": {
+    "introduction": "[2-3 sentence overview of the device and main conclusions]",
+    "designAndBuild": {
+      "overview": "[Description of overall design philosophy and build quality]",
+      "materials": {
+        "[materialType1]": {
+          "benefits": [
+            "[Benefit 1]",
+            "[Benefit 2]",
+            "[Benefit 3]"
+          ],
+          "drawbacks": [
+            "[Drawback 1]",
+            "[Drawback 2]"
+          ]
+        }
+      },
+      "ergonomics": "[Description of how it feels to hold and use daily]"
+    },
+    "performance": {
+      "overview": "[Performance summary and key improvements]",
+      "benchmarks": {
+        "geekbench6": {
+          "singleCore": 0,
+          "multiCore": 0,
+          "comparison": "[X]% improvement over [previous generation]"
+        },
+        "graphics": {
+          "metalPerformance": "[GPU performance description]",
+          "gaming": "[Gaming performance description]",
+          "realWorldGaming": "[Specific game performance examples]"
+        }
+      },
+      "thermals": "[Description of heat management during intensive tasks]"
+    },
+    "cameraSystem": {
+      "overview": "[Camera system overview and key improvements]",
+      "mainCamera": {
+        "hardware": "[Hardware specifications and improvements]",
+        "features": [
+          "[Feature 1]",
+          "[Feature 2]",
+          "[Feature 3]"
+        ],
+        "realWorldPerformance": "[Description of actual photo quality in various conditions]"
+      },
+      "ultraWideCamera": "[Ultra-wide camera performance description]",
+      "telephotoCamera": "[Telephoto camera performance description if applicable]",
+      "videoRecording": {
+        "capabilities": "[Video recording specifications]",
+        "stabilization": "[Stabilization performance]",
+        "qualityAssessment": "[Video quality assessment]"
+      }
+    },
+    "batteryLife": {
+      "overview": "[Battery performance summary]",
+      "realWorldTesting": {
+        "heavyUsage": "[X] hours screen-on time with [usage description]",
+        "moderateUsage": "[X] hours with [usage description]",
+        "lightUsage": "[X] hours with [usage description]"
+      },
+      "charging": {
+        "wiredCharging": "[Wired charging description and speeds]",
+        "wirelessCharging": "[Wireless charging description and speeds]",
+        "chargingSpeed": "[Charging time benchmarks]"
+      },
+      "comparison": "[Comparison to previous generation or competitors]"
+    },
+    "softwareExperience": {
+      "operatingSystem": "[OS version and key features]",
+      "longevity": "[Expected software support duration]",
+      "performance": "[Software performance and optimization description]"
+    }
+  },
+  "whoShouldBuy": {
+    "idealBuyers": [
+      {
+        "profile": "[User type 1]",
+        "reasoning": "[Why this device is perfect for them]"
+      },
+      {
+        "profile": "[User type 2]",
+        "reasoning": "[Why this device is perfect for them]"
+      },
+      {
+        "profile": "[User type 3]",
+        "reasoning": "[Why this device is perfect for them]"
+      }
+    ]
+  },
+  "whoShouldSkip": {
+    "profiles": [
+      {
+        "profile": "[User type who should avoid]",
+        "reasoning": "[Why they should look elsewhere]"
+      },
+      {
+        "profile": "[User type who should avoid]",
+        "reasoning": "[Why they should look elsewhere]"
+      }
+    ]
+  },
+  "competitiveComparison": {
+    "vs[CompetitorName]": {
+      "advantages": [
+        "[Advantage 1]",
+        "[Advantage 2]",
+        "[Advantage 3]"
+      ],
+      "disadvantages": [
+        "[Disadvantage 1]",
+        "[Disadvantage 2]",
+        "[Disadvantage 3]"
+      ]
+    }
+  },
+  "priceHistory": {
+    "launchPrice": 0,
+    "currentPrice": 0,
+    "bestDealsFound": [
+      {
+        "retailer": "[Retailer name]",
+        "discount": "[Discount description]",
+        "conditions": "[Deal conditions]"
+      }
+    ],
+    "priceProjection": "[Expected price changes and when to buy]"
+  },
+  "frequentlyAskedQuestions": [
+    {
+      "question": "[Common question about the device]",
+      "answer": "[Comprehensive answer]",
+      "category": "[Question category: upgrade, battery, camera, etc.]"
+    }
+  ],
+  "technicalSpecifications": {
+    "display": {
+      "size": "[X.X inches]",
+      "technology": "[Display technology]",
+      "resolution": "[Resolution]",
+      "pixelDensity": "[PPI]",
+      "refreshRate": "[Refresh rate]",
+      "brightness": {
+        "typical": "[Typical brightness]",
+        "peak": "[Peak brightness]"
+      },
+      "colorGamut": "[Color gamut support]",
+      "protection": "[Screen protection]"
+    },
+    "processor": {
+      "chip": "[Processor name]",
+      "architecture": "[Manufacturing process]",
+      "cpuCores": "[CPU core configuration]",
+      "gpuCores": "[GPU configuration]",
+      "neuralEngine": "[AI/ML processing unit]"
+    },
+    "memory": {
+      "ram": "[RAM capacity]",
+      "storage": ["[Storage option 1]", "[Storage option 2]"],
+      "expandable": "[Expandable storage availability]"
+    },
+    "cameras": {
+      "main": {
+        "megapixels": 0,
+        "aperture": "[Aperture]",
+        "sensorSize": "[Sensor size]",
+        "features": ["[Feature 1]", "[Feature 2]"]
+      },
+      "ultraWide": {
+        "megapixels": 0,
+        "aperture": "[Aperture]",
+        "fieldOfView": "[Field of view]",
+        "features": ["[Feature 1]", "[Feature 2]"]
+      },
+      "telephoto": {
+        "megapixels": 0,
+        "aperture": "[Aperture]",
+        "opticalZoom": "[Zoom level]",
+        "features": ["[Feature 1]", "[Feature 2]"]
+      },
+      "front": {
+        "megapixels": 0,
+        "aperture": "[Aperture]",
+        "features": ["[Feature 1]", "[Feature 2]"]
+      }
+    },
+    "batteryAndCharging": {
+      "capacity": "[Battery capacity]",
+      "videoPlayback": "[Video playback time]",
+      "audioPlayback": "[Audio playback time]",
+      "wiredCharging": "[Wired charging specifications]",
+      "wirelessCharging": "[Wireless charging specifications]"
+    },
+    "connectivity": {
+      "cellular": "[Cellular technology support]",
+      "wifi": "[Wi-Fi standards]",
+      "bluetooth": "[Bluetooth version]",
+      "nfc": "[NFC availability]",
+      "connector": "[Connector type]"
+    },
+    "durability": {
+      "waterResistance": "[Water resistance rating]",
+      "materials": {
+        "frame": "[Frame material]",
+        "back": "[Back material]",
+        "front": "[Front material/protection]"
+      }
+    },
+    "dimensions": {
+      "height": "[Height in mm]",
+      "width": "[Width in mm]",
+      "depth": "[Depth in mm]",
+      "weight": "[Weight in grams]"
+    },
+    "operatingSystem": {
+      "launch": "[Launch OS version]",
+      "supportDuration": "[Expected support duration]"
+    }
+  },
+  "alternatives": [
+    {
+      "name": "[Alternative 1]",
+      "reason": "[Why consider this alternative]",
+      "link": "[Link to alternative review]",
+      "price": 0,
+      "keyDifference": "[Main difference from reviewed product]"
+    }
+  ],
+  "sources": [
+    {
+      "title": "[Source title]",
+      "url": "[Source URL]",
+      "accessDate": "YYYY-MM-DD"
+    }
+  ],
+  "seo": {
+    "metaTitle": "[Product Name] Review: [Key benefit/feature] | Trends Today",
+    "metaDescription": "[Compelling description with key points and call to action, 150-160 characters]",
+    "keywords": ["[product name] review", "[brand] [model]", "[key feature 1]", "[key feature 2]", "[comparison keywords]"],
+    "canonicalUrl": "https://trendstoday.ca/reviews/[product-slug]"
+  },
+  "publishedDate": "YYYY-MM-DD",
+  "lastUpdated": "YYYY-MM-DD",
+  "author": {
+    "id": "[author-id]",
+    "name": "[Author Name]",
+    "title": "[Author Title]", 
+    "bio": "[Author bio with expertise and background]",
+    "expertise": ["[Expertise 1]", "[Expertise 2]", "[Expertise 3]"],
+    "credentials": [
+      "[Credential 1]",
+      "[Credential 2]",
+      "[Credential 3]"
+    ],
+    "socialMedia": {
+      "twitter": "[Twitter handle]",
+      "linkedin": "[LinkedIn profile]",
+      "email": "[Email address]"
+    },
+    "avatar": "/images/authors/[author-id].jpg"
+  },
+  "reviewMetrics": {
+    "testingPeriod": "[X] days",
+    "testingHours": 0,
+    "batteryTests": 0,
+    "benchmarkRuns": 0,
+    "photosSampled": 0,
+    "verificationTests": 0
+  },
+  "trustSignals": {
+    "independentPurchase": true,
+    "noManufacturerInfluence": true,
+    "professionalEquipment": true,
+    "peerReviewed": true,
+    "transparentMethodology": true
+  }
+}

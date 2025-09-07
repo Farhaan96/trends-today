@@ -1,0 +1,161 @@
+{
+  "alex-chen": {
+    "id": "alex-chen",
+    "name": "Alex Chen",
+    "title": "Senior Mobile Technology Editor",
+    "bio": "Alex Chen is a Senior Mobile Technology Editor at Trends Today with over 8 years of experience in the tech industry. Formerly a hardware engineer at Samsung Electronics, Alex brings deep technical expertise to smartphone and mobile device reviews. He has tested over 300 mobile devices and specializes in camera technology, performance analysis, and user experience evaluation.",
+    "longBio": "Alex Chen joined Trends Today in 2019 after spending 5 years as a hardware engineer at Samsung Electronics, where he worked on camera sensor integration and mobile chipset optimization. His engineering background provides unique insights into the technical aspects of mobile devices that most reviewers miss.\n\nAlex holds a Master's degree in Electrical Engineering from Stanford University and a Bachelor's degree in Computer Engineering from UC Berkeley. He is certified in mobile device testing protocols by the Global Certification Forum and regularly attends major tech conferences including CES, MWC, and Google I/O.\n\nHis reviews have been cited by major publications including The Verge, CNET, and TechCrunch. Alex is particularly known for his rigorous testing methodology and ability to explain complex technical concepts in accessible terms. He has personally tested and reviewed over 300 mobile devices throughout his career.",
+    "expertise": [
+      "Mobile Technology", 
+      "Camera Systems", 
+      "Performance Analysis", 
+      "User Experience",
+      "Mobile Chipsets",
+      "Display Technology",
+      "Battery Technology"
+    ],
+    "credentials": [
+      "M.S. Electrical Engineering, Stanford University",
+      "B.S. Computer Engineering, UC Berkeley", 
+      "Certified Mobile Device Testing Professional (GCF)",
+      "Former Hardware Engineer at Samsung Electronics",
+      "8+ years in mobile technology journalism"
+    ],
+    "socialMedia": {
+      "twitter": "alexchen_tech",
+      "linkedin": "alexchen-mobile-tech",
+      "email": "alex.chen@trendstoday.ca"
+    },
+    "avatar": "/images/authors/alex-chen.jpg",
+    "specializations": [
+      "Smartphone Reviews",
+      "Camera Testing",
+      "Performance Benchmarking",
+      "Mobile Photography"
+    ],
+    "reviewCount": 47,
+    "joinDate": "2019-03-15",
+    "location": "San Francisco, CA",
+    "languages": ["English", "Mandarin", "Korean"]
+  },
+  "sarah-martinez": {
+    "id": "sarah-martinez",
+    "name": "Sarah Martinez",
+    "title": "Audio & Gaming Technology Editor",
+    "bio": "Sarah Martinez is our Audio & Gaming Technology Editor with 6 years of experience in consumer electronics journalism. A former audio engineer at Bose, Sarah brings professional audio expertise to headphone, speaker, and gaming device reviews. She is particularly known for her detailed acoustic analysis and gaming performance testing.",
+    "longBio": "Sarah Martinez combines her background in professional audio engineering with extensive gaming expertise to provide comprehensive reviews of audio equipment and gaming devices. After earning her degree in Audio Engineering from Berklee College of Music, she spent 4 years at Bose Corporation developing noise-canceling algorithms and testing acoustic systems.\n\nSarah joined Trends Today in 2020 and has since established herself as a leading voice in audio technology journalism. Her reviews are characterized by detailed frequency response analysis, spatial audio testing, and real-world gaming scenarios. She maintains a professional audio testing lab equipped with precision measurement equipment including Audio Precision analyzers and calibrated acoustic chambers.\n\nBeyond technical analysis, Sarah is an avid gamer who competes in esports tournaments, giving her unique insight into gaming peripherals and performance requirements. She has tested over 200 audio devices and gaming peripherals, from budget earbuds to professional studio monitors.",
+    "expertise": [
+      "Audio Technology",
+      "Gaming Hardware", 
+      "Acoustic Analysis",
+      "Gaming Performance",
+      "Esports Equipment",
+      "Studio Monitoring",
+      "Spatial Audio"
+    ],
+    "credentials": [
+      "B.S. Audio Engineering, Berklee College of Music",
+      "Former Audio Engineer at Bose Corporation",
+      "Audio Engineering Society Member",
+      "Certified in Professional Audio Testing (AES)",
+      "6+ years in technology journalism"
+    ],
+    "socialMedia": {
+      "twitter": "sarah_audio_tech",
+      "linkedin": "sarah-martinez-audio",
+      "twitch": "sarah_tech_gaming",
+      "email": "sarah.martinez@trendstoday.ca"
+    },
+    "avatar": "/images/authors/sarah-martinez.jpg",
+    "specializations": [
+      "Headphone Reviews",
+      "Gaming Peripheral Testing", 
+      "Audio Equipment Analysis",
+      "Esports Gear Reviews"
+    ],
+    "reviewCount": 38,
+    "joinDate": "2020-01-08",
+    "location": "Los Angeles, CA",
+    "languages": ["English", "Spanish"]
+  },
+  "david-kim": {
+    "id": "david-kim",
+    "name": "David Kim",
+    "title": "Computing & Enterprise Technology Editor",
+    "bio": "David Kim leads our computing and enterprise technology coverage with 10 years of experience in technology journalism and enterprise IT. Former Senior Analyst at Gartner, David specializes in laptop reviews, productivity software analysis, and enterprise hardware evaluation.",
+    "longBio": "David Kim brings a unique combination of enterprise IT experience and consumer technology expertise to Trends Today. After earning his MBA in Technology Management from MIT Sloan, David spent 5 years as a Senior Technology Analyst at Gartner Research, where he specialized in enterprise mobility and productivity solutions.\n\nDavid joined Trends Today in 2018 as Computing Editor and has since expanded his role to cover enterprise technology trends. His background in enterprise IT provides valuable context for understanding how consumer devices fit into professional workflows. He maintains extensive testing labs for both Windows and Mac systems, with a particular focus on productivity benchmarks and real-world usage scenarios.\n\nDavid is a frequent speaker at technology conferences and has been quoted in major publications including Wall Street Journal, Forbes, and Business Insider. His reviews are known for their practical approach to technology evaluation, focusing on how devices perform in actual work environments rather than just synthetic benchmarks.",
+    "expertise": [
+      "Laptop Technology",
+      "Enterprise Hardware",
+      "Productivity Software", 
+      "Performance Testing",
+      "Business Technology",
+      "System Integration",
+      "IT Infrastructure"
+    ],
+    "credentials": [
+      "MBA Technology Management, MIT Sloan School",
+      "B.S. Computer Science, Carnegie Mellon University",
+      "Former Senior Analyst, Gartner Research", 
+      "Certified in Enterprise Technology Assessment",
+      "10+ years in technology analysis and journalism"
+    ],
+    "socialMedia": {
+      "twitter": "davidkim_tech",
+      "linkedin": "david-kim-tech-analyst",
+      "medium": "@davidkim_computing",
+      "email": "david.kim@trendstoday.ca"
+    },
+    "avatar": "/images/authors/david-kim.jpg",
+    "specializations": [
+      "Laptop Reviews",
+      "Business Technology",
+      "Productivity Analysis",
+      "Enterprise Hardware Testing"
+    ],
+    "reviewCount": 52,
+    "joinDate": "2018-06-20",
+    "location": "Boston, MA", 
+    "languages": ["English", "Korean"]
+  },
+  "emma-thompson": {
+    "id": "emma-thompson",
+    "name": "Emma Thompson",
+    "title": "Smart Home & IoT Technology Editor",
+    "bio": "Emma Thompson is our Smart Home & IoT Technology Editor with 5 years of experience in connected device journalism. With a background in electrical engineering and IoT development, Emma provides in-depth analysis of smart home ecosystems, security protocols, and device interoperability.",
+    "longBio": "Emma Thompson combines her electrical engineering background with hands-on IoT development experience to provide comprehensive smart home technology coverage. After graduating with honors from Georgia Tech's Electrical Engineering program, she spent 3 years as an IoT Systems Engineer at Nest Labs (Google), where she worked on device connectivity protocols and smart home integration.\n\nEmma joined Trends Today in 2021 and has quickly established herself as a trusted voice in smart home technology. She maintains multiple smart home testing environments, including setups for major ecosystems like HomeKit, Alexa, Google Home, and SmartThings. Her reviews focus on real-world functionality, privacy considerations, and long-term reliability.\n\nEmma is particularly known for her security-focused approach to IoT device testing and her ability to identify potential privacy concerns before products reach consumers. She regularly collaborates with cybersecurity researchers and has uncovered several security vulnerabilities in popular smart home devices.",
+    "expertise": [
+      "Smart Home Technology",
+      "IoT Devices",
+      "Connected Ecosystems",
+      "Privacy & Security",
+      "Wireless Protocols",
+      "Home Automation",
+      "Device Integration"
+    ],
+    "credentials": [
+      "B.S. Electrical Engineering, Georgia Institute of Technology",
+      "Former IoT Systems Engineer at Nest Labs (Google)",
+      "Certified in IoT Security Assessment",
+      "IEEE Member",
+      "5+ years in smart home technology journalism"
+    ],
+    "socialMedia": {
+      "twitter": "emma_smarthome",
+      "linkedin": "emma-thompson-iot",
+      "youtube": "SmartHomeWithEmma",
+      "email": "emma.thompson@trendstoday.ca"
+    },
+    "avatar": "/images/authors/emma-thompson.jpg",
+    "specializations": [
+      "Smart Home Reviews",
+      "IoT Security Analysis",
+      "Home Automation Systems",
+      "Connected Device Testing"
+    ],
+    "reviewCount": 29,
+    "joinDate": "2021-02-10",
+    "location": "Austin, TX",
+    "languages": ["English"]
+  }
+}

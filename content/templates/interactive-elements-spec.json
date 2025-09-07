@@ -1,0 +1,327 @@
+{
+  "title": "Interactive Content Elements Specification",
+  "description": "Comprehensive specification for interactive widgets and elements to enhance user engagement",
+  "widgets": {
+    "productComparison": {
+      "type": "interactive-table",
+      "purpose": "Side-by-side product comparison with filtering and sorting",
+      "features": [
+        "Column-based filtering (price, performance, battery, etc.)",
+        "Sortable columns with ascending/descending options",
+        "Expandable rows for detailed specifications",
+        "Visual indicators for advantages/disadvantages",
+        "Export functionality for user reference"
+      ],
+      "implementation": {
+        "frontend": "React component with data visualization",
+        "backend": "JSON data structure with real-time updates",
+        "styling": "Responsive design with mobile optimization"
+      },
+      "dataStructure": {
+        "products": [
+          {
+            "id": "product-slug",
+            "name": "Product Name",
+            "brand": "Brand Name",
+            "price": 999,
+            "specs": {
+              "category": "value",
+              "advantage": "product1|product2|tie"
+            }
+          }
+        ]
+      }
+    },
+    "specsComparison": {
+      "type": "visual-comparison-chart",
+      "purpose": "Visual representation of specifications with charts and graphs",
+      "features": [
+        "Bar charts for quantitative comparisons",
+        "Radar charts for multi-dimensional analysis",
+        "Color-coded advantages and disadvantages",
+        "Interactive hover tooltips with explanations",
+        "Customizable metric weighting by user preference"
+      ],
+      "visualizations": [
+        {
+          "type": "radar",
+          "metrics": ["performance", "battery", "camera", "design", "value"],
+          "scale": "1-5"
+        },
+        {
+          "type": "bar",
+          "metrics": ["price", "storage", "ram", "screenSize"],
+          "format": "quantitative"
+        }
+      ]
+    },
+    "prosConsMatrix": {
+      "type": "interactive-grid",
+      "purpose": "Dynamic pros/cons comparison with user weighting",
+      "features": [
+        "Weighted scoring based on user priorities",
+        "Category-based grouping (performance, design, camera, etc.)",
+        "Visual impact scoring with color coding",
+        "Personal recommendation engine based on preferences",
+        "Share functionality for custom comparisons"
+      ],
+      "categories": [
+        "Performance & Speed",
+        "Camera & Photography",
+        "Battery Life",
+        "Design & Build Quality",
+        "Value & Pricing",
+        "Software & Features"
+      ]
+    },
+    "batteryLifeCalculator": {
+      "type": "interactive-calculator", 
+      "purpose": "Personalized battery life estimation based on usage patterns",
+      "features": [
+        "Usage pattern input (gaming, photography, streaming percentages)",
+        "Real-time battery life prediction",
+        "Comparison with multiple devices",
+        "Charging time calculator with different charger types",
+        "Power management tips based on usage"
+      ],
+      "inputParameters": [
+        {"name": "Gaming", "type": "slider", "range": "0-100%", "default": 20},
+        {"name": "Photography", "type": "slider", "range": "0-100%", "default": 15},
+        {"name": "Streaming", "type": "slider", "range": "0-100%", "default": 25},
+        {"name": "Social Media", "type": "slider", "range": "0-100%", "default": 30},
+        {"name": "Basic Usage", "type": "slider", "range": "0-100%", "default": 10}
+      ]
+    },
+    "priceTracker": {
+      "type": "price-monitoring-widget",
+      "purpose": "Historical price tracking with deal alerts and predictions",
+      "features": [
+        "Interactive price history charts",
+        "Deal alert subscriptions",
+        "Price drop predictions based on trends",
+        "Multi-retailer price comparison",
+        "Best time to buy recommendations"
+      ],
+      "dataPoints": [
+        "Launch price",
+        "Current price",
+        "Lowest recorded price",
+        "Average price over time",
+        "Seasonal pricing patterns"
+      ]
+    },
+    "buyingDecisionTool": {
+      "type": "guided-questionnaire",
+      "purpose": "Personalized product recommendations based on individual needs",
+      "features": [
+        "Step-by-step questionnaire",
+        "Weighted recommendation algorithm", 
+        "Budget-based filtering",
+        "Use-case scenario matching",
+        "Alternative suggestions with reasoning"
+      ],
+      "questionFlow": [
+        {"category": "Budget", "type": "range", "impact": "high"},
+        {"category": "Primary Use", "type": "multiple-choice", "impact": "high"},
+        {"category": "Ecosystem Preference", "type": "single-choice", "impact": "high"},
+        {"category": "Feature Priorities", "type": "ranking", "impact": "medium"},
+        {"category": "Form Factor", "type": "single-choice", "impact": "low"}
+      ]
+    },
+    "performanceBenchmarkVisualizer": {
+      "type": "interactive-charts",
+      "purpose": "Dynamic visualization of benchmark results and real-world performance",
+      "features": [
+        "Benchmark comparison charts with filtering",
+        "Real-world performance scenarios visualization",
+        "Thermal throttling graphs over time",
+        "Gaming FPS charts with frame time analysis",
+        "Interactive timeline for sustained performance"
+      ],
+      "chartTypes": [
+        {"name": "Bar Chart", "use": "Benchmark score comparison"},
+        {"name": "Line Chart", "use": "Performance over time/thermal"},
+        {"name": "Scatter Plot", "use": "Price vs performance analysis"},
+        {"name": "Heat Map", "use": "Multi-dimensional comparison matrix"}
+      ]
+    },
+    "cameraComparison": {
+      "type": "before-after-slider",
+      "purpose": "Visual camera quality comparison with interactive sliders",
+      "features": [
+        "Before/after image sliders",
+        "Multiple scenario comparisons (daylight, low-light, portrait)",
+        "Zoom functionality for detail inspection",
+        "EXIF data display",
+        "Blind comparison testing"
+      ],
+      "scenarios": [
+        "Daylight Portrait",
+        "Low-light Photography", 
+        "Night Mode",
+        "Ultra-wide Landscape",
+        "Telephoto Zoom",
+        "Video Stabilization"
+      ]
+    },
+    "socialProofWidget": {
+      "type": "aggregated-reviews",
+      "purpose": "Social proof through aggregated user reviews and expert opinions",
+      "features": [
+        "Expert review score aggregation",
+        "User review sentiment analysis",
+        "Pro/con frequency analysis from multiple sources",
+        "Review authenticity scoring",
+        "Timeline of opinion changes"
+      ],
+      "dataSources": [
+        "Expert reviews from trusted publications",
+        "Verified user reviews from retailers",
+        "Social media sentiment analysis",
+        "Forum discussions and community feedback"
+      ]
+    },
+    "upgradeAdvisor": {
+      "type": "decision-engine",
+      "purpose": "Personalized upgrade recommendations based on current device and needs",
+      "features": [
+        "Current device capability assessment",
+        "Upgrade benefit quantification",
+        "Cost-benefit analysis with depreciation",
+        "Timing recommendations (wait vs buy now)",
+        "Alternative upgrade paths"
+      ],
+      "considerations": [
+        "Current device age and condition",
+        "Performance gap analysis",
+        "New feature benefit assessment",
+        "Financial impact calculation",
+        "Future-proofing analysis"
+      ]
+    },
+    "configurationBuilder": {
+      "type": "product-customizer",
+      "purpose": "Interactive product configuration with real-time pricing",
+      "features": [
+        "Storage capacity selector with price impact",
+        "Color option preview",
+        "Accessory recommendations",
+        "Total cost calculator with taxes",
+        "Availability checker across retailers"
+      ],
+      "options": [
+        {"type": "storage", "impact": "price", "visualization": "cost-breakdown"},
+        {"type": "color", "impact": "availability", "visualization": "3d-preview"},
+        {"type": "accessories", "impact": "bundle-discount", "visualization": "compatibility-matrix"}
+      ]
+    }
+  },
+  "userEngagementFeatures": {
+    "polls": {
+      "type": "interactive-voting",
+      "examples": [
+        "Which feature matters most to you?",
+        "Would you pay $200 more for titanium build?",
+        "iPhone vs Android: What's your preference?",
+        "How important is camera quality vs battery life?"
+      ],
+      "dataUsage": "Aggregate results for content insights and user preference analysis"
+    },
+    "quizzes": {
+      "type": "knowledge-assessment",
+      "examples": [
+        "Find Your Perfect Smartphone Quiz",
+        "Are You a Tech Enthusiast or Casual User?",
+        "Camera Features: Do You Know What Matters?",
+        "Budget vs Premium: What's Right for You?"
+      ],
+      "personalization": "Results influence product recommendations and content prioritization"
+    },
+    "calculators": {
+      "type": "utility-tools",
+      "examples": [
+        "Total Cost of Ownership Calculator",
+        "Trade-in Value Estimator",
+        "Monthly Payment Calculator",
+        "Storage Needs Assessment Tool"
+      ]
+    }
+  },
+  "contentEnhancementElements": {
+    "tooltips": {
+      "purpose": "Contextual explanations for technical terms",
+      "implementation": "Hover/tap activated definitions with links to detailed explanations",
+      "coverage": "All technical specifications, benchmark names, camera terminology"
+    },
+    "expandableSections": {
+      "purpose": "Detailed information without cluttering main content",
+      "uses": [
+        "Technical specifications tables",
+        "Detailed benchmark explanations", 
+        "Methodology deep-dives",
+        "Historical context and background"
+      ]
+    },
+    "progressIndicators": {
+      "purpose": "Guide users through long-form content",
+      "types": [
+        "Reading progress bars",
+        "Section navigation menus",
+        "Estimated reading time",
+        "Content completion tracking"
+      ]
+    },
+    "visualCallouts": {
+      "purpose": "Highlight key information and insights",
+      "styles": [
+        "Key takeaway boxes",
+        "Warning/caution alerts",
+        "Pro tip highlights",
+        "Editor's choice badges"
+      ]
+    }
+  },
+  "accessibilityConsiderations": {
+    "requirements": [
+      "WCAG 2.1 AA compliance for all interactive elements",
+      "Keyboard navigation support",
+      "Screen reader compatibility",
+      "High contrast mode support",
+      "Reduced motion options for animations"
+    ],
+    "testing": [
+      "Automated accessibility testing integration",
+      "Manual testing with assistive technologies",
+      "User testing with accessibility needs",
+      "Regular compliance audits"
+    ]
+  },
+  "performanceOptimization": {
+    "loadingStrategy": [
+      "Progressive loading for large comparison tables",
+      "Image lazy loading with placeholder optimization",
+      "Interactive element initialization on viewport entry",
+      "Caching strategies for frequently accessed data"
+    ],
+    "mobileOptimization": [
+      "Touch-optimized interactive elements",
+      "Responsive chart scaling",
+      "Gesture support for image comparisons",
+      "Optimized data usage for mobile connections"
+    ]
+  },
+  "analyticsAndTracking": {
+    "userInteraction": [
+      "Widget usage patterns",
+      "Most compared products",
+      "Feature importance rankings",
+      "Conversion paths from comparison to purchase links"
+    ],
+    "contentPerformance": [
+      "Time spent on interactive elements",
+      "Completion rates for calculators and quizzes",
+      "Share rates for comparison results",
+      "User feedback on tool usefulness"
+    ]
+  }
+}

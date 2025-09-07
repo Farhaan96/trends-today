@@ -2,9 +2,14 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import DarkModeToggle from '../ui/DarkModeToggle';
+import NotificationSystem from '../ui/NotificationSystem';
+import SearchModal from '../ui/SearchModal';
+import MobileMenu from '../mobile/MobileMenu';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const primaryNavigation = [
     { name: 'REVIEWS', href: '/reviews' },
@@ -33,9 +38,11 @@ export default function Header() {
             <span className="text-xs text-blue-300">Trending: iPhone 16 Pro, Galaxy S25, Vision Pro 2</span>
           </div>
           <div className="hidden md:flex items-center space-x-4 text-xs">
-            <Link href="/newsletter" className="text-gray-300 hover:text-white">Newsletter</Link>
+            <Link href="/authors" className="text-gray-300 hover:text-white">Our Team</Link>
             <span className="text-gray-500">|</span>
-            <Link href="/about" className="text-gray-300 hover:text-white">About</Link>
+            <Link href="/how-we-test" className="text-gray-300 hover:text-white">How We Test</Link>
+            <span className="text-gray-500">|</span>
+            <Link href="/editorial-standards" className="text-gray-300 hover:text-white">Standards</Link>
             <span className="text-gray-500">|</span>
             <Link href="/contact" className="text-gray-300 hover:text-white">Contact</Link>
           </div>
@@ -77,30 +84,28 @@ export default function Header() {
               ))}
             </div>
 
-            {/* Search and Mobile Menu */}
-            <div className="flex items-center space-x-4">
-              {/* TechRadar-style Search */}
-              <div className="hidden md:block">
-                <div className="relative">
-                  <input 
-                    type="text" 
-                    placeholder="Search reviews, news..."
-                    className="w-48 px-4 py-2 text-sm border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                  <button className="absolute right-2 top-2 text-gray-400 hover:text-blue-600">
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-
-              {/* Mobile search button */}
-              <button className="md:hidden p-2 text-slate-800 hover:text-blue-600 rounded-md">
+            {/* Actions and Mobile Menu */}
+            <div className="flex items-center space-x-3">
+              {/* Search Button */}
+              <button 
+                onClick={() => setSearchOpen(true)}
+                className="p-2 text-slate-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                aria-label="Search"
+              >
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </button>
+
+              {/* Dark Mode Toggle */}
+              <div className="hidden md:block">
+                <DarkModeToggle />
+              </div>
+
+              {/* Notifications */}
+              <div className="hidden md:block">
+                <NotificationSystem />
+              </div>
 
               {/* Mobile menu button */}
               <div className="lg:hidden">
@@ -146,52 +151,13 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
-        {isOpen && (
-          <div className="lg:hidden bg-white border-t">
-            <div className="px-4 pt-4 pb-6 space-y-6">
-              {/* Mobile Search */}
-              <div>
-                <input 
-                  type="text" 
-                  placeholder="Search reviews, news..."
-                  className="w-full px-4 py-2 text-sm border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-
-              {/* Primary Navigation */}
-              <div className="space-y-1">
-                <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Main Navigation</div>
-                {primaryNavigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="block text-slate-800 hover:text-blue-600 font-bold text-base uppercase tracking-wide py-2"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-
-              {/* Category Navigation */}
-              <div className="space-y-1">
-                <div className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Categories</div>
-                {categoryNavigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="block text-gray-700 hover:text-blue-600 font-medium py-2"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
       </nav>
+
+      {/* Mobile Menu */}
+      <MobileMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
+
+      {/* Search Modal */}
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }

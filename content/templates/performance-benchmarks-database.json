@@ -1,0 +1,426 @@
+{
+  "title": "Performance Benchmarks Database - Q4 2024",
+  "lastUpdated": "2024-12-01",
+  "testingStandards": {
+    "environment": "Climate-controlled lab at 22°C ± 2°C, 45-55% humidity",
+    "preparation": "Device at 50% battery, background apps cleared, airplane mode during CPU tests",
+    "methodology": "Minimum 5 benchmark runs, highest and lowest scores discarded, average of remaining 3 runs"
+  },
+  "benchmarkTools": {
+    "geekbench6": {
+      "version": "6.3.0",
+      "purpose": "CPU single-core and multi-core performance",
+      "relevance": "Measures computational performance for app launches, multitasking"
+    },
+    "3dmakWildLifeExtreme": {
+      "version": "2.0.4",
+      "purpose": "GPU performance and sustained gaming capability",
+      "relevance": "Gaming performance, graphics rendering, AR/VR applications"
+    },
+    "antutu": {
+      "version": "10.2.7",
+      "purpose": "Overall system performance including CPU, GPU, memory, UX",
+      "relevance": "General system responsiveness and overall performance"
+    },
+    "gfxBenchManhattan": {
+      "version": "5.0.5",
+      "purpose": "Graphics performance at 1080p resolution",
+      "relevance": "Gaming performance standardized across different screen resolutions"
+    },
+    "pcmarkWork": {
+      "version": "3.0.4233",
+      "purpose": "Real-world productivity performance",
+      "relevance": "Office tasks, web browsing, photo editing workflow"
+    }
+  },
+  "smartphoneResults": {
+    "flagshipTier": [
+      {
+        "device": "iPhone 15 Pro",
+        "processor": "A17 Pro",
+        "results": {
+          "geekbench6": {
+            "singleCore": 2914,
+            "multiCore": 7199,
+            "notes": "Leading single-core performance, excellent for app responsiveness"
+          },
+          "3dmakWildLife": {
+            "score": 4247,
+            "fps": "25.4 fps",
+            "thermalThrottling": "15% performance drop after 20 minutes",
+            "notes": "Excellent peak performance, thermal throttling under sustained load"
+          },
+          "antutu": {
+            "overall": 1641543,
+            "breakdown": {
+              "cpu": 312847,
+              "gpu": 573291,
+              "memory": 398276,
+              "ux": 357129
+            },
+            "notes": "Industry-leading overall performance"
+          },
+          "realWorldTests": {
+            "appLaunchSpeed": "0.8 seconds average for large apps",
+            "photoshopRAW": "4K RAW processing in 12 seconds",
+            "4kVideoExport": "1-minute 4K video rendered in 35 seconds",
+            "gaming": "Genshin Impact: 58 fps average, drops to 45 fps after 30 minutes"
+          }
+        }
+      },
+      {
+        "device": "Samsung Galaxy S24",
+        "processor": "Snapdragon 8 Gen 3 for Galaxy",
+        "results": {
+          "geekbench6": {
+            "singleCore": 2267,
+            "multiCore": 6895,
+            "notes": "Solid performance, trails A17 Pro in single-core tasks"
+          },
+          "3dmakWildLife": {
+            "score": 3847,
+            "fps": "23.1 fps",
+            "thermalThrottling": "8% performance drop after 30 minutes",
+            "notes": "Consistent sustained performance with better thermal management"
+          },
+          "antutu": {
+            "overall": 1532876,
+            "breakdown": {
+              "cpu": 289456,
+              "gpu": 534892,
+              "memory": 376234,
+              "ux": 332294
+            },
+            "notes": "Excellent overall performance, well-balanced across categories"
+          },
+          "realWorldTests": {
+            "appLaunchSpeed": "1.1 seconds average for large apps",
+            "photoshopRAW": "4K RAW processing in 15 seconds",
+            "4kVideoExport": "1-minute 4K video rendered in 42 seconds",
+            "gaming": "Genshin Impact: 55 fps average, maintains 52 fps after 30 minutes"
+          }
+        }
+      },
+      {
+        "device": "Google Pixel 8 Pro",
+        "processor": "Tensor G3",
+        "results": {
+          "geekbench6": {
+            "singleCore": 1760,
+            "multiCore": 4442,
+            "notes": "Slower than flagship competition, adequate for typical use"
+          },
+          "3dmakWildLife": {
+            "score": 2847,
+            "fps": "17.1 fps",
+            "thermalThrottling": "22% performance drop after 20 minutes",
+            "notes": "Gaming performance lags behind Snapdragon and A-series chips"
+          },
+          "antutu": {
+            "overall": 1179432,
+            "breakdown": {
+              "cpu": 234567,
+              "gpu": 387654,
+              "memory": 298432,
+              "ux": 258779
+            },
+            "notes": "Performance gap evident in benchmarks, good for AI-specific tasks"
+          },
+          "realWorldTests": {
+            "appLaunchSpeed": "1.4 seconds average for large apps",
+            "photoshopRAW": "4K RAW processing in 18 seconds",
+            "4kVideoExport": "1-minute 4K video rendered in 48 seconds",
+            "gaming": "Genshin Impact: 42 fps average, drops to 33 fps after 20 minutes",
+            "aiTasks": "Photo processing with Magic Eraser: 2.3 seconds average"
+          }
+        }
+      }
+    ],
+    "midRangeTier": [
+      {
+        "device": "iPhone 15",
+        "processor": "A16 Bionic",
+        "results": {
+          "geekbench6": {
+            "singleCore": 2523,
+            "multiCore": 6312,
+            "notes": "Excellent performance for non-Pro iPhone"
+          },
+          "3dmakWildLife": {
+            "score": 3456,
+            "fps": "20.7 fps",
+            "notes": "Good gaming performance, limited by 60Hz display"
+          },
+          "realWorldTests": {
+            "appLaunchSpeed": "0.9 seconds average",
+            "gaming": "Most games run excellently at 60fps"
+          }
+        }
+      },
+      {
+        "device": "Nothing Phone (2)",
+        "processor": "Snapdragon 8+ Gen 1",
+        "results": {
+          "geekbench6": {
+            "singleCore": 1987,
+            "multiCore": 5234,
+            "notes": "Previous generation flagship performance, still very capable"
+          },
+          "3dmakWildLife": {
+            "score": 3124,
+            "fps": "18.8 fps",
+            "notes": "Good gaming performance for the price point"
+          },
+          "realWorldTests": {
+            "appLaunchSpeed": "1.2 seconds average",
+            "gaming": "Handles most games well at high settings"
+          }
+        }
+      }
+    ]
+  },
+  "batteryLifeResults": {
+    "testingConditions": "50% screen brightness, 120Hz when available, Wi-Fi and 5G enabled, typical app mix",
+    "results": [
+      {
+        "device": "Samsung Galaxy S24",
+        "capacity": "4000mAh",
+        "results": {
+          "heavyUsage": {
+            "screenOnTime": "8.2 hours",
+            "totalTime": "16.5 hours",
+            "description": "Gaming, streaming, GPS, photography"
+          },
+          "moderateUsage": {
+            "screenOnTime": "9.5 hours", 
+            "totalTime": "18.2 hours",
+            "description": "Social media, messaging, web browsing, light photography"
+          },
+          "lightUsage": {
+            "screenOnTime": "11.1 hours",
+            "totalTime": "20.8 hours",
+            "description": "Calls, texts, basic apps"
+          },
+          "standbyDrain": "2.8% over 8 hours"
+        }
+      },
+      {
+        "device": "iPhone 15 Pro",
+        "capacity": "3274mAh",
+        "results": {
+          "heavyUsage": {
+            "screenOnTime": "6.8 hours",
+            "totalTime": "14.2 hours",
+            "description": "Gaming, streaming, GPS, photography"
+          },
+          "moderateUsage": {
+            "screenOnTime": "8.1 hours",
+            "totalTime": "16.5 hours", 
+            "description": "Social media, messaging, web browsing, light photography"
+          },
+          "lightUsage": {
+            "screenOnTime": "9.8 hours",
+            "totalTime": "18.9 hours",
+            "description": "Calls, texts, basic apps"
+          },
+          "standbyDrain": "3.2% over 8 hours"
+        }
+      },
+      {
+        "device": "Google Pixel 8 Pro",
+        "capacity": "5050mAh",
+        "results": {
+          "heavyUsage": {
+            "screenOnTime": "7.8 hours",
+            "totalTime": "15.9 hours",
+            "description": "AI features heavily used, photography, streaming"
+          },
+          "moderateUsage": {
+            "screenOnTime": "9.1 hours",
+            "totalTime": "17.8 hours",
+            "description": "Typical usage with occasional AI features"
+          },
+          "lightUsage": {
+            "screenOnTime": "10.5 hours",
+            "totalTime": "19.7 hours",
+            "description": "Basic usage, minimal AI processing"
+          },
+          "standbyDrain": "2.9% over 8 hours"
+        }
+      }
+    ]
+  },
+  "chargingSpeedResults": {
+    "testConditions": "0-50% and 0-100% charging times, room temperature, official chargers",
+    "results": [
+      {
+        "device": "Samsung Galaxy S24",
+        "wiredCharging": {
+          "maxWattage": "25W",
+          "zeroTo50": "28 minutes",
+          "zeroTo100": "68 minutes",
+          "notes": "Conservative charging speeds help battery longevity"
+        },
+        "wirelessCharging": {
+          "maxWattage": "15W",
+          "zeroTo50": "48 minutes",
+          "zeroTo100": "95 minutes"
+        }
+      },
+      {
+        "device": "iPhone 15 Pro",
+        "wiredCharging": {
+          "maxWattage": "20W (USB-C)",
+          "zeroTo50": "30 minutes",
+          "zeroTo100": "75 minutes",
+          "notes": "USB-C enables faster charging than previous Lightning iPhones"
+        },
+        "wirelessCharging": {
+          "maxWattage": "15W (MagSafe)",
+          "zeroTo50": "45 minutes",
+          "zeroTo100": "88 minutes"
+        }
+      },
+      {
+        "device": "Google Pixel 8 Pro",
+        "wiredCharging": {
+          "maxWattage": "30W",
+          "zeroTo50": "32 minutes",
+          "zeroTo100": "78 minutes",
+          "notes": "Adaptive charging reduces speeds to preserve battery health"
+        },
+        "wirelessCharging": {
+          "maxWattage": "23W (Pixel Stand)",
+          "zeroTo50": "42 minutes",
+          "zeroTo100": "85 minutes"
+        }
+      }
+    ]
+  },
+  "cameraPerformanceTests": {
+    "testingConditions": "Standardized lighting conditions, professional color checker, identical framing",
+    "scenarios": [
+      {
+        "scenario": "Daylight Portrait",
+        "conditions": "Outdoor, 50,000 lux, golden hour lighting",
+        "results": [
+          {
+            "device": "iPhone 15 Pro",
+            "score": 9.2,
+            "strengths": ["Natural skin tones", "Excellent subject separation", "Consistent results"],
+            "weaknesses": ["Conservative processing may appear flat to some users"]
+          },
+          {
+            "device": "Samsung Galaxy S24",
+            "score": 8.8,
+            "strengths": ["Vibrant colors", "Good detail retention", "Eye-catching results"],
+            "weaknesses": ["Occasionally over-saturated skin tones"]
+          },
+          {
+            "device": "Google Pixel 8 Pro",
+            "score": 9.4,
+            "strengths": ["Exceptional computational processing", "Perfect exposure", "Real Tone skin accuracy"],
+            "weaknesses": ["Can be too aggressive with HDR processing"]
+          }
+        ]
+      },
+      {
+        "scenario": "Low Light Photography",
+        "conditions": "Indoor, 2 lux, handheld shots",
+        "results": [
+          {
+            "device": "iPhone 15 Pro",
+            "score": 8.5,
+            "strengths": ["Good noise control", "Natural colors", "Reliable autofocus"],
+            "weaknesses": ["Slower shutter can cause motion blur"]
+          },
+          {
+            "device": "Samsung Galaxy S24",
+            "score": 9.0,
+            "strengths": ["Bright results", "Fast capture", "Good stabilization"],
+            "weaknesses": ["Aggressive noise reduction can reduce detail"]
+          },
+          {
+            "device": "Google Pixel 8 Pro", 
+            "score": 9.6,
+            "strengths": ["Night Sight produces exceptional results", "Amazing detail retention", "Superior to dedicated cameras"],
+            "weaknesses": ["Processing time can be slow"]
+          }
+        ]
+      }
+    ]
+  },
+  "realWorldUsageScenarios": {
+    "scenarios": [
+      {
+        "title": "Content Creator Daily Driver",
+        "description": "Heavy photography, video recording, social media posting, editing",
+        "testDuration": "8 hours typical usage",
+        "results": [
+          {
+            "device": "iPhone 15 Pro",
+            "performance": "Excellent video quality, good photo processing speed, thermal throttling during 4K recording",
+            "batteryLife": "Requires midday charge for full day",
+            "recommendation": "Best for video-focused creators"
+          },
+          {
+            "device": "Samsung Galaxy S24",
+            "performance": "Good overall performance, excellent battery optimization, vibrant photo processing",
+            "batteryLife": "Easily lasts full day with moderate evening charge remaining",
+            "recommendation": "Best balance for mixed content creation"
+          },
+          {
+            "device": "Google Pixel 8 Pro",
+            "performance": "Outstanding photo processing, unique AI features, adequate video quality",
+            "batteryLife": "Full day usage possible, AI features drain battery faster",
+            "recommendation": "Best for photography-focused creators"
+          }
+        ]
+      },
+      {
+        "title": "Business Professional",
+        "description": "Email, video calls, document editing, travel navigation",
+        "testDuration": "10-12 hour workday",
+        "results": [
+          {
+            "device": "iPhone 15 Pro",
+            "performance": "Excellent app performance, seamless ecosystem integration, reliable connectivity",
+            "batteryLife": "May need afternoon top-up during heavy usage days",
+            "recommendation": "Best for Apple ecosystem users"
+          },
+          {
+            "device": "Samsung Galaxy S24",
+            "performance": "Good productivity features, DeX mode useful, excellent battery optimization",
+            "batteryLife": "Easily lasts full business day with room to spare",
+            "recommendation": "Best overall for business use"
+          },
+          {
+            "device": "Google Pixel 8 Pro",
+            "performance": "Excellent call screening, live translate features, good Google Workspace integration",
+            "batteryLife": "Solid all-day performance for typical business use",
+            "recommendation": "Best for Google Workspace users"
+          }
+        ]
+      }
+    ]
+  },
+  "competitiveAnalysis": {
+    "performanceLeaders": {
+      "singleCore": "iPhone 15 Pro (A17 Pro) - 2914 points",
+      "multiCore": "iPhone 15 Pro (A17 Pro) - 7199 points",
+      "graphics": "iPhone 15 Pro (A17 Pro) - 4247 points",
+      "sustained": "Samsung Galaxy S24 (Snapdragon 8 Gen 3) - best thermal management"
+    },
+    "batteryLifeLeaders": {
+      "overall": "Samsung Galaxy S24 - 9.5 hours moderate usage",
+      "efficiency": "iPhone 15 Pro - best performance per mAh",
+      "fastCharging": "Google Pixel 8 Pro - 30W max (still slow vs Chinese competitors)"
+    },
+    "cameraLeaders": {
+      "computational": "Google Pixel 8 Pro - AI features unmatched",
+      "video": "iPhone 15 Pro - industry standard for content creation",
+      "versatility": "Samsung Galaxy S24 - best all-around camera system",
+      "lowLight": "Google Pixel 8 Pro - Night Sight leads the industry"
+    }
+  }
+}
