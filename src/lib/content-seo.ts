@@ -40,8 +40,8 @@ export function analyzeContentSEO(data: {
 }): SEOScore {
   const { title, description, content, targetKeywords = [] } = data;
   
-  let issues: string[] = [];
-  let suggestions: string[] = [];
+  const issues: string[] = [];
+  const suggestions: string[] = [];
   
   // Analyze title
   const titleScore = analyzeTitleSEO(title, targetKeywords, issues, suggestions);

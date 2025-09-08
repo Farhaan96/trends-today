@@ -17,7 +17,7 @@ async function getAllComparisons(): Promise<Comparison[]> {
       path.join(process.cwd(), 'content', 'comparisons')
     ];
     
-    let comparisons: Comparison[] = [];
+    const comparisons: Comparison[] = [];
     
     for (const contentDir of contentDirs) {
       if (!fs.existsSync(contentDir)) continue;

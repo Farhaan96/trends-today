@@ -9,7 +9,7 @@
  * Uses native fetch (Node 18+) — no deps.
  */
 
-/* eslint-disable no-console */
+ 
 require('dotenv').config({ path: require('path').join(__dirname, '..', '.env.local') });
 
 const { URL } = require('url');

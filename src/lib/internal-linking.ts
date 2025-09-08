@@ -422,7 +422,7 @@ export function addInternalLinksToContent(
     avoidOverOptimization = true
   } = options;
 
-  let modifiedContent = content;
+  const modifiedContent = content;
   let totalLinksAdded = 0;
   
   const availableLinks = generateInternalLinks(content, currentUrl, maxTotalLinks * 2);

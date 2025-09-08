@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // Auto-fix broken internal image paths in MDX frontmatter using latest QA report
-/* eslint-disable no-console */
+ 
 const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
