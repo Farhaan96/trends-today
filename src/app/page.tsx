@@ -9,23 +9,23 @@ import { getHomepageContent, Article } from '@/lib/content';
 export default async function HomePage() {
   // Load dynamic content
   const content = await getHomepageContent();
-  // Use dynamic hero article or fallback
+  // Use dynamic hero article or modern fallback with current tech
   const heroArticle = content.heroArticle ? {
     title: content.heroArticle.frontmatter.title,
     description: content.heroArticle.frontmatter.description || content.heroArticle.frontmatter.summary,
     href: content.heroArticle.href,
     category: content.heroArticle.frontmatter.category || content.heroArticle.type,
     publishedAt: content.heroArticle.frontmatter.publishedAt || content.heroArticle.frontmatter.datePublished || new Date().toISOString(),
-    image: content.heroArticle.frontmatter.image || "/images/products/iphone-15-pro-max-hero.jpg",
+    image: content.heroArticle.frontmatter.image || "/images/products/iphone-16-pro-max-hero.jpg",
     author: content.heroArticle.frontmatter.author?.name || content.heroArticle.frontmatter.author || "Trends Today Editorial"
   } : {
-    title: "iPhone 15 Pro Max Review: Apple's Most Advanced Phone Yet",
-    description: "After two weeks of testing, we dive deep into Apple's flagship to see if the titanium design, A17 Pro chip, and 5x zoom camera justify the premium price tag.",
-    href: "/reviews/iphone-15-pro-max-review",
+    title: "iPhone 16 Pro Max Review: The AI Revolution Has Arrived",
+    description: "Apple Intelligence transforms everything in this stunning titanium flagship. Our 3-week deep dive reveals why this is the most significant iPhone upgrade in years - and what Apple didn't tell you.",
+    href: "/reviews/iphone-16-pro-max-review-the-ai-revolution-has-arrived",
     category: "Reviews",
-    publishedAt: "Update to current date",
-    image: "/images/products/iphone-15-pro-max-hero.jpg",
-    author: "Trends Today Editorial"
+    publishedAt: new Date().toISOString(),
+    image: "/images/products/iphone-16-pro-max-titanium-hero.jpg",
+    author: "Alex Chen"
   };
 
   // Convert dynamic articles to the format expected by the UI
@@ -159,11 +159,11 @@ export default async function HomePage() {
               ))}
             </div>
             <div className="hidden md:flex items-center space-x-4">
-              <span className="text-xs text-gray-300">TRENDING:</span>
-              <Link href="/news/iphone-16-leak" className="text-xs text-blue-300 hover:underline">iPhone 16 Pro</Link>
-              <Link href="/news/galaxy-s25" className="text-xs text-blue-300 hover:underline">Galaxy S25</Link>
-              <Link href="/news/spatial-computing-2025" className="text-xs text-blue-300 hover:underline">Spatial Computing</Link>
-              <Link href="/news/ai-powered-smartphones" className="text-xs text-blue-300 hover:underline">AI Smartphones</Link>
+              <span className="text-xs text-gray-300">🔥 TRENDING:</span>
+              <Link href="/news/iphone-17-air-ultra-thin-design-leak" className="text-xs text-blue-300 hover:underline animate-pulse">iPhone 17 Air</Link>
+              <Link href="/news/galaxy-s25-ultra-camera-upgrade" className="text-xs text-blue-300 hover:underline">Galaxy S25 Ultra</Link>
+              <Link href="/news/apple-intelligence-rollout-2025" className="text-xs text-blue-300 hover:underline">Apple Intelligence</Link>
+              <Link href="/news/openai-phone-partnership" className="text-xs text-blue-300 hover:underline">OpenAI Phone</Link>
             </div>
           </div>
         </div>
@@ -230,11 +230,71 @@ export default async function HomePage() {
 
               {/* Breaking News Strip */}
               <div className="mb-8">
-                <div className="bg-red-600 text-white p-4 rounded-sm">
+                <div className="bg-gradient-to-r from-red-600 to-red-700 text-white p-4 rounded-lg shadow-lg">
                   <div className="flex items-center gap-4">
-                    <span className="font-bold uppercase text-sm bg-white text-red-600 px-2 py-1 rounded">Breaking</span>
-                    <span className="font-bold">Apple Vision Pro 2 confirmed for Q4 2025 with major price reduction</span>
-                    <Link href="/news/vision-pro-2" className="ml-auto text-sm underline hover:no-underline">Read More</Link>
+                    <span className="font-bold uppercase text-sm bg-white text-red-600 px-3 py-1 rounded-full animate-pulse">🔥 Hot</span>
+                    <span className="font-bold">iPhone 17 Air Leaked: Ultra-Thin Design May Replace Plus Model</span>
+                    <Link href="/news/iphone-17-air-ultra-thin-design-leak" className="ml-auto text-sm underline hover:no-underline bg-white/20 px-3 py-1 rounded-full">Read More</Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Compare Section */}
+              <div className="mb-10">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-gray-900 uppercase tracking-wide">⚔️ Head-to-Head</h2>
+                  <Link href="/compare" className="text-sm font-bold text-blue-600 hover:text-blue-800 uppercase tracking-wide">
+                    All Comparisons
+                  </Link>
+                </div>
+                
+                <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl border border-blue-200">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <Link href="/compare/iphone-16-pro-vs-samsung-galaxy-s24-ultra" className="group">
+                      <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="text-center">
+                            <div className="w-16 h-16 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl mx-auto mb-2 flex items-center justify-center">
+                              <span className="text-white text-2xl">🍎</span>
+                            </div>
+                            <p className="text-sm font-bold">iPhone 16 Pro</p>
+                          </div>
+                          <div className="text-2xl font-bold text-red-500">VS</div>
+                          <div className="text-center">
+                            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl mx-auto mb-2 flex items-center justify-center">
+                              <span className="text-white text-2xl">📱</span>
+                            </div>
+                            <p className="text-sm font-bold">Galaxy S24 Ultra</p>
+                          </div>
+                        </div>
+                        <h3 className="font-bold text-center text-gray-900 group-hover:text-blue-600 transition-colors">
+                          The Ultimate Flagship Battle: Which Reigns Supreme?
+                        </h3>
+                      </div>
+                    </Link>
+                    
+                    <Link href="/compare/macbook-air-vs-surface-laptop-studio" className="group">
+                      <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="text-center">
+                            <div className="w-16 h-16 bg-gradient-to-br from-gray-300 to-gray-400 rounded-xl mx-auto mb-2 flex items-center justify-center">
+                              <span className="text-gray-700 text-2xl">💻</span>
+                            </div>
+                            <p className="text-sm font-bold">MacBook Air M3</p>
+                          </div>
+                          <div className="text-2xl font-bold text-red-500">VS</div>
+                          <div className="text-center">
+                            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl mx-auto mb-2 flex items-center justify-center">
+                              <span className="text-white text-2xl">🖥️</span>
+                            </div>
+                            <p className="text-sm font-bold">Surface Laptop Studio</p>
+                          </div>
+                        </div>
+                        <h3 className="font-bold text-center text-gray-900 group-hover:text-blue-600 transition-colors">
+                          Creative Powerhouse Showdown: M3 vs Intel
+                        </h3>
+                      </div>
+                    </Link>
                   </div>
                 </div>
               </div>
