@@ -1,0 +1,253 @@
+{
+  "keyword_research_summary": {
+    "generated_date": "2025-09-07",
+    "agent": "seo-finder",
+    "focus_areas": ["AI agents", "Nintendo Switch 2", "RTX 50-series", "Budget tech products", "Comparison keywords"],
+    "target_monthly_visitors": "30K",
+    "methodology": "Real-time trend analysis + competitor gap identification"
+  },
+  "high_value_opportunities": [
+    {
+      "keyword": "Nintendo Switch 2 vs Switch OLED comparison",
+      "estimated_monthly_searches": 8500,
+      "competition_level": "medium",
+      "content_type": "comparison_review",
+      "urgency_level": "very_high",
+      "rationale": "Switch 2 just released June 2025, massive interest in upgrade decisions. First-mover advantage for comprehensive comparisons.",
+      "target_price_range": "$450-500",
+      "affiliate_potential": "high"
+    },
+    {
+      "keyword": "RTX 5090 vs RTX 4090 gaming performance 2025",
+      "estimated_monthly_searches": 12000,
+      "competition_level": "high", 
+      "content_type": "comparison_review",
+      "urgency_level": "high",
+      "rationale": "RTX 5090 launched Jan 2025 at $1999. Gamers deciding if upgrade worth $400 premium. High commercial intent.",
+      "target_price_range": "$1599-1999",
+      "affiliate_potential": "very_high"
+    },
+    {
+      "keyword": "best AI agent tools for business under $100",
+      "estimated_monthly_searches": 4200,
+      "competition_level": "low",
+      "content_type": "buyer_guide",
+      "urgency_level": "very_high", 
+      "rationale": "2025 declared 'year of the agent' - 99% of developers exploring AI agents. Budget-conscious businesses seeking affordable solutions.",
+      "target_price_range": "$50-100",
+      "affiliate_potential": "medium"
+    },
+    {
+      "keyword": "Nintendo Switch 2 Mario Kart World bundle worth it",
+      "estimated_monthly_searches": 3800,
+      "competition_level": "low",
+      "content_type": "buying_guide",
+      "urgency_level": "high",
+      "rationale": "Limited-time $500 bundle vs $450 console. Time-sensitive purchase decision with clear value proposition.",
+      "target_price_range": "$450-500", 
+      "affiliate_potential": "high"
+    },
+    {
+      "keyword": "RTX 5080 vs RTX 4080 Super performance difference",
+      "estimated_monthly_searches": 6800,
+      "competition_level": "medium",
+      "content_type": "comparison_review",
+      "urgency_level": "high",
+      "rationale": "RTX 5080 shows only 10% uplift over 4080 Super. Gamers questioning if upgrade worth $999 price tag.",
+      "target_price_range": "$799-999",
+      "affiliate_potential": "very_high"
+    },
+    {
+      "keyword": "iPhone 16 vs Samsung Galaxy S25 AI features comparison",
+      "estimated_monthly_searches": 9200,
+      "competition_level": "high",
+      "content_type": "comparison_review", 
+      "urgency_level": "medium",
+      "rationale": "Galaxy AI is polished vs Apple Intelligence still in beta. AI becoming major phone buying factor in 2025.",
+      "target_price_range": "$800-1200",
+      "affiliate_potential": "high"
+    },
+    {
+      "keyword": "best budget smartphone under $500 2025",
+      "estimated_monthly_searches": 11500,
+      "competition_level": "medium",
+      "content_type": "buyer_guide",
+      "urgency_level": "high",
+      "rationale": "OnePlus 13R and Pixel 9a leading budget segment. Strong commercial intent with clear price ceiling.",
+      "target_price_range": "$200-500",
+      "affiliate_potential": "high"
+    },
+    {
+      "keyword": "AI autonomous agents market size 2025",
+      "estimated_monthly_searches": 2100,
+      "competition_level": "low",
+      "content_type": "market_analysis",
+      "urgency_level": "very_high",
+      "rationale": "Market reaching $43.21B by 2029, 44.8% annual growth. Low competition for in-depth analysis content.",
+      "target_price_range": "N/A",
+      "affiliate_potential": "low"
+    },
+    {
+      "keyword": "Nintendo Switch 2 backwards compatibility issues",
+      "estimated_monthly_searches": 5500,
+      "competition_type": "medium", 
+      "content_type": "troubleshooting_guide",
+      "urgency_level": "high",
+      "rationale": "Nintendo warns 'certain Switch games may not be supported'. Immediate need for compatibility lists and solutions.",
+      "target_price_range": "N/A",
+      "affiliate_potential": "low"
+    },
+    {
+      "keyword": "Sony WH-1000XM6 vs Bose QuietComfort Ultra 2025",
+      "estimated_monthly_searches": 4500,
+      "competition_level": "medium",
+      "content_type": "comparison_review",
+      "urgency_level": "high",
+      "rationale": "Both launched 2025, $150 cheaper than AirPods Max. Premium ANC headphone battle intensifying.",
+      "target_price_range": "$300-450",
+      "affiliate_potential": "high"
+    },
+    {
+      "keyword": "best gaming laptop under $1500 RTX 50 series",
+      "estimated_monthly_searches": 7200,
+      "competition_level": "medium",
+      "content_type": "buyer_guide", 
+      "urgency_level": "high",
+      "rationale": "New RTX 50-series mobile GPUs launching. Gamers seeking best performance per dollar in mid-range segment.",
+      "target_price_range": "$1000-1500",
+      "affiliate_potential": "very_high"
+    },
+    {
+      "keyword": "DLSS 4 Multi Frame Generation explained",
+      "estimated_monthly_searches": 3200,
+      "competition_level": "low",
+      "content_type": "explainer_guide",
+      "urgency_level": "very_high",
+      "rationale": "New with RTX 50-series. Nvidia claiming 4090-level performance at $549 with heavy DLSS 4 reliance.",
+      "target_price_range": "N/A",
+      "affiliate_potential": "low"
+    },
+    {
+      "keyword": "how to fix Nintendo Switch 2 charging issues",
+      "estimated_monthly_searches": 2800,
+      "competition_level": "low",
+      "content_type": "troubleshooting_guide", 
+      "urgency_level": "medium",
+      "rationale": "New hardware always has early adoption issues. Low-competition long-tail troubleshooting opportunity.",
+      "target_price_range": "N/A",
+      "affiliate_potential": "low"
+    },
+    {
+      "keyword": "Apple Vision Pro 2 vs Meta Quest 4 comparison",
+      "estimated_monthly_searches": 5200,
+      "competition_level": "medium",
+      "content_type": "comparison_review",
+      "urgency_level": "very_high",
+      "rationale": "Vision Pro 2 confirmed Q4 2025 with major price reduction. VR market heating up with clearer value propositions.",
+      "target_price_range": "$1500-3000",
+      "affiliate_potential": "medium"
+    },
+    {
+      "keyword": "Acer Aspire Go 15 vs ASUS Vivobook 16 budget laptop",
+      "estimated_monthly_searches": 1800,
+      "competition_level": "low",
+      "content_type": "comparison_review",
+      "urgency_level": "medium",
+      "rationale": "Top budget laptops under $600. Students and professionals seeking best bang-for-buck comparison.",
+      "target_price_range": "$400-600",
+      "affiliate_potential": "medium"
+    },
+    {
+      "keyword": "AI agents vs chatbots difference 2025",
+      "estimated_monthly_searches": 2600,
+      "competition_level": "low",
+      "content_type": "explainer_guide",
+      "urgency_level": "high",
+      "rationale": "Mass confusion as vendors engage in 'agent washing'. Educational content needed to clarify differences.",
+      "target_price_range": "N/A", 
+      "affiliate_potential": "low"
+    },
+    {
+      "keyword": "RTX 5070 Ti vs RTX 4070 Ti Super value comparison",
+      "estimated_monthly_searches": 4100,
+      "competition_level": "medium",
+      "content_type": "comparison_review",
+      "urgency_level": "high",
+      "rationale": "RTX 5070 Ti at $749 Feb 2025 launch. Mid-range GPU buyers evaluating if new generation worth premium.",
+      "target_price_range": "$599-749",
+      "affiliate_potential": "very_high"
+    },
+    {
+      "keyword": "best wireless earbuds under $200 2025 tested",
+      "estimated_monthly_searches": 8900,
+      "competition_level": "medium",
+      "content_type": "buyer_guide",
+      "urgency_level": "medium",
+      "rationale": "Evergreen high-volume keyword. JBL Endurance Peak 3 and others providing flagship features at budget prices.",
+      "target_price_range": "$50-200",
+      "affiliate_potential": "high"
+    },
+    {
+      "keyword": "iPhone 17 Air thickness rumors vs iPhone 16",
+      "estimated_monthly_searches": 6300,
+      "competition_level": "low",
+      "content_type": "news_analysis",
+      "urgency_level": "very_high",
+      "rationale": "Apple revealed 'thinnest iPhone ever' - iPhone 17 Air. Early speculation content before competitors saturate.",
+      "target_price_range": "$800-1200",
+      "affiliate_potential": "medium"
+    },
+    {
+      "keyword": "spatial computing apps Nintendo Switch 2",
+      "estimated_monthly_searches": 1400,
+      "competition_level": "very_low",
+      "content_type": "feature_deep_dive",
+      "urgency_level": "very_high",
+      "rationale": "Emerging intersection of spatial computing and gaming. Nintendo's new hardware may support spatial features.",
+      "target_price_range": "N/A",
+      "affiliate_potential": "low"
+    }
+  ],
+  "content_strategy_recommendations": {
+    "immediate_priority": [
+      "Nintendo Switch 2 comparison and buying guides",
+      "RTX 50-series GPU comparisons and benchmarks", 
+      "AI agents business tool recommendations"
+    ],
+    "scaling_opportunities": [
+      "Budget tech product roundups under specific price points",
+      "Troubleshooting guides for new 2025 hardware",
+      "Emerging technology explainers (DLSS 4, spatial computing)"
+    ],
+    "seasonal_content": [
+      "Back-to-school laptop guides (Aug-Sept)",
+      "Holiday gaming gear guides (Nov-Dec)",
+      "New year tech resolution guides (Jan)"
+    ]
+  },
+  "competitive_analysis": {
+    "content_gaps_identified": [
+      "Lack of comprehensive AI agents business guides",
+      "Limited Nintendo Switch 2 troubleshooting content", 
+      "Missing DLSS 4 technical explanations",
+      "Insufficient budget gaming laptop RTX 50-series coverage"
+    ],
+    "first_mover_advantages": [
+      "Nintendo Switch 2 accessory compatibility guides",
+      "RTX 50-series power consumption analysis",
+      "AI agents ROI calculators for small business"
+    ]
+  },
+  "monetization_potential": {
+    "high_commission_categories": [
+      "Gaming laptops ($1000-2000 range)",
+      "Graphics cards (RTX 50-series)",
+      "Gaming consoles and bundles"
+    ],
+    "recurring_revenue_opportunities": [
+      "AI agent software subscriptions",
+      "Cloud gaming service comparisons",
+      "Tech accessory recommendations"
+    ]
+  }
+}

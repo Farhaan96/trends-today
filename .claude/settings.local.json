@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(del config.yaml)",
+      "Bash(npm ls:*)",
+      "mcp__ide__executeCode",
+      "Bash(del nul)",
+      "Bash(git clone:*)",
+      "Bash(ls:*)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)",
+      "Bash(git reset:*)",
+      "Bash(git rm:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:headed": "playwright test --headed"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  },
+  "dependencies": {
+    "@mendable/firecrawl-js": "^4.3.4",
+    "dotenv": "^17.2.2"
+  }
+}
