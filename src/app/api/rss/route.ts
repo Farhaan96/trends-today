@@ -33,20 +33,20 @@ export async function GET() {
     <ttl>60</ttl>
     ${posts.map(post => `
     <item>
-      <title><![CDATA[${post.title}]]></title>
-      <description><![CDATA[${post.description || post.excerpt || ''}]]></description>
-      <link>${siteUrl}/${post.category}/${post.slug}</link>
-      <guid isPermaLink="true">${siteUrl}/${post.category}/${post.slug}</guid>
-      <pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>
-      <category><![CDATA[${post.category}]]></category>
-      <author>${post.author?.name || 'Trends Today Editorial'}</author>
-      ${post.image ? `
-      <media:content url="${siteUrl}${post.image}" medium="image" />
-      <enclosure url="${siteUrl}${post.image}" type="image/jpeg" length="0"/>` : ''}
+      <title><![CDATA[${post.frontmatter.title || 'Untitled'}]]></title>
+      <description><![CDATA[${post.frontmatter.description || post.frontmatter.excerpt || ''}]]></description>
+      <link>${siteUrl}${post.href}</link>
+      <guid isPermaLink="true">${siteUrl}${post.href}</guid>
+      <pubDate>${new Date(post.frontmatter.publishedAt || post.frontmatter.datePublished || new Date()).toUTCString()}</pubDate>
+      <category><![CDATA[${post.type}]]></category>
+      <author>${post.frontmatter.author?.name || post.frontmatter.author || 'Trends Today Editorial'}</author>
+      ${post.frontmatter.image ? `
+      <media:content url="${siteUrl}${post.frontmatter.image}" medium="image" />
+      <enclosure url="${siteUrl}${post.frontmatter.image}" type="image/jpeg" length="0"/>` : ''}
       <content:encoded><![CDATA[
-        <img src="${siteUrl}${post.image}" alt="${post.title}" style="max-width:100%;height:auto;margin-bottom:1rem;">
-        <p>${post.description || post.excerpt || ''}</p>
-        <p><a href="${siteUrl}/${post.category}/${post.slug}">Read the full article on Trends Today</a></p>
+        ${post.frontmatter.image ? `<img src="${siteUrl}${post.frontmatter.image}" alt="${post.frontmatter.title}" style="max-width:100%;height:auto;margin-bottom:1rem;">` : ''}
+        <p>${post.frontmatter.description || post.frontmatter.excerpt || ''}</p>
+        <p><a href="${siteUrl}${post.href}">Read the full article on Trends Today</a></p>
       ]]></content:encoded>
     </item>`).join('')}
   </channel>
@@ -68,7 +68,8 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const { category } = await request.json()
-    const posts = await getAllPosts({ category })
+    const allPosts = await getAllPosts()
+    const posts = allPosts.filter(post => post.type === category)
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://trendstoday.ca'
     
     const categoryTitle = category.charAt(0).toUpperCase() + category.slice(1)
@@ -84,12 +85,12 @@ export async function POST(request: Request) {
     <atom:link href="${siteUrl}/api/rss?category=${category}" rel="self" type="application/rss+xml"/>
     ${posts.map(post => `
     <item>
-      <title><![CDATA[${post.title}]]></title>
-      <description><![CDATA[${post.description || ''}]]></description>
-      <link>${siteUrl}/${post.category}/${post.slug}</link>
-      <guid isPermaLink="true">${siteUrl}/${post.category}/${post.slug}</guid>
-      <pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>
-      <category><![CDATA[${post.category}]]></category>
+      <title><![CDATA[${post.frontmatter.title || 'Untitled'}]]></title>
+      <description><![CDATA[${post.frontmatter.description || ''}]]></description>
+      <link>${siteUrl}${post.href}</link>
+      <guid isPermaLink="true">${siteUrl}${post.href}</guid>
+      <pubDate>${new Date(post.frontmatter.publishedAt || post.frontmatter.datePublished || new Date()).toUTCString()}</pubDate>
+      <category><![CDATA[${post.type}]]></category>
     </item>`).join('')}
   </channel>
 </rss>`
