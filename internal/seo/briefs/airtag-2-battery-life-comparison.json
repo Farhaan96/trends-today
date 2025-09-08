@@ -1,0 +1,63 @@
+{
+  "slug": "airtag-2-battery-life-comparison",
+  "primary_keyword": "AirTag 2 vs AirTag battery life differences",
+  "secondary_keywords": [
+    "AirTag 2 new features",
+    "AirTag 2 vs original comparison",
+    "Apple AirTag 2 improvements",
+    "AirTag 2 release date price"
+  ],
+  "search_intent": "comparison",
+  "angle": "Comprehensive comparison focusing on battery improvements and new features",
+  "urgency": "high",
+  "publish_date": "2025-09-10",
+  "outline": {
+    "title": "AirTag 2 vs Original AirTag: Battery Life & Feature Comparison",
+    "h2_sections": [
+      {
+        "heading": "AirTag 2: What's New and Improved",
+        "content_focus": "Key upgrades, design changes, new capabilities"
+      },
+      {
+        "heading": "Battery Life Comparison: AirTag 2 vs Original",
+        "content_focus": "Tested battery performance, usage scenarios, longevity"
+      },
+      {
+        "heading": "Range and Precision Improvements",
+        "content_focus": "Ultra Wideband enhancements, finding accuracy, distance"
+      },
+      {
+        "heading": "Privacy and Security Updates",
+        "content_focus": "Anti-stalking features, privacy controls, safety improvements"
+      },
+      {
+        "heading": "Pricing and Availability",
+        "content_focus": "Cost comparison, value proposition, where to buy"
+      },
+      {
+        "heading": "Should You Upgrade? Decision Guide",
+        "content_focus": "Upgrade scenarios, when to stick with original"
+      }
+    ],
+    "faq_section": [
+      "How much longer does AirTag 2 battery last?",
+      "What's the main difference between AirTag 2 and original?",
+      "Is AirTag 2 worth upgrading from original?",
+      "When does AirTag 2 come out?",
+      "Does AirTag 2 work with older iPhones?"
+    ]
+  },
+  "internal_links": [
+    "/content/reviews/airtag-original-review",
+    "/content/guides/best-airtag-accessories",
+    "/content/news/apple-september-event-recap"
+  ],
+  "target_sources": [
+    "https://www.apple.com/airtag/",
+    "https://support.apple.com/airtag",
+    "https://www.macrumors.com/roundup/airtags/"
+  ],
+  "content_length": "1500-2000 words",
+  "publish_priority": 4,
+  "expiry_date": "2026-01-31"
+}

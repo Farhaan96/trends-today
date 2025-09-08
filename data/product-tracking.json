@@ -1,0 +1,240 @@
+{
+  "products": [
+    {
+      "name": "iPhone 16 Pro Max",
+      "brand": "Apple",
+      "category": "smartphones",
+      "source": "Apple Newsroom",
+      "sourceUrl": "https://www.apple.com/newsroom/",
+      "announcementType": "official",
+      "discoveredAt": "2025-09-06T23:43:50.153Z",
+      "status": "announced",
+      "confidence": 9,
+      "details": {
+        "specifications": [
+          "Advanced processor",
+          "Improved camera system",
+          "Enhanced battery life"
+        ],
+        "pricing": "$999",
+        "availability": "Expected Q2 2025",
+        "keyFeatures": [
+          "Pro camera system",
+          "All-day battery",
+          "Premium design"
+        ],
+        "targetMarket": "Tech enthusiasts and professionals"
+      }
+    },
+    {
+      "name": "Galaxy S25 Ultra",
+      "brand": "Samsung",
+      "category": "smartphones",
+      "source": "Samsung News",
+      "sourceUrl": "https://news.samsung.com/us/",
+      "announcementType": "official",
+      "discoveredAt": "2025-09-06T23:43:50.153Z",
+      "status": "rumored",
+      "confidence": 7,
+      "details": {
+        "specifications": [
+          "Advanced processor",
+          "Improved camera system",
+          "Enhanced battery life"
+        ],
+        "pricing": "$999",
+        "availability": "Expected Q2 2025",
+        "keyFeatures": [
+          "Pro camera system",
+          "All-day battery",
+          "Premium design"
+        ],
+        "targetMarket": "Tech enthusiasts and professionals"
+      }
+    },
+    {
+      "name": "Pixel 9 Pro XL",
+      "brand": "Google",
+      "category": "smartphones",
+      "source": "Google Blog",
+      "sourceUrl": "https://blog.google/",
+      "announcementType": "official",
+      "discoveredAt": "2025-09-06T23:43:50.153Z",
+      "status": "announced",
+      "confidence": 8,
+      "details": {
+        "specifications": [
+          "Advanced processor",
+          "Improved camera system",
+          "Enhanced battery life"
+        ],
+        "pricing": "$999",
+        "availability": "Expected Q2 2025",
+        "keyFeatures": [
+          "Pro camera system",
+          "All-day battery",
+          "Premium design"
+        ],
+        "targetMarket": "Tech enthusiasts and professionals"
+      }
+    },
+    {
+      "name": "a New Era of AI-Powered Displays](https://img",
+      "brand": "Samsung",
+      "category": "ai-devices",
+      "source": "Samsung News",
+      "sourceUrl": "https://news.samsung.com/us/",
+      "announcementType": "official",
+      "discoveredAt": "2025-09-07T03:12:32.111Z",
+      "status": "announced",
+      "confidence": 10,
+      "details": {
+        "specifications": [],
+        "pricing": "$100",
+        "availability": "- The products are expected to be widely available following the pre-order period in mid to late 2025.",
+        "keyFeatures": [
+          "The **Samsung 2025 Smart Monitors** represent a new era of AI-powered displays featuring premium 4K QD-OLED technology combined with advanced AI capabilities designed for work, play, and streaming on a single screen. Key specifications and features include:",
+          "- Exact retail pricing varies by model but is positioned as premium given the advanced display and AI features."
+        ],
+        "targetMarket": null
+      }
+    },
+    {
+      "name": "a New Era of AI-Powered Displays\")",
+      "brand": "Samsung",
+      "category": "ai-devices",
+      "source": "Samsung News",
+      "sourceUrl": "https://news.samsung.com/us/",
+      "announcementType": "official",
+      "discoveredAt": "2025-09-07T03:12:32.114Z",
+      "status": "announced",
+      "confidence": 10,
+      "details": {
+        "specifications": [],
+        "pricing": "$100",
+        "availability": "- The monitors were first unveiled at CES 2025 in January and are now available for purchase in the U.S. market[2][3].",
+        "keyFeatures": [
+          "The **Samsung 2025 Smart Monitor lineup**, branded as a new era of AI-powered displays, features **premium 4K QD-OLED technology** combined with advanced AI capabilities designed for versatile use in work, play, and streaming from a single screen[1][2].",
+          "**Key specifications and features:**",
+          "- **Connectivity:** Seamless integration with Samsung’s AI ecosystem and compatibility with Microsoft Copilot for personalized content and productivity features[3].",
+          "- **Additional AI Features:** Samsung Vision AI technology across the lineup, enabling personalized, adaptive screen experiences that simplify and enrich daily use[3].",
+          "**Expected or announced pricing:**",
+          "- Exact retail prices have not been explicitly stated in the sources but are positioned as premium monitors with advanced features, suggesting a higher price tier consistent with 4K QD-OLED technology and AI integration[1][2].",
+          "**Release date or availability:**",
+          "**Comparison to existing products:**"
+        ],
+        "targetMarket": null
+      }
+    },
+    {
+      "name": "a New Era of AI-Powered Displays](https://news",
+      "brand": "Samsung",
+      "category": "ai-devices",
+      "source": "Samsung News",
+      "sourceUrl": "https://news.samsung.com/us/",
+      "announcementType": "official",
+      "discoveredAt": "2025-09-07T03:12:32.114Z",
+      "status": "announced",
+      "confidence": 10,
+      "details": {
+        "specifications": [],
+        "pricing": "$100",
+        "availability": "3. **Release Date or Availability:**",
+        "keyFeatures": [
+          "**Key Specifications and Features:**",
+          "- **AI Features:** Vision AI Companion powered by generative AI enables conversational interactions, personalized recommendations, and smarter multi-device communication with an upgraded Bixby 2 voice assistant.",
+          "**Expected or Announced Pricing:**",
+          "- Specific pricing details for the 2025 OLED lineup have not been publicly announced yet. However, Samsung has offered promotions such as $100 off qualifying TVs or soundbars for early sign-ups during the CES 2025 launch period, indicating premium pricing consistent with flagship OLED TVs.",
+          "**Release Date or Availability:**",
+          "- The Galaxy S25 series, which also features advanced AI displays, is set for unveiling on January 22, 2025.",
+          "**Comparison to Existing Products:**"
+        ],
+        "targetMarket": null
+      }
+    },
+    {
+      "name": "a New Era of AI-Powered Displays\")",
+      "brand": "Samsung",
+      "category": "ai-devices",
+      "source": "Samsung News",
+      "sourceUrl": "https://news.samsung.com/us/",
+      "announcementType": "official",
+      "discoveredAt": "2025-09-07T03:12:32.115Z",
+      "status": "announced",
+      "confidence": 10,
+      "details": {
+        "specifications": [],
+        "pricing": "$100",
+        "availability": "- The 2025 Smart Monitor lineup was announced as available for reservation starting **June 9, 2025**.",
+        "keyFeatures": [
+          "The \"Samsung: A New Era of AI-Powered Displays\" refers primarily to Samsung's 2025 Smart Monitor lineup and AI-powered TV displays unveiled with advanced AI features under the Samsung Vision AI initiative.",
+          "**Key Specifications and Features:**",
+          "- The 2025 Smart Monitors feature **premium 4K QD-OLED technology** for superior picture quality.",
+          "- They include **AI Picture Optimizer**, an industry-first feature built directly into the display that performs real-time visual optimization without needing a separate PC.",
+          "**Expected or Announced Pricing:**",
+          "- Specific MSRP pricing for individual models has not been detailed in the available information but pre-order incentives indicate a premium pricing tier consistent with 4K QD-OLED and AI features[1][2].",
+          "**Release Date or Availability:**",
+          "**Comparison to Existing Products:**",
+          "- These 2025 displays represent a significant upgrade over previous Samsung Smart Monitors and TVs by integrating **on-device AI for real-time picture optimization**, a feature not present in earlier models."
+        ],
+        "targetMarket": null
+      }
+    },
+    {
+      "name": "‘SmartThings Meets AI Home’ Campaign Ahead of IFA 2025](https://img",
+      "brand": "Samsung",
+      "category": "smart-home",
+      "source": "Samsung News",
+      "sourceUrl": "https://news.samsung.com/us/",
+      "announcementType": "official",
+      "discoveredAt": "2025-09-07T03:12:32.115Z",
+      "status": "announced",
+      "confidence": 10,
+      "details": {
+        "specifications": [],
+        "pricing": null,
+        "availability": "3. **Release Date or Availability:**",
+        "keyFeatures": [
+          "**Key Specifications and Features:**",
+          "- **AI Home Display:** Appliances feature 7-inch or 9-inch LCD AI Home screens (e.g., on refrigerators) that serve as central control hubs, enabling interaction with devices and displaying personalized information like calendars and daily boards.",
+          "- **Care Features:** Proactive maintenance alerts and family care monitoring (e.g., alerts if no movement is detected) enhance user safety and convenience.",
+          "**Expected or Announced Pricing:**",
+          "- Specific pricing details for the Bespoke AI appliances or the SmartThings Meets AI Home campaign have not been publicly disclosed in the available sources as of September 2025.",
+          "**Release Date or Availability:**",
+          "**Comparison to Existing Products:**"
+        ],
+        "targetMarket": null
+      }
+    },
+    {
+      "name": "sideline technology using AI innovation](https://news",
+      "brand": "Microsoft",
+      "category": "ai-devices",
+      "source": "Microsoft News",
+      "sourceUrl": "https://news.microsoft.com/",
+      "announcementType": "official",
+      "discoveredAt": "2025-09-07T03:12:38.187Z",
+      "status": "announced",
+      "confidence": 6,
+      "details": {
+        "specifications": [],
+        "pricing": null,
+        "availability": "3. **Release Date or Availability:**",
+        "keyFeatures": [
+          "**Key Specifications and Features:**",
+          "**Expected or Announced Pricing:**",
+          "**Release Date or Availability:**",
+          "**Comparison to Existing Products:**",
+          "- This solution is unique in its deep integration of AI-powered natural language processing and real-time analytics tailored specifically for professional football sideline use."
+        ],
+        "targetMarket": null
+      }
+    }
+  ],
+  "lastUpdated": "2025-09-07T03:13:33.357Z",
+  "stats": {
+    "total": 9,
+    "new": 6,
+    "updated": 0
+  }
+}

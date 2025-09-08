@@ -1,0 +1,344 @@
+import { z } from 'zod';
+
+const DataForSEOKeywordSchema = z.object({
+  keyword: z.string(),
+  location_code: z.number().optional(),
+  language_code: z.string().optional(),
+  search_volume: z.number().optional(),
+  cpc: z.number().optional(),
+  competition: z.number().optional(),
+  competition_level: z.string().optional(),
+  keyword_difficulty: z.number().optional(),
+  monthly_searches: z.array(z.object({
+    year: z.number(),
+    month: z.number(),
+    search_volume: z.number(),
+  })).optional(),
+});
+
+const DataForSEOResponseSchema = z.object({
+  version: z.string(),
+  status_code: z.number(),
+  status_message: z.string(),
+  time: z.string(),
+  cost: z.number(),
+  tasks_count: z.number(),
+  tasks_error: z.number(),
+  tasks: z.array(z.object({
+    id: z.string(),
+    status_code: z.number(),
+    status_message: z.string(),
+    time: z.string(),
+    cost: z.number(),
+    result_count: z.number(),
+    path: z.array(z.string()),
+    data: z.object({
+      api: z.string(),
+      function: z.string(),
+    }),
+    result: z.array(DataForSEOKeywordSchema).optional(),
+  })),
+});
+
+export type DataForSEOKeyword = z.infer<typeof DataForSEOKeywordSchema>;
+export type DataForSEOResponse = z.infer<typeof DataForSEOResponseSchema>;
+
+export class DataForSEOClient {
+  private login: string;
+  private password: string;
+  private baseUrl = 'https://api.dataforseo.com/v3';
+
+  constructor(login?: string, password?: string) {
+    this.login = login || process.env.DATAFORSEO_LOGIN || '';
+    this.password = password || process.env.DATAFORSEO_PASSWORD || '';
+    
+    if (!this.login || !this.password) {
+      throw new Error('DataForSEO credentials are required. Set DATAFORSEO_LOGIN and DATAFORSEO_PASSWORD in your environment variables.');
+    }
+  }
+
+  private getAuthHeader(): string {
+    return 'Basic ' + Buffer.from(`${this.login}:${this.password}`).toString('base64');
+  }
+
+  async getKeywordData(keywords: string[], options?: {
+    locationCode?: number; // US = 2840
+    languageCode?: string; // en = English
+  }): Promise<DataForSEOKeyword[]> {
+    try {
+      const requestBody = keywords.map(keyword => ({
+        keyword,
+        location_code: options?.locationCode || 2840, // US by default
+        language_code: options?.languageCode || 'en',
+      }));
+
+      const response = await fetch(`${this.baseUrl}/keywords_data/google_ads/search_volume/live`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': this.getAuthHeader(),
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`DataForSEO API error: ${response.status} ${response.statusText} - ${errorText}`);
+      }
+
+      const data = await response.json();
+      const parsedResponse = DataForSEOResponseSchema.parse(data);
+      
+      if (parsedResponse.tasks[0]?.result) {
+        return parsedResponse.tasks[0].result;
+      }
+
+      throw new Error('No keyword data returned from DataForSEO');
+    } catch (error) {
+      console.error('DataForSEO keyword data failed:', error);
+      throw error;
+    }
+  }
+
+  async getKeywordDifficulty(keywords: string[], options?: {
+    locationCode?: number;
+    languageCode?: string;
+  }): Promise<Array<{
+    keyword: string;
+    difficulty: number;
+    competition: number;
+  }>> {
+    try {
+      const requestBody = keywords.map(keyword => ({
+        keyword,
+        location_code: options?.locationCode || 2840,
+        language_code: options?.languageCode || 'en',
+      }));
+
+      const response = await fetch(`${this.baseUrl}/keywords_data/google_ads/keyword_difficulty/live`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': this.getAuthHeader(),
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        throw new Error(`DataForSEO keyword difficulty failed: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const parsedResponse = DataForSEOResponseSchema.parse(data);
+      
+      if (parsedResponse.tasks[0]?.result) {
+        return parsedResponse.tasks[0].result.map(item => ({
+          keyword: item.keyword,
+          difficulty: item.keyword_difficulty || 0,
+          competition: item.competition || 0,
+        }));
+      }
+
+      return [];
+    } catch (error) {
+      console.error('DataForSEO keyword difficulty failed:', error);
+      throw error;
+    }
+  }
+
+  async getSERPAnalysis(keyword: string, options?: {
+    locationCode?: number;
+    languageCode?: string;
+    depth?: number;
+  }): Promise<{
+    keyword: string;
+    totalResults: number;
+    competitorDomains: string[];
+    topPages: Array<{
+      url: string;
+      title: string;
+      description: string;
+      domain: string;
+      position: number;
+    }>;
+  }> {
+    try {
+      const requestBody = [{
+        keyword,
+        location_code: options?.locationCode || 2840,
+        language_code: options?.languageCode || 'en',
+        depth: options?.depth || 10,
+      }];
+
+      const response = await fetch(`${this.baseUrl}/serp/google/organic/live/advanced`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': this.getAuthHeader(),
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        throw new Error(`DataForSEO SERP analysis failed: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      if (data.tasks?.[0]?.result?.[0]?.items) {
+        const items = data.tasks[0].result[0].items;
+        const organicResults = items.filter((item: any) => item.type === 'organic');
+        
+        return {
+          keyword,
+          totalResults: data.tasks[0].result[0].total_count || 0,
+          competitorDomains: [...new Set(organicResults.map((item: any) => item.domain).filter(Boolean))] as string[],
+          topPages: organicResults.slice(0, 10).map((item: any, index: number) => ({
+            url: item.url || '',
+            title: item.title || '',
+            description: item.description || '',
+            domain: item.domain || '',
+            position: index + 1,
+          })),
+        };
+      }
+
+      throw new Error('No SERP data returned from DataForSEO');
+    } catch (error) {
+      console.error('DataForSEO SERP analysis failed:', error);
+      throw error;
+    }
+  }
+
+  async getCompetitorAnalysis(domain: string, options?: {
+    locationCode?: number;
+    languageCode?: string;
+    limit?: number;
+  }): Promise<{
+    domain: string;
+    organicKeywords: number;
+    organicTraffic: number;
+    paidKeywords: number;
+    paidTraffic: number;
+    topKeywords: Array<{
+      keyword: string;
+      position: number;
+      searchVolume: number;
+      cpc: number;
+      trafficPercentage: number;
+    }>;
+  }> {
+    try {
+      const requestBody = [{
+        target: domain,
+        location_code: options?.locationCode || 2840,
+        language_code: options?.languageCode || 'en',
+        limit: options?.limit || 100,
+      }];
+
+      const response = await fetch(`${this.baseUrl}/domain_analytics/google/organic/overview/live`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': this.getAuthHeader(),
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        throw new Error(`DataForSEO competitor analysis failed: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      if (data.tasks?.[0]?.result?.[0]) {
+        const result = data.tasks[0].result[0];
+        
+        return {
+          domain,
+          organicKeywords: result.metrics?.organic?.count || 0,
+          organicTraffic: result.metrics?.organic?.etv || 0,
+          paidKeywords: result.metrics?.paid?.count || 0,
+          paidTraffic: result.metrics?.paid?.etv || 0,
+          topKeywords: (result.top_keywords || []).map((kw: any) => ({
+            keyword: kw.keyword || '',
+            position: kw.rank_absolute || 0,
+            searchVolume: kw.search_volume || 0,
+            cpc: kw.cpc || 0,
+            trafficPercentage: kw.traffic_percentage || 0,
+          })),
+        };
+      }
+
+      throw new Error('No competitor data returned from DataForSEO');
+    } catch (error) {
+      console.error('DataForSEO competitor analysis failed:', error);
+      throw error;
+    }
+  }
+
+  async batchKeywordAnalysis(keywords: string[]): Promise<Array<{
+    keyword: string;
+    volume: number;
+    kd: number;
+    cpc: number;
+    competition: string;
+    intent: 'informational' | 'commercial' | 'transactional' | 'navigational';
+    notes: string;
+  }>> {
+    try {
+      // Get search volume and basic metrics
+      const keywordData = await this.getKeywordData(keywords);
+      
+      // Get keyword difficulty
+      const difficultyData = await this.getKeywordDifficulty(keywords);
+      
+      // Combine and analyze
+      const results = keywords.map(keyword => {
+        const volumeData = keywordData.find(kd => kd.keyword === keyword);
+        const diffData = difficultyData.find(dd => dd.keyword === keyword);
+        
+        // Determine intent based on keyword patterns
+        let intent: 'informational' | 'commercial' | 'transactional' | 'navigational' = 'informational';
+        
+        if (keyword.includes('buy') || keyword.includes('purchase') || keyword.includes('order')) {
+          intent = 'transactional';
+        } else if (keyword.includes('best') || keyword.includes('review') || keyword.includes('vs') || keyword.includes('compare')) {
+          intent = 'commercial';
+        } else if (keyword.includes('how to') || keyword.includes('what is') || keyword.includes('guide')) {
+          intent = 'informational';
+        } else if (keyword.includes('login') || keyword.includes('website') || keyword.includes('official')) {
+          intent = 'navigational';
+        }
+        
+        const volume = volumeData?.search_volume || 0;
+        const kd = diffData?.difficulty || 0;
+        const cpc = volumeData?.cpc || 0;
+        const competition = volumeData?.competition_level || 'unknown';
+        
+        let notes = '';
+        if (volume < 100) notes += 'Low volume. ';
+        if (kd > 70) notes += 'High difficulty. ';
+        if (cpc > 2) notes += 'High CPC value. ';
+        if (competition === 'HIGH') notes += 'High competition. ';
+        
+        return {
+          keyword,
+          volume,
+          kd,
+          cpc,
+          competition,
+          intent,
+          notes: notes.trim() || 'Good opportunity',
+        };
+      });
+      
+      return results;
+    } catch (error) {
+      console.error('Batch keyword analysis failed:', error);
+      throw error;
+    }
+  }
+}
+
+export const dataForSEO = new DataForSEOClient();

@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Review Content Schema",
+  "type": "object",
+  "required": ["title", "product", "score", "verdict", "testedClaims", "lastUpdated"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Review title targeting primary keyword"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "product": {
+      "type": "object",
+      "required": ["name", "brand", "model", "category", "price"],
+      "properties": {
+        "name": "string",
+        "brand": "string", 
+        "model": "string",
+        "category": "string",
+        "price": {
+          "type": "object",
+          "properties": {
+            "amount": "number",
+            "currency": "string",
+            "date": "string"
+          }
+        },
+        "specs": {
+          "type": "object",
+          "description": "Key technical specifications"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": "string",
+              "alt": "string",
+              "caption": "string"
+            }
+          }
+        }
+      }
+    },
+    "score": {
+      "type": "object",
+      "required": ["overall", "breakdown"],
+      "properties": {
+        "overall": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "breakdown": {
+          "type": "object",
+          "properties": {
+            "design": "number",
+            "performance": "number", 
+            "features": "number",
+            "value": "number"
+          }
+        }
+      }
+    },
+    "testedClaims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim", "result", "methodology"],
+        "properties": {
+          "claim": "string",
+          "result": "string",
+          "methodology": "string",
+          "evidence": "string"
+        }
+      }
+    },
+    "prosAndCons": {
+      "type": "object",
+      "properties": {
+        "pros": {
+          "type": "array",
+          "items": "string"
+        },
+        "cons": {
+          "type": "array", 
+          "items": "string"
+        }
+      }
+    },
+    "howWeTested": {
+      "type": "string",
+      "description": "Detailed testing methodology"
+    },
+    "verdict": {
+      "type": "string",
+      "description": "Final verdict and recommendations"
+    },
+    "alternatives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": "string",
+          "reason": "string",
+          "link": "string"
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "url"],
+        "properties": {
+          "title": "string",
+          "url": "string",
+          "accessDate": "string"
+        }
+      }
+    },
+    "seo": {
+      "type": "object",
+      "properties": {
+        "metaTitle": "string",
+        "metaDescription": "string", 
+        "keywords": {
+          "type": "array",
+          "items": "string"
+        },
+        "canonicalUrl": "string"
+      }
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date"
+    },
+    "author": {
+      "type": "object",
+      "properties": {
+        "name": "string",
+        "bio": "string",
+        "expertise": {
+          "type": "array",
+          "items": "string"
+        }
+      }
+    }
+  }
+}

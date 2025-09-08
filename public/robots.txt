@@ -1,0 +1,97 @@
+User-agent: *
+Allow: /
+
+# Allow important crawlers with specific settings
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Applebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /private/
+Disallow: /dashboard/
+
+# Disallow search and filter parameters to avoid duplicate content
+Disallow: /*?q=*
+Disallow: /*?search=*
+Disallow: /*?filter=*
+Disallow: /*?sort=*
+Disallow: /*&q=*
+Disallow: /*&search=*
+Disallow: /*&filter=*
+Disallow: /*&sort=*
+
+# Disallow affiliate tracking parameters
+Disallow: /*?utm_*
+Disallow: /*&utm_*
+Disallow: /*?ref=*
+Disallow: /*&ref=*
+
+# Disallow development and testing files
+Disallow: /test/
+Disallow: /dev/
+Disallow: /*.test.html
+Disallow: /*.staging.html
+
+# Allow important files
+Allow: /sitemap.xml
+Allow: /sitemap-*.xml
+Allow: /robots.txt
+Allow: /favicon.ico
+Allow: /manifest.json
+
+# Block bad bots and scrapers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+# Sitemaps
+Sitemap: https://trendstoday.ca/sitemap.xml
+Sitemap: https://trendstoday.ca/news-sitemap.xml
+Sitemap: https://trendstoday.ca/reviews-sitemap.xml
+Sitemap: https://trendstoday.ca/comparisons-sitemap.xml
+Sitemap: https://trendstoday.ca/guides-sitemap.xml

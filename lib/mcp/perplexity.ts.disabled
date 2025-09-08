@@ -1,0 +1,287 @@
+import { z } from 'zod';
+
+const PerplexityMessageSchema = z.object({
+  role: z.enum(['system', 'user', 'assistant']),
+  content: z.string(),
+});
+
+const PerplexityResponseSchema = z.object({
+  id: z.string(),
+  model: z.string(),
+  created: z.number(),
+  usage: z.object({
+    prompt_tokens: z.number(),
+    completion_tokens: z.number(),
+    total_tokens: z.number(),
+  }),
+  choices: z.array(
+    z.object({
+      index: z.number(),
+      finish_reason: z.string(),
+      message: z.object({
+        role: z.string(),
+        content: z.string(),
+      }),
+      delta: z.object({
+        role: z.string().optional(),
+        content: z.string().optional(),
+      }).optional(),
+    })
+  ),
+});
+
+export type PerplexityMessage = z.infer<typeof PerplexityMessageSchema>;
+export type PerplexityResponse = z.infer<typeof PerplexityResponseSchema>;
+
+export class PerplexityClient {
+  private apiKey: string;
+  private baseUrl = 'https://api.perplexity.ai';
+
+  constructor(apiKey?: string) {
+    this.apiKey = apiKey || process.env.PERPLEXITY_API_KEY || '';
+    
+    if (!this.apiKey) {
+      throw new Error('Perplexity API key is required. Set PERPLEXITY_API_KEY in your environment variables.');
+    }
+  }
+
+  async chat(messages: PerplexityMessage[], options?: {
+    model?: string;
+    temperature?: number;
+    max_tokens?: number;
+    return_citations?: boolean;
+    return_images?: boolean;
+  }): Promise<PerplexityResponse> {
+    try {
+      const response = await fetch(`${this.baseUrl}/chat/completions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.apiKey}`,
+        },
+        body: JSON.stringify({
+          model: options?.model || 'llama-3.1-sonar-large-128k-online',
+          messages,
+          temperature: options?.temperature || 0.2,
+          max_tokens: options?.max_tokens || 4000,
+          return_citations: options?.return_citations ?? true,
+          return_images: options?.return_images ?? false,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Perplexity API error: ${response.status} ${response.statusText} - ${errorText}`);
+      }
+
+      const data = await response.json();
+      return PerplexityResponseSchema.parse(data);
+    } catch (error) {
+      console.error('Perplexity chat failed:', error);
+      throw error;
+    }
+  }
+
+  async generateKeywordClusters(category: string, count: number = 5): Promise<{
+    clusters: Array<{
+      topic: string;
+      keywords: string[];
+      intent: 'informational' | 'commercial' | 'transactional' | 'navigational';
+      difficulty: 'low' | 'medium' | 'high';
+    }>;
+  }> {
+    const messages: PerplexityMessage[] = [
+      {
+        role: 'system',
+        content: `You are an SEO expert helping generate keyword clusters for a tech blog. Focus on high-value, searchable topics with clear commercial or informational intent. Consider seasonal trends and buying cycles.`
+      },
+      {
+        role: 'user',
+        content: `Generate ${count} keyword clusters for the "${category}" category. For each cluster, provide:
+
+1. A main topic/theme
+2. 5-8 related keywords with different search intents
+3. The primary search intent (informational, commercial, transactional, navigational)
+4. Estimated SEO difficulty (low, medium, high)
+
+Focus on topics that would work well for:
+- Product reviews
+- Buying guides ("Best [category] 2025")
+- Comparisons ("[Product A] vs [Product B]")
+- News and trends
+
+Format as JSON with this structure:
+{
+  "clusters": [
+    {
+      "topic": "iPhone 15 Pro Reviews",
+      "keywords": ["iPhone 15 Pro review", "iPhone 15 Pro camera test", "iPhone 15 Pro battery life", "iPhone 15 Pro vs iPhone 14 Pro", "iPhone 15 Pro price", "best iPhone 15 Pro cases", "iPhone 15 Pro specs"],
+      "intent": "commercial",
+      "difficulty": "high"
+    }
+  ]
+}`
+      }
+    ];
+
+    try {
+      const response = await this.chat(messages, {
+        model: 'llama-3.1-sonar-large-128k-online',
+        temperature: 0.3,
+        max_tokens: 2000,
+      });
+
+      const content = response.choices[0]?.message?.content;
+      if (!content) {
+        throw new Error('No content returned from Perplexity');
+      }
+
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) {
+        throw new Error('Could not extract JSON from Perplexity response');
+      }
+
+      return JSON.parse(jsonMatch[0]);
+    } catch (error) {
+      console.error('Keyword cluster generation failed:', error);
+      throw error;
+    }
+  }
+
+  async researchProduct(productName: string, category: string): Promise<{
+    specs: Record<string, any>;
+    pros: string[];
+    cons: string[];
+    priceRange: string;
+    competitorComparisons: string[];
+    sources: string[];
+  }> {
+    const messages: PerplexityMessage[] = [
+      {
+        role: 'system',
+        content: `You are a tech product researcher. Provide comprehensive, factual information about products for review purposes. Include current pricing, specifications, and balanced pros/cons based on multiple sources.`
+      },
+      {
+        role: 'user',
+        content: `Research the ${productName} in the ${category} category. Provide:
+
+1. Key specifications (technical details, features, dimensions, etc.)
+2. Main advantages (3-5 pros)
+3. Main disadvantages (3-5 cons)
+4. Current price range
+5. Top 3 competitor products for comparison
+6. Reputable sources used
+
+Format as JSON:
+{
+  "specs": {
+    "display": "6.1-inch Super Retina XDR",
+    "processor": "A17 Pro chip",
+    "camera": "48MP Main, 12MP Ultra Wide, 12MP Telephoto",
+    "battery": "Up to 23 hours video playback",
+    "storage": "128GB, 256GB, 512GB, 1TB",
+    "price": "$999-$1599"
+  },
+  "pros": ["Excellent camera quality", "Fast A17 Pro performance"],
+  "cons": ["Expensive", "No significant design changes"],
+  "priceRange": "$999-$1599",
+  "competitorComparisons": ["Samsung Galaxy S24 Ultra", "Google Pixel 8 Pro", "OnePlus 12"],
+  "sources": ["apple.com", "gsmarena.com", "techradar.com"]
+}`
+      }
+    ];
+
+    try {
+      const response = await this.chat(messages, {
+        temperature: 0.2,
+        max_tokens: 3000,
+        return_citations: true,
+      });
+
+      const content = response.choices[0]?.message?.content;
+      if (!content) {
+        throw new Error('No content returned from Perplexity');
+      }
+
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) {
+        throw new Error('Could not extract JSON from Perplexity response');
+      }
+
+      return JSON.parse(jsonMatch[0]);
+    } catch (error) {
+      console.error('Product research failed:', error);
+      throw error;
+    }
+  }
+
+  async generateNewsDigest(sources: string[], topics: string[]): Promise<{
+    articles: Array<{
+      title: string;
+      summary: string;
+      source: string;
+      url?: string;
+      publishedAt: string;
+      category: string;
+    }>;
+  }> {
+    const messages: PerplexityMessage[] = [
+      {
+        role: 'system',
+        content: `You are a tech news curator. Find and summarize the most recent, newsworthy tech developments from reliable sources. Focus on breaking news, product launches, industry updates, and significant developments.`
+      },
+      {
+        role: 'user',
+        content: `Find the latest tech news from the past 48 hours covering these topics: ${topics.join(', ')}
+
+Focus on sources like: ${sources.join(', ')}
+
+Provide 5-8 recent articles with:
+1. Compelling headline
+2. 2-3 sentence summary
+3. Source name
+4. Publication date/time
+5. Category/topic
+
+Format as JSON:
+{
+  "articles": [
+    {
+      "title": "Apple Announces Vision Pro 2 Development",
+      "summary": "Apple confirms it's working on a second-generation Vision Pro with improved displays and lighter design. The new headset is expected to launch in late 2025 with significant price reductions.",
+      "source": "TechCrunch",
+      "publishedAt": "2025-01-15T10:30:00Z",
+      "category": "AR/VR"
+    }
+  ]
+}`
+      }
+    ];
+
+    try {
+      const response = await this.chat(messages, {
+        model: 'llama-3.1-sonar-large-128k-online',
+        temperature: 0.4,
+        max_tokens: 3000,
+        return_citations: true,
+      });
+
+      const content = response.choices[0]?.message?.content;
+      if (!content) {
+        throw new Error('No content returned from Perplexity');
+      }
+
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) {
+        throw new Error('Could not extract JSON from Perplexity response');
+      }
+
+      return JSON.parse(jsonMatch[0]);
+    } catch (error) {
+      console.error('News digest generation failed:', error);
+      throw error;
+    }
+  }
+}
+
+export const perplexity = new PerplexityClient();

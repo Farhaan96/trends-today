@@ -1,0 +1,278 @@
+{
+  "title": "Trends Today Testing Methodology and Criteria",
+  "categories": {
+    "smartphones": {
+      "testingDuration": "14-21 days minimum",
+      "criteria": {
+        "design": {
+          "weight": 15,
+          "factors": [
+            "Material quality and feel",
+            "Ergonomics and one-handed use",
+            "Button placement and tactile feedback",
+            "Port and speaker placement",
+            "Color accuracy and finish quality"
+          ],
+          "tests": [
+            "Drop test from 1.5m (with and without case)",
+            "Scratch resistance testing",
+            "Daily wear assessment",
+            "Grip security evaluation"
+          ]
+        },
+        "performance": {
+          "weight": 25,
+          "factors": [
+            "CPU single and multi-core performance",
+            "GPU performance and gaming capability",
+            "RAM management and multitasking",
+            "Storage speed (read/write)",
+            "Thermal management under load"
+          ],
+          "benchmarks": [
+            "Geekbench 6 (CPU)",
+            "3DMark Wild Life Extreme (GPU)",
+            "AnTuTu Benchmark (overall)",
+            "GFXBench Manhattan (graphics)",
+            "Disk Speed Test (storage)"
+          ],
+          "realWorldTests": [
+            "4K video editing (30-minute project)",
+            "High-end gaming (1-hour sessions)",
+            "Photo processing (RAW files)",
+            "App launch speed comparison",
+            "Multitasking stress test (15+ apps)"
+          ]
+        },
+        "camera": {
+          "weight": 20,
+          "factors": [
+            "Daylight photo quality",
+            "Low-light and night mode performance",
+            "Portrait mode accuracy",
+            "Video recording quality and stabilization",
+            "Zoom quality (if applicable)",
+            "Front camera performance"
+          ],
+          "testScenarios": [
+            "Golden hour outdoor portraits",
+            "Indoor photography (1-10 lux)",
+            "Night mode (0.1-1 lux)",
+            "Action photography (moving subjects)",
+            "Macro photography detail",
+            "4K video recording with movement"
+          ],
+          "equipment": [
+            "Professional color checker",
+            "Calibrated monitor for review",
+            "Tripod for consistency",
+            "Light meter for standardization"
+          ]
+        },
+        "battery": {
+          "weight": 20,
+          "factors": [
+            "Real-world battery life",
+            "Charging speed (wired)",
+            "Wireless charging performance",
+            "Battery degradation indicators",
+            "Power efficiency"
+          ],
+          "testProfiles": [
+            "Heavy usage (gaming, streaming, GPS)",
+            "Moderate usage (social media, photos)",
+            "Light usage (calls, texts, basic apps)"
+          ],
+          "measurements": [
+            "Screen-on time tracking",
+            "Standby battery drain",
+            "Charging curve analysis",
+            "Heat during charging"
+          ]
+        },
+        "display": {
+          "weight": 15,
+          "factors": [
+            "Brightness levels (indoor/outdoor)",
+            "Color accuracy and gamut",
+            "Viewing angles",
+            "Touch responsiveness",
+            "Refresh rate implementation"
+          ],
+          "tests": [
+            "Peak brightness measurement",
+            "Color gamut testing",
+            "Outdoor readability assessment",
+            "Touch latency measurement",
+            "PWM flicker detection"
+          ]
+        },
+        "value": {
+          "weight": 5,
+          "factors": [
+            "Price vs performance ratio",
+            "Competition comparison",
+            "Long-term software support",
+            "Resale value projection",
+            "Deal availability"
+          ]
+        }
+      }
+    },
+    "laptops": {
+      "testingDuration": "21-28 days minimum",
+      "criteria": {
+        "design": {
+          "weight": 15,
+          "factors": [
+            "Build quality and materials",
+            "Keyboard and trackpad quality",
+            "Port selection and placement",
+            "Thermal design and fan noise",
+            "Portability and weight"
+          ]
+        },
+        "performance": {
+          "weight": 30,
+          "factors": [
+            "CPU performance (single/multi-core)",
+            "GPU performance (integrated/discrete)",
+            "RAM and storage performance",
+            "Sustained performance under load",
+            "Real-world workflow performance"
+          ]
+        },
+        "display": {
+          "weight": 20,
+          "factors": [
+            "Panel quality and color accuracy",
+            "Brightness and contrast",
+            "Viewing angles",
+            "Touch functionality (if applicable)",
+            "Refresh rate and response time"
+          ]
+        },
+        "battery": {
+          "weight": 15,
+          "factors": [
+            "Real-world battery life",
+            "Charging speed",
+            "Power efficiency",
+            "Battery degradation over time"
+          ]
+        },
+        "connectivity": {
+          "weight": 10,
+          "factors": [
+            "Wi-Fi performance and range",
+            "Bluetooth reliability",
+            "Port functionality",
+            "External display support"
+          ]
+        },
+        "value": {
+          "weight": 10,
+          "factors": [
+            "Price vs performance",
+            "Warranty and support",
+            "Upgrade potential",
+            "Software bundle value"
+          ]
+        }
+      }
+    },
+    "headphones": {
+      "testingDuration": "14 days minimum",
+      "criteria": {
+        "soundQuality": {
+          "weight": 40,
+          "factors": [
+            "Frequency response accuracy",
+            "Soundstage and imaging",
+            "Bass quality and extension",
+            "Midrange clarity",
+            "Treble detail and smoothness"
+          ]
+        },
+        "comfort": {
+          "weight": 20,
+          "factors": [
+            "Long-term wearing comfort",
+            "Clamping force",
+            "Ear cup size and shape",
+            "Headband padding",
+            "Weight distribution"
+          ]
+        },
+        "features": {
+          "weight": 20,
+          "factors": [
+            "Active noise cancellation",
+            "Transparency mode quality",
+            "Controls and ease of use",
+            "App functionality",
+            "Codec support"
+          ]
+        },
+        "buildQuality": {
+          "weight": 10,
+          "factors": [
+            "Material quality",
+            "Hinge and adjustment durability",
+            "Cable quality (if wired)",
+            "Case quality"
+          ]
+        },
+        "battery": {
+          "weight": 10,
+          "factors": [
+            "Battery life (ANC on/off)",
+            "Charging speed",
+            "Quick charge functionality",
+            "Battery level indication"
+          ]
+        }
+      }
+    }
+  },
+  "scoringSystem": {
+    "scale": "1.0 to 5.0 (in 0.1 increments)",
+    "ratings": {
+      "5.0": "Outstanding - Best in class",
+      "4.5-4.9": "Excellent - Among the best available",
+      "4.0-4.4": "Very Good - Above average with minor flaws",
+      "3.5-3.9": "Good - Solid performance with some compromises",
+      "3.0-3.4": "Average - Acceptable but unremarkable",
+      "2.5-2.9": "Below Average - Notable issues affecting usability",
+      "2.0-2.4": "Poor - Significant problems",
+      "1.0-1.9": "Very Poor - Major flaws making it hard to recommend"
+    }
+  },
+  "testingEnvironment": {
+    "location": "Climate-controlled testing laboratory",
+    "temperature": "22°C ± 2°C",
+    "humidity": "45-55% RH",
+    "equipment": [
+      "Calibrated colorimeter for display testing",
+      "Professional audio measurement equipment",
+      "Precision scales for weight measurement",
+      "Thermal imaging camera for heat testing",
+      "Professional photography lighting setup",
+      "Standardized testing devices for comparison"
+    ]
+  },
+  "qualityAssurance": {
+    "multipleUnits": "Test multiple units when possible to account for manufacturing variance",
+    "peerReview": "All reviews undergo peer review by senior team members",
+    "retesting": "Retest questionable results and outliers",
+    "longTermTesting": "Extended testing periods for products meant for long-term use",
+    "updateTesting": "Retest after major software updates that could affect performance"
+  },
+  "ethicsAndTransparency": {
+    "independence": "All products purchased independently or borrowed with no strings attached",
+    "noInfluence": "No manufacturer input on review content or scores",
+    "disclosure": "Clear disclosure of any potential conflicts of interest",
+    "methodology": "Full methodology available for each product category",
+    "dataSharing": "Raw test data available upon request for verification"
+  }
+}

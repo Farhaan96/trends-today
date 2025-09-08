@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model ContentQueue {
+  id          String   @id @default(cuid())
+  type        String   
+  slug        String   @unique
+  title       String
+  status      String   @default("pending") 
+  keywords    Json?
+  metadata    Json?
+  sources     Json?
+  reviewNotes String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  publishedAt DateTime?
+  
+  @@map("content_queue")
+}
+
+model SEOMetrics {
+  id            String   @id @default(cuid())
+  keyword       String
+  searchVolume  Int?
+  difficulty    Int?
+  cpc           Float?
+  intent        String?
+  competitors   Json?
+  lastUpdated   DateTime @default(now())
+  
+  @@unique([keyword])
+  @@map("seo_metrics")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  target    String
+  details   Json?
+  timestamp DateTime @default(now())
+  
+  @@map("audit_log")
+}

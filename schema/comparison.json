@@ -1,0 +1,171 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Comparison Content Schema",
+  "type": "object",
+  "required": ["title", "productA", "productB", "verdict", "lastUpdated"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Comparison title (Product A vs Product B)"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+-vs-[a-z0-9-]+$"
+    },
+    "productA": {
+      "type": "object",
+      "required": ["name", "brand", "price", "keyFeatures"],
+      "properties": {
+        "name": "string",
+        "brand": "string",
+        "price": {
+          "type": "object",
+          "properties": {
+            "amount": "number",
+            "currency": "string"
+          }
+        },
+        "keyFeatures": {
+          "type": "array",
+          "items": "string"
+        },
+        "specs": "object",
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object", 
+            "properties": {
+              "url": "string",
+              "alt": "string"
+            }
+          }
+        }
+      }
+    },
+    "productB": {
+      "type": "object",
+      "required": ["name", "brand", "price", "keyFeatures"],
+      "properties": {
+        "name": "string",
+        "brand": "string", 
+        "price": {
+          "type": "object",
+          "properties": {
+            "amount": "number",
+            "currency": "string"
+          }
+        },
+        "keyFeatures": {
+          "type": "array",
+          "items": "string"
+        },
+        "specs": "object",
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": "string", 
+              "alt": "string"
+            }
+          }
+        }
+      }
+    },
+    "comparisonTable": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["category", "productA", "productB", "winner"],
+        "properties": {
+          "category": "string",
+          "productA": "string",
+          "productB": "string",
+          "winner": {
+            "type": "string",
+            "enum": ["productA", "productB", "tie"]
+          },
+          "explanation": "string"
+        }
+      }
+    },
+    "verdict": {
+      "type": "object", 
+      "required": ["winner", "reasoning"],
+      "properties": {
+        "winner": {
+          "type": "string",
+          "enum": ["productA", "productB", "depends"]
+        },
+        "reasoning": "string",
+        "bestFor": {
+          "type": "object",
+          "properties": {
+            "productA": {
+              "type": "array",
+              "items": "string"
+            },
+            "productB": {
+              "type": "array", 
+              "items": "string"
+            }
+          }
+        }
+      }
+    },
+    "pricingCalculator": {
+      "type": "object",
+      "properties": {
+        "scenarios": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": "string",
+              "productA": "object",
+              "productB": "object"
+            }
+          }
+        }
+      }
+    },
+    "faqs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["question", "answer"],
+        "properties": {
+          "question": "string",
+          "answer": "string"
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "url"],
+        "properties": {
+          "title": "string",
+          "url": "string",
+          "accessDate": "string"
+        }
+      }
+    },
+    "seo": {
+      "type": "object",
+      "properties": {
+        "metaTitle": "string",
+        "metaDescription": "string",
+        "keywords": {
+          "type": "array",
+          "items": "string"
+        }
+      }
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date"
+    }
+  }
+}

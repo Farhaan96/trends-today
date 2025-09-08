@@ -1,0 +1,97 @@
+{
+  "timestamp": "2025-09-07T15:45:00.767Z",
+  "totalDuration": 326402,
+  "success": false,
+  "error": null,
+  "executionResults": [
+    {
+      "agent": "link-healer",
+      "exitCode": 0,
+      "duration": 67,
+      "stdout": "[dotenv@17.2.2] injecting env (0) from .env.local -- tip: 📡 observe env with Radar: https://dotenvx.com/radar\n🚑 LINK HEALER - Emergency Repair Service\nFixing broken links and 404 errors...\n\n🔍 Scanning site for broken links...\nFound 0 potential issues\n🏠 Checking homepage links...\n⚠️ Homepage may need link updates\n🧪 Testing critical links...\n✅ /news/iphone-17-air-announcement-what-to-expect → EXISTS\n✅ /reviews/iphone-15-pro-max-review → EXISTS\n✅ /reviews/samsung-galaxy-s24-ultra-review → EXISTS\n\n📋 LINK HEALING REPORT\n==================================================\n✅ Fixes applied: 0\n❌ Errors encountered: 0\n📄 Report saved: C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\reports\\link-healing-report.json\n\n✅ Link healing completed!\n",
+      "stderr": "",
+      "timestamp": "2025-09-07T15:39:34.432Z",
+      "success": true
+    },
+    {
+      "agent": "image-hunter",
+      "exitCode": 0,
+      "duration": 316,
+      "stdout": "[dotenv@17.2.2] injecting env (0) from .env.local -- tip: 📡 version env with Radar: https://dotenvx.com/radar\n🎯 IMAGE HUNTER - Professional Image Sourcing\nReplacing placeholder images with real content...\n\n🔍 Scanning for placeholder images...\nFound 0 files with placeholder images\n👥 Downloading author images...\n📸 Downloading image for: tech-expert\n✅ Downloaded: alex-chen.jpg\n📸 Downloading image for: tech-expert\n✅ Downloaded: sarah-martinez.jpg\n📸 Downloading image for: tech-expert\n✅ Downloaded: david-kim.jpg\n📸 Downloading image for: tech-expert\n✅ Downloaded: emma-thompson.jpg\n\n📋 IMAGE HUNTING REPORT\n==================================================\n🖼️ Images replaced: 0\n❌ Errors encountered: 0\n📄 Report saved: C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\reports\\image-hunting-report.json\n\n✅ Image hunting completed!\n📸 Professional images ready for deployment\n",
+      "stderr": "",
+      "timestamp": "2025-09-07T15:39:35.758Z",
+      "success": true
+    },
+    {
+      "agent": "content-refresher",
+      "exitCode": 0,
+      "duration": 97,
+      "stdout": "[dotenv@17.2.2] injecting env (0) from .env.local -- tip: 📡 version env with Radar: https://dotenvx.com/radar\n🔄 CONTENT REFRESHER - Modernizing Stale Content\nUpdating dates, facts, and context...\n\n🔍 Scanning for outdated content...\nFound 1 items with stale content\n🔄 Refreshing stale content...\nRefreshing: iphone-17-air-announcement-what-to-expect.mdx\n\n📋 CONTENT REFRESH REPORT\n==================================================\n🔄 Content refreshed: 0\n❌ Errors encountered: 0\n📄 Report saved: C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\reports\\content-refresh-report.json\n\n✅ Content refresh completed!\n📅 All content updated with current information\n",
+      "stderr": "",
+      "timestamp": "2025-09-07T15:39:36.869Z",
+      "success": true
+    },
+    {
+      "agent": "trust-builder",
+      "exitCode": 0,
+      "duration": 112,
+      "stdout": "[dotenv@17.2.2] injecting env (0) from .env.local -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit\n🔒 TRUST BUILDER - Establishing Credibility\nAdding author info, sources, and trust signals...\n\n📋 Creating editorial standards page...\n✅ Editorial standards page already exists\n🔍 Scanning for missing trust signals...\nFound 17 items needing trust enhancements\n🔒 Enhancing trust signals...\nEnhancing: first-of-its-kind-ai-settlement-anthropic-to-pay-authors-1-5.mdx\nEnhancing: how-to-watch-apple-s-iphone-17-announcement-and-what-to-expe.mdx\nEnhancing: iphone-17-air-announcement-what-to-expect.mdx\nEnhancing: google-pixel-8-pro-review.mdx\nEnhancing: google-pixel-9-pro-review-why-this-changes-everything-or-doe.mdx\nEnhancing: google-pixel-9-pro-review.mdx\nEnhancing: iphone-15-pro-max-review.mdx\nEnhancing: iphone-15-pro-review.mdx\nEnhancing: iphone-16-pro-max-review-surprising-results-from-real-world-.mdx\nEnhancing: iphone-16-pro-max-review-the-review-that-breaks-the-echo-cha.mdx\nEnhancing: iphone-16-pro-review.mdx\nEnhancing: macbook-air-m3-review.mdx\nEnhancing: oneplus-12-review.mdx\nEnhancing: samsung-galaxy-s24-ultra-review.mdx\nEnhancing: samsung-galaxy-s25-ultra-review-surprising-results-from-real.mdx\nEnhancing: xiaomi-14-ultra-review.mdx\nEnhancing: page.tsx\n\n📋 TRUST BUILDING REPORT\n==================================================\n🔒 Trust enhancements: 7\n❌ Errors encountered: 0\n📄 Report saved: C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\reports\\trust-building-report.json\n\n✨ Trust enhancements:\n  - how-to-watch-apple-s-iphone-17-announcement-and-what-to-expe.mdx: 2 issues fixed\n  - google-pixel-9-pro-review-why-this-changes-everything-or-doe.mdx: 2 issues fixed\n  - iphone-15-pro-max-review.mdx: 1 issues fixed\n  - iphone-16-pro-max-review-surprising-results-from-real-world-.mdx: 2 issues fixed\n  - iphone-16-pro-max-review-the-review-that-breaks-the-echo-cha.mdx: 2 issues fixed\n  - samsung-galaxy-s24-ultra-review.mdx: 1 issues fixed\n  - samsung-galaxy-s25-ultra-review-surprising-results-from-real.mdx: 2 issues fixed\n\n✅ Trust building completed!\n🏆 Credibility signals established across content\n",
+      "stderr": "",
+      "timestamp": "2025-09-07T15:39:37.992Z",
+      "success": true
+    },
+    {
+      "agent": "quality-check",
+      "exitCode": 0,
+      "duration": 110,
+      "stdout": "🚀 Starting quality validation...\n🔍 Starting quality validation...\nValidating 3 news files...\nValidating 13 reviews files...\nValidating 0 compare files...\nValidating 0 best files...\nValidating 0 guides files...\n📊 Quality report saved: C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\reports\\quality-report.json\n📋 Summary report saved: C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\Trends Today\\reports\\quality-summary.md\n✅ Quality validation completed.\n📊 Results: 8/16 files valid, 13 total issues\n⚠️ 8 files have critical issues that should be reviewed.\n📋 Quality report generated with recommendations for improvement.\n",
+      "stderr": "",
+      "timestamp": "2025-09-07T15:39:39.117Z",
+      "success": true
+    },
+    {
+      "agent": "news-scanner",
+      "exitCode": 0,
+      "duration": 23839,
+      "stdout": "🚀 Starting news scanner...\n🔍 Scanning RSS feeds for breaking tech news...\nScanning https://techcrunch.com/feed/...\nScanning https://www.theverge.com/rss/index.xml...\nScanning https://arstechnica.com/feed/...\nScanning https://www.engadget.com/rss.xml...\nScanning https://www.wired.com/feed/rss...\nScanning https://gizmodo.com/rss...\nFound 25 RSS opportunities\n📱 Scanning Reddit for trending tech topics...\nScanning https://www.reddit.com/r/technology.json...\nScanning https://www.reddit.com/r/gadgets.json...\nScanning https://www.reddit.com/r/apple.json...\nScanning https://www.reddit.com/r/android.json...\nFound 2 Reddit opportunities\n💾 Saved 41 news opportunities\n✅ News scanning completed. 41 total opportunities saved.\n🔥 Top opportunities:\n1. iPhone 17 series leak: 8x zoom cameras, 8K recording, vapor chamber cooling, A19 Pro chip, bigger batteries, and new colours (10/10)\n2. “First of its kind” AI settlement: Anthropic to pay authors $1.5 billion (9/10)\n3. How to Watch Apple’s iPhone 17 Announcement, and What to Expect (8/10)\n4. Live Updates From Apple s Awe Dropping iPhone 17 Event 🔴 (8/10)\n5. Why is an Amazon-backed AI startup making Orson Welles fan fiction? (7/10)\n",
+      "stderr": "",
+      "timestamp": "2025-09-07T15:40:03.970Z",
+      "success": true
+    },
+    {
+      "agent": "seo-finder",
+      "exitCode": 0,
+      "duration": 294716,
+      "stdout": "[dotenv@17.2.2] injecting env (0) from .env.local -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`\n🚀 Starting SEO opportunity finder...\n🔍 Finding zero-volume keywords with high potential...\nAnalyzing: \"AI assistant how to use\"\nAnalyzing: \"AI assistant vs comparison\"\nAnalyzing: \"AI assistant alternatives to\"\nAnalyzing: \"AI assistant worth it\"\nAnalyzing: \"AI assistant hidden features\"\nAnalyzing: \"AI assistant tips and tricks\"\nAnalyzing: \"AI assistant beginner guide\"\nAnalyzing: \"AI assistant troubleshooting\"\nAnalyzing: \"foldable phone how to use\"\nAnalyzing: \"foldable phone vs comparison\"\nAnalyzing: \"foldable phone alternatives to\"\nAnalyzing: \"foldable phone worth it\"\nAnalyzing: \"foldable phone hidden features\"\nAnalyzing: \"foldable phone tips and tricks\"\nAnalyzing: \"foldable phone beginner guide\"\nAnalyzing: \"foldable phone troubleshooting\"\nAnalyzing: \"spatial computing how to use\"\nAnalyzing: \"spatial computing vs comparison\"\nAnalyzing: \"spatial computing alternatives to\"\nAnalyzing: \"spatial computing worth it\"\nAnalyzing: \"spatial computing hidden features\"\nAnalyzing: \"spatial computing tips and tricks\"\nAnalyzing: \"spatial computing beginner guide\"\nAnalyzing: \"spatial computing troubleshooting\"\nAnalyzing: \"neural processor how to use\"\nAnalyzing: \"neural processor vs comparison\"\nAnalyzing: \"neural processor alternatives to\"\nAnalyzing: \"neural processor worth it\"\nAnalyzing: \"neural processor hidden features\"\nAnalyzing: \"neural processor tips and tricks\"\nAnalyzing: \"neural processor beginner guide\"\nAnalyzing: \"neural processor troubleshooting\"\nAnalyzing: \"quantum chip how to use\"\nAnalyzing: \"quantum chip vs comparison\"\nAnalyzing: \"quantum chip alternatives to\"\nAnalyzing: \"quantum chip worth it\"\nAnalyzing: \"quantum chip hidden features\"\nAnalyzing: \"quantum chip tips and tricks\"\nAnalyzing: \"quantum chip beginner guide\"\nAnalyzing: \"quantum chip troubleshooting\"\nFound 34 zero-volume keyword opportunities\n📈 Finding trending tech topics with opportunity...\nError finding trending topics: API Error: 400\nFound 2 trending topics\n💾 Saved 36 SEO opportunities\n✅ SEO opportunity finding completed.\n🎯 Top keyword opportunities:\n1. \"AI assistant vs comparison\" (10/10) - comparison\n2. \"AI assistant alternatives to\" (10/10) - article\n3. \"AI assistant worth it\" (10/10) - article\n🔥 Top trending topics:\n1. Spatial Computing (9/10)\n2. Neural Processing Units (8/10)\n",
+      "stderr": "",
+      "timestamp": "2025-09-07T15:44:59.699Z",
+      "success": true
+    }
+  ],
+  "errors": [
+    {
+      "agent": "product-tracker",
+      "exitCode": 3221225794,
+      "duration": 37,
+      "stdout": "",
+      "stderr": "",
+      "timestamp": "2025-09-07T15:45:00.751Z",
+      "success": false
+    },
+    {
+      "agent": "content-creator",
+      "exitCode": 3221225794,
+      "duration": 15,
+      "stdout": "",
+      "stderr": "",
+      "timestamp": "2025-09-07T15:45:00.766Z",
+      "success": false
+    }
+  ],
+  "summary": {
+    "totalAgents": 7,
+    "successfulAgents": 7,
+    "failedAgents": 0,
+    "averageDuration": 45608.142857142855
+  }
+}

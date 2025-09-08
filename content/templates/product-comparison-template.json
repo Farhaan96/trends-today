@@ -1,0 +1,299 @@
+{
+  "title": "[Product A] vs [Product B]: Which [Category] Reigns Supreme?",
+  "slug": "[product-a-vs-product-b]",
+  "category": "[Product Category]",
+  "introduction": "[2-3 sentence overview of why these products are being compared and what readers will learn]",
+  "productA": {
+    "name": "[Product A Name]",
+    "brand": "[Brand A]",
+    "price": {
+      "amount": 0,
+      "currency": "USD"
+    },
+    "keyFeatures": [
+      "[Key feature 1]",
+      "[Key feature 2]",
+      "[Key feature 3]",
+      "[Key feature 4]",
+      "[Key feature 5]"
+    ],
+    "specs": {
+      "display": "[Display specifications]",
+      "processor": "[Processor details]",
+      "ram": "[RAM capacity]",
+      "storage": "[Storage options]",
+      "camera": "[Camera configuration]",
+      "battery": "[Battery capacity/life]",
+      "charging": "[Charging specifications]",
+      "os": "[Operating system]"
+    },
+    "images": [
+      {
+        "url": "/images/[product-a-slug]-comparison.jpg",
+        "alt": "[Product A] for comparison"
+      }
+    ]
+  },
+  "productB": {
+    "name": "[Product B Name]",
+    "brand": "[Brand B]",
+    "price": {
+      "amount": 0,
+      "currency": "USD"
+    },
+    "keyFeatures": [
+      "[Key feature 1]",
+      "[Key feature 2]",
+      "[Key feature 3]",
+      "[Key feature 4]",
+      "[Key feature 5]"
+    ],
+    "specs": {
+      "display": "[Display specifications]",
+      "processor": "[Processor details]",
+      "ram": "[RAM capacity]",
+      "storage": "[Storage options]",
+      "camera": "[Camera configuration]",
+      "battery": "[Battery capacity/life]",
+      "charging": "[Charging specifications]",
+      "os": "[Operating system]"
+    },
+    "images": [
+      {
+        "url": "/images/[product-b-slug]-comparison.jpg",
+        "alt": "[Product B] for comparison"
+      }
+    ]
+  },
+  "comparisonTable": [
+    {
+      "category": "Build Quality",
+      "productA": "[Product A build quality description]",
+      "productB": "[Product B build quality description]",
+      "winner": "[productA/productB/tie]",
+      "explanation": "[Why one wins or why it's a tie]"
+    },
+    {
+      "category": "Display",
+      "productA": "[Product A display details]",
+      "productB": "[Product B display details]",
+      "winner": "[productA/productB/tie]",
+      "explanation": "[Detailed comparison explanation]"
+    },
+    {
+      "category": "Performance",
+      "productA": "[Product A performance description]",
+      "productB": "[Product B performance description]",
+      "winner": "[productA/productB/tie]",
+      "explanation": "[Performance comparison with benchmarks]"
+    },
+    {
+      "category": "Camera System",
+      "productA": "[Product A camera capabilities]",
+      "productB": "[Product B camera capabilities]",
+      "winner": "[productA/productB/tie]",
+      "explanation": "[Camera comparison with real-world examples]"
+    },
+    {
+      "category": "Battery Life",
+      "productA": "[Product A battery performance]",
+      "productB": "[Product B battery performance]",
+      "winner": "[productA/productB/tie]",
+      "explanation": "[Battery comparison with test results]"
+    },
+    {
+      "category": "Charging Speed",
+      "productA": "[Product A charging specifications]",
+      "productB": "[Product B charging specifications]",
+      "winner": "[productA/productB/tie]",
+      "explanation": "[Charging speed comparison]"
+    },
+    {
+      "category": "Software Updates",
+      "productA": "[Product A update policy]",
+      "productB": "[Product B update policy]",
+      "winner": "[productA/productB/tie]",
+      "explanation": "[Software support comparison]"
+    },
+    {
+      "category": "Ecosystem Integration",
+      "productA": "[Product A ecosystem benefits]",
+      "productB": "[Product B ecosystem benefits]",
+      "winner": "[productA/productB/tie]",
+      "explanation": "[Ecosystem comparison]"
+    },
+    {
+      "category": "Price & Value",
+      "productA": "[Product A price point]",
+      "productB": "[Product B price point]",
+      "winner": "[productA/productB/tie]",
+      "explanation": "[Value proposition comparison]"
+    }
+  ],
+  "detailedAnalysis": {
+    "designAndBuild": {
+      "productA": {
+        "materials": "[Material description]",
+        "ergonomics": "[Ergonomics assessment]",
+        "durability": "[Durability evaluation]"
+      },
+      "productB": {
+        "materials": "[Material description]",
+        "ergonomics": "[Ergonomics assessment]",
+        "durability": "[Durability evaluation]"
+      },
+      "conclusion": "[Which is better for design and why]"
+    },
+    "performance": {
+      "benchmarks": {
+        "productA": {
+          "geekbench": "[Geekbench scores]",
+          "graphics": "[Graphics performance]",
+          "realWorld": "[Real-world performance examples]"
+        },
+        "productB": {
+          "geekbench": "[Geekbench scores]",
+          "graphics": "[Graphics performance]",
+          "realWorld": "[Real-world performance examples]"
+        }
+      },
+      "conclusion": "[Performance winner and reasoning]"
+    },
+    "camera": {
+      "daylight": "[Daylight photography comparison]",
+      "lowLight": "[Low-light performance comparison]",
+      "video": "[Video recording comparison]",
+      "features": "[Special camera features comparison]",
+      "conclusion": "[Camera system winner and reasoning]"
+    },
+    "battery": {
+      "testResults": {
+        "productA": {
+          "heavyUsage": "[X] hours",
+          "moderateUsage": "[X] hours",
+          "lightUsage": "[X] hours"
+        },
+        "productB": {
+          "heavyUsage": "[X] hours",
+          "moderateUsage": "[X] hours",
+          "lightUsage": "[X] hours"
+        }
+      },
+      "chargingComparison": "[Charging speed and convenience comparison]",
+      "conclusion": "[Battery winner and reasoning]"
+    }
+  },
+  "useCaseScenarios": [
+    {
+      "scenario": "Professional Use",
+      "recommendation": "[productA/productB]",
+      "reasoning": "[Why this product is better for professionals]"
+    },
+    {
+      "scenario": "Gaming",
+      "recommendation": "[productA/productB]", 
+      "reasoning": "[Why this product is better for gaming]"
+    },
+    {
+      "scenario": "Photography",
+      "recommendation": "[productA/productB]",
+      "reasoning": "[Why this product is better for photography]"
+    },
+    {
+      "scenario": "Budget-Conscious Buyers",
+      "recommendation": "[productA/productB]",
+      "reasoning": "[Why this product offers better value]"
+    }
+  ],
+  "verdict": {
+    "winner": "[productA/productB/depends]",
+    "reasoning": "[Detailed explanation of the overall winner and why, or why it depends on user needs]",
+    "bestFor": {
+      "productA": [
+        "[User type 1 who should choose Product A]",
+        "[User type 2 who should choose Product A]",
+        "[User type 3 who should choose Product A]",
+        "[User type 4 who should choose Product A]",
+        "[User type 5 who should choose Product A]"
+      ],
+      "productB": [
+        "[User type 1 who should choose Product B]",
+        "[User type 2 who should choose Product B]",
+        "[User type 3 who should choose Product B]",
+        "[User type 4 who should choose Product B]",
+        "[User type 5 who should choose Product B]"
+      ]
+    }
+  },
+  "buyingAdvice": {
+    "waitOrBuy": "[Should readers buy now or wait for next generation]",
+    "bestDeals": [
+      {
+        "product": "[productA/productB]",
+        "retailer": "[Retailer name]",
+        "discount": "[Discount details]",
+        "conditions": "[Deal conditions]"
+      }
+    ],
+    "alternatives": [
+      {
+        "name": "[Alternative product name]",
+        "reason": "[Why consider this alternative]",
+        "price": 0
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "question": "[Common comparison question 1]",
+      "answer": "[Comprehensive answer addressing both products]"
+    },
+    {
+      "question": "[Common comparison question 2]",
+      "answer": "[Comprehensive answer addressing both products]"
+    },
+    {
+      "question": "[Common comparison question 3]",
+      "answer": "[Comprehensive answer addressing both products]"
+    },
+    {
+      "question": "[Common comparison question 4]",
+      "answer": "[Comprehensive answer addressing both products]"
+    }
+  ],
+  "sources": [
+    {
+      "title": "[Source title for Product A]",
+      "url": "[Source URL]",
+      "accessDate": "YYYY-MM-DD"
+    },
+    {
+      "title": "[Source title for Product B]",
+      "url": "[Source URL]",
+      "accessDate": "YYYY-MM-DD"
+    },
+    {
+      "title": "[Performance comparison source]",
+      "url": "[Source URL]",
+      "accessDate": "YYYY-MM-DD"
+    }
+  ],
+  "seo": {
+    "metaTitle": "[Product A] vs [Product B]: Complete Comparison 2025 | Trends Today",
+    "metaDescription": "Detailed comparison of [Product A] vs [Product B]. [Key differentiators] to help you choose the best [category] for your needs.",
+    "keywords": ["[Product A] vs [Product B]", "[category] comparison", "[Brand A] vs [Brand B]", "best [category] 2025"]
+  },
+  "lastUpdated": "YYYY-MM-DD",
+  "author": {
+    "id": "[author-id]",
+    "name": "[Author Name]",
+    "title": "[Author Title]",
+    "expertise": ["[Expertise 1]", "[Expertise 2]", "[Expertise 3]"]
+  },
+  "testingMethodology": {
+    "duration": "[X] weeks of testing",
+    "conditions": "[Testing conditions and environment]",
+    "equipment": "[Testing equipment used]",
+    "benchmarks": "[Benchmark tools and tests performed]"
+  }
+}

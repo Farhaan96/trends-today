@@ -1,0 +1,9 @@
+# Programmatic content generation configuration
+maxPagesPerRun: 8
+minVolume: 200
+requireSources: true
+humanReview: true
+reviewsPerRun: 3
+comparisonsPerRun: 2
+guidesPerRun: 2
+newsPerRun: 4
