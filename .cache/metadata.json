@@ -1,0 +1,20 @@
+{
+  "lastUpdated": "2025-09-07T21:03:29.624Z",
+  "apiUsage": {
+    "perplexity": {
+      "daily": 3,
+      "hourly": 3,
+      "lastReset": 1757278976171
+    },
+    "firecrawl": {
+      "daily": 0,
+      "hourly": 0,
+      "lastReset": 1757278976171
+    }
+  },
+  "cacheStats": {
+    "perplexityCacheSize": 2,
+    "firecrawlCacheSize": 0,
+    "totalCacheFiles": 2
+  }
+}

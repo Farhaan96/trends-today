@@ -162,6 +162,8 @@ export default async function HomePage() {
               <span className="text-xs text-gray-300">TRENDING:</span>
               <Link href="/news/iphone-16-leak" className="text-xs text-blue-300 hover:underline">iPhone 16 Pro</Link>
               <Link href="/news/galaxy-s25" className="text-xs text-blue-300 hover:underline">Galaxy S25</Link>
+              <Link href="/news/spatial-computing-2025" className="text-xs text-blue-300 hover:underline">Spatial Computing</Link>
+              <Link href="/news/ai-powered-smartphones" className="text-xs text-blue-300 hover:underline">AI Smartphones</Link>
             </div>
           </div>
         </div>
@@ -319,7 +321,7 @@ export default async function HomePage() {
                 </div>
                 <div className="bg-white border border-gray-200 p-4">
                   <div className="flex flex-wrap gap-2">
-                    {["iPhone 16 Pro", "Galaxy S25", "Pixel 9", "Vision Pro 2", "MacBook Air", "Tesla Phone"].map((tag) => (
+                    {["iPhone 16 Pro", "Galaxy S25", "Pixel 9", "Vision Pro 2", "MacBook Air", "Spatial Computing", "AI Smartphones", "iPhone 17 Leaks"].map((tag) => (
                       <Link key={tag} href={`/search?q=${encodeURIComponent(tag)}`}>
                         <span className="px-2 py-1 bg-gray-100 text-gray-900 text-xs font-bold uppercase tracking-wide hover:bg-blue-100 hover:text-blue-700 transition-colors cursor-pointer">
                           {tag}
