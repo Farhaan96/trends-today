@@ -4,14 +4,7 @@ import { useEffect } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import Script from 'next/script'
 
-// Extend Window interface for analytics
-declare global {
-  interface Window {
-    gtag: (command: string, targetId: string, config?: any) => void
-    clarity: (method: string, ...args: any[]) => void
-    fbq: (method: string, ...args: any[]) => void
-  }
-}
+// Analytics types are defined in src/types/global.d.ts
 
 interface AnalyticsProps {
   googleAnalyticsId?: string

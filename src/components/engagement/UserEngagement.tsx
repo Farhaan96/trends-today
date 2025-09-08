@@ -307,7 +307,9 @@ export default function UserEngagement({
   }
 
   const handleShare = () => {
-    if (navigator.share) {
+    const hasNativeShare = 'share' in navigator && typeof navigator.share === 'function'
+    
+    if (hasNativeShare) {
       navigator.share({
         title: articleTitle,
         url: window.location.href,
@@ -320,7 +322,7 @@ export default function UserEngagement({
     trackEvent('article_share', {
       article_id: articleId,
       article_title: articleTitle,
-      method: navigator.share ? 'native' : 'clipboard',
+      method: hasNativeShare ? 'native' : 'clipboard',
     })
   }
 
