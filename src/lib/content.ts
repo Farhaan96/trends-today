@@ -136,3 +136,32 @@ export async function getArticlesByType(type: Article['type']): Promise<Article[
   const contentDir = path.join(process.cwd(), 'content', type);
   return getArticlesFromDir(contentDir, type);
 }
+
+// Get all posts from all content types (for RSS feed)
+export async function getAllPosts(): Promise<Article[]> {
+  const contentBaseDir = path.join(process.cwd(), 'content');
+  
+  // Load articles from all directories
+  const [newsArticles, reviewArticles, comparisonArticles, guideArticles, bestArticles] = await Promise.all([
+    getArticlesFromDir(path.join(contentBaseDir, 'news'), 'news'),
+    getArticlesFromDir(path.join(contentBaseDir, 'reviews'), 'reviews'),
+    getArticlesFromDir(path.join(contentBaseDir, 'comparisons'), 'comparisons'),
+    getArticlesFromDir(path.join(contentBaseDir, 'guides'), 'guides'),
+    getArticlesFromDir(path.join(contentBaseDir, 'best'), 'best')
+  ]);
+
+  // Combine all articles and sort by date
+  const allArticles = [
+    ...newsArticles,
+    ...reviewArticles, 
+    ...comparisonArticles,
+    ...guideArticles,
+    ...bestArticles
+  ].sort((a, b) => {
+    const dateA = new Date(a.frontmatter.publishedAt || a.frontmatter.datePublished || '1970-01-01');
+    const dateB = new Date(b.frontmatter.publishedAt || b.frontmatter.datePublished || '1970-01-01');
+    return dateB.getTime() - dateA.getTime(); // Sort by date, newest first
+  });
+
+  return allArticles;
+}
