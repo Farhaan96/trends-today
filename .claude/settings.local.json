@@ -69,7 +69,9 @@
       "Bash(del nul)",
       "Bash(git clone:*)",
       "Bash(ls:*)",
-      "Bash(del package-lock.json)"
+      "Bash(del package-lock.json)",
+      "Bash(cat:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []

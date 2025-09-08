@@ -1,219 +1,282 @@
 {
-  "generatedAt": "2025-09-07T16:17:35.667Z",
+  "generatedAt": "2025-09-08T04:03:37.081Z",
   "summary": {
-    "totalFiles": 19,
-    "validFiles": 9,
-    "invalidFiles": 10,
-    "totalIssues": 16,
-    "averageScore": 77.10526315789474
+    "totalFiles": 20,
+    "validFiles": 0,
+    "invalidFiles": 20,
+    "totalIssues": 99,
+    "averageScore": 37.25
   },
   "issues": {
-    "critical": 0,
-    "warning": 8,
-    "good": 11
+    "critical": 20,
+    "warning": 0,
+    "good": 0
   },
   "files": [
     {
+      "path": "news\\ai-agents-revolution-13-billion-market-taking-over-2025.mdx",
+      "contentType": "news",
+      "isValid": false,
+      "score": 25,
+      "issuesCount": 5,
+      "warningsCount": 5,
+      "topIssues": [
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
+      ]
+    },
+    {
       "path": "news\\first-of-its-kind-ai-settlement-anthropic-to-pay-authors-1-5.mdx",
       "contentType": "news",
-      "isValid": true,
-      "score": 80,
-      "issuesCount": 0,
-      "warningsCount": 4,
-      "topIssues": []
+      "isValid": false,
+      "score": 35,
+      "issuesCount": 5,
+      "warningsCount": 3,
+      "topIssues": [
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
+      ]
     },
     {
       "path": "news\\how-to-watch-apple-s-iphone-17-announcement-and-what-to-expe.mdx",
       "contentType": "news",
       "isValid": false,
-      "score": 70,
-      "issuesCount": 2,
+      "score": 40,
+      "issuesCount": 5,
       "warningsCount": 2,
       "topIssues": [
-        "Title too long: 63 chars (max 60)",
-        "Content too short: 295 words (min 300)"
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
       ]
     },
     {
       "path": "news\\iphone-17-air-announcement-what-to-expect.mdx",
       "contentType": "news",
       "isValid": false,
-      "score": 80,
-      "issuesCount": 1,
-      "warningsCount": 2,
+      "score": 45,
+      "issuesCount": 5,
+      "warningsCount": 1,
       "topIssues": [
-        "Invalid publishedAt date format"
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
       ]
     },
     {
       "path": "news\\iphone-17-series-leak-8x-zoom-cameras-8k-recording-vapor-cha.mdx",
       "contentType": "news",
       "isValid": false,
-      "score": 70,
-      "issuesCount": 2,
+      "score": 40,
+      "issuesCount": 5,
       "warningsCount": 2,
       "topIssues": [
-        "Title too long: 124 chars (max 60)",
-        "Description too long: 191 chars (max 160)"
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
       ]
     },
     {
       "path": "news\\live-updates-from-apple-s-awe-dropping-iphone-17-event.mdx",
       "contentType": "news",
-      "isValid": true,
-      "score": 90,
-      "issuesCount": 0,
+      "isValid": false,
+      "score": 40,
+      "issuesCount": 5,
       "warningsCount": 2,
-      "topIssues": []
+      "topIssues": [
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
+      ]
     },
     {
       "path": "news\\why-is-an-amazon-backed-ai-startup-making-orson-welles-fan-f.mdx",
       "contentType": "news",
       "isValid": false,
-      "score": 80,
-      "issuesCount": 1,
+      "score": 40,
+      "issuesCount": 5,
       "warningsCount": 2,
       "topIssues": [
-        "Title too long: 67 chars (max 60)"
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
       ]
     },
     {
       "path": "reviews\\google-pixel-8-pro-review.mdx",
       "contentType": "reviews",
-      "isValid": true,
-      "score": 85,
-      "issuesCount": 0,
-      "warningsCount": 3,
-      "topIssues": []
+      "isValid": false,
+      "score": 40,
+      "issuesCount": 5,
+      "warningsCount": 2,
+      "topIssues": [
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
+      ]
     },
     {
       "path": "reviews\\google-pixel-9-pro-review-why-this-changes-everything-or-doe.mdx",
       "contentType": "reviews",
       "isValid": false,
-      "score": 65,
-      "issuesCount": 2,
+      "score": 45,
+      "issuesCount": 4,
       "warningsCount": 3,
       "topIssues": [
-        "Missing required frontmatter field: author",
-        "Title too long: 67 chars (max 60)"
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
       ]
     },
     {
       "path": "reviews\\google-pixel-9-pro-review.mdx",
       "contentType": "reviews",
-      "isValid": true,
-      "score": 85,
-      "issuesCount": 0,
-      "warningsCount": 3,
-      "topIssues": []
+      "isValid": false,
+      "score": 40,
+      "issuesCount": 5,
+      "warningsCount": 2,
+      "topIssues": [
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
+      ]
     },
     {
       "path": "reviews\\iphone-15-pro-max-review.mdx",
       "contentType": "reviews",
       "isValid": false,
-      "score": 70,
-      "issuesCount": 1,
-      "warningsCount": 4,
+      "score": 35,
+      "issuesCount": 5,
+      "warningsCount": 3,
       "topIssues": [
-        "Title too long: 63 chars (max 60)"
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
       ]
     },
     {
       "path": "reviews\\iphone-15-pro-review.mdx",
       "contentType": "reviews",
-      "isValid": true,
-      "score": 85,
-      "issuesCount": 0,
+      "isValid": false,
+      "score": 35,
+      "issuesCount": 5,
       "warningsCount": 3,
-      "topIssues": []
+      "topIssues": [
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
+      ]
     },
     {
       "path": "reviews\\iphone-16-pro-max-review-surprising-results-from-real-world-.mdx",
       "contentType": "reviews",
       "isValid": false,
-      "score": 65,
-      "issuesCount": 2,
+      "score": 35,
+      "issuesCount": 5,
       "warningsCount": 3,
       "topIssues": [
-        "Missing required frontmatter field: author",
-        "Title too long: 64 chars (max 60)"
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
       ]
     },
     {
       "path": "reviews\\iphone-16-pro-max-review-the-review-that-breaks-the-echo-cha.mdx",
       "contentType": "reviews",
       "isValid": false,
-      "score": 65,
-      "issuesCount": 2,
+      "score": 35,
+      "issuesCount": 5,
       "warningsCount": 3,
       "topIssues": [
-        "Missing required frontmatter field: author",
-        "Title too long: 65 chars (max 60)"
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
       ]
     },
     {
       "path": "reviews\\iphone-16-pro-review.mdx",
       "contentType": "reviews",
-      "isValid": true,
-      "score": 80,
-      "issuesCount": 0,
-      "warningsCount": 4,
-      "topIssues": []
+      "isValid": false,
+      "score": 35,
+      "issuesCount": 5,
+      "warningsCount": 3,
+      "topIssues": [
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
+      ]
     },
     {
       "path": "reviews\\macbook-air-m3-review.mdx",
       "contentType": "reviews",
-      "isValid": true,
-      "score": 85,
-      "issuesCount": 0,
-      "warningsCount": 3,
-      "topIssues": []
+      "isValid": false,
+      "score": 40,
+      "issuesCount": 5,
+      "warningsCount": 2,
+      "topIssues": [
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
+      ]
     },
     {
       "path": "reviews\\oneplus-12-review.mdx",
       "contentType": "reviews",
-      "isValid": true,
-      "score": 85,
-      "issuesCount": 0,
+      "isValid": false,
+      "score": 35,
+      "issuesCount": 5,
       "warningsCount": 3,
-      "topIssues": []
+      "topIssues": [
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
+      ]
     },
     {
       "path": "reviews\\samsung-galaxy-s24-ultra-review.mdx",
       "contentType": "reviews",
       "isValid": false,
-      "score": 70,
-      "issuesCount": 1,
+      "score": 30,
+      "issuesCount": 5,
       "warningsCount": 4,
       "topIssues": [
-        "Title too long: 64 chars (max 60)"
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
       ]
     },
     {
       "path": "reviews\\samsung-galaxy-s25-ultra-review-surprising-results-from-real.mdx",
       "contentType": "reviews",
       "isValid": false,
-      "score": 70,
-      "issuesCount": 2,
-      "warningsCount": 2,
+      "score": 35,
+      "issuesCount": 5,
+      "warningsCount": 3,
       "topIssues": [
-        "Missing required frontmatter field: author",
-        "Title too long: 71 chars (max 60)"
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
       ]
     },
     {
       "path": "reviews\\xiaomi-14-ultra-review.mdx",
       "contentType": "reviews",
-      "isValid": true,
-      "score": 85,
-      "issuesCount": 0,
-      "warningsCount": 3,
-      "topIssues": []
+      "isValid": false,
+      "score": 40,
+      "issuesCount": 5,
+      "warningsCount": 2,
+      "topIssues": [
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
+      ]
     }
   ],
   "recommendations": [
-    "Fix 10 files with critical issues",
-    "Improve 3 files with low quality scores",
-    "Address common issues: Title too long, Missing required frontmatter field, Content too short"
+    "Fix 20 files with critical issues",
+    "Improve 20 files with low quality scores",
+    "Address common issues: Missing required frontmatter field, Too few paragraphs"
   ]
 }
