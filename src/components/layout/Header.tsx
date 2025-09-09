@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import ImageWithFallback from '@/components/ui/ImageWithFallback';
+import Image from 'next/image';
 import { useState } from 'react';
 import DarkModeToggle from '../ui/DarkModeToggle';
 import NotificationSystem from '../ui/NotificationSystem';
@@ -58,7 +58,7 @@ export default function Header() {
             <div className="flex items-center">
               <Link href="/" className="flex-shrink-0" aria-label="Trends Today Home">
                 <div className="flex items-center">
-                  <ImageWithFallback
+                  <Image
                     src="/images/brand/trends-today-logo-tight.png"
                     alt="Trends Today — Tech Reviews & News"
                     width={480}
