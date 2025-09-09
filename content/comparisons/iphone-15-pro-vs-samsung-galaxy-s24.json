@@ -27,7 +27,7 @@
     },
     "images": [
       {
-        "url": "/images/iphone-15-pro-comparison.jpg",
+        "url": "/images/products/iphone-15-pro-comparison.jpg",
         "alt": "iPhone 15 Pro for comparison"
       }
     ]
@@ -58,7 +58,7 @@
     },
     "images": [
       {
-        "url": "/images/samsung-galaxy-s24-comparison.jpg",
+        "url": "/images/products/samsung-galaxy-s24-comparison.jpg",
         "alt": "Samsung Galaxy S24 for comparison"
       }
     ]

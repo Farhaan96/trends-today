@@ -6,6 +6,7 @@ require('dotenv').config({ path: '.env.local' });
 const fs = require('fs').promises;
 const path = require('path');
 const https = require('https');
+const matter = require('gray-matter');
 
 class ImageHunter {
   constructor() {
@@ -20,16 +21,100 @@ class ImageHunter {
     
     this.imageReplacements = [];
     this.errors = [];
+    this.missingImages = new Set();
+    this.downloadQueue = [];
     
-    // Image mapping for different content types
-    this.imageMapping = {
-      'iphone': ['iphone-15-pro-max', 'iphone-16-pro', 'iphone-17-air'],
-      'samsung': ['galaxy-s24-ultra', 'galaxy-s25-ultra'],
-      'google': ['pixel-8-pro', 'pixel-9-pro'],
-      'apple': ['macbook-air-m3', 'apple-vision-pro'],
-      'tech-news': ['tech-workspace', 'smartphone-comparison', 'tech-event'],
-      'authors': ['tech-expert-1', 'tech-expert-2', 'tech-expert-3', 'tech-expert-4']
+    // Enhanced image sourcing database with high-quality tech images
+    this.imageDatabase = {
+      // iPhone 16 Pro Max variations
+      'iphone-16-pro-max-titanium-hero.jpg': {
+        query: 'iPhone 16 Pro titanium premium smartphone',
+        fallback: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=1200&h=800&fit=crop',
+        category: 'product-hero'
+      },
+      'iphone-16-pro-max-camera-system.jpg': {
+        query: 'iPhone camera system lens macro photography',
+        fallback: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200&h=800&fit=crop',
+        category: 'product-feature'
+      },
+      'iphone-16-pro-max-apple-intelligence.jpg': {
+        query: 'AI artificial intelligence smartphone features',
+        fallback: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=800&fit=crop',
+        category: 'product-feature'
+      },
+      'iphone-16-pro-max-a18-bionic.jpg': {
+        query: 'computer chip processor semiconductor technology',
+        fallback: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&h=800&fit=crop',
+        category: 'product-feature'
+      },
+      'iphone-16-pro-max-battery-life.jpg': {
+        query: 'smartphone battery charging wireless power',
+        fallback: 'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=1200&h=800&fit=crop',
+        category: 'product-feature'
+      },
+      'iphone-16-pro-max-titanium-design.jpg': {
+        query: 'titanium metal premium design smartphone',
+        fallback: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=1200&h=800&fit=crop',
+        category: 'product-feature'
+      },
+      // iPhone 15 Pro Max variations
+      'iphone-15-pro-max-camera.jpg': {
+        query: 'iPhone 15 Pro camera lens photography',
+        fallback: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200&h=800&fit=crop',
+        category: 'product-feature'
+      },
+      'iphone-15-pro-max-titanium.jpg': {
+        query: 'iPhone 15 Pro titanium design premium',
+        fallback: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=1200&h=800&fit=crop',
+        category: 'product-feature'
+      },
+      'iphone-15-pro-max-display.jpg': {
+        query: 'smartphone OLED display screen technology',
+        fallback: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=800&fit=crop',
+        category: 'product-feature'
+      },
+      'iphone-15-pro-max-battery.jpg': {
+        query: 'smartphone battery life charging technology',
+        fallback: 'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=1200&h=800&fit=crop',
+        category: 'product-feature'
+      },
+      'iphone-15-pro-max-usbc.jpg': {
+        query: 'USB-C cable charging connector smartphone',
+        fallback: 'https://images.unsplash.com/photo-1558618666-fcd25d85cd64?w=1200&h=800&fit=crop',
+        category: 'product-feature'
+      },
+      // News images
+      'ai-agents-revolution-hero.jpg': {
+        query: 'AI artificial intelligence robots automation future',
+        fallback: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=800&fit=crop',
+        category: 'news'
+      },
+      'ai-settlement-hero.jpg': {
+        query: 'legal documents settlement AI technology law',
+        fallback: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=800&fit=crop',
+        category: 'news'
+      },
+      'iphone-17-lineup-comparison.jpg': {
+        query: 'smartphone lineup comparison multiple phones',
+        fallback: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=800&fit=crop',
+        category: 'news'
+      },
+      'ios-26-features.jpg': {
+        query: 'iOS interface smartphone features software',
+        fallback: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=800&fit=crop',
+        category: 'news'
+      },
+      'iphone-17-air-thin-profile.jpg': {
+        query: 'thin smartphone profile ultra slim design',
+        fallback: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200&h=800&fit=crop',
+        category: 'news'
+      }
     };
+    
+    // Rate limiting for APIs
+    this.requestCount = 0;
+    this.maxRequestsPerHour = 100; // Conservative limit
+    this.requestStartTime = Date.now();
   }
 
   async ensureDirectories() {
@@ -51,10 +136,10 @@ class ImageHunter {
     }
   }
 
-  async scanForPlaceholders() {
-    console.log('🔍 Scanning for placeholder images...');
+  async scanForMissingImages() {
+    console.log('🔍 Scanning for missing images in all articles...');
     
-    const placeholders = [];
+    const missingImages = [];
     
     // Scan content files
     const contentTypes = ['news', 'reviews'];
@@ -68,57 +153,92 @@ class ImageHunter {
           const filePath = path.join(typeDir, file);
           const content = await fs.readFile(filePath, 'utf-8');
           
-          // Check for /file.svg placeholders
-          if (content.includes('/file.svg') || content.includes('/images/placeholder')) {
-            placeholders.push({
-              file: filePath,
-              type: type,
-              contentType: this.detectContentType(file, content),
-              priority: this.determinePriority(file)
-            });
+          // Parse frontmatter to extract image references
+          const { data: frontmatter } = matter(content);
+          const imagePaths = this.extractImagePaths(frontmatter, content);
+          
+          for (const imagePath of imagePaths) {
+            const fullPath = path.join(this.publicDir, imagePath);
+            try {
+              await fs.access(fullPath);
+              // Image exists, skip
+            } catch (error) {
+              // Image doesn't exist, add to missing list
+              const filename = path.basename(imagePath);
+              if (!this.missingImages.has(filename)) {
+                this.missingImages.add(filename);
+                missingImages.push({
+                  file: filePath,
+                  imagePath: imagePath,
+                  filename: filename,
+                  type: type,
+                  product: this.extractProductFromPath(imagePath),
+                  priority: this.determinePriority(filename, frontmatter)
+                });
+              }
+            }
           }
         }
       } catch (error) {
-        console.log(`No ${type} directory found`);
+        console.log(`Error scanning ${type} directory:`, error.message);
       }
     }
     
-    // Scan homepage for placeholder images
-    const homepagePath = path.join(this.srcDir, 'app', 'page.tsx');
-    try {
-      const homepageContent = await fs.readFile(homepagePath, 'utf-8');
-      if (homepageContent.includes('/file.svg')) {
-        placeholders.push({
-          file: homepagePath,
-          type: 'homepage',
-          contentType: 'homepage',
-          priority: 'CRITICAL'
-        });
-      }
-    } catch (error) {
-      console.log('Could not scan homepage');
+    console.log(`📊 Found ${missingImages.length} missing images`);
+    return missingImages;
+  }
+  
+  extractImagePaths(frontmatter, content) {
+    const paths = [];
+    
+    // Extract main image
+    if (frontmatter.image) {
+      paths.push(frontmatter.image);
     }
     
-    return placeholders;
+    // Extract featured image
+    if (frontmatter.images && frontmatter.images.featured) {
+      paths.push(frontmatter.images.featured);
+    }
+    
+    // Extract gallery images
+    if (frontmatter.images && frontmatter.images.gallery) {
+      paths.push(...frontmatter.images.gallery);
+    }
+    
+    // Extract any other image references in content
+    const imageRegex = /\/images\/[\w\/-]+\.(jpg|jpeg|png|webp)/g;
+    const matches = content.match(imageRegex) || [];
+    paths.push(...matches);
+    
+    return [...new Set(paths)]; // Remove duplicates
+  }
+  
+  extractProductFromPath(imagePath) {
+    const filename = path.basename(imagePath);
+    if (filename.includes('iphone')) return 'iphone';
+    if (filename.includes('samsung') || filename.includes('galaxy')) return 'samsung';
+    if (filename.includes('pixel') || filename.includes('google')) return 'google';
+    if (filename.includes('macbook')) return 'macbook';
+    if (filename.includes('oneplus')) return 'oneplus';
+    if (filename.includes('xiaomi')) return 'xiaomi';
+    return 'general';
   }
 
-  detectContentType(filename, content) {
-    const lower = filename.toLowerCase() + ' ' + content.toLowerCase();
+  determinePriority(filename, frontmatter = {}) {
+    // Critical: Homepage and featured articles
+    if (filename.includes('hero') || frontmatter.featured) return 'CRITICAL';
     
-    if (lower.includes('iphone')) return 'iphone';
-    if (lower.includes('samsung') || lower.includes('galaxy')) return 'samsung';
-    if (lower.includes('pixel') || lower.includes('google')) return 'google';
-    if (lower.includes('apple') && !lower.includes('iphone')) return 'apple';
-    if (lower.includes('news') || lower.includes('announcement')) return 'tech-news';
+    // High: Latest iPhone models and main product images
+    if (filename.includes('iphone-16') || filename.includes('iphone-17')) return 'HIGH';
+    if (filename.includes('galaxy-s24') || filename.includes('galaxy-s25')) return 'HIGH';
+    if (filename.includes('pixel-9')) return 'HIGH';
     
-    return 'general-tech';
-  }
-
-  determinePriority(filename) {
-    if (filename.includes('iphone-17-air') || filename.includes('homepage')) return 'CRITICAL';
-    if (filename.includes('iphone-15-pro-max')) return 'HIGH';
-    if (filename.includes('samsung-galaxy-s24')) return 'HIGH';
-    return 'MEDIUM';
+    // Medium: Feature images and older models
+    if (filename.includes('camera') || filename.includes('battery') || filename.includes('display')) return 'MEDIUM';
+    
+    // Low: News and supplementary images
+    return 'LOW';
   }
 
   async downloadImageFromUnsplash(query, filename, directory) {

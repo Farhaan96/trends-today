@@ -1,0 +1,471 @@
+{
+  "timestamp": "2025-09-09T05:27:59.794Z",
+  "version": "1.0",
+  "stats": {
+    "pathsAnalyzed": 168,
+    "pathsFixed": 0,
+    "pathsCreated": 0,
+    "pathsMapped": 1,
+    "errors": []
+  },
+  "mappings": {
+    "/images/authors/sarah-chen.jpg": {
+      "originalPath": "/images/authors/sarah-chen.jpg",
+      "mappedPath": "/images/authors/sarah-chen.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "authors",
+      "directory": "authors",
+      "priority": 5
+    },
+    "/images/news/ai-agents-revolution-hero.jpg": {
+      "originalPath": "/images/news/ai-agents-revolution-hero.jpg",
+      "mappedPath": "/images/news/ai-agents-revolution-hero.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/vision-pro-2-concept.jpg": {
+      "originalPath": "/images/vision-pro-2-concept.jpg",
+      "mappedPath": "/images/products/vision-pro-2-concept.jpg",
+      "status": "generated",
+      "type": "intelligent_generation",
+      "directory": "products",
+      "standardizedName": "vision-pro-2-concept.jpg"
+    },
+    "/images/authors/news-team.jpg": {
+      "originalPath": "/images/authors/news-team.jpg",
+      "mappedPath": "/images/authors/news-team.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "authors",
+      "directory": "authors",
+      "priority": 5
+    },
+    "/images/news/ai-settlement-hero.jpg": {
+      "originalPath": "/images/news/ai-settlement-hero.jpg",
+      "mappedPath": "/images/news/ai-settlement-hero.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/products/google-pixel-9-pro-hero.jpg": {
+      "originalPath": "/images/products/google-pixel-9-pro-hero.jpg",
+      "mappedPath": "/images/products/google-pixel-9-pro-hero.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/authors/alex-chen.jpg": {
+      "originalPath": "/images/authors/alex-chen.jpg",
+      "mappedPath": "/images/authors/alex-chen.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/products/iphone-16-pro-hero.jpgne-15-pro-hero.jpg": {
+      "originalPath": "/images/products/iphone-16-pro-hero.jpgne-15-pro-hero.jpg",
+      "mappedPath": "/images/products/iphone-16-pro-hero.jpgne-15-pro-hero.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "hero",
+      "directory": "products",
+      "priority": 10
+    },
+    "/images/news/ios-26-features.jpg": {
+      "originalPath": "/images/news/ios-26-features.jpg",
+      "mappedPath": "/images/news/ios-26-features.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/news/iphone-17-lineup-comparison.jpg": {
+      "originalPath": "/images/news/iphone-17-lineup-comparison.jpg",
+      "mappedPath": "/images/news/iphone-17-lineup-comparison.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/news/iphone-17-air-thin-profile.jpg": {
+      "originalPath": "/images/news/iphone-17-air-thin-profile.jpg",
+      "mappedPath": "/images/news/iphone-17-air-thin-profile.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/news/apple-watch-airpods-2025.jpg": {
+      "originalPath": "/images/news/apple-watch-airpods-2025.jpg",
+      "mappedPath": "/images/news/apple-watch-airpods-2025.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "news",
+      "directory": "news",
+      "priority": 7
+    },
+    "/images/news/iphone-17-air-engineering.jpg": {
+      "originalPath": "/images/news/iphone-17-air-engineering.jpg",
+      "mappedPath": "/images/news/iphone-17-air-engineering.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "news",
+      "directory": "news",
+      "priority": 7
+    },
+    "/images/news/apple-event-how-to-watch.jpg": {
+      "originalPath": "/images/news/apple-event-how-to-watch.jpg",
+      "mappedPath": "/images/news/apple-event-how-to-watch.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "news",
+      "directory": "news",
+      "priority": 7
+    },
+    "/images/news/iphone-17-air-analysis.jpg": {
+      "originalPath": "/images/news/iphone-17-air-analysis.jpg",
+      "mappedPath": "/images/news/iphone-17-air-analysis.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "news",
+      "directory": "news",
+      "priority": 7
+    },
+    "/images/authors/sarah-martinez.jpg": {
+      "originalPath": "/images/authors/sarah-martinez.jpg",
+      "mappedPath": "/images/authors/sarah-martinez.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/authors/emma-thompson.jpg": {
+      "originalPath": "/images/authors/emma-thompson.jpg",
+      "mappedPath": "/images/authors/emma-thompson.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/products/iphone-16-pro-hero.jpg": {
+      "originalPath": "/images/products/iphone-16-pro-hero.jpg",
+      "mappedPath": "/images/products/iphone-16-pro-hero.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/pixel-8-pro-main.jpg": {
+      "originalPath": "/images/pixel-8-pro-main.jpg",
+      "mappedPath": "/images/products/google-pixel-8-pro-hero.jpg",
+      "status": "similar",
+      "type": "similarity_match",
+      "confidence": 0.7543478260869565,
+      "reason": "product_match_pixel, feature_match_pro, model_match_8"
+    },
+    "/images/authors/sarah-johnson.jpg": {
+      "originalPath": "/images/authors/sarah-johnson.jpg",
+      "mappedPath": "/images/authors/sarah-johnson.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "authors",
+      "directory": "authors",
+      "priority": 5
+    },
+    "/images/authors/david-kim.jpg": {
+      "originalPath": "/images/authors/david-kim.jpg",
+      "mappedPath": "/images/authors/david-kim.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/products/google-pixel-8-pro-hero.jpg": {
+      "originalPath": "/images/products/google-pixel-8-pro-hero.jpg",
+      "mappedPath": "/images/products/google-pixel-8-pro-hero.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/products/iphone-15-pro-max-hero.jpg": {
+      "originalPath": "/images/products/iphone-15-pro-max-hero.jpg",
+      "mappedPath": "/images/products/iphone-15-pro-max-hero.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/products/iphone-15-pro-max-camera.jpg": {
+      "originalPath": "/images/products/iphone-15-pro-max-camera.jpg",
+      "mappedPath": "/images/products/iphone-15-pro-max-camera.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "product-features",
+      "directory": "products",
+      "priority": 6
+    },
+    "/images/products/iphone-15-pro-max-titanium.jpg": {
+      "originalPath": "/images/products/iphone-15-pro-max-titanium.jpg",
+      "mappedPath": "/images/products/iphone-15-pro-max-titanium.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "product-features",
+      "directory": "products",
+      "priority": 6
+    },
+    "/images/products/iphone-15-pro-max-display.jpg": {
+      "originalPath": "/images/products/iphone-15-pro-max-display.jpg",
+      "mappedPath": "/images/products/iphone-15-pro-max-display.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "product-features",
+      "directory": "products",
+      "priority": 6
+    },
+    "/images/products/iphone-15-pro-max-battery.jpg": {
+      "originalPath": "/images/products/iphone-15-pro-max-battery.jpg",
+      "mappedPath": "/images/products/iphone-15-pro-max-battery.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "product-features",
+      "directory": "products",
+      "priority": 6
+    },
+    "/images/products/iphone-15-pro-max-usbc.jpg": {
+      "originalPath": "/images/products/iphone-15-pro-max-usbc.jpg",
+      "mappedPath": "/images/products/iphone-15-pro-max-usbc.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "product-features",
+      "directory": "products",
+      "priority": 6
+    },
+    "/images/reviews/iphone-15-pro-max-review/titanium-design.jpg": {
+      "originalPath": "/images/reviews/iphone-15-pro-max-review/titanium-design.jpg",
+      "mappedPath": "/images/reviews/titanium-design.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "reviews",
+      "directory": "reviews",
+      "priority": 8
+    },
+    "/images/reviews/iphone-15-pro-max-review/camera-comparison.jpg": {
+      "originalPath": "/images/reviews/iphone-15-pro-max-review/camera-comparison.jpg",
+      "mappedPath": "/images/reviews/camera-comparison.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "reviews",
+      "directory": "reviews",
+      "priority": 8
+    },
+    "/images/reviews/iphone-15-pro-max-review/performance-benchmarks.jpg": {
+      "originalPath": "/images/reviews/iphone-15-pro-max-review/performance-benchmarks.jpg",
+      "mappedPath": "/images/reviews/performance-benchmarks.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "reviews",
+      "directory": "reviews",
+      "priority": 8
+    },
+    "/images/iphone-15-pro-main.jpg": {
+      "originalPath": "/images/iphone-15-pro-main.jpg",
+      "mappedPath": "/images/products/iphone-15-pro-hero.jpg",
+      "status": "similar",
+      "type": "similarity_match",
+      "confidence": 0.8055555555555555,
+      "reason": "product_match_iphone, feature_match_pro, model_match_15, high_string_similarity"
+    },
+    "/images/products/iphone-15-pro-hero.jpgne-15-pro-hero.jpg": {
+      "originalPath": "/images/products/iphone-15-pro-hero.jpgne-15-pro-hero.jpg",
+      "mappedPath": "/images/products/iphone-15-pro-hero.jpgne-15-pro-hero.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "hero",
+      "directory": "products",
+      "priority": 10
+    },
+    "/images/products/iphone-15-pro-hero.jpg": {
+      "originalPath": "/images/products/iphone-15-pro-hero.jpg",
+      "mappedPath": "/images/products/iphone-15-pro-hero.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/products/iphone-16-pro-hero.jpgne-16-pro-hero.jpg": {
+      "originalPath": "/images/products/iphone-16-pro-hero.jpgne-16-pro-hero.jpg",
+      "mappedPath": "/images/products/iphone-16-pro-hero.jpgne-16-pro-hero.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "hero",
+      "directory": "products",
+      "priority": 10
+    },
+    "/images/products/iphone-16-pro-max-titanium-hero.jpg": {
+      "originalPath": "/images/products/iphone-16-pro-max-titanium-hero.jpg",
+      "mappedPath": "/images/products/iphone-16-pro-max-titanium-hero.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "hero",
+      "directory": "products",
+      "priority": 10
+    },
+    "/images/products/iphone-16-pro-max-camera-system.jpg": {
+      "originalPath": "/images/products/iphone-16-pro-max-camera-system.jpg",
+      "mappedPath": "/images/products/iphone-16-pro-max-camera-system.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "products",
+      "directory": "products",
+      "priority": 4
+    },
+    "/images/products/iphone-16-pro-max-apple-intelligence.jpg": {
+      "originalPath": "/images/products/iphone-16-pro-max-apple-intelligence.jpg",
+      "mappedPath": "/images/products/iphone-16-pro-max-apple-intelligence.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "product-features",
+      "directory": "products",
+      "priority": 6
+    },
+    "/images/products/iphone-16-pro-max-a18-bionic.jpg": {
+      "originalPath": "/images/products/iphone-16-pro-max-a18-bionic.jpg",
+      "mappedPath": "/images/products/iphone-16-pro-max-a18-bionic.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "products",
+      "directory": "products",
+      "priority": 4
+    },
+    "/images/products/iphone-16-pro-max-battery-life.jpg": {
+      "originalPath": "/images/products/iphone-16-pro-max-battery-life.jpg",
+      "mappedPath": "/images/products/iphone-16-pro-max-battery-life.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "products",
+      "directory": "products",
+      "priority": 4
+    },
+    "/images/products/iphone-16-pro-max-titanium-design.jpg": {
+      "originalPath": "/images/products/iphone-16-pro-max-titanium-design.jpg",
+      "mappedPath": "/images/products/iphone-16-pro-max-titanium-design.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "product-features",
+      "directory": "products",
+      "priority": 6
+    },
+    "/images/products/macbook-air-m3-hero.jpg": {
+      "originalPath": "/images/products/macbook-air-m3-hero.jpg",
+      "mappedPath": "/images/products/macbook-air-m3-hero.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/products/oneplus-12-hero.jpgneplus-12-hero.jpg": {
+      "originalPath": "/images/products/oneplus-12-hero.jpgneplus-12-hero.jpg",
+      "mappedPath": "/images/products/oneplus-12-hero.jpgneplus-12-hero.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "hero",
+      "directory": "products",
+      "priority": 10
+    },
+    "/images/products/oneplus-12-hero.jpg": {
+      "originalPath": "/images/products/oneplus-12-hero.jpg",
+      "mappedPath": "/images/products/oneplus-12-hero.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/galaxy-s24-main.jpg": {
+      "originalPath": "/images/galaxy-s24-main.jpg",
+      "mappedPath": "/images/products/galaxy-s24-main.jpg",
+      "status": "generated",
+      "type": "intelligent_generation",
+      "directory": "products",
+      "standardizedName": "galaxy-s24-main.jpg"
+    },
+    "/images/products/samsung-galaxy-s24-hero.jpg": {
+      "originalPath": "/images/products/samsung-galaxy-s24-hero.jpg",
+      "mappedPath": "/images/products/samsung-galaxy-s24-hero.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/reviews/samsung-galaxy-s24-ultra-review/camera-system.jpg": {
+      "originalPath": "/images/reviews/samsung-galaxy-s24-ultra-review/camera-system.jpg",
+      "mappedPath": "/images/reviews/camera-system.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "reviews",
+      "directory": "reviews",
+      "priority": 8
+    },
+    "/images/reviews/samsung-galaxy-s24-ultra-review/s-pen-productivity.jpg": {
+      "originalPath": "/images/reviews/samsung-galaxy-s24-ultra-review/s-pen-productivity.jpg",
+      "mappedPath": "/images/reviews/s-pen-productivity.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "reviews",
+      "directory": "reviews",
+      "priority": 8
+    },
+    "/images/reviews/samsung-galaxy-s24-ultra-review/display-comparison.jpg": {
+      "originalPath": "/images/reviews/samsung-galaxy-s24-ultra-review/display-comparison.jpg",
+      "mappedPath": "/images/reviews/display-comparison.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "reviews",
+      "directory": "reviews",
+      "priority": 8
+    },
+    "/images/products/xiaomi-14-ultra-hero.jpg": {
+      "originalPath": "/images/products/xiaomi-14-ultra-hero.jpg",
+      "mappedPath": "/images/products/xiaomi-14-ultra-hero.jpg",
+      "status": "exists",
+      "type": "identity"
+    },
+    "/images/iphone-15-pro-guide.jpg": {
+      "originalPath": "/images/iphone-15-pro-guide.jpg",
+      "mappedPath": "/images/products/iphone-15-pro-hero.jpg",
+      "status": "similar",
+      "type": "similarity_match",
+      "confidence": 0.7973684210526315,
+      "reason": "product_match_iphone, feature_match_pro, model_match_15, high_string_similarity"
+    },
+    "/images/galaxy-s24-guide.jpg": {
+      "originalPath": "/images/galaxy-s24-guide.jpg",
+      "mappedPath": "/images/products/galaxy-s24-guide.jpg",
+      "status": "generated",
+      "type": "intelligent_generation",
+      "directory": "products",
+      "standardizedName": "galaxy-s24-guide.jpg"
+    },
+    "/images/pixel-8-guide.jpg": {
+      "originalPath": "/images/pixel-8-guide.jpg",
+      "mappedPath": "/images/products/pixel-8-guide.jpg",
+      "status": "generated",
+      "type": "intelligent_generation",
+      "directory": "products",
+      "standardizedName": "pixel-8-guide.jpg"
+    },
+    "/images/nothing-phone-2-guide.jpg": {
+      "originalPath": "/images/nothing-phone-2-guide.jpg",
+      "mappedPath": "/images/products/nothing-phone-2-guide.jpg",
+      "status": "generated",
+      "type": "intelligent_generation",
+      "directory": "products",
+      "standardizedName": "nothing-phone-2-guide.jpg"
+    },
+    "/images/iphone-15-guide.jpg": {
+      "originalPath": "/images/iphone-15-guide.jpg",
+      "mappedPath": "/images/products/iphone-15-pro-hero.jpg",
+      "status": "similar",
+      "type": "similarity_match",
+      "confidence": 0.6222222222222222,
+      "reason": "product_match_iphone, model_match_15"
+    },
+    "/images/iphone-15-pro-comparison.jpg": {
+      "originalPath": "/images/iphone-15-pro-comparison.jpg",
+      "mappedPath": "/images/products/iphone-15-pro-comparison.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "comparisons",
+      "directory": "products",
+      "priority": 3
+    },
+    "/images/samsung-galaxy-s24-comparison.jpg": {
+      "originalPath": "/images/samsung-galaxy-s24-comparison.jpg",
+      "mappedPath": "/images/products/samsung-galaxy-s24-comparison.jpg",
+      "status": "pattern_mapped",
+      "type": "pattern_match",
+      "pattern": "comparisons",
+      "directory": "products",
+      "priority": 3
+    },
+    "/images/products/google-pixel-9-pro-hero.jpgnges Everything (Or Doesn''t)'": {
+      "originalPath": "/images/products/google-pixel-9-pro-hero.jpgnges Everything (Or Doesn''t)'",
+      "mappedPath": "/images/products/google-pixel-9-pro-hero.jpg",
+      "status": "similar",
+      "type": "similarity_match",
+      "confidence": 1,
+      "reason": "product_match_pixel, feature_match_hero, feature_match_pro, model_match_9, high_string_similarity"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "originalUrl": "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=1200&h=600&fit=crop&q=85",
+  "downloadedAt": 1757395697462,
+  "size": 62950,
+  "options": {
+    "dimensions": {
+      "width": 1200,
+      "height": 600
+    },
+    "quality": "high"
+  },
+  "source": "unsplash",
+  "cacheKey": "f29eb48cecfe753a7e2a9edf6b2c15b2",
+  "localPath": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\.cache\\images\\images\\f29eb48cecfe753a7e2a9edf6b2c15b2.jpg",
+  "cachedAt": 1757395697467,
+  "fileExists": true
+}

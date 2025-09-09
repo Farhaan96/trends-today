@@ -1,0 +1,355 @@
+{
+  "timestamp": "2025-09-09T06:00:47.559Z",
+  "summary": {
+    "duplicateGroupsFound": 9,
+    "imagesReplaced": 20,
+    "errors": 5,
+    "successRate": 80
+  },
+  "duplicateGroups": [
+    {
+      "hash": "01f5065baafe93ec59da7904cee103a4",
+      "files": [
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\authors\\alex-chen.jpg",
+          "filename": "alex-chen.jpg",
+          "relativePath": "authors\\alex-chen.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\authors\\david-kim.jpg",
+          "filename": "david-kim.jpg",
+          "relativePath": "authors\\david-kim.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\authors\\emma-thompson.jpg",
+          "filename": "emma-thompson.jpg",
+          "relativePath": "authors\\emma-thompson.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\authors\\sarah-martinez.jpg",
+          "filename": "sarah-martinez.jpg",
+          "relativePath": "authors\\sarah-martinez.jpg"
+        }
+      ]
+    },
+    {
+      "hash": "339cb32a3fc41fb97b230ade8a2c3a31",
+      "files": [
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\authors\\news-team.jpg",
+          "filename": "news-team.jpg",
+          "relativePath": "authors\\news-team.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\authors\\sarah-chen.jpg",
+          "filename": "sarah-chen.jpg",
+          "relativePath": "authors\\sarah-chen.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\authors\\sarah-johnson.jpg",
+          "filename": "sarah-johnson.jpg",
+          "relativePath": "authors\\sarah-johnson.jpg"
+        }
+      ]
+    },
+    {
+      "hash": "6c6a4da8960e3abd83aec1cae62fcc74",
+      "files": [
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\news\\ai-settlement-hero.jpg",
+          "filename": "ai-settlement-hero.jpg",
+          "relativePath": "news\\ai-settlement-hero.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\iphone-16-pro-max-apple-intelligence.jpg",
+          "filename": "iphone-16-pro-max-apple-intelligence.jpg",
+          "relativePath": "products\\iphone-16-pro-max-apple-intelligence.jpg"
+        }
+      ]
+    },
+    {
+      "hash": "865194bbffd9fbb911c638f23217dc02",
+      "files": [
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\news\\iphone-17-air-analysis.jpg",
+          "filename": "iphone-17-air-analysis.jpg",
+          "relativePath": "news\\iphone-17-air-analysis.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\iphone-15-pro-max-camera.jpg",
+          "filename": "iphone-15-pro-max-camera.jpg",
+          "relativePath": "products\\iphone-15-pro-max-camera.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\iphone-16-pro-max-camera-system.jpg",
+          "filename": "iphone-16-pro-max-camera-system.jpg",
+          "relativePath": "products\\iphone-16-pro-max-camera-system.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\reviews\\camera-comparison.jpg",
+          "filename": "camera-comparison.jpg",
+          "relativePath": "reviews\\camera-comparison.jpg"
+        }
+      ]
+    },
+    {
+      "hash": "3cc5d580f73f045dff55ecac25e1a1ee",
+      "files": [
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\news\\iphone-17-air-engineering.jpg",
+          "filename": "iphone-17-air-engineering.jpg",
+          "relativePath": "news\\iphone-17-air-engineering.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\iphone-16-pro-max-a18-bionic.jpg",
+          "filename": "iphone-16-pro-max-a18-bionic.jpg",
+          "relativePath": "products\\iphone-16-pro-max-a18-bionic.jpg"
+        }
+      ]
+    },
+    {
+      "hash": "e4d008fbfab88eaa239419d64f6b4047",
+      "files": [
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\default-hero.jpg",
+          "filename": "default-hero.jpg",
+          "relativePath": "products\\default-hero.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\galaxy-s24-main.jpg",
+          "filename": "galaxy-s24-main.jpg",
+          "relativePath": "products\\galaxy-s24-main.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\oneplus-12-hero.jpgneplus-12-hero.jpg",
+          "filename": "oneplus-12-hero.jpgneplus-12-hero.jpg",
+          "relativePath": "products\\oneplus-12-hero.jpgneplus-12-hero.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\reviews\\camera-system.jpg",
+          "filename": "camera-system.jpg",
+          "relativePath": "reviews\\camera-system.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\reviews\\display-comparison.jpg",
+          "filename": "display-comparison.jpg",
+          "relativePath": "reviews\\display-comparison.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\reviews\\s-pen-productivity.jpg",
+          "filename": "s-pen-productivity.jpg",
+          "relativePath": "reviews\\s-pen-productivity.jpg"
+        }
+      ]
+    },
+    {
+      "hash": "7afb3ba1e0e4250fd2dedfe7fba1cb94",
+      "files": [
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\galaxy-s24-guide.jpg",
+          "filename": "galaxy-s24-guide.jpg",
+          "relativePath": "products\\galaxy-s24-guide.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\iphone-15-pro-max-titanium.jpg",
+          "filename": "iphone-15-pro-max-titanium.jpg",
+          "relativePath": "products\\iphone-15-pro-max-titanium.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\iphone-16-pro-max-titanium-design.jpg",
+          "filename": "iphone-16-pro-max-titanium-design.jpg",
+          "relativePath": "products\\iphone-16-pro-max-titanium-design.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\iphone-16-pro-max-titanium-hero.jpg",
+          "filename": "iphone-16-pro-max-titanium-hero.jpg",
+          "relativePath": "products\\iphone-16-pro-max-titanium-hero.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\nothing-phone-2-guide.jpg",
+          "filename": "nothing-phone-2-guide.jpg",
+          "relativePath": "products\\nothing-phone-2-guide.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\pixel-8-guide.jpg",
+          "filename": "pixel-8-guide.jpg",
+          "relativePath": "products\\pixel-8-guide.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\vision-pro-2-concept.jpg",
+          "filename": "vision-pro-2-concept.jpg",
+          "relativePath": "products\\vision-pro-2-concept.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\reviews\\titanium-design.jpg",
+          "filename": "titanium-design.jpg",
+          "relativePath": "reviews\\titanium-design.jpg"
+        }
+      ]
+    },
+    {
+      "hash": "194656dd3a3f302d68da07c1ecfef423",
+      "files": [
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\iphone-15-pro-hero.jpg",
+          "filename": "iphone-15-pro-hero.jpg",
+          "relativePath": "products\\iphone-15-pro-hero.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\iphone-16-pro-hero.jpg",
+          "filename": "iphone-16-pro-hero.jpg",
+          "relativePath": "products\\iphone-16-pro-hero.jpg"
+        }
+      ]
+    },
+    {
+      "hash": "2ae6bbc0a3715b5b5aaa5fdb50628e9a",
+      "files": [
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\iphone-15-pro-max-battery.jpg",
+          "filename": "iphone-15-pro-max-battery.jpg",
+          "relativePath": "products\\iphone-15-pro-max-battery.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\iphone-15-pro-max-usbc.jpg",
+          "filename": "iphone-15-pro-max-usbc.jpg",
+          "relativePath": "products\\iphone-15-pro-max-usbc.jpg"
+        },
+        {
+          "path": "C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\public\\images\\products\\iphone-16-pro-max-battery-life.jpg",
+          "filename": "iphone-16-pro-max-battery-life.jpg",
+          "relativePath": "products\\iphone-16-pro-max-battery-life.jpg"
+        }
+      ]
+    }
+  ],
+  "replacements": [
+    {
+      "originalFile": "authors\\david-kim.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "authors\\emma-thompson.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "authors\\sarah-martinez.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "authors\\sarah-chen.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "authors\\sarah-johnson.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "products\\iphone-16-pro-max-apple-intelligence.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1555421689-491a97ff2040?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "products\\iphone-15-pro-max-camera.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "products\\iphone-16-pro-max-camera-system.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "reviews\\camera-comparison.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "products\\galaxy-s24-main.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "products\\oneplus-12-hero.jpgneplus-12-hero.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "reviews\\camera-system.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "reviews\\display-comparison.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "reviews\\s-pen-productivity.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "products\\iphone-16-pro-max-titanium-design.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "products\\iphone-16-pro-max-titanium-hero.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "products\\pixel-8-guide.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "products\\vision-pro-2-concept.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1584697964358-3e14ca57658b?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "reviews\\titanium-design.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    },
+    {
+      "originalFile": "products\\iphone-16-pro-hero.jpg",
+      "newUrl": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=1200&h=800&fit=crop&q=85&auto=format",
+      "status": "success"
+    }
+  ],
+  "errors": [
+    {
+      "file": "products\\iphone-16-pro-max-a18-bionic.jpg",
+      "error": "HTTP 404"
+    },
+    {
+      "file": "products\\iphone-15-pro-max-titanium.jpg",
+      "error": "HTTP 404"
+    },
+    {
+      "file": "products\\nothing-phone-2-guide.jpg",
+      "error": "HTTP 404"
+    },
+    {
+      "file": "products\\iphone-15-pro-max-usbc.jpg",
+      "error": "HTTP 404"
+    },
+    {
+      "file": "products\\iphone-16-pro-max-battery-life.jpg",
+      "error": "HTTP 404"
+    }
+  ],
+  "diverseSourceStats": {
+    "totalVariations": 72,
+    "productTypes": 24,
+    "usedImages": 0
+  }
+}
