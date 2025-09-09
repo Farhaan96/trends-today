@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2025-09-08T04:03:37.081Z",
+  "generatedAt": "2025-09-09T07:08:55.433Z",
   "summary": {
-    "totalFiles": 20,
+    "totalFiles": 22,
     "validFiles": 0,
-    "invalidFiles": 20,
-    "totalIssues": 99,
-    "averageScore": 37.25
+    "invalidFiles": 22,
+    "totalIssues": 106,
+    "averageScore": 38.40909090909091
   },
   "issues": {
-    "critical": 20,
-    "warning": 0,
+    "critical": 21,
+    "warning": 1,
     "good": 0
   },
   "files": [
@@ -37,6 +37,17 @@
         "Missing required frontmatter field: title",
         "Missing required frontmatter field: description",
         "Missing required frontmatter field: publishedAt"
+      ]
+    },
+    {
+      "path": "news\\google-s-ai-mode-adds-5-new-languages-including-hindi-japane.mdx",
+      "contentType": "news",
+      "isValid": false,
+      "score": 70,
+      "issuesCount": 1,
+      "warningsCount": 4,
+      "topIssues": [
+        "Title too long: 75 chars (max 60)"
       ]
     },
     {
@@ -121,8 +132,8 @@
       "path": "reviews\\google-pixel-9-pro-review-why-this-changes-everything-or-doe.mdx",
       "contentType": "reviews",
       "isValid": false,
-      "score": 45,
-      "issuesCount": 4,
+      "score": 35,
+      "issuesCount": 5,
       "warningsCount": 3,
       "topIssues": [
         "Missing required frontmatter field: title",
@@ -147,9 +158,9 @@
       "path": "reviews\\iphone-15-pro-max-review.mdx",
       "contentType": "reviews",
       "isValid": false,
-      "score": 35,
+      "score": 40,
       "issuesCount": 5,
-      "warningsCount": 3,
+      "warningsCount": 2,
       "topIssues": [
         "Missing required frontmatter field: title",
         "Missing required frontmatter field: description",
@@ -171,6 +182,19 @@
     },
     {
       "path": "reviews\\iphone-16-pro-max-review-surprising-results-from-real-world-.mdx",
+      "contentType": "reviews",
+      "isValid": false,
+      "score": 35,
+      "issuesCount": 5,
+      "warningsCount": 3,
+      "topIssues": [
+        "Missing required frontmatter field: title",
+        "Missing required frontmatter field: description",
+        "Missing required frontmatter field: publishedAt"
+      ]
+    },
+    {
+      "path": "reviews\\iphone-16-pro-max-review-the-ai-revolution-has-arrived.mdx",
       "contentType": "reviews",
       "isValid": false,
       "score": 35,
@@ -275,8 +299,8 @@
     }
   ],
   "recommendations": [
-    "Fix 20 files with critical issues",
-    "Improve 20 files with low quality scores",
-    "Address common issues: Missing required frontmatter field, Too few paragraphs"
+    "Fix 22 files with critical issues",
+    "Improve 21 files with low quality scores",
+    "Address common issues: Missing required frontmatter field, Too few paragraphs, Title too long"
   ]
 }

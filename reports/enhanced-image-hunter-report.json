@@ -1,0 +1,73 @@
+{
+  "timestamp": "2025-09-09T07:21:29.876Z",
+  "summary": {
+    "articlesProcessed": 4,
+    "imagesDownloaded": 4,
+    "imagesReplaced": 4,
+    "errors": 0,
+    "cacheHits": 2,
+    "successRate": 100
+  },
+  "replacements": [
+    {
+      "file": "C:\\Users\\farha\\Desktop\\Blog\\content\\news\\samsung-galaxy-s25-ai-perplexity-deal-2025.mdx",
+      "image": "samsung-galaxy-s25-perplexity-ai-hero.jpg",
+      "path": "/images/news/samsung-galaxy-s25-perplexity-ai-hero.jpg",
+      "type": "hero",
+      "priority": 10,
+      "status": "success"
+    },
+    {
+      "file": "C:\\Users\\farha\\Desktop\\Blog\\content\\news\\ai-generated-minecraft-decart-etched-2025.mdx",
+      "image": "ai-generated-minecraft-oasis-gaming-hero.jpg",
+      "path": "/images/news/ai-generated-minecraft-oasis-gaming-hero.jpg",
+      "type": "hero",
+      "priority": 10,
+      "status": "success"
+    },
+    {
+      "file": "C:\\Users\\farha\\Desktop\\Blog\\content\\news\\quantum-computing-2025-commercial-breakthrough.mdx",
+      "image": "quantum-computing-2025-breakthrough-hero.jpg",
+      "path": "/images/news/quantum-computing-2025-breakthrough-hero.jpg",
+      "type": "hero",
+      "priority": 10,
+      "status": "success"
+    },
+    {
+      "file": "C:\\Users\\farha\\Desktop\\Blog\\content\\reviews\\apple-vision-pro-vs-meta-quest-spatial-computing-2025.mdx",
+      "image": "apple-vision-pro-vs-meta-quest-spatial-computing-hero.jpg",
+      "path": "/images/reviews/apple-vision-pro-vs-meta-quest-spatial-computing-hero.jpg",
+      "type": "hero",
+      "priority": 10,
+      "status": "success"
+    }
+  ],
+  "downloads": [
+    {
+      "path": "C:\\Users\\farha\\Desktop\\Blog\\public\\images\\news\\samsung-galaxy-s25-perplexity-ai-hero.jpg",
+      "url": "https://images.unsplash.com/photo-1659100946660-d743d8d7952e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MDIyMTN8MHwxfHNlYXJjaHwxfHxzYW1zdW5nJTIwcHJlbWl1bSUyMHNtYXJ0cGhvbmUlMjBoZXJvJTIwc2hvdCUyMHByb2Zlc3Npb25hbCUyMHBob3RvZ3JhcGh5fGVufDB8MHx8fDE3NTc0MDI0ODd8MA&ixlib=rb-4.1.0&q=80&w=1080&w=1200&h=800&fit=crop",
+      "timestamp": "2025-09-09T07:21:28.452Z"
+    },
+    {
+      "path": "C:\\Users\\farha\\Desktop\\Blog\\public\\images\\news\\ai-generated-minecraft-oasis-gaming-hero.jpg",
+      "url": "https://images.unsplash.com/photo-1639020124201-f86afa88219a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MDIyMTN8MHwxfHNlYXJjaHwxfHxpcGhvbmUlMjBwcmVtaXVtJTIwc21hcnRwaG9uZSUyMGhlcm8lMjBzaG90JTIwcHJvZmVzc2lvbmFsJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc1NzQwMjQ4OHww&ixlib=rb-4.1.0&q=80&w=1080&w=1200&h=800&fit=crop",
+      "timestamp": "2025-09-09T07:21:29.755Z"
+    },
+    {
+      "path": "C:\\Users\\farha\\Desktop\\Blog\\public\\images\\news\\quantum-computing-2025-breakthrough-hero.jpg",
+      "url": "https://images.unsplash.com/photo-1639020124201-f86afa88219a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MDIyMTN8MHwxfHNlYXJjaHwxfHxpcGhvbmUlMjBwcmVtaXVtJTIwc21hcnRwaG9uZSUyMGhlcm8lMjBzaG90JTIwcHJvZmVzc2lvbmFsJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc1NzQwMjQ4OHww&ixlib=rb-4.1.0&q=80&w=1080&w=1200&h=800&fit=crop",
+      "timestamp": "2025-09-09T07:21:29.800Z"
+    },
+    {
+      "path": "C:\\Users\\farha\\Desktop\\Blog\\public\\images\\reviews\\apple-vision-pro-vs-meta-quest-spatial-computing-hero.jpg",
+      "url": "https://images.unsplash.com/photo-1639020124201-f86afa88219a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4MDIyMTN8MHwxfHNlYXJjaHwxfHxpcGhvbmUlMjBwcmVtaXVtJTIwc21hcnRwaG9uZSUyMGhlcm8lMjBzaG90JTIwcHJvZmVzc2lvbmFsJTIwcGhvdG9ncmFwaHl8ZW58MHwwfHx8MTc1NzQwMjQ4OHww&ixlib=rb-4.1.0&q=80&w=1080&w=1200&h=800&fit=crop",
+      "timestamp": "2025-09-09T07:21:29.876Z"
+    }
+  ],
+  "errors": [],
+  "performance": {
+    "totalRequests": 0,
+    "cacheSize": 2,
+    "executionTime": 2933
+  }
+}

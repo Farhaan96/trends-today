@@ -85,6 +85,7 @@
         "eslint-config-next": "15.5.2",
         "husky": "^9.1.7",
         "lint-staged": "^16.1.6",
+        "node-fetch": "^2.7.0",
         "prettier": "^3.6.2",
         "sharp": "^0.34.3",
         "tailwindcss": "^4",
