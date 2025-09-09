@@ -17,6 +17,7 @@
         "gen:best": "node scripts/generate-best.js",
         "gen:news-digest": "node scripts/generate-news.js",
         "audit:seo": "node scripts/seo-audit.js",
+        "fix:images": "node scripts/fix-images.js",
         "test:mcp": "node scripts/test-mcp.js",
         "sitemaps": "next-sitemap",
         "postbuild": "next-sitemap",
