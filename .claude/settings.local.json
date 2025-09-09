@@ -73,7 +73,8 @@
       "Bash(cat:*)",
       "Bash(find:*)",
       "WebFetch(domain:www.semrush.com)",
-      "WebFetch(domain:www.theverge.com)"
+      "WebFetch(domain:www.theverge.com)",
+      "Bash(git config:*)"
     ],
     "deny": [],
     "ask": []

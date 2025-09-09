@@ -80,56 +80,77 @@ export default async function HomePage() {
             <div className="lg:col-span-2">
               <Link href={heroArticle.href}>
                 <article className="group cursor-pointer relative">
-                  <div className="relative aspect-[16/10] rounded-sm overflow-hidden" style={{ backgroundImage: `url(${heroArticle.image})`, backgroundSize: "cover", backgroundPosition: "center" }}>
-                    <ImageWithFallback src={heroArticle.image} alt={heroArticle.title} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
-                    <div className="absolute inset-0 flex items-center justify-center hidden">
-                      <div className="w-24 h-24 bg-white/10 rounded-lg flex items-center justify-center">
-                        <span className="text-5xl opacity-60">📱</span>
-                      </div>
-                    </div>
-                    {/* TechRadar-style Category Tag */}
-                    <div className="absolute top-3 left-3">
-                      <span className="px-2 py-1 bg-red-600 text-white text-xs font-bold uppercase tracking-wide">
+                  <div className="relative aspect-[16/10] rounded-sm overflow-hidden bg-gradient-to-br from-blue-900 to-purple-900">
+                    <ImageWithFallback 
+                      src={heroArticle.image} 
+                      alt={heroArticle.title} 
+                      fill 
+                      priority 
+                      sizes="(max-width: 1024px) 100vw, 50vw" 
+                      className="object-cover"
+                    />
+                    {/* Enhanced Category Tag */}
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1.5 bg-red-600 text-white text-xs font-bold uppercase tracking-wide shadow-lg border border-red-500">
                         {heroArticle.category}
                       </span>
                     </div>
-                    {/* Professional overlay */}
-                    <div className="absolute inset-0 bg-black/40" />
-                    {/* Article info overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h2 className="text-white text-2xl font-bold mb-1 line-clamp-2">{heroArticle.title}</h2>
-                      <p className="text-white/90 text-sm line-clamp-2">{heroArticle.description}</p>
+                    {/* Rating badge */}
+                    <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-sm text-white px-3 py-1.5 rounded-md">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-yellow-400 text-lg">★</span>
+                        <span className="text-sm font-bold">9.2</span>
+                      </div>
+                    </div>
+                    {/* Professional gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    {/* Enhanced article info overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/60 to-transparent">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-white/80 text-sm font-medium">{heroArticle.author}</span>
+                        <span className="text-white/60 text-sm">•</span>
+                        <span className="text-white/80 text-sm">{new Date(heroArticle.publishedAt).toLocaleDateString()}</span>
+                      </div>
+                      <h2 className="text-white text-3xl font-bold mb-2 line-clamp-2 leading-tight">{heroArticle.title}</h2>
+                      <p className="text-white/90 text-base line-clamp-2 leading-relaxed">{heroArticle.description}</p>
                     </div>
                   </div>
                 </article>
               </Link>
             </div>
 
-            {/* Secondary Featured Articles - TechRadar Grid Style */}
+            {/* Secondary Featured Articles - Enhanced Grid Style */}
             <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-2 gap-4">
               {featuredArticles.slice(0, 4).map((article, index) => (
                 <Link key={index} href={article.href}>
-                  <article className="group cursor-pointer relative bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
-                    <div className="relative aspect-[16/10] overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center hidden">
-                        <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
-                          <span className="text-lg opacity-60">📱</span>
-                        </div>
-                      </div>
-                      <div className="absolute top-3 left-3">
-                        <span className="px-1.5 py-0.5 bg-blue-600 text-white text-xs font-bold uppercase">
+                  <article className="group cursor-pointer relative bg-white border border-gray-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 rounded-lg overflow-hidden">
+                    <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+                      <ImageWithFallback 
+                        src={article.image} 
+                        alt={article.title} 
+                        fill 
+                        sizes="(max-width: 1280px) 100vw, 33vw" 
+                        className="object-cover group-hover:scale-105 transition-transform duration-300" 
+                      />
+                      <div className="absolute top-2 left-2">
+                        <span className="px-2 py-1 bg-blue-600 text-white text-xs font-bold uppercase shadow-md">
                           {article.category}
                         </span>
                       </div>
-                      <ImageWithFallback src={article.image} alt={article.title} fill sizes="(max-width: 1280px) 100vw, 33vw" className="object-cover" />
+                      {/* Subtle overlay */}
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                     </div>
-                    <div className="p-3">
-                      <h3 className="font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors line-clamp-2">
+                    <div className="p-4">
+                      <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2 text-sm leading-tight">
                         {article.title}
                       </h3>
-                      <p className="text-gray-700 text-xs line-clamp-2">
+                      <p className="text-gray-600 text-xs line-clamp-2 leading-relaxed">
                         {article.description}
                       </p>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className="text-xs text-gray-500">{new Date(article.publishedAt).toLocaleDateString()}</span>
+                        <div className="w-2 h-2 bg-blue-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </div>
                     </div>
                   </article>
                 </Link>
@@ -139,10 +160,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Professional Navigation Bar */}
-      <section className="bg-gray-800 text-white border-t border-gray-700">
+      {/* Enhanced Navigation with Trending */}
+      <section className="bg-gray-900 text-white border-t border-gray-700 shadow-lg">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center py-4">
+          <div className="flex items-center justify-between py-4">
             <div className="flex items-center space-x-8">
               {[
                 { name: "Reviews", href: "/reviews" },
@@ -152,11 +173,23 @@ export default async function HomePage() {
                 { name: "Guides", href: "/guides" }
               ].map((nav) => (
                 <Link key={nav.name} href={nav.href}>
-                  <span className="text-sm font-medium hover:text-blue-300 transition-colors">
+                  <span className="text-sm font-medium hover:text-blue-400 transition-colors px-2 py-1 rounded hover:bg-gray-800">
                     {nav.name}
                   </span>
                 </Link>
               ))}
+            </div>
+            <div className="hidden lg:flex items-center space-x-4">
+              <span className="text-xs text-orange-400 font-bold uppercase tracking-wide">🔥 Trending:</span>
+              <div className="flex items-center space-x-3">
+                {["iPhone 17 Air", "Galaxy S25 Ultra", "Apple Intelligence"].map((trend) => (
+                  <Link key={trend} href={`/search?q=${encodeURIComponent(trend)}`}>
+                    <span className="text-xs text-blue-300 hover:text-blue-200 transition-colors bg-blue-900/30 px-2 py-1 rounded-full">
+                      {trend}
+                    </span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -182,37 +215,50 @@ export default async function HomePage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {featuredArticles.map((article, index) => (
                     <Link key={index} href={article.href}>
-                      <article className="group cursor-pointer bg-white border border-gray-200 hover:shadow-lg transition-all duration-200">
-                        <div className="relative aspect-[16/10] rounded-sm overflow-hidden" style={{ backgroundImage: `url(${article.image})`, backgroundSize: "cover", backgroundPosition: "center" }}>
-                          <ImageWithFallback src={article.image} alt={article.title} fill sizes="(max-width: 1280px) 100vw, 33vw" className="object-cover" loading="lazy" />
-                          <div className="absolute inset-0 flex items-center justify-center hidden">
-                            <div className="w-16 h-16 bg-gray-300 rounded-lg flex items-center justify-center hidden">
-                              <span className="text-2xl opacity-60">📱</span>
-                            </div>
-                          </div>
+                      <article className="group cursor-pointer bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-1 border border-gray-100">
+                        <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+                          <ImageWithFallback 
+                            src={article.image} 
+                            alt={article.title} 
+                            fill 
+                            sizes="(max-width: 1280px) 100vw, 33vw" 
+                            className="object-cover group-hover:scale-110 transition-transform duration-500" 
+                            loading="lazy" 
+                          />
                           <div className="absolute top-3 left-3">
-                            <span className="px-2 py-1 bg-green-600 text-white text-xs font-bold uppercase">
+                            <span className="px-3 py-1 bg-gradient-to-r from-green-500 to-green-600 text-white text-xs font-bold uppercase shadow-lg rounded-full">
                               {article.category}
                             </span>
                           </div>
-                          {/* TechRadar-style rating badge */}
-                          <div className="absolute top-3 right-3 bg-black/70 text-white px-2 py-1 rounded">
+                          {/* Enhanced rating badge */}
+                          <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-sm text-white px-3 py-1 rounded-full shadow-lg">
                             <div className="flex items-center gap-1">
                               <span className="text-yellow-400 text-sm">★</span>
-                              <span className="text-xs font-bold">4.5</span>
+                              <span className="text-xs font-bold">9.{index + 1}</span>
                             </div>
                           </div>
+                          {/* Gradient overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
-                        <div className="p-4">
-                          <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2 text-lg">
+                        <div className="p-5">
+                          <h3 className="font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2 text-lg leading-tight">
                             {article.title}
                           </h3>
-                          <p className="text-gray-700 text-sm line-clamp-2 mb-3">
+                          <p className="text-gray-600 text-sm line-clamp-3 mb-4 leading-relaxed">
                             {article.description}
                           </p>
-                          <div className="flex items-center justify-between text-xs text-gray-600">
-                            <span>{new Date(article.publishedAt).toLocaleDateString()}</span>
-                            <span className="font-bold uppercase tracking-wide">Read Review</span>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-2">
+                              <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                                <span className="text-white text-xs font-bold">T</span>
+                              </div>
+                              <span className="text-xs text-gray-500">Trends Today</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <span className="text-xs text-gray-500">{new Date(article.publishedAt).toLocaleDateString()}</span>
+                              <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
+                              <span className="text-xs text-blue-600 font-medium group-hover:text-blue-700">Read Review</span>
+                            </div>
                           </div>
                         </div>
                       </article>
