@@ -1,126 +1,247 @@
-# Trends Today - Production-Ready Tech Blog
+# Trends Today - AI-Automated Tech Blog
 
-**🎉 COMPLETE TRANSFORMATION DEPLOYED - ALL 6 AGENTS LIVE!**
+A lean, reliable AI-automated blog system that publishes 15 high-quality tech articles daily with accurate images, clean minimalist UI, solid SEO, and ad monetization.
 
-Trends Today is a complete, production-ready technology blog platform built with Next.js 14, featuring reviews, comparisons, buying guides, and news articles with comprehensive SEO optimization.
-
-## 🚀 Quick Deploy to Vercel
-
-### Option 1: One-Click Deploy (Recommended)
-1. Push this code to GitHub
-2. Visit [vercel.com](https://vercel.com) and sign up/login
-3. Click "New Project" and import from GitHub
-4. Select this repository
-5. Deploy with default settings
-
-### Option 2: Vercel CLI Deploy
-```bash
-# Install Vercel CLI
-npm install -g vercel
-
-# Login to Vercel
-vercel login
-
-# Deploy to production
-vercel --prod
-```
-
-## 📋 Live Sample Pages
-
-Once deployed, your site will include these professional pages:
-
-- **📱 Review**: `/reviews/iphone-15-pro-review`
-  - Complete iPhone 15 Pro review with real testing data
-  - Evidence-based methodology, pros/cons, scoring
-  
-- **⚖️ Comparison**: `/compare/iphone-15-pro-vs-samsung-galaxy-s24`
-  - Head-to-head flagship comparison
-  - Interactive tables, FAQs, recommendations
-  
-- **📋 Buying Guide**: `/best/smartphones/2025`
-  - "Best Smartphones 2025" comprehensive guide
-  - Top 5 ranked recommendations with analysis
-  
-- **📰 News**: `/news/apple-vision-pro-2-development`
-  - Breaking tech news with proper structure
-  - Timeline, quotes, industry impact
-
-## 🏗️ Architecture Overview
-
-### Tech Stack
-- **Next.js 14** with App Router + TypeScript
-- **Tailwind CSS** for responsive design
-- **MDX** for rich content management
-- **Prisma + SQLite** for editorial workflows
-- **Comprehensive SEO** with sitemaps & structured data
-
-### Key Features
-- ✅ **4 Content Types**: Reviews, Comparisons, Buying Guides, News
-- ✅ **SEO Optimized**: Structured data, sitemaps, meta tags
-- ✅ **E-E-A-T Compliant**: Author credentials, source citations, testing methodology
-- ✅ **Mobile-First**: Responsive design with Tailwind CSS
-- ✅ **Production Ready**: Vercel deployment configuration
-
-## 📊 SEO Infrastructure
-
-### Automated SEO Features
-- **Sitemaps**: Auto-generated XML sitemaps for all content
-- **News Sitemap**: Google News compliant sitemap at `/news-sitemap.xml`
-- **Robots.txt**: SEO-friendly robots.txt at `/robots.txt`
-- **Structured Data**: JSON-LD for all content types
-- **Meta Tags**: Optimized for social sharing and search
-
-### Content Standards
-- **Source Citations**: Every article requires 3+ sources
-- **Testing Methodology**: "How we tested" sections for reviews
-- **Author Credentials**: E-E-A-T signals with author boxes
-- **Evidence-Based**: Real testing data and claims verification
-
-## 🔧 Development
+## 🚀 Quick Start
 
 ### Prerequisites
-```bash
-Node.js 18+ 
-npm or yarn
-```
+- Node.js 18+
+- Python 3.8+
+- API Keys (see `.env.example`)
 
 ### Setup
+
+1. **Clone and install dependencies:**
 ```bash
-# Install dependencies
+# Install Node dependencies
+cd apps/web
 npm install
+cd ../..
 
-# Set up database
-npx prisma db push
-
-# Run development server
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Install Python dependencies
+pip install requests python-dotenv
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Configure environment:**
+```bash
+cp .env.example .env.local
+# Edit .env.local with your API keys
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Run the web app:**
+```bash
+cd apps/web
+npm run dev
+# Visit http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. **Generate content:**
+```bash
+# Test run (dry mode - no publishing)
+python apps/pipeline/runner.py --limit 3 --dry-run
 
-## Learn More
+# Publish articles
+python apps/pipeline/runner.py --limit 3 --publish
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+/apps
+  /web          → Next.js blog frontend (minimalist UI)
+  /pipeline     → Python content generation pipeline
+    - topics.py      → Discover trending topics
+    - retrieve.py    → Fetch source content
+    - draft.py       → Generate articles with AI
+    - qa.py          → Quality assurance pass
+    - image.py       → Find and download images
+    - seo.py         → SEO optimization
+    - publish.py     → Write MDX files
+    - runner.py      → Main orchestrator
+    
+/packages
+  /shared       → Shared types and utilities
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔑 API Configuration
 
-## Deploy on Vercel
+### Required APIs (Priority Order)
+1. **Content Generation** (pick one primary):
+   - Claude (Anthropic) - Recommended
+   - OpenAI GPT
+   - Google Gemini
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Research & Sources**:
+   - Perplexity AI - Real-time web search
+   - Firecrawl - Web scraping (optional)
+   - Google Search API (optional)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Images**:
+   - Unsplash - Primary image source
+   - Pexels - Fallback source
+
+## 🤖 Daily Publishing Schedule
+
+The system publishes 15 articles/day in 3 batches:
+
+```bash
+# Morning Batch (9 AM) - 5 articles
+python apps/pipeline/runner.py --limit 5 --publish
+
+# Midday Batch (1 PM) - 5 articles  
+python apps/pipeline/runner.py --limit 5 --publish
+
+# Evening Batch (5 PM) - 5 articles
+python apps/pipeline/runner.py --limit 5 --publish
+```
+
+### Cron Setup
+```cron
+0 9 * * * cd /path/to/blog && python apps/pipeline/runner.py --limit 5 --publish
+0 13 * * * cd /path/to/blog && python apps/pipeline/runner.py --limit 5 --publish
+0 17 * * * cd /path/to/blog && python apps/pipeline/runner.py --limit 5 --publish
+```
+
+### GitHub Actions (Alternative)
+```yaml
+name: Publish Articles
+on:
+  schedule:
+    - cron: '0 9,13,17 * * *'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: pip install requests python-dotenv
+      - run: python apps/pipeline/runner.py --limit 5 --publish
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          # Add other API keys...
+```
+
+## 🎨 Features
+
+### Minimalist UI
+- Clean, leravi.org-inspired design
+- Fast page loads (<2s)
+- Mobile-responsive
+- Card-based article grid
+- Category navigation
+
+### SEO Optimized
+- Meta tags & OpenGraph
+- JSON-LD structured data
+- Sitemap generation
+- Clean URLs
+- Image alt text
+
+### Content Quality
+- 600-900 word articles
+- 2-4 H2 sections
+- Engaging introductions
+- Source attribution
+- Related articles
+
+### Monetization
+- AdSense placeholders
+- Strategic ad placement
+- Non-intrusive design
+
+## 📊 Monitoring
+
+Check pipeline logs:
+```bash
+tail -f pipeline.log
+```
+
+View generation stats:
+```bash
+ls reports/pipeline_*.json
+```
+
+## 🔧 Customization
+
+### Add New Categories
+Edit `apps/web/components/Header.tsx`:
+```typescript
+const categories = [
+  { name: 'Your Category', href: '/category/your-category' },
+  // ...
+]
+```
+
+### Change Publishing Frequency
+Edit `.env.local`:
+```env
+POSTS_PER_DAY=20
+ACTIVE_HOURS=06-23
+BATCH_SIZE=7
+```
+
+### Switch to WordPress
+Implement `apps/pipeline/publishers/wordpress_api/publisher.py`:
+```python
+class WordPressPublisher(PublisherAdapter):
+    def publish(self, article, seo, image):
+        # Implement WordPress REST API
+        pass
+```
+
+Then update runner.py to use WordPress adapter.
+
+## 🚦 Quality Gates
+
+The pipeline ensures quality through:
+1. **Topic deduplication** - No repeated content
+2. **Source verification** - Multiple sources per topic
+3. **QA pass** - Grammar, tone, fact-checking
+4. **SEO validation** - Meta tags, slug optimization
+5. **Image attribution** - Proper licensing
+
+## 📈 Performance Targets
+
+- **Traffic Goal**: 30K monthly visitors
+- **Articles**: 15/day → 450/month
+- **Avg. Engagement**: 60% time on page
+- **Page Speed**: <2s load time
+- **SEO**: 50% page 1 rankings
+
+## 🐛 Troubleshooting
+
+### No topics found
+- Check Perplexity/Google API keys
+- Verify internet connection
+- Check `pipeline.log` for errors
+
+### Images not loading
+- Verify Unsplash/Pexels API keys
+- Check image directory permissions
+- Ensure Next.js image domains configured
+
+### Articles not publishing
+- Check MDX directory exists
+- Verify write permissions
+- Review `pipeline.log` for errors
+
+## 📝 License
+
+MIT
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create feature branch
+3. Commit changes
+4. Push to branch
+5. Open pull request
+
+---
+
+Built with ❤️ for high-quality, automated content generation.

@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+**/node_modules
+apps/web/node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -15,6 +17,8 @@
 
 # next.js
 /.next/
+**/.next/
+apps/web/.next/
 /out/
 
 # production
@@ -50,3 +54,16 @@ next-env.d.ts
 
 # nested repos
 Trends Today/
+
+# cache and temp files
+.cache/
+**/.cache/
+reports/
+pipeline.log
+nul
+*.tmp
+*.temp
+
+# test files
+test_setup.py
+setup.bat

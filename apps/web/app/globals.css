@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Clean typography */
+  h1 {
+    @apply text-4xl font-bold tracking-tight;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold mt-8 mb-4;
+  }
+
+  h3 {
+    @apply text-xl font-semibold mt-6 mb-3;
+  }
+
+  p {
+    @apply leading-relaxed mb-4;
+  }
+}
+
+@layer components {
+  /* Article content */
+  .prose {
+    @apply max-w-none;
+  }
+
+  .prose p {
+    @apply mb-4 text-gray-700 leading-relaxed;
+  }
+
+  .prose h2 {
+    @apply text-2xl font-bold mt-8 mb-4 text-gray-900;
+  }
+
+  .prose h3 {
+    @apply text-xl font-semibold mt-6 mb-3 text-gray-900;
+  }
+
+  .prose ul,
+  .prose ol {
+    @apply mb-4 ml-6;
+  }
+
+  .prose li {
+    @apply mb-2;
+  }
+
+  .prose code {
+    @apply bg-gray-100 px-1 py-0.5 rounded text-sm;
+  }
+
+  .prose pre {
+    @apply bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic my-4;
+  }
+
+  .prose img {
+    @apply rounded-lg my-6;
+  }
+
+  /* Hover effects */
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  /* Card hover */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  /* AdSlot placeholder styling */
+  .ad-slot {
+    @apply bg-gray-50 border border-gray-200 rounded-lg flex items-center justify-center text-gray-400 text-sm;
+    min-height: 250px;
+  }
+
+  /* Loading skeleton */
+  .skeleton {
+    @apply animate-pulse bg-gray-200 rounded;
+  }
+}
