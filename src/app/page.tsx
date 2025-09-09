@@ -52,11 +52,11 @@ export default async function HomePage() {
     title: article.frontmatter.title,
     href: article.href,
     count: article.frontmatter.count || "Top Picks",
-    icon: article.frontmatter.icon || "🏆"
+    category: article.frontmatter.category || "Guide"
   }));
 
   return (
-    <main className="min-h-screen bg-white" style={{ fontFamily: '"Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+    <main className="min-h-screen bg-white">
       {/* SEO: H1 + JSON-LD */}
       <h1 className="sr-only">Trends Today - Tech Reviews, Comparisons & Buying Guides</h1>
       <StructuredData data={getAllBaseSchemas()} />
@@ -93,8 +93,8 @@ export default async function HomePage() {
                         {heroArticle.category}
                       </span>
                     </div>
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+                    {/* Professional overlay */}
+                    <div className="absolute inset-0 bg-black/40" />
                     {/* Article info overlay */}
                     <div className="absolute bottom-0 left-0 right-0 p-4">
                       <h2 className="text-white text-2xl font-bold mb-1 line-clamp-2">{heroArticle.title}</h2>
@@ -139,31 +139,24 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* TechRadar-style Navigation Bar */}
-      <section className="bg-slate-800 text-white">
+      {/* Professional Navigation Bar */}
+      <section className="bg-gray-800 text-white border-t border-gray-700">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between py-3">
-            <div className="flex items-center space-x-6">
+          <div className="flex items-center py-4">
+            <div className="flex items-center space-x-8">
               {[
-                { name: "REVIEWS", href: "/reviews", active: false },
-                { name: "BUYING GUIDES", href: "/best", active: false },
-                { name: "NEWS", href: "/news", active: true },
-                { name: "VERSUS", href: "/compare", active: false },
-                { name: "HOW TO", href: "/guides", active: false }
+                { name: "Reviews", href: "/reviews" },
+                { name: "News", href: "/news" },
+                { name: "Comparisons", href: "/compare" },
+                { name: "Best Of", href: "/best" },
+                { name: "Guides", href: "/guides" }
               ].map((nav) => (
                 <Link key={nav.name} href={nav.href}>
-                  <span className={`text-sm font-bold uppercase tracking-wide hover:text-blue-300 transition-colors ${nav.active ? 'text-blue-300 border-b-2 border-blue-300 pb-3' : ''}`}>
+                  <span className="text-sm font-medium hover:text-blue-300 transition-colors">
                     {nav.name}
                   </span>
                 </Link>
               ))}
-            </div>
-            <div className="hidden md:flex items-center space-x-4">
-              <span className="text-xs text-gray-300">🔥 TRENDING:</span>
-              <Link href="/news/iphone-17-air-ultra-thin-design-leak" className="text-xs text-blue-300 hover:underline animate-pulse">iPhone 17 Air</Link>
-              <Link href="/news/galaxy-s25-ultra-camera-upgrade" className="text-xs text-blue-300 hover:underline">Galaxy S25 Ultra</Link>
-              <Link href="/news/apple-intelligence-rollout-2025" className="text-xs text-blue-300 hover:underline">Apple Intelligence</Link>
-              <Link href="/news/openai-phone-partnership" className="text-xs text-blue-300 hover:underline">OpenAI Phone</Link>
             </div>
           </div>
         </div>
@@ -228,41 +221,31 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              {/* Breaking News Strip */}
-              <div className="mb-8">
-                <div className="bg-gradient-to-r from-red-600 to-red-700 text-white p-4 rounded-lg shadow-lg">
-                  <div className="flex items-center gap-4">
-                    <span className="font-bold uppercase text-sm bg-white text-red-600 px-3 py-1 rounded-full animate-pulse">🔥 Hot</span>
-                    <span className="font-bold">iPhone 17 Air Leaked: Ultra-Thin Design May Replace Plus Model</span>
-                    <Link href="/news/iphone-17-air-ultra-thin-design-leak" className="ml-auto text-sm underline hover:no-underline bg-white/20 px-3 py-1 rounded-full">Read More</Link>
-                  </div>
-                </div>
-              </div>
 
               {/* Quick Compare Section */}
               <div className="mb-10">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-gray-900 uppercase tracking-wide">⚔️ Head-to-Head</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 uppercase tracking-wide">Comparisons</h2>
                   <Link href="/compare" className="text-sm font-bold text-blue-600 hover:text-blue-800 uppercase tracking-wide">
                     All Comparisons
                   </Link>
                 </div>
                 
-                <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl border border-blue-200">
+                <div className="bg-gray-50 p-6 border border-gray-200">
                   <div className="grid md:grid-cols-2 gap-6">
                     <Link href="/compare/iphone-16-pro-vs-samsung-galaxy-s24-ultra" className="group">
                       <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 group-hover:scale-105">
                         <div className="flex items-center justify-between mb-3">
                           <div className="text-center">
-                            <div className="w-16 h-16 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl mx-auto mb-2 flex items-center justify-center">
-                              <span className="text-white text-2xl">🍎</span>
+                            <div className="w-16 h-16 bg-gray-800 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                              <div className="w-8 h-8 bg-white rounded-sm"></div>
                             </div>
                             <p className="text-sm font-bold">iPhone 16 Pro</p>
                           </div>
-                          <div className="text-2xl font-bold text-red-500">VS</div>
+                          <div className="text-2xl font-bold text-red-600">VS</div>
                           <div className="text-center">
-                            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl mx-auto mb-2 flex items-center justify-center">
-                              <span className="text-white text-2xl">📱</span>
+                            <div className="w-16 h-16 bg-blue-600 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                              <div className="w-8 h-8 bg-white rounded-sm"></div>
                             </div>
                             <p className="text-sm font-bold">Galaxy S24 Ultra</p>
                           </div>
@@ -277,15 +260,15 @@ export default async function HomePage() {
                       <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 group-hover:scale-105">
                         <div className="flex items-center justify-between mb-3">
                           <div className="text-center">
-                            <div className="w-16 h-16 bg-gradient-to-br from-gray-300 to-gray-400 rounded-xl mx-auto mb-2 flex items-center justify-center">
-                              <span className="text-gray-700 text-2xl">💻</span>
+                            <div className="w-16 h-16 bg-gray-400 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                              <div className="w-10 h-6 bg-white rounded-sm"></div>
                             </div>
                             <p className="text-sm font-bold">MacBook Air M3</p>
                           </div>
-                          <div className="text-2xl font-bold text-red-500">VS</div>
+                          <div className="text-2xl font-bold text-red-600">VS</div>
                           <div className="text-center">
-                            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl mx-auto mb-2 flex items-center justify-center">
-                              <span className="text-white text-2xl">🖥️</span>
+                            <div className="w-16 h-16 bg-blue-600 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                              <div className="w-10 h-6 bg-white rounded-sm"></div>
                             </div>
                             <p className="text-sm font-bold">Surface Laptop Studio</p>
                           </div>
@@ -342,7 +325,9 @@ export default async function HomePage() {
                     {bestGuides.map((guide, index) => (
                       <Link key={index} href={guide.href}>
                         <div className="group flex items-center gap-3 p-3 hover:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100 last:border-b-0">
-                          <span className="text-2xl">{guide.icon}</span>
+                          <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center flex-shrink-0">
+                            <div className="w-4 h-4 bg-white rounded-sm"></div>
+                          </div>
                           <div>
                             <h3 className="font-bold text-sm text-gray-900 group-hover:text-blue-600 transition-colors">
                               {guide.title}
@@ -356,23 +341,6 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              {/* Newsletter Signup - TechRadar Style */}
-              <div className="mb-8">
-                <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-6 text-center">
-                  <h3 className="font-bold text-lg mb-2 uppercase tracking-wide">Stay Updated</h3>
-                  <p className="text-sm mb-4 opacity-90">Get the latest tech reviews and news delivered to your inbox</p>
-                  <div className="space-y-2">
-                    <input 
-                      type="email" 
-                      placeholder="Enter your email"
-                      className="w-full px-3 py-2 text-gray-900 text-sm rounded"
-                    />
-                    <button className="w-full bg-white text-purple-600 font-bold py-2 px-4 rounded text-sm uppercase tracking-wide hover:bg-gray-100 transition-colors">
-                      Subscribe
-                    </button>
-                  </div>
-                </div>
-              </div>
 
               {/* Trending Topics */}
               <div>
@@ -397,54 +365,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Trust & Authority Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-50 to-purple-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Millions Trust Trends Today
-            </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8">
-              Our expert team of technology professionals brings decades of combined experience 
-              from companies like Apple, Samsung, Google, and leading tech publications.
-            </p>
-          </div>
-          
-          <TrustBadges variant="horizontal" showAll={true} />
-          
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">25+</div>
-              <div className="text-lg font-semibold text-gray-900 mb-1">Years Combined Experience</div>
-              <div className="text-sm text-gray-700">Former engineers from Apple, Samsung, Google</div>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-600 mb-2">150+</div>
-              <div className="text-lg font-semibold text-gray-900 mb-1">Products Reviewed</div>
-              <div className="text-sm text-gray-700">Rigorous testing with professional equipment</div>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-600 mb-2">100%</div>
-              <div className="text-lg font-semibold text-gray-900 mb-1">Editorial Independence</div>
-              <div className="text-sm text-gray-700">No manufacturer influence on our reviews</div>
-            </div>
-          </div>
-          
-          <div className="text-center mt-12">
-            <Link 
-              href="/authors"
-              className="inline-flex items-center px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold text-lg"
-            >
-              Meet Our Expert Team
-            </Link>
-          </div>
-        </div>
-      </section>
 
-      {/* Bottom Newsletter Section - TechRadar Style */}
-      <section className="py-12 bg-slate-900 text-white">
+      {/* Bottom Newsletter Section */}
+      <section className="py-12 bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4 uppercase tracking-wide">Get the Latest Tech News</h2>
           <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">

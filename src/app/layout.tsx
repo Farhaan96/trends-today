@@ -1,24 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import StickyNavigation from '@/components/ui/StickyNavigation';
 import BackToTop from '@/components/ui/BackToTop';
 import ReadingProgressBar from '@/components/ui/ReadingProgressBar';
-import WebVitals, { PerformanceObserver, ResourcePreloader, LayoutStabilizer } from '@/components/seo/WebVitals';
 import { OrganizationSchema, WebsiteSchema } from '@/components/seo/SchemaMarkup';
 import Script from 'next/script';
 import { Analytics } from "@vercel/analytics/next";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -103,9 +98,6 @@ export default function RootLayout({
         <OrganizationSchema />
         <WebsiteSchema />
         
-        {/* Performance and SEO Optimization */}
-        <ResourcePreloader />
-        <LayoutStabilizer />
         
         {/* Google Analytics */}
         <Script
@@ -135,26 +127,6 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
 
-        {/* Facebook Pixel */}
-        <Script id="facebook-pixel" strategy="afterInteractive">
-          {`
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window,document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '1234567890123456');
-            fbq('track', 'PageView');
-          `}
-        </Script>
-        <noscript>
-          <img height="1" width="1" style={{display: 'none'}}
-            src="https://www.facebook.com/tr?id=1234567890123456&ev=PageView&noscript=1"
-          />
-        </noscript>
 
         {/* Additional SEO Meta Tags */}
         <meta name="google-adsense-account" content="ca-pub-xxxxxxxxxxxxxxxx" />
@@ -182,12 +154,8 @@ export default function RootLayout({
       </head>
       
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300`}
+        className={`${inter.variable} font-sans antialiased min-h-screen flex flex-col bg-white text-gray-900`}
       >
-        {/* SEO and Performance Monitoring */}
-        <WebVitals />
-        <PerformanceObserver />
-        
         <ReadingProgressBar />
         <Header />
         <StickyNavigation />
@@ -198,75 +166,6 @@ export default function RootLayout({
         <BackToTop />
         {/* Vercel Web Analytics */}
         <Analytics />
-        
-        {/* Revenue Tracking Script */}
-        <Script id="revenue-tracking" strategy="afterInteractive">
-          {`
-            // Custom revenue tracking functions
-            window.trackAffiliateClick = function(provider, productName, price) {
-              gtag('event', 'affiliate_click', {
-                event_category: 'monetization',
-                event_label: provider + '_' + productName,
-                value: price || 0
-              });
-              
-              fbq('track', 'Lead', {
-                content_name: productName,
-                content_category: 'affiliate',
-                value: price || 0,
-                currency: 'USD'
-              });
-              
-              // Send to our tracking API
-              fetch('/api/revenue-tracking', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  eventType: 'affiliate_click',
-                  provider: provider,
-                  productName: productName,
-                  value: price || 0
-                })
-              }).catch(console.error);
-            };
-            
-            window.trackPremiumSignup = function(tier, price) {
-              gtag('event', 'purchase', {
-                transaction_id: 'sub_' + Date.now(),
-                value: price,
-                currency: 'USD',
-                items: [{
-                  item_id: tier,
-                  item_name: 'Trends Today Pro',
-                  category: 'subscription',
-                  quantity: 1,
-                  price: price
-                }]
-              });
-              
-              fbq('track', 'Subscribe', {
-                value: price,
-                currency: 'USD',
-                predicted_ltv: price * 12
-              });
-            };
-            
-            window.trackDealAlertSignup = function(productName, targetPrice) {
-              gtag('event', 'generate_lead', {
-                event_category: 'monetization',
-                event_label: 'deal_alert_' + productName,
-                value: targetPrice
-              });
-              
-              fbq('track', 'Lead', {
-                content_name: productName,
-                content_category: 'deal_alert',
-                value: targetPrice,
-                currency: 'USD'
-              });
-            };
-          `}
-        </Script>
       </body>
     </html>
   );
