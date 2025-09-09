@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { getAllPosts } from '@/lib/mdx'
-import AdSlot from '@/components/AdSlot'
+import { getAllPosts } from '../lib/mdx'
+import AdSlot from '../components/AdSlot'
 
 export default async function HomePage() {
   const posts = await getAllPosts()
