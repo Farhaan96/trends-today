@@ -75,7 +75,8 @@
       "WebFetch(domain:www.semrush.com)",
       "WebFetch(domain:www.theverge.com)",
       "Bash(git config:*)",
-      "Bash(sed:*)"
+      "Bash(sed:*)",
+      "Bash(do echo \"Checking $file:\")"
     ],
     "deny": [],
     "ask": []
