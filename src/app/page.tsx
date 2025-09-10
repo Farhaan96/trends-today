@@ -6,7 +6,7 @@ import StructuredData from '@/components/seo/StructuredData';
 import { getAllBaseSchemas } from '@/lib/schema';
 import { getHomepageContent, getAllPosts, Article } from '@/lib/content';
 import PostListItem from '@/components/minimal/PostListItem';
-\nimport HeroCard from '@/components/minimal/HeroCard';\nimport GridCard from '@/components/minimal/GridCard';\n
+\nimport HeroCard from '@/components/minimal/HeroCard';\nimport GridCard from '@/components/minimal/GridCard';
 export default async function HomePage({ searchParams }: { searchParams?: { page?: string } }) {
   // Force minimal theme (leravi.org style)
   const useMinimalTheme = true; // Always use minimal theme
@@ -23,7 +23,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
 
     return (
       <main className="bg-white min-h-screen">
-        <h1 className="sr-only">Trends Today â€” Latest Tech Articles</h1>
+        <h1 className="sr-only">Trends Today — Latest Articles</h1>
         <StructuredData data={getAllBaseSchemas()} />
         <section>
           <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-12">
@@ -110,62 +110,15 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
     category: content.heroArticle.frontmatter.category || content.heroArticle.type,
     publishedAt: content.heroArticle.frontmatter.publishedAt || content.heroArticle.frontmatter.datePublished || new Date().toISOString(),
     image: content.heroArticle.frontmatter.image || "/images/products/iphone-16-pro-max-hero.jpg",
-    author: content.heroArticle.frontmatter.author?.name || content.heroArticle.frontmatter.author || "Trends Today Editorial"
-  } : {
-    title: "iPhone 16 Pro Max Review: The AI Revolution Has Arrived",
-    description: "Apple Intelligence transforms everything in this stunning titanium flagship. Our 3-week deep dive reveals why this is the most significant iPhone upgrade in years - and what Apple didn't tell you.",
-    href: "/reviews/iphone-16-pro-max-review-the-ai-revolution-has-arrived",
-    category: "Reviews",
-    publishedAt: new Date().toISOString(),
-    image: "/images/products/iphone-16-pro-max-titanium-hero.jpg",
-    author: "Alex Chen"
-  };
-
-  // Convert dynamic articles to the format expected by the UI
-  const featuredArticles = content.latestReviews.slice(0, 4).map(article => ({
-    title: article.frontmatter.title,
-    description: article.frontmatter.description || article.frontmatter.summary,
-    href: article.href,
-    category: article.frontmatter.category || article.type,
-    publishedAt: article.frontmatter.publishedAt || article.frontmatter.datePublished || new Date().toISOString(),
-    image: article.frontmatter.image || "/images/products/default-hero.jpg"
-  }));
-
-  // Convert dynamic news articles to the format expected by the UI
-  const newsArticles = content.featuredNews.slice(0, 4).map(article => ({
-    title: article.frontmatter.title,
-    description: article.frontmatter.description || article.frontmatter.summary,
-    href: article.href,
-    publishedAt: article.frontmatter.publishedAt || article.frontmatter.datePublished || new Date().toISOString(),
-    category: article.frontmatter.category || "News"
-  }));
-
-  // Convert dynamic best guides to the format expected by the UI
-  const bestGuides = content.bestGuides.slice(0, 3).map(article => ({
-    title: article.frontmatter.title,
-    href: article.href,
-    count: article.frontmatter.count || "Top Picks",
-    category: article.frontmatter.category || "Guide"
-  }));
-
-  return (
-    <main className="min-h-screen bg-white">
+    author: content.heroArticle.frontmatter.author?.name || content.heroArticle.frontmatter.author || "Trends Today — Latest Articles<main className="min-h-screen bg-white">
       {/* SEO: H1 + JSON-LD */}
-      <h1 className="sr-only">Trends Today - Tech Reviews, Comparisons & Buying Guides</h1>
+      <h1 className="sr-only">Trends Today — Latest Articles</h1>
       <StructuredData data={getAllBaseSchemas()} />
       <StructuredData
         data={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          name: "Trends Today - Tech Reviews, Comparisons & Buying Guides",
-          url: "https://trendstoday.ca/",
-          description:
-            "Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides.",
-          isPartOf: { "@type": "WebSite", url: "https://trendstoday.ca" }
-        }}
-      />
-      {/* TechRadar-style Hero Grid */}
-      <section className="bg-white">
+          name: "Trends Today — Latest Articles<section className="bg-white">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             
@@ -510,8 +463,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4 uppercase tracking-wide">Get the Latest Tech News</h2>
           <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join thousands of tech enthusiasts who trust Trends Today for unbiased reviews, breaking news, and expert buying advice.
-          </p>
+            Join thousands of tech enthusiasts who trust Trends Today — Latest Articles</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
             <input 
               type="email"
@@ -528,6 +480,10 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
     </main>
   );
 }
+
+
+
+
 
 
 
