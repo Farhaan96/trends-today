@@ -1,17 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="420" height="64" viewBox="0 0 420 64" role="img" aria-label="Trends Today">
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="120" viewBox="0 0 640 120" role="img" aria-label="TrendsToday">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#3DD6D0"/>
       <stop offset="1" stop-color="#6B3DF4"/>
     </linearGradient>
   </defs>
-  <g transform="translate(8,14)">
-    <path d="M0 32 L20 18 L30 26 L42 10 L54 22" fill="none" stroke="url(#g)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Larger sparkline mark -->
+  <g transform="translate(12,28)">
+    <path d="M0 60 L36 34 L54 48 L76 18 L98 40" fill="none" stroke="url(#g)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
-  <g transform="translate(72,44)" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="700" font-size="34">
-    <text fill="#ffffff">Trends</text>
-  </g>
-  <g transform="translate(220,44)" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="700" font-size="34">
-    <text fill="#3DD6D0">Today</text>
+  <!-- Tight wordmark: TrendsToday (single block with colored tspan) -->
+  <g transform="translate(130,86)" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="800" font-size="64">
+    <text fill="#ffffff" letter-spacing="-0.5">
+      Trends<tspan fill="#3DD6D0">Today</tspan>
+    </text>
   </g>
 </svg>

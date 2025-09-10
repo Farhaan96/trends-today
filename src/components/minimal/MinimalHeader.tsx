@@ -19,15 +19,15 @@ export default function MinimalHeader() {
   return (
     <header className="border-b border-purple-700/20 bg-purple-700">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex justify-between items-center h-14">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
               src="/images/brand/trendstoday-wordmark.svg"
               alt="Trends Today"
-              width={140}
-              height={28}
-              className="h-7 w-auto"
+              width={240}
+              height={48}
+              className="h-12 w-auto"
               priority
             />
           </Link>
