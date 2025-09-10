@@ -79,8 +79,9 @@ export default async function ArticlePage({ params }: { params: { category: stri
   return (
     <article className="min-h-screen bg-white">
       {/* Article Header */}
-      <header className="relative">
-        <div className="relative h-96 md:h-[500px]">
+      <header>
+        {/* Hero Image */}
+        <div className="relative h-64 md:h-96">
           <Image
             src={article.image || article.frontmatter?.image || '/images/placeholder.jpg'}
             alt={article.title || article.frontmatter?.title || 'Article'}
@@ -88,33 +89,40 @@ export default async function ArticlePage({ params }: { params: { category: stri
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
           
           {/* Category Badge - Links back to category page */}
           <Link 
             href={`/${params.category}`}
-            className={`absolute top-8 left-8 bg-gradient-to-r ${category.color} text-white px-4 py-2 rounded-full text-sm font-bold hover:scale-105 transition-transform`}
+            className={`absolute top-8 left-8 bg-gradient-to-r ${category.color} text-white px-4 py-2 rounded-full text-sm font-bold hover:scale-105 transition-transform shadow-lg`}
           >
             ← Back to {category.name}
           </Link>
-          
-          <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-            <div className="max-w-4xl mx-auto">
-              <h1 className="text-3xl md:text-5xl font-bold mb-4">
-                {article.title || article.frontmatter?.title}
-              </h1>
-              <div className="flex items-center gap-4 text-lg">
-                <span>{article.author?.name || article.frontmatter?.author?.name || 'Trends Today'}</span>
-                <span>•</span>
-                <span>{new Date(article.publishedAt || article.frontmatter?.publishedAt).toLocaleDateString()}</span>
-              </div>
+        </div>
+
+        {/* Article Title and Meta - Below the image */}
+        <div className="bg-white py-8 px-4">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900">
+              {article.title || article.frontmatter?.title}
+            </h1>
+            <div className="flex items-center gap-4 text-gray-600">
+              <span className="font-medium">{article.author?.name || article.frontmatter?.author?.name || 'Trends Today'}</span>
+              <span>•</span>
+              <span>{new Date(article.publishedAt || article.frontmatter?.publishedAt).toLocaleDateString()}</span>
+              {article.readingTime && (
+                <>
+                  <span>•</span>
+                  <span>{article.readingTime} min read</span>
+                </>
+              )}
             </div>
           </div>
         </div>
       </header>
 
       {/* Article Content */}
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-4 pb-12">
         <ArticleContent content={article.content || article.mdxContent} />
       </div>
 
