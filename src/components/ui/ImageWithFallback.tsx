@@ -44,6 +44,21 @@ export default function ImageWithFallback(props: Props) {
   // Dynamic image sourcing hook
   const { getDynamicImageUrl, isSourceAvailable } = useDynamicImageSourcing();
 
+  // Map known broken local filenames to safe fallbacks (prevents placeholder flashes)
+  React.useEffect(() => {
+    const replacements: Record<string, string> = {
+      '/images/products/iphone-15-pro-max-titanium.jpg': '/images/products/iphone-15-pro-max-display.jpg',
+      '/images/products/iphone-15-pro-max-usbc.jpg': '/images/products/iphone-15-pro-max-battery.jpg',
+      '/images/products/nothing-phone-2-guide.jpg': '/images/products/default-hero.jpg',
+      '/images/news/ai-agents-revolution-hero.jpg': '/images/news/ai-settlement-hero.jpg',
+      '/images/news/iphone-17-air-ultra-thin-hero.jpg': '/images/news/iphone-17-air-thin-profile.jpg',
+    };
+    if (typeof src === 'string' && replacements[src]) {
+      setImgSrc(replacements[src]);
+      setImageSource({ url: replacements[src], priority: 9, source: 'fallback', description: 'Known-broken image remap' });
+    }
+  }, [src]);
+
   const handleError = async () => {
     if (hasError) return;
     
@@ -105,39 +120,39 @@ export default function ImageWithFallback(props: Props) {
   const createSmartPlaceholder = () => {
     const deviceName = alt?.toLowerCase() || src?.toLowerCase() || productHint?.toLowerCase() || '';
     
-    let icon = '📱';
+    let icon = '???';
     let bgGradient = 'from-blue-100 to-blue-200';
     let textColor = 'text-blue-600';
     let deviceType = 'Product';
     
     // Enhanced device detection
     if (deviceName.includes('iphone')) {
-      icon = '📱';
+      icon = '??';
       bgGradient = 'from-gray-100 to-gray-300';
       textColor = 'text-gray-700';
       deviceType = 'iPhone';
     } else if (deviceName.includes('samsung') || deviceName.includes('galaxy')) {
-      icon = '📱';
+      icon = '??';
       bgGradient = 'from-blue-100 to-blue-200';
       textColor = 'text-blue-600';
       deviceType = 'Galaxy';
     } else if (deviceName.includes('google') || deviceName.includes('pixel')) {
-      icon = '📱';
+      icon = '??';
       bgGradient = 'from-green-100 to-green-200';
       textColor = 'text-green-600';
       deviceType = 'Pixel';
     } else if (deviceName.includes('macbook') || deviceName.includes('laptop')) {
-      icon = '💻';
+      icon = '??';
       bgGradient = 'from-gray-100 to-gray-200';
       textColor = 'text-gray-600';
       deviceType = 'MacBook';
     } else if (deviceName.includes('headphone') || deviceName.includes('audio')) {
-      icon = '🎧';
+      icon = '??';
       bgGradient = 'from-purple-100 to-purple-200';
       textColor = 'text-purple-600';
       deviceType = 'Audio';
     } else if (deviceName.includes('author') || imageType === 'author') {
-      icon = '👤';
+      icon = '??';
       bgGradient = 'from-indigo-100 to-indigo-200';
       textColor = 'text-indigo-600';
       deviceType = 'Author';
@@ -191,8 +206,10 @@ export default function ImageWithFallback(props: Props) {
   React.useEffect(() => {
     if (enableDynamicSourcing && !hasError) {
       const timeout = setTimeout(async () => {
-        // If image hasn't loaded within 2 seconds, try dynamic source
-        if (isLoading) {
+        // Only attempt dynamic source on slow load for REMOTE or unknown sources.
+        // For local public assets ("/images/..."), do not override unless onError fires.
+        const isLocalPublicAsset = typeof imgSrc === 'string' && imgSrc.startsWith('/');
+        if (isLoading && !isLocalPublicAsset) {
           const dynamicSource = await tryGetDynamicSource();
           if (dynamicSource) {
             setImageSource(dynamicSource);
@@ -203,7 +220,7 @@ export default function ImageWithFallback(props: Props) {
 
       return () => clearTimeout(timeout);
     }
-  }, [src, enableDynamicSourcing]);
+  }, [src, enableDynamicSourcing, isLoading, imgSrc, hasError]);
 
   // If we have an error and no fallback, show smart placeholder
   if (hasError && imgSrc === fallbackSrc) {
@@ -332,3 +349,4 @@ function getIntelligentFallback(filename: string, options: any): string {
   // Default tech fallback
   return `https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=${dimensions.width}&h=${dimensions.height}&fit=crop&q=85`;
 }
+

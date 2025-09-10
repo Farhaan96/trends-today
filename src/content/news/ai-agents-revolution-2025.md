@@ -2,7 +2,7 @@
 title: "AI Agents Revolution: $13.5B Market Explodes in 2025"
 description: "AI agents like AIXBT reach $700M valuations as autonomous AI market explodes to $47B by 2028. Complete investment analysis."
 publishedAt: "2025-01-15"
-image: "/images/news/ai-agents-revolution-hero.jpg"
+image: "/images/news/ai-settlement-hero.jpg"
 author: "Sarah Chen"
 category: "News"
 tags: ["AI agents", "AIXBT", "Truth Terminal", "artificial intelligence", "investment", "automation", "crypto AI", "autonomous AI", "agentic AI", "AI revolution"]

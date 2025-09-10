@@ -1,3 +1,62 @@
+<!-- September 2025 Operations Update -->
+
+## Operations Update — Images, Minimal Theme, Security
+
+This update documents recent fixes and the plan to align the site with an ultra‑simple, ad‑friendly design similar to leravi.org.
+
+### Image Reliability Fixes (Completed)
+- Root cause: Next/Image blocked remote fallbacks and custom logic overrode local assets after 2s, causing placeholders.
+- Changes implemented:
+  - next.config.ts: allow `images.unsplash.com`, `images.pexels.com`, and `trendstoday.ca` as remote image hosts.
+  - ImageWithFallback: no longer auto‑switches away from local `/images/...` unless an actual error occurs.
+  - Safety remaps for known bad filenames so UI never points at zero‑byte files.
+  - Content references updated to valid images (news and iPhone 15 Pro Max gallery).
+- Known empty/tiny files to replace (recommended):
+  - `public/images/products/iphone-15-pro-max-titanium.jpg`
+  - `public/images/products/iphone-15-pro-max-usbc.jpg`
+  - `public/images/products/nothing-phone-2-guide.jpg`
+  - `public/images/news/ai-agents-revolution-hero.jpg`
+  - `public/images/news/iphone-17-air-ultra-thin-hero.jpg`
+- Verification: `npm run build && npm start` → hero/feed images render; remote Unsplash/Pexels load without errors.
+
+### Minimal Theme (Planned) — leravi.org Style
+Goal: ultra‑simple, click‑forward, ad‑friendly list.
+- Feature flag: `NEXT_PUBLIC_THEME=minimal` to toggle minimal vs magazine layouts.
+- Homepage (single column list):
+  - 20–40 posts, title‑first, subtle meta; optional tiny thumbnail; numbered pagination.
+  - Files to add: `src/components/minimal/PostListItem.tsx`, `src/components/minimal/Pager.tsx`, `src/app/(minimal)/page.tsx` (or branch inside `src/app/page.tsx`).
+- Post page (clean reader):
+  - Narrow column (max‑w ~ 700px), large H1, 1–2 key images with fixed ratios, TOC optional.
+  - Simplify chrome in `src/components/article/*` when minimal theme is on.
+- Performance budget:
+  - Text‑based LCP (headline), thumbnails ≤ 40KB webp, images lazy, no gradients/overlays on feed.
+- SEO:
+  - CTR‑oriented titles, Article/NewsArticle schema, stable pagination links.
+
+### Ads Strategy (Configurable)
+- Placement (policy‑friendly):
+  - In‑feed: 1 ad every 5–7 items (reserved height to avoid CLS).
+  - In‑article: after first H2 and mid‑content (lazy). Optional sticky footer if allowed.
+- Components:
+  - `src/components/ads/AdSlot.tsx` (props: slot, width, height, lazy). Defer AdSense/GPT until user interaction/idle.
+- Labels: “Advertisement” on each slot; ad density within guidelines.
+
+### Security & Secrets (Important)
+- `.env.local` must never be committed. Current `.gitignore` ignores `.env*`. Keep secrets in Vercel/host env.
+- Rotate any keys that were shared in local files before production use.
+- Pre‑commit guard (recommended): add `git-secrets` or a simple secret scan in CI.
+  - Example scan: ripgrep for `sk-`, `pplx-`, `AIza`, etc.
+- Verify history: `git log -p | rg -n "(sk-|pplx-|AIza|re_|fc-)"` in a clean environment before making repo public.
+
+### Deployment Checklist
+- [ ] Replace the listed zero/tiny image assets or keep the remaps.
+- [ ] Set `NEXT_PUBLIC_THEME=minimal` for rollout (or test on preview).
+- [ ] Validate Core Web Vitals (no CLS from ads; text LCP).
+- [ ] Configure ads and enable behind `NEXT_PUBLIC_ADS=on`.
+- [ ] Confirm no secrets in repo; use Vercel env vars for production.
+
+---
+
 # CLAUDE.md - Trends Today: Quality-First Content Strategy
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.

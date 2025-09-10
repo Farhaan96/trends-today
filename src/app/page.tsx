@@ -4,9 +4,64 @@ import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import TrustBadges from '@/components/ui/TrustBadges';
 import StructuredData from '@/components/seo/StructuredData';
 import { getAllBaseSchemas } from '@/lib/schema';
-import { getHomepageContent, Article } from '@/lib/content';
+import { getHomepageContent, getAllPosts, Article } from '@/lib/content';
+import PostListItem from '@/components/minimal/PostListItem';
+import AdSlot from '@/components/ads/AdSlot';
 
-export default async function HomePage() {
+export default async function HomePage({ searchParams }: { searchParams?: { page?: string } }) {
+  // Minimal theme branch (leravi.org style)
+  if (process.env.NEXT_PUBLIC_THEME === 'minimal') {
+    const posts = await getAllPosts();
+    const pageSize = 30;
+    const page = Math.max(1, parseInt(searchParams?.page || '1', 10) || 1);
+    const start = (page - 1) * pageSize;
+    const end = start + pageSize;
+    const pagePosts = posts.slice(start, end);
+    const hasNext = end < posts.length;
+    const hasPrev = page > 1;
+
+    return (
+      <main className="bg-white">
+        <h1 className="sr-only">Trends Today — Latest Posts</h1>
+        <StructuredData data={getAllBaseSchemas()} />
+        <section>
+          <div className="max-w-3xl mx-auto px-4 py-8">
+            <ul className="divide-y divide-gray-100">
+              {pagePosts.map((a, i) => (
+                <>
+                  <PostListItem key={a.href} article={a} showThumb={false} />
+                  {/* In-feed ad every 6 items */}
+                  {((i + 1) % 6 === 0) && (
+                    <li className="py-4" key={`ad-${i}`}>
+                      <AdSlot height={120} className="rounded" />
+                    </li>
+                  )}
+                </>
+              ))}
+            </ul>
+            <nav className="flex items-center justify-between mt-8 text-sm">
+              <div>
+                {hasPrev && (
+                  <Link href={`/?page=${page - 1}`} prefetch={false} className="underline decoration-gray-300 hover:decoration-gray-500">
+                    ← Newer
+                  </Link>
+                )}
+              </div>
+              <div className="text-gray-500">Page {page}</div>
+              <div>
+                {hasNext && (
+                  <Link href={`/?page=${page + 1}`} prefetch={false} className="underline decoration-gray-300 hover:decoration-gray-500">
+                    Older →
+                  </Link>
+                )}
+              </div>
+            </nav>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
   // Load dynamic content
   const content = await getHomepageContent();
   // Use dynamic hero article or modern fallback with current tech
@@ -435,4 +490,6 @@ export default async function HomePage() {
     </main>
   );
 }
+
+
 
