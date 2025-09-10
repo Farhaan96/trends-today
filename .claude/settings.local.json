@@ -14,7 +14,8 @@
       "WebFetch(domain:trendstoday.ca)",
       "WebFetch(domain:leravi.org)",
       "Bash(npm run dev:*)",
-      "WebFetch(domain:www.leravi.org)"
+      "WebFetch(domain:www.leravi.org)",
+      "Bash(git checkout:*)"
     ],
     "deny": [],
     "ask": []
