@@ -93,7 +93,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isMinimalTheme = process.env.NEXT_PUBLIC_THEME === 'minimal';
+  const isMinimalTheme = true; // Force minimal theme
   
   return (
     <html lang="en" className="scroll-smooth">

@@ -9,8 +9,9 @@ import PostListItem from '@/components/minimal/PostListItem';
 import AdSlot from '@/components/ads/AdSlot';
 
 export default async function HomePage({ searchParams }: { searchParams?: { page?: string } }) {
-  // Minimal theme branch (leravi.org style)
-  if (process.env.NEXT_PUBLIC_THEME === 'minimal') {
+  // Force minimal theme (leravi.org style)
+  const useMinimalTheme = true; // Always use minimal theme
+  if (useMinimalTheme) {
     const posts = await getAllPosts();
     const pageSize = 10; // Optimized for engagement like leravi.org
     const page = Math.max(1, parseInt(searchParams?.page || '1', 10) || 1);
