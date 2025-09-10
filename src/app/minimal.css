@@ -58,13 +58,16 @@ body.minimal-theme {
 
 /* Minimal color palette */
 .minimal-theme {
-  --color-primary: #0066cc;     /* Blue for links and accents */
-  --color-text: #333;            /* Dark gray for body text */
-  --color-heading: #111;         /* Near black for headings */
-  --color-meta: #666;            /* Medium gray for metadata */
-  --color-border: #e5e5e5;       /* Light gray for borders */
-  --color-bg: #fff;              /* White background */
-  --color-bg-alt: #f9f9f9;       /* Very light gray for alternating sections */
+  /* Leravi-inspired palette */
+  --color-primary: #0B63C6;      /* Link blue */
+  --color-accent: #6B3DF4;       /* Header purple */
+  --color-teal: #3DD6D0;         /* Accent teal */
+  --color-text: #1F2937;         /* Slate-700 */
+  --color-heading: #111827;      /* Slate-900 */
+  --color-meta: #6B7280;         /* Gray-500 */
+  --color-border: #E5E7EB;       /* Gray-200 */
+  --color-bg: #FFFFFF;           /* White */
+  --color-bg-alt: #F6F7FB;       /* Soft gray background */
 }
 
 /* Remove all unnecessary visual noise */

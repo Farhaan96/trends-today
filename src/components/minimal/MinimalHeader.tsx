@@ -17,35 +17,35 @@ export default function MinimalHeader() {
   ];
 
   return (
-    <header className="bg-white border-b border-gray-200">
+    <header className="border-b border-purple-700/20 bg-purple-700">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex justify-between items-center h-16 sm:h-20">
-          {/* Logo - Simple and clean */}
+        <div className="flex justify-between items-center h-14">
+          {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
-              src="/images/brand/trends-today-logo-tight.png"
+              src="/images/brand/trendstoday-wordmark.svg"
               alt="Trends Today"
-              width={200}
-              height={50}
-              className="h-10 sm:h-12 w-auto"
+              width={140}
+              height={28}
+              className="h-7 w-auto"
               priority
             />
           </Link>
 
-          {/* Desktop Navigation - Clean and minimal */}
-          <nav className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-blue-600 font-medium text-sm transition-colors"
+                className="text-white/90 hover:text-white text-sm font-medium"
               >
                 {item.name}
               </Link>
             ))}
             <Link
               href="/search"
-              className="text-gray-700 hover:text-blue-600 transition-colors"
+              className="text-white/90 hover:text-white"
               aria-label="Search"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,7 +57,7 @@ export default function MinimalHeader() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-gray-700 hover:text-gray-900"
+            className="md:hidden p-2 text-white"
             aria-label="Menu"
           >
             {isMenuOpen ? (
@@ -75,13 +75,13 @@ export default function MinimalHeader() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-gray-200">
+        <div className="md:hidden border-t border-purple-600/30 bg-purple-700/95">
           <nav className="px-4 py-4 space-y-2">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="block py-2 text-gray-700 hover:text-blue-600 font-medium"
+                className="block py-2 text-white/90 hover:text-white font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
@@ -89,7 +89,7 @@ export default function MinimalHeader() {
             ))}
             <Link
               href="/search"
-              className="block py-2 text-gray-700 hover:text-blue-600 font-medium"
+              className="block py-2 text-white/90 hover:text-white font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               Search
