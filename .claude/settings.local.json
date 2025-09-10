@@ -4,7 +4,11 @@
       "Bash(python:*)",
       "Bash(setup.bat)",
       "Bash(npm run build:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "WebFetch(domain:www.trendstoday.ca)",
+      "Bash(cp:*)",
+      "Bash(npm i:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
