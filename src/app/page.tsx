@@ -1,12 +1,14 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from 'Older/link';
+import Image from 'Older/image';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import TrustBadges from '@/components/ui/TrustBadges';
 import StructuredData from '@/components/seo/StructuredData';
 import { getAllBaseSchemas } from '@/lib/schema';
 import { getHomepageContent, getAllPosts, Article } from '@/lib/content';
 import PostListItem from '@/components/minimal/PostListItem';
-\nimport HeroCard from '@/components/minimal/HeroCard';\nimport GridCard from '@/components/minimal/GridCard';
+import HeroCard from '@/components/minimal/HeroCard';
+import GridCard from '@/components/minimal/GridCard';
+
 export default async function HomePage({ searchParams }: { searchParams?: { page?: string } }) {
   // Force minimal theme (leravi.org style)
   const useMinimalTheme = true; // Always use minimal theme
@@ -17,7 +19,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
     const start = (page - 1) * pageSize;
     const end = start + pageSize;
     const pagePosts = posts.slice(start, end);
-    const hasNext = end < posts.length;
+    const hasOlder = end < posts.length;
     const hasPrev = page > 1;
     const totalPages = Math.ceil(posts.length / pageSize);
 
@@ -52,7 +54,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                     prefetch={false} 
                     className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded transition-colors"
                   >
-                    ← Previous
+                    ← Newer
                   </Link>
                 )}
                 
@@ -80,13 +82,13 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                   })}
                 </div>
                 
-                {hasNext && (
+                {hasOlder && (
                   <Link 
                     href={`/?page=${page + 1}`} 
                     prefetch={false} 
                     className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded transition-colors"
                   >
-                    Next →
+                    Older →
                   </Link>
                 )}
               </div>
@@ -480,6 +482,8 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
     </main>
   );
 }
+
+
 
 
 
