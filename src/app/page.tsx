@@ -28,10 +28,10 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
       <StructuredData data={getAllBaseSchemas()} />
       
       {/* Leravi-style Layout */}
-      <section className="max-w-6xl mx-auto px-6 py-24">
+      <section className="max-w-6xl mx-auto px-6 py-32">
         {/* Featured Article - Takes up most of the screen */}
         {featuredPost && (
-          <div className="mb-32">
+          <div className="mb-48">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               {/* Image */}
               <Link href={featuredPost.href as string} prefetch={false}>
@@ -58,7 +58,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
               {/* Content */}
               <div className="space-y-4">
                 <Link href={featuredPost.href as string} prefetch={false}>
-                  <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight break-words">
+                  <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 hover:text-blue-600 transition-colors leading-tight break-words">
                     {featuredPost.frontmatter.title as string}
                   </h2>
                 </Link>
@@ -87,7 +87,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
         )}
 
         {/* Preview Articles - Show just the tops */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-48">
           {secondPost && (
             <div className="space-y-4">
               <Link href={secondPost.href as string} prefetch={false}>
@@ -111,7 +111,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                 </div>
               </Link>
               <Link href={secondPost.href as string} prefetch={false}>
-                <h3 className="text-xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight break-words">
+                <h3 className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors leading-tight break-words">
                   {secondPost.frontmatter.title as string}
                 </h3>
               </Link>
@@ -146,7 +146,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                 </div>
               </Link>
               <Link href={thirdPost.href as string} prefetch={false}>
-                <h3 className="text-xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight break-words">
+                <h3 className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors leading-tight break-words">
                   {thirdPost.frontmatter.title as string}
                 </h3>
               </Link>
@@ -161,7 +161,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
 
         {/* Additional Articles Grid - 6 more articles */}
         {pagePosts.length > 3 && (
-          <div className="mt-24">
+          <div className="mt-48">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {pagePosts.slice(3).map((article, index) => (
                 <div key={article.href} className="space-y-3">
@@ -186,7 +186,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                     </div>
                   </Link>
                   <Link href={article.href as string} prefetch={false}>
-                    <h3 className="text-base font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight break-words">
+                    <h3 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors leading-tight break-words">
                       {article.frontmatter.title as string}
                     </h3>
                   </Link>
@@ -202,7 +202,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
         )}
 
           {/* Pagination */}
-        <nav className="mt-24 pt-8 border-t border-gray-200">
+        <nav className="mt-48 pt-12 border-t border-gray-200">
             <div className="flex items-center justify-center space-x-1">
               {hasPrev && (
                 <Link

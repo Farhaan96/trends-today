@@ -69,3 +69,6 @@ nul
 # test files
 test_setup.py
 setup.bat
+
+# sitemap files (generated during build)
+public/sitemap*.xml
