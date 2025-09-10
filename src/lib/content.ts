@@ -7,6 +7,7 @@ export interface Article {
   frontmatter: any;
   type: 'news' | 'reviews' | 'comparisons' | 'guides' | 'best';
   href: string;
+  category?: string;
 }
 
 export interface HomepageContent {
@@ -68,24 +69,27 @@ async function getArticlesFromDir(
 export async function getHomepageContent(): Promise<HomepageContent> {
   const contentBaseDir = path.join(process.cwd(), 'content');
   
-  // Load articles from different directories
-  const [newsArticles, reviewArticles, comparisonArticles, guideArticles] = await Promise.all([
-    getArticlesFromDir(path.join(contentBaseDir, 'news'), 'news'),
-    getArticlesFromDir(path.join(contentBaseDir, 'reviews'), 'reviews'),
-    getArticlesFromDir(path.join(contentBaseDir, 'comparisons'), 'comparisons'),
-    getArticlesFromDir(path.join(contentBaseDir, 'best'), 'best')
-  ]);
+  // Load articles from NEW category directories
+  const allArticles = await getAllPosts();
+  
+  // Separate articles by type based on their category
+  const techArticles = allArticles.filter(a => a.category === 'technology');
+  const scienceArticles = allArticles.filter(a => a.category === 'science');
+  const cultureArticles = allArticles.filter(a => a.category === 'culture');
+  const psychologyArticles = allArticles.filter(a => a.category === 'psychology');
+  const healthArticles = allArticles.filter(a => a.category === 'health');
+  const mysteryArticles = allArticles.filter(a => a.category === 'mystery');
 
-  // Find hero article (featured news or latest review)
-  const heroArticle = newsArticles.find(article => article.frontmatter.featured) || 
-                     newsArticles[0] || 
-                     reviewArticles[0];
+  // Find hero article (latest article overall)
+  const heroArticle = allArticles[0];
 
   return {
-    featuredNews: newsArticles.slice(0, 4),
-    latestReviews: reviewArticles.slice(0, 4),
-    latestComparisons: comparisonArticles.slice(0, 2),
-    bestGuides: guideArticles.slice(0, 3),
+    featuredNews: techArticles.slice(0, 4), // Use tech articles as "news"
+    latestReviews: techArticles.filter(a => 
+      a.frontmatter.title?.toLowerCase().includes('review')).slice(0, 4),
+    latestComparisons: techArticles.filter(a => 
+      a.frontmatter.title?.toLowerCase().includes('vs')).slice(0, 2),
+    bestGuides: [...scienceArticles, ...cultureArticles, ...psychologyArticles].slice(0, 3),
     heroArticle
   };
 }
@@ -141,27 +145,57 @@ export async function getArticlesByType(type: Article['type']): Promise<Article[
 export async function getAllPosts(): Promise<Article[]> {
   const contentBaseDir = path.join(process.cwd(), 'content');
   
-  // Load articles from all directories
-  const [newsArticles, reviewArticles, comparisonArticles, guideArticles, bestArticles] = await Promise.all([
-    getArticlesFromDir(path.join(contentBaseDir, 'news'), 'news'),
-    getArticlesFromDir(path.join(contentBaseDir, 'reviews'), 'reviews'),
-    getArticlesFromDir(path.join(contentBaseDir, 'comparisons'), 'comparisons'),
-    getArticlesFromDir(path.join(contentBaseDir, 'guides'), 'guides'),
-    getArticlesFromDir(path.join(contentBaseDir, 'best'), 'best')
-  ]);
-
+  // Load articles from NEW category directories
+  const categories = ['science', 'culture', 'psychology', 'technology', 'health', 'mystery'];
+  const articlePromises = categories.map(category => 
+    getArticlesFromCategoryDir(path.join(contentBaseDir, category), category)
+  );
+  
+  const articleArrays = await Promise.all(articlePromises);
+  
   // Combine all articles and sort by date
-  const allArticles = [
-    ...newsArticles,
-    ...reviewArticles, 
-    ...comparisonArticles,
-    ...guideArticles,
-    ...bestArticles
-  ].sort((a, b) => {
+  const allArticles = articleArrays.flat().sort((a, b) => {
     const dateA = new Date(a.frontmatter.publishedAt || a.frontmatter.datePublished || '1970-01-01');
     const dateB = new Date(b.frontmatter.publishedAt || b.frontmatter.datePublished || '1970-01-01');
     return dateB.getTime() - dateA.getTime(); // Sort by date, newest first
   });
 
   return allArticles;
+}
+
+// Helper function for category-based articles
+async function getArticlesFromCategoryDir(contentDir: string, category: string): Promise<Article[]> {
+  try {
+    if (!fs.existsSync(contentDir)) {
+      return [];
+    }
+    
+    const files = fs.readdirSync(contentDir);
+    const articles = files
+      .filter(file => file.endsWith('.mdx'))
+      .map(file => {
+        const filePath = path.join(contentDir, file);
+        const fileContent = fs.readFileSync(filePath, 'utf-8');
+        const { data } = matter(fileContent);
+        
+        return {
+          slug: file.replace('.mdx', ''),
+          frontmatter: data,
+          type: 'news' as Article['type'], // Default type for compatibility
+          href: `/${category}/${file.replace('.mdx', '')}`, // Use category-based routing
+          category: category
+        };
+      })
+      .filter(article => article.frontmatter.title) // Only include articles with titles
+      .sort((a, b) => {
+        const dateA = new Date(a.frontmatter.publishedAt || a.frontmatter.datePublished || '1970-01-01');
+        const dateB = new Date(b.frontmatter.publishedAt || b.frontmatter.datePublished || '1970-01-01');
+        return dateB.getTime() - dateA.getTime();
+      });
+    
+    return articles;
+  } catch (error) {
+    console.error(`Error loading articles from ${contentDir}:`, error);
+    return [];
+  }
 }

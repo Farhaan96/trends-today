@@ -23,7 +23,8 @@
       "Bash(for:*)",
       "Bash(do echo \"=== $dir ===\")",
       "Bash(ls:*)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(taskkill:*)"
     ],
     "deny": [],
     "ask": []
