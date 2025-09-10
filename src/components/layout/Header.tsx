@@ -13,11 +13,12 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
 
   const primaryNavigation = [
-    { name: 'REVIEWS', href: '/reviews' },
-    { name: 'BUYING GUIDES', href: '/best' },
-    { name: 'NEWS', href: '/news' },
-    { name: 'VERSUS', href: '/compare' },
-    { name: 'HOW TO', href: '/guides' }
+    { name: 'Science', href: '/science' },
+    { name: 'Culture', href: '/culture' },
+    { name: 'Psychology', href: '/psychology' },
+    { name: 'Technology', href: '/news' },
+    { name: 'Health', href: '/health' },
+    { name: 'Mystery', href: '/mystery' }
   ];
 
   const categoryNavigation = [
@@ -52,7 +53,7 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-white hover:text-purple-200 font-medium text-base transition-colors duration-200"
+                  className="text-white hover:text-purple-200 font-medium text-lg transition-colors duration-200"
                 >
                   {item.name}
                 </Link>
