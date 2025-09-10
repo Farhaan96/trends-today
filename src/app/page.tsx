@@ -162,9 +162,9 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
         {/* Additional Articles Grid - 6 more articles */}
         {pagePosts.length > 3 && (
           <div className="mt-48">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {pagePosts.slice(3).map((article, index) => (
-                <div key={article.href} className="space-y-3">
+                <div key={article.href} className="space-y-4">
                   <Link href={article.href as string} prefetch={false}>
                     <div className="relative w-full aspect-[16/9] bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer">
                       {article.frontmatter.image ? (
@@ -173,12 +173,12 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                           alt={article.frontmatter.title as string}
                           fill 
                           className="object-cover hover:scale-105 transition-transform duration-300" 
-                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          sizes="(max-width: 768px) 100vw, 50vw"
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center text-gray-400">
                           <div className="text-center">
-                            <div className="w-10 h-10 bg-gray-200 rounded-full mx-auto mb-2"></div>
+                            <div className="w-12 h-12 bg-gray-200 rounded-full mx-auto mb-2"></div>
                             <p className="text-xs">Image</p>
                           </div>
                         </div>
@@ -186,11 +186,11 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                     </div>
                   </Link>
                   <Link href={article.href as string} prefetch={false}>
-                    <h3 className="text-base font-bold text-gray-900 hover:text-blue-600 transition-colors leading-tight break-words">
+                    <h3 className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors leading-tight break-words">
                       {article.frontmatter.title as string}
                     </h3>
                   </Link>
-                  <div className="text-xs text-gray-500">
+                  <div className="text-sm text-gray-500">
                     <span className="font-medium">{typeof article.frontmatter.author === 'string' ? article.frontmatter.author : article.frontmatter.author?.name || 'Trends Today'}</span>
                     <span className="mx-2">•</span>
                     <span>{new Date(article.frontmatter.publishedAt || article.frontmatter.datePublished || new Date().toISOString()).toLocaleDateString()}</span>
