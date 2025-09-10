@@ -1,0 +1,231 @@
+/* Minimal Theme CSS - Inspired by leravi.org */
+
+/* Typography System - Clean 2-font hierarchy */
+body.minimal-theme {
+  /* System font stack for optimal readability */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings - Clean and readable */
+.minimal-theme h1,
+.minimal-theme h2,
+.minimal-theme h3,
+.minimal-theme h4,
+.minimal-theme h5,
+.minimal-theme h6 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #111;
+  margin: 0;
+  padding: 0;
+}
+
+.minimal-theme h1 { font-size: 2.2rem; }
+.minimal-theme h2 { font-size: 1.8rem; }
+.minimal-theme h3 { font-size: 1.4rem; }
+
+/* Links - Simple and functional */
+.minimal-theme a {
+  color: #0066cc;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.minimal-theme a:hover {
+  color: #0052a3;
+  text-decoration: underline;
+}
+
+/* Article titles - Highly clickable */
+.minimal-theme .article-title {
+  color: #111;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.minimal-theme .article-title:hover {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+/* Minimal color palette */
+.minimal-theme {
+  --color-primary: #0066cc;     /* Blue for links and accents */
+  --color-text: #333;            /* Dark gray for body text */
+  --color-heading: #111;         /* Near black for headings */
+  --color-meta: #666;            /* Medium gray for metadata */
+  --color-border: #e5e5e5;       /* Light gray for borders */
+  --color-bg: #fff;              /* White background */
+  --color-bg-alt: #f9f9f9;       /* Very light gray for alternating sections */
+}
+
+/* Remove all unnecessary visual noise */
+.minimal-theme * {
+  /* No gradients */
+  background-image: none !important;
+  /* No shadows except where absolutely necessary */
+  box-shadow: none !important;
+  /* No complex borders */
+  border-radius: 0 !important;
+}
+
+/* Allow subtle shadows only on hover for images */
+.minimal-theme img:hover,
+.minimal-theme .image-container:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* Clean borders */
+.minimal-theme .border-b {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.minimal-theme .border-t {
+  border-top: 1px solid var(--color-border);
+}
+
+/* Clean spacing */
+.minimal-theme .container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Article list styling */
+.minimal-theme .article-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.minimal-theme .article-list-item {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.minimal-theme .article-list-item:last-child {
+  border-bottom: none;
+}
+
+/* Metadata styling */
+.minimal-theme .article-meta {
+  color: var(--color-meta);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* Pagination */
+.minimal-theme .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.minimal-theme .pagination a,
+.minimal-theme .pagination span {
+  padding: 0.5rem 0.75rem;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.minimal-theme .pagination a:hover {
+  background: var(--color-bg-alt);
+  color: var(--color-primary);
+}
+
+.minimal-theme .pagination .active {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Ad slots - Clean and labeled */
+.minimal-theme .ad-slot {
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  padding: 2rem;
+  margin: 2rem 0;
+  text-align: center;
+  position: relative;
+}
+
+.minimal-theme .ad-label {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .minimal-theme {
+    font-size: 15px;
+  }
+  
+  .minimal-theme h1 { font-size: 1.8rem; }
+  .minimal-theme h2 { font-size: 1.5rem; }
+  .minimal-theme h3 { font-size: 1.2rem; }
+  
+  .minimal-theme .container {
+    padding: 0 15px;
+  }
+  
+  .minimal-theme .article-list-item {
+    padding: 1rem 0;
+  }
+}
+
+/* Remove all animations except essential ones */
+.minimal-theme *,
+.minimal-theme *::before,
+.minimal-theme *::after {
+  animation: none !important;
+  transition-duration: 0.2s !important;
+  transition-property: color, background-color, border-color, opacity !important;
+}
+
+/* Focus states - Accessibility */
+.minimal-theme a:focus,
+.minimal-theme button:focus,
+.minimal-theme input:focus,
+.minimal-theme textarea:focus,
+.minimal-theme select:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .minimal-theme {
+    font-size: 12pt;
+    color: black;
+    background: white;
+  }
+  
+  .minimal-theme a {
+    color: black;
+    text-decoration: underline;
+  }
+  
+  .minimal-theme .ad-slot,
+  .minimal-theme .pagination,
+  .minimal-theme nav,
+  .minimal-theme footer {
+    display: none;
+  }
+}

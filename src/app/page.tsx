@@ -12,48 +12,85 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
   // Minimal theme branch (leravi.org style)
   if (process.env.NEXT_PUBLIC_THEME === 'minimal') {
     const posts = await getAllPosts();
-    const pageSize = 30;
+    const pageSize = 10; // Optimized for engagement like leravi.org
     const page = Math.max(1, parseInt(searchParams?.page || '1', 10) || 1);
     const start = (page - 1) * pageSize;
     const end = start + pageSize;
     const pagePosts = posts.slice(start, end);
     const hasNext = end < posts.length;
     const hasPrev = page > 1;
+    const totalPages = Math.ceil(posts.length / pageSize);
 
     return (
-      <main className="bg-white">
-        <h1 className="sr-only">Trends Today — Latest Posts</h1>
+      <main className="bg-white min-h-screen">
+        <h1 className="sr-only">Trends Today — Latest Tech Articles</h1>
         <StructuredData data={getAllBaseSchemas()} />
         <section>
-          <div className="max-w-3xl mx-auto px-4 py-8">
-            <ul className="divide-y divide-gray-100">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+            {/* Clean article list with larger thumbnails like leravi.org */}
+            <div className="space-y-1">
               {pagePosts.map((a, i) => (
                 <>
-                  <PostListItem key={a.href} article={a} showThumb={false} />
-                  {/* In-feed ad every 6 items */}
-                  {((i + 1) % 6 === 0) && (
-                    <li className="py-4" key={`ad-${i}`}>
-                      <AdSlot height={120} className="rounded" />
-                    </li>
+                  <PostListItem key={a.href} article={a} showThumb={true} />
+                  {/* Clean in-feed ad every 5 items */}
+                  {((i + 1) % 5 === 0) && i !== pagePosts.length - 1 && (
+                    <div className="py-6 border-b border-gray-100" key={`ad-${i}`}>
+                      <div className="text-xs text-gray-400 mb-2 uppercase tracking-wide">Advertisement</div>
+                      <AdSlot height={100} className="bg-gray-50" />
+                    </div>
                   )}
                 </>
               ))}
-            </ul>
-            <nav className="flex items-center justify-between mt-8 text-sm">
-              <div>
+            </div>
+            {/* Clean pagination like leravi.org */}
+            <nav className="mt-12 pt-8 border-t border-gray-200">
+              <div className="flex items-center justify-center space-x-1">
                 {hasPrev && (
-                  <Link href={`/?page=${page - 1}`} prefetch={false} className="underline decoration-gray-300 hover:decoration-gray-500">
-                    ← Newer
+                  <Link 
+                    href={`/?page=${page - 1}`} 
+                    prefetch={false} 
+                    className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded transition-colors"
+                  >
+                    ← Previous
+                  </Link>
+                )}
+                
+                {/* Page numbers */}
+                <div className="flex items-center space-x-1">
+                  {[...Array(Math.min(5, totalPages))].map((_, i) => {
+                    const pageNum = Math.max(1, Math.min(page - 2 + i, totalPages - 4) + i);
+                    if (pageNum > 0 && pageNum <= totalPages) {
+                      return (
+                        <Link
+                          key={pageNum}
+                          href={`/?page=${pageNum}`}
+                          prefetch={false}
+                          className={`px-3 py-2 text-sm rounded transition-colors ${
+                            pageNum === page
+                              ? 'bg-blue-600 text-white'
+                              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                          }`}
+                        >
+                          {pageNum}
+                        </Link>
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
+                
+                {hasNext && (
+                  <Link 
+                    href={`/?page=${page + 1}`} 
+                    prefetch={false} 
+                    className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded transition-colors"
+                  >
+                    Next →
                   </Link>
                 )}
               </div>
-              <div className="text-gray-500">Page {page}</div>
-              <div>
-                {hasNext && (
-                  <Link href={`/?page=${page + 1}`} prefetch={false} className="underline decoration-gray-300 hover:decoration-gray-500">
-                    Older →
-                  </Link>
-                )}
+              <div className="text-center mt-4 text-xs text-gray-500">
+                Page {page} of {totalPages} • {posts.length} articles
               </div>
             </nav>
           </div>

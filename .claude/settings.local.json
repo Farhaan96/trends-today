@@ -10,7 +10,11 @@
       "Bash(npm i:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "WebFetch(domain:trendstoday.ca)",
+      "WebFetch(domain:leravi.org)",
+      "Bash(npm run dev:*)",
+      "WebFetch(domain:www.leravi.org)"
     ],
     "deny": [],
     "ask": []

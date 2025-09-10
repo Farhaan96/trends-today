@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "./minimal.css";
 import Header from '@/components/layout/Header';
+import MinimalHeader from '@/components/minimal/MinimalHeader';
 import Footer from '@/components/layout/Footer';
 import StickyNavigation from '@/components/ui/StickyNavigation';
 import BackToTop from '@/components/ui/BackToTop';
@@ -19,11 +21,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://trendstoday.ca'),
   title: {
-    default: "Trends Today - Tech Reviews, Comparisons & Buying Guides",
+    default: "Trends Today - Discover What's Trending in Science, Culture, Technology & More",
     template: "%s | Trends Today"
   },
-  description: "Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides. Expert analysis from tech professionals with 25+ years experience.",
-  keywords: ["tech reviews", "product comparisons", "buying guides", "technology news", "tech trends", "gadget reviews", "smartphone reviews", "laptop reviews", "best tech 2025"],
+  description: "Explore trending discoveries, breakthrough research, and fascinating insights across science, psychology, technology, culture, and more. Your daily source for what's new and noteworthy.",
+  keywords: ["trending topics", "scientific discoveries", "psychology insights", "cultural phenomena", "technology breakthroughs", "health research", "environmental news", "future predictions", "mysteries explained", "lifestyle trends", "what's trending today"],
   authors: [{ name: "Trends Today Editorial Team", url: "https://trendstoday.ca/authors" }],
   creator: "Trends Today",
   publisher: "Trends Today",
@@ -44,8 +46,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://trendstoday.ca",
     siteName: "Trends Today",
-    title: "Trends Today - Expert Tech Reviews & Buying Guides",
-    description: "Expert tech reviews from professionals with 25+ years experience. Unbiased analysis of smartphones, laptops, headphones and more.",
+    title: "Trends Today - Discover What's Trending Across All Topics",
+    description: "Daily discoveries and insights across science, culture, technology, psychology, and more. Explore what's trending and why it matters.",
     images: [
       {
         url: "/images/og-default.jpg",
@@ -57,8 +59,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Trends Today - Expert Tech Reviews",
-    description: "Expert tech reviews from professionals with 25+ years experience.",
+    title: "Trends Today - What's Trending Now",
+    description: "Discover breakthrough findings and trending topics across science, culture, tech, and more.",
     site: "@trendstoday",
     creator: "@trendstoday",
     images: ["/images/twitter-card.jpg"],
@@ -91,6 +93,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isMinimalTheme = process.env.NEXT_PUBLIC_THEME === 'minimal';
+  
   return (
     <html lang="en" className="scroll-smooth">
       <head>
@@ -154,16 +158,33 @@ export default function RootLayout({
       </head>
       
       <body
-        className={`${inter.variable} font-sans antialiased min-h-screen flex flex-col bg-white text-gray-900`}
+        className={`${inter.variable} font-sans antialiased min-h-screen flex flex-col bg-white text-gray-900 ${isMinimalTheme ? 'minimal-theme' : ''}`}
       >
-        <ReadingProgressBar />
-        <Header />
-        <StickyNavigation />
+        {!isMinimalTheme && <ReadingProgressBar />}
+        {isMinimalTheme ? <MinimalHeader /> : <Header />}
+        {!isMinimalTheme && <StickyNavigation />}
         <main className="flex-1">
           {children}
         </main>
-        <Footer />
-        <BackToTop />
+        {isMinimalTheme ? (
+          <footer className="border-t border-gray-200 mt-16">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+              <div className="text-center text-sm text-gray-500">
+                <p>© {new Date().getFullYear()} Trends Today. All rights reserved.</p>
+                <div className="mt-4 space-x-4">
+                  <a href="/about" className="hover:text-gray-700">About</a>
+                  <span>•</span>
+                  <a href="/privacy" className="hover:text-gray-700">Privacy</a>
+                  <span>•</span>
+                  <a href="/contact" className="hover:text-gray-700">Contact</a>
+                </div>
+              </div>
+            </div>
+          </footer>
+        ) : (
+          <Footer />
+        )}
+        {!isMinimalTheme && <BackToTop />}
         {/* Vercel Web Analytics */}
         <Analytics />
       </body>

@@ -1,0 +1,748 @@
+{
+  "generated": "2025-09-10T06:01:53.389Z",
+  "totalTopics": 50,
+  "categories": {
+    "history": [
+      {
+        "title": "500-year-old manuscript reveals ancient knowledge about astronomy",
+        "angle": "discovery",
+        "category": "history",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "ancient ruins abstract, time layers, historical artifacts collage, vintage texture overlay, archaeological dig site, ancient ruins, weathered stone, mysterious artifacts, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Archaeological find in Egypt changes understanding of ancient civilization",
+        "angle": "discovery",
+        "category": "history",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "ancient ruins abstract, time layers, historical artifacts collage, vintage texture overlay, archaeological dig site, ancient ruins, weathered stone, mysterious artifacts, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Ancient tradition makes unexpected comeback among millennials",
+        "angle": "discovery",
+        "category": "history",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "ancient ruins abstract, time layers, historical artifacts collage, vintage texture overlay, archaeological dig site, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "1000-year-old Viking settlement found in unexpected location",
+        "angle": "discovery",
+        "category": "history",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "ancient ruins abstract, time layers, historical artifacts collage, vintage texture overlay, archaeological dig site, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Ancient Roman concrete mystery finally solved by MIT",
+        "angle": "discovery",
+        "category": "history",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "ancient ruins abstract, time layers, historical artifacts collage, vintage texture overlay, archaeological dig site, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Ancient structure predates known civilization by 5000 years",
+        "angle": "discovery",
+        "category": "history",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "ancient ruins abstract, time layers, historical artifacts collage, vintage texture overlay, archaeological dig site, ultra detailed, trending on artstation, 8k resolution"
+      }
+    ],
+    "science": [
+      {
+        "title": "Scientists discover planet that shouldn't exist according to physics",
+        "angle": "discovery",
+        "category": "science",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "abstract scientific visualization, glowing particles, cosmic nebula, laboratory aesthetics, futuristic research, depth of field, cosmic vista, distant galaxies, celestial bodies, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "New quantum breakthrough could revolutionize computing by 2027",
+        "angle": "discovery",
+        "category": "science",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "abstract scientific visualization, glowing particles, cosmic nebula, laboratory aesthetics, futuristic research, depth of field, quantum particles, wave functions, subatomic visualization, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Mysterious signal from space has scientists baffled",
+        "angle": "discovery",
+        "category": "science",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "abstract scientific visualization, glowing particles, cosmic nebula, laboratory aesthetics, futuristic research, depth of field, cosmic vista, distant galaxies, celestial bodies, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Scientists discover new organ in human body after centuries",
+        "angle": "discovery",
+        "category": "science",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "abstract scientific visualization, glowing particles, cosmic nebula, laboratory aesthetics, futuristic research, depth of field, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Quantum internet successfully tested between cities",
+        "angle": "discovery",
+        "category": "science",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "abstract scientific visualization, glowing particles, cosmic nebula, laboratory aesthetics, futuristic research, depth of field, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Scientists find way to reverse climate damage in breakthrough",
+        "angle": "discovery",
+        "category": "science",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "abstract scientific visualization, glowing particles, cosmic nebula, laboratory aesthetics, futuristic research, depth of field, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Scientists can't explain this phenomenon happening worldwide",
+        "angle": "discovery",
+        "category": "science",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "abstract scientific visualization, glowing particles, cosmic nebula, laboratory aesthetics, futuristic research, depth of field, ultra detailed, trending on artstation, 8k resolution"
+      }
+    ],
+    "psychology": [
+      {
+        "title": "The psychology behind why we procrastinate even when we know better",
+        "angle": "discovery",
+        "category": "psychology",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "abstract mind concept, neural pathways, emotional spectrum, consciousness visualization, surreal mental landscape, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "What your sleep position says about your personality type",
+        "angle": "discovery",
+        "category": "psychology",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "abstract mind concept, neural pathways, emotional spectrum, consciousness visualization, surreal mental landscape, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "73% of people have this cognitive bias without knowing",
+        "angle": "discovery",
+        "category": "psychology",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "abstract mind concept, neural pathways, emotional spectrum, consciousness visualization, surreal mental landscape, ultra detailed, trending on artstation, 8k resolution"
+      }
+    ],
+    "culture": [
+      {
+        "title": "New study reveals surprising link between music taste and intelligence",
+        "angle": "discovery",
+        "category": "culture",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "cultural mosaic, diverse patterns, social connection web, cultural symbols abstract, unity in diversity, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "How Gen Alpha is completely redefining social media",
+        "angle": "discovery",
+        "category": "culture",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "cultural mosaic, diverse patterns, social connection web, cultural symbols abstract, unity in diversity, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "The cultural phenomenon that's bigger than TikTok",
+        "angle": "discovery",
+        "category": "culture",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "cultural mosaic, diverse patterns, social connection web, cultural symbols abstract, unity in diversity, ultra detailed, trending on artstation, 8k resolution"
+      }
+    ],
+    "lifestyle": [
+      {
+        "title": "Why introverts are actually better at this one crucial skill",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "The morning habit that could add 5 years to your life",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "The programming language that's taking over Silicon Valley",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Why Nordic countries do education completely differently",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "The plant that could solve world hunger grows in your backyard",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Lost Leonardo da Vinci invention finally built and it works",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Hidden chamber in Great Pyramid reveals new secrets",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "The mathematical pattern found in nature that shouldn't exist",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Declassified documents reveal truth about mysterious event",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "The job that will be most valuable in 2035",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Why futurists think this decade changes everything",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Countries racing to build first city on Mars",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "The morning routine of highly successful people revealed",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Why minimalism is evolving into something unexpected",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "The productivity hack that Silicon Valley doesn't want you to know",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "How remote work is creating new type of inequality",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "The lifestyle trend that's actually backed by science",
+        "angle": "discovery",
+        "category": "lifestyle",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+      }
+    ],
+    "health": [
+      {
+        "title": "The unexpected health benefits of spending 10 minutes in nature",
+        "angle": "discovery",
+        "category": "health",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "wellness visualization, organic flowing forms, vitality abstract, healing energy, balanced lifestyle imagery, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Why Mediterranean diet might not work for everyone",
+        "angle": "discovery",
+        "category": "health",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "wellness visualization, organic flowing forms, vitality abstract, healing energy, balanced lifestyle imagery, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Hidden dangers of popular wellness trend revealed by new study",
+        "angle": "discovery",
+        "category": "health",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "wellness visualization, organic flowing forms, vitality abstract, healing energy, balanced lifestyle imagery, ultra detailed, trending on artstation, 8k resolution"
+      }
+    ],
+    "technology": [
+      {
+        "title": "AI achieves consciousness according to new research paper",
+        "angle": "discovery",
+        "category": "technology",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "digital matrix, circuit board abstract, AI visualization, quantum computing representation, innovation flow, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "The technology that will replace smartphones by 2030",
+        "angle": "discovery",
+        "category": "technology",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "digital matrix, circuit board abstract, AI visualization, quantum computing representation, innovation flow, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Why tech giants are secretly investing billions in this",
+        "angle": "discovery",
+        "category": "technology",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "digital matrix, circuit board abstract, AI visualization, quantum computing representation, innovation flow, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "The rise of digital nomads is changing entire cities",
+        "angle": "discovery",
+        "category": "technology",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "digital matrix, circuit board abstract, AI visualization, quantum computing representation, innovation flow, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "City becomes carbon negative using revolutionary technique",
+        "angle": "discovery",
+        "category": "technology",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "digital matrix, circuit board abstract, AI visualization, quantum computing representation, innovation flow, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Medieval manuscript contains blueprint for modern technology",
+        "angle": "discovery",
+        "category": "technology",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "digital matrix, circuit board abstract, AI visualization, quantum computing representation, innovation flow, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "The technology that makes aging optional by 2040",
+        "angle": "discovery",
+        "category": "technology",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "digital matrix, circuit board abstract, AI visualization, quantum computing representation, innovation flow, ultra detailed, trending on artstation, 8k resolution"
+      }
+    ],
+    "environment": [
+      {
+        "title": "Ocean discovery changes everything we knew about marine life",
+        "angle": "discovery",
+        "category": "environment",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "nature abstract, climate visualization, earth from space, renewable energy flow, ecological balance, underwater scene, bioluminescence, deep sea mystery, ultra detailed, trending on artstation, 8k resolution"
+      },
+      {
+        "title": "Why this renewable energy source beats solar and wind",
+        "angle": "discovery",
+        "category": "environment",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "nature abstract, climate visualization, earth from space, renewable energy flow, ecological balance, ultra detailed, trending on artstation, 8k resolution"
+      }
+    ],
+    "mystery": [
+      {
+        "title": "The Bermuda Triangle mystery might finally be solved",
+        "angle": "discovery",
+        "category": "mystery",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "enigmatic atmosphere, shadowy depths, mysterious portal, unknown dimensions, cryptic symbols, ultra detailed, trending on artstation, 8k resolution"
+      }
+    ],
+    "future": [
+      {
+        "title": "10 predictions about 2030 that experts agree on",
+        "angle": "discovery",
+        "category": "future",
+        "hooks": [
+          "What scientists found will shock you",
+          "The implications are staggering",
+          "This changes everything we thought we knew",
+          "Experts are calling it revolutionary"
+        ],
+        "imagePrompt": "futuristic cityscape, neon geometry, time travel visualization, technological singularity, cyberpunk aesthetic, ultra detailed, trending on artstation, 8k resolution"
+      }
+    ]
+  },
+  "topPicks": [
+    {
+      "title": "500-year-old manuscript reveals ancient knowledge about astronomy",
+      "angle": "discovery",
+      "category": "history",
+      "hooks": [
+        "What scientists found will shock you",
+        "The implications are staggering",
+        "This changes everything we thought we knew",
+        "Experts are calling it revolutionary"
+      ],
+      "imagePrompt": "ancient ruins abstract, time layers, historical artifacts collage, vintage texture overlay, archaeological dig site, ancient ruins, weathered stone, mysterious artifacts, ultra detailed, trending on artstation, 8k resolution"
+    },
+    {
+      "title": "Scientists discover planet that shouldn't exist according to physics",
+      "angle": "discovery",
+      "category": "science",
+      "hooks": [
+        "What scientists found will shock you",
+        "The implications are staggering",
+        "This changes everything we thought we knew",
+        "Experts are calling it revolutionary"
+      ],
+      "imagePrompt": "abstract scientific visualization, glowing particles, cosmic nebula, laboratory aesthetics, futuristic research, depth of field, cosmic vista, distant galaxies, celestial bodies, ultra detailed, trending on artstation, 8k resolution"
+    },
+    {
+      "title": "The psychology behind why we procrastinate even when we know better",
+      "angle": "discovery",
+      "category": "psychology",
+      "hooks": [
+        "What scientists found will shock you",
+        "The implications are staggering",
+        "This changes everything we thought we knew",
+        "Experts are calling it revolutionary"
+      ],
+      "imagePrompt": "abstract mind concept, neural pathways, emotional spectrum, consciousness visualization, surreal mental landscape, ultra detailed, trending on artstation, 8k resolution"
+    },
+    {
+      "title": "New study reveals surprising link between music taste and intelligence",
+      "angle": "discovery",
+      "category": "culture",
+      "hooks": [
+        "What scientists found will shock you",
+        "The implications are staggering",
+        "This changes everything we thought we knew",
+        "Experts are calling it revolutionary"
+      ],
+      "imagePrompt": "cultural mosaic, diverse patterns, social connection web, cultural symbols abstract, unity in diversity, ultra detailed, trending on artstation, 8k resolution"
+    },
+    {
+      "title": "Why introverts are actually better at this one crucial skill",
+      "angle": "discovery",
+      "category": "lifestyle",
+      "hooks": [
+        "What scientists found will shock you",
+        "The implications are staggering",
+        "This changes everything we thought we knew",
+        "Experts are calling it revolutionary"
+      ],
+      "imagePrompt": "modern minimalist, lifestyle montage, urban living abstract, work-life balance visualization, trendy aesthetics, ultra detailed, trending on artstation, 8k resolution"
+    },
+    {
+      "title": "The unexpected health benefits of spending 10 minutes in nature",
+      "angle": "discovery",
+      "category": "health",
+      "hooks": [
+        "What scientists found will shock you",
+        "The implications are staggering",
+        "This changes everything we thought we knew",
+        "Experts are calling it revolutionary"
+      ],
+      "imagePrompt": "wellness visualization, organic flowing forms, vitality abstract, healing energy, balanced lifestyle imagery, ultra detailed, trending on artstation, 8k resolution"
+    },
+    {
+      "title": "AI achieves consciousness according to new research paper",
+      "angle": "discovery",
+      "category": "technology",
+      "hooks": [
+        "What scientists found will shock you",
+        "The implications are staggering",
+        "This changes everything we thought we knew",
+        "Experts are calling it revolutionary"
+      ],
+      "imagePrompt": "digital matrix, circuit board abstract, AI visualization, quantum computing representation, innovation flow, ultra detailed, trending on artstation, 8k resolution"
+    },
+    {
+      "title": "Ocean discovery changes everything we knew about marine life",
+      "angle": "discovery",
+      "category": "environment",
+      "hooks": [
+        "What scientists found will shock you",
+        "The implications are staggering",
+        "This changes everything we thought we knew",
+        "Experts are calling it revolutionary"
+      ],
+      "imagePrompt": "nature abstract, climate visualization, earth from space, renewable energy flow, ecological balance, underwater scene, bioluminescence, deep sea mystery, ultra detailed, trending on artstation, 8k resolution"
+    },
+    {
+      "title": "The Bermuda Triangle mystery might finally be solved",
+      "angle": "discovery",
+      "category": "mystery",
+      "hooks": [
+        "What scientists found will shock you",
+        "The implications are staggering",
+        "This changes everything we thought we knew",
+        "Experts are calling it revolutionary"
+      ],
+      "imagePrompt": "enigmatic atmosphere, shadowy depths, mysterious portal, unknown dimensions, cryptic symbols, ultra detailed, trending on artstation, 8k resolution"
+    },
+    {
+      "title": "10 predictions about 2030 that experts agree on",
+      "angle": "discovery",
+      "category": "future",
+      "hooks": [
+        "What scientists found will shock you",
+        "The implications are staggering",
+        "This changes everything we thought we knew",
+        "Experts are calling it revolutionary"
+      ],
+      "imagePrompt": "futuristic cityscape, neon geometry, time travel visualization, technological singularity, cyberpunk aesthetic, ultra detailed, trending on artstation, 8k resolution"
+    }
+  ]
+}
