@@ -120,39 +120,39 @@ export default function ImageWithFallback(props: Props) {
   const createSmartPlaceholder = () => {
     const deviceName = alt?.toLowerCase() || src?.toLowerCase() || productHint?.toLowerCase() || '';
     
-    let icon = '???';
+    let icon = 'IMG';
     let bgGradient = 'from-blue-100 to-blue-200';
     let textColor = 'text-blue-600';
     let deviceType = 'Product';
     
     // Enhanced device detection
     if (deviceName.includes('iphone')) {
-      icon = '??';
+      icon = 'PHONE';
       bgGradient = 'from-gray-100 to-gray-300';
       textColor = 'text-gray-700';
       deviceType = 'iPhone';
     } else if (deviceName.includes('samsung') || deviceName.includes('galaxy')) {
-      icon = '??';
+      icon = 'PHONE';
       bgGradient = 'from-blue-100 to-blue-200';
       textColor = 'text-blue-600';
       deviceType = 'Galaxy';
     } else if (deviceName.includes('google') || deviceName.includes('pixel')) {
-      icon = '??';
+      icon = 'PHONE';
       bgGradient = 'from-green-100 to-green-200';
       textColor = 'text-green-600';
       deviceType = 'Pixel';
     } else if (deviceName.includes('macbook') || deviceName.includes('laptop')) {
-      icon = '??';
+      icon = 'LAPTOP';
       bgGradient = 'from-gray-100 to-gray-200';
       textColor = 'text-gray-600';
       deviceType = 'MacBook';
     } else if (deviceName.includes('headphone') || deviceName.includes('audio')) {
-      icon = '??';
+      icon = 'AUDIO';
       bgGradient = 'from-purple-100 to-purple-200';
       textColor = 'text-purple-600';
       deviceType = 'Audio';
     } else if (deviceName.includes('author') || imageType === 'author') {
-      icon = '??';
+      icon = 'AUTHOR';
       bgGradient = 'from-indigo-100 to-indigo-200';
       textColor = 'text-indigo-600';
       deviceType = 'Author';
