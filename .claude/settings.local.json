@@ -8,7 +8,9 @@
       "WebFetch(domain:www.trendstoday.ca)",
       "Bash(cp:*)",
       "Bash(npm i:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
