@@ -110,10 +110,10 @@ export default async function ArticlePage({ params }: { params: { category: stri
               <span className="font-medium">{article.author?.name || article.frontmatter?.author?.name || 'Trends Today'}</span>
               <span>•</span>
               <span>{new Date(article.publishedAt || article.frontmatter?.publishedAt).toLocaleDateString()}</span>
-              {article.readingTime && (
+              {(article.frontmatter?.readingTime || (article as any).readingTime) && (
                 <>
                   <span>•</span>
-                  <span>{article.readingTime} min read</span>
+                  <span>{article.frontmatter?.readingTime || (article as any).readingTime} min read</span>
                 </>
               )}
             </div>
