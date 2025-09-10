@@ -28,10 +28,10 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
       <StructuredData data={getAllBaseSchemas()} />
       
       {/* Leravi-style Layout */}
-      <section className="max-w-6xl mx-auto px-6 py-16">
+      <section className="max-w-6xl mx-auto px-6 py-24">
         {/* Featured Article - Takes up most of the screen */}
         {featuredPost && (
-          <div className="mb-20">
+          <div className="mb-32">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               {/* Image */}
               <Link href={featuredPost.href as string} prefetch={false}>
@@ -77,7 +77,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                 
                 <Link 
                   href={featuredPost.href as string}
-                  className="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-sm"
+                  className="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-sm text-white"
                 >
                   Read more →
                 </Link>
@@ -87,7 +87,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
         )}
 
         {/* Preview Articles - Show just the tops */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
           {secondPost && (
             <div className="space-y-4">
               <Link href={secondPost.href as string} prefetch={false}>
@@ -161,7 +161,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
 
         {/* Additional Articles Grid - 6 more articles */}
         {pagePosts.length > 3 && (
-          <div className="mt-12">
+          <div className="mt-24">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {pagePosts.slice(3).map((article, index) => (
                 <div key={article.href} className="space-y-3">
@@ -202,7 +202,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
         )}
 
           {/* Pagination */}
-        <nav className="mt-12 pt-6 border-t border-gray-200">
+        <nav className="mt-24 pt-8 border-t border-gray-200">
             <div className="flex items-center justify-center space-x-1">
               {hasPrev && (
                 <Link

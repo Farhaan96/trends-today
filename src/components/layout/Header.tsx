@@ -30,19 +30,19 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-white" style={{ fontFamily: '"Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+    <header className="bg-gradient-to-r from-blue-500 via-purple-600 to-blue-700" style={{ fontFamily: '"Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
       {/* Main Header - Leravi Style */}
-      <nav className="bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 text-white shadow-lg">
+      <nav className="text-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center h-16">
             {/* Brand Logo */}
             <div className="flex items-center">
               <Link href="/" className="flex-shrink-0" aria-label="Trends Today Home">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md">
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
                     <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full"></div>
                   </div>
-                  <span className="text-2xl font-bold text-white drop-shadow-sm">Trends Today</span>
+                  <span className="text-2xl font-bold text-white drop-shadow-lg">Trends Today</span>
                 </div>
               </Link>
             </div>
