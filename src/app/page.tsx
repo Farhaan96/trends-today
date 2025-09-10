@@ -28,54 +28,56 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
       <StructuredData data={getAllBaseSchemas()} />
       
       {/* Leravi-style Layout */}
-      <section className="max-w-7xl mx-auto px-6 py-12">
+      <section className="max-w-6xl mx-auto px-6 py-8">
         {/* Featured Article - Takes up most of the screen */}
         {featuredPost && (
-          <div className="mb-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="mb-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               {/* Image */}
-              <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden shadow-lg">
-                {featuredPost.frontmatter.image ? (
-                  <Image 
-                    src={featuredPost.frontmatter.image} 
-                    alt={featuredPost.frontmatter.title as string}
-                    fill 
-                    className="object-cover" 
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-400">
-                    <div className="text-center">
-                      <div className="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-4"></div>
-                      <p className="text-lg">Image</p>
+              <Link href={featuredPost.href as string} prefetch={false}>
+                <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow cursor-pointer">
+                  {featuredPost.frontmatter.image ? (
+                    <Image 
+                      src={featuredPost.frontmatter.image} 
+                      alt={featuredPost.frontmatter.title as string}
+                      fill 
+                      className="object-cover hover:scale-105 transition-transform duration-300" 
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                      <div className="text-center">
+                        <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-3"></div>
+                        <p className="text-sm">Image</p>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+              </Link>
               
               {/* Content */}
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <Link href={featuredPost.href as string} prefetch={false}>
-                  <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight">
+                  <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight">
                     {featuredPost.frontmatter.title as string}
                   </h2>
                 </Link>
                 
-                <div className="flex items-center space-x-3 text-base text-gray-500">
+                <div className="flex items-center space-x-2 text-sm text-gray-500">
                   <span className="font-medium">By {typeof featuredPost.frontmatter.author === 'string' ? featuredPost.frontmatter.author : featuredPost.frontmatter.author?.name || 'Trends Today'}</span>
                   <span>•</span>
                   <span>{new Date(featuredPost.frontmatter.publishedAt || featuredPost.frontmatter.datePublished || new Date().toISOString()).toLocaleDateString()}</span>
                 </div>
                 
                 {featuredPost.frontmatter.description && (
-                  <p className="text-gray-600 text-xl leading-relaxed">
-                    {(featuredPost.frontmatter.description as string).substring(0, 250)}...
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    {(featuredPost.frontmatter.description as string).substring(0, 200)}...
                   </p>
                 )}
                 
                 <Link 
                   href={featuredPost.href as string}
-                  className="inline-block bg-purple-600 text-white px-8 py-4 rounded-lg font-medium hover:bg-purple-700 transition-colors text-lg"
+                  className="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors"
                 >
                   Read more →
                 </Link>
@@ -85,33 +87,35 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
         )}
 
         {/* Preview Articles - Show just the tops */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {secondPost && (
-            <div className="space-y-6">
-              <div className="relative w-full aspect-[16/9] bg-gray-100 rounded-xl overflow-hidden shadow-md">
-                {secondPost.frontmatter.image ? (
-                  <Image 
-                    src={secondPost.frontmatter.image} 
-                    alt={secondPost.frontmatter.title as string}
-                    fill 
-                    className="object-cover" 
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-400">
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-3"></div>
-                      <p className="text-sm">Image</p>
-                    </div>
-                  </div>
-                )}
-              </div>
+            <div className="space-y-4">
               <Link href={secondPost.href as string} prefetch={false}>
-                <h3 className="text-2xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight">
+                <div className="relative w-full aspect-[16/9] bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                  {secondPost.frontmatter.image ? (
+                    <Image 
+                      src={secondPost.frontmatter.image} 
+                      alt={secondPost.frontmatter.title as string}
+                      fill 
+                      className="object-cover hover:scale-105 transition-transform duration-300" 
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                      <div className="text-center">
+                        <div className="w-12 h-12 bg-gray-200 rounded-full mx-auto mb-2"></div>
+                        <p className="text-xs">Image</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </Link>
+              <Link href={secondPost.href as string} prefetch={false}>
+                <h3 className="text-xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight">
                   {secondPost.frontmatter.title as string}
                 </h3>
               </Link>
-              <div className="text-base text-gray-500">
+              <div className="text-sm text-gray-500">
                 <span className="font-medium">{typeof secondPost.frontmatter.author === 'string' ? secondPost.frontmatter.author : secondPost.frontmatter.author?.name || 'Trends Today'}</span>
                 <span className="mx-2">•</span>
                 <span>{new Date(secondPost.frontmatter.publishedAt || secondPost.frontmatter.datePublished || new Date().toISOString()).toLocaleDateString()}</span>
@@ -120,31 +124,33 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
           )}
 
           {thirdPost && (
-            <div className="space-y-6">
-              <div className="relative w-full aspect-[16/9] bg-gray-100 rounded-xl overflow-hidden shadow-md">
-                {thirdPost.frontmatter.image ? (
-                  <Image 
-                    src={thirdPost.frontmatter.image} 
-                    alt={thirdPost.frontmatter.title as string}
-                    fill 
-                    className="object-cover" 
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-400">
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-3"></div>
-                      <p className="text-sm">Image</p>
-                    </div>
-                  </div>
-                )}
-              </div>
+            <div className="space-y-4">
               <Link href={thirdPost.href as string} prefetch={false}>
-                <h3 className="text-2xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight">
+                <div className="relative w-full aspect-[16/9] bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                  {thirdPost.frontmatter.image ? (
+                    <Image 
+                      src={thirdPost.frontmatter.image} 
+                      alt={thirdPost.frontmatter.title as string}
+                      fill 
+                      className="object-cover hover:scale-105 transition-transform duration-300" 
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                      <div className="text-center">
+                        <div className="w-12 h-12 bg-gray-200 rounded-full mx-auto mb-2"></div>
+                        <p className="text-xs">Image</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </Link>
+              <Link href={thirdPost.href as string} prefetch={false}>
+                <h3 className="text-xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight">
                   {thirdPost.frontmatter.title as string}
                 </h3>
               </Link>
-              <div className="text-base text-gray-500">
+              <div className="text-sm text-gray-500">
                 <span className="font-medium">{typeof thirdPost.frontmatter.author === 'string' ? thirdPost.frontmatter.author : thirdPost.frontmatter.author?.name || 'Trends Today'}</span>
                 <span className="mx-2">•</span>
                 <span>{new Date(thirdPost.frontmatter.publishedAt || thirdPost.frontmatter.datePublished || new Date().toISOString()).toLocaleDateString()}</span>
@@ -155,34 +161,36 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
 
         {/* Additional Articles Grid - 6 more articles */}
         {pagePosts.length > 3 && (
-          <div className="mt-20">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {pagePosts.slice(3).map((article, index) => (
-                <div key={article.href} className="space-y-4">
-                  <div className="relative w-full aspect-[16/9] bg-gray-100 rounded-lg overflow-hidden shadow-sm">
-                    {article.frontmatter.image ? (
-                      <Image 
-                        src={article.frontmatter.image} 
-                        alt={article.frontmatter.title as string}
-                        fill 
-                        className="object-cover" 
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-gray-400">
-                        <div className="text-center">
-                          <div className="w-12 h-12 bg-gray-200 rounded-full mx-auto mb-2"></div>
-                          <p className="text-xs">Image</p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                <div key={article.href} className="space-y-3">
                   <Link href={article.href as string} prefetch={false}>
-                    <h3 className="text-lg font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight">
+                    <div className="relative w-full aspect-[16/9] bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                      {article.frontmatter.image ? (
+                        <Image 
+                          src={article.frontmatter.image} 
+                          alt={article.frontmatter.title as string}
+                          fill 
+                          className="object-cover hover:scale-105 transition-transform duration-300" 
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-gray-400">
+                          <div className="text-center">
+                            <div className="w-10 h-10 bg-gray-200 rounded-full mx-auto mb-2"></div>
+                            <p className="text-xs">Image</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+                  <Link href={article.href as string} prefetch={false}>
+                    <h3 className="text-base font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight">
                       {article.frontmatter.title as string}
                     </h3>
                   </Link>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-xs text-gray-500">
                     <span className="font-medium">{typeof article.frontmatter.author === 'string' ? article.frontmatter.author : article.frontmatter.author?.name || 'Trends Today'}</span>
                     <span className="mx-2">•</span>
                     <span>{new Date(article.frontmatter.publishedAt || article.frontmatter.datePublished || new Date().toISOString()).toLocaleDateString()}</span>
@@ -194,7 +202,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
         )}
 
         {/* Pagination */}
-        <nav className="mt-16 pt-8 border-t border-gray-200">
+        <nav className="mt-12 pt-6 border-t border-gray-200">
           <div className="flex items-center justify-center space-x-1">
             {hasPrev && (
               <Link
