@@ -11,7 +11,7 @@
   </g>
   <!-- Tight wordmark: TrendsToday (single block with colored tspan) -->
   <g transform="translate(130,86)" font-family="Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="800" font-size="64">
-    <text fill="#ffffff" letter-spacing="-0.5">
+    <text fill="#0B63C6" letter-spacing="-0.5">
       Trends<tspan fill="#3DD6D0">Today</tspan>
     </text>
   </g>

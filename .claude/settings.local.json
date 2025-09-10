@@ -15,7 +15,8 @@
       "WebFetch(domain:leravi.org)",
       "Bash(npm run dev:*)",
       "WebFetch(domain:www.leravi.org)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
