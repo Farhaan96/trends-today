@@ -28,10 +28,10 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
       <StructuredData data={getAllBaseSchemas()} />
       
       {/* Leravi-style Layout */}
-      <section className="max-w-6xl mx-auto px-6 py-8">
+      <section className="max-w-6xl mx-auto px-6 py-16">
         {/* Featured Article - Takes up most of the screen */}
         {featuredPost && (
-          <div className="mb-12">
+          <div className="mb-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               {/* Image */}
               <Link href={featuredPost.href as string} prefetch={false}>
@@ -58,7 +58,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
               {/* Content */}
               <div className="space-y-4">
                 <Link href={featuredPost.href as string} prefetch={false}>
-                  <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight">
+                  <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight break-words">
                     {featuredPost.frontmatter.title as string}
                   </h2>
                 </Link>
@@ -77,7 +77,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                 
                 <Link 
                   href={featuredPost.href as string}
-                  className="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors"
+                  className="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-sm"
                 >
                   Read more →
                 </Link>
@@ -87,7 +87,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
         )}
 
         {/* Preview Articles - Show just the tops */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {secondPost && (
             <div className="space-y-4">
               <Link href={secondPost.href as string} prefetch={false}>
@@ -111,7 +111,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                 </div>
               </Link>
               <Link href={secondPost.href as string} prefetch={false}>
-                <h3 className="text-xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight">
+                <h3 className="text-xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight break-words">
                   {secondPost.frontmatter.title as string}
                 </h3>
               </Link>
@@ -146,7 +146,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                 </div>
               </Link>
               <Link href={thirdPost.href as string} prefetch={false}>
-                <h3 className="text-xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight">
+                <h3 className="text-xl font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight break-words">
                   {thirdPost.frontmatter.title as string}
                 </h3>
               </Link>
@@ -186,7 +186,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                     </div>
                   </Link>
                   <Link href={article.href as string} prefetch={false}>
-                    <h3 className="text-base font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight">
+                    <h3 className="text-base font-bold text-gray-900 hover:text-purple-600 transition-colors leading-tight break-words">
                       {article.frontmatter.title as string}
                     </h3>
                   </Link>
@@ -201,53 +201,53 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
           </div>
         )}
 
-        {/* Pagination */}
+          {/* Pagination */}
         <nav className="mt-12 pt-6 border-t border-gray-200">
-          <div className="flex items-center justify-center space-x-1">
-            {hasPrev && (
-              <Link
-                href={`/?page=${page - 1}`}
-                prefetch={false}
+            <div className="flex items-center justify-center space-x-1">
+              {hasPrev && (
+                <Link
+                  href={`/?page=${page - 1}`}
+                  prefetch={false}
                 className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
-              >
-                ← Newer
-              </Link>
-            )}
+                >
+                  ← Newer
+                </Link>
+              )}
 
-            <div className="flex items-center space-x-1">
+              <div className="flex items-center space-x-1">
               {Array.from({ length: Math.min(5, totalPages) }).map((_, idx) => {
-                const pageNum = Math.min(Math.max(1, page - 2) + idx, totalPages);
-                return (
-                  <Link
-                    key={pageNum}
-                    href={`/?page=${pageNum}`}
-                    prefetch={false}
+                  const pageNum = Math.min(Math.max(1, page - 2) + idx, totalPages);
+                  return (
+                    <Link
+                      key={pageNum}
+                      href={`/?page=${pageNum}`}
+                      prefetch={false}
                     className={`px-4 py-2 text-sm rounded-lg transition-colors ${
-                      pageNum === page
+                        pageNum === page
                         ? 'bg-purple-600 text-white'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                    }`}
-                  >
-                    {pageNum}
-                  </Link>
-                );
-              })}
-            </div>
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                      }`}
+                    >
+                      {pageNum}
+                    </Link>
+                  );
+                })}
+              </div>
 
-            {hasNext && (
-              <Link
-                href={`/?page=${page + 1}`}
-                prefetch={false}
+              {hasNext && (
+                <Link
+                  href={`/?page=${page + 1}`}
+                  prefetch={false}
                 className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
-              >
-                Older →
-              </Link>
-            )}
-          </div>
+                >
+                  Older →
+                </Link>
+              )}
+            </div>
           <div className="text-center mt-4 text-sm text-gray-500">
-            Page {page} of {totalPages} • {posts.length} articles
-          </div>
-        </nav>
+              Page {page} of {totalPages} • {posts.length} articles
+            </div>
+          </nav>
       </section>
     </main>
   );
