@@ -16,7 +16,7 @@ export default function Header() {
     { name: 'Science', href: '/science' },
     { name: 'Culture', href: '/culture' },
     { name: 'Psychology', href: '/psychology' },
-    { name: 'Technology', href: '/news' },
+    { name: 'Technology', href: '/technology' },
     { name: 'Health', href: '/health' },
     { name: 'Mystery', href: '/mystery' }
   ];
