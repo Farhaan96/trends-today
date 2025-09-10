@@ -6,14 +6,13 @@ import StructuredData from '@/components/seo/StructuredData';
 import { getAllBaseSchemas } from '@/lib/schema';
 import { getHomepageContent, getAllPosts, Article } from '@/lib/content';
 import PostListItem from '@/components/minimal/PostListItem';
-import AdSlot from '@/components/ads/AdSlot';
-
+\nimport HeroCard from '@/components/minimal/HeroCard';\nimport GridCard from '@/components/minimal/GridCard';\n
 export default async function HomePage({ searchParams }: { searchParams?: { page?: string } }) {
   // Force minimal theme (leravi.org style)
   const useMinimalTheme = true; // Always use minimal theme
   if (useMinimalTheme) {
     const posts = await getAllPosts();
-    const pageSize = 10; // Optimized for engagement like leravi.org
+    const pageSize = 9; // 1 hero + 2 grid x 3 groups
     const page = Math.max(1, parseInt(searchParams?.page || '1', 10) || 1);
     const start = (page - 1) * pageSize;
     const end = start + pageSize;
@@ -27,23 +26,24 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
         <h1 className="sr-only">Trends Today — Latest Tech Articles</h1>
         <StructuredData data={getAllBaseSchemas()} />
         <section>
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
-            {/* Clean article list with larger thumbnails like leravi.org */}
-            <div className="space-y-1">
-              {pagePosts.map((a, i) => (
-                <>
-                  <PostListItem key={a.href} article={a} showThumb={true} />
-                  {/* Clean in-feed ad every 5 items */}
-                  {((i + 1) % 5 === 0) && i !== pagePosts.length - 1 && (
-                    <div className="py-6 border-b border-gray-100" key={`ad-${i}`}>
-                      <div className="text-xs text-gray-400 mb-2 uppercase tracking-wide">Advertisement</div>
-                      <AdSlot height={100} className="bg-gray-50" />
-                    </div>
-                  )}
-                </>
-              ))}
-            </div>
-            {/* Clean pagination like leravi.org */}
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-12">
+            {Array.from({ length: Math.ceil(pagePosts.length / 3) }).map((_, gi) => {
+              const i = gi * 3;
+              const hero = pagePosts[i];
+              const left = pagePosts[i + 1];
+              const right = pagePosts[i + 2];
+              if (!hero) return null;
+              return (
+                <div key={`group-${gi}`} className="space-y-6">
+                  <HeroCard article={hero} />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {left && (<GridCard article={left} />)}
+                    {right && (<GridCard article={right} />)}
+                  </div>
+                  <AdSlot height={120} className="rounded" />
+                </div>
+              );
+            })}            {/* Clean pagination like leravi.org */}
             <nav className="mt-12 pt-8 border-t border-gray-200">
               <div className="flex items-center justify-center space-x-1">
                 {hasPrev && (
@@ -528,6 +528,9 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
     </main>
   );
 }
+
+
+
 
 
 

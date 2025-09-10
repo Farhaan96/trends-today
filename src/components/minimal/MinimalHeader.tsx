@@ -17,9 +17,9 @@ export default function MinimalHeader() {
   ];
 
   return (
-    <header className="border-b border-purple-700/20 bg-purple-700">
+    <header className="border-b border-purple-700/20" style={{background: 'linear-gradient(90deg, var(--color-accent), var(--color-teal))'}}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-24">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
@@ -27,7 +27,7 @@ export default function MinimalHeader() {
               alt="Trends Today"
               width={240}
               height={48}
-              className="h-12 w-auto"
+              className="h-14 w-auto"
               priority
             />
           </Link>
