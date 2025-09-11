@@ -70,14 +70,22 @@ body.minimal-theme {
   --color-bg-alt: #F6F7FB;       /* Soft gray background */
 }
 
-/* Remove all unnecessary visual noise */
-.minimal-theme * {
-  /* No gradients */
+/* Remove all unnecessary visual noise - but allow for header and buttons */
+.minimal-theme *:not(header):not(a):not(button) {
+  /* No gradients except header and buttons */
   background-image: none !important;
   /* No shadows except where absolutely necessary */
   box-shadow: none !important;
   /* No complex borders */
   border-radius: 0 !important;
+}
+
+/* Allow buttons to have their styles */
+.minimal-theme a.bg-blue-500,
+.minimal-theme button {
+  border-radius: 0.5rem !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+  color: white !important;
 }
 
 /* Allow subtle shadows only on hover for images */

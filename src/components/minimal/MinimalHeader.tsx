@@ -17,7 +17,7 @@ export default function MinimalHeader() {
   ];
 
   return (
-    <header className="border-b border-purple-700/20" style={{background: 'linear-gradient(90deg, var(--color-accent), var(--color-teal))'}}>
+    <header className="border-b border-purple-700/20" style={{background: 'linear-gradient(90deg, #8B5CF6, #3B82F6)', backgroundImage: 'linear-gradient(90deg, #8B5CF6, #3B82F6)'}}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center h-24">
           {/* Logo */}
