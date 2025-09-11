@@ -77,7 +77,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                 
                 <Link 
                   href={featuredPost.href as string}
-                  className="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-sm text-white"
+                  className="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-sm"
                 >
                   Read more →
                 </Link>
@@ -122,7 +122,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
               </div>
               <Link 
                 href={secondPost.href as string}
-                className="inline-block text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+                className="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-sm"
               >
                 Read more →
               </Link>
@@ -163,7 +163,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
               </div>
               <Link 
                 href={thirdPost.href as string}
-                className="inline-block text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+                className="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-sm"
               >
                 Read more →
               </Link>
@@ -209,7 +209,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                   </div>
                   <Link 
                     href={article.href as string}
-                    className="inline-block text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+                    className="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-sm"
                   >
                     Read more →
                   </Link>
