@@ -37,7 +37,7 @@ export default function Header() {
           <div className="flex justify-between items-center h-16">
             {/* Brand Logo */}
             <div className="flex items-center">
-              <Link href="/" className="flex-shrink-0" aria-label="Trends Today Home">
+              <Link href="/" className="flex-shrink-0 focus:outline-none focus:ring-0" aria-label="Trends Today Home">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
                     <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full"></div>

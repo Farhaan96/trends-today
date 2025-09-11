@@ -57,6 +57,13 @@ body.minimal-theme {
   text-decoration: none !important;
 }
 
+/* Remove blue focus ring on header links while keeping accessibility elsewhere */
+.minimal-theme header a:focus,
+.minimal-theme header a:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 /* Extra specificity for header links */
 header a,
 header a:link,

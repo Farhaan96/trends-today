@@ -22,7 +22,7 @@ export default function MinimalHeader() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center h-24">
           {/* Logo */}
-          <Link href="/" className="flex items-center" aria-label="Trends Today Home">
+          <Link href="/" className="flex items-center focus:outline-none focus:ring-0" aria-label="Trends Today Home">
             <div className="flex flex-col leading-tight" style={{lineHeight: 1}}>
               <span className="text-white font-extrabold tracking-tight text-3xl md:text-4xl">Trends Today</span>
               <span className="text-white/80 text-sm md:text-base">Discover What's Trending</span>
@@ -35,6 +35,7 @@ export default function MinimalHeader() {
               <a
                 key={item.name}
                 href={item.href}
+                className="focus:outline-none focus:ring-0"
                 style={{
                   color: 'white',
                   fontSize: '12px',

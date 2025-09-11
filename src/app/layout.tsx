@@ -158,7 +158,7 @@ export default function RootLayout({
       </head>
       
       <body
-        className={`${inter.variable} font-sans antialiased min-h-screen flex flex-col bg-white text-gray-900 ${isMinimalTheme ? 'minimal-theme' : ''}`}
+        className={`${inter.variable} font-sans antialiased min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text)] ${isMinimalTheme ? 'minimal-theme' : ''}`}
       >
         {!isMinimalTheme && <ReadingProgressBar />}
         {isMinimalTheme ? <MinimalHeader /> : <Header />}
