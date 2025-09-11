@@ -6,6 +6,7 @@ import RelatedArticles, { getRelatedLinks, InlineLink } from '@/components/conte
 import { Article } from '@/lib/content';
 import AdSlot from '@/components/ads/AdSlot';
 import { getCategoryStyles } from '@/lib/categories';
+import DisqusComments from '@/components/engagement/DisqusComments';
 
 interface MinimalArticleLayoutProps {
   article: Article;
@@ -142,6 +143,14 @@ export default async function MinimalArticleLayout({ article, children }: Minima
             </Link>
           </div>
         </nav>
+      </div>
+      {/* Comments */}
+      <div className="mt-12">
+        <DisqusComments
+          url={`https://trendstoday.ca${article.href}`}
+          identifier={`article-${article.slug}`}
+          title={frontmatter.title}
+        />
       </div>
     </article>
   );

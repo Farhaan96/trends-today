@@ -10,6 +10,7 @@ import StructuredData from '@/components/seo/StructuredData';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import MDXImage from '@/components/mdx/MDXImage';
 import { getCategoryStyles } from '@/lib/categories';
+import DisqusComments from '@/components/engagement/DisqusComments';
 
 interface NewsPageProps {
   params: {
@@ -290,6 +291,15 @@ export default async function NewsPage({ params }: NewsPageProps) {
             <CitationsList sources={frontmatter.sources} />
           )}
         </footer>
+      </div>
+
+      {/* Comments */}
+      <div className="max-w-7xl mx-auto px-4 pb-12">
+        <DisqusComments
+          url={`https://trendstoday.ca/news/${params.slug}`}
+          identifier={`news-${params.slug}`}
+          title={frontmatter.title}
+        />
       </div>
     </main>
   );

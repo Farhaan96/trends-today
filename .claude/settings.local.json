@@ -24,7 +24,8 @@
       "Bash(do echo \"=== $dir ===\")",
       "Bash(ls:*)",
       "Bash(done)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []
