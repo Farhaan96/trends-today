@@ -6,7 +6,7 @@ import RelatedArticles, { getRelatedLinks, InlineLink } from '@/components/conte
 import { Article } from '@/lib/content';
 import AdSlot from '@/components/ads/AdSlot';
 import { getCategoryStyles } from '@/lib/categories';
-import CommentSystem from '@/components/engagement/CommentSystem';
+import UtterancesComments from '@/components/engagement/UtterancesComments';
 
 interface MinimalArticleLayoutProps {
   article: Article;
@@ -144,12 +144,9 @@ export default async function MinimalArticleLayout({ article, children }: Minima
           </div>
         </nav>
       </div>
-      {/* Comments (free, built-in) */}
+      {/* Comments (Utterances - free via GitHub issues) */}
       <div className="mt-12">
-        <CommentSystem
-          articleId={`article-${article.slug}`}
-          articleTitle={frontmatter.title}
-        />
+        <UtterancesComments issueTerm="pathname" />
       </div>
     </article>
   );

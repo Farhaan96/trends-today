@@ -10,7 +10,7 @@ import StructuredData from '@/components/seo/StructuredData';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import MDXImage from '@/components/mdx/MDXImage';
 import { getCategoryStyles } from '@/lib/categories';
-import CommentSystem from '@/components/engagement/CommentSystem';
+import UtterancesComments from '@/components/engagement/UtterancesComments';
 
 interface ReviewPageProps {
   params: {
@@ -306,12 +306,9 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
         </footer>
         </div>
 
-        {/* Comments (free, built-in) */}
+        {/* Comments (Utterances - free via GitHub issues) */}
         <div className="pt-4 pb-12">
-          <CommentSystem
-            articleId={`review-${params.slug}`}
-            articleTitle={frontmatter.title}
-          />
+          <UtterancesComments issueTerm="pathname" />
         </div>
     </main>
   );

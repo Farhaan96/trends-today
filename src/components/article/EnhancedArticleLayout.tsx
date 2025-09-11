@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react'
 import dynamic from 'next/dynamic'
-import CommentSystem from '@/components/engagement/CommentSystem'
+import UtterancesComments from '@/components/engagement/UtterancesComments'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getCategoryStyles } from '@/lib/categories'
@@ -278,8 +278,8 @@ export default function EnhancedArticleLayout({
           limit={6}
         />
 
-        {/* Comments Section (free, built-in) */}
-        <CommentSystem articleId={articleId} articleTitle={article.title} />
+        {/* Comments Section (Utterances - free via GitHub issues) */}
+        <UtterancesComments issueTerm="pathname" />
       </article>
     </>
   )
