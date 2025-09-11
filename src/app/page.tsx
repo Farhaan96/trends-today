@@ -120,6 +120,12 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                 <span className="mx-2">•</span>
                 <span>{new Date(secondPost.frontmatter.publishedAt || secondPost.frontmatter.datePublished || new Date().toISOString()).toLocaleDateString()}</span>
               </div>
+              <Link 
+                href={secondPost.href as string}
+                className="inline-block text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+              >
+                Read more →
+              </Link>
             </div>
           )}
 
@@ -155,6 +161,12 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                 <span className="mx-2">•</span>
                 <span>{new Date(thirdPost.frontmatter.publishedAt || thirdPost.frontmatter.datePublished || new Date().toISOString()).toLocaleDateString()}</span>
               </div>
+              <Link 
+                href={thirdPost.href as string}
+                className="inline-block text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+              >
+                Read more →
+              </Link>
             </div>
           )}
         </div>
@@ -162,7 +174,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
         {/* Additional Articles Grid - 6 more articles */}
         {pagePosts.length > 3 && (
           <div className="mt-48">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
               {pagePosts.slice(3).map((article, index) => (
                 <div key={article.href} className="space-y-4">
                   <Link href={article.href as string} prefetch={false}>
@@ -195,6 +207,12 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
                     <span className="mx-2">•</span>
                     <span>{new Date(article.frontmatter.publishedAt || article.frontmatter.datePublished || new Date().toISOString()).toLocaleDateString()}</span>
                   </div>
+                  <Link 
+                    href={article.href as string}
+                    className="inline-block text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+                  >
+                    Read more →
+                  </Link>
                 </div>
               ))}
             </div>
