@@ -99,6 +99,25 @@ header a:active {
   --color-bg-alt: #F6F7FB;       /* Soft gray background */
 }
 
+/* Dark mode variable overrides for minimal theme */
+html.dark .minimal-theme {
+  --color-primary: #60A5FA;      /* Sky-400 */
+  --color-accent: #8B5CF6;       /* Violet-500 */
+  --color-teal: #22D3EE;         /* Cyan-400 */
+  --color-text: #E5E7EB;         /* Gray-200 */
+  --color-heading: #F9FAFB;      /* Gray-50 */
+  --color-meta: #9CA3AF;         /* Gray-400 */
+  --color-border: #334155;       /* Slate-700 */
+  --color-bg: #0B1020;           /* Deep blue/near-black */
+  --color-bg-alt: #0F172A;       /* Slate-900 */
+}
+
+/* Apply dark background and text when minimal theme is active */
+html.dark body.minimal-theme {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
 /* Remove all unnecessary visual noise - but allow for header and buttons */
 .minimal-theme *:not(header):not(a):not(button) {
   /* No gradients except header and buttons */

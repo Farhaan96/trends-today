@@ -26,7 +26,8 @@
       "Bash(done)",
       "Bash(taskkill:*)",
       "WebSearch",
-      "Bash(del:*)"
+      "Bash(del:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []
