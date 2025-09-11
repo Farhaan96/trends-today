@@ -249,7 +249,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
             [&>p]:text-gray-900 [&>p]:leading-relaxed [&>p]:mb-4 [&>p]:text-base [&>p]:font-normal
             [&>strong]:text-gray-900 [&>strong]:font-semibold
             [&>em]:text-gray-800 [&>em]:italic
-            [&>a]:text-blue-600 [&>a]:no-underline hover:[&>a]:underline [&>a]:font-medium
+            [&>a]:text-blue-600 [&>a]:no-underline [&>a]:font-medium
             [&>ul]:text-gray-900 [&>ul]:mb-4 [&>ul]:pl-6
             [&>ol]:text-gray-900 [&>ol]:mb-4 [&>ol]:pl-6
             [&>li]:text-gray-900 [&>li]:mb-2 [&>li]:leading-relaxed

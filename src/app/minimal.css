@@ -44,7 +44,7 @@ body.minimal-theme {
 .minimal-theme article a:hover,
 .minimal-theme section a:hover {
   color: #333333;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 /* Keep header navigation white and remove underlines */
