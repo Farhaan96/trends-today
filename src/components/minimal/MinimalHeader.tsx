@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+// Image removed to switch to text-based logo
 import { useState } from 'react';
 
 export default function MinimalHeader() {
@@ -22,19 +22,9 @@ export default function MinimalHeader() {
         <div className="flex justify-between items-center h-24">
           {/* Logo */}
           <Link href="/" className="flex items-center" aria-label="Trends Today Home">
-            <div className="flex items-center gap-3">
-              <Image
-                src="/images/brand/trendstoday-wordmark.svg"
-                alt="Trends Today"
-                width={360}
-                height={80}
-                className="h-16 md:h-20 w-auto drop-shadow-md"
-                priority
-              />
-              <div className="hidden sm:flex flex-col leading-tight">
-                <span className="text-white font-extrabold tracking-tight">Trends Today</span>
-                <span className="text-white/80 text-xs">Discover What's Trending</span>
-              </div>
+            <div className="flex flex-col leading-tight" style={{lineHeight: 1}}>
+              <span className="text-white font-extrabold tracking-tight text-3xl md:text-4xl">Trends Today</span>
+              <span className="text-white/80 text-sm md:text-base">Discover What's Trending</span>
             </div>
           </Link>
 
