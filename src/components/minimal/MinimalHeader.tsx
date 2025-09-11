@@ -19,30 +19,28 @@ export default function MinimalHeader() {
     <header className="border-b border-purple-700/20" style={{background: 'linear-gradient(90deg, #8B5CF6, #3B82F6)', backgroundImage: 'linear-gradient(90deg, #8B5CF6, #3B82F6)'}}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center h-24">
-          {/* Logo - Enhanced with shadow and glow effect */}
+          {/* Logo - Clean design without broken image */}
           <Link href="/" className="flex items-center group">
             <div className="flex items-center space-x-3">
               {/* Logo Icon */}
-              <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-                <div className="w-10 h-10 bg-gradient-to-br from-white to-blue-100 rounded-lg flex items-center justify-center">
-                  <span className="text-2xl font-black bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">T</span>
-                </div>
+              <div className="w-11 h-11 bg-white rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
+                <span className="text-2xl font-black bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">T</span>
               </div>
               {/* Logo Text */}
               <div className="flex flex-col">
-                <span className="text-2xl font-black text-white tracking-tight">Trends Today</span>
-                <span className="text-xs text-white/70 font-medium">Discover What's Trending</span>
+                <span className="text-xl font-black text-white tracking-tight">Trends Today</span>
+                <span className="text-xs text-white/80 font-medium">Discover What's Trending</span>
               </div>
             </div>
           </Link>
 
-          {/* Desktop Navigation - Larger, Bold, White */}
-          <nav className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation - Medium size, Bold, White */}
+          <nav className="hidden md:flex items-center space-x-6">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-white hover:text-white/90 text-base font-bold uppercase tracking-wide transition-all duration-200 hover:scale-105"
+                className="text-white hover:text-white/90 text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105"
               >
                 {item.name}
               </Link>

@@ -33,14 +33,20 @@ body.minimal-theme {
 
 /* Links - Simple and functional */
 .minimal-theme a {
-  color: #0066cc;
+  color: #111111;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .minimal-theme a:hover {
-  color: #0052a3;
+  color: #333333;
   text-decoration: underline;
+}
+
+/* Keep navigation and buttons with their colors */
+.minimal-theme header a,
+.minimal-theme a.bg-blue-500 {
+  color: inherit;
 }
 
 /* Article titles - Highly clickable */
