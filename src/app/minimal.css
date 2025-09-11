@@ -32,21 +32,29 @@ body.minimal-theme {
 .minimal-theme h3 { font-size: 1.4rem; }
 
 /* Links - Simple and functional */
-.minimal-theme a {
+.minimal-theme main a,
+.minimal-theme article a,
+.minimal-theme section a {
   color: #111111;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.minimal-theme a:hover {
+.minimal-theme main a:hover,
+.minimal-theme article a:hover,
+.minimal-theme section a:hover {
   color: #333333;
   text-decoration: underline;
 }
 
-/* Keep navigation and buttons with their colors */
-.minimal-theme header a,
+/* Keep header navigation white */
+.minimal-theme header a {
+  color: white !important;
+}
+
+/* Keep buttons with their defined colors */
 .minimal-theme a.bg-blue-500 {
-  color: inherit;
+  color: white !important;
 }
 
 /* Article titles - Highly clickable */

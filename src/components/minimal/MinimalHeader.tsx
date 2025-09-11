@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function MinimalHeader() {
@@ -19,19 +20,17 @@ export default function MinimalHeader() {
     <header className="border-b border-purple-700/20" style={{background: 'linear-gradient(90deg, #8B5CF6, #3B82F6)', backgroundImage: 'linear-gradient(90deg, #8B5CF6, #3B82F6)'}}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center h-24">
-          {/* Logo - Clean design without broken image */}
+          {/* Logo - Using actual logo image */}
           <Link href="/" className="flex items-center group">
-            <div className="flex items-center space-x-3">
-              {/* Logo Icon */}
-              <div className="w-11 h-11 bg-white rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
-                <span className="text-2xl font-black bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">T</span>
-              </div>
-              {/* Logo Text */}
-              <div className="flex flex-col">
-                <span className="text-xl font-black text-white tracking-tight">Trends Today</span>
-                <span className="text-xs text-white/80 font-medium">Discover What's Trending</span>
-              </div>
-            </div>
+            <Image 
+              src="/images/brand/trends-today-logo-tight.png" 
+              alt="Trends Today" 
+              width={180}
+              height={56}
+              className="h-14 w-auto group-hover:scale-105 transition-transform duration-300"
+              priority
+              style={{filter: 'brightness(0) invert(1)'}}
+            />
           </Link>
 
           {/* Desktop Navigation - Medium size, Bold, White */}
@@ -40,14 +39,16 @@ export default function MinimalHeader() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-white hover:text-white/90 text-sm font-bold uppercase tracking-wider transition-all duration-200 hover:scale-105"
+                className="hover:scale-105 transition-transform duration-200"
+                style={{color: 'white', fontSize: '14px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.05em'}}
               >
                 {item.name}
               </Link>
             ))}
             <Link
               href="/search"
-              className="text-white hover:text-white/90 transition-all duration-200 hover:scale-105"
+              className="hover:scale-105 transition-transform duration-200"
+              style={{color: 'white'}}
               aria-label="Search"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
@@ -83,7 +84,8 @@ export default function MinimalHeader() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="block py-3 text-white hover:text-white/90 font-bold text-lg uppercase tracking-wide transition-all duration-200"
+                className="block py-3 font-bold text-lg uppercase tracking-wide transition-all duration-200"
+                style={{color: 'white'}}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
@@ -91,7 +93,8 @@ export default function MinimalHeader() {
             ))}
             <Link
               href="/search"
-              className="block py-3 text-white hover:text-white/90 font-bold text-lg uppercase tracking-wide transition-all duration-200"
+              className="block py-3 font-bold text-lg uppercase tracking-wide transition-all duration-200"
+              style={{color: 'white'}}
               onClick={() => setIsMenuOpen(false)}
             >
               Search
