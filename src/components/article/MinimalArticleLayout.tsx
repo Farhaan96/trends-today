@@ -80,11 +80,15 @@ export default async function MinimalArticleLayout({ article, children }: Minima
 
       {/* Article content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="prose prose-lg max-w-none">
-          {/* Add strategic internal links in the content */}
-          <div className="mb-8">
-            {children}
-          </div>
+      <div className="prose prose-lg max-w-none">
+        {/* Add strategic internal links in the content */}
+        <div className="mb-8">
+          {children}
+        </div>
+        {/* Gentle end-of-article prompt */}
+        <div className="mt-8 p-4 bg-gray-50 border border-gray-200 rounded">
+          <p className="text-gray-800">What did you find most interesting here? Share your take in the comments below — we read every one.</p>
+        </div>
 
           {/* Inline related articles (Le Ravi style) */}
           {relatedLinks.length > 0 && (

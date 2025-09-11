@@ -78,7 +78,7 @@ export async function getHomepageContent(): Promise<HomepageContent> {
   const cultureArticles = allArticles.filter(a => a.category === 'culture');
   const psychologyArticles = allArticles.filter(a => a.category === 'psychology');
   const healthArticles = allArticles.filter(a => a.category === 'health');
-  const mysteryArticles = allArticles.filter(a => a.category === 'mystery');
+  const spaceArticles = allArticles.filter(a => a.category === 'space');
 
   // Find hero article (latest article overall)
   const heroArticle = allArticles[0];
@@ -146,7 +146,7 @@ export async function getAllPosts(): Promise<Article[]> {
   const contentBaseDir = path.join(process.cwd(), 'content');
   
   // Load articles from NEW category directories
-  const categories = ['science', 'culture', 'psychology', 'technology', 'health', 'mystery'];
+  const categories = ['science', 'culture', 'psychology', 'technology', 'health', 'space'];
   const articlePromises = categories.map(category => 
     getArticlesFromCategoryDir(path.join(contentBaseDir, category), category)
   );

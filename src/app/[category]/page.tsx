@@ -7,7 +7,7 @@ import { getCategoryKey, getCategoryStyles, getCategoryDescription } from '@/lib
 type Params = { category: string }
 
 export function generateStaticParams() {
-  const categories = ['science','culture','psychology','technology','health','mystery']
+  const categories = ['science','culture','psychology','technology','health','space']
   return categories.map((c) => ({ category: c }))
 }
 

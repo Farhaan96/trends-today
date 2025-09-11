@@ -12,6 +12,7 @@ export default function GridCard({ article }: Props) {
   ).toLocaleDateString();
   const category = (article.frontmatter.category || article.type) as string;
   const img = article.frontmatter.image as string | undefined;
+  const description = (article.frontmatter.description || article.frontmatter.summary || '') as string;
 
   return (
     <article>
@@ -32,7 +33,9 @@ export default function GridCard({ article }: Props) {
           <div className="w-full h-full flex items-center justify-center text-xs text-gray-400">Image</div>
         )}
       </div>
+      {description && (
+        <p className="mt-3 text-gray-600 text-sm line-clamp-2">{description}</p>
+      )}
     </article>
   );
 }
-

@@ -1,4 +1,4 @@
-export type CategoryKey = 'science' | 'culture' | 'psychology' | 'technology' | 'health' | 'mystery' | 'lifestyle';
+export type CategoryKey = 'science' | 'culture' | 'psychology' | 'technology' | 'health' | 'space' | 'lifestyle';
 
 type Style = {
   badge: string; // pill background + text
@@ -32,10 +32,10 @@ const styles: Record<CategoryKey, Style> = {
     text: 'text-emerald-600',
     headerBg: 'bg-gradient-to-r from-emerald-500/10 to-green-600/10',
   },
-  mystery: {
-    badge: 'bg-gradient-to-r from-slate-600 to-indigo-700 text-white',
-    text: 'text-slate-700',
-    headerBg: 'bg-gradient-to-r from-slate-600/10 to-indigo-700/10',
+  space: {
+    badge: 'bg-gradient-to-r from-indigo-600 to-fuchsia-700 text-white',
+    text: 'text-indigo-700',
+    headerBg: 'bg-gradient-to-r from-indigo-600/10 to-fuchsia-700/10',
   },
   lifestyle: {
     badge: 'bg-gradient-to-r from-rose-500 to-orange-500 text-white',
@@ -46,7 +46,9 @@ const styles: Record<CategoryKey, Style> = {
 
 export function getCategoryKey(input?: string): CategoryKey {
   const key = (input || '').toLowerCase();
-  if ((styles as Record<string, Style>)[key]) return key as CategoryKey;
+  // Backward-compatibility + aliases
+  const alias = key === 'mystery' ? 'space' : key;
+  if ((styles as Record<string, Style>)[alias]) return alias as CategoryKey;
   // Fallback to technology as a sensible default
   return 'technology';
 }
@@ -67,8 +69,8 @@ export function getCategoryDescription(input?: string): string {
       return 'Gadgets, AI, and innovations changing how we live and work.';
     case 'health':
       return 'Wellness, medicine, and evidence-based advice for better living.';
-    case 'mystery':
-      return 'Unexplained events, curiosities, and deep dives into the unknown.';
+    case 'space':
+      return 'Astronomy, exploration, and the science of our universe.';
     case 'lifestyle':
       return 'Ideas, habits, and trends for living smarter every day.';
     default:

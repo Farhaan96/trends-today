@@ -11,7 +11,7 @@ const categoryConfig = {
   psychology: { name: 'Psychology', color: 'from-green-500 to-teal-600' },
   technology: { name: 'Technology', color: 'from-orange-500 to-red-600' },
   health: { name: 'Health', color: 'from-cyan-500 to-blue-600' },
-  mystery: { name: 'Mystery', color: 'from-violet-500 to-purple-600' }
+  space: { name: 'Space', color: 'from-indigo-600 to-fuchsia-700' }
 };
 
 export async function generateStaticParams() {

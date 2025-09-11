@@ -13,7 +13,7 @@ export default function MinimalHeader() {
     { name: 'Psychology', href: '/psychology' },
     { name: 'Technology', href: '/technology' },
     { name: 'Health', href: '/health' },
-    { name: 'Mystery', href: '/mystery' },
+    { name: 'Space', href: '/space' },
   ];
 
   return (

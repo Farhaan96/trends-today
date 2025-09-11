@@ -185,6 +185,11 @@ export default function EnhancedArticleLayout({
           {article.content}
         </div>
 
+        {/* Gentle end-of-article prompt */}
+        <div className="mb-12 p-4 bg-gray-50 border border-gray-200 rounded">
+          <p className="text-gray-800">Have a different take or an insight to add? Drop a comment below — we love hearing from readers.</p>
+        </div>
+
         {/* Bottom Social Share */}
         <div className="mb-12 p-6 bg-gray-50 rounded-2xl">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">

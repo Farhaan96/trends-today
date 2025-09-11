@@ -22,7 +22,7 @@ export interface Article {
 }
 
 export async function getAllArticles(): Promise<Article[]> {
-  const categories = ['science', 'culture', 'psychology', 'technology', 'health', 'mystery'];
+  const categories = ['science', 'culture', 'psychology', 'technology', 'health', 'space'];
   const articles: Article[] = [];
 
   for (const category of categories) {
