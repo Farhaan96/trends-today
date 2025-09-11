@@ -3,6 +3,7 @@
 import Link from 'next/link';
 // Image removed to switch to text-based logo
 import { useState } from 'react';
+import DarkModeToggle from '../ui/DarkModeToggle';
 
 export default function MinimalHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,6 +61,8 @@ export default function MinimalHeader() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </a>
+            {/* Dark mode toggle */}
+            <DarkModeToggle />
           </nav>
 
           {/* Mobile menu button */}

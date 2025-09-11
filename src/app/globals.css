@@ -46,6 +46,15 @@ body {
   font-variation-settings: "opsz" 32;
 }
 
+/* Basic dark mode defaults */
+html.dark body {
+  background: #0b1020;
+  color: #e5e7eb;
+}
+
+html.dark a { color: #93c5fd; }
+html.dark a:hover { color: #bfdbfe; }
+
 /* Professional transitions */
 * {
   transition-property: background-color, border-color, color, fill, stroke, opacity;

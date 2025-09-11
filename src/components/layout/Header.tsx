@@ -62,6 +62,10 @@ export default function Header() {
 
             {/* Actions and Mobile Menu */}
             <div className="flex items-center space-x-3">
+              {/* Dark mode */}
+              <div className="hidden md:block">
+                <DarkModeToggle />
+              </div>
               {/* Search Button */}
               <button 
                 onClick={() => setSearchOpen(true)}
