@@ -2,15 +2,12 @@
 
 import { ReactNode } from 'react'
 import dynamic from 'next/dynamic'
+import CommentSystem from '@/components/engagement/CommentSystem'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getCategoryStyles } from '@/lib/categories'
 
 // Dynamic imports for better performance
-const DisqusComments = dynamic(() => import('@/components/engagement/DisqusComments'), { 
-  ssr: false,
-  loading: () => <div className="animate-pulse h-32 bg-gray-100 rounded-lg"></div>
-})
 const SocialShare = dynamic(() => import('@/components/social/SocialShare'))
 const EnhancedNewsletter = dynamic(() => import('@/components/newsletter/EnhancedNewsletter'))
 const RelatedArticles = dynamic(() => import('@/components/content/RelatedArticles'))
@@ -281,12 +278,8 @@ export default function EnhancedArticleLayout({
           limit={6}
         />
 
-        {/* Comments Section */}
-        <DisqusComments
-          url={currentUrl}
-          identifier={articleId}
-          title={article.title}
-        />
+        {/* Comments Section (free, built-in) */}
+        <CommentSystem articleId={articleId} articleTitle={article.title} />
       </article>
     </>
   )

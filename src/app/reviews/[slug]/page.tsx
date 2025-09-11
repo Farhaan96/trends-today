@@ -10,7 +10,7 @@ import StructuredData from '@/components/seo/StructuredData';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import MDXImage from '@/components/mdx/MDXImage';
 import { getCategoryStyles } from '@/lib/categories';
-import DisqusComments from '@/components/engagement/DisqusComments';
+import CommentSystem from '@/components/engagement/CommentSystem';
 
 interface ReviewPageProps {
   params: {
@@ -306,12 +306,11 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
         </footer>
         </div>
 
-        {/* Comments */}
+        {/* Comments (free, built-in) */}
         <div className="pt-4 pb-12">
-          <DisqusComments
-            url={`https://trendstoday.ca/reviews/${params.slug}`}
-            identifier={`review-${params.slug}`}
-            title={frontmatter.title}
+          <CommentSystem
+            articleId={`review-${params.slug}`}
+            articleTitle={frontmatter.title}
           />
         </div>
     </main>
