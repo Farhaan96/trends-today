@@ -31,7 +31,7 @@ body.minimal-theme {
 .minimal-theme h2 { font-size: 1.8rem; }
 .minimal-theme h3 { font-size: 1.4rem; }
 
-/* Links - Simple and functional */
+/* Links - Simple and functional (but NOT header links) */
 .minimal-theme main a,
 .minimal-theme article a,
 .minimal-theme section a {
@@ -48,12 +48,22 @@ body.minimal-theme {
 }
 
 /* Keep header navigation white and remove underlines */
-.minimal-theme header a {
+.minimal-theme header a,
+.minimal-theme header a:link,
+.minimal-theme header a:visited,
+.minimal-theme header a:hover,
+.minimal-theme header a:active {
   color: white !important;
   text-decoration: none !important;
 }
 
-.minimal-theme header a:hover {
+/* Extra specificity for header links */
+header a,
+header a:link,
+header a:visited,
+header a:hover,
+header a:active {
+  color: white !important;
   text-decoration: none !important;
 }
 
