@@ -4,6 +4,7 @@ import { ReactNode } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getCategoryStyles } from '@/lib/categories'
 
 // Dynamic imports for better performance
 const DisqusComments = dynamic(() => import('@/components/engagement/DisqusComments'), { 
@@ -105,12 +106,17 @@ export default function EnhancedArticleLayout({
         <header className="mb-8">
           {/* Category Badge */}
           <div className="mb-4">
-            <Link 
-              href={`/${article.category}`}
-              className="inline-block px-3 py-1 text-sm font-medium text-blue-600 bg-blue-50 rounded-full hover:bg-blue-100 transition-colors capitalize"
-            >
-              {article.category}
-            </Link>
+            {(() => {
+              const cat = getCategoryStyles(article.category)
+              return (
+                <Link 
+                  href={`/${article.category}`}
+                  className={`inline-block px-3 py-1 text-sm font-semibold rounded-full capitalize ${cat.badge}`}
+                >
+                  {article.category}
+                </Link>
+              )
+            })()}
           </div>
 
           {/* Title */}

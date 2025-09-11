@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function MinimalHeader() {
@@ -19,30 +20,21 @@ export default function MinimalHeader() {
     <header className="border-b border-purple-700/20" style={{background: 'linear-gradient(90deg, #8B5CF6, #3B82F6)'}}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center h-24">
-          {/* Logo - Text only */}
-          <Link href="/" style={{textDecoration: 'none'}}>
-            <div className="flex flex-col">
-              <span 
-                style={{
-                  color: 'white',
-                  fontSize: '24px',
-                  fontWeight: 'bold',
-                  fontFamily: 'system-ui, -apple-system, sans-serif',
-                  letterSpacing: '-0.02em'
-                }}
-              >
-                Trends Today
-              </span>
-              <span 
-                style={{
-                  color: 'rgba(255,255,255,0.8)',
-                  fontSize: '12px',
-                  fontFamily: 'system-ui, -apple-system, sans-serif',
-                  marginTop: '2px'
-                }}
-              >
-                Discover What&apos;s Trending
-              </span>
+          {/* Logo */}
+          <Link href="/" className="flex items-center" aria-label="Trends Today Home">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/images/brand/trendstoday-wordmark.svg"
+                alt="Trends Today"
+                width={360}
+                height={80}
+                className="h-16 md:h-20 w-auto drop-shadow-md"
+                priority
+              />
+              <div className="hidden sm:flex flex-col leading-tight">
+                <span className="text-white font-extrabold tracking-tight">Trends Today</span>
+                <span className="text-white/80 text-xs">Discover What's Trending</span>
+              </div>
             </div>
           </Link>
 
@@ -61,21 +53,18 @@ export default function MinimalHeader() {
                   textDecoration: 'none',
                   transition: 'opacity 0.2s'
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
-                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.9')}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
               >
                 {item.name}
               </a>
             ))}
             <a
               href="/search"
-              style={{
-                color: 'white',
-                textDecoration: 'none'
-              }}
+              style={{ color: 'white', textDecoration: 'none' }}
               aria-label="Search"
-              onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
-              onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.9')}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -87,7 +76,7 @@ export default function MinimalHeader() {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2"
-            style={{color: 'white'}}
+            style={{ color: 'white' }}
             aria-label="Menu"
           >
             {isMenuOpen ? (

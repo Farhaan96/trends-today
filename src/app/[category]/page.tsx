@@ -1,150 +1,94 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
-import Image from 'next/image';
-import { getAllArticles } from '@/lib/article-utils';
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import Image from 'next/image'
+import { getAllArticles } from '@/lib/article-utils'
+import { getCategoryKey, getCategoryStyles, getCategoryDescription } from '@/lib/categories'
 
-const categories = {
-  science: {
-    name: 'Science',
-    description: 'Explore the latest scientific discoveries, research breakthroughs, and innovations shaping our understanding of the universe.',
-    color: 'from-blue-500 to-indigo-600'
-  },
-  culture: {
-    name: 'Culture', 
-    description: 'Dive into cultural phenomena, social trends, arts, and the forces shaping modern society.',
-    color: 'from-purple-500 to-pink-600'
-  },
-  psychology: {
-    name: 'Psychology',
-    description: 'Understand the human mind, behavior patterns, mental health, and the science of well-being.',
-    color: 'from-green-500 to-teal-600'
-  },
-  technology: {
-    name: 'Technology',
-    description: 'Stay updated with the latest in tech, AI, gadgets, software, and digital innovation.',
-    color: 'from-orange-500 to-red-600'
-  },
-  health: {
-    name: 'Health',
-    description: 'Discover wellness tips, medical breakthroughs, fitness trends, and holistic health insights.',
-    color: 'from-cyan-500 to-blue-600'
-  },
-  mystery: {
-    name: 'Mystery',
-    description: 'Uncover unexplained phenomena, historical enigmas, and fascinating mysteries from around the world.',
-    color: 'from-violet-500 to-purple-600'
-  }
-};
+type Params = { category: string }
 
-export async function generateStaticParams() {
-  return Object.keys(categories).map((category) => ({
-    category: category,
-  }));
+export function generateStaticParams() {
+  const categories = ['science','culture','psychology','technology','health','mystery']
+  return categories.map((c) => ({ category: c }))
 }
 
-export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
-  const category = categories[params.category as keyof typeof categories];
-  
-  if (!category) {
-    return {
-      title: 'Category Not Found | Trends Today',
-      description: 'The category you are looking for does not exist.'
-    };
-  }
-
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const key = getCategoryKey(params.category)
+  const title = `${key.charAt(0).toUpperCase() + key.slice(1)} | Trends Today`
+  const description = getCategoryDescription(key)
   return {
-    title: `${category.name} Articles | Trends Today`,
-    description: category.description,
-    openGraph: {
-      title: `${category.name} | Trends Today`,
-      description: category.description,
-      type: 'website',
-    },
-  };
+    title,
+    description,
+  }
 }
 
-export default async function CategoryPage({ params }: { params: { category: string } }) {
-  const categoryKey = params.category as keyof typeof categories;
-  const category = categories[categoryKey];
-  
-  if (!category) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Category Not Found</h1>
-          <Link href="/" className="text-blue-600 hover:underline">
-            Return to Homepage
-          </Link>
-        </div>
-      </div>
-    );
-  }
+export default async function CategoryPage({ params }: { params: Params }) {
+  const key = getCategoryKey(params.category)
+  const styles = getCategoryStyles(key)
+  const description = getCategoryDescription(key)
 
-  // Get articles for this category
-  const allArticles = await getAllArticles();
-  const categoryArticles = allArticles.filter(article => 
-    article.category?.toLowerCase() === categoryKey || 
-    article.frontmatter?.category?.toLowerCase() === categoryKey
-  );
+  // Use category-based loader so pages work with content/science, content/culture, etc.
+  const all = await getAllArticles()
+  const posts = all.filter((p) => (p.category || p.frontmatter?.category || '').toString().toLowerCase() === key)
+
+  const title = key.charAt(0).toUpperCase() + key.slice(1)
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Category Header */}
-      <div className={`bg-gradient-to-r ${category.color} text-white py-16`}>
-        <div className="max-w-7xl mx-auto px-4">
-          <h1 className="text-5xl font-bold mb-4">{category.name}</h1>
-          <p className="text-xl opacity-90 max-w-3xl">{category.description}</p>
-          <div className="mt-6">
-            <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-              {categoryArticles.length} article{categoryArticles.length !== 1 ? 's' : ''}
+    <main className="bg-white">
+      {/* Themed Category Header */}
+      <section className={`border-b ${styles.headerBg}`}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+          <div className="mb-3">
+            <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide ${styles.badge}`}>
+              {title}
             </span>
           </div>
+          <h1 className="font-serif text-4xl font-extrabold tracking-tight text-gray-900">{title}</h1>
+          {description && <p className="mt-2 text-gray-600">{description}</p>}
+          <p className="mt-3 text-sm text-gray-500">{posts.length} {posts.length === 1 ? 'article' : 'articles'}</p>
         </div>
-      </div>
+      </section>
 
-      {/* Articles Grid */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        {categoryArticles.length === 0 ? (
-          <div className="text-center py-16">
-            <p className="text-gray-600 text-lg mb-8">No articles in this category yet.</p>
-            <Link href="/" className="text-blue-600 hover:underline">
-              Browse all articles
-            </Link>
-          </div>
+      {/* Articles list */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+        {posts.length === 0 ? (
+          <p className="text-gray-600">No articles in this category yet.</p>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {categoryArticles.map((article) => (
-              <article key={article.slug} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-                <Link href={`/${categoryKey}/${article.slug}`}>
-                  <div className="relative h-48">
-                    <Image
-                      src={article.image || article.frontmatter?.image || '/images/placeholder.jpg'}
-                      alt={article.title || article.frontmatter?.title || 'Article'}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className={`absolute top-4 left-4 bg-gradient-to-r ${category.color} text-white px-3 py-1 rounded-full text-sm font-semibold`}>
-                      {category.name}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {posts.map((article) => {
+              const href = `/${key}/${article.slug}`
+              const img = (article.image || article.frontmatter?.image) as string | undefined
+              const atitle = (article.title || article.frontmatter?.title) as string
+              const date = new Date(
+                (article.publishedAt || article.frontmatter?.publishedAt || new Date().toISOString()) as string
+              ).toLocaleDateString()
+              return (
+                <article key={href} className="group">
+                  <Link href={href}>
+                    <div className="relative w-full aspect-[16/9] bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
+                      {img ? (
+                        <Image src={img} alt={atitle} fill className="object-cover transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 1024px) 100vw, 33vw" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">Image</div>
+                      )}
+                      <div className="absolute top-3 left-3">
+                        <span className={`inline-block px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide ${styles.badge}`}>
+                          {key}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-6">
-                    <h2 className="text-xl font-bold mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
-                      {article.title || article.frontmatter?.title}
+                  </Link>
+                  <Link href={href}>
+                    <h2 className="mt-3 text-lg font-bold text-gray-900 group-hover:text-gray-800 leading-snug">
+                      {atitle}
                     </h2>
-                    <p className="text-gray-600 line-clamp-3 mb-4">
-                      {article.description || article.frontmatter?.description}
-                    </p>
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <span>{article.author?.name || article.frontmatter?.author?.name || 'Trends Today'}</span>
-                      <span>{new Date(article.publishedAt || article.frontmatter?.publishedAt).toLocaleDateString()}</span>
-                    </div>
-                  </div>
-                </Link>
-              </article>
-            ))}
+                  </Link>
+                  <div className="text-sm text-gray-500">{date}</div>
+                </article>
+              )
+            })}
           </div>
         )}
-      </div>
-    </div>
-  );
+      </section>
+    </main>
+  )
 }

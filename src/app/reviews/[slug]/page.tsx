@@ -9,6 +9,7 @@ import CitationsList from '@/components/content/CitationsList';
 import StructuredData from '@/components/seo/StructuredData';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import MDXImage from '@/components/mdx/MDXImage';
+import { getCategoryStyles } from '@/lib/categories';
 
 interface ReviewPageProps {
   params: {
@@ -148,9 +149,14 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
         <header className="p-8 pb-6">
           {/* Category badge */}
           <div className="flex items-center gap-3 mb-4">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-              {frontmatter.category || 'Review'}
-            </span>
+            {(() => {
+              const cat = getCategoryStyles(frontmatter.category)
+              return (
+                <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold ${cat.badge}`}>
+                  {frontmatter.category || 'Review'}
+                </span>
+              )
+            })()}
             {frontmatter.featured && (
               <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
                 ⭐ Featured Review

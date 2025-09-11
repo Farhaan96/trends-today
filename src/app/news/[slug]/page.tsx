@@ -9,6 +9,7 @@ import CitationsList from '@/components/content/CitationsList';
 import StructuredData from '@/components/seo/StructuredData';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import MDXImage from '@/components/mdx/MDXImage';
+import { getCategoryStyles } from '@/lib/categories';
 
 interface NewsPageProps {
   params: {
@@ -146,9 +147,14 @@ export default async function NewsPage({ params }: NewsPageProps) {
         {/* Article Header */}
         <header className="mb-8">
           <div className="mb-4">
-            <span className="inline-block px-3 py-1 bg-red-600 text-white text-sm font-bold uppercase tracking-wide rounded-sm">
-              {frontmatter.category || 'News'}
-            </span>
+            {(() => {
+              const cat = getCategoryStyles(frontmatter.category)
+              return (
+                <span className={`inline-block px-3 py-1 text-sm font-bold uppercase tracking-wide rounded-full ${cat.badge}`}>
+                  {frontmatter.category || 'News'}
+                </span>
+              )
+            })()}
             {frontmatter.featured && (
               <span className="ml-2 inline-block px-3 py-1 bg-blue-600 text-white text-sm font-bold uppercase tracking-wide rounded-sm">
                 Featured

@@ -5,6 +5,7 @@ import AuthorSection from '@/components/content/AuthorSection';
 import RelatedArticles, { getRelatedLinks, InlineLink } from '@/components/content/InternalLinks';
 import { Article } from '@/lib/content';
 import AdSlot from '@/components/ads/AdSlot';
+import { getCategoryStyles } from '@/lib/categories';
 
 interface MinimalArticleLayoutProps {
   article: Article;
@@ -24,12 +25,17 @@ export default async function MinimalArticleLayout({ article, children }: Minima
       <header className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Category */}
         <div className="mb-4">
-          <Link 
-            href={`/${frontmatter.category?.toLowerCase() || 'articles'}`}
-            className="text-sm font-medium text-blue-600 uppercase tracking-wide hover:text-blue-800"
-          >
-            {frontmatter.category || 'Article'}
-          </Link>
+          {(() => {
+            const cat = getCategoryStyles(frontmatter.category)
+            return (
+              <Link 
+                href={`/${frontmatter.category?.toLowerCase() || 'articles'}`}
+                className={`inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide ${cat.badge}`}
+              >
+                {frontmatter.category || 'Article'}
+              </Link>
+            )
+          })()}
         </div>
 
         {/* Title */}
