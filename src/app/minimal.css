@@ -47,9 +47,14 @@ body.minimal-theme {
   text-decoration: underline;
 }
 
-/* Keep header navigation white */
+/* Keep header navigation white and remove underlines */
 .minimal-theme header a {
   color: white !important;
+  text-decoration: none !important;
+}
+
+.minimal-theme header a:hover {
+  text-decoration: none !important;
 }
 
 /* Keep buttons with their defined colors */
