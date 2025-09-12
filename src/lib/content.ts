@@ -28,7 +28,11 @@ async function getArticlesFromDir(
       return [];
     }
     
-    const files = fs.readdirSync(contentDir);
+    const files = fs
+      .readdirSync(contentDir)
+      .filter(file => file.endsWith('.mdx') || file.endsWith('.json'))
+      // Exclude backup long-form duplicates (e.g., *.backup.mdx)
+      .filter(file => !/\.backup\.mdx$/i.test(file));
     const articles = files
       .filter(file => file.endsWith('.mdx') || file.endsWith('.json'))
       .map(file => {
@@ -173,6 +177,8 @@ async function getArticlesFromCategoryDir(contentDir: string, category: string):
     const files = fs.readdirSync(contentDir);
     const articles = files
       .filter(file => file.endsWith('.mdx'))
+      // Exclude backup long-form duplicates (e.g., *.backup.mdx)
+      .filter(file => !/\.backup\.mdx$/i.test(file))
       .map(file => {
         const filePath = path.join(contentDir, file);
         const fileContent = fs.readFileSync(filePath, 'utf-8');

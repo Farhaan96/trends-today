@@ -32,7 +32,11 @@ export async function getAllArticles(): Promise<Article[]> {
       continue;
     }
 
-    const files = fs.readdirSync(categoryPath).filter(file => file.endsWith('.mdx'));
+    const files = fs
+      .readdirSync(categoryPath)
+      .filter(file => file.endsWith('.mdx'))
+      // Exclude backup long-form duplicates (e.g., *.backup.mdx)
+      .filter(file => !/\.backup\.mdx$/i.test(file));
     
     for (const file of files) {
       const filePath = path.join(categoryPath, file);
@@ -63,6 +67,10 @@ export async function getAllArticles(): Promise<Article[]> {
 }
 
 export async function getArticleBySlug(category: string, slug: string): Promise<Article | null> {
+  // Hide backup long-form duplicates
+  if (/\.backup$/i.test(slug)) {
+    return null;
+  }
   const filePath = path.join(contentDirectory, category, `${slug}.mdx`);
   
   if (!fs.existsSync(filePath)) {
@@ -93,7 +101,11 @@ export async function getArticlesByCategory(category: string): Promise<Article[]
     return [];
   }
 
-  const files = fs.readdirSync(categoryPath).filter(file => file.endsWith('.mdx'));
+  const files = fs
+    .readdirSync(categoryPath)
+    .filter(file => file.endsWith('.mdx'))
+    // Exclude backup long-form duplicates (e.g., *.backup.mdx)
+    .filter(file => !/\.backup\.mdx$/i.test(file));
   const articles: Article[] = [];
   
   for (const file of files) {
