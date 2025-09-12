@@ -16,34 +16,35 @@ interface InternalLinksProps {
 export async function getRelatedLinks(
   currentArticle?: string,
   category?: string,
-  maxLinks: number = 5
+  maxLinks: number = 4
 ): Promise<InternalLink[]> {
   const posts = await getAllPosts();
-  
-  // Filter out current article and get related posts
-  const relatedPosts = posts
-    .filter(post => post.href !== currentArticle)
-    .filter(post => !category || post.frontmatter.category === category)
-    .slice(0, maxLinks * 2); // Get extra to have options
 
-  // Create natural anchor texts based on article titles
-  const links: InternalLink[] = relatedPosts.slice(0, maxLinks).map(post => {
-    // Generate contextual anchor text (not just the title)
-    const anchorVariations = [
-      post.frontmatter.title.toLowerCase().includes('review') ? 'our detailed analysis' : null,
-      post.frontmatter.title.toLowerCase().includes('best') ? 'top recommendations' : null,
-      post.frontmatter.title.toLowerCase().includes('vs') ? 'comparison guide' : null,
-      post.frontmatter.title.toLowerCase().includes('how') ? 'step-by-step guide' : null,
-      // Fallback to key phrases from title
-      extractKeyPhrase(post.frontmatter.title)
-    ].filter(Boolean);
+  // Exclude current article
+  const pool = posts.filter(p => p.href !== currentArticle);
 
-    return {
-      text: anchorVariations[0] || post.frontmatter.title,
-      href: post.href,
-      context: post.frontmatter.description || ''
-    };
-  });
+  // Strategy: blend categories for cross-linking
+  const sameCategory = pool.filter(p => !category || p.frontmatter.category === category);
+  const otherCategories = pool.filter(p => !category || p.frontmatter.category !== category);
+
+  const targetSame = Math.ceil(maxLinks / 2); // 50% same category
+  const selected: typeof pool = [];
+
+  for (const p of sameCategory) {
+    if (selected.length >= targetSame) break;
+    selected.push(p);
+  }
+  for (const p of otherCategories) {
+    if (selected.length >= maxLinks) break;
+    selected.push(p);
+  }
+
+  // Map to link objects with descriptive, natural anchor text
+  const links: InternalLink[] = selected.map(post => ({
+    text: post.frontmatter.title, // Descriptive anchor text
+    href: post.href,
+    context: post.frontmatter.description || ''
+  }));
 
   return links;
 }

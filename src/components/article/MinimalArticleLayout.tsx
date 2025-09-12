@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import AuthorSection from '@/components/content/AuthorSection';
-import RelatedArticles, { getRelatedLinks, InlineLink } from '@/components/content/InternalLinks';
+import RelatedArticles, { getRelatedLinks } from '@/components/content/InternalLinks';
 import { Article } from '@/lib/content';
 import AdSlot from '@/components/ads/AdSlot';
 import { getCategoryStyles } from '@/lib/categories';
@@ -15,7 +15,7 @@ interface MinimalArticleLayoutProps {
 
 export default async function MinimalArticleLayout({ article, children }: MinimalArticleLayoutProps) {
   const frontmatter = article.frontmatter;
-  const relatedLinks = await getRelatedLinks(article.href, frontmatter.category, 5);
+  const relatedLinks = await getRelatedLinks(article.href, frontmatter.category, 2);
 
   // Parse content to add internal links (this would be done in content generation)
   // For now, we'll add them strategically in the layout
@@ -81,7 +81,7 @@ export default async function MinimalArticleLayout({ article, children }: Minima
       {/* Article content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
       <div className="prose prose-lg max-w-none">
-        {/* Add strategic internal links in the content */}
+        {/* Article body */}
         <div className="mb-8">
           {children}
         </div>
@@ -89,27 +89,6 @@ export default async function MinimalArticleLayout({ article, children }: Minima
         <div className="mt-8 p-4 bg-gray-50 border border-gray-200 rounded">
           <p className="text-gray-800">What did you find most interesting here? Share your take in the comments below — we read every one.</p>
         </div>
-
-          {/* Inline related articles (Le Ravi style) */}
-          {relatedLinks.length > 0 && (
-            <div className="my-8 p-4 bg-blue-50 border-l-4 border-blue-600">
-              <p className="text-gray-700">
-                <strong>You might also be interested in:</strong> Check out our{' '}
-                <InlineLink href={relatedLinks[0].href}>
-                  {relatedLinks[0].text}
-                </InlineLink>
-                {relatedLinks[1] && (
-                  <>
-                    {' '}and our recent{' '}
-                    <InlineLink href={relatedLinks[1].href}>
-                      {relatedLinks[1].text}
-                    </InlineLink>
-                  </>
-                )}
-                {' '}for more insights on this topic.
-              </p>
-            </div>
-          )}
         </div>
 
         {/* Mid-article ad slot */}
@@ -125,9 +104,9 @@ export default async function MinimalArticleLayout({ article, children }: Minima
           showMoreArticles={true}
         />
 
-        {/* Related articles section */}
-        {relatedLinks.length > 2 && (
-          <RelatedArticles links={relatedLinks.slice(2)} />
+        {/* Related articles section (1–2 links per strategy) */}
+        {relatedLinks.length > 0 && (
+          <RelatedArticles links={relatedLinks} />
         )}
 
         {/* Bottom navigation */}
