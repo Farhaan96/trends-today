@@ -192,7 +192,7 @@ html.dark .prose a:hover { color: #bfdbfe; opacity: 1; }
 .prose strong,
 .prose em,
 .prose code,
-.prose span { color: #111827; }
+.prose span { color: #111827 !important; }
 
 html.dark .prose p,
 html.dark .prose ul,
@@ -201,7 +201,7 @@ html.dark .prose li,
 html.dark .prose strong,
 html.dark .prose em,
 html.dark .prose code,
-html.dark .prose span { color: #e5e7eb; }
+html.dark .prose span { color: #e5e7eb !important; }
 
 .text-subheading {
   font-size: var(--font-size-2xl);
