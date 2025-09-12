@@ -97,7 +97,7 @@ export default function RelatedArticles({ links }: { links: InternalLink[] }) {
             <div>
               <Link 
                 href={link.href}
-                className="text-blue-600 hover:text-blue-800 font-medium hover:underline"
+                className="text-blue-600 hover:text-blue-800 font-medium no-underline"
               >
                 {link.text}
               </Link>
