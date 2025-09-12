@@ -96,6 +96,11 @@ export default async function ArticlePage({ params }: { params: { category: stri
         {/* Article Title and Meta - Below the image */}
         <div className="bg-white py-8 px-4">
           <div className="max-w-4xl mx-auto">
+            {/* Article Title */}
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+              {article.title || article.frontmatter?.title}
+            </h1>
+            
             {/* Category Badge */}
             <Link 
               href={`/${params.category}`}
