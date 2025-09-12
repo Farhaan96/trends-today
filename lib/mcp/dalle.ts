@@ -46,6 +46,10 @@ export class DalleClient {
         n
       });
 
+      if (!response.data || response.data.length === 0) {
+        throw new Error('No images returned from DALL-E');
+      }
+      
       const image = response.data[0];
       if (!image?.url) {
         throw new Error('No image URL returned from DALL-E');
