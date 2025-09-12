@@ -47,13 +47,8 @@ body {
 }
 
 /* Basic dark mode defaults */
-html.dark body {
-  background: #0b1020;
-  color: #e5e7eb;
-}
-
-html.dark a { color: #93c5fd; }
-html.dark a:hover { color: #bfdbfe; }
+/* Force light color scheme site-wide */
+html { color-scheme: light; }
 
 /* Professional transitions */
 * {
@@ -180,9 +175,6 @@ html {
 .prose a:hover { opacity: 0.85; }
 
 /* Dark mode contrast for article text and links */
-html.dark .prose { color: #e5e7eb; }
-html.dark .prose a { color: #93c5fd; }
-html.dark .prose a:hover { color: #bfdbfe; opacity: 1; }
 
 /* Strongly enforce readable body text colors */
 .prose p,
@@ -194,14 +186,6 @@ html.dark .prose a:hover { color: #bfdbfe; opacity: 1; }
 .prose code,
 .prose span { color: #111827 !important; }
 
-html.dark .prose p,
-html.dark .prose ul,
-html.dark .prose ol,
-html.dark .prose li,
-html.dark .prose strong,
-html.dark .prose em,
-html.dark .prose code,
-html.dark .prose span { color: #e5e7eb !important; }
 
 .text-subheading {
   font-size: var(--font-size-2xl);
