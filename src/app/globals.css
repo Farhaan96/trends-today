@@ -175,9 +175,18 @@ html {
 .prose hr { margin: 2rem 0; }
 .prose blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 4px solid #e5e7eb; color: inherit; }
 
-/* Links inside article content: no underline, subtle hover */
-.prose a { text-decoration: none; color: #2563eb; }
-.prose a:hover { opacity: 0.85; }
+/* Links inside article content: visible underline, better contrast */
+.prose a { 
+  text-decoration: underline; 
+  text-decoration-color: #2563eb;
+  text-underline-offset: 2px;
+  color: #2563eb; 
+  font-weight: 500;
+}
+.prose a:hover { 
+  color: #1d4ed8; 
+  text-decoration-color: #1d4ed8;
+}
 
 /* Dark mode contrast for article text and links */
 

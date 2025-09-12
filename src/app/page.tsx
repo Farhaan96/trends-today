@@ -28,10 +28,10 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
       <StructuredData data={getAllBaseSchemas()} />
       
       {/* Leravi-style Layout */}
-      <section className="max-w-6xl mx-auto px-6 py-32">
+      <section className="max-w-6xl mx-auto px-6 py-8 md:py-32">
         {/* Featured Article - Takes up most of the screen */}
         {featuredPost && (
-          <div className="mb-48">
+          <div className="mb-16 md:mb-48">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               {/* Image */}
               <Link href={featuredPost.href as string} prefetch={false}>
@@ -87,7 +87,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
         )}
 
         {/* Preview Articles - Show just the tops */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-48">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 md:mb-48">
           {secondPost && (
             <div className="space-y-4">
               <Link href={secondPost.href as string} prefetch={false}>
@@ -173,7 +173,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
 
         {/* Additional Articles Grid - 6 more articles */}
         {pagePosts.length > 3 && (
-          <div className="mt-48">
+          <div className="mt-16 md:mt-48">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
               {pagePosts.slice(3).map((article, index) => (
                 <div key={article.href} className="space-y-4">
@@ -220,7 +220,7 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
         )}
 
           {/* Pagination */}
-        <nav className="mt-48 pt-12 border-t border-gray-200">
+        <nav className="mt-16 md:mt-48 pt-12 border-t border-gray-200">
             <div className="flex items-center justify-center space-x-1">
               {hasPrev && (
                 <Link
