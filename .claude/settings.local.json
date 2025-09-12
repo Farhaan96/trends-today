@@ -31,7 +31,9 @@
       "Bash(dir:*)",
       "Bash(awk:*)",
       "Bash(npm run ultra:generate:*)",
-      "Bash(npm run ultra:validate:*)"
+      "Bash(npm run ultra:validate:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm run typecheck:*)"
     ],
     "deny": [],
     "ask": []
