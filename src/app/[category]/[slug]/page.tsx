@@ -91,13 +91,6 @@ export default async function ArticlePage({ params }: { params: { category: stri
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
           
-          {/* Category Badge - Links back to category page */}
-          <Link 
-            href={`/${params.category}`}
-            className={`absolute top-8 left-8 bg-gradient-to-r ${category.color} text-white px-4 py-2 rounded-full text-sm font-bold hover:scale-105 transition-transform shadow-lg`}
-          >
-            ← Back to {category.name}
-          </Link>
         </div>
 
         {/* Article Title and Meta - Below the image */}
@@ -111,9 +104,6 @@ export default async function ArticlePage({ params }: { params: { category: stri
               {category.name}
             </Link>
             
-            <h1 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900">
-              {article.title || article.frontmatter?.title}
-            </h1>
             <div className="flex items-center gap-4 text-gray-600">
               <span className="font-medium">{article.author?.name || article.frontmatter?.author?.name || 'Trends Today'}</span>
               <span>•</span>
