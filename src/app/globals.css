@@ -152,6 +152,7 @@ html {
 
 /* --- Article readability overrides (work without typography plugin) --- */
 .prose {
+  color: var(--color-foreground);
   font-size: 1.0625rem; /* ~17px on mobile */
   line-height: 1.8;
   max-width: none;
