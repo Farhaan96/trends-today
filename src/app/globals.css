@@ -184,13 +184,24 @@ html.dark .prose { color: #e5e7eb; }
 html.dark .prose a { color: #93c5fd; }
 html.dark .prose a:hover { color: #bfdbfe; opacity: 1; }
 
-/* Force text color on nested elements inside prose to avoid unintended grays */
-.prose :where(p, ul, ol, li, strong, em, code, span) {
-  color: inherit;
-}
-html.dark .prose :where(p, ul, ol, li, strong, em, code, span) {
-  color: inherit;
-}
+/* Strongly enforce readable body text colors */
+.prose p,
+.prose ul,
+.prose ol,
+.prose li,
+.prose strong,
+.prose em,
+.prose code,
+.prose span { color: #111827; }
+
+html.dark .prose p,
+html.dark .prose ul,
+html.dark .prose ol,
+html.dark .prose li,
+html.dark .prose strong,
+html.dark .prose em,
+html.dark .prose code,
+html.dark .prose span { color: #e5e7eb; }
 
 .text-subheading {
   font-size: var(--font-size-2xl);
