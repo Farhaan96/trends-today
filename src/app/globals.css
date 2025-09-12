@@ -173,7 +173,7 @@ html {
 .prose ul, .prose ol { margin: 1rem 0 1.25rem; padding-left: 1.25rem; }
 .prose li { margin: 0.375rem 0; }
 .prose hr { margin: 2rem 0; }
-.prose blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 4px solid #e5e7eb; color: #374151; }
+.prose blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 4px solid #e5e7eb; color: inherit; }
 
 /* Links inside article content: no underline, subtle hover */
 .prose a { text-decoration: none; color: #2563eb; }
@@ -183,6 +183,14 @@ html {
 html.dark .prose { color: #e5e7eb; }
 html.dark .prose a { color: #93c5fd; }
 html.dark .prose a:hover { color: #bfdbfe; opacity: 1; }
+
+/* Force text color on nested elements inside prose to avoid unintended grays */
+.prose :where(p, ul, ol, li, strong, em, code, span) {
+  color: inherit;
+}
+html.dark .prose :where(p, ul, ol, li, strong, em, code, span) {
+  color: inherit;
+}
 
 .text-subheading {
   font-size: var(--font-size-2xl);
