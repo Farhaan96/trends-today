@@ -35,14 +35,14 @@ export default function ArticleContent({ content }: ArticleContentProps) {
   if (!mdxSource) {
     // Fallback to rendering as plain markdown-style HTML
     return (
-      <div className="prose prose-xl max-w-none prose-a:no-underline hover:prose-a:opacity-80 prose-p:leading-7 md:prose-p:leading-8 prose-headings:mt-8 prose-headings:mb-3 prose-ul:my-6 prose-ol:my-6 prose-li:my-1.5">
+      <div className="prose prose-xl max-w-none text-gray-900 dark:text-gray-100 prose-a:no-underline hover:prose-a:opacity-80 prose-p:leading-7 md:prose-p:leading-8 prose-headings:mt-8 prose-headings:mb-3 prose-ul:my-6 prose-ol:my-6 prose-li:my-1.5">
         <div dangerouslySetInnerHTML={{ __html: demoteH1ToH2(content) }} />
       </div>
     );
   }
 
   return (
-    <div className="prose prose-xl max-w-none prose-a:no-underline hover:prose-a:opacity-80 prose-p:leading-7 md:prose-p:leading-8 prose-headings:mt-8 prose-headings:mb-3 prose-ul:my-6 prose-ol:my-6 prose-li:my-1.5">
+    <div className="prose prose-xl max-w-none text-gray-900 dark:text-gray-100 prose-a:no-underline hover:prose-a:opacity-80 prose-p:leading-7 md:prose-p:leading-8 prose-headings:mt-8 prose-headings:mb-3 prose-ul:my-6 prose-ol:my-6 prose-li:my-1.5">
       <MDXRemote {...mdxSource} />
     </div>
   );
