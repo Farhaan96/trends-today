@@ -2,6 +2,8 @@
 
 A lean, reliable AI-automated blog system that publishes 15 high-quality tech articles daily with accurate images, clean minimalist UI, solid SEO, and ad monetization.
 
+<!-- Force Vercel rebuild: 2025-09-11 22:53 -->
+
 ## 🚀 Quick Start
 
 ### Prerequisites
