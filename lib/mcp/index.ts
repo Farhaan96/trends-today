@@ -1,9 +1,12 @@
 export { FirecrawlClient, firecrawl } from './firecrawl';
 export { PerplexityClient, perplexity } from './perplexity';
+export { DalleClient, dalle } from './dalle';
 import type { FirecrawlClient as FirecrawlClientType } from './firecrawl';
 import type { PerplexityClient as PerplexityClientType } from './perplexity';
+import type { DalleClient as DalleClientType } from './dalle';
 import { FirecrawlClient as FirecrawlClientCtor } from './firecrawl';
 import { PerplexityClient as PerplexityClientCtor } from './perplexity';
+import { DalleClient as DalleClientCtor } from './dalle';
 export { demoKeywordData, demoProductData, demoNewsData, isDemoMode, getDemoModeWarning, simulateApiDelay } from './demo-data';
 
 class DataForSEOLite {
@@ -22,11 +25,13 @@ class DataForSEOLite {
 export class MCPClient {
   public firecrawl: FirecrawlClientType;
   public perplexity: PerplexityClientType;
+  public dalle: DalleClientType;
   public dataForSEO: DataForSEOLite;
 
-  constructor(options?: { firecrawlKey?: string; perplexityKey?: string }) {
+  constructor(options?: { firecrawlKey?: string; perplexityKey?: string; openaiKey?: string }) {
     this.firecrawl = new FirecrawlClientCtor(options?.firecrawlKey);
     this.perplexity = new PerplexityClientCtor(options?.perplexityKey);
+    this.dalle = new DalleClientCtor(options?.openaiKey);
     this.dataForSEO = new DataForSEOLite();
   }
 
@@ -34,6 +39,7 @@ export class MCPClient {
     const errors: string[] = [];
     let firecrawlHealthy = false;
     let perplexityHealthy = false;
+    let dalleHealthy = false;
     try {
       await this.firecrawl.scrapeUrl('https://example.com');
       firecrawlHealthy = true;
@@ -46,7 +52,12 @@ export class MCPClient {
     } catch (e: any) {
       errors.push(`Perplexity: ${e?.message || 'Unknown error'}`);
     }
-    return { firecrawl: firecrawlHealthy, perplexity: perplexityHealthy, dataForSEO: true, errors };
+    try {
+      dalleHealthy = await this.dalle.healthCheck();
+    } catch (e: any) {
+      errors.push(`DALL-E: ${e?.message || 'Unknown error'}`);
+    }
+    return { firecrawl: firecrawlHealthy, perplexity: perplexityHealthy, dalle: dalleHealthy, dataForSEO: true, errors };
   }
 
   async getComprehensiveProductData(productName: string, category: string) {

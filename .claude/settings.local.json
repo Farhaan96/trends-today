@@ -27,7 +27,11 @@
       "Bash(taskkill:*)",
       "WebSearch",
       "Bash(del:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(dir:*)",
+      "Bash(awk:*)",
+      "Bash(npm run ultra:generate:*)",
+      "Bash(npm run ultra:validate:*)"
     ],
     "deny": [],
     "ask": []
