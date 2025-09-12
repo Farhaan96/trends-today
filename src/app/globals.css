@@ -162,7 +162,12 @@ html {
 }
 
 .prose p { margin: 0 0 1.25rem; }
-.prose h1 { line-height: 1.15; margin: 2rem 0 1rem; }
+.prose h1 { 
+  line-height: 1.1; 
+  margin: 4rem 0 2.5rem; 
+  font-size: 3rem;
+  font-weight: 800;
+}
 .prose h2 { line-height: 1.2; margin: 2rem 0 0.75rem; font-weight: 700; }
 .prose h3 { line-height: 1.25; margin: 1.5rem 0 0.5rem; font-weight: 600; }
 .prose ul, .prose ol { margin: 1rem 0 1.25rem; padding-left: 1.25rem; }
@@ -229,10 +234,10 @@ html {
 }
 
 .article-content h1 {
-  font-size: var(--font-size-4xl);
+  font-size: 3rem;
   font-weight: 800;
   line-height: 1.1;
-  margin-bottom: 1.5rem;
+  margin: 4rem 0 2.5rem;
   color: var(--color-foreground);
 }
 
