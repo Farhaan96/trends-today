@@ -3,7 +3,6 @@
 import Link from 'next/link';
 // Image removed to switch to text-based logo
 import { useState } from 'react';
-import DarkModeToggle from '../ui/DarkModeToggle';
 
 export default function MinimalHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,19 +50,6 @@ export default function MinimalHeader() {
                 {item.name}
               </a>
             ))}
-            <a
-              href="/search"
-              style={{ color: 'white', textDecoration: 'none' }}
-              aria-label="Search"
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.9')}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
-            >
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </a>
-            {/* Dark mode toggle */}
-            <DarkModeToggle />
           </nav>
 
           {/* Mobile menu button */}
@@ -108,21 +94,6 @@ export default function MinimalHeader() {
                 {item.name}
               </a>
             ))}
-            <a
-              href="/search"
-              className="block py-3"
-              style={{
-                color: 'white',
-                fontWeight: 'bold',
-                fontSize: '18px',
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em',
-                textDecoration: 'none'
-              }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Search
-            </a>
           </nav>
         </div>
       )}
