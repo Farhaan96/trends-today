@@ -9,7 +9,6 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const slugify = require('slugify');
-const { categories, articleTemplates } = require('../config/categories');
 
 class LeRaviContentCreator {
   constructor() {
@@ -50,7 +49,6 @@ class LeRaviContentCreator {
    */
   generateMetadata(topic, category, keywords) {
     const now = new Date();
-    const template = articleTemplates[category] || articleTemplates.technology;
     
     return {
       title: this.generateCuriosityGapHeadline(topic, category),
