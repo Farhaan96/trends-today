@@ -179,6 +179,11 @@ html {
 .prose a { text-decoration: none; color: #2563eb; }
 .prose a:hover { opacity: 0.85; }
 
+/* Dark mode contrast for article text and links */
+html.dark .prose { color: #e5e7eb; }
+html.dark .prose a { color: #93c5fd; }
+html.dark .prose a:hover { color: #bfdbfe; opacity: 1; }
+
 .text-subheading {
   font-size: var(--font-size-2xl);
   font-weight: 700;
