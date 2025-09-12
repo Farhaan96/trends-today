@@ -175,17 +175,18 @@ html {
 .prose hr { margin: 2rem 0; }
 .prose blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 4px solid #e5e7eb; color: inherit; }
 
-/* Links inside article content: visible underline, better contrast */
+/* Links inside article content: bright blue, clearly clickable */
 .prose a { 
-  text-decoration: underline; 
-  text-decoration-color: #2563eb;
-  text-underline-offset: 2px;
-  color: #2563eb; 
-  font-weight: 500;
+  text-decoration: underline !important; 
+  text-decoration-color: #2563eb !important;
+  text-underline-offset: 2px !important;
+  color: #2563eb !important; 
+  font-weight: 500 !important;
 }
 .prose a:hover { 
-  color: #1d4ed8; 
-  text-decoration-color: #1d4ed8;
+  color: #1d4ed8 !important; 
+  text-decoration-color: #1d4ed8 !important;
+  text-decoration-thickness: 2px !important;
 }
 
 /* Dark mode contrast for article text and links */
