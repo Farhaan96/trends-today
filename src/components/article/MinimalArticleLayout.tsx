@@ -24,6 +24,11 @@ export default async function MinimalArticleLayout({ article, children }: Minima
     <article className="min-h-screen bg-white">
       {/* Clean article header */}
       <header className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        {/* Title */}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+          {frontmatter.title}
+        </h1>
+
         {/* Category */}
         <div className="mb-4">
           {(() => {
@@ -38,11 +43,6 @@ export default async function MinimalArticleLayout({ article, children }: Minima
             )
           })()}
         </div>
-
-        {/* Title */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">
-          {frontmatter.title}
-        </h1>
 
         {/* Meta information */}
         <div className="flex items-center text-sm text-gray-600 space-x-4 mb-6">

@@ -101,6 +101,11 @@ export default function EnhancedArticleLayout({
 
         {/* Article Header */}
         <header className="mb-8">
+          {/* Title */}
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+            {article.title}
+          </h1>
+
           {/* Category Badge */}
           <div className="mb-4">
             {(() => {
@@ -115,11 +120,6 @@ export default function EnhancedArticleLayout({
               )
             })()}
           </div>
-
-          {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
-            {article.title}
-          </h1>
 
           {/* Description */}
           <p className="text-xl text-gray-600 mb-8 leading-relaxed">
