@@ -79,49 +79,45 @@ export default async function ArticlePage({ params }: { params: { category: stri
   return (
     <article className="min-h-screen bg-white">
       {/* Article Header */}
-      <header>
-        {/* Article Image - Square Format */}
-        <div className="bg-white py-8 px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="relative w-80 h-80 mx-auto mb-6 rounded-lg overflow-hidden shadow-lg">
-              <Image
-                src={article.image || article.frontmatter?.image || '/images/placeholder.jpg'}
-                alt={article.title || article.frontmatter?.title || 'Article'}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          </div>
-        </div>
+      <header className="bg-white pt-8 pb-6 px-4">
+        <div className="max-w-4xl mx-auto">
+          {/* Article Title - At the very top */}
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-8">
+            {article.title || article.frontmatter?.title}
+          </h1>
 
-        {/* Article Title and Meta - Below the image */}
-        <div className="bg-white py-8 px-4">
-          <div className="max-w-4xl mx-auto">
-            {/* Article Title */}
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
-              {article.title || article.frontmatter?.title}
-            </h1>
-            
-            {/* Category Badge */}
-            <Link 
+          {/* Square Image - Below title */}
+          <div className="relative w-80 h-80 mx-auto mb-6 rounded-lg overflow-hidden shadow-lg">
+            <Image
+              src={article.image || article.frontmatter?.image || '/images/placeholder.jpg'}
+              alt={article.title || article.frontmatter?.title || 'Article'}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+
+          {/* Author, Date, Reading Time - Below image */}
+          <div className="flex items-center justify-center gap-4 text-gray-600 mb-6">
+            <span className="font-medium">{article.author?.name || article.frontmatter?.author?.name || 'Trends Today'}</span>
+            <span>•</span>
+            <span>{new Date(article.publishedAt || article.frontmatter?.publishedAt).toLocaleDateString()}</span>
+            {(article.frontmatter?.readingTime || (article as any).readingTime) && (
+              <>
+                <span>•</span>
+                <span>{article.frontmatter?.readingTime || (article as any).readingTime} min read</span>
+              </>
+            )}
+          </div>
+
+          {/* Category Badge - At the bottom */}
+          <div className="text-center">
+            <Link
               href={`/${params.category}`}
-              className={`inline-block bg-gradient-to-r ${category.color} text-white px-4 py-2 rounded-full text-sm font-bold hover:scale-105 transition-transform mb-4`}
+              className={`inline-block bg-gradient-to-r ${category.color} text-white px-4 py-2 rounded-full text-sm font-bold hover:scale-105 transition-transform`}
             >
               {category.name}
             </Link>
-            
-            <div className="flex items-center gap-4 text-gray-600">
-              <span className="font-medium">{article.author?.name || article.frontmatter?.author?.name || 'Trends Today'}</span>
-              <span>•</span>
-              <span>{new Date(article.publishedAt || article.frontmatter?.publishedAt).toLocaleDateString()}</span>
-              {(article.frontmatter?.readingTime || (article as any).readingTime) && (
-                <>
-                  <span>•</span>
-                  <span>{article.frontmatter?.readingTime || (article as any).readingTime} min read</span>
-                </>
-              )}
-            </div>
           </div>
         </div>
       </header>
