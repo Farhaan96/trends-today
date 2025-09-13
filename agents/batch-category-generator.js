@@ -37,10 +37,14 @@ class BatchCategoryGenerator {
   }
 
   /**
-   * Generate one article for each category
+   * Generate 5-7 articles per batch (ultra-short strategy)
    */
   async generateBatch(options = {}) {
-    console.log('\n🚀 Starting Batch Generation for All Categories');
+    // Default to 6 articles per batch (one per category)
+    const articlesPerBatch = options.articlesPerBatch || 6;
+
+    console.log('\n🚀 Starting Ultra-Short Batch Generation');
+    console.log(`📊 Target: ${articlesPerBatch} articles (400-500 words each)`);
     console.log('=' .repeat(60));
     
     this.stats.startTime = new Date();
