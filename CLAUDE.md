@@ -81,44 +81,52 @@ Trends Today is a premium tech blog platform built with Next.js 14, featuring AI
 
 ## 🤖 AGENT-DRIVEN AUTOMATION SYSTEM
 
-### Core Content Agents (Optimized for Quality + Efficiency)
+### Core Content Agents (Ultra-Short Strategy Optimized)
 
-#### Production Agents ✅ DEPLOYED & OPTIMIZED
-- **news-scanner.js** - Discovers trending topics from RSS, Reddit, industry sources
-- **content-creator.js** - Generates engaging articles using cached research + Perplexity API
-- **seo-finder.js** - Identifies low-competition, high-potential keywords
-- **image-hunter.js** - Sources and optimizes unique images for each article
-- **image-hunter-v2.js** - Enhanced image sourcing with content-aware analysis
-- **enhanced-image-hunter.js** - Production-grade image system with 60+ curated sources
-- **quality-check.js** - Validates content quality, engagement, and SEO compliance
-- **trust-builder.js** - Adds author credentials, sources, and authority signals
-- **content-refresher.js** - Updates outdated information and maintains freshness
+#### Content Generation Agents ✅ ALIGNED WITH 400-500 WORDS
+- **ultra-short-content-creator.js** - Creates 400-500 word articles with 2-minute read time
+- **batch-category-generator.js** - Generates 5-7 articles per batch across categories
+- **leravi-content-creator.js** - Alternative ultra-simple, ad-friendly format
 
-#### Advanced Utility Modules ✅ NEW & ENHANCED
-- **perplexity-enhanced.js** - Advanced Perplexity integration with caching and fallbacks
-- **ai-image-generator.js** - OpenAI DALL-E 3 integration for custom image generation
-- **comprehensive-image-system.js** - Multi-source image pipeline (stock + AI + fallbacks)
-- **firecrawl-enhanced.js** - Advanced web scraping with smart content extraction
+#### Enhancement Agents ✅ CRITICAL FOR QUALITY
+- **typography-enhancer.js** - Bolds statistics, adds blockquotes, ensures visual hierarchy
+- **fact-checker.js** - Verifies facts/sources to prevent SEO penalties (>80% accuracy required)
+- **smart-content-linker.js** - Adds 3-4 strategic internal links per article
+- **article-quality-enhancer.js** - Improves hooks, SEO, and readability
 
-#### Master Orchestration
-- **orchestrator.js** - Coordinates all agents with timeout management and API efficiency
+#### Discovery & Research Agents
+- **seo-keyword-researcher.js** - Finds long-tail, low-competition keywords
+- **trending-topics-discovery.js** - Identifies trending topics from Reddit, news, social
+- **content-enhancer.js** - Enhances existing content with latest information
 
-### Agent Execution Commands (Batch-Optimized)
+#### Quality Validation ✅ MUST PASS
+- **ultra-short-quality-validator.js** - Ensures 400-500 words, 2-min read, proper formatting
+
+#### Advanced Utility Modules
+- **perplexity-enhanced.js** - Real-time research with citations
+- **comprehensive-image-system.js** - Multi-source image pipeline
+- **internal-link-manager.js** - Strategic cross-category linking
+
+### Agent Execution Commands (Ultra-Short Optimized)
 ```bash
-# Strategic batch content creation (5 articles per run)
-npm run agents:batch        # Generate 5 premium articles with full quality checks
-npm run agents:discover     # Find high-potential topics and keywords  
-npm run agents:enhance      # Improve existing content with images/trust signals
+# Ultra-short content generation (400-500 words)
+npm run ultra:generate      # Generate 6 articles (one per category)
+npm run ultra:morning       # Batch 1: 5-7 articles (9 AM run)
+npm run ultra:midday        # Batch 2: 5-7 articles (1 PM run)
+npm run ultra:evening       # Batch 3: 5-7 articles (5 PM run)
 
-# Daily workflow commands
-npm run agents:morning      # Batch 1: 5 articles (9 AM run)
-npm run agents:midday       # Batch 2: 5 articles (1 PM run)
-npm run agents:evening      # Batch 3: 5 articles (5 PM run)
+# Critical quality enhancements
+npm run ultra:typography    # Bold stats, blockquotes, visual hierarchy
+npm run ultra:factcheck     # Verify facts/sources (prevent SEO penalties!)
+npm run ultra:validate      # Ensure 400-500 words, 2-min read time
 
-# Maintenance and optimization
-npm run agents:maintenance  # Update content, fix links, optimize images
-npm run agents:emergency    # Quick fixes for critical issues
+# Targeted operations
+npm run ultra:typography:category technology  # Enhance specific category
+npm run ultra:factcheck:category science      # Check specific category
+npm run ultra:factcheck:file content/x.mdx    # Check specific file
 ```
+
+📚 **Full Agent Pipeline Documentation:** See `AGENT-PIPELINE-GUIDE.md` for complete usage guide
 
 ### 🚀 API ECOSYSTEM & CAPABILITIES (86% Success Rate)
 
@@ -278,39 +286,46 @@ IMAGE_CACHE_DAYS=7                       # Cache images for 7 days
 - **Readability gates per batch** - 2-minute read time, 85% completion target
 - **Engagement monitoring** - Track pages per session and social shares
 
-## 🎯 DAILY WORKFLOW (3-Batch Strategy)
+## 🎯 DAILY WORKFLOW (Ultra-Short 3-Batch Strategy)
 
-### Batch 1 - Morning (9 AM): First 5 Articles
+### ⚠️ CRITICAL: Fact-Checking Required
+**All articles MUST be fact-checked before publishing to avoid SEO penalties!**
+
 ```bash
-npm run agents:discover     # Find 15-20 high-potential topics for day
-npm run agents:morning      # Generate 5-7 ultra-short articles (Batch 1)
-# Focus areas: Breaking news, trending topics, urgent reviews
-# 90-minute execution limit with quality gates
-# Topics: Mix of news (2) + reviews (2) + guides (1)
+# After EVERY batch generation:
+npm run ultra:factcheck  # Must achieve >80% accuracy
 ```
 
-### Batch 2 - Midday (1 PM): Second 5 Articles  
+### Batch 1 - Morning (9 AM): 5-7 Articles
 ```bash
-npm run agents:midday       # Generate 5-7 ultra-short articles (Batch 2)
-# Focus areas: Deep-dive reviews, comparison guides, how-tos
-# 90-minute execution limit with quality gates
-# Topics: Mix of reviews (3) + comparisons (1) + buying guide (1)
+npm run ultra:morning       # Generate 5-7 ultra-short articles
+npm run ultra:typography    # Bold stats, blockquotes, spacing
+npm run ultra:factcheck     # Verify all facts (CRITICAL!)
+# Topics: Breaking news, trending topics
 ```
 
-### Batch 3 - Evening (5 PM): Final 5 Articles
+### Batch 2 - Midday (1 PM): 5-7 Articles
 ```bash
-npm run agents:evening      # Generate 5-7 ultra-short articles (Batch 3)
-# Focus areas: Analysis pieces, niche topics, evergreen content
-# 90-minute execution limit with quality gates  
-# Topics: Mix of analysis (2) + niche reviews (2) + how-to (1)
+npm run ultra:midday        # Generate 5-7 ultra-short articles
+npm run ultra:typography    # Apply visual enhancements
+npm run ultra:factcheck     # Verify accuracy (>80% required)
+# Topics: Analysis, comparisons, reviews
 ```
 
-### End of Day (8 PM): Enhancement & Publishing
+### Batch 3 - Evening (5 PM): 5-7 Articles
 ```bash
-npm run agents:enhance      # Polish all 15 articles with images/trust signals
-npm run agents:deploy       # Publish to production with full SEO
-# Final quality assurance across all daily content
-# Performance monitoring and analytics setup
+npm run ultra:evening       # Generate 5-7 ultra-short articles
+npm run ultra:typography    # Format for readability
+npm run ultra:factcheck     # Final fact verification
+# Topics: Evergreen content, how-tos
+```
+
+### End of Day (8 PM): Quality Check & Deploy
+```bash
+npm run ultra:validate      # Ensure all articles meet standards
+npm run build              # Build the site
+git add -A && git commit -m "Daily ultra-short content batch"
+git push origin main       # Deploy to production
 ```
 
 ## 🔧 AGENT INTEGRATION & TESTING
