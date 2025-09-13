@@ -149,7 +149,7 @@ export default function Footer() {
         </div>
         
         {/* Trust Badges Section */}
-        <div className="mt-12 border-t border-gray-700 pt-8">
+        <div className="mt-12 border-t border-white/20 pt-8">
           <h3 className="text-lg font-semibold text-white mb-6 text-center">Why Trust Trends Today?</h3>
           <div className="mb-8">
             <TrustBadges variant="horizontal" showAll={false} />
@@ -157,8 +157,8 @@ export default function Footer() {
         </div>
         
         {/* Affiliate Disclosure Section */}
-        <div className="border-t border-gray-700 pt-6 pb-6">
-          <div className="bg-gray-800 rounded-lg p-4">
+        <div className="border-t border-white/20 pt-6 pb-6">
+          <div className="bg-white/10 backdrop-blur rounded-lg p-4">
             <div className="flex items-start gap-3">
               <div className="text-yellow-500 text-lg">⚠️</div>
               <div className="text-sm text-gray-300">
@@ -173,17 +173,21 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="border-t border-gray-700 pt-8">
+        <div className="border-t border-white/20 pt-8">
           <div className="flex flex-col lg:flex-row justify-between items-center">
             <div className="text-center lg:text-left">
-              <p className="text-base text-gray-300">
+              <p className="text-base text-white">
                 &copy; 2025 Trends Today. All rights reserved.
               </p>
-              <p className="text-sm text-gray-900 mt-1">
-                Independent tech reviews • Transparent monetization • Reader-first approach
-              </p>
+              <div className="text-sm text-white/80 mt-2 space-x-4">
+                <Link href="/about" className="hover:text-white transition-colors">About</Link>
+                <span>•</span>
+                <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+                <span>•</span>
+                <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
+              </div>
             </div>
-            <div className="mt-4 lg:mt-0 flex flex-wrap items-center gap-4 text-sm text-gray-900">
+            <div className="mt-4 lg:mt-0 flex flex-wrap items-center gap-4 text-sm text-white/80">
               <span className="flex items-center">
                 <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
                 Independent Reviews
