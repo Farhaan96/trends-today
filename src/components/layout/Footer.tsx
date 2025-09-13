@@ -4,7 +4,7 @@ import NewsletterSignup from '@/components/newsletter/NewsletterSignup';
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gradient-to-r from-blue-500 via-purple-600 to-blue-700 text-white">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
         {/* Newsletter Section */}
         <div className="mb-12">
