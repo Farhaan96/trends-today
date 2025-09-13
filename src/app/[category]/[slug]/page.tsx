@@ -139,7 +139,7 @@ export default async function ArticlePage({ params }: { params: { category: stri
                   href={`/${params.category}/${related.slug}`}
                   className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
                 >
-                  <div className="relative h-48">
+                  <div className="relative aspect-square rounded-lg overflow-hidden">
                     <Image
                       src={related.image || related.frontmatter?.image || '/images/placeholder.jpg'}
                       alt={related.title || related.frontmatter?.title || 'Article'}
