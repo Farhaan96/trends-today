@@ -50,7 +50,9 @@ export async function getAllArticles(): Promise<Article[]> {
         description: data.description || '',
         image: data.image || data.images?.featured || '/images/placeholder.jpg',
         publishedAt: data.publishedAt || new Date().toISOString(),
-        author: data.author || { name: 'Trends Today' },
+        author: typeof data.author === 'string' 
+      ? { name: data.author }
+      : data.author || { name: 'Trends Today' },
         content: content,
         mdxContent: content,
         frontmatter: data
@@ -87,7 +89,9 @@ export async function getArticleBySlug(category: string, slug: string): Promise<
     description: data.description || '',
     image: data.image || data.images?.featured || '/images/placeholder.jpg',
     publishedAt: data.publishedAt || new Date().toISOString(),
-    author: data.author || { name: 'Trends Today' },
+    author: typeof data.author === 'string' 
+      ? { name: data.author }
+      : data.author || { name: 'Trends Today' },
     content: content,
     mdxContent: content,
     frontmatter: data
@@ -120,7 +124,9 @@ export async function getArticlesByCategory(category: string): Promise<Article[]
       description: data.description || '',
       image: data.image || data.images?.featured || '/images/placeholder.jpg',
       publishedAt: data.publishedAt || new Date().toISOString(),
-      author: data.author || { name: 'Trends Today' },
+      author: typeof data.author === 'string' 
+      ? { name: data.author }
+      : data.author || { name: 'Trends Today' },
       content: content,
       mdxContent: content,
       frontmatter: data

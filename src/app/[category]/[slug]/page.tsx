@@ -80,17 +80,19 @@ export default async function ArticlePage({ params }: { params: { category: stri
     <article className="min-h-screen bg-white">
       {/* Article Header */}
       <header>
-        {/* Hero Image */}
-        <div className="relative h-64 md:h-96">
-          <Image
-            src={article.image || article.frontmatter?.image || '/images/placeholder.jpg'}
-            alt={article.title || article.frontmatter?.title || 'Article'}
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-          
+        {/* Article Image - Square Format */}
+        <div className="bg-white py-8 px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="relative w-80 h-80 mx-auto mb-6 rounded-lg overflow-hidden shadow-lg">
+              <Image
+                src={article.image || article.frontmatter?.image || '/images/placeholder.jpg'}
+                alt={article.title || article.frontmatter?.title || 'Article'}
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
         </div>
 
         {/* Article Title and Meta - Below the image */}
