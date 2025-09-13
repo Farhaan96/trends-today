@@ -34,7 +34,7 @@ async function runTests() {
     const response = await axios.post(
       'https://api.perplexity.ai/chat/completions',
       {
-        model: 'llama-3.1-sonar-small-128k-online',
+        model: 'sonar',
         messages: [{ role: 'user', content: 'test' }],
         max_tokens: 10
       },
@@ -54,11 +54,9 @@ async function runTests() {
     const key = process.env.OPENAI_API_KEY;
     if (!key) throw new Error('API key not configured');
     
-    const response = await axios.post(
+    const response = await axios.get(
       'https://api.openai.com/v1/models',
-      {},
       {
-        method: 'GET',
         headers: {
           'Authorization': `Bearer ${key}`
         },
