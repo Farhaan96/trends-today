@@ -87,7 +87,7 @@ export default async function ArticlePage({ params }: { params: { category: stri
           </h1>
 
           {/* Square Image - Below title */}
-          <div className="relative w-80 h-80 mx-auto mb-6 rounded-lg overflow-hidden shadow-lg">
+          <div className="relative w-96 h-96 md:w-[500px] md:h-[500px] mx-auto mb-6 rounded-lg overflow-hidden shadow-lg">
             <Image
               src={article.image || article.frontmatter?.image || '/images/placeholder.jpg'}
               alt={article.title || article.frontmatter?.title || 'Article'}
