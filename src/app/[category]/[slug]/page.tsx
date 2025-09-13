@@ -80,14 +80,14 @@ export default async function ArticlePage({ params }: { params: { category: stri
     <article className="min-h-screen bg-white">
       {/* Article Header */}
       <header className="bg-white pt-8 pb-6 px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto space-y-8 md:space-y-12">
           {/* Article Title - At the very top */}
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
             {article.title || article.frontmatter?.title}
           </h1>
 
           {/* Square Image - Below title */}
-          <div className="relative w-96 h-96 md:w-[500px] md:h-[500px] mx-auto mb-6 rounded-lg overflow-hidden shadow-lg">
+          <div className="relative w-96 h-96 md:w-[500px] md:h-[500px] mx-auto rounded-lg overflow-hidden shadow-lg">
             <Image
               src={article.image || article.frontmatter?.image || '/images/placeholder.jpg'}
               alt={article.title || article.frontmatter?.title || 'Article'}
@@ -98,7 +98,7 @@ export default async function ArticlePage({ params }: { params: { category: stri
           </div>
 
           {/* Author, Date, Reading Time - Below image */}
-          <div className="flex items-center justify-center gap-4 text-gray-600 mb-6">
+          <div className="flex items-center justify-center gap-4 text-gray-600">
             <span className="font-medium">{article.author?.name || article.frontmatter?.author?.name || 'Trends Today'}</span>
             <span>•</span>
             <span>{new Date(article.publishedAt || article.frontmatter?.publishedAt).toLocaleDateString()}</span>
