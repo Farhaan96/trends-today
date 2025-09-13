@@ -5,10 +5,9 @@
 
 ## Progress Summary
 - **Total Articles**: 25
-- **✅ Completed & Ultra-Short**: 5 (Technology)
-- **✅ Fact-Checked, Need Shortening**: 6
-- **🔄 In Progress**: 0
-- **⏳ Pending**: 14
+- **✅ Completed & Ultra-Short**: 11
+- **🔄 In Progress**: 1 (edge computing)
+- **⏳ Pending**: 13
 
 ---
 
@@ -26,29 +25,29 @@
 ## PSYCHOLOGY (4 articles)
 | Status | Article | Key Issues Fixed | Sources Added |
 |--------|---------|-----------------|---------------|
-| ✅ | why-introverts-excel-at-deep-work-psychology-research-2025.mdx | Fixed false 73% stat, Stanford study | 5 sources |
-| ✅ | digital-detox-improves-mental-health.mdx | Corrected phone check stats, Microsoft data | 6 sources |
+| ✅ | why-introverts-excel-at-deep-work-psychology-research-2025.mdx | 419 words, 40% focus advantage | 5 sources |
+| ✅ | digital-detox-improves-mental-health.mdx | 445 words, 7-day transformation | 5 sources |
 | ⏳ | the-psychology-behind-why-we-procrastinate-even-when-we-know.mdx | - | - |
 | ⏳ | your-brain-lies-to-you-cognitive-biases-2025.mdx | - | - |
 
 ## HEALTH (3 articles)
 | Status | Article | Key Issues Fixed | Sources Added |
 |--------|---------|-----------------|---------------|
-| ✅ | precision-medicine-revolution-2025.mdx | CAR-T 80-93% response (verified), market size | 5 sources |
+| ✅ | precision-medicine-revolution-2025.mdx | 432 words, CAR-T 93% response | 5 sources |
 | ⏳ | personalized-medicine-using-ai.mdx | - | - |
 | ⏳ | mental-health-apps-show-clinical-results.mdx | - | - |
 
 ## SCIENCE (3 articles)
 | Status | Article | Key Issues Fixed | Sources Added |
 |--------|---------|-----------------|---------------|
-| ✅ | crispr-therapeutics-breakthrough-2025.mdx | 97% success rate verified, FDA approval details | 5 sources |
+| ✅ | crispr-therapeutics-breakthrough-2025.mdx | 406 words, 97% crisis-free | 5 sources |
 | ⏳ | lab-grown-organs-pass-human-trials.mdx | - | - |
 | ⏳ | room-temperature-superconductor-confirmed.mdx | - | - |
 
 ## CULTURE (4 articles)
 | Status | Article | Key Issues Fixed | Sources Added |
 |--------|---------|-----------------|---------------|
-| ✅ | creator-economy-hits-500-billion.mdx | $205B current (not $500B), 4% earn living wage | 5 sources |
+| ✅ | creator-economy-hits-500-billion.mdx | 389 words, $205B reality | 5 sources |
 | ⏳ | ai-art-wins-major-competition.mdx | - | - |
 | ⏳ | neurodivergent-voices-cultural-revolution-2025.mdx | - | - |
 | ⏳ | new-study-reveals-surprising-link-between-music-taste-and-in.mdx | - | - |
@@ -56,7 +55,7 @@
 ## SPACE (4 articles)
 | Status | Article | Key Issues Fixed | Sources Added |
 |--------|---------|-----------------|---------------|
-| ✅ | toi-2431-b-impossible-planet-defies-physics-nasa-discovery.mdx | Orbit period, temperature, discovery details | 5 sources |
+| ✅ | toi-2431-b-impossible-planet-defies-physics-nasa-discovery.mdx | 396 words, 5.4-hour year | 5 sources |
 | ⏳ | 500-year-old-manuscript-reveals-ancient-astronomy-knowledge.mdx | - | - |
 | ⏳ | asteroid-mining-becomes-reality.mdx | - | - |
 | ⏳ | space-tourism-reaches-mainstream.mdx | - | - |
