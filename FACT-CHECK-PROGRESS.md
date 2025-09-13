@@ -25,7 +25,7 @@
 ### Psychology (4 articles)
 - [x] why-introverts-excel-at-deep-work-psychology-research-2025.mdx ✅
 - [ ] the-psychology-behind-why-we-procrastinate-even-when-we-know.mdx
-- [ ] digital-detox-improves-mental-health.mdx
+- [x] digital-detox-improves-mental-health.mdx ✅
 - [ ] your-brain-lies-to-you-cognitive-biases-2025.mdx
 
 ### Health (3 articles)
@@ -202,7 +202,7 @@
 
 ## Summary Statistics
 - **Total Articles**: 25
-- **Completed & Corrected**: 7
+- **Completed & Corrected**: 8
   - AI Agents Revolution ✅ (Technology)
   - Google Willow Quantum ✅ (Technology)
   - TOI-2431 b Space Discovery ✅ (Space)
@@ -210,8 +210,10 @@
   - Precision Medicine Revolution ✅ (Health)
   - CRISPR Therapeutics ✅ (Science)
   - Creator Economy Reality ✅ (Culture)
+  - Digital Detox Mental Health ✅ (Psychology)
 - **In Progress**: 0
-- **Pending**: 18
+- **Pending**: 17
+- **All Sources Updated**: Non-hyperlinked format for SEO retention
 - **Claims Checked**: 19 total (9 AI Agents + 10 Quantum)
 - **Verified Claims**: 6 (32%)
 - **Partially True Claims**: 3 (16%)
