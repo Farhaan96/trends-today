@@ -35,7 +35,7 @@
 
 ### Science (3 articles)
 - [ ] lab-grown-organs-pass-human-trials.mdx
-- [ ] crispr-therapeutics-breakthrough-2025.mdx
+- [x] crispr-therapeutics-breakthrough-2025.mdx ✅
 - [ ] room-temperature-superconductor-confirmed.mdx
 
 ### Culture (4 articles)
@@ -202,14 +202,15 @@
 
 ## Summary Statistics
 - **Total Articles**: 25
-- **Completed & Corrected**: 5
+- **Completed & Corrected**: 6
   - AI Agents Revolution ✅ (Technology)
   - Google Willow Quantum ✅ (Technology)
   - TOI-2431 b Space Discovery ✅ (Space)
   - Introverts & Deep Work ✅ (Psychology)
   - Precision Medicine Revolution ✅ (Health)
+  - CRISPR Therapeutics ✅ (Science)
 - **In Progress**: 0
-- **Pending**: 20
+- **Pending**: 19
 - **Claims Checked**: 19 total (9 AI Agents + 10 Quantum)
 - **Verified Claims**: 6 (32%)
 - **Partially True Claims**: 3 (16%)
