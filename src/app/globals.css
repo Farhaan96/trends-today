@@ -268,3 +268,11 @@ html {
   margin-top: 2rem;
   color: var(--color-foreground);
 }
+
+/* Friendly rounded corners for images site‑wide */
+/* Applies to plain <img> elements and images rendered inside article prose */
+img,
+.prose img,
+.article-content img {
+  border-radius: 0.75rem; /* matches Tailwind rounded-lg */
+}
