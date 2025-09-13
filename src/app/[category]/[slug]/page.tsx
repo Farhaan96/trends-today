@@ -87,12 +87,12 @@ export default async function ArticlePage({ params }: { params: { category: stri
           </h1>
 
           {/* Square Image - Below title */}
-          <div className="relative w-full max-w-[18rem] h-[18rem] sm:max-w-[22rem] sm:h-[22rem] md:w-[500px] md:h-[500px] mx-auto mb-4 md:mb-6 rounded-lg overflow-hidden shadow-lg">
+          <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] mx-auto mb-4 md:mb-6">
             <Image
               src={article.image || article.frontmatter?.image || '/images/placeholder.jpg'}
               alt={article.title || article.frontmatter?.title || 'Article'}
               fill
-              className="object-cover"
+              className="object-cover rounded-2xl"
               priority
             />
           </div>
@@ -134,17 +134,17 @@ export default async function ArticlePage({ params }: { params: { category: stri
             <h2 className="text-3xl font-bold mb-8">More from {category.name}</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {relatedArticles.map((related) => (
-                <Link 
-                  key={related.slug} 
+                <Link
+                  key={related.slug}
                   href={`/${params.category}/${related.slug}`}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+                  className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow block"
                 >
-                  <div className="relative aspect-square rounded-lg overflow-hidden">
+                  <div className="relative aspect-square">
                     <Image
                       src={related.image || related.frontmatter?.image || '/images/placeholder.jpg'}
                       alt={related.title || related.frontmatter?.title || 'Article'}
                       fill
-                      className="object-cover"
+                      className="object-cover rounded-t-xl"
                     />
                   </div>
                   <div className="p-4">

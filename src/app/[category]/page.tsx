@@ -64,11 +64,11 @@ export default async function CategoryPage({ params }: { params: Params }) {
               return (
                 <article key={href} className="group">
                   <Link href={href}>
-                    <div className="relative w-full aspect-square bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
+                    <div className="relative w-full aspect-square bg-gray-100 border border-gray-200 rounded-xl overflow-hidden">
                       {img ? (
-                        <Image src={img} alt={atitle} fill className="object-cover transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 1024px) 100vw, 33vw" />
+                        <Image src={img} alt={atitle} fill className="object-cover rounded-xl transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 1024px) 100vw, 33vw" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">Image</div>
+                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm rounded-xl">Image</div>
                       )}
                       <div className="absolute top-3 left-3">
                         <span className={`inline-block px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide ${styles.badge}`}>

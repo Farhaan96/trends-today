@@ -35,13 +35,13 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               {/* Image */}
               <Link href={featuredPost.href as string} prefetch={false}>
-                <div className="relative w-full aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow cursor-pointer">
+                <div className="relative w-full aspect-square bg-gray-100 shadow-md hover:shadow-lg transition-shadow cursor-pointer">
                   {featuredPost.frontmatter.image ? (
                     <Image 
                       src={featuredPost.frontmatter.image} 
                       alt={featuredPost.frontmatter.title as string}
                       fill 
-                      className="object-cover hover:scale-105 transition-transform duration-300" 
+                      className="object-cover rounded-xl hover:scale-105 transition-transform duration-300" 
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                   ) : (
@@ -91,13 +91,13 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
           {secondPost && (
             <div className="space-y-4">
               <Link href={secondPost.href as string} prefetch={false}>
-                <div className="relative w-full aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                <div className="relative w-full aspect-square bg-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
                   {secondPost.frontmatter.image ? (
                     <Image 
                       src={secondPost.frontmatter.image} 
                       alt={secondPost.frontmatter.title as string}
                       fill 
-                      className="object-cover hover:scale-105 transition-transform duration-300" 
+                      className="object-cover rounded-xl hover:scale-105 transition-transform duration-300" 
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   ) : (
@@ -132,13 +132,13 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
           {thirdPost && (
             <div className="space-y-4">
               <Link href={thirdPost.href as string} prefetch={false}>
-                <div className="relative w-full aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                <div className="relative w-full aspect-square bg-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
                   {thirdPost.frontmatter.image ? (
                     <Image 
                       src={thirdPost.frontmatter.image} 
                       alt={thirdPost.frontmatter.title as string}
                       fill 
-                      className="object-cover hover:scale-105 transition-transform duration-300" 
+                      className="object-cover rounded-xl hover:scale-105 transition-transform duration-300" 
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   ) : (
@@ -178,13 +178,13 @@ export default async function HomePage({ searchParams }: { searchParams?: { page
               {pagePosts.slice(3).map((article, index) => (
                 <div key={article.href} className="space-y-4">
                   <Link href={article.href as string} prefetch={false}>
-                    <div className="relative w-full aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                    <div className="relative w-full aspect-square bg-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
                       {article.frontmatter.image ? (
                         <Image 
                           src={article.frontmatter.image} 
                           alt={article.frontmatter.title as string}
                           fill 
-                          className="object-cover hover:scale-105 transition-transform duration-300" 
+                          className="object-cover rounded-xl hover:scale-105 transition-transform duration-300" 
                           sizes="(max-width: 768px) 100vw, 50vw"
                         />
                       ) : (
