@@ -82,7 +82,7 @@ export default async function ArticlePage({ params }: { params: { category: stri
       <header className="bg-white pt-8 pb-6 px-4">
         <div className="max-w-4xl mx-auto">
           {/* Article Title - At the very top */}
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6 md:mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-3 md:mb-4">
             {article.title || article.frontmatter?.title}
           </h1>
 
