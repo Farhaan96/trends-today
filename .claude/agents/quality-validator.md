@@ -33,6 +33,9 @@ Validate that every article meets strict quality criteria for length, readabilit
 - **Keywords**: Natural integration, 1-2% density
 - **Headers**: Logical H2/H3 structure
 - **Alt Text**: Descriptive image descriptions
+- **AI Generated Images**: Only gpt-image-1 generated images used
+- **Image Uniqueness**: No duplicate images across articles
+- **Image Relevance**: Image matches article content
 
 #### 4. Content Quality
 - **Originality**: Unique angle or insight

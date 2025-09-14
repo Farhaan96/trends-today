@@ -35,6 +35,9 @@ Check for:
 - ✅ Multiline descriptions use >- syntax
 - ✅ Tags in array format
 - ✅ Image URLs are properly formatted
+- ✅ Images are AI-generated (from /images/ai-generated/ directory)
+- ✅ No stock photos or Unsplash URLs used
+- ✅ Each article has unique image (no duplicates)
 
 ### Step 2.5: Date Validation
 Check article dates are reasonable:
@@ -141,10 +144,14 @@ done
 3. **Files Named Correctly**: All articles use .mdx extension
 4. **Authors Valid**: Only use existing author names
 5. **Dates Formatted**: ISO 8601 format for all dates
+6. **AI Images Only**: All images must be from /images/ai-generated/ directory
+7. **No Stock Photos**: Zero tolerance for Unsplash, Pexels, or stock images
 
 ### Warning Checks:
 - Missing SEO fields (meta descriptions)
 - Images without alt text
+- Stock photo URLs detected (Unsplash, Pexels, etc.)
+- Duplicate image paths across articles
 - Articles without tags
 - Word count outside 400-500 range
 - **Article not showing on homepage** (check date is most recent)

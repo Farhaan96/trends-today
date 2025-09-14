@@ -76,25 +76,51 @@ MANDATORY - Every article MUST end with a properly formatted Sources section:
 - Add horizontal rules (---) between major sections
 - Keep paragraphs to 2-3 sentences maximum
 
-### Step 4.5: Generate AI Image (When Appropriate)
-For these categories, generate unique AI images using Bash tool:
+### Step 4.5: Generate Unique AI Image with gpt-image-1 (MANDATORY)
+
+CRITICAL - Every article MUST have a unique AI-generated image using ONLY gpt-image-1:
+
 ```bash
-# For psychology/brain topics:
-node utils/ai-image-generator.js generate "neural networks, brain visualization, [specific topic]" psychology
-
-# For medical/health topics:
-node utils/ai-image-generator.js generate "medical visualization, [specific topic]" health
-
-# For abstract concepts (AI, quantum):
-node utils/ai-image-generator.js generate "abstract visualization, [specific topic]" technology
-
-# For space/astronomy:
-node utils/ai-image-generator.js generate "cosmic visualization, [specific topic]" space
+# Generate dynamic image based on actual article content
+node utils/ai-image-generator.js generate-from-article --file="content/[category]/[article-slug].mdx"
 ```
 
-Use the generated image path (e.g., /images/ai-generated/ai-generated-xxxxx.png) in frontmatter.
+This will:
+- Read the article content you just created
+- Extract key topics, statistics, and technologies mentioned
+- Generate a contextually relevant prompt based on actual content
+- Create a unique image with gpt-image-1 (high quality, 1536x1024)
+- Download and save to /images/ai-generated/
+- Return the local image path for frontmatter
 
-For product reviews, news, or specific devices - use Unsplash/Pexels stock photos instead.
+**NO FALLBACKS OR ALTERNATIVES:**
+- NO Unsplash/Pexels stock photos
+- NO DALL-E 3
+- NO template-based prompts
+- ONLY gpt-image-1 with dynamic content analysis
+
+**Dynamic Prompt Generation:**
+The system automatically creates prompts like:
+```
+Professional hero image for blog article: "[ACTUAL_TITLE]"
+
+Key concepts: [EXTRACTED_FROM_CONTENT]
+Technologies featured: [FOUND_IN_ARTICLE]
+Data visualization elements: [STATISTICS_MENTIONED]
+
+Visual requirements:
+- Ultra high quality, photorealistic or stylized professional illustration
+- 1536x1024 aspect ratio for blog header
+- Modern, professional, editorial quality
+- [MOOD_FROM_CONTENT] mood and atmosphere
+- Clean composition with clear focal point
+- Vibrant, engaging color palette
+- No text, logos, or watermarks
+- Suitable for [category] content
+- Sharp details, professional photography or digital art style
+```
+
+Use the returned image path in frontmatter: `image: /images/ai-generated/ai-generated-[timestamp].png`
 
 ### Step 5: Save Article
 Use Write tool to save as .mdx file (NOT .md) with proper frontmatter:
@@ -187,7 +213,9 @@ Before completing any article, verify:
 - [ ] **All source URLs verified with WebFetch before including**
 - [ ] **Horizontal rule (---) separates sources from main content**
 - [ ] **Bold "Sources:" header used**
-- [ ] **AI image generated for appropriate topics**
+- [ ] **MANDATORY: Unique AI image generated with gpt-image-1 from article content**
+- [ ] **Image path uses /images/ai-generated/ directory**
+- [ ] **NO stock photos, Unsplash, or reused images**
 - [ ] **File saved as .mdx (NOT .md)**
 - [ ] **Valid author name used**
 - [ ] **ISO 8601 date format**
