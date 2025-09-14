@@ -49,7 +49,8 @@
       "WebFetch(domain:www.nature.com)",
       "WebFetch(domain:www.livescience.com)",
       "WebFetch(domain:www.hopkinsmedicine.org)",
-      "WebFetch(domain:jamanetwork.com)"
+      "WebFetch(domain:jamanetwork.com)",
+      "Bash(sort:*)"
     ],
     "deny": [],
     "ask": []
