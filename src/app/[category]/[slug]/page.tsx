@@ -73,8 +73,15 @@ export default async function ArticlePage({ params }: { params: { category: stri
             {article.title || article.frontmatter?.title}
           </h1>
 
-          {/* Meta below title, above image */}
-          <div className="flex items-center justify-center gap-4 text-gray-600 mb-4">
+          {/* Meta below title, above image (left-aligned; category first) */}
+          <div className="flex flex-wrap items-center justify-start gap-3 text-gray-600 mb-4 text-sm">
+            <Link
+              href={`/${params.category}`}
+              className={`inline-block px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${category.color}`}
+            >
+              {category.name}
+            </Link>
+            <span>•</span>
             <span className="font-medium">{article.author?.name || article.frontmatter?.author?.name || 'Trends Today'}</span>
             <span>•</span>
             <span>{new Date(article.publishedAt || article.frontmatter?.publishedAt).toLocaleDateString()}</span>
@@ -84,10 +91,6 @@ export default async function ArticlePage({ params }: { params: { category: stri
                 <span>{article.frontmatter?.readingTime || (article as any).readingTime} min read</span>
               </>
             )}
-            <span>•</span>
-            <Link href={`/${params.category}`} className={`inline-block px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${category.color}`}>
-              {category.name}
-            </Link>
           </div>
 
           {/* Large square hero image */}
