@@ -36,7 +36,11 @@
       "Bash(npm run typecheck:*)",
       "Bash(echo:*)",
       "Bash(bash:*)",
-      "Bash(xargs rm:*)"
+      "Bash(xargs rm:*)",
+      "Bash(npm run:*)",
+      "WebFetch(domain:medianeth.dev)",
+      "WebFetch(domain:claudelog.com)",
+      "WebFetch(domain:jewelhuq.medium.com)"
     ],
     "deny": [],
     "ask": []

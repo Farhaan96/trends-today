@@ -1,47 +1,96 @@
-# 🤖 Agent Pipeline Guide - Trends Today
+# 🤖 Claude Code Agent Pipeline Guide
 
-## Complete Guide to Using the Ultra-Short Content Generation Pipeline
+## Overview
 
----
+This guide explains how to use the Claude Code agent pipeline system for automated content generation with critical thinking and quality assurance at every step.
 
-## 📋 Table of Contents
+## Architecture
 
-1. [Quick Start](#quick-start)
-2. [Daily Workflow](#daily-workflow)
-3. [Individual Agents](#individual-agents)
-4. [Quality Control](#quality-control)
-5. [Troubleshooting](#troubleshooting)
-6. [Best Practices](#best-practices)
+### Agent-Based Pipeline vs JavaScript Commands
 
----
-
-## 🚀 Quick Start
-
-### Prerequisites
+**❌ OLD WAY (JavaScript Commands)**
 ```bash
-# Ensure you have all dependencies installed
-npm install
+npm run ultra:generate  # Just runs a JS script
+```
+- No critical thinking
+- No quality gates
+- No error recovery
+- No context awareness
 
-# Set up your .env.local file with API keys
-PERPLEXITY_API_KEY=pplx-xxx...
-OPENAI_API_KEY=sk-proj-xxx...
-UNSPLASH_ACCESS_KEY=xxx...
-PEXELS_API_KEY=xxx...
+**✅ NEW WAY (Claude Code Agents)**
+```bash
+# Each step is handled by an intelligent agent
+claude "Use batch-orchestrator to run the morning content batch"
+```
+- Critical thinking at each step
+- Quality validation
+- Error recovery
+- Context-aware decisions
+
+## 📁 Agent Definitions
+
+All agents are defined in `.claude/agents/` as Markdown files with YAML frontmatter:
+
+```
+.claude/
+└── agents/
+    ├── batch-orchestrator.md           # Main pipeline orchestrator
+    ├── trending-topics-discovery.md     # Topic research and discovery
+    ├── ultra-short-content-creator.md   # Content generation (400-500 words)
+    ├── fact-checker.md                  # Fact verification (>80% accuracy)
+    ├── typography-enhancer.md           # Visual formatting
+    ├── quality-validator.md             # Quality assurance (85+ score)
+    ├── smart-content-linker.md          # Internal linking
+    └── publication-reviewer.md          # Final review before publishing
 ```
 
-### Generate Your First Batch
+## 🚀 How to Run Content Batches
+
+### Method 1: Full Pipeline Orchestration (Recommended)
+
 ```bash
-# Generate 6 ultra-short articles (one per category)
-npm run ultra:generate
+# Morning batch (5-7 trending articles)
+claude "Use batch-orchestrator to execute the morning content batch"
 
-# Enhance typography (bold stats, blockquotes, spacing)
-npm run ultra:typography
+# Midday batch (5-7 analysis articles)
+claude "Use batch-orchestrator to execute the midday content batch"
 
-# Fact-check all articles
-npm run ultra:factcheck
+# Evening batch (5-7 evergreen articles)
+claude "Use batch-orchestrator to execute the evening content batch"
+```
+
+The orchestrator will:
+1. Create a todo list for tracking
+2. Execute each agent in sequence
+3. Validate outputs between stages
+4. Handle errors gracefully
+5. Generate a comprehensive report
+
+### Method 2: Individual Agent Execution
+
+For testing or specific tasks, you can run agents individually:
+
+```bash
+# Discover trending topics
+claude "Use trending-topics-discovery to find 5 high-potential topics"
+
+# Create an article
+claude "Use ultra-short-content-creator to write about [topic]"
+
+# Fact-check existing articles
+claude "Use fact-checker to verify all articles in content/technology"
+
+# Enhance typography
+claude "Use typography-enhancer to improve formatting in [article]"
 
 # Validate quality
-npm run ultra:validate
+claude "Use quality-validator to check [article] meets standards"
+
+# Add internal links
+claude "Use smart-content-linker to add links to [article]"
+
+# Final review
+claude "Use publication-reviewer to approve [article] for publishing"
 ```
 
 ---
