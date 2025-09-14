@@ -1,10 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState } from 'react';
 import DarkModeToggle from '../ui/DarkModeToggle';
-import NotificationSystem from '../ui/NotificationSystem';
 import SearchModal from '../ui/SearchModal';
 import MobileMenu from '../mobile/MobileMenu';
 
@@ -21,13 +19,13 @@ export default function Header() {
     { name: 'Space', href: '/space' }
   ];
 
-  const categoryNavigation = [
-    { name: 'Phones', href: '/reviews?category=smartphones' },
-    { name: 'Laptops', href: '/reviews?category=laptops' },
-    { name: 'Audio', href: '/reviews?category=headphones' },
-    { name: 'Gaming', href: '/reviews?category=gaming' },
-    { name: 'Smart Home', href: '/reviews?category=smart-home' }
-  ];
+  // const categoryNavigation = [
+  //   { name: 'Phones', href: '/reviews?category=smartphones' },
+  //   { name: 'Laptops', href: '/reviews?category=laptops' },
+  //   { name: 'Audio', href: '/reviews?category=headphones' },
+  //   { name: 'Gaming', href: '/reviews?category=gaming' },
+  //   { name: 'Smart Home', href: '/reviews?category=smart-home' }
+  // ];
 
   return (
     <header className="bg-gradient-to-r from-blue-500 via-purple-600 to-blue-700" style={{ fontFamily: '"Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>

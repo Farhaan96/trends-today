@@ -1,5 +1,6 @@
 ﻿import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 import "./minimal.css";
 import Header from '@/components/layout/Header';
@@ -172,11 +173,11 @@ export default function RootLayout({
               <div className="text-center text-sm text-white/80">
                 <p>&copy; {new Date().getFullYear()} Trends Today. All rights reserved.</p>
                 <div className="mt-4 space-x-4">
-                  <a href="/about" className="hover:text-white transition-colors">About</a>
+                  <Link href="/about" className="hover:text-white transition-colors">About</Link>
                   <span>•</span>
-                  <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
+                  <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
                   <span>•</span>
-                  <a href="/contact" className="hover:text-white transition-colors">Contact</a>
+                  <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
                 </div>
               </div>
             </div>
