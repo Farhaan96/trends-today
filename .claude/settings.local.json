@@ -54,7 +54,9 @@
       "WebFetch(domain:medicine.iu.edu)",
       "WebFetch(domain:news.iu.edu)",
       "WebFetch",
-      "WebSearch"
+      "WebSearch",
+      "Read(//c/dev/**)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

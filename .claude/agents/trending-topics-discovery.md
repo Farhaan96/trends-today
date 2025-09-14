@@ -42,12 +42,33 @@ WebFetch url: [news_article_url]
 prompt: "Extract the main story, why it's significant, unique angles, and potential for reader interest"
 ```
 
-### Step 3: Evaluate Topic Potential
+### Step 3: Check for Existing Coverage (MANDATORY)
+**CRITICAL: Always check for duplicates before recommending topics**
+
+Before evaluating any topic, use the duplicate checker:
+```bash
+# Check if topic already exists
+node utils/topic-duplicate-checker.js check "Proposed Article Title"
+```
+
+**Rules for duplicate checking:**
+- If risk level is HIGH or CRITICAL → Skip this topic entirely
+- If risk level is MEDIUM → Only proceed if you can find a unique angle
+- If risk level is LOW → Safe to proceed with topic
+
+**Look for existing articles about:**
+- Same company/product (Google, Apple, OpenAI, etc.)
+- Same technology (quantum computing, AI, chips, etc.)
+- Same breakthrough/announcement from recent months
+- Similar headlines or angles already covered
+
+### Step 4: Evaluate Topic Potential
 Score each topic (1-10) on:
 - **Search Volume**: Are people searching for this?
 - **Competition**: How saturated is this topic?
 - **Timeliness**: How current/urgent is this?
 - **Shareability**: Will people share this content?
+- **Uniqueness**: Do we already have coverage of this? (CRITICAL)
 - **Authority**: Can we provide unique insights?
 
 Minimum score: 35/50 to qualify

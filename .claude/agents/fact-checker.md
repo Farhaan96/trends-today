@@ -17,7 +17,26 @@ Use Read tool to examine articles:
 Read file_path: content/[category]/[article].mdx
 ```
 
-### Step 2: Extract Claims to Verify
+### Step 2: Format Validation & Text Cleanup
+**CRITICAL: Check for formatting issues before fact-checking**
+
+Validate text formatting:
+- **Em dashes (—):** Should be replaced with standard dashes ( - )
+- **Bold markers:** Check for broken patterns like ****text** or ****63%**
+- **Spacing issues:** Missing spaces around percentages and numbers
+- **Combined words:** Look for words merged without spaces
+
+Use text cleanup when needed:
+```javascript
+const { TextCleanup } = require('../utils/text-cleanup');
+const issues = TextCleanup.validateBoldMarkdown(content);
+if (issues.length > 0) {
+  const cleaned = TextCleanup.cleanArticleContent(content);
+  // Apply cleaning with Edit tool
+}
+```
+
+### Step 3: Extract Claims to Verify
 Identify all:
 - Statistics and percentages
 - Company/product claims

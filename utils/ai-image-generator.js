@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * AI Image Generation Utility
- * Supports OpenAI gpt-image-1 and Google AI as backup image sources
- * Perfect for blog post hero images and product visuals
+ * AI Image Generation Utility - gpt-image-1 ONLY
+ * Generates unique, context-aware images from article content
+ * Cost-optimized for HD quality with dynamic prompting
  */
 
 require('dotenv').config({ path: '.env.local' });
@@ -15,18 +15,22 @@ const crypto = require('crypto');
 class AIImageGenerator {
   constructor() {
     this.openaiKey = process.env.OPENAI_API_KEY;
-    this.googleKey = process.env.GOOGLE_AI_API_KEY;
-    
+
     this.cacheDir = path.join(__dirname, '..', '.cache', 'ai-images');
     this.outputDir = path.join(__dirname, '..', 'public', 'images', 'ai-generated');
-    
-    this.providers = ['openai', 'google'];
-    this.currentProvider = 'openai';
-    
+
+    // Optimized settings for cost and quality based on gpt-image-1 specs
+    this.defaultOptions = {
+      size: '1536x1024',  // Supported: 1024x1024, 1024x1536, 1536x1024
+      quality: 'medium',  // Options: low (~$0.01), medium (~$0.05), high (~$0.20)
+      model: 'gpt-image-1',
+      n: 1                // Only 1 image per request supported
+    };
+
     // Rate limiting
     this.lastRequestTime = 0;
-    this.minRequestInterval = 2000; // 2 seconds between requests
-    
+    this.minRequestInterval = 3000; // 3 seconds for gpt-image-1
+
     this.generatedImages = [];
     this.errors = [];
   }
@@ -34,6 +38,198 @@ class AIImageGenerator {
   async ensureDirs() {
     await fs.mkdir(this.cacheDir, { recursive: true }).catch(() => {});
     await fs.mkdir(this.outputDir, { recursive: true }).catch(() => {});
+  }
+
+  // Dynamic content extraction for contextual image generation
+  extractMainTopics(content) {
+    const topics = [];
+
+    // Extract from headers (## and ###)
+    const headers = content.match(/^#{2,3}\s+(.+)$/gm) || [];
+    headers.forEach(header => {
+      const cleaned = header.replace(/^#{2,3}\s+/, '').replace(/[*_`]/g, '');
+      topics.push(cleaned);
+    });
+
+    // Extract from bold text
+    const boldText = content.match(/\*\*([^*]+)\*\*/g) || [];
+    boldText.forEach(bold => {
+      const cleaned = bold.replace(/\*\*/g, '');
+      if (cleaned.length > 3 && cleaned.length < 50) {
+        topics.push(cleaned);
+      }
+    });
+
+    return [...new Set(topics)].slice(0, 5); // Top 5 unique topics
+  }
+
+  extractKeyStatistics(content) {
+    const stats = [];
+
+    // Find percentages
+    const percentages = content.match(/\b\d+%/g) || [];
+    stats.push(...percentages);
+
+    // Find numbers with units
+    const numbers = content.match(/\b\d+[\s-]?(million|billion|thousand|years?|days?|hours?|minutes?|seconds?)\b/gi) || [];
+    stats.push(...numbers);
+
+    // Find dollar amounts
+    const money = content.match(/\$[\d,]+(\.\d+)?(K|M|B)?/gi) || [];
+    stats.push(...money);
+
+    return [...new Set(stats)].slice(0, 3); // Top 3 unique stats
+  }
+
+  extractTechnologies(content) {
+    const techTerms = [
+      'AI', 'artificial intelligence', 'machine learning', 'neural network',
+      'quantum', 'blockchain', 'cryptocurrency', 'VR', 'AR', 'IoT',
+      'cloud computing', '5G', 'robotics', 'autonomous', 'automation',
+      'smartphone', 'iPhone', 'Android', 'app', 'software', 'hardware',
+      'algorithm', 'data', 'analytics', 'cybersecurity', 'privacy'
+    ];
+
+    const found = [];
+    const contentLower = content.toLowerCase();
+
+    techTerms.forEach(term => {
+      if (contentLower.includes(term.toLowerCase())) {
+        found.push(term);
+      }
+    });
+
+    return [...new Set(found)].slice(0, 4); // Top 4 unique technologies
+  }
+
+  determineMood(content) {
+    const contentLower = content.toLowerCase();
+
+    // Analyze sentiment indicators
+    const positive = ['breakthrough', 'revolutionary', 'amazing', 'incredible', 'success', 'advance'];
+    const urgent = ['emergency', 'critical', 'urgent', 'breaking', 'alert', 'crisis'];
+    const scientific = ['study', 'research', 'analysis', 'findings', 'evidence', 'data'];
+    const futuristic = ['future', 'tomorrow', 'next-gen', 'cutting-edge', 'innovation'];
+
+    let mood = 'professional';
+
+    if (positive.some(word => contentLower.includes(word))) mood = 'optimistic';
+    if (urgent.some(word => contentLower.includes(word))) mood = 'urgent';
+    if (scientific.some(word => contentLower.includes(word))) mood = 'analytical';
+    if (futuristic.some(word => contentLower.includes(word))) mood = 'futuristic';
+
+    return mood;
+  }
+
+  async generateDynamicPrompt(articleTitle, articleContent, category) {
+    const topics = this.extractMainTopics(articleContent);
+    const stats = this.extractKeyStatistics(articleContent);
+    const technologies = this.extractTechnologies(articleContent);
+    const mood = this.determineMood(articleContent);
+
+    // Base prompt structure
+    let prompt = `Professional hero image for tech blog article: "${articleTitle}"\n\n`;
+
+    // Add key concepts
+    if (topics.length > 0) {
+      prompt += `Key concepts: ${topics.slice(0, 3).join(', ')}\n`;
+    }
+
+    // Add technologies
+    if (technologies.length > 0) {
+      prompt += `Technologies featured: ${technologies.slice(0, 3).join(', ')}\n`;
+    }
+
+    // Add data visualization if stats present
+    if (stats.length > 0) {
+      prompt += `Data visualization elements: Charts showing ${stats.slice(0, 2).join(' and ')}\n`;
+    }
+
+    // Add mood-specific visual requirements
+    const moodStyles = {
+      optimistic: 'vibrant colors, upward trending elements, bright lighting',
+      urgent: 'dynamic composition, alert colors, high contrast',
+      analytical: 'clean data visualization, graphs, scientific aesthetic',
+      futuristic: 'holographic elements, neon accents, sci-fi atmosphere',
+      professional: 'clean modern design, corporate colors, sophisticated layout'
+    };
+
+    prompt += `\nVisual requirements:\n`;
+    prompt += `- Ultra high quality, photorealistic or stylized professional illustration\n`;
+    prompt += `- 1536x1024 aspect ratio for blog header\n`;
+    prompt += `- ${moodStyles[mood]}\n`;
+    prompt += `- ${category} content theme\n`;
+    prompt += `- Clean composition with clear focal point\n`;
+    prompt += `- No text, logos, or watermarks\n`;
+    prompt += `- Sharp details, editorial quality\n`;
+    prompt += `- Suitable for professional tech publication`;
+
+    return prompt;
+  }
+
+  async generateFromArticle(articleFilePath, options = {}) {
+    try {
+      console.log(`🎨 Generating image from article: ${path.basename(articleFilePath)}`);
+
+      // Read and parse article
+      const content = await fs.readFile(articleFilePath, 'utf-8');
+
+      // Extract frontmatter
+      const frontmatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+      if (!frontmatterMatch) {
+        throw new Error('No frontmatter found in article');
+      }
+
+      const frontmatter = frontmatterMatch[1];
+      const title = frontmatter.match(/title:\s*['"](.*?)['"]/)?.[1] || 'Untitled';
+      const category = frontmatter.match(/category:\s*(\w+)/)?.[1] || 'technology';
+
+      // Generate dynamic prompt
+      const prompt = await this.generateDynamicPrompt(title, content, category);
+
+      console.log(`   Dynamic prompt generated (${prompt.length} chars)`);
+
+      // Generate image with optimized settings
+      const result = await this.generateWithOpenAI(prompt, {
+        ...this.defaultOptions,
+        ...options
+      });
+
+      // Create unique filename
+      const timestamp = Date.now();
+      const filename = `ai-generated-${timestamp}.png`;
+      const localPath = path.join(this.outputDir, filename);
+
+      // Download and save
+      if (result.url) {
+        await this.downloadImage(result.url, localPath);
+      }
+
+      const imageResult = {
+        url: result.url,
+        localPath: `/images/ai-generated/${filename}`,
+        filename,
+        prompt: prompt.substring(0, 100) + '...',
+        provider: 'openai',
+        model: 'gpt-image-1',
+        cost: 0.05, // Medium quality cost (~$0.05 per image)
+        extractedTopics: this.extractMainTopics(content),
+        extractedStats: this.extractKeyStatistics(content),
+        extractedTech: this.extractTechnologies(content)
+      };
+
+      this.generatedImages.push(imageResult);
+
+      console.log(`✅ Image generated successfully: ${filename}`);
+      console.log(`   Local path: ${imageResult.localPath}`);
+
+      return imageResult;
+
+    } catch (error) {
+      console.error(`❌ Error generating image from article: ${error.message}`);
+      this.errors.push({ file: articleFilePath, error: error.message });
+      throw error;
+    }
   }
 
   getCacheKey(prompt, options = {}) {
@@ -93,14 +289,15 @@ class AIImageGenerator {
       throw new Error('OpenAI API key not configured');
     }
 
+    // Use optimized defaults
     const {
-      size = '1024x1024',
-      quality = 'standard', // standard or hd
-      style = 'vivid', // vivid or natural
+      size = this.defaultOptions.size,
+      quality = this.defaultOptions.quality,
       n = 1
     } = options;
 
     console.log(`🎨 Generating image with OpenAI gpt-image-1...`);
+    console.log(`   Size: ${size}, Quality: ${quality}`);
     console.log(`   Prompt: "${prompt.substring(0, 50)}..."`);
 
     await this.enforceRateLimit();
@@ -137,8 +334,7 @@ class AIImageGenerator {
       originalPrompt: prompt,
       revisedPrompt: revisedPrompt,
       size: size,
-      quality: quality,
-      style: style
+      quality: quality
     };
   }
 
@@ -318,7 +514,9 @@ class AIImageGenerator {
     let cost = 0;
     for (const img of this.generatedImages) {
       if (img.provider === 'openai') {
-        cost += img.quality === 'hd' ? 0.080 : 0.040; // USD per image
+        // gpt-image-1 pricing: low (~$0.01), medium (~$0.05), high (~$0.20)
+        const qualityCosts = { low: 0.01, medium: 0.05, high: 0.20 };
+        cost += qualityCosts[img.quality] || 0.05;
       }
     }
     return `$${cost.toFixed(3)}`;
@@ -328,39 +526,54 @@ class AIImageGenerator {
 // CLI interface
 if (require.main === module) {
   const generator = new AIImageGenerator();
-  
+
   const args = process.argv.slice(2);
   const command = args[0];
-  const prompt = args.slice(1).join(' ');
-  
+
   async function run() {
+    await generator.ensureDirs();
+
     switch (command) {
       case 'generate':
+        const prompt = args.slice(1).join(' ');
         if (!prompt) {
           console.log('Usage: node ai-image-generator.js generate "your image prompt"');
           return;
         }
-        
-        const result = await generator.generateImage(prompt, {
-          size: '1024x1024',
-          quality: 'hd',
-          style: 'vivid'
-        });
-        
+
+        const result = await generator.generateWithOpenAI(prompt, generator.defaultOptions);
+
         console.log('\n🎨 Generation Result:');
         console.log(`   URL: ${result.url}`);
-        console.log(`   Local: ${result.localPath || 'Not downloaded'}`);
-        console.log(`   Provider: ${result.provider}`);
+        console.log(`   Model: gpt-image-1`);
+        console.log(`   Quality: ${generator.defaultOptions.quality}`);
+        console.log(`   Size: ${generator.defaultOptions.size}`);
         break;
 
-      case 'blog-batch':
-        const topics = prompt.split(',').map(t => t.trim());
-        const results = await generator.generateBlogImages(topics);
-        
-        console.log('\n📊 Batch Generation Results:');
-        results.forEach(r => {
-          console.log(`   ${r.topic}: ${r.error ? '❌ ' + r.error : '✅ ' + r.filename}`);
-        });
+      case 'generate-from-article':
+        const fileFlag = args.find(arg => arg.startsWith('--file='));
+        if (!fileFlag) {
+          console.log('Usage: node ai-image-generator.js generate-from-article --file="path/to/article.mdx"');
+          return;
+        }
+
+        const filePath = fileFlag.split('=')[1].replace(/['"]/g, '');
+        const fullPath = path.resolve(filePath);
+
+        try {
+          const result = await generator.generateFromArticle(fullPath);
+
+          console.log('\n✅ Dynamic Image Generation Complete:');
+          console.log(`   Filename: ${result.filename}`);
+          console.log(`   Local path: ${result.localPath}`);
+          console.log(`   Cost: $${result.cost}`);
+          console.log(`   Topics: ${result.extractedTopics.slice(0, 3).join(', ')}`);
+          console.log(`   Technologies: ${result.extractedTech.slice(0, 3).join(', ')}`);
+          console.log(`   Statistics: ${result.extractedStats.slice(0, 2).join(', ')}`);
+
+        } catch (error) {
+          console.error(`❌ Failed to generate image: ${error.message}`);
+        }
         break;
 
       case 'stats':
@@ -370,22 +583,29 @@ if (require.main === module) {
 
       default:
         console.log(`
-🎨 AI Image Generator
+🎨 AI Image Generator - gpt-image-1 ONLY
+Dynamic content-aware image generation for tech blog
 
 Usage: node ai-image-generator.js <command> [options]
 
 Commands:
-  generate "prompt"           - Generate single image
-  blog-batch "topic1,topic2"  - Generate blog hero images
-  stats                       - Show usage statistics
+  generate "prompt"                           - Generate single image from prompt
+  generate-from-article --file="path.mdx"    - Generate contextual image from article
+  stats                                       - Show usage statistics
 
 Examples:
-  node ai-image-generator.js generate "iPhone 16 Pro in titanium"
-  node ai-image-generator.js blog-batch "AI trends,5G technology,quantum computing"
+  node ai-image-generator.js generate "AI breakthrough visualization"
+  node ai-image-generator.js generate-from-article --file="content/technology/ai-article.mdx"
+
+Optimized Settings:
+  - Size: 1536x1024 (blog header optimized)
+  - Quality: HD ($0.08 per image)
+  - Style: Vivid (engaging visuals)
+  - Model: gpt-image-1 (latest OpenAI)
         `);
     }
   }
-  
+
   run().catch(console.error);
 }
 

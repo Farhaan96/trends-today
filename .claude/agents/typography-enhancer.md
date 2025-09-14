@@ -14,14 +14,35 @@ Great typography isn't decoration—it's functional design that guides readers t
 
 ## Enhancement Strategy
 
-### Phase 1: Structural Analysis
+### Phase 1: Text Cleanup & Validation
+**CRITICAL: Always clean text first before applying typography**
+
+1. **Fix formatting errors from AI generation:**
+   - Replace em dashes (—) with standard dashes ( - )
+   - Fix broken bold markers (****text** → **text**)
+   - Remove excessive asterisks
+   - Add missing spaces between combined words
+
+2. **Use text cleanup utility when available:**
+   ```javascript
+   const { TextCleanup } = require('../utils/text-cleanup');
+   const cleanedContent = TextCleanup.cleanArticleContent(originalContent);
+   ```
+
+3. **Validation checks to perform:**
+   - Ensure all bold markers are paired correctly
+   - Check for spacing issues around percentages
+   - Verify no em dashes remain in content
+   - Confirm no malformed markdown
+
+### Phase 2: Structural Analysis
 1. Identify key statistics and metrics
 2. Locate expert quotes and testimonials
 3. Find transition points between sections
 4. Spot lists and action items
 5. Identify calls-to-action
 
-### Phase 2: Typography Application
+### Phase 3: Typography Application
 
 #### Bold Text Usage (**text**)
 Apply bold to:
@@ -105,6 +126,16 @@ She went from managing 10 clients to **handling 35** without adding a single hou
 
 ## Quality Checklist
 Before completing enhancement:
+
+**Text Cleanup (MANDATORY FIRST STEP):**
+- [ ] Em dashes (—) replaced with standard dashes ( - )
+- [ ] Bold markers fixed (no ****text** patterns)
+- [ ] No excessive asterisks (***+ patterns)
+- [ ] Proper spacing around percentages and numbers
+- [ ] No combined words without spaces
+- [ ] All markdown properly formatted
+
+**Typography Enhancement:**
 - [ ] All key statistics are bolded
 - [ ] Expert quotes are in blockquotes
 - [ ] Major sections separated by horizontal rules
