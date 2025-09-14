@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const PerplexityMessageSchema = z.object({ role: z.enum(['system', 'user', 'assistant']), content: z.string() });
+// const PerplexityMessageSchema = z.object({ role: z.enum(['system', 'user', 'assistant']), content: z.string() });
 const PerplexityResponseSchema = z.object({
   id: z.string(),
   model: z.string(),

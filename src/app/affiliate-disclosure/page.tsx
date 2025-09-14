@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import AffiliateDisclosure from '@/components/monetization/AffiliateDisclosure';
-import { ExclamationTriangleIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
+import { ShieldCheckIcon } from '@heroicons/react/24/outline';
 
 export const metadata: Metadata = {
   title: 'Affiliate Disclosure - Trends Today Transparency Policy',
@@ -21,7 +21,7 @@ export default function AffiliateDisclosurePage() {
         </h1>
         <p className="text-xl text-gray-800 max-w-3xl mx-auto">
           At Trends Today, we believe in complete transparency about how we fund our independent 
-          reviews and maintain editorial integrity. Here's everything you need to know about our 
+          reviews and maintain editorial integrity. Here&apos;s everything you need to know about our 
           monetization and affiliate partnerships.
         </p>
       </div>
@@ -53,7 +53,7 @@ export default function AffiliateDisclosurePage() {
           </h2>
           <div className="text-blue-800">
             <p className="mb-4">
-              We're committed to transparency and welcome any questions about our 
+              We&apos;re committed to transparency and welcome any questions about our 
               affiliate partnerships, monetization methods, or editorial processes.
             </p>
             <div className="grid md:grid-cols-2 gap-6">

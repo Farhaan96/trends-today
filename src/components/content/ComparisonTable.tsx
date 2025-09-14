@@ -1,4 +1,4 @@
-import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { CheckIcon } from '@heroicons/react/24/solid';
 
 interface ComparisonRow {
   category: string;

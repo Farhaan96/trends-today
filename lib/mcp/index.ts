@@ -43,19 +43,19 @@ export class MCPClient {
     try {
       await this.firecrawl.scrapeUrl('https://example.com');
       firecrawlHealthy = true;
-    } catch (e: any) {
-      errors.push(`Firecrawl: ${e?.message || 'Unknown error'}`);
+    } catch (e: unknown) {
+      errors.push(`Firecrawl: ${e instanceof Error ? e.message : 'Unknown error'}`);
     }
     try {
       await this.perplexity.chat([{ role: 'user', content: 'Hello' }], { max_tokens: 5 });
       perplexityHealthy = true;
-    } catch (e: any) {
-      errors.push(`Perplexity: ${e?.message || 'Unknown error'}`);
+    } catch (e: unknown) {
+      errors.push(`Perplexity: ${e instanceof Error ? e.message : 'Unknown error'}`);
     }
     try {
       dalleHealthy = await this.dalle.healthCheck();
-    } catch (e: any) {
-      errors.push(`DALL-E: ${e?.message || 'Unknown error'}`);
+    } catch (e: unknown) {
+      errors.push(`DALL-E: ${e instanceof Error ? e.message : 'Unknown error'}`);
     }
     return { firecrawl: firecrawlHealthy, perplexity: perplexityHealthy, dalle: dalleHealthy, dataForSEO: true, errors };
   }
@@ -84,7 +84,7 @@ export class MCPClient {
 
   async generateContentIdeas(category: string, count = 10) {
     const clusters = await this.perplexity.generateKeywordClusters(category, count);
-    const allKeywords = clusters.clusters.flatMap((c: any) => c.keywords);
+    const allKeywords = clusters.clusters.flatMap((c: { keywords: string[] }) => c.keywords);
     const keywordOpportunities = await this.dataForSEO.batchKeywordAnalysis(allKeywords);
     return {
       reviews: allKeywords.filter((k: string) => k.includes('review') && !k.includes('vs')).slice(0, count),

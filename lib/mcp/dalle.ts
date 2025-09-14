@@ -59,16 +59,16 @@ export class DalleClient {
         url: image.url,
         revised_prompt: image.revised_prompt
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('DALL-E generation error:', error);
       return {
         url: '',
-        error: error.message || 'Unknown error occurred'
+        error: error instanceof Error ? error.message : 'Unknown error occurred'
       };
     }
   }
 
-  async generateBlogImage(articleTitle: string, category: string, description?: string): Promise<DalleImageResponse> {
+  async generateBlogImage(articleTitle: string, category: string, _description?: string): Promise<DalleImageResponse> {
     // Create optimized prompts for different categories
     const categoryPrompts = {
       technology: 'futuristic technology, modern digital interface, sleek design, professional lighting',

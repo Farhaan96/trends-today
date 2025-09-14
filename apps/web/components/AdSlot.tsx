@@ -15,7 +15,9 @@ export default function AdSlot({ id, className = '' }: AdSlotProps) {
     if (adsEnabled && adClient && typeof window !== 'undefined') {
       try {
         // Push ad refresh to AdSense
-        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({})
+        const adsbygoogle = (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle || []
+        ;(window as unknown as { adsbygoogle: unknown[] }).adsbygoogle = adsbygoogle
+        adsbygoogle.push({})
       } catch (err) {
         console.error('AdSense error:', err)
       }

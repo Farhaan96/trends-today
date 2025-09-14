@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'About Trends Today | Independent Tech Reviews & Analysis',
@@ -89,8 +90,8 @@ export default function AboutPage() {
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
             <p className="text-gray-700 leading-relaxed">
-              Have questions, feedback, or suggestions? We'd love to hear from you.
-              Visit our <a href="/contact" className="text-blue-600 hover:text-blue-800 underline">contact page</a> to get in touch.
+              Have questions, feedback, or suggestions? We&apos;d love to hear from you.
+              Visit our <Link href="/contact" className="text-blue-600 hover:text-blue-800 underline">contact page</Link> to get in touch.
             </p>
           </section>
         </div>

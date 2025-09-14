@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { 
   UserIcon, 
   MapPinIcon, 
@@ -81,7 +81,7 @@ export default function AuthorsPage() {
       <div className="grid lg:grid-cols-2 gap-8 mb-12">
         {authors.map((author) => {
           const joinYear = new Date(author.joinDate).getFullYear();
-          const yearsAtTrends = new Date().getFullYear() - joinYear;
+          // const yearsAtTrends = new Date().getFullYear() - joinYear;
           
           return (
             <div key={author.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">

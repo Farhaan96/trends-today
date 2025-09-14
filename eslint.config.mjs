@@ -19,6 +19,7 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
       "apps/web/.next/**",
+      "apps/web/next-env.d.ts",
       // Ignore utility and script files that don't need strict linting
       "scripts/**/*.js",
       "lib/**/*.js",
