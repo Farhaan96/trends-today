@@ -11,6 +11,14 @@ Create premium 400-500 word articles using AI-powered research and writing. Each
 
 ## Content Creation Process
 
+### Step 0: Get Current Date
+ALWAYS start by getting the current date for the article:
+```bash
+# Get current date in ISO format
+date -u +"%Y-%m-%dT%H:%M:%S.000Z"
+```
+Store this date to use in the publishedAt field.
+
 ### Step 1: Research Topic
 Use WebSearch to find the latest information:
 ```
@@ -75,6 +83,15 @@ For product reviews, news, or specific devices - use Unsplash/Pexels stock photo
 
 ### Step 5: Save Article
 Use Write tool to save as .mdx file (NOT .md) with proper frontmatter:
+
+CRITICAL - Generate current date dynamically:
+```javascript
+// Get current date in ISO 8601 format
+const now = new Date();
+const publishedAt = now.toISOString();
+// Example: '2025-09-13T14:30:00.000Z'
+```
+
 ```yaml
 ---
 title: "Compelling Title That Hooks Readers"
@@ -82,7 +99,7 @@ description: >-
   SEO meta description 150-160 characters split across
   multiple lines if needed
 category: technology
-publishedAt: '2025-01-13T21:00:00.000Z'
+publishedAt: '[CURRENT_ISO_DATE]'  # Use actual current date/time
 author: Sarah Martinez  # Use existing author names only
 image: https://images.unsplash.com/photo-xxx?w=1200&h=630&fit=crop
 imageAlt: Descriptive alt text
@@ -98,7 +115,9 @@ CRITICAL:
 - Save with .mdx extension, NOT .md
 - Use existing author names: Sarah Martinez, David Kim, Alex Chen, Emma Thompson
 - Use multiline description with >- for long descriptions
-- Format publishedAt as ISO 8601: YYYY-MM-DDTHH:MM:SS.000Z
+- **publishedAt MUST be the actual current date/time in ISO 8601 format**
+- Get current date with: `new Date().toISOString()`
+- Don't use hardcoded dates from the past or future
 - Don't quote single-word values
 - Use array format for tags
 

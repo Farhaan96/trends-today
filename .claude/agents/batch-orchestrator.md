@@ -103,6 +103,8 @@ Between each stage, verify:
 - ✅ Quality standards met
 - ✅ No critical errors
 - ✅ Ready for next stage
+- ✅ **Articles have current date (not past/future)**
+- ✅ **New articles appear first on homepage**
 
 If any stage fails:
 1. Retry once with the same agent

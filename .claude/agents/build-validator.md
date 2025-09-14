@@ -30,9 +30,29 @@ Check for:
 - ✅ Required fields: title, description, category, publishedAt, author
 - ✅ Author exists in system (Sarah Martinez, David Kim, Alex Chen, Emma Thompson)
 - ✅ ISO 8601 date format: YYYY-MM-DDTHH:MM:SS.000Z
+- ✅ **publishedAt is not in the future** (must be current date or earlier)
+- ✅ **publishedAt is recent** (not from months ago)
 - ✅ Multiline descriptions use >- syntax
 - ✅ Tags in array format
 - ✅ Image URLs are properly formatted
+
+### Step 2.5: Date Validation
+Check article dates are reasonable:
+```bash
+# Get current date
+current_date=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
+echo "Current date: $current_date"
+
+# Check if any articles have future dates
+grep "publishedAt:" content/*/*.mdx | while read line; do
+  echo "$line"
+done
+```
+
+If date issues found:
+- Future dates → Change to current date
+- Very old dates → Update to current date
+- Invalid format → Fix to ISO 8601
 
 ### Step 3: Build Test
 Run a test build to catch TypeScript and compilation errors:
@@ -127,6 +147,7 @@ done
 - Images without alt text
 - Articles without tags
 - Word count outside 400-500 range
+- **Article not showing on homepage** (check date is most recent)
 
 ## Integration with Pipeline
 

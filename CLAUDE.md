@@ -190,6 +190,8 @@ Trends Today is a premium tech blog platform built with Next.js 14, featuring AI
 - ✅ **File format** - MUST use .mdx extension (NOT .md)
 - ✅ **Valid authors** - Only use: Sarah Martinez, David Kim, Alex Chen, Emma Thompson
 - ✅ **Date format** - ISO 8601: YYYY-MM-DDTHH:MM:SS.000Z
+- ✅ **Current date** - Use actual current date (`date -u +"%Y-%m-%dT%H:%M:%S.000Z"`), NOT hardcoded
+- ✅ **Homepage visibility** - New articles must have most recent date to appear first
 
 ## 🤖 AGENT-DRIVEN AUTOMATION SYSTEM
 
