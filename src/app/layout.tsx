@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "./minimal.css";
@@ -167,16 +167,16 @@ export default function RootLayout({
           {children}
         </main>
         {isMinimalTheme ? (
-          <footer className="border-t border-gray-200 mt-16">
+          <footer className="border-t border-white/20 mt-16" style={{ background: 'linear-gradient(90deg, #8B5CF6, #3B82F6)' }}>
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
-              <div className="text-center text-sm text-gray-500">
-                <p>© {new Date().getFullYear()} Trends Today. All rights reserved.</p>
+              <div className="text-center text-sm text-white/80">
+                <p>Â© {new Date().getFullYear()} Trends Today. All rights reserved.</p>
                 <div className="mt-4 space-x-4">
-                  <a href="/about" className="hover:text-gray-700">About</a>
+                  <a href="/about" className="hover:text-white transition-colors">About</a>
                   <span>•</span>
-                  <a href="/privacy" className="hover:text-gray-700">Privacy</a>
+                  <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
                   <span>•</span>
-                  <a href="/contact" className="hover:text-gray-700">Contact</a>
+                  <a href="/contact" className="hover:text-white transition-colors">Contact</a>
                 </div>
               </div>
             </div>
@@ -191,3 +191,4 @@ export default function RootLayout({
     </html>
   );
 }
+
