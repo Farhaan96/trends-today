@@ -1,4 +1,8 @@
-// import OpenAI from 'openai';
+// NOTE: This file is currently disabled to avoid OpenAI dependency issues
+// Uncomment and install 'openai' package if DALL-E functionality is needed
+
+/*
+import OpenAI from 'openai';
 
 export interface DalleImageOptions {
   prompt: string;
@@ -120,3 +124,14 @@ export class DalleClient {
 }
 
 export const dalle = new DalleClient();
+*/
+
+// Placeholder exports to maintain module structure
+export interface DalleImageOptions {
+  prompt: string;
+}
+
+export interface DalleImageResponse {
+  url: string;
+  error?: string;
+}
