@@ -11,38 +11,29 @@ const categoryConfig = {
   psychology: { name: 'Psychology', color: 'from-green-500 to-teal-600' },
   technology: { name: 'Technology', color: 'from-orange-500 to-red-600' },
   health: { name: 'Health', color: 'from-cyan-500 to-blue-600' },
-  space: { name: 'Space', color: 'from-indigo-600 to-fuchsia-700' }
-};
+  space: { name: 'Space', color: 'from-indigo-600 to-fuchsia-700' },
+} as const;
 
 export async function generateStaticParams() {
   const articles = await getAllArticles();
-  const params = [];
-  
+  const params: { category: string; slug: string }[] = [];
+
   for (const category of Object.keys(categoryConfig)) {
-    const categoryArticles = articles.filter(a => 
-      a.category?.toLowerCase() === category || 
-      a.frontmatter?.category?.toLowerCase() === category
+    const categoryArticles = articles.filter(
+      (a) => a.category?.toLowerCase() === category || a.frontmatter?.category?.toLowerCase() === category
     );
-    
     for (const article of categoryArticles) {
-      params.push({
-        category: category,
-        slug: article.slug
-      });
+      params.push({ category, slug: article.slug });
     }
   }
-  
+
   return params;
 }
 
 export async function generateMetadata({ params }: { params: { category: string; slug: string } }): Promise<Metadata> {
   const article = await getArticleBySlug(params.category, params.slug);
-  
   if (!article) {
-    return {
-      title: 'Article Not Found | Trends Today',
-      description: 'The article you are looking for does not exist.'
-    };
+    return { title: 'Article Not Found | Trends Today', description: 'The article you are looking for does not exist.' };
   }
 
   return {
@@ -59,45 +50,42 @@ export async function generateMetadata({ params }: { params: { category: string;
 
 export default async function ArticlePage({ params }: { params: { category: string; slug: string } }) {
   const article = await getArticleBySlug(params.category, params.slug);
-  
-  if (!article) {
-    notFound();
-  }
+  if (!article) notFound();
 
   const category = categoryConfig[params.category as keyof typeof categoryConfig];
-  
-  // Get related articles from the same category
+
   const allArticles = await getAllArticles();
   const relatedArticles = allArticles
-    .filter(a => 
-      (a.category?.toLowerCase() === params.category || 
-       a.frontmatter?.category?.toLowerCase() === params.category) &&
-      a.slug !== params.slug
+    .filter(
+      (a) =>
+        (a.category?.toLowerCase() === params.category || a.frontmatter?.category?.toLowerCase() === params.category) &&
+        a.slug !== params.slug
     )
     .slice(0, 3);
 
   return (
     <article className="min-h-screen bg-white">
-      {/* Article Header */}
+      {/* Header */}
       <header className="bg-white pt-8 pb-6 px-4">
-        <div className="max-w-4xl mx-auto">
-          {/* Article Title - At the very top */}
+        <div className="max-w-5xl mx-auto">
+          {/* Title */}
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-3 md:mb-4">
             {article.title || article.frontmatter?.title}
           </h1>
 
-          {/* Square Image - Below title */}
-          <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] mx-auto mb-4 md:mb-6">
+          {/* Large hero image matching reference layout */}
+          <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-gray-100 rounded-2xl overflow-hidden mb-4 md:mb-6">
             <Image
               src={article.image || article.frontmatter?.image || '/images/placeholder.jpg'}
               alt={article.title || article.frontmatter?.title || 'Article'}
               fill
-              className="object-cover rounded-2xl"
+              className="object-cover"
               priority
+              sizes="(max-width: 768px) 100vw, 1024px"
             />
           </div>
 
-          {/* Author, Date, Reading Time - Below image */}
+          {/* Meta */}
           <div className="flex items-center justify-center gap-4 text-gray-600 mb-4">
             <span className="font-medium">{article.author?.name || article.frontmatter?.author?.name || 'Trends Today'}</span>
             <span>•</span>
@@ -110,7 +98,7 @@ export default async function ArticlePage({ params }: { params: { category: stri
             )}
           </div>
 
-          {/* Category Badge - At the bottom */}
+          {/* Category */}
           <div className="text-center">
             <Link
               href={`/${params.category}`}
@@ -123,11 +111,11 @@ export default async function ArticlePage({ params }: { params: { category: stri
       </header>
 
       {/* Article Content */}
-      <div className="max-w-4xl mx-auto px-4 pb-12">
+      <div className="max-w-5xl mx-auto px-4 pb-12">
         <ArticleContent content={article.content || article.mdxContent} />
       </div>
 
-      {/* Related Articles */}
+      {/* Related */}
       {relatedArticles.length > 0 && (
         <section className="bg-gray-50 py-12">
           <div className="max-w-7xl mx-auto px-4">
@@ -161,3 +149,4 @@ export default async function ArticlePage({ params }: { params: { category: stri
     </article>
   );
 }
+
