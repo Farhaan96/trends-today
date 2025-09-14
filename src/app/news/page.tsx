@@ -6,7 +6,18 @@ import { Metadata } from 'next';
 
 interface NewsArticle {
   slug: string;
-  frontmatter: Record<string, unknown>;
+  frontmatter: {
+    title?: string;
+    description?: string;
+    publishedAt?: string;
+    image?: string;
+    category?: string;
+    author?: {
+      name?: string;
+      avatar?: string;
+    };
+    [key: string]: any;
+  };
 }
 
 // Get all news articles
@@ -32,7 +43,11 @@ async function getAllNews(): Promise<NewsArticle[]> {
         };
       })
       .filter(article => article.frontmatter.title) // Only include articles with titles
-      .sort((a, b) => new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime()); // Sort by date
+      .sort((a, b) => {
+        const dateA = a.frontmatter.publishedAt ? new Date(a.frontmatter.publishedAt).getTime() : 0;
+        const dateB = b.frontmatter.publishedAt ? new Date(b.frontmatter.publishedAt).getTime() : 0;
+        return dateB - dateA;
+      }); // Sort by date
     
     return articles;
   } catch (_error) {
@@ -90,7 +105,7 @@ export default async function NewsPage() {
                     </p>
                     <div className="flex items-center gap-2 text-sm text-gray-900">
                       <time dateTime={article.frontmatter.publishedAt}>
-                        {new Date(article.frontmatter.publishedAt).toLocaleDateString()}
+                        {article.frontmatter.publishedAt ? new Date(article.frontmatter.publishedAt).toLocaleDateString() : 'Recently'}
                       </time>
                       <span>•</span>
                       <span>{(typeof article.frontmatter.author === 'string' ? article.frontmatter.author : article.frontmatter.author?.name) || 'Editorial Team'}</span>
@@ -139,7 +154,7 @@ export default async function NewsPage() {
                   <div className="flex items-center justify-between text-sm text-gray-900">
                     <span>{(typeof article.frontmatter.author === 'string' ? article.frontmatter.author : article.frontmatter.author?.name) || 'Editorial Team'}</span>
                     <time dateTime={article.frontmatter.publishedAt}>
-                      {new Date(article.frontmatter.publishedAt).toLocaleDateString()}
+                      {article.frontmatter.publishedAt ? new Date(article.frontmatter.publishedAt).toLocaleDateString() : 'Recently'}
                     </time>
                   </div>
                 </div>
@@ -170,7 +185,7 @@ export default async function NewsPage() {
                     {article.frontmatter.category || 'News'}
                   </span>
                   <time className="text-sm text-gray-900" dateTime={article.frontmatter.publishedAt}>
-                    {new Date(article.frontmatter.publishedAt).toLocaleDateString()}
+                    {article.frontmatter.publishedAt ? new Date(article.frontmatter.publishedAt).toLocaleDateString() : 'Recently'}
                   </time>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-3">

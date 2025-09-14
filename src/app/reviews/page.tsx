@@ -7,7 +7,19 @@ import { Metadata } from 'next';
 
 interface Review {
   slug: string;
-  frontmatter: Record<string, unknown>;
+  frontmatter: {
+    title?: string;
+    description?: string;
+    publishedAt?: string;
+    image?: string;
+    category?: string;
+    rating?: number;
+    author?: {
+      name?: string;
+      avatar?: string;
+    };
+    [key: string]: any;
+  };
 }
 
 // Get all review articles
@@ -33,7 +45,11 @@ async function getAllReviews(): Promise<Review[]> {
         };
       })
       .filter(review => review.frontmatter.title) // Only include reviews with titles
-      .sort((a, b) => new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime()); // Sort by date
+      .sort((a, b) => {
+        const dateA = a.frontmatter.publishedAt ? new Date(a.frontmatter.publishedAt).getTime() : 0;
+        const dateB = b.frontmatter.publishedAt ? new Date(b.frontmatter.publishedAt).getTime() : 0;
+        return dateB - dateA;
+      }); // Sort by date
     
     return reviews;
   } catch (_error) {
@@ -53,11 +69,16 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: { c
   
   // Group reviews by category
   const filtered = activeCategory
-    ? reviews.filter(r => (r.frontmatter.category || '').toLowerCase() === activeCategory)
+    ? reviews.filter(r => {
+        const category = r.frontmatter.category;
+        return typeof category === 'string' && category.toLowerCase() === activeCategory;
+      })
     : reviews;
 
   const reviewsByCategory = filtered.reduce((acc, review) => {
-    const category = review.frontmatter.category || 'Other';
+    const category = typeof review.frontmatter.category === 'string'
+      ? review.frontmatter.category
+      : 'Other';
     if (!acc[category]) {
       acc[category] = [];
     }
@@ -93,7 +114,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: { c
                   <div className="aspect-video bg-gray-200 rounded-t-lg overflow-hidden">
                     <img
                       src={review.frontmatter.image}
-                      alt={review.frontmatter.title}
+                      alt={review.frontmatter.title || 'Review image'}
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -120,7 +141,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: { c
                   <div className="flex items-center justify-between text-sm text-gray-900">
                     <span>{review.frontmatter.category}</span>
                     <time dateTime={review.frontmatter.publishedAt}>
-                      {new Date(review.frontmatter.publishedAt).toLocaleDateString()}
+                      {review.frontmatter.publishedAt ? new Date(review.frontmatter.publishedAt).toLocaleDateString() : 'Recently'}
                     </time>
                   </div>
                 </div>
@@ -140,7 +161,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: { c
                 <div className="aspect-video bg-gray-200 rounded-t-lg overflow-hidden">
                   <img
                     src={review.frontmatter.image}
-                    alt={review.frontmatter.title}
+                    alt={review.frontmatter.title || 'Review image'}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -167,7 +188,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: { c
                 <div className="flex items-center justify-between text-sm text-gray-900">
                   <span>{(typeof review.frontmatter.author === 'string' ? review.frontmatter.author : review.frontmatter.author?.name) || 'Editorial Team'}</span>
                   <time dateTime={review.frontmatter.publishedAt}>
-                    {new Date(review.frontmatter.publishedAt).toLocaleDateString()}
+                    {review.frontmatter.publishedAt ? new Date(review.frontmatter.publishedAt).toLocaleDateString() : 'Recently'}
                   </time>
                 </div>
               </div>
@@ -192,7 +213,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: { c
                       <div className="w-20 h-20 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0 relative">
                         <ImageWithFallback
                           src={review.frontmatter.image}
-                          alt={review.frontmatter.title}
+                          alt={review.frontmatter.title || 'Review image'}
                           fill
                           className="object-cover"
                         />
@@ -212,7 +233,7 @@ export default async function ReviewsPage({ searchParams }: { searchParams?: { c
                           <span className="text-yellow-500">★ {review.frontmatter.rating}/10</span>
                         )}
                         <time dateTime={review.frontmatter.publishedAt}>
-                          {new Date(review.frontmatter.publishedAt).toLocaleDateString()}
+                          {review.frontmatter.publishedAt ? new Date(review.frontmatter.publishedAt).toLocaleDateString() : 'Recently'}
                         </time>
                       </div>
                     </div>

@@ -177,19 +177,19 @@ function generateUIInsights(markdown: string, _metadata: unknown) {
   return insights;
 }
 
-function generateRecommendations(analysis: unknown, uiInsights: unknown) {
+function generateRecommendations(analysis: any, uiInsights: any) {
   const recommendations: string[] = [];
-  
+
   if (analysis.hasHeroSection) {
     recommendations.push('✅ Keep hero section - effective for featuring main content');
   } else {
     recommendations.push('💡 Consider adding a hero section for featured articles');
   }
-  
+
   if (analysis.hasSidebar) {
     recommendations.push('✅ Sidebar approach works well - keep latest news/popular content');
   }
-  
+
   if (analysis.contentDensity === 'high') {
     recommendations.push('⚖️ High content density - consider better visual hierarchy');
   }

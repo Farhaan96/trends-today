@@ -7,7 +7,18 @@ import { Metadata } from 'next';
 
 interface Comparison {
   slug: string;
-  frontmatter: Record<string, unknown>;
+  frontmatter: {
+    title?: string;
+    description?: string;
+    publishedAt?: string;
+    image?: string;
+    products?: any[];
+    author?: {
+      name?: string;
+      avatar?: string;
+    };
+    [key: string]: any;
+  };
 }
 
 // Get all comparison articles
@@ -42,7 +53,11 @@ async function getAllComparisons(): Promise<Comparison[]> {
     
     return comparisons
       .filter(comparison => comparison.frontmatter.title) // Only include comparisons with titles
-      .sort((a, b) => new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime()); // Sort by date
+      .sort((a, b) => {
+        const dateA = a.frontmatter.publishedAt ? new Date(a.frontmatter.publishedAt).getTime() : 0;
+        const dateB = b.frontmatter.publishedAt ? new Date(b.frontmatter.publishedAt).getTime() : 0;
+        return dateB - dateA;
+      }); // Sort by date
     
   } catch (_error) {
     return [];
@@ -183,7 +198,7 @@ export default async function ComparePage() {
                     {comparison.frontmatter.description}
                   </p>
                   <div className="flex items-center justify-between text-sm text-gray-900">
-                    <span>Updated {new Date(comparison.frontmatter.publishedAt).toLocaleDateString()}</span>
+                    <span>Updated {comparison.frontmatter.publishedAt ? new Date(comparison.frontmatter.publishedAt).toLocaleDateString() : 'Recently'}</span>
                     <span>📊 Detailed specs</span>
                   </div>
                 </div>

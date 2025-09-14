@@ -7,7 +7,18 @@ import { Metadata } from 'next';
 
 interface BestGuide {
   slug: string;
-  frontmatter: Record<string, unknown>;
+  frontmatter: {
+    title?: string;
+    description?: string;
+    publishedAt?: string;
+    image?: string;
+    category?: string;
+    author?: {
+      name?: string;
+      avatar?: string;
+    };
+    [key: string]: any;
+  };
 }
 
 // Get all buying guides
@@ -33,7 +44,11 @@ async function getAllGuides(): Promise<BestGuide[]> {
         };
       })
       .filter(guide => guide.frontmatter.title) // Only include guides with titles
-      .sort((a, b) => new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime()); // Sort by date
+      .sort((a, b) => {
+        const dateA = a.frontmatter.publishedAt ? new Date(a.frontmatter.publishedAt).getTime() : 0;
+        const dateB = b.frontmatter.publishedAt ? new Date(b.frontmatter.publishedAt).getTime() : 0;
+        return dateB - dateA;
+      }); // Sort by date
     
     return guides;
   } catch (_error) {
@@ -167,7 +182,7 @@ export default async function BestPage() {
                     {guide.frontmatter.description}
                   </p>
                   <div className="flex items-center justify-between text-sm text-gray-900">
-                    <span>Updated {new Date(guide.frontmatter.publishedAt).toLocaleDateString()}</span>
+                    <span>Updated {guide.frontmatter.publishedAt ? new Date(guide.frontmatter.publishedAt).toLocaleDateString() : 'Recently'}</span>
                     <span>💰 Budget options included</span>
                   </div>
                 </div>
