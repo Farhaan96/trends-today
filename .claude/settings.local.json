@@ -40,7 +40,11 @@
       "Bash(npm run:*)",
       "WebFetch(domain:medianeth.dev)",
       "WebFetch(domain:claudelog.com)",
-      "WebFetch(domain:jewelhuq.medium.com)"
+      "WebFetch(domain:jewelhuq.medium.com)",
+      "WebFetch(domain:ts2.tech)",
+      "WebFetch(domain:www.crescendo.ai)",
+      "WebFetch(domain:medicalxpress.com)",
+      "WebFetch(domain:www.apple.com)"
     ],
     "deny": [],
     "ask": []
