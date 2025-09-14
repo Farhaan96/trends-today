@@ -126,7 +126,7 @@ html.dark body.minimal-theme {
 }
 
 /* Remove all unnecessary visual noise - but allow for header and buttons */
-.minimal-theme *:not(header):not(a):not(button) {
+.minimal-theme *:not(header):not(a):not(button):not(footer) {
   /* No gradients except header and buttons */
   background-image: none !important;
   /* No shadows except where absolutely necessary */
