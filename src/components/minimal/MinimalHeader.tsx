@@ -29,23 +29,34 @@ export default function MinimalHeader() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-5">
+          <nav className="hidden md:flex items-center space-x-6">
             {navigation.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="focus:outline-none focus:ring-0"
+                className="focus:outline-none focus:ring-0 relative group"
                 style={{
                   color: 'white',
-                  fontSize: '12px',
-                  fontWeight: '600',
+                  fontSize: '16px',
+                  fontWeight: '700',
                   textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
+                  letterSpacing: '0.1em',
                   textDecoration: 'none',
-                  transition: 'opacity 0.2s'
+                  transition: 'all 0.3s ease',
+                  textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                  padding: '8px 12px',
+                  borderRadius: '6px'
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.9')}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.15)';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.textShadow = '0 4px 8px rgba(0,0,0,0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.textShadow = '0 2px 4px rgba(0,0,0,0.3)';
+                }}
               >
                 {item.name}
               </a>
@@ -75,19 +86,30 @@ export default function MinimalHeader() {
       {/* Mobile Navigation */}
       {isMenuOpen && (
         <div className="md:hidden border-t border-white/20 bg-gradient-to-b from-purple-600/95 to-blue-600/95 backdrop-blur-sm">
-          <nav className="px-4 py-4 space-y-2">
+          <nav className="px-4 py-6 space-y-3">
             {navigation.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="block py-3"
+                className="block py-4 px-4 rounded-lg transition-all duration-200"
                 style={{
                   color: 'white',
-                  fontWeight: 'bold',
-                  fontSize: '18px',
+                  fontWeight: '700',
+                  fontSize: '20px',
                   textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                  textDecoration: 'none'
+                  letterSpacing: '0.1em',
+                  textDecoration: 'none',
+                  textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                  backgroundColor: 'rgba(255,255,255,0.1)',
+                  border: '1px solid rgba(255,255,255,0.2)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.2)';
+                  e.currentTarget.style.transform = 'translateX(8px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                  e.currentTarget.style.transform = 'translateX(0)';
                 }}
                 onClick={() => setIsMenuOpen(false)}
               >
