@@ -44,7 +44,9 @@
       "WebFetch(domain:ts2.tech)",
       "WebFetch(domain:www.crescendo.ai)",
       "WebFetch(domain:medicalxpress.com)",
-      "WebFetch(domain:www.apple.com)"
+      "WebFetch(domain:www.apple.com)",
+      "WebFetch(domain:news.stonybrook.edu)",
+      "WebFetch(domain:www.nature.com)"
     ],
     "deny": [],
     "ask": []
