@@ -2,7 +2,7 @@
 
 /**
  * AI Image Generation Utility
- * Supports OpenAI DALL-E and Google AI as backup image sources
+ * Supports OpenAI gpt-image-1 and Google AI as backup image sources
  * Perfect for blog post hero images and product visuals
  */
 
@@ -75,7 +75,7 @@ class AIImageGenerator {
       });
 
       req.on('error', reject);
-      req.setTimeout(60000, () => { // 60 second timeout for image generation
+      req.setTimeout(120000, () => { // 120 second timeout for image generation
         req.destroy();
         reject(new Error('Request timeout'));
       });
@@ -100,7 +100,7 @@ class AIImageGenerator {
       n = 1
     } = options;
 
-    console.log(`🎨 Generating image with OpenAI DALL-E...`);
+    console.log(`🎨 Generating image with OpenAI gpt-image-1...`);
     console.log(`   Prompt: "${prompt.substring(0, 50)}..."`);
 
     await this.enforceRateLimit();
@@ -112,26 +112,28 @@ class AIImageGenerator {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'dall-e-3',
+        model: 'gpt-image-1',
         prompt: prompt,
         n: n,
         size: size,
-        quality: quality,
-        style: style
+        quality: quality
       })
     });
 
-    const imageUrl = response.data?.data?.[0]?.url;
-    const revisedPrompt = response.data?.data?.[0]?.revised_prompt;
+    const item = response.data?.data?.[0] || {};
+    const imageUrl = item.url;
+    const b64 = item.b64_json;
+    const revisedPrompt = item.revised_prompt;
 
-    if (!imageUrl) {
-      throw new Error('No image URL returned from OpenAI');
+    if (!imageUrl && !b64) {
+      throw new Error('No image returned from OpenAI');
     }
 
     return {
       url: imageUrl,
+      b64_json: b64,
       provider: 'openai',
-      model: 'dall-e-3',
+      model: 'gpt-image-1',
       originalPrompt: prompt,
       revisedPrompt: revisedPrompt,
       size: size,
@@ -225,6 +227,22 @@ class AIImageGenerator {
       }
     }
 
+    // Save base64 image if provided
+    if (downloadImage && result.b64_json && !result.localPath) {
+      const imageFilename = filename || `ai-generated-${Date.now()}.png`;
+      try {
+        await this.ensureDirs();
+        const filePath = path.join(this.outputDir, imageFilename);
+        const buffer = Buffer.from(result.b64_json, 'base64');
+        await require('fs').promises.writeFile(filePath, buffer);
+        result.localPath = filePath;
+        result.filename = imageFilename;
+        console.log(`dY'_ Saved base64 image: ${imageFilename}`);
+      } catch (error) {
+        console.error(`Failed to save base64 image: ${error.message}`);
+      }
+    }
+
     // Download image if requested
     if (downloadImage && result.url) {
       const imageFilename = filename || `ai-generated-${Date.now()}.png`;
@@ -296,7 +314,7 @@ class AIImageGenerator {
   }
 
   estimateCost() {
-    // OpenAI DALL-E 3 pricing estimates
+    // OpenAI gpt-image-1 3 pricing estimates
     let cost = 0;
     for (const img of this.generatedImages) {
       if (img.provider === 'openai') {
