@@ -167,7 +167,7 @@ export default function RootLayout({
           {children}
         </main>
         {isMinimalTheme ? (
-          <footer className="border-t border-white/20 mt-16" style={{ background: 'linear-gradient(90deg, #8B5CF6, #3B82F6)' }}>
+          <footer className="mt-16 border-t border-white/20 bg-gradient-to-r from-violet-600 to-blue-600">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
               <div className="text-center text-sm text-white/80">
                 <p>Â© {new Date().getFullYear()} Trends Today. All rights reserved.</p>
