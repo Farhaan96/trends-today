@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+﻿import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -73,19 +73,7 @@ export default async function ArticlePage({ params }: { params: { category: stri
             {article.title || article.frontmatter?.title}
           </h1>
 
-          {/* Large hero image matching reference layout */}
-          <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-gray-100 rounded-2xl overflow-hidden mb-4 md:mb-6">
-            <Image
-              src={article.image || article.frontmatter?.image || '/images/placeholder.jpg'}
-              alt={article.title || article.frontmatter?.title || 'Article'}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, 1024px"
-            />
-          </div>
-
-          {/* Meta */}
+          {/* Meta below title, above image */}
           <div className="flex items-center justify-center gap-4 text-gray-600 mb-4">
             <span className="font-medium">{article.author?.name || article.frontmatter?.author?.name || 'Trends Today'}</span>
             <span>•</span>
@@ -96,16 +84,22 @@ export default async function ArticlePage({ params }: { params: { category: stri
                 <span>{article.frontmatter?.readingTime || (article as any).readingTime} min read</span>
               </>
             )}
-          </div>
-
-          {/* Category */}
-          <div className="text-center">
-            <Link
-              href={`/${params.category}`}
-              className={`inline-block bg-gradient-to-r ${category.color} text-white px-4 py-2 rounded-full text-sm font-bold hover:scale-105 transition-transform`}
-            >
+            <span>•</span>
+            <Link href={`/${params.category}`} className={`inline-block px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${category.color}`}>
               {category.name}
             </Link>
+          </div>
+
+          {/* Large square hero image */}
+          <div className="relative w-full aspect-square bg-gray-100 rounded-2xl overflow-hidden mb-4 md:mb-6">
+            <Image
+              src={article.image || article.frontmatter?.image || '/images/placeholder.jpg'}
+              alt={article.title || article.frontmatter?.title || 'Article'}
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, 1024px"
+            />
           </div>
         </div>
       </header>
@@ -149,4 +143,3 @@ export default async function ArticlePage({ params }: { params: { category: stri
     </article>
   );
 }
-
