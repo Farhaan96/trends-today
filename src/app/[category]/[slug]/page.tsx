@@ -74,23 +74,23 @@ export default async function ArticlePage({ params }: { params: { category: stri
           </h1>
 
           {/* Meta below title, above image (left-aligned; category first) */}
-          <div className="flex flex-wrap items-center justify-start gap-3 text-gray-600 mb-4 text-sm">
-            <Link
-              href={`/${params.category}`}
-              className={`inline-block px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${category.color}`}
-            >
-              {category.name}
-            </Link>
-            <span>•</span>
-            <span className="font-medium">{article.author?.name || article.frontmatter?.author?.name || 'Trends Today'}</span>
-            <span>•</span>
-            <span>{new Date(article.publishedAt || article.frontmatter?.publishedAt).toLocaleDateString()}</span>
-            {(article.frontmatter?.readingTime || (article as any).readingTime) && (
-              <>
-                <span>•</span>
-                <span>{article.frontmatter?.readingTime || (article as any).readingTime} min read</span>
-              </>
-            )}
+          {/* Meta below title, above image (left-aligned; category first) */}
+          <div className="my-4 border-y border-gray-200/70">
+            <div className="flex flex-wrap items-center justify-start gap-3 text-gray-600 py-3 text-sm">
+              <Link href={`/${params.category}`} className={`inline-block px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${category.color}`}>
+                {category.name}
+              </Link>
+              <span>•</span>
+              <span className="font-medium">{article.author?.name || article.frontmatter?.author?.name || 'Trends Today'}</span>
+              <span>•</span>
+              <span>{new Date(article.publishedAt || article.frontmatter?.publishedAt).toLocaleDateString()}</span>
+              {(article.frontmatter?.readingTime || (article as any).readingTime) && (
+                <>
+                  <span>•</span>
+                  <span>{article.frontmatter?.readingTime || (article as any).readingTime} min read</span>
+                </>
+              )}
+            </div>
           </div>
 
           {/* Large square hero image */}
