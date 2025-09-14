@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
     })).sort((a, b) => b.score - a.score);
 
     // Remove score from response
-    const results = scoredResults.map(({ score, ...result }) => result);
+    const results = scoredResults.map(({ score: _score, ...result }) => result);
 
     // Track search
     console.log(`Search performed: "${query}" - ${results.length} results`);

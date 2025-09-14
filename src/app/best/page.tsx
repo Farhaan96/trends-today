@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 
 interface BestGuide {
   slug: string;
-  frontmatter: any;
+  frontmatter: Record<string, unknown>;
 }
 
 // Get all buying guides
@@ -35,7 +35,7 @@ async function getAllGuides(): Promise<BestGuide[]> {
       .sort((a, b) => new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime()); // Sort by date
     
     return guides;
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }
@@ -214,7 +214,7 @@ export default async function BestPage() {
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
             <h3 className="text-2xl font-bold text-green-800 mb-2">Under $100</h3>
-            <p className="text-green-700 mb-4">Budget-friendly options that don't compromise on quality</p>
+            <p className="text-green-700 mb-4">Budget-friendly options that don&apos;t compromise on quality</p>
             <Link href="/best/budget" className="text-green-600 hover:text-green-800 font-medium">
               View Budget Picks →
             </Link>

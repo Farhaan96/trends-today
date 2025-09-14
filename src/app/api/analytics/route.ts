@@ -26,7 +26,7 @@ interface AutomationStats {
   generationSuccess: number;
 }
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     // Get content statistics
     const contentStats = await getContentStats();
@@ -51,12 +51,12 @@ export async function GET(request: NextRequest) {
       }
     });
 
-  } catch (error) {
-    console.error('Analytics dashboard error:', error);
+  } catch (_error) {
+    console.error('Analytics dashboard error:', _error);
     
     return NextResponse.json({
       success: false,
-      error: error instanceof Error ? error.message : 'Unknown error',
+      error: _error instanceof Error ? _error.message : 'Unknown error',
       timestamp: new Date().toISOString()
     }, { status: 500 });
   }
@@ -104,7 +104,7 @@ async function getContentStats(): Promise<ContentStats> {
           }
         }
         
-      } catch (error) {
+      } catch (_error) {
         // Directory doesn't exist or is empty
         stats.articlesByType[type] = 0;
       }

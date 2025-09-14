@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 
 interface Comparison {
   slug: string;
-  frontmatter: any;
+  frontmatter: Record<string, unknown>;
 }
 
 // Get all comparison articles
@@ -43,7 +43,7 @@ async function getAllComparisons(): Promise<Comparison[]> {
       .filter(comparison => comparison.frontmatter.title) // Only include comparisons with titles
       .sort((a, b) => new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime()); // Sort by date
     
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }
@@ -192,9 +192,9 @@ export default async function ComparePage() {
 
       {/* Comparison Tool CTA */}
       <section className="mb-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl p-8 text-center">
-        <h2 className="text-3xl font-bold mb-4">Can't Find What You're Looking For?</h2>
+        <h2 className="text-3xl font-bold mb-4">Can&apos;t Find What You&apos;re Looking For?</h2>
         <p className="text-xl text-blue-200 mb-6">
-          Request a custom comparison and we'll create it for you
+          Request a custom comparison and we&apos;ll create it for you
         </p>
         <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
           Request Comparison

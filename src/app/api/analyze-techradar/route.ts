@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     const apiKey = process.env.FIRECRAWL_API_KEY;
     
@@ -138,7 +138,7 @@ function determineArticleType(title: string): string {
   return 'article';
 }
 
-function generateUIInsights(markdown: string, metadata: any) {
+function generateUIInsights(markdown: string, _metadata: unknown) {
   const insights = {
     layoutStructure: 'unknown',
     contentTypes: [] as string[],
@@ -177,7 +177,7 @@ function generateUIInsights(markdown: string, metadata: any) {
   return insights;
 }
 
-function generateRecommendations(analysis: any, uiInsights: any) {
+function generateRecommendations(analysis: unknown, uiInsights: unknown) {
   const recommendations: string[] = [];
   
   if (analysis.hasHeroSection) {
