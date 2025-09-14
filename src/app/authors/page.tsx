@@ -80,7 +80,7 @@ export default function AuthorsPage() {
 
       <div className="grid lg:grid-cols-2 gap-8 mb-12">
         {authors.map((author) => {
-          const joinYear = new Date(author.joinDate).getFullYear();
+          const _joinYear = new Date(author.joinDate).getFullYear();
           // const yearsAtTrends = new Date().getFullYear() - joinYear;
           
           return (

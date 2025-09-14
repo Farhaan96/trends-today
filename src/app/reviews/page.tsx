@@ -7,7 +7,7 @@ import { Metadata } from 'next';
 
 interface Review {
   slug: string;
-  frontmatter: any;
+  frontmatter: Record<string, unknown>;
 }
 
 // Get all review articles
@@ -36,7 +36,7 @@ async function getAllReviews(): Promise<Review[]> {
       .sort((a, b) => new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime()); // Sort by date
     
     return reviews;
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }

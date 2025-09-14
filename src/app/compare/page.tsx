@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Metadata } from 'next';
 
 interface Comparison {
@@ -155,9 +156,11 @@ export default async function ComparePage() {
               <article key={comparison.slug} className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow">
                 {comparison.frontmatter.image && (
                   <div className="aspect-video bg-gray-200 rounded-t-lg overflow-hidden">
-                    <img
-                      src={comparison.frontmatter.image}
-                      alt={comparison.frontmatter.title}
+                    <Image
+                      src={comparison.frontmatter.image as string}
+                      alt={comparison.frontmatter.title as string}
+                      width={400}
+                      height={225}
                       className="w-full h-full object-cover"
                     />
                   </div>

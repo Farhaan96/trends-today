@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { HeartIcon, ArrowUturnLeftIcon as ReplyIcon, FlagIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';
+import Image from 'next/image';
 
 interface Comment {
   id: string;
@@ -215,9 +216,11 @@ export default function CommentSystem({ articleId, articleTitle }: CommentSystem
   }) => (
     <div className={`${isReply ? 'ml-8 pl-4 border-l-2 border-gray-100' : ''}`}>
       <div className="flex space-x-3">
-        <img
+        <Image
           src={comment.avatar}
           alt={comment.author}
+          width={32}
+          height={32}
           className="w-8 h-8 rounded-full"
         />
         

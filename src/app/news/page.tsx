@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 
 interface NewsArticle {
   slug: string;
-  frontmatter: any;
+  frontmatter: Record<string, unknown>;
 }
 
 // Get all news articles
@@ -35,7 +35,7 @@ async function getAllNews(): Promise<NewsArticle[]> {
       .sort((a, b) => new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime()); // Sort by date
     
     return articles;
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface SearchResult {
   id: string;
@@ -179,9 +180,11 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               >
                 <div className="flex items-start gap-3">
                   {result.image && (
-                    <img
+                    <Image
                       src={result.image}
                       alt={result.title}
+                      width={48}
+                      height={48}
                       className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
                     />
                   )}

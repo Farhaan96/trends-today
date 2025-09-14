@@ -5,6 +5,7 @@ import { ProductComparison as ProductComparisonType, AffiliateProvider } from '@
 import AffiliateButton from './AffiliateButton';
 import { StarIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 interface ProductComparisonProps {
   products: ProductComparisonType[];
@@ -96,15 +97,12 @@ export default function ProductComparison({
               <div className="flex flex-col md:flex-row gap-4">
                 {/* Product Image */}
                 <div className="flex-shrink-0">
-                  <img
-                    loading="lazy"
+                  <Image
                     src={product.image}
                     alt={product.name}
+                    width={96}
+                    height={96}
                     className="w-20 h-20 md:w-24 md:h-24 object-cover rounded-lg bg-gray-100"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgMTVhMyAzIDAgMTAwLTYgMyAzIDAgMDAwIDZ6IiBmaWxsPSIjY2NjIi8+PHBhdGggZD0iTTEuNSA2YTIuNSAyLjUgMCAwMTIuNS0yLjVoMTZhMi41IDIuNSAwIDAxMi41IDIuNXYxMmEyLjUgMi41IDAgMDEtMi41IDIuNUg0YTIuNSAyLjUgMCAwMS0yLjUtMi41VjZ6TTQgNWExIDEgMCAwMC0xIDF2MTJhMSAxIDAgMDAxIDFoMTZhMSAxIDAgMDAxLTFWNmExIDEgMCAwMC0xLTFINHoiIGZpbGw9IiNjY2MiLz48L3N2Zz4=';
-                    }}
                   />
                 </div>
 

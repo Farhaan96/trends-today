@@ -140,7 +140,7 @@ async function getAutomationStats(): Promise<AutomationStats> {
       const newsData = await fs.readFile(newsFile, 'utf-8');
       const newsOpportunities = JSON.parse(newsData);
       stats.newsOpportunities = Array.isArray(newsOpportunities) ? newsOpportunities.length : 0;
-    } catch (error) {
+    } catch (_error) {
       // File doesn't exist
     }
 
@@ -150,7 +150,7 @@ async function getAutomationStats(): Promise<AutomationStats> {
       const seoData = await fs.readFile(seoFile, 'utf-8');
       const seoOpportunities = JSON.parse(seoData);
       stats.seoOpportunities = seoOpportunities.totalOpportunities || 0;
-    } catch (error) {
+    } catch (_error) {
       // File doesn't exist
     }
 
@@ -160,7 +160,7 @@ async function getAutomationStats(): Promise<AutomationStats> {
       const trackingData = await fs.readFile(trackingFile, 'utf-8');
       const tracking = JSON.parse(trackingData);
       stats.trackedProducts = tracking.stats?.total || 0;
-    } catch (error) {
+    } catch (_error) {
       // File doesn't exist
     }
 
@@ -190,7 +190,7 @@ async function getQualityMetrics() {
       topIssues: report.recommendations.slice(0, 3)
     };
     
-  } catch (error) {
+  } catch (_error) {
     // No quality report available
     return {
       averageScore: 0,

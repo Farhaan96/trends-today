@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Metadata } from 'next';
 
 interface BestGuide {
@@ -139,9 +140,11 @@ export default async function BestPage() {
               <article key={guide.slug} className="bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow">
                 {guide.frontmatter.image && (
                   <div className="aspect-video bg-gray-200 rounded-t-lg overflow-hidden">
-                    <img
-                      src={guide.frontmatter.image}
-                      alt={guide.frontmatter.title}
+                    <Image
+                      src={guide.frontmatter.image as string}
+                      alt={guide.frontmatter.title as string}
+                      width={400}
+                      height={225}
                       className="w-full h-full object-cover"
                     />
                   </div>
