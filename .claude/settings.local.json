@@ -50,7 +50,11 @@
       "WebFetch(domain:www.livescience.com)",
       "WebFetch(domain:www.hopkinsmedicine.org)",
       "WebFetch(domain:jamanetwork.com)",
-      "Bash(sort:*)"
+      "Bash(sort:*)",
+      "WebFetch(domain:medicine.iu.edu)",
+      "WebFetch(domain:news.iu.edu)",
+      "WebFetch",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []
