@@ -170,7 +170,7 @@ export default function RootLayout({
           <footer className="mt-16 border-t border-white/20 bg-gradient-to-r from-violet-600 to-blue-600">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
               <div className="text-center text-sm text-white/80">
-                <p>Â© {new Date().getFullYear()} Trends Today. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} Trends Today. All rights reserved.</p>
                 <div className="mt-4 space-x-4">
                   <a href="/about" className="hover:text-white transition-colors">About</a>
                   <span>•</span>
@@ -191,6 +191,7 @@ export default function RootLayout({
     </html>
   );
 }
+
 
 
 
