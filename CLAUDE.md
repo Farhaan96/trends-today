@@ -1,5 +1,113 @@
 <!-- September 2025 Operations Update -->
 
+## 🚨 CRITICAL: Claude Code Agent System - PROPER USAGE
+
+### ⚠️ IMPORTANT: Agent Invocation Issues
+**PROBLEM:** Agents are NOT appearing with colored boxes when invoked. This means they're not being triggered as separate entities.
+
+**CORRECT INVOCATION:**
+- Use the `/agents` command first to see available agents
+- Use `> Use the [agent-name] subagent to [task]` format
+- Each agent should appear with its own colored box
+- If no colored box appears, the agent is NOT actually running
+
+**CURRENT STATUS:**
+- Agents are defined in `.claude/agents/` but may not be properly registered
+- The Task tool simulates agents but doesn't actually invoke them
+- Need to use proper Claude Code subagent invocation syntax
+
+### 📁 Pure AI Agent Pipeline (No JavaScript)
+All JavaScript agent files have been REMOVED. The system now uses pure Claude Code AI agents:
+
+**Available Agents in `.claude/agents/`:**
+1. `batch-orchestrator` - Orchestrates the pipeline
+2. `trending-topics-discovery` - Finds topics using WebSearch
+3. `ultra-short-content-creator` - Creates articles using AI
+4. `fact-checker` - Verifies facts using WebSearch/WebFetch
+5. `typography-enhancer` - Applies formatting
+6. `quality-validator` - Ensures standards
+7. `smart-content-linker` - Adds internal links
+8. `publication-reviewer` - Final approval
+
+**Tools Agents Use:**
+- `WebSearch` - Real-time information
+- `WebFetch` - Deep dive into sources
+- `Write/Edit` - Content creation/modification
+- `Read` - Analyze existing content
+- NO direct API access (use utilities for that)
+
+### 🎨 AI Image Generation Guidelines
+
+**✅ GOOD for AI Images:**
+- Medical/scientific visualizations
+- Abstract concepts (AI, quantum computing)
+- Data visualizations
+- Space/astronomy scenes
+- Conceptual future tech
+- Neural networks, brain activity
+
+**❌ AVOID for AI Images:**
+- Product reviews (phones, laptops)
+- Specific devices (iPhone, Samsung)
+- Text/logos (DALL-E garbles them)
+- Real people/celebrities
+- Screenshots/interfaces
+- Anything requiring accurate text
+
+**Why:** AI can't accurately depict real products, text is often illegible, and brand logos are distorted.
+
+**For Product Images:** Use stock photos from Unsplash/Pexels or real product photos.
+
+### 🔧 Hybrid Approach for API Access
+Since pure Claude agents can't use API keys directly:
+- **Content/Research:** Use Claude agents (WebSearch/WebFetch)
+- **Image Generation:** Use `utils/ai-image-generator.js` with OpenAI API
+- **Other APIs:** Keep utility files in `utils/` for API access
+
+### 📝 Daily Workflow with Agents
+
+**Morning Batch:**
+```
+/agents  # Check available agents
+> Use the batch-orchestrator subagent to run morning batch
+```
+
+**The orchestrator should then trigger (with colored boxes):**
+- trending-topics-discovery
+- ultra-short-content-creator
+- fact-checker
+- typography-enhancer
+- quality-validator
+- smart-content-linker
+- publication-reviewer
+
+**If agents don't appear with colored boxes, they're NOT running!**
+
+### 🧪 Testing Agent Invocation
+
+**Test Command:**
+```
+> Use the trending-topics-discovery subagent to find 2 trending tech topics
+```
+
+**Expected Result:**
+- Agent name appears in a colored box
+- Agent operates as separate entity with its own context
+- Agent uses its defined tools (WebSearch, WebFetch, etc.)
+
+**If This Doesn't Work:**
+1. Try `/agents` command to list available agents
+2. Check `.claude/agents/` folder for agent files
+3. Ensure each agent has proper YAML frontmatter
+4. Try restarting Claude Code session
+5. May need to manually register agents
+
+### ⚠️ Current Workaround
+Until proper agent invocation works:
+- Use Task tool to simulate agent behavior
+- Use JavaScript utilities for API access (`utils/` folder)
+- Manually follow agent pipeline steps
+
 ## Operations Update — Images, Minimal Theme, Security
 
 This update documents recent fixes and the plan to align the site with an ultra‑simple, ad‑friendly design similar to leravi.org.
