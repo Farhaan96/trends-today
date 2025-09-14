@@ -19,10 +19,10 @@ class AIImageGenerator {
     this.cacheDir = path.join(__dirname, '..', '.cache', 'ai-images');
     this.outputDir = path.join(__dirname, '..', 'public', 'images', 'ai-generated');
 
-    // Optimized settings for cost and quality based on gpt-image-1 specs
+    // Optimized settings for cost and quality based on gpt-image-1 2025 specs
     this.defaultOptions = {
       size: '1536x1024',  // Supported: 1024x1024, 1024x1536, 1536x1024
-      quality: 'medium',  // Options: low (~$0.01), medium (~$0.05), high (~$0.20)
+      quality: 'high',    // Options: low (~$0.02), medium (~$0.07), high (~$0.19)
       model: 'gpt-image-1',
       n: 1                // Only 1 image per request supported
     };
@@ -67,38 +67,76 @@ class AIImageGenerator {
     const stats = [];
 
     // Find percentages
-    const percentages = content.match(/\b\d+%/g) || [];
+    const percentages = content.match(/\b\d+(\.\d+)?%/g) || [];
     stats.push(...percentages);
 
-    // Find numbers with units
-    const numbers = content.match(/\b\d+[\s-]?(million|billion|thousand|years?|days?|hours?|minutes?|seconds?)\b/gi) || [];
+    // Find numbers with units (improved for space/science)
+    const numbers = content.match(/\b[\d,]+(\.\d+)?[\s-]?(million|billion|thousand|years?|days?|hours?|minutes?|seconds?|miles?|MPH|mph|°F|°C|degrees?)\b/gi) || [];
     stats.push(...numbers);
 
     // Find dollar amounts
     const money = content.match(/\$[\d,]+(\.\d+)?(K|M|B)?/gi) || [];
     stats.push(...money);
 
+    // Find space/science specific numbers
+    const spaceNumbers = content.match(/\b\d+[\s-]?(qubits?|watts?|volts?|amps?|hertz|Hz|GHz|MHz|kilometers?|km|feet|ft|meters?|m)\b/gi) || [];
+    stats.push(...spaceNumbers);
+
+    // Find speed measurements
+    const speeds = content.match(/\b[\d,]+(\.\d+)?[\s-]?(miles per hour|mph|MPH|kilometers per hour|kph|KPH)\b/gi) || [];
+    stats.push(...speeds);
+
     return [...new Set(stats)].slice(0, 3); // Top 3 unique stats
   }
 
-  extractTechnologies(content) {
-    const techTerms = [
-      'AI', 'artificial intelligence', 'machine learning', 'neural network',
-      'quantum', 'blockchain', 'cryptocurrency', 'VR', 'AR', 'IoT',
-      'cloud computing', '5G', 'robotics', 'autonomous', 'automation',
-      'smartphone', 'iPhone', 'Android', 'app', 'software', 'hardware',
-      'algorithm', 'data', 'analytics', 'cybersecurity', 'privacy'
-    ];
+  extractTechnologies(content, category = 'technology') {
+    const techTermsByCategory = {
+      technology: [
+        'AI', 'artificial intelligence', 'machine learning', 'neural network',
+        'quantum', 'blockchain', 'cryptocurrency', 'VR', 'AR', 'IoT',
+        'cloud computing', '5G', 'robotics', 'autonomous', 'automation',
+        'smartphone', 'iPhone', 'Android', 'app', 'software', 'hardware',
+        'algorithm', 'data', 'analytics', 'cybersecurity', 'privacy'
+      ],
+      space: [
+        'NASA', 'SpaceX', 'Parker Solar Probe', 'spacecraft', 'probe', 'rover',
+        'satellite', 'rocket', 'astronaut', 'space station', 'ISS', 'Mars',
+        'solar', 'corona', 'flyby', 'orbit', 'telescope', 'galaxy', 'planet',
+        'asteroid', 'comet', 'space exploration', 'mission', 'launch', 'lunar'
+      ],
+      science: [
+        'CRISPR', 'DNA', 'genome', 'protein', 'molecule', 'research', 'study',
+        'clinical trial', 'laboratory', 'experiment', 'analysis', 'breakthrough',
+        'discovery', 'superconductor', 'quantum', 'physics', 'chemistry'
+      ],
+      health: [
+        'clinical', 'medical', 'treatment', 'therapy', 'diagnosis', 'patient',
+        'healthcare', 'medicine', 'pharmaceutical', 'drug', 'vaccine', 'trial',
+        'FDA', 'biotech', 'precision medicine', 'personalized medicine'
+      ],
+      psychology: [
+        'brain', 'neuroscience', 'cognitive', 'mental health', 'therapy',
+        'psychology', 'psychiatry', 'depression', 'anxiety', 'mindfulness',
+        'behavioral', 'neuroplasticity', 'psychedelic', 'meditation'
+      ],
+      culture: [
+        'social media', 'creator economy', 'influencer', 'viral', 'platform',
+        'content creation', 'streaming', 'TikTok', 'YouTube', 'Instagram',
+        'digital culture', 'online community', 'metaverse'
+      ]
+    };
 
+    const techTerms = techTermsByCategory[category] || techTermsByCategory.technology;
     const found = [];
     const contentLower = content.toLowerCase();
 
     techTerms.forEach(term => {
-      if (contentLower.includes(term.toLowerCase())) {
+      // Use word boundaries to match whole words only
+      const regex = new RegExp(`\\b${term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+      if (regex.test(contentLower)) {
         found.push(term);
       }
     });
-
     return [...new Set(found)].slice(0, 4); // Top 4 unique technologies
   }
 
@@ -124,7 +162,7 @@ class AIImageGenerator {
   async generateDynamicPrompt(articleTitle, articleContent, category) {
     const topics = this.extractMainTopics(articleContent);
     const stats = this.extractKeyStatistics(articleContent);
-    const technologies = this.extractTechnologies(articleContent);
+    const technologies = this.extractTechnologies(articleContent, category);
     const mood = this.determineMood(articleContent);
 
     // Base prompt structure
@@ -169,7 +207,7 @@ class AIImageGenerator {
 
   async generateFromArticle(articleFilePath, options = {}) {
     try {
-      console.log(`🎨 Generating image from article: ${path.basename(articleFilePath)}`);
+      console.log(`🎨 Generating single high-quality image from article: ${path.basename(articleFilePath)}`);
 
       // Read and parse article
       const content = await fs.readFile(articleFilePath, 'utf-8');
@@ -189,20 +227,36 @@ class AIImageGenerator {
 
       console.log(`   Dynamic prompt generated (${prompt.length} chars)`);
 
-      // Generate image with optimized settings
-      const result = await this.generateWithOpenAI(prompt, {
+      // Ensure only one image generation per call
+      const forceOptions = {
         ...this.defaultOptions,
-        ...options
-      });
+        ...options,
+        n: 1  // Force single image generation
+      };
 
-      // Create unique filename
+      // Generate single high-quality image
+      const result = await this.generateWithOpenAI(prompt, forceOptions);
+
+      // Create unique filename with timestamp
       const timestamp = Date.now();
       const filename = `ai-generated-${timestamp}.png`;
       const localPath = path.join(this.outputDir, filename);
 
-      // Download and save
-      if (result.url) {
-        await this.downloadImage(result.url, localPath);
+      // Save base64 image (gpt-image-1 ONLY returns base64, never URLs)
+      console.log(`🔍 Result structure:`, { hasB64: !!result.b64_json, hasUrl: !!result.url });
+      if (result.b64_json) {
+        console.log(`📥 Saving gpt-image-1 base64 data to: ${path.join(this.outputDir, filename)}`);
+        try {
+          const buffer = Buffer.from(result.b64_json, 'base64');
+          await fs.writeFile(path.join(this.outputDir, filename), buffer);
+          console.log(`✅ gpt-image-1 image saved successfully`);
+        } catch (error) {
+          console.error(`❌ Base64 save failed: ${error.message}`);
+          throw error;
+        }
+      } else {
+        console.error(`❌ No base64 data returned from gpt-image-1 (URLs not supported)`);
+        throw new Error('gpt-image-1 must return base64 data but none was found');
       }
 
       const imageResult = {
@@ -212,10 +266,10 @@ class AIImageGenerator {
         prompt: prompt.substring(0, 100) + '...',
         provider: 'openai',
         model: 'gpt-image-1',
-        cost: 0.05, // Medium quality cost (~$0.05 per image)
+        cost: 0.19, // High quality cost (~$0.19 per image in 2025)
         extractedTopics: this.extractMainTopics(content),
         extractedStats: this.extractKeyStatistics(content),
-        extractedTech: this.extractTechnologies(content)
+        extractedTech: this.extractTechnologies(content, category)
       };
 
       this.generatedImages.push(imageResult);
@@ -423,7 +477,7 @@ class AIImageGenerator {
       }
     }
 
-    // Save base64 image if provided
+    // Save base64 image (gpt-image-1 ONLY returns base64, never URLs)
     if (downloadImage && result.b64_json && !result.localPath) {
       const imageFilename = filename || `ai-generated-${Date.now()}.png`;
       try {
@@ -433,22 +487,9 @@ class AIImageGenerator {
         await require('fs').promises.writeFile(filePath, buffer);
         result.localPath = filePath;
         result.filename = imageFilename;
-        console.log(`dY'_ Saved base64 image: ${imageFilename}`);
+        console.log(`💾 Saved gpt-image-1 base64 image: ${imageFilename}`);
       } catch (error) {
         console.error(`Failed to save base64 image: ${error.message}`);
-      }
-    }
-
-    // Download image if requested
-    if (downloadImage && result.url) {
-      const imageFilename = filename || `ai-generated-${Date.now()}.png`;
-      try {
-        const localPath = await this.downloadImage(result.url, imageFilename);
-        result.localPath = localPath;
-        result.filename = imageFilename;
-        console.log(`💾 Downloaded image: ${imageFilename}`);
-      } catch (error) {
-        console.error(`⚠️ Failed to download image: ${error.message}`);
       }
     }
 
@@ -510,13 +551,13 @@ class AIImageGenerator {
   }
 
   estimateCost() {
-    // OpenAI gpt-image-1 3 pricing estimates
+    // OpenAI gpt-image-1 2025 pricing estimates
     let cost = 0;
     for (const img of this.generatedImages) {
       if (img.provider === 'openai') {
-        // gpt-image-1 pricing: low (~$0.01), medium (~$0.05), high (~$0.20)
-        const qualityCosts = { low: 0.01, medium: 0.05, high: 0.20 };
-        cost += qualityCosts[img.quality] || 0.05;
+        // gpt-image-1 2025 pricing: low (~$0.02), medium (~$0.07), high (~$0.19)
+        const qualityCosts = { low: 0.02, medium: 0.07, high: 0.19 };
+        cost += qualityCosts[img.quality] || 0.19;
       }
     }
     return `$${cost.toFixed(3)}`;
