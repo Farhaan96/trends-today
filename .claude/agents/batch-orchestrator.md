@@ -13,7 +13,7 @@ Orchestrate the sequential execution of AI agents, ensuring each completes their
 
 ### Sequential AI Agent Pipeline
 ```
-1. Topic Discovery → 2. Content Creation → 3. Fact Checking → 4. Typography Enhancement → 5. Quality Validation → 6. Internal Linking → 7. Final Review
+1. Topic Discovery → 2. Content Creation → 3. Build Validation → 4. Fact Checking → 5. Typography Enhancement → 6. Quality Validation → 7. Internal Linking → 8. Final Review
 ```
 
 ## How to Execute the Pipeline
@@ -24,6 +24,7 @@ Create a todo list to track progress:
 TodoWrite:
 - [ ] Discover 5-7 trending topics
 - [ ] Create content for each topic
+- [ ] Validate builds and fix errors
 - [ ] Fact-check all articles
 - [ ] Enhance typography
 - [ ] Validate quality
@@ -43,31 +44,37 @@ For each discovered topic, delegate to content creator:
 "Use the ultra-short-content-creator agent to write an article about [topic] in the [category] category"
 ```
 
-### Step 4: Fact Verification
-After all articles are created:
+### Step 4: Build Validation
+CRITICAL - Run immediately after content creation:
+```
+"Use the build-validator agent to check all articles for build errors, YAML issues, and file format problems. Fix any errors found."
+```
+
+### Step 5: Fact Verification
+After build validation passes:
 ```
 "Use the fact-checker agent to verify all articles just created. Ensure >80% accuracy."
 ```
 
-### Step 5: Typography Enhancement
+### Step 6: Typography Enhancement
 Once facts are verified:
 ```
 "Use the typography-enhancer agent to apply visual formatting to all articles"
 ```
 
-### Step 6: Quality Validation
+### Step 7: Quality Validation
 After formatting:
 ```
 "Use the quality-validator agent to ensure all articles meet our 85+ quality score requirement"
 ```
 
-### Step 7: Internal Linking
+### Step 8: Internal Linking
 For approved articles:
 ```
 "Use the smart-content-linker agent to add 3-4 strategic internal links to each article"
 ```
 
-### Step 8: Final Review
+### Step 9: Final Review
 Last check before publishing:
 ```
 "Use the publication-reviewer agent to do final approval of all articles"
@@ -124,6 +131,7 @@ Average Quality Score: [score]
 Stage Performance:
 ✅ Topic Discovery: [time]
 ✅ Content Creation: [time]
+✅ Build Validation: [time]
 ✅ Fact Checking: [time]
 ✅ Typography: [time]
 ✅ Quality: [time]

@@ -22,12 +22,13 @@ All JavaScript agent files have been REMOVED. The system now uses pure Claude Co
 **Available Agents in `.claude/agents/`:**
 1. `batch-orchestrator` - Orchestrates the pipeline
 2. `trending-topics-discovery` - Finds topics using WebSearch
-3. `ultra-short-content-creator` - Creates articles using AI
-4. `fact-checker` - Verifies facts using WebSearch/WebFetch
-5. `typography-enhancer` - Applies formatting
-6. `quality-validator` - Ensures standards
-7. `smart-content-linker` - Adds internal links
-8. `publication-reviewer` - Final approval
+3. `ultra-short-content-creator` - Creates articles using AI (now with .mdx support)
+4. `build-validator` - Validates builds and fixes YAML/file errors
+5. `fact-checker` - Verifies facts using WebSearch/WebFetch
+6. `typography-enhancer` - Applies formatting
+7. `quality-validator` - Ensures standards
+8. `smart-content-linker` - Adds internal links
+9. `publication-reviewer` - Final approval
 
 **Tools Agents Use:**
 - `WebSearch` - Real-time information
@@ -186,6 +187,9 @@ Trends Today is a premium tech blog platform built with Next.js 14, featuring AI
 - ✅ **SEO-optimized** - Long-tail keywords, semantic search optimization
 - ✅ **3-4 internal links** - Strategic cross-linking for 3+ pages per session
 - ✅ **Visual hierarchy** - Short paragraphs (2-3 sentences), horizontal rules between sections
+- ✅ **File format** - MUST use .mdx extension (NOT .md)
+- ✅ **Valid authors** - Only use: Sarah Martinez, David Kim, Alex Chen, Emma Thompson
+- ✅ **Date format** - ISO 8601: YYYY-MM-DDTHH:MM:SS.000Z
 
 ## 🤖 AGENT-DRIVEN AUTOMATION SYSTEM
 
@@ -396,11 +400,22 @@ IMAGE_CACHE_DAYS=7                       # Cache images for 7 days
 
 ## 🎯 DAILY WORKFLOW (Ultra-Short 3-Batch Strategy)
 
-### ⚠️ CRITICAL: Fact-Checking Required
-**All articles MUST be fact-checked before publishing to avoid SEO penalties!**
+### ⚠️ CRITICAL: Build Validation & Fact-Checking Required
+**All articles MUST pass build validation AND fact-checking before publishing!**
+
+### 🔧 NEW: Automated Error Prevention
+The pipeline now includes automatic build validation to prevent:
+- ❌ YAML frontmatter errors
+- ❌ Wrong file extensions (.md instead of .mdx)
+- ❌ TypeScript compilation errors
+- ❌ Invalid author names
+- ❌ Incorrect date formats
+
+**Build Validator Agent** runs automatically after content creation to catch and fix errors before they reach production.
 
 ```bash
 # After EVERY batch generation:
+npm run build            # Must compile without errors (NEW!)
 npm run ultra:factcheck  # Must achieve >80% accuracy
 ```
 

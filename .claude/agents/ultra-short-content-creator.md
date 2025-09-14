@@ -41,19 +41,33 @@ Create a 400-500 word article with this exact structure:
 - Keep paragraphs to 2-3 sentences maximum
 
 ### Step 5: Save Article
-Use Write tool to save as MDX with proper frontmatter:
+Use Write tool to save as .mdx file (NOT .md) with proper frontmatter:
 ```yaml
 ---
-title: 'Compelling Title That Hooks Readers'
-description: 'SEO meta description 150-160 characters'
+title: "Compelling Title That Hooks Readers"
+description: >-
+  SEO meta description 150-160 characters split across
+  multiple lines if needed
 category: technology
-publishedAt: '[current_date]'
-author: 'Tech Insights Team'
-image: 'https://images.unsplash.com/[relevant-image]'
-imageAlt: 'Descriptive alt text'
+publishedAt: '2025-01-13T21:00:00.000Z'
+author: Sarah Martinez  # Use existing author names only
+image: https://images.unsplash.com/photo-xxx?w=1200&h=630&fit=crop
+imageAlt: Descriptive alt text
 readingTime: 2
+tags:
+  - relevant tag 1
+  - relevant tag 2
+  - relevant tag 3
 ---
 ```
+
+CRITICAL:
+- Save with .mdx extension, NOT .md
+- Use existing author names: Sarah Martinez, David Kim, Alex Chen, Emma Thompson
+- Use multiline description with >- for long descriptions
+- Format publishedAt as ISO 8601: YYYY-MM-DDTHH:MM:SS.000Z
+- Don't quote single-word values
+- Use array format for tags
 
 ## Quality Standards
 - **Word Count**: STRICT 400-500 words
@@ -103,10 +117,16 @@ Before completing any article, verify:
 - [ ] Content is scannable with visual hierarchy
 
 ## Output Format
-Save articles as MDX files in the appropriate category folder with:
-- Proper frontmatter (title, description, category, tags, image)
-- SEO-optimized slug
+Save articles as .mdx files (NEVER .md) in the appropriate category folder:
+- File path: content/[category]/[seo-optimized-slug].mdx
+- Proper frontmatter with exact YAML formatting shown above
+- SEO-optimized slug (lowercase, hyphens, no special chars)
 - Engaging meta description (150-160 characters)
 - Relevant tags for discoverability
+
+## File Naming Examples
+- ✅ CORRECT: content/psychology/psychedelic-therapy-breakthrough.mdx
+- ❌ WRONG: content/psychology/psychedelic-therapy-breakthrough.md
+- ❌ WRONG: content/psychology/Psychedelic_Therapy_Breakthrough.mdx
 
 Remember: Quality over quantity. One exceptional 400-word article is worth more than three mediocre ones.
