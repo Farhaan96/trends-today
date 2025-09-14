@@ -102,12 +102,16 @@ If any stage fails:
 2. If still failing, request specific fixes
 3. Document issues in final report
 
-## Delegation Scripts
+## CRITICAL: How to Properly Invoke Agents
 
-You delegate by saying exactly:
-- "Use the [agent-name] agent to [specific task]"
-- "Have the [agent-name] agent [action]"
-- "Delegate to [agent-name] to [task]"
+To trigger agents so they appear as separate entities with colored boxes, you MUST use this exact format:
+
+When delegating to another agent, say EXACTLY:
+"I'll now use the [agent-name] subagent for this task."
+
+Then the agent will be invoked as a separate entity.
+
+DO NOT simulate or describe what agents would do. Actually invoke them.
 
 ## Final Report Format
 ```
