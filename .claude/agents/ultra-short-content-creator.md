@@ -42,17 +42,32 @@ Create a 400-500 word article with this exact structure:
 5. **Conclusion (20-30 words)** - Strong call-to-action
 6. **Sources (50-75 words)** - 3-5 clickable links to real sources
 
-### Step 3.5: Add Real Sources
-CRITICAL - Every article MUST include real, clickable source links:
-```markdown
-## Sources
+### Step 3.5: Add Real Sources Section
+MANDATORY - Every article MUST end with a properly formatted Sources section:
 
-1. [Source Title](https://actual-url.com/article) - *Publication Name* (Date)
-2. [Research Paper Title](https://journal.com/doi/full/xxxxx) - Author et al., *Journal Name*
-3. [Organization Report](https://org.com/report) - *Organization Name*
+```markdown
+---
+
+**Sources:**
+
+- [Source Title](https://actual-url.com/article) - *Publication Name*, Date
+- [Research Paper Title](https://journal.com/doi/full/xxxxx) - Author et al., *Journal Name*, Year
+- [Organization Report](https://org.com/report) - *Organization Name*
+- [News Coverage](https://news-site.com/article) - *News Publication*, Date
+- [Additional Source](https://site.com/page) - *Source Name*
 ```
 
-Use WebFetch to verify URLs are real and working before including them.
+**CRITICAL REQUIREMENTS:**
+- Sources section goes at the VERY END of the article (after conclusion and internal links)
+- Use horizontal rule (---) to separate from main content
+- Bold the "**Sources:**" header
+- Use bulleted list format with hyphens (-)
+- Include descriptive titles in square brackets [Title]
+- Follow with actual working URL in parentheses
+- Add publication/source attribution after the link
+- MINIMUM 3-5 real, verifiable sources required
+- Mix primary sources (studies, reports) with reputable media coverage
+- Use WebFetch to verify ALL URLs work before including
 
 ### Step 4: Apply Typography
 - **Bold** all statistics and key metrics (e.g., **73% increase**)
@@ -167,7 +182,11 @@ Before completing any article, verify:
 - [ ] Word count is 400-500 words (not including sources)
 - [ ] Read time is under 2 minutes
 - [ ] Content is scannable with visual hierarchy
-- [ ] **3-5 real, clickable source links included**
+- [ ] **MANDATORY: Sources section at bottom with 3-5 real, working links**
+- [ ] **Sources use proper format: [Title](URL) - *Publication*, Date**
+- [ ] **All source URLs verified with WebFetch before including**
+- [ ] **Horizontal rule (---) separates sources from main content**
+- [ ] **Bold "Sources:" header used**
 - [ ] **AI image generated for appropriate topics**
 - [ ] **File saved as .mdx (NOT .md)**
 - [ ] **Valid author name used**

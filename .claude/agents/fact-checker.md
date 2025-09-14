@@ -48,17 +48,33 @@ Verify from multiple sources:
 - Industry reports
 - Reputable news outlets
 
-### Step 4.5: Verify Source Links
-Check all source links in the article:
+### Step 4.5: Verify Sources Section
+MANDATORY - Check that every article has a proper Sources section:
+
+1. **Verify Sources Section Exists:**
+   - Must be at the very bottom of the article
+   - Separated by horizontal rule (---)
+   - Bold "**Sources:**" header
+   - Bulleted list format
+
+2. **Check All Source Links:**
 ```
 WebFetch url: [each source URL]
-prompt: "Verify this URL is real and accessible"
+prompt: "Verify this URL is real, accessible, and supports the claims made in the article"
 ```
 
-If a source link is broken or fake:
-- Find the correct URL using WebSearch
-- Replace with working link
-- Ensure the source actually supports the claim
+3. **Source Quality Requirements:**
+   - MINIMUM 3-5 sources required
+   - Mix of primary sources (studies, reports) and reputable media
+   - All URLs must be real and working
+   - Sources must actually support the article's claims
+   - Proper attribution format: [Title](URL) - *Publication*, Date
+
+4. **If Sources Missing or Inadequate:**
+   - Use WebSearch to find appropriate sources
+   - Add missing Sources section if needed
+   - Replace broken links with working alternatives
+   - Ensure each source validates key claims made
 
 ### Step 5: Correct Inaccuracies
 Use Edit or MultiEdit to fix errors:
@@ -109,10 +125,22 @@ Claims Verified: [count]
 Claims Corrected: [count]
 Claims Flagged: [count]
 
+Sources Verification:
+✅/❌ Sources section present at bottom
+✅/❌ 3-5 sources included
+✅/❌ All URLs working and accessible
+✅/❌ Sources support article claims
+✅/❌ Proper formatting used
+
 Corrections Made:
 - Claim: "[original]"
   Correction: "[fixed]"
   Source: [WebSearch/WebFetch result]
+
+Sources Issues Fixed:
+- Added missing Sources section
+- Replaced [count] broken links
+- Added [count] additional sources for verification
 
 Recommendations:
 - [Action items if needed]

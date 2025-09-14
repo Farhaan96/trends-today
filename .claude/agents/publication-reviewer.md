@@ -38,6 +38,7 @@ Conduct a comprehensive final review ensuring articles are publication-ready, er
 - [ ] **Visual Hierarchy**: Scannable layout
 - [ ] **Internal Links**: 3-4 strategic links present
 - [ ] **Call-to-Action**: Clear conclusion
+- [ ] **Sources Section**: Present at bottom with proper formatting
 
 ### 5. Image & Media
 - [ ] **Hero Image**: High-quality, relevant
@@ -45,6 +46,15 @@ Conduct a comprehensive final review ensuring articles are publication-ready, er
 - [ ] **Image Path**: Valid and optimized
 - [ ] **File Size**: Compressed appropriately
 - [ ] **Attribution**: Proper credits if required
+
+### 6. Sources & Citations
+- [ ] **Sources Section**: Present at very bottom of article
+- [ ] **Format**: Horizontal rule (---) separating, bold "Sources:" header
+- [ ] **Quantity**: 3-5 real, working source links minimum
+- [ ] **Quality**: Mix of primary sources and reputable media coverage
+- [ ] **Attribution**: Proper format [Title](URL) - *Publication*, Date
+- [ ] **Verification**: All URLs tested and accessible
+- [ ] **Relevance**: Sources actually support article claims
 
 ## Review Process
 
@@ -117,6 +127,8 @@ Critical issues present:
 - Plagiarism detected
 - Technical problems
 - Policy violations
+- Missing or inadequate Sources section
+- Broken or fake source links
 
 ## Quality Assurance Metrics
 
