@@ -184,7 +184,7 @@ export default function RelatedArticles({
                   src={article.image}
                   alt={article.title}
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="object-cover transition-transform duration-300"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute top-3 left-3">

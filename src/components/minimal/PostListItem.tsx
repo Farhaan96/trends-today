@@ -67,7 +67,7 @@ export default function PostListItem({ article, showThumb = false }: Props) {
                 src={img} 
                 alt={title} 
                 fill 
-                className="object-cover hover:scale-105 transition-transform duration-300" 
+                className="object-cover transition-transform duration-300" 
                 sizes="(max-width: 768px) 160px, 192px"
                 loading="lazy"
               />
@@ -78,4 +78,3 @@ export default function PostListItem({ article, showThumb = false }: Props) {
     </article>
   );
 }
-

@@ -66,7 +66,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
                   <Link href={href}>
                     <div className="relative w-full aspect-square bg-gray-100 border border-gray-200 rounded-xl overflow-hidden">
                       {img ? (
-                        <Image src={img} alt={atitle} fill className="object-cover rounded-xl transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 1024px) 100vw, 33vw" />
+                        <Image src={img} alt={atitle} fill className="object-cover rounded-xl transition-transform duration-300" sizes="(max-width: 1024px) 100vw, 33vw" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm rounded-xl">Image</div>
                       )}

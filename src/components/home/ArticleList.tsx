@@ -53,7 +53,7 @@ export default function ArticleList({ initialArticles, allArticles }: ArticleLis
                     src={featuredPost.frontmatter.image}
                     alt={featuredPost.frontmatter.title}
                     fill
-                    className="object-cover rounded-xl hover:scale-105 transition-transform duration-300"
+                    className="object-cover rounded-xl transition-transform duration-300"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 ) : (
@@ -109,7 +109,7 @@ export default function ArticleList({ initialArticles, allArticles }: ArticleLis
                     src={secondPost.frontmatter.image}
                     alt={secondPost.frontmatter.title}
                     fill
-                    className="object-cover rounded-xl hover:scale-105 transition-transform duration-300"
+                    className="object-cover rounded-xl transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 ) : (
@@ -150,7 +150,7 @@ export default function ArticleList({ initialArticles, allArticles }: ArticleLis
                     src={thirdPost.frontmatter.image}
                     alt={thirdPost.frontmatter.title}
                     fill
-                    className="object-cover rounded-xl hover:scale-105 transition-transform duration-300"
+                    className="object-cover rounded-xl transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 ) : (
@@ -196,7 +196,7 @@ export default function ArticleList({ initialArticles, allArticles }: ArticleLis
                         src={article.frontmatter.image}
                         alt={article.frontmatter.title}
                         fill
-                        className="object-cover rounded-xl hover:scale-105 transition-transform duration-300"
+                        className="object-cover rounded-xl transition-transform duration-300"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     ) : (
