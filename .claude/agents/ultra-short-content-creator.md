@@ -32,6 +32,19 @@ Create a 400-500 word article with this exact structure:
 3. **Real Examples (100-150 words)** - Concrete examples with statistics
 4. **Practical Application (50-75 words)** - What this means for readers
 5. **Conclusion (20-30 words)** - Strong call-to-action
+6. **Sources (50-75 words)** - 3-5 clickable links to real sources
+
+### Step 3.5: Add Real Sources
+CRITICAL - Every article MUST include real, clickable source links:
+```markdown
+## Sources
+
+1. [Source Title](https://actual-url.com/article) - *Publication Name* (Date)
+2. [Research Paper Title](https://journal.com/doi/full/xxxxx) - Author et al., *Journal Name*
+3. [Organization Report](https://org.com/report) - *Organization Name*
+```
+
+Use WebFetch to verify URLs are real and working before including them.
 
 ### Step 4: Apply Typography
 - **Bold** all statistics and key metrics (e.g., **73% increase**)
@@ -39,6 +52,26 @@ Create a 400-500 word article with this exact structure:
   > "This changes everything we thought we knew" - Expert Name
 - Add horizontal rules (---) between major sections
 - Keep paragraphs to 2-3 sentences maximum
+
+### Step 4.5: Generate AI Image (When Appropriate)
+For these categories, generate unique AI images using Bash tool:
+```bash
+# For psychology/brain topics:
+node utils/ai-image-generator.js generate "neural networks, brain visualization, [specific topic]" psychology
+
+# For medical/health topics:
+node utils/ai-image-generator.js generate "medical visualization, [specific topic]" health
+
+# For abstract concepts (AI, quantum):
+node utils/ai-image-generator.js generate "abstract visualization, [specific topic]" technology
+
+# For space/astronomy:
+node utils/ai-image-generator.js generate "cosmic visualization, [specific topic]" space
+```
+
+Use the generated image path (e.g., /images/ai-generated/ai-generated-xxxxx.png) in frontmatter.
+
+For product reviews, news, or specific devices - use Unsplash/Pexels stock photos instead.
 
 ### Step 5: Save Article
 Use Write tool to save as .mdx file (NOT .md) with proper frontmatter:
@@ -112,9 +145,14 @@ Before completing any article, verify:
 - [ ] Expert quotes feel authentic and add value
 - [ ] Examples are concrete and relatable
 - [ ] Conclusion drives engagement
-- [ ] Word count is 400-500 words
+- [ ] Word count is 400-500 words (not including sources)
 - [ ] Read time is under 2 minutes
 - [ ] Content is scannable with visual hierarchy
+- [ ] **3-5 real, clickable source links included**
+- [ ] **AI image generated for appropriate topics**
+- [ ] **File saved as .mdx (NOT .md)**
+- [ ] **Valid author name used**
+- [ ] **ISO 8601 date format**
 
 ## Output Format
 Save articles as .mdx files (NEVER .md) in the appropriate category folder:

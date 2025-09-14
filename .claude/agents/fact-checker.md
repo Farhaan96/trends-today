@@ -25,6 +25,7 @@ Identify all:
 - Technical specifications
 - Historical facts
 - Price points
+- **Source URLs - verify they work and match the claim**
 
 ### Step 3: Verify Each Claim
 For each factual claim, use WebSearch:
@@ -46,6 +47,18 @@ Verify from multiple sources:
 - Government data
 - Industry reports
 - Reputable news outlets
+
+### Step 4.5: Verify Source Links
+Check all source links in the article:
+```
+WebFetch url: [each source URL]
+prompt: "Verify this URL is real and accessible"
+```
+
+If a source link is broken or fake:
+- Find the correct URL using WebSearch
+- Replace with working link
+- Ensure the source actually supports the claim
 
 ### Step 5: Correct Inaccuracies
 Use Edit or MultiEdit to fix errors:
