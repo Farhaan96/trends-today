@@ -7,11 +7,11 @@ type InternalLink = {
   context?: string;
 };
 
-interface InternalLinksProps {
-  currentArticle?: string;
-  category?: string;
-  maxLinks?: number;
-}
+// interface InternalLinksProps {
+//   currentArticle?: string;
+//   category?: string;
+//   maxLinks?: number;
+// }
 
 export async function getRelatedLinks(
   currentArticle?: string,
@@ -49,7 +49,7 @@ export async function getRelatedLinks(
   return links;
 }
 
-function extractKeyPhrase(title: string): string {
+function _extractKeyPhrase(title: string): string {
   // Extract meaningful phrases for natural linking
   const phrases = [
     /iPhone \d+/i,

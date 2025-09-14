@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import PremiumUpgrade from '@/components/monetization/PremiumUpgrade';
-import { CheckIcon, StarIcon } from '@heroicons/react/24/solid';
+import { StarIcon } from '@heroicons/react/24/solid';
 import { SparklesIcon as CrownIcon } from '@heroicons/react/24/outline';
 
 export const metadata: Metadata = {

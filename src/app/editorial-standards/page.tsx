@@ -8,8 +8,8 @@ import {
   CheckBadgeIcon,
   ExclamationTriangleIcon,
   DocumentTextIcon,
-  UserGroupIcon,
-  GlobeAltIcon,
+  // UserGroupIcon,
+  // GlobeAltIcon,
   ClockIcon
 } from '@heroicons/react/24/outline';
 

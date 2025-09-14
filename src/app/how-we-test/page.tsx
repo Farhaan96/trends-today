@@ -9,10 +9,10 @@ import {
   HomeIcon,
   CheckBadgeIcon,
   DocumentTextIcon,
-  CpuChipIcon,
-  CameraIcon,
-  Battery0Icon as BatteryIcon,
-  SignalIcon
+  // CpuChipIcon,
+  // CameraIcon,
+  // Battery0Icon as BatteryIcon,
+  // SignalIcon
 } from '@heroicons/react/24/outline';
 
 export const metadata: Metadata = {
@@ -168,7 +168,7 @@ export default function HowWeTestPage() {
         </h1>
         <p className="text-xl text-gray-800 max-w-3xl mx-auto mb-8">
           Our rigorous testing methodology ensures every review is thorough, objective, 
-          and trustworthy. Here's exactly how we evaluate every product that comes through our lab.
+          and trustworthy. Here&apos;s exactly how we evaluate every product that comes through our lab.
         </p>
         
         <div className="grid md:grid-cols-4 gap-4 max-w-4xl mx-auto">
@@ -202,7 +202,7 @@ export default function HowWeTestPage() {
           <div className="bg-white border border-gray-200 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-3">Real-World Focus</h3>
             <p className="text-gray-800 text-sm">
-              We test products the way you'll actually use them, not just in synthetic benchmarks. 
+              We test products the way you&apos;ll actually use them, not just in synthetic benchmarks. 
               Our reviewers use devices as their primary tools for weeks to understand real-world performance.
             </p>
           </div>
@@ -402,7 +402,7 @@ export default function HowWeTestPage() {
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Have Questions About Our Testing?</h2>
         <p className="text-gray-800 mb-6 max-w-2xl mx-auto">
           We believe in complete transparency. If you have questions about our testing methodology 
-          or want to suggest improvements, we'd love to hear from you.
+          or want to suggest improvements, we&apos;d love to hear from you.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link 

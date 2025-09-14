@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -34,7 +35,7 @@ export default function ContactPage() {
             <div className="text-6xl mb-4">✅</div>
             <h1 className="text-3xl font-bold text-gray-900 mb-4">Thank You!</h1>
             <p className="text-gray-700 text-lg mb-8">
-              Your message has been received. We'll get back to you within 24-48 hours.
+              Your message has been received. We&apos;ll get back to you within 24-48 hours.
             </p>
             <button
               onClick={() => {
@@ -61,7 +62,7 @@ export default function ContactPage() {
           <div>
             <h2 className="text-2xl font-bold mb-4">Get in Touch</h2>
             <p className="text-gray-700 mb-6">
-              Have a question, feedback, or want to work with us? We'd love to hear from you.
+              Have a question, feedback, or want to work with us? We&apos;d love to hear from you.
               Fill out the form or use the contact information below.
             </p>
 
@@ -97,7 +98,7 @@ export default function ContactPage() {
             <div className="mt-8 p-4 bg-blue-50 rounded-lg">
               <h3 className="font-semibold mb-2">For PR & Partnerships</h3>
               <p className="text-gray-700 text-sm">
-                If you're interested in partnership opportunities or have a press release,
+                If you&apos;re interested in partnership opportunities or have a press release,
                 please mention it in your message subject.
               </p>
             </div>
@@ -170,7 +171,7 @@ export default function ContactPage() {
                   value={formData.message}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Tell us what's on your mind..."
+                  placeholder="Tell us what&apos;s on your mind..."
                 />
               </div>
 
@@ -184,7 +185,7 @@ export default function ContactPage() {
 
             <p className="text-xs text-gray-500 mt-4">
               * Required fields. We respect your privacy and will never share your information.
-              See our <a href="/privacy" className="text-blue-600 hover:text-blue-800 underline">Privacy Policy</a>.
+              See our <Link href="/privacy" className="text-blue-600 hover:text-blue-800 underline">Privacy Policy</Link>.
             </p>
           </div>
         </div>
