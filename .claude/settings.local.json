@@ -46,7 +46,10 @@
       "WebFetch(domain:medicalxpress.com)",
       "WebFetch(domain:www.apple.com)",
       "WebFetch(domain:news.stonybrook.edu)",
-      "WebFetch(domain:www.nature.com)"
+      "WebFetch(domain:www.nature.com)",
+      "WebFetch(domain:www.livescience.com)",
+      "WebFetch(domain:www.hopkinsmedicine.org)",
+      "WebFetch(domain:jamanetwork.com)"
     ],
     "deny": [],
     "ask": []
