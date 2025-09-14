@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 :root {
   /* Professional color system - TechCrunch inspired */
@@ -172,7 +172,14 @@ html {
 .prose h3 { line-height: 1.25; margin: 1.5rem 0 0.5rem; font-weight: 600; }
 .prose ul, .prose ol { margin: 1rem 0 1.25rem; padding-left: 1.25rem; }
 .prose li { margin: 0.375rem 0; }
-.prose hr { margin: 2rem 0; }
+.prose hr {
+  /* Ensure a single, light divider */
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid var(--color-gray-200);
+}
+/* Collapse consecutive horizontal rules into a single divider */
+.prose hr + hr { display: none; }
 .prose blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 4px solid #e5e7eb; color: inherit; }
 
 /* Links inside article content: bright blue, clearly clickable */
@@ -276,3 +283,4 @@ img,
 .article-content img {
   border-radius: 0.75rem; /* matches Tailwind rounded-lg */
 }
+
