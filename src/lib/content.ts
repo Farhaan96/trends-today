@@ -94,9 +94,8 @@ export async function getHomepageContent(): Promise<HomepageContent> {
   const healthArticles = allArticles.filter((a) => a.category === 'health');
   const spaceArticles = allArticles.filter((a) => a.category === 'space');
 
-  // Find hero article: prefer pinned, else latest
-  const heroArticle =
-    allArticles.find((a) => a.frontmatter?.pinned) || allArticles[0];
+  // Hero article is always the latest (newest) article
+  const heroArticle = allArticles[0];
 
   return {
     featuredNews: techArticles.slice(0, 4), // Use tech articles as "news"
@@ -186,11 +185,8 @@ export async function getAllPosts(): Promise<Article[]> {
 
   const articleArrays = await Promise.all(articlePromises);
 
-  // Combine all articles and sort by date
+  // Combine all articles and sort by date (newest first)
   const allArticles = articleArrays.flat().sort((a, b) => {
-    const pinnedA = a.frontmatter?.pinned ? 1 : 0;
-    const pinnedB = b.frontmatter?.pinned ? 1 : 0;
-    if (pinnedB !== pinnedA) return pinnedB - pinnedA;
     const dateA = new Date(
       a.frontmatter.publishedAt || a.frontmatter.datePublished || '1970-01-01'
     );
