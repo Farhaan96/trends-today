@@ -39,18 +39,21 @@ export default function RelatedArticles({
     <section className={`py-12 ${className}`}>
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl font-bold mb-8">{title}</h2>
-        <div className={`grid gap-6 ${
-          articles.length === 1
-            ? 'grid-cols-1 max-w-md'
-            : articles.length === 2
-            ? 'md:grid-cols-2'
-            : 'md:grid-cols-3'
-        }`}>
+        <div
+          className={`grid gap-6 ${
+            articles.length === 1
+              ? 'grid-cols-1 max-w-md'
+              : articles.length === 2
+                ? 'md:grid-cols-2'
+                : 'md:grid-cols-3'
+          }`}
+        >
           {articles.map((article) => {
             const articleTitle = article.title || article.frontmatter?.title;
             const articleImage = article.image || article.frontmatter?.image;
             const articleDescription = article.frontmatter?.description;
-            const articleDate = article.publishedAt || article.frontmatter?.publishedAt;
+            const articleDate =
+              article.publishedAt || article.frontmatter?.publishedAt;
             const href = `/${currentCategory}/${article.slug}`;
 
             return (
@@ -127,8 +130,10 @@ export function SmartRelatedArticles({
   maxArticles = 3,
   className = '',
 }: SmartRelatedArticlesProps) {
-  const currentCategory = currentArticle.category || currentArticle.frontmatter?.category;
-  const currentTitle = currentArticle.title || currentArticle.frontmatter?.title;
+  const currentCategory =
+    currentArticle.category || currentArticle.frontmatter?.category;
+  const currentTitle =
+    currentArticle.title || currentArticle.frontmatter?.title;
   const currentKeywords = currentArticle.frontmatter?.keywords || [];
   const currentTags = currentArticle.frontmatter?.tags || [];
 
@@ -156,24 +161,29 @@ export function SmartRelatedArticles({
       }
 
       // Keyword matches
-      const keywordMatches = currentKeywords.filter(keyword =>
-        articleKeywords.includes(keyword) ||
-        articleTitle?.toLowerCase().includes(keyword.toLowerCase())
+      const keywordMatches = currentKeywords.filter(
+        (keyword) =>
+          articleKeywords.includes(keyword) ||
+          articleTitle?.toLowerCase().includes(keyword.toLowerCase())
       );
       score += keywordMatches.length * 5;
 
       // Tag matches
-      const tagMatches = currentTags.filter(tag =>
-        articleTags.includes(tag)
-      );
+      const tagMatches = currentTags.filter((tag) => articleTags.includes(tag));
       score += tagMatches.length * 3;
 
       // Title word similarity (basic)
       if (currentTitle && articleTitle) {
-        const currentWords = currentTitle.toLowerCase().split(' ').filter(w => w.length > 3);
-        const articleWords = articleTitle.toLowerCase().split(' ').filter(w => w.length > 3);
-        const wordMatches = currentWords.filter(word =>
-          articleWords.some(aw => aw.includes(word) || word.includes(aw))
+        const currentWords = currentTitle
+          .toLowerCase()
+          .split(' ')
+          .filter((w) => w.length > 3);
+        const articleWords = articleTitle
+          .toLowerCase()
+          .split(' ')
+          .filter((w) => w.length > 3);
+        const wordMatches = currentWords.filter((word) =>
+          articleWords.some((aw) => aw.includes(word) || word.includes(aw))
         );
         score += wordMatches.length * 2;
       }
@@ -189,8 +199,12 @@ export function SmartRelatedArticles({
     // Fallback: just get recent articles from the same category
     const fallbackArticles = allArticles
       .filter((article) => {
-        const articleCategory = article.category || article.frontmatter?.category;
-        return articleCategory === currentCategory && article.slug !== currentArticle.slug;
+        const articleCategory =
+          article.category || article.frontmatter?.category;
+        return (
+          articleCategory === currentCategory &&
+          article.slug !== currentArticle.slug
+        );
       })
       .slice(0, maxArticles);
 

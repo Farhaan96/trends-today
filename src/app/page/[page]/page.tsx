@@ -4,7 +4,11 @@ import StructuredData from '@/components/seo/StructuredData';
 import { getAllBaseSchemas } from '@/lib/schema';
 import { getAllPosts } from '@/lib/content';
 import ArticleList from '@/components/home/ArticleList';
-import { paginateItems, generatePaginationMetadata, validatePageParam } from '@/lib/pagination';
+import {
+  paginateItems,
+  generatePaginationMetadata,
+  validatePageParam,
+} from '@/lib/pagination';
 import PaginationLinks from '@/components/ui/PaginationLinks';
 
 interface Props {
@@ -36,7 +40,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const paginatedResult = paginateItems(posts, page, 12, '');
-  const baseTitle = "Trends Today - Discover What's Trending in Science, Culture, Technology & More";
+  const baseTitle =
+    "Trends Today - Discover What's Trending in Science, Culture, Technology & More";
 
   return {
     ...generatePaginationMetadata(paginatedResult.pagination, '', baseTitle),
@@ -67,9 +72,7 @@ export default async function PaginatedHomePage({ params }: Props) {
 
   return (
     <main className="bg-white min-h-screen">
-      <h1 className="sr-only">
-        Trends Today - Latest Articles - Page {page}
-      </h1>
+      <h1 className="sr-only">Trends Today - Latest Articles - Page {page}</h1>
       <StructuredData data={getAllBaseSchemas()} />
 
       {/* Leravi-style Layout */}
@@ -77,10 +80,12 @@ export default async function PaginatedHomePage({ params }: Props) {
         {/* Page indicator for SEO and user orientation */}
         <div className="mb-8">
           <p className="text-sm text-gray-600 mb-2">
-            Page {pagination.currentPage} of {pagination.totalPages} • {pagination.totalItems} total articles
+            Page {pagination.currentPage} of {pagination.totalPages} •{' '}
+            {pagination.totalItems} total articles
           </p>
           <h2 className="text-2xl font-bold text-gray-900">
-            Latest Articles {pagination.currentPage > 1 && `- Page ${pagination.currentPage}`}
+            Latest Articles{' '}
+            {pagination.currentPage > 1 && `- Page ${pagination.currentPage}`}
           </h2>
         </div>
 

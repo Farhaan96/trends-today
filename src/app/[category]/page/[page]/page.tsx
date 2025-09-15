@@ -8,7 +8,11 @@ import {
   getCategoryStyles,
   getCategoryDescription,
 } from '@/lib/categories';
-import { paginateItems, generatePaginationMetadata, validatePageParam } from '@/lib/pagination';
+import {
+  paginateItems,
+  generatePaginationMetadata,
+  validatePageParam,
+} from '@/lib/pagination';
 import PaginationLinks from '@/components/ui/PaginationLinks';
 import { BreadcrumbSchema } from '@/components/seo/SchemaMarkup';
 
@@ -31,7 +35,7 @@ export function generateStaticParams() {
   // We'll calculate the actual pages needed in the build
   const params: Array<{ category: string; page: string }> = [];
 
-  categories.forEach(category => {
+  categories.forEach((category) => {
     // Generate up to 10 pages per category for static generation
     // Additional pages will be generated on-demand
     for (let page = 2; page <= 10; page++) {
@@ -72,7 +76,11 @@ export async function generateMetadata({
   const baseTitle = `${key.charAt(0).toUpperCase() + key.slice(1)} | Trends Today`;
 
   return {
-    ...generatePaginationMetadata(paginatedResult.pagination, `/${key}`, baseTitle),
+    ...generatePaginationMetadata(
+      paginatedResult.pagination,
+      `/${key}`,
+      baseTitle
+    ),
     title,
     description: `Page ${page} of ${description}`,
     openGraph: {
@@ -88,7 +96,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function CategoryPaginatedPage({ params }: { params: Params }) {
+export default async function CategoryPaginatedPage({
+  params,
+}: {
+  params: Params;
+}) {
   const key = getCategoryKey(params.category);
   const page = validatePageParam(params.page);
   const styles = getCategoryStyles(key);
@@ -114,7 +126,10 @@ export default async function CategoryPaginatedPage({ params }: { params: Params
   const breadcrumbs = [
     { name: 'Home', url: 'https://www.trendstoday.ca' },
     { name: title, url: `https://www.trendstoday.ca/${key}` },
-    { name: `Page ${page}`, url: `https://www.trendstoday.ca/${key}/page/${page}` },
+    {
+      name: `Page ${page}`,
+      url: `https://www.trendstoday.ca/${key}/page/${page}`,
+    },
   ];
 
   return (
@@ -137,7 +152,8 @@ export default async function CategoryPaginatedPage({ params }: { params: Params
           </h1>
           {description && <p className="mt-2 text-gray-600">{description}</p>}
           <p className="mt-3 text-sm text-gray-500">
-            Page {pagination.currentPage} of {pagination.totalPages} • {pagination.totalItems} total articles
+            Page {pagination.currentPage} of {pagination.totalPages} •{' '}
+            {pagination.totalItems} total articles
           </p>
         </div>
       </section>

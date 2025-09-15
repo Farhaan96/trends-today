@@ -6,13 +6,7 @@ module.exports = {
   changefreq: 'daily',
   priority: 0.7,
   sitemapSize: 5000,
-  exclude: [
-    '/api/*',
-    '/admin/*',
-    '/demo-article',
-    '/_next/*',
-    '/images/*'
-  ],
+  exclude: ['/api/*', '/admin/*', '/demo-article', '/_next/*', '/images/*'],
   transform: async (config, path) => {
     // Custom priorities based on page type
     let priority = 0.7;
@@ -73,26 +67,14 @@ module.exports = {
       {
         userAgent: 'Googlebot',
         allow: '/',
-        disallow: [
-          '/api/',
-          '/admin/',
-          '/_next/',
-          '/demo-article',
-        ],
+        disallow: ['/api/', '/admin/', '/_next/', '/demo-article'],
       },
       {
         userAgent: 'Bingbot',
         allow: '/',
-        disallow: [
-          '/api/',
-          '/admin/',
-          '/_next/',
-          '/demo-article',
-        ],
+        disallow: ['/api/', '/admin/', '/_next/', '/demo-article'],
       },
     ],
-    additionalSitemaps: [
-      'https://www.trendstoday.ca/news-sitemap.xml',
-    ],
+    additionalSitemaps: ['https://www.trendstoday.ca/news-sitemap.xml'],
   },
 };

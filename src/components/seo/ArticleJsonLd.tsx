@@ -34,9 +34,7 @@ export default function ArticleJsonLd({
   readingTime,
   keywords,
 }: ArticleJsonLdProps) {
-  const authorData = typeof author === 'string'
-    ? { name: author }
-    : author;
+  const authorData = typeof author === 'string' ? { name: author } : author;
 
   const schema = {
     '@context': 'https://schema.org',
@@ -113,9 +111,8 @@ export function NewsArticleJsonLd({
   isBreakingNews,
   ...props
 }: NewsArticleJsonLdProps) {
-  const authorData = typeof props.author === 'string'
-    ? { name: props.author }
-    : props.author;
+  const authorData =
+    typeof props.author === 'string' ? { name: props.author } : props.author;
 
   const schema = {
     '@context': 'https://schema.org',
@@ -180,9 +177,8 @@ export function NewsArticleJsonLd({
  * BlogPosting schema for blog-style content
  */
 export function BlogPostingJsonLd(props: ArticleJsonLdProps) {
-  const authorData = typeof props.author === 'string'
-    ? { name: props.author }
-    : props.author;
+  const authorData =
+    typeof props.author === 'string' ? { name: props.author } : props.author;
 
   const schema = {
     '@context': 'https://schema.org',

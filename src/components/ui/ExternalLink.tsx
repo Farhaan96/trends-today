@@ -46,8 +46,12 @@ export default function ExternalLink({
   // Check if it's an affiliate/sponsored link
   const isAffiliate =
     forceSponsored ||
-    /(?:ref|affid|affiliate|partner|sponsored|utm_source|utm_campaign|tag=|aff_|referral)/i.test(normalizedHref) ||
-    /(?:amazon\.com|amzn\.to|bit\.ly|geni\.us|bestbuy\.com|target\.com).*[?&](?:ref|tag|affid)/i.test(normalizedHref);
+    /(?:ref|affid|affiliate|partner|sponsored|utm_source|utm_campaign|tag=|aff_|referral)/i.test(
+      normalizedHref
+    ) ||
+    /(?:amazon\.com|amzn\.to|bit\.ly|geni\.us|bestbuy\.com|target\.com).*[?&](?:ref|tag|affid)/i.test(
+      normalizedHref
+    );
 
   // Check if it should be nofollow
   const shouldNofollow =
@@ -126,13 +130,19 @@ export function processLinksInHTML(html: string): string {
 
       // Check if affiliate/sponsored
       const isAffiliate =
-        /(?:ref|affid|affiliate|partner|sponsored|utm_source|utm_campaign|tag=|aff_|referral)/i.test(normalizedHref) ||
-        /(?:amazon\.com|amzn\.to|bit\.ly|geni\.us|bestbuy\.com|target\.com).*[?&](?:ref|tag|affid)/i.test(normalizedHref);
+        /(?:ref|affid|affiliate|partner|sponsored|utm_source|utm_campaign|tag=|aff_|referral)/i.test(
+          normalizedHref
+        ) ||
+        /(?:amazon\.com|amzn\.to|bit\.ly|geni\.us|bestbuy\.com|target\.com).*[?&](?:ref|tag|affid)/i.test(
+          normalizedHref
+        );
 
       // Check if should be nofollow
       const shouldNofollow =
         isAffiliate ||
-        /(?:bit\.ly|tinyurl\.com|t\.co|short\.link|ow\.ly)/i.test(normalizedHref);
+        /(?:bit\.ly|tinyurl\.com|t\.co|short\.link|ow\.ly)/i.test(
+          normalizedHref
+        );
 
       // Build rel attribute
       const relParts = ['noopener', 'noreferrer'];
@@ -166,7 +176,7 @@ interface SponsoredLinkProps extends ExternalLinkProps {
 
 export function SponsoredLink({
   showDisclosure = true,
-  disclosureText = "Sponsored",
+  disclosureText = 'Sponsored',
   children,
   className = '',
   ...props

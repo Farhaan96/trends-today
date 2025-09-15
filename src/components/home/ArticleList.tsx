@@ -323,7 +323,10 @@ export default function ArticleList({
             For search engines and accessibility:
           </p>
           <nav className="flex flex-wrap justify-center gap-2 text-xs">
-            {Array.from({ length: Math.min(pagination.totalPages, 10) }, (_, i) => i + 1).map((page) => (
+            {Array.from(
+              { length: Math.min(pagination.totalPages, 10) },
+              (_, i) => i + 1
+            ).map((page) => (
               <Link
                 key={page}
                 href={page === 1 ? '/' : `/page/${page}`}

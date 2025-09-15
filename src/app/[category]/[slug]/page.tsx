@@ -65,8 +65,15 @@ export async function generateMetadata({
       type: 'article',
       url,
       publishedTime: article.publishedAt || article.frontmatter?.publishedAt,
-      modifiedTime: article.frontmatter?.modifiedAt || article.publishedAt || article.frontmatter?.publishedAt,
-      authors: [article.author?.name || article.frontmatter?.author?.name || 'Trends Today'],
+      modifiedTime:
+        article.frontmatter?.modifiedAt ||
+        article.publishedAt ||
+        article.frontmatter?.publishedAt,
+      authors: [
+        article.author?.name ||
+          article.frontmatter?.author?.name ||
+          'Trends Today',
+      ],
       section: params.category,
       images: [
         {
@@ -117,13 +124,17 @@ export default async function ArticlePage({
   const image = article.image || article.frontmatter?.image;
   const publishedAt = article.publishedAt || article.frontmatter?.publishedAt;
   const modifiedAt = article.frontmatter?.modifiedAt || publishedAt;
-  const author = article.author || article.frontmatter?.author || { name: 'Trends Today' };
+  const author = article.author ||
+    article.frontmatter?.author || { name: 'Trends Today' };
   const url = `https://www.trendstoday.ca/${params.category}/${params.slug}`;
 
   // Breadcrumb data
   const breadcrumbs = [
     { name: 'Home', url: 'https://www.trendstoday.ca' },
-    { name: category.name, url: `https://www.trendstoday.ca/${params.category}` },
+    {
+      name: category.name,
+      url: `https://www.trendstoday.ca/${params.category}`,
+    },
     { name: title, url },
   ];
 
@@ -217,7 +228,7 @@ export default async function ArticlePage({
           slug: params.slug,
           title: article.title,
           category: params.category,
-          frontmatter: article.frontmatter
+          frontmatter: article.frontmatter,
         }}
         allArticles={allArticles}
         maxArticles={6}

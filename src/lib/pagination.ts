@@ -47,7 +47,9 @@ export function paginateItems<T>(
       itemsPerPage,
       hasNextPage,
       hasPrevPage,
-      nextPageUrl: hasNextPage ? `${baseUrl}/page/${validCurrentPage + 1}` : undefined,
+      nextPageUrl: hasNextPage
+        ? `${baseUrl}/page/${validCurrentPage + 1}`
+        : undefined,
       prevPageUrl: hasPrevPage
         ? validCurrentPage === 2
           ? baseUrl || '/'
@@ -79,7 +81,8 @@ export function generatePaginationMetadata(
     metadata.other = {};
 
     if (hasPrevPage) {
-      metadata.other['prev'] = currentPage === 2 ? baseUrl : `${baseUrl}/page/${currentPage - 1}`;
+      metadata.other['prev'] =
+        currentPage === 2 ? baseUrl : `${baseUrl}/page/${currentPage - 1}`;
     }
 
     if (hasNextPage) {
@@ -93,7 +96,10 @@ export function generatePaginationMetadata(
 /**
  * Generate page numbers for pagination navigation
  */
-export function generatePageNumbers(currentPage: number, totalPages: number): (number | '...')[] {
+export function generatePageNumbers(
+  currentPage: number,
+  totalPages: number
+): (number | '...')[] {
   if (totalPages <= 7) {
     return Array.from({ length: totalPages }, (_, i) => i + 1);
   }
@@ -108,10 +114,24 @@ export function generatePageNumbers(currentPage: number, totalPages: number): (n
     pages.push(2, 3, 4, 5, '...', totalPages);
   } else if (currentPage >= totalPages - 3) {
     // Near the end
-    pages.push('...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+    pages.push(
+      '...',
+      totalPages - 4,
+      totalPages - 3,
+      totalPages - 2,
+      totalPages - 1,
+      totalPages
+    );
   } else {
     // In the middle
-    pages.push('...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
+    pages.push(
+      '...',
+      currentPage - 1,
+      currentPage,
+      currentPage + 1,
+      '...',
+      totalPages
+    );
   }
 
   return pages;
@@ -157,7 +177,8 @@ export function generatePaginationSitemapEntries(
 
   for (let page = 1; page <= totalPages; page++) {
     const url = page === 1 ? baseUrl : `${baseUrl}/page/${page}`;
-    const pagePriority = page === 1 ? priority : Math.max(0.3, priority - (page - 1) * 0.1);
+    const pagePriority =
+      page === 1 ? priority : Math.max(0.3, priority - (page - 1) * 0.1);
 
     entries.push({
       url,

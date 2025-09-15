@@ -57,7 +57,10 @@ export default function PaginationLinks({
 
       {/* Page Numbers */}
       <div className="hidden md:flex">
-        <div className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" role="group">
+        <div
+          className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+          role="group"
+        >
           {pageNumbers.map((pageNum, index) => {
             if (pageNum === '...') {
               return (
@@ -146,7 +149,10 @@ export function SubtlePaginationLinks({
   };
 
   return (
-    <nav className={`text-xs text-gray-400 ${className}`} aria-label="All pages">
+    <nav
+      className={`text-xs text-gray-400 ${className}`}
+      aria-label="All pages"
+    >
       <p className="mb-2 text-gray-500">All pages:</p>
       <div className="flex flex-wrap gap-1">
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (

@@ -27,14 +27,21 @@ class SEOAuditor {
       coreWebVitals: [],
       errors: [],
       warnings: [],
-      passed: []
+      passed: [],
     };
     this.baseUrl = 'https://www.trendstoday.ca';
   }
 
   log(message, type = 'info') {
     const timestamp = new Date().toISOString().split('T')[1].split('.')[0];
-    const prefix = type === 'error' ? '❌' : type === 'warning' ? '⚠️' : type === 'success' ? '✅' : 'ℹ️';
+    const prefix =
+      type === 'error'
+        ? '❌'
+        : type === 'warning'
+          ? '⚠️'
+          : type === 'success'
+            ? '✅'
+            : 'ℹ️';
     console.log(`${prefix} [${timestamp}] ${message}`);
   }
 
@@ -44,7 +51,13 @@ class SEOAuditor {
 
       if (!fs.existsSync(robotsPath)) {
         // Check if robots.ts exists in app directory
-        const robotsTsPath = path.join(process.cwd(), 'src', 'app', 'robots.txt', 'route.ts');
+        const robotsTsPath = path.join(
+          process.cwd(),
+          'src',
+          'app',
+          'robots.txt',
+          'route.ts'
+        );
         if (fs.existsSync(robotsTsPath)) {
           this.results.passed.push('robots.txt implemented via Next.js route');
           this.log('✓ robots.txt implemented via Next.js route', 'success');
@@ -93,8 +106,23 @@ class SEOAuditor {
 
   async checkPaginationStructure() {
     try {
-      const homePaginationPath = path.join(process.cwd(), 'src', 'app', 'page', '[page]', 'page.tsx');
-      const categoryPaginationPath = path.join(process.cwd(), 'src', 'app', '[category]', 'page', '[page]', 'page.tsx');
+      const homePaginationPath = path.join(
+        process.cwd(),
+        'src',
+        'app',
+        'page',
+        '[page]',
+        'page.tsx'
+      );
+      const categoryPaginationPath = path.join(
+        process.cwd(),
+        'src',
+        'app',
+        '[category]',
+        'page',
+        '[page]',
+        'page.tsx'
+      );
 
       if (fs.existsSync(homePaginationPath)) {
         this.results.passed.push('Homepage pagination routes implemented');
@@ -112,7 +140,9 @@ class SEOAuditor {
         this.log('Category pagination routes missing', 'error');
       }
     } catch (error) {
-      this.results.errors.push(`Pagination structure check failed: ${error.message}`);
+      this.results.errors.push(
+        `Pagination structure check failed: ${error.message}`
+      );
       this.log(`Pagination structure check failed: ${error.message}`, 'error');
     }
   }
@@ -120,17 +150,34 @@ class SEOAuditor {
   async checkStructuredDataComponents() {
     try {
       const structuredDataPaths = [
-        path.join(process.cwd(), 'src', 'components', 'seo', 'ArticleJsonLd.tsx'),
-        path.join(process.cwd(), 'src', 'components', 'seo', 'SchemaMarkup.tsx'),
-        path.join(process.cwd(), 'src', 'lib', 'schema.ts')
+        path.join(
+          process.cwd(),
+          'src',
+          'components',
+          'seo',
+          'ArticleJsonLd.tsx'
+        ),
+        path.join(
+          process.cwd(),
+          'src',
+          'components',
+          'seo',
+          'SchemaMarkup.tsx'
+        ),
+        path.join(process.cwd(), 'src', 'lib', 'schema.ts'),
       ];
 
       let foundComponents = 0;
-      structuredDataPaths.forEach(filePath => {
+      structuredDataPaths.forEach((filePath) => {
         if (fs.existsSync(filePath)) {
           foundComponents++;
-          this.results.passed.push(`Structured data component found: ${path.basename(filePath)}`);
-          this.log(`✓ Structured data component found: ${path.basename(filePath)}`, 'success');
+          this.results.passed.push(
+            `Structured data component found: ${path.basename(filePath)}`
+          );
+          this.log(
+            `✓ Structured data component found: ${path.basename(filePath)}`,
+            'success'
+          );
         }
       });
 
@@ -139,7 +186,9 @@ class SEOAuditor {
         this.log('No structured data components found', 'error');
       }
     } catch (error) {
-      this.results.errors.push(`Structured data check failed: ${error.message}`);
+      this.results.errors.push(
+        `Structured data check failed: ${error.message}`
+      );
       this.log(`Structured data check failed: ${error.message}`, 'error');
     }
   }
@@ -147,17 +196,34 @@ class SEOAuditor {
   async checkInternalLinkingComponents() {
     try {
       const linkingPaths = [
-        path.join(process.cwd(), 'src', 'components', 'article', 'RelatedArticles.tsx'),
+        path.join(
+          process.cwd(),
+          'src',
+          'components',
+          'article',
+          'RelatedArticles.tsx'
+        ),
         path.join(process.cwd(), 'src', 'components', 'ui', 'ExternalLink.tsx'),
-        path.join(process.cwd(), 'src', 'components', 'ui', 'PaginationLinks.tsx')
+        path.join(
+          process.cwd(),
+          'src',
+          'components',
+          'ui',
+          'PaginationLinks.tsx'
+        ),
       ];
 
       let foundComponents = 0;
-      linkingPaths.forEach(filePath => {
+      linkingPaths.forEach((filePath) => {
         if (fs.existsSync(filePath)) {
           foundComponents++;
-          this.results.passed.push(`Internal linking component found: ${path.basename(filePath)}`);
-          this.log(`✓ Internal linking component found: ${path.basename(filePath)}`, 'success');
+          this.results.passed.push(
+            `Internal linking component found: ${path.basename(filePath)}`
+          );
+          this.log(
+            `✓ Internal linking component found: ${path.basename(filePath)}`,
+            'success'
+          );
         }
       });
 
@@ -166,7 +232,9 @@ class SEOAuditor {
         this.log('Some internal linking components missing', 'warning');
       }
     } catch (error) {
-      this.results.errors.push(`Internal linking check failed: ${error.message}`);
+      this.results.errors.push(
+        `Internal linking check failed: ${error.message}`
+      );
       this.log(`Internal linking check failed: ${error.message}`, 'error');
     }
   }
@@ -183,7 +251,10 @@ class SEOAuditor {
           this.log('✓ Next.js image optimization configured', 'success');
         }
 
-        if (config.includes('images.unsplash.com') || config.includes('images.pexels.com')) {
+        if (
+          config.includes('images.unsplash.com') ||
+          config.includes('images.pexels.com')
+        ) {
           this.results.passed.push('Remote image domains configured');
           this.log('✓ Remote image domains configured', 'success');
         }
@@ -192,17 +263,34 @@ class SEOAuditor {
       // Check for sharp package
       const packageJsonPath = path.join(process.cwd(), 'package.json');
       if (fs.existsSync(packageJsonPath)) {
-        const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
-        if (packageJson.devDependencies?.sharp || packageJson.dependencies?.sharp) {
-          this.results.passed.push('Sharp package installed for image optimization');
-          this.log('✓ Sharp package installed for image optimization', 'success');
+        const packageJson = JSON.parse(
+          fs.readFileSync(packageJsonPath, 'utf-8')
+        );
+        if (
+          packageJson.devDependencies?.sharp ||
+          packageJson.dependencies?.sharp
+        ) {
+          this.results.passed.push(
+            'Sharp package installed for image optimization'
+          );
+          this.log(
+            '✓ Sharp package installed for image optimization',
+            'success'
+          );
         } else {
-          this.results.warnings.push('Sharp package not found - consider installing for better image optimization');
-          this.log('Sharp package not found - consider installing for better image optimization', 'warning');
+          this.results.warnings.push(
+            'Sharp package not found - consider installing for better image optimization'
+          );
+          this.log(
+            'Sharp package not found - consider installing for better image optimization',
+            'warning'
+          );
         }
       }
     } catch (error) {
-      this.results.errors.push(`Image optimization check failed: ${error.message}`);
+      this.results.errors.push(
+        `Image optimization check failed: ${error.message}`
+      );
       this.log(`Image optimization check failed: ${error.message}`, 'error');
     }
   }
@@ -230,7 +318,9 @@ class SEOAuditor {
         }
       }
     } catch (error) {
-      this.results.errors.push(`Core Web Vitals check failed: ${error.message}`);
+      this.results.errors.push(
+        `Core Web Vitals check failed: ${error.message}`
+      );
       this.log(`Core Web Vitals check failed: ${error.message}`, 'error');
     }
   }
@@ -251,13 +341,21 @@ class SEOAuditor {
     const report = {
       timestamp: new Date().toISOString(),
       summary: {
-        total_checks: this.results.passed.length + this.results.warnings.length + this.results.errors.length,
+        total_checks:
+          this.results.passed.length +
+          this.results.warnings.length +
+          this.results.errors.length,
         passed: this.results.passed.length,
         warnings: this.results.warnings.length,
         errors: this.results.errors.length,
-        score: Math.round((this.results.passed.length / (this.results.passed.length + this.results.errors.length)) * 100) || 0
+        score:
+          Math.round(
+            (this.results.passed.length /
+              (this.results.passed.length + this.results.errors.length)) *
+              100
+          ) || 0,
       },
-      details: this.results
+      details: this.results,
     };
 
     const reportPath = path.join(process.cwd(), 'reports', 'seo-audit.json');
@@ -285,23 +383,25 @@ class SEOAuditor {
 
     if (report.summary.errors > 0) {
       console.log('\n❌ ERRORS TO FIX:');
-      this.results.errors.forEach(error => console.log(`  • ${error}`));
+      this.results.errors.forEach((error) => console.log(`  • ${error}`));
     }
 
     if (report.summary.warnings > 0) {
       console.log('\n⚠️  WARNINGS:');
-      this.results.warnings.forEach(warning => console.log(`  • ${warning}`));
+      this.results.warnings.forEach((warning) => console.log(`  • ${warning}`));
     }
 
     if (report.summary.passed > 0) {
       console.log('\n✅ PASSED CHECKS:');
-      this.results.passed.forEach(passed => console.log(`  • ${passed}`));
+      this.results.passed.forEach((passed) => console.log(`  • ${passed}`));
     }
 
     console.log(`\n📄 Full report saved to: reports/seo-audit.json`);
     console.log('\n🔗 URLs to test in Google Rich Results Test:');
     console.log(`  • Homepage: ${this.baseUrl}`);
-    console.log(`  • Article: ${this.baseUrl}/technology/ai-agents-revolution-13-billion-market-taking-over-2025`);
+    console.log(
+      `  • Article: ${this.baseUrl}/technology/ai-agents-revolution-13-billion-market-taking-over-2025`
+    );
     console.log(`  • Category: ${this.baseUrl}/technology`);
     console.log(`  • Pagination: ${this.baseUrl}/page/2`);
     console.log('='.repeat(60));
