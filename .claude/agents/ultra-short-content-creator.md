@@ -106,7 +106,7 @@ This process:
 - Reads the article content you just created
 - Extracts key topics, statistics, and technologies mentioned
 - Generates a contextually relevant prompt based on actual content
-- Creates a unique image with gpt-image-1 (high quality, 1536x1024)
+- Creates a unique image with gpt-image-1 (high quality, 1024x1024)
 - Saves to /public/images/ai-generated/
 - Returns the local image path for frontmatter
 

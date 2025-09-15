@@ -9,9 +9,11 @@
 
 require('dotenv').config({ path: '.env.local' });
 const https = require('https');
+const OpenAI = require('openai');
 const fs = require('fs').promises;
 const path = require('path');
 const crypto = require('crypto');
+const matter = require('gray-matter');
 
 class AIImageGenerator {
   constructor() {
@@ -28,8 +30,8 @@ class AIImageGenerator {
 
     // Optimized settings for cost and quality based on gpt-image-1 specs
     this.defaultOptions = {
-      size: '1536x1024', // Supported: 1024x1024, 1024x1536, 1536x1024
-      quality: 'high', // Options: low, medium, high, auto
+      size: '1024x1024', // Supported: 1024x1024, 1024x1536, 1536x1024
+      quality: 'high', // Supported: low | medium | high | auto
       model: 'gpt-image-1',
       n: 1, // Only 1 image per request supported
     };
@@ -103,6 +105,352 @@ class AIImageGenerator {
     stats.push(...speeds);
 
     return [...new Set(stats)].slice(0, 3); // Top 3 unique stats
+  }
+
+  // Build a visual plan (subject/environment/action/mood/palette) from content
+  buildVisualPlan(articleTitle, articleContent) {
+    const text = `${articleTitle}\n${articleContent}`.toLowerCase();
+    const topics = this.extractMainTopics(articleContent).map((t) =>
+      t.toLowerCase()
+    );
+
+    const hasAny = (arr) => arr.some((w) => text.includes(w));
+
+    // 1) Custom editor-defined plans (config/image-visual-plans.json)
+    try {
+      const custom = this.loadCustomPlans();
+      if (custom && Array.isArray(custom.patterns)) {
+        for (const entry of custom.patterns) {
+          const pats = (entry.match || []).map((p) => new RegExp(p, 'i'));
+          if (pats.length === 0) continue;
+          const matched = pats.some(
+            (rx) => rx.test(text) || topics.some((t) => rx.test(t))
+          );
+          if (matched && entry.plan) {
+            const { subject, environment, action, mood, palette } = entry.plan;
+            if (subject && environment && action && mood && palette) {
+              return entry.plan;
+            }
+          }
+        }
+      }
+    } catch (_) {
+      // ignore config errors and continue to heuristics
+    }
+
+    // Keyword clusters for common editorial concepts
+    const K = {
+      adolescentMentalHealth: [
+        'child',
+        'children',
+        'kid',
+        'teen',
+        'adolescent',
+        'parent',
+        'parenting',
+        'family',
+        'pediatric',
+        'school',
+        'classroom',
+        'teacher',
+        'counselor',
+        'therapist',
+        'clinic',
+        'mental health',
+        '13-year',
+        'thirteen',
+      ],
+      misinformation: [
+        'misinformation',
+        'disinformation',
+        'fake news',
+        'deepfake',
+        'conspiracy',
+        'hoax',
+        'fact-check',
+        'rumor',
+        'propaganda',
+        'algorithmic amplification',
+      ],
+      privacy: [
+        'privacy',
+        'data',
+        'tracking',
+        'ad tracking',
+        'cookies',
+        'biometric',
+        'facial recognition',
+        'metadata',
+        'encryption',
+        'anonymity',
+      ],
+      surveillance: [
+        'surveillance',
+        'cctv',
+        'monitoring',
+        'mass surveillance',
+        'spyware',
+        'wiretap',
+        'nsa',
+        'police state',
+        'watchlist',
+      ],
+      addiction: [
+        'addiction',
+        'compulsion',
+        'doomscroll',
+        'dopamine loop',
+        'screen time',
+        'overuse',
+        'withdrawal',
+        'habit loop',
+      ],
+      social: [
+        'social media',
+        'creator',
+        'influencer',
+        'viral',
+        'algorithm',
+        'follower',
+        'platform',
+        'tiktok',
+        'youtube',
+        'instagram',
+        'clout',
+        'engagement',
+        'notification',
+        'dopamine',
+        'burnout',
+        'toxicity',
+      ],
+      archaeology: [
+        'sumerian',
+        'anunnaki',
+        'mesopotamia',
+        'archaeolog',
+        'cuneiform',
+        'tablet',
+        'artifact',
+        'museum',
+      ],
+      psychology: [
+        'cognitive',
+        'bias',
+        'mind',
+        'brain',
+        'behavior',
+        'therapy',
+        'depression',
+        'anxiety',
+      ],
+      health: [
+        'clinical',
+        'patient',
+        'medical',
+        'treatment',
+        'diagnosis',
+        'hospital',
+      ],
+      space: [
+        'nasa',
+        'space',
+        'planet',
+        'orbit',
+        'probe',
+        'mission',
+        'cosmic',
+        'astronomy',
+        'exoplanet',
+      ],
+      tech: [
+        'ai',
+        'robot',
+        'chip',
+        'semiconductor',
+        'device',
+        'smartphone',
+        'quantum',
+        'software',
+      ],
+    };
+
+    // Heuristic visual plans (specific themes first)
+    if (hasAny(K.adolescentMentalHealth)) {
+      return {
+        subject:
+          'a parent and pre-teen sitting together at a kitchen table or pediatric clinic, smartphone placed face down on the table or in a small household basket nearby',
+        environment:
+          'daytime natural light, warm and supportive home or clinic setting, no identifiable branding or readable text',
+        action:
+          'calm conversation posture with gentle attention toward each other; phone clearly not in use',
+        mood: 'supportive, protective, evidence-based guidance for healthy development',
+        palette: 'warm neutrals and natural daylight tones',
+      };
+    }
+    if (
+      hasAny(K.misinformation) ||
+      topics.some(
+        (t) =>
+          t.includes('misinform') ||
+          t.includes('fake') ||
+          t.includes('deepfake')
+      )
+    ) {
+      return {
+        subject:
+          'a person at a desk surrounded by multiple screens showing conflicting, blurred thumbnail-like panels (no readable text)',
+        environment:
+          'dim room with screens as primary light source; abstract UI shapes suggesting contradictory feeds',
+        action: 'head tilted, uncertain posture, hands near keyboard or mouse',
+        mood: 'confused, overwhelmed, critical of information chaos',
+        palette:
+          'cool blues and harsh highlights with subtle red accents indicating warning',
+      };
+    }
+
+    if (hasAny(K.privacy)) {
+      return {
+        subject:
+          'a person holding a smartphone with camera partially covered by a hand, laptop webcam covered with tape',
+        environment:
+          'subtle home/desk scene; soft depth of field; faint abstract tracker glyphs floating in bokeh (no logos or text)',
+        action: 'protective gesture covering sensors, phone close to chest',
+        mood: 'cautious, protective, privacy-conscious',
+        palette: 'neutral tones with muted teal accents',
+      };
+    }
+
+    if (hasAny(K.surveillance)) {
+      return {
+        subject:
+          'a cluster of generic CCTV cameras angled toward a pedestrian walkway (no brands)',
+        environment:
+          'urban setting with long shadows; slight haze for atmosphere',
+        action:
+          'cameras pointed in different directions, implying pervasive monitoring',
+        mood: 'uneasy, observed, systemic oversight',
+        palette: 'desaturated grayscale with cold blue highlights',
+      };
+    }
+
+    if (
+      hasAny(K.addiction) ||
+      topics.some((t) => t.includes('doomscroll') || t.includes('addict'))
+    ) {
+      return {
+        subject:
+          'hands gripping a smartphone tightly with thumbs mid-scroll, face illuminated by blue light',
+        environment:
+          'dark bedroom at night with only screen glow lighting the scene',
+        action: 'endless scrolling gesture captured mid-motion',
+        mood: 'compulsive, isolating, nocturnal',
+        palette: 'deep blues and dark shadows with bright screen highlights',
+      };
+    }
+
+    if (
+      hasAny(K.social) ||
+      topics.some((t) => t.includes('creator') || t.includes('viral'))
+    ) {
+      return {
+        subject:
+          'a solitary content creator figure, head down, illuminated by the cold glow of a phone and laptop',
+        environment:
+          'small dim room at night with cluttered desk; abstract, generic notification shapes floating subtly (no brand UI)',
+        action:
+          'sitting at a desk, surrounded by overwhelming digital cues suggesting endless engagement',
+        mood: 'somber, isolating, critical of toxic attention dynamics',
+        palette:
+          'cool blues and desaturated tones with harsh screen highlights',
+      };
+    }
+
+    if (
+      hasAny(K.archaeology) ||
+      topics.some((t) => t.includes('archaeolog') || t.includes('sumerian'))
+    ) {
+      return {
+        subject:
+          'ancient Mesopotamian cuneiform tablets and artifacts on archival supports',
+        environment:
+          'museum conservation table with soft diffused lighting and neutral archival background',
+        action: 'close-up documentation emphasizing inscriptions and texture',
+        mood: 'scholarly, meticulous, respectful of antiquity',
+        palette: 'neutral warm stone tones with soft shadows',
+      };
+    }
+
+    if (hasAny(K.space)) {
+      return {
+        subject:
+          'space exploration concept consistent with real mission photography',
+        environment: 'deep space backdrop with subtle stars; no logos or text',
+        action: 'spacecraft or planetary scene presented in documentary style',
+        mood: 'awe, vastness, scientific rigor',
+        palette: 'deep blacks, subtle blues and whites',
+      };
+    }
+
+    if (hasAny(K.tech)) {
+      return {
+        subject: 'modern technology subject closely tied to the article focus',
+        environment: 'clean editorial studio setup with minimal props',
+        action: 'hero product or conceptual tech representation',
+        mood: 'precise, modern, high-clarity',
+        palette: 'neutral grayscale with a single accent color',
+      };
+    }
+
+    if (hasAny(K.psychology)) {
+      return {
+        subject:
+          'human silhouette or portrait conveying cognitive/behavioral theme without text or symbols',
+        environment: 'soft, minimal studio backdrop with layered depth',
+        action: 'subtle pose emphasizing introspection',
+        mood: 'thoughtful, analytical',
+        palette: 'neutral tones with soft highlights',
+      };
+    }
+
+    if (hasAny(K.health)) {
+      return {
+        subject:
+          'clinical instruments or lab elements relevant to the topic (no branding)',
+        environment: 'sterile, clean clinical setup',
+        action: 'careful arrangement emphasizing precision',
+        mood: 'trustworthy, clinical',
+        palette: 'clean whites and soft blues',
+      };
+    }
+
+    // Fallback: use title/topics as the visual nucleus
+    const nucleus = (articleTitle || topics[0] || 'the article subject')
+      .replace(/\s+/g, ' ')
+      .trim();
+    return {
+      subject: `${nucleus} represented in a contextually appropriate, photorealistic editorial scene`,
+      environment: 'minimal, uncluttered background that supports the subject',
+      action: 'clear focal presentation with shallow depth of field',
+      mood: 'professional, editorial',
+      palette: 'neutral tones with natural highlights',
+    };
+  }
+
+  loadCustomPlans() {
+    if (this._customPlans !== null) return this._customPlans;
+    this._customPlans = null;
+    try {
+      const cfgPath = path.join(
+        process.cwd(),
+        'config',
+        'image-visual-plans.json'
+      );
+      const raw = require('fs').readFileSync(cfgPath, 'utf8');
+      this._customPlans = JSON.parse(raw);
+    } catch (_) {
+      this._customPlans = null;
+    }
+    return this._customPlans;
   }
 
   extractTechnologies(content, category = 'technology') {
@@ -468,6 +816,32 @@ EDITORIAL RESTRICTIONS (CRITICAL):
     return prompt;
   }
 
+  // Concise prompt builder for gpt-image-1
+  buildConcisePrompt(articleTitle, articleContent, category) {
+    const topics = this.extractMainTopics(articleContent);
+    const stats = this.extractKeyStatistics(articleContent);
+    const plan = this.buildVisualPlan(articleTitle, articleContent);
+
+    const topicHint = topics.length
+      ? ` Key focus: ${topics.slice(0, 2).join(', ')}.`
+      : '';
+    const statHint = stats.length
+      ? ` Subtle data context: ${stats.slice(0, 1).join(', ')}.`
+      : '';
+
+    return (
+      `Photorealistic editorial image capturing ${plan.subject}. ` +
+      `Environment: ${plan.environment}. ` +
+      `Action: ${plan.action}. ` +
+      `Mood: ${plan.mood}. ` +
+      `Palette: ${plan.palette}. ` +
+      `Composition: clear focal subject, shallow depth of field, uncluttered background. ` +
+      `Constraints: no text, no logos, no watermarks; avoid brand-identifiable UI; no illustrations or CGI; photorealistic only.` +
+      topicHint +
+      statHint
+    );
+  }
+
   async generateFromArticle(articleFilePath, options = {}) {
     try {
       console.log(
@@ -489,8 +863,44 @@ EDITORIAL RESTRICTIONS (CRITICAL):
       const category =
         frontmatter.match(/category:\s*(\w+)/)?.[1] || 'technology';
 
-      // Generate dynamic prompt
-      const prompt = await this.generateDynamicPrompt(title, content, category);
+      const { promptMode = 'concise', plan: planOverride } = options;
+      let prompt;
+      // Try to read structured frontmatter for optional image plan overrides
+      let fmData = {};
+      try {
+        fmData = require('gray-matter')(content).data || {};
+      } catch (_) {}
+      const fmPlan =
+        (fmData && (fmData.imagePlan || fmData.imageHints)) || null;
+      if (
+        fmPlan &&
+        fmPlan.subject &&
+        fmPlan.environment &&
+        fmPlan.action &&
+        fmPlan.mood &&
+        fmPlan.palette
+      ) {
+        prompt =
+          `Photorealistic editorial image capturing ${fmPlan.subject}. ` +
+          `Environment: ${fmPlan.environment}. Action: ${fmPlan.action}. ` +
+          `Mood: ${fmPlan.mood}. Palette: ${fmPlan.palette}. ` +
+          `Composition: clear focal subject, shallow depth of field, uncluttered background. ` +
+          `Constraints: no text, no logos, no watermarks; avoid brand-identifiable UI; no illustrations or CGI; photorealistic only.`;
+      } else if (planOverride && planOverride.subject) {
+        const p = planOverride;
+        prompt =
+          `Photorealistic editorial image capturing ${p.subject}. ` +
+          `Environment: ${p.environment}. Action: ${p.action}. ` +
+          `Mood: ${p.mood}. Palette: ${p.palette}. ` +
+          `Composition: clear focal subject, shallow depth of field, uncluttered background. ` +
+          `Constraints: no text, no logos, no watermarks; avoid brand-identifiable UI; no illustrations or CGI; photorealistic only.`;
+      } else {
+        // Choose prompt style (default: concise)
+        prompt =
+          promptMode === 'detailed'
+            ? await this.generateDynamicPrompt(title, content, category)
+            : this.buildConcisePrompt(title, content, category);
+      }
 
       console.log(`   Dynamic prompt generated (${prompt.length} chars)`);
 
@@ -539,7 +949,7 @@ EDITORIAL RESTRICTIONS (CRITICAL):
         url: result.url,
         localPath: `/images/ai-generated/${filename}`,
         filename,
-        prompt: prompt.substring(0, 100) + '...',
+        prompt: prompt.substring(0, 200) + '...',
         provider: 'openai',
         model: 'gpt-image-1',
         cost: 0.19, // High quality cost (~$0.19 per image in 2025)
@@ -636,42 +1046,36 @@ EDITORIAL RESTRICTIONS (CRITICAL):
 
     await this.enforceRateLimit();
 
-    const response = await this.makeRequest(
-      'https://api.openai.com/v1/images/generations',
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${this.openaiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'gpt-image-1',
-          prompt: prompt,
-          n: n,
-          size: size,
-          quality: quality,
-        }),
-      }
-    );
+    // Use official OpenAI SDK per docs: images.generate
+    if (!this._openai) {
+      this._openai = new OpenAI({ apiKey: this.openaiKey });
+    }
 
-    const item = response.data?.data?.[0] || {};
-    const imageUrl = item.url;
+    const resp = await this._openai.images.generate({
+      model: 'gpt-image-1',
+      prompt,
+      size,
+      quality,
+      // n is limited to 1 for gpt-image-1
+    });
+
+    const item = resp.data?.[0] || {};
     const b64 = item.b64_json;
     const revisedPrompt = item.revised_prompt;
 
-    if (!imageUrl && !b64) {
-      throw new Error('No image returned from OpenAI');
+    if (!b64) {
+      throw new Error('No base64 image returned from OpenAI gpt-image-1');
     }
 
     return {
-      url: imageUrl,
+      url: undefined,
       b64_json: b64,
       provider: 'openai',
       model: 'gpt-image-1',
       originalPrompt: prompt,
-      revisedPrompt: revisedPrompt,
-      size: size,
-      quality: quality,
+      revisedPrompt,
+      size,
+      quality,
     };
   }
 
@@ -933,9 +1337,10 @@ if (require.main === module) {
 
       case 'generate-from-article':
         const fileFlag = args.find((arg) => arg.startsWith('--file='));
+        const promptFlag = args.find((arg) => arg.startsWith('--prompt='));
         if (!fileFlag) {
           console.log(
-            'Usage: node ai-image-generator.js generate-from-article --file="path/to/article.mdx"'
+            'Usage: node ai-image-generator.js generate-from-article --file="path/to/article.mdx" [--prompt=concise|detailed]'
           );
           return;
         }
@@ -944,7 +1349,12 @@ if (require.main === module) {
         const fullPath = path.resolve(filePath);
 
         try {
-          const result = await generator.generateFromArticle(fullPath);
+          const promptMode = promptFlag
+            ? promptFlag.split('=')[1].replace(/['"]/g, '')
+            : 'concise';
+          const result = await generator.generateFromArticle(fullPath, {
+            promptMode,
+          });
 
           console.log('\n✅ Dynamic Image Generation Complete:');
           console.log(`   Filename: ${result.filename}`);

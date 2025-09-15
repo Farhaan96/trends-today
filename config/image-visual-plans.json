@@ -1,0 +1,14 @@
+{
+  "patterns": [
+    {
+      "match": ["misinformation", "fake\\s*news", "deepfake"],
+      "plan": {
+        "subject": "a person at a desk with multiple screens showing conflicting blurred panels (no readable text)",
+        "environment": "dim room with screens as primary light source; abstract UI shapes (no logos)",
+        "action": "uncertain posture, hands near keyboard",
+        "mood": "confused, overwhelmed by information chaos",
+        "palette": "cool blues with subtle warning reds"
+      }
+    }
+  ]
+}

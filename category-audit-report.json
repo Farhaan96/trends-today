@@ -1,0 +1,177 @@
+{
+  "summary": {
+    "total": 33,
+    "ok": 33,
+    "issues": 0,
+    "issueBreakdown": {},
+    "timestamp": "2025-09-15T04:58:33.876Z"
+  },
+  "issues": [],
+  "ok": [
+    {
+      "file": "content/culture/ai-art-wins-major-competition.mdx",
+      "folder": "culture",
+      "declared": "culture"
+    },
+    {
+      "file": "content/culture/creator-economy-hits-500-billion.mdx",
+      "folder": "culture",
+      "declared": "culture"
+    },
+    {
+      "file": "content/culture/neurodivergent-voices-cultural-revolution-2025.mdx",
+      "folder": "culture",
+      "declared": "culture"
+    },
+    {
+      "file": "content/culture/new-study-reveals-surprising-link-between-music-taste-and-in.mdx",
+      "folder": "culture",
+      "declared": "culture"
+    },
+    {
+      "file": "content/culture/viral-fame-toxic-death-mass-social-media.mdx",
+      "folder": "culture",
+      "declared": "culture"
+    },
+    {
+      "file": "content/health/ai-detects-hidden-consciousness-coma-patients.mdx",
+      "folder": "health",
+      "declared": "health"
+    },
+    {
+      "file": "content/health/mental-health-apps-show-clinical-results.mdx",
+      "folder": "health",
+      "declared": "health"
+    },
+    {
+      "file": "content/health/personalized-medicine-using-ai.mdx",
+      "folder": "health",
+      "declared": "health"
+    },
+    {
+      "file": "content/health/precision-medicine-revolution-2025.mdx",
+      "folder": "health",
+      "declared": "health"
+    },
+    {
+      "file": "content/psychology/psychedelic-therapy-depression-breakthrough.mdx",
+      "folder": "psychology",
+      "declared": "psychology"
+    },
+    {
+      "file": "content/psychology/revolutionary-blood-test-depression-biomarkers.mdx",
+      "folder": "psychology",
+      "declared": "psychology"
+    },
+    {
+      "file": "content/psychology/the-psychology-behind-why-we-procrastinate-even-when-we-know.mdx",
+      "folder": "psychology",
+      "declared": "psychology"
+    },
+    {
+      "file": "content/psychology/why-introverts-excel-at-deep-work-psychology-research-2025.mdx",
+      "folder": "psychology",
+      "declared": "psychology"
+    },
+    {
+      "file": "content/psychology/your-brain-lies-to-you-cognitive-biases-2025.mdx",
+      "folder": "psychology",
+      "declared": "psychology"
+    },
+    {
+      "file": "content/science/13-year-rule-child-mental-health.mdx",
+      "folder": "science",
+      "declared": "science"
+    },
+    {
+      "file": "content/science/anunnaki-sumerian-gods-mystery.mdx",
+      "folder": "science",
+      "declared": "science"
+    },
+    {
+      "file": "content/science/crispr-therapeutics-breakthrough-2025.mdx",
+      "folder": "science",
+      "declared": "science"
+    },
+    {
+      "file": "content/science/ntnu-walking-study-prevents-back-pain.mdx",
+      "folder": "science",
+      "declared": "science"
+    },
+    {
+      "file": "content/science/room-temperature-superconductor-confirmed.mdx",
+      "folder": "science",
+      "declared": "science"
+    },
+    {
+      "file": "content/space/500-year-old-manuscript-reveals-ancient-astronomy-knowledge.mdx",
+      "folder": "space",
+      "declared": "space"
+    },
+    {
+      "file": "content/space/asteroid-mining-becomes-reality.mdx",
+      "folder": "space",
+      "declared": "space"
+    },
+    {
+      "file": "content/space/nasa-mars-emergency-discovery-biosignature.mdx",
+      "folder": "space",
+      "declared": "space"
+    },
+    {
+      "file": "content/space/parker-solar-probe-christmas-eve-historic-flyby.mdx",
+      "folder": "space",
+      "declared": "space"
+    },
+    {
+      "file": "content/space/space-tourism-reaches-mainstream.mdx",
+      "folder": "space",
+      "declared": "space"
+    },
+    {
+      "file": "content/space/toi-2431-b-impossible-planet-defies-physics-nasa-discovery.mdx",
+      "folder": "space",
+      "declared": "space"
+    },
+    {
+      "file": "content/technology/ai-agents-revolution-13-billion-market-taking-over-2025.mdx",
+      "folder": "technology",
+      "declared": "technology"
+    },
+    {
+      "file": "content/technology/ai-agents-workplace-productivity-2025.mdx",
+      "folder": "technology",
+      "declared": "technology"
+    },
+    {
+      "file": "content/technology/edge-computing-revolutionizes-iot.mdx",
+      "folder": "technology",
+      "declared": "technology"
+    },
+    {
+      "file": "content/technology/first-of-its-kind-ai-settlement-anthropic-to-pay-authors-1-5.mdx",
+      "folder": "technology",
+      "declared": "technology"
+    },
+    {
+      "file": "content/technology/google-s-ai-mode-adds-5-new-languages-including-hindi-japane.mdx",
+      "folder": "technology",
+      "declared": "technology"
+    },
+    {
+      "file": "content/technology/quantum-computing-2025-commercial-breakthrough.mdx",
+      "folder": "technology",
+      "declared": "technology"
+    },
+    {
+      "file": "content/technology/ucla-brain-chip-paralyzed-patients-4x-faster.mdx",
+      "folder": "technology",
+      "declared": "technology"
+    },
+    {
+      "file": "content/technology/web3-authentication-replaces-passwords.mdx",
+      "folder": "technology",
+      "declared": "technology"
+    }
+  ]
+}
