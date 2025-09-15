@@ -24,10 +24,9 @@ class ComprehensiveImageSystem {
     this.outputDir = path.join(__dirname, '..', 'public', 'images');
     this.cacheDir = path.join(__dirname, '..', '.cache', 'images');
     
-    // Image source priorities
+    // Image source priorities - ENFORCED: gpt-image-1 ONLY (no stock photos)
     this.sources = [
-      'stock', // Try stock photos first (fastest, cheapest)
-      'ai'     // Fallback to AI generation (slower, costs money)
+      'ai'     // ONLY AI generation with gpt-image-1 (no stock photos, no fallbacks)
     ];
     
     this.results = [];
@@ -214,7 +213,7 @@ class ComprehensiveImageSystem {
 
   async findBestImage(query, options = {}) {
     const {
-      type = 'auto', // auto, stock, ai
+      type = 'ai', // ENFORCED: only gpt-image-1 generation, no stock photos, no other sources
       downloadImages = true,
       filename,
       subfolder = 'auto',
@@ -243,37 +242,6 @@ class ComprehensiveImageSystem {
     for (const source of sourcesToTry) {
       try {
         switch (source) {
-          case 'stock':
-            console.log(`🔍 Searching stock photos for: "${query}"`);
-            const stockImages = await this.getStockImages(query, otherOptions);
-            
-            if (stockImages.length > 0) {
-              const bestImage = stockImages[0]; // Take the first (most relevant) result
-              
-              if (downloadImages) {
-                const imageFilename = filename || `stock-${query.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${Date.now()}.jpg`;
-                const imagePath = await this.downloadImage(
-                  bestImage.download_url, 
-                  imageFilename, 
-                  subfolder === 'auto' ? 'stock' : subfolder
-                );
-                bestImage.localPath = imagePath;
-                bestImage.filename = imageFilename;
-              }
-              
-              result = {
-                source: 'stock',
-                primary: bestImage,
-                alternatives: stockImages.slice(1),
-                query: query
-              };
-              
-              this.stats.stock++;
-              console.log(`✅ Found stock image: ${bestImage.source} - ${bestImage.description}`);
-              break;
-            }
-            break;
-
           case 'ai':
             console.log(`🎨 Generating AI image for: "${query}"`);
             
@@ -347,7 +315,7 @@ class ComprehensiveImageSystem {
         console.log(`\n📋 Processing: ${topic}`);
         
         const imageResult = await this.findBestImage(topic, {
-          type: 'auto', // Try stock first, fallback to AI
+          type: 'ai', // ENFORCED: only gpt-image-1, no stock photos
           downloadImages: true,
           subfolder: 'blog-heroes',
           ...options
@@ -425,7 +393,7 @@ if (require.main === module) {
         }
         
         const result = await imageSystem.findBestImage(query, {
-          type: 'auto',
+          type: 'ai',
           downloadImages: true
         });
         

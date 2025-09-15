@@ -198,7 +198,9 @@ class AIImageGenerator {
     prompt += `- ${moodStyles[mood]}\n`;
     prompt += `- ${category} content theme\n`;
     prompt += `- Clean composition with clear focal point\n`;
-    prompt += `- No text, logos, or watermarks\n`;
+    prompt += `- ABSOLUTELY NO TEXT, numbers, words, letters, or any written characters visible\n`;
+    prompt += `- NO logos, watermarks, signs, or any textual elements\n`;
+    prompt += `- Pure visual imagery only, no readable text of any kind\n`;
     prompt += `- Sharp details, editorial quality\n`;
     prompt += `- Suitable for professional tech publication`;
 
