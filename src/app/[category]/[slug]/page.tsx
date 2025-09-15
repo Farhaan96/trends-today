@@ -4,6 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getArticleBySlug, getAllArticles } from '@/lib/article-utils';
 import ArticleContent from '@/components/article/ArticleContent';
+import ArticleJsonLd from '@/components/seo/ArticleJsonLd';
+import { BreadcrumbSchema } from '@/components/seo/SchemaMarkup';
+import { SmartRelatedArticles } from '@/components/article/RelatedArticles';
 
 const categoryConfig = {
   science: { name: 'Science', color: 'from-blue-500 to-indigo-600' },
@@ -45,18 +48,44 @@ export async function generateMetadata({
     };
   }
 
+  const title = article.title || article.frontmatter?.title;
+  const description = article.description || article.frontmatter?.description;
+  const image = article.image || article.frontmatter?.image;
+  const url = `https://www.trendstoday.ca/${params.category}/${params.slug}`;
+
   return {
-    title: `${article.title || article.frontmatter?.title} | Trends Today`,
-    description: article.description || article.frontmatter?.description,
+    title: `${title} | Trends Today`,
+    description,
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
-      title: article.title || article.frontmatter?.title,
-      description: article.description || article.frontmatter?.description,
+      title,
+      description,
       type: 'article',
+      url,
+      publishedTime: article.publishedAt || article.frontmatter?.publishedAt,
+      modifiedTime: article.frontmatter?.modifiedAt || article.publishedAt || article.frontmatter?.publishedAt,
+      authors: [article.author?.name || article.frontmatter?.author?.name || 'Trends Today'],
+      section: params.category,
       images: [
-        article.image ||
-          article.frontmatter?.image ||
-          '/images/placeholder.jpg',
+        {
+          url: image || '/images/placeholder.jpg',
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
       ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image || '/images/placeholder.jpg'],
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
@@ -82,8 +111,39 @@ export default async function ArticlePage({
     )
     .slice(0, 3);
 
+  // Prepare data for structured data
+  const title = article.title || article.frontmatter?.title;
+  const description = article.description || article.frontmatter?.description;
+  const image = article.image || article.frontmatter?.image;
+  const publishedAt = article.publishedAt || article.frontmatter?.publishedAt;
+  const modifiedAt = article.frontmatter?.modifiedAt || publishedAt;
+  const author = article.author || article.frontmatter?.author || { name: 'Trends Today' };
+  const url = `https://www.trendstoday.ca/${params.category}/${params.slug}`;
+
+  // Breadcrumb data
+  const breadcrumbs = [
+    { name: 'Home', url: 'https://www.trendstoday.ca' },
+    { name: category.name, url: `https://www.trendstoday.ca/${params.category}` },
+    { name: title, url },
+  ];
+
   return (
     <article className="min-h-screen bg-white">
+      {/* Structured Data */}
+      <ArticleJsonLd
+        headline={title}
+        description={description}
+        image={image}
+        author={author}
+        publishedAt={publishedAt}
+        modifiedAt={modifiedAt}
+        category={category.name}
+        url={url}
+        wordCount={article.frontmatter?.wordCount}
+        readingTime={article.frontmatter?.readingTime}
+        keywords={article.frontmatter?.keywords}
+      />
+      <BreadcrumbSchema items={breadcrumbs} />
       {/* Header */}
       <header className="bg-white pt-8 pb-6 px-4">
         <div className="max-w-5xl mx-auto">
@@ -151,45 +211,18 @@ export default async function ArticlePage({
         <ArticleContent content={article.content || article.mdxContent} />
       </div>
 
-      {/* Related */}
-      {relatedArticles.length > 0 && (
-        <section className="bg-gray-50 py-12">
-          <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8">
-              More from {category.name}
-            </h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              {relatedArticles.map((related) => (
-                <Link
-                  key={related.slug}
-                  href={`/${params.category}/${related.slug}`}
-                  className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow block"
-                >
-                  <div className="relative aspect-square">
-                    <Image
-                      src={
-                        related.image ||
-                        related.frontmatter?.image ||
-                        '/images/placeholder.jpg'
-                      }
-                      alt={
-                        related.title || related.frontmatter?.title || 'Article'
-                      }
-                      fill
-                      className="object-cover rounded-t-xl"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-bold line-clamp-2 hover:text-blue-600 transition-colors">
-                      {related.title || related.frontmatter?.title}
-                    </h3>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* Related Articles */}
+      <SmartRelatedArticles
+        currentArticle={{
+          slug: params.slug,
+          title: article.title,
+          category: params.category,
+          frontmatter: article.frontmatter
+        }}
+        allArticles={allArticles}
+        maxArticles={6}
+        className="bg-gray-50"
+      />
     </article>
   );
 }

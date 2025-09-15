@@ -61,6 +61,7 @@
     "ultra:factcheck:file": "node agents/fact-checker.js file",
     "qa:site": "node scripts/qa-site.js",
     "qa:fix-images": "node scripts/qa-fix-images.js",
+    "seo:check": "node scripts/seo-check.js",
     "test:e2e": "playwright test",
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",

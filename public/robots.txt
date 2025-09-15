@@ -3,9 +3,30 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /admin/
+Disallow: /_next/
+Disallow: /demo-article
+Disallow: /search?*
+Disallow: /*?page=*
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /demo-article
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /demo-article
 
 # Host
 Host: https://www.trendstoday.ca
 
 # Sitemaps
 Sitemap: https://www.trendstoday.ca/sitemap.xml
+Sitemap: https://www.trendstoday.ca/news-sitemap.xml

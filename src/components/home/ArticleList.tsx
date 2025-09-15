@@ -1,8 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import { SubtlePaginationLinks } from '@/components/ui/PaginationLinks';
+import { paginateItems } from '@/lib/pagination';
 
 interface Article {
   href: string;
@@ -27,6 +30,9 @@ export default function ArticleList({
 }: ArticleListProps) {
   const [displayedArticles, setDisplayedArticles] = useState(initialArticles);
   const [currentIndex, setCurrentIndex] = useState(9); // Start after initial 9 articles
+  const [currentPage, setCurrentPage] = useState(1);
+  const router = useRouter();
+  const pathname = usePathname();
   const articlesPerLoad = 6;
 
   const loadMore = () => {
@@ -36,9 +42,21 @@ export default function ArticleList({
     );
     setDisplayedArticles([...displayedArticles, ...nextArticles]);
     setCurrentIndex(currentIndex + articlesPerLoad);
+
+    // Update URL to reflect new page (for analytics and sharing)
+    const newPage = Math.ceil((currentIndex + articlesPerLoad) / 12);
+    setCurrentPage(newPage);
+    if (newPage > 1) {
+      const newUrl = `${pathname}?page=${newPage}`;
+      window.history.replaceState({}, '', newUrl);
+    }
   };
 
   const hasMore = currentIndex < allArticles.length;
+
+  // Generate pagination info for subtle links
+  const paginationResult = paginateItems(allArticles, currentPage, 12, '');
+  const pagination = paginationResult.pagination;
 
   // Get first 3 posts for the featured layout
   const featuredPost = displayedArticles[0];
@@ -292,6 +310,37 @@ export default function ArticleList({
           </p>
         </div>
       )}
+
+      {/* Subtle Pagination Links for Crawlers (Footer Area) */}
+      <div className="mt-20 pt-8 border-t border-gray-100">
+        <SubtlePaginationLinks
+          pagination={pagination}
+          baseUrl=""
+          className="mb-8"
+        />
+        <div className="text-center">
+          <p className="text-xs text-gray-400 mb-2">
+            For search engines and accessibility:
+          </p>
+          <nav className="flex flex-wrap justify-center gap-2 text-xs">
+            {Array.from({ length: Math.min(pagination.totalPages, 10) }, (_, i) => i + 1).map((page) => (
+              <Link
+                key={page}
+                href={page === 1 ? '/' : `/page/${page}`}
+                className="px-2 py-1 text-gray-400 hover:text-gray-600 transition-colors"
+                aria-label={`View page ${page} of articles`}
+              >
+                Page {page}
+              </Link>
+            ))}
+            {pagination.totalPages > 10 && (
+              <span className="px-2 py-1 text-gray-400">
+                ... +{pagination.totalPages - 10} more pages
+              </span>
+            )}
+          </nav>
+        </div>
+      </div>
     </>
   );
 }
