@@ -33,7 +33,7 @@
         "images": {
           "type": "array",
           "items": {
-            "type": "object", 
+            "type": "object",
             "properties": {
               "url": "string",
               "alt": "string"
@@ -47,7 +47,7 @@
       "required": ["name", "brand", "price", "keyFeatures"],
       "properties": {
         "name": "string",
-        "brand": "string", 
+        "brand": "string",
         "price": {
           "type": "object",
           "properties": {
@@ -65,7 +65,7 @@
           "items": {
             "type": "object",
             "properties": {
-              "url": "string", 
+              "url": "string",
               "alt": "string"
             }
           }
@@ -90,7 +90,7 @@
       }
     },
     "verdict": {
-      "type": "object", 
+      "type": "object",
       "required": ["winner", "reasoning"],
       "properties": {
         "winner": {
@@ -106,7 +106,7 @@
               "items": "string"
             },
             "productB": {
-              "type": "array", 
+              "type": "array",
               "items": "string"
             }
           }

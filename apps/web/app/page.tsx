@@ -1,15 +1,15 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { getAllPosts } from '../lib/mdx'
-import AdSlot from '../components/AdSlot'
+import Link from 'next/link';
+import Image from 'next/image';
+import { getAllPosts } from '../lib/mdx';
+import AdSlot from '../components/AdSlot';
 
 export default async function HomePage() {
-  const posts = await getAllPosts()
-  
+  const posts = await getAllPosts();
+
   // Group posts by category
-  const featuredPost = posts[0]
-  const recentPosts = posts.slice(1, 13)
-  
+  const featuredPost = posts[0];
+  const recentPosts = posts.slice(1, 13);
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Hero Featured Post */}
@@ -30,10 +30,14 @@ export default async function HomePage() {
                   <span className="inline-block px-3 py-1 bg-blue-600 text-xs font-semibold rounded-full mb-3">
                     {featuredPost.category || 'Technology'}
                   </span>
-                  <h1 className="text-3xl font-bold mb-2">{featuredPost.title}</h1>
+                  <h1 className="text-3xl font-bold mb-2">
+                    {featuredPost.title}
+                  </h1>
                   <p className="text-gray-200 mb-3">{featuredPost.subtitle}</p>
                   <div className="flex items-center gap-4 text-sm text-gray-300">
-                    <time>{new Date(featuredPost.date).toLocaleDateString()}</time>
+                    <time>
+                      {new Date(featuredPost.date).toLocaleDateString()}
+                    </time>
                     <span>•</span>
                     <span>{featuredPost.readingTime}</span>
                   </div>
@@ -96,5 +100,5 @@ export default async function HomePage() {
       {/* Bottom Ad */}
       <AdSlot id="home-bottom" className="mt-12" />
     </div>
-  )
+  );
 }

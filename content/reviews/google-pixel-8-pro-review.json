@@ -66,7 +66,7 @@
   "prosAndCons": {
     "pros": [
       "Unmatched computational photography with truly magical AI features",
-      "Pure Android experience with fastest access to new features", 
+      "Pure Android experience with fastest access to new features",
       "Seven years of guaranteed OS updates directly from Google",
       "Excellent call screening and spam protection built-in",
       "Best-in-class voice recognition and transcription",
@@ -108,7 +108,12 @@
       },
       "performance": {
         "description": "Comprehensive performance testing with focus on Tensor G3 capabilities and limitations",
-        "tools": ["Geekbench 6", "3DMark Wild Life Extreme", "AI benchmark suite", "PCMark Work 3.0"],
+        "tools": [
+          "Geekbench 6",
+          "3DMark Wild Life Extreme",
+          "AI benchmark suite",
+          "PCMark Work 3.0"
+        ],
         "realWorldTests": [
           "Photo editing with Google Photos and third-party apps",
           "AI feature processing speed and accuracy",
@@ -451,7 +456,11 @@
     "videoRecording": {
       "maxResolution": "4K at 60fps",
       "formats": ["HEVC", "AV1"],
-      "features": ["Audio Magic Eraser", "Magic Eraser for Video", "Long Exposure"]
+      "features": [
+        "Audio Magic Eraser",
+        "Magic Eraser for Video",
+        "Long Exposure"
+      ]
     },
     "batteryAndCharging": {
       "capacity": "5050 mAh",
@@ -508,7 +517,7 @@
     {
       "name": "iPhone 15 Pro",
       "reason": "Superior performance and video recording",
-      "link": "/reviews/iphone-15-pro-review", 
+      "link": "/reviews/iphone-15-pro-review",
       "price": 999,
       "keyDifference": "A17 Pro performance and premium build vs AI photography magic"
     },
@@ -532,7 +541,7 @@
       "accessDate": "2024-09-20"
     },
     {
-      "title": "Pixel Camera AI Features Analysis", 
+      "title": "Pixel Camera AI Features Analysis",
       "url": "https://ai.googleblog.com/2023/10/pixel-8-pro-camera-features.html",
       "accessDate": "2024-09-25"
     },
@@ -543,9 +552,16 @@
     }
   ],
   "seo": {
-    "metaTitle": "Google Pixel 8 Pro Review: AI Photography Revolution | Trends Today", 
+    "metaTitle": "Google Pixel 8 Pro Review: AI Photography Revolution | Trends Today",
     "metaDescription": "Comprehensive Pixel 8 Pro review: Magic Eraser, Best Take, Tensor G3 performance, 7-year updates. The ultimate AI camera phone tested.",
-    "keywords": ["Google Pixel 8 Pro review", "Magic Eraser", "Best Take", "Tensor G3", "AI photography", "computational photography"],
+    "keywords": [
+      "Google Pixel 8 Pro review",
+      "Magic Eraser",
+      "Best Take",
+      "Tensor G3",
+      "AI photography",
+      "computational photography"
+    ],
     "canonicalUrl": "https://trendstoday.ca/reviews/google-pixel-8-pro-review"
   },
   "publishedDate": "2024-09-28",
@@ -555,7 +571,13 @@
     "name": "Sarah Johnson",
     "title": "Senior Photography Technology Editor",
     "bio": "Sarah Johnson is a Senior Photography Technology Editor at Trends Today with over 10 years of experience in mobile photography and AI technology. She holds a background in computer vision and has extensively covered the evolution of computational photography.",
-    "expertise": ["Mobile Photography", "AI Technology", "Computational Photography", "Android Systems", "Google Services"],
+    "expertise": [
+      "Mobile Photography",
+      "AI Technology",
+      "Computational Photography",
+      "Android Systems",
+      "Google Services"
+    ],
     "credentials": [
       "M.S. Computer Vision, MIT",
       "Former Research Engineer at Adobe",
@@ -563,7 +585,7 @@
     ],
     "socialMedia": {
       "twitter": "sarahj_photo",
-      "linkedin": "sarahjohnson-phototech", 
+      "linkedin": "sarahjohnson-phototech",
       "email": "sarah.johnson@trendstoday.ca"
     },
     "avatar": "/images/authors/sarah-johnson.jpg"

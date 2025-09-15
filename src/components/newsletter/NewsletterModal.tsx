@@ -49,7 +49,7 @@ export default function NewsletterModal() {
         >
           <XMarkIcon className="w-5 h-5 text-gray-800" />
         </button>
-        
+
         <div className="bg-white rounded-lg shadow-2xl overflow-hidden">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white text-center">
             <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -59,17 +59,19 @@ export default function NewsletterModal() {
               </svg>
             </div>
             <h2 className="text-2xl font-bold mb-2">Wait! Don't Miss Out</h2>
-            <p className="text-blue-200">Join 50,000+ tech enthusiasts getting our weekly insights</p>
+            <p className="text-blue-200">
+              Join 50,000+ tech enthusiasts getting our weekly insights
+            </p>
           </div>
-          
+
           <div className="p-6">
-            <NewsletterSignup 
-              variant="modal" 
+            <NewsletterSignup
+              variant="modal"
               showLeadMagnet={true}
               leadMagnetTitle="Free: Ultimate Tech Buying Guide 2025"
               leadMagnetDescription="50+ pages of expert recommendations, deal alerts, and insider tips"
             />
-            
+
             <div className="mt-6 grid grid-cols-3 gap-4 text-center text-sm">
               <div>
                 <div className="text-2xl font-bold text-blue-600">50K+</div>

@@ -66,7 +66,7 @@
   "prosAndCons": {
     "pros": [
       "Excellent battery optimization delivers all-day usage",
-      "Snapdragon 8 Gen 3 provides smooth performance with better efficiency", 
+      "Snapdragon 8 Gen 3 provides smooth performance with better efficiency",
       "Galaxy AI features are genuinely useful, not just marketing",
       "Bright, vibrant display perfect for outdoor use",
       "Seven years of guaranteed software updates",
@@ -87,7 +87,13 @@
     "methodology": {
       "performance": {
         "description": "CPU and GPU performance tested using industry-standard benchmarks and real-world applications",
-        "tools": ["Geekbench 6", "3DMark Wild Life Extreme", "AnTuTu Benchmark v10", "GFXBench Manhattan", "PCMark Work 3.0"],
+        "tools": [
+          "Geekbench 6",
+          "3DMark Wild Life Extreme",
+          "AnTuTu Benchmark v10",
+          "GFXBench Manhattan",
+          "PCMark Work 3.0"
+        ],
         "testConditions": "Room temperature (22°C), 50% battery, background apps cleared, airplane mode during benchmarks",
         "realWorldTests": [
           "4K video editing in Adobe Premiere Rush (45-minute timeline)",
@@ -434,7 +440,11 @@
     "videoRecording": {
       "maxResolution": "8K at 24fps, 4K at 60fps",
       "formats": ["HEVC", "H.264"],
-      "features": ["Super Steady stabilization", "Director's View", "Portrait video"]
+      "features": [
+        "Super Steady stabilization",
+        "Director's View",
+        "Portrait video"
+      ]
     },
     "batteryAndCharging": {
       "capacity": "4000 mAh",
@@ -454,7 +464,7 @@
     "sensors": [
       "Ultrasonic fingerprint sensor",
       "Accelerometer",
-      "Barometer", 
+      "Barometer",
       "Gyro sensor",
       "Geomagnetic sensor",
       "Hall sensor",
@@ -528,17 +538,29 @@
   "seo": {
     "metaTitle": "Samsung Galaxy S24 Review: Android Flagship Excellence | Trends Today",
     "metaDescription": "Comprehensive Galaxy S24 review after 3 weeks testing. Galaxy AI features, Snapdragon 8 Gen 3 performance, camera quality, and value analysis.",
-    "keywords": ["Samsung Galaxy S24 review", "Galaxy AI features", "Snapdragon 8 Gen 3 performance", "Galaxy S24 vs iPhone 15", "Android flagship 2024"],
+    "keywords": [
+      "Samsung Galaxy S24 review",
+      "Galaxy AI features",
+      "Snapdragon 8 Gen 3 performance",
+      "Galaxy S24 vs iPhone 15",
+      "Android flagship 2024"
+    ],
     "canonicalUrl": "https://trendstoday.ca/reviews/samsung-galaxy-s24-review"
   },
   "publishedDate": "2024-09-25",
   "lastUpdated": "2024-12-01",
   "author": {
     "id": "alex-chen",
-    "name": "Alex Chen", 
+    "name": "Alex Chen",
     "title": "Senior Mobile Technology Editor",
     "bio": "Alex Chen is a Senior Mobile Technology Editor at Trends Today with over 8 years of experience in the tech industry. Formerly a hardware engineer at Samsung Electronics, Alex brings deep technical expertise to smartphone and mobile device reviews.",
-    "expertise": ["Mobile Technology", "Android Systems", "Performance Analysis", "AI Features", "Mobile Photography"],
+    "expertise": [
+      "Mobile Technology",
+      "Android Systems",
+      "Performance Analysis",
+      "AI Features",
+      "Mobile Photography"
+    ],
     "credentials": [
       "M.S. Electrical Engineering, Stanford University",
       "Former Hardware Engineer at Samsung Electronics",

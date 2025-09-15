@@ -23,18 +23,18 @@ async function getNewsArticle(slug: string) {
   try {
     const contentDir = path.join(process.cwd(), 'content', 'news');
     const filePath = path.join(contentDir, `${slug}.mdx`);
-    
+
     if (!fs.existsSync(filePath)) {
       return null;
     }
-    
+
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const { data, content } = matter(fileContent);
-    
+
     return {
       frontmatter: data,
       content,
-      slug
+      slug,
     };
   } catch (error) {
     return null;
@@ -45,16 +45,16 @@ async function getNewsArticle(slug: string) {
 export async function generateStaticParams() {
   try {
     const contentDir = path.join(process.cwd(), 'content', 'news');
-    
+
     if (!fs.existsSync(contentDir)) {
       return [];
     }
-    
+
     const files = fs.readdirSync(contentDir);
-    
+
     return files
-      .filter(file => file.endsWith('.mdx'))
-      .map(file => ({
+      .filter((file) => file.endsWith('.mdx'))
+      .map((file) => ({
         slug: file.replace('.mdx', ''),
       }));
   } catch (error) {
@@ -63,9 +63,11 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: NewsPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: NewsPageProps): Promise<Metadata> {
   const article = await getNewsArticle(params.slug);
-  
+
   if (!article) {
     return {
       title: 'Article Not Found | Trends Today',
@@ -74,26 +76,39 @@ export async function generateMetadata({ params }: NewsPageProps): Promise<Metad
   }
 
   const { frontmatter } = article;
-  
+
   return {
     title: frontmatter.title + ' | Trends Today',
     description: frontmatter.description,
     keywords: frontmatter.tags?.join(', '),
-    authors: [{ name: (typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || 'Trends Today Editorial' }],
+    authors: [
+      {
+        name:
+          (typeof frontmatter.author === 'string'
+            ? frontmatter.author
+            : frontmatter.author?.name) || 'Trends Today Editorial',
+      },
+    ],
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
       type: 'article',
       publishedTime: frontmatter.publishedAt,
-      authors: [(typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || 'Trends Today Editorial'],
-      images: frontmatter.image ? [
-        {
-          url: frontmatter.image,
-          width: 1200,
-          height: 630,
-          alt: frontmatter.title,
-        }
-      ] : [],
+      authors: [
+        (typeof frontmatter.author === 'string'
+          ? frontmatter.author
+          : frontmatter.author?.name) || 'Trends Today Editorial',
+      ],
+      images: frontmatter.image
+        ? [
+            {
+              url: frontmatter.image,
+              width: 1200,
+              height: 630,
+              alt: frontmatter.title,
+            },
+          ]
+        : [],
     },
     twitter: {
       card: 'summary_large_image',
@@ -106,55 +121,62 @@ export async function generateMetadata({ params }: NewsPageProps): Promise<Metad
 
 export default async function NewsPage({ params }: NewsPageProps) {
   const article = await getNewsArticle(params.slug);
-  
+
   if (!article) {
     notFound();
   }
-  
+
   const { frontmatter, content } = article;
-  
+
   // Generate structured data for the article
   const articleStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    "headline": frontmatter.title,
-    "description": frontmatter.description,
-    "image": frontmatter.image ? `https://trendstoday.ca${frontmatter.image}` : undefined,
-    "datePublished": frontmatter.publishedAt,
-    "dateModified": frontmatter.updatedAt || frontmatter.publishedAt,
-    "author": {
-      "@type": "Person",
-      "name": (typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || "Trends Today Editorial"
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    image: frontmatter.image
+      ? `https://trendstoday.ca${frontmatter.image}`
+      : undefined,
+    datePublished: frontmatter.publishedAt,
+    dateModified: frontmatter.updatedAt || frontmatter.publishedAt,
+    author: {
+      '@type': 'Person',
+      name:
+        (typeof frontmatter.author === 'string'
+          ? frontmatter.author
+          : frontmatter.author?.name) || 'Trends Today Editorial',
     },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Trends Today",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://trendstoday.ca/logo.png"
-      }
+    publisher: {
+      '@type': 'Organization',
+      name: 'Trends Today',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://trendstoday.ca/logo.png',
+      },
     },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://trendstoday.ca/news/${params.slug}`
-    }
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://trendstoday.ca/news/${params.slug}`,
+    },
   };
-  
+
   return (
     <main className="min-h-screen bg-white">
       <StructuredData data={articleStructuredData} />
-      
+
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Article Header */}
         <header className="mb-8">
           <div className="mb-4">
             {(() => {
-              const cat = getCategoryStyles(frontmatter.category)
+              const cat = getCategoryStyles(frontmatter.category);
               return (
-                <span className={`inline-block px-3 py-1 text-sm font-bold uppercase tracking-wide rounded-full ${cat.badge}`}>
+                <span
+                  className={`inline-block px-3 py-1 text-sm font-bold uppercase tracking-wide rounded-full ${cat.badge}`}
+                >
                   {frontmatter.category || 'News'}
                 </span>
-              )
+              );
             })()}
             {frontmatter.featured && (
               <span className="ml-2 inline-block px-3 py-1 bg-blue-600 text-white text-sm font-bold uppercase tracking-wide rounded-sm">
@@ -162,19 +184,21 @@ export default async function NewsPage({ params }: NewsPageProps) {
               </span>
             )}
           </div>
-          
+
           <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
             {frontmatter.title}
           </h1>
-          
+
           <p className="text-xl text-gray-800 mb-6 leading-relaxed">
             {frontmatter.description}
           </p>
-          
+
           <div className="flex items-center gap-4 text-gray-900 border-b pb-6">
             <div className="flex items-center gap-2">
               <span className="font-medium text-gray-900">
-                {(typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || 'Trends Today Editorial'}
+                {(typeof frontmatter.author === 'string'
+                  ? frontmatter.author
+                  : frontmatter.author?.name) || 'Trends Today Editorial'}
               </span>
             </div>
             <span>•</span>
@@ -182,7 +206,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
               {new Date(frontmatter.publishedAt).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
-                day: 'numeric'
+                day: 'numeric',
               })}
             </time>
             {frontmatter.readingTime && (
@@ -193,7 +217,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
             )}
           </div>
         </header>
-        
+
         {/* Featured Image */}
         {frontmatter.image && (
           <div className="mb-8">
@@ -208,28 +232,39 @@ export default async function NewsPage({ params }: NewsPageProps) {
             {(frontmatter.imageCredit || frontmatter.imageIsConcept) && (
               <div className="mt-2 text-xs text-gray-600 flex items-center gap-2">
                 {frontmatter.imageIsConcept && (
-                  <span className="inline-flex items-center px-2 py-0.5 bg-yellow-100 text-yellow-800 font-semibold rounded-sm">Concept render</span>
+                  <span className="inline-flex items-center px-2 py-0.5 bg-yellow-100 text-yellow-800 font-semibold rounded-sm">
+                    Concept render
+                  </span>
                 )}
                 {frontmatter.imageCredit && (
                   <span>
-                    Image credit: {frontmatter.imageCredit.url ? (
-                      <a href={frontmatter.imageCredit.url} target="_blank" rel="noopener noreferrer" className="underline">
+                    Image credit:{' '}
+                    {frontmatter.imageCredit.url ? (
+                      <a
+                        href={frontmatter.imageCredit.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline"
+                      >
                         {frontmatter.imageCredit.name || 'Source'}
                       </a>
                     ) : (
                       frontmatter.imageCredit.name || 'Source'
                     )}
-                    {frontmatter.imageLicense ? ` · ${frontmatter.imageLicense}` : ''}
+                    {frontmatter.imageLicense
+                      ? ` · ${frontmatter.imageLicense}`
+                      : ''}
                   </span>
                 )}
               </div>
             )}
           </div>
         )}
-        
+
         {/* Article Content */}
         <article className="max-w-6xl mx-auto mb-12">
-          <div className="prose prose-lg max-w-none text-gray-900 article-content
+          <div
+            className="prose prose-lg max-w-none text-gray-900 article-content
             [&>h1]:text-4xl [&>h1]:font-bold [&>h1]:text-gray-900 [&>h1]:mb-6 [&>h1]:mt-8 [&>h1]:tracking-tight
             [&>h2]:text-3xl [&>h2]:font-bold [&>h2]:text-gray-900 [&>h2]:mb-4 [&>h2]:mt-8 [&>h2]:border-b [&>h2]:border-gray-200 [&>h2]:pb-2 [&>h2]:tracking-tight
             [&>h3]:text-2xl [&>h3]:font-bold [&>h3]:text-gray-900 [&>h3]:mb-3 [&>h3]:mt-6 [&>h3]:tracking-tight
@@ -248,16 +283,17 @@ export default async function NewsPage({ params }: NewsPageProps) {
             [&>table]:text-sm [&>table]:mb-6
             [&>th]:bg-gray-100 [&>th]:font-semibold [&>th]:text-gray-900 [&>th]:px-4 [&>th]:py-2
             [&>td]:px-4 [&>td]:py-2 [&>td]:text-gray-900 [&>td]:border-t [&>td]:border-gray-200
-            [&>hr]:border-gray-300 [&>hr]:my-8">
-            <MDXRemote 
-              source={content} 
+            [&>hr]:border-gray-300 [&>hr]:my-8"
+          >
+            <MDXRemote
+              source={content}
               components={{
-                img: MDXImage
+                img: MDXImage,
               }}
             />
           </div>
         </article>
-        
+
         {/* Article Footer */}
         <footer className="border-t pt-8 space-y-8">
           {/* Tags */}
@@ -276,16 +312,16 @@ export default async function NewsPage({ params }: NewsPageProps) {
               </div>
             </div>
           )}
-          
+
           {/* Author Box */}
           {frontmatter.author && (
-            <AuthorBox 
-              author={frontmatter.author} 
+            <AuthorBox
+              author={frontmatter.author}
               publishedAt={frontmatter.publishedAt}
               lastUpdated={frontmatter.updatedAt}
             />
           )}
-          
+
           {/* Citations */}
           {frontmatter.sources && (
             <CitationsList sources={frontmatter.sources} />

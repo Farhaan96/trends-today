@@ -1,43 +1,46 @@
-'use client'
+'use client';
 
-import { useEffect } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
-import Script from 'next/script'
+import { useEffect } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import Script from 'next/script';
 
 // Analytics types are defined in src/types/global.d.ts
 
 interface AnalyticsProps {
-  googleAnalyticsId?: string
-  microsoftClarityId?: string
-  facebookPixelId?: string
+  googleAnalyticsId?: string;
+  microsoftClarityId?: string;
+  facebookPixelId?: string;
 }
 
 // Custom event tracking
-export const trackEvent = (eventName: string, parameters?: Record<string, any>) => {
+export const trackEvent = (
+  eventName: string,
+  parameters?: Record<string, any>
+) => {
   // Google Analytics 4
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', eventName, {
       event_category: 'engagement',
       event_label: eventName,
       ...parameters,
-    })
+    });
   }
 
   // Microsoft Clarity custom events
   if (typeof window !== 'undefined' && window.clarity) {
-    window.clarity('event', eventName)
+    window.clarity('event', eventName);
   }
 
   // Facebook Pixel
   if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq('trackCustom', eventName, parameters)
+    window.fbq('trackCustom', eventName, parameters);
   }
 
   // Console log for development
   if (process.env.NODE_ENV === 'development') {
-    console.log('Analytics Event:', eventName, parameters)
+    console.log('Analytics Event:', eventName, parameters);
   }
-}
+};
 
 // Page view tracking
 export const trackPageView = (url: string, title?: string) => {
@@ -45,27 +48,31 @@ export const trackPageView = (url: string, title?: string) => {
     window.gtag('config', process.env.NEXT_PUBLIC_GA_ID!, {
       page_title: title,
       page_location: url,
-    })
+    });
   }
-}
+};
 
 // Article interaction tracking
-export const trackArticleInteraction = (action: string, articleTitle: string, category: string) => {
+export const trackArticleInteraction = (
+  action: string,
+  articleTitle: string,
+  category: string
+) => {
   trackEvent('article_interaction', {
     action,
     article_title: articleTitle,
     category,
     timestamp: new Date().toISOString(),
-  })
-}
+  });
+};
 
 // Newsletter subscription tracking
 export const trackNewsletterSignup = (source: string) => {
   trackEvent('newsletter_signup', {
     source,
     timestamp: new Date().toISOString(),
-  })
-}
+  });
+};
 
 // Social sharing tracking
 export const trackSocialShare = (platform: string, articleTitle: string) => {
@@ -73,80 +80,82 @@ export const trackSocialShare = (platform: string, articleTitle: string) => {
     platform,
     article_title: articleTitle,
     timestamp: new Date().toISOString(),
-  })
-}
+  });
+};
 
 // Scroll depth tracking
 export const trackScrollDepth = (depth: number, articleTitle: string) => {
   trackEvent('scroll_depth', {
     depth: Math.round(depth),
     article_title: articleTitle,
-  })
-}
+  });
+};
 
 export default function Analytics({
   googleAnalyticsId = process.env.NEXT_PUBLIC_GA_ID,
   microsoftClarityId = process.env.NEXT_PUBLIC_CLARITY_ID,
   facebookPixelId = process.env.NEXT_PUBLIC_FB_PIXEL_ID,
 }: AnalyticsProps) {
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   // Track page views
   useEffect(() => {
-    const url = `${pathname}${searchParams ? `?${searchParams}` : ''}`
-    trackPageView(url)
-  }, [pathname, searchParams])
+    const url = `${pathname}${searchParams ? `?${searchParams}` : ''}`;
+    trackPageView(url);
+  }, [pathname, searchParams]);
 
   // Set up scroll depth tracking
   useEffect(() => {
-    let maxScrollDepth = 0
-    let scrollTimeout: NodeJS.Timeout
+    let maxScrollDepth = 0;
+    let scrollTimeout: NodeJS.Timeout;
 
     const handleScroll = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight
-      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
 
       if (scrollPercent > maxScrollDepth) {
-        maxScrollDepth = scrollPercent
+        maxScrollDepth = scrollPercent;
 
         // Track at 25%, 50%, 75%, and 100% scroll depths
-        const milestones = [25, 50, 75, 100]
+        const milestones = [25, 50, 75, 100];
         for (const milestone of milestones) {
           if (scrollPercent >= milestone && maxScrollDepth < milestone + 5) {
-            clearTimeout(scrollTimeout)
+            clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
-              trackScrollDepth(milestone, document.title)
-            }, 1000)
-            break
+              trackScrollDepth(milestone, document.title);
+            }, 1000);
+            break;
           }
         }
       }
-    }
+    };
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-      clearTimeout(scrollTimeout)
-    }
-  }, [])
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, []);
 
   // Set up time on page tracking
   useEffect(() => {
-    const startTime = Date.now()
+    const startTime = Date.now();
 
     const handleBeforeUnload = () => {
-      const timeOnPage = Math.round((Date.now() - startTime) / 1000)
+      const timeOnPage = Math.round((Date.now() - startTime) / 1000);
       trackEvent('time_on_page', {
         seconds: timeOnPage,
         page: pathname,
-      })
-    }
+      });
+    };
 
-    window.addEventListener('beforeunload', handleBeforeUnload)
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
-  }, [pathname])
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [pathname]);
 
   return (
     <>
@@ -280,5 +289,5 @@ export default function Analytics({
         `}
       </Script>
     </>
-  )
+  );
 }

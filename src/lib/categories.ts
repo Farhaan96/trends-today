@@ -1,4 +1,11 @@
-export type CategoryKey = 'science' | 'culture' | 'psychology' | 'technology' | 'health' | 'space' | 'lifestyle';
+export type CategoryKey =
+  | 'science'
+  | 'culture'
+  | 'psychology'
+  | 'technology'
+  | 'health'
+  | 'space'
+  | 'lifestyle';
 
 type Style = {
   badge: string; // pill background + text
@@ -77,4 +84,3 @@ export function getCategoryDescription(input?: string): string {
       return '';
   }
 }
-

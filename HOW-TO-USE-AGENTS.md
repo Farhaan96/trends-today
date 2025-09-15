@@ -9,6 +9,7 @@ Claude Code has a special command for managing subagents:
 ```
 
 This command allows you to:
+
 - View all available subagents
 - Create new subagents
 - Edit existing subagents
@@ -23,26 +24,33 @@ This command allows you to:
 ## Invoking Agents (Two Methods)
 
 ### Method 1: Explicit Invocation
+
 Use this exact format with the `>` prefix:
+
 ```
 > Use the ultra-short-content-creator subagent to write an article about AI
 ```
 
 ### Method 2: Natural Language
+
 Simply describe what you need:
+
 ```
 "Create an ultra-short article about quantum computing"
 ```
+
 Claude will automatically select the appropriate agent based on descriptions.
 
 ## Testing the Pipeline
 
 ### Correct Way:
+
 ```
 > Use the batch-orchestrator subagent to run a morning content batch
 ```
 
 The orchestrator will then delegate to other agents:
+
 ```
 > Use the trending-topics-discovery subagent to find topics
 > Use the ultra-short-content-creator subagent to write articles
@@ -52,6 +60,7 @@ The orchestrator will then delegate to other agents:
 ## Verifying Agents Work
 
 When agents are properly invoked:
+
 1. Their name appears in a colored box
 2. They operate as separate entities
 3. They have their own context and tools

@@ -16,9 +16,7 @@ export default function CitationsList({ sources }: CitationsListProps) {
       <ol className="space-y-2">
         {sources.map((source, index) => (
           <li key={index} className="text-sm">
-            <span className="font-medium text-gray-900">
-              {index + 1}.{' '}
-            </span>
+            <span className="font-medium text-gray-900">{index + 1}. </span>
             <a
               href={source.url}
               target="_blank"
@@ -32,7 +30,8 @@ export default function CitationsList({ sources }: CitationsListProps) {
             )}
             {source.accessDate && (
               <span className="text-gray-900 text-xs">
-                {' '}(Accessed: {source.accessDate})
+                {' '}
+                (Accessed: {source.accessDate})
               </span>
             )}
           </li>

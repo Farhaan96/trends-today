@@ -1,6 +1,7 @@
 # Fact-Checking Progress Tracker
 
 ## Overview
+
 - **Started**: January 13, 2025
 - **Method**: Using Perplexity API (sonar-small model for cost efficiency)
 - **Goal**: Verify all factual claims and add proper citations to articles
@@ -8,6 +9,7 @@
 ## Articles to Check
 
 ### Technology (7 articles)
+
 - [x] ai-agents-revolution-13-billion-market-taking-over-2025.mdx ✅
 - [x] ai-agents-workplace-productivity-2025.mdx ✅
 - [x] quantum-computing-2025-commercial-breakthrough.mdx ✅
@@ -17,28 +19,33 @@
 - [ ] web3-authentication-replaces-passwords.mdx
 
 ### Space (4 articles)
+
 - [x] toi-2431-b-impossible-planet-defies-physics-nasa-discovery.mdx ✅
 - [ ] 500-year-old-manuscript-reveals-ancient-astronomy-knowledge.mdx
 - [ ] space-tourism-reaches-mainstream.mdx
 - [ ] asteroid-mining-becomes-reality.mdx
 
 ### Psychology (4 articles)
+
 - [x] why-introverts-excel-at-deep-work-psychology-research-2025.mdx ✅
 - [ ] the-psychology-behind-why-we-procrastinate-even-when-we-know.mdx
 - [x] digital-detox-improves-mental-health.mdx ✅
 - [ ] your-brain-lies-to-you-cognitive-biases-2025.mdx
 
 ### Health (3 articles)
+
 - [x] precision-medicine-revolution-2025.mdx ✅
 - [ ] personalized-medicine-using-ai.mdx
 - [ ] mental-health-apps-show-clinical-results.mdx
 
 ### Science (3 articles)
+
 - [ ] lab-grown-organs-pass-human-trials.mdx
 - [x] crispr-therapeutics-breakthrough-2025.mdx ✅
 - [ ] room-temperature-superconductor-confirmed.mdx
 
 ### Culture (4 articles)
+
 - [ ] new-study-reveals-surprising-link-between-music-taste-and-in.mdx
 - [x] creator-economy-hits-500-billion.mdx ✅
 - [ ] ai-art-wins-major-competition.mdx
@@ -49,6 +56,7 @@
 ## Fact-Checking Results
 
 ### Article 1: AI Agents Revolution Claims Fact-Check
+
 **File**: `content/technology/ai-agents-revolution-13-billion-market-taking-over-2025.mdx`
 **Status**: ✅ Completed
 **Date Verified**: January 13, 2025
@@ -58,7 +66,7 @@
 1. **"AI agents market valued at $7.6-7.9 billion by 2025"**
    - ✅ **VERIFIED**: Multiple credible sources confirm this range
    - Precedence Research: $7.92 billion in 2025
-   - Grand View Research: $7.6 billion in 2025  
+   - Grand View Research: $7.6 billion in 2025
    - Global Market Insights: $7.7 billion in 2025
    - **Sources**: Precedence Research, Grand View Research, Global Market Insights
 
@@ -97,6 +105,7 @@
    - ❌ **UNSUBSTANTIATED**: No evidence found to support this claim
 
 #### Sources Added:
+
 - Precedence Research: AI Agents Market Report 2025
 - Grand View Research: AI Agents Market Analysis
 - Global Market Insights: AI Agents Market Study
@@ -105,12 +114,14 @@
 - Australian Government: Microsoft 365 Copilot Evaluation
 
 #### Updates Needed:
+
 - **High Priority**: Correct false job replacement statistics (73%, 500K, 30%)
 - **Medium Priority**: Clarify Microsoft Copilot productivity claims with context
 - **Medium Priority**: Remove unsubstantiated Amazon, JPMorgan, and Google claims
 - **Low Priority**: Update market value claim from $13B to verified $7.6-7.9B range
 
 ### Google Willow Quantum Computing Claims Fact-Check
+
 **Status**: ✅ Completed  
 **Date Verified**: January 13, 2025
 **Method**: Perplexity API verification with multiple credible sources
@@ -170,7 +181,7 @@
 
 9. **"Goldman Sachs pricing derivatives 1000x faster"**
    - ⚠️ **PARTIALLY TRUE**: Research projection, not current operational capability
-   - **Reality**: Goldman research shows *potential* for 1000x speedup with mature quantum systems
+   - **Reality**: Goldman research shows _potential_ for 1000x speedup with mature quantum systems
    - **Current state**: Developing quantum algorithms with IBM, QC Ware, Quantum Motion
    - **Timeline**: Research-stage development, not production deployment
    - **Sources**: Goldman Sachs careers blog, Patent PC analysis, Waters Technology
@@ -182,6 +193,7 @@
     - **Sources**: McKinsey Quantum Technology Monitor, McKinsey Digital insights
 
 #### Sources Added:
+
 - Google Quantum AI official blog and Nature publications
 - Technology Magazine and The Quantum Insider
 - TechSpot and PC Gamer technical analysis
@@ -191,6 +203,7 @@
 - Academic sources from Imperial College, St. Jude Research
 
 #### Updates Needed:
+
 - **High Priority**: Correct false RSA encryption timeline (hours → requires massive future systems)
 - **High Priority**: Remove false drug discovery compression claims (10 years → 10 weeks)
 - **High Priority**: Correct weather forecasting claims (30-day accuracy not possible)
@@ -201,6 +214,7 @@
 ---
 
 ## Summary Statistics
+
 - **Total Articles**: 25
 - **Completed & Corrected**: 9
   - AI Agents Revolution ✅ (Technology)
@@ -225,22 +239,26 @@
 ## Key Findings from Google Willow Quantum Computing Fact-Check
 
 ### ✅ Verified Claims (4/10):
+
 1. **5-minute computation vs 10 septillion years** - Accurate for RCS benchmark (synthetic test)
 2. **105 qubits with ~99.9% accuracy** - 105 qubits confirmed; accuracy ~99.857%
 3. **Accuracy improves with more qubits** - Historic quantum error correction breakthrough
 4. **Volkswagen Lisbon traffic optimization** - Real pilot project with D-Wave quantum computer
 
 ### ⚠️ Partially True Claims (2/10):
+
 5. **Error correction 20x improvement** - Closer to 2-5x vs. Sycamore, but exponential scaling achieved
 6. **Goldman Sachs 1000x faster derivatives** - Research projection for future systems, not current
 
 ### ❌ False/Overstated Claims (4/10):
+
 7. **RSA encryption cracked in hours** - Requires 1M+ qubits running for weeks, not hours
 8. **Drug discovery: 10 years → 10 weeks** - Massive overstatement of current capabilities
 9. **30-day weather forecasts** - Not possible due to atmospheric chaos, regardless of computing power
 10. **McKinsey "quantum or die" by 2030** - Misrepresents McKinsey's gradual adoption projections
 
 ### 📊 Credibility Assessment:
+
 - **Overall Article Accuracy**: 60% (6/10 claims verified/partially true)
 - **Major Issues**: False timelines for RSA encryption, drug discovery, and weather forecasting
 - **Technical Accuracy**: Strong on core Willow specifications; weak on application claims
@@ -249,6 +267,7 @@
 ## Combined Fact-Check Summary
 
 ### ✅ All Verified Claims (6/19 total):
+
 - AI agents market $7.6-7.9B by 2025
 - 52% enterprise AI agent adoption
 - Willow 5-minute RCS computation benchmark
@@ -257,20 +276,24 @@
 - Volkswagen Lisbon quantum traffic optimization pilot
 
 ### ⚠️ All Partially True Claims (3/19 total):
+
 - Microsoft Copilot 70% improvement (context needed)
 - Quantum error correction 20x improvement (2-5x more accurate)
 - Goldman Sachs 1000x derivatives speedup (research projection)
 
 ### ❌ All False/Unsubstantiated Claims (10/19 total):
+
 - AI: 73% Fortune 500 worker replacement, 500K jobs lost Q1 2025, various corporate claims
 - Quantum: RSA hours timeline, drug discovery compression, 30-day weather, McKinsey prediction
 
 ### 📊 Overall Assessment:
+
 - **Combined Accuracy Rate**: 47% (9/19 claims verified/partially true)
 - **Pattern**: Technical specifications often accurate; application/timeline claims frequently overstated
 - **Priority**: Focus corrections on false timeline and adoption claims while preserving verified research
 
 ## Notes
+
 - Using Perplexity's sonar-small model for cost efficiency
 - Each article takes approximately 2-3 minutes to fully verify
 - Priority given to articles with specific numerical claims and statistics

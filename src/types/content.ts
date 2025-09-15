@@ -166,7 +166,7 @@ export interface NewsContent {
   slug: string;
   summary: string;
   content?: string;
-  category: 
+  category:
     | 'smartphones'
     | 'laptops'
     | 'gaming'

@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import { 
-  UserIcon, 
-  CheckBadgeIcon, 
+import {
+  UserIcon,
+  CheckBadgeIcon,
   AcademicCapIcon,
   ClockIcon,
-  CalendarIcon
+  CalendarIcon,
 } from '@heroicons/react/24/outline';
 
 interface Author {
@@ -48,22 +48,24 @@ interface AuthorBoxProps {
   trustSignals?: TrustSignals;
 }
 
-export default function AuthorBox({ 
-  author, 
-  publishedAt, 
-  lastUpdated, 
-  reviewMetrics, 
-  trustSignals 
+export default function AuthorBox({
+  author,
+  publishedAt,
+  lastUpdated,
+  reviewMetrics,
+  trustSignals,
 }: AuthorBoxProps) {
   const twitterHandle = author.socialMedia?.twitter || author.twitter;
-  
+
   return (
     <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg overflow-hidden my-8">
       {/* Trust Signals Header */}
       {trustSignals && (
         <div className="bg-white border-b border-blue-200 px-6 py-3">
           <div className="flex flex-wrap items-center gap-4 text-xs">
-            <span className="font-semibold text-gray-900">Trust Indicators:</span>
+            <span className="font-semibold text-gray-900">
+              Trust Indicators:
+            </span>
             {trustSignals.independentPurchase && (
               <div className="flex items-center text-green-700">
                 <CheckBadgeIcon className="w-3 h-3 mr-1" />
@@ -85,7 +87,7 @@ export default function AuthorBox({
           </div>
         </div>
       )}
-      
+
       <div className="p-6">
         <div className="flex items-start space-x-4">
           <div className="flex-shrink-0 relative">
@@ -96,14 +98,16 @@ export default function AuthorBox({
               <CheckBadgeIcon className="w-3 h-3 text-white" />
             </div>
           </div>
-          
+
           <div className="flex-1">
             <div className="flex items-center justify-between mb-2">
               <div>
                 <div className="flex items-center space-x-2">
-                  <h3 className="text-lg font-bold text-gray-900">{author.name}</h3>
+                  <h3 className="text-lg font-bold text-gray-900">
+                    {author.name}
+                  </h3>
                   {author.id && (
-                    <Link 
+                    <Link
                       href={`/author/${author.id}`}
                       className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                     >
@@ -112,10 +116,12 @@ export default function AuthorBox({
                   )}
                 </div>
                 {author.title && (
-                  <p className="text-blue-700 font-semibold text-sm">{author.title}</p>
+                  <p className="text-blue-700 font-semibold text-sm">
+                    {author.title}
+                  </p>
                 )}
               </div>
-              
+
               {twitterHandle && (
                 <a
                   href={`https://twitter.com/${twitterHandle}`}
@@ -127,13 +133,15 @@ export default function AuthorBox({
                 </a>
               )}
             </div>
-            
+
             {author.bio && (
               <p className="text-gray-900 text-sm mt-2 leading-relaxed">
-                {typeof author.bio === 'string' ? author.bio : String(author.bio)}
+                {typeof author.bio === 'string'
+                  ? author.bio
+                  : String(author.bio)}
               </p>
             )}
-            
+
             {/* Credentials */}
             {author.credentials && author.credentials.length > 0 && (
               <div className="mt-3">
@@ -158,7 +166,7 @@ export default function AuthorBox({
                 </div>
               </div>
             )}
-            
+
             {/* Expertise */}
             {author.expertise && author.expertise.length > 0 && (
               <div className="flex flex-wrap gap-1 mt-3">
@@ -190,40 +198,72 @@ export default function AuthorBox({
             {reviewMetrics ? (
               <div className="space-y-1 text-xs text-gray-800">
                 {reviewMetrics.testingPeriod && (
-                  <div>Testing period: <span className="font-medium">{reviewMetrics.testingPeriod}</span></div>
+                  <div>
+                    Testing period:{' '}
+                    <span className="font-medium">
+                      {reviewMetrics.testingPeriod}
+                    </span>
+                  </div>
                 )}
                 {reviewMetrics.testingHours && (
-                  <div>Total testing hours: <span className="font-medium">{reviewMetrics.testingHours}</span></div>
+                  <div>
+                    Total testing hours:{' '}
+                    <span className="font-medium">
+                      {reviewMetrics.testingHours}
+                    </span>
+                  </div>
                 )}
                 {reviewMetrics.benchmarkRuns && (
-                  <div>Benchmark runs: <span className="font-medium">{reviewMetrics.benchmarkRuns}</span></div>
+                  <div>
+                    Benchmark runs:{' '}
+                    <span className="font-medium">
+                      {reviewMetrics.benchmarkRuns}
+                    </span>
+                  </div>
                 )}
                 {reviewMetrics.verificationTests && (
-                  <div>Verification tests: <span className="font-medium">{reviewMetrics.verificationTests}</span></div>
+                  <div>
+                    Verification tests:{' '}
+                    <span className="font-medium">
+                      {reviewMetrics.verificationTests}
+                    </span>
+                  </div>
                 )}
               </div>
             ) : (
-              <p className="text-xs text-gray-800">Comprehensive real-world testing performed</p>
+              <p className="text-xs text-gray-800">
+                Comprehensive real-world testing performed
+              </p>
             )}
           </div>
-          
+
           <div>
             <h4 className="text-sm font-semibold text-gray-900 mb-2 flex items-center">
               <CalendarIcon className="w-4 h-4 mr-1" />
               Publication Info
             </h4>
             <div className="space-y-1 text-xs text-gray-800">
-              <div>Published: <span className="font-medium">{new Date(publishedAt).toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-              })}</span></div>
+              <div>
+                Published:{' '}
+                <span className="font-medium">
+                  {new Date(publishedAt).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </span>
+              </div>
               {lastUpdated && lastUpdated !== publishedAt && (
-                <div>Last updated: <span className="font-medium">{new Date(lastUpdated).toLocaleDateString('en-US', { 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}</span></div>
+                <div>
+                  Last updated:{' '}
+                  <span className="font-medium">
+                    {new Date(lastUpdated).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </span>
+                </div>
               )}
             </div>
           </div>

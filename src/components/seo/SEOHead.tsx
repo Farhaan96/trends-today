@@ -6,27 +6,27 @@ interface SEOHeadProps {
   description: string;
   keywords?: string[];
   canonical?: string;
-  
+
   // Open Graph
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
   ogType?: 'website' | 'article' | 'product' | 'video';
   ogUrl?: string;
-  
+
   // Twitter
   twitterTitle?: string;
   twitterDescription?: string;
   twitterImage?: string;
   twitterCard?: 'summary' | 'summary_large_image' | 'app' | 'player';
-  
+
   // Article specific
   author?: string;
   publishedAt?: string;
   modifiedAt?: string;
   section?: string;
   tags?: string[];
-  
+
   // Language and locale
   language?: string;
   locale?: string;
@@ -34,12 +34,12 @@ interface SEOHeadProps {
     href: string;
     hrefLang: string;
   }>;
-  
+
   // Additional meta
   robots?: string;
   viewport?: string;
   themeColor?: string;
-  
+
   // JSON-LD Schema
   jsonLd?: any;
 }
@@ -49,58 +49,63 @@ export default function SEOHead({
   description,
   keywords = [],
   canonical,
-  
+
   // Open Graph
   ogTitle,
   ogDescription,
   ogImage = '/images/og-default.jpg',
   ogType = 'website',
   ogUrl,
-  
+
   // Twitter
   twitterTitle,
   twitterDescription,
   twitterImage,
   twitterCard = 'summary_large_image',
-  
+
   // Article specific
   author,
   publishedAt,
   modifiedAt,
   section,
   tags = [],
-  
+
   // Language and locale
   language = 'en',
   locale = 'en_US',
   alternateLanguages = [],
-  
+
   // Additional meta
   robots = 'index,follow',
   viewport = 'width=device-width,initial-scale=1',
   themeColor = '#0070f3',
-  
+
   // JSON-LD Schema
-  jsonLd
+  jsonLd,
 }: SEOHeadProps) {
-  
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://trendstoday.ca';
   const fullCanonical = canonical ? `${siteUrl}${canonical}` : undefined;
   const fullOgUrl = ogUrl || fullCanonical || siteUrl;
-  const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
-  const fullTwitterImage = twitterImage ? 
-    (twitterImage.startsWith('http') ? twitterImage : `${siteUrl}${twitterImage}`) : 
-    fullOgImage;
+  const fullOgImage = ogImage.startsWith('http')
+    ? ogImage
+    : `${siteUrl}${ogImage}`;
+  const fullTwitterImage = twitterImage
+    ? twitterImage.startsWith('http')
+      ? twitterImage
+      : `${siteUrl}${twitterImage}`
+    : fullOgImage;
 
   // Generate optimized title
-  const pageTitle = title.includes('Trends Today') ? title : `${title} | Trends Today`;
+  const pageTitle = title.includes('Trends Today')
+    ? title
+    : `${title} | Trends Today`;
   const finalOgTitle = ogTitle || title;
   const finalTwitterTitle = twitterTitle || finalOgTitle;
-  
+
   // Generate optimized descriptions
   const finalOgDescription = ogDescription || description;
   const finalTwitterDescription = twitterDescription || finalOgDescription;
-  
+
   // Combine all keywords
   const allKeywords = [
     ...keywords,
@@ -108,8 +113,10 @@ export default function SEOHead({
     'tech reviews',
     'product comparisons',
     'buying guides',
-    'technology news'
-  ].filter(Boolean).slice(0, 10); // Limit to 10 keywords
+    'technology news',
+  ]
+    .filter(Boolean)
+    .slice(0, 10); // Limit to 10 keywords
 
   return (
     <Head>
@@ -119,14 +126,14 @@ export default function SEOHead({
       {allKeywords.length > 0 && (
         <meta name="keywords" content={allKeywords.join(', ')} />
       )}
-      
+
       {/* Canonical URL */}
       {fullCanonical && <link rel="canonical" href={fullCanonical} />}
-      
+
       {/* Language and Locale */}
       <meta httpEquiv="content-language" content={language} />
       <meta property="og:locale" content={locale} />
-      
+
       {/* Alternate Languages */}
       {alternateLanguages.map((lang) => (
         <link
@@ -136,27 +143,31 @@ export default function SEOHead({
           href={lang.href}
         />
       ))}
-      
+
       {/* Robots and Crawling */}
       <meta name="robots" content={robots} />
       <meta name="googlebot" content={robots} />
       <meta name="bingbot" content={robots} />
-      
+
       {/* Viewport and Mobile */}
       <meta name="viewport" content={viewport} />
       <meta name="theme-color" content={themeColor} />
-      
+
       {/* Author and Publication Info */}
       {author && <meta name="author" content={author} />}
-      {publishedAt && <meta property="article:published_time" content={publishedAt} />}
-      {modifiedAt && <meta property="article:modified_time" content={modifiedAt} />}
+      {publishedAt && (
+        <meta property="article:published_time" content={publishedAt} />
+      )}
+      {modifiedAt && (
+        <meta property="article:modified_time" content={modifiedAt} />
+      )}
       {section && <meta property="article:section" content={section} />}
-      
+
       {/* Article Tags */}
       {tags.map((tag) => (
         <meta key={tag} property="article:tag" content={tag} />
       ))}
-      
+
       {/* Open Graph Meta Tags */}
       <meta property="og:title" content={finalOgTitle} />
       <meta property="og:description" content={finalOgDescription} />
@@ -165,12 +176,12 @@ export default function SEOHead({
       <meta property="og:type" content={ogType} />
       <meta property="og:url" content={fullOgUrl} />
       <meta property="og:site_name" content="Trends Today" />
-      
+
       {/* Additional OG Image Properties */}
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:type" content="image/jpeg" />
-      
+
       {/* Twitter Card Meta Tags */}
       <meta name="twitter:card" content={twitterCard} />
       <meta name="twitter:site" content="@trendstoday" />
@@ -179,7 +190,7 @@ export default function SEOHead({
       <meta name="twitter:description" content={finalTwitterDescription} />
       <meta name="twitter:image" content={fullTwitterImage} />
       <meta name="twitter:image:alt" content={finalTwitterTitle} />
-      
+
       {/* Additional Meta Tags for Rich Results */}
       <meta name="application-name" content="Trends Today" />
       <meta name="apple-mobile-web-app-title" content="Trends Today" />
@@ -187,30 +198,44 @@ export default function SEOHead({
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       <meta name="format-detection" content="telephone=no" />
       <meta name="mobile-web-app-capable" content="yes" />
-      
+
       {/* Favicon and Icons */}
       <link rel="icon" href="/favicon.ico" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/favicon-32x32.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png"
+      />
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       <link rel="manifest" href="/manifest.json" />
-      
+
       {/* Preconnect to External Domains */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossOrigin="anonymous"
+      />
       <link rel="preconnect" href="https://www.google-analytics.com" />
       <link rel="preconnect" href="https://www.googletagmanager.com" />
-      
+
       {/* DNS Prefetch for Performance */}
       <link rel="dns-prefetch" href="//fonts.googleapis.com" />
       <link rel="dns-prefetch" href="//www.google-analytics.com" />
-      
+
       {/* JSON-LD Structured Data */}
       {jsonLd && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd, null, 0)
+            __html: JSON.stringify(jsonLd, null, 0),
           }}
         />
       )}
@@ -258,14 +283,19 @@ export function ReviewSEO({
 }: ReviewSEOProps) {
   const ratingText = rating ? ` • Rated ${rating}/${maxRating}` : '';
   const priceText = price ? ` • ${price}` : '';
-  
+
   return (
     <SEOHead
       {...props}
       ogType="article"
       title={`${productName} Review${ratingText} | Trends Today`}
       description={`${props.description}${ratingText}${priceText}`}
-      keywords={[...(props.keywords || []), productName.toLowerCase(), 'review', 'rating']}
+      keywords={[
+        ...(props.keywords || []),
+        productName.toLowerCase(),
+        'review',
+        'rating',
+      ]}
     />
   );
 }
@@ -286,14 +316,20 @@ export function ProductSEO({
 }: ProductSEOProps) {
   const priceText = price ? ` • ${price}` : '';
   const availabilityText = availability ? ` • ${availability}` : '';
-  
+
   return (
     <SEOHead
       {...props}
       ogType="product"
       title={`${productName} by ${brand}${priceText} | Trends Today`}
       description={`${props.description}${priceText}${availabilityText}`}
-      keywords={[...(props.keywords || []), productName.toLowerCase(), brand.toLowerCase(), 'buy', 'price']}
+      keywords={[
+        ...(props.keywords || []),
+        productName.toLowerCase(),
+        brand.toLowerCase(),
+        'buy',
+        'price',
+      ]}
     />
   );
 }

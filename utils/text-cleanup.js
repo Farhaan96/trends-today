@@ -43,7 +43,10 @@ class TextCleanup {
     cleaned = cleaned.replace(/\*{4,}([^*]*?)\*{2}/g, '**$1**');
 
     // Fix cases like ****63%** of companies** -> **63% of companies**
-    cleaned = cleaned.replace(/\*{4,}([^*]*?)\*{2}\s+([^*]*?)\*{2}/g, '**$1 $2**');
+    cleaned = cleaned.replace(
+      /\*{4,}([^*]*?)\*{2}\s+([^*]*?)\*{2}/g,
+      '**$1 $2**'
+    );
 
     // Fix standalone quadruple asterisks: ****55%**** -> **55%**
     cleaned = cleaned.replace(/\*{4,}([^*]*?)\*{4,}/g, '**$1**');
@@ -78,7 +81,9 @@ class TextCleanup {
     // Check for excessive asterisks
     const excessiveAsterisks = content.match(/\*{3,}/g) || [];
     if (excessiveAsterisks.length > 0) {
-      issues.push(`Found ${excessiveAsterisks.length} instances of excessive asterisks`);
+      issues.push(
+        `Found ${excessiveAsterisks.length} instances of excessive asterisks`
+      );
     }
 
     // Check for em dashes
@@ -115,7 +120,7 @@ class TextCleanup {
       cleanedIssueCount: cleanedIssues.length,
       issuesFixed: originalIssues.length - cleanedIssues.length,
       remainingIssues: cleanedIssues,
-      changes: originalContent !== cleanedContent
+      changes: originalContent !== cleanedContent,
     };
   }
 }

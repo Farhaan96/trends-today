@@ -1,86 +1,92 @@
-'use client'
+'use client';
 
-import { ReactNode } from 'react'
-import dynamic from 'next/dynamic'
-import UtterancesComments from '@/components/engagement/UtterancesComments'
-import Image from 'next/image'
-import Link from 'next/link'
-import { getCategoryStyles } from '@/lib/categories'
+import { ReactNode } from 'react';
+import dynamic from 'next/dynamic';
+import UtterancesComments from '@/components/engagement/UtterancesComments';
+import Image from 'next/image';
+import Link from 'next/link';
+import { getCategoryStyles } from '@/lib/categories';
 
 // Dynamic imports for better performance
-const SocialShare = dynamic(() => import('@/components/social/SocialShare'))
-const EnhancedNewsletter = dynamic(() => import('@/components/newsletter/EnhancedNewsletter'))
-const RelatedArticles = dynamic(() => import('@/components/content/RelatedArticles'))
-const UserEngagement = dynamic(() => import('@/components/engagement/UserEngagement'))
+const SocialShare = dynamic(() => import('@/components/social/SocialShare'));
+const EnhancedNewsletter = dynamic(
+  () => import('@/components/newsletter/EnhancedNewsletter')
+);
+const RelatedArticles = dynamic(
+  () => import('@/components/content/RelatedArticles')
+);
+const UserEngagement = dynamic(
+  () => import('@/components/engagement/UserEngagement')
+);
 
 interface Author {
-  name: string
-  bio: string
-  avatar: string
-  twitter?: string
-  linkedin?: string
+  name: string;
+  bio: string;
+  avatar: string;
+  twitter?: string;
+  linkedin?: string;
 }
 
 interface Article {
-  title: string
-  description: string
-  slug: string
-  category: string
-  publishedAt: string
-  lastUpdated?: string
-  author: Author
-  image: string
-  imageAlt: string
-  readingTime: number
-  tags?: string[]
-  content: ReactNode
+  title: string;
+  description: string;
+  slug: string;
+  category: string;
+  publishedAt: string;
+  lastUpdated?: string;
+  author: Author;
+  image: string;
+  imageAlt: string;
+  readingTime: number;
+  tags?: string[];
+  content: ReactNode;
 }
 
 interface EnhancedArticleLayoutProps {
-  article: Article
-  className?: string
+  article: Article;
+  className?: string;
 }
 
 export default function EnhancedArticleLayout({
   article,
-  className = ''
+  className = '',
 }: EnhancedArticleLayoutProps) {
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : ''
-  const articleId = `${article.category}-${article.slug}`
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const articleId = `${article.category}-${article.slug}`;
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
-    })
-  }
+      day: 'numeric',
+    });
+  };
 
   const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": article.title,
-    "description": article.description,
-    "image": article.image,
-    "author": {
-      "@type": "Person",
-      "name": article.author.name
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.description,
+    image: article.image,
+    author: {
+      '@type': 'Person',
+      name: article.author.name,
     },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Trends Today",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "/images/logo.png"
-      }
+    publisher: {
+      '@type': 'Organization',
+      name: 'Trends Today',
+      logo: {
+        '@type': 'ImageObject',
+        url: '/images/logo.png',
+      },
     },
-    "datePublished": article.publishedAt,
-    "dateModified": article.lastUpdated || article.publishedAt,
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": currentUrl
-    }
-  }
+    datePublished: article.publishedAt,
+    dateModified: article.lastUpdated || article.publishedAt,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': currentUrl,
+    },
+  };
 
   return (
     <>
@@ -109,15 +115,15 @@ export default function EnhancedArticleLayout({
           {/* Category Badge */}
           <div className="mb-4">
             {(() => {
-              const cat = getCategoryStyles(article.category)
+              const cat = getCategoryStyles(article.category);
               return (
-                <Link 
+                <Link
                   href={`/${article.category}`}
                   className={`inline-block px-3 py-1 text-sm font-semibold rounded-full capitalize ${cat.badge}`}
                 >
                   {article.category}
                 </Link>
-              )
+              );
             })()}
           </div>
 
@@ -137,16 +143,16 @@ export default function EnhancedArticleLayout({
                 className="rounded-full"
               />
               <div>
-                <p className="font-medium text-gray-900">{article.author.name}</p>
+                <p className="font-medium text-gray-900">
+                  {article.author.name}
+                </p>
                 <p className="text-sm text-gray-600">{article.author.bio}</p>
                 <div className="flex items-center gap-4 text-sm text-gray-500 mt-1">
                   <time dateTime={article.publishedAt}>
                     {formatDate(article.publishedAt)}
                   </time>
                   {article.lastUpdated && (
-                    <span>
-                      Updated {formatDate(article.lastUpdated)}
-                    </span>
+                    <span>Updated {formatDate(article.lastUpdated)}</span>
                   )}
                 </div>
               </div>
@@ -187,7 +193,10 @@ export default function EnhancedArticleLayout({
 
         {/* Gentle end-of-article prompt */}
         <div className="mb-12 p-4 bg-gray-50 border border-gray-200 rounded">
-          <p className="text-gray-800">Have a different take or an insight to add? Drop a comment below — we love hearing from readers.</p>
+          <p className="text-gray-800">
+            Have a different take or an insight to add? Drop a comment below —
+            we love hearing from readers.
+          </p>
         </div>
 
         {/* Bottom Social Share */}
@@ -287,5 +296,5 @@ export default function EnhancedArticleLayout({
         <UtterancesComments issueTerm="pathname" />
       </article>
     </>
-  )
+  );
 }

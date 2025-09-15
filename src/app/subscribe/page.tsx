@@ -6,8 +6,15 @@ import { SparklesIcon as CrownIcon } from '@heroicons/react/24/outline';
 
 export const metadata: Metadata = {
   title: 'Subscribe to Trends Today Pro - Premium Tech Content',
-  description: 'Unlock ad-free reading, early access to reviews, exclusive buyer\'s guides, and premium comparison tools. Join thousands of tech enthusiasts.',
-  keywords: ['trends today pro', 'tech subscription', 'premium content', 'ad-free reading', 'exclusive reviews'],
+  description:
+    "Unlock ad-free reading, early access to reviews, exclusive buyer's guides, and premium comparison tools. Join thousands of tech enthusiasts.",
+  keywords: [
+    'trends today pro',
+    'tech subscription',
+    'premium content',
+    'ad-free reading',
+    'exclusive reviews',
+  ],
 };
 
 export default function SubscribePage() {
@@ -24,10 +31,11 @@ export default function SubscribePage() {
               Upgrade to Trends Today Pro
             </h1>
             <p className="text-xl text-purple-200 mb-8 max-w-2xl mx-auto">
-              Get the complete tech experience with ad-free reading, early access to reviews, 
-              and exclusive content that helps you make smarter buying decisions.
+              Get the complete tech experience with ad-free reading, early
+              access to reviews, and exclusive content that helps you make
+              smarter buying decisions.
             </p>
-            
+
             {/* Social Proof */}
             <div className="flex items-center justify-center gap-2 text-purple-200">
               <div className="flex">
@@ -44,7 +52,13 @@ export default function SubscribePage() {
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Premium Upgrade Component */}
-        <Suspense fallback={<div className="text-center py-8">Loading subscription options...</div>}>
+        <Suspense
+          fallback={
+            <div className="text-center py-8">
+              Loading subscription options...
+            </div>
+          }
+        >
           <PremiumUpgrade />
         </Suspense>
 
@@ -55,10 +69,11 @@ export default function SubscribePage() {
               Ready to Upgrade Your Tech Experience?
             </h2>
             <p className="text-purple-200 mb-6">
-              Join thousands of tech enthusiasts who trust Trends Today Pro for their buying decisions.
+              Join thousands of tech enthusiasts who trust Trends Today Pro for
+              their buying decisions.
             </p>
-            <a 
-              href="#pricing" 
+            <a
+              href="#pricing"
               className="inline-block bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
             >
               Start Your Free Trial

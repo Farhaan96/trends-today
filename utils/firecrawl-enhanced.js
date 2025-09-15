@@ -14,12 +14,12 @@ class FirecrawlEnhanced {
     this.cacheDir = path.join(__dirname, '..', '.cache', 'firecrawl');
     this.cacheEnabled = true;
     this.cacheTTL = 7200000; // 2 hours for web content
-    
+
     // Rate limiting
     this.requestQueue = [];
     this.lastRequestTime = 0;
     this.minRequestInterval = 1000; // 1 request per second
-    
+
     // Preset configurations for different tech sites
     this.siteConfigs = {
       techradar: {
@@ -29,8 +29,8 @@ class FirecrawlEnhanced {
           content: 'article',
           author: '.author-name',
           date: 'time',
-          image: 'article img'
-        }
+          image: 'article img',
+        },
       },
       theverge: {
         waitFor: 2000,
@@ -39,8 +39,8 @@ class FirecrawlEnhanced {
           content: '.article-content',
           author: '.author',
           date: 'time',
-          image: 'picture img'
-        }
+          image: 'picture img',
+        },
       },
       techcrunch: {
         waitFor: 1500,
@@ -49,8 +49,8 @@ class FirecrawlEnhanced {
           content: '.article-content',
           author: '.article__byline',
           date: 'time',
-          image: '.article__featured-image img'
-        }
+          image: '.article__featured-image img',
+        },
       },
       default: {
         waitFor: 1000,
@@ -59,9 +59,9 @@ class FirecrawlEnhanced {
           content: 'main, article, .content',
           author: '.author, .by-author',
           date: 'time, .date, .published',
-          image: 'img'
-        }
-      }
+          image: 'img',
+        },
+      },
     };
   }
 
@@ -78,16 +78,16 @@ class FirecrawlEnhanced {
 
   async getCached(cacheKey) {
     if (!this.cacheEnabled) return null;
-    
+
     try {
       const cachePath = path.join(this.cacheDir, `${cacheKey}.json`);
       const stats = await fs.stat(cachePath);
-      
+
       if (Date.now() - stats.mtime.getTime() > this.cacheTTL) {
         await fs.unlink(cachePath).catch(() => {});
         return null;
       }
-      
+
       const cached = await fs.readFile(cachePath, 'utf-8');
       return JSON.parse(cached);
     } catch {
@@ -97,7 +97,7 @@ class FirecrawlEnhanced {
 
   async saveCache(cacheKey, data) {
     if (!this.cacheEnabled) return;
-    
+
     try {
       await this.ensureCacheDir();
       const cachePath = path.join(this.cacheDir, `${cacheKey}.json`);
@@ -110,12 +110,12 @@ class FirecrawlEnhanced {
   async enforceRateLimit() {
     const now = Date.now();
     const timeSinceLastRequest = now - this.lastRequestTime;
-    
+
     if (timeSinceLastRequest < this.minRequestInterval) {
       const waitTime = this.minRequestInterval - timeSinceLastRequest;
-      await new Promise(resolve => setTimeout(resolve, waitTime));
+      await new Promise((resolve) => setTimeout(resolve, waitTime));
     }
-    
+
     this.lastRequestTime = Date.now();
   }
 
@@ -128,14 +128,14 @@ class FirecrawlEnhanced {
 
   async scrapeUrl(url, options = {}) {
     const {
-      format = 'markdown',     // markdown, html, or text
+      format = 'markdown', // markdown, html, or text
       includeHtml = false,
       onlyMainContent = true,
       includeTags = true,
       includeMetadata = true,
       screenshot = false,
       useCache = true,
-      customSelectors = null
+      customSelectors = null,
     } = options;
 
     // Check cache first
@@ -160,7 +160,7 @@ class FirecrawlEnhanced {
       includeTags: includeTags,
       includeMetadata: includeMetadata,
       screenshot: screenshot,
-      waitFor: siteConfig.waitFor
+      waitFor: siteConfig.waitFor,
     };
 
     // Add CSS selectors if specified
@@ -171,43 +171,43 @@ class FirecrawlEnhanced {
           properties: {
             title: {
               type: 'string',
-              selector: siteConfig.selectors.title
+              selector: siteConfig.selectors.title,
             },
             content: {
               type: 'string',
-              selector: siteConfig.selectors.content
+              selector: siteConfig.selectors.content,
             },
             author: {
               type: 'string',
-              selector: siteConfig.selectors.author
+              selector: siteConfig.selectors.author,
             },
             date: {
               type: 'string',
-              selector: siteConfig.selectors.date
+              selector: siteConfig.selectors.date,
             },
             image: {
               type: 'string',
               selector: siteConfig.selectors.image,
-              attribute: 'src'
-            }
-          }
-        }
+              attribute: 'src',
+            },
+          },
+        },
       };
     }
 
     try {
       await this.enforceRateLimit();
-      
+
       console.log(`🕷️ Scraping with Firecrawl: ${url}`);
-      
+
       const response = await fetch(`${this.baseUrl}/scrape`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
         },
         body: JSON.stringify(requestBody),
-        timeout: 30000
+        timeout: 30000,
       });
 
       if (!response.ok) {
@@ -215,7 +215,7 @@ class FirecrawlEnhanced {
       }
 
       const data = await response.json();
-      
+
       const result = {
         success: data.success,
         url: url,
@@ -225,12 +225,12 @@ class FirecrawlEnhanced {
         extract: data.data?.extract || {},
         metadata: data.data?.metadata || {},
         screenshot: data.data?.screenshot || null,
-        scrapedAt: new Date().toISOString()
+        scrapedAt: new Date().toISOString(),
       };
 
       // Process and clean content
       result.content = this.cleanContent(result.content);
-      
+
       // Extract key information
       result.keyInfo = this.extractKeyInfo(result);
 
@@ -241,7 +241,6 @@ class FirecrawlEnhanced {
       }
 
       return result;
-
     } catch (error) {
       console.error(`Firecrawl API error: ${error.message}`);
       return this.getFallbackScrape(url);
@@ -250,10 +249,10 @@ class FirecrawlEnhanced {
 
   cleanContent(content) {
     if (!content) return '';
-    
+
     // Remove excessive whitespace
     content = content.replace(/\n{3,}/g, '\n\n');
-    
+
     // Remove common website artifacts
     const artifactPatterns = [
       /Newsletter\s+Sign\s+up/gi,
@@ -262,13 +261,13 @@ class FirecrawlEnhanced {
       /Share\s+this\s+article/gi,
       /Advertisement/gi,
       /Cookie\s+Policy/gi,
-      /Terms\s+of\s+Service/gi
+      /Terms\s+of\s+Service/gi,
     ];
-    
-    artifactPatterns.forEach(pattern => {
+
+    artifactPatterns.forEach((pattern) => {
       content = content.replace(pattern, '');
     });
-    
+
     // Trim and return
     return content.trim();
   }
@@ -276,30 +275,39 @@ class FirecrawlEnhanced {
   extractKeyInfo(scrapedData) {
     const keyInfo = {
       title: scrapedData.title,
-      author: scrapedData.extract?.author || scrapedData.metadata?.author || 'Unknown',
-      publishDate: scrapedData.extract?.date || scrapedData.metadata?.publishedTime || null,
-      mainImage: scrapedData.extract?.image || scrapedData.metadata?.image || null,
-      wordCount: scrapedData.content ? scrapedData.content.split(/\s+/).length : 0,
-      readingTime: 0
+      author:
+        scrapedData.extract?.author ||
+        scrapedData.metadata?.author ||
+        'Unknown',
+      publishDate:
+        scrapedData.extract?.date ||
+        scrapedData.metadata?.publishedTime ||
+        null,
+      mainImage:
+        scrapedData.extract?.image || scrapedData.metadata?.image || null,
+      wordCount: scrapedData.content
+        ? scrapedData.content.split(/\s+/).length
+        : 0,
+      readingTime: 0,
     };
-    
+
     // Calculate reading time (200 words per minute)
     keyInfo.readingTime = Math.ceil(keyInfo.wordCount / 200);
-    
+
     // Extract key points from content
     keyInfo.keyPoints = this.extractKeyPoints(scrapedData.content);
-    
+
     return keyInfo;
   }
 
   extractKeyPoints(content) {
     if (!content) return [];
-    
+
     const keyPoints = [];
     const lines = content.split('\n');
-    
+
     // Look for bullet points or numbered lists
-    lines.forEach(line => {
+    lines.forEach((line) => {
       if (line.match(/^[\-\*•]\s+(.+)/) || line.match(/^\d+\.\s+(.+)/)) {
         const point = line.replace(/^[\-\*•\d\.]\s+/, '').trim();
         if (point.length > 20 && point.length < 200) {
@@ -307,70 +315,68 @@ class FirecrawlEnhanced {
         }
       }
     });
-    
+
     // If no bullet points found, extract first few sentences
     if (keyPoints.length === 0) {
       const sentences = content.match(/[^.!?]+[.!?]+/g) || [];
-      keyPoints.push(...sentences.slice(0, 3).map(s => s.trim()));
+      keyPoints.push(...sentences.slice(0, 3).map((s) => s.trim()));
     }
-    
+
     return keyPoints.slice(0, 5);
   }
 
   async scrapeMultiple(urls, options = {}) {
     console.log(`🕷️ Batch scraping ${urls.length} URLs...`);
-    
+
     const results = [];
     for (const url of urls) {
       const result = await this.scrapeUrl(url, options);
       results.push(result);
-      
+
       // Small delay between requests
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
     }
-    
+
     return results;
   }
 
   async scrapeTechNews(options = {}) {
-    const {
-      sources = ['techradar', 'theverge', 'techcrunch'],
-      limit = 5
-    } = options;
+    const { sources = ['techradar', 'theverge', 'techcrunch'], limit = 5 } =
+      options;
 
     const newsUrls = {
       techradar: 'https://www.techradar.com/news',
       theverge: 'https://www.theverge.com/tech',
-      techcrunch: 'https://techcrunch.com/latest'
+      techcrunch: 'https://techcrunch.com/latest',
     };
 
     const allNews = [];
 
     for (const source of sources) {
       if (!newsUrls[source]) continue;
-      
+
       console.log(`📰 Scraping ${source} news...`);
-      
+
       const result = await this.scrapeUrl(newsUrls[source], {
         onlyMainContent: true,
-        includeMetadata: true
+        includeMetadata: true,
       });
-      
+
       if (result.success) {
         // Extract article links from the page
         const articleLinks = this.extractArticleLinks(result.content, source);
-        
+
         // Scrape individual articles (up to limit)
         for (const link of articleLinks.slice(0, limit)) {
           const article = await this.scrapeUrl(link, {
             format: 'markdown',
-            includeMetadata: true
+            includeMetadata: true,
           });
-          
+
           if (article.success) {
             allNews.push({
               source: source,
-              ...article
+              ...article,
             });
           }
         }
@@ -382,14 +388,14 @@ class FirecrawlEnhanced {
 
   extractArticleLinks(content, source) {
     const links = [];
-    
+
     // Extract URLs from markdown links
     const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g;
     let match;
-    
+
     while ((match = linkPattern.exec(content)) !== null) {
       const url = match[2];
-      
+
       // Filter for article URLs based on source
       if (source === 'techradar' && url.includes('/news/')) {
         links.push(url);
@@ -399,7 +405,7 @@ class FirecrawlEnhanced {
         links.push(url);
       }
     }
-    
+
     return [...new Set(links)]; // Remove duplicates
   }
 
@@ -409,7 +415,8 @@ class FirecrawlEnhanced {
       url: url,
       title: 'Scraping Failed',
       description: 'Unable to scrape content from this URL',
-      content: 'Content could not be retrieved. Please check the URL and try again.',
+      content:
+        'Content could not be retrieved. Please check the URL and try again.',
       extract: {},
       metadata: {},
       screenshot: null,
@@ -421,47 +428,47 @@ class FirecrawlEnhanced {
         mainImage: null,
         wordCount: 0,
         readingTime: 0,
-        keyPoints: []
-      }
+        keyPoints: [],
+      },
     };
   }
 
   async searchAndScrape(query, options = {}) {
-    const {
-      limit = 5,
-      useGoogle = true
-    } = options;
+    const { limit = 5, useGoogle = true } = options;
 
     console.log(`🔍 Searching and scraping for: ${query}`);
-    
+
     // This would typically use Google Custom Search API
     // For now, we'll use predefined tech sites
     const searchUrls = [
       `https://www.techradar.com/search?searchTerm=${encodeURIComponent(query)}`,
       `https://www.theverge.com/search?q=${encodeURIComponent(query)}`,
-      `https://techcrunch.com/search/${encodeURIComponent(query)}`
+      `https://techcrunch.com/search/${encodeURIComponent(query)}`,
     ];
-    
-    const results = await this.scrapeMultiple(searchUrls.slice(0, limit), options);
-    
-    return results.filter(r => r.success);
+
+    const results = await this.scrapeMultiple(
+      searchUrls.slice(0, limit),
+      options
+    );
+
+    return results.filter((r) => r.success);
   }
 
   async getCacheStats() {
     try {
       const files = await fs.readdir(this.cacheDir);
       let totalSize = 0;
-      
+
       for (const file of files) {
         const filePath = path.join(this.cacheDir, file);
         const stats = await fs.stat(filePath);
         totalSize += stats.size;
       }
-      
+
       return {
         fileCount: files.length,
         totalSize: `${(totalSize / 1024).toFixed(2)} KB`,
-        cacheDir: this.cacheDir
+        cacheDir: this.cacheDir,
       };
     } catch {
       return { fileCount: 0, totalSize: '0 KB', cacheDir: this.cacheDir };
@@ -487,11 +494,11 @@ module.exports = FirecrawlEnhanced;
 // CLI interface for testing
 if (require.main === module) {
   const firecrawl = new FirecrawlEnhanced();
-  
+
   const args = process.argv.slice(2);
   const command = args[0];
   const param = args[1];
-  
+
   async function run() {
     switch (command) {
       case 'scrape':
@@ -505,36 +512,38 @@ if (require.main === module) {
         console.log('Word Count:', result.keyInfo?.wordCount);
         console.log('Key Points:', result.keyInfo?.keyPoints);
         break;
-        
+
       case 'tech-news':
         const news = await firecrawl.scrapeTechNews({ limit: 3 });
         console.log(`\nScraped ${news.length} articles:`);
-        news.forEach(article => {
+        news.forEach((article) => {
           console.log(`- ${article.title} (${article.source})`);
         });
         break;
-        
+
       case 'search':
         if (!param) {
           console.log('Please provide a search query');
           return;
         }
-        const searchResults = await firecrawl.searchAndScrape(param, { limit: 3 });
+        const searchResults = await firecrawl.searchAndScrape(param, {
+          limit: 3,
+        });
         console.log(`\nFound ${searchResults.length} results for "${param}":`);
-        searchResults.forEach(r => {
+        searchResults.forEach((r) => {
           console.log(`- ${r.title}`);
         });
         break;
-        
+
       case 'cache-stats':
         const stats = await firecrawl.getCacheStats();
         console.log('Cache Statistics:', stats);
         break;
-        
+
       case 'clear-cache':
         await firecrawl.clearCache();
         break;
-        
+
       default:
         console.log(`
 Usage: node firecrawl-enhanced.js <command> [param]
@@ -551,6 +560,6 @@ Example:
         `);
     }
   }
-  
+
   run().catch(console.error);
 }

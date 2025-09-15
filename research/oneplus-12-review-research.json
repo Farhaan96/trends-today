@@ -22,16 +22,8 @@
       "OxygenOS bugs occasionally present"
     ],
     "priceRange": "$799-$899",
-    "competitorComparisons": [
-      "iPhone 15",
-      "Galaxy S24",
-      "Pixel 8"
-    ],
-    "sources": [
-      "oneplus.com",
-      "gsmarena.com",
-      "androidauthority.com"
-    ],
+    "competitorComparisons": ["iPhone 15", "Galaxy S24", "Pixel 8"],
+    "sources": ["oneplus.com", "gsmarena.com", "androidauthority.com"],
     "productName": "OnePlus 12"
   },
   "keywordData": [

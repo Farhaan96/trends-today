@@ -42,14 +42,14 @@ export function generateOptimizedAltText(
     action,
     contentType,
     pageTitle,
-    mainKeyword
+    mainKeyword,
   } = context;
 
   // Extract descriptive information from filename
   const baseName = fileName
     .replace(/\.(jpg|jpeg|png|webp|gif|svg|avif)$/i, '')
     .replace(/[-_]/g, ' ')
-    .replace(/\b\w/g, l => l.toUpperCase());
+    .replace(/\b\w/g, (l) => l.toUpperCase());
 
   let altText = '';
 
@@ -112,23 +112,38 @@ export function analyzeImageSEO(
   const { targetKeywords = [], isHeroImage = false } = context;
 
   // Alt text analysis
-  const altTextScore = analyzeAltText(image.alt, targetKeywords, issues, suggestions);
+  const altTextScore = analyzeAltText(
+    image.alt,
+    targetKeywords,
+    issues,
+    suggestions
+  );
   score = Math.min(score, altTextScore + 20); // Weight alt text heavily
 
   // File size analysis
   if (image.fileSize) {
-    if (image.fileSize > 1000000) { // 1MB
+    if (image.fileSize > 1000000) {
+      // 1MB
       issues.push('Image file size too large (over 1MB)');
       score -= 20;
-    } else if (image.fileSize > 500000) { // 500KB
-      suggestions.push('Consider compressing image further for better loading speed');
+    } else if (image.fileSize > 500000) {
+      // 500KB
+      suggestions.push(
+        'Consider compressing image further for better loading speed'
+      );
       score -= 10;
     }
   }
 
   // Format optimization
-  if (image.format === 'png' && !image.src.includes('logo') && !image.src.includes('icon')) {
-    suggestions.push('Consider using WebP or AVIF format for better compression');
+  if (
+    image.format === 'png' &&
+    !image.src.includes('logo') &&
+    !image.src.includes('icon')
+  ) {
+    suggestions.push(
+      'Consider using WebP or AVIF format for better compression'
+    );
     score -= 5;
   }
 
@@ -166,7 +181,7 @@ export function analyzeImageSEO(
     issues,
     suggestions,
     altTextQuality,
-    seoOptimized: score >= 80
+    seoOptimized: score >= 80,
   };
 }
 
@@ -197,12 +212,23 @@ function analyzeAltText(
 
   // Generic/poor alt text
   const genericPhrases = [
-    'image', 'picture', 'photo', 'img', 'graphic', 'screenshot',
-    'untitled', 'dsc', 'img_', 'image_', 'photo_'
+    'image',
+    'picture',
+    'photo',
+    'img',
+    'graphic',
+    'screenshot',
+    'untitled',
+    'dsc',
+    'img_',
+    'image_',
+    'photo_',
   ];
 
-  const isGeneric = genericPhrases.some(phrase => 
-    altText.toLowerCase().includes(phrase.toLowerCase()) && altText.split(' ').length <= 2
+  const isGeneric = genericPhrases.some(
+    (phrase) =>
+      altText.toLowerCase().includes(phrase.toLowerCase()) &&
+      altText.split(' ').length <= 2
   );
 
   if (isGeneric) {
@@ -212,8 +238,8 @@ function analyzeAltText(
 
   // Keyword stuffing check
   const words = altText.toLowerCase().split(' ');
-  const duplicates = words.filter((word, index) => 
-    word.length > 3 && words.indexOf(word) !== index
+  const duplicates = words.filter(
+    (word, index) => word.length > 3 && words.indexOf(word) !== index
   );
 
   if (duplicates.length > 0) {
@@ -226,14 +252,16 @@ function analyzeAltText(
     const altTextLower = altText.toLowerCase();
     let keywordFound = false;
 
-    targetKeywords.forEach(keyword => {
+    targetKeywords.forEach((keyword) => {
       if (altTextLower.includes(keyword.toLowerCase())) {
         keywordFound = true;
       }
     });
 
     if (!keywordFound) {
-      suggestions.push('Consider including target keywords in alt text naturally');
+      suggestions.push(
+        'Consider including target keywords in alt text naturally'
+      );
       score -= 15;
     }
   }
@@ -245,9 +273,11 @@ function analyzeAltText(
   }
 
   // Redundancy with nearby text (this would require context)
-  if (altText.toLowerCase().includes('image of') || 
-      altText.toLowerCase().includes('photo of') ||
-      altText.toLowerCase().includes('picture of')) {
+  if (
+    altText.toLowerCase().includes('image of') ||
+    altText.toLowerCase().includes('photo of') ||
+    altText.toLowerCase().includes('picture of')
+  ) {
     suggestions.push('Remove redundant phrases like "image of" from alt text');
     score -= 5;
   }
@@ -260,9 +290,7 @@ export function generateResponsiveSrcSet(
   baseSrc: string,
   sizes: number[] = [480, 768, 1024, 1280, 1920, 2560]
 ): string {
-  return sizes
-    .map(size => `${baseSrc}?w=${size}&q=75 ${size}w`)
-    .join(', ');
+  return sizes.map((size) => `${baseSrc}?w=${size}&q=75 ${size}w`).join(', ');
 }
 
 // Generate sizes attribute for responsive images
@@ -270,11 +298,11 @@ export function generateSizesAttribute(
   breakpoints: Array<{ mediaQuery: string; width: string }> = [
     { mediaQuery: '(max-width: 640px)', width: '100vw' },
     { mediaQuery: '(max-width: 1024px)', width: '50vw' },
-    { mediaQuery: '', width: '33vw' }
+    { mediaQuery: '', width: '33vw' },
   ]
 ): string {
   return breakpoints
-    .map(bp => bp.mediaQuery ? `${bp.mediaQuery} ${bp.width}` : bp.width)
+    .map((bp) => (bp.mediaQuery ? `${bp.mediaQuery} ${bp.width}` : bp.width))
     .join(', ');
 }
 
@@ -294,36 +322,38 @@ export function analyzeContentImages(
   suggestedAlt: string;
 }> {
   const imageRegex = /!\[(.*?)\]\((.*?)\)/g;
-  const images: Array<{ src: string; alt: string; analysis: ImageSEOAnalysis; suggestedAlt: string }> = [];
-  
+  const images: Array<{
+    src: string;
+    alt: string;
+    analysis: ImageSEOAnalysis;
+    suggestedAlt: string;
+  }> = [];
+
   let match;
   while ((match = imageRegex.exec(content)) !== null) {
     const [, alt, src] = match;
-    
+
     const imageMetadata: ImageMetadata = {
       src,
       alt,
       format: getImageFormat(src),
     };
-    
+
     const analysis = analyzeImageSEO(imageMetadata, context);
-    
-    const suggestedAlt = generateOptimizedAltText(
-      src.split('/').pop() || src,
-      {
-        ...context,
-        mainKeyword: context.targetKeywords?.[0]
-      }
-    );
-    
+
+    const suggestedAlt = generateOptimizedAltText(src.split('/').pop() || src, {
+      ...context,
+      mainKeyword: context.targetKeywords?.[0],
+    });
+
     images.push({
       src,
       alt,
       analysis,
-      suggestedAlt
+      suggestedAlt,
     });
   }
-  
+
   return images;
 }
 
@@ -362,30 +392,28 @@ export function generateImageStructuredData(
   if (images.length === 0) return null;
 
   const primaryImage = images[0];
-  
+
   return {
-    "@context": "https://schema.org",
-    "@type": "ImageGallery",
-    "name": `${context.productName || 'Product'} Images`,
-    "description": `Image gallery for ${context.productName || 'product'}`,
-    "image": images.map(img => ({
-      "@type": "ImageObject",
-      "url": img.src,
-      "name": img.alt,
-      "caption": img.caption,
-      "width": img.width,
-      "height": img.height,
-      "encodingFormat": `image/${img.format}`,
-      "contentUrl": img.src,
-      "acquireLicensePage": context.pageUrl
-    }))
+    '@context': 'https://schema.org',
+    '@type': 'ImageGallery',
+    name: `${context.productName || 'Product'} Images`,
+    description: `Image gallery for ${context.productName || 'product'}`,
+    image: images.map((img) => ({
+      '@type': 'ImageObject',
+      url: img.src,
+      name: img.alt,
+      caption: img.caption,
+      width: img.width,
+      height: img.height,
+      encodingFormat: `image/${img.format}`,
+      contentUrl: img.src,
+      acquireLicensePage: context.pageUrl,
+    })),
   };
 }
 
 // Image optimization recommendations
-export function getImageOptimizationRecommendations(
-  images: ImageMetadata[]
-): {
+export function getImageOptimizationRecommendations(images: ImageMetadata[]): {
   criticalIssues: string[];
   improvements: string[];
   overallScore: number;
@@ -393,35 +421,39 @@ export function getImageOptimizationRecommendations(
   const criticalIssues: string[] = [];
   const improvements: string[] = [];
   let totalScore = 0;
-  
+
   images.forEach((image, index) => {
     const analysis = analyzeImageSEO(image, { isHeroImage: index === 0 });
     totalScore += analysis.score;
-    
+
     // Collect critical issues
     if (analysis.score < 50) {
       criticalIssues.push(`Image ${index + 1}: ${analysis.issues.join(', ')}`);
     }
-    
+
     // Collect improvement suggestions
     if (analysis.suggestions.length > 0) {
-      improvements.push(`Image ${index + 1}: ${analysis.suggestions.join(', ')}`);
+      improvements.push(
+        `Image ${index + 1}: ${analysis.suggestions.join(', ')}`
+      );
     }
   });
-  
+
   const overallScore = images.length > 0 ? totalScore / images.length : 0;
-  
+
   // General recommendations based on image count
   if (images.length === 0) {
-    criticalIssues.push('No images found in content - add relevant images for better SEO');
+    criticalIssues.push(
+      'No images found in content - add relevant images for better SEO'
+    );
   } else if (images.length < 3) {
     improvements.push('Consider adding more images to improve engagement');
   }
-  
+
   return {
     criticalIssues,
     improvements,
-    overallScore
+    overallScore,
   };
 }
 
@@ -434,23 +466,29 @@ export function generateImageCaptions(
     contentType?: 'review' | 'comparison' | 'guide' | 'news';
   } = {}
 ): Array<{ src: string; alt: string; caption: string }> {
-  return images.map(image => {
+  return images.map((image) => {
     let caption = image.alt;
-    
+
     // Enhance caption based on context
     if (context.contentType === 'review') {
-      if (image.src.includes('camera') || image.alt.toLowerCase().includes('photo')) {
+      if (
+        image.src.includes('camera') ||
+        image.alt.toLowerCase().includes('photo')
+      ) {
         caption += ` - Sample photo taken with ${context.productName || 'the device'}`;
-      } else if (image.src.includes('screen') || image.alt.toLowerCase().includes('display')) {
+      } else if (
+        image.src.includes('screen') ||
+        image.alt.toLowerCase().includes('display')
+      ) {
         caption += ` - Display quality demonstration`;
       } else if (image.src.includes('unbox')) {
         caption += ` - What's included in the box`;
       }
     }
-    
+
     return {
       ...image,
-      caption
+      caption,
     };
   });
 }

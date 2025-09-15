@@ -23,19 +23,21 @@ async function getUnsplashImage(query) {
       params: {
         query: query,
         per_page: 5,
-        orientation: 'landscape'
+        orientation: 'landscape',
       },
       headers: {
-        'Authorization': `Client-ID ${UNSPLASH_ACCESS_KEY}`
-      }
+        Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}`,
+      },
     });
 
     if (response.data.results && response.data.results.length > 0) {
       // Get a random image from the results
-      const randomIndex = Math.floor(Math.random() * Math.min(5, response.data.results.length));
+      const randomIndex = Math.floor(
+        Math.random() * Math.min(5, response.data.results.length)
+      );
       const image = response.data.results[randomIndex];
       const imageUrl = image.urls.regular || image.urls.full;
-      
+
       imageCache[query] = imageUrl;
       console.log(`  ✅ Found Unsplash image for "${query}"`);
       return imageUrl;
@@ -58,19 +60,22 @@ async function getPexelsImage(query) {
       params: {
         query: query,
         per_page: 5,
-        orientation: 'landscape'
+        orientation: 'landscape',
       },
       headers: {
-        'Authorization': PEXELS_API_KEY
-      }
+        Authorization: PEXELS_API_KEY,
+      },
     });
 
     if (response.data.photos && response.data.photos.length > 0) {
       // Get a random image from the results
-      const randomIndex = Math.floor(Math.random() * Math.min(5, response.data.photos.length));
+      const randomIndex = Math.floor(
+        Math.random() * Math.min(5, response.data.photos.length)
+      );
       const image = response.data.photos[randomIndex];
-      const imageUrl = image.src.large2x || image.src.large || image.src.original;
-      
+      const imageUrl =
+        image.src.large2x || image.src.large || image.src.original;
+
       imageCache[query + '_pexels'] = imageUrl;
       console.log(`  ✅ Found Pexels image for "${query}"`);
       return imageUrl;
@@ -89,7 +94,7 @@ async function getWorkingImageUrl(title, category) {
     category,
     `${category} technology`,
     'technology modern',
-    'tech innovation'
+    'tech innovation',
   ];
 
   // Try Unsplash first
@@ -112,26 +117,28 @@ async function fixArticleImages(filePath, category) {
   try {
     const content = fs.readFileSync(filePath, 'utf-8');
     const { data: frontmatter, content: body } = matter(content);
-    
+
     const fileName = path.basename(filePath, '.mdx');
     console.log(`\n📄 Processing: ${fileName}`);
-    
+
     // Check if image is broken (source.unsplash.com or picsum)
-    const needsNewImage = 
-      !frontmatter.image || 
-      frontmatter.image.includes('source.unsplash.com') || 
+    const needsNewImage =
+      !frontmatter.image ||
+      frontmatter.image.includes('source.unsplash.com') ||
       frontmatter.image.includes('picsum.photos') ||
       frontmatter.image.startsWith('/images/'); // Local images that might not exist
-    
+
     if (needsNewImage) {
-      console.log(`  🔍 Getting new image for: ${frontmatter.title || fileName}`);
-      
+      console.log(
+        `  🔍 Getting new image for: ${frontmatter.title || fileName}`
+      );
+
       // Get a working image URL
       const newImageUrl = await getWorkingImageUrl(
         frontmatter.title || fileName.replace(/-/g, ' '),
         category
       );
-      
+
       // Update all image fields
       frontmatter.image = newImageUrl;
       if (frontmatter.images) {
@@ -140,10 +147,10 @@ async function fixArticleImages(filePath, category) {
       } else {
         frontmatter.images = {
           featured: newImageUrl,
-          hero: newImageUrl
+          hero: newImageUrl,
         };
       }
-      
+
       // Save the updated file
       const newContent = matter.stringify(body, frontmatter);
       fs.writeFileSync(filePath, newContent);
@@ -161,34 +168,43 @@ async function fixArticleImages(filePath, category) {
 
 async function processAllArticles() {
   const contentDir = path.join(process.cwd(), 'content');
-  const categories = ['science', 'culture', 'psychology', 'technology', 'health', 'mystery'];
-  
+  const categories = [
+    'science',
+    'culture',
+    'psychology',
+    'technology',
+    'health',
+    'mystery',
+  ];
+
   let totalProcessed = 0;
   let totalFixed = 0;
-  
+
   for (const category of categories) {
     const categoryPath = path.join(contentDir, category);
-    
+
     if (!fs.existsSync(categoryPath)) {
       console.log(`\n⚠️ Category folder doesn't exist: ${category}`);
       continue;
     }
-    
-    const files = fs.readdirSync(categoryPath).filter(f => f.endsWith('.mdx'));
+
+    const files = fs
+      .readdirSync(categoryPath)
+      .filter((f) => f.endsWith('.mdx'));
     console.log(`\n📁 Processing ${category} (${files.length} articles)...`);
-    
+
     for (const file of files) {
       const filePath = path.join(categoryPath, file);
       totalProcessed++;
-      
+
       const wasFixed = await fixArticleImages(filePath, category);
       if (wasFixed) totalFixed++;
-      
+
       // Small delay to avoid rate limiting
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
     }
   }
-  
+
   console.log('\n' + '='.repeat(50));
   console.log('✅ Image Fix Complete!');
   console.log(`📊 Results:`);

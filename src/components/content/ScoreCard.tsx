@@ -28,7 +28,10 @@ export default function ScoreCard({ overallScore, breakdown }: ScoreCardProps) {
           </div>
         )}
         {[...Array(emptyStars)].map((_, i) => (
-          <StarOutlineIcon key={`empty-${i}`} className="w-5 h-5 text-gray-300" />
+          <StarOutlineIcon
+            key={`empty-${i}`}
+            className="w-5 h-5 text-gray-300"
+          />
         ))}
         <span className="ml-2 text-sm font-medium text-gray-900">
           {score.toFixed(1)}/5
@@ -47,14 +50,14 @@ export default function ScoreCard({ overallScore, breakdown }: ScoreCardProps) {
   return (
     <div className="bg-gray-50 rounded-lg p-6 my-8">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">Our Rating</h3>
-      
+
       <div className="text-center mb-6">
-        <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full text-2xl font-bold ${getScoreColor(overallScore)}`}>
+        <div
+          className={`inline-flex items-center justify-center w-16 h-16 rounded-full text-2xl font-bold ${getScoreColor(overallScore)}`}
+        >
           {overallScore.toFixed(1)}
         </div>
-        <div className="mt-2">
-          {renderStars(overallScore)}
-        </div>
+        <div className="mt-2">{renderStars(overallScore)}</div>
         <p className="text-sm text-gray-800 mt-1">Overall Score</p>
       </div>
 
@@ -65,9 +68,7 @@ export default function ScoreCard({ overallScore, breakdown }: ScoreCardProps) {
               <span className="text-sm font-medium text-gray-900 capitalize">
                 {category}
               </span>
-              <div className="flex items-center">
-                {renderStars(score)}
-              </div>
+              <div className="flex items-center">{renderStars(score)}</div>
             </div>
           ))}
         </div>

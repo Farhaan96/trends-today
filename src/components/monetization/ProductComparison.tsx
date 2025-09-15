@@ -1,7 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ProductComparison as ProductComparisonType, AffiliateProvider } from '@/types/monetization';
+import {
+  ProductComparison as ProductComparisonType,
+  AffiliateProvider,
+} from '@/types/monetization';
 import AffiliateButton from './AffiliateButton';
 import { StarIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
@@ -16,9 +19,9 @@ interface ProductComparisonProps {
 
 export default function ProductComparison({
   products,
-  title = "Alternative Products",
+  title = 'Alternative Products',
   className = '',
-  maxVisible = 3
+  maxVisible = 3,
 }: ProductComparisonProps) {
   const [showAll, setShowAll] = useState(false);
   const [sortBy, setSortBy] = useState<'price' | 'rating' | 'deal'>('price');
@@ -37,12 +40,14 @@ export default function ProductComparison({
     }
   });
 
-  const displayProducts = showAll ? sortedProducts : sortedProducts.slice(0, maxVisible);
+  const displayProducts = showAll
+    ? sortedProducts
+    : sortedProducts.slice(0, maxVisible);
 
   const formatCurrency = (price: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'USD',
     }).format(price);
   };
 
@@ -56,7 +61,8 @@ export default function ProductComparison({
   };
 
   const getSavings = (product: ProductComparisonType) => {
-    if (!product.originalPrice || product.originalPrice <= product.currentPrice) return null;
+    if (!product.originalPrice || product.originalPrice <= product.currentPrice)
+      return null;
     const savings = product.originalPrice - product.currentPrice;
     const percentage = Math.round((savings / product.originalPrice) * 100);
     return { amount: savings, percentage };
@@ -72,11 +78,15 @@ export default function ProductComparison({
         <div className="flex items-center justify-between">
           <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
           <div className="flex items-center gap-2">
-            <label htmlFor="comparison-sort" className="text-sm text-gray-800">Sort by:</label>
+            <label htmlFor="comparison-sort" className="text-sm text-gray-800">
+              Sort by:
+            </label>
             <select
               id="comparison-sort"
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as 'price' | 'rating' | 'deal')}
+              onChange={(e) =>
+                setSortBy(e.target.value as 'price' | 'rating' | 'deal')
+              }
               className="text-sm border border-gray-300 rounded px-2 py-1"
             >
               <option value="price">Price</option>
@@ -91,7 +101,7 @@ export default function ProductComparison({
         {displayProducts.map((product, index) => {
           const savings = getSavings(product);
           const bestAffiliate = Object.entries(product.affiliateLinks)[0]; // Get first available affiliate link
-          
+
           return (
             <div key={product.productId} className="p-6">
               <div className="flex flex-col md:flex-row gap-4">
@@ -111,7 +121,9 @@ export default function ProductComparison({
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
-                        <h4 className="font-semibold text-gray-900">{product.name}</h4>
+                        <h4 className="font-semibold text-gray-900">
+                          {product.name}
+                        </h4>
                         {product.isRecommended && (
                           <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
                             Recommended
@@ -124,7 +136,9 @@ export default function ProductComparison({
                         )}
                       </div>
 
-                      <p className="text-sm text-gray-800 mb-2">{product.brand}</p>
+                      <p className="text-sm text-gray-800 mb-2">
+                        {product.brand}
+                      </p>
 
                       {/* Rating */}
                       <div className="flex items-center gap-1 mb-3">
@@ -155,10 +169,15 @@ export default function ProductComparison({
                       <div className="grid md:grid-cols-2 gap-4 mb-4">
                         {product.pros.length > 0 && (
                           <div>
-                            <h5 className="text-sm font-medium text-green-800 mb-1">Pros</h5>
+                            <h5 className="text-sm font-medium text-green-800 mb-1">
+                              Pros
+                            </h5>
                             <ul className="space-y-1">
                               {product.pros.slice(0, 2).map((pro, proIndex) => (
-                                <li key={proIndex} className="flex items-start gap-1 text-xs text-green-700">
+                                <li
+                                  key={proIndex}
+                                  className="flex items-start gap-1 text-xs text-green-700"
+                                >
                                   <CheckIcon className="w-3 h-3 mt-0.5 text-green-600" />
                                   <span>{pro}</span>
                                 </li>
@@ -166,13 +185,18 @@ export default function ProductComparison({
                             </ul>
                           </div>
                         )}
-                        
+
                         {product.cons.length > 0 && (
                           <div>
-                            <h5 className="text-sm font-medium text-red-800 mb-1">Cons</h5>
+                            <h5 className="text-sm font-medium text-red-800 mb-1">
+                              Cons
+                            </h5>
                             <ul className="space-y-1">
                               {product.cons.slice(0, 2).map((con, conIndex) => (
-                                <li key={conIndex} className="flex items-start gap-1 text-xs text-red-700">
+                                <li
+                                  key={conIndex}
+                                  className="flex items-start gap-1 text-xs text-red-700"
+                                >
                                   <XMarkIcon className="w-3 h-3 mt-0.5 text-red-600" />
                                   <span>{con}</span>
                                 </li>
@@ -197,7 +221,11 @@ export default function ProductComparison({
                               price={product.currentPrice}
                               originalPrice={product.originalPrice}
                               size="sm"
-                              variant={provider === bestAffiliate[0] ? 'primary' : 'secondary'}
+                              variant={
+                                provider === bestAffiliate[0]
+                                  ? 'primary'
+                                  : 'secondary'
+                              }
                             />
                           ))}
                       </div>
@@ -223,7 +251,8 @@ export default function ProductComparison({
               </>
             ) : (
               <>
-                Show {products.length - maxVisible} More Products <ChevronDownIcon className="w-4 h-4" />
+                Show {products.length - maxVisible} More Products{' '}
+                <ChevronDownIcon className="w-4 h-4" />
               </>
             )}
           </button>
@@ -233,8 +262,9 @@ export default function ProductComparison({
       {/* Affiliate Disclaimer */}
       <div className="p-4 bg-gray-50 border-t border-gray-200">
         <p className="text-xs text-gray-900 text-center">
-          <span className="text-yellow-600">*</span> Trends Today earns commission from purchases made through our affiliate links. 
-          Prices and availability are subject to change.
+          <span className="text-yellow-600">*</span> Trends Today earns
+          commission from purchases made through our affiliate links. Prices and
+          availability are subject to change.
         </p>
       </div>
     </div>

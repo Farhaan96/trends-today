@@ -75,7 +75,7 @@
       ]
     },
     "batteryLifeCalculator": {
-      "type": "interactive-calculator", 
+      "type": "interactive-calculator",
       "purpose": "Personalized battery life estimation based on usage patterns",
       "features": [
         "Usage pattern input (gaming, photography, streaming percentages)",
@@ -85,11 +85,36 @@
         "Power management tips based on usage"
       ],
       "inputParameters": [
-        {"name": "Gaming", "type": "slider", "range": "0-100%", "default": 20},
-        {"name": "Photography", "type": "slider", "range": "0-100%", "default": 15},
-        {"name": "Streaming", "type": "slider", "range": "0-100%", "default": 25},
-        {"name": "Social Media", "type": "slider", "range": "0-100%", "default": 30},
-        {"name": "Basic Usage", "type": "slider", "range": "0-100%", "default": 10}
+        {
+          "name": "Gaming",
+          "type": "slider",
+          "range": "0-100%",
+          "default": 20
+        },
+        {
+          "name": "Photography",
+          "type": "slider",
+          "range": "0-100%",
+          "default": 15
+        },
+        {
+          "name": "Streaming",
+          "type": "slider",
+          "range": "0-100%",
+          "default": 25
+        },
+        {
+          "name": "Social Media",
+          "type": "slider",
+          "range": "0-100%",
+          "default": 30
+        },
+        {
+          "name": "Basic Usage",
+          "type": "slider",
+          "range": "0-100%",
+          "default": 10
+        }
       ]
     },
     "priceTracker": {
@@ -115,17 +140,29 @@
       "purpose": "Personalized product recommendations based on individual needs",
       "features": [
         "Step-by-step questionnaire",
-        "Weighted recommendation algorithm", 
+        "Weighted recommendation algorithm",
         "Budget-based filtering",
         "Use-case scenario matching",
         "Alternative suggestions with reasoning"
       ],
       "questionFlow": [
-        {"category": "Budget", "type": "range", "impact": "high"},
-        {"category": "Primary Use", "type": "multiple-choice", "impact": "high"},
-        {"category": "Ecosystem Preference", "type": "single-choice", "impact": "high"},
-        {"category": "Feature Priorities", "type": "ranking", "impact": "medium"},
-        {"category": "Form Factor", "type": "single-choice", "impact": "low"}
+        { "category": "Budget", "type": "range", "impact": "high" },
+        {
+          "category": "Primary Use",
+          "type": "multiple-choice",
+          "impact": "high"
+        },
+        {
+          "category": "Ecosystem Preference",
+          "type": "single-choice",
+          "impact": "high"
+        },
+        {
+          "category": "Feature Priorities",
+          "type": "ranking",
+          "impact": "medium"
+        },
+        { "category": "Form Factor", "type": "single-choice", "impact": "low" }
       ]
     },
     "performanceBenchmarkVisualizer": {
@@ -139,10 +176,10 @@
         "Interactive timeline for sustained performance"
       ],
       "chartTypes": [
-        {"name": "Bar Chart", "use": "Benchmark score comparison"},
-        {"name": "Line Chart", "use": "Performance over time/thermal"},
-        {"name": "Scatter Plot", "use": "Price vs performance analysis"},
-        {"name": "Heat Map", "use": "Multi-dimensional comparison matrix"}
+        { "name": "Bar Chart", "use": "Benchmark score comparison" },
+        { "name": "Line Chart", "use": "Performance over time/thermal" },
+        { "name": "Scatter Plot", "use": "Price vs performance analysis" },
+        { "name": "Heat Map", "use": "Multi-dimensional comparison matrix" }
       ]
     },
     "cameraComparison": {
@@ -157,7 +194,7 @@
       ],
       "scenarios": [
         "Daylight Portrait",
-        "Low-light Photography", 
+        "Low-light Photography",
         "Night Mode",
         "Ultra-wide Landscape",
         "Telephoto Zoom",
@@ -210,9 +247,21 @@
         "Availability checker across retailers"
       ],
       "options": [
-        {"type": "storage", "impact": "price", "visualization": "cost-breakdown"},
-        {"type": "color", "impact": "availability", "visualization": "3d-preview"},
-        {"type": "accessories", "impact": "bundle-discount", "visualization": "compatibility-matrix"}
+        {
+          "type": "storage",
+          "impact": "price",
+          "visualization": "cost-breakdown"
+        },
+        {
+          "type": "color",
+          "impact": "availability",
+          "visualization": "3d-preview"
+        },
+        {
+          "type": "accessories",
+          "impact": "bundle-discount",
+          "visualization": "compatibility-matrix"
+        }
       ]
     }
   },
@@ -257,7 +306,7 @@
       "purpose": "Detailed information without cluttering main content",
       "uses": [
         "Technical specifications tables",
-        "Detailed benchmark explanations", 
+        "Detailed benchmark explanations",
         "Methodology deep-dives",
         "Historical context and background"
       ]

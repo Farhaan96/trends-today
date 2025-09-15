@@ -22,20 +22,20 @@ async function researchTopic(topic) {
         messages: [
           {
             role: 'user',
-            content: `Research the topic "${topic}" and provide detailed, factual information including latest updates, key features, specifications, expert opinions, and real-world performance data. Focus on accurate, verifiable information.`
-          }
+            content: `Research the topic "${topic}" and provide detailed, factual information including latest updates, key features, specifications, expert opinions, and real-world performance data. Focus on accurate, verifiable information.`,
+          },
         ],
         max_tokens: 1500,
-        temperature: 0.7
+        temperature: 0.7,
       },
       {
         headers: {
-          'Authorization': `Bearer ${PERPLEXITY_API_KEY}`,
-          'Content-Type': 'application/json'
-        }
+          Authorization: `Bearer ${PERPLEXITY_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
       }
     );
-    
+
     return response.data.choices[0].message.content;
   } catch (error) {
     console.log(`  ⚠️ Perplexity error: ${error.message}`);
@@ -50,9 +50,11 @@ async function generateWithGemini(title, research, category) {
     const response = await axios.post(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GOOGLE_AI_API_KEY}`,
       {
-        contents: [{
-          parts: [{
-            text: `Write a comprehensive, engaging article about "${title}" for a ${category} category.
+        contents: [
+          {
+            parts: [
+              {
+                text: `Write a comprehensive, engaging article about "${title}" for a ${category} category.
 
 Research data: ${research || 'Generate based on your knowledge'}
 
@@ -76,17 +78,19 @@ For product reviews, include:
 - Comparison with competitors
 - Value proposition analysis
 
-Write the complete article now:`
-          }]
-        }],
+Write the complete article now:`,
+              },
+            ],
+          },
+        ],
         generationConfig: {
           temperature: 0.8,
-          maxOutputTokens: 3000
-        }
+          maxOutputTokens: 3000,
+        },
       },
       { timeout: 30000 }
     );
-    
+
     return response.data.candidates[0].content.parts[0].text;
   } catch (error) {
     console.log(`  ⚠️ Gemini error: ${error.message}`);
@@ -99,29 +103,32 @@ async function regenerateArticle(filePath, category) {
   try {
     const content = fs.readFileSync(filePath, 'utf-8');
     const { data: frontmatter, content: oldBody } = matter(content);
-    
+
     const fileName = path.basename(filePath, '.mdx');
     const title = frontmatter.title || fileName.replace(/-/g, ' ');
-    
+
     console.log(`\n📄 Regenerating: ${title}`);
-    
+
     // Skip if article is already high quality (has substantial content)
-    if (oldBody.length > 5000 && !oldBody.includes('Picture this: Researchers')) {
+    if (
+      oldBody.length > 5000 &&
+      !oldBody.includes('Picture this: Researchers')
+    ) {
       console.log(`  ✔️ Already has quality content (${oldBody.length} chars)`);
       return false;
     }
-    
+
     // Research the topic first
     const research = await researchTopic(title);
-    
+
     // Generate new content
     const newContent = await generateWithGemini(title, research, category);
-    
+
     if (!newContent || newContent.length < 1000) {
       console.log(`  ❌ Failed to generate quality content`);
       return false;
     }
-    
+
     // Clean up the content
     let cleanContent = newContent
       .replace(/```markdown\n?/g, '')
@@ -129,32 +136,40 @@ async function regenerateArticle(filePath, category) {
       .replace(/\*\*Note:\*\*.*/g, '') // Remove AI notes
       .replace(/\*\*Disclaimer:\*\*.*/g, '') // Remove disclaimers
       .trim();
-    
+
     // Ensure content doesn't have generic placeholders
-    if (cleanContent.includes('Advanced chip') || cleanContent.includes('Multi-lens system')) {
+    if (
+      cleanContent.includes('Advanced chip') ||
+      cleanContent.includes('Multi-lens system')
+    ) {
       console.log(`  ⚠️ Content still has placeholders, skipping`);
       return false;
     }
-    
+
     // Update frontmatter with better metadata
     if (!frontmatter.description || frontmatter.description.length < 50) {
       // Extract first paragraph as description
-      const firstPara = cleanContent.split('\n\n')[1] || cleanContent.split('\n\n')[0];
-      frontmatter.description = firstPara.replace(/[#*]/g, '').substring(0, 160).trim();
+      const firstPara =
+        cleanContent.split('\n\n')[1] || cleanContent.split('\n\n')[0];
+      frontmatter.description = firstPara
+        .replace(/[#*]/g, '')
+        .substring(0, 160)
+        .trim();
     }
-    
+
     // Ensure proper dates
     if (!frontmatter.publishedAt) {
       frontmatter.publishedAt = new Date().toISOString();
     }
-    
+
     // Save the regenerated article
     const finalContent = matter.stringify(cleanContent, frontmatter);
     fs.writeFileSync(filePath, finalContent);
-    
-    console.log(`  ✅ Regenerated with ${cleanContent.length} chars of quality content!`);
+
+    console.log(
+      `  ✅ Regenerated with ${cleanContent.length} chars of quality content!`
+    );
     return true;
-    
   } catch (error) {
     console.error(`  ❌ Error: ${error.message}`);
     return false;
@@ -164,36 +179,51 @@ async function regenerateArticle(filePath, category) {
 // Main function to process articles
 async function processArticles() {
   const contentDir = path.join(process.cwd(), 'content');
-  
+
   // Focus on articles that need the most help
   const priorityArticles = [
-    { path: 'technology/google-pixel-9-pro-review.mdx', category: 'technology' },
-    { path: 'technology/samsung-galaxy-s24-ultra-review.mdx', category: 'technology' },
+    {
+      path: 'technology/google-pixel-9-pro-review.mdx',
+      category: 'technology',
+    },
+    {
+      path: 'technology/samsung-galaxy-s24-ultra-review.mdx',
+      category: 'technology',
+    },
     { path: 'technology/macbook-air-m3-review.mdx', category: 'technology' },
     { path: 'technology/oneplus-12-review.mdx', category: 'technology' },
-    { path: 'science/scientists-discover-planet-that-shouldn-t-exist-according-to.mdx', category: 'science' },
-    { path: 'psychology/the-psychology-behind-why-we-procrastinate-even-when-we-know.mdx', category: 'psychology' },
-    { path: 'health/why-introverts-are-actually-better-at-this-one-crucial-skill.mdx', category: 'health' }
+    {
+      path: 'science/scientists-discover-planet-that-shouldn-t-exist-according-to.mdx',
+      category: 'science',
+    },
+    {
+      path: 'psychology/the-psychology-behind-why-we-procrastinate-even-when-we-know.mdx',
+      category: 'psychology',
+    },
+    {
+      path: 'health/why-introverts-are-actually-better-at-this-one-crucial-skill.mdx',
+      category: 'health',
+    },
   ];
-  
+
   let processed = 0;
   let regenerated = 0;
-  
+
   console.log('📝 Processing priority articles with poor content...\n');
-  
+
   for (const article of priorityArticles) {
     const filePath = path.join(contentDir, article.path);
-    
+
     if (fs.existsSync(filePath)) {
       processed++;
       const success = await regenerateArticle(filePath, article.category);
       if (success) regenerated++;
-      
+
       // Delay to avoid rate limits
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
     }
   }
-  
+
   console.log('\n' + '='.repeat(50));
   console.log('✅ Article Regeneration Complete!');
   console.log(`📊 Results:`);

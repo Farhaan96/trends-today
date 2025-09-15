@@ -3,23 +3,28 @@
 ## 🚨 CRITICAL: Claude Code Agent System - PROPER USAGE
 
 ### ⚠️ IMPORTANT: Agent Invocation Issues
+
 **PROBLEM:** Agents are NOT appearing with colored boxes when invoked. This means they're not being triggered as separate entities.
 
 **CORRECT INVOCATION:**
+
 - Use the `/agents` command first to see available agents
 - Use `> Use the [agent-name] subagent to [task]` format
 - Each agent should appear with its own colored box
 - If no colored box appears, the agent is NOT actually running
 
 **CURRENT STATUS:**
+
 - Agents are defined in `.claude/agents/` but may not be properly registered
 - The Task tool simulates agents but doesn't actually invoke them
 - Need to use proper Claude Code subagent invocation syntax
 
 ### 📁 Pure AI Agent Pipeline (No JavaScript)
+
 All JavaScript agent files have been REMOVED. The system now uses pure Claude Code AI agents:
 
 **Available Agents in `.claude/agents/`:**
+
 1. `batch-orchestrator` - Orchestrates the pipeline
 2. `trending-topics-discovery` - Finds topics using WebSearch
 3. `ultra-short-content-creator` - Creates articles using AI (now with .mdx support)
@@ -31,6 +36,7 @@ All JavaScript agent files have been REMOVED. The system now uses pure Claude Co
 9. `publication-reviewer` - Final approval
 
 **Tools Agents Use:**
+
 - `WebSearch` - Real-time information
 - `WebFetch` - Deep dive into sources
 - `Write/Edit` - Content creation/modification
@@ -40,6 +46,7 @@ All JavaScript agent files have been REMOVED. The system now uses pure Claude Co
 ### 🎨 AI Image Generation Guidelines
 
 **✅ GOOD for AI Images:**
+
 - Medical/scientific visualizations
 - Abstract concepts (AI, quantum computing)
 - Data visualizations
@@ -48,6 +55,7 @@ All JavaScript agent files have been REMOVED. The system now uses pure Claude Co
 - Neural networks, brain activity
 
 **❌ AVOID for AI Images:**
+
 - Product reviews (phones, laptops)
 - Specific devices (iPhone, Samsung)
 - Text/logos (DALL-E garbles them)
@@ -60,7 +68,9 @@ All JavaScript agent files have been REMOVED. The system now uses pure Claude Co
 **For Product Images:** Use stock photos from Unsplash/Pexels or real product photos.
 
 ### 🔧 Hybrid Approach for API Access
+
 Since pure Claude agents can't use API keys directly:
+
 - **Content/Research:** Use Claude agents (WebSearch/WebFetch)
 - **Image Generation:** Use `utils/ai-image-generator.js` with OpenAI API
 - **Other APIs:** Keep utility files in `utils/` for API access
@@ -68,12 +78,14 @@ Since pure Claude agents can't use API keys directly:
 ### 📝 Daily Workflow with Agents
 
 **Morning Batch:**
+
 ```
 /agents  # Check available agents
 > Use the batch-orchestrator subagent to run morning batch
 ```
 
 **The orchestrator should then trigger (with colored boxes):**
+
 - trending-topics-discovery
 - ultra-short-content-creator
 - fact-checker
@@ -87,16 +99,19 @@ Since pure Claude agents can't use API keys directly:
 ### 🧪 Testing Agent Invocation
 
 **Test Command:**
+
 ```
 > Use the trending-topics-discovery subagent to find 2 trending tech topics
 ```
 
 **Expected Result:**
+
 - Agent name appears in a colored box
 - Agent operates as separate entity with its own context
 - Agent uses its defined tools (WebSearch, WebFetch, etc.)
 
 **If This Doesn't Work:**
+
 1. Try `/agents` command to list available agents
 2. Check `.claude/agents/` folder for agent files
 3. Ensure each agent has proper YAML frontmatter
@@ -104,7 +119,9 @@ Since pure Claude agents can't use API keys directly:
 5. May need to manually register agents
 
 ### ⚠️ Current Workaround
+
 Until proper agent invocation works:
+
 - Use Task tool to simulate agent behavior
 - Use JavaScript utilities for API access (`utils/` folder)
 - Manually follow agent pipeline steps
@@ -114,6 +131,7 @@ Until proper agent invocation works:
 This update documents recent fixes and the plan to align the site with an ultra‑simple, ad‑friendly design similar to leravi.org.
 
 ### Image Reliability Fixes (Completed)
+
 - Root cause: Next/Image blocked remote fallbacks and custom logic overrode local assets after 2s, causing placeholders.
 - Changes implemented:
   - next.config.ts: allow `images.unsplash.com`, `images.pexels.com`, and `trendstoday.ca` as remote image hosts.
@@ -129,7 +147,9 @@ This update documents recent fixes and the plan to align the site with an ultra�
 - Verification: `npm run build && npm start` → hero/feed images render; remote Unsplash/Pexels load without errors.
 
 ### Minimal Theme (Planned) — leravi.org Style
+
 Goal: ultra‑simple, click‑forward, ad‑friendly list.
+
 - Feature flag: `NEXT_PUBLIC_THEME=minimal` to toggle minimal vs magazine layouts.
 - Homepage (single column list):
   - 20–40 posts, title‑first, subtle meta; optional tiny thumbnail; numbered pagination.
@@ -143,6 +163,7 @@ Goal: ultra‑simple, click‑forward, ad‑friendly list.
   - CTR‑oriented titles, Article/NewsArticle schema, stable pagination links.
 
 ### Ads Strategy (Configurable)
+
 - Placement (policy‑friendly):
   - In‑feed: 1 ad every 5–7 items (reserved height to avoid CLS).
   - In‑article: after first H2 and mid‑content (lazy). Optional sticky footer if allowed.
@@ -151,6 +172,7 @@ Goal: ultra‑simple, click‑forward, ad‑friendly list.
 - Labels: “Advertisement” on each slot; ad density within guidelines.
 
 ### Security & Secrets (Important)
+
 - `.env.local` must never be committed. Current `.gitignore` ignores `.env*`. Keep secrets in Vercel/host env.
 - Rotate any keys that were shared in local files before production use.
 - Pre‑commit guard (recommended): add `git-secrets` or a simple secret scan in CI.
@@ -158,6 +180,7 @@ Goal: ultra‑simple, click‑forward, ad‑friendly list.
 - Verify history: `git log -p | rg -n "(sk-|pplx-|AIza|re_|fc-)"` in a clean environment before making repo public.
 
 ### Deployment Checklist
+
 - [ ] Replace the listed zero/tiny image assets or keep the remaps.
 - [ ] Set `NEXT_PUBLIC_THEME=minimal` for rollout (or test on preview).
 - [ ] Validate Core Web Vitals (no CLS from ads; text LCP).
@@ -181,6 +204,7 @@ Trends Today is a premium tech blog platform built with Next.js 14, featuring AI
 **Approach:** 15-20 articles/day via 3 strategic batch runs (5-7 articles each)
 
 ### Ultra-Short Article Standards:
+
 - ✅ **400-500 words maximum** - 2-minute read time for high completion rates
 - ✅ **Engaging hooks** - Compelling story or surprising fact in first 80-100 words
 - ✅ **Premium typography** - Bold statistics, blockquotes, generous white space
@@ -198,30 +222,36 @@ Trends Today is a premium tech blog platform built with Next.js 14, featuring AI
 ### Core Content Agents (Ultra-Short Strategy Optimized)
 
 #### Content Generation Agents ✅ ALIGNED WITH 400-500 WORDS
+
 - **ultra-short-content-creator.js** - Creates 400-500 word articles with 2-minute read time
 - **batch-category-generator.js** - Generates 5-7 articles per batch across categories
 - **leravi-content-creator.js** - Alternative ultra-simple, ad-friendly format
 
 #### Enhancement Agents ✅ CRITICAL FOR QUALITY
+
 - **typography-enhancer.js** - Bolds statistics, adds blockquotes, ensures visual hierarchy
 - **fact-checker.js** - Verifies facts/sources to prevent SEO penalties (>80% accuracy required)
 - **smart-content-linker.js** - Adds 3-4 strategic internal links per article
 - **article-quality-enhancer.js** - Improves hooks, SEO, and readability
 
 #### Discovery & Research Agents
+
 - **seo-keyword-researcher.js** - Finds long-tail, low-competition keywords
 - **trending-topics-discovery.js** - Identifies trending topics from Reddit, news, social
 - **content-enhancer.js** - Enhances existing content with latest information
 
 #### Quality Validation ✅ MUST PASS
+
 - **ultra-short-quality-validator.js** - Ensures 400-500 words, 2-min read, proper formatting
 
 #### Advanced Utility Modules
+
 - **perplexity-enhanced.js** - Real-time research with citations
 - **comprehensive-image-system.js** - Multi-source image pipeline
 - **internal-link-manager.js** - Strategic cross-category linking
 
 ### Agent Execution Commands (Ultra-Short Optimized)
+
 ```bash
 # Ultra-short content generation (400-500 words)
 npm run ultra:generate      # Generate 6 articles (one per category)
@@ -245,22 +275,27 @@ npm run ultra:factcheck:file content/x.mdx    # Check specific file
 ### 🚀 API ECOSYSTEM & CAPABILITIES (86% Success Rate)
 
 #### ✅ WORKING APIS (7/9 Total)
+
 **Content Generation & Research:**
+
 - **Perplexity AI** - Real-time research with citations and source validation
 - **OpenAI GPT-4** - Advanced content generation and editing
 - **Google AI/Gemini 1.5** - Alternative content generation with latest knowledge
 
 **Image & Visual Content:**
+
 - **Unsplash API** - 3M+ professional stock photos with proper attribution
 - **Pexels API** - Backup stock photo source with commercial licensing
 - **OpenAI DALL-E 3** - Custom AI image generation (1024x1024, HD quality)
 - **Firecrawl API** - Advanced web scraping with content extraction
 
 #### ⚠️ REQUIRES SETUP (2/9 Total)
+
 - **Google AI Images (Imagen)** - Requires Google Cloud Project configuration
 - **News API** - Needs API key configuration for breaking news feeds
 
 #### API Efficiency & Timeout Management ⚡
+
 ```javascript
 // Production-ready timeout-resistant architecture
 - HTTP timeouts: 30-60 seconds with exponential backoff retry
@@ -274,6 +309,7 @@ npm run ultra:factcheck:file content/x.mdx    # Check specific file
 ## 🎯 CONTENT STRATEGY: 2000+ ULTRA-SHORT ARTICLES
 
 ### Niche Targeting Strategy (Quality-First Approach)
+
 Focus on **20 micro-niches** with deep, authoritative coverage:
 
 1. **Budget Tech Excellence** - "Best [Product] Under $[Price]" with real testing
@@ -288,7 +324,7 @@ Focus on **20 micro-niches** with deep, authoritative coverage:
 10. **Travel Tech Essentials** - Real-world testing in various conditions
 11. **Car Tech Innovation** - Dashboard tech, safety systems, connectivity
 12. **Kitchen Tech Reviews** - Smart appliances with cooking performance tests
-13. **Parenting Tech Guide** - Safety-focused reviews with real parent perspectives  
+13. **Parenting Tech Guide** - Safety-focused reviews with real parent perspectives
 14. **Senior-Friendly Tech** - Accessibility reviews with usability testing
 15. **Student Tech Value** - Budget analysis with academic use cases
 16. **Small Business Tools** - ROI-focused reviews with implementation guides
@@ -300,15 +336,17 @@ Focus on **20 micro-niches** with deep, authoritative coverage:
 ### Article Quality Framework
 
 #### 5 Premium Article Types (50+ articles per niche):
+
 1. **Ultimate Buyer's Guides** - "Complete Guide to [Category]: What Experts Actually Recommend"
-2. **Honest Review Deep-Dives** - "[Product] After 3 Months: The Unfiltered Truth"  
+2. **Honest Review Deep-Dives** - "[Product] After 3 Months: The Unfiltered Truth"
 3. **Head-to-Head Comparisons** - "[Product A] vs [Product B]: The Definitive Analysis"
 4. **Expert How-To Guides** - "How to [Task]: The Professional Method"
 5. **Industry Analysis** - "Why [Trend] Changes Everything (Or Doesn't)"
 
 #### Content Quality Checklist (Every Article Must Pass):
+
 - 🎯 **Hook-driven opening** - Controversial, surprising, or story-based first paragraph
-- 📊 **Unique data/insights** - Something competitors don't have  
+- 📊 **Unique data/insights** - Something competitors don't have
 - 🔍 **SEO optimization** - Long-tail keywords, semantic search optimization
 - 📸 **Custom visuals** - Product photos, comparison charts, infographics
 - ✍️ **Engaging voice** - Opinionated, authoritative, personality-driven
@@ -319,6 +357,7 @@ Focus on **20 micro-niches** with deep, authoritative coverage:
 ## 🛠️ TECHNICAL IMPLEMENTATION
 
 ### Agent Configuration (.claude folder)
+
 - **Agent Definitions**: `.claude/agents/*.md` with YAML frontmatter
 - **Quality Templates**: `.claude/templates/*.md` for consistent excellence
 - **API Configs**: `.claude/config.yaml` with timeout and rate limiting
@@ -327,14 +366,15 @@ Focus on **20 micro-niches** with deep, authoritative coverage:
 ### 🔧 COMPREHENSIVE ENVIRONMENT CONFIGURATION
 
 #### 🔑 Production API Keys (All Working)
+
 ```bash
 # AI & Research APIs (86% Success Rate)
 PERPLEXITY_API_KEY=pplx-xxx...           # ✅ Real-time research with citations
-OPENAI_API_KEY=sk-proj-xxx...            # ✅ GPT-4 + DALL-E 3 generation  
+OPENAI_API_KEY=sk-proj-xxx...            # ✅ GPT-4 + DALL-E 3 generation
 GOOGLE_AI_API_KEY=AIzaSyBxxx...          # ✅ Gemini 1.5 + future Imagen
 GOOGLE_GEMINI_API_KEY=AIzaSyBxxx...      # ✅ Same key as Google AI
 
-# Web Scraping & Data APIs  
+# Web Scraping & Data APIs
 FIRECRAWL_API_KEY=fc-xxx...              # ✅ Advanced content extraction
 DATAFORSEO_LOGIN=xxx                     # ⚠️ SEO keyword research (optional)
 DATAFORSEO_PASSWORD=xxx                  # ⚠️ SEO keyword research (optional)
@@ -353,6 +393,7 @@ GOOGLE_MAPS_API_KEY=xxx                  # Location-based reviews
 ```
 
 #### ⚙️ Agent Performance Configuration
+
 ```bash
 # Batch Optimization Settings
 API_TIMEOUT_MS=30000                     # 30-second HTTP timeouts (60s for images)
@@ -370,6 +411,7 @@ IMAGE_CACHE_DAYS=7                       # Cache images for 7 days
 ```
 
 ### Content Quality Controls
+
 - **Pre-publication review** - Quality score must exceed 85/100
 - **Engagement optimization** - A/B test headlines and openings
 - **SEO validation** - Technical SEO audit before publishing
@@ -380,6 +422,7 @@ IMAGE_CACHE_DAYS=7                       # Cache images for 7 days
 ## 📊 SUCCESS METRICS (Quality-Focused)
 
 ### Content Quality KPIs:
+
 - **Completion Rate**: >85% article completion rate
 - **Pages per Session**: 3+ through strategic internal linking
 - **SEO Performance**: >50% articles ranking page 1 within 90 days
@@ -387,13 +430,15 @@ IMAGE_CACHE_DAYS=7                       # Cache images for 7 days
 - **Bounce Rate**: <30% through engaging hooks and cross-linking
 
 ### Traffic Growth Timeline (15-20 Articles/Day Strategy):
+
 - **Week 1**: 105 premium articles → 2K visitors (19 visitors/article avg - new content)
 - **Month 1**: 450 premium articles → 12K visitors (27 visitors/article avg)
-- **Month 2**: 900 premium articles → 25K visitors (28 visitors/article avg)  
+- **Month 2**: 900 premium articles → 25K visitors (28 visitors/article avg)
 - **Month 3**: 1350 premium articles → 35K visitors (26 visitors/article avg)
 - **Month 4**: 1800 premium articles → 50K visitors (28 visitors/article avg)
 
 ### Strategic Batch Production:
+
 - **15-20 articles/day via 3 batches** - 5-7 ultra-short articles per batch run
 - **400-500 words maximum** - Snackable content optimized for completion
 - **60-minute batch cycles** - Research → Write → Typography → Links → Publish
@@ -403,10 +448,13 @@ IMAGE_CACHE_DAYS=7                       # Cache images for 7 days
 ## 🎯 DAILY WORKFLOW (Ultra-Short 3-Batch Strategy)
 
 ### ⚠️ CRITICAL: Build Validation & Fact-Checking Required
+
 **All articles MUST pass build validation AND fact-checking before publishing!**
 
 ### 🔧 NEW: Automated Error Prevention
+
 The pipeline now includes automatic build validation to prevent:
+
 - ❌ YAML frontmatter errors
 - ❌ Wrong file extensions (.md instead of .mdx)
 - ❌ TypeScript compilation errors
@@ -422,6 +470,7 @@ npm run ultra:factcheck  # Must achieve >80% accuracy
 ```
 
 ### Batch 1 - Morning (9 AM): 5-7 Articles
+
 ```bash
 npm run ultra:morning       # Generate 5-7 ultra-short articles
 npm run ultra:typography    # Bold stats, blockquotes, spacing
@@ -430,6 +479,7 @@ npm run ultra:factcheck     # Verify all facts (CRITICAL!)
 ```
 
 ### Batch 2 - Midday (1 PM): 5-7 Articles
+
 ```bash
 npm run ultra:midday        # Generate 5-7 ultra-short articles
 npm run ultra:typography    # Apply visual enhancements
@@ -438,6 +488,7 @@ npm run ultra:factcheck     # Verify accuracy (>80% required)
 ```
 
 ### Batch 3 - Evening (5 PM): 5-7 Articles
+
 ```bash
 npm run ultra:evening       # Generate 5-7 ultra-short articles
 npm run ultra:typography    # Format for readability
@@ -446,6 +497,7 @@ npm run ultra:factcheck     # Final fact verification
 ```
 
 ### End of Day (8 PM): Quality Check & Deploy
+
 ```bash
 npm run ultra:validate      # Ensure all articles meet standards
 npm run build              # Build the site
@@ -456,6 +508,7 @@ git push origin main       # Deploy to production
 ## 🔧 AGENT INTEGRATION & TESTING
 
 ### 🧪 Testing & Validation Utilities
+
 ```bash
 # API Testing (Current: 86% success rate)
 node scripts/test-apis.js                # Test all configured APIs
@@ -470,10 +523,13 @@ node scripts/fix-empty-images.js        # Fix 0-byte image files
 ```
 
 ### 🤖 Agent Integration Patterns
+
 ```javascript
 // Modern agent architecture with enhanced capabilities
 const PerplexityEnhanced = require('./utils/perplexity-enhanced');
-const { ComprehensiveImageSystem } = require('./utils/comprehensive-image-system');
+const {
+  ComprehensiveImageSystem,
+} = require('./utils/comprehensive-image-system');
 const { AIImageGenerator } = require('./utils/ai-image-generator');
 
 // Example: Content generation with full pipeline
@@ -483,28 +539,29 @@ const imageSystem = new ComprehensiveImageSystem();
 async function generateArticle(topic) {
   // Research with citations
   const research = await perplexity.research(topic, { type: 'deep' });
-  
+
   // Generate content
   const content = await perplexity.generateContent(topic, 'article');
-  
+
   // Get perfect image (stock first, AI fallback)
-  const image = await imageSystem.findBestImage(topic, { 
+  const image = await imageSystem.findBestImage(topic, {
     type: 'auto',
-    downloadImages: true 
+    downloadImages: true,
   });
-  
+
   return { content, image, research };
 }
 ```
 
 ### 📁 Enhanced File Structure
+
 ```
 /agents/                    # Core automation agents
   ├── enhanced-image-hunter.js      # Production image system
   ├── image-hunter-v2.js           # Enhanced version with analysis
   └── content-creator.js           # Article generation
 
-/utils/                     # Advanced utility modules  
+/utils/                     # Advanced utility modules
   ├── perplexity-enhanced.js       # Advanced research with caching
   ├── ai-image-generator.js        # DALL-E 3 integration
   ├── comprehensive-image-system.js # Multi-source image pipeline
@@ -524,6 +581,7 @@ async function generateArticle(topic) {
 ## 🚨 QUALITY ASSURANCE PROTOCOLS
 
 ### Never Compromise On:
+
 - ✅ **Article depth and insight** - Better to publish 3 great articles than 10 mediocre ones
 - ✅ **Original research and data** - Use APIs efficiently but always add unique value
 - ✅ **Visual quality** - Custom images, proper compression, engaging graphics
@@ -532,6 +590,7 @@ async function generateArticle(topic) {
 - ✅ **Editorial standards** - Consistent voice, proper citations, ethical disclosure
 
 ### Red Flags to Avoid:
+
 - ❌ **Generic, templated content** - Every article must have unique insights
 - ❌ **Over 500 word articles** - Keep ultra-short for maximum engagement
 - ❌ **Stock photos and placeholder images** - Custom visuals only
@@ -542,14 +601,16 @@ async function generateArticle(topic) {
 ## 🎯 COMPETITIVE ADVANTAGE
 
 ### What Makes Us Different:
+
 1. **Quality-First Automation** - AI efficiency meets human editorial standards
 2. **Deep Niche Expertise** - 20+ micro-niches with authoritative coverage
-3. **Engagement Optimization** - Every article designed to hook and retain readers  
+3. **Engagement Optimization** - Every article designed to hook and retain readers
 4. **Technical Excellence** - Superior SEO, performance, and user experience
 5. **Authentic Voice** - Opinionated, personality-driven content that builds trust
 6. **Visual Storytelling** - Custom graphics and images that enhance understanding
 
 ### Success Philosophy:
+
 > "One exceptional article that gets 100 engaged readers is infinitely more valuable than 10 generic articles that get 10 visitors each. Quality compounds - mediocrity disappears."
 
 This strategy transforms Trends Today into a destination publication where readers come for insights they can't find anywhere else, ensuring sustainable growth to 30K+ monthly visitors through content excellence.

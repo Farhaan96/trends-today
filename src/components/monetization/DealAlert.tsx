@@ -16,10 +16,12 @@ export default function DealAlert({
   currentPrice,
   currency = 'USD',
   className = '',
-  onSubscribe
+  onSubscribe,
 }: DealAlertProps) {
   const [email, setEmail] = useState('');
-  const [targetPrice, setTargetPrice] = useState(Math.round(currentPrice * 0.9)); // Default to 10% off
+  const [targetPrice, setTargetPrice] = useState(
+    Math.round(currentPrice * 0.9)
+  ); // Default to 10% off
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -27,7 +29,7 @@ export default function DealAlert({
   const formatCurrency = (price: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: currency
+      currency: currency,
     }).format(price);
   };
 
@@ -64,7 +66,7 @@ export default function DealAlert({
             email,
             productName,
             targetPrice,
-            currentPrice
+            currentPrice,
           }),
         });
 
@@ -74,16 +76,15 @@ export default function DealAlert({
       }
 
       setIsSubmitted(true);
-      
+
       // Track conversion
       if (typeof window !== 'undefined') {
         (window as any).gtag?.('event', 'deal_alert_signup', {
           event_category: 'monetization',
           event_label: productName,
-          value: targetPrice
+          value: targetPrice,
         });
       }
-      
     } catch (err) {
       setError('Failed to set up alert. Please try again.');
     } finally {
@@ -95,12 +96,14 @@ export default function DealAlert({
     { label: '5% off', value: Math.round(currentPrice * 0.95) },
     { label: '10% off', value: Math.round(currentPrice * 0.9) },
     { label: '15% off', value: Math.round(currentPrice * 0.85) },
-    { label: '20% off', value: Math.round(currentPrice * 0.8) }
+    { label: '20% off', value: Math.round(currentPrice * 0.8) },
   ];
 
   if (isSubmitted) {
     return (
-      <div className={`bg-green-50 border border-green-200 rounded-lg p-6 ${className}`}>
+      <div
+        className={`bg-green-50 border border-green-200 rounded-lg p-6 ${className}`}
+      >
         <div className="flex items-center gap-3">
           <CheckCircleIcon className="w-8 h-8 text-green-600" />
           <div>
@@ -121,7 +124,9 @@ export default function DealAlert({
   }
 
   return (
-    <div className={`bg-blue-50 border border-blue-200 rounded-lg p-6 ${className}`}>
+    <div
+      className={`bg-blue-50 border border-blue-200 rounded-lg p-6 ${className}`}
+    >
       <div className="flex items-center gap-3 mb-4">
         <BellIcon className="w-6 h-6 text-blue-600" />
         <div>
@@ -129,7 +134,8 @@ export default function DealAlert({
             🔔 Get Price Drop Alerts
           </h3>
           <p className="text-blue-700 text-sm">
-            Be the first to know when <strong>{productName}</strong> goes on sale!
+            Be the first to know when <strong>{productName}</strong> goes on
+            sale!
           </p>
         </div>
       </div>
@@ -137,7 +143,10 @@ export default function DealAlert({
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Email Input */}
         <div>
-          <label htmlFor="alert-email" className="block text-sm font-medium text-blue-900 mb-1">
+          <label
+            htmlFor="alert-email"
+            className="block text-sm font-medium text-blue-900 mb-1"
+          >
             Email Address
           </label>
           <input
@@ -153,7 +162,10 @@ export default function DealAlert({
 
         {/* Target Price */}
         <div>
-          <label htmlFor="target-price" className="block text-sm font-medium text-blue-900 mb-1">
+          <label
+            htmlFor="target-price"
+            className="block text-sm font-medium text-blue-900 mb-1"
+          >
             Alert me when price drops to:
           </label>
           <div className="flex items-center gap-2">
@@ -184,9 +196,10 @@ export default function DealAlert({
                 onClick={() => setTargetPrice(suggestion.value)}
                 className={`
                   px-2 py-1 text-xs rounded-full border transition-colors
-                  ${targetPrice === suggestion.value
-                    ? 'bg-blue-600 text-white border-blue-600'
-                    : 'bg-white text-blue-600 border-blue-200 hover:bg-blue-50'
+                  ${
+                    targetPrice === suggestion.value
+                      ? 'bg-blue-600 text-white border-blue-600'
+                      : 'bg-white text-blue-600 border-blue-200 hover:bg-blue-50'
                   }
                 `}
               >
@@ -222,9 +235,11 @@ export default function DealAlert({
 
       {/* Privacy Notice */}
       <p className="text-xs text-blue-600 mt-4 text-center">
-        We'll only email you about price drops for this product. You can unsubscribe anytime.
+        We'll only email you about price drops for this product. You can
+        unsubscribe anytime.
         <br />
-        <span className="text-yellow-600">*</span> We may include related deals and product recommendations.
+        <span className="text-yellow-600">*</span> We may include related deals
+        and product recommendations.
       </p>
     </div>
   );

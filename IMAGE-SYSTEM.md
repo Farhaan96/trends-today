@@ -5,6 +5,7 @@ This document describes the comprehensive automated image sourcing system that r
 ## 🚀 Quick Start
 
 ### Fix All Images (Recommended)
+
 ```bash
 # Dry run first (see what would happen)
 npm run fix:images:dry
@@ -17,6 +18,7 @@ npm run fix:images:fast
 ```
 
 ### Validate Image Quality
+
 ```bash
 # Validate specific images
 npm run validate:images public/images/products/iphone-16-pro-hero.jpg
@@ -66,17 +68,20 @@ npm run validate:images public/images/products/*.jpg
 ## 📊 Current State Analysis
 
 ### Problem Identified
+
 - **60+ broken image paths** across articles
 - **63% missing image rate** (only 22 of 60+ images exist)
 - **Generic placeholders** showing "Product Image Coming Soon"
 
 ### Root Causes
+
 - Static image database covering only 18% of needs
 - No content parsing for product extraction
 - Manual curation requirements
 - Limited fallback system
 
 ### Solution Delivered
+
 - **100% automated sourcing** based on article content
 - **Multi-tier fallback system** with 95%+ success rate
 - **Intelligent path mapping** with similarity detection
@@ -85,21 +90,24 @@ npm run validate:images public/images/products/*.jpg
 ## 🎨 Image Categories Supported
 
 ### Product Images
+
 - **iPhone 16 Pro Max**: Hero shots, camera systems, Apple Intelligence features
 - **iPhone 15 Pro Max**: Titanium design, camera, display, battery, USB-C
-- **Samsung Galaxy**: S24 Ultra, S Pen, camera zoom, display technology  
+- **Samsung Galaxy**: S24 Ultra, S Pen, camera zoom, display technology
 - **Google Pixel**: Clean design, camera bar, AI features, Tensor chip
 - **MacBook**: Air M3, performance, design elements
 - **OnePlus**: Premium design, performance features
 
 ### Review Images
+
 - Titanium design showcases
-- Camera comparison shots  
+- Camera comparison shots
 - Performance benchmark charts
 - Battery life demonstrations
 - Display technology highlights
 
 ### News Images
+
 - Apple event coverage
 - iPhone 17 Air concept renders
 - iOS 26 interface previews
@@ -109,6 +117,7 @@ npm run validate:images public/images/products/*.jpg
 ## 🔧 Configuration Options
 
 ### Environment Variables
+
 ```bash
 # API Configuration
 UNSPLASH_ACCESS_KEY=your_unsplash_key     # Primary image source
@@ -121,6 +130,7 @@ MAX_DAILY_API_CALLS=300                  # Budget for 15 articles/day
 ```
 
 ### Script Options
+
 ```bash
 # Execution modes
 --dry-run              # Preview changes without applying
@@ -133,38 +143,44 @@ MAX_DAILY_API_CALLS=300                  # Budget for 15 articles/day
 ## 📈 Performance Metrics
 
 ### Before System
+
 - Missing images: **60+ (63% failure rate)**
 - Manual fixes required: **Daily**
 - Content quality impact: **Severe**
 - User experience: **Poor placeholders**
 
-### After System  
+### After System
+
 - Missing images: **0 (100% coverage)**
 - Manual intervention: **None required**
 - Content quality: **Premium visuals**
 - User experience: **Professional imagery**
 
 ### System Performance
+
 - **Cache hit rate**: 85%+ for repeated requests
-- **Download success**: 95%+ with intelligent fallbacks  
+- **Download success**: 95%+ with intelligent fallbacks
 - **Quality compliance**: 90%+ images meet SEO standards
 - **Loading performance**: <2s with progressive enhancement
 
 ## 🎯 Quality Standards
 
 ### Technical Requirements
+
 - **Dimensions**: 800x600 minimum, 2400x1800 maximum
 - **File size**: <2MB maximum, 500KB optimal
 - **Formats**: WebP preferred, JPEG acceptable, PNG for graphics
 - **Compression**: 85% quality with progressive loading
 
 ### SEO Compliance
+
 - **Alt text**: 10-125 characters, descriptive and keyword-rich
 - **Filenames**: Kebab-case, descriptive, <50 characters
 - **Structured data**: Schema.org markup where applicable
 - **Social sharing**: Open Graph and Twitter Card support
 
 ### Content Relevance
+
 - **Product alignment**: Images match article product focus
 - **Feature relevance**: Images highlight discussed features
 - **Quality consistency**: Professional, branded appearance
@@ -175,6 +191,7 @@ MAX_DAILY_API_CALLS=300                  # Budget for 15 articles/day
 ### Common Issues
 
 **Rate limit exceeded:**
+
 ```bash
 # Check rate limit status
 node -e "const {ImageCacheManager} = require('./lib/image-cache'); console.log(new ImageCacheManager().rateLimiter.getStatus());"
@@ -184,6 +201,7 @@ npm run fix:images:all -- --concurrent=1
 ```
 
 **Quality validation failures:**
+
 ```bash
 # Check specific image quality
 npm run validate:images public/images/products/problematic-image.jpg
@@ -193,6 +211,7 @@ npm run fix:images:fast
 ```
 
 **Cache issues:**
+
 ```bash
 # Clear image cache
 node -e "const {ImageCacheManager} = require('./lib/image-cache'); new ImageCacheManager().clearCache();"
@@ -204,16 +223,19 @@ node -e "const {ImageCacheManager} = require('./lib/image-cache'); console.log(n
 ## 📋 Maintenance
 
 ### Daily Operations
+
 1. **Automated runs**: System runs with content generation agents
 2. **Quality monitoring**: Automated validation in CI/CD pipeline
 3. **Cache management**: Automatic cleanup and optimization
 
 ### Weekly Tasks
+
 1. **Performance review**: Check cache hit rates and download success
 2. **Quality audit**: Validate new images meet standards
 3. **API usage review**: Monitor rate limits and costs
 
 ### Monthly Maintenance
+
 1. **Full system validation**: Complete image audit across all articles
 2. **Source optimization**: Review and update image sources
 3. **Performance tuning**: Optimize cache sizes and cleanup intervals
@@ -223,7 +245,7 @@ node -e "const {ImageCacheManager} = require('./lib/image-cache'); console.log(n
 The comprehensive image sourcing system transforms your blog from having **60+ broken image placeholders** to **100% professional image coverage** with:
 
 - ✅ **Zero manual intervention required**
-- ✅ **Intelligent content-aware sourcing**  
+- ✅ **Intelligent content-aware sourcing**
 - ✅ **Multi-tier fallback reliability**
 - ✅ **SEO-optimized image delivery**
 - ✅ **Performance-optimized caching**

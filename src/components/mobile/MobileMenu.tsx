@@ -1,7 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { XMarkIcon, Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import {
+  XMarkIcon,
+  Bars3Icon,
+  MagnifyingGlassIcon,
+} from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import DarkModeToggle from '../ui/DarkModeToggle';
 import NewsletterSignup from '../newsletter/NewsletterSignup';
@@ -24,8 +28,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         { name: 'Laptops', href: '/reviews?category=laptops' },
         { name: 'Headphones', href: '/reviews?category=headphones' },
         { name: 'Gaming', href: '/reviews?category=gaming' },
-        { name: 'Smart Home', href: '/reviews?category=smart-home' }
-      ]
+        { name: 'Smart Home', href: '/reviews?category=smart-home' },
+      ],
     },
     {
       name: 'Buying Guides',
@@ -35,8 +39,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         { name: 'Best Phones 2025', href: '/best/smartphones/2025' },
         { name: 'Best Laptops 2025', href: '/best/laptops/2025' },
         { name: 'Best Headphones', href: '/best/headphones/2025' },
-        { name: 'Best Gaming Gear', href: '/best/gaming/2025' }
-      ]
+        { name: 'Best Gaming Gear', href: '/best/gaming/2025' },
+      ],
     },
     {
       name: 'News',
@@ -45,8 +49,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       categories: [
         { name: 'Latest Tech News', href: '/news' },
         { name: 'Product Launches', href: '/news?category=launches' },
-        { name: 'Industry Updates', href: '/news?category=industry' }
-      ]
+        { name: 'Industry Updates', href: '/news?category=industry' },
+      ],
     },
     {
       name: 'Comparisons',
@@ -54,15 +58,15 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       icon: '⚖️',
       categories: [
         { name: 'Phone Comparisons', href: '/compare?category=smartphones' },
-        { name: 'Laptop Comparisons', href: '/compare?category=laptops' }
-      ]
-    }
+        { name: 'Laptop Comparisons', href: '/compare?category=laptops' },
+      ],
+    },
   ];
 
   const quickActions = [
     { name: 'Search', icon: '🔍', action: 'search' },
     { name: 'Dark Mode', icon: '🌙', action: 'theme' },
-    { name: 'Newsletter', icon: '📧', action: 'newsletter' }
+    { name: 'Newsletter', icon: '📧', action: 'newsletter' },
   ];
 
   // Prevent body scroll when menu is open
@@ -83,8 +87,11 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
       {/* Backdrop */}
-      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
-      
+      <div
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
       {/* Menu Panel */}
       <div className="fixed inset-y-0 right-0 w-full max-w-sm bg-white dark:bg-gray-900 shadow-xl">
         <div className="flex flex-col h-full">
@@ -98,7 +105,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 Trends<span className="text-blue-600">Today</span>
               </span>
             </div>
-            
+
             <button
               onClick={onClose}
               className="p-2 text-gray-900 hover:text-gray-900 dark:text-gray-900 dark:hover:text-gray-200 rounded-md"
@@ -130,12 +137,18 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               {navigation.map((item) => (
                 <div key={item.name}>
                   <button
-                    onClick={() => setActiveSection(activeSection === item.name ? null : item.name)}
+                    onClick={() =>
+                      setActiveSection(
+                        activeSection === item.name ? null : item.name
+                      )
+                    }
                     className="flex items-center justify-between w-full p-3 text-left rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                   >
                     <div className="flex items-center">
                       <span className="text-lg mr-3">{item.icon}</span>
-                      <span className="font-medium text-gray-900 dark:text-white">{item.name}</span>
+                      <span className="font-medium text-gray-900 dark:text-white">
+                        {item.name}
+                      </span>
                     </div>
                     <svg
                       className={`w-5 h-5 text-gray-900 transition-transform ${
@@ -145,10 +158,15 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 9l-7 7-7-7"
+                      />
                     </svg>
                   </button>
-                  
+
                   {activeSection === item.name && (
                     <div className="ml-8 mt-2 space-y-1">
                       <Link

@@ -21,7 +21,9 @@ for (const file of walk(path.join(process.cwd(), 'content'))) {
     matter(src);
   } catch (e) {
     failed++;
-    console.error(`YAML error in ${path.relative(process.cwd(), file)}: ${e.message}`);
+    console.error(
+      `YAML error in ${path.relative(process.cwd(), file)}: ${e.message}`
+    );
   }
 }
 if (failed) {

@@ -1,10 +1,10 @@
-import { 
+import {
   ShieldCheckIcon,
   CheckBadgeIcon,
   AcademicCapIcon,
   BeakerIcon,
   ClockIcon,
-  StarIcon
+  StarIcon,
 } from '@heroicons/react/24/outline';
 
 interface TrustBadgesProps {
@@ -12,44 +12,47 @@ interface TrustBadgesProps {
   showAll?: boolean;
 }
 
-export default function TrustBadges({ variant = 'horizontal', showAll = true }: TrustBadgesProps) {
+export default function TrustBadges({
+  variant = 'horizontal',
+  showAll = true,
+}: TrustBadgesProps) {
   const badges = [
     {
       icon: ShieldCheckIcon,
-      title: "Editorial Independence",
-      description: "No manufacturer influence on reviews",
-      color: "green"
+      title: 'Editorial Independence',
+      description: 'No manufacturer influence on reviews',
+      color: 'green',
     },
     {
       icon: BeakerIcon,
-      title: "Professional Testing",
-      description: "Lab-grade equipment & methodology",
-      color: "blue"
+      title: 'Professional Testing',
+      description: 'Lab-grade equipment & methodology',
+      color: 'blue',
     },
     {
       icon: AcademicCapIcon,
-      title: "Expert Reviews",
-      description: "Industry professionals & engineers", 
-      color: "purple"
+      title: 'Expert Reviews',
+      description: 'Industry professionals & engineers',
+      color: 'purple',
     },
     {
       icon: CheckBadgeIcon,
-      title: "Verified Results",
-      description: "Peer-reviewed & fact-checked",
-      color: "indigo"
+      title: 'Verified Results',
+      description: 'Peer-reviewed & fact-checked',
+      color: 'indigo',
     },
     {
       icon: ClockIcon,
-      title: "Extended Testing",
-      description: "2-4 weeks of real-world usage",
-      color: "orange"
+      title: 'Extended Testing',
+      description: '2-4 weeks of real-world usage',
+      color: 'orange',
     },
     {
       icon: StarIcon,
-      title: "Reader Trusted",
-      description: "Transparent scoring & recommendations",
-      color: "yellow"
-    }
+      title: 'Reader Trusted',
+      description: 'Transparent scoring & recommendations',
+      color: 'yellow',
+    },
   ];
 
   const displayBadges = showAll ? badges : badges.slice(0, 4);
@@ -61,7 +64,7 @@ export default function TrustBadges({ variant = 'horizontal', showAll = true }: 
       purple: 'bg-purple-50 border-purple-200 text-purple-700',
       indigo: 'bg-indigo-50 border-indigo-200 text-indigo-700',
       orange: 'bg-orange-50 border-orange-200 text-orange-700',
-      yellow: 'bg-yellow-50 border-yellow-200 text-yellow-700'
+      yellow: 'bg-yellow-50 border-yellow-200 text-yellow-700',
     };
     return colorMap[color as keyof typeof colorMap] || colorMap.blue;
   };

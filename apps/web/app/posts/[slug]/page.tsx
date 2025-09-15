@@ -1,26 +1,30 @@
-import { notFound } from 'next/navigation'
-import Image from 'next/image'
-import Link from 'next/link'
-import { MDXRemote } from 'next-mdx-remote/rsc'
-import { getPostBySlug, getAllPosts } from '../../../lib/mdx'
-import AdSlot from '../../../components/AdSlot'
-import ShareButtons from '../../../components/ShareButtons'
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import { getPostBySlug, getAllPosts } from '../../../lib/mdx';
+import AdSlot from '../../../components/AdSlot';
+import ShareButtons from '../../../components/ShareButtons';
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts()
+  const posts = await getAllPosts();
   return posts.map((post) => ({
     slug: post.slug,
-  }))
+  }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = await params
-  const post = await getPostBySlug(resolvedParams.slug)
-  
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const resolvedParams = await params;
+  const post = await getPostBySlug(resolvedParams.slug);
+
   if (!post) {
     return {
       title: 'Post Not Found',
-    }
+    };
   }
 
   return {
@@ -47,22 +51,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description: post.description,
       images: [post.image || '/images/placeholder.svg'],
     },
-  }
+  };
 }
 
-export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = await params
-  const post = await getPostBySlug(resolvedParams.slug)
-  
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const resolvedParams = await params;
+  const post = await getPostBySlug(resolvedParams.slug);
+
   if (!post) {
-    notFound()
+    notFound();
   }
 
   // Get related posts (same category)
-  const allPosts = await getAllPosts()
+  const allPosts = await getAllPosts();
   const relatedPosts = allPosts
     .filter((p) => p.slug !== post.slug && p.category === post.category)
-    .slice(0, 3)
+    .slice(0, 3);
 
   return (
     <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -76,22 +84,24 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             {post.category || 'Technology'}
           </Link>
         </div>
-        
+
         <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-        
+
         {post.subtitle && (
           <p className="text-xl text-gray-600 mb-6">{post.subtitle}</p>
         )}
-        
+
         <div className="flex items-center justify-between mb-6 text-sm text-gray-500">
           <div className="flex items-center gap-4">
             <span>{post.author || 'Trends Today Team'}</span>
             <span>•</span>
-            <time>{new Date(post.date).toLocaleDateString('en-US', { 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
-            })}</time>
+            <time>
+              {new Date(post.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </time>
             <span>•</span>
             <span>{post.readingTime}</span>
           </div>
@@ -162,8 +172,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                       className="object-cover"
                     />
                   </div>
-                  <h3 className="font-semibold line-clamp-2">{related.title}</h3>
-                  <p className="text-sm text-gray-500 mt-1">{related.readingTime}</p>
+                  <h3 className="font-semibold line-clamp-2">
+                    {related.title}
+                  </h3>
+                  <p className="text-sm text-gray-500 mt-1">
+                    {related.readingTime}
+                  </p>
                 </article>
               </Link>
             ))}
@@ -183,5 +197,5 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </div>
       </nav>
     </article>
-  )
+  );
 }

@@ -6,7 +6,7 @@ class WebsiteAuditor {
     this.results = {
       pages: [],
       issues: [],
-      recommendations: []
+      recommendations: [],
     };
   }
 
@@ -14,13 +14,13 @@ class WebsiteAuditor {
     try {
       const payload = {
         url: url,
-        formats: ['markdown', 'html']
+        formats: ['markdown', 'html'],
       };
 
       if (extractionPrompt) {
         payload.extractorOptions = {
           mode: 'llm-extraction',
-          extractionPrompt: extractionPrompt
+          extractionPrompt: extractionPrompt,
         };
       }
 
@@ -28,7 +28,7 @@ class WebsiteAuditor {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.FIRECRAWL_API_KEY}`,
+          Authorization: `Bearer ${process.env.FIRECRAWL_API_KEY}`,
         },
         body: JSON.stringify(payload),
       });
@@ -47,28 +47,32 @@ class WebsiteAuditor {
 
   async researchWithPerplexity(query) {
     try {
-      const response = await fetch('https://api.perplexity.ai/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.PERPLEXITY_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: 'sonar-pro',
-          messages: [
-            {
-              role: 'system',
-              content: 'You are a tech fact-checker and content auditor. Provide accurate, current information and identify any outdated or incorrect details.'
-            },
-            {
-              role: 'user',
-              content: query
-            }
-          ],
-          max_tokens: 600,
-          temperature: 0.2
-        }),
-      });
+      const response = await fetch(
+        'https://api.perplexity.ai/chat/completions',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.PERPLEXITY_API_KEY}`,
+          },
+          body: JSON.stringify({
+            model: 'sonar-pro',
+            messages: [
+              {
+                role: 'system',
+                content:
+                  'You are a tech fact-checker and content auditor. Provide accurate, current information and identify any outdated or incorrect details.',
+              },
+              {
+                role: 'user',
+                content: query,
+              },
+            ],
+            max_tokens: 600,
+            temperature: 0.2,
+          }),
+        }
+      );
 
       const data = await response.json();
       return data.choices?.[0]?.message?.content || null;
@@ -80,7 +84,7 @@ class WebsiteAuditor {
 
   async auditHomepage() {
     console.log('\n=== AUDITING HOMEPAGE ===');
-    
+
     const homepageData = await this.scrapeWithFirecrawl(
       this.baseUrl,
       `Analyze the homepage and identify:
@@ -100,26 +104,26 @@ class WebsiteAuditor {
         url: this.baseUrl,
         type: 'homepage',
         analysis: homepageData.llm_extraction,
-        content: homepageData.markdown?.substring(0, 1000)
+        content: homepageData.markdown?.substring(0, 1000),
       });
     }
   }
 
   async auditKeyPages() {
     console.log('\n=== AUDITING KEY PAGES ===');
-    
+
     const keyPages = [
       { url: `${this.baseUrl}/reviews`, type: 'reviews-index' },
       { url: `${this.baseUrl}/news`, type: 'news-index' },
       { url: `${this.baseUrl}/best`, type: 'buying-guides' },
       { url: `${this.baseUrl}/authors`, type: 'authors' },
       { url: `${this.baseUrl}/how-we-test`, type: 'methodology' },
-      { url: `${this.baseUrl}/editorial-standards`, type: 'standards' }
+      { url: `${this.baseUrl}/editorial-standards`, type: 'standards' },
     ];
 
     for (const page of keyPages) {
       console.log(`Auditing: ${page.url}`);
-      
+
       const pageData = await this.scrapeWithFirecrawl(
         page.url,
         `Analyze this ${page.type} page and identify:
@@ -137,29 +141,29 @@ class WebsiteAuditor {
           url: page.url,
           type: page.type,
           analysis: pageData.llm_extraction,
-          content: pageData.markdown?.substring(0, 500)
+          content: pageData.markdown?.substring(0, 500),
         });
       }
-      
+
       // Small delay to avoid rate limiting
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
     }
   }
 
   async auditSpecificArticles() {
     console.log('\n=== AUDITING SPECIFIC ARTICLES ===');
-    
+
     // Get the iPhone 17 Air article we just created
     const articleUrls = [
       `${this.baseUrl}/news/iphone-17-air-announcement-what-to-expect`,
       `${this.baseUrl}/reviews/iphone-15-pro-max-review`,
       `${this.baseUrl}/reviews/samsung-galaxy-s24-ultra-review`,
-      `${this.baseUrl}/reviews/google-pixel-8-pro-review`
+      `${this.baseUrl}/reviews/google-pixel-8-pro-review`,
     ];
 
     for (const url of articleUrls) {
       console.log(`Auditing article: ${url}`);
-      
+
       const articleData = await this.scrapeWithFirecrawl(
         url,
         `Analyze this tech article for:
@@ -174,13 +178,16 @@ class WebsiteAuditor {
       );
 
       if (articleData) {
-        console.log('Article Analysis:', articleData.llm_extraction || 'No extraction available');
+        console.log(
+          'Article Analysis:',
+          articleData.llm_extraction || 'No extraction available'
+        );
         this.results.pages.push({
           url: url,
           type: 'article',
           analysis: articleData.llm_extraction,
           title: articleData.metadata?.title,
-          content: articleData.markdown?.substring(0, 800)
+          content: articleData.markdown?.substring(0, 800),
         });
 
         // Now verify the article's technical claims with Perplexity
@@ -188,45 +195,51 @@ class WebsiteAuditor {
           const factCheck = await this.researchWithPerplexity(
             `Fact-check the following content about the iPhone 17 or iPhone 15 Pro Max. Identify any outdated specs, incorrect pricing, or inaccurate technical claims: ${articleData.markdown.substring(0, 1000)}`
           );
-          
+
           if (factCheck) {
             console.log('Fact-check results:', factCheck);
             this.results.issues.push({
               url: url,
               type: 'fact-check',
-              finding: factCheck
+              finding: factCheck,
             });
           }
         }
       }
-      
+
       // Delay between requests
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 3000));
     }
   }
 
   async identifyImageIssues() {
     console.log('\n=== IDENTIFYING IMAGE ISSUES ===');
-    
+
     // Check each page for image problems
     for (const page of this.results.pages) {
       if (page.content) {
         // Look for common image issues in the content
         const imageIssues = [];
-        
+
         if (page.content.includes('/file.svg')) {
-          imageIssues.push('Using placeholder SVG images instead of actual product photos');
+          imageIssues.push(
+            'Using placeholder SVG images instead of actual product photos'
+          );
         }
-        
-        if (page.content.includes('![') && !page.content.includes('.jpg') && !page.content.includes('.png')) {
+
+        if (
+          page.content.includes('![') &&
+          !page.content.includes('.jpg') &&
+          !page.content.includes('.png')
+        ) {
           imageIssues.push('Missing or broken image references');
         }
-        
+
         if (imageIssues.length > 0) {
           this.results.issues.push({
             url: page.url,
             type: 'images',
-            issues: imageIssues
+            issues: imageIssues,
           });
         }
       }
@@ -235,52 +248,61 @@ class WebsiteAuditor {
 
   generateRecommendations() {
     console.log('\n=== GENERATING RECOMMENDATIONS ===');
-    
+
     // Based on findings, generate specific recommendations
     const recommendations = [
       {
         priority: 'HIGH',
         category: 'Images',
         issue: 'Placeholder images throughout site',
-        recommendation: 'Replace all /file.svg placeholders with actual product photos, screenshots, or professional imagery'
+        recommendation:
+          'Replace all /file.svg placeholders with actual product photos, screenshots, or professional imagery',
       },
       {
         priority: 'HIGH',
         category: 'Content Freshness',
         issue: 'Articles may contain outdated information',
-        recommendation: 'Implement content review schedule to update specs, prices, and availability'
+        recommendation:
+          'Implement content review schedule to update specs, prices, and availability',
       },
       {
         priority: 'MEDIUM',
         category: 'Navigation',
         issue: 'Some navigation links may not work properly',
-        recommendation: 'Test all internal links and ensure proper routing for news articles'
+        recommendation:
+          'Test all internal links and ensure proper routing for news articles',
       },
       {
         priority: 'MEDIUM',
         category: 'SEO',
         issue: 'Image alt text and metadata optimization',
-        recommendation: 'Add descriptive alt text to all images and optimize meta descriptions'
+        recommendation:
+          'Add descriptive alt text to all images and optimize meta descriptions',
       },
       {
         priority: 'LOW',
         category: 'Trust Signals',
         issue: 'Author credentials could be more prominent',
-        recommendation: 'Enhance author boxes with credentials, social links, and expertise indicators'
-      }
+        recommendation:
+          'Enhance author boxes with credentials, social links, and expertise indicators',
+      },
     ];
 
     this.results.recommendations = recommendations;
-    
+
     console.log('\n=== AUDIT RECOMMENDATIONS ===');
     recommendations.forEach((rec, index) => {
-      console.log(`${index + 1}. [${rec.priority}] ${rec.category}: ${rec.recommendation}`);
+      console.log(
+        `${index + 1}. [${rec.priority}] ${rec.category}: ${rec.recommendation}`
+      );
     });
   }
 
   async runFullAudit() {
     console.log('🔍 STARTING COMPREHENSIVE WEBSITE AUDIT');
-    console.log('This will analyze your entire site for accuracy, images, and best practices...\n');
+    console.log(
+      'This will analyze your entire site for accuracy, images, and best practices...\n'
+    );
 
     try {
       await this.auditHomepage();
@@ -294,12 +316,14 @@ class WebsiteAuditor {
       console.log(`- Pages analyzed: ${this.results.pages.length}`);
       console.log(`- Issues identified: ${this.results.issues.length}`);
       console.log(`- Recommendations: ${this.results.recommendations.length}`);
-      
+
       // Save results to file for detailed review
       const fs = require('fs');
-      fs.writeFileSync('website-audit-results.json', JSON.stringify(this.results, null, 2));
+      fs.writeFileSync(
+        'website-audit-results.json',
+        JSON.stringify(this.results, null, 2)
+      );
       console.log(`\n📄 Detailed results saved to: website-audit-results.json`);
-
     } catch (error) {
       console.error('Audit failed:', error.message);
     }

@@ -17,7 +17,7 @@
     },
     {
       "factor": "Camera Quality",
-      "importance": "high", 
+      "importance": "high",
       "explanation": "Smartphone cameras have become the primary camera for most users",
       "tips": [
         "Test low-light performance - this is where phones differ most",
@@ -135,7 +135,7 @@
         ],
         "keySpecs": {
           "processor": "Snapdragon 8 Gen 3",
-          "display": "6.2\" AMOLED 120Hz", 
+          "display": "6.2\" AMOLED 120Hz",
           "camera": "50MP + 12MP + 10MP",
           "battery": "4000mAh",
           "storage": "128GB/256GB"
@@ -195,7 +195,7 @@
           "processor": "Google Tensor G3",
           "display": "6.2\" OLED 120Hz",
           "camera": "50MP + 12MP",
-          "battery": "4575mAh", 
+          "battery": "4575mAh",
           "storage": "128GB/256GB"
         }
       },
@@ -221,7 +221,7 @@
         "pros": [
           "Best-in-class computational photography",
           "Clean Android experience",
-          "First to get Android updates", 
+          "First to get Android updates",
           "Excellent Magic Eraser and editing tools"
         ],
         "cons": [
@@ -283,7 +283,7 @@
           "Solid build quality"
         ],
         "cons": [
-          "Camera system lags behind competition", 
+          "Camera system lags behind competition",
           "Glyph notifications can be gimmicky",
           "Limited availability in some regions"
         ]
@@ -387,7 +387,7 @@
       ]
     },
     "premium": {
-      "range": "$800+", 
+      "range": "$800+",
       "recommendations": [
         "iPhone 15 Pro - best overall",
         "Galaxy S24 - best Android flagship",
@@ -420,7 +420,14 @@
   "seo": {
     "metaTitle": "Best Smartphones 2025: Top 5 Phones After Testing 25+ Devices | Trends Today",
     "metaDescription": "Our comprehensive guide to the best smartphones in 2025. We tested 25+ devices to find the top picks across all price ranges. iPhone 15 Pro leads our list.",
-    "keywords": ["best smartphones 2025", "top phones 2025", "smartphone buying guide", "iPhone 15 Pro review", "Galaxy S24 vs iPhone", "best camera phone"]
+    "keywords": [
+      "best smartphones 2025",
+      "top phones 2025",
+      "smartphone buying guide",
+      "iPhone 15 Pro review",
+      "Galaxy S24 vs iPhone",
+      "best camera phone"
+    ]
   },
   "lastUpdated": "2024-10-01",
   "nextUpdate": "2025-04-01"

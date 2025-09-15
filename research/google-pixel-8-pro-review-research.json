@@ -27,11 +27,7 @@
       "Samsung Galaxy S24",
       "OnePlus 12"
     ],
-    "sources": [
-      "store.google.com",
-      "gsmarena.com",
-      "dxomark.com"
-    ],
+    "sources": ["store.google.com", "gsmarena.com", "dxomark.com"],
     "productName": "Google Pixel 8 Pro"
   },
   "keywordData": [

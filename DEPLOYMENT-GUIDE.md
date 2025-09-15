@@ -72,16 +72,19 @@ npm run build
 ### 2. Required API Keys & Services
 
 #### Essential (Deploy Today):
+
 - **Google Analytics**: Get GA4 tracking ID
 - **Disqus**: Create account and shortname
 - **Microsoft Clarity**: Free heat map analytics
 
 #### High Priority (This Week):
+
 - **ConvertKit/Mailchimp**: Newsletter management
 - **Twitter API**: Automated posting
 - **Facebook Page Token**: Social automation
 
 #### Optional (Next Month):
+
 - **Hotjar**: User behavior analytics
 - **LinkedIn API**: Professional network posting
 - **Reddit API**: Community engagement
@@ -116,12 +119,14 @@ vercel domains verify trendstoday.ca
 ## 📊 PERFORMANCE OPTIMIZATION
 
 ### Current Improvements Achieved:
+
 - **Loading Speed**: Dynamic imports reduce bundle size by 40%
 - **SEO Score**: Structured data and meta tags implemented
 - **User Engagement**: Multiple engagement triggers added
 - **Conversion Rate**: Enhanced newsletter forms with benefits
 
 ### Next Optimizations:
+
 ```bash
 # Image optimization
 npm install @next/bundle-analyzer
@@ -136,15 +141,17 @@ npm install web-vitals
 ## 📈 CONTENT SCALING STRATEGY
 
 ### Week 1: Quality Foundation
+
 - Deploy all new features
 - Test all integrations
 - Monitor analytics setup
 
-### Week 2: Content Velocity  
+### Week 2: Content Velocity
+
 ```bash
 # Resume daily publishing
 npm run agents:morning
-npm run agents:midday  
+npm run agents:midday
 npm run agents:evening
 
 # Monitor performance
@@ -152,11 +159,13 @@ npm run agents:quality
 ```
 
 ### Week 3: Engagement Optimization
+
 - A/B test newsletter forms
 - Optimize social sharing
 - Analyze user behavior data
 
 ### Week 4: Automation Scaling
+
 - Implement Twitter bot
 - Set up Facebook automation
 - Launch Reddit strategy
@@ -166,18 +175,21 @@ npm run agents:quality
 ## 🎯 SUCCESS METRICS TO TRACK
 
 ### Immediate KPIs (Week 1):
+
 - Page load speed: <2 seconds
 - Newsletter signups: >50/week
 - Social shares: >100/week
 - Comments: >20/week
 
 ### Growth KPIs (Month 1):
+
 - Monthly visitors: 50K+
 - Newsletter subscribers: 1K+
 - Social media followers: 2K+
 - Engagement rate: >5%
 
 ### Revenue KPIs (Month 3):
+
 - Monthly revenue: $5K+
 - Affiliate conversions: >100/month
 - Display ad revenue: $1K+/month
@@ -188,6 +200,7 @@ npm run agents:quality
 ## 🔧 INTEGRATION TESTING
 
 ### Test All Features:
+
 ```bash
 # Test comments
 # Visit any article page, scroll down, verify Disqus loads
@@ -209,6 +222,7 @@ npm run agents:quality
 ```
 
 ### Debug Common Issues:
+
 ```bash
 # Clear Next.js cache
 rm -rf .next
@@ -228,24 +242,28 @@ curl http://localhost:3000/api/rss
 ## 🚨 IMMEDIATE ACTION ITEMS
 
 ### Day 1: Deploy Foundation
+
 1. Set up Google Analytics and Clarity
 2. Configure Disqus comments
 3. Deploy to production
 4. Test all features
 
 ### Day 2: Content Integration
+
 1. Update existing articles with new layout
 2. Add social share buttons to all pages
 3. Enable newsletter forms
 4. Test related articles
 
 ### Day 3: Analytics Setup
+
 1. Create GA4 custom events
 2. Set up conversion goals
 3. Configure Clarity recordings
 4. Implement heat map analysis
 
 ### Week 1: Optimization
+
 1. Monitor Core Web Vitals
 2. A/B test newsletter forms
 3. Optimize social sharing
@@ -256,6 +274,7 @@ curl http://localhost:3000/api/rss
 ## 📱 MOBILE OPTIMIZATION
 
 All new features are mobile-responsive:
+
 - ✅ Touch-friendly social buttons
 - ✅ Mobile-optimized newsletter forms
 - ✅ Responsive related articles grid
@@ -266,6 +285,7 @@ All new features are mobile-responsive:
 ## 🔒 SECURITY & PRIVACY
 
 Implemented protections:
+
 - ✅ Rate limiting on API endpoints
 - ✅ CSRF protection
 - ✅ Privacy-compliant analytics
@@ -276,6 +296,7 @@ Implemented protections:
 ## 🎉 LAUNCH CHECKLIST
 
 ### Pre-Launch:
+
 - [ ] Environment variables configured
 - [ ] All features tested
 - [ ] Analytics working
@@ -283,6 +304,7 @@ Implemented protections:
 - [ ] Mobile tested
 
 ### Launch Day:
+
 - [ ] Deploy to production
 - [ ] Monitor error logs
 - [ ] Check all integrations
@@ -290,6 +312,7 @@ Implemented protections:
 - [ ] Send newsletter to existing subscribers
 
 ### Post-Launch (Week 1):
+
 - [ ] Daily analytics review
 - [ ] User feedback collection
 - [ ] Performance monitoring
@@ -301,12 +324,14 @@ Implemented protections:
 ## 💰 REVENUE ACCELERATION
 
 ### Immediate Opportunities:
+
 1. **Newsletter Sponsorships**: $500-2K/week
 2. **Enhanced Social Sharing**: +30% traffic
 3. **Better User Engagement**: +50% time on site
 4. **Improved SEO**: +25% organic traffic
 
 ### Expected ROI:
+
 - **Month 1**: 2x current traffic
 - **Month 2**: $10K+ monthly revenue
 - **Month 3**: 100K+ monthly visitors
@@ -317,12 +342,14 @@ Implemented protections:
 ## 🆘 SUPPORT & TROUBLESHOOTING
 
 ### Common Issues:
+
 1. **Comments not loading**: Check Disqus shortname
 2. **Analytics not tracking**: Verify GA4 ID
 3. **Newsletter not working**: Check API endpoint
 4. **Social sharing broken**: Verify URL encoding
 
 ### Quick Fixes:
+
 ```bash
 # Reset all caches
 npm run build
@@ -333,6 +360,7 @@ vercel logs
 ```
 
 ### Emergency Rollback:
+
 ```bash
 # If issues occur, rollback instantly
 vercel rollback

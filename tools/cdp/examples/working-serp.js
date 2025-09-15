@@ -4,23 +4,23 @@ const CDPClient = require('../client.js');
 
 async function collectRedditEarbuds() {
   const client = new CDPClient();
-  
+
   try {
     console.log('🔍 Collecting Reddit earbuds data...');
     await client.connect();
-    
+
     // Navigate to Google search directly with the query
     const query = 'site:reddit.com best budget earbuds 2025';
     const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-    
+
     console.log('📡 Navigating directly to search results...');
     await client.open(searchUrl);
-    
+
     // Wait for results to load
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
     console.log('📊 Extracting Reddit results...');
-    
+
     // Extract results with a simpler approach
     const results = await client.evaluate(`
       (function() {
@@ -66,10 +66,12 @@ async function collectRedditEarbuds() {
         return results;
       })();
     `);
-    
+
     if (results.length === 0) {
-      console.log('⚠️ No Reddit results found. Extracting any search results...');
-      
+      console.log(
+        '⚠️ No Reddit results found. Extracting any search results...'
+      );
+
       // Fallback: get any search results
       const fallbackResults = await client.evaluate(`
         (function() {
@@ -97,29 +99,40 @@ async function collectRedditEarbuds() {
           return results;
         })();
       `);
-      
+
       if (fallbackResults.length > 0) {
         console.log(`✅ Found ${fallbackResults.length} search results!`);
-        console.log(JSON.stringify({
-          query: query,
-          timestamp: new Date().toISOString(),
-          resultsCount: fallbackResults.length,
-          results: fallbackResults
-        }, null, 2));
+        console.log(
+          JSON.stringify(
+            {
+              query: query,
+              timestamp: new Date().toISOString(),
+              resultsCount: fallbackResults.length,
+              results: fallbackResults,
+            },
+            null,
+            2
+          )
+        );
         return;
       }
     }
-    
+
     console.log(`✅ Found ${results.length} Reddit results!`);
-    
+
     // Output clean JSON
-    console.log(JSON.stringify({
-      query: query,
-      timestamp: new Date().toISOString(),
-      resultsCount: results.length,
-      results: results
-    }, null, 2));
-    
+    console.log(
+      JSON.stringify(
+        {
+          query: query,
+          timestamp: new Date().toISOString(),
+          resultsCount: results.length,
+          results: results,
+        },
+        null,
+        2
+      )
+    );
   } catch (error) {
     console.error('❌ Error:', error.message);
     process.exit(1);

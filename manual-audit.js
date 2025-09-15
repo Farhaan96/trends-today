@@ -7,29 +7,29 @@ async function simpleAudit() {
   const results = {
     pages: [],
     criticalIssues: [],
-    recommendations: []
+    recommendations: [],
   };
 
   // Helper function for basic scraping
   async function scrapeBasic(url, delay = 3000) {
     try {
       console.log(`Scraping: ${url}`);
-      
+
       const response = await fetch('https://api.firecrawl.dev/v1/scrape', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.FIRECRAWL_API_KEY}`,
+          Authorization: `Bearer ${process.env.FIRECRAWL_API_KEY}`,
         },
         body: JSON.stringify({
           url: url,
-          formats: ['markdown']
+          formats: ['markdown'],
         }),
       });
 
       if (response.status === 429) {
         console.log('Rate limited - waiting 60 seconds...');
-        await new Promise(resolve => setTimeout(resolve, 60000));
+        await new Promise((resolve) => setTimeout(resolve, 60000));
         return await scrapeBasic(url, delay);
       }
 
@@ -39,12 +39,12 @@ async function simpleAudit() {
       }
 
       const data = await response.json();
-      
+
       if (data.success) {
         console.log(`✅ Scraped: ${data.data.metadata?.title || 'Untitled'}`);
-        
+
         // Wait before next request
-        await new Promise(resolve => setTimeout(resolve, delay));
+        await new Promise((resolve) => setTimeout(resolve, delay));
         return data.data;
       } else {
         console.log(`❌ Failed: ${url}`);
@@ -59,22 +59,25 @@ async function simpleAudit() {
   // Analyze with Perplexity
   async function analyzeWithPerplexity(content, analysisType, url) {
     try {
-      const response = await fetch('https://api.perplexity.ai/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.PERPLEXITY_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: 'sonar-pro',
-          messages: [
-            {
-              role: 'system',
-              content: 'You are a website content auditor specializing in tech review sites. Analyze content for accuracy, completeness, and current best practices.'
-            },
-            {
-              role: 'user',
-              content: `Analyze this ${analysisType} content from ${url}:
+      const response = await fetch(
+        'https://api.perplexity.ai/chat/completions',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.PERPLEXITY_API_KEY}`,
+          },
+          body: JSON.stringify({
+            model: 'sonar-pro',
+            messages: [
+              {
+                role: 'system',
+                content:
+                  'You are a website content auditor specializing in tech review sites. Analyze content for accuracy, completeness, and current best practices.',
+              },
+              {
+                role: 'user',
+                content: `Analyze this ${analysisType} content from ${url}:
 
 ${content}
 
@@ -87,13 +90,14 @@ Provide a detailed analysis focusing on:
 6. Specific technical inaccuracies if any
 7. Overall content quality rating (1-10)
 
-Be specific and actionable in your recommendations.`
-            }
-          ],
-          max_tokens: 800,
-          temperature: 0.2
-        }),
-      });
+Be specific and actionable in your recommendations.`,
+              },
+            ],
+            max_tokens: 800,
+            temperature: 0.2,
+          }),
+        }
+      );
 
       const data = await response.json();
       return data.choices?.[0]?.message?.content || null;
@@ -112,57 +116,61 @@ Be specific and actionable in your recommendations.`
       'homepage',
       'https://www.trendstoday.ca'
     );
-    
+
     results.pages.push({
       url: 'https://www.trendstoday.ca',
       type: 'homepage',
       title: homepage.metadata?.title,
       analysis: homepageAnalysis,
-      content: homepage.markdown.substring(0, 1000)
+      content: homepage.markdown.substring(0, 1000),
     });
-    
+
     console.log('Homepage Analysis:', homepageAnalysis);
   }
 
   // 2. Audit iPhone 17 Air article (our new article)
   console.log('\n=== 2. NEW ARTICLE AUDIT (iPhone 17 Air) ===');
-  const newArticle = await scrapeBasic('https://www.trendstoday.ca/news/iphone-17-air-announcement-what-to-expect');
+  const newArticle = await scrapeBasic(
+    'https://www.trendstoday.ca/news/iphone-17-air-announcement-what-to-expect'
+  );
   if (newArticle) {
     const articleAnalysis = await analyzeWithPerplexity(
       newArticle.markdown.substring(0, 3000),
       'iPhone 17 Air news article',
       'https://www.trendstoday.ca/news/iphone-17-air-announcement-what-to-expect'
     );
-    
+
     results.pages.push({
       url: 'https://www.trendstoday.ca/news/iphone-17-air-announcement-what-to-expect',
       type: 'news-article',
       title: newArticle.metadata?.title,
       analysis: articleAnalysis,
-      content: newArticle.markdown.substring(0, 1500)
+      content: newArticle.markdown.substring(0, 1500),
     });
-    
+
     console.log('iPhone 17 Air Article Analysis:', articleAnalysis);
   }
 
   // 3. Audit a review article
   console.log('\n=== 3. REVIEW ARTICLE AUDIT ===');
-  const reviewArticle = await scrapeBasic('https://www.trendstoday.ca/reviews/iphone-15-pro-max-review');
+  const reviewArticle = await scrapeBasic(
+    'https://www.trendstoday.ca/reviews/iphone-15-pro-max-review'
+  );
   if (reviewArticle) {
     const reviewAnalysis = await analyzeWithPerplexity(
       reviewArticle.markdown.substring(0, 3000),
       'iPhone 15 Pro Max review',
       'https://www.trendstoday.ca/reviews/iphone-15-pro-max-review'
     );
-    
+
     results.pages.push({
       url: 'https://www.trendstoday.ca/reviews/iphone-15-pro-max-review',
       type: 'review',
       title: reviewArticle.metadata?.title,
       analysis: reviewAnalysis,
-      content: reviewArticle.markdown.substring(0, 1500)
+      content: reviewArticle.markdown.substring(0, 1500),
     });
-    
+
     console.log('iPhone 15 Pro Max Review Analysis:', reviewAnalysis);
   }
 
@@ -175,31 +183,31 @@ Be specific and actionable in your recommendations.`
       'authors page',
       'https://www.trendstoday.ca/authors'
     );
-    
+
     results.pages.push({
       url: 'https://www.trendstoday.ca/authors',
       type: 'authors',
       title: authorsPage.metadata?.title,
       analysis: authorsAnalysis,
-      content: authorsPage.markdown.substring(0, 1000)
+      content: authorsPage.markdown.substring(0, 1000),
     });
-    
+
     console.log('Authors Page Analysis:', authorsAnalysis);
   }
 
   // 5. Analyze all results for critical issues
   console.log('\n=== 5. IDENTIFYING CRITICAL ISSUES ===');
-  
+
   const criticalIssues = [];
-  
-  results.pages.forEach(page => {
+
+  results.pages.forEach((page) => {
     // Check for placeholder images
     if (page.content?.includes('/file.svg')) {
       criticalIssues.push({
         page: page.url,
         type: 'CRITICAL',
         issue: 'Using placeholder SVG images instead of actual content',
-        impact: 'Poor user experience, unprofessional appearance'
+        impact: 'Poor user experience, unprofessional appearance',
       });
     }
 
@@ -209,7 +217,7 @@ Be specific and actionable in your recommendations.`
         page: page.url,
         type: 'CRITICAL',
         issue: 'Page contains 404 or missing content references',
-        impact: 'Broken user experience'
+        impact: 'Broken user experience',
       });
     }
 
@@ -219,7 +227,7 @@ Be specific and actionable in your recommendations.`
         page: page.url,
         type: 'HIGH',
         issue: 'Content references potentially outdated years',
-        impact: 'Content may appear stale'
+        impact: 'Content may appear stale',
       });
     }
   });
@@ -228,23 +236,25 @@ Be specific and actionable in your recommendations.`
 
   // 6. Generate comprehensive recommendations
   console.log('\n=== 6. GENERATING RECOMMENDATIONS ===');
-  
+
   const recommendations = [
     {
       priority: 'CRITICAL',
       category: 'Images',
       issue: 'All placeholder images (/file.svg) need replacement',
-      action: 'Create or source high-quality product photos, screenshots, and graphics for every article',
+      action:
+        'Create or source high-quality product photos, screenshots, and graphics for every article',
       effort: 'High - requires design/photography work',
-      impact: 'Massive improvement in professionalism and user trust'
+      impact: 'Massive improvement in professionalism and user trust',
     },
     {
       priority: 'CRITICAL',
       category: 'Content Accuracy',
       issue: 'Tech specifications and product details may be outdated',
-      action: 'Fact-check all product specs, prices, and availability across all articles',
+      action:
+        'Fact-check all product specs, prices, and availability across all articles',
       effort: 'Medium - systematic content review',
-      impact: 'Essential for credibility and user trust'
+      impact: 'Essential for credibility and user trust',
     },
     {
       priority: 'HIGH',
@@ -252,24 +262,26 @@ Be specific and actionable in your recommendations.`
       issue: 'Missing alt text and image optimization',
       action: 'Add descriptive alt text to all images, optimize file sizes',
       effort: 'Medium - systematic image audit',
-      impact: 'Better SEO rankings and accessibility compliance'
+      impact: 'Better SEO rankings and accessibility compliance',
     },
     {
       priority: 'HIGH',
       category: 'Navigation',
       issue: 'News article routing may not work properly',
-      action: 'Test all internal links, ensure /news/[slug] routes work correctly',
+      action:
+        'Test all internal links, ensure /news/[slug] routes work correctly',
       effort: 'Low - technical testing and fixes',
-      impact: 'Improved user experience and reduced bounce rate'
+      impact: 'Improved user experience and reduced bounce rate',
     },
     {
       priority: 'MEDIUM',
       category: 'Trust Signals',
       issue: 'Author credibility could be enhanced',
-      action: 'Add author photos, credentials, social links, and expertise indicators',
+      action:
+        'Add author photos, credentials, social links, and expertise indicators',
       effort: 'Medium - content creation and design',
-      impact: 'Increased authority and user trust'
-    }
+      impact: 'Increased authority and user trust',
+    },
   ];
 
   results.recommendations = recommendations;
@@ -278,7 +290,7 @@ Be specific and actionable in your recommendations.`
   console.log('\n' + '='.repeat(60));
   console.log('🎯 COMPREHENSIVE AUDIT RESULTS');
   console.log('='.repeat(60));
-  
+
   console.log(`\n📊 OVERVIEW:`);
   console.log(`- Pages analyzed: ${results.pages.length}`);
   console.log(`- Critical issues: ${criticalIssues.length}`);
@@ -302,7 +314,10 @@ Be specific and actionable in your recommendations.`
 
   // Save detailed results
   const fs = require('fs');
-  fs.writeFileSync('detailed-audit-results.json', JSON.stringify(results, null, 2));
+  fs.writeFileSync(
+    'detailed-audit-results.json',
+    JSON.stringify(results, null, 2)
+  );
   console.log(`\n💾 Detailed results saved to: detailed-audit-results.json`);
 
   console.log('\n✅ AUDIT COMPLETE - Ready for implementation!');

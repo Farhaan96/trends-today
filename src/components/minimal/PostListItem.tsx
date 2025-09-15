@@ -12,11 +12,14 @@ export default function PostListItem({ article, showThumb = false }: Props) {
   const title: string = article.frontmatter.title;
   const href: string = article.href;
   const date = new Date(
-    article.frontmatter.publishedAt || article.frontmatter.datePublished || new Date().toISOString()
+    article.frontmatter.publishedAt ||
+      article.frontmatter.datePublished ||
+      new Date().toISOString()
   );
   const category: string = article.frontmatter.category || article.type;
   const img: string | undefined = article.frontmatter.image;
-  const description: string = article.frontmatter.description || article.frontmatter.summary || '';
+  const description: string =
+    article.frontmatter.description || article.frontmatter.summary || '';
 
   return (
     <article className="py-6 border-b border-gray-100 last:border-b-0">
@@ -28,7 +31,7 @@ export default function PostListItem({ article, showThumb = false }: Props) {
             <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 leading-tight mb-2 group-hover:text-blue-600 transition-colors">
               {title}
             </h2>
-            
+
             {/* Brief description for context */}
             {description && (
               <p className="text-gray-600 text-sm sm:text-base line-clamp-2 mb-3 leading-relaxed">
@@ -36,7 +39,7 @@ export default function PostListItem({ article, showThumb = false }: Props) {
               </p>
             )}
           </Link>
-          
+
           {/* Clean metadata */}
           <div className="flex items-center text-sm text-gray-500 space-x-3">
             <span className="font-medium text-blue-600 uppercase tracking-wide text-xs">
@@ -44,10 +47,10 @@ export default function PostListItem({ article, showThumb = false }: Props) {
             </span>
             <span>•</span>
             <time dateTime={date.toISOString()}>
-              {date.toLocaleDateString('en-US', { 
-                month: 'short', 
-                day: 'numeric', 
-                year: 'numeric' 
+              {date.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
               })}
             </time>
             {article.frontmatter.readingTime && (
@@ -58,16 +61,20 @@ export default function PostListItem({ article, showThumb = false }: Props) {
             )}
           </div>
         </div>
-        
+
         {/* Thumbnail with consistent 16:9 ratio */}
         {showThumb && img && (
-          <Link href={href} prefetch={false} className="flex-shrink-0 hidden sm:block">
+          <Link
+            href={href}
+            prefetch={false}
+            className="flex-shrink-0 hidden sm:block"
+          >
             <div className="relative w-40 h-24 md:w-48 md:h-28 rounded-lg overflow-hidden bg-gray-100 hover:shadow-lg transition-shadow">
-              <ImageWithFallback 
-                src={img} 
-                alt={title} 
-                fill 
-                className="object-cover transition-transform duration-300" 
+              <ImageWithFallback
+                src={img}
+                alt={title}
+                fill
+                className="object-cover transition-transform duration-300"
                 sizes="(max-width: 768px) 160px, 192px"
                 loading="lazy"
               />

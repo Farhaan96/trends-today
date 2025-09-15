@@ -26,11 +26,12 @@ export default function NotificationSystem() {
         id: '1',
         type: 'success',
         title: 'New Review Published',
-        message: 'iPhone 15 Pro Max review is now live with detailed camera tests.',
+        message:
+          'iPhone 15 Pro Max review is now live with detailed camera tests.',
         timestamp: new Date().toISOString(),
         read: false,
         actionUrl: '/reviews/iphone-15-pro-max',
-        actionText: 'Read Review'
+        actionText: 'Read Review',
       },
       {
         id: '2',
@@ -40,22 +41,22 @@ export default function NotificationSystem() {
         timestamp: new Date(Date.now() - 3600000).toISOString(),
         read: false,
         actionUrl: '/deals/samsung-galaxy-s24',
-        actionText: 'View Deal'
+        actionText: 'View Deal',
       },
       {
         id: '3',
         type: 'warning',
         title: 'Newsletter Reminder',
-        message: 'Don\'t miss our weekly tech digest this Sunday.',
+        message: "Don't miss our weekly tech digest this Sunday.",
         timestamp: new Date(Date.now() - 7200000).toISOString(),
         read: true,
         actionUrl: '/newsletter',
-        actionText: 'Subscribe'
-      }
+        actionText: 'Subscribe',
+      },
     ];
-    
+
     setNotifications(mockNotifications);
-    setUnreadCount(mockNotifications.filter(n => !n.read).length);
+    setUnreadCount(mockNotifications.filter((n) => !n.read).length);
   }, []);
 
   // Check for permission and setup push notifications
@@ -63,7 +64,7 @@ export default function NotificationSystem() {
     if ('Notification' in window && 'serviceWorker' in navigator) {
       // Request permission if not already granted
       if (Notification.permission === 'default') {
-        Notification.requestPermission().then(permission => {
+        Notification.requestPermission().then((permission) => {
           if (permission === 'granted') {
             console.log('Notification permission granted');
           }
@@ -72,51 +73,58 @@ export default function NotificationSystem() {
     }
   }, []);
 
-  const addNotification = useCallback((notification: Omit<Notification, 'id' | 'timestamp' | 'read'>) => {
-    const newNotification: Notification = {
-      ...notification,
-      id: Date.now().toString(),
-      timestamp: new Date().toISOString(),
-      read: false
-    };
+  const addNotification = useCallback(
+    (notification: Omit<Notification, 'id' | 'timestamp' | 'read'>) => {
+      const newNotification: Notification = {
+        ...notification,
+        id: Date.now().toString(),
+        timestamp: new Date().toISOString(),
+        read: false,
+      };
 
-    setNotifications(prev => [newNotification, ...prev.slice(0, 49)]); // Keep max 50 notifications
-    setUnreadCount(prev => prev + 1);
+      setNotifications((prev) => [newNotification, ...prev.slice(0, 49)]); // Keep max 50 notifications
+      setUnreadCount((prev) => prev + 1);
 
-    // Show browser notification if permission granted
-    if (Notification.permission === 'granted') {
-      new Notification(notification.title, {
-        body: notification.message,
-        icon: '/favicon.ico',
-        badge: '/favicon.ico'
-      });
-    }
+      // Show browser notification if permission granted
+      if (Notification.permission === 'granted') {
+        new Notification(notification.title, {
+          body: notification.message,
+          icon: '/favicon.ico',
+          badge: '/favicon.ico',
+        });
+      }
 
-    // Auto-hide success notifications
-    if (notification.type === 'success') {
-      setTimeout(() => {
-        markAsRead(newNotification.id);
-      }, 5000);
-    }
-  }, []);
+      // Auto-hide success notifications
+      if (notification.type === 'success') {
+        setTimeout(() => {
+          markAsRead(newNotification.id);
+        }, 5000);
+      }
+    },
+    []
+  );
 
   const markAsRead = (id: string) => {
-    setNotifications(prev => prev.map(notification =>
-      notification.id === id ? { ...notification, read: true } : notification
-    ));
-    setUnreadCount(prev => Math.max(0, prev - 1));
+    setNotifications((prev) =>
+      prev.map((notification) =>
+        notification.id === id ? { ...notification, read: true } : notification
+      )
+    );
+    setUnreadCount((prev) => Math.max(0, prev - 1));
   };
 
   const markAllAsRead = () => {
-    setNotifications(prev => prev.map(notification => ({ ...notification, read: true })));
+    setNotifications((prev) =>
+      prev.map((notification) => ({ ...notification, read: true }))
+    );
     setUnreadCount(0);
   };
 
   const removeNotification = (id: string) => {
-    const notification = notifications.find(n => n.id === id);
-    setNotifications(prev => prev.filter(n => n.id !== id));
+    const notification = notifications.find((n) => n.id === id);
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
     if (notification && !notification.read) {
-      setUnreadCount(prev => Math.max(0, prev - 1));
+      setUnreadCount((prev) => Math.max(0, prev - 1));
     }
   };
 
@@ -125,32 +133,64 @@ export default function NotificationSystem() {
       case 'success':
         return (
           <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-            <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            <svg
+              className="w-4 h-4 text-green-600"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clipRule="evenodd"
+              />
             </svg>
           </div>
         );
       case 'warning':
         return (
           <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
-            <svg className="w-4 h-4 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            <svg
+              className="w-4 h-4 text-yellow-600"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                clipRule="evenodd"
+              />
             </svg>
           </div>
         );
       case 'error':
         return (
           <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-            <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+            <svg
+              className="w-4 h-4 text-red-600"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                clipRule="evenodd"
+              />
             </svg>
           </div>
         );
       default:
         return (
           <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-            <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+            <svg
+              className="w-4 h-4 text-blue-600"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                clipRule="evenodd"
+              />
             </svg>
           </div>
         );
@@ -226,7 +266,9 @@ export default function NotificationSystem() {
             {notifications.length === 0 ? (
               <div className="p-8 text-center">
                 <BellIcon className="w-8 h-8 text-gray-300 dark:text-gray-800 mx-auto mb-2" />
-                <p className="text-gray-900 dark:text-gray-900">No notifications yet</p>
+                <p className="text-gray-900 dark:text-gray-900">
+                  No notifications yet
+                </p>
               </div>
             ) : (
               notifications.map((notification) => (
@@ -238,7 +280,7 @@ export default function NotificationSystem() {
                 >
                   <div className="flex items-start space-x-3">
                     {getNotificationIcon(notification.type)}
-                    
+
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
                         <p className="text-sm font-medium text-gray-900 dark:text-white line-clamp-1">
@@ -251,16 +293,16 @@ export default function NotificationSystem() {
                           <XMarkIcon className="w-3 h-3" />
                         </button>
                       </div>
-                      
+
                       <p className="text-sm text-gray-800 dark:text-gray-300 line-clamp-2 mt-1">
                         {notification.message}
                       </p>
-                      
+
                       <div className="flex items-center justify-between mt-2">
                         <span className="text-xs text-gray-900 dark:text-gray-900">
                           {formatTime(notification.timestamp)}
                         </span>
-                        
+
                         <div className="flex items-center space-x-2">
                           {!notification.read && (
                             <button
@@ -270,7 +312,7 @@ export default function NotificationSystem() {
                               Mark read
                             </button>
                           )}
-                          
+
                           {notification.actionUrl && (
                             <a
                               href={notification.actionUrl}

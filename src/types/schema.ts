@@ -1,12 +1,12 @@
 // Schema.org TypeScript definitions for structured data
 
 export interface BaseSchema {
-  "@context"?: "https://schema.org"; // optional to allow nested objects without @context
-  "@type": string;
+  '@context'?: 'https://schema.org'; // optional to allow nested objects without @context
+  '@type': string;
 }
 
 export interface ImageObjectSchema extends BaseSchema {
-  "@type": "ImageObject";
+  '@type': 'ImageObject';
   url: string;
   width?: number;
   height?: number;
@@ -15,7 +15,7 @@ export interface ImageObjectSchema extends BaseSchema {
 }
 
 export interface PersonSchema extends BaseSchema {
-  "@type": "Person";
+  '@type': 'Person';
   name: string;
   description?: string;
   image?: string;
@@ -28,14 +28,14 @@ export interface PersonSchema extends BaseSchema {
 }
 
 export interface BrandSchema extends BaseSchema {
-  "@type": "Brand";
+  '@type': 'Brand';
   name: string;
   logo?: ImageObjectSchema;
   url?: string;
 }
 
 export interface OrganizationSchema extends BaseSchema {
-  "@type": "Organization";
+  '@type': 'Organization';
   name: string;
   alternateName?: string;
   description?: string;
@@ -51,7 +51,7 @@ export interface OrganizationSchema extends BaseSchema {
 }
 
 export interface ContactPointSchema extends BaseSchema {
-  "@type": "ContactPoint";
+  '@type': 'ContactPoint';
   telephone?: string;
   email?: string;
   contactType: string;
@@ -60,7 +60,7 @@ export interface ContactPointSchema extends BaseSchema {
 }
 
 export interface PostalAddressSchema extends BaseSchema {
-  "@type": "PostalAddress";
+  '@type': 'PostalAddress';
   streetAddress?: string;
   addressLocality?: string;
   addressRegion?: string;
@@ -69,13 +69,13 @@ export interface PostalAddressSchema extends BaseSchema {
 }
 
 export interface GeoCoordinatesSchema extends BaseSchema {
-  "@type": "GeoCoordinates";
+  '@type': 'GeoCoordinates';
   latitude: number;
   longitude: number;
 }
 
 export interface WebSiteSchema extends BaseSchema {
-  "@type": "WebSite";
+  '@type': 'WebSite';
   name: string;
   alternateName?: string;
   url: string;
@@ -86,19 +86,19 @@ export interface WebSiteSchema extends BaseSchema {
 }
 
 export interface SearchActionSchema extends BaseSchema {
-  "@type": "SearchAction";
+  '@type': 'SearchAction';
   target: EntryPointSchema;
-  "query-input": string;
+  'query-input': string;
 }
 
 export interface EntryPointSchema extends BaseSchema {
-  "@type": "EntryPoint";
+  '@type': 'EntryPoint';
   urlTemplate: string;
 }
 
 export interface WebPageSchema extends BaseSchema {
-  "@type": "WebPage";
-  "@id": string;
+  '@type': 'WebPage';
+  '@id': string;
   url?: string;
   name?: string;
   description?: string;
@@ -109,7 +109,7 @@ export interface WebPageSchema extends BaseSchema {
 }
 
 export interface ArticleSchema extends BaseSchema {
-  "@type": "Article" | "NewsArticle" | "BlogPosting" | "TechArticle";
+  '@type': 'Article' | 'NewsArticle' | 'BlogPosting' | 'TechArticle';
   headline: string;
   description: string;
   image?: string[];
@@ -129,7 +129,7 @@ export interface ArticleSchema extends BaseSchema {
 }
 
 export interface ThingSchema extends BaseSchema {
-  "@type": "Thing";
+  '@type': 'Thing';
   name: string;
   description?: string;
   url?: string;
@@ -137,14 +137,14 @@ export interface ThingSchema extends BaseSchema {
 }
 
 export interface RatingSchema extends BaseSchema {
-  "@type": "Rating";
+  '@type': 'Rating';
   ratingValue: number;
   bestRating: number;
   worstRating?: number;
 }
 
 export interface AggregateRatingSchema extends BaseSchema {
-  "@type": "AggregateRating";
+  '@type': 'AggregateRating';
   ratingValue: number;
   reviewCount: number;
   bestRating?: number;
@@ -152,7 +152,7 @@ export interface AggregateRatingSchema extends BaseSchema {
 }
 
 export interface OfferSchema extends BaseSchema {
-  "@type": "Offer" | "AggregateOffer";
+  '@type': 'Offer' | 'AggregateOffer';
   price?: string;
   priceCurrency: string;
   lowPrice?: string;
@@ -166,7 +166,7 @@ export interface OfferSchema extends BaseSchema {
 }
 
 export interface ProductSchema extends BaseSchema {
-  "@type": "Product";
+  '@type': 'Product';
   name: string;
   description: string;
   brand: BrandSchema;
@@ -184,7 +184,7 @@ export interface ProductSchema extends BaseSchema {
 }
 
 export interface ReviewSchema extends BaseSchema {
-  "@type": "Review";
+  '@type': 'Review';
   itemReviewed: ProductSchema;
   reviewRating: RatingSchema;
   name: string;
@@ -201,19 +201,19 @@ export interface ReviewSchema extends BaseSchema {
 }
 
 export interface ListItemSchema extends BaseSchema {
-  "@type": "ListItem";
+  '@type': 'ListItem';
   position: number;
   name: string;
   item: string;
 }
 
 export interface BreadcrumbListSchema extends BaseSchema {
-  "@type": "BreadcrumbList";
+  '@type': 'BreadcrumbList';
   itemListElement: ListItemSchema[];
 }
 
 export interface QuestionSchema extends BaseSchema {
-  "@type": "Question";
+  '@type': 'Question';
   name: string;
   acceptedAnswer: AnswerSchema;
   answerCount?: number;
@@ -222,7 +222,7 @@ export interface QuestionSchema extends BaseSchema {
 }
 
 export interface AnswerSchema extends BaseSchema {
-  "@type": "Answer";
+  '@type': 'Answer';
   text: string;
   upvoteCount?: number;
   dateCreated?: string;
@@ -230,12 +230,12 @@ export interface AnswerSchema extends BaseSchema {
 }
 
 export interface FAQPageSchema extends BaseSchema {
-  "@type": "FAQPage";
+  '@type': 'FAQPage';
   mainEntity: QuestionSchema[];
 }
 
 export interface HowToSchema extends BaseSchema {
-  "@type": "HowTo";
+  '@type': 'HowTo';
   name: string;
   description: string;
   image?: ImageObjectSchema[];
@@ -248,7 +248,7 @@ export interface HowToSchema extends BaseSchema {
 }
 
 export interface HowToStepSchema extends BaseSchema {
-  "@type": "HowToStep";
+  '@type': 'HowToStep';
   name: string;
   text: string;
   image?: ImageObjectSchema;
@@ -256,23 +256,23 @@ export interface HowToStepSchema extends BaseSchema {
 }
 
 export interface HowToSupplySchema extends BaseSchema {
-  "@type": "HowToSupply";
+  '@type': 'HowToSupply';
   name: string;
 }
 
 export interface HowToToolSchema extends BaseSchema {
-  "@type": "HowToTool";
+  '@type': 'HowToTool';
   name: string;
 }
 
 export interface MonetaryAmountSchema extends BaseSchema {
-  "@type": "MonetaryAmount";
+  '@type': 'MonetaryAmount';
   currency: string;
   value: number;
 }
 
 export interface LocalBusinessSchema extends BaseSchema {
-  "@type": "LocalBusiness";
+  '@type': 'LocalBusiness';
   name: string;
   description: string;
   url: string;
@@ -287,7 +287,7 @@ export interface LocalBusinessSchema extends BaseSchema {
 }
 
 export interface VideoObjectSchema extends BaseSchema {
-  "@type": "VideoObject";
+  '@type': 'VideoObject';
   name: string;
   description: string;
   thumbnailUrl: string;
@@ -300,14 +300,14 @@ export interface VideoObjectSchema extends BaseSchema {
 }
 
 export interface ItemListSchema extends BaseSchema {
-  "@type": "ItemList";
+  '@type': 'ItemList';
   itemListElement: (ListItemSchema | ThingSchema)[];
   numberOfItems?: number;
-  itemListOrder?: "ascending" | "descending" | "unordered";
+  itemListOrder?: 'ascending' | 'descending' | 'unordered';
 }
 
 export interface SoftwareApplicationSchema extends BaseSchema {
-  "@type": "SoftwareApplication" | "WebApplication" | "MobileApplication";
+  '@type': 'SoftwareApplication' | 'WebApplication' | 'MobileApplication';
   name: string;
   description: string;
   applicationCategory: string;

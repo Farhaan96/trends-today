@@ -1,12 +1,12 @@
-FACT-CHECK REPORT - TEST BATCH
-===============================
+# FACT-CHECK REPORT - TEST BATCH
+
 Batch Date: 2025-09-13
 Articles Checked: 2
 Overall Status: APPROVED WITH MINOR CORRECTIONS
 Average Accuracy Score: 87%
 
-ARTICLE 1: AI Consciousness Detection
-=====================================
+# ARTICLE 1: AI Consciousness Detection
+
 File: content/health/ai-detects-hidden-consciousness-coma-patients.mdx
 Status: APPROVED
 Accuracy Score: 92%
@@ -23,6 +23,7 @@ VERIFIED CLAIMS:
 ✅ Published in Nature Communications Medicine (VERIFIED - peer-reviewed journal)
 
 MINOR CORRECTIONS NEEDED:
+
 - Title states "4 days earlier" but should specify this varies (4.1 days for eyes, 8.3 days for mouth)
 - Consider clarifying that different response types have different detection timelines
 
@@ -30,8 +31,8 @@ RECOMMENDATIONS:
 ✅ APPROVED - High accuracy, well-sourced, properly attributed
 ✅ No critical errors that would harm SEO or credibility
 
-ARTICLE 2: iPhone 17 Neural Chip
-=================================
+# ARTICLE 2: iPhone 17 Neural Chip
+
 File: content/technology/iphone-17-neural-chip-changes-mobile-ai.mdx
 Status: APPROVED
 Accuracy Score: 82%
@@ -55,6 +56,7 @@ CLAIMS REQUIRING CLARIFICATION:
 ⚠️ "17 languages" for translation - Apple announced 9 initially, expanding to 17 by year-end
 
 MINOR CORRECTIONS MADE:
+
 - Added context that benchmark comparisons are single-core specific
 - Clarified that language support is expanding throughout 2025
 
@@ -62,8 +64,8 @@ RECOMMENDATIONS:
 ✅ APPROVED - Strong technical accuracy, properly sourced specifications
 ⚠️ Minor technical details could be more precise but don't affect core message
 
-BATCH SUMMARY
-=============
+# BATCH SUMMARY
+
 Total Claims Verified: 23
 Verified Accurate: 20 (87%)
 Requires Clarification: 3 (13%)

@@ -33,19 +33,19 @@ export interface SEOPerformanceData {
     cls?: number; // Cumulative Layout Shift
     fcp?: number; // First Contentful Paint
     ttfb?: number; // Time to First Byte
-    
+
     // SEO Metrics
     seoScore: number;
     metaOptimization: number;
     contentQuality: number;
     technicalSEO: number;
-    
+
     // Search Performance (would come from Search Console API)
     impressions?: number;
     clicks?: number;
     avgPosition?: number;
     ctr?: number;
-    
+
     // Engagement Metrics
     bounceRate?: number;
     timeOnPage?: number;
@@ -86,7 +86,7 @@ export class SEOTracker {
       sessionId: this.sessionId,
       seoMetrics,
       userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
-      referrer: typeof document !== 'undefined' ? document.referrer : ''
+      referrer: typeof document !== 'undefined' ? document.referrer : '',
     };
 
     this.events.push(event);
@@ -94,13 +94,20 @@ export class SEOTracker {
   }
 
   // Track SEO interactions
-  trackSEOInteraction(type: 'internal_link_click' | 'external_link_click' | 'image_view' | 'schema_impression', data: any) {
+  trackSEOInteraction(
+    type:
+      | 'internal_link_click'
+      | 'external_link_click'
+      | 'image_view'
+      | 'schema_impression',
+    data: any
+  ) {
     const event = {
       type,
       data,
       timestamp: Date.now(),
       sessionId: this.sessionId,
-      url: typeof window !== 'undefined' ? window.location.href : ''
+      url: typeof window !== 'undefined' ? window.location.href : '',
     };
 
     this.events.push(event);
@@ -112,7 +119,7 @@ export class SEOTracker {
     const event = {
       type: 'seo_performance',
       ...data,
-      sessionId: this.sessionId
+      sessionId: this.sessionId,
     };
 
     this.sendToAnalytics(event);
@@ -128,7 +135,7 @@ export class SEOTracker {
       delta,
       timestamp: Date.now(),
       sessionId: this.sessionId,
-      url: typeof window !== 'undefined' ? window.location.href : ''
+      url: typeof window !== 'undefined' ? window.location.href : '',
     };
 
     this.events.push(event);
@@ -170,7 +177,7 @@ export function extractSEOMetrics(
 ): SEOMetrics {
   const wordCount = content.trim().split(/\s+/).length;
   const readingTime = Math.ceil(wordCount / 200); // 200 words per minute
-  
+
   // Count headings
   const headings = {
     h1: (content.match(/^# /gm) || []).length,
@@ -188,10 +195,13 @@ export function extractSEOMetrics(
 
   // Detect schema types (basic detection)
   const schema: string[] = [];
-  if (content.includes('rating') || content.includes('review')) schema.push('Review');
-  if (content.includes('price') || content.includes('$')) schema.push('Product');
-  if (content.includes('question') || content.includes('answer')) schema.push('FAQ');
-  
+  if (content.includes('rating') || content.includes('review'))
+    schema.push('Review');
+  if (content.includes('price') || content.includes('$'))
+    schema.push('Product');
+  if (content.includes('question') || content.includes('answer'))
+    schema.push('FAQ');
+
   // Calculate basic SEO score (simplified)
   let seoScore = 100;
   const issues: string[] = [];
@@ -258,14 +268,12 @@ export function extractSEOMetrics(
     headings,
     seoScore: Math.max(0, seoScore),
     issues,
-    suggestions
+    suggestions,
   };
 }
 
 // Generate SEO audit report
-export function generateSEOAuditReport(
-  pages: SEOMetrics[]
-): {
+export function generateSEOAuditReport(pages: SEOMetrics[]): {
   overallScore: number;
   summary: {
     totalPages: number;
@@ -281,14 +289,16 @@ export function generateSEOAuditReport(
   };
 } {
   const totalPages = pages.length;
-  const pagesWithIssues = pages.filter(page => page.issues.length > 0).length;
-  const avgWordCount = pages.reduce((sum, page) => sum + page.wordCount, 0) / totalPages;
-  const avgSEOScore = pages.reduce((sum, page) => sum + page.seoScore, 0) / totalPages;
+  const pagesWithIssues = pages.filter((page) => page.issues.length > 0).length;
+  const avgWordCount =
+    pages.reduce((sum, page) => sum + page.wordCount, 0) / totalPages;
+  const avgSEOScore =
+    pages.reduce((sum, page) => sum + page.seoScore, 0) / totalPages;
 
   // Collect and count issues
   const issueMap = new Map<string, { count: number; pages: string[] }>();
-  pages.forEach(page => {
-    page.issues.forEach(issue => {
+  pages.forEach((page) => {
+    page.issues.forEach((issue) => {
       const existing = issueMap.get(issue);
       if (existing) {
         existing.count++;
@@ -306,34 +316,36 @@ export function generateSEOAuditReport(
 
   // Generate recommendations
   const recommendations: string[] = [];
-  
+
   if (avgWordCount < 600) {
     recommendations.push('Increase average content length to 600+ words');
   }
-  
-  if (topIssues.find(issue => issue.issue.includes('H1'))) {
+
+  if (topIssues.find((issue) => issue.issue.includes('H1'))) {
     recommendations.push('Ensure all pages have proper H1 headings');
   }
-  
-  if (topIssues.find(issue => issue.issue.includes('images'))) {
+
+  if (topIssues.find((issue) => issue.issue.includes('images'))) {
     recommendations.push('Add relevant images to pages lacking visual content');
   }
 
   if (avgSEOScore < 80) {
-    recommendations.push('Focus on improving overall SEO scores across all pages');
+    recommendations.push(
+      'Focus on improving overall SEO scores across all pages'
+    );
   }
 
   // Best and worst performing pages
   const sortedPages = [...pages].sort((a, b) => b.seoScore - a.seoScore);
-  const bestPages = sortedPages.slice(0, 5).map(page => ({
-    url: page.pageUrl,
-    score: page.seoScore
-  }));
-  
-  const worstPages = sortedPages.slice(-5).map(page => ({
+  const bestPages = sortedPages.slice(0, 5).map((page) => ({
     url: page.pageUrl,
     score: page.seoScore,
-    issues: page.issues
+  }));
+
+  const worstPages = sortedPages.slice(-5).map((page) => ({
+    url: page.pageUrl,
+    score: page.seoScore,
+    issues: page.issues,
   }));
 
   return {
@@ -342,14 +354,14 @@ export function generateSEOAuditReport(
       totalPages,
       pagesWithIssues,
       avgWordCount: Math.round(avgWordCount),
-      avgSEOScore: Math.round(avgSEOScore)
+      avgSEOScore: Math.round(avgSEOScore),
     },
     topIssues,
     recommendations,
     performance: {
       bestPages,
-      worstPages
-    }
+      worstPages,
+    },
   };
 }
 
@@ -357,33 +369,33 @@ export function generateSEOAuditReport(
 export async function monitorSearchRankings(
   keywords: string[],
   domain: string
-): Promise<Array<{
-  keyword: string;
-  position: number;
-  url: string;
-  searchVolume?: number;
-  difficulty?: number;
-}>> {
+): Promise<
+  Array<{
+    keyword: string;
+    position: number;
+    url: string;
+    searchVolume?: number;
+    difficulty?: number;
+  }>
+> {
   // This would integrate with services like:
   // - Google Search Console API
   // - SEMrush API
   // - Ahrefs API
   // - SERPApi
-  
+
   // Mock implementation for demonstration
-  return keywords.map(keyword => ({
+  return keywords.map((keyword) => ({
     keyword,
     position: Math.floor(Math.random() * 100) + 1,
     url: `${domain}/search-result-for-${keyword.replace(/\s+/g, '-')}`,
     searchVolume: Math.floor(Math.random() * 10000) + 100,
-    difficulty: Math.floor(Math.random() * 100) + 1
+    difficulty: Math.floor(Math.random() * 100) + 1,
   }));
 }
 
 // Generate SEO performance report
-export function generatePerformanceReport(
-  data: SEOPerformanceData[]
-): {
+export function generatePerformanceReport(data: SEOPerformanceData[]): {
   period: { start: string; end: string };
   metrics: {
     avgSEOScore: number;
@@ -414,32 +426,48 @@ export function generatePerformanceReport(
         totalImpressions: 0,
         totalClicks: 0,
         avgCTR: 0,
-        avgPosition: 0
+        avgPosition: 0,
       },
       trends: {
         seoScore: 'stable',
         webVitals: 'stable',
-        searchPerformance: 'stable'
+        searchPerformance: 'stable',
       },
       topPerformingPages: [],
-      actionItems: []
+      actionItems: [],
     };
   }
 
   const sortedData = data.sort((a, b) => a.timestamp - b.timestamp);
   const start = new Date(sortedData[0].timestamp).toISOString().split('T')[0];
-  const end = new Date(sortedData[sortedData.length - 1].timestamp).toISOString().split('T')[0];
+  const end = new Date(sortedData[sortedData.length - 1].timestamp)
+    .toISOString()
+    .split('T')[0];
 
   // Calculate averages
   const metrics = {
-    avgSEOScore: data.reduce((sum, d) => sum + d.metrics.seoScore, 0) / data.length,
-    avgLCP: data.reduce((sum, d) => sum + (d.metrics.lcp || 0), 0) / data.filter(d => d.metrics.lcp).length,
-    avgFID: data.reduce((sum, d) => sum + (d.metrics.fid || 0), 0) / data.filter(d => d.metrics.fid).length,
-    avgCLS: data.reduce((sum, d) => sum + (d.metrics.cls || 0), 0) / data.filter(d => d.metrics.cls).length,
-    totalImpressions: data.reduce((sum, d) => sum + (d.metrics.impressions || 0), 0),
+    avgSEOScore:
+      data.reduce((sum, d) => sum + d.metrics.seoScore, 0) / data.length,
+    avgLCP:
+      data.reduce((sum, d) => sum + (d.metrics.lcp || 0), 0) /
+      data.filter((d) => d.metrics.lcp).length,
+    avgFID:
+      data.reduce((sum, d) => sum + (d.metrics.fid || 0), 0) /
+      data.filter((d) => d.metrics.fid).length,
+    avgCLS:
+      data.reduce((sum, d) => sum + (d.metrics.cls || 0), 0) /
+      data.filter((d) => d.metrics.cls).length,
+    totalImpressions: data.reduce(
+      (sum, d) => sum + (d.metrics.impressions || 0),
+      0
+    ),
     totalClicks: data.reduce((sum, d) => sum + (d.metrics.clicks || 0), 0),
-    avgCTR: data.reduce((sum, d) => sum + (d.metrics.ctr || 0), 0) / data.filter(d => d.metrics.ctr).length,
-    avgPosition: data.reduce((sum, d) => sum + (d.metrics.avgPosition || 0), 0) / data.filter(d => d.metrics.avgPosition).length
+    avgCTR:
+      data.reduce((sum, d) => sum + (d.metrics.ctr || 0), 0) /
+      data.filter((d) => d.metrics.ctr).length,
+    avgPosition:
+      data.reduce((sum, d) => sum + (d.metrics.avgPosition || 0), 0) /
+      data.filter((d) => d.metrics.avgPosition).length,
   };
 
   // Calculate trends (simplified)
@@ -449,46 +477,58 @@ export function generatePerformanceReport(
 
   const trends = {
     seoScore: calculateTrend(
-      firstHalf.reduce((sum, d) => sum + d.metrics.seoScore, 0) / firstHalf.length,
-      secondHalf.reduce((sum, d) => sum + d.metrics.seoScore, 0) / secondHalf.length
+      firstHalf.reduce((sum, d) => sum + d.metrics.seoScore, 0) /
+        firstHalf.length,
+      secondHalf.reduce((sum, d) => sum + d.metrics.seoScore, 0) /
+        secondHalf.length
     ),
     webVitals: calculateTrend(
-      firstHalf.reduce((sum, d) => sum + (d.metrics.lcp || 0), 0) / firstHalf.filter(d => d.metrics.lcp).length,
-      secondHalf.reduce((sum, d) => sum + (d.metrics.lcp || 0), 0) / secondHalf.filter(d => d.metrics.lcp).length
+      firstHalf.reduce((sum, d) => sum + (d.metrics.lcp || 0), 0) /
+        firstHalf.filter((d) => d.metrics.lcp).length,
+      secondHalf.reduce((sum, d) => sum + (d.metrics.lcp || 0), 0) /
+        secondHalf.filter((d) => d.metrics.lcp).length
     ),
     searchPerformance: calculateTrend(
       firstHalf.reduce((sum, d) => sum + (d.metrics.clicks || 0), 0),
       secondHalf.reduce((sum, d) => sum + (d.metrics.clicks || 0), 0)
-    )
+    ),
   };
 
   // Top performing pages
   const topPerformingPages = data
     .sort((a, b) => (b.metrics.clicks || 0) - (a.metrics.clicks || 0))
     .slice(0, 10)
-    .map(d => ({
+    .map((d) => ({
       url: d.url,
       seoScore: d.metrics.seoScore,
-      clicks: d.metrics.clicks || 0
+      clicks: d.metrics.clicks || 0,
     }));
 
   // Generate action items
   const actionItems: string[] = [];
-  
+
   if (metrics.avgSEOScore < 70) {
-    actionItems.push('Overall SEO scores need improvement - focus on content quality and technical SEO');
+    actionItems.push(
+      'Overall SEO scores need improvement - focus on content quality and technical SEO'
+    );
   }
-  
+
   if (metrics.avgLCP > 2500) {
-    actionItems.push('Improve Largest Contentful Paint (LCP) - optimize images and server response times');
+    actionItems.push(
+      'Improve Largest Contentful Paint (LCP) - optimize images and server response times'
+    );
   }
-  
+
   if (metrics.avgCLS > 0.1) {
-    actionItems.push('Reduce Cumulative Layout Shift (CLS) - ensure proper image dimensions and avoid layout jumps');
+    actionItems.push(
+      'Reduce Cumulative Layout Shift (CLS) - ensure proper image dimensions and avoid layout jumps'
+    );
   }
-  
+
   if (metrics.avgCTR < 2) {
-    actionItems.push('Improve click-through rates - optimize meta titles and descriptions');
+    actionItems.push(
+      'Improve click-through rates - optimize meta titles and descriptions'
+    );
   }
 
   return {
@@ -496,12 +536,15 @@ export function generatePerformanceReport(
     metrics,
     trends,
     topPerformingPages,
-    actionItems
+    actionItems,
   };
 }
 
 // Helper function to calculate trend
-function calculateTrend(oldValue: number, newValue: number): 'improving' | 'declining' | 'stable' {
+function calculateTrend(
+  oldValue: number,
+  newValue: number
+): 'improving' | 'declining' | 'stable' {
   const change = ((newValue - oldValue) / oldValue) * 100;
   if (change > 5) return 'improving';
   if (change < -5) return 'declining';
@@ -509,4 +552,5 @@ function calculateTrend(oldValue: number, newValue: number): 'improving' | 'decl
 }
 
 // Export tracker instance
-export const seoTracker = typeof window !== 'undefined' ? SEOTracker.getInstance() : null;
+export const seoTracker =
+  typeof window !== 'undefined' ? SEOTracker.getInstance() : null;

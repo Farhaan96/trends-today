@@ -4,8 +4,14 @@ import { ShieldCheckIcon } from '@heroicons/react/24/outline';
 
 export const metadata: Metadata = {
   title: 'Affiliate Disclosure - Trends Today Transparency Policy',
-  description: 'Complete transparency about our affiliate partnerships, monetization methods, and editorial independence. Learn how we maintain unbiased reviews.',
-  keywords: ['affiliate disclosure', 'transparency', 'editorial independence', 'monetization policy'],
+  description:
+    'Complete transparency about our affiliate partnerships, monetization methods, and editorial independence. Learn how we maintain unbiased reviews.',
+  keywords: [
+    'affiliate disclosure',
+    'transparency',
+    'editorial independence',
+    'monetization policy',
+  ],
 };
 
 export default function AffiliateDisclosurePage() {
@@ -20,9 +26,10 @@ export default function AffiliateDisclosurePage() {
           Affiliate Disclosure & Transparency Policy
         </h1>
         <p className="text-xl text-gray-800 max-w-3xl mx-auto">
-          At Trends Today, we believe in complete transparency about how we fund our independent 
-          reviews and maintain editorial integrity. Here&apos;s everything you need to know about our 
-          monetization and affiliate partnerships.
+          At Trends Today, we believe in complete transparency about how we fund
+          our independent reviews and maintain editorial integrity. Here&apos;s
+          everything you need to know about our monetization and affiliate
+          partnerships.
         </p>
       </div>
 
@@ -39,9 +46,10 @@ export default function AffiliateDisclosurePage() {
           </h2>
           <div className="prose prose-slate prose-slate max-w-none">
             <p className="text-gray-900 leading-relaxed mb-4">
-              Editorial independence is the foundation of everything we do at Trends Today. 
-              Our review process, recommendations, and editorial decisions are never influenced 
-              by affiliate partnerships, advertising relationships, or manufacturer incentives.
+              Editorial independence is the foundation of everything we do at
+              Trends Today. Our review process, recommendations, and editorial
+              decisions are never influenced by affiliate partnerships,
+              advertising relationships, or manufacturer incentives.
             </p>
           </div>
         </section>
@@ -53,27 +61,34 @@ export default function AffiliateDisclosurePage() {
           </h2>
           <div className="text-blue-800">
             <p className="mb-4">
-              We&apos;re committed to transparency and welcome any questions about our 
-              affiliate partnerships, monetization methods, or editorial processes.
+              We&apos;re committed to transparency and welcome any questions
+              about our affiliate partnerships, monetization methods, or
+              editorial processes.
             </p>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <h3 className="font-semibold mb-2">Editorial Questions</h3>
                 <p className="text-sm mb-2">
-                  Questions about our reviews, testing methodology, or editorial decisions:
+                  Questions about our reviews, testing methodology, or editorial
+                  decisions:
                 </p>
-                <a href="mailto:editorial@trendstoday.ca" 
-                   className="text-blue-600 hover:text-blue-700 underline font-medium">
+                <a
+                  href="mailto:editorial@trendstoday.ca"
+                  className="text-blue-600 hover:text-blue-700 underline font-medium"
+                >
                   editorial@trendstoday.ca
                 </a>
               </div>
               <div>
                 <h3 className="font-semibold mb-2">Business Questions</h3>
                 <p className="text-sm mb-2">
-                  Questions about affiliate partnerships, advertising, or business matters:
+                  Questions about affiliate partnerships, advertising, or
+                  business matters:
                 </p>
-                <a href="mailto:business@trendstoday.ca" 
-                   className="text-blue-600 hover:text-blue-700 underline font-medium">
+                <a
+                  href="mailto:business@trendstoday.ca"
+                  className="text-blue-600 hover:text-blue-700 underline font-medium"
+                >
                   business@trendstoday.ca
                 </a>
               </div>
@@ -88,11 +103,13 @@ export default function AffiliateDisclosurePage() {
       {/* Last Updated */}
       <div className="mt-12 text-center text-sm text-gray-900">
         <p>
-          This disclosure policy was last updated on {new Date().toLocaleDateString('en-US', {
+          This disclosure policy was last updated on{' '}
+          {new Date().toLocaleDateString('en-US', {
             year: 'numeric',
-            month: 'long', 
-            day: 'numeric'
-          })}.
+            month: 'long',
+            day: 'numeric',
+          })}
+          .
         </p>
       </div>
     </div>

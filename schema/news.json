@@ -25,7 +25,7 @@
       "type": "string",
       "enum": [
         "smartphones",
-        "laptops", 
+        "laptops",
         "gaming",
         "ai",
         "enterprise",

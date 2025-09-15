@@ -192,7 +192,7 @@
             "description": "Gaming, streaming, GPS, photography"
           },
           "moderateUsage": {
-            "screenOnTime": "9.5 hours", 
+            "screenOnTime": "9.5 hours",
             "totalTime": "18.2 hours",
             "description": "Social media, messaging, web browsing, light photography"
           },
@@ -215,7 +215,7 @@
           },
           "moderateUsage": {
             "screenOnTime": "8.1 hours",
-            "totalTime": "16.5 hours", 
+            "totalTime": "16.5 hours",
             "description": "Social media, messaging, web browsing, light photography"
           },
           "lightUsage": {
@@ -307,19 +307,33 @@
           {
             "device": "iPhone 15 Pro",
             "score": 9.2,
-            "strengths": ["Natural skin tones", "Excellent subject separation", "Consistent results"],
-            "weaknesses": ["Conservative processing may appear flat to some users"]
+            "strengths": [
+              "Natural skin tones",
+              "Excellent subject separation",
+              "Consistent results"
+            ],
+            "weaknesses": [
+              "Conservative processing may appear flat to some users"
+            ]
           },
           {
             "device": "Samsung Galaxy S24",
             "score": 8.8,
-            "strengths": ["Vibrant colors", "Good detail retention", "Eye-catching results"],
+            "strengths": [
+              "Vibrant colors",
+              "Good detail retention",
+              "Eye-catching results"
+            ],
             "weaknesses": ["Occasionally over-saturated skin tones"]
           },
           {
             "device": "Google Pixel 8 Pro",
             "score": 9.4,
-            "strengths": ["Exceptional computational processing", "Perfect exposure", "Real Tone skin accuracy"],
+            "strengths": [
+              "Exceptional computational processing",
+              "Perfect exposure",
+              "Real Tone skin accuracy"
+            ],
             "weaknesses": ["Can be too aggressive with HDR processing"]
           }
         ]
@@ -331,19 +345,31 @@
           {
             "device": "iPhone 15 Pro",
             "score": 8.5,
-            "strengths": ["Good noise control", "Natural colors", "Reliable autofocus"],
+            "strengths": [
+              "Good noise control",
+              "Natural colors",
+              "Reliable autofocus"
+            ],
             "weaknesses": ["Slower shutter can cause motion blur"]
           },
           {
             "device": "Samsung Galaxy S24",
             "score": 9.0,
-            "strengths": ["Bright results", "Fast capture", "Good stabilization"],
+            "strengths": [
+              "Bright results",
+              "Fast capture",
+              "Good stabilization"
+            ],
             "weaknesses": ["Aggressive noise reduction can reduce detail"]
           },
           {
-            "device": "Google Pixel 8 Pro", 
+            "device": "Google Pixel 8 Pro",
             "score": 9.6,
-            "strengths": ["Night Sight produces exceptional results", "Amazing detail retention", "Superior to dedicated cameras"],
+            "strengths": [
+              "Night Sight produces exceptional results",
+              "Amazing detail retention",
+              "Superior to dedicated cameras"
+            ],
             "weaknesses": ["Processing time can be slow"]
           }
         ]

@@ -21,11 +21,15 @@ export async function getRelatedLinks(
   const posts = await getAllPosts();
 
   // Exclude current article
-  const pool = posts.filter(p => p.href !== currentArticle);
+  const pool = posts.filter((p) => p.href !== currentArticle);
 
   // Strategy: blend categories for cross-linking
-  const sameCategory = pool.filter(p => !category || p.frontmatter.category === category);
-  const otherCategories = pool.filter(p => !category || p.frontmatter.category !== category);
+  const sameCategory = pool.filter(
+    (p) => !category || p.frontmatter.category === category
+  );
+  const otherCategories = pool.filter(
+    (p) => !category || p.frontmatter.category !== category
+  );
 
   const targetSame = Math.ceil(maxLinks / 2); // 50% same category
   const selected: typeof pool = [];
@@ -40,10 +44,10 @@ export async function getRelatedLinks(
   }
 
   // Map to link objects with descriptive, natural anchor text
-  const links: InternalLink[] = selected.map(post => ({
+  const links: InternalLink[] = selected.map((post) => ({
     text: post.frontmatter.title, // Descriptive anchor text
     href: post.href,
-    context: post.frontmatter.description || ''
+    context: post.frontmatter.description || '',
   }));
 
   return links;
@@ -58,7 +62,7 @@ function _extractKeyPhrase(title: string): string {
     /Pixel \d+/i,
     /best \w+ \w+/i,
     /\w+ review/i,
-    /\w+ guide/i
+    /\w+ guide/i,
   ];
 
   for (const pattern of phrases) {
@@ -67,14 +71,20 @@ function _extractKeyPhrase(title: string): string {
   }
 
   // Fallback: use first 3-4 significant words
-  const words = title.split(' ').filter(w => w.length > 3);
+  const words = title.split(' ').filter((w) => w.length > 3);
   return words.slice(0, 3).join(' ').toLowerCase();
 }
 
 // Component for rendering inline links within article content
-export function InlineLink({ href, children }: { href: string; children: React.ReactNode }) {
+export function InlineLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
   return (
-    <Link 
+    <Link
       href={href}
       className="text-blue-600 hover:text-blue-800 underline decoration-gray-300 hover:decoration-blue-600 transition-colors"
     >
@@ -89,13 +99,15 @@ export default function RelatedArticles({ links }: { links: InternalLink[] }) {
 
   return (
     <section className="my-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
-      <h3 className="text-lg font-semibold mb-4 text-gray-900">Related Articles</h3>
+      <h3 className="text-lg font-semibold mb-4 text-gray-900">
+        Related Articles
+      </h3>
       <ul className="space-y-3">
         {links.map((link, index) => (
           <li key={index} className="flex items-start">
             <span className="text-blue-600 mr-2 mt-1">→</span>
             <div>
-              <Link 
+              <Link
                 href={link.href}
                 className="text-blue-600 hover:text-blue-800 font-medium no-underline"
               >

@@ -33,12 +33,12 @@ const premiumTiers: PremiumTierData[] = [
     features: [
       { name: 'Ad-free reading experience', included: true, highlight: true },
       { name: 'Early access to reviews', included: true },
-      { name: 'Exclusive buyer\'s guides', included: true },
+      { name: "Exclusive buyer's guides", included: true },
       { name: 'Premium comparison tools', included: true },
       { name: 'Deal alerts & notifications', included: true },
       { name: 'Expert Q&A sessions', included: true },
-      { name: 'Download articles as PDF', included: true }
-    ]
+      { name: 'Download articles as PDF', included: true },
+    ],
   },
   {
     name: 'Trends Today Pro Yearly',
@@ -48,22 +48,22 @@ const premiumTiers: PremiumTierData[] = [
       { name: 'Everything in Monthly', included: true },
       { name: 'Ad-free reading experience', included: true, highlight: true },
       { name: 'Early access to reviews', included: true },
-      { name: 'Exclusive buyer\'s guides', included: true },
+      { name: "Exclusive buyer's guides", included: true },
       { name: 'Premium comparison tools', included: true },
       { name: 'Deal alerts & notifications', included: true },
       { name: 'Expert Q&A sessions', included: true },
       { name: 'Download articles as PDF', included: true },
-      { name: 'Priority customer support', included: true, highlight: true }
+      { name: 'Priority customer support', included: true, highlight: true },
     ],
     isPopular: true,
-    savings: 'Save 33%'
-  }
+    savings: 'Save 33%',
+  },
 ];
 
 export default function PremiumUpgrade({
   compact = false,
   className = '',
-  onUpgrade
+  onUpgrade,
 }: PremiumUpgradeProps) {
   const handleUpgrade = (tierName: string) => {
     // Track premium conversion attempt
@@ -71,7 +71,7 @@ export default function PremiumUpgrade({
       (window as any).gtag?.('event', 'premium_upgrade_click', {
         event_category: 'monetization',
         event_label: tierName,
-        value: tierName.includes('Yearly') ? 39.99 : 4.99
+        value: tierName.includes('Yearly') ? 39.99 : 4.99,
       });
     }
 
@@ -85,7 +85,9 @@ export default function PremiumUpgrade({
 
   if (compact) {
     return (
-      <div className={`bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg p-4 text-white ${className}`}>
+      <div
+        className={`bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg p-4 text-white ${className}`}
+      >
         <div className="flex items-center gap-3">
           <CrownIcon className="w-8 h-8 text-yellow-300" />
           <div className="flex-1">
@@ -106,7 +108,9 @@ export default function PremiumUpgrade({
   }
 
   return (
-    <div className={`bg-white border border-gray-200 rounded-xl p-6 ${className}`}>
+    <div
+      className={`bg-white border border-gray-200 rounded-xl p-6 ${className}`}
+    >
       <div className="text-center mb-6">
         <div className="flex items-center justify-center gap-2 mb-2">
           <CrownIcon className="w-8 h-8 text-yellow-500" />
@@ -115,7 +119,8 @@ export default function PremiumUpgrade({
           </h2>
         </div>
         <p className="text-gray-800">
-          Get the complete Trends Today experience with exclusive features and ad-free reading
+          Get the complete Trends Today experience with exclusive features and
+          ad-free reading
         </p>
       </div>
 
@@ -125,9 +130,10 @@ export default function PremiumUpgrade({
             key={tier.name}
             className={`
               relative rounded-lg border-2 p-6 transition-all hover:shadow-lg
-              ${tier.isPopular 
-                ? 'border-purple-500 bg-purple-50' 
-                : 'border-gray-200 bg-white'
+              ${
+                tier.isPopular
+                  ? 'border-purple-500 bg-purple-50'
+                  : 'border-gray-200 bg-white'
               }
             `}
           >
@@ -170,24 +176,30 @@ export default function PremiumUpgrade({
             <ul className="space-y-3 mb-6">
               {tier.features.map((feature, index) => (
                 <li key={index} className="flex items-start gap-2">
-                  <CheckIcon className={`
+                  <CheckIcon
+                    className={`
                     w-5 h-5 mt-0.5 flex-shrink-0
-                    ${feature.highlight 
-                      ? 'text-purple-600' 
-                      : feature.included 
-                        ? 'text-green-600' 
-                        : 'text-gray-300'
+                    ${
+                      feature.highlight
+                        ? 'text-purple-600'
+                        : feature.included
+                          ? 'text-green-600'
+                          : 'text-gray-300'
                     }
-                  `} />
-                  <span className={`
+                  `}
+                  />
+                  <span
+                    className={`
                     text-sm
-                    ${feature.highlight 
-                      ? 'text-purple-900 font-medium' 
-                      : feature.included 
-                        ? 'text-gray-900' 
-                        : 'text-gray-900 line-through'
+                    ${
+                      feature.highlight
+                        ? 'text-purple-900 font-medium'
+                        : feature.included
+                          ? 'text-gray-900'
+                          : 'text-gray-900 line-through'
                     }
-                  `}>
+                  `}
+                  >
                     {feature.name}
                   </span>
                 </li>
@@ -198,13 +210,16 @@ export default function PremiumUpgrade({
               onClick={() => handleUpgrade(tier.name)}
               className={`
                 w-full py-3 px-4 rounded-lg font-medium transition-all
-                ${tier.isPopular
-                  ? 'bg-purple-600 text-white hover:bg-purple-700 shadow-lg hover:shadow-xl transform hover:scale-105'
-                  : 'bg-gray-900 text-white hover:bg-gray-800'
+                ${
+                  tier.isPopular
+                    ? 'bg-purple-600 text-white hover:bg-purple-700 shadow-lg hover:shadow-xl transform hover:scale-105'
+                    : 'bg-gray-900 text-white hover:bg-gray-800'
                 }
               `}
             >
-              {tier.duration === 'yearly' ? 'Start Annual Plan' : 'Start Monthly Plan'}
+              {tier.duration === 'yearly'
+                ? 'Start Annual Plan'
+                : 'Start Monthly Plan'}
             </button>
 
             <p className="text-xs text-gray-900 text-center mt-3">
@@ -247,7 +262,8 @@ export default function PremiumUpgrade({
       {/* Trust Signals */}
       <div className="mt-6 pt-4 border-t border-gray-200 text-center">
         <p className="text-sm text-gray-900">
-          Join 10,000+ tech enthusiasts who trust Trends Today Pro for their buying decisions
+          Join 10,000+ tech enthusiasts who trust Trends Today Pro for their
+          buying decisions
         </p>
         <div className="flex justify-center items-center gap-4 mt-2 text-xs text-gray-900">
           <span>🔒 Secure Payment</span>

@@ -2,7 +2,13 @@
   "keyword_research_summary": {
     "generated_date": "2025-09-07",
     "agent": "seo-finder",
-    "focus_areas": ["AI agents", "Nintendo Switch 2", "RTX 50-series", "Budget tech products", "Comparison keywords"],
+    "focus_areas": [
+      "AI agents",
+      "Nintendo Switch 2",
+      "RTX 50-series",
+      "Budget tech products",
+      "Comparison keywords"
+    ],
     "target_monthly_visitors": "30K",
     "methodology": "Real-time trend analysis + competitor gap identification"
   },
@@ -20,7 +26,7 @@
     {
       "keyword": "RTX 5090 vs RTX 4090 gaming performance 2025",
       "estimated_monthly_searches": 12000,
-      "competition_level": "high", 
+      "competition_level": "high",
       "content_type": "comparison_review",
       "urgency_level": "high",
       "rationale": "RTX 5090 launched Jan 2025 at $1999. Gamers deciding if upgrade worth $400 premium. High commercial intent.",
@@ -32,7 +38,7 @@
       "estimated_monthly_searches": 4200,
       "competition_level": "low",
       "content_type": "buyer_guide",
-      "urgency_level": "very_high", 
+      "urgency_level": "very_high",
       "rationale": "2025 declared 'year of the agent' - 99% of developers exploring AI agents. Budget-conscious businesses seeking affordable solutions.",
       "target_price_range": "$50-100",
       "affiliate_potential": "medium"
@@ -44,7 +50,7 @@
       "content_type": "buying_guide",
       "urgency_level": "high",
       "rationale": "Limited-time $500 bundle vs $450 console. Time-sensitive purchase decision with clear value proposition.",
-      "target_price_range": "$450-500", 
+      "target_price_range": "$450-500",
       "affiliate_potential": "high"
     },
     {
@@ -61,7 +67,7 @@
       "keyword": "iPhone 16 vs Samsung Galaxy S25 AI features comparison",
       "estimated_monthly_searches": 9200,
       "competition_level": "high",
-      "content_type": "comparison_review", 
+      "content_type": "comparison_review",
       "urgency_level": "medium",
       "rationale": "Galaxy AI is polished vs Apple Intelligence still in beta. AI becoming major phone buying factor in 2025.",
       "target_price_range": "$800-1200",
@@ -90,7 +96,7 @@
     {
       "keyword": "Nintendo Switch 2 backwards compatibility issues",
       "estimated_monthly_searches": 5500,
-      "competition_type": "medium", 
+      "competition_type": "medium",
       "content_type": "troubleshooting_guide",
       "urgency_level": "high",
       "rationale": "Nintendo warns 'certain Switch games may not be supported'. Immediate need for compatibility lists and solutions.",
@@ -111,7 +117,7 @@
       "keyword": "best gaming laptop under $1500 RTX 50 series",
       "estimated_monthly_searches": 7200,
       "competition_level": "medium",
-      "content_type": "buyer_guide", 
+      "content_type": "buyer_guide",
       "urgency_level": "high",
       "rationale": "New RTX 50-series mobile GPUs launching. Gamers seeking best performance per dollar in mid-range segment.",
       "target_price_range": "$1000-1500",
@@ -131,7 +137,7 @@
       "keyword": "how to fix Nintendo Switch 2 charging issues",
       "estimated_monthly_searches": 2800,
       "competition_level": "low",
-      "content_type": "troubleshooting_guide", 
+      "content_type": "troubleshooting_guide",
       "urgency_level": "medium",
       "rationale": "New hardware always has early adoption issues. Low-competition long-tail troubleshooting opportunity.",
       "target_price_range": "N/A",
@@ -164,7 +170,7 @@
       "content_type": "explainer_guide",
       "urgency_level": "high",
       "rationale": "Mass confusion as vendors engage in 'agent washing'. Educational content needed to clarify differences.",
-      "target_price_range": "N/A", 
+      "target_price_range": "N/A",
       "affiliate_potential": "low"
     },
     {
@@ -211,7 +217,7 @@
   "content_strategy_recommendations": {
     "immediate_priority": [
       "Nintendo Switch 2 comparison and buying guides",
-      "RTX 50-series GPU comparisons and benchmarks", 
+      "RTX 50-series GPU comparisons and benchmarks",
       "AI agents business tool recommendations"
     ],
     "scaling_opportunities": [
@@ -228,7 +234,7 @@
   "competitive_analysis": {
     "content_gaps_identified": [
       "Lack of comprehensive AI agents business guides",
-      "Limited Nintendo Switch 2 troubleshooting content", 
+      "Limited Nintendo Switch 2 troubleshooting content",
       "Missing DLSS 4 technical explanations",
       "Insufficient budget gaming laptop RTX 50-series coverage"
     ],

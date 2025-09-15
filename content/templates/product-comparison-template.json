@@ -191,7 +191,7 @@
     },
     {
       "scenario": "Gaming",
-      "recommendation": "[productA/productB]", 
+      "recommendation": "[productA/productB]",
       "reasoning": "[Why this product is better for gaming]"
     },
     {
@@ -281,7 +281,12 @@
   "seo": {
     "metaTitle": "[Product A] vs [Product B]: Complete Comparison 2025 | Trends Today",
     "metaDescription": "Detailed comparison of [Product A] vs [Product B]. [Key differentiators] to help you choose the best [category] for your needs.",
-    "keywords": ["[Product A] vs [Product B]", "[category] comparison", "[Brand A] vs [Brand B]", "best [category] 2025"]
+    "keywords": [
+      "[Product A] vs [Product B]",
+      "[category] comparison",
+      "[Brand A] vs [Brand B]",
+      "best [category] 2025"
+    ]
   },
   "lastUpdated": "YYYY-MM-DD",
   "author": {

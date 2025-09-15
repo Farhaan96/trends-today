@@ -8,15 +8,19 @@ export default function ContactPage() {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   });
 
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -33,9 +37,12 @@ export default function ContactPage() {
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="text-center py-12">
             <div className="text-6xl mb-4">✅</div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">Thank You!</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+              Thank You!
+            </h1>
             <p className="text-gray-700 text-lg mb-8">
-              Your message has been received. We&apos;ll get back to you within 24-48 hours.
+              Your message has been received. We&apos;ll get back to you within
+              24-48 hours.
             </p>
             <button
               onClick={() => {
@@ -62,8 +69,9 @@ export default function ContactPage() {
           <div>
             <h2 className="text-2xl font-bold mb-4">Get in Touch</h2>
             <p className="text-gray-700 mb-6">
-              Have a question, feedback, or want to work with us? We&apos;d love to hear from you.
-              Fill out the form or use the contact information below.
+              Have a question, feedback, or want to work with us? We&apos;d love
+              to hear from you. Fill out the form or use the contact information
+              below.
             </p>
 
             <div className="space-y-4">
@@ -98,8 +106,8 @@ export default function ContactPage() {
             <div className="mt-8 p-4 bg-blue-50 rounded-lg">
               <h3 className="font-semibold mb-2">For PR & Partnerships</h3>
               <p className="text-gray-700 text-sm">
-                If you&apos;re interested in partnership opportunities or have a press release,
-                please mention it in your message subject.
+                If you&apos;re interested in partnership opportunities or have a
+                press release, please mention it in your message subject.
               </p>
             </div>
           </div>
@@ -108,7 +116,10 @@ export default function ContactPage() {
           <div>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Name *
                 </label>
                 <input
@@ -123,7 +134,10 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Email *
                 </label>
                 <input
@@ -138,7 +152,10 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="subject"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Subject *
                 </label>
                 <select
@@ -160,7 +177,10 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Message *
                 </label>
                 <textarea
@@ -171,7 +191,7 @@ export default function ContactPage() {
                   value={formData.message}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Tell us what&apos;s on your mind..."
+                  placeholder="Tell us what's on your mind..."
                 />
               </div>
 
@@ -184,8 +204,15 @@ export default function ContactPage() {
             </form>
 
             <p className="text-xs text-gray-500 mt-4">
-              * Required fields. We respect your privacy and will never share your information.
-              See our <Link href="/privacy" className="text-blue-600 hover:text-blue-800 underline">Privacy Policy</Link>.
+              * Required fields. We respect your privacy and will never share
+              your information. See our{' '}
+              <Link
+                href="/privacy"
+                className="text-blue-600 hover:text-blue-800 underline"
+              >
+                Privacy Policy
+              </Link>
+              .
             </p>
           </div>
         </div>

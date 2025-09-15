@@ -4,9 +4,11 @@ const path = require('path');
 
 function fixContent(text) {
   return text
-    .split('I��kur').join('Ishkur')
-    .split('�?"').join(' — ')
-    .replace(/\uFFFD/g, '')
+    .split('I��kur')
+    .join('Ishkur')
+    .split('�?"')
+    .join(' — ')
+    .replace(/\uFFFD/g, '');
 }
 
 async function main() {
@@ -26,5 +28,7 @@ async function main() {
   }
 }
 
-main().catch(err => { console.error(err); process.exit(1); });
-
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

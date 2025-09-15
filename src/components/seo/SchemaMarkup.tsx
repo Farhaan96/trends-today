@@ -11,7 +11,7 @@ export default function SchemaMarkup({ schema, id }: SchemaMarkupProps) {
       id={id || 'schema-markup'}
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(schema, null, 0)
+        __html: JSON.stringify(schema, null, 0),
       }}
       strategy="beforeInteractive"
     />
@@ -48,40 +48,40 @@ export function ArticleSchema({
   image,
   wordCount,
   readingTime,
-  keywords
+  keywords,
 }: ArticleSchemaProps) {
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": title,
-    "description": description,
-    "image": image ? [image] : [],
-    "author": {
-      "@type": "Person",
-      "name": author.name,
-      "description": author.bio,
-      "image": author.avatar
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description: description,
+    image: image ? [image] : [],
+    author: {
+      '@type': 'Person',
+      name: author.name,
+      description: author.bio,
+      image: author.avatar,
     },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Trends Today",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://trendstoday.ca/images/logo.png"
-      }
+    publisher: {
+      '@type': 'Organization',
+      name: 'Trends Today',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://trendstoday.ca/images/logo.png',
+      },
     },
-    "datePublished": publishedAt,
-    "dateModified": lastUpdated || publishedAt,
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": url
+    datePublished: publishedAt,
+    dateModified: lastUpdated || publishedAt,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
     },
-    "articleSection": category,
-    "wordCount": wordCount,
-    "timeRequired": readingTime ? `PT${readingTime}M` : undefined,
-    "inLanguage": "en-US",
-    "isAccessibleForFree": true,
-    "keywords": keywords?.join(', ')
+    articleSection: category,
+    wordCount: wordCount,
+    timeRequired: readingTime ? `PT${readingTime}M` : undefined,
+    inLanguage: 'en-US',
+    isAccessibleForFree: true,
+    keywords: keywords?.join(', '),
   };
 
   return <SchemaMarkup schema={schema} id="article-schema" />;
@@ -129,62 +129,64 @@ export function ReviewSchema({
   url,
   image,
   product,
-  review
+  review,
 }: ReviewSchemaProps) {
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "Review",
-    "itemReviewed": {
-      "@type": "Product",
-      "name": product.name,
-      "category": product.category,
-      "brand": {
-        "@type": "Brand",
-        "name": product.brand
+    '@context': 'https://schema.org',
+    '@type': 'Review',
+    itemReviewed: {
+      '@type': 'Product',
+      name: product.name,
+      category: product.category,
+      brand: {
+        '@type': 'Brand',
+        name: product.brand,
       },
-      "model": product.model,
-      "description": product.description,
-      "image": product.image,
-      "offers": product.price ? {
-        "@type": "AggregateOffer",
-        "priceCurrency": product.currency || "USD",
-        "lowPrice": product.price.split('-')[0].replace(/[^0-9.]/g, ''),
-        "highPrice": product.price.includes('-') ? 
-          product.price.split('-')[1].replace(/[^0-9.]/g, '') : 
-          product.price.replace(/[^0-9.]/g, ''),
-        "availability": `https://schema.org/${product.availability || 'InStock'}`,
-        "offerCount": "5"
-      } : undefined
+      model: product.model,
+      description: product.description,
+      image: product.image,
+      offers: product.price
+        ? {
+            '@type': 'AggregateOffer',
+            priceCurrency: product.currency || 'USD',
+            lowPrice: product.price.split('-')[0].replace(/[^0-9.]/g, ''),
+            highPrice: product.price.includes('-')
+              ? product.price.split('-')[1].replace(/[^0-9.]/g, '')
+              : product.price.replace(/[^0-9.]/g, ''),
+            availability: `https://schema.org/${product.availability || 'InStock'}`,
+            offerCount: '5',
+          }
+        : undefined,
     },
-    "reviewRating": {
-      "@type": "Rating",
-      "ratingValue": review.rating,
-      "bestRating": review.maxRating,
-      "worstRating": 1
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: review.rating,
+      bestRating: review.maxRating,
+      worstRating: 1,
     },
-    "name": title,
-    "author": {
-      "@type": "Person",
-      "name": author.name,
-      "description": author.bio,
-      "image": author.avatar
+    name: title,
+    author: {
+      '@type': 'Person',
+      name: author.name,
+      description: author.bio,
+      image: author.avatar,
     },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Trends Today",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://trendstoday.ca/images/logo.png"
-      }
+    publisher: {
+      '@type': 'Organization',
+      name: 'Trends Today',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://trendstoday.ca/images/logo.png',
+      },
     },
-    "datePublished": publishedAt,
-    "dateModified": lastUpdated || publishedAt,
-    "description": description,
-    "reviewBody": review.reviewBody,
-    "url": url,
-    "inLanguage": "en-US",
-    "positiveNotes": review.pros,
-    "negativeNotes": review.cons
+    datePublished: publishedAt,
+    dateModified: lastUpdated || publishedAt,
+    description: description,
+    reviewBody: review.reviewBody,
+    url: url,
+    inLanguage: 'en-US',
+    positiveNotes: review.pros,
+    negativeNotes: review.cons,
   };
 
   return <SchemaMarkup schema={schema} id="review-schema" />;
@@ -216,41 +218,45 @@ export function ProductSchema({
   category,
   image,
   price,
-  currency = "USD",
-  availability = "InStock",
+  currency = 'USD',
+  availability = 'InStock',
   sku,
-  aggregateRating
+  aggregateRating,
 }: ProductSchemaProps) {
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": name,
-    "description": description,
-    "brand": {
-      "@type": "Brand",
-      "name": brand
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: name,
+    description: description,
+    brand: {
+      '@type': 'Brand',
+      name: brand,
     },
-    "model": model,
-    "category": category,
-    "image": image,
-    "sku": sku,
-    "offers": price ? {
-      "@type": "AggregateOffer",
-      "priceCurrency": currency,
-      "lowPrice": price.split('-')[0].replace(/[^0-9.]/g, ''),
-      "highPrice": price.includes('-') ? 
-        price.split('-')[1].replace(/[^0-9.]/g, '') : 
-        price.replace(/[^0-9.]/g, ''),
-      "availability": `https://schema.org/${availability}`,
-      "offerCount": "5"
-    } : undefined,
-    "aggregateRating": aggregateRating ? {
-      "@type": "AggregateRating",
-      "ratingValue": aggregateRating.ratingValue,
-      "reviewCount": aggregateRating.reviewCount,
-      "bestRating": 5,
-      "worstRating": 1
-    } : undefined
+    model: model,
+    category: category,
+    image: image,
+    sku: sku,
+    offers: price
+      ? {
+          '@type': 'AggregateOffer',
+          priceCurrency: currency,
+          lowPrice: price.split('-')[0].replace(/[^0-9.]/g, ''),
+          highPrice: price.includes('-')
+            ? price.split('-')[1].replace(/[^0-9.]/g, '')
+            : price.replace(/[^0-9.]/g, ''),
+          availability: `https://schema.org/${availability}`,
+          offerCount: '5',
+        }
+      : undefined,
+    aggregateRating: aggregateRating
+      ? {
+          '@type': 'AggregateRating',
+          ratingValue: aggregateRating.ratingValue,
+          reviewCount: aggregateRating.reviewCount,
+          bestRating: 5,
+          worstRating: 1,
+        }
+      : undefined,
   };
 
   return <SchemaMarkup schema={schema} id="product-schema" />;
@@ -266,14 +272,14 @@ interface BreadcrumbSchemaProps {
 
 export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": items.map((item, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "name": item.name,
-      "item": item.url
-    }))
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
   };
 
   return <SchemaMarkup schema={schema} id="breadcrumb-schema" />;
@@ -289,58 +295,59 @@ interface FAQSchemaProps {
 
 export function FAQSchema({ faqs }: FAQSchemaProps) {
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
   };
 
   return <SchemaMarkup schema={schema} id="faq-schema" />;
 }
 
-// Organization Schema Component  
+// Organization Schema Component
 export function OrganizationSchema() {
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Trends Today",
-    "alternateName": "Trends Today Tech Blog",
-    "url": "https://trendstoday.ca",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://trendstoday.ca/images/logo.png",
-      "width": 400,
-      "height": 100
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Trends Today',
+    alternateName: 'Trends Today Tech Blog',
+    url: 'https://trendstoday.ca',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://trendstoday.ca/images/logo.png',
+      width: 400,
+      height: 100,
     },
-    "description": "Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides. Stay ahead with the latest tech trends.",
-    "foundingDate": "2025",
-    "founder": {
-      "@type": "Person",
-      "name": "Trends Today Editorial Team"
+    description:
+      'Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides. Stay ahead with the latest tech trends.',
+    foundingDate: '2025',
+    founder: {
+      '@type': 'Person',
+      name: 'Trends Today Editorial Team',
     },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+1-800-TRENDS",
-      "contactType": "customer service",
-      "email": "contact@trendstoday.ca"
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+1-800-TRENDS',
+      contactType: 'customer service',
+      email: 'contact@trendstoday.ca',
     },
-    "sameAs": [
-      "https://twitter.com/trendstoday",
-      "https://facebook.com/trendstoday", 
-      "https://linkedin.com/company/trends-today",
-      "https://youtube.com/@trendstoday"
+    sameAs: [
+      'https://twitter.com/trendstoday',
+      'https://facebook.com/trendstoday',
+      'https://linkedin.com/company/trends-today',
+      'https://youtube.com/@trendstoday',
     ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "CA",
-      "addressRegion": "ON"
-    }
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'CA',
+      addressRegion: 'ON',
+    },
   };
 
   return <SchemaMarkup schema={schema} id="organization-schema" />;
@@ -349,28 +356,29 @@ export function OrganizationSchema() {
 // Website Schema Component
 export function WebsiteSchema() {
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Trends Today",
-    "alternateName": "Trends Today Tech Reviews",
-    "url": "https://trendstoday.ca",
-    "description": "Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides.",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Trends Today",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://trendstoday.ca/images/logo.png"
-      }
-    },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://trendstoday.ca/search?q={search_term_string}"
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Trends Today',
+    alternateName: 'Trends Today Tech Reviews',
+    url: 'https://trendstoday.ca',
+    description:
+      'Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides.',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Trends Today',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://trendstoday.ca/images/logo.png',
       },
-      "query-input": "required name=search_term_string"
-    }
+    },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://trendstoday.ca/search?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
+    },
   };
 
   return <SchemaMarkup schema={schema} id="website-schema" />;

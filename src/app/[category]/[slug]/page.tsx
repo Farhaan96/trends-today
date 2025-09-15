@@ -20,7 +20,9 @@ export async function generateStaticParams() {
 
   for (const category of Object.keys(categoryConfig)) {
     const categoryArticles = articles.filter(
-      (a) => a.category?.toLowerCase() === category || a.frontmatter?.category?.toLowerCase() === category
+      (a) =>
+        a.category?.toLowerCase() === category ||
+        a.frontmatter?.category?.toLowerCase() === category
     );
     for (const article of categoryArticles) {
       params.push({ category, slug: article.slug });
@@ -30,10 +32,17 @@ export async function generateStaticParams() {
   return params;
 }
 
-export async function generateMetadata({ params }: { params: { category: string; slug: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string; slug: string };
+}): Promise<Metadata> {
   const article = await getArticleBySlug(params.category, params.slug);
   if (!article) {
-    return { title: 'Article Not Found | Trends Today', description: 'The article you are looking for does not exist.' };
+    return {
+      title: 'Article Not Found | Trends Today',
+      description: 'The article you are looking for does not exist.',
+    };
   }
 
   return {
@@ -43,22 +52,32 @@ export async function generateMetadata({ params }: { params: { category: string;
       title: article.title || article.frontmatter?.title,
       description: article.description || article.frontmatter?.description,
       type: 'article',
-      images: [article.image || article.frontmatter?.image || '/images/placeholder.jpg'],
+      images: [
+        article.image ||
+          article.frontmatter?.image ||
+          '/images/placeholder.jpg',
+      ],
     },
   };
 }
 
-export default async function ArticlePage({ params }: { params: { category: string; slug: string } }) {
+export default async function ArticlePage({
+  params,
+}: {
+  params: { category: string; slug: string };
+}) {
   const article = await getArticleBySlug(params.category, params.slug);
   if (!article) notFound();
 
-  const category = categoryConfig[params.category as keyof typeof categoryConfig];
+  const category =
+    categoryConfig[params.category as keyof typeof categoryConfig];
 
   const allArticles = await getAllArticles();
   const relatedArticles = allArticles
     .filter(
       (a) =>
-        (a.category?.toLowerCase() === params.category || a.frontmatter?.category?.toLowerCase() === params.category) &&
+        (a.category?.toLowerCase() === params.category ||
+          a.frontmatter?.category?.toLowerCase() === params.category) &&
         a.slug !== params.slug
     )
     .slice(0, 3);
@@ -77,17 +96,33 @@ export default async function ArticlePage({ params }: { params: { category: stri
           {/* Meta below title, above image (left-aligned; category first) */}
           <div className="my-4 border-y border-gray-200/70">
             <div className="flex flex-wrap items-center justify-start gap-3 text-gray-600 py-3 text-sm">
-              <Link href={`/${params.category}`} className={`inline-block px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${category.color}`}>
+              <Link
+                href={`/${params.category}`}
+                className={`inline-block px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${category.color}`}
+              >
                 {category.name}
               </Link>
               <span>•</span>
-              <span className="font-medium">{article.author?.name || article.frontmatter?.author?.name || 'Trends Today'}</span>
+              <span className="font-medium">
+                {article.author?.name ||
+                  article.frontmatter?.author?.name ||
+                  'Trends Today'}
+              </span>
               <span>•</span>
-              <span>{new Date(article.publishedAt || article.frontmatter?.publishedAt).toLocaleDateString()}</span>
-              {(article.frontmatter?.readingTime || (article as any).readingTime) && (
+              <span>
+                {new Date(
+                  article.publishedAt || article.frontmatter?.publishedAt
+                ).toLocaleDateString()}
+              </span>
+              {(article.frontmatter?.readingTime ||
+                (article as any).readingTime) && (
                 <>
                   <span>•</span>
-                  <span>{article.frontmatter?.readingTime || (article as any).readingTime} min read</span>
+                  <span>
+                    {article.frontmatter?.readingTime ||
+                      (article as any).readingTime}{' '}
+                    min read
+                  </span>
                 </>
               )}
             </div>
@@ -96,7 +131,11 @@ export default async function ArticlePage({ params }: { params: { category: stri
           {/* Large square hero image */}
           <div className="relative w-full aspect-square bg-gray-100 rounded-2xl overflow-hidden mb-4 md:mb-6">
             <Image
-              src={article.image || article.frontmatter?.image || '/images/placeholder.jpg'}
+              src={
+                article.image ||
+                article.frontmatter?.image ||
+                '/images/placeholder.jpg'
+              }
               alt={article.title || article.frontmatter?.title || 'Article'}
               fill
               className="object-cover"
@@ -116,7 +155,9 @@ export default async function ArticlePage({ params }: { params: { category: stri
       {relatedArticles.length > 0 && (
         <section className="bg-gray-50 py-12">
           <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8">More from {category.name}</h2>
+            <h2 className="text-3xl font-bold mb-8">
+              More from {category.name}
+            </h2>
             <div className="grid md:grid-cols-3 gap-6">
               {relatedArticles.map((related) => (
                 <Link
@@ -126,8 +167,14 @@ export default async function ArticlePage({ params }: { params: { category: stri
                 >
                   <div className="relative aspect-square">
                     <Image
-                      src={related.image || related.frontmatter?.image || '/images/placeholder.jpg'}
-                      alt={related.title || related.frontmatter?.title || 'Article'}
+                      src={
+                        related.image ||
+                        related.frontmatter?.image ||
+                        '/images/placeholder.jpg'
+                      }
+                      alt={
+                        related.title || related.frontmatter?.title || 'Article'
+                      }
                       fill
                       className="object-cover rounded-t-xl"
                     />

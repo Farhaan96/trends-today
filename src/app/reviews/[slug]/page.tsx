@@ -23,18 +23,18 @@ async function getReviewArticle(slug: string) {
   try {
     const contentDir = path.join(process.cwd(), 'content', 'reviews');
     const filePath = path.join(contentDir, `${slug}.mdx`);
-    
+
     if (!fs.existsSync(filePath)) {
       return null;
     }
-    
+
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const { data, content } = matter(fileContent);
-    
+
     return {
       frontmatter: data,
       content,
-      slug
+      slug,
     };
   } catch (error) {
     return null;
@@ -45,16 +45,16 @@ async function getReviewArticle(slug: string) {
 export async function generateStaticParams() {
   try {
     const contentDir = path.join(process.cwd(), 'content', 'reviews');
-    
+
     if (!fs.existsSync(contentDir)) {
       return [];
     }
-    
+
     const files = fs.readdirSync(contentDir);
-    
+
     return files
-      .filter(file => file.endsWith('.mdx'))
-      .map(file => ({
+      .filter((file) => file.endsWith('.mdx'))
+      .map((file) => ({
         slug: file.replace('.mdx', ''),
       }));
   } catch (error) {
@@ -63,9 +63,11 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: ReviewPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ReviewPageProps): Promise<Metadata> {
   const article = await getReviewArticle(params.slug);
-  
+
   if (!article) {
     return {
       title: 'Review Not Found | Trends Today',
@@ -74,26 +76,39 @@ export async function generateMetadata({ params }: ReviewPageProps): Promise<Met
   }
 
   const { frontmatter } = article;
-  
+
   return {
     title: frontmatter.title + ' | Trends Today',
     description: frontmatter.description,
     keywords: frontmatter.tags?.join(', '),
-    authors: [{ name: (typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || 'Trends Today Editorial' }],
+    authors: [
+      {
+        name:
+          (typeof frontmatter.author === 'string'
+            ? frontmatter.author
+            : frontmatter.author?.name) || 'Trends Today Editorial',
+      },
+    ],
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
       type: 'article',
       publishedTime: frontmatter.publishedAt,
-      authors: [(typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || 'Trends Today Editorial'],
-      images: frontmatter.image ? [
-        {
-          url: frontmatter.image,
-          width: 1200,
-          height: 630,
-          alt: frontmatter.title,
-        }
-      ] : [],
+      authors: [
+        (typeof frontmatter.author === 'string'
+          ? frontmatter.author
+          : frontmatter.author?.name) || 'Trends Today Editorial',
+      ],
+      images: frontmatter.image
+        ? [
+            {
+              url: frontmatter.image,
+              width: 1200,
+              height: 630,
+              alt: frontmatter.title,
+            },
+          ]
+        : [],
     },
     twitter: {
       card: 'summary_large_image',
@@ -106,57 +121,66 @@ export async function generateMetadata({ params }: ReviewPageProps): Promise<Met
 
 export default async function ReviewPage({ params }: ReviewPageProps) {
   const article = await getReviewArticle(params.slug);
-  
+
   if (!article) {
     notFound();
   }
-  
+
   const { frontmatter, content } = article;
-  
+
   // Generate structured data for the review
   const reviewStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "Review",
-    "itemReviewed": {
-      "@type": "Product",
-      "name": frontmatter.product?.name || frontmatter.title,
-      "brand": frontmatter.product?.brand,
-      "image": frontmatter.image ? `https://trendstoday.ca${frontmatter.image}` : undefined
+    '@context': 'https://schema.org',
+    '@type': 'Review',
+    itemReviewed: {
+      '@type': 'Product',
+      name: frontmatter.product?.name || frontmatter.title,
+      brand: frontmatter.product?.brand,
+      image: frontmatter.image
+        ? `https://trendstoday.ca${frontmatter.image}`
+        : undefined,
     },
-    "author": {
-      "@type": "Person",
-      "name": (typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || "Trends Today Editorial"
+    author: {
+      '@type': 'Person',
+      name:
+        (typeof frontmatter.author === 'string'
+          ? frontmatter.author
+          : frontmatter.author?.name) || 'Trends Today Editorial',
     },
-    "datePublished": frontmatter.publishedAt,
-    "dateModified": frontmatter.updatedAt || frontmatter.publishedAt,
-    "reviewRating": frontmatter.rating ? {
-      "@type": "Rating",
-      "ratingValue": frontmatter.rating,
-      "bestRating": "10"
-    } : undefined,
-    "publisher": {
-      "@type": "Organization",
-      "name": "Trends Today",
-      "url": "https://trendstoday.ca"
-    }
+    datePublished: frontmatter.publishedAt,
+    dateModified: frontmatter.updatedAt || frontmatter.publishedAt,
+    reviewRating: frontmatter.rating
+      ? {
+          '@type': 'Rating',
+          ratingValue: frontmatter.rating,
+          bestRating: '10',
+        }
+      : undefined,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Trends Today',
+      url: 'https://trendstoday.ca',
+    },
   };
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
       <StructuredData data={reviewStructuredData} />
-      
+
       <div className="bg-white rounded-lg shadow-sm">
         {/* Header */}
         <header className="p-8 pb-6">
           {/* Category badge */}
           <div className="flex items-center gap-3 mb-4">
             {(() => {
-              const cat = getCategoryStyles(frontmatter.category)
+              const cat = getCategoryStyles(frontmatter.category);
               return (
-                <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold ${cat.badge}`}>
+                <span
+                  className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold ${cat.badge}`}
+                >
                   {frontmatter.category || 'Review'}
                 </span>
-              )
+              );
             })()}
             {frontmatter.featured && (
               <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
@@ -164,21 +188,23 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
               </span>
             )}
           </div>
-          
+
           {/* Title */}
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             {frontmatter.title}
           </h1>
-          
+
           {/* Description */}
           <p className="text-xl text-gray-800 mb-6">
             {frontmatter.description}
           </p>
-          
+
           <div className="flex items-center gap-4 text-gray-900 border-b pb-6">
             <div className="flex items-center gap-2">
               <span className="font-medium text-gray-900">
-                {(typeof frontmatter.author === 'string' ? frontmatter.author : frontmatter.author?.name) || 'Trends Today Editorial'}
+                {(typeof frontmatter.author === 'string'
+                  ? frontmatter.author
+                  : frontmatter.author?.name) || 'Trends Today Editorial'}
               </span>
             </div>
             <span>•</span>
@@ -186,7 +212,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
               {new Date(frontmatter.publishedAt).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
-                day: 'numeric'
+                day: 'numeric',
               })}
             </time>
             {frontmatter.readingTime && (
@@ -200,7 +226,9 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
                 <span>•</span>
                 <div className="flex items-center">
                   <span className="text-yellow-500">★</span>
-                  <span className="ml-1 font-medium">{frontmatter.rating}/10</span>
+                  <span className="ml-1 font-medium">
+                    {frontmatter.rating}/10
+                  </span>
                 </div>
               </>
             )}
@@ -221,18 +249,28 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
             {(frontmatter.imageCredit || frontmatter.imageIsConcept) && (
               <div className="mt-2 text-xs text-gray-600 flex items-center gap-2">
                 {frontmatter.imageIsConcept && (
-                  <span className="inline-flex items-center px-2 py-0.5 bg-yellow-100 text-yellow-800 font-semibold rounded-sm">Concept render</span>
+                  <span className="inline-flex items-center px-2 py-0.5 bg-yellow-100 text-yellow-800 font-semibold rounded-sm">
+                    Concept render
+                  </span>
                 )}
                 {frontmatter.imageCredit && (
                   <span>
-                    Image credit: {frontmatter.imageCredit.url ? (
-                      <a href={frontmatter.imageCredit.url} target="_blank" rel="noopener noreferrer" className="underline">
+                    Image credit:{' '}
+                    {frontmatter.imageCredit.url ? (
+                      <a
+                        href={frontmatter.imageCredit.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline"
+                      >
                         {frontmatter.imageCredit.name || 'Source'}
                       </a>
                     ) : (
                       frontmatter.imageCredit.name || 'Source'
                     )}
-                    {frontmatter.imageLicense ? ` · ${frontmatter.imageLicense}` : ''}
+                    {frontmatter.imageLicense
+                      ? ` · ${frontmatter.imageLicense}`
+                      : ''}
                   </span>
                 )}
               </div>
@@ -242,7 +280,8 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
 
         {/* Content */}
         <article className="px-8 pb-8">
-          <div className="prose prose-lg max-w-none text-gray-900 article-content
+          <div
+            className="prose prose-lg max-w-none text-gray-900 article-content
             [&>h1]:text-4xl [&>h1]:font-bold [&>h1]:text-gray-900 [&>h1]:mb-6 [&>h1]:mt-8 [&>h1]:tracking-tight
             [&>h2]:text-3xl [&>h2]:font-bold [&>h2]:text-gray-900 [&>h2]:mb-4 [&>h2]:mt-8 [&>h2]:border-b [&>h2]:border-gray-200 [&>h2]:pb-2 [&>h2]:tracking-tight
             [&>h3]:text-2xl [&>h3]:font-bold [&>h3]:text-gray-900 [&>h3]:mb-3 [&>h3]:mt-6 [&>h3]:tracking-tight
@@ -261,11 +300,12 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
             [&>table]:text-sm [&>table]:mb-6
             [&>th]:bg-gray-100 [&>th]:font-semibold [&>th]:text-gray-900 [&>th]:px-4 [&>th]:py-2
             [&>td]:px-4 [&>td]:py-2 [&>td]:text-gray-900 [&>td]:border-t [&>td]:border-gray-200
-            [&>hr]:border-gray-300 [&>hr]:my-8">
-            <MDXRemote 
-              source={content} 
+            [&>hr]:border-gray-300 [&>hr]:my-8"
+          >
+            <MDXRemote
+              source={content}
               components={{
-                img: MDXImage
+                img: MDXImage,
               }}
             />
           </div>
@@ -289,27 +329,27 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
               </div>
             </div>
           )}
-          
+
           {/* Author Box */}
           {frontmatter.author && (
-            <AuthorBox 
-              author={frontmatter.author} 
+            <AuthorBox
+              author={frontmatter.author}
               publishedAt={frontmatter.publishedAt}
               lastUpdated={frontmatter.updatedAt}
             />
           )}
-          
+
           {/* Citations */}
           {frontmatter.sources && (
             <CitationsList sources={frontmatter.sources} />
           )}
         </footer>
-        </div>
+      </div>
 
-        {/* Comments (Utterances - free via GitHub issues) */}
-        <div className="pt-4 pb-12">
-          <UtterancesComments issueTerm="pathname" />
-        </div>
+      {/* Comments (Utterances - free via GitHub issues) */}
+      <div className="pt-4 pb-12">
+        <UtterancesComments issueTerm="pathname" />
+      </div>
     </main>
   );
 }

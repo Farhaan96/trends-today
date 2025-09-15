@@ -27,12 +27,7 @@
       "Google Pixel 9 Pro",
       "OnePlus 12"
     ],
-    "sources": [
-      "apple.com",
-      "techcrunch.com",
-      "theverge.com",
-      "gsmarena.com"
-    ],
+    "sources": ["apple.com", "techcrunch.com", "theverge.com", "gsmarena.com"],
     "productName": "iPhone 16 Pro"
   },
   "keywordData": [

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
 type Props = {
   label?: string;
@@ -9,7 +9,12 @@ type Props = {
   className?: string;
 };
 
-export default function AdSlot({ label = "Advertisement", width = "100%", height, className = "" }: Props) {
+export default function AdSlot({
+  label = 'Advertisement',
+  width = '100%',
+  height,
+  className = '',
+}: Props) {
   return (
     <div
       className={`ad-slot border border-gray-200 bg-gray-50 text-gray-500 text-xs flex items-center justify-center ${className}`}
@@ -20,4 +25,3 @@ export default function AdSlot({ label = "Advertisement", width = "100%", height
     </div>
   );
 }
-

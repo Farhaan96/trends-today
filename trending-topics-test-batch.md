@@ -1,12 +1,11 @@
-TRENDING TOPICS BATCH - TEST
-=============================
+# TRENDING TOPICS BATCH - TEST
+
 Batch Type: test
 Discovery Time: 2025-09-13 14:30:00
 Total Topics Discovered: 8
 Selected for Test Batch: 2
 
-SELECTED TOPICS (2 for Test)
-----------------------------
+## SELECTED TOPICS (2 for Test)
 
 1. Topic: "AI Detects Hidden Consciousness in Coma Patients 4 Days Earlier"
    Category: health
@@ -28,8 +27,7 @@ SELECTED TOPICS (2 for Test)
    Search Volume: High (iPhone + AI trending)
    Authority: Medium-High (hardware specifications, leaked details)
 
-ALTERNATE TOPICS DISCOVERED
----------------------------
+## ALTERNATE TOPICS DISCOVERED
 
 3. Topic: "Quantum Memory Breakthrough Makes Qubits Last 30X Longer"
    Category: science
@@ -52,13 +50,14 @@ ALTERNATE TOPICS DISCOVERED
    Unique Angle: Catheter-based AI detection system for hidden blockages
    Competition: Low (very specialized technology)
 
-RECOMMENDATIONS
---------------
+## RECOMMENDATIONS
+
 Priority Order: [1, 2]
 Quick Wins: Topic 1 (medical breakthrough, low competition, high shareability)
 Authority Play: Topic 2 (Apple hardware + AI trend intersection)
 
 Both selected topics offer:
+
 - Strong engagement potential (life-saving tech + popular consumer brand)
 - Manageable competition levels
 - Clear value propositions for readers

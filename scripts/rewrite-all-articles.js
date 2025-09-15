@@ -17,7 +17,7 @@ class ArticleRewriter {
       total: 0,
       rewritten: 0,
       failed: 0,
-      skipped: 0
+      skipped: 0,
     };
   }
 
@@ -26,19 +26,23 @@ class ArticleRewriter {
    */
   findAllArticles() {
     const articles = [];
-    const categories = fs.readdirSync(this.contentDir)
-      .filter(item => fs.statSync(path.join(this.contentDir, item)).isDirectory());
+    const categories = fs
+      .readdirSync(this.contentDir)
+      .filter((item) =>
+        fs.statSync(path.join(this.contentDir, item)).isDirectory()
+      );
 
     for (const category of categories) {
       const categoryPath = path.join(this.contentDir, category);
-      const files = fs.readdirSync(categoryPath)
-        .filter(file => file.endsWith('.mdx'));
+      const files = fs
+        .readdirSync(categoryPath)
+        .filter((file) => file.endsWith('.mdx'));
 
       for (const file of files) {
         articles.push({
           category,
           filename: file,
-          filepath: path.join(categoryPath, file)
+          filepath: path.join(categoryPath, file),
         });
       }
     }
@@ -53,24 +57,24 @@ class ArticleRewriter {
     try {
       const content = fs.readFileSync(filepath, 'utf8');
       const { data: frontmatter, content: body } = matter(content);
-      
+
       // Extract main topic from title
       const title = frontmatter.title || '';
       const topic = this.extractTopicFromTitle(title);
-      
+
       // Extract keywords from tags or generate from title
       const keywords = frontmatter.tags || this.generateKeywords(title);
-      
+
       // Get word count
       const wordCount = body.split(/\s+/).length;
-      
+
       return {
         title,
         topic,
         keywords,
         category: frontmatter.category || 'technology',
         originalWordCount: wordCount,
-        frontmatter
+        frontmatter,
       };
     } catch (error) {
       console.error(`Error reading ${filepath}:`, error.message);
@@ -93,12 +97,34 @@ class ArticleRewriter {
    * Generate keywords from title
    */
   generateKeywords(title) {
-    const stopWords = ['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were'];
-    const words = title.toLowerCase()
+    const stopWords = [
+      'the',
+      'a',
+      'an',
+      'and',
+      'or',
+      'but',
+      'in',
+      'on',
+      'at',
+      'to',
+      'for',
+      'of',
+      'with',
+      'by',
+      'from',
+      'as',
+      'is',
+      'was',
+      'are',
+      'were',
+    ];
+    const words = title
+      .toLowerCase()
       .replace(/[^\w\s]/g, '')
       .split(/\s+/)
-      .filter(word => word.length > 3 && !stopWords.includes(word));
-    
+      .filter((word) => word.length > 3 && !stopWords.includes(word));
+
     return words.slice(0, 5);
   }
 
@@ -107,16 +133,20 @@ class ArticleRewriter {
    */
   async rewriteArticle(articleInfo, filepath) {
     const { topic, category, keywords, title, originalWordCount } = articleInfo;
-    
+
     console.log(`\n📝 Rewriting: ${title}`);
     console.log(`   Category: ${category}`);
     console.log(`   Original: ${originalWordCount} words`);
     console.log(`   Keywords: ${keywords.join(', ')}`);
-    
+
     try {
       // Generate new ultra-short content
-      const newContent = await this.creator.generateUltraShortContent(topic, category, keywords);
-      
+      const newContent = await this.creator.generateUltraShortContent(
+        topic,
+        category,
+        keywords
+      );
+
       // Keep some original metadata but update with new content
       const updatedFrontmatter = {
         ...articleInfo.frontmatter,
@@ -126,15 +156,15 @@ class ArticleRewriter {
         updatedAt: new Date().toISOString(),
         rewrittenBy: 'LeRavi Ultra-Short Agent',
         originalWordCount: originalWordCount,
-        newWordCount: newContent.split(/\s+/).length
+        newWordCount: newContent.split(/\s+/).length,
       };
-      
+
       // Format frontmatter
       const frontmatterStr = Object.entries(updatedFrontmatter)
         .map(([key, value]) => {
           if (value === null || value === undefined) return null;
           if (Array.isArray(value)) {
-            return `${key}: [${value.map(v => `"${v}"`).join(', ')}]`;
+            return `${key}: [${value.map((v) => `"${v}"`).join(', ')}]`;
           }
           if (typeof value === 'string') {
             return `${key}: "${value.replace(/"/g, '\\"')}"`;
@@ -143,24 +173,26 @@ class ArticleRewriter {
         })
         .filter(Boolean)
         .join('\n');
-      
+
       // Combine frontmatter and content
       const fullContent = `---
 ${frontmatterStr}
 ---
 
 ${newContent}`;
-      
+
       // Create backup of original
       const backupPath = filepath.replace('.mdx', '.backup.mdx');
       fs.copyFileSync(filepath, backupPath);
-      
+
       // Write new content
       fs.writeFileSync(filepath, fullContent, 'utf8');
-      
+
       const newWordCount = newContent.split(/\s+/).length;
-      console.log(`   ✅ Rewritten: ${newWordCount} words (reduced by ${Math.round((1 - newWordCount/originalWordCount) * 100)}%)`);
-      
+      console.log(
+        `   ✅ Rewritten: ${newWordCount} words (reduced by ${Math.round((1 - newWordCount / originalWordCount) * 100)}%)`
+      );
+
       return true;
     } catch (error) {
       console.error(`   ❌ Failed to rewrite: ${error.message}`);
@@ -173,60 +205,66 @@ ${newContent}`;
    */
   async rewriteAll(options = {}) {
     console.log('🚀 Starting article rewrite process...\n');
-    
+
     const articles = this.findAllArticles();
     this.stats.total = articles.length;
-    
+
     console.log(`Found ${articles.length} articles to process\n`);
-    
+
     // Process options
     const limit = options.limit || articles.length;
     const skipBackups = options.skipBackups !== false;
     const category = options.category;
-    
+
     // Filter articles
     let articlesToProcess = articles;
     if (skipBackups) {
-      articlesToProcess = articles.filter(a => !a.filename.includes('.backup.'));
+      articlesToProcess = articles.filter(
+        (a) => !a.filename.includes('.backup.')
+      );
     }
     if (category) {
-      articlesToProcess = articlesToProcess.filter(a => a.category === category);
+      articlesToProcess = articlesToProcess.filter(
+        (a) => a.category === category
+      );
     }
-    
+
     // Limit number of articles
     articlesToProcess = articlesToProcess.slice(0, limit);
-    
+
     console.log(`Processing ${articlesToProcess.length} articles...\n`);
     console.log('─'.repeat(60));
-    
+
     for (const article of articlesToProcess) {
       const info = this.extractArticleInfo(article.filepath);
-      
+
       if (!info) {
         console.log(`⚠️  Skipping ${article.filename} - couldn't read file`);
         this.stats.skipped++;
         continue;
       }
-      
+
       // Skip if already short
       if (info.originalWordCount <= 600) {
-        console.log(`⏭️  Skipping ${article.filename} - already short (${info.originalWordCount} words)`);
+        console.log(
+          `⏭️  Skipping ${article.filename} - already short (${info.originalWordCount} words)`
+        );
         this.stats.skipped++;
         continue;
       }
-      
+
       const success = await this.rewriteArticle(info, article.filepath);
-      
+
       if (success) {
         this.stats.rewritten++;
       } else {
         this.stats.failed++;
       }
-      
+
       // Add delay to avoid overwhelming the system
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
-    
+
     // Print summary
     console.log('\n' + '─'.repeat(60));
     console.log('\n📊 Rewrite Summary:');
@@ -235,7 +273,7 @@ ${newContent}`;
     console.log(`   ⏭️  Skipped: ${this.stats.skipped}`);
     console.log(`   ❌ Failed: ${this.stats.failed}`);
     console.log('\n✨ Rewrite process complete!');
-    
+
     return this.stats;
   }
 }
@@ -243,11 +281,11 @@ ${newContent}`;
 // Run the rewriter
 if (require.main === module) {
   const rewriter = new ArticleRewriter();
-  
+
   // Parse command line arguments
   const args = process.argv.slice(2);
   const options = {};
-  
+
   // Parse options
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--limit' && args[i + 1]) {
@@ -277,14 +315,15 @@ Examples:
       process.exit(0);
     }
   }
-  
+
   // Run rewriter
-  rewriter.rewriteAll(options)
-    .then(stats => {
+  rewriter
+    .rewriteAll(options)
+    .then((stats) => {
       console.log('\n✅ Script completed successfully');
       process.exit(0);
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('\n❌ Script failed:', error);
       process.exit(1);
     });

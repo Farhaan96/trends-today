@@ -2,15 +2,15 @@ import { Metadata } from 'next';
 // import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { 
-  UserIcon, 
-  MapPinIcon, 
-  CalendarIcon, 
+import {
+  UserIcon,
+  MapPinIcon,
+  CalendarIcon,
   DocumentTextIcon,
   AcademicCapIcon,
   CheckBadgeIcon,
   // GlobeAltIcon,
-  LanguageIcon
+  LanguageIcon,
 } from '@heroicons/react/24/outline';
 import authorsData from '../../../../data/authors.json';
 
@@ -43,10 +43,14 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   const authors = authorsData as Record<string, Author>;
   const author = authors[params.slug];
-  
+
   if (!author) {
     return {
       title: 'Author Not Found | Trends Today',
@@ -74,10 +78,28 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
   }
 
   const socialLinks = [
-    { platform: 'Twitter', icon: '𝕏', url: author.socialMedia.twitter ? `https://twitter.com/${author.socialMedia.twitter}` : null },
-    { platform: 'LinkedIn', icon: 'in', url: author.socialMedia.linkedin ? `https://linkedin.com/in/${author.socialMedia.linkedin}` : null },
-    { platform: 'Email', icon: '✉', url: author.socialMedia.email ? `mailto:${author.socialMedia.email}` : null },
-  ].filter(link => link.url);
+    {
+      platform: 'Twitter',
+      icon: '𝕏',
+      url: author.socialMedia.twitter
+        ? `https://twitter.com/${author.socialMedia.twitter}`
+        : null,
+    },
+    {
+      platform: 'LinkedIn',
+      icon: 'in',
+      url: author.socialMedia.linkedin
+        ? `https://linkedin.com/in/${author.socialMedia.linkedin}`
+        : null,
+    },
+    {
+      platform: 'Email',
+      icon: '✉',
+      url: author.socialMedia.email
+        ? `mailto:${author.socialMedia.email}`
+        : null,
+    },
+  ].filter((link) => link.url);
 
   const joinYear = new Date(author.joinDate).getFullYear();
   const yearsAtTrends = new Date().getFullYear() - joinYear;
@@ -98,11 +120,15 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
               </div>
             </div>
           </div>
-          
+
           <div className="flex-1">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{author.name}</h1>
-            <h2 className="text-xl text-blue-600 font-semibold mb-4">{author.title}</h2>
-            
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+              {author.name}
+            </h1>
+            <h2 className="text-xl text-blue-600 font-semibold mb-4">
+              {author.title}
+            </h2>
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-sm">
               <div className="flex items-center text-gray-800">
                 <MapPinIcon className="w-4 h-4 mr-2" />
@@ -119,7 +145,7 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
             </div>
 
             <p className="text-gray-900 leading-relaxed mb-6">{author.bio}</p>
-            
+
             <div className="flex flex-wrap gap-3">
               {socialLinks.map((link, index) => (
                 <a
@@ -170,13 +196,15 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
           </section>
 
           <section>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Recent Reviews</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Recent Reviews
+            </h3>
             <div className="bg-gray-50 rounded-lg p-6">
               <p className="text-gray-800 text-center py-8">
                 Loading recent reviews by {author.name}...
               </p>
               <div className="text-center">
-                <Link 
+                <Link
                   href="/reviews"
                   className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                 >
@@ -189,7 +217,9 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
 
         <div className="space-y-6">
           <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <h4 className="text-lg font-semibold text-gray-900 mb-4">Areas of Expertise</h4>
+            <h4 className="text-lg font-semibold text-gray-900 mb-4">
+              Areas of Expertise
+            </h4>
             <div className="space-y-2">
               {author.expertise.map((skill, index) => (
                 <div key={index} className="flex items-center">
@@ -201,7 +231,9 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
           </div>
 
           <div className="bg-white border border-gray-200 rounded-lg p-6">
-            <h4 className="text-lg font-semibold text-gray-900 mb-4">Specializations</h4>
+            <h4 className="text-lg font-semibold text-gray-900 mb-4">
+              Specializations
+            </h4>
             <div className="flex flex-wrap gap-2">
               {author.specializations.map((spec, index) => (
                 <span
@@ -229,9 +261,12 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
           </div>
 
           <div className="bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-6">
-            <h4 className="text-lg font-semibold text-gray-900 mb-3">Contact {author.name.split(' ')[0]}</h4>
+            <h4 className="text-lg font-semibold text-gray-900 mb-3">
+              Contact {author.name.split(' ')[0]}
+            </h4>
             <p className="text-sm text-gray-800 mb-4">
-              Have questions about a review or want to suggest a product for testing?
+              Have questions about a review or want to suggest a product for
+              testing?
             </p>
             {author.socialMedia.email && (
               <a

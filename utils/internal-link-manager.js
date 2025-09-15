@@ -14,7 +14,7 @@ class InternalLinkManager {
     this.articleDatabase = new Map();
     this.linkGraph = new Map();
     this.initialized = false;
-    
+
     // Le Ravi linking guidelines
     this.linkingRules = {
       linksPerArticle: { min: 4, max: 8, optimal: 6 },
@@ -23,18 +23,25 @@ class InternalLinkManager {
         introduction: 1,
         bodyContent: '2-3',
         conclusion: 1,
-        relatedSection: '2-3'
+        relatedSection: '2-3',
       },
       anchorTextRules: {
         maxLength: 6, // words
         naturalPhrases: true,
         avoidKeywordStuffing: true,
-        useDescriptive: true
-      }
+        useDescriptive: true,
+      },
     };
 
     // Categories for cross-linking
-    this.categories = ['science', 'culture', 'psychology', 'technology', 'health', 'space'];
+    this.categories = [
+      'science',
+      'culture',
+      'psychology',
+      'technology',
+      'health',
+      'space',
+    ];
   }
 
   /**
@@ -42,12 +49,14 @@ class InternalLinkManager {
    */
   async initialize() {
     if (this.initialized) return;
-    
+
     console.log('🔗 Initializing Internal Link Manager...');
     await this.scanContentDirectory();
     this.buildLinkGraph();
     this.initialized = true;
-    console.log(`  ✅ Loaded ${this.articleDatabase.size} articles into link database`);
+    console.log(
+      `  ✅ Loaded ${this.articleDatabase.size} articles into link database`
+    );
   }
 
   /**
@@ -56,18 +65,18 @@ class InternalLinkManager {
   async scanContentDirectory() {
     for (const category of this.categories) {
       const categoryPath = path.join(this.contentDir, category);
-      
+
       try {
         const files = await fs.readdir(categoryPath);
-        const mdxFiles = files.filter(f => f.endsWith('.mdx'));
-        
+        const mdxFiles = files.filter((f) => f.endsWith('.mdx'));
+
         for (const file of mdxFiles) {
           const filePath = path.join(categoryPath, file);
           const content = await fs.readFile(filePath, 'utf-8');
           const { data, content: body } = matter(content);
-          
+
           const articleId = `${category}/${file.replace('.mdx', '')}`;
-          
+
           this.articleDatabase.set(articleId, {
             id: articleId,
             category,
@@ -78,7 +87,7 @@ class InternalLinkManager {
             publishedAt: data.publishedAt,
             wordCount: body.split(' ').length,
             topics: this.extractTopics(body),
-            url: `/${category}/${file.replace('.mdx', '')}`
+            url: `/${category}/${file.replace('.mdx', '')}`,
           });
         }
       } catch (error) {
@@ -93,21 +102,23 @@ class InternalLinkManager {
    */
   extractKeywords(metadata, content) {
     const keywords = new Set();
-    
+
     // Add SEO keywords if present
     if (metadata.seo && metadata.seo.keywords) {
-      metadata.seo.keywords.forEach(kw => keywords.add(kw.toLowerCase()));
+      metadata.seo.keywords.forEach((kw) => keywords.add(kw.toLowerCase()));
     }
-    
+
     // Add title words (excluding common words)
     if (metadata.title) {
-      this.extractImportantWords(metadata.title).forEach(word => keywords.add(word));
+      this.extractImportantWords(metadata.title).forEach((word) =>
+        keywords.add(word)
+      );
     }
-    
+
     // Extract important phrases from content
     const importantPhrases = this.extractImportantPhrases(content);
-    importantPhrases.forEach(phrase => keywords.add(phrase));
-    
+    importantPhrases.forEach((phrase) => keywords.add(phrase));
+
     return Array.from(keywords);
   }
 
@@ -116,16 +127,51 @@ class InternalLinkManager {
    */
   extractImportantWords(text) {
     const commonWords = new Set([
-      'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for',
-      'of', 'with', 'by', 'from', 'up', 'about', 'into', 'through', 'during',
-      'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had',
-      'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might'
+      'the',
+      'a',
+      'an',
+      'and',
+      'or',
+      'but',
+      'in',
+      'on',
+      'at',
+      'to',
+      'for',
+      'of',
+      'with',
+      'by',
+      'from',
+      'up',
+      'about',
+      'into',
+      'through',
+      'during',
+      'is',
+      'are',
+      'was',
+      'were',
+      'be',
+      'been',
+      'being',
+      'have',
+      'has',
+      'had',
+      'do',
+      'does',
+      'did',
+      'will',
+      'would',
+      'could',
+      'should',
+      'may',
+      'might',
     ]);
-    
+
     return text
       .toLowerCase()
       .split(/\W+/)
-      .filter(word => word.length > 3 && !commonWords.has(word));
+      .filter((word) => word.length > 3 && !commonWords.has(word));
   }
 
   /**
@@ -133,23 +179,23 @@ class InternalLinkManager {
    */
   extractImportantPhrases(content) {
     const phrases = [];
-    
+
     // Extract headers (H2, H3)
     const headerMatches = content.match(/^#{2,3}\s+(.+)$/gm) || [];
-    headerMatches.forEach(header => {
+    headerMatches.forEach((header) => {
       const cleanHeader = header.replace(/^#+\s+/, '').toLowerCase();
       phrases.push(cleanHeader);
     });
-    
+
     // Extract bold/emphasized text
     const boldMatches = content.match(/\*\*(.+?)\*\*/g) || [];
-    boldMatches.forEach(bold => {
+    boldMatches.forEach((bold) => {
       const cleanBold = bold.replace(/\*\*/g, '').toLowerCase();
       if (cleanBold.split(' ').length <= 4) {
         phrases.push(cleanBold);
       }
     });
-    
+
     return phrases;
   }
 
@@ -158,34 +204,99 @@ class InternalLinkManager {
    */
   extractTopics(content) {
     const topics = new Set();
-    
+
     // Technology topics
-    const techTerms = ['AI', 'artificial intelligence', 'machine learning', 'blockchain', 'quantum', 'robot', 'algorithm', 'software', 'hardware'];
-    
+    const techTerms = [
+      'AI',
+      'artificial intelligence',
+      'machine learning',
+      'blockchain',
+      'quantum',
+      'robot',
+      'algorithm',
+      'software',
+      'hardware',
+    ];
+
     // Science topics
-    const scienceTerms = ['physics', 'chemistry', 'biology', 'research', 'study', 'experiment', 'discovery', 'theory', 'hypothesis'];
-    
+    const scienceTerms = [
+      'physics',
+      'chemistry',
+      'biology',
+      'research',
+      'study',
+      'experiment',
+      'discovery',
+      'theory',
+      'hypothesis',
+    ];
+
     // Health topics
-    const healthTerms = ['health', 'wellness', 'medical', 'disease', 'treatment', 'therapy', 'nutrition', 'exercise', 'mental health'];
-    
+    const healthTerms = [
+      'health',
+      'wellness',
+      'medical',
+      'disease',
+      'treatment',
+      'therapy',
+      'nutrition',
+      'exercise',
+      'mental health',
+    ];
+
     // Psychology topics
-    const psychTerms = ['psychology', 'behavior', 'mind', 'cognitive', 'emotional', 'personality', 'mental', 'consciousness'];
-    
+    const psychTerms = [
+      'psychology',
+      'behavior',
+      'mind',
+      'cognitive',
+      'emotional',
+      'personality',
+      'mental',
+      'consciousness',
+    ];
+
     // Culture topics
-    const cultureTerms = ['culture', 'society', 'trend', 'generation', 'social', 'community', 'tradition', 'movement'];
-    
+    const cultureTerms = [
+      'culture',
+      'society',
+      'trend',
+      'generation',
+      'social',
+      'community',
+      'tradition',
+      'movement',
+    ];
+
     // Space topics
-    const spaceTerms = ['space', 'NASA', 'planet', 'star', 'galaxy', 'universe', 'astronomy', 'cosmic', 'satellite'];
-    
-    const allTerms = [...techTerms, ...scienceTerms, ...healthTerms, ...psychTerms, ...cultureTerms, ...spaceTerms];
-    
+    const spaceTerms = [
+      'space',
+      'NASA',
+      'planet',
+      'star',
+      'galaxy',
+      'universe',
+      'astronomy',
+      'cosmic',
+      'satellite',
+    ];
+
+    const allTerms = [
+      ...techTerms,
+      ...scienceTerms,
+      ...healthTerms,
+      ...psychTerms,
+      ...cultureTerms,
+      ...spaceTerms,
+    ];
+
     const contentLower = content.toLowerCase();
-    allTerms.forEach(term => {
+    allTerms.forEach((term) => {
       if (contentLower.includes(term.toLowerCase())) {
         topics.add(term);
       }
     });
-    
+
     return Array.from(topics);
   }
 
@@ -204,43 +315,55 @@ class InternalLinkManager {
    */
   findRelatedArticles(article) {
     const scores = new Map();
-    
+
     for (const [otherId, other] of this.articleDatabase) {
       if (otherId === article.id) continue;
-      
+
       let score = 0;
-      
+
       // Same category bonus
       if (article.category === other.category) {
         score += 10;
       }
-      
+
       // Cross-category linking (Le Ravi style)
-      const crossCategoryBonus = this.getCrossCategoryBonus(article.category, other.category);
+      const crossCategoryBonus = this.getCrossCategoryBonus(
+        article.category,
+        other.category
+      );
       score += crossCategoryBonus;
-      
+
       // Keyword overlap
-      const keywordOverlap = this.calculateOverlap(article.keywords, other.keywords);
+      const keywordOverlap = this.calculateOverlap(
+        article.keywords,
+        other.keywords
+      );
       score += keywordOverlap * 20;
-      
+
       // Topic overlap
       const topicOverlap = this.calculateOverlap(article.topics, other.topics);
       score += topicOverlap * 15;
-      
+
       // Temporal relevance (prefer newer content)
-      const ageDiff = Math.abs(new Date(article.publishedAt) - new Date(other.publishedAt));
+      const ageDiff = Math.abs(
+        new Date(article.publishedAt) - new Date(other.publishedAt)
+      );
       const daysDiff = ageDiff / (1000 * 60 * 60 * 24);
       if (daysDiff < 30) score += 5;
       if (daysDiff < 7) score += 10;
-      
+
       scores.set(otherId, score);
     }
-    
+
     // Sort by score and return top related articles
     return Array.from(scores.entries())
       .sort((a, b) => b[1] - a[1])
       .slice(0, 20)
-      .map(([id, score]) => ({ id, score, article: this.articleDatabase.get(id) }));
+      .map(([id, score]) => ({
+        id,
+        score,
+        article: this.articleDatabase.get(id),
+      }));
   }
 
   /**
@@ -256,9 +379,9 @@ class InternalLinkManager {
       'health-psychology': 9,
       'psychology-culture': 8,
       'culture-technology': 7,
-      'space-technology': 9
+      'space-technology': 9,
     };
-    
+
     const key = [cat1, cat2].sort().join('-');
     return crossLinks[key] || 3;
   }
@@ -268,11 +391,11 @@ class InternalLinkManager {
    */
   calculateOverlap(arr1, arr2) {
     if (!arr1 || !arr2 || arr1.length === 0 || arr2.length === 0) return 0;
-    
+
     const set1 = new Set(arr1);
     const set2 = new Set(arr2);
-    const intersection = Array.from(set1).filter(x => set2.has(x));
-    
+    const intersection = Array.from(set1).filter((x) => set2.has(x));
+
     return intersection.length / Math.max(set1.size, set2.size);
   }
 
@@ -281,48 +404,55 @@ class InternalLinkManager {
    */
   async addInternalLinks(content, currentArticle, options = {}) {
     await this.initialize();
-    
+
     const {
       maxLinks = 6,
       preferSameCategory = false,
-      includeRelatedSection = true
+      includeRelatedSection = true,
     } = options;
-    
+
     // Find related articles
-    const relatedArticles = this.linkGraph.get(currentArticle.id) || 
-                           this.findRelatedArticles(currentArticle);
-    
+    const relatedArticles =
+      this.linkGraph.get(currentArticle.id) ||
+      this.findRelatedArticles(currentArticle);
+
     // Select articles for linking
     const selectedForBody = relatedArticles.slice(0, maxLinks - 2);
-    const selectedForRelated = relatedArticles.slice(maxLinks - 2, maxLinks + 3);
-    
+    const selectedForRelated = relatedArticles.slice(
+      maxLinks - 2,
+      maxLinks + 3
+    );
+
     // Add contextual links within content
     let linkedContent = content;
     let linksAdded = 0;
-    
+
     for (const related of selectedForBody) {
       if (linksAdded >= maxLinks - 2) break;
-      
+
       const linkText = this.generateNaturalAnchorText(related.article);
-      const linkPattern = this.findLinkablePhrase(linkedContent, related.article);
-      
+      const linkPattern = this.findLinkablePhrase(
+        linkedContent,
+        related.article
+      );
+
       if (linkPattern) {
         const link = `[${linkPattern}](${related.article.url})`;
         linkedContent = linkedContent.replace(linkPattern, link);
         linksAdded++;
       }
     }
-    
+
     // Add related articles section
     if (includeRelatedSection && selectedForRelated.length > 0) {
       const relatedSection = this.generateRelatedSection(selectedForRelated);
       linkedContent += '\n\n' + relatedSection;
     }
-    
+
     return {
       content: linkedContent,
       linksAdded,
-      relatedArticles: selectedForRelated.map(r => r.article)
+      relatedArticles: selectedForRelated.map((r) => r.article),
     };
   }
 
@@ -332,18 +462,18 @@ class InternalLinkManager {
   generateNaturalAnchorText(article) {
     // Extract key phrase from title
     const titleWords = article.title.split(' ');
-    
+
     // Prefer 2-4 word phrases
     if (titleWords.length <= 4) {
       return article.title.toLowerCase();
     }
-    
+
     // Find the most important phrase
     const importantWords = this.extractImportantWords(article.title);
     if (importantWords.length >= 2 && importantWords.length <= 4) {
       return importantWords.join(' ');
     }
-    
+
     // Use first few words
     return titleWords.slice(0, 3).join(' ').toLowerCase();
   }
@@ -361,7 +491,7 @@ class InternalLinkManager {
         }
       }
     }
-    
+
     // Look for topic mentions
     for (const topic of targetArticle.topics) {
       const regex = new RegExp(`\\b${topic}\\b`, 'i');
@@ -369,7 +499,7 @@ class InternalLinkManager {
         return topic;
       }
     }
-    
+
     return null;
   }
 
@@ -378,19 +508,23 @@ class InternalLinkManager {
    */
   generateRelatedSection(relatedArticles) {
     let section = '## Related Articles You Might Enjoy\n\n';
-    
+
     for (const related of relatedArticles) {
       const article = related.article;
       section += `- **[${article.title}](${article.url})**: ${this.generateTeaser(article)}\n`;
     }
-    
+
     section += '\n---\n\n*Explore more fascinating discoveries in our [';
-    
+
     // Add category links
-    const categories = [...new Set(relatedArticles.map(r => r.article.category))];
-    const categoryLinks = categories.map(cat => `[${cat}](/${cat})`).join(', ');
+    const categories = [
+      ...new Set(relatedArticles.map((r) => r.article.category)),
+    ];
+    const categoryLinks = categories
+      .map((cat) => `[${cat}](/${cat})`)
+      .join(', ');
     section += categoryLinks + '] sections.*';
-    
+
     return section;
   }
 
@@ -406,7 +540,7 @@ class InternalLinkManager {
       }
       return article.description.substring(0, 100) + '...';
     }
-    
+
     // Generate from keywords
     const keywords = article.keywords.slice(0, 3).join(', ');
     return `Discover insights about ${keywords}`;
@@ -418,31 +552,31 @@ class InternalLinkManager {
   async analyzeContentForLinks(filePath) {
     const content = await fs.readFile(filePath, 'utf-8');
     const { data, content: body } = matter(content);
-    
+
     // Extract article info
     const article = {
       id: path.basename(filePath, '.mdx'),
       category: path.basename(path.dirname(filePath)),
       title: data.title,
       keywords: this.extractKeywords(data, body),
-      topics: this.extractTopics(body)
+      topics: this.extractTopics(body),
     };
-    
+
     // Find link opportunities
     await this.initialize();
     const opportunities = this.findRelatedArticles(article);
-    
+
     // Analyze current links
     const currentLinks = (body.match(/\[([^\]]+)\]\(([^)]+)\)/g) || []).length;
     const wordCount = body.split(' ').length;
     const idealLinks = Math.floor(wordCount / 500) * 2.5; // 2-3 links per 500 words
-    
+
     return {
       currentLinks,
       idealLinks: Math.round(idealLinks),
       deficit: Math.max(0, Math.round(idealLinks) - currentLinks),
       opportunities: opportunities.slice(0, 10),
-      wordCount
+      wordCount,
     };
   }
 
@@ -451,23 +585,23 @@ class InternalLinkManager {
    */
   async optimizeLinksForCategory(category) {
     await this.initialize();
-    
+
     const categoryPath = path.join(this.contentDir, category);
     const files = await fs.readdir(categoryPath);
-    const mdxFiles = files.filter(f => f.endsWith('.mdx'));
-    
+    const mdxFiles = files.filter((f) => f.endsWith('.mdx'));
+
     const results = [];
-    
+
     for (const file of mdxFiles) {
       const filePath = path.join(categoryPath, file);
       const analysis = await this.analyzeContentForLinks(filePath);
-      
+
       results.push({
         file,
-        ...analysis
+        ...analysis,
       });
     }
-    
+
     return results;
   }
 }
@@ -477,32 +611,39 @@ module.exports = InternalLinkManager;
 // Example usage
 if (require.main === module) {
   const manager = new InternalLinkManager();
-  
+
   async function test() {
     console.log('\n🔗 Internal Link Manager - Test Run\n');
-    
+
     // Initialize the manager
     await manager.initialize();
-    
+
     // Test article
     const testArticle = {
       id: 'technology/ai-breakthrough-2025',
       category: 'technology',
       title: 'AI Breakthrough Changes Everything in 2025',
-      keywords: ['artificial intelligence', 'machine learning', 'neural networks', 'AI breakthrough'],
+      keywords: [
+        'artificial intelligence',
+        'machine learning',
+        'neural networks',
+        'AI breakthrough',
+      ],
       topics: ['AI', 'technology', 'innovation'],
-      publishedAt: new Date().toISOString()
+      publishedAt: new Date().toISOString(),
     };
-    
+
     // Find related articles
     console.log('Finding related articles for:', testArticle.title);
     const related = manager.findRelatedArticles(testArticle);
-    
+
     console.log('\nTop 5 related articles:');
     related.slice(0, 5).forEach((r, i) => {
-      console.log(`  ${i + 1}. ${r.article?.title || 'Unknown'} (Score: ${r.score})`);
+      console.log(
+        `  ${i + 1}. ${r.article?.title || 'Unknown'} (Score: ${r.score})`
+      );
     });
-    
+
     // Test content linking
     const testContent = `
 # AI Breakthrough Changes Everything in 2025
@@ -520,13 +661,15 @@ This breakthrough in quantum computing paired with advanced algorithms has opene
 The implications for healthcare, education, and space exploration are profound. As we continue to explore 
 these possibilities, one thing becomes clear: the future is arriving faster than expected.
 `;
-    
+
     console.log('\n\nAdding internal links to test content...');
     const result = await manager.addInternalLinks(testContent, testArticle);
-    
+
     console.log(`  ✅ Links added: ${result.linksAdded}`);
-    console.log(`  ✅ Related articles section included: ${result.relatedArticles.length} articles`);
+    console.log(
+      `  ✅ Related articles section included: ${result.relatedArticles.length} articles`
+    );
   }
-  
+
   test().catch(console.error);
 }

@@ -20,7 +20,11 @@ class ArticleOptimizer {
     this.contentCreator = new LeRaviContentCreator();
     this.linkManager = new InternalLinkManager();
     this.contentDir = path.join(__dirname, '..', 'content');
-    this.trackingFile = path.join(__dirname, '..', 'ARTICLE-OPTIMIZATION-TRACKER.md');
+    this.trackingFile = path.join(
+      __dirname,
+      '..',
+      'ARTICLE-OPTIMIZATION-TRACKER.md'
+    );
     this.optimizedCount = 0;
     this.failedCount = 0;
   }
@@ -30,14 +34,23 @@ class ArticleOptimizer {
    */
   async optimizeAllArticles() {
     console.log('\n🚀 Starting Comprehensive Article Optimization\n');
-    console.log('Applying Le Ravi structure and long-tail keyword optimization...\n');
+    console.log(
+      'Applying Le Ravi structure and long-tail keyword optimization...\n'
+    );
 
     // Initialize link manager
     await this.linkManager.initialize();
 
     // Get all categories
-    const categories = ['science', 'culture', 'psychology', 'technology', 'health', 'space'];
-    
+    const categories = [
+      'science',
+      'culture',
+      'psychology',
+      'technology',
+      'health',
+      'space',
+    ];
+
     for (const category of categories) {
       await this.optimizeCategory(category);
     }
@@ -45,7 +58,7 @@ class ArticleOptimizer {
     console.log('\n✅ Optimization Complete!');
     console.log(`   Optimized: ${this.optimizedCount} articles`);
     console.log(`   Failed: ${this.failedCount} articles`);
-    
+
     await this.updateTrackingFile();
   }
 
@@ -54,13 +67,13 @@ class ArticleOptimizer {
    */
   async optimizeCategory(category) {
     console.log(`\n📁 Optimizing ${category.toUpperCase()} category...`);
-    
+
     const categoryPath = path.join(this.contentDir, category);
-    
+
     try {
       const files = await fs.readdir(categoryPath);
-      const mdxFiles = files.filter(f => f.endsWith('.mdx'));
-      
+      const mdxFiles = files.filter((f) => f.endsWith('.mdx'));
+
       for (const file of mdxFiles) {
         await this.optimizeArticle(category, file);
       }
@@ -74,14 +87,14 @@ class ArticleOptimizer {
    */
   async optimizeArticle(category, filename) {
     const filePath = path.join(this.contentDir, category, filename);
-    
+
     try {
       console.log(`   📝 Optimizing: ${filename}`);
-      
+
       // Read current article
       const content = await fs.readFile(filePath, 'utf-8');
       const { data: frontmatter, content: body } = matter(content);
-      
+
       // Skip if already optimized (check for our markers)
       if (frontmatter.optimized === true) {
         console.log(`      ✓ Already optimized, skipping`);
@@ -93,21 +106,30 @@ class ArticleOptimizer {
       const keywords = this.keywordGenerator.generateKeywords(topic, category, {
         count: 10,
         includeQuestions: true,
-        includeVoiceSearch: true
+        includeVoiceSearch: true,
       });
 
       // Analyze keywords and select primary
-      const keywordAnalysis = keywords.map(kw => 
+      const keywordAnalysis = keywords.map((kw) =>
         this.keywordGenerator.analyzeKeywordDifficulty(kw)
       );
-      const primaryKeyword = keywordAnalysis
-        .sort((a, b) => a.difficulty - b.difficulty)[0];
+      const primaryKeyword = keywordAnalysis.sort(
+        (a, b) => a.difficulty - b.difficulty
+      )[0];
 
       // Generate curiosity gap headline
-      const newTitle = this.generateOptimizedTitle(frontmatter.title, primaryKeyword.keyword, category);
-      
+      const newTitle = this.generateOptimizedTitle(
+        frontmatter.title,
+        primaryKeyword.keyword,
+        category
+      );
+
       // Generate optimized description
-      const newDescription = this.generateOptimizedDescription(newTitle, primaryKeyword.keyword, topic);
+      const newDescription = this.generateOptimizedDescription(
+        newTitle,
+        primaryKeyword.keyword,
+        topic
+      );
 
       // Update frontmatter with SEO optimization
       const optimizedFrontmatter = {
@@ -121,22 +143,27 @@ class ArticleOptimizer {
           title: `${newTitle} | 2025`,
           description: newDescription.substring(0, 160),
           keywords: keywords.slice(0, 7),
-          canonical: `https://trendstoday.ca/${category}/${filename.replace('.mdx', '')}`
+          canonical: `https://trendstoday.ca/${category}/${filename.replace('.mdx', '')}`,
         },
         schema: {
           type: 'Article',
           headline: newTitle,
           datePublished: frontmatter.publishedAt || new Date().toISOString(),
-          dateModified: new Date().toISOString()
+          dateModified: new Date().toISOString(),
         },
         primaryKeyword: primaryKeyword.keyword,
-        readingTime: Math.max(8, Math.ceil(body.split(' ').length / 200))
+        readingTime: Math.max(8, Math.ceil(body.split(' ').length / 200)),
       };
 
       // Apply Le Ravi structure to content if it's a stub
       let optimizedBody = body;
       if (this.isStubContent(body)) {
-        optimizedBody = await this.applyLeRaviStructure(topic, category, primaryKeyword.keyword, keywords);
+        optimizedBody = await this.applyLeRaviStructure(
+          topic,
+          category,
+          primaryKeyword.keyword,
+          keywords
+        );
       } else {
         // For existing content, just add optimization markers
         optimizedBody = this.enhanceExistingContent(body, keywords, category);
@@ -148,23 +175,31 @@ class ArticleOptimizer {
         category,
         title: newTitle,
         keywords: keywords,
-        topics: this.extractTopics(optimizedBody)
+        topics: this.extractTopics(optimizedBody),
       };
-      
-      const linkedContent = await this.linkManager.addInternalLinks(optimizedBody, articleData, {
-        maxLinks: 6,
-        includeRelatedSection: true
-      });
+
+      const linkedContent = await this.linkManager.addInternalLinks(
+        optimizedBody,
+        articleData,
+        {
+          maxLinks: 6,
+          includeRelatedSection: true,
+        }
+      );
 
       // Rebuild the file
-      const optimizedContent = matter.stringify(linkedContent.content || optimizedBody, optimizedFrontmatter);
-      
+      const optimizedContent = matter.stringify(
+        linkedContent.content || optimizedBody,
+        optimizedFrontmatter
+      );
+
       // Write back to file
       await fs.writeFile(filePath, optimizedContent);
-      
-      console.log(`      ✅ Optimized with ${keywords.length} keywords and ${linkedContent.linksAdded || 0} internal links`);
+
+      console.log(
+        `      ✅ Optimized with ${keywords.length} keywords and ${linkedContent.linksAdded || 0} internal links`
+      );
       this.optimizedCount++;
-      
     } catch (error) {
       console.log(`      ❌ Failed: ${error.message}`);
       this.failedCount++;
@@ -176,10 +211,23 @@ class ArticleOptimizer {
    */
   extractTopic(title) {
     // Remove common words and extract core topic
-    const commonWords = ['the', 'a', 'an', 'why', 'how', 'what', 'when', 'where', 'is', 'are'];
-    const words = title.toLowerCase().split(' ')
-      .filter(word => !commonWords.includes(word));
-    
+    const commonWords = [
+      'the',
+      'a',
+      'an',
+      'why',
+      'how',
+      'what',
+      'when',
+      'where',
+      'is',
+      'are',
+    ];
+    const words = title
+      .toLowerCase()
+      .split(' ')
+      .filter((word) => !commonWords.includes(word));
+
     return words.slice(0, 3).join(' ');
   }
 
@@ -191,38 +239,39 @@ class ArticleOptimizer {
       science: [
         'Scientists Discover {topic} That Changes Everything We Know About {field}',
         'The {topic} Discovery That Has Scientists Questioning {concept}',
-        'Breaking: {topic} Reveals What We Got Wrong About {field}'
+        'Breaking: {topic} Reveals What We Got Wrong About {field}',
       ],
       technology: [
         'Why {topic} Is the Game-Changer Nobody Saw Coming in 2025',
-        'The Hidden Truth About {topic} That Tech Giants Don\'t Want You to Know',
-        '{topic}: The Breakthrough That Makes Everything Else Obsolete'
+        "The Hidden Truth About {topic} That Tech Giants Don't Want You to Know",
+        '{topic}: The Breakthrough That Makes Everything Else Obsolete',
       ],
       psychology: [
         'The Psychological Reason You {behavior} (And How to Change It)',
         'What {topic} Reveals About Your Hidden Personality',
-        'The Surprising Science Behind Why We {behavior}'
+        'The Surprising Science Behind Why We {behavior}',
       ],
       culture: [
         'How {topic} Is Secretly Reshaping Society in 2025',
-        'The {topic} Movement That\'s Changing Everything',
-        'Why Everyone Is Wrong About {topic}'
+        "The {topic} Movement That's Changing Everything",
+        'Why Everyone Is Wrong About {topic}',
       ],
       health: [
-        'The {topic} Discovery Doctors Don\'t Want You to Miss',
+        "The {topic} Discovery Doctors Don't Want You to Miss",
         '{topic}: The Health Breakthrough That Changes Everything',
-        'What Science Just Discovered About {topic} Will Shock You'
+        'What Science Just Discovered About {topic} Will Shock You',
       ],
       space: [
         '{topic}: The Space Discovery That Defies All Logic',
-        'NASA\'s {topic} Finding Changes Everything About the Universe',
-        'The Impossible {topic} That Has Astronomers Baffled'
-      ]
+        "NASA's {topic} Finding Changes Everything About the Universe",
+        'The Impossible {topic} That Has Astronomers Baffled',
+      ],
     };
 
     const categoryTemplates = templates[category] || templates.technology;
-    const template = categoryTemplates[Math.floor(Math.random() * categoryTemplates.length)];
-    
+    const template =
+      categoryTemplates[Math.floor(Math.random() * categoryTemplates.length)];
+
     const topic = this.extractTopic(originalTitle);
     return template
       .replace(/{topic}/g, topic)
@@ -242,9 +291,11 @@ class ArticleOptimizer {
    * Check if content is a stub
    */
   isStubContent(content) {
-    return content.includes('[Hook paragraph') || 
-           content.includes('[Main discovery') ||
-           content.length < 2000;
+    return (
+      content.includes('[Hook paragraph') ||
+      content.includes('[Main discovery') ||
+      content.length < 2000
+    );
   }
 
   /**
@@ -310,9 +361,13 @@ ${keywords[0]} represents a significant advancement in ${category} that challeng
     const firstH2Index = content.indexOf('\n##');
     if (firstH2Index > -1) {
       const nextLineIndex = content.indexOf('\n', firstH2Index + 3);
-      return content.slice(0, nextLineIndex) + snippetSection + content.slice(nextLineIndex);
+      return (
+        content.slice(0, nextLineIndex) +
+        snippetSection +
+        content.slice(nextLineIndex)
+      );
     }
-    
+
     return content;
   }
 
@@ -331,10 +386,10 @@ ${keywords[0]} represents a significant advancement in ${category} that challeng
       /space/gi,
       /NASA/gi,
       /health/gi,
-      /culture/gi
+      /culture/gi,
     ];
 
-    topicPatterns.forEach(pattern => {
+    topicPatterns.forEach((pattern) => {
       if (pattern.test(content)) {
         topics.push(pattern.source.replace(/\\/g, ''));
       }
@@ -348,7 +403,7 @@ ${keywords[0]} represents a significant advancement in ${category} that challeng
    */
   async updateTrackingFile() {
     const tracking = await fs.readFile(this.trackingFile, 'utf-8');
-    
+
     // Update with completion status
     const updatedTracking = tracking.replace(
       '## Completed Articles\n\n(Articles will be checked off as they are optimized)',

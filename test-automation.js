@@ -9,11 +9,11 @@ console.log('=====================================\n');
 async function testAgent(agentName, description) {
   console.log(`🧪 Testing ${agentName}...`);
   console.log(`   ${description}\n`);
-  
+
   return new Promise((resolve) => {
     const agentPath = path.join(__dirname, 'agents', `${agentName}.js`);
     const command = `node "${agentPath}"`;
-    
+
     const child = exec(command, { timeout: 60000 }, (error, stdout, stderr) => {
       if (error) {
         console.log(`❌ ${agentName} failed: ${error.message}\n`);
@@ -24,7 +24,7 @@ async function testAgent(agentName, description) {
         resolve(true);
       }
     });
-    
+
     // Handle timeout
     setTimeout(() => {
       child.kill();
@@ -38,25 +38,26 @@ async function runTests() {
   const tests = [
     {
       agent: 'news-scanner',
-      description: 'Scans tech news sources for trending topics and breaking news'
+      description:
+        'Scans tech news sources for trending topics and breaking news',
     },
     {
-      agent: 'seo-finder', 
-      description: 'Finds zero-volume keywords and emerging SEO opportunities'
+      agent: 'seo-finder',
+      description: 'Finds zero-volume keywords and emerging SEO opportunities',
     },
     {
       agent: 'content-creator',
       description: 'Creates tech articles using research and templates',
-      args: '--type=news --count=1'
+      args: '--type=news --count=1',
     },
     {
       agent: 'quality-check',
-      description: 'Validates content quality and SEO optimization'
+      description: 'Validates content quality and SEO optimization',
     },
     {
       agent: 'product-tracker',
-      description: 'Tracks new product announcements from major tech companies'
-    }
+      description: 'Tracks new product announcements from major tech companies',
+    },
   ];
 
   let passed = 0;
@@ -89,14 +90,14 @@ async function testApiEndpoints() {
   const endpoints = [
     'https://trendstoday.ca/api/test-perplexity',
     'https://trendstoday.ca/api/test-firecrawl',
-    'https://trendstoday.ca/api/analytics'
+    'https://trendstoday.ca/api/analytics',
   ];
 
   for (const endpoint of endpoints) {
     try {
       const response = await fetch(endpoint);
       const name = endpoint.split('/').pop();
-      
+
       if (response.ok) {
         console.log(`✅ ${name} endpoint working`);
       } else {

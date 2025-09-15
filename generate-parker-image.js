@@ -29,7 +29,7 @@ no text or watermarks, epic scale showing the incredible achievement of humanity
       downloadImage: true,
       size: '1536x1024',
       quality: 'hd',
-      style: 'vivid'
+      style: 'vivid',
     });
 
     console.log('\n✅ Space image generated successfully!');
@@ -39,7 +39,6 @@ no text or watermarks, epic scale showing the incredible achievement of humanity
     console.log(`   Cost: $0.08 (HD quality)`);
 
     return result;
-
   } catch (error) {
     console.error('❌ Failed to generate space image:', error.message);
 

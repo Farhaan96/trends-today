@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Image, { ImageProps } from "next/image";
-import React from "react";
+import Image, { ImageProps } from 'next/image';
+import React from 'react';
 
 interface ImageSource {
   url: string;
@@ -10,7 +10,7 @@ interface ImageSource {
   description?: string;
 }
 
-type Props = Omit<ImageProps, "src"> & {
+type Props = Omit<ImageProps, 'src'> & {
   src: string;
   fallbackSrc?: string;
   enableDynamicSourcing?: boolean;
@@ -20,24 +20,24 @@ type Props = Omit<ImageProps, "src"> & {
 };
 
 export default function ImageWithFallback(props: Props) {
-  const { 
-    src, 
-    fallbackSrc = "/file.svg", 
-    alt, 
-    className = "", 
+  const {
+    src,
+    fallbackSrc = '/file.svg',
+    alt,
+    className = '',
     enableDynamicSourcing = true,
     productHint,
     imageType = 'general',
     quality = 'high',
-    ...rest 
+    ...rest
   } = props;
   const [imgSrc, setImgSrc] = React.useState(src);
   const [hasError, setHasError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [imageSource, setImageSource] = React.useState<ImageSource>({ 
-    url: src, 
-    priority: 10, 
-    source: 'primary' 
+  const [imageSource, setImageSource] = React.useState<ImageSource>({
+    url: src,
+    priority: 10,
+    source: 'primary',
   });
   const [attemptedSources, setAttemptedSources] = React.useState<string[]>([]);
 
@@ -47,27 +47,37 @@ export default function ImageWithFallback(props: Props) {
   // Map known broken local filenames to safe fallbacks (prevents placeholder flashes)
   React.useEffect(() => {
     const replacements: Record<string, string> = {
-      '/images/products/iphone-15-pro-max-titanium.jpg': '/images/products/iphone-15-pro-max-display.jpg',
-      '/images/products/iphone-15-pro-max-usbc.jpg': '/images/products/iphone-15-pro-max-battery.jpg',
-      '/images/products/nothing-phone-2-guide.jpg': '/images/products/default-hero.jpg',
-      '/images/news/ai-agents-revolution-hero.jpg': '/images/news/ai-settlement-hero.jpg',
-      '/images/news/iphone-17-air-ultra-thin-hero.jpg': '/images/news/iphone-17-air-thin-profile.jpg',
+      '/images/products/iphone-15-pro-max-titanium.jpg':
+        '/images/products/iphone-15-pro-max-display.jpg',
+      '/images/products/iphone-15-pro-max-usbc.jpg':
+        '/images/products/iphone-15-pro-max-battery.jpg',
+      '/images/products/nothing-phone-2-guide.jpg':
+        '/images/products/default-hero.jpg',
+      '/images/news/ai-agents-revolution-hero.jpg':
+        '/images/news/ai-settlement-hero.jpg',
+      '/images/news/iphone-17-air-ultra-thin-hero.jpg':
+        '/images/news/iphone-17-air-thin-profile.jpg',
     };
     if (typeof src === 'string' && replacements[src]) {
       setImgSrc(replacements[src]);
-      setImageSource({ url: replacements[src], priority: 9, source: 'fallback', description: 'Known-broken image remap' });
+      setImageSource({
+        url: replacements[src],
+        priority: 9,
+        source: 'fallback',
+        description: 'Known-broken image remap',
+      });
     }
   }, [src]);
 
   const handleError = async () => {
     if (hasError) return;
-    
+
     setHasError(true);
     const currentSrc = imgSrc;
-    
+
     // Add current source to attempted list
-    setAttemptedSources(prev => [...prev, currentSrc]);
-    
+    setAttemptedSources((prev) => [...prev, currentSrc]);
+
     // Try to get a better image source
     if (enableDynamicSourcing && !attemptedSources.includes(currentSrc)) {
       const dynamicSource = await tryGetDynamicSource();
@@ -78,7 +88,7 @@ export default function ImageWithFallback(props: Props) {
         return;
       }
     }
-    
+
     // Fall back to provided fallback
     if (imgSrc !== fallbackSrc) {
       setImgSrc(fallbackSrc);
@@ -90,48 +100,55 @@ export default function ImageWithFallback(props: Props) {
     try {
       const filename = extractFilename(src);
       const searchQuery = generateSearchQuery(filename, productHint, alt);
-      
+
       const dynamicUrl = await getDynamicImageUrl(filename, {
         searchQuery,
         imageType,
         quality,
-        dimensions: { 
-          width: rest.width as number || 1200, 
-          height: rest.height as number || 800 
-        }
+        dimensions: {
+          width: (rest.width as number) || 1200,
+          height: (rest.height as number) || 800,
+        },
       });
-      
+
       if (dynamicUrl && !attemptedSources.includes(dynamicUrl)) {
         return {
           url: dynamicUrl,
           priority: 8,
           source: 'dynamic',
-          description: `Dynamic source for ${filename}`
+          description: `Dynamic source for ${filename}`,
         };
       }
     } catch (error) {
       console.warn('Dynamic sourcing failed:', error);
     }
-    
+
     return null;
   };
 
   // Enhanced intelligent placeholder with loading state
   const createSmartPlaceholder = () => {
-    const deviceName = alt?.toLowerCase() || src?.toLowerCase() || productHint?.toLowerCase() || '';
-    
+    const deviceName =
+      alt?.toLowerCase() ||
+      src?.toLowerCase() ||
+      productHint?.toLowerCase() ||
+      '';
+
     let icon = 'IMG';
     let bgGradient = 'from-blue-100 to-blue-200';
     let textColor = 'text-blue-600';
     let deviceType = 'Product';
-    
+
     // Enhanced device detection
     if (deviceName.includes('iphone')) {
       icon = 'PHONE';
       bgGradient = 'from-gray-100 to-gray-300';
       textColor = 'text-gray-700';
       deviceType = 'iPhone';
-    } else if (deviceName.includes('samsung') || deviceName.includes('galaxy')) {
+    } else if (
+      deviceName.includes('samsung') ||
+      deviceName.includes('galaxy')
+    ) {
       icon = 'PHONE';
       bgGradient = 'from-blue-100 to-blue-200';
       textColor = 'text-blue-600';
@@ -141,12 +158,18 @@ export default function ImageWithFallback(props: Props) {
       bgGradient = 'from-green-100 to-green-200';
       textColor = 'text-green-600';
       deviceType = 'Pixel';
-    } else if (deviceName.includes('macbook') || deviceName.includes('laptop')) {
+    } else if (
+      deviceName.includes('macbook') ||
+      deviceName.includes('laptop')
+    ) {
       icon = 'LAPTOP';
       bgGradient = 'from-gray-100 to-gray-200';
       textColor = 'text-gray-600';
       deviceType = 'MacBook';
-    } else if (deviceName.includes('headphone') || deviceName.includes('audio')) {
+    } else if (
+      deviceName.includes('headphone') ||
+      deviceName.includes('audio')
+    ) {
       icon = 'AUDIO';
       bgGradient = 'from-purple-100 to-purple-200';
       textColor = 'text-purple-600';
@@ -158,18 +181,28 @@ export default function ImageWithFallback(props: Props) {
       deviceType = 'Author';
     }
 
-    const statusText = isLoading && enableDynamicSourcing ? 'Loading...' : 'Coming Soon';
-    const showSourceInfo = imageSource.source !== 'primary' && process.env.NODE_ENV === 'development';
+    const statusText =
+      isLoading && enableDynamicSourcing ? 'Loading...' : 'Coming Soon';
+    const showSourceInfo =
+      imageSource.source !== 'primary' &&
+      process.env.NODE_ENV === 'development';
 
     return (
-      <div 
-        className={`bg-gradient-to-br ${bgGradient} flex items-center justify-center relative overflow-hidden ${className} transition-all duration-300`} 
+      <div
+        className={`bg-gradient-to-br ${bgGradient} flex items-center justify-center relative overflow-hidden ${className} transition-all duration-300`}
         aria-label={`${deviceType} image ${isLoading ? 'loading' : 'not available'}`}
         title={`Source: ${imageSource.source} (${imageSource.priority})`}
       >
         <div className="text-center p-8 select-none z-10">
-          <div className={`text-4xl mb-3 ${isLoading ? 'animate-pulse' : ''}`} aria-hidden>{icon}</div>
-          <p className={`${textColor} text-sm font-semibold`}>{deviceType} Image</p>
+          <div
+            className={`text-4xl mb-3 ${isLoading ? 'animate-pulse' : ''}`}
+            aria-hidden
+          >
+            {icon}
+          </div>
+          <p className={`${textColor} text-sm font-semibold`}>
+            {deviceType} Image
+          </p>
           <p className="text-gray-500 text-xs mt-1">{statusText}</p>
           {showSourceInfo && (
             <p className="text-gray-400 text-xs mt-1 font-mono">
@@ -185,9 +218,12 @@ export default function ImageWithFallback(props: Props) {
           )}
         </div>
         {/* Enhanced pattern overlay */}
-        <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.1' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.1' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
         {/* Loading shimmer effect */}
         {isLoading && enableDynamicSourcing && (
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>
@@ -208,7 +244,8 @@ export default function ImageWithFallback(props: Props) {
       const timeout = setTimeout(async () => {
         // Only attempt dynamic source on slow load for REMOTE or unknown sources.
         // For local public assets ("/images/..."), do not override unless onError fires.
-        const isLocalPublicAsset = typeof imgSrc === 'string' && imgSrc.startsWith('/');
+        const isLocalPublicAsset =
+          typeof imgSrc === 'string' && imgSrc.startsWith('/');
         if (isLoading && !isLocalPublicAsset) {
           const dynamicSource = await tryGetDynamicSource();
           if (dynamicSource) {
@@ -238,20 +275,19 @@ export default function ImageWithFallback(props: Props) {
         onError={handleError}
         priority={imageType === 'hero' || (quality as string) === 'premium'}
       />
-      
+
       {/* Loading placeholder */}
       {isLoading && (
-        <div className="absolute inset-0">
-          {createSmartPlaceholder()}
-        </div>
+        <div className="absolute inset-0">{createSmartPlaceholder()}</div>
       )}
-      
+
       {/* Development info overlay */}
-      {process.env.NODE_ENV === 'development' && imageSource.source !== 'primary' && (
-        <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-          {imageSource.source}
-        </div>
-      )}
+      {process.env.NODE_ENV === 'development' &&
+        imageSource.source !== 'primary' && (
+          <div className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+            {imageSource.source}
+          </div>
+        )}
     </div>
   );
 }
@@ -259,40 +295,46 @@ export default function ImageWithFallback(props: Props) {
 // Hook for dynamic image sourcing
 function useDynamicImageSourcing() {
   const [cache] = React.useState(() => new Map<string, string>());
-  
-  const getDynamicImageUrl = React.useCallback(async (filename: string, options: {
-    searchQuery?: string;
-    imageType?: string;
-    quality?: string;
-    dimensions?: { width: number; height: number };
-  } = {}) => {
-    const cacheKey = `${filename}-${JSON.stringify(options)}`;
-    
-    // Check cache first
-    if (cache.has(cacheKey)) {
-      return cache.get(cacheKey)!;
-    }
-    
-    try {
-      // This would integrate with your ImageSourceManager
-      // For now, we'll use intelligent fallbacks
-      const fallbackUrl = getIntelligentFallback(filename, options);
-      
-      // Cache the result
-      cache.set(cacheKey, fallbackUrl);
-      
-      return fallbackUrl;
-    } catch (error) {
-      console.error('Dynamic image sourcing failed:', error);
-      return null;
-    }
-  }, [cache]);
-  
+
+  const getDynamicImageUrl = React.useCallback(
+    async (
+      filename: string,
+      options: {
+        searchQuery?: string;
+        imageType?: string;
+        quality?: string;
+        dimensions?: { width: number; height: number };
+      } = {}
+    ) => {
+      const cacheKey = `${filename}-${JSON.stringify(options)}`;
+
+      // Check cache first
+      if (cache.has(cacheKey)) {
+        return cache.get(cacheKey)!;
+      }
+
+      try {
+        // This would integrate with your ImageSourceManager
+        // For now, we'll use intelligent fallbacks
+        const fallbackUrl = getIntelligentFallback(filename, options);
+
+        // Cache the result
+        cache.set(cacheKey, fallbackUrl);
+
+        return fallbackUrl;
+      } catch (error) {
+        console.error('Dynamic image sourcing failed:', error);
+        return null;
+      }
+    },
+    [cache]
+  );
+
   const isSourceAvailable = React.useCallback((source: string) => {
     // Check if image source is available
     return true; // Simplified for now
   }, []);
-  
+
   return { getDynamicImageUrl, isSourceAvailable };
 }
 
@@ -301,38 +343,54 @@ function extractFilename(src: string): string {
   return src.split('/').pop() || src;
 }
 
-function generateSearchQuery(filename: string, productHint?: string, alt?: string): string {
+function generateSearchQuery(
+  filename: string,
+  productHint?: string,
+  alt?: string
+): string {
   const fn = filename.toLowerCase();
   const hint = productHint?.toLowerCase() || '';
   const altText = alt?.toLowerCase() || '';
-  
+
   // Generate intelligent search query based on filename and hints
   let query = '';
-  
-  if (fn.includes('iphone') || hint.includes('iphone') || altText.includes('iphone')) {
+
+  if (
+    fn.includes('iphone') ||
+    hint.includes('iphone') ||
+    altText.includes('iphone')
+  ) {
     query += 'iPhone premium smartphone ';
     if (fn.includes('16')) query += '16 Pro ';
     if (fn.includes('15')) query += '15 Pro ';
-  } else if (fn.includes('samsung') || fn.includes('galaxy') || hint.includes('samsung')) {
+  } else if (
+    fn.includes('samsung') ||
+    fn.includes('galaxy') ||
+    hint.includes('samsung')
+  ) {
     query += 'Samsung Galaxy smartphone ';
-  } else if (fn.includes('pixel') || hint.includes('pixel') || hint.includes('google')) {
+  } else if (
+    fn.includes('pixel') ||
+    hint.includes('pixel') ||
+    hint.includes('google')
+  ) {
     query += 'Google Pixel smartphone ';
   }
-  
+
   // Add feature keywords
   if (fn.includes('camera')) query += 'camera lens system ';
   if (fn.includes('battery')) query += 'battery charging power ';
   if (fn.includes('display')) query += 'display screen technology ';
   if (fn.includes('hero')) query += 'hero product shot ';
   if (fn.includes('titanium')) query += 'titanium premium design ';
-  
+
   return query.trim() || 'premium technology product';
 }
 
 function getIntelligentFallback(filename: string, options: any): string {
   const fn = filename.toLowerCase();
   const { dimensions = { width: 1200, height: 800 } } = options;
-  
+
   // High-quality fallback images based on content
   if (fn.includes('iphone')) {
     return `https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=${dimensions.width}&h=${dimensions.height}&fit=crop&q=85`;
@@ -345,8 +403,7 @@ function getIntelligentFallback(filename: string, options: any): string {
   } else if (fn.includes('ai') || fn.includes('intelligence')) {
     return `https://images.unsplash.com/photo-1677442136019-21780ecad995?w=${dimensions.width}&h=${dimensions.height}&fit=crop&q=85`;
   }
-  
+
   // Default tech fallback
   return `https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=${dimensions.width}&h=${dimensions.height}&fit=crop&q=85`;
 }
-

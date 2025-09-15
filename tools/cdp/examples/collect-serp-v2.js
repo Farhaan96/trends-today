@@ -6,49 +6,50 @@ class EnhancedSERPCollector {
   constructor() {
     this.client = new CDPClient({
       rateLimitMs: 600, // Slower to avoid detection
-      defaultTimeoutMs: 30000
+      defaultTimeoutMs: 30000,
     });
   }
 
   async collect(query, maxResults = 10) {
     try {
       console.error(`🔍 Enhanced SERP collection for: "${query}"`);
-      
+
       // Connect to Chrome
       await this.client.connect();
-      
+
       // Navigate directly to search results (bypass consent/typing issues)
       const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}&num=${maxResults + 5}`;
       console.error('📡 Navigating directly to search results...');
       await this.client.open(searchUrl);
-      
+
       // Wait for initial page load
       await this.client.waitForLoad();
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       // Handle consent dialog if present
       await this.handleConsentDialog();
-      
+
       // Wait for search results container
       console.error('⏳ Waiting for search results...');
       await this.waitForSearchResults();
-      
+
       // Extract results using multiple strategies
       console.error('📊 Extracting search results...');
       const results = await this.extractSearchResults(maxResults);
-      
+
       if (results.length === 0) {
-        throw new Error('No search results found - Google may have blocked the request');
+        throw new Error(
+          'No search results found - Google may have blocked the request'
+        );
       }
-      
+
       console.error(`✅ Successfully extracted ${results.length} results`);
       return {
         query: query,
         timestamp: new Date().toISOString(),
         resultsCount: results.length,
-        results: results
+        results: results,
       };
-      
     } catch (error) {
       console.error(`❌ Error collecting SERP data: ${error.message}`);
       throw error;
@@ -60,28 +61,28 @@ class EnhancedSERPCollector {
   async handleConsentDialog() {
     try {
       console.error('🍪 Checking for consent dialog...');
-      
+
       // Wait a moment for dialog to appear
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       // 2024 Google consent selectors (from research)
       const consentSelectors = [
-        '#L2AGLb',           // "I agree" button
+        '#L2AGLb', // "I agree" button
         '[aria-label*="Accept"]',
-        '[aria-label*="Agree"]', 
+        '[aria-label*="Agree"]',
         'button[jsname="higCR"]',
-        '#W0wltc',          // "Reject all" button
+        '#W0wltc', // "Reject all" button
         'button:contains("Accept all")',
-        'button:contains("I agree")'
+        'button:contains("I agree")',
       ];
-      
+
       for (const selector of consentSelectors) {
         try {
           const nodeId = await this.client.domQuerySelector(selector);
           if (nodeId) {
             console.error(`✓ Found consent button: ${selector}`);
             await this.client.click(selector);
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
             break;
           }
         } catch (e) {
@@ -90,7 +91,10 @@ class EnhancedSERPCollector {
         }
       }
     } catch (error) {
-      console.error('Consent dialog handling failed (non-critical):', error.message);
+      console.error(
+        'Consent dialog handling failed (non-critical):',
+        error.message
+      );
     }
   }
 
@@ -101,9 +105,9 @@ class EnhancedSERPCollector {
       '#center_col',
       '[data-async-context]',
       '#rso',
-      '.g'
+      '.g',
     ];
-    
+
     for (const selector of containerSelectors) {
       try {
         await this.client.waitForSelector(selector, { timeoutMs: 10000 });
@@ -113,26 +117,26 @@ class EnhancedSERPCollector {
         continue;
       }
     }
-    
+
     // If no container found, continue anyway
     console.error('⚠️ No specific results container found, proceeding...');
   }
 
   async extractSearchResults(maxResults) {
     const results = [];
-    
+
     // Strategy 1: Use enhanced DOM methods with 2024 selectors
     const strategy1Results = await this.extractWithDOMMethod();
     if (strategy1Results.length > 0) {
       return strategy1Results.slice(0, maxResults);
     }
-    
+
     // Strategy 2: Fallback to JavaScript evaluation with stable selectors
     const strategy2Results = await this.extractWithEvaluate();
     if (strategy2Results.length > 0) {
       return strategy2Results.slice(0, maxResults);
     }
-    
+
     // Strategy 3: Last resort - extract any links
     const strategy3Results = await this.extractAnyLinks();
     return strategy3Results.slice(0, maxResults);
@@ -140,34 +144,36 @@ class EnhancedSERPCollector {
 
   async extractWithDOMMethod() {
     const results = [];
-    
+
     try {
       // 2024 stable selectors (based on research)
       const resultSelectors = [
-        'div[data-async-context] h3 a',  // Data attributes are more stable
-        'h3 a[href][data-ved]',          // Links with data-ved
-        '.yuRUbf h3 a',                  // If yuRUbf still works
-        '[data-ved] h3 a',               // Any element with data-ved containing h3 link
-        'h3 a[href*="/url?"]'            // Google's URL format
+        'div[data-async-context] h3 a', // Data attributes are more stable
+        'h3 a[href][data-ved]', // Links with data-ved
+        '.yuRUbf h3 a', // If yuRUbf still works
+        '[data-ved] h3 a', // Any element with data-ved containing h3 link
+        'h3 a[href*="/url?"]', // Google's URL format
       ];
-      
+
       for (const selector of resultSelectors) {
         try {
           const nodeIds = await this.client.domQuerySelectorAll(selector);
-          
+
           if (nodeIds.length > 0) {
-            console.error(`✓ Found ${nodeIds.length} results with: ${selector}`);
-            
+            console.error(
+              `✓ Found ${nodeIds.length} results with: ${selector}`
+            );
+
             for (let i = 0; i < Math.min(nodeIds.length, 15); i++) {
               try {
                 const nodeId = nodeIds[i];
                 const attributes = await this.client.domGetAttributes(nodeId);
-                
+
                 if (!attributes.href) continue;
-                
+
                 let url = attributes.href;
                 let title = '';
-                
+
                 // Extract title from link text
                 try {
                   title = await this.client.evaluate(`
@@ -182,7 +188,7 @@ class EnhancedSERPCollector {
                 } catch (e) {
                   title = attributes.title || 'No title';
                 }
-                
+
                 // Clean up Google URL redirects
                 if (url.includes('/url?')) {
                   try {
@@ -196,12 +202,15 @@ class EnhancedSERPCollector {
                     // Keep original URL if parsing fails
                   }
                 }
-                
+
                 // Skip Google internal links
-                if (url.includes('google.com/search') || url.includes('accounts.google.com')) {
+                if (
+                  url.includes('google.com/search') ||
+                  url.includes('accounts.google.com')
+                ) {
                   continue;
                 }
-                
+
                 // Extract snippet (try multiple approaches)
                 let snippet = '';
                 try {
@@ -209,30 +218,28 @@ class EnhancedSERPCollector {
                 } catch (e) {
                   snippet = '';
                 }
-                
+
                 results.push({
                   position: results.length + 1,
                   title: title,
                   url: url,
-                  snippet: snippet
+                  snippet: snippet,
                 });
-                
               } catch (elementError) {
                 continue; // Skip this element, continue with next
               }
             }
-            
+
             if (results.length > 0) break; // Found results, stop trying selectors
           }
         } catch (selectorError) {
           continue; // Try next selector
         }
       }
-      
     } catch (error) {
       console.error('DOM method extraction failed:', error.message);
     }
-    
+
     return results;
   }
 
@@ -240,13 +247,13 @@ class EnhancedSERPCollector {
     // Snippet selectors for 2024 (based on research)
     const snippetSelectors = [
       '.VwiC3b',
-      '.s3v9rd', 
+      '.s3v9rd',
       '.lEBKkf span',
       '[data-content-feature="1"] span',
       '.st',
-      '.IsZvec'
+      '.IsZvec',
     ];
-    
+
     for (const snippetSelector of snippetSelectors) {
       try {
         const snippet = await this.client.evaluate(`
@@ -264,7 +271,7 @@ class EnhancedSERPCollector {
             return '';
           })();
         `);
-        
+
         if (snippet && snippet.length > 10) {
           return snippet;
         }
@@ -272,14 +279,14 @@ class EnhancedSERPCollector {
         continue;
       }
     }
-    
+
     return '';
   }
 
   async extractWithEvaluate() {
     try {
       console.error('🔄 Trying fallback extraction method...');
-      
+
       const results = await this.client.evaluate(`
         (function() {
           const results = [];
@@ -365,7 +372,7 @@ class EnhancedSERPCollector {
           return results;
         })();
       `);
-      
+
       return results || [];
     } catch (error) {
       console.error('Evaluate extraction failed:', error.message);
@@ -376,7 +383,7 @@ class EnhancedSERPCollector {
   async extractAnyLinks() {
     try {
       console.error('🔄 Trying last resort link extraction...');
-      
+
       const results = await this.client.evaluate(`
         (function() {
           const results = [];
@@ -409,7 +416,7 @@ class EnhancedSERPCollector {
           return results;
         })();
       `);
-      
+
       return results || [];
     } catch (error) {
       console.error('Last resort extraction failed:', error.message);
@@ -421,21 +428,22 @@ class EnhancedSERPCollector {
 // Main execution
 async function main() {
   const query = process.argv[2];
-  
+
   if (!query) {
     console.error('Usage: node collect-serp-v2.js "your search query"');
-    console.error('Example: node collect-serp-v2.js "site:reddit.com best budget earbuds 2025"');
+    console.error(
+      'Example: node collect-serp-v2.js "site:reddit.com best budget earbuds 2025"'
+    );
     process.exit(1);
   }
-  
+
   const collector = new EnhancedSERPCollector();
-  
+
   try {
     const results = await collector.collect(query, 10);
-    
+
     // Output clean JSON to stdout
     console.log(JSON.stringify(results, null, 2));
-    
   } catch (error) {
     console.error(`Fatal error: ${error.message}`);
     process.exit(1);

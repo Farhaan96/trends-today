@@ -10,11 +10,11 @@ interface NewsletterSignupProps {
   leadMagnetDescription?: string;
 }
 
-export default function NewsletterSignup({ 
+export default function NewsletterSignup({
   variant = 'inline',
   showLeadMagnet = false,
-  leadMagnetTitle = "Free Tech Buying Guide 2025",
-  leadMagnetDescription = "Get our exclusive 50-page guide with expert recommendations for every budget"
+  leadMagnetTitle = 'Free Tech Buying Guide 2025',
+  leadMagnetDescription = 'Get our exclusive 50-page guide with expert recommendations for every budget',
 }: NewsletterSignupProps) {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,10 +29,10 @@ export default function NewsletterSignup({
       const response = await fetch('/api/newsletter/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          email, 
+        body: JSON.stringify({
+          email,
           source: variant,
-          leadMagnet: showLeadMagnet ? leadMagnetTitle : null
+          leadMagnet: showLeadMagnet ? leadMagnetTitle : null,
         }),
       });
 
@@ -44,7 +44,7 @@ export default function NewsletterSignup({
           window.gtag('event', 'newsletter_signup', {
             event_category: 'engagement',
             event_label: variant,
-            value: 1
+            value: 1,
           });
         }
       } else {
@@ -76,15 +76,30 @@ export default function NewsletterSignup({
     return (
       <div className={`${getVariantStyles()} text-center`}>
         <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mx-auto mb-4">
-          <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+          <svg
+            className="w-6 h-6 text-green-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M5 13l4 4L19 7"
+            ></path>
           </svg>
         </div>
-        <h3 className={`text-xl font-bold mb-2 ${isFooterVariant ? 'text-white' : 'text-slate-900'}`}>
+        <h3
+          className={`text-xl font-bold mb-2 ${isFooterVariant ? 'text-white' : 'text-slate-900'}`}
+        >
           Welcome to Trends Today!
         </h3>
-        <p className={`text-sm ${isFooterVariant ? 'text-gray-300' : 'text-gray-800'}`}>
-          Check your email for confirmation and {showLeadMagnet ? 'your free guide!' : 'your first newsletter!'}
+        <p
+          className={`text-sm ${isFooterVariant ? 'text-gray-300' : 'text-gray-800'}`}
+        >
+          Check your email for confirmation and{' '}
+          {showLeadMagnet ? 'your free guide!' : 'your first newsletter!'}
         </p>
       </div>
     );
@@ -93,14 +108,17 @@ export default function NewsletterSignup({
   return (
     <div className={getVariantStyles()}>
       <div className="text-center mb-6">
-        <h3 className={`text-xl font-bold mb-2 ${isFooterVariant ? 'text-white' : 'text-white'}`}>
+        <h3
+          className={`text-xl font-bold mb-2 ${isFooterVariant ? 'text-white' : 'text-white'}`}
+        >
           {showLeadMagnet ? leadMagnetTitle : 'Stay Updated with Tech Trends'}
         </h3>
-        <p className={`text-sm ${isFooterVariant ? 'text-gray-300' : 'text-white/90'}`}>
-          {showLeadMagnet 
+        <p
+          className={`text-sm ${isFooterVariant ? 'text-gray-300' : 'text-white/90'}`}
+        >
+          {showLeadMagnet
             ? leadMagnetDescription
-            : 'Get weekly insights on the latest tech reviews, deals, and buying guides'
-          }
+            : 'Get weekly insights on the latest tech reviews, deals, and buying guides'}
         </p>
       </div>
 
@@ -142,8 +160,11 @@ export default function NewsletterSignup({
           </p>
         )}
 
-        <p className={`text-xs ${isFooterVariant ? 'text-gray-900' : 'text-white/70'}`}>
-          No spam, unsubscribe at any time. By subscribing, you agree to our privacy policy.
+        <p
+          className={`text-xs ${isFooterVariant ? 'text-gray-900' : 'text-white/70'}`}
+        >
+          No spam, unsubscribe at any time. By subscribing, you agree to our
+          privacy policy.
         </p>
       </form>
 

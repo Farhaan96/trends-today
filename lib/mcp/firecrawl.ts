@@ -49,7 +49,7 @@ export class FirecrawlClient {
       excludeTags?: string[];
       onlyMainContent?: boolean;
       timeout?: number;
-    },
+    }
   ): Promise<FirecrawlResponse> {
     this.ensureConfigured();
     const response = await fetch(`${this.baseUrl}/v1/scrape`, {
@@ -69,7 +69,9 @@ export class FirecrawlClient {
     });
     if (!response.ok) {
       const t = await response.text();
-      throw new Error(`Firecrawl API error: ${response.status} ${response.statusText} - ${t}`);
+      throw new Error(
+        `Firecrawl API error: ${response.status} ${response.statusText} - ${t}`
+      );
     }
     const data = await response.json();
     return FirecrawlResponseSchema.parse(data);
@@ -83,28 +85,44 @@ export class FirecrawlClient {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.apiKey}`,
       },
-      body: JSON.stringify({ url, includePageSpeed: true, includeSEO: true, includeAccessibility: true }),
+      body: JSON.stringify({
+        url,
+        includePageSpeed: true,
+        includeSEO: true,
+        includeAccessibility: true,
+      }),
     });
-    if (!response.ok) throw new Error(`Firecrawl audit failed: ${response.status}`);
+    if (!response.ok)
+      throw new Error(`Firecrawl audit failed: ${response.status}`);
     return response.json();
   }
 
-  async scrapeMultipleUrls(urls: string[], options?: { formats?: ('markdown' | 'html')[]; concurrency?: number; delay?: number }) {
+  async scrapeMultipleUrls(
+    urls: string[],
+    options?: {
+      formats?: ('markdown' | 'html')[];
+      concurrency?: number;
+      delay?: number;
+    }
+  ) {
     const concurrency = options?.concurrency || 3;
     const delay = options?.delay || 1000;
     const results: FirecrawlResponse[] = [];
     for (let i = 0; i < urls.length; i += concurrency) {
       const batch = urls.slice(i, i + concurrency);
-      const batchResults = await Promise.allSettled(batch.map((u) => this.scrapeUrl(u, { formats: options?.formats })));
+      const batchResults = await Promise.allSettled(
+        batch.map((u) => this.scrapeUrl(u, { formats: options?.formats }))
+      );
       for (const r of batchResults) {
         if (r.status === 'fulfilled') results.push(r.value);
-        else results.push({ success: false, error: (r.reason as Error).message });
+        else
+          results.push({ success: false, error: (r.reason as Error).message });
       }
-      if (i + concurrency < urls.length) await new Promise((res) => setTimeout(res, delay));
+      if (i + concurrency < urls.length)
+        await new Promise((res) => setTimeout(res, delay));
     }
     return results;
   }
 }
 
 export const firecrawl = new FirecrawlClient();
-

@@ -33,7 +33,11 @@ function removeDuplicates(content) {
     content = content.replace(implicationsRegex, '');
     const relatedIdx = content.lastIndexOf('## Related Articles');
     if (relatedIdx > -1) {
-      content = content.slice(0, relatedIdx) + implicationMatches[0] + '\n\n' + content.slice(relatedIdx);
+      content =
+        content.slice(0, relatedIdx) +
+        implicationMatches[0] +
+        '\n\n' +
+        content.slice(relatedIdx);
     } else {
       content += '\n\n' + implicationMatches[0];
     }
@@ -46,21 +50,36 @@ function removeDuplicates(content) {
     content = content.replace(lookingAheadRegex, '');
     const relatedIdx = content.lastIndexOf('## Related Articles');
     if (relatedIdx > -1) {
-      content = content.slice(0, relatedIdx) + lookingMatches[0] + '\n\n' + content.slice(relatedIdx);
+      content =
+        content.slice(0, relatedIdx) +
+        lookingMatches[0] +
+        '\n\n' +
+        content.slice(relatedIdx);
     }
   }
 
   // Remove repetitive internal link phrases
-  content = content.replace(/For more insights, check out our.*?\n/g, (match, offset, string) => {
-    const before = string.substring(0, offset);
-    const occurrences = (before.match(/For more insights, check out our/g) || []).length;
-    return occurrences > 0 ? '' : match;
-  });
+  content = content.replace(
+    /For more insights, check out our.*?\n/g,
+    (match, offset, string) => {
+      const before = string.substring(0, offset);
+      const occurrences = (
+        before.match(/For more insights, check out our/g) || []
+      ).length;
+      return occurrences > 0 ? '' : match;
+    }
+  );
 
   // Remove orphaned link sentences
-  content = content.replace(/Building on this, \[.*?\] takes these concepts even further\.\n/g, '');
-  content = content.replace(/You might also find our \[.*?\] particularly relevant to this discussion\.\n/g, '');
-  
+  content = content.replace(
+    /Building on this, \[.*?\] takes these concepts even further\.\n/g,
+    ''
+  );
+  content = content.replace(
+    /You might also find our \[.*?\] particularly relevant to this discussion\.\n/g,
+    ''
+  );
+
   return content;
 }
 
@@ -71,7 +90,7 @@ function fixReviewContent(content, frontmatter) {
   }
 
   // Remove scientific discovery nonsense from reviews
-  NONSENSE_PATTERNS.forEach(pattern => {
+  NONSENSE_PATTERNS.forEach((pattern) => {
     content = content.replace(pattern, '');
   });
 
@@ -82,7 +101,7 @@ function fixReviewContent(content, frontmatter) {
 
   // Remove empty sections
   content = content.replace(/##[^\n]*\n\s*\n##/g, '##');
-  
+
   return content;
 }
 
@@ -91,19 +110,19 @@ function processArticle(filePath) {
   try {
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const { data: frontmatter, content: mdxContent } = matter(fileContent);
-    
+
     let fixedContent = mdxContent;
-    
+
     // Remove duplicates
     fixedContent = removeDuplicates(fixedContent);
-    
+
     // Fix review-specific issues
     fixedContent = fixReviewContent(fixedContent, frontmatter);
-    
+
     // Clean up excessive whitespace
     fixedContent = fixedContent.replace(/\n{4,}/g, '\n\n\n');
     fixedContent = fixedContent.replace(/\n\s*\n\s*\n/g, '\n\n');
-    
+
     // Fix image URLs (replace Picsum with real product images where applicable)
     if (frontmatter.image && frontmatter.image.includes('picsum.photos')) {
       // Map to real images based on article title
@@ -112,63 +131,66 @@ function processArticle(filePath) {
         frontmatter.image = '/images/products/google-pixel-9-pro.jpg';
         frontmatter.images = {
           featured: '/images/products/google-pixel-9-pro.jpg',
-          hero: '/images/products/google-pixel-9-pro-hero.jpg'
+          hero: '/images/products/google-pixel-9-pro-hero.jpg',
         };
       } else if (titleLower.includes('pixel 8')) {
         frontmatter.image = '/images/products/google-pixel-8-pro.jpg';
         frontmatter.images = {
           featured: '/images/products/google-pixel-8-pro.jpg',
-          hero: '/images/products/google-pixel-8-pro-hero.jpg'
+          hero: '/images/products/google-pixel-8-pro-hero.jpg',
         };
       } else if (titleLower.includes('galaxy s24')) {
         frontmatter.image = '/images/products/samsung-galaxy-s24-ultra.jpg';
         frontmatter.images = {
           featured: '/images/products/samsung-galaxy-s24-ultra.jpg',
-          hero: '/images/products/samsung-galaxy-s24-ultra-hero.jpg'
+          hero: '/images/products/samsung-galaxy-s24-ultra-hero.jpg',
         };
       } else if (titleLower.includes('galaxy s25')) {
         frontmatter.image = '/images/products/samsung-galaxy-s25-ultra.jpg';
         frontmatter.images = {
           featured: '/images/products/samsung-galaxy-s25-ultra.jpg',
-          hero: '/images/products/samsung-galaxy-s25-ultra-hero.jpg'
+          hero: '/images/products/samsung-galaxy-s25-ultra-hero.jpg',
         };
       } else if (titleLower.includes('macbook')) {
         frontmatter.image = '/images/products/macbook-air-m3.jpg';
         frontmatter.images = {
           featured: '/images/products/macbook-air-m3.jpg',
-          hero: '/images/products/macbook-air-m3-hero.jpg'
+          hero: '/images/products/macbook-air-m3-hero.jpg',
         };
       } else if (titleLower.includes('oneplus')) {
         frontmatter.image = '/images/products/oneplus-12.jpg';
         frontmatter.images = {
           featured: '/images/products/oneplus-12.jpg',
-          hero: '/images/products/oneplus-12-hero.jpg'
+          hero: '/images/products/oneplus-12-hero.jpg',
         };
       } else if (titleLower.includes('xiaomi')) {
         frontmatter.image = '/images/products/xiaomi-14-ultra.jpg';
         frontmatter.images = {
           featured: '/images/products/xiaomi-14-ultra.jpg',
-          hero: '/images/products/xiaomi-14-ultra-hero.jpg'
+          hero: '/images/products/xiaomi-14-ultra-hero.jpg',
         };
       } else if (titleLower.includes('vision pro')) {
         frontmatter.image = '/images/products/apple-vision-pro.jpg';
         frontmatter.images = {
           featured: '/images/products/apple-vision-pro.jpg',
-          hero: '/images/products/apple-vision-pro-hero.jpg'
+          hero: '/images/products/apple-vision-pro-hero.jpg',
         };
-      } else if (titleLower.includes('ai') || titleLower.includes('artificial')) {
+      } else if (
+        titleLower.includes('ai') ||
+        titleLower.includes('artificial')
+      ) {
         frontmatter.image = '/images/news/ai-technology.jpg';
         frontmatter.images = {
           featured: '/images/news/ai-technology.jpg',
-          hero: '/images/news/ai-technology-hero.jpg'
+          hero: '/images/news/ai-technology-hero.jpg',
         };
       }
     }
-    
+
     // Rebuild the file
     const newContent = matter.stringify(fixedContent, frontmatter);
     fs.writeFileSync(filePath, newContent, 'utf-8');
-    
+
     return true;
   } catch (error) {
     console.error(`Error processing ${filePath}:`, error.message);
@@ -181,20 +203,22 @@ function processAllArticles() {
   const contentDir = path.join(process.cwd(), 'content');
   let processed = 0;
   let fixed = 0;
-  
+
   // Get all subdirectories
-  const categories = fs.readdirSync(contentDir).filter(item => {
+  const categories = fs.readdirSync(contentDir).filter((item) => {
     const itemPath = path.join(contentDir, item);
     return fs.statSync(itemPath).isDirectory();
   });
-  
-  categories.forEach(category => {
+
+  categories.forEach((category) => {
     const categoryPath = path.join(contentDir, category);
-    const files = fs.readdirSync(categoryPath).filter(file => file.endsWith('.mdx'));
-    
+    const files = fs
+      .readdirSync(categoryPath)
+      .filter((file) => file.endsWith('.mdx'));
+
     console.log(`\n📁 Processing ${category} (${files.length} files)...`);
-    
-    files.forEach(file => {
+
+    files.forEach((file) => {
       const filePath = path.join(categoryPath, file);
       console.log(`  ✏️ Fixing ${file}...`);
       if (processArticle(filePath)) {
@@ -203,7 +227,7 @@ function processAllArticles() {
       processed++;
     });
   });
-  
+
   console.log('\n✨ Article Quality Fix Complete!');
   console.log(`📊 Results:`);
   console.log(`   - Processed: ${processed} articles`);

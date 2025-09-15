@@ -1,15 +1,17 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Trends Today - Tech News & Reviews',
   description: 'Discover the latest in technology, gadgets, AI, and innovation',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://trends-today.vercel.app'),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://trends-today.vercel.app'
+  ),
   openGraph: {
     title: 'Trends Today',
     description: 'Discover the latest in technology',
@@ -34,24 +36,22 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col">
           <Header />
-          <main className="flex-grow">
-            {children}
-          </main>
+          <main className="flex-grow">{children}</main>
           <Footer />
         </div>
       </body>
     </html>
-  )
+  );
 }

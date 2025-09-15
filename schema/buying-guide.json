@@ -162,7 +162,7 @@
           }
         },
         "midRange": {
-          "type": "object", 
+          "type": "object",
           "properties": {
             "range": "string",
             "recommendations": {
@@ -174,7 +174,7 @@
         "premium": {
           "type": "object",
           "properties": {
-            "range": "string", 
+            "range": "string",
             "recommendations": {
               "type": "array",
               "items": "string"

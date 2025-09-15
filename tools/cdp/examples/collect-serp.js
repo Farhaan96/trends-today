@@ -7,25 +7,25 @@ class SERPCollector {
   constructor() {
     this.client = new CDPClient({
       rateLimitMs: 500, // Be respectful to Google
-      defaultTimeoutMs: 30000
+      defaultTimeoutMs: 30000,
     });
   }
 
   async collect(query, maxResults = 10) {
     try {
       console.error(`🔍 Collecting SERP data for: "${query}"`);
-      
+
       // Connect to Chrome
       await this.client.connect();
-      
+
       // Navigate to Google
       console.error('📡 Navigating to Google...');
       await this.client.open('https://www.google.com');
-      
+
       // Wait for page to load and handle consent dialog
       console.error('⏳ Waiting for page to load...');
       await this.client.waitForLoad();
-      
+
       // Handle consent dialog more aggressively
       try {
         console.error('🍪 Handling consent dialog...');
@@ -64,7 +64,7 @@ class SERPCollector {
       } catch (e) {
         console.error('Consent handling failed:', e.message);
       }
-      
+
       // Wait for search box with multiple selectors
       console.error('🔍 Looking for search box...');
       const searchBoxFound = await this.client.evaluate(`
@@ -97,15 +97,15 @@ class SERPCollector {
           });
         })();
       `);
-      
+
       if (!searchBoxFound) {
         throw new Error('Could not find Google search box after waiting');
       }
-      
+
       // Type search query using the found selector
       console.error('💬 Entering search query...');
       await this.client.type(searchBoxFound, query, { clearFirst: true });
-      
+
       // Submit search
       console.error('🚀 Submitting search...');
       await this.client.evaluate(`
@@ -124,11 +124,11 @@ class SERPCollector {
           searchBox.dispatchEvent(event);
         }
       `);
-      
+
       // Wait for results
       console.error('⏳ Waiting for search results...');
       await this.client.waitForSelector('#search', { timeoutMs: 15000 });
-      
+
       // Extract SERP data
       console.error('📊 Extracting results...');
       const results = await this.client.evaluate(`
@@ -227,14 +227,15 @@ class SERPCollector {
           return results;
         })();
       `);
-      
+
       if (results.length === 0) {
-        throw new Error('No search results found. Google may have blocked the request or changed their layout.');
+        throw new Error(
+          'No search results found. Google may have blocked the request or changed their layout.'
+        );
       }
-      
+
       console.error(`✅ Successfully extracted ${results.length} results`);
       return results;
-      
     } catch (error) {
       console.error(`❌ Error collecting SERP data: ${error.message}`);
       throw error;
@@ -247,26 +248,33 @@ class SERPCollector {
 // Main execution
 async function main() {
   const query = process.argv[2];
-  
+
   if (!query) {
     console.error('Usage: node collect-serp.js "your search query"');
-    console.error('Example: node collect-serp.js "site:reddit.com best budget earbuds 2025"');
+    console.error(
+      'Example: node collect-serp.js "site:reddit.com best budget earbuds 2025"'
+    );
     process.exit(1);
   }
-  
+
   const collector = new SERPCollector();
-  
+
   try {
     const results = await collector.collect(query, 10);
-    
+
     // Output clean JSON to stdout (for piping/processing)
-    console.log(JSON.stringify({
-      query: query,
-      timestamp: new Date().toISOString(),
-      resultsCount: results.length,
-      results: results
-    }, null, 2));
-    
+    console.log(
+      JSON.stringify(
+        {
+          query: query,
+          timestamp: new Date().toISOString(),
+          resultsCount: results.length,
+          results: results,
+        },
+        null,
+        2
+      )
+    );
   } catch (error) {
     console.error(`Fatal error: ${error.message}`);
     process.exit(1);

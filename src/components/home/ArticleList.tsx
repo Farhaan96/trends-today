@@ -21,13 +21,19 @@ interface ArticleListProps {
   allArticles: Article[];
 }
 
-export default function ArticleList({ initialArticles, allArticles }: ArticleListProps) {
+export default function ArticleList({
+  initialArticles,
+  allArticles,
+}: ArticleListProps) {
   const [displayedArticles, setDisplayedArticles] = useState(initialArticles);
   const [currentIndex, setCurrentIndex] = useState(9); // Start after initial 9 articles
   const articlesPerLoad = 6;
 
   const loadMore = () => {
-    const nextArticles = allArticles.slice(currentIndex, currentIndex + articlesPerLoad);
+    const nextArticles = allArticles.slice(
+      currentIndex,
+      currentIndex + articlesPerLoad
+    );
     setDisplayedArticles([...displayedArticles, ...nextArticles]);
     setCurrentIndex(currentIndex + articlesPerLoad);
   };
@@ -76,9 +82,20 @@ export default function ArticleList({ initialArticles, allArticles }: ArticleLis
               </Link>
 
               <div className="flex items-center space-x-2 text-sm text-gray-500">
-                <span className="font-medium">By {typeof featuredPost.frontmatter.author === 'string' ? featuredPost.frontmatter.author : featuredPost.frontmatter.author?.name || 'Trends Today'}</span>
+                <span className="font-medium">
+                  By{' '}
+                  {typeof featuredPost.frontmatter.author === 'string'
+                    ? featuredPost.frontmatter.author
+                    : featuredPost.frontmatter.author?.name || 'Trends Today'}
+                </span>
                 <span>•</span>
-                <span>{new Date(featuredPost.frontmatter.publishedAt || featuredPost.frontmatter.datePublished || new Date().toISOString()).toLocaleDateString()}</span>
+                <span>
+                  {new Date(
+                    featuredPost.frontmatter.publishedAt ||
+                      featuredPost.frontmatter.datePublished ||
+                      new Date().toISOString()
+                  ).toLocaleDateString()}
+                </span>
               </div>
 
               {featuredPost.frontmatter.description && (
@@ -128,9 +145,19 @@ export default function ArticleList({ initialArticles, allArticles }: ArticleLis
               </h3>
             </Link>
             <div className="text-sm text-gray-500">
-              <span className="font-medium">{typeof secondPost.frontmatter.author === 'string' ? secondPost.frontmatter.author : secondPost.frontmatter.author?.name || 'Trends Today'}</span>
+              <span className="font-medium">
+                {typeof secondPost.frontmatter.author === 'string'
+                  ? secondPost.frontmatter.author
+                  : secondPost.frontmatter.author?.name || 'Trends Today'}
+              </span>
               <span className="mx-2">•</span>
-              <span>{new Date(secondPost.frontmatter.publishedAt || secondPost.frontmatter.datePublished || new Date().toISOString()).toLocaleDateString()}</span>
+              <span>
+                {new Date(
+                  secondPost.frontmatter.publishedAt ||
+                    secondPost.frontmatter.datePublished ||
+                    new Date().toISOString()
+                ).toLocaleDateString()}
+              </span>
             </div>
             <Link
               href={secondPost.href}
@@ -169,9 +196,19 @@ export default function ArticleList({ initialArticles, allArticles }: ArticleLis
               </h3>
             </Link>
             <div className="text-sm text-gray-500">
-              <span className="font-medium">{typeof thirdPost.frontmatter.author === 'string' ? thirdPost.frontmatter.author : thirdPost.frontmatter.author?.name || 'Trends Today'}</span>
+              <span className="font-medium">
+                {typeof thirdPost.frontmatter.author === 'string'
+                  ? thirdPost.frontmatter.author
+                  : thirdPost.frontmatter.author?.name || 'Trends Today'}
+              </span>
               <span className="mx-2">•</span>
-              <span>{new Date(thirdPost.frontmatter.publishedAt || thirdPost.frontmatter.datePublished || new Date().toISOString()).toLocaleDateString()}</span>
+              <span>
+                {new Date(
+                  thirdPost.frontmatter.publishedAt ||
+                    thirdPost.frontmatter.datePublished ||
+                    new Date().toISOString()
+                ).toLocaleDateString()}
+              </span>
             </div>
             <Link
               href={thirdPost.href}
@@ -215,9 +252,19 @@ export default function ArticleList({ initialArticles, allArticles }: ArticleLis
                   </h3>
                 </Link>
                 <div className="text-sm text-gray-500">
-                  <span className="font-medium">{typeof article.frontmatter.author === 'string' ? article.frontmatter.author : article.frontmatter.author?.name || 'Trends Today'}</span>
+                  <span className="font-medium">
+                    {typeof article.frontmatter.author === 'string'
+                      ? article.frontmatter.author
+                      : article.frontmatter.author?.name || 'Trends Today'}
+                  </span>
                   <span className="mx-2">•</span>
-                  <span>{new Date(article.frontmatter.publishedAt || article.frontmatter.datePublished || new Date().toISOString()).toLocaleDateString()}</span>
+                  <span>
+                    {new Date(
+                      article.frontmatter.publishedAt ||
+                        article.frontmatter.datePublished ||
+                        new Date().toISOString()
+                    ).toLocaleDateString()}
+                  </span>
                 </div>
                 <Link
                   href={article.href}

@@ -6,9 +6,9 @@
     "bio": "Alex Chen is a Senior Mobile Technology Editor at Trends Today with over 8 years of experience in the tech industry. Formerly a hardware engineer at Samsung Electronics, Alex brings deep technical expertise to smartphone and mobile device reviews. He has tested over 300 mobile devices and specializes in camera technology, performance analysis, and user experience evaluation.",
     "longBio": "Alex Chen joined Trends Today in 2019 after spending 5 years as a hardware engineer at Samsung Electronics, where he worked on camera sensor integration and mobile chipset optimization. His engineering background provides unique insights into the technical aspects of mobile devices that most reviewers miss.\n\nAlex holds a Master's degree in Electrical Engineering from Stanford University and a Bachelor's degree in Computer Engineering from UC Berkeley. He is certified in mobile device testing protocols by the Global Certification Forum and regularly attends major tech conferences including CES, MWC, and Google I/O.\n\nHis reviews have been cited by major publications including The Verge, CNET, and TechCrunch. Alex is particularly known for his rigorous testing methodology and ability to explain complex technical concepts in accessible terms. He has personally tested and reviewed over 300 mobile devices throughout his career.",
     "expertise": [
-      "Mobile Technology", 
-      "Camera Systems", 
-      "Performance Analysis", 
+      "Mobile Technology",
+      "Camera Systems",
+      "Performance Analysis",
       "User Experience",
       "Mobile Chipsets",
       "Display Technology",
@@ -16,7 +16,7 @@
     ],
     "credentials": [
       "M.S. Electrical Engineering, Stanford University",
-      "B.S. Computer Engineering, UC Berkeley", 
+      "B.S. Computer Engineering, UC Berkeley",
       "Certified Mobile Device Testing Professional (GCF)",
       "Former Hardware Engineer at Samsung Electronics",
       "8+ years in mobile technology journalism"
@@ -46,7 +46,7 @@
     "longBio": "Sarah Martinez combines her background in professional audio engineering with extensive gaming expertise to provide comprehensive reviews of audio equipment and gaming devices. After earning her degree in Audio Engineering from Berklee College of Music, she spent 4 years at Bose Corporation developing noise-canceling algorithms and testing acoustic systems.\n\nSarah joined Trends Today in 2020 and has since established herself as a leading voice in audio technology journalism. Her reviews are characterized by detailed frequency response analysis, spatial audio testing, and real-world gaming scenarios. She maintains a professional audio testing lab equipped with precision measurement equipment including Audio Precision analyzers and calibrated acoustic chambers.\n\nBeyond technical analysis, Sarah is an avid gamer who competes in esports tournaments, giving her unique insight into gaming peripherals and performance requirements. She has tested over 200 audio devices and gaming peripherals, from budget earbuds to professional studio monitors.",
     "expertise": [
       "Audio Technology",
-      "Gaming Hardware", 
+      "Gaming Hardware",
       "Acoustic Analysis",
       "Gaming Performance",
       "Esports Equipment",
@@ -69,7 +69,7 @@
     "avatar": "/images/authors/sarah-martinez.jpg",
     "specializations": [
       "Headphone Reviews",
-      "Gaming Peripheral Testing", 
+      "Gaming Peripheral Testing",
       "Audio Equipment Analysis",
       "Esports Gear Reviews"
     ],
@@ -87,7 +87,7 @@
     "expertise": [
       "Laptop Technology",
       "Enterprise Hardware",
-      "Productivity Software", 
+      "Productivity Software",
       "Performance Testing",
       "Business Technology",
       "System Integration",
@@ -96,7 +96,7 @@
     "credentials": [
       "MBA Technology Management, MIT Sloan School",
       "B.S. Computer Science, Carnegie Mellon University",
-      "Former Senior Analyst, Gartner Research", 
+      "Former Senior Analyst, Gartner Research",
       "Certified in Enterprise Technology Assessment",
       "10+ years in technology analysis and journalism"
     ],
@@ -115,7 +115,7 @@
     ],
     "reviewCount": 52,
     "joinDate": "2018-06-20",
-    "location": "Boston, MA", 
+    "location": "Boston, MA",
     "languages": ["English", "Korean"]
   },
   "emma-thompson": {

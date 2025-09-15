@@ -9,19 +9,23 @@ This guide explains how to use the Claude Code agent pipeline system for automat
 ### Agent-Based Pipeline vs JavaScript Commands
 
 **❌ OLD WAY (JavaScript Commands)**
+
 ```bash
 npm run ultra:generate  # Just runs a JS script
 ```
+
 - No critical thinking
 - No quality gates
 - No error recovery
 - No context awareness
 
 **✅ NEW WAY (Claude Code Agents)**
+
 ```bash
 # Each step is handled by an intelligent agent
 claude "Use batch-orchestrator to run the morning content batch"
 ```
+
 - Critical thinking at each step
 - Quality validation
 - Error recovery
@@ -60,6 +64,7 @@ claude "Use batch-orchestrator to execute the evening content batch"
 ```
 
 The orchestrator will:
+
 1. Create a todo list for tracking
 2. Execute each agent in sequence
 3. Validate outputs between stages
@@ -100,6 +105,7 @@ claude "Use publication-reviewer to approve [article] for publishing"
 ### The 3-Batch Strategy (15-20 Articles/Day)
 
 #### **Morning Batch (9 AM)**
+
 ```bash
 # Generate 5-7 morning articles focusing on breaking news
 npm run ultra:morning
@@ -112,6 +118,7 @@ npm run ultra:factcheck
 ```
 
 #### **Midday Batch (1 PM)**
+
 ```bash
 # Generate 5-7 midday articles focusing on analysis
 npm run ultra:midday
@@ -124,6 +131,7 @@ npm run ultra:factcheck
 ```
 
 #### **Evening Batch (5 PM)**
+
 ```bash
 # Generate 5-7 evening articles focusing on evergreen content
 npm run ultra:evening
@@ -136,6 +144,7 @@ npm run ultra:factcheck
 ```
 
 #### **End of Day Review (8 PM)**
+
 ```bash
 # Validate all articles meet quality standards
 npm run ultra:validate
@@ -157,7 +166,9 @@ git push origin main
 ### Content Generation Agents
 
 #### **Ultra-Short Content Creator**
+
 Creates 400-500 word articles with engaging hooks and SEO optimization.
+
 ```bash
 # Run directly
 node agents/ultra-short-content-creator.js
@@ -171,7 +182,9 @@ node agents/ultra-short-content-creator.js
 ```
 
 #### **Batch Category Generator**
+
 Generates multiple articles across all categories in one run.
+
 ```bash
 # Generate batch of 6 articles (one per category)
 npm run ultra:generate
@@ -183,7 +196,9 @@ npm run ultra:evening   # Evening evergreen
 ```
 
 #### **Leravi Content Creator**
+
 Alternative content generator following leravi.org style.
+
 ```bash
 node agents/leravi-content-creator.js
 
@@ -196,7 +211,9 @@ node agents/leravi-content-creator.js
 ### Enhancement Agents
 
 #### **Typography Enhancer** ✨ NEW
+
 Formats articles with bold statistics, blockquotes, and visual hierarchy.
+
 ```bash
 # Enhance all articles
 npm run ultra:typography
@@ -216,7 +233,9 @@ node agents/typography-enhancer.js file content/science/article.mdx
 ```
 
 #### **Fact Checker** 🔍 CRITICAL
+
 Verifies facts and sources to prevent SEO penalties.
+
 ```bash
 # Check all articles
 npm run ultra:factcheck
@@ -242,7 +261,9 @@ npm run ultra:factcheck:file content/technology/ai-article.mdx
 ```
 
 #### **Smart Content Linker**
+
 Adds strategic internal links to boost pages-per-session.
+
 ```bash
 node agents/smart-content-linker.js
 
@@ -256,7 +277,9 @@ node agents/smart-content-linker.js
 ### Quality Validation
 
 #### **Ultra-Short Quality Validator**
+
 Ensures articles meet all quality standards.
+
 ```bash
 npm run ultra:validate
 
@@ -270,7 +293,9 @@ npm run ultra:validate
 ```
 
 #### **Article Quality Enhancer**
+
 Improves existing articles that don't meet standards.
+
 ```bash
 node agents/article-quality-enhancer.js
 
@@ -284,7 +309,9 @@ node agents/article-quality-enhancer.js
 ### Discovery & Research
 
 #### **SEO Keyword Researcher**
+
 Finds high-potential, low-competition keywords.
+
 ```bash
 node agents/seo-keyword-researcher.js
 
@@ -296,7 +323,9 @@ node agents/seo-keyword-researcher.js
 ```
 
 #### **Trending Topics Discovery**
+
 Identifies trending topics for content creation.
+
 ```bash
 node agents/trending-topics-discovery.js
 
@@ -314,30 +343,35 @@ node agents/trending-topics-discovery.js
 ### Pre-Publication Checklist
 
 1. **Word Count Compliance**
+
 ```bash
 # Verify all articles are 400-500 words
 npm run ultra:validate
 ```
 
 2. **Typography Check**
+
 ```bash
 # Ensure proper formatting
 npm run ultra:typography
 ```
 
 3. **Fact Verification** 🔴 CRITICAL
+
 ```bash
 # Must pass with >80% accuracy
 npm run ultra:factcheck
 ```
 
 4. **SEO Validation**
+
 ```bash
 # Check meta descriptions, keywords
 npm run audit:seo
 ```
 
 5. **Image Quality**
+
 ```bash
 # Verify all images are optimized
 npm run validate:images
@@ -360,12 +394,14 @@ npm run validate:images
 ### Common Issues & Solutions
 
 #### "Articles are too long"
+
 ```bash
 # Re-run with strict word limit
 node agents/ultra-short-content-creator.js --max-words 450
 ```
 
 #### "Fact-checking fails"
+
 ```bash
 # Check Perplexity API key
 echo $PERPLEXITY_API_KEY
@@ -375,6 +411,7 @@ DEBUG=true npm run ultra:factcheck
 ```
 
 #### "Typography not applying"
+
 ```bash
 # Force re-enhancement
 rm -rf .cache/typography
@@ -382,6 +419,7 @@ npm run ultra:typography
 ```
 
 #### "Broken source links"
+
 ```bash
 # Auto-fix sources
 node agents/fact-checker.js all --auto-fix
@@ -392,6 +430,7 @@ node agents/fact-checker.js all --auto-fix
 ## 📊 Best Practices
 
 ### 1. **Always Fact-Check**
+
 ```bash
 # After every batch generation
 npm run ultra:factcheck
@@ -401,12 +440,14 @@ npm run ultra:factcheck
 ```
 
 ### 2. **Maintain Consistency**
+
 ```bash
 # Use same workflow daily
 Morning → Generate → Enhance → Fact-check → Validate
 ```
 
 ### 3. **Monitor Performance**
+
 ```bash
 # Check engagement metrics weekly
 - Completion rate (target: >85%)
@@ -415,6 +456,7 @@ Morning → Generate → Enhance → Fact-check → Validate
 ```
 
 ### 4. **Batch Processing**
+
 ```bash
 # Process in batches for efficiency
 npm run ultra:morning    # 5-7 articles
@@ -423,6 +465,7 @@ npm run ultra:factcheck  # Verify batch together
 ```
 
 ### 5. **Cache Management**
+
 ```bash
 # Clear cache weekly for fresh data
 rm -rf .cache/
@@ -518,6 +561,6 @@ git add -A && git commit -m "Daily content batch" && git push
 
 ---
 
-*Remember: Quality > Quantity. Better to publish 10 perfect ultra-short articles than 20 with errors.*
+_Remember: Quality > Quantity. Better to publish 10 perfect ultra-short articles than 20 with errors._
 
-*Last Updated: January 2025*
+_Last Updated: January 2025_

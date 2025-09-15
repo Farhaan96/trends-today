@@ -5,32 +5,32 @@ const CDPClient = require('../client.js');
 async function testTrendsToday() {
   const client = new CDPClient({
     rateLimitMs: 800, // Slower for thorough testing
-    defaultTimeoutMs: 30000
+    defaultTimeoutMs: 30000,
   });
-  
+
   try {
     console.log('🚀 Testing Trends Today website...');
-    
+
     // Connect to Chrome
     await client.connect();
-    
+
     // Navigate to homepage
     console.log('📡 Loading homepage: https://www.trendstoday.ca/');
     await client.open('https://www.trendstoday.ca/');
-    
+
     // Wait for page to load
     await client.waitForLoad();
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
     // Get basic page info
     const title = await client.getTitle();
     const url = await client.getCurrentUrl();
     console.log(`✓ Page Title: ${title}`);
     console.log(`✓ Current URL: ${url}`);
-    
+
     // Test for common elements and potential issues
     console.log('\n🔍 Checking page elements...');
-    
+
     const pageTests = await client.evaluate(`
       (function() {
         const results = {
@@ -98,32 +98,38 @@ async function testTrendsToday() {
         return results;
       })();
     `);
-    
+
     // Report results
     console.log('\n📊 Test Results:');
-    console.log(`✓ Navigation: ${pageTests.hasNavigation ? 'Found' : 'Not found'}`);
+    console.log(
+      `✓ Navigation: ${pageTests.hasNavigation ? 'Found' : 'Not found'}`
+    );
     console.log(`✓ Header: ${pageTests.hasHeader ? 'Found' : 'Not found'}`);
     console.log(`✓ Footer: ${pageTests.hasFooter ? 'Found' : 'Not found'}`);
-    console.log(`✓ Main Content: ${pageTests.hasMainContent ? 'Found' : 'Not found'}`);
-    
+    console.log(
+      `✓ Main Content: ${pageTests.hasMainContent ? 'Found' : 'Not found'}`
+    );
+
     console.log(`\n🖼️  Images: ${pageTests.totalImages} total`);
     if (pageTests.brokenImages.length > 0) {
       console.log(`❌ Broken Images Found (${pageTests.brokenImages.length}):`);
-      pageTests.brokenImages.forEach(img => {
+      pageTests.brokenImages.forEach((img) => {
         console.log(`   - Image ${img.index}: ${img.src}`);
         console.log(`     Alt text: ${img.alt}`);
       });
     } else {
       console.log(`✅ All images loading correctly`);
     }
-    
+
     console.log(`\n📄 Content Analysis:`);
     if (pageTests.articles.length > 0) {
-      pageTests.articles.forEach(article => {
-        console.log(`✓ Found ${article.count} elements with selector: ${article.selector}`);
+      pageTests.articles.forEach((article) => {
+        console.log(
+          `✓ Found ${article.count} elements with selector: ${article.selector}`
+        );
         if (article.titles.length > 0) {
           console.log('   Titles/Content:');
-          article.titles.forEach(title => {
+          article.titles.forEach((title) => {
             console.log(`   - ${title}${title.length >= 80 ? '...' : ''}`);
           });
         }
@@ -131,30 +137,33 @@ async function testTrendsToday() {
     } else {
       console.log('⚠️  No articles or blog posts detected');
     }
-    
-    console.log(`\n⚡ Performance: Page loaded in ${pageTests.loadTime.toFixed(0)}ms`);
-    console.log(`${pageTests.hasErrors ? '❌' : '✅'} Error Status: ${pageTests.hasErrors ? 'Errors detected' : 'No errors detected'}`);
-    
+
+    console.log(
+      `\n⚡ Performance: Page loaded in ${pageTests.loadTime.toFixed(0)}ms`
+    );
+    console.log(
+      `${pageTests.hasErrors ? '❌' : '✅'} Error Status: ${pageTests.hasErrors ? 'Errors detected' : 'No errors detected'}`
+    );
+
     // Take a screenshot
     console.log('\n📸 Taking screenshot...');
     await client.screenshot('../../screenshots/trendstoday-test.png');
     console.log('✓ Screenshot saved to screenshots/trendstoday-test.png');
-    
+
     // Test mobile responsiveness (basic)
     console.log('\n📱 Testing mobile viewport...');
     await client.evaluate(`
       document.documentElement.style.width = '375px';
       document.body.style.width = '375px';
     `);
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     await client.screenshot('../../screenshots/trendstoday-mobile.png');
     console.log('✓ Mobile screenshot saved');
-    
+
     console.log('\n✅ Website testing complete!');
-    
   } catch (error) {
     console.error('❌ Error testing website:', error.message);
-    
+
     // Try to get current page info for debugging
     try {
       const currentUrl = await client.getCurrentUrl();
@@ -163,7 +172,6 @@ async function testTrendsToday() {
     } catch (debugError) {
       console.error('Could not get debug info');
     }
-    
   } finally {
     await client.disconnect();
   }

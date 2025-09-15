@@ -45,10 +45,7 @@
         "[Spec or feature to prioritize]",
         "[Another important consideration]"
       ],
-      "commonMistakes": [
-        "[Common mistake 1]",
-        "[Common mistake 2]"
-      ],
+      "commonMistakes": ["[Common mistake 1]", "[Common mistake 2]"],
       "budgetImpact": "[Price vs performance analysis]"
     }
   ],
@@ -56,11 +53,7 @@
     "budgetTier": {
       "range": "Under $[amount]",
       "description": "[What to expect in this price range]",
-      "compromises": [
-        "[Compromise 1]",
-        "[Compromise 2]",
-        "[Compromise 3]"
-      ],
+      "compromises": ["[Compromise 1]", "[Compromise 2]", "[Compromise 3]"],
       "bestOptions": [
         {
           "name": "[Product 1]",
@@ -68,24 +61,17 @@
           "why": "[Why it's good for budget buyers]"
         },
         {
-          "name": "[Product 2]", 
+          "name": "[Product 2]",
           "price": 0,
           "why": "[Why it's a good alternative]"
         }
       ],
-      "whoItsFors": [
-        "[User type 1]",
-        "[User type 2]"
-      ]
+      "whoItsFors": ["[User type 1]", "[User type 2]"]
     },
     "midRangeTier": {
       "range": "$[amount1] - $[amount2]",
       "description": "[Sweet spot analysis]",
-      "advantages": [
-        "[Advantage 1]",
-        "[Advantage 2]",
-        "[Advantage 3]"
-      ],
+      "advantages": ["[Advantage 1]", "[Advantage 2]", "[Advantage 3]"],
       "bestOptions": [
         {
           "name": "[Product 1]",
@@ -93,19 +79,12 @@
           "why": "[Why it's the best mid-range choice]"
         }
       ],
-      "whoItsFors": [
-        "[User type 1]",
-        "[User type 2]"
-      ]
+      "whoItsFors": ["[User type 1]", "[User type 2]"]
     },
     "premiumTier": {
       "range": "$[amount]+",
       "description": "[What premium features you get]",
-      "benefits": [
-        "[Benefit 1]",
-        "[Benefit 2]",
-        "[Benefit 3]"
-      ],
+      "benefits": ["[Benefit 1]", "[Benefit 2]", "[Benefit 3]"],
       "bestOptions": [
         {
           "name": "[Product 1]",
@@ -113,20 +92,13 @@
           "why": "[Why it justifies the premium price]"
         }
       ],
-      "whoItsFors": [
-        "[User type 1]",
-        "[User type 2]"
-      ]
+      "whoItsFors": ["[User type 1]", "[User type 2]"]
     }
   },
   "usesCaseGuide": [
     {
       "useCase": "[Use Case 1 - e.g., Professional Work]",
-      "requirements": [
-        "[Requirement 1]",
-        "[Requirement 2]",
-        "[Requirement 3]"
-      ],
+      "requirements": ["[Requirement 1]", "[Requirement 2]", "[Requirement 3]"],
       "recommendations": [
         {
           "product": "[Product Name]",
@@ -164,15 +136,8 @@
   "brandComparison": [
     {
       "brand": "[Brand 1]",
-      "strengths": [
-        "[Strength 1]",
-        "[Strength 2]",
-        "[Strength 3]"
-      ],
-      "weaknesses": [
-        "[Weakness 1]",
-        "[Weakness 2]"
-      ],
+      "strengths": ["[Strength 1]", "[Strength 2]", "[Strength 3]"],
+      "weaknesses": ["[Weakness 1]", "[Weakness 2]"],
       "bestFor": "[Who should consider this brand]",
       "topModel": "[Their best current model]"
     }
@@ -197,7 +162,7 @@
     },
     {
       "mistake": "[Common mistake 2]",
-      "whyItsBad": "[Consequences of this mistake]", 
+      "whyItsBad": "[Consequences of this mistake]",
       "howToAvoid": "[Prevention advice]"
     }
   ],
@@ -266,7 +231,12 @@
   "seo": {
     "metaTitle": "How to Choose the Best [Category] 2025: Complete Buying Guide | Trends Today",
     "metaDescription": "Expert guide to choosing the perfect [category] for your needs and budget. Compare features, brands, and get personalized recommendations.",
-    "keywords": ["[category] buying guide", "how to choose [category]", "best [category] 2025", "[category] comparison guide"]
+    "keywords": [
+      "[category] buying guide",
+      "how to choose [category]",
+      "best [category] 2025",
+      "[category] comparison guide"
+    ]
   },
   "author": {
     "id": "[author-id]",

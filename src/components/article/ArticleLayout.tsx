@@ -18,7 +18,7 @@ export default function ArticleLayout({
   description = '',
   image = '',
   publishedAt,
-  articleId
+  articleId,
 }: ArticleLayoutProps) {
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 
@@ -29,7 +29,7 @@ export default function ArticleLayout({
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
           {title}
         </h1>
-        
+
         {description && (
           <p className="text-xl text-gray-800 dark:text-gray-300 mb-6">
             {description}
@@ -44,12 +44,12 @@ export default function ArticleLayout({
                 {new Date(publishedAt).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'long',
-                  day: 'numeric'
+                  day: 'numeric',
                 })}
               </time>
             )}
           </div>
-          
+
           <SocialShareButtons
             url={currentUrl}
             title={title}
@@ -85,8 +85,8 @@ export default function ArticleLayout({
 
       {/* Newsletter CTA */}
       <div className="mb-12">
-        <NewsletterSignup 
-          variant="inline" 
+        <NewsletterSignup
+          variant="inline"
           showLeadMagnet={true}
           leadMagnetTitle="Get More Tech Reviews Like This"
           leadMagnetDescription="Join 50,000+ readers who get our weekly digest of the latest reviews and buying guides"
@@ -95,10 +95,7 @@ export default function ArticleLayout({
 
       {/* Comments */}
       <div className="mb-8">
-        <CommentSystem
-          articleId={articleId}
-          articleTitle={title}
-        />
+        <CommentSystem articleId={articleId} articleTitle={title} />
       </div>
     </div>
   );

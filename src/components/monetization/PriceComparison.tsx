@@ -14,7 +14,7 @@ interface PriceComparisonProps {
 export default function PriceComparison({
   productName,
   prices,
-  className = ''
+  className = '',
 }: PriceComparisonProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [sortBy, setSortBy] = useState<'price' | 'provider'>('price');
@@ -28,8 +28,12 @@ export default function PriceComparison({
   });
 
   // Get best price
-  const bestPrice = Math.min(...prices.filter(p => p.inStock).map(p => p.currentPrice));
-  const bestDeal = prices.find(p => p.currentPrice === bestPrice && p.inStock);
+  const bestPrice = Math.min(
+    ...prices.filter((p) => p.inStock).map((p) => p.currentPrice)
+  );
+  const bestDeal = prices.find(
+    (p) => p.currentPrice === bestPrice && p.inStock
+  );
 
   // Display up to 3 prices initially, show all when expanded
   const displayPrices = isExpanded ? sortedPrices : sortedPrices.slice(0, 3);
@@ -37,12 +41,13 @@ export default function PriceComparison({
   const formatCurrency = (price: number, currency: string) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: currency
+      currency: currency,
     }).format(price);
   };
 
   const getSavings = (price: PriceData) => {
-    if (!price.originalPrice || price.originalPrice <= price.currentPrice) return null;
+    if (!price.originalPrice || price.originalPrice <= price.currentPrice)
+      return null;
     const savings = price.originalPrice - price.currentPrice;
     const percentage = Math.round((savings / price.originalPrice) * 100);
     return { amount: savings, percentage };
@@ -53,13 +58,17 @@ export default function PriceComparison({
   }
 
   return (
-    <div className={`bg-white border border-gray-200 rounded-lg p-6 ${className}`}>
+    <div
+      className={`bg-white border border-gray-200 rounded-lg p-6 ${className}`}
+    >
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold text-gray-900">
           💰 Price Comparison
         </h3>
         <div className="flex items-center gap-2">
-          <label htmlFor="sort-select" className="text-sm text-gray-800">Sort by:</label>
+          <label htmlFor="sort-select" className="text-sm text-gray-800">
+            Sort by:
+          </label>
           <select
             id="sort-select"
             value={sortBy}
@@ -77,7 +86,9 @@ export default function PriceComparison({
         <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-green-800 font-medium text-sm">🏆 Best Price</span>
+              <span className="text-green-800 font-medium text-sm">
+                🏆 Best Price
+              </span>
               <p className="text-green-700 font-semibold text-lg">
                 {formatCurrency(bestDeal.currentPrice, bestDeal.currency)}
               </p>
@@ -105,7 +116,7 @@ export default function PriceComparison({
         {displayPrices.map((price, index) => {
           const savings = getSavings(price);
           const isBestPrice = price.currentPrice === bestPrice && price.inStock;
-          
+
           return (
             <div
               key={`${price.provider}-${index}`}
@@ -130,12 +141,12 @@ export default function PriceComparison({
                     </span>
                   )}
                 </div>
-                
+
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-lg font-semibold text-gray-900">
                     {formatCurrency(price.currentPrice, price.currency)}
                   </span>
-                  
+
                   {savings && (
                     <>
                       <span className="text-sm text-gray-900 line-through">
@@ -153,13 +164,13 @@ export default function PriceComparison({
                     🚚 {price.shipping}
                   </p>
                 )}
-                
+
                 {price.availability && (
                   <p className="text-xs text-gray-800 mt-1">
                     📦 {price.availability}
                   </p>
                 )}
-                
+
                 <p className="text-xs text-gray-900 mt-1">
                   Updated: {new Date(price.lastUpdated).toLocaleDateString()}
                 </p>
@@ -195,7 +206,8 @@ export default function PriceComparison({
             </>
           ) : (
             <>
-              Show More ({prices.length - 3} more stores) <ChevronDownIcon className="w-4 h-4" />
+              Show More ({prices.length - 3} more stores){' '}
+              <ChevronDownIcon className="w-4 h-4" />
             </>
           )}
         </button>
@@ -204,8 +216,9 @@ export default function PriceComparison({
       {/* Affiliate Disclaimer */}
       <div className="mt-4 pt-4 border-t border-gray-200">
         <p className="text-xs text-gray-900 text-center">
-          <span className="text-yellow-600">*</span> Trends Today may earn a commission from purchases made through our affiliate links. 
-          This helps support our independent testing and reviews at no extra cost to you.
+          <span className="text-yellow-600">*</span> Trends Today may earn a
+          commission from purchases made through our affiliate links. This helps
+          support our independent testing and reviews at no extra cost to you.
         </p>
       </div>
     </div>

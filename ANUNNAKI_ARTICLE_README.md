@@ -33,6 +33,7 @@ node utils/ai-image-generator.js generate-from-article --file="content/science/a
 ```
 
 **Or manually with prompt**:
+
 ```bash
 node utils/ai-image-generator.js generate "Professional hero image for tech blog article: The Anunnaki: Ancient Sumerian Gods or Something More? Ancient Mesopotamian cuneiform tablets, archaeological discoveries, mystical lighting, 1536x1024 aspect ratio, no text"
 ```

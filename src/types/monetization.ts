@@ -19,7 +19,7 @@ export enum AffiliateProvider {
   COMMISSION_JUNCTION = 'cj',
   TARGET = 'target',
   NEWEGG = 'newegg',
-  B_AND_H = 'bandh'
+  B_AND_H = 'bandh',
 }
 
 export interface PriceData {
@@ -57,7 +57,13 @@ export interface PremiumTier {
 
 export interface AdPlacement {
   id: string;
-  location: 'header' | 'sidebar' | 'content-top' | 'content-middle' | 'content-bottom' | 'footer';
+  location:
+    | 'header'
+    | 'sidebar'
+    | 'content-top'
+    | 'content-middle'
+    | 'content-bottom'
+    | 'footer';
   type: 'banner' | 'native' | 'video' | 'sponsored';
   size: string;
   isActive: boolean;

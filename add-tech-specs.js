@@ -25,9 +25,9 @@ const specs = {
     dimensions: '159.9 × 76.7 × 8.25mm',
     materials: 'Titanium frame, Ceramic Shield',
     waterRating: 'IP68 (6m for 30 min)',
-    os: 'iOS 17'
+    os: 'iOS 17',
   },
-  
+
   'iphone-15-pro': {
     display: '6.1" Super Retina XDR OLED',
     resolution: '2556 × 1179 pixels (460 ppi)',
@@ -48,7 +48,7 @@ const specs = {
     dimensions: '146.6 × 70.6 × 8.25mm',
     materials: 'Titanium frame, Ceramic Shield',
     waterRating: 'IP68 (6m for 30 min)',
-    os: 'iOS 17'
+    os: 'iOS 17',
   },
 
   'samsung-galaxy-s24-ultra': {
@@ -73,7 +73,7 @@ const specs = {
     materials: 'Titanium frame, Gorilla Glass Victus 2',
     waterRating: 'IP68',
     os: 'Android 14, One UI 6.1',
-    extras: 'S Pen included'
+    extras: 'S Pen included',
   },
 
   'google-pixel-9-pro': {
@@ -96,7 +96,7 @@ const specs = {
     dimensions: '152.8 × 72 × 8.5mm',
     materials: 'Aluminum frame, Gorilla Glass Victus 2',
     waterRating: 'IP68',
-    os: 'Android 14'
+    os: 'Android 14',
   },
 
   'oneplus-12': {
@@ -119,8 +119,8 @@ const specs = {
     dimensions: '164.3 × 75.8 × 9.15mm',
     materials: 'Aluminum frame, Gorilla Glass Victus 2',
     waterRating: 'IP65',
-    os: 'Android 14, OxygenOS 14'
-  }
+    os: 'Android 14, OxygenOS 14',
+  },
 };
 
 // Function to generate specs table
@@ -159,13 +159,13 @@ function generateSpecsTable(product) {
 // Function to detect product from filename
 function detectProduct(filename) {
   const lowerFilename = filename.toLowerCase();
-  
+
   for (const [product] of Object.entries(specs)) {
     if (lowerFilename.includes(product.replace(/-/g, '-'))) {
       return product;
     }
   }
-  
+
   return null;
 }
 
@@ -176,77 +176,86 @@ function addSpecs(content, product) {
     /^## The Reality Check$/gm,
     /^## Performance:/gm,
     /^## What/gm,
-    /^## Design/gm
+    /^## Design/gm,
   ];
-  
+
   const specsTable = generateSpecsTable(product);
-  
+
   for (const pattern of patterns) {
     if (pattern.test(content)) {
       return content.replace(pattern, specsTable + '\n$&');
     }
   }
-  
+
   // If no good insertion point, add after frontmatter
   const frontmatterEnd = content.indexOf('\n---\n') + 5;
   if (frontmatterEnd > 4) {
-    return content.slice(0, frontmatterEnd) + '\n' + specsTable + '\n' + content.slice(frontmatterEnd);
+    return (
+      content.slice(0, frontmatterEnd) +
+      '\n' +
+      specsTable +
+      '\n' +
+      content.slice(frontmatterEnd)
+    );
   }
-  
+
   return content;
 }
 
 // Function to recursively find all review MDX files
 function findReviewFiles(dir) {
   const files = [];
-  
+
   try {
     const items = fs.readdirSync(dir);
-    
+
     for (const item of items) {
       const fullPath = path.join(dir, item);
       const stat = fs.statSync(fullPath);
-      
+
       if (stat.isDirectory()) {
         files.push(...findReviewFiles(fullPath));
-      } else if (item.endsWith('.mdx') && (fullPath.includes('/reviews/') || fullPath.includes('\\reviews\\'))) {
+      } else if (
+        item.endsWith('.mdx') &&
+        (fullPath.includes('/reviews/') || fullPath.includes('\\reviews\\'))
+      ) {
         files.push(fullPath);
       }
     }
   } catch (error) {
     console.log(`Skipping directory ${dir}: ${error.message}`);
   }
-  
+
   return files;
 }
 
 // Main function
 async function addTechSpecs() {
   console.log('📊 Adding technical specifications to review articles...');
-  
+
   try {
     const files = findReviewFiles('content');
     let processedFiles = 0;
     let specsAdded = 0;
-    
+
     for (const file of files) {
       console.log(`📝 Processing: ${file}`);
-      
+
       const content = fs.readFileSync(file, 'utf8');
       const filename = path.basename(file, '.mdx');
-      
+
       // Skip if specs already exist
       if (content.includes('## Technical Specifications')) {
         console.log(`✨ Specs already exist in ${file}`);
         processedFiles++;
         continue;
       }
-      
+
       const product = detectProduct(filename);
-      
+
       if (product && specs[product]) {
         const contentWithSpecs = addSpecs(content, product);
-        
+
         if (contentWithSpecs !== content) {
           fs.writeFileSync(file, contentWithSpecs);
           console.log(`✅ Added specs to ${file} (${product})`);
@@ -255,14 +264,14 @@ async function addTechSpecs() {
       } else {
         console.log(`⚠️  No specs available for ${file}`);
       }
-      
+
       processedFiles++;
     }
-    
+
     console.log(`\n🎉 Technical specifications added!`);
     console.log(`📊 Added specs to ${specsAdded} files`);
     console.log(`📁 Processed ${processedFiles} review files`);
-    
+
     if (specsAdded > 0) {
       console.log(`\n🚀 Your articles now include:`);
       console.log(`• Comprehensive technical specifications`);
@@ -270,7 +279,6 @@ async function addTechSpecs() {
       console.log(`• Industry-standard hardware details`);
       console.log(`• Premium content quality matching TechRadar/The Verge`);
     }
-    
   } catch (error) {
     console.error('❌ Error adding tech specs:', error);
     process.exit(1);

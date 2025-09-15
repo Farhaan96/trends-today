@@ -1,28 +1,30 @@
-'use client'
+'use client';
 
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 
 interface AdSlotProps {
-  id: string
-  className?: string
+  id: string;
+  className?: string;
 }
 
 export default function AdSlot({ id, className = '' }: AdSlotProps) {
-  const adsEnabled = process.env.NEXT_PUBLIC_ENABLE_ADS === 'true'
-  const adClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT
+  const adsEnabled = process.env.NEXT_PUBLIC_ENABLE_ADS === 'true';
+  const adClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 
   useEffect(() => {
     if (adsEnabled && adClient && typeof window !== 'undefined') {
       try {
         // Push ad refresh to AdSense
-        const adsbygoogle = (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle || []
-        ;(window as unknown as { adsbygoogle: unknown[] }).adsbygoogle = adsbygoogle
-        adsbygoogle.push({})
+        const adsbygoogle =
+          (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle || [];
+        (window as unknown as { adsbygoogle: unknown[] }).adsbygoogle =
+          adsbygoogle;
+        adsbygoogle.push({});
       } catch (err) {
-        console.error('AdSense error:', err)
+        console.error('AdSense error:', err);
       }
     }
-  }, [adsEnabled, adClient])
+  }, [adsEnabled, adClient]);
 
   if (!adsEnabled) {
     // Show placeholder in development
@@ -31,9 +33,9 @@ export default function AdSlot({ id, className = '' }: AdSlotProps) {
         <div className={`ad-slot ${className}`}>
           <span>Ad Placeholder ({id})</span>
         </div>
-      )
+      );
     }
-    return null
+    return null;
   }
 
   return (
@@ -47,5 +49,5 @@ export default function AdSlot({ id, className = '' }: AdSlotProps) {
         data-full-width-responsive="true"
       />
     </div>
-  )
+  );
 }

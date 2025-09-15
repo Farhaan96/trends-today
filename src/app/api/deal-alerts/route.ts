@@ -46,8 +46,10 @@ export async function POST(request: NextRequest) {
       targetPrice,
       currentPrice,
       savings: currentPrice - targetPrice,
-      savingsPercentage: Math.round(((currentPrice - targetPrice) / currentPrice) * 100),
-      timestamp: new Date().toISOString()
+      savingsPercentage: Math.round(
+        ((currentPrice - targetPrice) / currentPrice) * 100
+      ),
+      timestamp: new Date().toISOString(),
     });
 
     // Simulate API call to email service
@@ -71,22 +73,21 @@ export async function POST(request: NextRequest) {
         email,
         productName,
         targetPrice,
-        expectedSavings: `$${(currentPrice - targetPrice).toFixed(2)} (${Math.round(((currentPrice - targetPrice) / currentPrice) * 100)}%)`
-      }
+        expectedSavings: `$${(currentPrice - targetPrice).toFixed(2)} (${Math.round(((currentPrice - targetPrice) / currentPrice) * 100)}%)`,
+      },
     });
 
     // Set tracking cookie for conversion attribution
     response.cookies.set('deal_alert_signup', 'true', {
       maxAge: 60 * 60 * 24 * 7, // 7 days
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production'
+      secure: process.env.NODE_ENV === 'production',
     });
 
     return response;
-
   } catch (error) {
     console.error('Deal alert signup error:', error);
-    
+
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -115,12 +116,12 @@ export async function GET(request: NextRequest) {
       targetPrice: 899,
       currentPrice: 999,
       isActive: true,
-      createdAt: '2024-09-07T00:00:00Z'
-    }
+      createdAt: '2024-09-07T00:00:00Z',
+    },
   ];
 
   return NextResponse.json({
     success: true,
-    alerts: mockAlerts
+    alerts: mockAlerts,
   });
 }

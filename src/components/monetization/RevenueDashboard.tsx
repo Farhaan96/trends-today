@@ -53,7 +53,14 @@ interface MetricCardProps {
   subtitle?: string;
 }
 
-function MetricCard({ title, value, change, icon, color, subtitle }: MetricCardProps) {
+function MetricCard({
+  title,
+  value,
+  change,
+  icon,
+  color,
+  subtitle,
+}: MetricCardProps) {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
       <div className="flex items-center justify-between">
@@ -71,7 +78,9 @@ function MetricCard({ title, value, change, icon, color, subtitle }: MetricCardP
           ) : (
             <ArrowDownIcon className="w-4 h-4 text-red-600 mr-1" />
           )}
-          <span className={`text-sm font-medium ${change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+          <span
+            className={`text-sm font-medium ${change >= 0 ? 'text-green-600' : 'text-red-600'}`}
+          >
             {Math.abs(change)}% from last period
           </span>
         </div>
@@ -85,7 +94,10 @@ interface RevenueDashboardProps {
   period?: '7d' | '30d' | '90d';
 }
 
-export default function RevenueDashboard({ className = '', period = '30d' }: RevenueDashboardProps) {
+export default function RevenueDashboard({
+  className = '',
+  period = '30d',
+}: RevenueDashboardProps) {
   const [metrics, setMetrics] = useState<RevenueMetrics | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedPeriod, setSelectedPeriod] = useState(period);
@@ -97,7 +109,9 @@ export default function RevenueDashboard({ className = '', period = '30d' }: Rev
   const fetchMetrics = async (timePeriod: string) => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/revenue-tracking?period=${timePeriod}&metric=all`);
+      const response = await fetch(
+        `/api/revenue-tracking?period=${timePeriod}&metric=all`
+      );
       const data = await response.json();
       if (data.success) {
         setMetrics(data.metrics);
@@ -110,9 +124,13 @@ export default function RevenueDashboard({ className = '', period = '30d' }: Rev
   };
 
   const formatCurrency = (value: number) =>
-    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+    new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(value);
 
-  const formatNumber = (value: number) => new Intl.NumberFormat('en-US').format(value);
+  const formatNumber = (value: number) =>
+    new Intl.NumberFormat('en-US').format(value);
 
   if (loading) {
     return (
@@ -127,8 +145,12 @@ export default function RevenueDashboard({ className = '', period = '30d' }: Rev
 
   if (!metrics) {
     return (
-      <div className={`bg-red-50 border border-red-200 rounded-lg p-6 ${className}`}>
-        <p className="text-red-700">Failed to load revenue metrics. Please try again.</p>
+      <div
+        className={`bg-red-50 border border-red-200 rounded-lg p-6 ${className}`}
+      >
+        <p className="text-red-700">
+          Failed to load revenue metrics. Please try again.
+        </p>
       </div>
     );
   }
@@ -137,13 +159,19 @@ export default function RevenueDashboard({ className = '', period = '30d' }: Rev
     <div className={`space-y-6 ${className}`}>
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Revenue Dashboard</h2>
-          <p className="text-gray-800">Performance metrics for Trends Today monetization</p>
+          <h2 className="text-2xl font-bold text-gray-900">
+            Revenue Dashboard
+          </h2>
+          <p className="text-gray-800">
+            Performance metrics for Trends Today monetization
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <select
             value={selectedPeriod}
-            onChange={(e) => setSelectedPeriod(e.target.value as '7d' | '30d' | '90d')}
+            onChange={(e) =>
+              setSelectedPeriod(e.target.value as '7d' | '30d' | '90d')
+            }
             className="border border-gray-300 rounded-lg px-3 py-2 text-sm"
           >
             <option value="7d">Last 7 days</option>
@@ -190,30 +218,45 @@ export default function RevenueDashboard({ className = '', period = '30d' }: Rev
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-lg border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-gray-900">Affiliate Performance</h3>
+            <h3 className="font-semibold text-gray-900">
+              Affiliate Performance
+            </h3>
             <ArrowTrendingUpIcon className="w-5 h-5 text-gray-900" />
           </div>
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
               <p className="text-sm text-gray-800">Clicks</p>
-              <p className="text-lg font-semibold">{formatNumber(metrics.affiliateRevenue.clicks)}</p>
+              <p className="text-lg font-semibold">
+                {formatNumber(metrics.affiliateRevenue.clicks)}
+              </p>
             </div>
             <div>
               <p className="text-sm text-gray-800">Conversions</p>
-              <p className="text-lg font-semibold">{formatNumber(metrics.affiliateRevenue.conversions)}</p>
+              <p className="text-lg font-semibold">
+                {formatNumber(metrics.affiliateRevenue.conversions)}
+              </p>
             </div>
             <div>
               <p className="text-sm text-gray-800">Conversion Rate</p>
-              <p className="text-lg font-semibold">{metrics.affiliateRevenue.conversionRate}%</p>
+              <p className="text-lg font-semibold">
+                {metrics.affiliateRevenue.conversionRate}%
+              </p>
             </div>
           </div>
           <div>
-            <p className="text-sm font-medium text-gray-900 mb-2">Top Providers</p>
+            <p className="text-sm font-medium text-gray-900 mb-2">
+              Top Providers
+            </p>
             <div className="space-y-2">
               {metrics.affiliateRevenue.topProviders.map((p) => (
-                <div key={p.provider} className="flex items-center justify-between text-sm">
+                <div
+                  key={p.provider}
+                  className="flex items-center justify-between text-sm"
+                >
                   <span className="text-gray-900 capitalize">{p.provider}</span>
-                  <span className="text-gray-900 font-medium">{formatCurrency(p.revenue)}</span>
+                  <span className="text-gray-900 font-medium">
+                    {formatCurrency(p.revenue)}
+                  </span>
                 </div>
               ))}
             </div>
@@ -228,19 +271,27 @@ export default function RevenueDashboard({ className = '', period = '30d' }: Rev
           <div className="grid grid-cols-2 gap-4">
             <div>
               <p className="text-sm text-gray-800">Subscriptions</p>
-              <p className="text-lg font-semibold">{formatNumber(metrics.premiumRevenue.subscriptions)}</p>
+              <p className="text-lg font-semibold">
+                {formatNumber(metrics.premiumRevenue.subscriptions)}
+              </p>
             </div>
             <div>
               <p className="text-sm text-gray-800">MRR</p>
-              <p className="text-lg font-semibold">{formatCurrency(metrics.premiumRevenue.mrr)}</p>
+              <p className="text-lg font-semibold">
+                {formatCurrency(metrics.premiumRevenue.mrr)}
+              </p>
             </div>
             <div>
               <p className="text-sm text-gray-800">Churn</p>
-              <p className="text-lg font-semibold">{metrics.premiumRevenue.churn}%</p>
+              <p className="text-lg font-semibold">
+                {metrics.premiumRevenue.churn}%
+              </p>
             </div>
             <div>
               <p className="text-sm text-gray-800">Ad RPM</p>
-              <p className="text-lg font-semibold">{metrics.adRevenue.rpm.toFixed(2)}</p>
+              <p className="text-lg font-semibold">
+                {metrics.adRevenue.rpm.toFixed(2)}
+              </p>
             </div>
           </div>
         </div>
@@ -248,4 +299,3 @@ export default function RevenueDashboard({ className = '', period = '30d' }: Rev
     </div>
   );
 }
-

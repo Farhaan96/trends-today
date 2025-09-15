@@ -27,11 +27,7 @@
       "Google Pixel 8 Pro",
       "OnePlus 12"
     ],
-    "sources": [
-      "apple.com",
-      "gsmarena.com",
-      "dxomark.com"
-    ],
+    "sources": ["apple.com", "gsmarena.com", "dxomark.com"],
     "productName": "iPhone 15 Pro Max"
   },
   "keywordData": [

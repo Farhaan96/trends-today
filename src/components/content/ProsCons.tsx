@@ -22,7 +22,7 @@ export default function ProsCons({ pros, cons }: ProsConsProps) {
           ))}
         </ul>
       </div>
-      
+
       <div className="bg-red-50 border border-red-200 rounded-lg p-6">
         <h3 className="text-lg font-semibold text-red-800 mb-4 flex items-center">
           <XMarkIcon className="w-5 h-5 mr-2" />

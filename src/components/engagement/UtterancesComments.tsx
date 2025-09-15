@@ -44,7 +44,9 @@ export default function UtterancesComments({
     scriptEl.crossOrigin = 'anonymous';
 
     const repoName =
-      repo || process.env.NEXT_PUBLIC_UTTERANCES_REPO || 'Farhaan96/trends-today';
+      repo ||
+      process.env.NEXT_PUBLIC_UTTERANCES_REPO ||
+      'Farhaan96/trends-today';
 
     scriptEl.setAttribute('repo', repoName);
     scriptEl.setAttribute('issue-term', issueTerm);
@@ -61,4 +63,3 @@ export default function UtterancesComments({
     </div>
   );
 }
-

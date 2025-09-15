@@ -6,12 +6,12 @@ const contentDir = path.join(root, 'content');
 
 // Map of common mojibake sequences -> proper punctuation
 const replacements = [
-  { from: /\uFFFD\?T/g, to: '’' },         // Christie�?Ts -> Christie’s
-  { from: /\uFFFD\?o/g, to: '“' },         // �?o -> “
-  { from: /\uFFFD\?\?/g, to: '”' },       // �?? -> ”
-  { from: /\uFFFD\\\"/g, to: '—' },      // �?\" -> — (em dash)
-  { from: /\uFFFD\?"/g, to: '—' },        // fallback variant
-  { from: /\uFFFD/g, to: '—' },            // any stray replacement char -> em dash as a safe default
+  { from: /\uFFFD\?T/g, to: '’' }, // Christie�?Ts -> Christie’s
+  { from: /\uFFFD\?o/g, to: '“' }, // �?o -> “
+  { from: /\uFFFD\?\?/g, to: '”' }, // �?? -> ”
+  { from: /\uFFFD\\\"/g, to: '—' }, // �?\" -> — (em dash)
+  { from: /\uFFFD\?"/g, to: '—' }, // fallback variant
+  { from: /\uFFFD/g, to: '—' }, // any stray replacement char -> em dash as a safe default
 ];
 
 function* walk(dir) {
@@ -39,4 +39,3 @@ for (const file of walk(contentDir)) {
 if (!changed) {
   console.log('No mojibake sequences found.');
 }
-

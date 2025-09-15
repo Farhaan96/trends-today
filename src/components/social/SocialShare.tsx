@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { 
+import { useState } from 'react';
+import {
   TwitterIcon,
   FacebookIcon,
   LinkedinIcon,
@@ -15,19 +15,19 @@ import {
   RedditShareButton,
   WhatsappShareButton,
   TelegramShareButton,
-  EmailShareButton
-} from 'react-share'
-import { ClipboardIcon, CheckIcon } from '@heroicons/react/24/outline'
+  EmailShareButton,
+} from 'react-share';
+import { ClipboardIcon, CheckIcon } from '@heroicons/react/24/outline';
 
 interface SocialShareProps {
-  url: string
-  title: string
-  description?: string
-  image?: string
-  className?: string
-  size?: 'small' | 'medium' | 'large'
-  showLabels?: boolean
-  vertical?: boolean
+  url: string;
+  title: string;
+  description?: string;
+  image?: string;
+  className?: string;
+  size?: 'small' | 'medium' | 'large';
+  showLabels?: boolean;
+  vertical?: boolean;
 }
 
 export default function SocialShare({
@@ -38,82 +38,86 @@ export default function SocialShare({
   className = '',
   size = 'medium',
   showLabels = false,
-  vertical = false
+  vertical = false,
 }: SocialShareProps) {
-  const [copied, setCopied] = useState(false)
-  
-  const iconSize = size === 'small' ? 32 : size === 'large' ? 48 : 40
-  
+  const [copied, setCopied] = useState(false);
+
+  const iconSize = size === 'small' ? 32 : size === 'large' ? 48 : 40;
+
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(url)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy URL:', err)
+      console.error('Failed to copy URL:', err);
     }
-  }
+  };
 
   const shareButtons = [
     {
       Component: TwitterShareButton,
       Icon: TwitterIcon,
       label: 'Twitter',
-      props: { url, title, via: 'TrendsToday' }
+      props: { url, title, via: 'TrendsToday' },
     },
     {
       Component: FacebookShareButton,
       Icon: FacebookIcon,
       label: 'Facebook',
-      props: { url, quote: title }
+      props: { url, quote: title },
     },
     {
       Component: LinkedinShareButton,
       Icon: LinkedinIcon,
       label: 'LinkedIn',
-      props: { url, title, summary: description, source: 'TrendsToday' }
+      props: { url, title, summary: description, source: 'TrendsToday' },
     },
     {
       Component: RedditShareButton,
       Icon: RedditIcon,
       label: 'Reddit',
-      props: { url, title }
+      props: { url, title },
     },
     {
       Component: WhatsappShareButton,
       Icon: WhatsappIcon,
       label: 'WhatsApp',
-      props: { url, title, separator: ' - ' }
+      props: { url, title, separator: ' - ' },
     },
     {
       Component: TelegramShareButton,
       Icon: TelegramIcon,
       label: 'Telegram',
-      props: { url, title }
+      props: { url, title },
     },
     {
       Component: EmailShareButton,
       Icon: EmailIcon,
       label: 'Email',
-      props: { url, subject: title, body: description }
-    }
-  ]
+      props: { url, subject: title, body: description },
+    },
+  ];
 
   return (
-    <div className={`${className} ${vertical ? 'space-y-3' : 'flex flex-wrap gap-3'}`}>
+    <div
+      className={`${className} ${vertical ? 'space-y-3' : 'flex flex-wrap gap-3'}`}
+    >
       <div className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
         <span>Share this article:</span>
       </div>
-      
+
       <div className={`${vertical ? 'space-y-2' : 'flex flex-wrap gap-2'}`}>
         {shareButtons.map(({ Component, Icon, label, props }) => (
           <div key={label} className={vertical ? '' : 'inline-block'}>
             <Component {...props}>
-              <div className={`
+              <div
+                className={`
                 group flex items-center gap-2 px-3 py-2 rounded-lg
                 transition-all duration-200 hover:scale-105 cursor-pointer
                 ${showLabels ? 'bg-gray-50 hover:bg-gray-100' : ''}
-              `}>
+              `}
+              >
                 <Icon size={iconSize} round />
                 {showLabels && (
                   <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
@@ -124,7 +128,7 @@ export default function SocialShare({
             </Component>
           </div>
         ))}
-        
+
         {/* Copy link button */}
         <button
           onClick={copyToClipboard}
@@ -135,10 +139,12 @@ export default function SocialShare({
           `}
           title="Copy link"
         >
-          <div className={`
+          <div
+            className={`
             w-[${iconSize}px] h-[${iconSize}px] rounded-full bg-gray-600 hover:bg-gray-700
             flex items-center justify-center transition-colors
-          `}>
+          `}
+          >
             {copied ? (
               <CheckIcon className="w-5 h-5 text-white" />
             ) : (
@@ -153,5 +159,5 @@ export default function SocialShare({
         </button>
       </div>
     </div>
-  )
+  );
 }

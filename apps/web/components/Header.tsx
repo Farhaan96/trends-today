@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { useState } from 'react'
+import Link from 'next/link';
+import Image from 'next/image';
+import { useState } from 'react';
 
 const categories = [
   { name: 'AI', href: '/category/ai' },
@@ -12,10 +12,10 @@ const categories = [
   { name: 'How-To', href: '/category/how-to' },
   { name: 'News', href: '/category/news' },
   { name: 'Opinion', href: '/category/opinion' },
-]
+];
 
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className="bg-white border-b border-gray-200">
@@ -51,11 +51,26 @@ export default function Header() {
             className="md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
               {mobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               )}
             </svg>
           </button>
@@ -78,5 +93,5 @@ export default function Header() {
         )}
       </div>
     </header>
-  )
+  );
 }

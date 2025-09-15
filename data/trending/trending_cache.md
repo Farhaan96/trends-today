@@ -3,6 +3,7 @@
 ## BREAKING: TOP TRENDING TECH NEWS
 
 ### 🔥 Apple iPhone 17 Event - September 9, 2025
+
 - **Event**: "Awe Dropping" Apple Event - Tuesday, September 9 at 10 AM PT
 - **Category**: Mobile/Gadgets
 - **Expected Products**:
@@ -23,6 +24,7 @@
   - "iPhone 17 preorder date and price?"
 
 ### 💰 Anthropic AI Settlement - $1.5 Billion
+
 - **Topic**: "First of its kind" AI settlement with authors
 - **Category**: AI/Legal
 - **Date**: September 5, 2025
@@ -34,7 +36,8 @@
   - "AI training data copyright settlement details?"
   - "Impact of AI settlement on tech companies?"
 
-### 🤖 OpenAI Reorganization 
+### 🤖 OpenAI Reorganization
+
 - **Topic**: ChatGPT personality research team restructured
 - **Category**: AI
 - **Date**: September 5, 2025
@@ -46,9 +49,10 @@
   - "ChatGPT personality development updates?"
 
 ### 💸 EU Google Fine - $3.5 Billion
+
 - **Topic**: Google fined for adtech abuse
 - **Category**: Tech/Legal
-- **Date**: September 6, 2025  
+- **Date**: September 6, 2025
 - **Details**: Major EU antitrust fine for advertising technology practices
 - **Source**: TechCrunch
 - **PAA Questions**:
@@ -59,11 +63,13 @@
 ## ADDITIONAL TRENDING TOPICS
 
 ### Gaming & Entertainment
+
 - Nintendo Switch 2 ongoing reviews and performance analysis
 - PS5 Pro vs Nintendo Switch 2 comparisons
 - Amazon-backed AI startup creating Orson Welles content
 
 ### Tech Industry News
+
 - EU tech regulation enforcement intensifying
 - AI copyright and training data legal battles
 - Apple ecosystem expansion with new hardware
@@ -71,6 +77,7 @@
 ## SEO OPPORTUNITIES (Low Competition Keywords)
 
 ### Apple Event Related
+
 - "How to watch iPhone 17 event live stream free"
 - "iPhone 17 Air vs iPhone 16 Plus thickness"
 - "Apple Watch Ultra 3 satellite messaging countries"
@@ -78,16 +85,19 @@
 - "iPhone 17 preorder September 12 tips"
 
 ### AI & Legal
+
 - "Anthropic settlement impact on AI companies"
 - "AI training data copyright settlement details"
 - "OpenAI ChatGPT personality team changes"
 - "EU Google adtech fine breakdown 2025"
 
 ### Gaming
+
 - "Nintendo Switch 2 performance vs Steam Deck"
 - "PS5 Pro worth it vs Nintendo Switch 2"
 
 ### Tech News Analysis
+
 - "Amazon AI startup Orson Welles project explained"
 - "EU tech fines impact on US companies 2025"
 
@@ -105,13 +115,15 @@
 10. **User Guides**: Setting up new Apple products
 
 ## EVIDENCE SOURCES
+
 - Apple.com official announcements
 - TechCrunch breaking news
-- The Verge hands-on reviews  
+- The Verge hands-on reviews
 - Ars Technica legal analysis
 - WIRED feature coverage
 - Reddit community discussions
 
 ---
-*Last Updated: September 6, 2025 23:45 PT*
-*Next Update: September 7, 2025 (Pre-Apple Event)*
+
+_Last Updated: September 6, 2025 23:45 PT_
+_Next Update: September 7, 2025 (Pre-Apple Event)_

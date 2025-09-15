@@ -2,7 +2,14 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Review Content Schema",
   "type": "object",
-  "required": ["title", "product", "score", "verdict", "testedClaims", "lastUpdated"],
+  "required": [
+    "title",
+    "product",
+    "score",
+    "verdict",
+    "testedClaims",
+    "lastUpdated"
+  ],
   "properties": {
     "title": {
       "type": "string",
@@ -17,7 +24,7 @@
       "required": ["name", "brand", "model", "category", "price"],
       "properties": {
         "name": "string",
-        "brand": "string", 
+        "brand": "string",
         "model": "string",
         "category": "string",
         "price": {
@@ -58,7 +65,7 @@
           "type": "object",
           "properties": {
             "design": "number",
-            "performance": "number", 
+            "performance": "number",
             "features": "number",
             "value": "number"
           }
@@ -86,7 +93,7 @@
           "items": "string"
         },
         "cons": {
-          "type": "array", 
+          "type": "array",
           "items": "string"
         }
       }
@@ -126,7 +133,7 @@
       "type": "object",
       "properties": {
         "metaTitle": "string",
-        "metaDescription": "string", 
+        "metaDescription": "string",
         "keywords": {
           "type": "array",
           "items": "string"

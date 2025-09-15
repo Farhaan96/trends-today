@@ -4,7 +4,13 @@
   "summary": "Sources suggest Apple is working on a lighter, more affordable Vision Pro successor with improved battery life and streamlined design for 2026 release.",
   "content": "According to new reports from multiple supply chain sources, Apple is actively developing a second-generation Vision Pro headset that addresses many of the criticisms leveled at the original device. The Vision Pro 2, tentatively scheduled for release in 2026, is expected to feature significant weight reduction, improved battery life, and a more consumer-friendly price point.\n\nThe original Vision Pro, launched in February 2024 at $3,499, has faced challenges with its hefty 650-gram weight and premium pricing that limited mainstream adoption. Industry analysts estimate Apple has sold approximately 500,000 units globally, falling short of initial projections.\n\nKey improvements reportedly in development include a redesigned chassis that could reduce weight by up to 30%, integration of more efficient M4-class processors, and optimization of the dual 4K displays to consume less power. Sources familiar with the project suggest Apple is exploring new materials and manufacturing techniques to achieve these goals while maintaining the device's premium feel.\n\nThe company is also reportedly working on a more affordable variant, potentially priced around $2,000, which would strip away some premium features like the external EyeSight display in favor of broader market appeal. This strategy mirrors Apple's approach with products like the iPhone SE and Apple Watch SE.\n\nApple has not officially commented on these reports, maintaining its typical silence on future product development. However, CEO Tim Cook has repeatedly emphasized the company's long-term commitment to spatial computing during recent earnings calls.",
   "category": "product-launches",
-  "tags": ["Apple", "Vision Pro", "AR/VR", "Mixed Reality", "Spatial Computing"],
+  "tags": [
+    "Apple",
+    "Vision Pro",
+    "AR/VR",
+    "Mixed Reality",
+    "Spatial Computing"
+  ],
   "publishedAt": "2024-10-01T09:00:00Z",
   "lastUpdated": "2024-10-01T09:00:00Z",
   "author": {
@@ -23,7 +29,7 @@
     {
       "title": "Apple Supply Chain Developments for Next-Gen Headset",
       "url": "https://www.macrumors.com/vision-pro-2-supply-chain",
-      "publisher": "MacRumors", 
+      "publisher": "MacRumors",
       "publishedAt": "2024-09-29",
       "accessDate": "2024-09-30"
     },
@@ -71,7 +77,7 @@
       "event": "Apple Vision Pro launches at $3,499"
     },
     {
-      "date": "June 2024", 
+      "date": "June 2024",
       "event": "Vision Pro launches internationally"
     },
     {
@@ -90,8 +96,20 @@
   "seo": {
     "metaTitle": "Apple Vision Pro 2 in Development: Lighter Design, Lower Price Coming 2026",
     "metaDescription": "Apple is reportedly developing Vision Pro 2 with 30% weight reduction, better battery life, and more affordable pricing for 2026 release. Latest details inside.",
-    "keywords": ["Apple Vision Pro 2", "Vision Pro successor", "Apple AR VR headset", "Vision Pro 2026", "Apple spatial computing"],
-    "newsKeywords": ["Apple", "Vision Pro", "Mixed Reality", "AR VR", "Technology"]
+    "keywords": [
+      "Apple Vision Pro 2",
+      "Vision Pro successor",
+      "Apple AR VR headset",
+      "Vision Pro 2026",
+      "Apple spatial computing"
+    ],
+    "newsKeywords": [
+      "Apple",
+      "Vision Pro",
+      "Mixed Reality",
+      "AR VR",
+      "Technology"
+    ]
   },
   "socialMedia": {
     "twitterCard": "summary_large_image",

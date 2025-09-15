@@ -30,7 +30,7 @@ export default function BackToTop() {
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'back_to_top_click', {
         event_category: 'navigation',
-        value: 1
+        value: 1,
       });
     }
   };

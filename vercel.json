@@ -19,7 +19,7 @@
           "value": "nosniff"
         },
         {
-          "key": "X-Frame-Options", 
+          "key": "X-Frame-Options",
           "value": "DENY"
         },
         {
@@ -41,7 +41,7 @@
       "source": "/robots.txt",
       "headers": [
         {
-          "key": "Cache-Control", 
+          "key": "Cache-Control",
           "value": "public, max-age=86400, s-maxage=86400"
         }
       ]

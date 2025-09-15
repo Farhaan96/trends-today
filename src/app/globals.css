@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+﻿@import 'tailwindcss';
 
 :root {
   /* Professional color system - TechCrunch inspired */
@@ -14,7 +14,7 @@
   --color-gray-700: #374151;
   --color-gray-800: #1f2937;
   --color-gray-900: #111827;
-  
+
   /* Professional spacing scale */
   --spacing-xs: 8px;
   --spacing-sm: 16px;
@@ -22,7 +22,7 @@
   --spacing-lg: 32px;
   --spacing-xl: 48px;
   --spacing-2xl: 64px;
-  
+
   /* Typography scale */
   --font-size-xs: 12px;
   --font-size-sm: 14px;
@@ -35,24 +35,33 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans:
+    var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 body {
   background: var(--color-background);
   color: var(--color-foreground);
-  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  font-variation-settings: "opsz" 32;
+  font-family:
+    var(--font-inter),
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  font-variation-settings: 'opsz' 32;
 }
 
 /* Basic dark mode defaults */
 /* Force light color scheme site-wide */
-html { color-scheme: light; }
+html {
+  color-scheme: light;
+}
 
 /* Professional transitions */
 * {
-  transition-property: background-color, border-color, color, fill, stroke, opacity;
+  transition-property:
+    background-color, border-color, color, fill, stroke, opacity;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -110,7 +119,7 @@ html { color-scheme: light; }
   button:hover {
     background-color: initial;
   }
-  
+
   button:active {
     transform: scale(0.98);
   }
@@ -132,7 +141,12 @@ html {
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, var(--color-gray-100) 25%, var(--color-gray-200) 50%, var(--color-gray-100) 75%);
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-100) 25%,
+    var(--color-gray-200) 50%,
+    var(--color-gray-100) 75%
+  );
   background-size: 200px 100%;
   animation: shimmer 1.5s infinite;
 }
@@ -154,24 +168,44 @@ html {
 }
 
 @media (min-width: 640px) {
-  .prose { font-size: 1.125rem; } /* 18px */
+  .prose {
+    font-size: 1.125rem;
+  } /* 18px */
 }
 
 @media (min-width: 768px) {
-  .prose { font-size: 1.1875rem; } /* 19px */
+  .prose {
+    font-size: 1.1875rem;
+  } /* 19px */
 }
 
-.prose p { margin: 0 0 1.25rem; }
-.prose h1 { 
-  line-height: 1.1; 
-  margin: 4rem 0 2.5rem; 
+.prose p {
+  margin: 0 0 1.25rem;
+}
+.prose h1 {
+  line-height: 1.1;
+  margin: 4rem 0 2.5rem;
   font-size: 3rem;
   font-weight: 800;
 }
-.prose h2 { line-height: 1.2; margin: 2rem 0 0.75rem; font-weight: 700; }
-.prose h3 { line-height: 1.25; margin: 1.5rem 0 0.5rem; font-weight: 600; }
-.prose ul, .prose ol { margin: 1rem 0 1.25rem; padding-left: 1.25rem; }
-.prose li { margin: 0.375rem 0; }
+.prose h2 {
+  line-height: 1.2;
+  margin: 2rem 0 0.75rem;
+  font-weight: 700;
+}
+.prose h3 {
+  line-height: 1.25;
+  margin: 1.5rem 0 0.5rem;
+  font-weight: 600;
+}
+.prose ul,
+.prose ol {
+  margin: 1rem 0 1.25rem;
+  padding-left: 1.25rem;
+}
+.prose li {
+  margin: 0.375rem 0;
+}
 .prose hr {
   /* Ensure a single, light divider */
   margin: 2rem 0;
@@ -179,19 +213,26 @@ html {
   border-top: 1px solid var(--color-gray-200);
 }
 /* Collapse consecutive horizontal rules into a single divider */
-.prose hr + hr { display: none; }
-.prose blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 4px solid #e5e7eb; color: inherit; }
+.prose hr + hr {
+  display: none;
+}
+.prose blockquote {
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  border-left: 4px solid #e5e7eb;
+  color: inherit;
+}
 
 /* Links inside article content: bright blue, clearly clickable */
-.prose a { 
-  text-decoration: underline !important; 
+.prose a {
+  text-decoration: underline !important;
   text-decoration-color: #2563eb !important;
   text-underline-offset: 2px !important;
-  color: #2563eb !important; 
+  color: #2563eb !important;
   font-weight: 500 !important;
 }
-.prose a:hover { 
-  color: #1d4ed8 !important; 
+.prose a:hover {
+  color: #1d4ed8 !important;
   text-decoration-color: #1d4ed8 !important;
   text-decoration-thickness: 2px !important;
 }
@@ -206,8 +247,9 @@ html {
 .prose strong,
 .prose em,
 .prose code,
-.prose span { color: #111827 !important; }
-
+.prose span {
+  color: #111827 !important;
+}
 
 .text-subheading {
   font-size: var(--font-size-2xl);
@@ -283,4 +325,3 @@ img,
 .article-content img {
   border-radius: 0.75rem; /* matches Tailwind rounded-lg */
 }
-

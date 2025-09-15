@@ -19,7 +19,7 @@
     },
     {
       "factor": "[Important Factor 2]",
-      "importance": "high", 
+      "importance": "high",
       "explanation": "[Why this factor is important]",
       "tips": [
         "[Tip 1 for evaluating this factor]",
@@ -84,17 +84,8 @@
           "[User type 3]",
           "[User type 4]"
         ],
-        "pros": [
-          "[Pro 1]",
-          "[Pro 2]",
-          "[Pro 3]",
-          "[Pro 4]"
-        ],
-        "cons": [
-          "[Con 1]",
-          "[Con 2]",
-          "[Con 3]"
-        ]
+        "pros": ["[Pro 1]", "[Pro 2]", "[Pro 3]", "[Pro 4]"],
+        "cons": ["[Con 1]", "[Con 2]", "[Con 3]"]
       },
       "testingNotes": "[Brief summary of testing experience and key observations]",
       "alternatives": [
@@ -142,7 +133,7 @@
       ]
     },
     "premium": {
-      "range": "$[amount]+", 
+      "range": "$[amount]+",
       "recommendations": [
         "[Premium recommendation 1]",
         "[Premium recommendation 2]",
@@ -197,7 +188,13 @@
   "seo": {
     "metaTitle": "Best [Category] 2025: Top [Number] Picks After Testing [X]+ Devices | Trends Today",
     "metaDescription": "Our comprehensive guide to the best [category] in 2025. We tested [X]+ devices to find the top picks across all price ranges. [Winner] leads our list.",
-    "keywords": ["best [category] 2025", "top [category] 2025", "[category] buying guide", "[winner product] review", "[category] comparison"]
+    "keywords": [
+      "best [category] 2025",
+      "top [category] 2025",
+      "[category] buying guide",
+      "[winner product] review",
+      "[category] comparison"
+    ]
   },
   "author": {
     "id": "[author-id]",

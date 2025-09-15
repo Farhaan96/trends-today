@@ -27,11 +27,7 @@
       "Google Pixel 8 Pro",
       "OnePlus 12"
     ],
-    "sources": [
-      "samsung.com",
-      "gsmarena.com",
-      "dxomark.com"
-    ],
+    "sources": ["samsung.com", "gsmarena.com", "dxomark.com"],
     "productName": "Samsung Galaxy S24 Ultra"
   },
   "keywordData": [

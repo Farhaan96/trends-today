@@ -5,24 +5,11 @@
       "processor": "Advanced chip",
       "camera": "Multi-lens system"
     },
-    "pros": [
-      "Great performance",
-      "Good build quality",
-      "Nice design"
-    ],
-    "cons": [
-      "Expensive",
-      "Battery could be better"
-    ],
+    "pros": ["Great performance", "Good build quality", "Nice design"],
+    "cons": ["Expensive", "Battery could be better"],
     "priceRange": "$699-$999",
-    "competitorComparisons": [
-      "Competitor A",
-      "Competitor B"
-    ],
-    "sources": [
-      "manufacturer.com",
-      "techsite.com"
-    ],
+    "competitorComparisons": ["Competitor A", "Competitor B"],
+    "sources": ["manufacturer.com", "techsite.com"],
     "productName": "iPhone 15 Pro"
   },
   "keywordData": [

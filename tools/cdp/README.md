@@ -17,6 +17,7 @@ Chrome must be started with remote debugging enabled. Use the appropriate comman
 #### Windows
 
 **Option 1: Minimal flags (Recommended)**
+
 ```bash
 # Using PowerShell (cleanest approach)
 Start-Process -FilePath "chrome.exe" -ArgumentList "--remote-debugging-port=9222"
@@ -25,7 +26,8 @@ Start-Process -FilePath "chrome.exe" -ArgumentList "--remote-debugging-port=9222
 chrome.exe --remote-debugging-port=9222
 ```
 
-**Option 2: Separate profile (if you want to keep your main Chrome separate)**  
+**Option 2: Separate profile (if you want to keep your main Chrome separate)**
+
 ```bash
 # Create a separate debug profile
 chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\temp\chrome-debug
@@ -35,6 +37,7 @@ Start-Process -FilePath "chrome.exe" -ArgumentList "--remote-debugging-port=9222
 ```
 
 **Option 3: Full path if Chrome is not in PATH**
+
 ```bash
 "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222
 ```
@@ -42,6 +45,7 @@ Start-Process -FilePath "chrome.exe" -ArgumentList "--remote-debugging-port=9222
 **⚠️ Important**: Using too many flags can trigger Chrome's "unsupported command line" warning and change the behavior. The minimal approach works best.
 
 #### macOS
+
 ```bash
 # Standard Chrome installation
 /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=/tmp/chrome-debug --no-first-run --no-default-browser-check
@@ -51,6 +55,7 @@ Start-Process -FilePath "chrome.exe" -ArgumentList "--remote-debugging-port=9222
 ```
 
 #### Linux
+
 ```bash
 # Ubuntu/Debian
 google-chrome --remote-debugging-port=9222 --user-data-dir=/tmp/chrome-debug --no-first-run --no-default-browser-check
@@ -89,24 +94,23 @@ const CDPClient = require('./client.js');
 
 async function example() {
   const client = new CDPClient();
-  
+
   try {
     // Connect to Chrome
     await client.connect();
-    
+
     // Navigate to a page
     await client.open('https://example.com');
-    
+
     // Wait for an element
     await client.waitForSelector('h1');
-    
+
     // Get page title
     const title = await client.getTitle();
     console.log('Title:', title);
-    
+
     // Take a screenshot
     await client.screenshot('screenshot.png');
-    
   } finally {
     await client.disconnect();
   }
@@ -137,8 +141,8 @@ The client includes built-in rate limiting (400ms between actions by default) to
 ```javascript
 // Customize rate limiting
 const client = new CDPClient({
-  rateLimitMs: 500,        // 500ms between actions
-  defaultTimeoutMs: 20000  // 20s default timeout
+  rateLimitMs: 500, // 500ms between actions
+  defaultTimeoutMs: 20000, // 20s default timeout
 });
 ```
 
@@ -165,26 +169,31 @@ node examples/collect-serp-v2.js "site:reddit.com best budget earbuds 2025"
 ## Troubleshooting
 
 ### Chrome Won't Start
+
 - Ensure Chrome is properly installed
 - Try a different user data directory path
 - Check if port 9222 is already in use: `netstat -an | grep 9222`
 
 ### Connection Refused
+
 - Verify Chrome is running with the correct flags
 - Check if `http://localhost:9222/json/version` returns JSON
 - Ensure no firewall is blocking port 9222
 
 ### JavaScript Errors
+
 - Use `client.evaluate()` to test JavaScript in the browser console
 - Check for timing issues - add waits before interacting with elements
 - Verify selectors are correct using browser dev tools
 
 ### Performance Issues
+
 - Increase rate limiting delay for slower websites (v2 uses 600ms for better stealth)
 - Add explicit waits for dynamic content
 - Use `waitForSelector()` before interacting with elements
 
 ### Google SERP Collection Issues
+
 - **Consent Dialogs**: The v2 collector handles consent dialogs automatically
 - **No Results**: Try direct URL navigation instead of typing searches
 - **Anti-bot Detection**: Use slower rate limiting (600ms+) and minimal Chrome flags
@@ -192,8 +201,9 @@ node examples/collect-serp-v2.js "site:reddit.com best budget earbuds 2025"
 - **Stealth Mode**: Minimal flags (`--remote-debugging-port=9222` only) work best to avoid detection
 
 ### Best Practices for Web Scraping
+
 - Use appropriate delays between requests (600ms+ for search engines)
-- Handle consent dialogs and cookie notices automatically  
+- Handle consent dialogs and cookie notices automatically
 - Test with multiple search queries to ensure selector robustness
 - Navigate directly to search URLs rather than typing when possible
 - Always clean up connections in finally blocks

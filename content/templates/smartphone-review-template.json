@@ -67,7 +67,12 @@
     "methodology": {
       "performance": {
         "description": "CPU and GPU performance tested using industry-standard benchmarks",
-        "tools": ["Geekbench 6", "3DMark Wild Life Extreme", "AnTuTu Benchmark", "GFXBench Manhattan"],
+        "tools": [
+          "Geekbench 6",
+          "3DMark Wild Life Extreme",
+          "AnTuTu Benchmark",
+          "GFXBench Manhattan"
+        ],
         "testConditions": "Room temperature (22°C), 50% battery, background apps closed, multiple test runs averaged",
         "realWorldTests": [
           "[Real-world performance test 1]",
@@ -93,7 +98,7 @@
         "description": "Real-world battery life testing under various usage patterns",
         "testProfiles": [
           "Heavy usage: Gaming, streaming, GPS navigation",
-          "Moderate usage: Social media, texting, light photography", 
+          "Moderate usage: Social media, texting, light photography",
           "Light usage: Calls, basic apps, minimal screen time"
         ],
         "measurements": "Screen-on time, standby drain, charging speeds (wired and wireless)",
@@ -117,15 +122,8 @@
       "overview": "[Description of overall design philosophy and build quality]",
       "materials": {
         "[materialType1]": {
-          "benefits": [
-            "[Benefit 1]",
-            "[Benefit 2]",
-            "[Benefit 3]"
-          ],
-          "drawbacks": [
-            "[Drawback 1]",
-            "[Drawback 2]"
-          ]
+          "benefits": ["[Benefit 1]", "[Benefit 2]", "[Benefit 3]"],
+          "drawbacks": ["[Drawback 1]", "[Drawback 2]"]
         }
       },
       "ergonomics": "[Description of how it feels to hold and use daily]"
@@ -150,11 +148,7 @@
       "overview": "[Camera system overview and key improvements]",
       "mainCamera": {
         "hardware": "[Hardware specifications and improvements]",
-        "features": [
-          "[Feature 1]",
-          "[Feature 2]",
-          "[Feature 3]"
-        ],
+        "features": ["[Feature 1]", "[Feature 2]", "[Feature 3]"],
         "realWorldPerformance": "[Description of actual photo quality in various conditions]"
       },
       "ultraWideCamera": "[Ultra-wide camera performance description]",
@@ -215,11 +209,7 @@
   },
   "competitiveComparison": {
     "vs[CompetitorName]": {
-      "advantages": [
-        "[Advantage 1]",
-        "[Advantage 2]",
-        "[Advantage 3]"
-      ],
+      "advantages": ["[Advantage 1]", "[Advantage 2]", "[Advantage 3]"],
       "disadvantages": [
         "[Disadvantage 1]",
         "[Disadvantage 2]",
@@ -349,7 +339,13 @@
   "seo": {
     "metaTitle": "[Product Name] Review: [Key benefit/feature] | Trends Today",
     "metaDescription": "[Compelling description with key points and call to action, 150-160 characters]",
-    "keywords": ["[product name] review", "[brand] [model]", "[key feature 1]", "[key feature 2]", "[comparison keywords]"],
+    "keywords": [
+      "[product name] review",
+      "[brand] [model]",
+      "[key feature 1]",
+      "[key feature 2]",
+      "[comparison keywords]"
+    ],
     "canonicalUrl": "https://trendstoday.ca/reviews/[product-slug]"
   },
   "publishedDate": "YYYY-MM-DD",
@@ -357,14 +353,10 @@
   "author": {
     "id": "[author-id]",
     "name": "[Author Name]",
-    "title": "[Author Title]", 
+    "title": "[Author Title]",
     "bio": "[Author bio with expertise and background]",
     "expertise": ["[Expertise 1]", "[Expertise 2]", "[Expertise 3]"],
-    "credentials": [
-      "[Credential 1]",
-      "[Credential 2]",
-      "[Credential 3]"
-    ],
+    "credentials": ["[Credential 1]", "[Credential 2]", "[Credential 3]"],
     "socialMedia": {
       "twitter": "[Twitter handle]",
       "linkedin": "[LinkedIn profile]",

@@ -37,7 +37,9 @@ function trackWebVital(metric: any) {
     (window as any).gtag('event', metric.name, {
       event_category: 'Web Vitals',
       event_label: metric.id,
-      value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+      value: Math.round(
+        metric.name === 'CLS' ? metric.value * 1000 : metric.value
+      ),
       non_interaction: true,
     });
   }
@@ -57,7 +59,7 @@ function trackWebVital(metric: any) {
         delta: metric.delta,
         url: window.location.href,
         userAgent: navigator.userAgent,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       }),
     }).catch(console.error);
   }
@@ -68,18 +70,21 @@ function trackWebVital(metric: any) {
       value: metric.value,
       rating: getVitalRating(metric.name, metric.value),
       delta: metric.delta,
-      id: metric.id
+      id: metric.id,
     });
   }
 }
 
-function getVitalRating(name: string, value: number): 'good' | 'needs-improvement' | 'poor' {
+function getVitalRating(
+  name: string,
+  value: number
+): 'good' | 'needs-improvement' | 'poor' {
   const thresholds = {
     CLS: [0.1, 0.25],
     FID: [100, 300],
     FCP: [1800, 3000],
     LCP: [2500, 4000],
-    TTFB: [800, 1800]
+    TTFB: [800, 1800],
   };
 
   const threshold = thresholds[name as keyof typeof thresholds];
@@ -103,18 +108,20 @@ export function PerformanceObserver() {
           for (const entry of list.getEntries()) {
             if (entry.entryType === 'navigation') {
               const navEntry = entry as PerformanceNavigationTiming;
-              
+
               // Track key navigation metrics
               const metrics = {
                 dns: navEntry.domainLookupEnd - navEntry.domainLookupStart,
                 connection: navEntry.connectEnd - navEntry.connectStart,
-                ssl: navEntry.secureConnectionStart > 0 ? 
-                     navEntry.connectEnd - navEntry.secureConnectionStart : 0,
+                ssl:
+                  navEntry.secureConnectionStart > 0
+                    ? navEntry.connectEnd - navEntry.secureConnectionStart
+                    : 0,
                 ttfb: navEntry.responseStart - navEntry.requestStart,
                 download: navEntry.responseEnd - navEntry.responseStart,
                 domInteractive: navEntry.domInteractive - navEntry.fetchStart,
                 domComplete: navEntry.domComplete - navEntry.fetchStart,
-                loadComplete: navEntry.loadEventEnd - navEntry.fetchStart
+                loadComplete: navEntry.loadEventEnd - navEntry.fetchStart,
               };
 
               // Send to analytics
@@ -125,8 +132,8 @@ export function PerformanceObserver() {
                   type: 'navigation-timing',
                   metrics,
                   url: window.location.href,
-                  timestamp: Date.now()
-                })
+                  timestamp: Date.now(),
+                }),
               }).catch(console.error);
             }
           }
@@ -157,8 +164,8 @@ export function PerformanceObserver() {
                 type: 'slow-resources',
                 resources: slowResources,
                 url: window.location.href,
-                timestamp: Date.now()
-              })
+                timestamp: Date.now(),
+              }),
             }).catch(console.error);
           }
         });
@@ -206,25 +213,24 @@ export function OptimizedImage({
   height,
   priority = false,
   className,
-  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
 }: OptimizedImageProps) {
   // Generate responsive image sources
   const generateSrcSet = (baseSrc: string) => {
     const sizes = [480, 768, 1024, 1280, 1920];
-    return sizes.map(size => 
-      `${baseSrc}?w=${size}&q=75 ${size}w`
-    ).join(', ');
+    return sizes.map((size) => `${baseSrc}?w=${size}&q=75 ${size}w`).join(', ');
   };
 
   const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
     const img = event.currentTarget;
-    
+
     // Track image loading performance
     if (typeof window !== 'undefined' && 'performance' in window) {
       const entries = performance.getEntriesByName(img.src, 'resource');
       const entry = entries[entries.length - 1] as PerformanceResourceTiming;
-      
-      if (entry && entry.duration > 2000) { // Slow loading image
+
+      if (entry && entry.duration > 2000) {
+        // Slow loading image
         fetch('/api/analytics', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -233,8 +239,8 @@ export function OptimizedImage({
             src: img.src,
             duration: entry.duration,
             size: entry.transferSize || 0,
-            timestamp: Date.now()
-          })
+            timestamp: Date.now(),
+          }),
         }).catch(console.error);
       }
     }
@@ -255,7 +261,7 @@ export function OptimizedImage({
       style={{
         maxWidth: '100%',
         height: 'auto',
-        aspectRatio: width && height ? `${width}/${height}` : undefined
+        aspectRatio: width && height ? `${width}/${height}` : undefined,
       }}
     />
   );
@@ -266,12 +272,17 @@ export function ResourcePreloader() {
   useEffect(() => {
     // Preload critical resources
     const criticalResources = [
-      { href: '/fonts/inter-var.woff2', as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+      {
+        href: '/fonts/inter-var.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossOrigin: 'anonymous',
+      },
       { href: '/images/logo.png', as: 'image' },
-      { href: '/api/featured-content', as: 'fetch', crossOrigin: 'anonymous' }
+      { href: '/api/featured-content', as: 'fetch', crossOrigin: 'anonymous' },
     ];
 
-    criticalResources.forEach(resource => {
+    criticalResources.forEach((resource) => {
       const link = document.createElement('link');
       link.rel = 'preload';
       link.href = resource.href;
@@ -286,10 +297,10 @@ export function ResourcePreloader() {
       'https://fonts.googleapis.com',
       'https://fonts.gstatic.com',
       'https://www.google-analytics.com',
-      'https://www.googletagmanager.com'
+      'https://www.googletagmanager.com',
     ];
 
-    preconnectDomains.forEach(domain => {
+    preconnectDomains.forEach((domain) => {
       const link = document.createElement('link');
       link.rel = 'preconnect';
       link.href = domain;
@@ -355,14 +366,17 @@ export function LayoutStabilizer() {
 }
 
 // Intersection Observer for lazy loading optimization
-export function useLazyLoading(ref: React.RefObject<HTMLElement>, callback: () => void) {
+export function useLazyLoading(
+  ref: React.RefObject<HTMLElement>,
+  callback: () => void
+) {
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             callback();
             observer.unobserve(entry.target);
@@ -371,7 +385,7 @@ export function useLazyLoading(ref: React.RefObject<HTMLElement>, callback: () =
       },
       {
         rootMargin: '50px',
-        threshold: 0.1
+        threshold: 0.1,
       }
     );
 

@@ -11,11 +11,11 @@ interface RatingSystemProps {
   allowRating?: boolean;
 }
 
-export default function RatingSystem({ 
-  articleId, 
-  initialRating = 0, 
+export default function RatingSystem({
+  articleId,
+  initialRating = 0,
   totalRatings = 0,
-  allowRating = true 
+  allowRating = true,
 }: RatingSystemProps) {
   const [currentRating, setCurrentRating] = useState(initialRating);
   const [userRating, setUserRating] = useState(0);
@@ -29,12 +29,12 @@ export default function RatingSystem({
     setIsSubmitting(true);
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       // Update ratings (simplified calculation)
       const newTotal = totalRatings + 1;
-      const newAverage = ((currentRating * totalRatings) + rating) / newTotal;
-      
+      const newAverage = (currentRating * totalRatings + rating) / newTotal;
+
       setCurrentRating(newAverage);
       setUserRating(rating);
       setHasRated(true);
@@ -44,10 +44,10 @@ export default function RatingSystem({
         (window as any).gtag('event', 'article_rating', {
           event_category: 'engagement',
           event_label: articleId,
-          value: rating
+          value: rating,
         });
       }
-      
+
       console.log(`Rated article ${articleId} with ${rating} stars`);
     } catch (error) {
       console.error('Error submitting rating:', error);
@@ -64,12 +64,11 @@ export default function RatingSystem({
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
           {hasRated ? 'Thanks for rating!' : 'Rate this article'}
         </h3>
-        
+
         <p className="text-sm text-gray-800 dark:text-gray-300 mb-4">
-          {hasRated 
+          {hasRated
             ? `You rated this article ${userRating} star${userRating !== 1 ? 's' : ''}`
-            : 'How helpful did you find this article?'
-          }
+            : 'How helpful did you find this article?'}
         </p>
 
         {/* Star Rating Display */}
@@ -82,8 +81,8 @@ export default function RatingSystem({
               onMouseLeave={() => !hasRated && setHoveredRating(0)}
               disabled={hasRated || !allowRating || isSubmitting}
               className={`transition-all duration-200 ${
-                hasRated || !allowRating 
-                  ? 'cursor-default' 
+                hasRated || !allowRating
+                  ? 'cursor-default'
                   : 'cursor-pointer hover:scale-110'
               }`}
             >
@@ -104,11 +103,12 @@ export default function RatingSystem({
               {currentRating > 0 ? currentRating.toFixed(1) : '0.0'}
             </span>
           </div>
-          
+
           <span className="text-gray-900">•</span>
-          
+
           <span>
-            {totalRatings + (hasRated ? 1 : 0)} rating{(totalRatings + (hasRated ? 1 : 0)) !== 1 ? 's' : ''}
+            {totalRatings + (hasRated ? 1 : 0)} rating
+            {totalRatings + (hasRated ? 1 : 0) !== 1 ? 's' : ''}
           </span>
         </div>
 
@@ -118,14 +118,20 @@ export default function RatingSystem({
             {[5, 4, 3, 2, 1].map((stars) => {
               // Mock distribution - in real app, get from API
               const count = Math.floor(Math.random() * (totalRatings / 3));
-              const percentage = totalRatings > 0 ? (count / totalRatings) * 100 : 0;
-              
+              const percentage =
+                totalRatings > 0 ? (count / totalRatings) * 100 : 0;
+
               return (
-                <div key={stars} className="flex items-center text-xs space-x-2">
-                  <span className="w-3 text-gray-800 dark:text-gray-900">{stars}</span>
+                <div
+                  key={stars}
+                  className="flex items-center text-xs space-x-2"
+                >
+                  <span className="w-3 text-gray-800 dark:text-gray-900">
+                    {stars}
+                  </span>
                   <StarSolid className="w-3 h-3 text-yellow-400" />
                   <div className="flex-1 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
-                    <div 
+                    <div
                       className="bg-yellow-400 h-2 rounded-full transition-all duration-300"
                       style={{ width: `${percentage}%` }}
                     />
@@ -144,14 +150,22 @@ export default function RatingSystem({
           <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-600">
             <div className="flex items-center justify-center space-x-4">
               <button className="flex items-center space-x-2 px-4 py-2 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-full hover:bg-green-200 dark:hover:bg-green-800 transition-colors">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
                   <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
                 </svg>
                 <span className="text-sm font-medium">Helpful</span>
               </button>
-              
+
               <button className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
                   <path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 113 0v6zM14 9.667v-5.43a2 2 0 00-1.106-1.79l-.05-.025A4 4 0 0011.057 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
                 </svg>
                 <span className="text-sm font-medium">Not helpful</span>

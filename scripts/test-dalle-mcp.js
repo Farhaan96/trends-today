@@ -26,42 +26,47 @@ async function testDalleMCP() {
       {
         title: 'AI Agents Revolution',
         category: 'technology',
-        prompt: 'futuristic AI robots and automation systems, modern workplace, professional lighting, high quality'
+        prompt:
+          'futuristic AI robots and automation systems, modern workplace, professional lighting, high quality',
       },
       {
         title: 'Cognitive Biases',
-        category: 'psychology', 
-        prompt: 'abstract brain visualization with neural networks, psychology concept, soft lighting, professional'
+        category: 'psychology',
+        prompt:
+          'abstract brain visualization with neural networks, psychology concept, soft lighting, professional',
       },
       {
         title: 'CRISPR Breakthrough',
         category: 'science',
-        prompt: 'DNA double helix with gene editing tools, scientific laboratory, clean white background, professional'
+        prompt:
+          'DNA double helix with gene editing tools, scientific laboratory, clean white background, professional',
       },
       {
         title: 'Quantum Computing',
         category: 'technology',
-        prompt: 'quantum computer processor with quantum bits, advanced technology, futuristic design, professional'
+        prompt:
+          'quantum computer processor with quantum bits, advanced technology, futuristic design, professional',
       },
       {
         title: 'Space Discovery',
         category: 'space',
-        prompt: 'exoplanet in deep space, cosmic beauty, astronomical phenomena, NASA style, professional'
-      }
+        prompt:
+          'exoplanet in deep space, cosmic beauty, astronomical phenomena, NASA style, professional',
+      },
     ];
 
     console.log('\n🎨 Testing image generation for each category...\n');
 
     for (const test of testPrompts) {
       console.log(`Generating image for: ${test.title} (${test.category})`);
-      
+
       try {
         const result = await dalle.generateImage({
           prompt: test.prompt,
           model: 'dall-e-3',
           size: '1792x1024',
           quality: 'hd',
-          style: 'vivid'
+          style: 'vivid',
         });
 
         if (result.error) {
@@ -75,7 +80,7 @@ async function testDalleMCP() {
       } catch (error) {
         console.log(`❌ Generation failed: ${error.message}`);
       }
-      
+
       console.log('---');
     }
 
@@ -98,7 +103,6 @@ async function testDalleMCP() {
     }
 
     console.log('\n🎉 DALL-E MCP setup test completed!');
-
   } catch (error) {
     console.error('❌ DALL-E MCP setup failed:', error.message);
     console.log('\nTroubleshooting:');

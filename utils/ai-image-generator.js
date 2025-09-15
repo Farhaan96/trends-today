@@ -17,14 +17,20 @@ class AIImageGenerator {
     this.openaiKey = process.env.OPENAI_API_KEY;
 
     this.cacheDir = path.join(__dirname, '..', '.cache', 'ai-images');
-    this.outputDir = path.join(__dirname, '..', 'public', 'images', 'ai-generated');
+    this.outputDir = path.join(
+      __dirname,
+      '..',
+      'public',
+      'images',
+      'ai-generated'
+    );
 
     // Optimized settings for cost and quality based on gpt-image-1 specs
     this.defaultOptions = {
-      size: '1536x1024',  // Supported: 1024x1024, 1024x1536, 1536x1024
-      quality: 'high',    // Options: low, medium, high, auto
+      size: '1536x1024', // Supported: 1024x1024, 1024x1536, 1536x1024
+      quality: 'high', // Options: low, medium, high, auto
       model: 'gpt-image-1',
-      n: 1                // Only 1 image per request supported
+      n: 1, // Only 1 image per request supported
     };
 
     // Rate limiting
@@ -46,14 +52,14 @@ class AIImageGenerator {
 
     // Extract from headers (## and ###)
     const headers = content.match(/^#{2,3}\s+(.+)$/gm) || [];
-    headers.forEach(header => {
+    headers.forEach((header) => {
       const cleaned = header.replace(/^#{2,3}\s+/, '').replace(/[*_`]/g, '');
       topics.push(cleaned);
     });
 
     // Extract from bold text
     const boldText = content.match(/\*\*([^*]+)\*\*/g) || [];
-    boldText.forEach(bold => {
+    boldText.forEach((bold) => {
       const cleaned = bold.replace(/\*\*/g, '');
       if (cleaned.length > 3 && cleaned.length < 50) {
         topics.push(cleaned);
@@ -71,7 +77,10 @@ class AIImageGenerator {
     stats.push(...percentages);
 
     // Find numbers with units (improved for space/science)
-    const numbers = content.match(/\b[\d,]+(\.\d+)?[\s-]?(million|billion|thousand|years?|days?|hours?|minutes?|seconds?|miles?|MPH|mph|°F|°C|degrees?)\b/gi) || [];
+    const numbers =
+      content.match(
+        /\b[\d,]+(\.\d+)?[\s-]?(million|billion|thousand|years?|days?|hours?|minutes?|seconds?|miles?|MPH|mph|°F|°C|degrees?)\b/gi
+      ) || [];
     stats.push(...numbers);
 
     // Find dollar amounts
@@ -79,11 +88,17 @@ class AIImageGenerator {
     stats.push(...money);
 
     // Find space/science specific numbers
-    const spaceNumbers = content.match(/\b\d+[\s-]?(qubits?|watts?|volts?|amps?|hertz|Hz|GHz|MHz|kilometers?|km|feet|ft|meters?|m)\b/gi) || [];
+    const spaceNumbers =
+      content.match(
+        /\b\d+[\s-]?(qubits?|watts?|volts?|amps?|hertz|Hz|GHz|MHz|kilometers?|km|feet|ft|meters?|m)\b/gi
+      ) || [];
     stats.push(...spaceNumbers);
 
     // Find speed measurements
-    const speeds = content.match(/\b[\d,]+(\.\d+)?[\s-]?(miles per hour|mph|MPH|kilometers per hour|kph|KPH)\b/gi) || [];
+    const speeds =
+      content.match(
+        /\b[\d,]+(\.\d+)?[\s-]?(miles per hour|mph|MPH|kilometers per hour|kph|KPH)\b/gi
+      ) || [];
     stats.push(...speeds);
 
     return [...new Set(stats)].slice(0, 3); // Top 3 unique stats
@@ -92,47 +107,141 @@ class AIImageGenerator {
   extractTechnologies(content, category = 'technology') {
     const techTermsByCategory = {
       technology: [
-        'AI', 'artificial intelligence', 'machine learning', 'neural network',
-        'quantum', 'blockchain', 'cryptocurrency', 'VR', 'AR', 'IoT',
-        'cloud computing', '5G', 'robotics', 'autonomous', 'automation',
-        'smartphone', 'iPhone', 'Android', 'app', 'software', 'hardware',
-        'algorithm', 'data', 'analytics', 'cybersecurity', 'privacy'
+        'AI',
+        'artificial intelligence',
+        'machine learning',
+        'neural network',
+        'quantum',
+        'blockchain',
+        'cryptocurrency',
+        'VR',
+        'AR',
+        'IoT',
+        'cloud computing',
+        '5G',
+        'robotics',
+        'autonomous',
+        'automation',
+        'smartphone',
+        'iPhone',
+        'Android',
+        'app',
+        'software',
+        'hardware',
+        'algorithm',
+        'data',
+        'analytics',
+        'cybersecurity',
+        'privacy',
       ],
       space: [
-        'NASA', 'SpaceX', 'Parker Solar Probe', 'spacecraft', 'probe', 'rover',
-        'satellite', 'rocket', 'astronaut', 'space station', 'ISS', 'Mars',
-        'solar', 'corona', 'flyby', 'orbit', 'telescope', 'galaxy', 'planet',
-        'asteroid', 'comet', 'space exploration', 'mission', 'launch', 'lunar'
+        'NASA',
+        'SpaceX',
+        'Parker Solar Probe',
+        'spacecraft',
+        'probe',
+        'rover',
+        'satellite',
+        'rocket',
+        'astronaut',
+        'space station',
+        'ISS',
+        'Mars',
+        'solar',
+        'corona',
+        'flyby',
+        'orbit',
+        'telescope',
+        'galaxy',
+        'planet',
+        'asteroid',
+        'comet',
+        'space exploration',
+        'mission',
+        'launch',
+        'lunar',
       ],
       science: [
-        'CRISPR', 'DNA', 'genome', 'protein', 'molecule', 'research', 'study',
-        'clinical trial', 'laboratory', 'experiment', 'analysis', 'breakthrough',
-        'discovery', 'superconductor', 'quantum', 'physics', 'chemistry'
+        'CRISPR',
+        'DNA',
+        'genome',
+        'protein',
+        'molecule',
+        'research',
+        'study',
+        'clinical trial',
+        'laboratory',
+        'experiment',
+        'analysis',
+        'breakthrough',
+        'discovery',
+        'superconductor',
+        'quantum',
+        'physics',
+        'chemistry',
       ],
       health: [
-        'clinical', 'medical', 'treatment', 'therapy', 'diagnosis', 'patient',
-        'healthcare', 'medicine', 'pharmaceutical', 'drug', 'vaccine', 'trial',
-        'FDA', 'biotech', 'precision medicine', 'personalized medicine'
+        'clinical',
+        'medical',
+        'treatment',
+        'therapy',
+        'diagnosis',
+        'patient',
+        'healthcare',
+        'medicine',
+        'pharmaceutical',
+        'drug',
+        'vaccine',
+        'trial',
+        'FDA',
+        'biotech',
+        'precision medicine',
+        'personalized medicine',
       ],
       psychology: [
-        'brain', 'neuroscience', 'cognitive', 'mental health', 'therapy',
-        'psychology', 'psychiatry', 'depression', 'anxiety', 'mindfulness',
-        'behavioral', 'neuroplasticity', 'psychedelic', 'meditation'
+        'brain',
+        'neuroscience',
+        'cognitive',
+        'mental health',
+        'therapy',
+        'psychology',
+        'psychiatry',
+        'depression',
+        'anxiety',
+        'mindfulness',
+        'behavioral',
+        'neuroplasticity',
+        'psychedelic',
+        'meditation',
       ],
       culture: [
-        'social media', 'creator economy', 'influencer', 'viral', 'platform',
-        'content creation', 'streaming', 'TikTok', 'YouTube', 'Instagram',
-        'digital culture', 'online community', 'metaverse'
-      ]
+        'social media',
+        'creator economy',
+        'influencer',
+        'viral',
+        'platform',
+        'content creation',
+        'streaming',
+        'TikTok',
+        'YouTube',
+        'Instagram',
+        'digital culture',
+        'online community',
+        'metaverse',
+      ],
     };
 
-    const techTerms = techTermsByCategory[category] || techTermsByCategory.technology;
+    const techTerms =
+      techTermsByCategory[category] || techTermsByCategory.technology;
     const found = [];
     const contentLower = content.toLowerCase();
 
-    techTerms.forEach(term => {
+    techTerms.forEach((term) => {
       // Use word boundaries to match whole words only
-      const regex = new RegExp(`\\b${term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+      const regex = new RegExp(
+        `\\b${term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`,
+        'i'
+      );
       if (regex.test(contentLower)) {
         found.push(term);
       }
@@ -144,17 +253,47 @@ class AIImageGenerator {
     const contentLower = content.toLowerCase();
 
     // Analyze sentiment indicators
-    const positive = ['breakthrough', 'revolutionary', 'amazing', 'incredible', 'success', 'advance'];
-    const urgent = ['emergency', 'critical', 'urgent', 'breaking', 'alert', 'crisis'];
-    const scientific = ['study', 'research', 'analysis', 'findings', 'evidence', 'data'];
-    const futuristic = ['future', 'tomorrow', 'next-gen', 'cutting-edge', 'innovation'];
+    const positive = [
+      'breakthrough',
+      'revolutionary',
+      'amazing',
+      'incredible',
+      'success',
+      'advance',
+    ];
+    const urgent = [
+      'emergency',
+      'critical',
+      'urgent',
+      'breaking',
+      'alert',
+      'crisis',
+    ];
+    const scientific = [
+      'study',
+      'research',
+      'analysis',
+      'findings',
+      'evidence',
+      'data',
+    ];
+    const futuristic = [
+      'future',
+      'tomorrow',
+      'next-gen',
+      'cutting-edge',
+      'innovation',
+    ];
 
     let mood = 'professional';
 
-    if (positive.some(word => contentLower.includes(word))) mood = 'optimistic';
-    if (urgent.some(word => contentLower.includes(word))) mood = 'urgent';
-    if (scientific.some(word => contentLower.includes(word))) mood = 'analytical';
-    if (futuristic.some(word => contentLower.includes(word))) mood = 'futuristic';
+    if (positive.some((word) => contentLower.includes(word)))
+      mood = 'optimistic';
+    if (urgent.some((word) => contentLower.includes(word))) mood = 'urgent';
+    if (scientific.some((word) => contentLower.includes(word)))
+      mood = 'analytical';
+    if (futuristic.some((word) => contentLower.includes(word)))
+      mood = 'futuristic';
 
     return mood;
   }
@@ -189,7 +328,8 @@ class AIImageGenerator {
       urgent: 'dynamic composition, alert colors, high contrast',
       analytical: 'clean data visualization, graphs, scientific aesthetic',
       futuristic: 'holographic elements, neon accents, sci-fi atmosphere',
-      professional: 'clean modern design, corporate colors, sophisticated layout'
+      professional:
+        'clean modern design, corporate colors, sophisticated layout',
     };
 
     prompt += `\nVisual requirements:\n`;
@@ -209,7 +349,9 @@ class AIImageGenerator {
 
   async generateFromArticle(articleFilePath, options = {}) {
     try {
-      console.log(`🎨 Generating single high-quality image from article: ${path.basename(articleFilePath)}`);
+      console.log(
+        `🎨 Generating single high-quality image from article: ${path.basename(articleFilePath)}`
+      );
 
       // Read and parse article
       const content = await fs.readFile(articleFilePath, 'utf-8');
@@ -221,8 +363,10 @@ class AIImageGenerator {
       }
 
       const frontmatter = frontmatterMatch[1];
-      const title = frontmatter.match(/title:\s*['"](.*?)['"]/)?.[1] || 'Untitled';
-      const category = frontmatter.match(/category:\s*(\w+)/)?.[1] || 'technology';
+      const title =
+        frontmatter.match(/title:\s*['"](.*?)['"]/)?.[1] || 'Untitled';
+      const category =
+        frontmatter.match(/category:\s*(\w+)/)?.[1] || 'technology';
 
       // Generate dynamic prompt
       const prompt = await this.generateDynamicPrompt(title, content, category);
@@ -233,7 +377,7 @@ class AIImageGenerator {
       const forceOptions = {
         ...this.defaultOptions,
         ...options,
-        n: 1  // Force single image generation
+        n: 1, // Force single image generation
       };
 
       // Generate single high-quality image
@@ -245,9 +389,14 @@ class AIImageGenerator {
       const localPath = path.join(this.outputDir, filename);
 
       // Save base64 image (gpt-image-1 ONLY returns base64, never URLs)
-      console.log(`🔍 Result structure:`, { hasB64: !!result.b64_json, hasUrl: !!result.url });
+      console.log(`🔍 Result structure:`, {
+        hasB64: !!result.b64_json,
+        hasUrl: !!result.url,
+      });
       if (result.b64_json) {
-        console.log(`📥 Saving gpt-image-1 base64 data to: ${path.join(this.outputDir, filename)}`);
+        console.log(
+          `📥 Saving gpt-image-1 base64 data to: ${path.join(this.outputDir, filename)}`
+        );
         try {
           const buffer = Buffer.from(result.b64_json, 'base64');
           await fs.writeFile(path.join(this.outputDir, filename), buffer);
@@ -257,8 +406,12 @@ class AIImageGenerator {
           throw error;
         }
       } else {
-        console.error(`❌ No base64 data returned from gpt-image-1 (URLs not supported)`);
-        throw new Error('gpt-image-1 must return base64 data but none was found');
+        console.error(
+          `❌ No base64 data returned from gpt-image-1 (URLs not supported)`
+        );
+        throw new Error(
+          'gpt-image-1 must return base64 data but none was found'
+        );
       }
 
       const imageResult = {
@@ -271,7 +424,7 @@ class AIImageGenerator {
         cost: 0.19, // High quality cost (~$0.19 per image in 2025)
         extractedTopics: this.extractMainTopics(content),
         extractedStats: this.extractKeyStatistics(content),
-        extractedTech: this.extractTechnologies(content, category)
+        extractedTech: this.extractTechnologies(content, category),
       };
 
       this.generatedImages.push(imageResult);
@@ -280,7 +433,6 @@ class AIImageGenerator {
       console.log(`   Local path: ${imageResult.localPath}`);
 
       return imageResult;
-
     } catch (error) {
       console.error(`❌ Error generating image from article: ${error.message}`);
       this.errors.push({ file: articleFilePath, error: error.message });
@@ -298,12 +450,12 @@ class AIImageGenerator {
   async enforceRateLimit() {
     const now = Date.now();
     const timeSinceLastRequest = now - this.lastRequestTime;
-    
+
     if (timeSinceLastRequest < this.minRequestInterval) {
       const waitTime = this.minRequestInterval - timeSinceLastRequest;
-      await new Promise(resolve => setTimeout(resolve, waitTime));
+      await new Promise((resolve) => setTimeout(resolve, waitTime));
     }
-    
+
     this.lastRequestTime = Date.now();
   }
 
@@ -311,14 +463,18 @@ class AIImageGenerator {
     return new Promise((resolve, reject) => {
       const req = https.request(url, options, (res) => {
         let data = '';
-        res.on('data', chunk => data += chunk);
+        res.on('data', (chunk) => (data += chunk));
         res.on('end', () => {
           try {
             const parsed = JSON.parse(data);
             if (res.statusCode >= 200 && res.statusCode < 300) {
               resolve({ statusCode: res.statusCode, data: parsed });
             } else {
-              reject(new Error(`HTTP ${res.statusCode}: ${parsed.error?.message || 'Unknown error'}`));
+              reject(
+                new Error(
+                  `HTTP ${res.statusCode}: ${parsed.error?.message || 'Unknown error'}`
+                )
+              );
             }
           } catch (e) {
             reject(new Error(`Parse error: ${data.substring(0, 200)}`));
@@ -327,7 +483,8 @@ class AIImageGenerator {
       });
 
       req.on('error', reject);
-      req.setTimeout(120000, () => { // 120 second timeout for image generation
+      req.setTimeout(120000, () => {
+        // 120 second timeout for image generation
         req.destroy();
         reject(new Error('Request timeout'));
       });
@@ -335,7 +492,7 @@ class AIImageGenerator {
       if (options.body) {
         req.write(options.body);
       }
-      
+
       req.end();
     });
   }
@@ -349,7 +506,7 @@ class AIImageGenerator {
     const {
       size = this.defaultOptions.size,
       quality = this.defaultOptions.quality,
-      n = 1
+      n = 1,
     } = options;
 
     console.log(`🎨 Generating image with OpenAI gpt-image-1...`);
@@ -358,20 +515,23 @@ class AIImageGenerator {
 
     await this.enforceRateLimit();
 
-    const response = await this.makeRequest('https://api.openai.com/v1/images/generations', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${this.openaiKey}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: 'gpt-image-1',
-        prompt: prompt,
-        n: n,
-        size: size,
-        quality: quality
-      })
-    });
+    const response = await this.makeRequest(
+      'https://api.openai.com/v1/images/generations',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${this.openaiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: 'gpt-image-1',
+          prompt: prompt,
+          n: n,
+          size: size,
+          quality: quality,
+        }),
+      }
+    );
 
     const item = response.data?.data?.[0] || {};
     const imageUrl = item.url;
@@ -390,7 +550,7 @@ class AIImageGenerator {
       originalPrompt: prompt,
       revisedPrompt: revisedPrompt,
       size: size,
-      quality: quality
+      quality: quality,
     };
   }
 
@@ -399,31 +559,35 @@ class AIImageGenerator {
     // This is a placeholder for future implementation
     console.log(`🎨 Google AI image generation requires Cloud Project setup`);
     console.log(`   Falling back to curated alternatives...`);
-    
+
     // For now, return a fallback suggestion
-    throw new Error('Google AI image generation requires Google Cloud Project configuration');
+    throw new Error(
+      'Google AI image generation requires Google Cloud Project configuration'
+    );
   }
 
   async downloadImage(imageUrl, filename) {
     return new Promise((resolve, reject) => {
       const filePath = path.join(this.outputDir, filename);
       const file = require('fs').createWriteStream(filePath);
-      
-      https.get(imageUrl, (response) => {
-        if (response.statusCode !== 200) {
-          reject(new Error(`HTTP ${response.statusCode}`));
-          return;
-        }
-        
-        response.pipe(file);
-        
-        file.on('finish', () => {
-          file.close();
-          resolve(filePath);
-        });
-        
-        file.on('error', reject);
-      }).on('error', reject);
+
+      https
+        .get(imageUrl, (response) => {
+          if (response.statusCode !== 200) {
+            reject(new Error(`HTTP ${response.statusCode}`));
+            return;
+          }
+
+          response.pipe(file);
+
+          file.on('finish', () => {
+            file.close();
+            resolve(filePath);
+          });
+
+          file.on('error', reject);
+        })
+        .on('error', reject);
     });
   }
 
@@ -440,11 +604,13 @@ class AIImageGenerator {
     // Check cache first
     const cacheKey = this.getCacheKey(prompt, providerOptions);
     const cachePath = path.join(this.cacheDir, `${cacheKey}.json`);
-    
+
     try {
       const cached = await fs.readFile(cachePath, 'utf-8');
       const cachedData = JSON.parse(cached);
-      console.log(`📦 Using cached AI image for: "${prompt.substring(0, 50)}..."`);
+      console.log(
+        `📦 Using cached AI image for: "${prompt.substring(0, 50)}..."`
+      );
       return cachedData;
     } catch {
       // No cache found, proceed with generation
@@ -470,8 +636,12 @@ class AIImageGenerator {
         break;
       } catch (error) {
         console.error(`❌ ${currentProvider} failed: ${error.message}`);
-        this.errors.push({ provider: currentProvider, error: error.message, prompt });
-        
+        this.errors.push({
+          provider: currentProvider,
+          error: error.message,
+          prompt,
+        });
+
         // If this was the last provider to try, throw error
         if (currentProvider === providersToTry[providersToTry.length - 1]) {
           throw new Error(`All providers failed. Last error: ${error.message}`);
@@ -496,7 +666,9 @@ class AIImageGenerator {
     }
 
     // Cache result
-    await fs.writeFile(cachePath, JSON.stringify(result, null, 2)).catch(console.error);
+    await fs
+      .writeFile(cachePath, JSON.stringify(result, null, 2))
+      .catch(console.error);
 
     this.generatedImages.push(result);
     return result;
@@ -504,38 +676,39 @@ class AIImageGenerator {
 
   async generateBlogImages(topics, options = {}) {
     console.log(`🎨 Generating AI images for ${topics.length} blog topics...`);
-    
+
     const results = [];
     for (const topic of topics) {
       try {
         // Create a detailed prompt for blog hero images
         const prompt = `Professional blog hero image for "${topic}": sleek, modern, high-quality, engaging visual that represents the topic, professional photography style, clean composition, vibrant colors`;
-        
+
         const filename = `blog-${topic.toLowerCase().replace(/[^a-z0-9]/g, '-')}.png`;
-        
+
         const result = await this.generateImage(prompt, {
           filename,
           size: '1536x1024', // Blog hero ratio
           quality: 'high',
           style: 'vivid',
-          ...options
+          ...options,
         });
 
         results.push({
           topic,
-          ...result
+          ...result,
         });
 
         console.log(`✅ Generated image for: ${topic}`);
-        
+
         // Small delay between generations
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
+        await new Promise((resolve) => setTimeout(resolve, 1000));
       } catch (error) {
-        console.error(`❌ Failed to generate image for "${topic}": ${error.message}`);
+        console.error(
+          `❌ Failed to generate image for "${topic}": ${error.message}`
+        );
         results.push({
           topic,
-          error: error.message
+          error: error.message,
         });
       }
     }
@@ -547,8 +720,8 @@ class AIImageGenerator {
     return {
       imagesGenerated: this.generatedImages.length,
       errors: this.errors.length,
-      providers: [...new Set(this.generatedImages.map(img => img.provider))],
-      totalCost: this.estimateCost()
+      providers: [...new Set(this.generatedImages.map((img) => img.provider))],
+      totalCost: this.estimateCost(),
     };
   }
 
@@ -580,11 +753,16 @@ if (require.main === module) {
       case 'generate':
         const prompt = args.slice(1).join(' ');
         if (!prompt) {
-          console.log('Usage: node ai-image-generator.js generate "your image prompt"');
+          console.log(
+            'Usage: node ai-image-generator.js generate "your image prompt"'
+          );
           return;
         }
 
-        const gen = await generator.generateImage(prompt, generator.defaultOptions);
+        const gen = await generator.generateImage(
+          prompt,
+          generator.defaultOptions
+        );
 
         console.log('\n🎨 Generation Result:');
         console.log(`   Saved: ${gen.filename || 'inline base64'}`);
@@ -595,9 +773,11 @@ if (require.main === module) {
         break;
 
       case 'generate-from-article':
-        const fileFlag = args.find(arg => arg.startsWith('--file='));
+        const fileFlag = args.find((arg) => arg.startsWith('--file='));
         if (!fileFlag) {
-          console.log('Usage: node ai-image-generator.js generate-from-article --file="path/to/article.mdx"');
+          console.log(
+            'Usage: node ai-image-generator.js generate-from-article --file="path/to/article.mdx"'
+          );
           return;
         }
 
@@ -611,10 +791,15 @@ if (require.main === module) {
           console.log(`   Filename: ${result.filename}`);
           console.log(`   Local path: ${result.localPath}`);
           console.log(`   Cost: $${result.cost}`);
-          console.log(`   Topics: ${result.extractedTopics.slice(0, 3).join(', ')}`);
-          console.log(`   Technologies: ${result.extractedTech.slice(0, 3).join(', ')}`);
-          console.log(`   Statistics: ${result.extractedStats.slice(0, 2).join(', ')}`);
-
+          console.log(
+            `   Topics: ${result.extractedTopics.slice(0, 3).join(', ')}`
+          );
+          console.log(
+            `   Technologies: ${result.extractedTech.slice(0, 3).join(', ')}`
+          );
+          console.log(
+            `   Statistics: ${result.extractedStats.slice(0, 2).join(', ')}`
+          );
         } catch (error) {
           console.error(`❌ Failed to generate image: ${error.message}`);
         }

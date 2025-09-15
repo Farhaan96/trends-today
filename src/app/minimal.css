@@ -3,7 +3,9 @@
 /* Typography System - Clean 2-font hierarchy */
 body.minimal-theme {
   /* System font stack for optimal readability */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: #333;
@@ -19,7 +21,7 @@ body.minimal-theme {
 .minimal-theme h4,
 .minimal-theme h5,
 .minimal-theme h6 {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: Georgia, 'Times New Roman', serif;
   font-weight: 700;
   line-height: 1.3;
   color: #111;
@@ -27,9 +29,15 @@ body.minimal-theme {
   padding: 0;
 }
 
-.minimal-theme h1 { font-size: 2.2rem; }
-.minimal-theme h2 { font-size: 1.8rem; }
-.minimal-theme h3 { font-size: 1.4rem; }
+.minimal-theme h1 {
+  font-size: 2.2rem;
+}
+.minimal-theme h2 {
+  font-size: 1.8rem;
+}
+.minimal-theme h3 {
+  font-size: 1.4rem;
+}
 
 /* Links - Simple and functional (but NOT header links) */
 .minimal-theme main a,
@@ -95,28 +103,28 @@ header a:active {
 /* Minimal color palette */
 .minimal-theme {
   /* Leravi-inspired palette */
-  --color-primary: #0B63C6;      /* Link blue */
-  --color-accent: #6B3DF4;       /* Header purple */
-  --color-teal: #3DD6D0;         /* Accent teal */
-  --color-text: #1F2937;         /* Slate-700 */
-  --color-heading: #111827;      /* Slate-900 */
-  --color-meta: #6B7280;         /* Gray-500 */
-  --color-border: #E5E7EB;       /* Gray-200 */
-  --color-bg: #FFFFFF;           /* White */
-  --color-bg-alt: #F6F7FB;       /* Soft gray background */
+  --color-primary: #0b63c6; /* Link blue */
+  --color-accent: #6b3df4; /* Header purple */
+  --color-teal: #3dd6d0; /* Accent teal */
+  --color-text: #1f2937; /* Slate-700 */
+  --color-heading: #111827; /* Slate-900 */
+  --color-meta: #6b7280; /* Gray-500 */
+  --color-border: #e5e7eb; /* Gray-200 */
+  --color-bg: #ffffff; /* White */
+  --color-bg-alt: #f6f7fb; /* Soft gray background */
 }
 
 /* Dark mode variable overrides for minimal theme */
 html.dark .minimal-theme {
-  --color-primary: #60A5FA;      /* Sky-400 */
-  --color-accent: #8B5CF6;       /* Violet-500 */
-  --color-teal: #22D3EE;         /* Cyan-400 */
-  --color-text: #E5E7EB;         /* Gray-200 */
-  --color-heading: #F9FAFB;      /* Gray-50 */
-  --color-meta: #9CA3AF;         /* Gray-400 */
-  --color-border: #334155;       /* Slate-700 */
-  --color-bg: #0B1020;           /* Deep blue/near-black */
-  --color-bg-alt: #0F172A;       /* Slate-900 */
+  --color-primary: #60a5fa; /* Sky-400 */
+  --color-accent: #8b5cf6; /* Violet-500 */
+  --color-teal: #22d3ee; /* Cyan-400 */
+  --color-text: #e5e7eb; /* Gray-200 */
+  --color-heading: #f9fafb; /* Gray-50 */
+  --color-meta: #9ca3af; /* Gray-400 */
+  --color-border: #334155; /* Slate-700 */
+  --color-bg: #0b1020; /* Deep blue/near-black */
+  --color-bg-alt: #0f172a; /* Slate-900 */
 }
 
 /* Apply dark background and text when minimal theme is active */
@@ -146,7 +154,7 @@ html.dark body.minimal-theme {
 /* Allow subtle shadows only on hover for images */
 .minimal-theme img:hover,
 .minimal-theme .image-container:hover {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* Clean borders */
@@ -242,15 +250,21 @@ html.dark body.minimal-theme {
   .minimal-theme {
     font-size: 15px;
   }
-  
-  .minimal-theme h1 { font-size: 1.8rem; }
-  .minimal-theme h2 { font-size: 1.5rem; }
-  .minimal-theme h3 { font-size: 1.2rem; }
-  
+
+  .minimal-theme h1 {
+    font-size: 1.8rem;
+  }
+  .minimal-theme h2 {
+    font-size: 1.5rem;
+  }
+  .minimal-theme h3 {
+    font-size: 1.2rem;
+  }
+
   .minimal-theme .container {
     padding: 0 15px;
   }
-  
+
   .minimal-theme .article-list-item {
     padding: 1rem 0;
   }
@@ -262,7 +276,8 @@ html.dark body.minimal-theme {
 .minimal-theme *::after {
   animation: none !important;
   transition-duration: 0.2s !important;
-  transition-property: color, background-color, border-color, opacity !important;
+  transition-property:
+    color, background-color, border-color, opacity !important;
 }
 
 /* Focus states - Accessibility */
@@ -282,12 +297,12 @@ html.dark body.minimal-theme {
     color: black;
     background: white;
   }
-  
+
   .minimal-theme a {
     color: black;
     text-decoration: underline;
   }
-  
+
   .minimal-theme .ad-slot,
   .minimal-theme .pagination,
   .minimal-theme nav,

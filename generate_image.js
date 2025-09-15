@@ -4,7 +4,9 @@ async function generateAnunnakiImage() {
   const generator = new AIImageGenerator();
 
   try {
-    const result = await generator.generateFromArticle('C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\content\\science\\anunnaki-sumerian-gods-mystery.mdx');
+    const result = await generator.generateFromArticle(
+      'C:\\Users\\farha\\OneDrive\\Desktop\\Blog\\content\\science\\anunnaki-sumerian-gods-mystery.mdx'
+    );
 
     console.log('\n✅ Image Generation Complete:');
     console.log(`Filename: ${result.filename}`);
@@ -21,7 +23,7 @@ async function generateAnunnakiImage() {
   }
 }
 
-generateAnunnakiImage().then(imagePath => {
+generateAnunnakiImage().then((imagePath) => {
   if (imagePath) {
     console.log(`\nImage successfully generated at: ${imagePath}`);
   }
