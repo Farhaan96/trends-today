@@ -57,7 +57,8 @@
       "WebSearch",
       "Read(//c/dev/**)",
       "Bash(cat:*)",
-      "Bash(npx prettier:*)"
+      "Bash(npx prettier:*)",
+      "Bash(git merge:*)"
     ],
     "deny": [],
     "ask": []
