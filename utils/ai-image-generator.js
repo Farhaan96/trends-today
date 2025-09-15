@@ -19,10 +19,10 @@ class AIImageGenerator {
     this.cacheDir = path.join(__dirname, '..', '.cache', 'ai-images');
     this.outputDir = path.join(__dirname, '..', 'public', 'images', 'ai-generated');
 
-    // Optimized settings for cost and quality based on gpt-image-1 2025 specs
+    // Optimized settings for cost and quality based on gpt-image-1 specs
     this.defaultOptions = {
       size: '1536x1024',  // Supported: 1024x1024, 1024x1536, 1536x1024
-      quality: 'high',    // Options: low (~$0.02), medium (~$0.07), high (~$0.19)
+      quality: 'high',    // Options: low, medium, high, auto
       model: 'gpt-image-1',
       n: 1                // Only 1 image per request supported
     };
@@ -513,8 +513,8 @@ class AIImageGenerator {
         
         const result = await this.generateImage(prompt, {
           filename,
-          size: '1792x1024', // Blog hero ratio
-          quality: 'hd',
+          size: '1536x1024', // Blog hero ratio
+          quality: 'high',
           style: 'vivid',
           ...options
         });
@@ -551,13 +551,13 @@ class AIImageGenerator {
   }
 
   estimateCost() {
-    // OpenAI gpt-image-1 2025 pricing estimates
+    // OpenAI gpt-image-1/DALL-E-like pricing estimate
     let cost = 0;
     for (const img of this.generatedImages) {
       if (img.provider === 'openai') {
-        // gpt-image-1 2025 pricing: low (~$0.02), medium (~$0.07), high (~$0.19)
+        // Typical pricing buckets
         const qualityCosts = { low: 0.02, medium: 0.07, high: 0.19 };
-        cost += qualityCosts[img.quality] || 0.19;
+        cost += qualityCosts[img.quality] || qualityCosts.high;
       }
     }
     return `$${cost.toFixed(3)}`;
@@ -582,10 +582,11 @@ if (require.main === module) {
           return;
         }
 
-        const result = await generator.generateWithOpenAI(prompt, generator.defaultOptions);
+        const gen = await generator.generateImage(prompt, generator.defaultOptions);
 
         console.log('\n🎨 Generation Result:');
-        console.log(`   URL: ${result.url}`);
+        console.log(`   Saved: ${gen.filename || 'inline base64'}`);
+        console.log(`   Local: ${gen.localPath || 'N/A'}`);
         console.log(`   Model: gpt-image-1`);
         console.log(`   Quality: ${generator.defaultOptions.quality}`);
         console.log(`   Size: ${generator.defaultOptions.size}`);

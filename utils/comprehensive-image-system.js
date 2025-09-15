@@ -282,8 +282,8 @@ class ComprehensiveImageSystem {
             
             const aiResult = await this.aiGenerator.generateImage(aiPrompt, {
               filename: filename || `ai-${query.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${Date.now()}.png`,
-              size: '1792x1024', // Good for blog heroes
-              quality: 'hd',
+              size: '1536x1024', // Blog hero-friendly; accepted by images API
+              quality: 'high',
               style: 'vivid',
               downloadImage: downloadImages,
               ...otherOptions
@@ -393,17 +393,17 @@ class ComprehensiveImageSystem {
     // Estimate savings from using stock photos vs. AI generation
     const stockImagesUsed = this.stats.stock;
     const aiImagesUsed = this.stats.ai;
-    const avgAIcost = 0.040; // USD per DALL-E image
-    
-    const potentialAICost = stockImagesUsed * avgAICoast;
-    const actualAICost = aiImagesUsed * avgAICoast;
-    
+    const avgAIcost = 0.080; // USD per hd image (est.)
+
+    const potentialAICost = (stockImagesUsed + aiImagesUsed) * avgAIcost; // if all were AI
+    const actualAICost = aiImagesUsed * avgAIcost; // actual spend for AI images
+
     return {
       stockImagesUsed,
       aiImagesUsed,
-      potentialCost: `$${(potentialAICost + actualAICost).toFixed(3)}`,
+      potentialCost: `$${potentialAICost.toFixed(3)}`,
       actualCost: `$${actualAICost.toFixed(3)}`,
-      savings: `$${potentialAICost.toFixed(3)}`
+      savings: `$${(potentialAICost - actualAICost).toFixed(3)}`
     };
   }
 }
