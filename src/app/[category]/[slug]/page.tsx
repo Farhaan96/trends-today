@@ -231,7 +231,7 @@ export default async function ArticlePage({
           frontmatter: article.frontmatter,
         }}
         allArticles={allArticles}
-        maxArticles={6}
+        maxArticles={3}
         className="bg-gray-50"
       />
     </article>
