@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 /**
- * AI Image Generation Utility - gpt-image-1 ONLY
- * Generates unique, context-aware images from article content
- * Cost-optimized for HD quality with dynamic prompting
+ * Professional Photorealistic AI Image Generator - gpt-image-1 ONLY
+ * Generates publication-quality, context-aware professional photography from article content
+ * Professional photography standards with National Geographic / Scientific American quality
+ * Cost-optimized for professional editorial use with photorealistic prompting
  */
 
 require('dotenv').config({ path: '.env.local' });
@@ -304,45 +305,165 @@ class AIImageGenerator {
     const technologies = this.extractTechnologies(articleContent, category);
     const mood = this.determineMood(articleContent);
 
-    // Base prompt structure
-    let prompt = `Professional hero image for tech blog article: "${articleTitle}"\n\n`;
-
-    // Add key concepts
-    if (topics.length > 0) {
-      prompt += `Key concepts: ${topics.slice(0, 3).join(', ')}\n`;
-    }
-
-    // Add technologies
-    if (technologies.length > 0) {
-      prompt += `Technologies featured: ${technologies.slice(0, 3).join(', ')}\n`;
-    }
-
-    // Add data visualization if stats present
-    if (stats.length > 0) {
-      prompt += `Data visualization elements: Charts showing ${stats.slice(0, 2).join(' and ')}\n`;
-    }
-
-    // Add mood-specific visual requirements
-    const moodStyles = {
-      optimistic: 'vibrant colors, upward trending elements, bright lighting',
-      urgent: 'dynamic composition, alert colors, high contrast',
-      analytical: 'clean data visualization, graphs, scientific aesthetic',
-      futuristic: 'holographic elements, neon accents, sci-fi atmosphere',
-      professional:
-        'clean modern design, corporate colors, sophisticated layout',
+    // Professional photography style based on category - Enhanced for GPT-Image-1
+    const categoryStyles = {
+      technology: {
+        style:
+          'Clean tech photography, minimalist design, modern professional corporate aesthetic, high-end consumer electronics styling',
+        lighting:
+          'professional studio lighting with soft key light, subtle rim lighting, controlled shadows',
+        camera:
+          'shot with Canon EOS R5, 85mm f/1.4 lens, commercial product photography setup',
+        composition:
+          'rule of thirds composition, shallow depth of field with natural bokeh, pristine white background gradient',
+      },
+      science: {
+        style:
+          'Documentary photography style, museum quality archival presentation, academic research documentation, ancient artifacts, cuneiform tablets, archaeological excavation sites',
+        lighting:
+          'natural diffused museum lighting, professional archival documentation lighting',
+        camera:
+          'shot with medium format camera, macro lens for intricate detail, scientific documentation grade',
+        composition:
+          'centered scholarly composition, maximum detail preservation, laboratory or excavation setting',
+      },
+      space: {
+        style:
+          'NASA photography style, scientific space mission documentation, high-resolution astronomical imaging, cosmic phenomena visualization',
+        lighting:
+          'dramatic cosmic lighting, celestial illumination, professional space photography effects',
+        camera:
+          'shot with professional astronomical imaging equipment, ultra-high resolution space photography',
+        composition:
+          'expansive wide angle composition, infinite cosmic depth, authentic space environment',
+      },
+      health: {
+        style:
+          'Medical photography style, clinical documentation standards, professional healthcare presentation, precision medicine visualization',
+        lighting:
+          'soft clinical lighting, medical grade illumination, professional healthcare setup',
+        camera:
+          'shot with medical imaging camera, precision optics, healthcare documentation grade',
+        composition:
+          'clean sterile medical environment, professional healthcare presentation standards',
+      },
+      psychology: {
+        style:
+          'Professional psychological study photography, human-centered research documentation, cognitive science visualization',
+        lighting:
+          'soft natural portrait lighting, psychological study atmosphere, empathetic professional setup',
+        camera:
+          'shot with portrait lens 85mm f/1.4, professional psychological research photography',
+        composition:
+          'shallow depth of field, natural bokeh background, human-focused therapeutic environment',
+      },
+      culture: {
+        style:
+          'Documentary photojournalism style, cultural anthropology documentation, authentic social media and creator economy visualization',
+        lighting:
+          'natural golden hour lighting, authentic environmental illumination, documentary realism',
+        camera:
+          'shot with documentary camera 35mm lens, professional photojournalism equipment',
+        composition:
+          'dynamic storytelling composition, environmental context, authentic cultural documentation',
+      },
     };
 
-    prompt += `\nVisual requirements:\n`;
-    prompt += `- Ultra high quality, photorealistic or stylized professional illustration\n`;
-    prompt += `- 1536x1024 aspect ratio for blog header\n`;
-    prompt += `- ${moodStyles[mood]}\n`;
-    prompt += `- ${category} content theme\n`;
-    prompt += `- Clean composition with clear focal point\n`;
-    prompt += `- ABSOLUTELY NO TEXT, numbers, words, letters, or any written characters visible\n`;
-    prompt += `- NO logos, watermarks, signs, or any textual elements\n`;
-    prompt += `- Pure visual imagery only, no readable text of any kind\n`;
-    prompt += `- Sharp details, editorial quality\n`;
-    prompt += `- Suitable for professional tech publication`;
+    const styleGuide = categoryStyles[category] || categoryStyles.technology;
+
+    // Enhanced professional photography mood settings for GPT-Image-1
+    const professionalMoodStyles = {
+      optimistic: {
+        lighting:
+          'bright natural golden hour lighting, warm professional atmosphere, uplifting illumination',
+        composition:
+          'upward dynamic angle, positive energy composition, vibrant professional color palette',
+      },
+      urgent: {
+        lighting:
+          'dramatic high contrast lighting, professional news photography setup, urgent atmosphere',
+        composition:
+          'dynamic tension angle, breaking news photography style, professional journalism presentation',
+      },
+      analytical: {
+        lighting:
+          'clean scientific lighting, neutral professional tones, research laboratory atmosphere',
+        composition:
+          'precise methodical composition, data-focused presentation, professional academic photography',
+      },
+      futuristic: {
+        lighting:
+          'modern LED accent lighting, cutting-edge tech atmosphere, innovation-focused setup',
+        composition:
+          'forward-thinking angle, technological advancement focus, professional innovation photography',
+      },
+      professional: {
+        lighting:
+          'corporate executive lighting setup, sophisticated business atmosphere, premium professional grade',
+        composition:
+          'executive composition, sophisticated professional angle, high-end business photography',
+      },
+    };
+
+    const moodStyle =
+      professionalMoodStyles[mood] || professionalMoodStyles.professional;
+
+    // Build enhanced professional photorealistic prompt for GPT-Image-1
+    let prompt = `Professional editorial photography for ${category} article: "${articleTitle}".
+
+SUBJECT MATTER:`;
+
+    // Add extracted content
+    if (topics.length > 0) {
+      prompt += `\nPrimary focus: ${topics.slice(0, 3).join(', ')}`;
+    }
+    if (technologies.length > 0) {
+      prompt += `\nTechnology elements: ${technologies.slice(0, 2).join(' and ')}`;
+    }
+    if (stats.length > 0) {
+      prompt += `\nKey data points: ${stats.slice(0, 2).join(', ')}`;
+    }
+
+    // Enhanced photography specifications
+    prompt += `
+
+CAMERA & TECHNICAL SPECIFICATIONS:
+- ${styleGuide.camera}
+- ${styleGuide.lighting}, ${moodStyle.lighting}
+- ${styleGuide.composition}, ${moodStyle.composition}
+- Professional depth of field control, tack sharp focus on subject
+- Shot in RAW format with professional color grading
+
+VISUAL STYLE & AESTHETIC:
+- ${styleGuide.style}
+- Photorealistic documentary-grade professional photography
+- National Geographic / Scientific American publication quality
+- Commercial photography standards with editorial presentation
+- 1536x1024 aspect ratio optimized for digital publication headers
+
+LIGHTING & ATMOSPHERE:
+- Professional studio-grade lighting setup
+- Controlled shadows and highlights for maximum detail
+- Color temperature balanced for publication standards
+- ${moodStyle.lighting}
+
+COMPOSITION & FRAMING:
+- ${moodStyle.composition}
+- Professional editorial composition standards
+- Visual hierarchy optimized for article header presentation
+- Background elements supporting but not competing with subject`;
+
+    // Absolute restrictions for editorial quality
+    prompt += `
+
+EDITORIAL RESTRICTIONS (CRITICAL):
+- ABSOLUTELY NO text, numbers, words, letters, or any readable characters
+- NO logos, watermarks, brand names, or corporate identifiers
+- NO cartoon, illustration, CGI, or artistic interpretation styles
+- NO amateur photography aesthetics or social media filters
+- ONLY photorealistic, professional documentary-style photography
+- Must meet serious journalism and scientific publication standards
+- Professional news photography ethics and presentation standards`;
 
     return prompt;
   }
@@ -675,13 +796,50 @@ class AIImageGenerator {
   }
 
   async generateBlogImages(topics, options = {}) {
-    console.log(`🎨 Generating AI images for ${topics.length} blog topics...`);
+    console.log(
+      `🎨 Generating professional photorealistic images for ${topics.length} blog topics...`
+    );
 
     const results = [];
     for (const topic of topics) {
       try {
-        // Create a detailed prompt for blog hero images
-        const prompt = `Professional blog hero image for "${topic}": sleek, modern, high-quality, engaging visual that represents the topic, professional photography style, clean composition, vibrant colors`;
+        // Enhanced professional photorealistic prompt for GPT-Image-1
+        const prompt = `Professional editorial photography for blog article: "${topic}".
+
+CAMERA & TECHNICAL SPECIFICATIONS:
+- Shot with Canon EOS R5, 85mm f/1.4 lens, commercial photography setup
+- Professional studio lighting with soft key light, subtle rim lighting, controlled shadows
+- Rule of thirds composition, shallow depth of field with natural bokeh
+- Professional depth of field control, tack sharp focus on subject
+- Shot in RAW format with professional color grading
+
+VISUAL STYLE & AESTHETIC:
+- Clean tech photography, minimalist design, modern professional corporate aesthetic
+- Photorealistic documentary-grade professional photography
+- National Geographic / Scientific American publication quality
+- Commercial photography standards with editorial presentation
+- 1536x1024 aspect ratio optimized for digital publication headers
+
+LIGHTING & ATMOSPHERE:
+- Professional studio-grade lighting setup
+- Controlled shadows and highlights for maximum detail
+- Color temperature balanced for publication standards
+- Corporate executive lighting setup, sophisticated business atmosphere
+
+COMPOSITION & FRAMING:
+- Executive composition, sophisticated professional angle, high-end business photography
+- Professional editorial composition standards
+- Visual hierarchy optimized for article header presentation
+- Background elements supporting but not competing with subject
+
+EDITORIAL RESTRICTIONS (CRITICAL):
+- ABSOLUTELY NO text, numbers, words, letters, or any readable characters
+- NO logos, watermarks, brand names, or corporate identifiers
+- NO cartoon, illustration, CGI, or artistic interpretation styles
+- NO amateur photography aesthetics or social media filters
+- ONLY photorealistic, professional documentary-style photography
+- Must meet serious journalism and scientific publication standards
+- Professional news photography ethics and presentation standards`;
 
         const filename = `blog-${topic.toLowerCase().replace(/[^a-z0-9]/g, '-')}.png`;
 
@@ -689,7 +847,6 @@ class AIImageGenerator {
           filename,
           size: '1536x1024', // Blog hero ratio
           quality: 'high',
-          style: 'vivid',
           ...options,
         });
 
@@ -698,7 +855,9 @@ class AIImageGenerator {
           ...result,
         });
 
-        console.log(`✅ Generated image for: ${topic}`);
+        console.log(
+          `✅ Generated professional photorealistic image for: ${topic}`
+        );
 
         // Small delay between generations
         await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -812,25 +971,46 @@ if (require.main === module) {
 
       default:
         console.log(`
-🎨 AI Image Generator - gpt-image-1 ONLY
-Dynamic content-aware image generation for tech blog
+🎨 Professional Photorealistic AI Image Generator - gpt-image-1 ENHANCED
+National Geographic / Scientific American quality images for serious journalism
 
 Usage: node ai-image-generator.js <command> [options]
 
 Commands:
-  generate "prompt"                           - Generate single image from prompt
-  generate-from-article --file="path.mdx"    - Generate contextual image from article
+  generate "prompt"                           - Generate single photorealistic image
+  generate-from-article --file="path.mdx"    - Generate contextual professional image
   stats                                       - Show usage statistics
 
 Examples:
-  node ai-image-generator.js generate "AI breakthrough visualization"
-  node ai-image-generator.js generate-from-article --file="content/technology/ai-article.mdx"
+  node ai-image-generator.js generate "archaeological excavation cuneiform tablets"
+  node ai-image-generator.js generate-from-article --file="content/science/anunnaki-article.mdx"
 
-Optimized Settings:
-  - Size: 1536x1024 (blog header optimized)
-  - Quality: HD ($0.08 per image)
-  - Style: Vivid (engaging visuals)
-  - Model: gpt-image-1 (latest OpenAI)
+ENHANCED Professional Photography Standards:
+  - Quality: Photorealistic, documentary-grade professional photography
+  - Style: National Geographic / Scientific American / Nature publication quality
+  - Camera: Canon EOS R5, medium format, specialized lenses (85mm f/1.4, macro, astronomical)
+  - Lighting: Professional studio, museum archival, scientific documentation lighting
+  - Composition: Editorial standards, rule of thirds, maximum detail preservation
+  - Categories: Science/Archaeological, Technology, Space, Health, Psychology, Culture
+  - Size: 1536x1024 (editorial header optimized)
+  - Cost: ~$0.19 per high-quality image
+  - Model: gpt-image-1 (latest OpenAI with enhanced prompting)
+
+Category-Specific Expertise:
+  - Science/Archaeological: Museum quality, ancient artifacts, excavation documentation
+  - Technology: Clean product photography, minimalist corporate aesthetic
+  - Space: NASA photography style, astronomical imaging, cosmic phenomena
+  - Health: Medical photography, clinical documentation standards
+  - Psychology: Professional study photography, human-centered documentation
+  - Culture: Documentary photojournalism, cultural anthropology documentation
+
+Editorial Guidelines (CRITICAL):
+  - ABSOLUTELY NO cartoonish, artistic, CGI, or illustrated styles
+  - NO text, numbers, logos, watermarks, or readable characters
+  - NO amateur photography or social media filter aesthetics
+  - ONLY photorealistic, professional documentary-style photography
+  - Must meet serious journalism and scientific publication standards
+  - Professional news photography ethics and presentation standards
         `);
     }
   }
