@@ -274,8 +274,48 @@ class AIImageGenerator {
       ],
     };
 
-    // Heuristic visual plans (specific themes first)
-    if (hasAny(K.adolescentMentalHealth)) {
+    // Heuristic visual plans (specific themes first, but context-aware)
+
+    // Check for AI Avatar/Virtual Influencer content FIRST (most specific for culture)
+    if (
+      (hasAny(K.social) || hasAny(['culture'])) &&
+      (topics.some(
+        (t) =>
+          t.toLowerCase().includes('avatar') ||
+          t.toLowerCase().includes('virtual') ||
+          t.toLowerCase().includes('ai influencer') ||
+          t.toLowerCase().includes('digital persona')
+      ) ||
+        text.includes('avatar') ||
+        text.includes('virtual influencer') ||
+        text.includes('ai influencer') ||
+        text.includes('digital persona'))
+    ) {
+      return {
+        subject:
+          'sleek holographic AI avatar interface on a modern smartphone or tablet, with abstract digital persona elements and social media UI mockups (no readable text or brand logos)',
+        environment:
+          'modern creator studio or high-tech workspace with soft LED lighting and minimal setup',
+        action:
+          'digital avatar creation process with floating interface elements suggesting content generation',
+        mood: 'futuristic, innovative, cutting-edge technology in creative space',
+        palette:
+          'cool blues and purples with neon accents and modern metallics',
+      };
+    }
+
+    // Mental health topics should only trigger if NOT primarily about creator economy/AI
+    if (
+      hasAny(K.adolescentMentalHealth) &&
+      !hasAny(K.social) &&
+      !topics.some(
+        (t) =>
+          t.toLowerCase().includes('creator') ||
+          t.toLowerCase().includes('influencer') ||
+          t.toLowerCase().includes('avatar') ||
+          t.toLowerCase().includes('virtual')
+      )
+    ) {
       return {
         subject:
           'a parent and pre-teen sitting together at a kitchen table or pediatric clinic, smartphone placed face down on the table or in a small household basket nearby',
@@ -352,17 +392,40 @@ class AIImageGenerator {
       hasAny(K.social) ||
       topics.some((t) => t.includes('creator') || t.includes('viral'))
     ) {
-      return {
-        subject:
-          'a solitary content creator figure, head down, illuminated by the cold glow of a phone and laptop',
-        environment:
-          'small dim room at night with cluttered desk; abstract, generic notification shapes floating subtly (no brand UI)',
-        action:
-          'sitting at a desk, surrounded by overwhelming digital cues suggesting endless engagement',
-        mood: 'somber, isolating, critical of toxic attention dynamics',
-        palette:
-          'cool blues and desaturated tones with harsh screen highlights',
-      };
+      // Check if this is specifically about AI avatars/virtual influencers
+      if (
+        topics.some(
+          (t) =>
+            t.toLowerCase().includes('avatar') ||
+            t.toLowerCase().includes('virtual') ||
+            t.toLowerCase().includes('ai influencer')
+        ) ||
+        text.includes('avatar') ||
+        text.includes('virtual influencer')
+      ) {
+        return {
+          subject:
+            'futuristic AI avatar interface on multiple screens showing virtual influencer profiles and digital personas (no readable text)',
+          environment:
+            'modern tech studio with holographic displays and professional lighting setup',
+          action:
+            'dynamic AI avatar generation process with floating digital elements',
+          mood: 'innovative, futuristic, cutting-edge creator technology',
+          palette: 'vibrant blues and purples with holographic highlights',
+        };
+      } else {
+        return {
+          subject:
+            'a solitary content creator figure, head down, illuminated by the cold glow of a phone and laptop',
+          environment:
+            'small dim room at night with cluttered desk; abstract, generic notification shapes floating subtly (no brand UI)',
+          action:
+            'sitting at a desk, surrounded by overwhelming digital cues suggesting endless engagement',
+          mood: 'somber, isolating, critical of toxic attention dynamics',
+          palette:
+            'cool blues and desaturated tones with harsh screen highlights',
+        };
+      }
     }
 
     if (
@@ -816,30 +879,279 @@ EDITORIAL RESTRICTIONS (CRITICAL):
     return prompt;
   }
 
-  // Concise prompt builder for gpt-image-1
+  // Enhanced GPT-Image-1 optimized prompt builder
   buildConcisePrompt(articleTitle, articleContent, category) {
-    const topics = this.extractMainTopics(articleContent);
-    const stats = this.extractKeyStatistics(articleContent);
-    const plan = this.buildVisualPlan(articleTitle, articleContent);
+    const coreInsight = this.extractCoreInsight(articleTitle, articleContent);
+    const visualMetaphor = this.generateVisualMetaphor(coreInsight, category);
+    const contextualElements = this.extractContextualElements(
+      articleContent,
+      category
+    );
 
-    const topicHint = topics.length
-      ? ` Key focus: ${topics.slice(0, 2).join(', ')}.`
-      : '';
-    const statHint = stats.length
-      ? ` Subtle data context: ${stats.slice(0, 1).join(', ')}.`
-      : '';
+    // GPT-Image-1 optimized structure: Subject + Context + Style + Constraints
+    const subject = this.buildDynamicSubject(
+      coreInsight,
+      visualMetaphor,
+      contextualElements
+    );
+    const context = this.buildContextualSetting(coreInsight, category);
+    const style = this.buildPhotographicStyle(
+      category,
+      contextualElements.mood
+    );
 
     return (
-      `Photorealistic editorial image capturing ${plan.subject}. ` +
-      `Environment: ${plan.environment}. ` +
-      `Action: ${plan.action}. ` +
-      `Mood: ${plan.mood}. ` +
-      `Palette: ${plan.palette}. ` +
-      `Composition: clear focal subject, shallow depth of field, uncluttered background. ` +
-      `Constraints: no text, no logos, no watermarks; avoid brand-identifiable UI; no illustrations or CGI; photorealistic only.` +
-      topicHint +
-      statHint
+      [
+        `Professional editorial photograph: ${subject}`,
+        `Setting: ${context}`,
+        `Style: ${style}`,
+        `Composition: Editorial header optimized, shallow depth of field, clean background`,
+        `Constraints: Photorealistic only, no text/logos/brands, documentary quality`,
+      ].join('. ') + '.'
     );
+  }
+
+  // Extract the core insight/message from the article
+  extractCoreInsight(title, content) {
+    // Remove frontmatter and get clean content
+    const cleanContent = content.replace(/^---[\s\S]*?---/, '');
+
+    // Extract the main thesis from first paragraph (hook)
+    const firstParagraph =
+      cleanContent.split('\n\n')[0]?.replace(/^#+\s*/, '') || '';
+
+    // Combine title insight with opening hook
+    const titleInsight = title.toLowerCase();
+    const contentInsight = firstParagraph.toLowerCase();
+
+    // Key insight extraction
+    if (
+      titleInsight.includes('ai avatar') ||
+      contentInsight.includes('ai avatar')
+    ) {
+      return {
+        topic: 'AI avatars revolutionizing content creation',
+        angle: 'virtual influencers replacing human creators',
+        impact: 'solving creator burnout crisis',
+        technology: 'AI-powered digital personas',
+      };
+    }
+
+    if (
+      titleInsight.includes('creator') &&
+      (titleInsight.includes('burnout') || contentInsight.includes('burnout'))
+    ) {
+      return {
+        topic: 'Creator economy transformation',
+        angle: 'burnout crisis solution',
+        impact: 'sustainable content creation',
+        technology: 'AI assistance tools',
+      };
+    }
+
+    // Fallback: extract from title
+    return {
+      topic: title.replace(/['"]/g, ''),
+      angle: 'emerging trend analysis',
+      impact: 'industry transformation',
+      technology: 'innovative solutions',
+    };
+  }
+
+  // Generate visual metaphor based on core insight
+  generateVisualMetaphor(coreInsight, category) {
+    const { topic, angle, impact, technology } = coreInsight;
+
+    if (
+      topic.includes('AI avatar') ||
+      technology.includes('digital personas')
+    ) {
+      return {
+        primary:
+          'holographic AI interface displaying virtual influencer profiles',
+        secondary: 'floating digital persona elements',
+        symbolism: 'future of human-AI content collaboration',
+      };
+    }
+
+    if (topic.includes('creator') && impact.includes('burnout')) {
+      return {
+        primary: 'content creator workspace with AI assistance visualization',
+        secondary: 'balanced human-AI workflow elements',
+        symbolism: 'sustainable creator economy',
+      };
+    }
+
+    // Category-based fallbacks
+    const categoryMetaphors = {
+      culture: {
+        primary: 'digital culture visualization with modern social elements',
+        secondary: 'contemporary lifestyle and technology integration',
+        symbolism: 'evolving digital society',
+      },
+      technology: {
+        primary: 'cutting-edge technology demonstration',
+        secondary: 'innovation and progress visualization',
+        symbolism: 'technological advancement',
+      },
+      science: {
+        primary: 'scientific discovery or research visualization',
+        secondary: 'data and research elements',
+        symbolism: 'knowledge and discovery',
+      },
+    };
+
+    return categoryMetaphors[category] || categoryMetaphors.technology;
+  }
+
+  // Extract contextual elements for better relevance
+  extractContextualElements(content, category) {
+    const mood = this.determineMood(content);
+    const timeContext = this.extractTimeContext(content);
+    const stakeholders = this.extractStakeholders(content);
+    const statistics = this.extractKeyStatistics(content);
+
+    return {
+      mood,
+      timeContext,
+      stakeholders,
+      statistics: statistics.slice(0, 2),
+      urgency:
+        content.toLowerCase().includes('breaking') ||
+        content.toLowerCase().includes('urgent')
+          ? 'high'
+          : 'medium',
+    };
+  }
+
+  // Extract temporal context
+  extractTimeContext(content) {
+    const contentLower = content.toLowerCase();
+
+    if (
+      contentLower.includes('2025') ||
+      contentLower.includes('future') ||
+      contentLower.includes('emerging')
+    ) {
+      return 'cutting-edge contemporary';
+    }
+    if (
+      contentLower.includes('traditional') ||
+      contentLower.includes('historical')
+    ) {
+      return 'traditional vs modern contrast';
+    }
+    return 'present-day professional';
+  }
+
+  // Extract stakeholders/personas
+  extractStakeholders(content) {
+    const contentLower = content.toLowerCase();
+    const stakeholders = [];
+
+    if (
+      contentLower.includes('creator') ||
+      contentLower.includes('influencer')
+    ) {
+      stakeholders.push('content creators');
+    }
+    if (
+      contentLower.includes('consumer') ||
+      contentLower.includes('user') ||
+      contentLower.includes('audience')
+    ) {
+      stakeholders.push('consumers');
+    }
+    if (contentLower.includes('brand') || contentLower.includes('marketer')) {
+      stakeholders.push('brands');
+    }
+    if (
+      contentLower.includes('researcher') ||
+      contentLower.includes('scientist')
+    ) {
+      stakeholders.push('researchers');
+    }
+
+    return stakeholders.slice(0, 2);
+  }
+
+  // Build dynamic subject based on insights
+  buildDynamicSubject(coreInsight, visualMetaphor, contextualElements) {
+    const { primary, secondary } = visualMetaphor;
+    const { mood, statistics } = contextualElements;
+
+    // Start with core visual concept
+    let subject = primary;
+
+    // Add mood-specific modifiers
+    const moodModifiers = {
+      futuristic: 'sleek, high-tech',
+      optimistic: 'bright, innovative',
+      analytical: 'precise, data-focused',
+      urgent: 'dynamic, attention-grabbing',
+      professional: 'polished, corporate',
+    };
+
+    const modifier = moodModifiers[mood] || 'professional';
+
+    // Add secondary elements with statistical context
+    if (statistics.length > 0) {
+      subject = `${modifier} ${subject} with subtle ${secondary} suggesting data-driven insights`;
+    } else {
+      subject = `${modifier} ${subject} with ${secondary}`;
+    }
+
+    return subject;
+  }
+
+  // Build contextual setting
+  buildContextualSetting(coreInsight, category) {
+    const { impact, technology } = coreInsight;
+
+    const categorySettings = {
+      culture: 'modern creator studio with ambient lighting',
+      technology: 'clean tech environment with professional setup',
+      science: 'research laboratory with controlled lighting',
+      psychology: 'clinical study environment with soft lighting',
+      health: 'medical facility with sterile professional presentation',
+      space: 'space mission control or cosmic environment',
+    };
+
+    let baseSetting = categorySettings[category] || categorySettings.technology;
+
+    // Add impact-specific environmental elements
+    if (impact.includes('crisis') || impact.includes('problem')) {
+      baseSetting += ', subtle tension or challenge visualization';
+    } else if (impact.includes('solution') || impact.includes('innovation')) {
+      baseSetting += ', optimistic and solution-oriented atmosphere';
+    }
+
+    return baseSetting;
+  }
+
+  // Build photographic style optimized for GPT-Image-1
+  buildPhotographicStyle(category, mood) {
+    const baseStyles = {
+      culture: 'documentary photojournalism with natural lighting',
+      technology: 'commercial product photography with studio lighting',
+      science: 'scientific documentation with archival quality',
+      psychology: 'professional research photography with soft focus',
+      health: 'medical photography with clinical precision',
+      space: 'NASA-quality space photography',
+    };
+
+    const moodStyles = {
+      futuristic: 'with futuristic blue-purple color palette',
+      optimistic: 'with warm, uplifting color temperature',
+      analytical: 'with neutral scientific color grading',
+      urgent: 'with dynamic contrast and sharp focus',
+      professional: 'with executive corporate aesthetic',
+    };
+
+    const baseStyle = baseStyles[category] || baseStyles.technology;
+    const moodStyle = moodStyles[mood] || moodStyles.professional;
+
+    return `${baseStyle} ${moodStyle}, National Geographic editorial quality`;
   }
 
   async generateFromArticle(articleFilePath, options = {}) {
