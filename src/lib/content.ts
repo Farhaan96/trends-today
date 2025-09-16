@@ -56,19 +56,7 @@ async function getArticlesFromDir(
         };
       })
       .filter((article) => article.frontmatter.title) // Only include articles with titles
-      .sort((a, b) => {
-        const dateA = new Date(
-          a.frontmatter.publishedAt ||
-            a.frontmatter.datePublished ||
-            '1970-01-01'
-        );
-        const dateB = new Date(
-          b.frontmatter.publishedAt ||
-            b.frontmatter.datePublished ||
-            '1970-01-01'
-        );
-        return dateB.getTime() - dateA.getTime(); // Sort by date, newest first
-      });
+      // Remove sorting here - will be sorted globally in getAllPosts()
 
     return articles;
   } catch (error) {
@@ -185,14 +173,27 @@ export async function getAllPosts(): Promise<Article[]> {
 
   const articleArrays = await Promise.all(articlePromises);
 
-  // Combine all articles and sort by date (newest first)
+  // Combine all articles and sort by date (newest first) with validation
   const allArticles = articleArrays.flat().sort((a, b) => {
-    const dateA = new Date(
-      a.frontmatter.publishedAt || a.frontmatter.datePublished || '1970-01-01'
-    );
-    const dateB = new Date(
-      b.frontmatter.publishedAt || b.frontmatter.datePublished || '1970-01-01'
-    );
+    // Helper function to safely parse dates
+    const parseDate = (article: Article) => {
+      const dateStr = article.frontmatter.publishedAt || article.frontmatter.datePublished;
+      if (!dateStr) {
+        console.warn(`Missing date for article: ${article.slug}`);
+        return new Date('1970-01-01');
+      }
+
+      const date = new Date(dateStr);
+      if (isNaN(date.getTime())) {
+        console.warn(`Invalid date "${dateStr}" for article: ${article.slug}`);
+        return new Date('1970-01-01');
+      }
+
+      return date;
+    };
+
+    const dateA = parseDate(a);
+    const dateB = parseDate(b);
     return dateB.getTime() - dateA.getTime(); // Sort by date, newest first
   });
 
@@ -227,20 +228,8 @@ async function getArticlesFromCategoryDir(
           category: category,
         };
       })
-      .filter((article) => article.frontmatter.title) // Only include articles with titles
-      .sort((a, b) => {
-        const dateA = new Date(
-          a.frontmatter.publishedAt ||
-            a.frontmatter.datePublished ||
-            '1970-01-01'
-        );
-        const dateB = new Date(
-          b.frontmatter.publishedAt ||
-            b.frontmatter.datePublished ||
-            '1970-01-01'
-        );
-        return dateB.getTime() - dateA.getTime();
-      });
+      .filter((article) => article.frontmatter.title); // Only include articles with titles
+      // Remove sorting here - will be sorted globally in getAllPosts()
 
     return articles;
   } catch (error) {
