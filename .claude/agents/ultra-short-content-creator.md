@@ -168,57 +168,32 @@ MANDATORY - Every article MUST end with a properly formatted Sources section:
 - Add horizontal rules (---) between major sections
 - Keep paragraphs to 2-3 sentences maximum
 
-### Step 4.5: Generate Unique AI Image with gpt-image-1 (MANDATORY)
+### Step 4.5: Request Image Generation (MANDATORY)
 
-CRITICAL - Every article MUST have a unique AI-generated image using ONLY gpt-image-1:
+CRITICAL — Every article MUST have a unique AI-generated hero image using ONLY gpt-image-1, saved locally.
 
-Use the Bash tool to generate the image AFTER saving the article:
+Preferred flow (delegate to subagent):
+
+- Say: "I'll now use the image-generator subagent for this task."
+- The subagent runs:
+  `node utils/ai-image-generator.js generate-from-article --file="content/[category]/[article-slug].mdx"`
+- It saves the image to `/public/images/ai-generated/` and returns the filename.
+- Update frontmatter `image:` to `/images/ai-generated/<filename>` (keep existing `imageAlt`).
+
+Fallback (only if subagent unavailable):
 
 1. Save the article first with Write tool
-2. Use Bash tool to execute:
-   `node utils/ai-image-generator.js generate-from-article --file="content/[category]/[article-slug].mdx"`
-3. The script will output the local image path
-4. Update the article frontmatter with the returned image path
+2. Use Bash tool to execute the same command as above
+3. Insert the returned local path into frontmatter
 
-This process:
+Rules:
 
-- Reads the article content you just created
-- Extracts key topics, statistics, and technologies mentioned
-- Generates a contextually relevant prompt based on actual content
-- Creates a unique image with gpt-image-1 (high quality, 1024x1024)
-- Saves to /public/images/ai-generated/
-- Returns the local image path for frontmatter
-
-**NO FALLBACKS OR ALTERNATIVES:**
-
-- NO Unsplash/Pexels stock photos
+- NO stock photos (Unsplash/Pexels)
 - NO DALL-E 3
-- NO template-based prompts
-- ONLY gpt-image-1 with dynamic content analysis
+- NO logos, text, watermarks, or brand marks
+- gpt-image-1 only; default size `1024x1024`; optionally use landscape `1536x1024` (or portrait `1024x1536`) when the page layout specifically needs it; quality `high`
 
-**Dynamic Prompt Generation:**
-The system automatically creates prompts like:
-
-```
-Professional hero image for blog article: "[ACTUAL_TITLE]"
-
-Key concepts: [EXTRACTED_FROM_CONTENT]
-Technologies featured: [FOUND_IN_ARTICLE]
-Data visualization elements: [STATISTICS_MENTIONED]
-
-Visual requirements:
-- Ultra high quality, photorealistic or stylized professional illustration
-- 1536x1024 aspect ratio for blog header
-- Modern, professional, editorial quality
-- [MOOD_FROM_CONTENT] mood and atmosphere
-- Clean composition with clear focal point
-- Vibrant, engaging color palette
-- No text, logos, or watermarks
-- Suitable for [category] content
-- Sharp details, professional photography or digital art style
-```
-
-Use the returned image path in frontmatter: `image: /images/ai-generated/ai-generated-[timestamp].png`
+Note: Prompt construction and content analysis are handled by the image generator (title/topics/stats extraction + editorial constraints).
 
 ### Step 5: Save Article
 

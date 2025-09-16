@@ -1870,7 +1870,11 @@ if (require.main === module) {
 
     switch (command) {
       case 'generate':
-        const prompt = args.slice(1).join(' ');
+        // Support flags like --size=1024x1024 --quality=high
+        const argTail = args.slice(1);
+        const sizeFlagG = argTail.find((a) => a.startsWith('--size='));
+        const qualityFlagG = argTail.find((a) => a.startsWith('--quality='));
+        const prompt = argTail.filter((a) => !a.startsWith('--')).join(' ');
         if (!prompt) {
           console.log(
             'Usage: node ai-image-generator.js generate "your image prompt"'
@@ -1878,10 +1882,11 @@ if (require.main === module) {
           return;
         }
 
-        const gen = await generator.generateImage(
-          prompt,
-          generator.defaultOptions
-        );
+        const gen = await generator.generateImage(prompt, {
+          ...generator.defaultOptions,
+          ...(sizeFlagG ? { size: sizeFlagG.split('=')[1] } : {}),
+          ...(qualityFlagG ? { quality: qualityFlagG.split('=')[1] } : {}),
+        });
 
         console.log('\n🎨 Generation Result:');
         console.log(`   Saved: ${gen.filename || 'inline base64'}`);
@@ -1894,9 +1899,11 @@ if (require.main === module) {
       case 'generate-from-article':
         const fileFlag = args.find((arg) => arg.startsWith('--file='));
         const promptFlag = args.find((arg) => arg.startsWith('--prompt='));
+        const sizeFlag = args.find((arg) => arg.startsWith('--size='));
+        const qualityFlag = args.find((arg) => arg.startsWith('--quality='));
         if (!fileFlag) {
           console.log(
-            'Usage: node ai-image-generator.js generate-from-article --file="path/to/article.mdx" [--prompt=concise|detailed]'
+            'Usage: node ai-image-generator.js generate-from-article --file="path/to/article.mdx" [--prompt=concise|detailed] [--size=1024x1024|1024x1536|1536x1024] [--quality=low|medium|high|auto]'
           );
           return;
         }
@@ -1910,6 +1917,8 @@ if (require.main === module) {
             : 'concise';
           const result = await generator.generateFromArticle(fullPath, {
             promptMode,
+            ...(sizeFlag ? { size: sizeFlag.split('=')[1] } : {}),
+            ...(qualityFlag ? { quality: qualityFlag.split('=')[1] } : {}),
           });
 
           console.log('\n✅ Dynamic Image Generation Complete:');
