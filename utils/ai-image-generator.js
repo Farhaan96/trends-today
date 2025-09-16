@@ -937,7 +937,9 @@ EDITORIAL RESTRICTIONS (CRITICAL):
     // Specific topic patterns
     if (
       (titleLower.includes('tree') || titleLower.includes('fig')) &&
-      (titleLower.includes('stone') || titleLower.includes('calcium') || titleLower.includes('mineral'))
+      (titleLower.includes('stone') ||
+        titleLower.includes('calcium') ||
+        titleLower.includes('mineral'))
     ) {
       return 'living trees forming mineral deposits and biological mineralization';
     }
@@ -1078,7 +1080,9 @@ EDITORIAL RESTRICTIONS (CRITICAL):
     // Trees/botanical/mineralization concepts
     if (
       (fullText.includes('tree') || fullText.includes('fig')) &&
-      (fullText.includes('stone') || fullText.includes('calcium carbonate') || fullText.includes('mineralization'))
+      (fullText.includes('stone') ||
+        fullText.includes('calcium carbonate') ||
+        fullText.includes('mineralization'))
     ) {
       return 'cross-section of living tree trunk showing calcium carbonate deposits within wood tissue';
     }
@@ -1200,7 +1204,8 @@ EDITORIAL RESTRICTIONS (CRITICAL):
       return {
         primary:
           'close-up cross-section of a living Kenyan fig tree trunk showing white calcium carbonate stone deposits embedded within dark wood grain',
-        secondary: 'green leaves and natural environment visible to show the tree is alive and thriving',
+        secondary:
+          'green leaves and natural environment visible to show the tree is alive and thriving',
         symbolism: 'impossible biological phenomenon defying natural laws',
       };
     }

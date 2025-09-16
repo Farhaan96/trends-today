@@ -41,10 +41,12 @@ All agents are defined in `.claude/agents/` as Markdown files with YAML frontmat
     ├── batch-orchestrator.md           # Main pipeline orchestrator
     ├── trending-topics-discovery.md     # Topic research and discovery
     ├── ultra-short-content-creator.md   # Content generation (400-500 words)
-    ├── fact-checker.md                  # Fact verification (>80% accuracy)
+    ├── image-generator.md               # AI image generation (gpt-image-1)
     ├── typography-enhancer.md           # Visual formatting
-    ├── quality-validator.md             # Quality assurance (85+ score)
+    ├── fact-checker.md                  # Fact verification (>80% accuracy)
     ├── smart-content-linker.md          # Internal linking
+    ├── quality-validator.md             # Quality assurance (85+ score)
+    ├── build-validator.md               # Build validation and error checking
     └── publication-reviewer.md          # Final review before publishing
 ```
 
@@ -66,7 +68,8 @@ claude "Use batch-orchestrator to execute the evening content batch"
 The orchestrator will:
 
 1. Create a todo list for tracking
-2. Execute each agent in sequence
+2. Execute each agent in sequence:
+   - Topic discovery → Content creation → Image generation → Typography → Fact-checking → Linking → Quality validation → Build validation → Final review
 3. Validate outputs between stages
 4. Handle errors gracefully
 5. Generate a comprehensive report
@@ -81,6 +84,9 @@ claude "Use trending-topics-discovery to find 5 high-potential topics"
 
 # Create an article
 claude "Use ultra-short-content-creator to write about [topic]"
+
+# Generate hero image for article
+claude "Use image-generator to add editorial gpt-image-1 hero image to [article]"
 
 # Fact-check existing articles
 claude "Use fact-checker to verify all articles in content/technology"
@@ -564,3 +570,38 @@ git add -A && git commit -m "Daily content batch" && git push
 _Remember: Quality > Quantity. Better to publish 10 perfect ultra-short articles than 20 with errors._
 
 _Last Updated: January 2025_
+
+---
+
+## 🎨 Image Generation Workflow
+
+**Pipeline Position:** After content creation, before typography enhancement
+
+```bash
+# Generate professional photorealistic hero image
+claude "Use image-generator to create editorial image for [article-path]"
+```
+
+**Process:**
+1. Analyzes article content for visual concepts
+2. Generates GPT-Image-1 professional photography
+3. Saves to /images/ai-generated/ with timestamp
+4. Updates frontmatter image path automatically
+5. Validates file exists and meets quality standards
+
+**Quality Standards:** National Geographic publication quality, photorealistic only, no text/logos.
+
+---
+
+
+### Image Generation (Between content creation and build validation)
+
+Use the image-generator agent to produce a photorealistic hero image and update frontmatter:
+
+`ash
+claude "Use image-generator to add an editorial gpt-image-1 hero image to content/[category]/[slug].mdx"
+# The subagent will run:
+node utils/ai-image-generator.js generate-from-article --file="content/[category]/[slug].mdx"
+`
+
+Ensure the frontmatter points to /images/ai-generated/<file>.png and not a remote URL.

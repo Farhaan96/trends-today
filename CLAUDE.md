@@ -18,6 +18,8 @@ Trends Today is a premium tech journalism platform powered by advanced AI system
 
 ## 🤖 AI AGENT PIPELINE SYSTEM
 
+**IMPORTANT:** Claude Code acts as the batch orchestrator and coordinates all specialized agents directly. The batch-orchestrator agent is not needed since Claude Code itself manages the pipeline workflow.
+
 ### Core Content Generation Agents
 
 #### ultra-short-content-creator
@@ -26,13 +28,23 @@ Trends Today is a premium tech journalism platform powered by advanced AI system
 - **Capabilities:** Real-time research using WebSearch and WebFetch
 - **Quality Standards:** Engaging hooks, premium typography, fact-checked content
 - **Output:** Professional .mdx files with proper frontmatter
+- **CRITICAL IMAGE RULE:**
+  - NEVER generate images or call image generation utilities
+  - Set image: '' and imageAlt: '' in frontmatter
+  - Image generation is handled ONLY by dedicated image-generator agent later in pipeline
 
 #### trending-topics-discovery
 
 - **Purpose:** Identifies emerging topics across multiple sources
+- **CRITICAL:** MUST check existing content first to avoid duplicates
 - **Sources:** Reddit, Twitter, tech blogs, scientific journals, news sites
-- **Algorithm:** Sentiment analysis + engagement metrics + novelty scoring
+- **Algorithm:** Sentiment analysis + engagement metrics + novelty scoring + uniqueness check
 - **Categories:** Science, Technology, Space, Health, Psychology, Culture
+- **Requirements:**
+  - Search existing content/ directory before topic selection
+  - Avoid similar themes (e.g., no more blood test articles if already covered)
+  - Find genuinely surprising, counterintuitive, or mind-blowing topics
+  - Prioritize weird, controversial, or shocking discoveries over generic breakthroughs
 
 #### fact-checker
 
