@@ -911,51 +911,267 @@ EDITORIAL RESTRICTIONS (CRITICAL):
     );
   }
 
-  // Extract the core insight/message from the article
-  extractCoreInsight(title, content) {
+  // Extract core insight from article content for semantic-driven image generation
+  extractCoreInsight(articleTitle, articleContent) {
+    // Remove frontmatter and get clean content
+    const cleanContent = articleContent.replace(/^---[\s\S]*?---/, '');
+    const fullText = `${articleTitle} ${cleanContent}`.toLowerCase();
+
+    // Extract key semantic elements
+    const insight = {
+      topic: this.extractMainTopic(articleTitle, fullText),
+      angle: this.extractUniqueAngle(fullText),
+      impact: this.extractImpactScope(fullText),
+      technology: this.extractTechnologyContext(fullText),
+      humanElement: this.extractHumanContext(fullText),
+      visualConcept: this.extractVisualConcept(fullText),
+    };
+
+    return insight;
+  }
+
+  // Extract the main topic from title and content
+  extractMainTopic(title, fullText) {
+    const titleLower = title.toLowerCase();
+
+    // Specific topic patterns
+    if (
+      titleLower.includes('brain') &&
+      (titleLower.includes('shutdown') || titleLower.includes('multitask'))
+    ) {
+      return 'cognitive disengagement and brain protective mechanisms';
+    }
+    if (titleLower.includes('ai') && titleLower.includes('avatar')) {
+      return 'AI avatar technology and virtual influencers';
+    }
+    if (titleLower.includes('blood') && titleLower.includes('cancer')) {
+      return 'AI-powered medical diagnostics';
+    }
+    if (titleLower.includes('creator') && titleLower.includes('burnout')) {
+      return 'creator economy sustainability';
+    }
+
+    // Extract from main header concepts
+    const headers = fullText.match(/^#{2,3}\s+(.+)$/gm) || [];
+    if (headers.length > 0) {
+      const mainHeader = headers[0]
+        .replace(/^#{2,3}\s+/, '')
+        .replace(/[*_`]/g, '');
+      return mainHeader.substring(0, 60);
+    }
+
+    // Fallback to title
+    return titleLower.substring(0, 60);
+  }
+
+  // Extract the unique angle or perspective
+  extractUniqueAngle(fullText) {
+    const angles = [];
+
+    if (fullText.includes('protective') && fullText.includes('mechanism')) {
+      angles.push('protective biological response');
+    }
+    if (
+      fullText.includes('breakthrough') ||
+      fullText.includes('revolutionary')
+    ) {
+      angles.push('groundbreaking discovery');
+    }
+    if (fullText.includes('hidden') || fullText.includes('reveals')) {
+      angles.push('uncovering hidden patterns');
+    }
+    if (fullText.includes('future') || fullText.includes('next-gen')) {
+      angles.push('future implications');
+    }
+    if (fullText.includes('crisis') || fullText.includes('problem')) {
+      angles.push('addressing critical challenges');
+    }
+
+    return angles.length > 0 ? angles[0] : 'innovative perspective';
+  }
+
+  // Extract impact scope and scale
+  extractImpactScope(fullText) {
+    const impacts = [];
+
+    if (fullText.includes('billion') || fullText.includes('million')) {
+      impacts.push('massive scale impact');
+    }
+    if (fullText.includes('industry') || fullText.includes('market')) {
+      impacts.push('industry transformation');
+    }
+    if (fullText.includes('society') || fullText.includes('culture')) {
+      impacts.push('societal change');
+    }
+    if (fullText.includes('health') || fullText.includes('medical')) {
+      impacts.push('healthcare advancement');
+    }
+    if (fullText.includes('productivity') || fullText.includes('efficiency')) {
+      impacts.push('performance optimization');
+    }
+
+    return impacts.length > 0 ? impacts[0] : 'targeted innovation';
+  }
+
+  // Extract technology context
+  extractTechnologyContext(fullText) {
+    const techContext = [];
+
+    if (
+      fullText.includes('ai') ||
+      fullText.includes('artificial intelligence')
+    ) {
+      techContext.push('AI-powered systems');
+    }
+    if (fullText.includes('neural') || fullText.includes('brain imaging')) {
+      techContext.push('neurotechnology');
+    }
+    if (fullText.includes('digital') || fullText.includes('virtual')) {
+      techContext.push('digital platforms');
+    }
+    if (fullText.includes('biomarker') || fullText.includes('molecular')) {
+      techContext.push('biotechnology');
+    }
+    if (
+      fullText.includes('algorithm') ||
+      fullText.includes('machine learning')
+    ) {
+      techContext.push('algorithmic processing');
+    }
+
+    return techContext.length > 0 ? techContext[0] : 'emerging technology';
+  }
+
+  // Extract human context and stakeholders
+  extractHumanContext(fullText) {
+    const humanElements = [];
+
+    if (fullText.includes('patient') || fullText.includes('medical')) {
+      humanElements.push('patient care and medical outcomes');
+    }
+    if (fullText.includes('creator') || fullText.includes('influencer')) {
+      humanElements.push('content creators and digital professionals');
+    }
+    if (fullText.includes('worker') || fullText.includes('employee')) {
+      humanElements.push('workplace productivity and human performance');
+    }
+    if (fullText.includes('consumer') || fullText.includes('user')) {
+      humanElements.push('consumer experience and user behavior');
+    }
+    if (fullText.includes('researcher') || fullText.includes('scientist')) {
+      humanElements.push('scientific research and discovery');
+    }
+
+    return humanElements.length > 0
+      ? humanElements[0]
+      : 'human-technology interaction';
+  }
+
+  // Extract visual concept based on content semantics
+  extractVisualConcept(fullText) {
+    // Cognitive/brain concepts
+    if (
+      fullText.includes('brain') &&
+      (fullText.includes('shutdown') || fullText.includes('switching'))
+    ) {
+      return 'abstract neural network patterns showing state transitions';
+    }
+
+    // AI/virtual concepts
+    if (
+      fullText.includes('avatar') ||
+      (fullText.includes('ai') && fullText.includes('virtual'))
+    ) {
+      return 'holographic digital interfaces with virtual personas';
+    }
+
+    // Medical/diagnostic concepts
+    if (fullText.includes('blood') && fullText.includes('cancer')) {
+      return 'precision medical analysis with microscopic detail';
+    }
+
+    // Creator/digital economy concepts
+    if (fullText.includes('creator') && fullText.includes('economy')) {
+      return 'modern digital workspace with content creation tools';
+    }
+
+    // Data/analysis concepts
+    if (fullText.includes('analysis') || fullText.includes('data')) {
+      return 'sophisticated data visualization and pattern recognition';
+    }
+
+    return 'conceptual technology demonstration';
+  }
+
+  // Extract semantic concepts using content analysis (not category templates)
+  extractSemanticConcepts(title, content) {
     // Remove frontmatter and get clean content
     const cleanContent = content.replace(/^---[\s\S]*?---/, '');
 
-    // Extract the main thesis from first paragraph (hook)
-    const firstParagraph =
-      cleanContent.split('\n\n')[0]?.replace(/^#+\s*/, '') || '';
+    // Combine title and content for full semantic analysis
+    const fullText = `${title} ${cleanContent}`.toLowerCase();
 
-    // Combine title insight with opening hook
-    const titleInsight = title.toLowerCase();
-    const contentInsight = firstParagraph.toLowerCase();
-
-    // Key insight extraction
-    if (
-      titleInsight.includes('ai avatar') ||
-      contentInsight.includes('ai avatar')
-    ) {
-      return {
-        topic: 'AI avatars revolutionizing content creation',
-        angle: 'virtual influencers replacing human creators',
-        impact: 'solving creator burnout crisis',
-        technology: 'AI-powered digital personas',
-      };
-    }
-
-    if (
-      titleInsight.includes('creator') &&
-      (titleInsight.includes('burnout') || contentInsight.includes('burnout'))
-    ) {
-      return {
-        topic: 'Creator economy transformation',
-        angle: 'burnout crisis solution',
-        impact: 'sustainable content creation',
-        technology: 'AI assistance tools',
-      };
-    }
-
-    // Fallback: extract from title
-    return {
-      topic: title.replace(/['"]/g, ''),
-      angle: 'emerging trend analysis',
-      impact: 'industry transformation',
-      technology: 'innovative solutions',
+    // Extract core concepts through semantic pattern matching
+    const concepts = {
+      primaryConcepts: [],
+      mechanisms: [],
+      subjects: [],
+      outcomes: [],
+      visualElements: [],
     };
+
+    // Cognitive/psychological concepts
+    if (
+      fullText.includes('brain') &&
+      (fullText.includes('shutdown') || fullText.includes('disengagement'))
+    ) {
+      concepts.primaryConcepts.push('cognitive protective mechanisms');
+      concepts.mechanisms.push('neural network switching');
+      concepts.visualElements.push('abstract brain state transitions');
+    }
+
+    // AI/technology concepts
+    if (
+      fullText.includes('ai') &&
+      (fullText.includes('detect') || fullText.includes('analysis'))
+    ) {
+      concepts.primaryConcepts.push('artificial intelligence analysis');
+      concepts.mechanisms.push('pattern recognition');
+      concepts.visualElements.push('data processing visualization');
+    }
+
+    // Medical/health concepts
+    if (fullText.includes('blood') && fullText.includes('cancer')) {
+      concepts.primaryConcepts.push('medical diagnosis');
+      concepts.mechanisms.push('biomarker detection');
+      concepts.visualElements.push('microscopic analysis');
+    }
+
+    // Virtual/digital concepts
+    if (fullText.includes('avatar') || fullText.includes('virtual')) {
+      concepts.primaryConcepts.push('digital identity');
+      concepts.mechanisms.push('virtual representation');
+      concepts.visualElements.push('holographic interfaces');
+    }
+
+    // Multitasking/cognitive load concepts
+    if (
+      fullText.includes('multitask') ||
+      fullText.includes('cognitive overload')
+    ) {
+      concepts.primaryConcepts.push('cognitive overload');
+      concepts.mechanisms.push('information processing stress');
+      concepts.visualElements.push('complex to simplified state transitions');
+    }
+
+    // Fallback to title analysis if no specific patterns found
+    if (concepts.primaryConcepts.length === 0) {
+      concepts.primaryConcepts.push('emerging technology trend');
+      concepts.mechanisms.push('innovation process');
+      concepts.visualElements.push('conceptual demonstration');
+    }
+
+    return concepts;
   }
 
   // Generate visual metaphor based on core insight
@@ -982,6 +1198,22 @@ EDITORIAL RESTRICTIONS (CRITICAL):
       };
     }
 
+    // Psychology-specific cognitive topics
+    if (
+      (topic.includes('brain') && topic.includes('shutdown')) ||
+      topic.includes('cognitive disengagement') ||
+      topic.includes('multitasking') ||
+      topic.includes('cognitive overload')
+    ) {
+      return {
+        primary:
+          'abstract neural network visualization showing cognitive switching patterns',
+        secondary:
+          'flowing information pathways transitioning from complex to simplified states',
+        symbolism: 'brain adaptation and protective mechanisms',
+      };
+    }
+
     // Category-based fallbacks
     const categoryMetaphors = {
       culture: {
@@ -998,6 +1230,18 @@ EDITORIAL RESTRICTIONS (CRITICAL):
         primary: 'scientific discovery or research visualization',
         secondary: 'data and research elements',
         symbolism: 'knowledge and discovery',
+      },
+      psychology: {
+        primary:
+          'abstract cognitive visualization with conceptual brain activity patterns',
+        secondary:
+          'mental process metaphors and neural network representations',
+        symbolism: 'mind and behavior understanding',
+      },
+      health: {
+        primary: 'medical breakthrough visualization in clinical setting',
+        secondary: 'diagnostic technology and patient care elements',
+        symbolism: 'health innovation and healing',
       },
     };
 
