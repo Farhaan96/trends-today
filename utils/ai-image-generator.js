@@ -723,23 +723,26 @@ class AIImageGenerator {
         this._openai = new OpenAI({ apiKey: this.openaiKey });
       }
 
-      const analysisPrompt = `Analyze this article and generate a specific, unique visual concept for a professional editorial photograph.
+      const analysisPrompt = `Analyze this article and generate a specific visual concept for a hyper-realistic editorial photograph.
 
-ARTICLE TITLE: "${articleTitle}"
+ARTICLE: "${articleTitle}"
+CONTENT: ${articleContent.substring(0, 2000)}
 
-ARTICLE CONTENT: ${articleContent.substring(0, 2000)}
-
-Based on the content, provide a JSON response with:
+Generate a JSON response optimized for photorealistic AI image generation:
 {
-  "coreDiscovery": "What is the main discovery/innovation/phenomenon?",
-  "visualSubject": "What specific subject should be photographed?",
-  "visualContext": "What environment/setting would best show this?",
-  "uniqueAngle": "What makes this visually compelling and unique?",
-  "photographyStyle": "What photography approach captures this best?",
-  "emotionalTone": "What emotional response should this evoke?"
+  "coreDiscovery": "Main phenomenon/discovery in 1-2 words",
+  "visualSubject": "Concrete, photographable subject (e.g., 'blood sample in laboratory vial', 'tree trunk cross-section')",
+  "visualContext": "Specific environment (e.g., 'sterile medical laboratory', 'natural forest setting')",
+  "uniqueAngle": "Visual differentiator (e.g., 'microscopic detail view', 'natural lighting contrast')",
+  "photographyStyle": "Specific style (e.g., 'macro photography', 'documentary style', 'clinical photography')",
+  "emotionalTone": "Single adjective (e.g., 'dramatic', 'serene', 'professional')"
 }
 
-Focus on the SPECIFIC phenomenon described, not generic category templates. Be highly specific and visual.`;
+Requirements:
+- visualSubject must be concrete and photographable
+- Avoid abstract concepts
+- Focus on physical objects/scenes that can be captured with a camera
+- Consider lighting, depth, and photographic composition`;
 
       const response = await this._openai.chat.completions.create({
         model: 'gpt-4',
@@ -878,29 +881,8 @@ Focus on the SPECIFIC phenomenon described, not generic category templates. Be h
 
     // Use AI visual concept if available, otherwise fall back to templates
     if (aiVisualConcept) {
-      // REVOLUTIONARY: Build prompt from AI semantic understanding
-      let prompt = `Professional editorial photography: ${aiVisualConcept.visualSubject}
-
-CORE DISCOVERY: ${aiVisualConcept.coreDiscovery}
-
-VISUAL CONCEPT:
-- Subject: ${aiVisualConcept.visualSubject}
-- Context: ${aiVisualConcept.visualContext}
-- Unique Angle: ${aiVisualConcept.uniqueAngle}
-- Photography Style: ${aiVisualConcept.photographyStyle}
-- Emotional Tone: ${aiVisualConcept.emotionalTone}
-
-TECHNICAL SPECIFICATIONS:
-- Professional editorial photography with National Geographic quality
-- ${aiVisualConcept.photographyStyle}
-- Sharp focus, controlled lighting, professional composition
-- 1536x1024 aspect ratio for digital publication
-
-EDITORIAL RESTRICTIONS:
-- ABSOLUTELY NO text, numbers, words, letters, or readable characters
-- NO logos, watermarks, brand names, or corporate identifiers
-- ONLY photorealistic professional documentary-style photography
-- Must capture the specific phenomenon described in the article`;
+      // OPTIMIZED: Build prompt following gpt-image-1 best practices
+      let prompt = `${aiVisualConcept.visualSubject} in ${aiVisualConcept.visualContext}, ${aiVisualConcept.photographyStyle}, hyper-realistic, ultra-detailed, shot on Canon EOS R5 with 85mm f/1.4 lens, ISO 100, shallow depth of field, professional editorial lighting, ${aiVisualConcept.emotionalTone} mood, 8K resolution, photographic quality, volumetric lighting, sharp focus, bokeh background, National Geographic style, HDR, no text, no logos, no watermarks, photorealistic documentary photography capturing ${aiVisualConcept.uniqueAngle}`;
 
       return prompt;
     }
@@ -971,8 +953,8 @@ EDITORIAL RESTRICTIONS (CRITICAL):
     const aiVisualConcept = await this.generateAIVisualConcept(articleTitle, articleContent);
 
     if (aiVisualConcept) {
-      // Use AI-generated concept for maximum relevance
-      return `Professional editorial photograph: ${aiVisualConcept.visualSubject}. Setting: ${aiVisualConcept.visualContext}. Style: ${aiVisualConcept.photographyStyle}. Mood: ${aiVisualConcept.emotionalTone}. Constraints: Photorealistic only, no text/logos/brands, ${aiVisualConcept.uniqueAngle}.`;
+      // OPTIMIZED: Ultra-concise but information-dense prompt
+      return `${aiVisualConcept.visualSubject}, ${aiVisualConcept.photographyStyle}, shot on Canon EOS R5 85mm f/1.4, hyper-realistic, ${aiVisualConcept.emotionalTone}, 8K, HDR, no text, ${aiVisualConcept.uniqueAngle}`;
     }
 
     // Fallback to template system
