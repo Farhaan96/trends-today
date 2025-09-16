@@ -936,6 +936,12 @@ EDITORIAL RESTRICTIONS (CRITICAL):
 
     // Specific topic patterns
     if (
+      (titleLower.includes('tree') || titleLower.includes('fig')) &&
+      (titleLower.includes('stone') || titleLower.includes('calcium') || titleLower.includes('mineral'))
+    ) {
+      return 'living trees forming mineral deposits and biological mineralization';
+    }
+    if (
       titleLower.includes('brain') &&
       (titleLower.includes('shutdown') || titleLower.includes('multitask'))
     ) {
@@ -1069,6 +1075,14 @@ EDITORIAL RESTRICTIONS (CRITICAL):
 
   // Extract visual concept based on content semantics
   extractVisualConcept(fullText) {
+    // Trees/botanical/mineralization concepts
+    if (
+      (fullText.includes('tree') || fullText.includes('fig')) &&
+      (fullText.includes('stone') || fullText.includes('calcium carbonate') || fullText.includes('mineralization'))
+    ) {
+      return 'cross-section of living tree trunk showing calcium carbonate deposits within wood tissue';
+    }
+
     // Cognitive/brain concepts
     if (
       fullText.includes('brain') &&
@@ -1177,6 +1191,19 @@ EDITORIAL RESTRICTIONS (CRITICAL):
   // Generate visual metaphor based on core insight
   generateVisualMetaphor(coreInsight, category) {
     const { topic, angle, impact, technology } = coreInsight;
+
+    if (
+      topic.includes('trees forming mineral') ||
+      topic.includes('biological mineralization') ||
+      topic.includes('calcium carbonate')
+    ) {
+      return {
+        primary:
+          'close-up cross-section of a living Kenyan fig tree trunk showing white calcium carbonate stone deposits embedded within dark wood grain',
+        secondary: 'green leaves and natural environment visible to show the tree is alive and thriving',
+        symbolism: 'impossible biological phenomenon defying natural laws',
+      };
+    }
 
     if (
       topic.includes('AI avatar') ||
