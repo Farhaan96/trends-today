@@ -710,7 +710,64 @@ class AIImageGenerator {
     return mood;
   }
 
+  // BREAKTHROUGH: AI Semantic Analysis for Truly Dynamic Image Generation
+  async generateAIVisualConcept(articleTitle, articleContent) {
+    if (!this.openaiKey || this.openaiKey === 'sk-your-api-key-here') {
+      console.log('⚠️  No OpenAI key - falling back to template system');
+      return null;
+    }
+
+    try {
+      // Use OpenAI to semantically understand the content
+      if (!this._openai) {
+        this._openai = new OpenAI({ apiKey: this.openaiKey });
+      }
+
+      const analysisPrompt = `Analyze this article and generate a specific, unique visual concept for a professional editorial photograph.
+
+ARTICLE TITLE: "${articleTitle}"
+
+ARTICLE CONTENT: ${articleContent.substring(0, 2000)}
+
+Based on the content, provide a JSON response with:
+{
+  "coreDiscovery": "What is the main discovery/innovation/phenomenon?",
+  "visualSubject": "What specific subject should be photographed?",
+  "visualContext": "What environment/setting would best show this?",
+  "uniqueAngle": "What makes this visually compelling and unique?",
+  "photographyStyle": "What photography approach captures this best?",
+  "emotionalTone": "What emotional response should this evoke?"
+}
+
+Focus on the SPECIFIC phenomenon described, not generic category templates. Be highly specific and visual.`;
+
+      const response = await this._openai.chat.completions.create({
+        model: 'gpt-4',
+        messages: [{ role: 'user', content: analysisPrompt }],
+        max_tokens: 500,
+        temperature: 0.3,
+      });
+
+      const analysisText = response.choices[0]?.message?.content;
+      if (!analysisText) return null;
+
+      // Parse JSON response
+      const jsonMatch = analysisText.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) return null;
+
+      const concept = JSON.parse(jsonMatch[0]);
+      console.log('🧠 AI Visual Concept Generated:', concept.coreDiscovery);
+      return concept;
+    } catch (error) {
+      console.error('❌ AI analysis failed:', error.message);
+      return null;
+    }
+  }
+
   async generateDynamicPrompt(articleTitle, articleContent, category) {
+    // Use AI to semantically understand the content instead of pattern matching
+    const aiVisualConcept = await this.generateAIVisualConcept(articleTitle, articleContent);
+
     const topics = this.extractMainTopics(articleContent);
     const stats = this.extractKeyStatistics(articleContent);
     const technologies = this.extractTechnologies(articleContent, category);
@@ -819,7 +876,36 @@ class AIImageGenerator {
     const moodStyle =
       professionalMoodStyles[mood] || professionalMoodStyles.professional;
 
-    // Build enhanced professional photorealistic prompt for GPT-Image-1
+    // Use AI visual concept if available, otherwise fall back to templates
+    if (aiVisualConcept) {
+      // REVOLUTIONARY: Build prompt from AI semantic understanding
+      let prompt = `Professional editorial photography: ${aiVisualConcept.visualSubject}
+
+CORE DISCOVERY: ${aiVisualConcept.coreDiscovery}
+
+VISUAL CONCEPT:
+- Subject: ${aiVisualConcept.visualSubject}
+- Context: ${aiVisualConcept.visualContext}
+- Unique Angle: ${aiVisualConcept.uniqueAngle}
+- Photography Style: ${aiVisualConcept.photographyStyle}
+- Emotional Tone: ${aiVisualConcept.emotionalTone}
+
+TECHNICAL SPECIFICATIONS:
+- Professional editorial photography with National Geographic quality
+- ${aiVisualConcept.photographyStyle}
+- Sharp focus, controlled lighting, professional composition
+- 1536x1024 aspect ratio for digital publication
+
+EDITORIAL RESTRICTIONS:
+- ABSOLUTELY NO text, numbers, words, letters, or readable characters
+- NO logos, watermarks, brand names, or corporate identifiers
+- ONLY photorealistic professional documentary-style photography
+- Must capture the specific phenomenon described in the article`;
+
+      return prompt;
+    }
+
+    // Fallback to template system if AI analysis fails
     let prompt = `Professional editorial photography for ${category} article: "${articleTitle}".
 
 SUBJECT MATTER:`;
@@ -880,7 +966,16 @@ EDITORIAL RESTRICTIONS (CRITICAL):
   }
 
   // Enhanced GPT-Image-1 optimized prompt builder
-  buildConcisePrompt(articleTitle, articleContent, category) {
+  async buildConcisePrompt(articleTitle, articleContent, category) {
+    // Try AI analysis first for maximum dynamism
+    const aiVisualConcept = await this.generateAIVisualConcept(articleTitle, articleContent);
+
+    if (aiVisualConcept) {
+      // Use AI-generated concept for maximum relevance
+      return `Professional editorial photograph: ${aiVisualConcept.visualSubject}. Setting: ${aiVisualConcept.visualContext}. Style: ${aiVisualConcept.photographyStyle}. Mood: ${aiVisualConcept.emotionalTone}. Constraints: Photorealistic only, no text/logos/brands, ${aiVisualConcept.uniqueAngle}.`;
+    }
+
+    // Fallback to template system
     const coreInsight = this.extractCoreInsight(articleTitle, articleContent);
     const visualMetaphor = this.generateVisualMetaphor(coreInsight, category);
     const contextualElements = this.extractContextualElements(
@@ -1487,7 +1582,7 @@ EDITORIAL RESTRICTIONS (CRITICAL):
         prompt =
           promptMode === 'detailed'
             ? await this.generateDynamicPrompt(title, content, category)
-            : this.buildConcisePrompt(title, content, category);
+            : await this.buildConcisePrompt(title, content, category);
       }
 
       console.log(`   Dynamic prompt generated (${prompt.length} chars)`);
