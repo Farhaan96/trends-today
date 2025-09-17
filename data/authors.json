@@ -33,10 +33,14 @@
       "Performance Benchmarking",
       "Mobile Photography"
     ],
-    "reviewCount": 6,
+    "reviewCount": 7,
     "joinDate": "2019-03-15",
     "location": "San Francisco, CA",
-    "languages": ["English", "Mandarin", "Korean"]
+    "languages": [
+      "English",
+      "Mandarin",
+      "Korean"
+    ]
   },
   "sarah-martinez": {
     "id": "sarah-martinez",
@@ -73,10 +77,13 @@
       "Audio Equipment Analysis",
       "Esports Gear Reviews"
     ],
-    "reviewCount": 14,
+    "reviewCount": 15,
     "joinDate": "2020-01-08",
     "location": "Los Angeles, CA",
-    "languages": ["English", "Spanish"]
+    "languages": [
+      "English",
+      "Spanish"
+    ]
   },
   "david-kim": {
     "id": "david-kim",
@@ -113,10 +120,13 @@
       "Productivity Analysis",
       "Enterprise Hardware Testing"
     ],
-    "reviewCount": 12,
+    "reviewCount": 13,
     "joinDate": "2018-06-20",
     "location": "Boston, MA",
-    "languages": ["English", "Korean"]
+    "languages": [
+      "English",
+      "Korean"
+    ]
   },
   "emma-thompson": {
     "id": "emma-thompson",
@@ -153,9 +163,11 @@
       "Home Automation Systems",
       "Connected Device Testing"
     ],
-    "reviewCount": 8,
+    "reviewCount": 9,
     "joinDate": "2021-02-10",
     "location": "Austin, TX",
-    "languages": ["English"]
+    "languages": [
+      "English"
+    ]
   }
 }

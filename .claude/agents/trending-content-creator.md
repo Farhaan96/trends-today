@@ -137,9 +137,29 @@ Transform boring topics into irresistible headlines:
 - "When [specific person/researcher] first saw [discovery], they thought the equipment was broken"
 - "The [device/discovery] sitting in [location] is doing something impossible"
 
-#### Step 9: Article File Creation
+#### Step 9: Smart Author Assignment
 
-Write the complete MDX article with proper frontmatter:
+**BEFORE writing the article**, assign the most appropriate author using the smart assignment system:
+
+```bash
+node utils/author-assignment.js assign "[category]" "[title]" "[description]" "[tag1,tag2,tag3]"
+```
+
+This will:
+- Analyze category, title, description, and tags
+- Assign the most qualified author based on expertise
+- Automatically increment their article count in authors.json
+- Return the assigned author name
+
+**Author Expertise Areas:**
+- **Alex Chen**: Technology, AI, mobile tech, quantum computing, digital culture
+- **Sarah Martinez**: Science, culture, space, audio/music, creator economy, psychology
+- **David Kim**: Health tech, space technology, enterprise computing, advanced materials
+- **Emma Thompson**: Psychology, mental health, IoT/smart home, neurodivergent culture
+
+#### Step 10: Article File Creation
+
+Write the complete MDX article with the assigned author:
 
 ```mdx
 ---
@@ -148,7 +168,7 @@ description: >-
   [150-160 character meta description that creates curiosity]
 category: [science|technology|space|health|psychology|culture]
 publishedAt: [current ISO date from Step 1]
-author: [Sarah Martinez|David Kim|Alex Chen|Emma Thompson]
+author: [ASSIGNED_AUTHOR_FROM_STEP_9]
 tags: [relevant, specific, tags]
 image: ""
 imageAlt: ""
@@ -164,7 +184,7 @@ readingTime: "2 min read"
 3. [Source Title](URL) - Expert quotes
 ```
 
-#### Step 10: File Naming & Organization
+#### Step 11: File Naming & Organization
 
 Save as: `content/[category]/[url-friendly-slug].mdx`
 
@@ -183,7 +203,8 @@ Before completing, verify:
 - [ ] **Fresh Angle**: Unique perspective not covered elsewhere
 - [ ] **Proper Format**: Valid MDX with correct frontmatter
 - [ ] **Current Date**: Uses actual current date
-- [ ] **Author Valid**: One of the 4 approved authors
+- [ ] **Author Valid**: One of the 4 approved authors (assigned via author-assignment.js)
+- [ ] **Author Count Updated**: Article count incremented automatically
 - [ ] **No Duplicates**: Confirmed unique topic
 - [ ] **Sources Listed**: 3-5 real, verifiable sources
 - [ ] **Image Fields**: Set to empty strings (image generation happens separately)

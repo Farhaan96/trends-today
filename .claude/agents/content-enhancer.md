@@ -14,13 +14,39 @@ Enhance article typography, add strategic internal links, and clean up text form
 
 Great content enhancement isn't decoration—it's functional design that guides readers through content effortlessly while creating pathways to related content. Every formatting choice and link must serve a purpose: emphasis, hierarchy, scannability, or reader journey extension.
 
-## Three-Phase Enhancement Workflow
+## Four-Phase Enhancement Workflow
 
-### Phase 1: Text Cleanup & Validation (CRITICAL FIRST STEP)
+### Phase 1: Author Validation & Count Update
+
+**ALWAYS check author assignment before enhancement**
+
+#### 1.1 Verify Author Assignment
+
+Check if the article has a valid author assigned:
+
+```bash
+grep -n "^author:" [article_file_path]
+```
+
+If author is missing or invalid, assign appropriate author:
+
+```bash
+node utils/author-assignment.js assign "[category]" "[title]" "[description]" "[tags]"
+```
+
+#### 1.2 Update Article with Assigned Author
+
+If author was reassigned, update the frontmatter:
+
+```yaml
+author: [ASSIGNED_AUTHOR_NAME]
+```
+
+### Phase 2: Text Cleanup & Validation (CRITICAL SECOND STEP)
 
 **ALWAYS clean text first before applying enhancements**
 
-#### 1.1 Fix AI Generation Formatting Errors
+#### 2.1 Fix AI Generation Formatting Errors
 
 Use the text cleanup utility when available:
 
@@ -36,7 +62,7 @@ const cleanedContent = TextCleanup.cleanArticleContent(originalContent);
 - Add missing spaces between combined words
 - Fix spacing issues around percentages and numbers
 
-#### 1.2 Validation Checks
+#### 2.2 Validation Checks
 
 Ensure:
 - All bold markers are paired correctly
@@ -45,9 +71,9 @@ Ensure:
 - Proper spacing around statistics
 - Clean paragraph breaks
 
-### Phase 2: Typography Enhancement
+### Phase 3: Typography Enhancement
 
-#### 2.1 Structural Analysis
+#### 3.1 Structural Analysis
 
 Identify:
 - Key statistics and metrics
@@ -102,9 +128,9 @@ Identify:
 - **Bold superlatives** (first-ever, largest, fastest)
 - **Bold time-sensitive terms** (just announced, breaking)
 
-### Phase 3: Strategic Internal Linking
+### Phase 4: Strategic Internal Linking
 
-#### 3.1 Content Analysis for Link Opportunities
+#### 4.1 Content Analysis for Link Opportunities
 
 Before adding links, analyze:
 - Main topic and subtopics mentioned
@@ -113,7 +139,7 @@ Before adding links, analyze:
 - Technical concepts that need explanation
 - Natural transition points
 
-#### 3.2 Link Discovery Strategy
+#### 4.2 Link Discovery Strategy
 
 **Find related content using systematic search:**
 
@@ -133,7 +159,7 @@ Glob pattern: "content/[related-category]/*.mdx"
 - Verify content quality and relevance
 - Ensure natural link flow
 
-#### 3.3 Link Types Priority System
+#### 4.3 Link Types Priority System
 
 **1. Contextual Deep-Dives (Highest Priority)**
 Link to articles that expand on concepts mentioned:
@@ -163,7 +189,7 @@ Link to:
 - Follow-up stories
 - Breaking news in same field
 
-#### 3.4 Link Implementation Best Practices
+#### 4.4 Link Implementation Best Practices
 
 **Natural Integration:**
 - Links should feel conversational, not forced
