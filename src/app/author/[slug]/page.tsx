@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-// import Image from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
@@ -111,9 +111,19 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
           <div className="flex-shrink-0">
             <div className="relative">
               <div className="w-32 h-32 bg-gray-200 rounded-full overflow-hidden">
-                <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
-                  <UserIcon className="w-16 h-16 text-white" />
-                </div>
+                {author.avatar ? (
+                  <Image
+                    src={author.avatar}
+                    alt={author.name}
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+                    <UserIcon className="w-16 h-16 text-white" />
+                  </div>
+                )}
               </div>
               <div className="absolute -bottom-2 -right-2 bg-green-500 w-8 h-8 rounded-full flex items-center justify-center">
                 <CheckBadgeIcon className="w-5 h-5 text-white" />

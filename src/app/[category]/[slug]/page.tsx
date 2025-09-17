@@ -178,10 +178,13 @@ export default async function ArticlePage({
               <span className="font-medium">
                 {(() => {
                   const author = article.author || article.frontmatter?.author;
-                  const authorName = author?.name || 'Trends Today';
+                  const authorName = typeof author === 'string' ? author : (author?.name || 'Trends Today');
                   const authorId = (author as any)?.id || (typeof author === 'string' ? (author as string).toLowerCase().replace(/\s+/g, '-') : null);
 
-                  return authorId && authorId !== 'trends-today' ? (
+                  // Known author IDs that have pages
+                  const knownAuthors = ['alex-chen', 'sarah-martinez', 'david-kim', 'emma-thompson'];
+
+                  return authorId && knownAuthors.includes(authorId) ? (
                     <Link
                       href={`/author/${authorId}`}
                       className="text-blue-600 hover:text-blue-800 transition-colors"

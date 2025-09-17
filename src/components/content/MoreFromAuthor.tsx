@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { UserIcon } from '@heroicons/react/24/outline';
+import authorsData from '../../../data/authors.json';
 
 interface Author {
   id?: string;
@@ -33,6 +34,10 @@ export default function MoreFromAuthor({
     ? author.id
     : authorName.toLowerCase().replace(/\s+/g, '-');
 
+  // Get author data from JSON for profile image
+  const authors = authorsData as Record<string, any>;
+  const authorData = authors[authorId];
+
   // For now, show a simple placeholder until we implement proper article fetching
   const sampleArticles: Article[] = [
     {
@@ -56,62 +61,74 @@ export default function MoreFromAuthor({
   const displayArticles = articles.length > 0 ? articles.slice(0, 3) : sampleArticles;
 
   return (
-    <section className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-6 my-8">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-12 h-12 bg-white border-2 border-blue-200 rounded-full flex items-center justify-center">
-          <UserIcon className="w-6 h-6 text-blue-600" />
+    <section className="bg-white border border-gray-100 rounded-xl p-8 my-8 shadow-sm">
+      <div className="flex items-center gap-4 mb-8">
+        <div className="w-16 h-16 bg-gray-100 rounded-full overflow-hidden flex items-center justify-center">
+          {authorData?.avatar ? (
+            <Image
+              src={authorData.avatar}
+              alt={authorName}
+              width={64}
+              height={64}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <UserIcon className="w-8 h-8 text-gray-600" />
+          )}
         </div>
         <div>
-          <h3 className="text-xl font-bold text-gray-900">
+          <h3 className="text-2xl font-bold text-gray-900">
             More from {authorName}
           </h3>
-          <p className="text-sm text-gray-600">
+          <p className="text-gray-600">
             Discover more insights from this author
           </p>
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {displayArticles.map((article, index) => (
           <Link
             key={index}
             href={article.href}
-            className="group bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-200"
+            className="group space-y-4"
           >
             {article.image && (
-              <div className="relative h-32 bg-gray-100">
+              <div className="relative w-full aspect-square bg-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
                 <Image
                   src={article.image}
                   alt={article.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="object-cover rounded-xl transition-transform duration-300"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
               </div>
             )}
-            <div className="p-4">
-              <div className="flex items-center gap-2 mb-2">
+
+            <div className="space-y-3">
+              <h4 className="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors leading-tight break-words line-clamp-2">
+                {article.title}
+              </h4>
+
+              <div className="flex items-center gap-2 text-sm text-gray-500">
                 <span className="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs font-semibold uppercase tracking-wide rounded-full">
                   {article.category}
                 </span>
-                <span className="text-xs text-gray-500">
+                <span>•</span>
+                <span className="text-xs">
                   {typeof article.readingTime === 'string' && article.readingTime.includes('min read')
                     ? article.readingTime
                     : `${article.readingTime} min read`}
                 </span>
               </div>
 
-              <h4 className="font-semibold text-gray-900 text-sm leading-tight mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
-                {article.title}
-              </h4>
-
               {article.description && (
-                <p className="text-xs text-gray-600 line-clamp-2 leading-relaxed">
+                <p className="text-gray-600 text-sm line-clamp-2 leading-relaxed">
                   {article.description}
                 </p>
               )}
 
-              <div className="mt-3 text-xs text-gray-500">
+              <div className="text-sm text-gray-500">
                 {new Date(article.publishedAt).toLocaleDateString('en-US', {
                   month: 'short',
                   day: 'numeric',
@@ -124,10 +141,10 @@ export default function MoreFromAuthor({
       </div>
 
       {authorId && authorId !== 'trends-today-editorial' && (
-        <div className="mt-6 text-center">
+        <div className="mt-8 text-center">
           <Link
             href={`/author/${authorId}`}
-            className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+            className="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors shadow-sm"
           >
             View all articles by {authorName} →
           </Link>

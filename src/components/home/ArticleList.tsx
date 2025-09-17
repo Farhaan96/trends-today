@@ -100,11 +100,25 @@ export default function ArticleList({
               </Link>
 
               <div className="flex items-center space-x-2 text-sm text-gray-500">
-                <span className="font-medium">
+                <span>
                   By{' '}
-                  {typeof featuredPost.frontmatter.author === 'string'
-                    ? featuredPost.frontmatter.author
-                    : featuredPost.frontmatter.author?.name || 'Trends Today'}
+                  {(() => {
+                    const author = featuredPost.frontmatter.author;
+                    const authorName = typeof author === 'string' ? author : (author?.name || 'Trends Today');
+                    const authorId = typeof author === 'string' ? author.toLowerCase().replace(/\s+/g, '-') : null;
+                    const knownAuthors = ['alex-chen', 'sarah-martinez', 'david-kim', 'emma-thompson'];
+
+                    return authorId && knownAuthors.includes(authorId) ? (
+                      <Link
+                        href={`/author/${authorId}`}
+                        className="font-medium text-blue-600 hover:text-blue-800 transition-colors"
+                      >
+                        {authorName}
+                      </Link>
+                    ) : (
+                      <span className="font-medium">{authorName}</span>
+                    );
+                  })()}
                 </span>
                 <span>•</span>
                 <span>
@@ -214,11 +228,23 @@ export default function ArticleList({
               </h3>
             </Link>
             <div className="text-sm text-gray-500">
-              <span className="font-medium">
-                {typeof thirdPost.frontmatter.author === 'string'
-                  ? thirdPost.frontmatter.author
-                  : thirdPost.frontmatter.author?.name || 'Trends Today'}
-              </span>
+              {(() => {
+                const author = thirdPost.frontmatter.author;
+                const authorName = typeof author === 'string' ? author : (author?.name || 'Trends Today');
+                const authorId = typeof author === 'string' ? author.toLowerCase().replace(/\s+/g, '-') : null;
+                const knownAuthors = ['alex-chen', 'sarah-martinez', 'david-kim', 'emma-thompson'];
+
+                return authorId && knownAuthors.includes(authorId) ? (
+                  <Link
+                    href={`/author/${authorId}`}
+                    className="font-medium text-blue-600 hover:text-blue-800 transition-colors"
+                  >
+                    {authorName}
+                  </Link>
+                ) : (
+                  <span className="font-medium">{authorName}</span>
+                );
+              })()}
               <span className="mx-2">•</span>
               <span>
                 {new Date(
@@ -270,11 +296,23 @@ export default function ArticleList({
                   </h3>
                 </Link>
                 <div className="text-sm text-gray-500">
-                  <span className="font-medium">
-                    {typeof article.frontmatter.author === 'string'
-                      ? article.frontmatter.author
-                      : article.frontmatter.author?.name || 'Trends Today'}
-                  </span>
+                  {(() => {
+                    const author = article.frontmatter.author;
+                    const authorName = typeof author === 'string' ? author : (author?.name || 'Trends Today');
+                    const authorId = typeof author === 'string' ? author.toLowerCase().replace(/\s+/g, '-') : null;
+                    const knownAuthors = ['alex-chen', 'sarah-martinez', 'david-kim', 'emma-thompson'];
+
+                    return authorId && knownAuthors.includes(authorId) ? (
+                      <Link
+                        href={`/author/${authorId}`}
+                        className="font-medium text-blue-600 hover:text-blue-800 transition-colors"
+                      >
+                        {authorName}
+                      </Link>
+                    ) : (
+                      <span className="font-medium">{authorName}</span>
+                    );
+                  })()}
                   <span className="mx-2">•</span>
                   <span>
                     {new Date(
