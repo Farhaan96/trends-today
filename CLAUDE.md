@@ -127,7 +127,13 @@ Task("trending-content-creator", {topic: "Health innovation", category: "health"
 // Claude Code executes simultaneously:
 Task("content-enhancer", {files: ["batch1_article1.mdx", "batch1_article2.mdx"]})
 Task("quality-factchecker", {files: ["batch1_article3.mdx", "batch1_article4.mdx"]})
-Task("image-generator", {files: ["batch1_article5.mdx"]})
+```
+
+**Data Visualization & Image Phase (After Fact-Checking):**
+```javascript
+// Only after facts are verified:
+Task("data-visualization-creator", {files: ["verified_articles.mdx"], data: "verified_research"})
+Task("image-generator", {files: ["fact_checked_articles.mdx"]})
 ```
 
 #### Performance Improvements
@@ -165,7 +171,8 @@ Process enhancement and fact-checking simultaneously for efficiency
 **Validation Gates:**
 - Phase 1: Content creation with built-in duplicate checking
 - Phase 2: Enhancement and fact-checking run in parallel
-- Phase 3: Build validation ensures technical compliance
+- Phase 3: Data visualization & image generation (AFTER fact-checking)
+- Phase 4: Build validation ensures technical compliance
 - All phases must pass before publication
 
 **Error Handling:**
@@ -559,11 +566,24 @@ This comprehensive AI system transforms Trends Today into a premium destination 
 - Each agent should appear with colored box when properly invoked
 - If no colored box appears, the agent is NOT actually running
 
+### Agent Pipeline Order (CRITICAL)
+
+**CORRECT SEQUENCE FOR ARTICLES WITH DATA VISUALIZATIONS:**
+
+1. **trending-content-creator** - Create article with image: '' and imageAlt: ''
+2. **content-enhancer** - Apply typography and internal linking
+3. **quality-factchecker** - Verify all facts and research accuracy
+4. **data-visualization-creator** - Create charts/graphs with VERIFIED data only
+5. **image-generator** - Generate AI image after content is finalized
+6. **build-validator** - Final technical validation
+
+**CRITICAL RULE:** Data visualizations and images must come AFTER fact-checking to ensure accuracy.
+
 ### Image Generation
 
 - **MANDATORY:** Every article must have AI-generated image using GPT-Image-1
 - **NO stock photos, Unsplash, or reused images for articles**
-- **Process:** Save article first, then generate image with utils/ai-image-generator.js
+- **Process:** Generate image AFTER fact-checking and content finalization
 - **Path format:** /images/ai-generated/ai-generated-[timestamp].png
 
 ### Content Standards
