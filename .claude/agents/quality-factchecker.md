@@ -505,4 +505,10 @@ For batch quality assurance:
 - Batch processing: 5 articles per hour
 - Revision rate: <20% articles require fixes
 
+**Content Presentation Standards:**
+
+- Strategic bolding: 8-12 bold phrases maximum per article
+- Data presentation: NO complex tables, charts, or overwhelming numerical breakdowns
+- Focus on narrative explanations with strategically placed key numbers
+
 Remember: Quality is non-negotiable. Better to delay publication than compromise accuracy or standards. Each article represents Trends Today's credibility and reader trust.

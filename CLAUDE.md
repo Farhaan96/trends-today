@@ -61,7 +61,7 @@ Claude Code (Orchestrator)
   - Adapts content length to category requirements automatically
 - **Tools:** WebSearch, WebFetch, Write, Read, Grep, Glob, Bash
 - **Content-Type Aware Standards:**
-  - **Scientific/Research:** 800-1,200 words with comprehensive data tables and analysis
+  - **Scientific/Research:** 600-800 words with clear explanations and accessible findings
   - **Technology Deep Dives:** 600-800 words with technical specifications and comparisons
   - **Quick News/Trends:** 300-500 words optimized for rapid consumption
   - **Psychology/Health:** 500-700 words with study methodology and applications
@@ -103,7 +103,7 @@ Claude Code (Orchestrator)
   - Category-appropriate validation depth
 - **Tools:** Read, WebSearch, WebFetch, TodoWrite, Grep, Glob
 - **Category-Specific Standards:**
-  - **Scientific/Research:** >90% accuracy, extensive source verification, data table validation
+  - **Scientific/Research:** >90% accuracy, extensive source verification, accessible explanation validation
   - **Technology:** >85% accuracy, technical specification verification, product claim validation
   - **Quick News:** >80% accuracy, rapid fact verification, trending topic validation
   - **Psychology/Health:** >85% accuracy, study methodology verification, clinical claim validation
@@ -326,13 +326,13 @@ This optimized pipeline represents a breakthrough in AI content generation effic
 
 ### Content-Type Aware Word Count Strategy
 
-**Scientific & Research Articles (800-1,200 words):**
+**Scientific & Research Articles (600-800 words):**
 
-- **Purpose:** Comprehensive data analysis, research findings, technical breakthroughs
-- **Why longer:** Complex data requires detailed tables, methodology explanations, and thorough analysis
-- **Structure:** Hook → Research Context → Comprehensive Data Tables → Analysis → Implications → Conclusion
-- **Examples:** "Scientists Found Evidence We're Living in a Digital Universe" (comprehensive entropy/energy analysis)
-- **Key features:** Multiple data tables, detailed calculations, extensive source citations
+- **Purpose:** Research findings, technical breakthroughs, scientific discoveries
+- **Why moderate length:** Complex topics need explanation but must remain accessible and readable
+- **Structure:** Hook → Research Context → Key Findings → Real-world Implications → Conclusion
+- **Examples:** "Scientists Found Evidence We're Living in a Digital Universe" (entropy/energy research)
+- **Key features:** Clear explanations, strategic statistics, accessible language, expert quotes
 
 **Technology Deep Dives (600-800 words):**
 
@@ -385,8 +385,22 @@ This optimized pipeline represents a breakthrough in AI content generation effic
 - General descriptions (avoid **crushing numbers**)
 - Regular nouns (avoid **information systems**)
 - Obvious phrases (avoid **traditional physics**)
+- Data tables, charts, or heavy numerical presentations
 
 **Goal:** Guide reader's eye to only the most critical information. Excessive bolding reduces impact and looks spammy.
+
+### Critical Content Guidelines
+
+**AVOID Heavy Data Presentations:**
+
+- ❌ NO complex data tables with multiple rows and columns
+- ❌ NO extensive numerical breakdowns that overwhelm readers
+- ❌ NO chart-like text presentations that look like spreadsheets
+- ✅ USE narrative explanations with strategically placed key numbers
+- ✅ USE accessible language that makes complex concepts clear
+- ✅ USE storytelling to convey data insights without overwhelming detail
+
+**Readability First:** Complex scientific topics must be accessible. Present findings through clear narrative rather than data dumps.
 
 ### Content Categories & Niches
 
@@ -487,8 +501,8 @@ CONTENT_QUALITY_THRESHOLD=85             # Minimum quality score
    - Social media buzz, tech announcements, viral phenomena
    - Fast consumption, high sharing potential
 
-2. **Does this involve complex scientific research or data?** → **Scientific/Research (800-1,200 words)**
-   - Studies with methodology, data tables, comprehensive analysis
+2. **Does this involve complex scientific research or data?** → **Scientific/Research (600-800 words)**
+   - Studies with clear explanations, accessible findings, expert insights
    - Examples: Clinical trials, physics discoveries, research papers
 
 3. **Is this a product review or technical analysis?** → **Technology Deep Dive (600-800 words)**

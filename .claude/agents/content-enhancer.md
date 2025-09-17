@@ -387,6 +387,8 @@ Verify each enhanced article includes:
 - [ ] **No malformed syntax** present
 - [ ] **Content depth signals** (multiple angles, comprehensive coverage)
 - [ ] **Fresh content markers** (recent dates, current examples, latest research)
+- [ ] **Strategic bolding limits** (8-12 bold phrases maximum per article)
+- [ ] **Data presentation** (NO complex tables, charts, or overwhelming numerical breakdowns)
 
 ## Batch Processing Optimization
 

@@ -345,6 +345,8 @@ seo:
 - [ ] **Voice Search Ready**: Answers conversational questions
 - [ ] **Social Sharing Triggers**: Content makes readers want to share
 - [ ] **Internal Link Opportunities**: Phrases that could link to other content identified
+- [ ] **Strategic Bolding**: Use 8-12 strategic bold phrases maximum
+- [ ] **Data Presentation**: NO complex tables, charts, or overwhelming numerical breakdowns - use narrative with key numbers
 
 #### Step 13: File Naming & Organization
 
