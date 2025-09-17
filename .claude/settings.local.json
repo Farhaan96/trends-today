@@ -60,7 +60,8 @@
       "Bash(npx prettier:*)",
       "Bash(git merge:*)",
       "Bash(npx tsc:*)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(time:*)"
     ],
     "deny": [],
     "ask": []

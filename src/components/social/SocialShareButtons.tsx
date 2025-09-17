@@ -25,7 +25,7 @@ export default function SocialShareButtons({
   const encodedImage = encodeURIComponent(image);
 
   const shareUrls = {
-    twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+    x: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
     reddit: `https://reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`,
@@ -82,7 +82,7 @@ export default function SocialShareButtons({
       'flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 hover:scale-110';
 
     const platformColors = {
-      twitter: 'bg-blue-500 hover:bg-blue-600 text-white',
+      x: 'bg-blue-500 hover:bg-blue-600 text-white',
       facebook: 'bg-blue-600 hover:bg-blue-700 text-white',
       linkedin: 'bg-blue-700 hover:bg-blue-800 text-white',
       reddit: 'bg-orange-600 hover:bg-orange-700 text-white',
@@ -99,7 +99,7 @@ export default function SocialShareButtons({
 
   const socialButtons = [
     {
-      platform: 'twitter',
+      platform: 'x',
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />

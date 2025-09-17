@@ -1,10 +1,12 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import AuthorBox from '@/components/content/AuthorBox';
+import MoreFromAuthor from '@/components/content/MoreFromAuthor';
 import CitationsList from '@/components/content/CitationsList';
 import StructuredData from '@/components/seo/StructuredData';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
@@ -196,9 +198,23 @@ export default async function NewsPage({ params }: NewsPageProps) {
           <div className="flex items-center gap-4 text-gray-900 border-b pb-6">
             <div className="flex items-center gap-2">
               <span className="font-medium text-gray-900">
-                {(typeof frontmatter.author === 'string'
-                  ? frontmatter.author
-                  : frontmatter.author?.name) || 'Trends Today Editorial'}
+                {(() => {
+                  const authorName = (typeof frontmatter.author === 'string'
+                    ? frontmatter.author
+                    : frontmatter.author?.name) || 'Trends Today Editorial';
+                  const authorId = typeof frontmatter.author === 'object'
+                    ? frontmatter.author?.id
+                    : frontmatter.author?.toLowerCase().replace(/\s+/g, '-');
+
+                  return authorId && authorId !== 'trends-today-editorial' ? (
+                    <Link
+                      href={`/author/${authorId}`}
+                      className="text-blue-600 hover:text-blue-800 transition-colors"
+                    >
+                      {authorName}
+                    </Link>
+                  ) : authorName;
+                })()}
               </span>
             </div>
             <span>•</span>
@@ -319,6 +335,15 @@ export default async function NewsPage({ params }: NewsPageProps) {
               author={frontmatter.author}
               publishedAt={frontmatter.publishedAt}
               lastUpdated={frontmatter.updatedAt}
+            />
+          )}
+
+          {/* More from Author */}
+          {frontmatter.author && (
+            <MoreFromAuthor
+              author={frontmatter.author}
+              currentArticleSlug={params.slug}
+              maxArticles={3}
             />
           )}
 

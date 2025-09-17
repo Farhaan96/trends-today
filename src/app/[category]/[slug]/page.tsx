@@ -175,9 +175,20 @@ export default async function ArticlePage({
               </Link>
               <span>•</span>
               <span className="font-medium">
-                {article.author?.name ||
-                  article.frontmatter?.author?.name ||
-                  'Trends Today'}
+                {(() => {
+                  const author = article.author || article.frontmatter?.author;
+                  const authorName = author?.name || 'Trends Today';
+                  const authorId = (author as any)?.id || (typeof author === 'string' ? (author as string).toLowerCase().replace(/\s+/g, '-') : null);
+
+                  return authorId && authorId !== 'trends-today' ? (
+                    <Link
+                      href={`/author/${authorId}`}
+                      className="text-blue-600 hover:text-blue-800 transition-colors"
+                    >
+                      {authorName}
+                    </Link>
+                  ) : authorName;
+                })()}
               </span>
               <span>•</span>
               <span>
@@ -190,9 +201,14 @@ export default async function ArticlePage({
                 <>
                   <span>•</span>
                   <span>
-                    {article.frontmatter?.readingTime ||
-                      (article as any).readingTime}{' '}
-                    min read
+                    {(() => {
+                      const readingTime = article.frontmatter?.readingTime ||
+                        (article as any).readingTime;
+                      return typeof readingTime === 'string' &&
+                             readingTime.includes('min read')
+                        ? readingTime
+                        : `${readingTime} min read`;
+                    })()}
                   </span>
                 </>
               )}

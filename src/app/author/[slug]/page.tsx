@@ -79,10 +79,10 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
 
   const socialLinks = [
     {
-      platform: 'Twitter',
+      platform: 'X',
       icon: '𝕏',
       url: author.socialMedia.twitter
-        ? `https://twitter.com/${author.socialMedia.twitter}`
+        ? `https://x.com/${author.socialMedia.twitter}`
         : null,
     },
     {
