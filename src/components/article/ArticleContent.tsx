@@ -3,10 +3,22 @@
 import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import { useEffect, useState } from 'react';
+import EntropyChart from '@/components/data-viz/EntropyChart';
+import EnergyComparisonChart from '@/components/data-viz/EnergyComparisonChart';
+import InformationStorageChart from '@/components/data-viz/InformationStorageChart';
+import QuantumProgressChart from '@/components/data-viz/QuantumProgressChart';
 
 interface ArticleContentProps {
   content: string;
 }
+
+// Custom components for MDX
+const components = {
+  EntropyChart,
+  EnergyComparisonChart,
+  InformationStorageChart,
+  QuantumProgressChart,
+};
 
 export default function ArticleContent({ content }: ArticleContentProps) {
   const [mdxSource, setMdxSource] = useState<any>(null);
@@ -43,7 +55,7 @@ export default function ArticleContent({ content }: ArticleContentProps) {
 
   return (
     <div className="prose prose-xl max-w-none text-gray-900 prose-a:text-blue-600 prose-a:underline prose-a:underline-offset-2 hover:prose-a:text-blue-700 prose-p:leading-7 md:prose-p:leading-8 prose-headings:mt-8 prose-headings:mb-3 prose-ul:my-6 prose-ol:my-6 prose-li:my-1.5">
-      <MDXRemote {...mdxSource} />
+      <MDXRemote {...mdxSource} components={components} />
     </div>
   );
 }
