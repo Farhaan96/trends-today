@@ -53,13 +53,20 @@ Claude Code (Orchestrator)
 
 - **Consolidates:** trending-topics-discovery + ultra-short-content-creator
 - **Purpose:** End-to-end workflow from topic discovery to article creation
-- **Capabilities:** Real-time research, duplicate checking, content generation
+- **Capabilities:** Real-time research, duplicate checking, content generation with category-aware word limits
 - **Benefits:**
   - Eliminates handoff delays between discovery and creation
   - Preserves research context throughout writing process
   - 40% faster execution through context preservation
+  - Adapts content length to category requirements automatically
 - **Tools:** WebSearch, WebFetch, Write, Read, Grep, Glob, Bash
-- **Quality Standards:** 400-500 words, engaging hooks, fact-checked content
+- **Content-Type Aware Standards:**
+  - **Scientific/Research:** 800-1,200 words with comprehensive data tables and analysis
+  - **Technology Deep Dives:** 600-800 words with technical specifications and comparisons
+  - **Quick News/Trends:** 300-500 words optimized for rapid consumption
+  - **Psychology/Health:** 500-700 words with study methodology and applications
+- **Universal Quality:** Engaging hooks, fact-checked content, evidence-based analysis
+- **CRITICAL FORMATTING RULE:** Use strategic bolding only - maximum 8-12 bold phrases per article focusing on key findings, researcher names (first mention), and critical statistics. Avoid bolding common terms or every modifier.
 - **CRITICAL IMAGE RULE:**
   - NEVER generate images or call image generation utilities
   - Set image: '' and imageAlt: '' in frontmatter
@@ -70,26 +77,37 @@ Claude Code (Orchestrator)
 
 - **Consolidates:** typography-enhancer + smart-content-linker + text cleanup
 - **Purpose:** Single-pass content enhancement for typography and strategic linking
-- **Capabilities:** Bold formatting, expert quotes, internal linking, text cleanup
+- **Capabilities:** Strategic bold formatting, expert quotes, internal linking, text cleanup
 - **Benefits:**
   - Single pass through content eliminates redundant file operations
   - Unified enhancement reduces processing time by 60%
   - Consistent formatting and linking strategy
+  - Applies strategic bolding guidelines to remove excessive formatting
 - **Tools:** Read, Edit, MultiEdit, Glob, Grep
-- **Standards:** Visual hierarchy, 3-4 strategic links, premium typography
+- **Standards:** Visual hierarchy, 3-4 strategic links, premium typography with selective bolding
+- **CRITICAL BOLDING GUIDELINES:**
+  - Remove excessive bolding - maximum 8-12 bold phrases per article
+  - Bold only: key researchers (first mention), critical statistics, major discoveries, important institutions
+  - Never bold: common terms, repeated mentions, adjectives, general descriptions
 - **Optimization:** All text enhancements applied in one MultiEdit operation
 
 #### quality-factchecker (CONSOLIDATED)
 
 - **Consolidates:** fact-checker + quality-validator + publication-reviewer
 - **Purpose:** Comprehensive accuracy and quality validation in unified workflow
-- **Capabilities:** Real-time fact verification, quality scoring, publication readiness
+- **Capabilities:** Real-time fact verification, quality scoring, publication readiness with category-specific standards
 - **Benefits:**
   - Unified quality assessment eliminates multiple validation rounds
   - Parallel fact-checking across multiple sources
   - Single comprehensive quality report
+  - Category-appropriate validation depth
 - **Tools:** Read, WebSearch, WebFetch, TodoWrite, Grep, Glob
-- **Standards:** >80% accuracy threshold, 85+ quality score, SEO compliance
+- **Category-Specific Standards:**
+  - **Scientific/Research:** >90% accuracy, extensive source verification, data table validation
+  - **Technology:** >85% accuracy, technical specification verification, product claim validation
+  - **Quick News:** >80% accuracy, rapid fact verification, trending topic validation
+  - **Psychology/Health:** >85% accuracy, study methodology verification, clinical claim validation
+- **Universal Standards:** SEO compliance, proper attribution, working source links
 - **Efficiency:** Parallel research and validation reduce processing time by 50%
 
 #### build-validator (ENHANCED)
@@ -304,27 +322,71 @@ This optimized pipeline represents a breakthrough in AI content generation effic
 - ✅ ONLY photorealistic, professional documentary-style photography
 - ✅ Must meet serious journalism and scientific publication standards
 
-## 📝 CONTENT STRATEGY: ULTRA-SHORT EXCELLENCE
+## 📝 CONTENT STRATEGY: CATEGORY-OPTIMIZED EXCELLENCE
 
-### Article Standards (400-500 Words Maximum)
+### Content-Type Aware Word Count Strategy
 
-**Structure Template:**
+**Scientific & Research Articles (800-1,200 words):**
 
-1. **Hook (80-100 words)** - Compelling story, surprising fact, or controversial statement
-2. **Core Discovery (150-200 words)** - Main insights with evidence and expert quotes
-3. **Real Examples (100-150 words)** - Concrete examples with specific statistics
-4. **Practical Application (50-75 words)** - What this means for readers
-5. **Conclusion (20-30 words)** - Strong call-to-action or thought-provoking question
+- **Purpose:** Comprehensive data analysis, research findings, technical breakthroughs
+- **Why longer:** Complex data requires detailed tables, methodology explanations, and thorough analysis
+- **Structure:** Hook → Research Context → Comprehensive Data Tables → Analysis → Implications → Conclusion
+- **Examples:** "Scientists Found Evidence We're Living in a Digital Universe" (comprehensive entropy/energy analysis)
+- **Key features:** Multiple data tables, detailed calculations, extensive source citations
 
-**Quality Requirements:**
+**Technology Deep Dives (600-800 words):**
 
-- ✅ **Engaging hook** - Must grab attention within first 10 seconds
-- ✅ **3-5 statistics** - Bold formatted, specific and impactful
+- **Purpose:** Product reviews, technical analysis, comparative studies
+- **Why longer:** Technical specifications, performance metrics, detailed comparisons require space
+- **Structure:** Hook → Technical Overview → Performance Analysis → Comparison Data → Practical Implications
+- **Examples:** Quantum computing breakthroughs, AI model comparisons, hardware reviews
+
+**Quick News & Trends (300-500 words):**
+
+- **Purpose:** Breaking news, viral trends, rapid updates, cultural moments
+- **Why shorter:** Immediate consumption, social sharing, rapid engagement
+- **Structure:** Hook → Core Story → Key Statistics → Quick Analysis → Call-to-action
+- **Examples:** Tech company announcements, trending topics, market updates
+
+**Psychology & Health Insights (500-700 words):**
+
+- **Purpose:** Research studies, behavioral analysis, health discoveries
+- **Why moderate:** Sufficient space for study methodology and practical applications
+- **Structure:** Hook → Study Context → Research Findings → Real-world Applications → Takeaways
+
+### Universal Quality Requirements (All Categories)
+
+- ✅ **Compelling hook** - Must grab attention within first 10 seconds
+- ✅ **Evidence-based content** - Key statistics and findings strategically emphasized
 - ✅ **Expert quotes** - Blockquote format with proper attribution
-- ✅ **Internal links** - 3-4 strategic cross-links per article
-- ✅ **Sources section** - 3-5 real, verifiable sources with working URLs
-- ✅ **Professional images** - AI-generated photorealistic visuals
-- ✅ **2-minute read time** - Optimized for high completion rates
+- ✅ **Strategic internal links** - 3-5 cross-links per article
+- ✅ **Comprehensive sources** - 3-6 real, verifiable sources with working URLs
+- ✅ **Professional AI images** - Category-appropriate photorealistic visuals
+- ✅ **Optimized completion rates** - Length appropriate to content complexity
+
+### Strategic Bolding Guidelines (CRITICAL)
+
+**Use Bold Sparingly - Maximum 8-12 bold phrases per article:**
+
+✅ **DO Bold:**
+
+- Key researcher names (first mention only): **Dr. Sarah Johnson**
+- Critical statistics/findings: **decreased by 13.7%**, **10^109 more energy**
+- Important discoveries: **Second Law of Infodynamics**
+- Major institutions (first mention): **University of Portsmouth**
+- Section headers and key conclusions
+- Most impactful 2-3 takeaways for readers
+
+❌ **DON'T Bold:**
+
+- Common technical terms (entropy, quantum, simulation)
+- Repeated mentions of same people/concepts
+- Every adjective or modifier (avoid **super complex**)
+- General descriptions (avoid **crushing numbers**)
+- Regular nouns (avoid **information systems**)
+- Obvious phrases (avoid **traditional physics**)
+
+**Goal:** Guide reader's eye to only the most critical information. Excessive bolding reduces impact and looks spammy.
 
 ### Content Categories & Niches
 
@@ -416,6 +478,28 @@ CONTENT_QUALITY_THRESHOLD=85             # Minimum quality score
 ```
 
 ## 🚀 DAILY WORKFLOW & BATCH OPERATIONS
+
+### Content Type Decision Framework
+
+**Use this decision tree to determine content approach:**
+
+1. **Is this breaking news or trending topic?** → **Quick News/Trends (300-500 words)**
+   - Social media buzz, tech announcements, viral phenomena
+   - Fast consumption, high sharing potential
+
+2. **Does this involve complex scientific research or data?** → **Scientific/Research (800-1,200 words)**
+   - Studies with methodology, data tables, comprehensive analysis
+   - Examples: Clinical trials, physics discoveries, research papers
+
+3. **Is this a product review or technical analysis?** → **Technology Deep Dive (600-800 words)**
+   - Specifications, performance metrics, comparisons
+   - Examples: Hardware reviews, software analysis, tool comparisons
+
+4. **Is this psychology/health research with practical applications?** → **Psychology/Health (500-700 words)**
+   - Study findings with real-world implications
+   - Examples: Behavioral research, medical discoveries, wellness studies
+
+**Remember:** Quality and comprehensive coverage trump arbitrary word limits. The goal is optimal value for readers.
 
 ### 3-Batch Daily Strategy (15-20 Articles/Day)
 
