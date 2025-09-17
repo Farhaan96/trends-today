@@ -359,8 +359,6 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
           {frontmatter.author && (
             <MoreFromAuthor
               author={frontmatter.author}
-              currentArticleSlug={params.slug}
-              maxArticles={3}
             />
           )}
 

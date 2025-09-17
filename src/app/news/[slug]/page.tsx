@@ -342,8 +342,6 @@ export default async function NewsPage({ params }: NewsPageProps) {
           {frontmatter.author && (
             <MoreFromAuthor
               author={frontmatter.author}
-              currentArticleSlug={params.slug}
-              maxArticles={3}
             />
           )}
 
