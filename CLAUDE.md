@@ -66,7 +66,7 @@ Claude Code (Orchestrator)
   - **Quick News/Trends:** 300-500 words optimized for rapid consumption
   - **Psychology/Health:** 500-700 words with study methodology and applications
 - **Universal Quality:** Engaging hooks, fact-checked content, evidence-based analysis
-- **CRITICAL FORMATTING RULE:** Use strategic bolding only - maximum 8-12 bold phrases per article focusing on key findings, researcher names (first mention), and critical statistics. Avoid bolding common terms or every modifier.
+- **CRITICAL FORMATTING RULE:** Use strategic bolding for optimal engagement - 12-18 bold phrases per article focusing on breakthrough moments, key measurements, shocking discoveries, scientific terms, emotional triggers, and transition phrases. Avoid bolding common terms or every modifier.
 - **CRITICAL IMAGE RULE:**
   - NEVER generate images or call image generation utilities
   - Set image: '' and imageAlt: '' in frontmatter
@@ -86,7 +86,7 @@ Claude Code (Orchestrator)
 - **Tools:** Read, Edit, MultiEdit, Glob, Grep
 - **Standards:** Visual hierarchy, 3-4 strategic links, premium typography with selective bolding
 - **CRITICAL BOLDING GUIDELINES:**
-  - Remove excessive bolding - maximum 8-12 bold phrases per article
+  - Apply strategic bolding for engagement - 12-18 bold phrases per article focusing on breakthrough moments, key measurements, and scientific discoveries
   - Bold only: key researchers (first mention), critical statistics, major discoveries, important institutions
   - Never bold: common terms, repeated mentions, adjectives, general descriptions
 - **Optimization:** All text enhancements applied in one MultiEdit operation

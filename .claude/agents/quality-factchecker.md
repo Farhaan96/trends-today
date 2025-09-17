@@ -507,7 +507,7 @@ For batch quality assurance:
 
 **Content Presentation Standards:**
 
-- Strategic bolding: 8-12 bold phrases maximum per article
+- Strategic bolding: 12-18 bold phrases for optimal reader engagement (breakthrough moments, key measurements, shocking discoveries, scientific terms, emotional triggers, transition phrases)
 - Data presentation: NO complex tables, charts, or overwhelming numerical breakdowns
 - Focus on narrative explanations with strategically placed key numbers
 
