@@ -165,14 +165,10 @@ Task('quality-factchecker', {
 });
 ```
 
-**Data Visualization & Image Phase (After Fact-Checking):**
+**Image Generation Phase (After Fact-Checking):**
 
 ```javascript
 // Only after facts are verified:
-Task('data-visualization-creator', {
-  files: ['verified_articles.mdx'],
-  data: 'verified_research',
-});
 Task('image-generator', { files: ['fact_checked_articles.mdx'] });
 ```
 
@@ -216,7 +212,7 @@ Process enhancement and fact-checking simultaneously for efficiency
 
 - Phase 1: Content creation with built-in duplicate checking
 - Phase 2: Enhancement and fact-checking run in parallel
-- Phase 3: Data visualization & image generation (AFTER fact-checking)
+- Phase 3: Image generation (AFTER fact-checking)
 - Phase 4: Build validation ensures technical compliance
 - All phases must pass before publication
 
@@ -396,6 +392,7 @@ This optimized pipeline represents a breakthrough in AI content generation effic
 - ❌ NO complex data tables with multiple rows and columns
 - ❌ NO extensive numerical breakdowns that overwhelm readers
 - ❌ NO chart-like text presentations that look like spreadsheets
+- ❌ NO data visualization charts or graphs of any kind
 - ✅ USE narrative explanations with strategically placed key numbers
 - ✅ USE accessible language that makes complex concepts clear
 - ✅ USE storytelling to convey data insights without overwhelming detail
@@ -697,16 +694,15 @@ This comprehensive AI system transforms Trends Today into a premium destination 
 
 ### Agent Pipeline Order (CRITICAL)
 
-**CORRECT SEQUENCE FOR ARTICLES WITH DATA VISUALIZATIONS:**
+**CORRECT SEQUENCE FOR ARTICLES:**
 
 1. **trending-content-creator** - Create article with image: '' and imageAlt: ''
 2. **content-enhancer** - Apply typography and internal linking
 3. **quality-factchecker** - Verify all facts and research accuracy
-4. **data-visualization-creator** - Create charts/graphs with VERIFIED data only
-5. **image-generator** - Generate AI image after content is finalized
-6. **build-validator** - Final technical validation
+4. **image-generator** - Generate AI image after content is finalized
+5. **build-validator** - Final technical validation
 
-**CRITICAL RULE:** Data visualizations and images must come AFTER fact-checking to ensure accuracy.
+**CRITICAL RULE:** Images must come AFTER fact-checking to ensure accuracy.
 
 ### Image Generation
 

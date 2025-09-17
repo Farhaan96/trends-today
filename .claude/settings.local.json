@@ -62,7 +62,8 @@
       "Bash(npx tsc:*)",
       "Bash(test:*)",
       "Bash(time:*)",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(rm:*)"
     ],
     "deny": [],
     "ask": []
