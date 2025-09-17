@@ -13,6 +13,7 @@ import {
   LanguageIcon,
 } from '@heroicons/react/24/outline';
 import authorsData from '../../../../data/authors.json';
+import { getArticlesByAuthor } from '@/lib/article-utils';
 
 interface Author {
   id: string;
@@ -69,13 +70,17 @@ export async function generateMetadata({
   };
 }
 
-export default function AuthorPage({ params }: { params: { slug: string } }) {
+export default async function AuthorPage({ params }: { params: { slug: string } }) {
   const authors = authorsData as Record<string, Author>;
   const author = authors[params.slug];
 
   if (!author) {
     notFound();
   }
+
+  // Get articles by this author
+  const authorArticles = await getArticlesByAuthor(author.name);
+  const articleCount = authorArticles.length;
 
   const socialLinks = [
     {
@@ -150,7 +155,7 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
               </div>
               <div className="flex items-center text-gray-800">
                 <DocumentTextIcon className="w-4 h-4 mr-2" />
-                {author.reviewCount} reviews published
+                {articleCount} articles published
               </div>
             </div>
 
@@ -207,21 +212,68 @@ export default function AuthorPage({ params }: { params: { slug: string } }) {
 
           <section>
             <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Recent Reviews
+              Recent Articles
             </h3>
-            <div className="bg-gray-50 rounded-lg p-6">
-              <p className="text-gray-800 text-center py-8">
-                Loading recent reviews by {author.name}...
-              </p>
-              <div className="text-center">
-                <Link
-                  href="/reviews"
-                  className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  View All Reviews
-                </Link>
+            {authorArticles.length > 0 ? (
+              <div className="space-y-6">
+                {authorArticles.slice(0, 5).map((article, index) => (
+                  <Link
+                    key={index}
+                    href={`/${article.category}/${article.slug}`}
+                    className="block group"
+                  >
+                    <div className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                      <div className="flex items-start gap-4">
+                        {article.image && (
+                          <div className="w-20 h-20 flex-shrink-0">
+                            <Image
+                              src={article.image}
+                              alt={article.title}
+                              width={80}
+                              height={80}
+                              className="w-full h-full object-cover rounded-lg"
+                            />
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
+                            {article.title}
+                          </h4>
+                          <p className="text-gray-600 text-sm mt-1 line-clamp-2">
+                            {article.description}
+                          </p>
+                          <div className="flex items-center gap-3 mt-2 text-xs text-gray-500">
+                            <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full font-medium">
+                              {article.category}
+                            </span>
+                            <span>
+                              {new Date(article.publishedAt).toLocaleDateString('en-US', {
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric',
+                              })}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+                {authorArticles.length > 5 && (
+                  <div className="text-center pt-4">
+                    <p className="text-gray-600 text-sm">
+                      Showing 5 of {authorArticles.length} articles by {author.name}
+                    </p>
+                  </div>
+                )}
               </div>
-            </div>
+            ) : (
+              <div className="bg-gray-50 rounded-lg p-6">
+                <p className="text-gray-800 text-center py-8">
+                  No articles found by {author.name}
+                </p>
+              </div>
+            )}
           </section>
         </div>
 

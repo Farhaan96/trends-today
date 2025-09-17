@@ -155,3 +155,12 @@ export async function getArticlesByCategory(
     return dateB - dateA;
   });
 }
+
+export async function getArticlesByAuthor(authorName: string): Promise<Article[]> {
+  const allArticles = await getAllArticles();
+
+  return allArticles.filter(article => {
+    const articleAuthor = typeof article.author === 'string' ? article.author : article.author?.name;
+    return articleAuthor === authorName;
+  });
+}
