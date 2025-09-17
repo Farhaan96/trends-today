@@ -70,7 +70,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function AuthorPage({ params }: { params: { slug: string } }) {
+export default async function AuthorPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const authors = authorsData as Record<string, Author>;
   const author = authors[params.slug];
 
@@ -247,11 +251,14 @@ export default async function AuthorPage({ params }: { params: { slug: string } 
                               {article.category}
                             </span>
                             <span>
-                              {new Date(article.publishedAt).toLocaleDateString('en-US', {
-                                month: 'short',
-                                day: 'numeric',
-                                year: 'numeric',
-                              })}
+                              {new Date(article.publishedAt).toLocaleDateString(
+                                'en-US',
+                                {
+                                  month: 'short',
+                                  day: 'numeric',
+                                  year: 'numeric',
+                                }
+                              )}
                             </span>
                           </div>
                         </div>
@@ -262,7 +269,8 @@ export default async function AuthorPage({ params }: { params: { slug: string } 
                 {authorArticles.length > 5 && (
                   <div className="text-center pt-4">
                     <p className="text-gray-600 text-sm">
-                      Showing 5 of {authorArticles.length} articles by {author.name}
+                      Showing 5 of {authorArticles.length} articles by{' '}
+                      {author.name}
                     </p>
                   </div>
                 )}

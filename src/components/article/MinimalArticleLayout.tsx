@@ -57,25 +57,29 @@ export default async function MinimalArticleLayout({
         <div className="flex items-center text-sm text-gray-600 space-x-4 mb-6">
           <span>
             By{' '}
-            {frontmatter.author ? (
-              (() => {
-                const authorName = typeof frontmatter.author === 'string'
-                  ? frontmatter.author
-                  : frontmatter.author?.name;
-                const authorId = typeof frontmatter.author === 'object'
-                  ? frontmatter.author?.id
-                  : frontmatter.author?.toLowerCase().replace(/\s+/g, '-');
+            {frontmatter.author
+              ? (() => {
+                  const authorName =
+                    typeof frontmatter.author === 'string'
+                      ? frontmatter.author
+                      : frontmatter.author?.name;
+                  const authorId =
+                    typeof frontmatter.author === 'object'
+                      ? frontmatter.author?.id
+                      : frontmatter.author?.toLowerCase().replace(/\s+/g, '-');
 
-                return authorId ? (
-                  <Link
-                    href={`/author/${authorId}`}
-                    className="text-blue-600 hover:text-blue-800 font-medium"
-                  >
-                    {authorName}
-                  </Link>
-                ) : authorName;
-              })()
-            ) : 'Trends Today Editorial'}
+                  return authorId ? (
+                    <Link
+                      href={`/author/${authorId}`}
+                      className="text-blue-600 hover:text-blue-800 font-medium"
+                    >
+                      {authorName}
+                    </Link>
+                  ) : (
+                    authorName
+                  );
+                })()
+              : 'Trends Today Editorial'}
           </span>
           <span>•</span>
           <time dateTime={frontmatter.publishedAt || frontmatter.datePublished}>
@@ -92,7 +96,7 @@ export default async function MinimalArticleLayout({
               <span>•</span>
               <span>
                 {typeof frontmatter.readingTime === 'string' &&
-                 frontmatter.readingTime.includes('min read')
+                frontmatter.readingTime.includes('min read')
                   ? frontmatter.readingTime
                   : `${frontmatter.readingTime} min read`}
               </span>

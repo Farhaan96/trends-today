@@ -173,7 +173,8 @@ const ArticleStats = ({
       <div className="flex items-center gap-1">
         <ClockIcon className="w-4 h-4" />
         <span>
-          {typeof readingTime === 'string' && String(readingTime).includes('min read')
+          {typeof readingTime === 'string' &&
+          String(readingTime).includes('min read')
             ? readingTime
             : `${readingTime} min read`}
         </span>

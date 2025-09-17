@@ -58,7 +58,7 @@ export default function PostListItem({ article, showThumb = false }: Props) {
                 <span>•</span>
                 <span>
                   {typeof article.frontmatter.readingTime === 'string' &&
-                   article.frontmatter.readingTime.includes('min read')
+                  article.frontmatter.readingTime.includes('min read')
                     ? article.frontmatter.readingTime
                     : `${article.frontmatter.readingTime} min read`}
                 </span>

@@ -17,24 +17,97 @@ class AuthorAssignmentSystem {
     this.authorExpertise = {
       'Alex Chen': {
         categories: ['technology', 'culture'], // Tech + AI/culture intersection
-        keywords: ['ai', 'artificial intelligence', 'mobile', 'smartphone', 'app', 'tech', 'innovation', 'startup', 'quantum', 'computing', 'silicon valley', 'venture capital', 'art', 'creativity', 'digital culture'],
-        bio: 'Senior Mobile Technology Editor - AI, mobile tech, quantum computing'
+        keywords: [
+          'ai',
+          'artificial intelligence',
+          'mobile',
+          'smartphone',
+          'app',
+          'tech',
+          'innovation',
+          'startup',
+          'quantum',
+          'computing',
+          'silicon valley',
+          'venture capital',
+          'art',
+          'creativity',
+          'digital culture',
+        ],
+        bio: 'Senior Mobile Technology Editor - AI, mobile tech, quantum computing',
       },
       'Sarah Martinez': {
         categories: ['science', 'culture', 'space', 'psychology'], // Audio/science crossover + diverse interests
-        keywords: ['audio', 'music', 'sound', 'science', 'research', 'study', 'discovery', 'space', 'nasa', 'astronomy', 'culture', 'social', 'creator economy', 'content', 'media', 'psychology', 'brain', 'behavior'],
-        bio: 'Audio & Gaming Technology Editor - Science, space, culture, psychology'
+        keywords: [
+          'audio',
+          'music',
+          'sound',
+          'science',
+          'research',
+          'study',
+          'discovery',
+          'space',
+          'nasa',
+          'astronomy',
+          'culture',
+          'social',
+          'creator economy',
+          'content',
+          'media',
+          'psychology',
+          'brain',
+          'behavior',
+        ],
+        bio: 'Audio & Gaming Technology Editor - Science, space, culture, psychology',
       },
       'David Kim': {
         categories: ['technology', 'health', 'space', 'science'], // Enterprise tech + technical health/space
-        keywords: ['enterprise', 'business', 'productivity', 'laptop', 'computing', 'data', 'health tech', 'medical', 'ai', 'precision medicine', 'space technology', 'mars', 'rocket', 'satellite', 'crispr', 'genetics', 'biotech', 'superconductor', 'materials'],
-        bio: 'Computing & Enterprise Technology Editor - Health tech, space tech, advanced computing'
+        keywords: [
+          'enterprise',
+          'business',
+          'productivity',
+          'laptop',
+          'computing',
+          'data',
+          'health tech',
+          'medical',
+          'ai',
+          'precision medicine',
+          'space technology',
+          'mars',
+          'rocket',
+          'satellite',
+          'crispr',
+          'genetics',
+          'biotech',
+          'superconductor',
+          'materials',
+        ],
+        bio: 'Computing & Enterprise Technology Editor - Health tech, space tech, advanced computing',
       },
       'Emma Thompson': {
         categories: ['psychology', 'health', 'culture', 'technology'], // IoT/smart home + mental health + culture
-        keywords: ['iot', 'smart home', 'connected', 'automation', 'psychology', 'mental health', 'behavior', 'cognitive', 'neuroscience', 'wellness', 'therapy', 'mindfulness', 'culture', 'neurodivergent', 'accessibility', 'privacy', 'security'],
-        bio: 'Smart Home & IoT Technology Editor - Psychology, mental health, connected systems'
-      }
+        keywords: [
+          'iot',
+          'smart home',
+          'connected',
+          'automation',
+          'psychology',
+          'mental health',
+          'behavior',
+          'cognitive',
+          'neuroscience',
+          'wellness',
+          'therapy',
+          'mindfulness',
+          'culture',
+          'neurodivergent',
+          'accessibility',
+          'privacy',
+          'security',
+        ],
+        bio: 'Smart Home & IoT Technology Editor - Psychology, mental health, connected systems',
+      },
     };
   }
 
@@ -47,7 +120,9 @@ class AuthorAssignmentSystem {
     let bestMatch = null;
     let highestScore = 0;
 
-    for (const [authorName, expertise] of Object.entries(this.authorExpertise)) {
+    for (const [authorName, expertise] of Object.entries(
+      this.authorExpertise
+    )) {
       let score = 0;
 
       // Category match (high weight)
@@ -89,7 +164,7 @@ class AuthorAssignmentSystem {
       'Alex Chen': ['technology'],
       'Sarah Martinez': ['science', 'culture'],
       'David Kim': ['health', 'space'],
-      'Emma Thompson': ['psychology']
+      'Emma Thompson': ['psychology'],
     };
 
     return primaryCategories[authorName]?.includes(category) || false;
@@ -100,12 +175,12 @@ class AuthorAssignmentSystem {
    */
   getRoundRobinAuthor(category) {
     const categoryDefaults = {
-      'technology': 'Alex Chen',
-      'science': 'Sarah Martinez',
-      'culture': 'Sarah Martinez',
-      'space': 'David Kim',
-      'health': 'David Kim',
-      'psychology': 'Emma Thompson'
+      technology: 'Alex Chen',
+      science: 'Sarah Martinez',
+      culture: 'Sarah Martinez',
+      space: 'David Kim',
+      health: 'David Kim',
+      psychology: 'Emma Thompson',
     };
 
     return categoryDefaults[category] || 'Alex Chen';
@@ -116,7 +191,9 @@ class AuthorAssignmentSystem {
    */
   async updateAuthorCount(authorName, increment = 1) {
     try {
-      const authorsData = JSON.parse(await fs.readFile(this.authorsPath, 'utf-8'));
+      const authorsData = JSON.parse(
+        await fs.readFile(this.authorsPath, 'utf-8')
+      );
 
       // Find author by name
       for (const [authorId, authorData] of Object.entries(authorsData)) {
@@ -124,9 +201,14 @@ class AuthorAssignmentSystem {
           authorData.reviewCount = (authorData.reviewCount || 0) + increment;
 
           // Write back to file
-          await fs.writeFile(this.authorsPath, JSON.stringify(authorsData, null, 2));
+          await fs.writeFile(
+            this.authorsPath,
+            JSON.stringify(authorsData, null, 2)
+          );
 
-          console.log(`✅ Updated ${authorName}: ${authorData.reviewCount} articles`);
+          console.log(
+            `✅ Updated ${authorName}: ${authorData.reviewCount} articles`
+          );
           return authorData.reviewCount;
         }
       }
@@ -144,7 +226,9 @@ class AuthorAssignmentSystem {
    */
   async getAuthorCount(authorName) {
     try {
-      const authorsData = JSON.parse(await fs.readFile(this.authorsPath, 'utf-8'));
+      const authorsData = JSON.parse(
+        await fs.readFile(this.authorsPath, 'utf-8')
+      );
 
       for (const [authorId, authorData] of Object.entries(authorsData)) {
         if (authorData.name === authorName) {
@@ -164,7 +248,9 @@ class AuthorAssignmentSystem {
    */
   async getAllAuthorCounts() {
     try {
-      const authorsData = JSON.parse(await fs.readFile(this.authorsPath, 'utf-8'));
+      const authorsData = JSON.parse(
+        await fs.readFile(this.authorsPath, 'utf-8')
+      );
       const counts = {};
 
       for (const [authorId, authorData] of Object.entries(authorsData)) {
@@ -182,7 +268,12 @@ class AuthorAssignmentSystem {
    * Assign author and update count in one operation
    */
   async assignAndUpdateAuthor(category, title, description = '', tags = []) {
-    const assignedAuthor = this.assignAuthor(category, title, description, tags);
+    const assignedAuthor = this.assignAuthor(
+      category,
+      title,
+      description,
+      tags
+    );
     await this.updateAuthorCount(assignedAuthor, 1);
 
     console.log(`📝 Assigned "${title}" to ${assignedAuthor}`);
@@ -201,19 +292,19 @@ if (require.main === module) {
     const [_, category, title, description, tags] = args;
     const tagArray = tags ? tags.split(',') : [];
 
-    authorSystem.assignAndUpdateAuthor(category, title, description, tagArray)
-      .then(author => {
+    authorSystem
+      .assignAndUpdateAuthor(category, title, description, tagArray)
+      .then((author) => {
         console.log(`Assigned author: ${author}`);
       });
   } else if (args[0] === 'counts') {
     // node author-assignment.js counts
-    authorSystem.getAllAuthorCounts()
-      .then(counts => {
-        console.log('Current author article counts:');
-        for (const [author, count] of Object.entries(counts)) {
-          console.log(`  ${author}: ${count} articles`);
-        }
-      });
+    authorSystem.getAllAuthorCounts().then((counts) => {
+      console.log('Current author article counts:');
+      for (const [author, count] of Object.entries(counts)) {
+        console.log(`  ${author}: ${count} articles`);
+      }
+    });
   } else {
     console.log(`
 Usage:

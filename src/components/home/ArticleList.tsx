@@ -104,9 +104,20 @@ export default function ArticleList({
                   By{' '}
                   {(() => {
                     const author = featuredPost.frontmatter.author;
-                    const authorName = typeof author === 'string' ? author : (author?.name || 'Trends Today');
-                    const authorId = typeof author === 'string' ? author.toLowerCase().replace(/\s+/g, '-') : null;
-                    const knownAuthors = ['alex-chen', 'sarah-martinez', 'david-kim', 'emma-thompson'];
+                    const authorName =
+                      typeof author === 'string'
+                        ? author
+                        : author?.name || 'Trends Today';
+                    const authorId =
+                      typeof author === 'string'
+                        ? author.toLowerCase().replace(/\s+/g, '-')
+                        : null;
+                    const knownAuthors = [
+                      'alex-chen',
+                      'sarah-martinez',
+                      'david-kim',
+                      'emma-thompson',
+                    ];
 
                     return authorId && knownAuthors.includes(authorId) ? (
                       <Link
@@ -230,9 +241,20 @@ export default function ArticleList({
             <div className="text-sm text-gray-500">
               {(() => {
                 const author = thirdPost.frontmatter.author;
-                const authorName = typeof author === 'string' ? author : (author?.name || 'Trends Today');
-                const authorId = typeof author === 'string' ? author.toLowerCase().replace(/\s+/g, '-') : null;
-                const knownAuthors = ['alex-chen', 'sarah-martinez', 'david-kim', 'emma-thompson'];
+                const authorName =
+                  typeof author === 'string'
+                    ? author
+                    : author?.name || 'Trends Today';
+                const authorId =
+                  typeof author === 'string'
+                    ? author.toLowerCase().replace(/\s+/g, '-')
+                    : null;
+                const knownAuthors = [
+                  'alex-chen',
+                  'sarah-martinez',
+                  'david-kim',
+                  'emma-thompson',
+                ];
 
                 return authorId && knownAuthors.includes(authorId) ? (
                   <Link
@@ -298,9 +320,20 @@ export default function ArticleList({
                 <div className="text-sm text-gray-500">
                   {(() => {
                     const author = article.frontmatter.author;
-                    const authorName = typeof author === 'string' ? author : (author?.name || 'Trends Today');
-                    const authorId = typeof author === 'string' ? author.toLowerCase().replace(/\s+/g, '-') : null;
-                    const knownAuthors = ['alex-chen', 'sarah-martinez', 'david-kim', 'emma-thompson'];
+                    const authorName =
+                      typeof author === 'string'
+                        ? author
+                        : author?.name || 'Trends Today';
+                    const authorId =
+                      typeof author === 'string'
+                        ? author.toLowerCase().replace(/\s+/g, '-')
+                        : null;
+                    const knownAuthors = [
+                      'alex-chen',
+                      'sarah-martinez',
+                      'david-kim',
+                      'emma-thompson',
+                    ];
 
                     return authorId && knownAuthors.includes(authorId) ? (
                       <Link

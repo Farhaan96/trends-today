@@ -23,6 +23,7 @@ Read file_path: content/[category]/[article].mdx
 ```
 
 **Content Structure Assessment:**
+
 - Word count and reading time compliance
 - Article flow and engagement elements
 - Technical accuracy requirements
@@ -33,18 +34,21 @@ Read file_path: content/[category]/[article].mdx
 Extract all verifiable claims:
 
 **Statistical Claims:**
+
 - Percentages and numerical data
 - Research study results
 - Performance metrics
 - Market data and trends
 
 **Technical Claims:**
+
 - Product specifications
 - Scientific discoveries
 - Technology capabilities
 - Medical/health statements
 
 **Attribution Claims:**
+
 - Expert quotes and statements
 - Company announcements
 - Research paper citations
@@ -57,6 +61,7 @@ Extract all verifiable claims:
 For each factual claim, conduct targeted research:
 
 **Primary Source Verification:**
+
 ```
 WebSearch: "[specific claim] [original source] official study"
 WebSearch: "[company name] [announcement] press release"
@@ -65,6 +70,7 @@ WebSearch: "[statistic] [methodology] authoritative source"
 ```
 
 **Cross-Reference Validation:**
+
 ```
 WebFetch url: [authoritative_source_url]
 prompt: "Verify the specific claim: '[claim]'. Extract exact numbers, context, methodology, and any important caveats or limitations."
@@ -75,6 +81,7 @@ prompt: "Verify the specific claim: '[claim]'. Extract exact numbers, context, m
 Evaluate each source for:
 
 **Authority Criteria:**
+
 - Academic institutions (.edu domains)
 - Government agencies (.gov domains)
 - Peer-reviewed journals
@@ -82,11 +89,13 @@ Evaluate each source for:
 - Official company communications
 
 **Recency Standards:**
+
 - Information within 2 years for rapidly changing fields
 - Current year data for market statistics
 - Latest findings for ongoing research areas
 
 **Credibility Markers:**
+
 - Author credentials and expertise
 - Publication reputation
 - Methodology transparency
@@ -97,12 +106,14 @@ Evaluate each source for:
 Calculate overall accuracy percentage:
 
 **Verification Categories:**
+
 - ✅ **Verified (100%)** - Multiple authoritative sources confirm
 - ⚠️ **Partially Verified (75%)** - Single source or minor discrepancies
 - ❓ **Questionable (50%)** - Conflicting information found
 - ❌ **Inaccurate (0%)** - Contradicted by authoritative sources
 
 **Minimum Standards:**
+
 - Overall accuracy must be >80% to pass
 - No critical errors (health, safety, financial advice)
 - All statistics must have verifiable sources
@@ -112,6 +123,7 @@ Calculate overall accuracy percentage:
 #### 3.1 Viral Potential Scoring
 
 **Emotional Trigger Assessment:**
+
 - [ ] **Awe Factor**: Does this make readers go "holy crap, I had no idea!"
 - [ ] **Curiosity Gap**: Does the headline create psychological tension requiring resolution
 - [ ] **Social Currency**: Does sharing this make the reader look smart/informed
@@ -119,6 +131,7 @@ Calculate overall accuracy percentage:
 - [ ] **Practical Value**: Provides actionable insights or decision-making guidance
 
 **Shareability Indicators (Rate 1-10 each):**
+
 - **Controversy/Debate Potential**: Does this spark discussion?
 - **Knowledge Gap**: Reveals insider information or hidden truths?
 - **Time Sensitivity**: Feels current and relevant to 2025?
@@ -126,6 +139,7 @@ Calculate overall accuracy percentage:
 - **Identity Reinforcement**: Does sharing align with reader's self-image?
 
 **Viral Engagement Score Calculation:**
+
 ```
 Viral Score = (Emotional Triggers × 20) + (Shareability Average × 15) + (Curiosity Gap × 25)
 Target: 90+ points for viral potential
@@ -134,6 +148,7 @@ Target: 90+ points for viral potential
 #### 3.2 Long-Tail Keyword & Voice Search Optimization
 
 **Long-Tail Keyword Validation:**
+
 - [ ] **Primary Keyword**: 3-5+ word conversational phrase naturally integrated 2-3 times
 - [ ] **Question-Based**: Answers "how does", "why does", "what makes" queries
 - [ ] **Voice Search Ready**: Responds to natural language questions
@@ -141,6 +156,7 @@ Target: 90+ points for viral potential
 - [ ] **Search Intent Match**: Content satisfies informational search intent
 
 **Featured Snippet Optimization Check:**
+
 - [ ] **40-55 Word Answer Block**: Direct response to main query present
 - [ ] **Scannable Format**: Answer block is clearly formatted and readable
 - [ ] **Position Zero Target**: Content structured to capture featured snippets
@@ -149,24 +165,28 @@ Target: 90+ points for viral potential
 #### 3.3 E-E-A-T Signal Validation
 
 **Experience Signals Assessment:**
+
 - [ ] **Firsthand Testing**: Evidence of hands-on experience or analysis
 - [ ] **Practical Insights**: Real-world context and practical implications
 - [ ] **Realistic Details**: Specific timeframes, challenges, unexpected discoveries
 - [ ] **Personal Perspective**: Unique insights that demonstrate experience
 
 **Expertise Demonstration:**
+
 - [ ] **Technical Accuracy**: Complex concepts explained correctly
 - [ ] **Industry Knowledge**: Shows deep understanding of field
 - [ ] **Methodology Awareness**: Understanding of research methods and standards
 - [ ] **Expert Voice**: Authoritative tone without oversimplification
 
 **Authoritativeness Indicators:**
+
 - [ ] **Institution References**: Credible organizations and research institutions mentioned
 - [ ] **Expert Citations**: Quotes from recognized authorities in the field
 - [ ] **Publication Details**: References to peer-reviewed research and official studies
 - [ ] **Industry Standards**: Awareness of and reference to established practices
 
 **Trustworthiness Markers:**
+
 - [ ] **Balanced Perspective**: Acknowledges limitations and alternative viewpoints
 - [ ] **Source Transparency**: Clear attribution and verifiable sources
 - [ ] **Error Acknowledgment**: Admits uncertainty where appropriate
@@ -175,12 +195,14 @@ Target: 90+ points for viral potential
 #### 3.4 Accessibility & Scientific Communication
 
 **Complex Content Simplification:**
+
 - [ ] **Jargon Translation**: Technical terms explained in accessible language
 - [ ] **Analogy Usage**: Complex concepts related to familiar experiences
 - [ ] **Visual Language**: Mental pictures created through descriptive language
 - [ ] **Scale Context**: Big numbers and measurements given relatable comparisons
 
 **Reading Level Optimization:**
+
 - [ ] **Grade Level**: 8th-10th grade reading level maintained
 - [ ] **Sentence Length**: Average 15-20 words per sentence
 - [ ] **Paragraph Structure**: 2-3 sentences maximum per paragraph
@@ -191,6 +213,7 @@ Target: 90+ points for viral potential
 #### 4.1 Content Quality Assessment
 
 **Length & Readability Standards:**
+
 - Word Count: 400-500 words (STRICT)
 - Reading Time: Under 2 minutes
 - Paragraph Length: Maximum 3 sentences
@@ -198,6 +221,7 @@ Target: 90+ points for viral potential
 - Flesch Reading Ease: 60-70 (high school level)
 
 **Enhanced Engagement Elements Checklist:**
+
 - [ ] **Hook Quality**: First 80-100 words captivate readers + emotional trigger
 - [ ] **Visual Hierarchy**: Bold, blockquotes, lists properly applied + authority markers
 - [ ] **Scannability**: Key points visible in 10-second scan + featured snippet block
@@ -207,6 +231,7 @@ Target: 90+ points for viral potential
 #### 4.2 Advanced SEO Optimization Validation
 
 **Technical SEO Requirements (Enhanced):**
+
 - [ ] **Title**: Long-tail keyword optimized with emotional trigger (50-60 chars)
 - [ ] **Meta Description**: Curiosity gap + benefit + keyword (150-160 chars)
 - [ ] **Semantic Keywords**: Related terms naturally integrated
@@ -214,6 +239,7 @@ Target: 90+ points for viral potential
 - [ ] **URL Structure**: Long-tail keyword phrase in slug
 
 **Content SEO Standards (2025):**
+
 - [ ] **Voice Search Optimization**: Natural conversational language
 - [ ] **Featured Snippet Targeting**: 40-55 word answer blocks
 - [ ] **Topic Cluster Support**: Links to related hub content
@@ -223,6 +249,7 @@ Target: 90+ points for viral potential
 #### 4.3 Image & Media Validation
 
 **Image Standards:**
+
 - [ ] **AI Generated**: Only gpt-image-1 generated images
 - [ ] **Image Uniqueness**: No duplicate images across articles
 - [ ] **Image Relevance**: Visual matches article content
@@ -234,6 +261,7 @@ Target: 90+ points for viral potential
 #### 5.1 Technical Standards Verification
 
 **File Format Compliance:**
+
 - [ ] **MDX Format**: Valid frontmatter and syntax
 - [ ] **Category Assignment**: Correctly categorized
 - [ ] **Tag Relevance**: Specific and appropriate tags + semantic keywords
@@ -244,6 +272,7 @@ Target: 90+ points for viral potential
 #### 5.2 Content Integrity Final Check
 
 **Completeness Verification:**
+
 - [ ] **No Placeholders**: All TODO items resolved
 - [ ] **Coherent Flow**: Logical progression from intro to conclusion
 - [ ] **Source List**: 5 authoritative sources listed with credentials
@@ -255,6 +284,7 @@ Target: 90+ points for viral potential
 Calculate comprehensive quality score (target 90+):
 
 **Enhanced Scoring Components:**
+
 - **Accuracy (25%)**: Fact verification results + source credibility
 - **Viral Engagement (25%)**: Emotional triggers + shareability + curiosity gaps
 - **SEO Optimization (20%)**: Long-tail keywords + featured snippets + voice search
@@ -263,16 +293,19 @@ Calculate comprehensive quality score (target 90+):
 - **Technical Compliance (5%)**: Format, structure, compliance
 
 **Viral Engagement Subscore (25% of total):**
+
 - Emotional trigger presence (8%)
 - Social shareability indicators (8%)
 - Curiosity gap effectiveness (9%)
 
 **SEO Optimization Subscore (20% of total):**
+
 - Long-tail keyword integration (7%)
 - Featured snippet optimization (7%)
 - Voice search readiness (6%)
 
 **Minimum Thresholds:**
+
 - Overall Score: 90+ for viral potential articles
 - Accuracy: >80% (non-negotiable)
 - Viral Engagement: >85% for trending content
@@ -353,6 +386,7 @@ STATUS: APPROVED FOR PUBLICATION/NEEDS VIRAL ENHANCEMENT/REQUIRES REVISION
 For articles requiring revision:
 
 **Use TodoWrite to track comprehensive fixes needed:**
+
 ```
 TodoWrite: [
   {content: "Fix inaccurate statistic in paragraph 2 and add authoritative source", status: "pending"},
@@ -365,6 +399,7 @@ TodoWrite: [
 ```
 
 **Priority Ranking for Fixes:**
+
 1. **Critical Errors** (accuracy, safety, legal) - Fix immediately
 2. **Viral Enhancement** (emotional triggers, curiosity gaps) - High priority
 3. **SEO Optimization** (keywords, featured snippets) - High priority
@@ -386,11 +421,13 @@ For batch quality assurance:
 #### Efficiency Techniques
 
 **Research Optimization:**
+
 - Cache recent fact-checks for similar topics
 - Prioritize high-authority sources for faster verification
 - Use parallel searches for related claims
 
 **Validation Streamlining:**
+
 - Automated word counting and readability assessment
 - Pattern recognition for common quality issues
 - Standardized scoring matrices for consistency
@@ -398,24 +435,28 @@ For batch quality assurance:
 ## Quality Standards by Category
 
 **Science Articles:**
+
 - Extra verification for statistical claims
 - Academic source requirements
 - Methodology validation essential
 - Expert credibility verification
 
 **Technology Articles:**
+
 - Product specification accuracy
 - Company statement verification
 - Performance claim validation
 - Technical terminology precision
 
 **Health Articles:**
+
 - Medical claim strict verification
 - Clinical study requirement
 - Expert medical professional quotes
 - Disclaimer compliance check
 
 **Space Articles:**
+
 - NASA/ESA official source preference
 - Mission data accuracy verification
 - Scientific measurement precision
@@ -424,18 +465,21 @@ For batch quality assurance:
 ## Error Prevention & Risk Mitigation
 
 **Critical Error Categories:**
+
 - Health/medical misinformation
 - Financial advice inaccuracies
 - Safety-related claims
 - Defamatory statements
 
 **Quality Risk Factors:**
+
 - Outdated information sources
 - Unverified statistical claims
 - Lack of expert attribution
 - SEO keyword stuffing
 
 **Mitigation Strategies:**
+
 - Always verify health claims with medical authorities
 - Cross-reference statistics with multiple sources
 - Require expert quotes for technical topics
@@ -444,16 +488,19 @@ For batch quality assurance:
 ## Performance Metrics & KPIs
 
 **Accuracy Targets:**
+
 - Overall accuracy: >80% minimum, 90%+ target
 - Zero critical errors tolerance
 - Source verification: 100% of statistical claims
 
 **Quality Targets:**
+
 - Quality score: 85+ minimum, 90%+ target
 - Engagement elements: 100% compliance
 - SEO optimization: 90%+ technical compliance
 
 **Efficiency Metrics:**
+
 - Processing time: <10 minutes per article
 - Batch processing: 5 articles per hour
 - Revision rate: <20% articles require fixes

@@ -32,7 +32,7 @@ export default function EntropyChart() {
       },
       title: {
         display: true,
-        text: 'SARS-CoV-2 Information Entropy: Vopson\'s 2023 Findings',
+        text: "SARS-CoV-2 Information Entropy: Vopson's 2023 Findings",
         font: {
           size: 16,
           weight: 'bold' as const,
@@ -67,7 +67,7 @@ export default function EntropyChart() {
         borderDash: [5, 5],
       },
       {
-        label: 'Observed Entropy (Vopson\'s Data)',
+        label: "Observed Entropy (Vopson's Data)",
         data: [3.2, 3.18, 3.15, 3.12, 3.08, 3.05, 3.02],
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.2)',
@@ -80,9 +80,10 @@ export default function EntropyChart() {
     <div className="my-8 p-6 bg-gray-50 rounded-lg border">
       <Line options={options} data={data} />
       <p className="mt-4 text-sm text-gray-600">
-        <strong>Vopson's 2023 Discovery:</strong> SARS-CoV-2 mutations decrease information entropy
-        instead of increasing it, contradicting the Second Law of Thermodynamics and suggesting
-        reality follows compression algorithms like computer software. Published in AIP Advances.
+        <strong>Vopson's 2023 Discovery:</strong> SARS-CoV-2 mutations decrease
+        information entropy instead of increasing it, contradicting the Second
+        Law of Thermodynamics and suggesting reality follows compression
+        algorithms like computer software. Published in AIP Advances.
       </p>
     </div>
   );

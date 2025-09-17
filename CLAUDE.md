@@ -23,6 +23,7 @@ Trends Today is a premium tech journalism platform powered by advanced AI system
 ### Optimized Pipeline Architecture
 
 **Phase 1: Discovery & Creation (Parallel Execution)**
+
 ```
 Claude Code (Orchestrator)
     ├─→ trending-content-creator (NEW: discovery + creation merged)
@@ -31,6 +32,7 @@ Claude Code (Orchestrator)
 ```
 
 **Phase 2: Enhancement & Validation (Parallel Execution)**
+
 ```
 Claude Code (Orchestrator)
     ├─→ content-enhancer (NEW: typography + linking merged)
@@ -39,6 +41,7 @@ Claude Code (Orchestrator)
 ```
 
 **Phase 3: Technical Validation (Sequential)**
+
 ```
 Claude Code (Orchestrator)
     └─→ build-validator (enhanced comprehensive checks)
@@ -115,35 +118,56 @@ Claude Code (Orchestrator)
 #### Orchestration Patterns
 
 **Morning Batch (Parallel Content Creation):**
+
 ```javascript
 // Claude Code executes simultaneously:
-Task("trending-content-creator", {topic: "AI breakthrough", category: "technology"})
-Task("trending-content-creator", {topic: "Space discovery", category: "space"})
-Task("trending-content-creator", {topic: "Health innovation", category: "health"})
+Task('trending-content-creator', {
+  topic: 'AI breakthrough',
+  category: 'technology',
+});
+Task('trending-content-creator', {
+  topic: 'Space discovery',
+  category: 'space',
+});
+Task('trending-content-creator', {
+  topic: 'Health innovation',
+  category: 'health',
+});
 ```
 
 **Enhancement Phase (Parallel Processing):**
+
 ```javascript
 // Claude Code executes simultaneously:
-Task("content-enhancer", {files: ["batch1_article1.mdx", "batch1_article2.mdx"]})
-Task("quality-factchecker", {files: ["batch1_article3.mdx", "batch1_article4.mdx"]})
+Task('content-enhancer', {
+  files: ['batch1_article1.mdx', 'batch1_article2.mdx'],
+});
+Task('quality-factchecker', {
+  files: ['batch1_article3.mdx', 'batch1_article4.mdx'],
+});
 ```
 
 **Data Visualization & Image Phase (After Fact-Checking):**
+
 ```javascript
 // Only after facts are verified:
-Task("data-visualization-creator", {files: ["verified_articles.mdx"], data: "verified_research"})
-Task("image-generator", {files: ["fact_checked_articles.mdx"]})
+Task('data-visualization-creator', {
+  files: ['verified_articles.mdx'],
+  data: 'verified_research',
+});
+Task('image-generator', { files: ['fact_checked_articles.mdx'] });
 ```
 
 #### Performance Improvements
 
 **Before Optimization:**
+
 - 10 sequential agents × 3 minutes = **30 minutes per batch**
 - High context switching overhead
 - Redundant file operations
 
 **After Optimization:**
+
 - 5 agents with parallel execution = **10 minutes per batch**
 - 3x faster processing
 - 50% reduction in context usage
@@ -154,6 +178,7 @@ Task("image-generator", {files: ["fact_checked_articles.mdx"]})
 #### Proper Task Tool Usage
 
 **Correct Orchestration Syntax:**
+
 ```
 Use the trending-content-creator subagent to discover and create an article about [topic]
 Use the content-enhancer subagent to apply typography and linking to [files]
@@ -161,6 +186,7 @@ Use the quality-factchecker subagent to validate accuracy of [articles]
 ```
 
 **Parallel Execution Example:**
+
 ```
 Launch 3 trending-content-creator instances in parallel to generate morning batch
 Process enhancement and fact-checking simultaneously for efficiency
@@ -169,6 +195,7 @@ Process enhancement and fact-checking simultaneously for efficiency
 #### Quality Assurance Integration
 
 **Validation Gates:**
+
 - Phase 1: Content creation with built-in duplicate checking
 - Phase 2: Enhancement and fact-checking run in parallel
 - Phase 3: Data visualization & image generation (AFTER fact-checking)
@@ -176,6 +203,7 @@ Process enhancement and fact-checking simultaneously for efficiency
 - All phases must pass before publication
 
 **Error Handling:**
+
 - Automatic retry logic for failed agents
 - TodoWrite integration for tracking fixes
 - Comprehensive error reporting at each phase
@@ -183,6 +211,7 @@ Process enhancement and fact-checking simultaneously for efficiency
 ### Removed Legacy Agents
 
 **Deprecated and Consolidated:**
+
 - ❌ `batch-orchestrator` → Claude Code orchestration
 - ❌ `trending-topics-discovery` → Merged into trending-content-creator
 - ❌ `ultra-short-content-creator` → Merged into trending-content-creator
@@ -195,12 +224,14 @@ Process enhancement and fact-checking simultaneously for efficiency
 ### Success Metrics
 
 **Performance Targets:**
+
 - **Batch Processing Time:** 10 minutes (down from 30)
 - **Parallel Agent Utilization:** Up to 10 concurrent tasks
 - **Context Efficiency:** 50% reduction in token usage
 - **Quality Maintenance:** 100% of original standards preserved
 
 **Quality Assurance:**
+
 - **Accuracy Threshold:** >80% maintained across all consolidations
 - **Content Standards:** 400-500 words, 85+ quality score
 - **Technical Compliance:** Zero build failures, comprehensive validation

@@ -583,6 +583,7 @@ claude "Use image-generator to create editorial image for [article-path]"
 ```
 
 **Process:**
+
 1. Analyzes article content for visual concepts
 2. Generates GPT-Image-1 professional photography
 3. Saves to /images/ai-generated/ with timestamp
@@ -593,14 +594,15 @@ claude "Use image-generator to create editorial image for [article-path]"
 
 ---
 
-
 ### Image Generation (Between content creation and build validation)
 
 Use the image-generator agent to produce a photorealistic hero image and update frontmatter:
 
 `ash
 claude "Use image-generator to add an editorial gpt-image-1 hero image to content/[category]/[slug].mdx"
+
 # The subagent will run:
+
 node utils/ai-image-generator.js generate-from-article --file="content/[category]/[slug].mdx"
 `
 

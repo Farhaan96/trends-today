@@ -156,11 +156,16 @@ export async function getArticlesByCategory(
   });
 }
 
-export async function getArticlesByAuthor(authorName: string): Promise<Article[]> {
+export async function getArticlesByAuthor(
+  authorName: string
+): Promise<Article[]> {
   const allArticles = await getAllArticles();
 
-  return allArticles.filter(article => {
-    const articleAuthor = typeof article.author === 'string' ? article.author : article.author?.name;
+  return allArticles.filter((article) => {
+    const articleAuthor =
+      typeof article.author === 'string'
+        ? article.author
+        : article.author?.name;
     return articleAuthor === authorName;
   });
 }

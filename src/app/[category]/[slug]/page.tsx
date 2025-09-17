@@ -178,11 +178,23 @@ export default async function ArticlePage({
               <span className="font-medium">
                 {(() => {
                   const author = article.author || article.frontmatter?.author;
-                  const authorName = typeof author === 'string' ? author : (author?.name || 'Trends Today');
-                  const authorId = (author as any)?.id || (typeof author === 'string' ? (author as string).toLowerCase().replace(/\s+/g, '-') : null);
+                  const authorName =
+                    typeof author === 'string'
+                      ? author
+                      : author?.name || 'Trends Today';
+                  const authorId =
+                    (author as any)?.id ||
+                    (typeof author === 'string'
+                      ? (author as string).toLowerCase().replace(/\s+/g, '-')
+                      : null);
 
                   // Known author IDs that have pages
-                  const knownAuthors = ['alex-chen', 'sarah-martinez', 'david-kim', 'emma-thompson'];
+                  const knownAuthors = [
+                    'alex-chen',
+                    'sarah-martinez',
+                    'david-kim',
+                    'emma-thompson',
+                  ];
 
                   return authorId && knownAuthors.includes(authorId) ? (
                     <Link
@@ -191,7 +203,9 @@ export default async function ArticlePage({
                     >
                       {authorName}
                     </Link>
-                  ) : authorName;
+                  ) : (
+                    authorName
+                  );
                 })()}
               </span>
               <span>•</span>
@@ -206,10 +220,11 @@ export default async function ArticlePage({
                   <span>•</span>
                   <span>
                     {(() => {
-                      const readingTime = article.frontmatter?.readingTime ||
+                      const readingTime =
+                        article.frontmatter?.readingTime ||
                         (article as any).readingTime;
                       return typeof readingTime === 'string' &&
-                             readingTime.includes('min read')
+                        readingTime.includes('min read')
                         ? readingTime
                         : `${readingTime} min read`;
                     })()}
@@ -244,36 +259,41 @@ export default async function ArticlePage({
 
       {/* More from Author */}
       <div className="max-w-5xl mx-auto px-4">
-        {(article.author || article.frontmatter?.author) && (() => {
-          const currentAuthor = article.author || article.frontmatter?.author;
-          const authorName = typeof currentAuthor === 'string'
-            ? currentAuthor
-            : currentAuthor?.name || currentAuthor;
+        {(article.author || article.frontmatter?.author) &&
+          (() => {
+            const currentAuthor = article.author || article.frontmatter?.author;
+            const authorName =
+              typeof currentAuthor === 'string'
+                ? currentAuthor
+                : currentAuthor?.name || currentAuthor;
 
-          // Filter articles by the same author, excluding current article
-          const authorArticles = allArticles
-            .filter(a => {
-              const articleAuthor = a.author?.name || a.frontmatter?.author?.name || a.frontmatter?.author;
-              return articleAuthor === authorName && a.slug !== params.slug;
-            })
-            .slice(0, 3)
-            .map(a => ({
-              title: a.title || a.frontmatter?.title,
-              description: a.description || a.frontmatter?.description,
-              href: `/${a.category}/${a.slug}`,
-              publishedAt: a.publishedAt || a.frontmatter?.publishedAt,
-              image: a.image || a.frontmatter?.image,
-              category: a.category,
-              readingTime: a.frontmatter?.readingTime || '2',
-            }));
+            // Filter articles by the same author, excluding current article
+            const authorArticles = allArticles
+              .filter((a) => {
+                const articleAuthor =
+                  a.author?.name ||
+                  a.frontmatter?.author?.name ||
+                  a.frontmatter?.author;
+                return articleAuthor === authorName && a.slug !== params.slug;
+              })
+              .slice(0, 3)
+              .map((a) => ({
+                title: a.title || a.frontmatter?.title,
+                description: a.description || a.frontmatter?.description,
+                href: `/${a.category}/${a.slug}`,
+                publishedAt: a.publishedAt || a.frontmatter?.publishedAt,
+                image: a.image || a.frontmatter?.image,
+                category: a.category,
+                readingTime: a.frontmatter?.readingTime || '2',
+              }));
 
-          return (
-            <MoreFromAuthor
-              author={currentAuthor}
-              articles={authorArticles}
-            />
-          );
-        })()}
+            return (
+              <MoreFromAuthor
+                author={currentAuthor}
+                articles={authorArticles}
+              />
+            );
+          })()}
       </div>
 
       {/* Related Articles */}

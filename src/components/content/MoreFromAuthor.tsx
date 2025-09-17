@@ -30,9 +30,10 @@ export default function MoreFromAuthor({
   articles = [],
 }: MoreFromAuthorProps) {
   const authorName = typeof author === 'string' ? author : author.name;
-  const authorId = typeof author === 'object' && author.id
-    ? author.id
-    : authorName.toLowerCase().replace(/\s+/g, '-');
+  const authorId =
+    typeof author === 'object' && author.id
+      ? author.id
+      : authorName.toLowerCase().replace(/\s+/g, '-');
 
   // Get author data from JSON for profile image
   const authors = authorsData as Record<string, any>;
@@ -58,7 +59,8 @@ export default function MoreFromAuthor({
     },
   ];
 
-  const displayArticles = articles.length > 0 ? articles.slice(0, 3) : sampleArticles;
+  const displayArticles =
+    articles.length > 0 ? articles.slice(0, 3) : sampleArticles;
 
   return (
     <section className="bg-white border border-gray-100 rounded-xl p-8 my-8 shadow-sm">
@@ -88,11 +90,7 @@ export default function MoreFromAuthor({
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {displayArticles.map((article, index) => (
-          <Link
-            key={index}
-            href={article.href}
-            className="group space-y-4"
-          >
+          <Link key={index} href={article.href} className="group space-y-4">
             {article.image && (
               <div className="relative w-full aspect-square bg-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
                 <Image
@@ -116,7 +114,8 @@ export default function MoreFromAuthor({
                 </span>
                 <span>•</span>
                 <span className="text-xs">
-                  {typeof article.readingTime === 'string' && article.readingTime.includes('min read')
+                  {typeof article.readingTime === 'string' &&
+                  article.readingTime.includes('min read')
                     ? article.readingTime
                     : `${article.readingTime} min read`}
                 </span>

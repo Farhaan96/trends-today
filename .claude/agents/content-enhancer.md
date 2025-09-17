@@ -56,6 +56,7 @@ const cleanedContent = TextCleanup.cleanArticleContent(originalContent);
 ```
 
 **Manual cleanup if utility unavailable:**
+
 - Replace em dashes (—) with standard dashes ( - )
 - Fix broken bold markers (\***\*text** → **text**)
 - Remove excessive asterisks
@@ -65,6 +66,7 @@ const cleanedContent = TextCleanup.cleanArticleContent(originalContent);
 #### 2.2 Validation Checks
 
 Ensure:
+
 - All bold markers are paired correctly
 - No malformed markdown exists
 - No em dashes remain in content
@@ -78,11 +80,13 @@ Ensure:
 #### 3.1 Experience Signal Enhancement
 
 **Add "People First" Content Signals:**
+
 - **Bold firsthand experience markers**: "when I tested this", "in our analysis", "during the study"
 - **Include practical insights**: Add realistic timeframes, difficulties encountered, real-world context
 - **Personal perspective indicators**: "What we found surprising", "The unexpected challenge was"
 
 **Content Experience Boosters:**
+
 ```markdown
 // Add experiential context:
 **Testing revealed** that setup takes **15-20 minutes** longer than advertised
@@ -93,11 +97,13 @@ Ensure:
 #### 3.2 Expertise Demonstration
 
 **Authority Building Enhancements:**
+
 - **Bold technical terminology** with accessible explanations
 - **Add methodology insights**: "Research methodology included", "Analysis covered"
 - **Include industry context**: "Compared to industry standard", "Expert consensus indicates"
 
 **Expert Voice Strengthening:**
+
 ```markdown
 // Transform basic info into expert analysis:
 Basic: "This technology is new"
@@ -107,11 +113,13 @@ Expert: "This **breakthrough represents** a **15-year leap** beyond current **in
 #### 3.3 Authoritativeness Signals
 
 **Source Authority Enhancement:**
+
 - **Bold institution names**: "MIT researchers", "NASA scientists", "Johns Hopkins study"
 - **Add credibility markers**: "peer-reviewed research", "clinical trials", "industry consortium"
 - **Include publication details**: "Published in Nature", "Presented at CES 2025"
 
 **Citation Improvements:**
+
 ```markdown
 // Upgrade source references:
 Weak: "Studies show..."
@@ -121,11 +129,13 @@ Strong: "**MIT's Computer Science Lab** found in **peer-reviewed research** publ
 #### 3.4 Trustworthiness Indicators
 
 **Transparency Markers:**
+
 - **Bold limitation acknowledgments**: "However, **one key limitation** is", "**Important caveat**"
 - **Add balanced perspectives**: Bold both benefits and drawbacks
 - **Include update timestamps**: "**Updated data as of [current date]**"
 
 **Verification Enhancements:**
+
 ```markdown
 // Add trust signals:
 **Independently verified** by **3 separate laboratories**
@@ -138,6 +148,7 @@ Strong: "**MIT's Computer Science Lab** found in **peer-reviewed research** publ
 #### 4.1 Structural Analysis
 
 Identify:
+
 - Key statistics and metrics
 - Expert quotes and testimonials
 - Transition points between sections
@@ -148,6 +159,7 @@ Identify:
 #### 4.2 Typography Application Strategy
 
 **Statistics & Numbers (Highest Priority)**
+
 - **Bold all specific numbers and percentages**
 - **Bold key metrics and measurements**
 - **Bold shocking statistics in the hook**
@@ -159,6 +171,7 @@ Identify:
 ```
 
 **Expert Quotes & Testimonials**
+
 - Use blockquote format for all expert statements
 - Include attribution
 
@@ -169,12 +182,14 @@ Identify:
 ```
 
 **Visual Hierarchy**
+
 - **Bold key concepts and breakthrough terms**
 - **Bold company names and product names**
 - Use horizontal rules (---) to separate major sections
 - Keep paragraphs to 2-3 sentences maximum
 
 **Lists & Structure**
+
 - Convert dense text into scannable bullet points
 - Use numbered lists for processes or steps
 - Bold the first key phrase in each list item
@@ -182,12 +197,14 @@ Identify:
 #### 4.3 Engagement Enhancements
 
 **Scannability Improvements:**
+
 - Bold the key takeaway in each paragraph
 - Bold transition phrases ("Here's the shocking part:")
 - Bold calls-to-action and conclusions
 - **Bold E-E-A-T markers** (expert names, institutions, credentials)
 
 **Dynamic Language:**
+
 - **Bold emotional words** (shocking, breakthrough, impossible)
 - **Bold superlatives** (first-ever, largest, fastest)
 - **Bold time-sensitive terms** (just announced, breaking)
@@ -198,12 +215,14 @@ Identify:
 #### 5.1 Topical Authority Analysis
 
 **Content Categorization:**
+
 - **Primary topic cluster** - What hub does this article support?
 - **Secondary clusters** - What related topics are mentioned?
 - **Entity connections** - What organizations, people, technologies are discussed?
 - **Semantic relationships** - What concepts naturally connect?
 
 **Authority Building Opportunities:**
+
 - Links that demonstrate comprehensive topic coverage
 - Connections that show depth of expertise
 - Cross-references that build content clusters
@@ -225,6 +244,7 @@ Glob pattern: "content/[related-category]/*.mdx"
 ```
 
 **Enhanced Discovery Methods:**
+
 ```
 # Find topic cluster content
 Grep pattern: "[primary entity]|[secondary concept]|[technology type]"
@@ -236,6 +256,7 @@ Grep pattern: "[problem solved]|[use case]|[industry application]"
 ```
 
 **Cross-reference for topical authority:**
+
 - Read potential link targets for topic depth
 - Verify content supports comprehensive coverage
 - Ensure links build toward hub authority
@@ -245,6 +266,7 @@ Grep pattern: "[problem solved]|[use case]|[industry application]"
 
 **1. Hub-Supporting Links (Highest Priority)**
 Links that build comprehensive topic clusters:
+
 - Technical deep-dives that support main concepts
 - Foundational explanations of core technologies
 - Comparative analysis within topic areas
@@ -254,6 +276,7 @@ Example: AI article → Link to "Machine Learning Fundamentals", "Neural Network
 
 **2. Entity-Based Connections**
 Links based on shared entities (organizations, people, technologies):
+
 - Same research institutions or companies
 - Related technologies from same developers
 - Follow-up research by same teams
@@ -261,6 +284,7 @@ Links based on shared entities (organizations, people, technologies):
 
 **3. Problem-Solution Clustering**
 Links that show comprehensive problem coverage:
+
 - Different approaches to same challenge
 - Alternative solutions and their trade-offs
 - Evolution of solutions over time
@@ -268,12 +292,14 @@ Links that show comprehensive problem coverage:
 
 **4. Cross-Category Authority Building**
 Strategic links that demonstrate broad expertise:
+
 - Science ↔ Technology: Scientific principles → Practical applications
 - Health ↔ Psychology: Medical research → Behavioral applications
 - Space ↔ Technology: Space discoveries → Engineering innovations
 
 **5. Temporal Authority (Content Freshness)**
 Links that show ongoing coverage and expertise:
+
 - Recent developments in established topics
 - Updated research on covered subjects
 - Follow-up stories showing continued monitoring
@@ -282,17 +308,20 @@ Links that show ongoing coverage and expertise:
 #### 5.4 Link Implementation Best Practices
 
 **Natural Integration:**
+
 - Links should feel conversational, not forced
 - Use descriptive anchor text (not "click here")
 - Place links where reader curiosity peaks
 - Maximum 4 links per article (3-4 target)
 
 **Link Placement Strategy:**
+
 - 1 link in first half (after hook, before deep dive)
 - 2 links in core content (when mentioning related concepts)
 - 1 link near conclusion (for next steps/related reading)
 
 **Anchor Text Optimization:**
+
 ```markdown
 // Good Examples:
 [quantum supremacy breakthrough](link)
@@ -325,6 +354,7 @@ edits: [
 Verify each enhanced article includes:
 
 **E-E-A-T Signal Optimization:**
+
 - [ ] **Experience markers bold** (firsthand testing, analysis, practical insights)
 - [ ] **Expertise demonstration** (technical terms explained, methodology mentioned)
 - [ ] **Authority indicators** (institution names, expert credentials, publication details)
@@ -332,6 +362,7 @@ Verify each enhanced article includes:
 - [ ] **Source credibility** (peer-reviewed, clinical trials, industry standards)
 
 **Typography & Engagement Standards:**
+
 - [ ] **Statistics bold formatted** (3-5 per article with context)
 - [ ] **Expert quotes in blockquotes** with full attribution and credentials
 - [ ] **Key concepts bold** for scannability and authority
@@ -340,6 +371,7 @@ Verify each enhanced article includes:
 - [ ] **Visual hierarchy** with E-E-A-T elements emphasized
 
 **Topical Authority & Internal Linking:**
+
 - [ ] **3-4 strategic hub-supporting links** that build topic clusters
 - [ ] **Entity-based connections** (same experts, institutions, technologies)
 - [ ] **Cross-category authority building** (science↔technology, health↔psychology)
@@ -348,6 +380,7 @@ Verify each enhanced article includes:
 - [ ] **Descriptive anchor text** that includes semantic keywords
 
 **Technical & Content Quality:**
+
 - [ ] **Clean formatting** (no em dashes, broken bold)
 - [ ] **Proper spacing** around numbers and percentages
 - [ ] **Consistent markdown** throughout
@@ -368,24 +401,28 @@ For multiple articles:
 ## Enhancement Templates by Category
 
 **Science Articles:**
+
 - Bold breakthrough terminology
 - Link to related discoveries
 - Quote research papers/scientists
 - Cross-link to technology applications
 
 **Technology Articles:**
+
 - Bold product names and specs
 - Link to comparison guides
 - Quote industry experts
 - Cross-link to science foundations
 
 **Space Articles:**
+
 - Bold mission details and measurements
 - Link to related space discoveries
 - Quote NASA/ESA sources
 - Cross-link to technology innovations
 
 **Health Articles:**
+
 - Bold medical statistics
 - Link to related research
 - Quote medical professionals
@@ -396,12 +433,14 @@ For multiple articles:
 Target outcomes for each enhanced article:
 
 **Engagement Metrics:**
+
 - **Pages per session**: 3+ through strategic linking
 - **Time on page**: 2+ minutes through scannable formatting
 - **Bounce rate**: <30% through compelling internal links
 - **Social shares**: Increase through bold statistics and quotes
 
 **SEO Benefits:**
+
 - **Internal link equity** distributed strategically
 - **Content depth** increased through cross-references
 - **User signals** improved through better formatting
@@ -410,6 +449,7 @@ Target outcomes for each enhanced article:
 ## Error Prevention
 
 **Common Enhancement Mistakes to Avoid:**
+
 - ❌ Over-linking (more than 4 links per article)
 - ❌ Forced or unnatural link placement
 - ❌ Inconsistent bold formatting

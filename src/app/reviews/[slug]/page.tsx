@@ -205,12 +205,14 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
             <div className="flex items-center gap-2">
               <span className="font-medium text-gray-900">
                 {(() => {
-                  const authorName = (typeof frontmatter.author === 'string'
-                    ? frontmatter.author
-                    : frontmatter.author?.name) || 'Trends Today Editorial';
-                  const authorId = typeof frontmatter.author === 'object'
-                    ? frontmatter.author?.id
-                    : frontmatter.author?.toLowerCase().replace(/\s+/g, '-');
+                  const authorName =
+                    (typeof frontmatter.author === 'string'
+                      ? frontmatter.author
+                      : frontmatter.author?.name) || 'Trends Today Editorial';
+                  const authorId =
+                    typeof frontmatter.author === 'object'
+                      ? frontmatter.author?.id
+                      : frontmatter.author?.toLowerCase().replace(/\s+/g, '-');
 
                   return authorId && authorId !== 'trends-today-editorial' ? (
                     <Link
@@ -219,7 +221,9 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
                     >
                       {authorName}
                     </Link>
-                  ) : authorName;
+                  ) : (
+                    authorName
+                  );
                 })()}
               </span>
             </div>
@@ -356,11 +360,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
           )}
 
           {/* More from Author */}
-          {frontmatter.author && (
-            <MoreFromAuthor
-              author={frontmatter.author}
-            />
-          )}
+          {frontmatter.author && <MoreFromAuthor author={frontmatter.author} />}
 
           {/* Citations */}
           {frontmatter.sources && (

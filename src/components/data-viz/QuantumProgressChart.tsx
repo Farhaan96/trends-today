@@ -89,17 +89,18 @@ export default function QuantumProgressChart() {
       <Line options={options} data={data} />
       <div className="mt-4 space-y-2">
         <p className="text-sm text-gray-600">
-          <strong>Quantum Simulation Breakthrough:</strong> Google's <strong className="text-purple-600">58-qubit lattices</strong>
+          <strong>Quantum Simulation Breakthrough:</strong> Google's{' '}
+          <strong className="text-purple-600">58-qubit lattices</strong>
           can now generate matter phases that classical computers cannot reach.
         </p>
         <p className="text-sm text-gray-600">
-          <strong>Digital-Analog Switching:</strong> Researchers are flipping between quantum
-          processors like "game engines," suggesting reality itself may operate through
-          modular computational systems.
+          <strong>Digital-Analog Switching:</strong> Researchers are flipping
+          between quantum processors like "game engines," suggesting reality
+          itself may operate through modular computational systems.
         </p>
         <p className="text-sm text-gray-600">
-          <strong>2025 Milestone:</strong> IBM's 1,200+ qubit systems are approaching
-          the scale needed for complex physical simulations.
+          <strong>2025 Milestone:</strong> IBM's 1,200+ qubit systems are
+          approaching the scale needed for complex physical simulations.
         </p>
       </div>
     </div>

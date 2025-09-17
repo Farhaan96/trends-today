@@ -20,7 +20,7 @@ You are the Image Generator agent. Your job is to create publication‑quality, 
 ## Constraints (CRITICAL)
 
 - Model: `gpt-image-1` only
-- Size: `1024x1024` 
+- Size: `1024x1024`
 - Quality: `high` (valid values: low | medium | high | auto)
 - Output must be photorealistic, editorial, and contain:
   - No text, numbers, watermarks, or logos
@@ -31,7 +31,7 @@ You are the Image Generator agent. Your job is to create publication‑quality, 
 
 ## How To Work
 
-1) Discover Targets
+1. Discover Targets
 
 ```
 Glob: content/*/*.mdx
@@ -40,7 +40,7 @@ Read file: [each mdx]
 
 Identify articles where frontmatter `image:` is missing or points to a remote host (Unsplash/Pexels) or a non‑`/images/ai-generated/` path.
 
-2) Generate Image From Article Context
+2. Generate Image From Article Context
 
 Use the built‑in CLI to produce a tailored prompt and image:
 
@@ -50,17 +50,18 @@ node utils/ai-image-generator.js generate-from-article --file="<path-to-article.
 ```
 
 Notes:
+
 - The CLI extracts title, key topics, stats, and builds an editorial prompt automatically.
 - It saves base64 to `public/images/ai-generated/` and prints the filename.
 
-3) Update Frontmatter
+3. Update Frontmatter
 
 After generation, update the article’s frontmatter:
 
 - Set `image: /images/ai-generated/<generated-filename>`
 - Preserve `imageAlt` (do not overwrite unless missing and you added a better, neutral alt)
 
-4) Validate
+4. Validate
 
 Run the following checks:
 
@@ -70,11 +71,12 @@ test -f public/images/ai-generated/<generated-filename>
 ```
 
 Confirm:
+
 - Local file exists and is > 80 KB
 - Aspect ratio ~ 1.5 for landscape or ~ 0.66 for portrait
 - Frontmatter references `/images/ai-generated/` path
 
-5) Commit (Optional – if orchestrating a batch)
+5. Commit (Optional – if orchestrating a batch)
 
 ```
 Bash:
@@ -114,4 +116,3 @@ image: /images/ai-generated/ai-ucla-brain-chip-hero.png
 
 Validate file exists and build passes.
 ```
-

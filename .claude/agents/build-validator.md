@@ -53,6 +53,7 @@ Glob pattern: "content/*/*.mdx"
 ```
 
 For each file:
+
 - Verify kebab-case naming (no spaces, underscores)
 - Check for SEO-friendly slugs
 - Ensure no special characters that break URLs
@@ -68,6 +69,7 @@ Read file_path: content/[category]/[article].mdx
 ```
 
 **Critical YAML Checks:**
+
 - ✅ Valid YAML syntax (no parsing errors)
 - ✅ Proper indentation and structure
 - ✅ No tab characters (spaces only)
@@ -77,6 +79,7 @@ Read file_path: content/[category]/[article].mdx
 #### 2.2 Required Fields Validation
 
 **Mandatory Frontmatter Fields:**
+
 - ✅ `title`: Present and non-empty
 - ✅ `description`: Present with >- multiline syntax
 - ✅ `category`: Valid category from approved list
@@ -101,6 +104,7 @@ grep -r "publishedAt:" content/ | head -5
 ```
 
 **Date Standards:**
+
 - ✅ ISO 8601 format: YYYY-MM-DDTHH:MM:SS.000Z
 - ✅ UTC timezone (ends with .000Z)
 - ✅ Not in the future (must be ≤ current date)
@@ -110,12 +114,14 @@ grep -r "publishedAt:" content/ | head -5
 #### 2.4 Author & Content Validation
 
 **Approved Authors Only:**
+
 - Sarah Martinez
 - David Kim
 - Alex Chen
 - Emma Thompson
 
 **Content Standards:**
+
 - ✅ Title length: 50-60 characters for SEO
 - ✅ Description length: 150-160 characters
 - ✅ Category matches file directory
@@ -124,6 +130,7 @@ grep -r "publishedAt:" content/ | head -5
 #### 2.5 Image Path & AI Generation Validation
 
 **Image Standards:**
+
 - ✅ Images from `/images/ai-generated/` path only
 - ✅ No Unsplash, Pexels, or stock photo URLs
 - ✅ No remote image URLs (must be local)
@@ -368,6 +375,7 @@ TodoWrite: [
 Implement automatic fixes for common problems:
 
 **Date Corrections:**
+
 ```bash
 # Fix future dates to current date
 current_date=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
@@ -375,12 +383,14 @@ current_date=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
 ```
 
 **File Extension Fixes:**
+
 ```bash
 # Rename .md files to .mdx
 find content -name "*.md" -exec mv {} {}.mdx \;
 ```
 
 **YAML Formatting:**
+
 - Fix indentation issues
 - Correct quote usage
 - Standardize array formats
@@ -388,11 +398,13 @@ find content -name "*.md" -exec mv {} {}.mdx \;
 ## Performance Optimization
 
 **Parallel Validation:**
+
 - Run TypeScript and build checks simultaneously
 - Validate multiple articles in parallel
 - Use concurrent file operations
 
 **Caching Strategy:**
+
 - Cache build results for unchanged files
 - Skip validation for previously validated content
 - Optimize file system operations
@@ -400,16 +412,19 @@ find content -name "*.md" -exec mv {} {}.mdx \;
 ## Error Prevention Strategy
 
 **Pre-Validation Checks:**
+
 - Template validation for new articles
 - Real-time YAML syntax checking
 - Automated file naming standards
 
 **Quality Gates:**
+
 - Zero tolerance for critical errors
 - Build must pass before deployment
 - All validation checks must succeed
 
 **Monitoring & Alerts:**
+
 - Track validation failure rates
 - Monitor build performance
 - Alert on recurring issues

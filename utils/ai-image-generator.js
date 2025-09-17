@@ -769,7 +769,10 @@ Requirements:
 
   async generateDynamicPrompt(articleTitle, articleContent, category) {
     // Use AI to semantically understand the content instead of pattern matching
-    const aiVisualConcept = await this.generateAIVisualConcept(articleTitle, articleContent);
+    const aiVisualConcept = await this.generateAIVisualConcept(
+      articleTitle,
+      articleContent
+    );
 
     const topics = this.extractMainTopics(articleContent);
     const stats = this.extractKeyStatistics(articleContent);
@@ -950,7 +953,10 @@ EDITORIAL RESTRICTIONS (CRITICAL):
   // Enhanced GPT-Image-1 optimized prompt builder
   async buildConcisePrompt(articleTitle, articleContent, category) {
     // Try AI analysis first for maximum dynamism
-    const aiVisualConcept = await this.generateAIVisualConcept(articleTitle, articleContent);
+    const aiVisualConcept = await this.generateAIVisualConcept(
+      articleTitle,
+      articleContent
+    );
 
     if (aiVisualConcept) {
       // OPTIMIZED: Ultra-concise but information-dense prompt

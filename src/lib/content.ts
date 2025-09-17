@@ -55,8 +55,8 @@ async function getArticlesFromDir(
           href: `/${type}/${file.replace(/\.(mdx|json)$/, '')}`,
         };
       })
-      .filter((article) => article.frontmatter.title) // Only include articles with titles
-      // Remove sorting here - will be sorted globally in getAllPosts()
+      .filter((article) => article.frontmatter.title); // Only include articles with titles
+    // Remove sorting here - will be sorted globally in getAllPosts()
 
     return articles;
   } catch (error) {
@@ -177,7 +177,8 @@ export async function getAllPosts(): Promise<Article[]> {
   const allArticles = articleArrays.flat().sort((a, b) => {
     // Helper function to safely parse dates
     const parseDate = (article: Article) => {
-      const dateStr = article.frontmatter.publishedAt || article.frontmatter.datePublished;
+      const dateStr =
+        article.frontmatter.publishedAt || article.frontmatter.datePublished;
       if (!dateStr) {
         console.warn(`Missing date for article: ${article.slug}`);
         return new Date('1970-01-01');
@@ -229,7 +230,7 @@ async function getArticlesFromCategoryDir(
         };
       })
       .filter((article) => article.frontmatter.title); // Only include articles with titles
-      // Remove sorting here - will be sorted globally in getAllPosts()
+    // Remove sorting here - will be sorted globally in getAllPosts()
 
     return articles;
   } catch (error) {
