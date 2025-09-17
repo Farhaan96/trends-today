@@ -7,6 +7,7 @@ import ArticleContent from '@/components/article/ArticleContent';
 import ArticleJsonLd from '@/components/seo/ArticleJsonLd';
 import { BreadcrumbSchema } from '@/components/seo/SchemaMarkup';
 import { SmartRelatedArticles } from '@/components/article/RelatedArticles';
+import MoreFromAuthor from '@/components/content/MoreFromAuthor';
 
 const categoryConfig = {
   science: { name: 'Science', color: 'from-blue-500 to-indigo-600' },
@@ -236,6 +237,40 @@ export default async function ArticlePage({
       {/* Article Content */}
       <div className="max-w-5xl mx-auto px-4 pb-12">
         <ArticleContent content={article.content || article.mdxContent} />
+      </div>
+
+      {/* More from Author */}
+      <div className="max-w-5xl mx-auto px-4">
+        {(article.author || article.frontmatter?.author) && (() => {
+          const currentAuthor = article.author || article.frontmatter?.author;
+          const authorName = typeof currentAuthor === 'string'
+            ? currentAuthor
+            : currentAuthor?.name || currentAuthor;
+
+          // Filter articles by the same author, excluding current article
+          const authorArticles = allArticles
+            .filter(a => {
+              const articleAuthor = a.author?.name || a.frontmatter?.author?.name || a.frontmatter?.author;
+              return articleAuthor === authorName && a.slug !== params.slug;
+            })
+            .slice(0, 3)
+            .map(a => ({
+              title: a.title || a.frontmatter?.title,
+              description: a.description || a.frontmatter?.description,
+              href: `/${a.category}/${a.slug}`,
+              publishedAt: a.publishedAt || a.frontmatter?.publishedAt,
+              image: a.image || a.frontmatter?.image,
+              category: a.category,
+              readingTime: a.frontmatter?.readingTime || '2',
+            }));
+
+          return (
+            <MoreFromAuthor
+              author={currentAuthor}
+              articles={authorArticles}
+            />
+          );
+        })()}
       </div>
 
       {/* Related Articles */}
