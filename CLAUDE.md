@@ -247,7 +247,7 @@ Process enhancement and fact-checking simultaneously for efficiency
 **Quality Assurance:**
 
 - **Accuracy Threshold:** >80% maintained across all consolidations
-- **Content Standards:** 400-500 words, 85+ quality score
+- **Content Standards:** Category-appropriate length, 85+ quality score
 - **Technical Compliance:** Zero build failures, comprehensive validation
 - **Reader Engagement:** 3+ pages per session through strategic linking
 

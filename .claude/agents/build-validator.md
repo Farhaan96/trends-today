@@ -230,7 +230,7 @@ for (const category of categories) {
 Validate article standards:
 
 ```bash
-# Word count validation (400-500 words)
+# Word count validation (category-specific ranges)
 node -e "
 const fs = require('fs');
 const matter = require('gray-matter');
@@ -242,7 +242,7 @@ glob('content/*/*.mdx', (err, files) => {
     const { content: body } = matter(content);
     const wordCount = body.split(/\s+/).length;
     if (wordCount < 400 || wordCount > 500) {
-      console.log(\`⚠️ \${file}: \${wordCount} words (should be 400-500)\`);
+      console.log(\`⚠️ \${file}: \${wordCount} words (check category requirements)\`);
     } else {
       console.log(\`✅ \${file}: \${wordCount} words\`);
     }
@@ -559,7 +559,7 @@ done
 - Stock photo URLs detected (Unsplash, Pexels, etc.)
 - Duplicate image paths across articles
 - Articles without tags
-- Word count outside 400-500 range
+- Word count outside category-appropriate range (Science/Tech: 600-800, Health: 500-700, Culture: 300-500)
 - **Article not showing on homepage** (check date is most recent)
 
 ## Integration with Pipeline

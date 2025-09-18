@@ -214,7 +214,7 @@ Target: 90+ points for viral potential
 
 **Length & Readability Standards:**
 
-- Word Count: 400-500 words (STRICT)
+- Word Count: Category-appropriate length (Science/Tech: 600-800, Health: 500-700, Culture: 300-500)
 - Reading Time: Under 2 minutes
 - Paragraph Length: Maximum 3 sentences
 - Sentence Length: Average 15-20 words
