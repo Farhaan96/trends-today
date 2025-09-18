@@ -63,7 +63,9 @@
       "Bash(test:*)",
       "Bash(time:*)",
       "Bash(git reset:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(uniq:*)",
+      "Bash(wc:*)"
     ],
     "deny": [],
     "ask": []
