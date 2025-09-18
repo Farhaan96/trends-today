@@ -6,7 +6,7 @@ This file provides comprehensive guidance to Claude Code (claude.ai/code) when w
 
 Trends Today is a premium tech journalism platform powered by advanced AI systems, featuring photorealistic image generation, ultra-short content strategy, and comprehensive quality validation. Our mission: Create the most engaging, professional-grade content that meets serious journalism standards.
 
-**Current Date:** 2025-09-15T04:39:19.000Z
+**Current Date:** 2025-09-18T16:00:00.000Z
 
 ### Core Technical Architecture
 
@@ -630,7 +630,7 @@ npm run build              # Pre-deployment validation
 **Content Quality Issues:**
 
 - ❌ **Generic content** - Template-driven or AI-obvious writing
-- ❌ **Over-length articles** - Must stay under 500 words
+- ❌ **Wrong-length articles** - Must match category requirements (Science/Tech: 600-800, Health: 500-700, Culture: 300-500)
 - ❌ **Poor image quality** - Stock photos or amateur visuals
 - ❌ **Inaccurate information** - Unverified claims or outdated data
 - ❌ **Technical errors** - Build failures, YAML errors, wrong extensions
@@ -650,7 +650,7 @@ npm run build              # Pre-deployment validation
 
 1. **AI-First Editorial Pipeline** - Fully automated quality assurance
 2. **Photorealistic Image Generation** - Professional photography standards
-3. **Ultra-Short Content Mastery** - 400-500 word engagement optimization
+3. **Category-Optimized Content Mastery** - Category-appropriate length optimization (Science/Tech: 600-800, Health: 500-700, Culture: 300-500)
 4. **Real-Time Fact Verification** - Live web research integration
 5. **Category-Specific Expertise** - Specialized AI prompting per domain
 
@@ -714,7 +714,7 @@ This comprehensive AI system transforms Trends Today into a premium destination 
 ### Content Standards
 
 - **File extension:** MUST be .mdx (NOT .md)
-- **Word count:** 400-500 words maximum
+- **Word count:** Category-appropriate length (Science/Tech: 600-800, Health: 500-700, Culture: 300-500)
 - **Authors:** Only Sarah Martinez, David Kim, Alex Chen, Emma Thompson
 - **Date:** Current ISO 8601 format, not hardcoded dates
 - **Quality gate:** Must pass build validation and fact-checking before publication
@@ -740,17 +740,13 @@ This comprehensive AI system transforms Trends Today into a premium destination 
 - The Task tool simulates agents but doesn't actually invoke them
 - Need to use proper Claude Code subagent invocation syntax
 
-### Available Agents in `.claude/agents/`
+### Active Agents in `.claude/agents/` (5 Consolidated Agents)
 
-1. `batch-orchestrator` - Orchestrates the pipeline
-2. `trending-topics-discovery` - Finds topics using WebSearch
-3. `ultra-short-content-creator` - Creates articles using AI (now with .mdx support)
-4. `build-validator` - Validates builds and fixes YAML/file errors
-5. `fact-checker` - Verifies facts using WebSearch/WebFetch
-6. `typography-enhancer` - Applies formatting
-7. `quality-validator` - Ensures standards
-8. `smart-content-linker` - Adds internal links
-9. `publication-reviewer` - Final approval
+1. `trending-content-creator` - Discovers topics and creates articles (consolidated discovery + creation)
+2. `content-enhancer` - Applies typography, linking, and text cleanup (consolidated enhancement)
+3. `quality-factchecker` - Comprehensive fact-checking and quality validation (consolidated validation)
+4. `image-generator` - Enhanced 2025 text-free image generation with OCR validation
+5. `build-validator` - Technical validation, builds, YAML, and deployment readiness
 
 **Tools Agents Use:**
 
@@ -773,7 +769,7 @@ Since pure Claude agents can't use API keys directly:
 **Test Command:**
 
 ```
-> Use the trending-topics-discovery subagent to find 2 trending tech topics
+> Use the trending-content-creator subagent to discover and create an article about fascinating space phenomena
 ```
 
 **Expected Result:**
