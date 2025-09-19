@@ -552,7 +552,7 @@ Secondary Query: "biomarker discovery revolutionizing diagnostics"
    - If `isDuplicate: true`, request new pre-approved query from orchestrator
    - **NEVER write content** that hasn't passed pre-creation duplicate validation
 
-2. **balanced-batch-orchestrator MUST:**
+3. **balanced-batch-orchestrator MUST:**
    - Include oversaturation warnings in all batch plans
    - Generate diversity-aware research queries
    - Display recent article counts per category
