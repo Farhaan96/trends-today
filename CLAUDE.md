@@ -49,11 +49,11 @@ Claude Code (Orchestrator)
 
 ### Consolidated Agent Specifications
 
-#### trending-content-creator (CONSOLIDATED)
+#### trending-content-creator (CONSOLIDATED + DUPLICATE PREVENTION)
 
-- **Consolidates:** trending-topics-discovery + ultra-short-content-creator
-- **Purpose:** End-to-end workflow from topic discovery to article creation
-- **Capabilities:** Real-time research, duplicate checking, content generation with category-aware word limits
+- **Consolidates:** trending-topics-discovery + ultra-short-content-creator + comprehensive duplicate detection
+- **Purpose:** End-to-end workflow from topic discovery to article creation with mandatory duplicate prevention
+- **Capabilities:** Real-time research, comprehensive duplicate detection, content generation with category-aware word limits
 - **Benefits:**
   - Eliminates handoff delays between discovery and creation
   - Preserves research context throughout writing process
@@ -423,6 +423,137 @@ This optimized pipeline represents a breakthrough in AI content generation effic
 - Remote Work Solutions
 - Travel Tech Essentials
 
+## 🚨 MANDATORY DUPLICATE PREVENTION SYSTEM
+
+**CRITICAL UPDATE:** Comprehensive duplicate detection system implemented to prevent topic oversaturation across ALL categories.
+
+### Content Diversity Manager
+
+**Core Functionality:**
+
+- **Real-time duplicate detection** - Scans existing content before creation
+- **Topic saturation analysis** - Identifies oversaturated themes per category
+- **Diverse query generation** - Generates research queries that avoid saturated topics
+- **Title similarity detection** - Prevents similar headlines (>70% match blocked)
+
+**Usage Commands:**
+
+```bash
+# Full diversity analysis across all categories
+node utils/content-diversity-manager.js report
+
+# Check if proposed article would be duplicate
+node utils/content-diversity-manager.js check health "CRISPR Baby Treatment" "Gene editing saves infant"
+
+# Generate diverse research queries avoiding saturated topics
+node utils/content-diversity-manager.js queries psychology 3
+
+# Analyze specific category saturation
+node utils/content-diversity-manager.js analyze health
+```
+
+### Duplicate Detection Patterns (Per Category)
+
+**Health:**
+
+- CRISPR/gene editing (OVERSATURATED: 3+ articles)
+- Precision medicine (OVERSATURATED: 2+ articles)
+- Cancer breakthroughs (OVERSATURATED: 2+ articles)
+- AI medical diagnosis
+- Mental health treatments
+
+**Psychology:**
+
+- Brain research/neuroscience (OVERSATURATED: 4+ articles)
+- Consciousness studies
+- Procrastination research
+- Meditation/mindfulness
+- Decision making/cognitive bias
+
+**Science:**
+
+- Quantum physics breakthroughs
+- Archaeological discoveries
+- Climate change research
+- Biological phenomena
+- Materials science
+
+**Technology:**
+
+- AI breakthroughs
+- Robotics/automation
+- Quantum computing
+- Cybersecurity
+- Autonomous vehicles
+
+**Space:**
+
+- Exoplanet discoveries (OVERSATURATED: 3+ articles)
+- NASA missions
+- Mars exploration
+- Black hole research
+- Asteroid/comet studies
+
+**Culture:**
+
+- Social media trends (OVERSATURATED: 3+ articles)
+- Creator economy (OVERSATURATED: 3+ articles)
+- AI art/digital creativity
+- Gaming/esports
+- Privacy/digital rights
+
+### Enhanced Batch Orchestrator
+
+**Integration:**
+
+- **Mandatory duplicate checking** before topic assignment
+- **Oversaturation warnings** displayed in batch plans
+- **Diverse query generation** replaces generic searches
+- **Category-specific avoidance** of saturated topics
+
+**Example Enhanced Output:**
+
+```
+Article 1: HEALTH
+Target: 500-700 words
+Recent articles: 9
+🚨 AVOID these oversaturated topics: crispr, precision medicine, cancer breakthrough
+Primary Query: "rare disease breakthrough treatments 2025"
+Secondary Query: "biomarker discovery revolutionizing diagnostics"
+```
+
+### Mandatory Workflow Integration
+
+**CRITICAL AGENT INSTRUCTIONS:**
+
+1. **trending-content-creator MUST:**
+   - Run duplicate check: `node utils/content-diversity-manager.js check [category] "[title]" "[description]"`
+   - REJECT any HIGH risk duplicates immediately
+   - Use diversity-generated queries, not generic ones
+   - Avoid all oversaturated topics listed in batch plan
+
+2. **balanced-batch-orchestrator MUST:**
+   - Include oversaturation warnings in all batch plans
+   - Generate diversity-aware research queries
+   - Display recent article counts per category
+   - Provide explicit avoidance instructions
+
+### Success Metrics
+
+**Duplicate Prevention KPIs:**
+
+- **Zero HIGH risk duplicates** - System must reject >70% similar articles
+- **Topic diversity score** - Max 2 articles per topic pattern in 30 days
+- **Category balance** - No category >3 articles ahead of others
+- **Research diversity** - Unique research angles per batch
+
+**Quality Assurance:**
+
+- All article creation must pass duplicate detection
+- Batch plans must show oversaturation warnings
+- Agents must use diversity-aware queries only
+- Manual override requires explicit user approval
+
 ## 🔧 TECHNICAL IMPLEMENTATION
 
 ### File Structure & Organization
@@ -432,6 +563,8 @@ This optimized pipeline represents a breakthrough in AI content generation effic
   ├── ai-image-generator.js        # Enhanced GPT-Image-1 system
   ├── perplexity-enhanced.js       # Real-time research with citations
   ├── comprehensive-image-system.js # Multi-source image pipeline
+  ├── content-diversity-manager.js  # NEW: Comprehensive duplicate prevention system
+  ├── balanced-batch-orchestrator.js # Enhanced with diversity checking
   └── firecrawl-enhanced.js        # Advanced web scraping
 
 /content/

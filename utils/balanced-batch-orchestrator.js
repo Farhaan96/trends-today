@@ -4,10 +4,12 @@
  */
 
 const CategoryDistributionManager = require('./category-distribution-manager');
+const ContentDiversityManager = require('./content-diversity-manager');
 
 class BalancedBatchOrchestrator {
   constructor() {
     this.categoryManager = new CategoryDistributionManager();
+    this.diversityManager = new ContentDiversityManager();
   }
 
   /**
@@ -47,9 +49,17 @@ class BalancedBatchOrchestrator {
       console.log(`  ${index + 1}. ${category}`);
     });
 
-    // Generate article plans for each category
+    // Generate article plans for each category with diversity checking
     const articlePlans = selectedCategories.map((category, index) => {
-      const queries = this.categoryManager.generateSearchQueries(category, 2);
+      // Get diversity analysis for this category
+      const diversityAnalysis =
+        this.diversityManager.analyzeContentSaturation(category);
+
+      // Use diversity-aware queries instead of generic ones
+      const diverseQueries = this.diversityManager.generateDiverseQueries(
+        category,
+        2
+      );
       const suggestions =
         this.categoryManager.getCategoryTopicSuggestions(category);
 
@@ -57,14 +67,17 @@ class BalancedBatchOrchestrator {
         position: index + 1,
         category,
         primaryQuery:
-          queries[0] || `breakthrough ${category} discoveries that defy logic`,
+          diverseQueries[0] ||
+          `breakthrough ${category} discoveries that defy logic`,
         secondaryQuery:
-          queries[1] ||
+          diverseQueries[1] ||
           `impossible ${category} phenomena scientists can't explain`,
         topicSuggestions: suggestions.slice(0, 3),
         targetWordCount: this.getWordCountForCategory(category),
         priority:
           priorities.find((p) => p.category === category)?.priority || 1,
+        diversityWarnings: diversityAnalysis.oversaturatedTopics,
+        recentArticleCount: diversityAnalysis.recentArticles,
       };
     });
 
@@ -74,6 +87,14 @@ class BalancedBatchOrchestrator {
         `\n  Article ${plan.position}: ${plan.category.toUpperCase()}`
       );
       console.log(`  Target: ${plan.targetWordCount} words`);
+      console.log(`  Recent articles: ${plan.recentArticleCount}`);
+
+      if (plan.diversityWarnings.length > 0) {
+        console.log(
+          `  🚨 AVOID these oversaturated topics: ${plan.diversityWarnings.join(', ')}`
+        );
+      }
+
       console.log(`  Primary Query: "${plan.primaryQuery}"`);
       console.log(`  Secondary Query: "${plan.secondaryQuery}"`);
       console.log(`  Topic Suggestions:`);
@@ -136,7 +157,8 @@ ${batchPlan.articlePlans
   .join('\n')}
 
 CRITICAL INSTRUCTIONS:
-- Use Category Distribution Manager to verify this selection: node utils/category-distribution-manager.js balance ${batchPlan.batchSize}
+- MANDATORY: Check for duplicates using: node utils/content-diversity-manager.js check [category] "[title]" "[description]"
+- REJECT any article ideas that match oversaturated topics listed above
 - Research each category with the provided queries for balanced topic discovery
 - Create exactly ONE article per selected category
 - Follow category-specific word count targets
