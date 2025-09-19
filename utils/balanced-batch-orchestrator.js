@@ -16,7 +16,11 @@ class BalancedBatchOrchestrator {
    * @param {string[]} excludeCategories - Categories to exclude
    * @param {boolean} strictBalance - Enforce perfect balance vs priority-based
    */
-  generateBatchPlan(batchSize = 3, excludeCategories = [], strictBalance = false) {
+  generateBatchPlan(
+    batchSize = 3,
+    excludeCategories = [],
+    strictBalance = false
+  ) {
     console.log(`\n🎯 GENERATING BATCH PLAN FOR ${batchSize} ARTICLES`);
     console.log('================================================\n');
 
@@ -27,11 +31,16 @@ class BalancedBatchOrchestrator {
     console.log('📊 Current Content Distribution:');
     priorities.forEach((p, index) => {
       const indicator = index < 2 ? '🔥' : index < 4 ? '⚡' : '📝';
-      console.log(`  ${indicator} ${p.category.padEnd(12)} ${p.count} articles (${p.percentage}%)`);
+      console.log(
+        `  ${indicator} ${p.category.padEnd(12)} ${p.count} articles (${p.percentage}%)`
+      );
     });
 
     // Get balanced category selection
-    const selectedCategories = this.categoryManager.getBalancedSelection(batchSize, excludeCategories);
+    const selectedCategories = this.categoryManager.getBalancedSelection(
+      batchSize,
+      excludeCategories
+    );
 
     console.log(`\n🎯 Selected Categories for This Batch:`);
     selectedCategories.forEach((category, index) => {
@@ -41,27 +50,34 @@ class BalancedBatchOrchestrator {
     // Generate article plans for each category
     const articlePlans = selectedCategories.map((category, index) => {
       const queries = this.categoryManager.generateSearchQueries(category, 2);
-      const suggestions = this.categoryManager.getCategoryTopicSuggestions(category);
+      const suggestions =
+        this.categoryManager.getCategoryTopicSuggestions(category);
 
       return {
         position: index + 1,
         category,
-        primaryQuery: queries[0] || `breakthrough ${category} discoveries that defy logic`,
-        secondaryQuery: queries[1] || `impossible ${category} phenomena scientists can't explain`,
+        primaryQuery:
+          queries[0] || `breakthrough ${category} discoveries that defy logic`,
+        secondaryQuery:
+          queries[1] ||
+          `impossible ${category} phenomena scientists can't explain`,
         topicSuggestions: suggestions.slice(0, 3),
         targetWordCount: this.getWordCountForCategory(category),
-        priority: priorities.find(p => p.category === category)?.priority || 1
+        priority:
+          priorities.find((p) => p.category === category)?.priority || 1,
       };
     });
 
     console.log(`\n📝 Article Generation Plan:`);
-    articlePlans.forEach(plan => {
-      console.log(`\n  Article ${plan.position}: ${plan.category.toUpperCase()}`);
+    articlePlans.forEach((plan) => {
+      console.log(
+        `\n  Article ${plan.position}: ${plan.category.toUpperCase()}`
+      );
       console.log(`  Target: ${plan.targetWordCount} words`);
       console.log(`  Primary Query: "${plan.primaryQuery}"`);
       console.log(`  Secondary Query: "${plan.secondaryQuery}"`);
       console.log(`  Topic Suggestions:`);
-      plan.topicSuggestions.forEach(suggestion => {
+      plan.topicSuggestions.forEach((suggestion) => {
         console.log(`    • ${suggestion}`);
       });
     });
@@ -72,7 +88,7 @@ class BalancedBatchOrchestrator {
       articlePlans,
       currentDistribution,
       priorities,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
@@ -81,14 +97,14 @@ class BalancedBatchOrchestrator {
    */
   getWordCountForCategory(category) {
     const wordCounts = {
-      'science': '600-800',
-      'technology': '600-800',
-      'space': '600-800',
-      'health': '500-700',
-      'psychology': '500-700',
-      'culture': '300-500',
-      'news': '300-500',
-      'reviews': '600-800'
+      science: '600-800',
+      technology: '600-800',
+      space: '600-800',
+      health: '500-700',
+      psychology: '500-700',
+      culture: '300-500',
+      news: '300-500',
+      reviews: '600-800',
     };
 
     return wordCounts[category] || '500-700';
@@ -101,17 +117,23 @@ class BalancedBatchOrchestrator {
     console.log(`\n🤖 CLAUDE CODE AGENT COMMANDS`);
     console.log('==============================\n');
 
-    console.log('Step 1: Generate the balanced batch using trending-content-creator');
+    console.log(
+      'Step 1: Generate the balanced batch using trending-content-creator'
+    );
     console.log('Copy and paste this command:\n');
 
     const command = `Use the trending-content-creator subagent to create a balanced batch of ${batchPlan.batchSize} articles with the following category distribution:
 
-${batchPlan.articlePlans.map(plan =>
-  `${plan.position}. **${plan.category.toUpperCase()}** (${plan.targetWordCount} words)
+${batchPlan.articlePlans
+  .map(
+    (plan) =>
+      `${plan.position}. **${plan.category.toUpperCase()}** (${plan.targetWordCount} words)
    - Primary research: "${plan.primaryQuery}"
    - Secondary research: "${plan.secondaryQuery}"
    - Focus areas: ${plan.topicSuggestions.slice(0, 2).join(', ')}
-`).join('\n')}
+`
+  )
+  .join('\n')}
 
 CRITICAL INSTRUCTIONS:
 - Use Category Distribution Manager to verify this selection: node utils/category-distribution-manager.js balance ${batchPlan.batchSize}
@@ -139,28 +161,37 @@ CRITICAL INSTRUCTIONS:
     console.log('==========================\n');
 
     console.log('Distribution Changes:');
-    Object.keys(currentDistribution).forEach(category => {
+    Object.keys(currentDistribution).forEach((category) => {
       const before = preBatchDistribution[category] || 0;
       const after = currentDistribution[category];
       const change = after - before;
 
       if (change > 0) {
-        console.log(`  ${category.padEnd(12)} ${before} → ${after} (+${change}) ✅`);
+        console.log(
+          `  ${category.padEnd(12)} ${before} → ${after} (+${change}) ✅`
+        );
       } else if (change === 0) {
-        console.log(`  ${category.padEnd(12)} ${before} → ${after} (no change)`);
+        console.log(
+          `  ${category.padEnd(12)} ${before} → ${after} (no change)`
+        );
       }
     });
 
     const newPriorities = this.categoryManager.getCategoryPriorities();
     console.log('\nUpdated Priorities:');
     newPriorities.slice(0, 3).forEach((p, index) => {
-      console.log(`  ${index + 1}. ${p.category} (${p.count} articles, priority: ${p.priority})`);
+      console.log(
+        `  ${index + 1}. ${p.category} (${p.count} articles, priority: ${p.priority})`
+      );
     });
 
     return {
-      distributionImprovement: this.calculateDistributionImprovement(preBatchDistribution, currentDistribution),
+      distributionImprovement: this.calculateDistributionImprovement(
+        preBatchDistribution,
+        currentDistribution
+      ),
       newPriorities,
-      recommendedNextBatch: this.categoryManager.getBalancedSelection(3)
+      recommendedNextBatch: this.categoryManager.getBalancedSelection(3),
     };
   }
 
@@ -178,8 +209,12 @@ CRITICAL INSTRUCTIONS:
       beforeVariance: Math.round(beforeVariance * 100) / 100,
       afterVariance: Math.round(afterVariance * 100) / 100,
       improvement: Math.round((beforeVariance - afterVariance) * 100) / 100,
-      percentageImprovement: beforeVariance > 0 ?
-        Math.round(((beforeVariance - afterVariance) / beforeVariance) * 100) : 0
+      percentageImprovement:
+        beforeVariance > 0
+          ? Math.round(
+              ((beforeVariance - afterVariance) / beforeVariance) * 100
+            )
+          : 0,
     };
   }
 
@@ -188,7 +223,7 @@ CRITICAL INSTRUCTIONS:
    */
   calculateVariance(values) {
     const mean = values.reduce((sum, val) => sum + val, 0) / values.length;
-    const squaredDiffs = values.map(val => Math.pow(val - mean, 2));
+    const squaredDiffs = values.map((val) => Math.pow(val - mean, 2));
     return squaredDiffs.reduce((sum, diff) => sum + diff, 0) / values.length;
   }
 
@@ -240,7 +275,9 @@ if (require.main === module) {
 
     case 'analyze':
       // This would typically be called with pre-batch data
-      console.log('Run this after batch completion with: node utils/category-distribution-manager.js report');
+      console.log(
+        'Run this after batch completion with: node utils/category-distribution-manager.js report'
+      );
       break;
 
     default:

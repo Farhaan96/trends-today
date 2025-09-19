@@ -5,6 +5,7 @@ This guide ensures every article batch creates a perfectly balanced content port
 ## 📊 Current System Problem
 
 **Before:** Batches randomly generated 3 articles that often clustered:
+
 - Technology: 10 articles (20%)
 - Science: 10 articles (20%)
 - Space: 9 articles (18%)
@@ -23,6 +24,7 @@ node utils/balanced-batch-orchestrator.js plan 3
 ```
 
 This gives you:
+
 - 📊 Current distribution analysis
 - 🎯 Optimal category selection (prioritizes gaps)
 - 📝 Specific research queries per category
@@ -70,16 +72,19 @@ node utils/category-distribution-manager.js report
 ## 🎯 Different Batch Sizes
 
 **3 Articles (Standard):**
+
 ```bash
 node utils/balanced-batch-orchestrator.js plan 3
 ```
 
 **5 Articles (Large Batch):**
+
 ```bash
 node utils/balanced-batch-orchestrator.js plan 5
 ```
 
 **Custom with Exclusions:**
+
 ```bash
 node utils/balanced-batch-orchestrator.js plan 4 "technology,space"
 ```
@@ -95,6 +100,7 @@ node utils/balanced-batch-orchestrator.js plan 4 "technology,space"
 ### Example Selection Logic
 
 **Current State:**
+
 - Health: 7 articles → Priority: 🔥 High (2.5)
 - Psychology: 7 articles → Priority: 🔥 High (2.5)
 - Culture: 8 articles → Priority: ⚡ Medium (1.5)
@@ -105,10 +111,12 @@ node utils/balanced-batch-orchestrator.js plan 4 "technology,space"
 ## 🏆 Perfect Balance Target
 
 **Goal Distribution (51 articles total):**
+
 - Each category: ~8-9 articles
 - Range: ≤2 articles difference between highest and lowest
 
 **Current Progress:**
+
 ```
 Health:     7 articles ████████████▌   [PRIORITY]
 Psychology: 7 articles ████████████▌   [PRIORITY]
@@ -127,6 +135,7 @@ node utils/balanced-batch-orchestrator.js check
 ```
 
 Returns:
+
 - 🎯 EXCELLENT - Range ≤2 articles
 - ⚡ GOOD - Range ≤4 articles
 - 📝 FAIR - Range ≤6 articles
@@ -135,16 +144,19 @@ Returns:
 ## 💡 Benefits
 
 ### Content Quality
+
 - **Diverse Topics** - No more tech/science clustering
 - **Reader Variety** - Something for every audience
 - **SEO Coverage** - Broader keyword and topic coverage
 
 ### Editorial Strategy
+
 - **Balanced Growth** - Systematic content portfolio development
 - **Gap Prevention** - Never fall behind in any category
 - **Strategic Planning** - Data-driven content decisions
 
 ### Workflow Efficiency
+
 - **Automated Planning** - No manual category selection
 - **Research Focus** - Category-specific topic suggestions
 - **Quality Control** - Built-in word count and topic guidelines
