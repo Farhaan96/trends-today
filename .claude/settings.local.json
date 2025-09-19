@@ -72,7 +72,9 @@
       "Bash(do echo \"=== $file ===\")",
       "Bash(head:*)",
       "Bash(yaml-lint:*)",
-      "Bash(while IFS=':' read -r file title)"
+      "Bash(while IFS=':' read -r file title)",
+      "Bash(npx next lint:*)",
+      "Bash(tee:*)"
     ],
     "deny": [],
     "ask": []
