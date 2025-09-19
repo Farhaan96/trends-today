@@ -68,7 +68,11 @@
       "Bash(wc:*)",
       "Bash(powershell:*)",
       "Bash(do echo \"=== Checking $file ===\")",
-      "Bash(rg:*)"
+      "Bash(rg:*)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(head:*)",
+      "Bash(yaml-lint:*)",
+      "Bash(while IFS=':' read -r file title)"
     ],
     "deny": [],
     "ask": []
