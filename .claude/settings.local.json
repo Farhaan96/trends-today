@@ -74,7 +74,9 @@
       "Bash(yaml-lint:*)",
       "Bash(while IFS=':' read -r file title)",
       "Bash(npx next lint:*)",
-      "Bash(tee:*)"
+      "Bash(tee:*)",
+      "Bash(while read line)",
+      "Bash(do echo \"$line\")"
     ],
     "deny": [],
     "ask": []
