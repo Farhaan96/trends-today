@@ -57,11 +57,24 @@ const cleanedContent = TextCleanup.cleanArticleContent(originalContent);
 
 **Manual cleanup if utility unavailable:**
 
-- Replace em dashes (—) with standard dashes ( - )
+- Remove all dashes (em dashes —, en dashes –, and regular dashes -) used for emphasis or asides
+- Convert dash-separated clauses to proper sentences with periods, commas, or parentheses
 - Fix broken bold markers (\***\*text** → **text**)
 - Remove excessive asterisks
 - Add missing spaces between combined words
 - Fix spacing issues around percentages and numbers
+
+**CRITICAL: Dash Removal Priority**
+
+❌ **Remove patterns like:**
+- "The discovery - published yesterday - changes everything"
+- "Scientists found - and this is shocking - new evidence"
+- "This breakthrough - which nobody expected - revolutionizes medicine"
+
+✅ **Replace with natural alternatives:**
+- "The discovery changes everything. Published yesterday, it represents a major breakthrough."
+- "Scientists found shocking new evidence that challenges current understanding."
+- "This unexpected breakthrough revolutionizes medicine in ways nobody anticipated."
 
 #### 2.2 Validation Checks
 

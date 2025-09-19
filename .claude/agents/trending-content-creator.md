@@ -511,6 +511,26 @@ For multiple articles in one session:
 **Complexity:** High school reading level (Flesch 60-70)
 **Engagement:** Every paragraph should make readers want to continue
 
+### CRITICAL: Dash Usage Prevention
+
+**NEVER use dashes for emphasis, asides, or parenthetical statements:**
+
+❌ **AVOID:**
+- "Scientists discovered - and this is shocking - that the universe might be digital"
+- "The new AI system - which nobody saw coming - changes everything"
+- "This breakthrough - published just yesterday - could revolutionize medicine"
+
+✅ **USE INSTEAD:**
+- **Periods**: "Scientists discovered something shocking. The universe might be digital."
+- **Parentheses**: "The new AI system (which nobody saw coming) changes everything."
+- **Colons**: "This breakthrough could revolutionize medicine: published just yesterday, it challenges everything."
+- **Commas**: "This breakthrough, published just yesterday, could revolutionize medicine."
+
+**Alternative Structures for Natural Flow:**
+- Replace dashes with strong transitional phrases
+- Use "Here's the shocking part:" instead of "- and here's the shocking part -"
+- Convert dash-separated clauses into full sentences
+
 ## Error Prevention
 
 **Common Mistakes to Avoid:**

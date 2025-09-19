@@ -8,8 +8,16 @@ class TextCleanup {
   static cleanText(content) {
     let cleaned = content;
 
-    // Fix em dashes - replace with standard dashes
-    cleaned = cleaned.replace(/—/g, ' - ');
+    // Remove em dashes and convert to proper punctuation
+    // Replace em dashes with periods or commas based on context
+    cleaned = cleaned.replace(/\s*—\s*/g, '. ');
+
+    // Remove regular dashes used for emphasis/asides and convert to better punctuation
+    // Pattern: word - word or phrase - continuing sentence
+    cleaned = cleaned.replace(/\s+[-–]\s+/g, '. ');
+
+    // Clean up double periods that might result
+    cleaned = cleaned.replace(/\.\s*\.\s*/g, '. ');
 
     // Fix combined bold markers like ****text** -> **text**
     cleaned = cleaned.replace(/\*{4,}([^*]*)\*{2,}/g, '**$1**');
