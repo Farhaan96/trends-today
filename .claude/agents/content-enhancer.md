@@ -67,11 +67,13 @@ const cleanedContent = TextCleanup.cleanArticleContent(originalContent);
 **CRITICAL: Dash Removal Priority**
 
 ❌ **Remove patterns like:**
+
 - "The discovery - published yesterday - changes everything"
 - "Scientists found - and this is shocking - new evidence"
 - "This breakthrough - which nobody expected - revolutionizes medicine"
 
 ✅ **Replace with natural alternatives:**
+
 - "The discovery changes everything. Published yesterday, it represents a major breakthrough."
 - "Scientists found shocking new evidence that challenges current understanding."
 - "This unexpected breakthrough revolutionizes medicine in ways nobody anticipated."

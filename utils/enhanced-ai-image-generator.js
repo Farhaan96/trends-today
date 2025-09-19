@@ -27,7 +27,13 @@ class EnhancedAIImageGenerator {
     this.openaiKey = process.env.OPENAI_API_KEY;
 
     this.cacheDir = path.join(__dirname, '..', '.cache', 'ai-images');
-    this.outputDir = path.join(__dirname, '..', 'public', 'images', 'ai-generated');
+    this.outputDir = path.join(
+      __dirname,
+      '..',
+      'public',
+      'images',
+      'ai-generated'
+    );
 
     // Enhanced 2025 settings based on research
     this.defaultOptions = {
@@ -59,47 +65,64 @@ class EnhancedAIImageGenerator {
     // CRITICAL: Never mention "text", "words", "letters" - they increase text generation
     const professionalSpecs = {
       technology: {
-        focus: 'pristine commercial product photography showcasing advanced technology',
+        focus:
+          'pristine commercial product photography showcasing advanced technology',
         camera: 'Canon EOS R5 with 85mm f/1.4 lens, commercial studio setup',
-        lighting: 'controlled professional studio lighting, soft key light with rim lighting',
-        composition: 'clean minimalist composition, shallow depth of field, neutral background',
-        atmosphere: 'modern corporate aesthetic, high-end product presentation'
+        lighting:
+          'controlled professional studio lighting, soft key light with rim lighting',
+        composition:
+          'clean minimalist composition, shallow depth of field, neutral background',
+        atmosphere: 'modern corporate aesthetic, high-end product presentation',
       },
       science: {
         focus: 'museum-quality documentary photography of scientific research',
-        camera: 'medium format camera with macro lens, archival documentation grade',
-        lighting: 'natural diffused museum lighting, professional conservation setup',
+        camera:
+          'medium format camera with macro lens, archival documentation grade',
+        lighting:
+          'natural diffused museum lighting, professional conservation setup',
         composition: 'scholarly centered composition preserving maximum detail',
-        atmosphere: 'academic research environment, laboratory precision'
+        atmosphere: 'academic research environment, laboratory precision',
       },
       space: {
         focus: 'NASA-grade space photography, astronomical imaging excellence',
-        camera: 'professional astronomical imaging equipment, ultra-high resolution',
-        lighting: 'dramatic cosmic illumination, authentic space environment lighting',
+        camera:
+          'professional astronomical imaging equipment, ultra-high resolution',
+        lighting:
+          'dramatic cosmic illumination, authentic space environment lighting',
         composition: 'expansive cosmic composition, infinite depth perspective',
-        atmosphere: 'authentic space mission documentation aesthetic'
+        atmosphere: 'authentic space mission documentation aesthetic',
       },
       health: {
-        focus: 'clinical medical photography, precision healthcare documentation',
-        camera: 'medical imaging camera with precision optics, healthcare grade',
-        lighting: 'soft clinical lighting, medical facility illumination standards',
-        composition: 'sterile clinical environment, professional healthcare presentation',
-        atmosphere: 'trustworthy medical facility ambiance'
+        focus:
+          'clinical medical photography, precision healthcare documentation',
+        camera:
+          'medical imaging camera with precision optics, healthcare grade',
+        lighting:
+          'soft clinical lighting, medical facility illumination standards',
+        composition:
+          'sterile clinical environment, professional healthcare presentation',
+        atmosphere: 'trustworthy medical facility ambiance',
       },
       psychology: {
-        focus: 'professional psychological research photography, human-centered documentation',
-        camera: 'portrait lens 85mm f/1.4, professional research photography equipment',
+        focus:
+          'professional psychological research photography, human-centered documentation',
+        camera:
+          'portrait lens 85mm f/1.4, professional research photography equipment',
         lighting: 'soft natural lighting, psychological study atmosphere',
-        composition: 'shallow depth therapeutic environment, natural bokeh background',
-        atmosphere: 'empathetic professional therapeutic setting'
+        composition:
+          'shallow depth therapeutic environment, natural bokeh background',
+        atmosphere: 'empathetic professional therapeutic setting',
       },
       culture: {
         focus: 'documentary photojournalism, authentic cultural documentation',
-        camera: 'documentary camera 35mm lens, professional photojournalism equipment',
-        lighting: 'natural golden hour lighting, authentic environmental illumination',
+        camera:
+          'documentary camera 35mm lens, professional photojournalism equipment',
+        lighting:
+          'natural golden hour lighting, authentic environmental illumination',
         composition: 'dynamic storytelling composition, environmental context',
-        atmosphere: 'authentic cultural documentation, natural human interaction'
-      }
+        atmosphere:
+          'authentic cultural documentation, natural human interaction',
+      },
     };
 
     const spec = professionalSpecs[category] || professionalSpecs.technology;
@@ -141,7 +164,12 @@ Publication standards: serious journalism quality, scientific documentation grad
       return { hasText: false, confidence: 0.95, detectedText: '' };
     } catch (error) {
       console.error(`⚠️ OCR validation failed: ${error.message}`);
-      return { hasText: false, confidence: 0.5, detectedText: '', error: error.message };
+      return {
+        hasText: false,
+        confidence: 0.5,
+        detectedText: '',
+        error: error.message,
+      };
     }
   }
 
@@ -161,7 +189,6 @@ Publication standards: serious journalism quality, scientific documentation grad
       // Placeholder: Simulate text removal process
       console.log(`✅ Text removal completed (simulated)`);
       return { success: true, cleanedImagePath: imagePath };
-
     } catch (error) {
       console.error(`❌ Text removal failed: ${error.message}`);
       return { success: false, error: error.message };
@@ -175,13 +202,19 @@ Publication standards: serious journalism quality, scientific documentation grad
   refinePromptForRetry(originalPrompt, attemptNumber) {
     const refinements = [
       // Attempt 1: Add more specific photography terminology
-      (prompt) => prompt + ' Pure visual photography composition, wordless editorial presentation, symbol-free documentation.',
+      (prompt) =>
+        prompt +
+        ' Pure visual photography composition, wordless editorial presentation, symbol-free documentation.',
 
       // Attempt 2: Emphasize physical objects only
-      (prompt) => prompt.replace(/photography/g, 'physical object photography') + ' Tangible subject matter only, concrete visual elements, material world documentation.',
+      (prompt) =>
+        prompt.replace(/photography/g, 'physical object photography') +
+        ' Tangible subject matter only, concrete visual elements, material world documentation.',
 
       // Attempt 3: Ultra-specific professional terms
-      (prompt) => prompt + ' Commercial product photography standards, advertising industry visual requirements, symbol-free corporate presentation, pure visual communication.',
+      (prompt) =>
+        prompt +
+        ' Commercial product photography standards, advertising industry visual requirements, symbol-free corporate presentation, pure visual communication.',
     ];
 
     const refinement = refinements[attemptNumber - 1];
@@ -198,7 +231,8 @@ Publication standards: serious journalism quality, scientific documentation grad
       console.log(`🎨 Generation attempt ${attempt}/${maxRetries}`);
 
       // Refine prompt for retry attempts
-      const refinedPrompt = attempt === 1 ? prompt : this.refinePromptForRetry(prompt, attempt);
+      const refinedPrompt =
+        attempt === 1 ? prompt : this.refinePromptForRetry(prompt, attempt);
 
       try {
         // Generate image
@@ -221,14 +255,24 @@ Publication standards: serious journalism quality, scientific documentation grad
             return { ...result, tempPath, validation, attempt };
           } else {
             console.log(`❌ Text detected on attempt ${attempt}, retrying...`);
-            this.validationResults.push({ attempt, success: false, validation });
+            this.validationResults.push({
+              attempt,
+              success: false,
+              validation,
+            });
 
             // Try text removal before retry
             if (attempt < maxRetries) {
               const textRemoval = await this.removeTextFromImage(tempPath);
               if (textRemoval.success) {
                 console.log(`✅ Text removal successful, using cleaned image`);
-                return { ...result, tempPath, validation, attempt, textRemoved: true };
+                return {
+                  ...result,
+                  tempPath,
+                  validation,
+                  attempt,
+                  textRemoved: true,
+                };
               }
             }
 
@@ -238,14 +282,17 @@ Publication standards: serious journalism quality, scientific documentation grad
         } else {
           throw new Error('No base64 data returned from GPT-Image-1');
         }
-
       } catch (error) {
-        console.error(`❌ Generation attempt ${attempt} failed: ${error.message}`);
+        console.error(
+          `❌ Generation attempt ${attempt} failed: ${error.message}`
+        );
         if (attempt === maxRetries) throw error;
       }
     }
 
-    throw new Error(`Failed to generate text-free image after ${maxRetries} attempts`);
+    throw new Error(
+      `Failed to generate text-free image after ${maxRetries} attempts`
+    );
   }
 
   /**
@@ -253,7 +300,9 @@ Publication standards: serious journalism quality, scientific documentation grad
    */
   async generateFromArticleEnhanced(articleFilePath, options = {}) {
     try {
-      console.log(`🎨 Enhanced generation from: ${path.basename(articleFilePath)}`);
+      console.log(
+        `🎨 Enhanced generation from: ${path.basename(articleFilePath)}`
+      );
 
       // Read and parse article
       const content = await fs.readFile(articleFilePath, 'utf-8');
@@ -263,21 +312,27 @@ Publication standards: serious journalism quality, scientific documentation grad
       }
 
       const frontmatter = frontmatterMatch[1];
-      const title = frontmatter.match(/title:\s*['"](.*?)['"]/)?.[1] || 'Untitled';
-      const category = frontmatter.match(/category:\s*(\w+)/)?.[1] || 'technology';
+      const title =
+        frontmatter.match(/title:\s*['"](.*?)['"]/)?.[1] || 'Untitled';
+      const category =
+        frontmatter.match(/category:\s*(\w+)/)?.[1] || 'technology';
 
       // Extract semantic subject
       const subject = this.extractSemanticSubject(title, content, category);
 
       // Build text-free prompt using 2025 research
-      const prompt = this.buildTextFreePrompt(subject, category, 'professional');
+      const prompt = this.buildTextFreePrompt(
+        subject,
+        category,
+        'professional'
+      );
 
       console.log(`📝 Text-free prompt: "${prompt.substring(0, 100)}..."`);
 
       // Generate with validation
       const result = await this.generateWithValidation(prompt, {
         ...this.defaultOptions,
-        ...options
+        ...options,
       });
 
       // Create final filename and move from temp
@@ -301,20 +356,25 @@ Publication standards: serious journalism quality, scientific documentation grad
         validation: result.validation,
         attempt: result.attempt,
         textRemoved: result.textRemoved || false,
-        enhancedGeneration: true // Flag for enhanced system
+        enhancedGeneration: true, // Flag for enhanced system
       };
 
       this.generatedImages.push(imageResult);
 
       console.log(`✅ Enhanced image generated: ${filename}`);
-      console.log(`   Validation: ${result.validation.hasText ? 'Text detected but handled' : 'Text-free verified'}`);
+      console.log(
+        `   Validation: ${result.validation.hasText ? 'Text detected but handled' : 'Text-free verified'}`
+      );
       console.log(`   Attempts: ${result.attempt}/${options.maxRetries || 3}`);
 
       return imageResult;
-
     } catch (error) {
       console.error(`❌ Enhanced generation failed: ${error.message}`);
-      this.errors.push({ file: articleFilePath, error: error.message, enhanced: true });
+      this.errors.push({
+        file: articleFilePath,
+        error: error.message,
+        enhanced: true,
+      });
       throw error;
     }
   }
@@ -324,7 +384,8 @@ Publication standards: serious journalism quality, scientific documentation grad
    */
   extractSemanticSubject(title, content, category) {
     // Clean title and extract core concept
-    const cleanTitle = title.toLowerCase()
+    const cleanTitle = title
+      .toLowerCase()
       .replace(/['"""'']/g, '') // Remove quotes
       .replace(/\b(the|a|an|and|or|but|in|on|at|to|for|of|with|by)\b/g, '') // Remove articles
       .trim();
@@ -332,7 +393,10 @@ Publication standards: serious journalism quality, scientific documentation grad
     // Category-specific subject extraction
     const categoryExtractors = {
       technology: () => {
-        if (cleanTitle.includes('ai') || cleanTitle.includes('artificial intelligence')) {
+        if (
+          cleanTitle.includes('ai') ||
+          cleanTitle.includes('artificial intelligence')
+        ) {
           return 'advanced AI computing system with modern interfaces and processing units';
         }
         if (cleanTitle.includes('solar') || cleanTitle.includes('storm')) {
@@ -361,12 +425,16 @@ Publication standards: serious journalism quality, scientific documentation grad
         return 'sterile medical laboratory equipment for advanced healthcare research';
       },
 
-      science: () => 'scientific research equipment in controlled laboratory environment',
-      psychology: () => 'professional research environment for cognitive behavioral studies',
-      culture: () => 'modern digital workspace representing contemporary cultural innovation'
+      science: () =>
+        'scientific research equipment in controlled laboratory environment',
+      psychology: () =>
+        'professional research environment for cognitive behavioral studies',
+      culture: () =>
+        'modern digital workspace representing contemporary cultural innovation',
     };
 
-    const extractor = categoryExtractors[category] || categoryExtractors.technology;
+    const extractor =
+      categoryExtractors[category] || categoryExtractors.technology;
     return extractor();
   }
 
@@ -434,14 +502,17 @@ Publication standards: serious journalism quality, scientific documentation grad
    * ENHANCED: Get comprehensive usage stats including validation results
    */
   async getEnhancedUsageStats() {
-    const validationStats = this.validationResults.reduce((acc, result) => {
-      if (result.success) {
-        acc.successfulValidations++;
-      } else {
-        acc.failedValidations++;
-      }
-      return acc;
-    }, { successfulValidations: 0, failedValidations: 0 });
+    const validationStats = this.validationResults.reduce(
+      (acc, result) => {
+        if (result.success) {
+          acc.successfulValidations++;
+        } else {
+          acc.failedValidations++;
+        }
+        return acc;
+      },
+      { successfulValidations: 0, failedValidations: 0 }
+    );
 
     return {
       imagesGenerated: this.generatedImages.length,
@@ -449,13 +520,16 @@ Publication standards: serious journalism quality, scientific documentation grad
       providers: [...new Set(this.generatedImages.map((img) => img.provider))],
       totalCost: this.estimateCost(),
       validation: validationStats,
-      textFreeSuccess: validationStats.successfulValidations / (validationStats.successfulValidations + validationStats.failedValidations) || 1,
+      textFreeSuccess:
+        validationStats.successfulValidations /
+          (validationStats.successfulValidations +
+            validationStats.failedValidations) || 1,
       enhancedFeatures: {
         ocrValidation: true,
         textRemoval: true,
         progressiveRetry: true,
-        positiveFraming: true
-      }
+        positiveFraming: true,
+      },
     };
   }
 
@@ -468,7 +542,9 @@ Publication standards: serious journalism quality, scientific documentation grad
 
         // Add retry costs if multiple attempts
         if (img.attempt > 1) {
-          cost += (img.attempt - 1) * (qualityCosts[img.quality] || qualityCosts.high);
+          cost +=
+            (img.attempt - 1) *
+            (qualityCosts[img.quality] || qualityCosts.high);
         }
       }
     }
@@ -490,7 +566,9 @@ if (require.main === module) {
       case 'generate-enhanced':
         const fileFlag = args.find((arg) => arg.startsWith('--file='));
         if (!fileFlag) {
-          console.log('Usage: node enhanced-ai-image-generator.js generate-enhanced --file="path/to/article.mdx"');
+          console.log(
+            'Usage: node enhanced-ai-image-generator.js generate-enhanced --file="path/to/article.mdx"'
+          );
           return;
         }
 
@@ -504,9 +582,13 @@ if (require.main === module) {
           console.log(`   Filename: ${result.filename}`);
           console.log(`   Local path: ${result.localPath}`);
           console.log(`   Cost: $${result.cost}`);
-          console.log(`   Text-free validation: ${!result.validation.hasText ? '✅ PASSED' : '⚠️ HANDLED'}`);
+          console.log(
+            `   Text-free validation: ${!result.validation.hasText ? '✅ PASSED' : '⚠️ HANDLED'}`
+          );
           console.log(`   Attempts required: ${result.attempt}`);
-          console.log(`   Text removal applied: ${result.textRemoved ? 'Yes' : 'No'}`);
+          console.log(
+            `   Text removal applied: ${result.textRemoved ? 'Yes' : 'No'}`
+          );
         } catch (error) {
           console.error(`❌ Enhanced generation failed: ${error.message}`);
         }

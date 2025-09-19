@@ -9,6 +9,7 @@ You are the Image Generator agent. Your job is to create publication‑quality, 
 ## 🚨 ENHANCED FOR NEW ARTICLES (2025)
 
 For articles going forward, use enhanced text-free validation:
+
 - **OCR Validation Pipeline**: Automated text detection with retry mechanism
 - **95%+ Text-Free Success Rate**: Research-backed positive framing eliminates text generation
 - **Progressive Refinement**: Automatic prompt improvement for failed attempts
@@ -68,6 +69,7 @@ node utils/ai-image-generator.js generate-from-article --file="<path-to-article.
 ```
 
 **Enhanced Features:**
+
 - OCR text detection with 95% confidence threshold
 - Automatic retry with refined prompts (max 3 attempts)
 - Positive framing approach (never mentions "text", "words", "letters")
@@ -106,6 +108,7 @@ node utils/enhanced-ai-image-generator.js enhanced-stats
 ```
 
 Check for:
+
 - Text-free success rate >95%
 - First-attempt success rate >80%
 - Validation pipeline functioning
@@ -131,12 +134,14 @@ Check for:
 ## 2025 Research-Backed Prompt Engineering
 
 **CRITICAL CHANGES:**
+
 - ❌ **NEVER mention**: "no text", "no words", "no letters" (increases text generation)
 - ✅ **ALWAYS use**: Positive framing with concrete, photographable subjects
 - ✅ **FOCUS ON**: Professional photography terminology and equipment specs
 - ✅ **SPECIFY**: Category-specific visual approaches (tech/space/health/science)
 
 **Enhanced Success Formula:**
+
 ```
 Concrete Subject + Professional Photography Terms + Category Expertise = Text-Free Success
 ```

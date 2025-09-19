@@ -5,6 +5,7 @@ This document tracks the manual cleanup of all articles to remove dashes and imp
 ## Cleanup Status
 
 ### Science Articles (9 articles)
+
 - [x] **scientists-found-evidence-digital-universe.mdx** - ✅ COMPLETED: Removed 6 dash patterns, improved flow
 - [x] **water-hidden-intelligence-memory-consciousness-research.mdx** - ✅ COMPLETED: Removed 6 dash patterns, improved sentence structure
 - [x] **anunnaki-sumerian-gods-mystery.mdx** - ✅ COMPLETED: Removed 9 dash patterns including description, improved clarity
@@ -17,6 +18,7 @@ This document tracks the manual cleanup of all articles to remove dashes and imp
 - [x] **ntnu-walking-study-prevents-back-pain.mdx** - ✅ COMPLETED: Removed 2 dash patterns
 
 ### Technology Articles (11 articles)
+
 - [x] **ucla-brain-chip-paralyzed-patients-4x-faster.mdx** - ✅ CLEAN: No dashes found
 - [x] **first-of-its-kind-ai-settlement-anthropic-to-pay-authors-1-5.mdx** - ✅ COMPLETED: Removed 2 dash patterns
 - [x] **google-s-ai-mode-adds-5-new-languages-including-hindi-japane.mdx** - ✅ CLEAN: No dashes found
@@ -29,6 +31,7 @@ This document tracks the manual cleanup of all articles to remove dashes and imp
 - [x] **humanoid-robots-chatgpt-moment-figure-02-bmw-nvidia-breakthrough.mdx** - ✅ COMPLETED: Removed 4 dash patterns, improved readability
 
 ### Space Articles (9 articles)
+
 - [x] **glass-rain-planet-sideways-5400-mph.mdx** - ✅ CLEAN: No dashes found
 - [x] **parker-solar-probe-christmas-eve-historic-flyby.mdx** - ✅ CLEAN: No dashes found
 - [x] **nasa-mars-emergency-discovery-biosignature.mdx** - ✅ CLEAN: No dashes found
@@ -40,6 +43,7 @@ This document tracks the manual cleanup of all articles to remove dashes and imp
 - [x] **mars-sapphire-canyon-biosignature-discovery-perseverance.mdx** - ✅ CLEAN: No dashes found
 
 ### Psychology Articles (5 articles)
+
 - [ ] **cognitive-disengagement-multitasking-brain-shutdown.mdx** - Check for dashes
 - [ ] **psychedelic-therapy-depression-breakthrough.mdx** - Check for dashes
 - [ ] **revolutionary-blood-test-depression-biomarkers.mdx** - Check for dashes
@@ -49,6 +53,7 @@ This document tracks the manual cleanup of all articles to remove dashes and imp
 - [x] **single-dose-lsd-anxiety-treatment-breakthrough-2025.mdx** - ✅ COMPLETED: Removed 6 dash patterns, converted to natural punctuation
 
 ### Health Articles (6 articles)
+
 - [ ] **ai-detects-hidden-consciousness-coma-patients.mdx** - Check for dashes
 - [ ] **ai-liquid-biopsy-cancer-detection-breakthrough.mdx** - Check for dashes
 - [ ] **mental-health-apps-show-clinical-results.mdx** - Check for dashes
@@ -58,6 +63,7 @@ This document tracks the manual cleanup of all articles to remove dashes and imp
 - [ ] **lenacapavir-hiv-prevention-breakthrough-2025.mdx** - Check for dashes
 
 ### Culture Articles (9 articles)
+
 - [ ] **ai-avatars-revolutionizing-social-media.mdx** - Check for dashes
 - [ ] **viral-fame-toxic-death-mass-social-media.mdx** - Check for dashes
 - [ ] **sacred-rudraksha-beads-science-meets-spirituality.mdx** - Check for dashes
@@ -70,11 +76,13 @@ This document tracks the manual cleanup of all articles to remove dashes and imp
 ## Cleanup Process for Each Article
 
 ### Title Cleanup Rules:
+
 1. Remove all dashes used for separation or emphasis
 2. Convert to natural, flowing titles without dashes
 3. Maintain keyword optimization and impact
 
 ### Content Cleanup Rules:
+
 1. Replace all dashes used for emphasis with periods, commas, or parentheses
 2. Convert dash-separated clauses into proper sentences
 3. Ensure natural reading flow
@@ -82,6 +90,7 @@ This document tracks the manual cleanup of all articles to remove dashes and imp
 5. Remove AI-generated patterns
 
 ### Quality Verification:
+
 - [ ] No dashes remain in title or content (except in compound words like "AI-powered")
 - [ ] Content reads naturally and professionally
 - [ ] Meaning and impact preserved
@@ -89,6 +98,7 @@ This document tracks the manual cleanup of all articles to remove dashes and imp
 - [ ] Professional tone achieved
 
 ## Progress Summary
+
 - **Total Articles**: 48
 - **Completed**: 39
 - **With Dashes Fixed**: 15 articles (64 total dashes removed)
@@ -96,6 +106,7 @@ This document tracks the manual cleanup of all articles to remove dashes and imp
 - **Remaining**: 9 articles
 
 ## Notes
+
 - Focus on high-impact articles first (recent posts with known dash issues)
 - Verify no regression in quality or SEO impact
 - Test sample articles before batch processing
