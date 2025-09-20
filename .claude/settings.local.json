@@ -79,7 +79,21 @@
       "Bash(do echo \"$line\")",
       "Bash(if [ $? -eq 0 ])",
       "Bash(then echo \"CRITICAL ERROR: Found .md files that must be .mdx\")",
-      "Bash(fi)"
+      "Bash(fi)",
+      "Bash(do if ! grep -q \"^image:\" \"$file\")",
+      "Bash(then echo \"NO IMAGE FIELD: $file\")",
+      "Bash(do echo \"FILE: $file\")",
+      "Bash(do if [ -f \"public/images/ai-generated/$img\" ])",
+      "Bash(then echo \"✅ EXISTS: $img\")",
+      "Bash(else echo \"❌ MISSING: $img\")",
+      "Bash(__NEW_LINE__ echo \"2. /technology/ai-agents-workplace-productivity-2025\")",
+      "Bash(__NEW_LINE__ echo \"3. /health/mental-health-apps-show-clinical-results\")",
+      "Bash(__NEW_LINE__ echo \"4. /psychology/the-psychology-behind-why-we-procrastinate-even-when-we-know\")",
+      "Bash(__NEW_LINE__ echo \"2. /science/scientists-create-materials-rewrite-reality-4d-metamaterials\")",
+      "Bash(__NEW_LINE__ echo \"3. /science/mit-impossible-2d-material-stronger-than-steel\")",
+      "Bash(__NEW_LINE__ echo \"4. /science/room-temperature-superconductor-confirmed\")",
+      "Bash(__NEW_LINE__ echo \"2. Materials physics article image:\")",
+      "Bash(__NEW_LINE__ echo \"\")"
     ],
     "deny": [],
     "ask": []
