@@ -207,6 +207,13 @@ Generate a category-appropriate length article with this proven viral + ranking 
 - **Space:** 600-800 words (complex phenomena explanations)
 - **Culture/Quick News:** 300-500 words (rapid consumption)
 
+**CRITICAL FORMATTING REQUIREMENTS:**
+
+- **Strategic Bolding LIMIT**: Maximum 12-18 bold phrases per article (key statistics, expert names first mention, major discoveries, institutions first mention)
+- **NEVER use horizontal rules (---)** for section breaks - use natural paragraph breaks instead
+- **NEVER use em-dashes (—) or en-dashes (–)** for emphasis - convert to periods, commas, or parentheses
+- **NO complex data tables or charts** - use narrative explanations with key numbers bolded
+
 **Article Structure (adapt sections to target length):**
 
 **1. Psychological Hook + Featured Snippet (40-55 words + 40-60 words)**
@@ -406,7 +413,7 @@ seo:
 - [ ] **Voice Search Ready**: Answers conversational questions
 - [ ] **Social Sharing Triggers**: Content makes readers want to share
 - [ ] **Internal Link Opportunities**: Phrases that could link to other content identified
-- [ ] **Strategic Bolding**: Use 12-18 strategic bold phrases for optimal engagement (breakthrough moments, key measurements, shocking discoveries, scientific terms, transition phrases)
+- [ ] **Formatting Standards**: CRITICAL requirements applied (12-18 bold limit, no horizontal rules, no em/en-dashes)
 - [ ] **Data Presentation**: NO complex tables, charts, or overwhelming numerical breakdowns - use narrative with key numbers
 
 #### Step 13: File Naming & Organization

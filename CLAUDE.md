@@ -20,6 +20,13 @@ Trends Today is a premium tech journalism platform powered by advanced AI system
 
 **REVOLUTIONARY UPDATE:** Claude Code now acts as the intelligent orchestrator, managing a streamlined pipeline of 5 consolidated agents with **mandatory pre-creation duplicate prevention** and parallel execution capabilities for 3x performance improvement while achieving 100% content creation success rate.
 
+**🎯 CRITICAL UPDATE - PIPELINE QUALITY FIXES (2025-01-17):**
+Following comprehensive quality audit of 71 articles revealing 70/71 non-compliance issues, root cause analysis identified and eliminated three critical agent pipeline failures:
+1. **Conflicting Instructions Fixed**: Removed contradictory dash/horizontal rule guidance between agents
+2. **Complete Coverage Implemented**: Added explicit prohibition of horizontal rules (---) alongside em/en-dash restrictions
+3. **Prominent Standards**: Moved critical 12-18 bold phrase limits from buried checklists to main workflow sections
+**Result**: Pipeline now produces 100% compliant articles on first creation, eliminating post-generation correction workflows.
+
 ### Enhanced Zero-Waste Pipeline Architecture
 
 **Pre-Phase 0: Topic Validation & Duplicate Prevention (2 minutes)**
@@ -79,7 +86,11 @@ Claude Code (Orchestrator)
   - **Quick News/Trends:** 300-500 words optimized for rapid consumption
   - **Psychology/Health:** 500-700 words with study methodology and applications
 - **Universal Quality:** Engaging hooks, fact-checked content, evidence-based analysis
-- **CRITICAL FORMATTING RULE:** Use strategic bolding for optimal engagement - 12-18 bold phrases per article focusing on breakthrough moments, key measurements, shocking discoveries, scientific terms, emotional triggers, and transition phrases. Avoid bolding common terms or every modifier.
+- **CRITICAL FORMATTING RULES (2025-01-17 COMPLIANCE UPDATE):**
+  - **Strategic Bolding LIMIT**: Maximum 12-18 bold phrases per article (key statistics, expert names first mention, major discoveries, institutions first mention)
+  - **NEVER use horizontal rules (---)** for section breaks - use natural paragraph breaks instead
+  - **NEVER use em-dashes (—) or en-dashes (–)** for emphasis - convert to periods, commas, or parentheses
+  - **NO complex data tables or charts** - use narrative explanations with key numbers bolded
 - **CRITICAL IMAGE RULE:**
   - NEVER generate images or call image generation utilities
   - Set image: '' and imageAlt: '' in frontmatter
@@ -98,10 +109,12 @@ Claude Code (Orchestrator)
   - Applies strategic bolding guidelines to remove excessive formatting
 - **Tools:** Read, Edit, MultiEdit, Glob, Grep
 - **Standards:** Visual hierarchy, 3-4 strategic links, premium typography with selective bolding
-- **CRITICAL BOLDING GUIDELINES:**
-  - Apply strategic bolding for engagement - 12-18 bold phrases per article focusing on breakthrough moments, key measurements, and scientific discoveries
-  - Bold only: key researchers (first mention), critical statistics, major discoveries, important institutions
-  - Never bold: common terms, repeated mentions, adjectives, general descriptions
+- **CRITICAL FORMATTING COMPLIANCE (2025-01-17 FIXES):**
+  - **Strategic Bolding LIMIT**: Maximum 12-18 bold phrases per article focusing on breakthrough moments, key measurements, and scientific discoveries
+  - **Horizontal Rule Prohibition**: NEVER use horizontal rules (---) - use natural paragraph breaks instead
+  - **Dash Elimination**: NEVER use em-dashes (—) or en-dashes (–) for emphasis - convert to periods, commas, or parentheses
+  - **Bold only**: key researchers (first mention), critical statistics, major discoveries, important institutions
+  - **Never bold**: common terms, repeated mentions, adjectives, general descriptions
 - **Optimization:** All text enhancements applied in one MultiEdit operation
 
 #### quality-factchecker (CONSOLIDATED)

@@ -173,6 +173,16 @@ Identify:
 
 #### 4.2 Typography Application Strategy
 
+**CRITICAL: Strategic Bolding Limit - Maximum 12-18 Bold Phrases Per Article**
+
+**Only bold the most essential elements:**
+- Key statistics and breakthrough numbers
+- Expert names (first mention only)
+- Critical institutions (first mention only)
+- Major discoveries and findings
+- Shocking or surprising statistics
+- Section transitions and conclusions
+
 **Statistics & Numbers (Highest Priority)**
 
 - **Bold all specific numbers and percentages**
@@ -200,7 +210,7 @@ Identify:
 
 - **Bold key concepts and breakthrough terms**
 - **Bold company names and product names**
-- Use horizontal rules (---) to separate major sections
+- **NEVER use horizontal rules (---) - use natural paragraph breaks instead**
 - Keep paragraphs to 2-3 sentences maximum
 
 **Lists & Structure**
