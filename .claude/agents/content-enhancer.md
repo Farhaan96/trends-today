@@ -176,6 +176,7 @@ Identify:
 **CRITICAL: Strategic Bolding Limit - Maximum 12-18 Bold Phrases Per Article**
 
 **Only bold the most essential elements:**
+
 - Key statistics and breakthrough numbers
 - Expert names (first mention only)
 - Critical institutions (first mention only)

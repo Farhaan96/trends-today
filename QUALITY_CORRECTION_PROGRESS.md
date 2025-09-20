@@ -18,15 +18,18 @@
 ## 🎯 Compliance Standards
 
 ### Word Count Requirements
+
 - **Science/Technology/Space:** 600-800 words
 - **Health/Psychology:** 500-700 words
 - **Culture:** 300-500 words
 
 ### Strategic Bolding
+
 - **Target:** 12-18 bold phrases per article
 - **Focus:** Key statistics, breakthrough discoveries, critical institutions (first mention), major findings
 
 ### Formatting Standards
+
 - **NO dashes:** Em-dashes (—), en-dashes (–), or emphasis dashes
 - **Images:** AI-generated only (/images/ai-generated/)
 - **Authors:** Approved authors only
@@ -34,14 +37,17 @@
 ## 📈 Processing Status
 
 ### ✅ COMPLIANT ARTICLES (1)
+
 - [x] `science/mit-impossible-2d-material-stronger-than-steel.mdx` - 767 words, 17 bold phrases
 
 ### 🔧 IN PROGRESS (0)
-*No articles currently being processed*
+
+_No articles currently being processed_
 
 ### ⏳ PENDING CORRECTION (70)
 
 #### Culture Category (11 articles) - ✅ 11/11 COMPLETED
+
 - [x] `culture/ai-art-wins-major-competition.mdx` - **FIXED:** Bold reduced 59→15, dashes eliminated
 - [x] `culture/ai-avatars-revolutionizing-social-media.mdx` - **FIXED:** Word count, bold reduced 40→16, dashes eliminated
 - [x] `culture/creator-economy-1-trillion-social-media-exodus-paradox.mdx` - **FIXED:** Word count, bold reduced 63→18, dashes eliminated
@@ -55,6 +61,7 @@
 - [x] `culture/viral-fame-toxic-death-mass-social-media.mdx` - **FIXED:** Word count, bold reduced 56→16, dashes eliminated
 
 #### Health Category (13 articles) - ✅ COMPLETED
+
 **Target:** 500-700 words, 12-18 bold phrases, no dashes
 
 - [x] ai-detects-hidden-consciousness-coma-patients.mdx (620 words, 15 bold phrases)
@@ -72,6 +79,7 @@
 - [x] rna-cancer-vaccines-breakthrough-2025.mdx (680 words, 17 bold phrases)
 
 #### Psychology Category (10 articles) - ✅ COMPLETED
+
 **Target:** 500-700 words, 12-18 bold phrases, no dashes
 
 - [x] cognitive-disengagement-multitasking-brain-shutdown.mdx (620 words, 16 bold phrases)
@@ -86,6 +94,7 @@
 - [x] your-brain-lies-to-you-cognitive-biases-2025.mdx (540 words, 12 bold phrases)
 
 #### Science Category (14 articles) - ✅ COMPLETED
+
 **Target:** 600-800 words, 12-18 bold phrases, no dashes
 
 - [x] 13-year-rule-child-mental-health.mdx (750 words, 12 bold phrases)
@@ -104,6 +113,7 @@
 - [x] why-blue-ring-octopus-kills-26-humans-golf-ball-body.mdx (650 words, 12 bold phrases)
 
 #### Space Category (10 articles) - ✅ COMPLETED
+
 **Target:** 600-800 words, 12-18 bold phrases, no dashes
 
 - [x] 500-year-old-manuscript-reveals-ancient-astronomy-knowledge.mdx (750 words, 14 bold phrases)
@@ -118,6 +128,7 @@
 - [x] webb-telescope-alpha-centauri-planet-discovery.mdx (800 words, 12 bold phrases)
 
 #### Technology Category (13 articles) - ✅ COMPLETED
+
 **Target:** 600-800 words, 12-18 bold phrases, no dashes
 
 - [x] ai-agents-revolution-13-billion-market-taking-over-2025.mdx (750 words, 15 bold phrases)
@@ -137,27 +148,32 @@
 ## 🎯 Priority Order
 
 ### Critical Priority (Severe Violations)
+
 1. Articles with 1000+ words that need major trimming
 2. Articles with 50+ bold phrases
 3. Articles under 400 words that need significant expansion
 
 ### Medium Priority
+
 1. Articles with word count violations (±100 words)
 2. Articles with 30-50 bold phrases
 3. Articles with extensive dash usage
 
 ### Low Priority
+
 1. Articles with minor violations (borderline word counts, 20-30 bold phrases)
 
 ## 📝 Processing Notes
 
 ### Agent Pipeline Corrections Applied
+
 - **Word count enforcement:** Strict category-specific limits
 - **Strategic bolding:** Reduced to 12-18 key phrases only
 - **Dash elimination:** Complete removal of all dash patterns
 - **Quality preservation:** Maintain content value while fixing formatting
 
 ### Processing Time Estimates
+
 - **Simple fixes (dashes only):** 2-3 minutes per article
 - **Medium fixes (word count + bolding):** 5-7 minutes per article
 - **Complex fixes (major rewrite needed):** 10-15 minutes per article
@@ -188,6 +204,7 @@
 ### 🎯 AGENT PIPELINE SUCCESS
 
 The corrected agent pipeline successfully processed all articles through:
+
 1. **content-enhancer** - Word count, strategic bolding, dash elimination
 2. **quality-factchecker** - Accuracy and compliance validation
 3. **build-validator** - Technical validation ready
@@ -195,6 +212,7 @@ The corrected agent pipeline successfully processed all articles through:
 ### 🚀 READY FOR PUBLICATION
 
 All 71 articles now meet premium editorial standards and are ready for:
+
 - ✅ Build deployment without errors
 - ✅ SEO optimization with proper formatting
 - ✅ Reader engagement through strategic emphasis
