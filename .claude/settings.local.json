@@ -76,7 +76,10 @@
       "Bash(npx next lint:*)",
       "Bash(tee:*)",
       "Bash(while read line)",
-      "Bash(do echo \"$line\")"
+      "Bash(do echo \"$line\")",
+      "Bash(if [ $? -eq 0 ])",
+      "Bash(then echo \"CRITICAL ERROR: Found .md files that must be .mdx\")",
+      "Bash(fi)"
     ],
     "deny": [],
     "ask": []
