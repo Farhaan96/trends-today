@@ -9,6 +9,96 @@
         "mood": "confused, overwhelmed by information chaos",
         "palette": "cool blues with subtle warning reds"
       }
+    },
+    {
+      "match": ["brain.*organoid", "lab.*grown.*brain", "organoid.*intelligence"],
+      "plan": {
+        "subject": "close-up of lab-grown neural tissue in clear petri dishes showing brain-like structures",
+        "environment": "sterile neuroscience laboratory with precision equipment and soft clinical lighting",
+        "action": "detailed view of organoid cultures with subtle neural network patterns visible",
+        "mood": "scientific precision with ethical contemplation",
+        "palette": "clinical whites with soft purple neural accents"
+      }
+    },
+    {
+      "match": ["ai.*avatar", "virtual.*influencer", "digital.*persona"],
+      "plan": {
+        "subject": "holographic AI interface displaying realistic virtual personas on multiple screens",
+        "environment": "futuristic content creation studio with ambient LED lighting",
+        "action": "AI avatar generation process with floating digital elements and interface mockups",
+        "mood": "innovative, cutting-edge technology meets creativity",
+        "palette": "vibrant blues and purples with holographic highlights"
+      }
+    },
+    {
+      "match": ["quantum.*batter", "instant.*charg", "quantum.*energy"],
+      "plan": {
+        "subject": "advanced quantum battery cells with visible energy flow patterns and crystalline structures",
+        "environment": "high-tech energy research laboratory with specialized equipment",
+        "action": "close-up of quantum energy storage with subtle electromagnetic field visualization",
+        "mood": "revolutionary energy breakthrough",
+        "palette": "electric blues with bright energy accents"
+      }
+    },
+    {
+      "match": ["tree.*stone", "fig.*calcium", "living.*mineral"],
+      "plan": {
+        "subject": "cross-section of Kenyan fig tree trunk showing white calcium carbonate deposits within dark wood grain",
+        "environment": "natural forest setting with scientific documentation lighting",
+        "action": "detailed macro photography revealing the impossible biological phenomenon",
+        "mood": "wonder at nature defying scientific understanding",
+        "palette": "natural earth tones with striking white mineral contrasts"
+      }
+    },
+    {
+      "match": ["creator.*economy", "creator.*burnout", "social.*media.*exodus"],
+      "plan": {
+        "subject": "modern content creator workspace showing both creative tools and wellness elements",
+        "environment": "balanced home studio with natural lighting and organized but not cluttered setup",
+        "action": "thoughtful arrangement suggesting sustainable creative practice",
+        "mood": "hopeful, balanced approach to digital creativity",
+        "palette": "warm naturals with soft technological accents"
+      }
+    },
+    {
+      "match": ["blood.*test.*cancer", "ai.*diagnos", "liquid.*biopsy"],
+      "plan": {
+        "subject": "precision medical analysis setup with blood samples and AI diagnostic equipment",
+        "environment": "advanced medical laboratory with state-of-the-art diagnostic technology",
+        "action": "AI-powered analysis of biological samples with subtle data visualization",
+        "mood": "precise, life-saving medical innovation",
+        "palette": "clean medical whites with subtle diagnostic blue accents"
+      }
+    },
+    {
+      "match": ["parker.*probe", "solar.*corona", "spacecraft.*sun"],
+      "plan": {
+        "subject": "NASA Parker Solar Probe spacecraft approaching the sun's corona with heat shield visible",
+        "environment": "space environment with intense solar radiation and cosmic backdrop",
+        "action": "dramatic approach to solar corona with protective technologies engaged",
+        "mood": "epic space exploration pushing technological limits",
+        "palette": "intense oranges and yellows with dark space contrasts"
+      }
+    },
+    {
+      "match": ["materials.*defy.*physics", "impossible.*material", "4d.*metamaterial"],
+      "plan": {
+        "subject": "crystalline material structures that appear to bend or manipulate space-time",
+        "environment": "advanced materials science laboratory with precision measurement equipment",
+        "action": "close-up documentation of materials exhibiting impossible properties",
+        "mood": "mind-bending scientific breakthrough",
+        "palette": "metallic silvers with reality-bending prismatic effects"
+      }
+    },
+    {
+      "match": ["cognitive.*disengagement", "brain.*shutdown", "multitask.*overload"],
+      "plan": {
+        "subject": "abstract neural network visualization showing cognitive switching patterns from complex to simplified states",
+        "environment": "research psychology laboratory with brain monitoring equipment",
+        "action": "visualization of brain protective mechanisms during cognitive overload",
+        "mood": "scientific understanding of mind's protective systems",
+        "palette": "soft neurological blues transitioning to calming simplified tones"
+      }
     }
   ]
 }

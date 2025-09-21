@@ -107,7 +107,7 @@ class AIImageGenerator {
     return [...new Set(stats)].slice(0, 3); // Top 3 unique stats
   }
 
-  // Build a visual plan (subject/environment/action/mood/palette) from content
+  // Build a visual plan prioritizing content-specific details over category templates
   buildVisualPlan(articleTitle, articleContent) {
     const text = `${articleTitle}\n${articleContent}`.toLowerCase();
     const topics = this.extractMainTopics(articleContent).map((t) =>
@@ -116,7 +116,7 @@ class AIImageGenerator {
 
     const hasAny = (arr) => arr.some((w) => text.includes(w));
 
-    // 1) Custom editor-defined plans (config/image-visual-plans.json)
+    // 1) Custom editor-defined plans (config/image-visual-plans.json) - HIGHEST PRIORITY
     try {
       const custom = this.loadCustomPlans();
       if (custom && Array.isArray(custom.patterns)) {
@@ -129,14 +129,219 @@ class AIImageGenerator {
           if (matched && entry.plan) {
             const { subject, environment, action, mood, palette } = entry.plan;
             if (subject && environment && action && mood && palette) {
+              console.log(`🎯 Using custom visual plan for: ${entry.match[0]}`);
               return entry.plan;
             }
           }
         }
       }
     } catch (_) {
-      // ignore config errors and continue to heuristics
+      // ignore config errors and continue to content-specific extraction
     }
+
+    // 2) CONTENT-SPECIFIC EXTRACTION - Extract visual elements directly from article content
+    const contentSpecificPlan = this.extractContentSpecificVisuals(articleTitle, articleContent, text, topics);
+    if (contentSpecificPlan) {
+      console.log(`🎯 Generated content-specific visual plan: ${contentSpecificPlan.subject.substring(0, 50)}...`);
+      return contentSpecificPlan;
+    }
+
+    // 3) FALLBACK TO CATEGORY TEMPLATES ONLY IF CONTENT-SPECIFIC FAILS
+    console.log(`⚠️ Falling back to category templates - content extraction failed`);
+    return this.buildCategoryFallbackPlan(text, topics);
+  }
+
+  // Extract visual elements directly from article content
+  extractContentSpecificVisuals(articleTitle, articleContent, text, topics) {
+    // Extract specific visual elements mentioned in the article
+    const visualElements = this.findVisualElements(text);
+    const specificNumbers = this.extractSpecificNumbers(text);
+    const uniqueDescriptors = this.extractUniqueDescriptors(articleTitle, text);
+    const realWorldContext = this.extractRealWorldContext(text);
+
+    // Only create content-specific plan if we found substantial unique elements
+    if (visualElements.length > 0 || specificNumbers.length > 0 || uniqueDescriptors.length > 0) {
+      const subject = this.buildSpecificSubject(articleTitle, visualElements, specificNumbers, uniqueDescriptors);
+      const environment = realWorldContext || this.inferEnvironmentFromContent(text);
+      const action = this.inferActionFromContent(text, visualElements);
+      const mood = this.inferMoodFromContent(text);
+      const palette = this.inferPaletteFromContent(text, mood);
+
+      return {
+        subject,
+        environment,
+        action,
+        mood,
+        palette
+      };
+    }
+
+    return null;
+  }
+
+  // Find specific visual elements mentioned in the article text
+  findVisualElements(text) {
+    const visualKeywords = [
+      // Scientific/Medical visuals
+      'microscopic', 'cross-section', 'petri dish', 'laboratory vial', 'blood sample',
+      'brain tissue', 'neural network', 'organoids', 'cell culture', 'specimen',
+      'crystal structure', 'molecular', 'protein structure', 'dna strand',
+
+      // Technology visuals
+      'interface', 'screen', 'display', 'holographic', 'avatar', 'digital persona',
+      'smartphone', 'tablet', 'sensor', 'chip', 'circuit board', 'robotic',
+      'satellite', 'probe', 'spacecraft', 'solar panel',
+
+      // Natural/Environmental visuals
+      'tree trunk', 'bark', 'leaves', 'forest', 'coral reef', 'ocean',
+      'mountain', 'canyon', 'rock formation', 'mineral deposit',
+
+      // Human-centered visuals
+      'workspace', 'desk setup', 'studio', 'office', 'clinical setting',
+      'therapy room', 'classroom', 'laboratory bench'
+    ];
+
+    const found = [];
+    for (const keyword of visualKeywords) {
+      if (text.includes(keyword)) {
+        found.push(keyword);
+      }
+    }
+    return found.slice(0, 3); // Top 3 most relevant
+  }
+
+  // Extract specific numbers and measurements that could be visualized
+  extractSpecificNumbers(text) {
+    const numberPatterns = [
+      /\b(\d+)\s*(percent|%|times|x|fold)\b/gi,
+      /\b(\d+)\s*(billion|million|thousand)\b/gi,
+      /\b(\d+)\s*(years?|months?|days?|hours?)\b/gi,
+      /\b(\d+)\s*(mph|km\/h|degrees?|celsius|fahrenheit)\b/gi
+    ];
+
+    const found = [];
+    for (const pattern of numberPatterns) {
+      const matches = text.match(pattern);
+      if (matches) {
+        found.push(...matches.slice(0, 2));
+      }
+    }
+    return [...new Set(found)].slice(0, 3);
+  }
+
+  // Extract unique descriptors specific to this article
+  extractUniqueDescriptors(title, text) {
+    const titleWords = title.toLowerCase().split(/\s+/);
+    const uniqueWords = [];
+
+    // Find distinctive words from title that appear in content
+    for (const word of titleWords) {
+      if (word.length > 4 && text.includes(word) && !this.isCommonWord(word)) {
+        uniqueWords.push(word);
+      }
+    }
+
+    // Add distinctive phrases from content
+    const phrases = text.match(/"[^"]{10,50}"/g) || [];
+    for (const phrase of phrases.slice(0, 2)) {
+      uniqueWords.push(phrase.replace(/"/g, ''));
+    }
+
+    return uniqueWords.slice(0, 3);
+  }
+
+  isCommonWord(word) {
+    const commonWords = [
+      'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with',
+      'by', 'from', 'this', 'that', 'these', 'those', 'how', 'what', 'when',
+      'where', 'why', 'who', 'can', 'will', 'could', 'would', 'should',
+      'new', 'old', 'big', 'small', 'good', 'bad', 'first', 'last'
+    ];
+    return commonWords.includes(word.toLowerCase());
+  }
+
+  // Extract real-world context from article
+  extractRealWorldContext(text) {
+    const contexts = [
+      { pattern: /laboratory|lab|research|clinical|medical/gi, environment: 'professional research laboratory with controlled lighting' },
+      { pattern: /space|nasa|mission|probe|satellite/gi, environment: 'space mission control or cosmic environment' },
+      { pattern: /forest|tree|nature|wildlife|outdoor/gi, environment: 'natural outdoor environment with organic lighting' },
+      { pattern: /studio|creator|content|social media/gi, environment: 'modern content creation studio' },
+      { pattern: /hospital|clinic|patient|treatment/gi, environment: 'sterile medical facility' },
+      { pattern: /office|workplace|business|corporate/gi, environment: 'professional business environment' }
+    ];
+
+    for (const context of contexts) {
+      if (context.pattern.test(text)) {
+        return context.environment;
+      }
+    }
+    return null;
+  }
+
+  // Build subject description from specific elements found
+  buildSpecificSubject(title, visualElements, specificNumbers, uniqueDescriptors) {
+    let subject = '';
+
+    // Start with the most specific visual element or unique descriptor
+    if (visualElements.length > 0) {
+      subject = visualElements[0];
+    } else if (uniqueDescriptors.length > 0) {
+      subject = uniqueDescriptors[0];
+    } else {
+      // Extract key noun from title
+      const titleWords = title.split(/\s+/);
+      const keyNoun = titleWords.find(word => word.length > 4) || titleWords[0];
+      subject = keyNoun.toLowerCase();
+    }
+
+    // Add specific details
+    if (specificNumbers.length > 0) {
+      subject += ` showing ${specificNumbers[0]} scale`;
+    }
+
+    if (visualElements.length > 1) {
+      subject += ` with ${visualElements[1]} detail`;
+    }
+
+    return `detailed view of ${subject} in professional editorial photography style`;
+  }
+
+  inferActionFromContent(text, visualElements) {
+    if (visualElements.some(el => el.includes('microscopic') || el.includes('detail'))) {
+      return 'extreme close-up capturing intricate detail and texture';
+    }
+    if (text.includes('breakthrough') || text.includes('discovery')) {
+      return 'dramatic reveal composition showcasing the innovation';
+    }
+    if (text.includes('comparison') || text.includes('before') || text.includes('after')) {
+      return 'side-by-side comparison or transformation sequence';
+    }
+    return 'clear focal presentation with professional composition';
+  }
+
+  inferMoodFromContent(text) {
+    if (text.includes('breakthrough') || text.includes('revolutionary')) return 'groundbreaking, innovative';
+    if (text.includes('crisis') || text.includes('problem') || text.includes('urgent')) return 'serious, urgent';
+    if (text.includes('future') || text.includes('cutting-edge')) return 'futuristic, forward-thinking';
+    if (text.includes('natural') || text.includes('organic')) return 'serene, natural';
+    if (text.includes('clinical') || text.includes('medical')) return 'precise, clinical';
+    return 'professional, editorial';
+  }
+
+  inferPaletteFromContent(text, mood) {
+    if (mood.includes('futuristic')) return 'cool blues and purples with technological accents';
+    if (mood.includes('natural')) return 'earth tones with natural lighting';
+    if (mood.includes('clinical')) return 'clean whites and soft blues';
+    if (mood.includes('urgent')) return 'dramatic contrast with warm highlights';
+    return 'neutral professional tones with natural color balance';
+  }
+
+  // Category templates as last resort fallback only
+  buildCategoryFallbackPlan(text, topics) {
+    const hasAny = (arr) => arr.some((w) => text.includes(w));
+
+    console.log(`📋 Using category template fallback`);
 
     // Keyword clusters for common editorial concepts
     const K = {
@@ -516,6 +721,54 @@ class AIImageGenerator {
     return this._customPlans;
   }
 
+  // Build AI-enhanced prompt using semantic analysis results
+  buildAIEnhancedPrompt(aiVisualConcept) {
+    const {
+      coreDiscovery,
+      visualSubject,
+      specificDetails,
+      visualContext,
+      uniqueAngle,
+      photographyStyle,
+      emotionalTone,
+      keyElements
+    } = aiVisualConcept;
+
+    // Professional photography base
+    const cameraSpecs = 'shot on Canon EOS R5 with 85mm f/1.4 lens, ISO 100';
+    const technicalSpecs = 'hyper-realistic, ultra-detailed, shallow depth of field, professional editorial lighting';
+    const qualitySpecs = '8K resolution, photographic quality, volumetric lighting, sharp focus, bokeh background';
+    const styleSpecs = 'National Geographic style, HDR, photorealistic documentary photography';
+
+    // Build subject description with specific details
+    let subjectDescription = visualSubject;
+    if (specificDetails) {
+      subjectDescription += `, ${specificDetails}`;
+    }
+    if (keyElements && keyElements.length > 0) {
+      subjectDescription += `, featuring ${keyElements.slice(0, 2).join(' and ')}`;
+    }
+
+    // Build environment with unique angle
+    let environmentDescription = visualContext;
+    if (uniqueAngle) {
+      environmentDescription += `, ${uniqueAngle}`;
+    }
+
+    // Combine into comprehensive prompt
+    const prompt = [
+      `Professional editorial photograph: ${subjectDescription}`,
+      `Environment: ${environmentDescription}`,
+      `Photography style: ${photographyStyle}, ${styleSpecs}`,
+      `Technical specs: ${cameraSpecs}, ${technicalSpecs}`,
+      `Mood: ${emotionalTone}, ${qualitySpecs}`,
+      `Focus: ${coreDiscovery} visualization with documentary precision`,
+      'Constraints: no text, no logos, no watermarks, no readable characters'
+    ].join('. ') + '.';
+
+    return prompt;
+  }
+
   extractTechnologies(content, category = 'technology') {
     const techTermsByCategory = {
       technology: [
@@ -710,61 +963,115 @@ class AIImageGenerator {
     return mood;
   }
 
-  // BREAKTHROUGH: AI Semantic Analysis for Truly Dynamic Image Generation
+  // ENHANCED: AI Semantic Analysis for Truly Dynamic Image Generation
   async generateAIVisualConcept(articleTitle, articleContent) {
     if (!this.openaiKey || this.openaiKey === 'sk-your-api-key-here') {
       console.log('⚠️  No OpenAI key - falling back to template system');
       return null;
     }
 
-    try {
-      // Use OpenAI to semantically understand the content
-      if (!this._openai) {
-        this._openai = new OpenAI({ apiKey: this.openaiKey });
-      }
+    // Try multiple times with different approaches for better content-specific results
+    const attempts = [
+      { temperature: 0.7, approach: 'creative' },
+      { temperature: 0.5, approach: 'balanced' },
+      { temperature: 0.3, approach: 'precise' }
+    ];
 
-      const analysisPrompt = `Analyze this article and generate a specific visual concept for a hyper-realistic editorial photograph.
+    for (const attempt of attempts) {
+      try {
+        console.log(`🧠 Attempting AI visual analysis (${attempt.approach} approach)...`);
 
-ARTICLE: "${articleTitle}"
-CONTENT: ${articleContent.substring(0, 2000)}
+        if (!this._openai) {
+          this._openai = new OpenAI({ apiKey: this.openaiKey });
+        }
 
-Generate a JSON response optimized for photorealistic AI image generation:
+        // Enhanced analysis prompt that extracts specific visual elements
+        const analysisPrompt = `Analyze this article and extract specific visual elements for a photorealistic editorial photograph. Focus on UNIQUE aspects mentioned in the content, not generic category templates.
+
+ARTICLE TITLE: "${articleTitle}"
+CONTENT EXCERPT: ${articleContent.substring(0, 3000)}
+
+Extract these specific visual elements from the article content:
+
+1. SPECIFIC SUBJECT: What concrete object, phenomenon, or scene is this article actually about? (e.g., "lab-grown brain tissue in petri dish", "tree trunk showing mineral deposits", "smartphone with AI avatar interface")
+
+2. UNIQUE DETAILS: What makes this story visually different? Extract specific numbers, colors, textures, sizes mentioned in the article.
+
+3. ENVIRONMENT: Where would this subject naturally be found based on the article? Be specific to the story.
+
+4. VISUAL HOOK: What specific visual element would make someone want to read this article?
+
+Generate a JSON response:
 {
-  "coreDiscovery": "Main phenomenon/discovery in 1-2 words",
-  "visualSubject": "Concrete, photographable subject (e.g., 'blood sample in laboratory vial', 'tree trunk cross-section')",
-  "visualContext": "Specific environment (e.g., 'sterile medical laboratory', 'natural forest setting')",
-  "uniqueAngle": "Visual differentiator (e.g., 'microscopic detail view', 'natural lighting contrast')",
-  "photographyStyle": "Specific style (e.g., 'macro photography', 'documentary style', 'clinical photography')",
-  "emotionalTone": "Single adjective (e.g., 'dramatic', 'serene', 'professional')"
+  "coreDiscovery": "Main discovery/innovation from article (specific, not generic)",
+  "visualSubject": "Exact subject mentioned or implied in article content",
+  "specificDetails": "Unique visual details extracted from article text",
+  "visualContext": "Specific environment described or implied in article",
+  "uniqueAngle": "What makes this visually different from other articles",
+  "photographyStyle": "Style that best captures this specific subject",
+  "emotionalTone": "Tone that matches the article's impact",
+  "keyElements": ["element1", "element2", "element3"]
 }
 
-Requirements:
-- visualSubject must be concrete and photographable
-- Avoid abstract concepts
-- Focus on physical objects/scenes that can be captured with a camera
-- Consider lighting, depth, and photographic composition`;
+IMPORTANT: Base everything on the actual article content, not category assumptions. Extract specific visual details mentioned in the text.`;
 
-      const response = await this._openai.chat.completions.create({
-        model: 'gpt-4',
-        messages: [{ role: 'user', content: analysisPrompt }],
-        max_tokens: 500,
-        temperature: 0.3,
-      });
+        const response = await this._openai.chat.completions.create({
+          model: 'gpt-4',
+          messages: [{ role: 'user', content: analysisPrompt }],
+          max_tokens: 800,
+          temperature: attempt.temperature,
+        });
 
-      const analysisText = response.choices[0]?.message?.content;
-      if (!analysisText) return null;
+        const analysisText = response.choices[0]?.message?.content;
+        if (!analysisText) continue;
 
-      // Parse JSON response
-      const jsonMatch = analysisText.match(/\{[\s\S]*\}/);
-      if (!jsonMatch) return null;
+        // Parse JSON response
+        const jsonMatch = analysisText.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) continue;
 
-      const concept = JSON.parse(jsonMatch[0]);
-      console.log('🧠 AI Visual Concept Generated:', concept.coreDiscovery);
-      return concept;
-    } catch (error) {
-      console.error('❌ AI analysis failed:', error.message);
-      return null;
+        const concept = JSON.parse(jsonMatch[0]);
+
+        // Validate that we got content-specific results, not generic templates
+        if (this.isContentSpecific(concept, articleTitle, articleContent)) {
+          console.log(`✅ Content-specific AI concept generated (${attempt.approach}):`, concept.coreDiscovery);
+          console.log(`   Subject: ${concept.visualSubject}`);
+          console.log(`   Unique angle: ${concept.uniqueAngle}`);
+          return concept;
+        } else {
+          console.log(`⚠️  Generic concept detected, trying next approach...`);
+        }
+      } catch (error) {
+        console.log(`❌ AI analysis attempt failed (${attempt.approach}): ${error.message}`);
+        continue;
+      }
     }
+
+    console.log('❌ All AI analysis attempts failed, falling back to enhanced content extraction');
+    return null;
+  }
+
+  // Validate that the AI concept is content-specific, not a generic template
+  isContentSpecific(concept, articleTitle, articleContent) {
+    const genericTerms = [
+      'generic', 'abstract', 'general', 'typical', 'standard', 'common',
+      'simple', 'basic', 'regular', 'normal', 'traditional'
+    ];
+
+    const titleWords = articleTitle.toLowerCase().split(/\s+/);
+    const conceptText = `${concept.visualSubject} ${concept.specificDetails} ${concept.uniqueAngle}`.toLowerCase();
+
+    // Check if concept contains specific words from the article title
+    const hasSpecificContent = titleWords.some(word =>
+      word.length > 3 && conceptText.includes(word)
+    );
+
+    // Check if concept avoids generic terms
+    const isNotGeneric = !genericTerms.some(term => conceptText.includes(term));
+
+    // Check if concept has unique details
+    const hasUniqueDetails = concept.specificDetails && concept.specificDetails.length > 20;
+
+    return hasSpecificContent && isNotGeneric && hasUniqueDetails;
   }
 
   async generateDynamicPrompt(articleTitle, articleContent, category) {
@@ -882,11 +1189,11 @@ Requirements:
     const moodStyle =
       professionalMoodStyles[mood] || professionalMoodStyles.professional;
 
-    // Use AI visual concept if available, otherwise fall back to templates
+    // Use AI visual concept if available, otherwise fall back to content-specific or templates
     if (aiVisualConcept) {
-      // OPTIMIZED: Build prompt following gpt-image-1 best practices
-      let prompt = `${aiVisualConcept.visualSubject} in ${aiVisualConcept.visualContext}, ${aiVisualConcept.photographyStyle}, hyper-realistic, ultra-detailed, shot on Canon EOS R5 with 85mm f/1.4 lens, ISO 100, shallow depth of field, professional editorial lighting, ${aiVisualConcept.emotionalTone} mood, 8K resolution, photographic quality, volumetric lighting, sharp focus, bokeh background, National Geographic style, HDR, no text, no logos, no watermarks, photorealistic documentary photography capturing ${aiVisualConcept.uniqueAngle}`;
-
+      // ENHANCED: Build comprehensive prompt using AI analysis
+      const prompt = this.buildAIEnhancedPrompt(aiVisualConcept);
+      console.log(`🤖 Using AI-enhanced prompt: ${prompt.substring(0, 100)}...`);
       return prompt;
     }
 
@@ -950,7 +1257,7 @@ EDITORIAL RESTRICTIONS (CRITICAL):
     return prompt;
   }
 
-  // Enhanced GPT-Image-1 optimized prompt builder
+  // Enhanced GPT-Image-1 optimized prompt builder with content prioritization
   async buildConcisePrompt(articleTitle, articleContent, category) {
     // Try AI analysis first for maximum dynamism
     const aiVisualConcept = await this.generateAIVisualConcept(
@@ -959,8 +1266,22 @@ EDITORIAL RESTRICTIONS (CRITICAL):
     );
 
     if (aiVisualConcept) {
-      // OPTIMIZED: Ultra-concise but information-dense prompt
-      return `${aiVisualConcept.visualSubject}, ${aiVisualConcept.photographyStyle}, shot on Canon EOS R5 85mm f/1.4, hyper-realistic, ${aiVisualConcept.emotionalTone}, 8K, HDR, no text, ${aiVisualConcept.uniqueAngle}`;
+      // OPTIMIZED: Ultra-concise but information-dense prompt using AI analysis
+      const concisePrompt = `${aiVisualConcept.visualSubject}, ${aiVisualConcept.photographyStyle}, shot on Canon EOS R5 85mm f/1.4, hyper-realistic, ${aiVisualConcept.emotionalTone}, 8K, HDR, no text, ${aiVisualConcept.uniqueAngle}`;
+      console.log(`🎯 AI-powered concise prompt: ${concisePrompt.substring(0, 80)}...`);
+      return concisePrompt;
+    }
+
+    // If AI fails, try content-specific extraction
+    const contentSpecificPlan = this.extractContentSpecificVisuals(articleTitle, articleContent,
+      `${articleTitle}\n${articleContent}`.toLowerCase(),
+      this.extractMainTopics(articleContent).map(t => t.toLowerCase())
+    );
+
+    if (contentSpecificPlan) {
+      const concisePrompt = `${contentSpecificPlan.subject}, ${contentSpecificPlan.environment}, shot on Canon EOS R5 85mm f/1.4, hyper-realistic, ${contentSpecificPlan.mood}, 8K, HDR, no text, ${contentSpecificPlan.action}`;
+      console.log(`🎯 Content-specific concise prompt: ${concisePrompt.substring(0, 80)}...`);
+      return concisePrompt;
     }
 
     // Fallback to template system

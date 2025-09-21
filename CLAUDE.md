@@ -27,11 +27,16 @@ Create high-quality, SEO-optimized content that naturally ranks for voice search
 **Tools:** Read, Bash, TodoWrite, Edit, Glob, Grep, WebSearch, WebFetch
 **Output:** Validated article with 100% technical compliance and fact accuracy
 
-### 3. image-generator (Unchanged)
+### 3. image-generator (Enhanced 2025)
 
-**Purpose:** Generate text-free, photorealistic hero images
+**Purpose:** Generate unique, article-specific photorealistic hero images using dynamic content analysis
 **Tools:** Read, Bash, Glob, Edit
-**Output:** AI-generated images with OCR validation
+**Enhanced Features:**
+- AI semantic analysis extracts specific visual elements from article content
+- 10+ custom visual plans for common topics (brain organoids, AI avatars, space missions)
+- Content-specific keyword and measurement extraction
+- Smart fallback system (category templates only when content analysis fails)
+**Output:** Unique AI-generated images tailored to each article's specific content with OCR validation
 
 ## 📝 NATURAL TITLE OPTIMIZATION
 
@@ -277,6 +282,56 @@ node utils/readability-scorer.js check   # Readability check
 ```
 
 **Success Formula:** User Value + Natural SEO + Quality Content = Sustainable Growth
+
+## 🎨 ENHANCED IMAGE GENERATION SYSTEM (2025)
+
+### Dynamic Content Analysis
+
+The image generation system now creates **unique, article-specific images** instead of generic category templates:
+
+**Priority System:**
+1. **AI Semantic Analysis**: GPT-4 analyzes article content to extract specific visual elements
+2. **Custom Visual Plans**: 10+ predefined patterns for common topics
+3. **Content-Specific Extraction**: Identifies visual keywords, measurements, unique descriptors
+4. **Category Templates**: Only used as last resort fallback
+
+### Custom Visual Plans Available
+
+- `brain.*organoid|lab.*grown.*brain` → Lab-grown neural tissue in petri dishes
+- `ai.*avatar|virtual.*influencer` → Holographic AI interfaces with virtual personas
+- `quantum.*batter|instant.*charg` → Advanced quantum energy storage with crystalline structures
+- `tree.*stone|fig.*calcium` → Cross-section of tree showing mineral deposits
+- `creator.*economy|creator.*burnout` → Balanced creative workspace with wellness elements
+- `parker.*probe|solar.*corona` → NASA spacecraft approaching sun's corona
+- `materials.*defy.*physics` → Crystalline structures with impossible properties
+- `cognitive.*disengagement|brain.*shutdown` → Neural network switching patterns
+
+### Testing Results (Verified Unique Images)
+
+**Before Enhancement:**
+- Culture articles → Generic "person at laptop"
+- Psychology articles → Generic brain imagery
+- Technology articles → Abstract tech elements
+- Health articles → Microscopes and lab equipment
+
+**After Enhancement:**
+- Brain organoids article → Lab-grown neural tissue with brain-like structures
+- AI workplace productivity → Professional office with AI-powered dashboards
+- Parker Solar Probe → Spacecraft with heat shield flying through corona
+
+### Command Usage
+
+```bash
+# Generate content-specific image
+node utils/ai-image-generator.js generate-from-article --file="content/health/article.mdx"
+
+# The system automatically:
+# 1. Analyzes article content with AI
+# 2. Extracts visual elements and unique details
+# 3. Matches against custom visual plans
+# 4. Generates unique, article-specific image
+# 5. Validates text-free with OCR
+```
 
 ## 📚 EXISTING CONTENT INVENTORY (As of 2025-09-21)
 
