@@ -19,6 +19,7 @@ Create high-quality, SEO-optimized content that naturally ranks for voice search
 **Combines:** Former trending-content-creator + content-enhancer functionality
 **Tools:** WebSearch, WebFetch, Write, Read, Edit, MultiEdit, Grep, Glob, Bash
 **Output:** Complete MDX article with natural titles and organic keyword integration
+**CRITICAL:** NEVER generate images - leave `image: ''` and `imageAlt: ''` empty for image-generator agent
 
 ### 2. quality-validator
 
@@ -26,6 +27,7 @@ Create high-quality, SEO-optimized content that naturally ranks for voice search
 **Combines:** Former quality-factchecker + build-validator functionality
 **Tools:** Read, Bash, TodoWrite, Edit, Glob, Grep, WebSearch, WebFetch
 **Output:** Validated article with 100% technical compliance and fact accuracy
+**CRITICAL:** Do not modify image fields - leave image generation to image-generator agent
 
 ### 3. image-generator (Enhanced 2025)
 
@@ -38,6 +40,7 @@ Create high-quality, SEO-optimized content that naturally ranks for voice search
 - Content-specific keyword and measurement extraction
 - Smart fallback system (category templates only when content analysis fails)
   **Output:** Unique AI-generated images tailored to each article's specific content with OCR validation
+  **CRITICAL:** ONLY agent authorized to generate and assign images to articles
 
 ## 📝 NATURAL TITLE OPTIMIZATION
 
@@ -176,6 +179,53 @@ seo:
 4. **Optimize:** Add keywords naturally, not forced
 5. **Validate:** Check facts and technical requirements
 6. **Enhance:** Polish for readability and engagement
+
+### 📦 PARALLEL BATCH EXECUTION (CRITICAL FOR EFFICIENCY)
+
+**MANDATORY: Run agents in parallel whenever creating multiple articles**
+
+#### Batch Creation Protocol:
+
+1. **Phase 1 - Content Creation (Parallel)**
+
+   ```
+   Run ALL content-creator agents simultaneously in single message
+   - Agent 1: Topic A (leaves image: '' empty)
+   - Agent 2: Topic B (leaves image: '' empty)
+   - Agent 3: Topic C (leaves image: '' empty)
+   ```
+
+2. **Phase 2 - Quality Validation (Parallel)**
+
+   ```
+   Run ALL quality-validator agents simultaneously in single message
+   - Validator 1: Article A fact-check/build validation
+   - Validator 2: Article B fact-check/build validation
+   - Validator 3: Article C fact-check/build validation
+   ```
+
+3. **Phase 3 - Image Generation (Parallel)**
+   ```
+   Run ALL image-generator agents simultaneously in single message
+   - Generator 1: Unique image for Article A
+   - Generator 2: Unique image for Article B
+   - Generator 3: Unique image for Article C
+   ```
+
+#### Performance Benefits:
+
+- **3x faster execution** vs sequential processing
+- **Consistent quality** across all articles in batch
+- **Resource optimization** with parallel API calls
+- **Scalable** to any batch size (3, 5, 10+ articles)
+
+#### Agent Separation Enforcement:
+
+- ❌ **content-creator** NEVER touches images (leaves fields empty)
+- ❌ **quality-validator** NEVER generates images (validates only)
+- ✅ **image-generator** ONLY agent that creates/assigns images
+
+**CRITICAL:** Always use single message with multiple Task tool calls for parallel execution
 
 ### Quality Checks (Essentials Only):
 
