@@ -142,12 +142,22 @@ echo "Your Title Here" | wc -c
 - **Authority:** Reference institutions when relevant
 - **Trust:** Acknowledge limitations honestly
 
-**Internal Linking (Natural):**
+**Internal Linking (REQUIRED - Minimum 3 Links):**
 
-- Link to genuinely related content
-- Use descriptive anchor text
-- Place links where curiosity peaks
-- Format: `/category/article-slug`
+- **MANDATORY**: Every article MUST include at least 3 internal links to related content
+- Link to genuinely related articles in the same or related categories
+- Use descriptive anchor text that naturally flows with the content
+- Place links where curiosity peaks or when referencing related concepts
+- Format: `[descriptive anchor text](/category/article-slug)`
+- **CRITICAL**: Articles without internal links fail quality standards
+
+**How to Find Related Articles:**
+- Psychology articles → Link to cognitive research, mental health, consciousness studies
+- Technology articles → Link to AI, automation, digital innovation topics
+- Health articles → Link to medical breakthroughs, research, wellness topics
+- Science articles → Link to research, discoveries, breakthrough studies
+- Space articles → Link to missions, discoveries, astronomical research
+- Culture articles → Link to social trends, digital culture, creator economy
 
 ### Step 6: Article Template
 

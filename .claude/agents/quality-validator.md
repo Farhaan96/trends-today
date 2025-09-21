@@ -117,6 +117,26 @@ node utils/title-optimizer.js suggest "[title]"
 - Health/Psychology: 400-800 words
 - Culture/News: 250-600 words
 
+**Internal Link Validation (REQUIRED):**
+
+```bash
+# Check for internal links in article
+grep -o '\[.*\](/[^)]*' content/[category]/[file].mdx | wc -l
+```
+
+**Internal Link Requirements:**
+
+- Minimum 3 internal links per article (MANDATORY)
+- Links must point to related content within the site
+- Use descriptive anchor text (not "click here")
+- Format: `[descriptive text](/category/article-slug)`
+
+**Auto-Fix Capability:**
+
+- Flag articles with <3 internal links as CRITICAL ERROR
+- Suggest related articles for linking based on category and tags
+- Validate link targets exist in the content directory
+
 **Readability Check:**
 
 - Paragraph length (2-4 sentences)
@@ -217,7 +237,8 @@ FACT-CHECKING:
 SEO OPTIMIZATION:
 ✅ Keyword Integration: NATURAL/FORCED/MISSING
 ✅ Featured Snippet: OPTIMIZED/POSSIBLE/NONE
-✅ Internal Links: [count] (quality: [rating])
+✅ Internal Links: [count]/3 minimum (PASS/FAIL)
+✅ Link Quality: [rating] (DESCRIPTIVE/GENERIC/POOR)
 
 E-E-A-T SIGNALS:
 ✅ Experience: PRESENT/LIMITED/ABSENT
@@ -242,6 +263,7 @@ OVERALL STATUS: APPROVED/NEEDS FIXES/REQUIRES REVIEW
 - Factual accuracy >80%
 - No plagiarism detected
 - Required fields present
+- Minimum 3 internal links present (MANDATORY)
 
 **Should Meet (Important):**
 
