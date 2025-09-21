@@ -416,6 +416,30 @@ seo:
 - [ ] **Formatting Standards**: CRITICAL requirements applied (12-18 bold limit, no horizontal rules, no em/en-dashes)
 - [ ] **Data Presentation**: NO complex tables, charts, or overwhelming numerical breakdowns - use narrative with key numbers
 
+## 🚨 MANDATORY BUILD VALIDATOR COMPLIANCE (ZERO TOLERANCE)
+
+**These standards are BLOCKING REQUIREMENTS. Any violation will cause build-validator to reject the article:**
+
+**✅ REQUIRED SEO Standards:**
+- Title: 50-60 characters ONLY (build-validator blocks if outside this range)
+- Meta description: 150-160 characters ONLY (build-validator blocks if outside this range)
+- Category-specific word counts: Science/Tech (600-800), Health (500-700), Culture (300-500)
+
+**✅ REQUIRED Content Standards:**
+- Strategic bolding: 8-18 bold phrases ONLY (build-validator counts and blocks if outside range)
+- NO horizontal rules (---) anywhere in content
+- NO em-dashes (—) or en-dashes (–) for emphasis - use periods, commas, parentheses instead
+- MUST use .mdx extension (NOT .md)
+- Image fields: Set to empty strings (image: '' and imageAlt: '') for later generation
+
+**✅ REQUIRED Technical Standards:**
+- Valid YAML frontmatter syntax
+- Current ISO 8601 date format (not hardcoded dates)
+- Approved authors only: Sarah Martinez, David Kim, Alex Chen, Emma Thompson
+- Proper category assignment matching file location
+
+**CRITICAL:** Build-validator will BLOCK completion if ANY of these standards are violated. Create content that passes validation on first attempt.
+
 #### Step 13: File Naming & Organization
 
 Save as: `content/[category]/[long-tail-keyword-optimized-slug].mdx`

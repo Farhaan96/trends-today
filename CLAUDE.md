@@ -58,12 +58,14 @@ Claude Code (Orchestrator)
     └─→ image-generator (specialized API usage)
 ```
 
-**Phase 3: Technical Validation (Sequential)**
+**Phase 3: MANDATORY BLOCKING VALIDATION (Sequential)**
 
 ```
 Claude Code (Orchestrator)
-    └─→ build-validator (enhanced comprehensive checks)
+    └─→ build-validator (MANDATORY BLOCKING GATE - ALL issues must be fixed)
 ```
+
+**🚨 CRITICAL: Phase 3 is a BLOCKING GATE. Articles are NOT complete until build-validator gives 100% clean validation. ALL warnings and errors are MANDATORY fixes that prevent publication.**
 
 ### Consolidated Agent Specifications
 
@@ -241,8 +243,16 @@ Process enhancement and fact-checking simultaneously for efficiency
 - Phase 1: Content creation with built-in duplicate checking
 - Phase 2: Enhancement and fact-checking run in parallel
 - Phase 3: Image generation (AFTER fact-checking)
-- Phase 4: Build validation ensures technical compliance
-- All phases must pass before publication
+- Phase 4: **MANDATORY BLOCKING BUILD VALIDATION** - NO EXCEPTIONS
+- **🚨 CRITICAL: Articles are INCOMPLETE until build-validator approves 100% clean validation**
+
+**BLOCKING CRITERIA (Zero Tolerance):**
+- Word count outside category limits (Science/Tech: 600-800, Health: 500-700, Culture: 300-500)
+- SEO title >60 chars or <50 chars
+- Meta description >160 chars or <150 chars
+- Strategic bolding >18 or <8 bold phrases
+- Any horizontal rules (---) or em/en-dashes (—/–)
+- Technical errors (YAML, file extensions, build failures)
 
 **Error Handling:**
 
@@ -868,9 +878,13 @@ This comprehensive AI system transforms Trends Today into a premium destination 
 2. **content-enhancer** - Apply typography and internal linking
 3. **quality-factchecker** - Verify all facts and research accuracy
 4. **image-generator** - Generate AI image after content is finalized
-5. **build-validator** - Final technical validation
+5. **build-validator** - 🚨 **MANDATORY BLOCKING VALIDATION GATE** 🚨
 
-**CRITICAL RULE:** Images must come AFTER fact-checking to ensure accuracy.
+**🚨 CRITICAL RULES:**
+- Images must come AFTER fact-checking to ensure accuracy
+- **Articles are NOT complete until build-validator gives 100% clean pass**
+- **ALL build-validator findings are BLOCKING issues, not optional suggestions**
+- **Must fix ALL warnings/errors before articles can be considered finished**
 
 ### Image Generation
 
@@ -879,13 +893,22 @@ This comprehensive AI system transforms Trends Today into a premium destination 
 - **Process:** Generate image AFTER fact-checking and content finalization
 - **Path format:** /images/ai-generated/ai-generated-[timestamp].png
 
-### Content Standards
+### Content Standards (BLOCKING REQUIREMENTS)
 
-- **File extension:** MUST be .mdx (NOT .md)
-- **Word count:** Category-appropriate length (Science/Tech: 600-800, Health: 500-700, Culture: 300-500)
-- **Authors:** Only Sarah Martinez, David Kim, Alex Chen, Emma Thompson
-- **Date:** Current ISO 8601 format, not hardcoded dates
-- **Quality gate:** Must pass build validation and fact-checking before publication
+**🚨 THESE ARE MANDATORY BLOCKING CRITERIA - Build-validator will REJECT articles that violate ANY of these:**
+
+- **File extension:** MUST be .mdx (NOT .md) - BLOCKING
+- **Word count:** Category-appropriate length (Science/Tech: 600-800, Health: 500-700, Culture: 300-500) - BLOCKING
+- **SEO Title:** 50-60 characters ONLY - BLOCKING
+- **Meta Description:** 150-160 characters ONLY - BLOCKING
+- **Strategic Bolding:** 8-18 bold phrases ONLY - BLOCKING
+- **NO horizontal rules (---)** anywhere in content - BLOCKING
+- **NO em-dashes (—) or en-dashes (–)** for emphasis - BLOCKING
+- **Authors:** Only Sarah Martinez, David Kim, Alex Chen, Emma Thompson - BLOCKING
+- **Date:** Current ISO 8601 format, not hardcoded dates - BLOCKING
+- **Quality gate:** Must pass 100% clean build validation before publication - BLOCKING
+
+**CRITICAL:** Articles are INCOMPLETE until ALL standards are met and build-validator approves.
 
 ---
 
