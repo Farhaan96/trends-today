@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 /**
- * Title Optimizer Utility
- * Validates and optimizes article titles using the SPARK framework
- * Ensures 50-60 character compliance and SEO optimization
+ * Title Optimizer Utility v2.0
+ * Provides suggestions and flexible validation for article titles
+ * Focuses on natural language and search intent over rigid formulas
+ * Optimal range: 50-70 characters (best: 55-65)
  */
 
 const fs = require('fs');
@@ -13,128 +14,259 @@ class TitleOptimizer {
   constructor() {
     this.sparkElements = {
       powerWords: [
-        'Scientists', 'Breakthrough', 'Secret', 'Impossible', 'Doctors', 'NASA', 'MIT',
-        'Found', 'Discovered', 'Revealed', 'Proved', 'Breakthrough', 'Revolutionary',
-        'Hidden', 'Nobody', 'Can\'t Explain', 'Mystery', 'Shocking', 'Stunning'
+        'Scientists',
+        'Breakthrough',
+        'Secret',
+        'Impossible',
+        'Doctors',
+        'NASA',
+        'MIT',
+        'Found',
+        'Discovered',
+        'Revealed',
+        'Proved',
+        'Breakthrough',
+        'Revolutionary',
+        'Hidden',
+        'Nobody',
+        "Can't Explain",
+        'Mystery',
+        'Shocking',
+        'Stunning',
       ],
       actionWords: [
-        'Detects', 'Transforms', 'Reveals', 'Solves', 'Doubles', 'Cuts', 'Reverses',
-        'Found', 'Discovered', 'Proves', 'Shows', 'Beats', 'Changes', 'Breaks'
+        'Detects',
+        'Transforms',
+        'Reveals',
+        'Solves',
+        'Doubles',
+        'Cuts',
+        'Reverses',
+        'Found',
+        'Discovered',
+        'Proves',
+        'Shows',
+        'Beats',
+        'Changes',
+        'Breaks',
       ],
       numberPatterns: [
-        /\d+%/,           // percentages: 90%
-        /\d+x/i,          // multipliers: 3x
-        /\d+,?\d*/,       // numbers: 26, 5,400
-        /\d+-year/i,      // time: 500-year
-        /\d+\s*mph/i,     // speed: 5,400 MPH
-        /\d+\s*days?/i,   // duration: 7 days
-      ]
+        /\d+%/, // percentages: 90%
+        /\d+x/i, // multipliers: 3x
+        /\d+,?\d*/, // numbers: 26, 5,400
+        /\d+-year/i, // time: 500-year
+        /\d+\s*mph/i, // speed: 5,400 MPH
+        /\d+\s*days?/i, // duration: 7 days
+      ],
     };
 
     this.titleTemplates = [
       {
-        pattern: "Scientists Found [Number] Ways [Tech] [Benefit]",
-        example: "Scientists Found 3 Ways AI Detects Cancer Early",
-        category: "science"
+        pattern: 'Scientists Found [Number] Ways [Tech] [Benefit]',
+        example: 'Scientists Found 3 Ways AI Detects Cancer Early',
+        category: 'science',
       },
       {
-        pattern: "Why [Percentage] of [Group] [Action] [Thing]",
-        example: "Why 90% of Planets Rain Glass at 5,400 MPH",
-        category: "science"
+        pattern: 'Why [Percentage] of [Group] [Action] [Thing]',
+        example: 'Why 90% of Planets Rain Glass at 5,400 MPH',
+        category: 'science',
       },
       {
-        pattern: "How [Tech] [Action] [Problem] [Multiplier] Faster",
-        example: "How AI Solves Cancer Detection 3x Faster",
-        category: "technology"
+        pattern: 'How [Tech] [Action] [Problem] [Multiplier] Faster',
+        example: 'How AI Solves Cancer Detection 3x Faster',
+        category: 'technology',
       },
       {
-        pattern: "[Treatment] Cuts [Disease] by [Percentage]",
-        example: "Gene Therapy Cuts Cancer Deaths by 44%",
-        category: "health"
+        pattern: '[Treatment] Cuts [Disease] by [Percentage]',
+        example: 'Gene Therapy Cuts Cancer Deaths by 44%',
+        category: 'health',
       },
       {
-        pattern: "Secret [Process] Doubles [Outcome] in [Time]",
-        example: "Secret Brain Trick Doubles Memory in 7 Days",
-        category: "psychology"
-      }
+        pattern: 'Secret [Process] Doubles [Outcome] in [Time]',
+        example: 'Secret Brain Trick Doubles Memory in 7 Days',
+        category: 'psychology',
+      },
     ];
   }
 
   /**
-   * Validate title against SPARK criteria
+   * Suggest improvements for title (flexible validation)
    */
-  validateTitle(title) {
-    const issues = [];
+  suggestTitle(title) {
     const suggestions = [];
+    const strengths = [];
+    const improvements = [];
 
-    // Character count validation (CRITICAL)
+    // Character count validation (FLEXIBLE)
     const charCount = title.length;
     if (charCount < 50) {
-      issues.push(`Title too short: ${charCount} chars (need 50-60)`);
-      suggestions.push("Add specific numbers, power words, or context");
-    } else if (charCount > 60) {
-      issues.push(`Title too long: ${charCount} chars (need 50-60)`);
-      suggestions.push("Remove filler words, abbreviate, or split concepts");
+      improvements.push(
+        `Title is ${charCount} chars (optimal: 55-65, acceptable: 50-70)`
+      );
+      suggestions.push('Consider adding more context or descriptive words');
+    } else if (charCount > 70) {
+      improvements.push(
+        `Title is ${charCount} chars (optimal: 55-65, max recommended: 70)`
+      );
+      suggestions.push('Consider shortening while preserving key message');
+    } else if (charCount >= 55 && charCount <= 65) {
+      strengths.push(`Perfect length: ${charCount} characters`);
+    } else {
+      strengths.push(`Good length: ${charCount} characters`);
     }
 
-    // SPARK element validation
-    const sparkCheck = this.checkSparkElements(title);
+    // Natural element analysis (not requirements)
+    const elements = this.analyzeNaturalElements(title);
 
-    if (!sparkCheck.hasNumbers) {
-      issues.push("Missing specific numbers (3, 90%, 26, 500-year)");
-      suggestions.push("Add exact statistics or measurements");
+    if (elements.hasNumbers) {
+      strengths.push('Contains specific numbers for credibility');
+    } else {
+      suggestions.push(
+        'Consider adding specific numbers or statistics if relevant'
+      );
     }
 
-    if (!sparkCheck.hasPowerWords) {
-      issues.push("Missing power words (Scientists, Breakthrough, Secret)");
-      suggestions.push("Start with authority words or emotional triggers");
+    if (elements.hasPowerWords) {
+      strengths.push('Uses compelling power words');
     }
 
-    if (!sparkCheck.hasAction) {
-      issues.push("Missing action words (Found, Detects, Solves)");
-      suggestions.push("Use active verbs that create movement");
+    if (elements.hasAction) {
+      strengths.push('Contains active, engaging verbs');
+    }
+
+    if (elements.hasQuestion) {
+      strengths.push('Question format good for voice search');
+    }
+
+    if (elements.hasEmotionalHook) {
+      strengths.push('Creates emotional connection');
     }
 
     return {
-      isValid: issues.length === 0 && charCount >= 50 && charCount <= 60,
+      optimal: charCount >= 55 && charCount <= 65,
+      acceptable: charCount >= 50 && charCount <= 70,
       charCount,
-      issues,
+      strengths,
+      improvements,
       suggestions,
-      sparkScore: this.calculateSparkScore(sparkCheck),
-      sparkCheck
+      naturalScore: this.calculateNaturalScore(elements),
+      elements,
+      searchIntentMatch: this.assessSearchIntent(title),
     };
   }
 
   /**
-   * Check for SPARK elements in title
+   * Analyze natural elements in title (not requirements)
    */
-  checkSparkElements(title) {
+  analyzeNaturalElements(title) {
     const titleLower = title.toLowerCase();
 
     return {
-      hasNumbers: this.sparkElements.numberPatterns.some(pattern => pattern.test(title)),
-      hasPowerWords: this.sparkElements.powerWords.some(word =>
+      hasNumbers: this.sparkElements.numberPatterns.some((pattern) =>
+        pattern.test(title)
+      ),
+      hasPowerWords: this.sparkElements.powerWords.some((word) =>
         titleLower.includes(word.toLowerCase())
       ),
-      hasAction: this.sparkElements.actionWords.some(word =>
+      hasAction: this.sparkElements.actionWords.some((word) =>
         titleLower.includes(word.toLowerCase())
       ),
+      hasQuestion: /^(how|what|why|when|where|who|which|can|does|is)/i.test(
+        title
+      ),
+      hasEmotionalHook: this.checkEmotionalHook(title),
       specificity: this.checkSpecificity(title),
-      relevance: this.checkRelevance(title)
+      relevance: this.checkRelevance(title),
+      naturalFlow: this.checkNaturalFlow(title),
     };
   }
 
   /**
-   * Calculate SPARK score (0-100)
+   * Calculate natural optimization score (0-100)
    */
-  calculateSparkScore(sparkCheck) {
+  calculateNaturalScore(elements) {
     let score = 0;
-    if (sparkCheck.hasNumbers) score += 25;
-    if (sparkCheck.hasPowerWords) score += 25;
-    if (sparkCheck.hasAction) score += 25;
-    if (sparkCheck.specificity) score += 15;
-    if (sparkCheck.relevance) score += 10;
+    if (elements.hasNumbers) score += 15;
+    if (elements.hasPowerWords) score += 15;
+    if (elements.hasAction) score += 15;
+    if (elements.hasQuestion) score += 10;
+    if (elements.hasEmotionalHook) score += 10;
+    if (elements.specificity) score += 15;
+    if (elements.relevance) score += 10;
+    if (elements.naturalFlow) score += 10;
     return score;
+  }
+
+  /**
+   * Check for emotional hook
+   */
+  checkEmotionalHook(title) {
+    const emotionalWords = [
+      'amazing',
+      'surprising',
+      'shocking',
+      'incredible',
+      'revolutionary',
+      'breakthrough',
+      'secret',
+      'hidden',
+      'revealed',
+      'truth',
+      'real',
+      'finally',
+      'actually',
+      'really',
+      'proven',
+      'game-changing',
+    ];
+    const titleLower = title.toLowerCase();
+    return emotionalWords.some((word) => titleLower.includes(word));
+  }
+
+  /**
+   * Check natural flow and readability
+   */
+  checkNaturalFlow(title) {
+    // Check if title reads naturally
+    const hasNaturalStructure = /^[A-Z][^:]+(:.*)?$/.test(title);
+    const notTooManyNumbers = (title.match(/\d+/g) || []).length <= 2;
+    const properSpacing = !/ {2,}/.test(title);
+    return hasNaturalStructure && notTooManyNumbers && properSpacing;
+  }
+
+  /**
+   * Assess search intent match
+   */
+  assessSearchIntent(title) {
+    const intents = {
+      informational: 0,
+      transactional: 0,
+      navigational: 0,
+      investigational: 0,
+    };
+
+    // Informational intent signals
+    if (/^(how|what|why|when|where|who)\s/i.test(title))
+      intents.informational += 3;
+    if (/guide|tutorial|explained|understanding/i.test(title))
+      intents.informational += 2;
+
+    // Transactional intent signals
+    if (/best|top|review|buy|cheap|deal/i.test(title))
+      intents.transactional += 2;
+
+    // Investigational intent signals
+    if (/vs\.|versus|comparison|difference/i.test(title))
+      intents.investigational += 2;
+
+    const primary = Object.keys(intents).reduce((a, b) =>
+      intents[a] > intents[b] ? a : b
+    );
+    return {
+      primary,
+      score: intents[primary],
+      strong: intents[primary] >= 2,
+    };
   }
 
   /**
@@ -143,15 +275,15 @@ class TitleOptimizer {
   checkSpecificity(title) {
     // Look for specific numbers, timeframes, exact measurements
     const specificityPatterns = [
-      /\d+%/,                    // percentages
-      /\d+x/i,                   // multipliers
-      /\d+,\d+/,                 // large numbers with commas
-      /\d+\s*(mph|km\/h)/i,      // speeds
-      /\d+\s*(year|day|hour)s?/i,// time periods
-      /\d+\.\d+/,                // decimals
+      /\d+%/, // percentages
+      /\d+x/i, // multipliers
+      /\d+,\d+/, // large numbers with commas
+      /\d+\s*(mph|km\/h)/i, // speeds
+      /\d+\s*(year|day|hour)s?/i, // time periods
+      /\d+\.\d+/, // decimals
     ];
 
-    return specificityPatterns.some(pattern => pattern.test(title));
+    return specificityPatterns.some((pattern) => pattern.test(title));
   }
 
   /**
@@ -159,22 +291,22 @@ class TitleOptimizer {
    */
   checkRelevance(title) {
     const relevanceIndicators = [
-      /^(how|why|what|which|when|where)/i,  // Question starters
+      /^(how|why|what|which|when|where)/i, // Question starters
       /\b(help|work|best|better|faster)\b/i, // Benefit words
-      /\b(2025|new|latest|breakthrough)\b/i,  // Timeliness
+      /\b(2025|new|latest|breakthrough)\b/i, // Timeliness
     ];
 
-    return relevanceIndicators.some(pattern => pattern.test(title));
+    return relevanceIndicators.some((pattern) => pattern.test(title));
   }
 
   /**
-   * Auto-optimize title to fit 50-60 character range
+   * Auto-optimize title to fit optimal character range (50-70, best 55-65)
    */
   optimizeTitle(title) {
     let optimized = title.trim();
 
     // If too long, apply compression strategies
-    if (optimized.length > 60) {
+    if (optimized.length > 70) {
       optimized = this.compressTitle(optimized);
     }
 
@@ -194,8 +326,22 @@ class TitleOptimizer {
 
     // Remove unnecessary words
     const fillerWords = [
-      'the', 'a', 'an', 'and', 'or', 'but', 'so', 'yet', 'for',
-      'that', 'this', 'these', 'those', 'very', 'really', 'quite'
+      'the',
+      'a',
+      'an',
+      'and',
+      'or',
+      'but',
+      'so',
+      'yet',
+      'for',
+      'that',
+      'this',
+      'these',
+      'those',
+      'very',
+      'really',
+      'quite',
     ];
 
     // Remove articles and connectors that don't add SEO value
@@ -209,11 +355,11 @@ class TitleOptimizer {
       'machine learning': 'ML',
       'virtual reality': 'VR',
       'augmented reality': 'AR',
-      'cryptocurrency': 'crypto',
-      'scientists': 'experts',
-      'researchers': 'experts',
-      'technology': 'tech',
-      'percentage': '%'
+      cryptocurrency: 'crypto',
+      scientists: 'experts',
+      researchers: 'experts',
+      technology: 'tech',
+      percentage: '%',
     };
 
     Object.entries(abbreviations).forEach(([full, abbrev]) => {
@@ -230,9 +376,9 @@ class TitleOptimizer {
     let expanded = title;
 
     // Add power words if missing
-    const sparkCheck = this.checkSparkElements(expanded);
+    const elements = this.analyzeNaturalElements(expanded);
 
-    if (!sparkCheck.hasPowerWords && expanded.length < 55) {
+    if (!elements.hasPowerWords && expanded.length < 55) {
       if (/scientists?|researchers?|experts?/i.test(expanded)) {
         // Already has authority
       } else {
@@ -240,7 +386,7 @@ class TitleOptimizer {
       }
     }
 
-    if (!sparkCheck.hasNumbers && expanded.length < 55) {
+    if (!elements.hasNumbers && expanded.length < 55) {
       // Suggest adding a number - this would need context
       // For now, flag for manual review
     }
@@ -259,14 +405,16 @@ class TitleOptimizer {
 
     // Generate suggestions based on templates
     this.titleTemplates
-      .filter(template => template.category === category || category === 'general')
-      .forEach(template => {
+      .filter(
+        (template) => template.category === category || category === 'general'
+      )
+      .forEach((template) => {
         const suggestion = this.fillTemplate(template, concepts);
         if (suggestion) {
           suggestions.push({
             title: suggestion,
             template: template.pattern,
-            example: template.example
+            example: template.example,
           });
         }
       });
@@ -283,15 +431,16 @@ class TitleOptimizer {
 
     // Extract key nouns (simple approach)
     const words = title.toLowerCase().split(/\s+/);
-    const keyTerms = words.filter(word =>
-      word.length > 3 &&
-      !['the', 'and', 'but', 'for', 'with', 'this', 'that'].includes(word)
+    const keyTerms = words.filter(
+      (word) =>
+        word.length > 3 &&
+        !['the', 'and', 'but', 'for', 'with', 'this', 'that'].includes(word)
     );
 
     return {
       numbers,
       keyTerms,
-      originalLength: title.length
+      originalLength: title.length,
     };
   }
 
@@ -305,9 +454,9 @@ class TitleOptimizer {
   }
 
   /**
-   * Validate all titles in content directory
+   * Analyze all titles in content directory
    */
-  validateAllTitles() {
+  analyzeAllTitles() {
     const contentDir = path.join(process.cwd(), 'content');
     const results = [];
 
@@ -321,7 +470,7 @@ class TitleOptimizer {
       const files = [];
       const items = fs.readdirSync(dir);
 
-      items.forEach(item => {
+      items.forEach((item) => {
         const fullPath = path.join(dir, item);
         const stat = fs.statSync(fullPath);
 
@@ -337,19 +486,19 @@ class TitleOptimizer {
 
     const mdxFiles = getAllMdxFiles(contentDir);
 
-    mdxFiles.forEach(filePath => {
+    mdxFiles.forEach((filePath) => {
       try {
         const content = fs.readFileSync(filePath, 'utf8');
         const titleMatch = content.match(/^title:\s*['"](.+)['"]$/m);
 
         if (titleMatch) {
           const title = titleMatch[1];
-          const validation = this.validateTitle(title);
+          const analysis = this.suggestTitle(title);
 
           results.push({
             file: path.relative(process.cwd(), filePath),
             title,
-            validation
+            analysis,
           });
         }
       } catch (error) {
@@ -368,48 +517,95 @@ function main() {
   const optimizer = new TitleOptimizer();
 
   switch (command) {
-    case 'validate':
+    case 'suggest':
       if (args[1]) {
-        // Validate single title
+        // Analyze and suggest improvements for title
         const title = args.slice(1).join(' ');
-        const result = optimizer.validateTitle(title);
+        const result = optimizer.suggestTitle(title);
 
-        console.log(`\nTitle: "${title}"`);
-        console.log(`Characters: ${result.charCount}/60`);
-        console.log(`SPARK Score: ${result.sparkScore}/100`);
+        console.log(`\n📝 Title Analysis: "${title}"`);
+        console.log(`📏 Length: ${result.charCount} characters`);
 
-        if (result.isValid) {
-          console.log('✅ Title is VALID');
+        if (result.optimal) {
+          console.log('✅ Status: OPTIMAL (55-65 chars)');
+        } else if (result.acceptable) {
+          console.log('✅ Status: ACCEPTABLE (50-70 chars)');
         } else {
-          console.log('❌ Title needs optimization');
-          result.issues.forEach(issue => console.log(`  - ${issue}`));
-          console.log('\nSuggestions:');
-          result.suggestions.forEach(suggestion => console.log(`  • ${suggestion}`));
+          console.log('⚠️  Status: NEEDS ADJUSTMENT');
+        }
+
+        console.log(`🎯 Natural Score: ${result.naturalScore}/100`);
+        console.log(
+          `🔍 Search Intent: ${result.searchIntentMatch.primary} (${result.searchIntentMatch.strong ? 'strong' : 'moderate'})`
+        );
+
+        if (result.strengths.length > 0) {
+          console.log('\n💪 Strengths:');
+          result.strengths.forEach((strength) =>
+            console.log(`  • ${strength}`)
+          );
+        }
+
+        if (result.improvements.length > 0) {
+          console.log('\n🔧 Areas for Improvement:');
+          result.improvements.forEach((improvement) =>
+            console.log(`  • ${improvement}`)
+          );
+        }
+
+        if (result.suggestions.length > 0) {
+          console.log('\n💡 Suggestions:');
+          result.suggestions.forEach((suggestion) =>
+            console.log(`  • ${suggestion}`)
+          );
         }
       } else {
-        // Validate all titles
-        console.log('Validating all article titles...\n');
-        const results = optimizer.validateAllTitles();
+        // Analyze all titles
+        console.log('Analyzing all article titles...\n');
+        const results = optimizer.analyzeAllTitles();
 
-        const issues = results.filter(r => !r.validation.isValid);
-        const valid = results.filter(r => r.validation.isValid);
+        const optimal = results.filter((r) => r.analysis.optimal);
+        const acceptable = results.filter(
+          (r) => r.analysis.acceptable && !r.analysis.optimal
+        );
+        const needsWork = results.filter((r) => !r.analysis.acceptable);
 
-        console.log(`Results: ${valid.length} valid, ${issues.length} need fixing\n`);
+        console.log(
+          `📊 Results: ${optimal.length} optimal, ${acceptable.length} acceptable, ${needsWork.length} need adjustment\n`
+        );
 
-        if (issues.length > 0) {
-          console.log('❌ TITLES NEEDING OPTIMIZATION:\n');
-          issues.forEach(result => {
-            console.log(`File: ${result.file}`);
-            console.log(`Title: "${result.title}"`);
-            console.log(`Issues: ${result.validation.issues.join(', ')}`);
-            console.log(`SPARK Score: ${result.validation.sparkScore}/100\n`);
+        if (optimal.length > 0) {
+          console.log('✅ OPTIMAL TITLES (55-65 chars):\n');
+          optimal.forEach((result) => {
+            console.log(
+              `  • ${result.title} (${result.analysis.charCount} chars, score: ${result.analysis.naturalScore}/100)`
+            );
           });
         }
 
-        if (valid.length > 0) {
-          console.log('✅ VALID TITLES:\n');
-          valid.forEach(result => {
-            console.log(`${result.title} (${result.validation.charCount} chars, ${result.validation.sparkScore}/100)`);
+        if (acceptable.length > 0) {
+          console.log('\n✔️  ACCEPTABLE TITLES (50-70 chars):\n');
+          acceptable.forEach((result) => {
+            console.log(
+              `  • ${result.title} (${result.analysis.charCount} chars, score: ${result.analysis.naturalScore}/100)`
+            );
+          });
+        }
+
+        if (needsWork.length > 0) {
+          console.log('\n⚠️  TITLES NEEDING ADJUSTMENT:\n');
+          needsWork.forEach((result) => {
+            console.log(`File: ${result.file}`);
+            console.log(
+              `Title: "${result.title}" (${result.analysis.charCount} chars)`
+            );
+            if (result.analysis.suggestions.length > 0) {
+              console.log(`Suggestions:`);
+              result.analysis.suggestions.forEach((s) =>
+                console.log(`  • ${s}`)
+              );
+            }
+            console.log('');
           });
         }
       }
@@ -419,55 +615,46 @@ function main() {
       if (args[1]) {
         const title = args.slice(1).join(' ');
         const optimized = optimizer.optimizeTitle(title);
-        const validation = optimizer.validateTitle(optimized);
+        const analysis = optimizer.suggestTitle(optimized);
 
         console.log(`Original: "${title}" (${title.length} chars)`);
         console.log(`Optimized: "${optimized}" (${optimized.length} chars)`);
-        console.log(`SPARK Score: ${validation.sparkScore}/100`);
+        console.log(`Natural Score: ${analysis.naturalScore}/100`);
 
-        if (validation.isValid) {
-          console.log('✅ Optimized title is valid');
+        if (analysis.optimal) {
+          console.log('✅ Optimized title is in optimal range');
+        } else if (analysis.acceptable) {
+          console.log('✔️  Optimized title is acceptable');
         } else {
           console.log('⚠️  Still needs manual refinement');
-          validation.suggestions.forEach(suggestion => console.log(`  • ${suggestion}`));
+          analysis.suggestions.forEach((suggestion) =>
+            console.log(`  • ${suggestion}`)
+          );
         }
       } else {
-        console.log('Usage: node title-optimizer.js optimize "Your Title Here"');
-      }
-      break;
-
-    case 'suggest':
-      if (args[1]) {
-        const title = args.slice(1).join(' ');
-        const category = args.find(arg => arg.startsWith('--category='))?.split('=')[1] || 'general';
-        const suggestions = optimizer.suggestTitles(title, category);
-
-        console.log(`Suggestions for: "${title}"\n`);
-        if (suggestions.length > 0) {
-          suggestions.forEach((suggestion, index) => {
-            console.log(`${index + 1}. ${suggestion.title}`);
-            console.log(`   Template: ${suggestion.template}`);
-            console.log(`   Example: ${suggestion.example}\n`);
-          });
-        } else {
-          console.log('No template suggestions available. Manual optimization needed.');
-        }
-      } else {
-        console.log('Usage: node title-optimizer.js suggest "Your Title" --category=science');
+        console.log(
+          'Usage: node title-optimizer.js optimize "Your Title Here"'
+        );
       }
       break;
 
     default:
-      console.log('Title Optimizer - SPARK Framework Validation\n');
+      console.log('Title Optimizer v2.0 - Natural SEO Analysis\n');
       console.log('Commands:');
-      console.log('  validate [title]     - Validate title(s) against SPARK criteria');
-      console.log('  optimize "title"     - Auto-optimize title length and SPARK elements');
-      console.log('  suggest "title"      - Suggest optimized titles using templates');
+      console.log(
+        '  suggest [title]      - Analyze and suggest improvements for title(s)'
+      );
+      console.log(
+        '  optimize "title"     - Auto-optimize title to ideal length'
+      );
       console.log('\nExamples:');
-      console.log('  node title-optimizer.js validate');
-      console.log('  node title-optimizer.js validate "Your Title Here"');
-      console.log('  node title-optimizer.js optimize "This is a very long title that exceeds the character limit"');
-      console.log('  node title-optimizer.js suggest "AI Cancer Detection" --category=health');
+      console.log('  node title-optimizer.js suggest');
+      console.log('  node title-optimizer.js suggest "Your Title Here"');
+      console.log(
+        '  node title-optimizer.js optimize "This is a very long title that exceeds the character limit"'
+      );
+      console.log('\nOptimal Range: 55-65 characters');
+      console.log('Acceptable Range: 50-70 characters');
   }
 }
 

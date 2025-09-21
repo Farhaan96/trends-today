@@ -1,235 +1,279 @@
-# CLAUDE.md - Trends Today: Optimized AI Content System
+# CLAUDE.md - Trends Today: Optimized Content System v2.0
 
-**Current Date:** 2025-09-20
+**Current Date:** 2025-09-21
+**Last Updated:** 2025-09-21
 
 ## 🎯 CORE MISSION
-Create viral, SEO-optimized content with perfect titles that dominate voice search and featured snippets using the streamlined 2-agent system.
+
+Create high-quality, SEO-optimized content that naturally ranks for voice search and featured snippets while maintaining authenticity and reader value. Focus on user intent over rigid formulas.
 
 **Platform:** Next.js 14 + TypeScript + MDX + GPT-Image-1
-**Quality Standard:** 85%+ completion rate, 3+ pages per session
-**Target:** 15-20 articles/day via optimized workflow
+**Quality Standard:** Reader value first, SEO optimization second
+**Target:** Quality over quantity - sustainable content production
 
-## 🤖 STREAMLINED AGENT SYSTEM (2 Agents Only)
+## 🤖 STREAMLINED 3-AGENT SYSTEM
 
-### trending-content-creator
-**Purpose:** Discover topics + create complete articles with SPARK-optimized titles
-**Tools:** WebSearch, WebFetch, Write, Read, Grep, Glob, Bash
-**Output:** Complete MDX article with perfect 50-60 char titles
+### 1. content-creator
 
-### quality-validator (build-validator)
-**Purpose:** Fact-check + image generation + technical validation + SPARK compliance
+**Purpose:** Research topics + create complete, engaging articles with natural SEO optimization
+**Combines:** Former trending-content-creator + content-enhancer functionality
+**Tools:** WebSearch, WebFetch, Write, Read, Edit, MultiEdit, Grep, Glob, Bash
+**Output:** Complete MDX article with natural titles and organic keyword integration
+
+### 2. quality-validator
+
+**Purpose:** Comprehensive fact-checking + technical validation + SEO compliance
+**Combines:** Former quality-factchecker + build-validator functionality
 **Tools:** Read, Bash, TodoWrite, Edit, Glob, Grep, WebSearch, WebFetch
-**Output:** Validated article with AI image + 100% compliance
+**Output:** Validated article with 100% technical compliance and fact accuracy
 
-## 📝 SPARK TITLE OPTIMIZATION SYSTEM
+### 3. image-generator (Unchanged)
 
-### Core Formula (50-60 Characters EXACTLY):
-```
-[Power Word] + [Specific Number] + [Keyword] + [Benefit/Mystery]
-[Scientists/Experts] + [Action Verb] + [Impossible Claim] + [Proof]
-[Number] + [Study/Discovery] + [Contradicts Common Belief]
-```
+**Purpose:** Generate text-free, photorealistic hero images
+**Tools:** Read, Bash, Glob, Edit
+**Output:** AI-generated images with OCR validation
 
-### SPARK Elements (MANDATORY):
-- **S**pecificity: Exact numbers (256-person, 75%, 26 humans, 1000x)
-- **P**ower words: Scientists, Breakthrough, Secret, Impossible, Discovers
-- **A**ction: Finds, Builds, Creates, Proves, Reveals, Solves
-- **R**elevance: Matches search intent + creates curiosity gap
-- **K**ey metrics: Shocking statistics that sound impossible but are true
+## 📝 NATURAL TITLE OPTIMIZATION
 
-### Premium Title Examples (Proven Formulas):
+### Flexible Guidelines (50-70 Characters)
 
-**Health/Science Authority Pattern:**
-✅ **"Scientists Discover Why 75% Sepsis Patients Die Twice"** (54 chars)
-✅ **"26-Gram Octopus Kills 26 Humans With 1000x Cyanide Venom"** (57 chars)
+- **Optimal:** 55-65 characters
+- **Acceptable:** 50-70 characters
+- **Focus:** Search intent and click-through rate
+- **Priority:** Natural language over formulas
 
-**Study/Research Pattern:**
-✅ **"256-Person Study: Consciousness Lives in Eyes, Not Brain"** (57 chars)
-✅ **"Scientists Create First Visible Perpetual Motion Crystal"** (57 chars)
+### Title Best Practices (Guidelines, Not Rules):
 
-**Technology Breakthrough Pattern:**
-✅ **"Scientists Build Quantum Battery That Charges Instantly"** (56 chars)
-✅ **"Webb Finds Saturn Planet at Closest Star - Then Loses It"** (57 chars)
+- Include numbers when they add value (not forced)
+- Use power words when authentic to the content
+- Focus on answering the user's search query
+- Create curiosity without clickbait
+- Match content accurately
 
-**Culture/Behavior Pattern:**
-✅ **"Going Viral Is Dead: Creators Choose 60% Better Engagement"** (59 chars)
-✅ **"Creator Economy Hits $1.2T While 50% Flee Social Media"** (55 chars)
+### Example Evolution:
 
-### Voice Search Long-Tail Patterns:
-```
-"why do [professionals] choose [new approach] over [old method]"
-"how does [technology] achieve [impossible result] in [timeframe]"
-"what happens when [experts] discover [contradictory evidence]"
-"scientists found [number] ways [problem] affects [people]"
-```
+❌ **Old (Forced):** "Scientists Discover Why 75% Sepsis Patients Die Twice" (54 chars)
+✅ **New (Natural):** "New Immune Memory Research Could Save Sepsis Survivors" (55 chars)
 
-### Emotional Triggers (Pick 1-2 per title):
-**Authority:** Scientists, NASA, MIT, Doctors, Experts
-**Impossibility:** First, Impossible, Defies, Breaks, Shouldn't Work
-**Contradiction:** Not What You Think, Opposite, Actually, Really
-**Numbers:** Exact statistics that sound fake but are real
-**Mystery:** Then Loses It, Can't Explain, Nobody Knows Why
+❌ **Old (Formulaic):** "26-Gram Octopus Kills 26 Humans With 1000x Cyanide Venom" (57 chars)
+✅ **New (Engaging):** "The Blue-Ringed Octopus: Nature's Most Venomous Marine Animal" (62 chars)
 
-## 🎨 CONTENT REQUIREMENTS
+## 🎯 SEMANTIC SEO STRATEGY
 
-### Word Counts by Category:
-- **Science/Technology:** 600-800 words (complex explanations needed)
-- **Health/Psychology:** 500-700 words (study methodology + applications)
-- **Culture/News:** 300-500 words (rapid consumption optimized)
+### Natural Keyword Integration:
 
-### Content Structure:
-1. **Featured Snippet** (40-55 words): Direct answer to title question
-2. **Hook** (40-60 words): "Holy crap" emotional trigger
-3. **Evidence** (120-150 words): Stats + expert quotes + proof
-4. **Stakes** (60-80 words): What this means for readers
-5. **Conclusion** (20-30 words): Share-worthy discussion starter
+- **Primary keyword:** Once in title, once in first 100 words
+- **Semantic variations:** Naturally throughout content
+- **Related entities:** Mention when relevant
+- **No keyword density targets** - write naturally
 
-### Critical Formatting Rules:
-- **Bold limit:** 8-18 phrases ONLY (key stats, expert names, discoveries)
-- **NO dashes:** Never use em-dashes (—) or en-dashes (–) for emphasis
-- **NO horizontal rules:** Never use (---) for section breaks
-- **Links:** Only `/category/article-name` format (NEVER relative ../paths)
+### Long-Tail Optimization:
 
-## 🔧 TECHNICAL SPECS
+- Focus on **user questions** not keyword stuffing
+- Answer **search intent** comprehensively
+- Use **natural language patterns**
+- Include **conversational phrases**
 
-### File Requirements:
-- **Extension:** .mdx (never .md) - BLOCKING REQUIREMENT
-- **Filename:** SEO slug matching title keywords (50 chars max)
-- **Title:** 50-60 characters EXACTLY - BLOCKING REQUIREMENT
-- **Description:** 150-160 characters EXACTLY - BLOCKING REQUIREMENT
-- **Authors:** Sarah Martinez, David Kim, Alex Chen, Emma Thompson ONLY
+### Voice Search Optimization:
 
-### SEO Frontmatter Template:
+- Write in **question-answer format** where appropriate
+- Use **natural speech patterns**
+- Include **"how," "what," "why," "when"** naturally
+- Create **scannable answer blocks** (40-60 words)
+
+## 🎨 FLEXIBLE CONTENT GUIDELINES
+
+### Word Count Ranges (±20% Flexibility):
+
+- **Science/Technology:** 500-900 words
+- **Health/Psychology:** 400-800 words
+- **Culture/News:** 250-600 words
+- **Deep Dives:** 1000+ words when warranted
+
+### Natural Formatting:
+
+- **Bold for emphasis:** Use naturally, no counting
+- **Em-dashes allowed:** Use for natural flow
+- **Horizontal rules:** Optional for section breaks
+- **Paragraph length:** 2-4 sentences as feels natural
+- **Lists and bullets:** Use when they improve readability
+
+### Content Structure (Flexible):
+
+1. **Hook** (40-80 words): Capture attention
+2. **Answer** (40-60 words): Direct response for featured snippets
+3. **Body** (Variable): Comprehensive coverage
+4. **Evidence** (As needed): Stats, quotes, research
+5. **Conclusion** (20-50 words): Key takeaway
+
+## 🔧 TECHNICAL REQUIREMENTS (Keep These Strict)
+
+### File Standards:
+
+- **Extension:** .mdx (required)
+- **Filename:** SEO-friendly slug
+- **Categories:** science, technology, space, health, psychology, culture
+- **Authors:** Sarah Martinez, David Kim, Alex Chen, Emma Thompson
+
+### Frontmatter (Flexible Ranges):
+
 ```yaml
-title: '[SPARK title 50-60 chars EXACTLY]'
+title: '[Natural title 50-70 chars]'
 description: >-
-  [Hook + keyword 150-160 chars EXACTLY]
-category: [science|technology|space|health|psychology|culture]
-publishedAt: [current ISO date - NOT hardcoded]
-author: [ASSIGNED_AUTHOR_VIA_UTILITY]
-tags: [long-tail-variations, semantic-keywords, topic-tags]
+  [Compelling meta 150-170 chars]
+category: [appropriate category]
+publishedAt: [current ISO date]
+author: [approved author]
+tags: [relevant tags, no minimum]
 image: ''
 imageAlt: ''
-readingTime: '2 min read'
+readingTime: '[calculated] min read'
 seo:
-  primaryKeyword: '[3-5 word long-tail phrase]'
-  secondaryKeywords: ['phrase 1', 'phrase 2', 'phrase 3']
-  featuredSnippetTarget: true
+  primaryKeyword: '[main search query]'
+  semanticKeywords: ['related', 'terms', 'entities']
+  searchIntent: '[informational|transactional|navigational]'
 ```
 
-## 🚀 WORKFLOW
+## 📊 E-E-A-T OPTIMIZATION (Simplified)
 
-### Content Discovery Priority:
-1. **Voice search queries** with curiosity gaps (3-5 word long-tail)
-2. **Fascinating evergreen** topics with timeless appeal
-3. **Breaking research** if genuinely exceptional
+### Experience:
 
-### Enhanced Agent Pipeline:
+- Include practical insights when relevant
+- Share real-world applications
+- Mention testing or analysis naturally
 
-#### Step 1: Title-First Content Creation
+### Expertise:
+
+- Cite credible sources
+- Explain complex topics clearly
+- Use appropriate technical language
+
+### Authoritativeness:
+
+- Reference institutions and experts
+- Link to quality sources
+- Build topic clusters
+
+### Trustworthiness:
+
+- Acknowledge limitations
+- Provide balanced perspectives
+- Keep content current
+
+## 🚀 SIMPLIFIED WORKFLOW
+
+### Content Creation Process:
+
+1. **Research:** Find topics with genuine user interest
+2. **Title:** Create natural, engaging titles (50-70 chars)
+3. **Write:** Focus on value and natural flow
+4. **Optimize:** Add keywords naturally, not forced
+5. **Validate:** Check facts and technical requirements
+6. **Enhance:** Polish for readability and engagement
+
+### Quality Checks (Essentials Only):
+
+- ✅ Factual accuracy
+- ✅ Technical validation (build passes)
+- ✅ Natural keyword presence
+- ✅ Reader value delivered
+- ✅ Image generated and validated
+
+## 💡 NEW SEO UTILITIES
+
+### Available Tools:
+
 ```bash
-# trending-content-creator MUST:
-1. Research topic thoroughly
-2. Extract specific numbers/statistics
-3. Create SPARK title using character counter: echo "title" | wc -c
-4. Validate 50-60 chars BEFORE writing content
-5. Write article that delivers on title promise
-```
+# Flexible title validation (suggests, doesn't enforce)
+node utils/title-optimizer.js suggest "Your Title"
 
-#### Step 2: SPARK Title Validation
-```bash
-# quality-validator MUST run:
-node utils/title-optimizer.js validate
-# BLOCK publication if SPARK score <60/100
-```
+# Semantic keyword analysis
+node utils/semantic-keywords.js analyze "content/[file].mdx"
 
-#### Step 3: Build Validation (BLOCKING GATE)
-- All technical standards must pass 100%
-- SPARK title compliance mandatory
-- Word count within category limits
-- No formatting violations
+# Readability scoring
+node utils/readability-scorer.js check "content/[file].mdx"
 
-### Daily 3-Batch Strategy:
-- **Morning:** 5-7 trending topics (300-500 words)
-- **Midday:** 5-7 analysis pieces (600-800 words)
-- **Evening:** 5-7 evergreen content (category-appropriate)
+# Content uniqueness checker
+node utils/uniqueness-checker.js verify "content/[file].mdx"
 
-## 📊 SUCCESS METRICS
-
-**Content KPIs:**
-- **Title compliance:** 100% within 50-60 chars
-- **SPARK scores:** Average >75/100
-- **Article completion rate:** >85%
-- **Voice search ranking:** >50% page 1 in 90 days
-- **Social sharing:** 2-3x improvement via curiosity gaps
-
-**Technical KPIs:**
-- **Build success:** 100% first-attempt pass
-- **SEO optimization:** Long-tail keyword dominance
-- **Image quality:** Professional photorealistic only
-
-## 🚨 BLOCKING REQUIREMENTS (Zero Tolerance)
-
-**Title Standards (MANDATORY):**
-- 50-60 characters EXACTLY
-- SPARK score >60/100 (power words + numbers + action verbs)
-- Factually accurate to content
-- Creates curiosity gap without misleading
-
-**Content Standards (MANDATORY):**
-- Word count within category ranges
-- Description 150-160 characters EXACTLY
-- .mdx extension (NOT .md)
-- Bold phrases 8-18 only
-- No horizontal rules or em/en-dashes
-- Current ISO date (not hardcoded)
-
-**Technical Standards (MANDATORY):**
-- Valid YAML frontmatter
-- Approved authors only
-- Proper category assignment
-- Working internal links
-- Image fields set correctly
-
-## 💡 TITLE OPTIMIZATION UTILITIES
-
-### Character Counter:
-```bash
-echo "Your Title Here" | wc -c
-```
-
-### SPARK Validation:
-```bash
-node utils/title-optimizer.js validate "Your Title"
-node utils/title-optimizer.js optimize "Your Title"
-```
-
-### Author Assignment:
-```bash
+# Author assignment (unchanged)
 node utils/author-assignment.js assign "[category]" "[title]" "[description]" "[tags]"
 ```
 
-## 🏆 COMPETITIVE ADVANTAGE
+## 🏆 SUCCESS METRICS (Balanced)
 
-**What Makes Us Different:**
-1. **SPARK-optimized titles** that dominate voice search
-2. **Content-accurate headlines** that deliver on promises
-3. **Category-aware length optimization** for maximum engagement
-4. **Photorealistic AI images** (National Geographic quality)
-5. **2-agent efficiency** vs bloated 5+ agent systems
-6. **100% first-attempt validation** through systematic optimization
+### Content Quality:
 
-**Content Philosophy:**
-> "One viral article with a perfect 55-character SPARK title that accurately represents breakthrough research beats 10 generic clickbait pieces. Quality + optimization = exponential growth."
+- **Reader engagement:** Time on page, bounce rate
+- **Search performance:** Rankings, CTR, impressions
+- **User satisfaction:** Comments, shares, return visits
+- **Technical health:** Core Web Vitals, mobile performance
+
+### SEO Performance:
+
+- **Organic traffic growth:** Sustainable increases
+- **Featured snippets:** Natural capture rate
+- **Voice search rankings:** Conversational queries
+- **Topic authority:** Entity recognition
+
+## 🚨 CRITICAL REQUIREMENTS (Keep These)
+
+### Must-Haves:
+
+- Valid .mdx files with proper frontmatter
+- Approved authors only
+- AI-generated images (no stock photos)
+- Build validation passes
+- Factual accuracy verified
+
+### Avoid:
+
+- Keyword stuffing
+- Clickbait titles that don't deliver
+- Duplicate content
+- Broken internal links
+- Plagiarism or AI detection issues
+
+## 📚 CONTENT PHILOSOPHY
+
+> "Write for humans first, search engines second. Natural, valuable content that genuinely helps readers will always outperform over-optimized, formulaic articles. Quality and authenticity build lasting SEO success."
+
+### Core Principles:
+
+1. **User Intent > Keywords:** Answer what users actually want to know
+2. **Natural Language > Formulas:** Write how people actually speak and search
+3. **Value > Volume:** One great article beats ten mediocre ones
+4. **Flexibility > Rigidity:** Guidelines that adapt to content needs
+5. **Authenticity > Optimization:** Real insights rank better than SEO tricks
+
+## 🔄 CONTINUOUS IMPROVEMENT
+
+### Monitor and Adapt:
+
+- Track which content performs best
+- A/B test title styles
+- Analyze user behavior
+- Update strategies based on data
+- Stay current with SEO trends
+
+### Feedback Loop:
+
+- Review search console data weekly
+- Check user engagement metrics
+- Monitor competitor strategies
+- Adjust guidelines based on results
 
 ---
 
 ## Commands
+
 ```bash
 npm run build              # Validate articles
 npm run dev               # Development
 npm run test:e2e          # Testing
-node utils/title-optimizer.js validate    # Check all titles
+node utils/title-optimizer.js suggest    # Title suggestions
+node utils/semantic-keywords.js analyze  # Keyword analysis
+node utils/readability-scorer.js check   # Readability check
 ```
 
-**Success Formula:** Accurate + Specific + Curiosity Gap + 50-60 chars = Viral SEO domination
+**Success Formula:** User Value + Natural SEO + Quality Content = Sustainable Growth

@@ -11,11 +11,13 @@
 ## 🤖 STREAMLINED AGENT SYSTEM (2 Agents Only)
 
 ### Agent 1: content-creator
+
 - **Purpose:** Discover topics + create complete articles with SEO-optimized titles
 - **Tools:** WebSearch, WebFetch, Write, Read, Bash
 - **Output:** Complete MDX article with perfect titles and filenames
 
 ### Agent 2: quality-validator
+
 - **Purpose:** Fact-check + image generation + technical validation
 - **Tools:** WebSearch, WebFetch, Read, Edit, Bash
 - **Output:** Validated article with AI image
@@ -25,6 +27,7 @@
 ## 📝 TITLE OPTIMIZATION SYSTEM (SPARK Framework)
 
 ### Core Formula (50-60 characters):
+
 ```
 "How [Subject] [Action] [Specific Benefit]: [Shocking Number/Fact]"
 "Why [Phenomenon] [Unexpected Result] [Specific Context]"
@@ -32,6 +35,7 @@
 ```
 
 ### SPARK Elements (Every Title Must Have):
+
 - **S**pecificity: Exact numbers, timeframes, measurements
 - **P**ower words: "Breakthrough," "Impossible," "Secret," "Revolutionary"
 - **A**ction-oriented: "How," "Why," "What happens," "Scientists discover"
@@ -39,6 +43,7 @@
 - **K**ey metrics: Bold numbers that sound impossible
 
 ### Long-Tail Keyword Patterns (Voice Search Ready):
+
 ```
 "how does [tech] help [specific people] with [specific problem]"
 "why does [phenomenon] happen when [specific condition]"
@@ -60,11 +65,13 @@
 ## 🎨 CONTENT REQUIREMENTS
 
 ### Word Counts by Category:
+
 - **Science/Technology:** 600-800 words (complex explanations)
 - **Health/Psychology:** 500-700 words (study + applications)
 - **Culture/News:** 300-500 words (quick consumption)
 
 ### Content Structure:
+
 1. **Featured Snippet Block** (40-55 words): Direct answer to main query
 2. **Emotional Hook** (40-60 words): "Holy crap" factor
 3. **Evidence Avalanche** (120-150 words): Stats, expert quotes, proof
@@ -72,6 +79,7 @@
 5. **Share-Worthy Conclusion** (20-30 words): Discussion starter
 
 ### Critical Formatting:
+
 - **Bold limit:** 8-18 phrases only (key stats, expert names, discoveries)
 - **NO dashes:** Never use em-dashes (—) or en-dashes (–) for emphasis
 - **NO horizontal rules:** Never use (---) for section breaks
@@ -80,6 +88,7 @@
 ## 🔧 TECHNICAL SPECS
 
 ### File Requirements:
+
 - **Extension:** .mdx (never .md)
 - **Filename:** SEO-optimized slug matching title keywords
 - **Title:** 50-60 characters exactly
@@ -87,23 +96,27 @@
 - **Authors:** Sarah Martinez, David Kim, Alex Chen, Emma Thompson only
 
 ### SEO Frontmatter:
+
 ```yaml
 title: '[SPARK-optimized title 50-60 chars]'
 description: '[curiosity gap + keyword 150-160 chars]'
 seo:
   primaryKeyword: '[3-5 word long-tail phrase]'
-  secondaryKeywords: ['related phrase 1', 'related phrase 2', 'related phrase 3']
+  secondaryKeywords:
+    ['related phrase 1', 'related phrase 2', 'related phrase 3']
   featuredSnippetTarget: true
 ```
 
 ## 🚀 WORKFLOW
 
 ### Daily 3-Batch Strategy:
+
 1. **Morning (9 AM):** 5-7 trending news articles (300-500 words)
 2. **Midday (1 PM):** 5-7 analysis pieces (600-800 words)
 3. **Evening (5 PM):** 5-7 evergreen content (category-appropriate)
 
 ### Content Discovery (Priority: Fascinating over Trending):
+
 ```bash
 # Long-tail keyword research
 WebSearch: "how does [technology] work for [specific users] 2025"
@@ -118,6 +131,7 @@ WebSearch: "counterintuitive facts about physics that blow minds"
 ```
 
 ### Quality Gates:
+
 1. **Build validator must pass 100%** (blocking requirement)
 2. **Fact-checking >80% accuracy** required
 3. **Title character count 50-60** exactly
@@ -126,12 +140,14 @@ WebSearch: "counterintuitive facts about physics that blow minds"
 ## 📊 SUCCESS METRICS
 
 **Content KPIs:**
+
 - Article completion rate: >85%
 - Pages per session: 3+ via strategic linking
 - Search ranking: >50% articles page 1 in 90 days
 - Social sharing: Immediate "text to friend" reaction
 
 **Technical KPIs:**
+
 - Build success rate: 100%
 - Title optimization: 50-60 chars, SPARK framework
 - SEO compliance: Long-tail keyword integration
@@ -140,6 +156,7 @@ WebSearch: "counterintuitive facts about physics that blow minds"
 ## 🎯 COMPETITIVE ADVANTAGE
 
 **What Makes Us Different:**
+
 1. **SPARK-optimized titles** that dominate voice search
 2. **Category-aware length optimization** for maximum engagement
 3. **Photorealistic AI images** (National Geographic quality)
@@ -147,6 +164,7 @@ WebSearch: "counterintuitive facts about physics that blow minds"
 5. **Fascinating over trending** approach for evergreen value
 
 **Content Philosophy:**
+
 > "One viral 600-word article with 90% completion rate beats 10 generic pieces readers abandon. Quality creates exponential growth."
 
 ## 🚨 BLOCKING REQUIREMENTS (Zero Tolerance)
@@ -169,6 +187,7 @@ WebSearch: "counterintuitive facts about physics that blow minds"
 ## Commands
 
 ### Common Commands
+
 ```bash
 # Testing
 npm run test:e2e        # Playwright tests
