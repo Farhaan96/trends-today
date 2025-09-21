@@ -189,6 +189,7 @@ image: /images/ai-generated/ai-generated-1758483370958.png
 ## System Performance
 
 **Testing Results** (verified unique images):
+
 - Brain organoids → Lab-grown neural tissue in petri dishes
 - AI workplace productivity → Professional office with AI-powered dashboards
 - Parker Solar Probe → Spacecraft with heat shield flying through corona

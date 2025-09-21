@@ -32,11 +32,12 @@ Create high-quality, SEO-optimized content that naturally ranks for voice search
 **Purpose:** Generate unique, article-specific photorealistic hero images using dynamic content analysis
 **Tools:** Read, Bash, Glob, Edit
 **Enhanced Features:**
+
 - AI semantic analysis extracts specific visual elements from article content
 - 10+ custom visual plans for common topics (brain organoids, AI avatars, space missions)
 - Content-specific keyword and measurement extraction
 - Smart fallback system (category templates only when content analysis fails)
-**Output:** Unique AI-generated images tailored to each article's specific content with OCR validation
+  **Output:** Unique AI-generated images tailored to each article's specific content with OCR validation
 
 ## 📝 NATURAL TITLE OPTIMIZATION
 
@@ -127,7 +128,7 @@ title: '[Natural title 50-70 chars]'
 description: >-
   [Compelling meta 150-170 chars]
 category: [appropriate category]
-publishedAt: [current ISO date]
+publishedAt: [use new Date().toISOString() - actual current timestamp]
 author: [approved author]
 tags: [relevant tags, no minimum]
 image: ''
@@ -290,6 +291,7 @@ node utils/readability-scorer.js check   # Readability check
 The image generation system now creates **unique, article-specific images** instead of generic category templates:
 
 **Priority System:**
+
 1. **AI Semantic Analysis**: GPT-4 analyzes article content to extract specific visual elements
 2. **Custom Visual Plans**: 10+ predefined patterns for common topics
 3. **Content-Specific Extraction**: Identifies visual keywords, measurements, unique descriptors
@@ -309,12 +311,14 @@ The image generation system now creates **unique, article-specific images** inst
 ### Testing Results (Verified Unique Images)
 
 **Before Enhancement:**
+
 - Culture articles → Generic "person at laptop"
 - Psychology articles → Generic brain imagery
 - Technology articles → Abstract tech elements
 - Health articles → Microscopes and lab equipment
 
 **After Enhancement:**
+
 - Brain organoids article → Lab-grown neural tissue with brain-like structures
 - AI workplace productivity → Professional office with AI-powered dashboards
 - Parker Solar Probe → Spacecraft with heat shield flying through corona

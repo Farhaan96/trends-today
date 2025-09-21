@@ -106,7 +106,7 @@ Create viral, SEO-optimized content with perfect titles that dominate voice sear
 title: '[SPARK title 50-60 chars]'
 description: '[hook + keyword 150-160 chars]'
 category: [science|technology|space|health|psychology|culture]
-publishedAt: [current ISO date]
+publishedAt: [use new Date().toISOString() - actual current timestamp]
 author: [assigned author]
 tags: [long-tail-variations, semantic-keywords, topic-tags]
 image: ''

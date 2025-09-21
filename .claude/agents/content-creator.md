@@ -152,6 +152,7 @@ echo "Your Title Here" | wc -c
 - **CRITICAL**: Articles without internal links fail quality standards
 
 **How to Find Related Articles:**
+
 - Psychology articles → Link to cognitive research, mental health, consciousness studies
 - Technology articles → Link to AI, automation, digital innovation topics
 - Health articles → Link to medical breakthroughs, research, wellness topics
@@ -159,7 +160,30 @@ echo "Your Title Here" | wc -c
 - Space articles → Link to missions, discoveries, astronomical research
 - Culture articles → Link to social trends, digital culture, creator economy
 
-### Step 6: Article Template
+### Step 6: Timestamp Generation
+
+**CRITICAL**: Always use the actual current timestamp, not midnight or generic dates.
+
+When setting the `publishedAt` field, use the JavaScript equivalent of:
+
+```javascript
+new Date().toISOString();
+```
+
+This generates the precise current date and time in ISO format (e.g., `2025-09-21T14:01:23.456Z`).
+
+**Never use:**
+
+- Midnight timestamps (`2025-09-21T00:00:00.000Z`)
+- Generic dates without specific times
+- Hardcoded timestamps
+
+**Always use:**
+
+- The actual current moment when creating the article
+- Full precision timestamp with hours, minutes, seconds
+
+### Step 7: Article Template
 
 ```mdx
 ---
@@ -167,7 +191,7 @@ title: '[Natural title 50-70 chars]'
 description: >-
   [Compelling meta description 150-170 chars that expands on title]
 category: [science|technology|space|health|psychology|culture]
-publishedAt: '[current ISO date]'
+publishedAt: '[use new Date().toISOString() - actual current timestamp]'
 author: '[assigned author]'
 tags: [relevant-tags, topic-clusters, entities]
 image: ''
@@ -236,9 +260,10 @@ seo:
 
 - [ ] Valid MDX format
 - [ ] Proper frontmatter
-- [ ] Current ISO date
+- [ ] Current ISO timestamp (not midnight - use actual current time)
 - [ ] Author assigned
 - [ ] Category correct
+- [ ] Timestamp reflects actual creation time, not 00:00:00
 
 ## Writing Philosophy
 

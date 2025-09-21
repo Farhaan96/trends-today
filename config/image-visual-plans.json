@@ -11,7 +11,11 @@
       }
     },
     {
-      "match": ["brain.*organoid", "lab.*grown.*brain", "organoid.*intelligence"],
+      "match": [
+        "brain.*organoid",
+        "lab.*grown.*brain",
+        "organoid.*intelligence"
+      ],
       "plan": {
         "subject": "close-up of lab-grown neural tissue in clear petri dishes showing brain-like structures",
         "environment": "sterile neuroscience laboratory with precision equipment and soft clinical lighting",
@@ -51,7 +55,11 @@
       }
     },
     {
-      "match": ["creator.*economy", "creator.*burnout", "social.*media.*exodus"],
+      "match": [
+        "creator.*economy",
+        "creator.*burnout",
+        "social.*media.*exodus"
+      ],
       "plan": {
         "subject": "modern content creator workspace showing both creative tools and wellness elements",
         "environment": "balanced home studio with natural lighting and organized but not cluttered setup",
@@ -81,7 +89,11 @@
       }
     },
     {
-      "match": ["materials.*defy.*physics", "impossible.*material", "4d.*metamaterial"],
+      "match": [
+        "materials.*defy.*physics",
+        "impossible.*material",
+        "4d.*metamaterial"
+      ],
       "plan": {
         "subject": "crystalline material structures that appear to bend or manipulate space-time",
         "environment": "advanced materials science laboratory with precision measurement equipment",
@@ -91,7 +103,11 @@
       }
     },
     {
-      "match": ["cognitive.*disengagement", "brain.*shutdown", "multitask.*overload"],
+      "match": [
+        "cognitive.*disengagement",
+        "brain.*shutdown",
+        "multitask.*overload"
+      ],
       "plan": {
         "subject": "abstract neural network visualization showing cognitive switching patterns from complex to simplified states",
         "environment": "research psychology laboratory with brain monitoring equipment",
