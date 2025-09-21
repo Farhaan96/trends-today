@@ -204,13 +204,20 @@ seo:
    - Validator 3: Article C fact-check/build validation
    ```
 
-3. **Phase 3 - Image Generation (Parallel)**
+3. **Phase 3 - Image Generation (Parallel) - CRITICAL FILE TARGETING**
+
    ```
    Run ALL image-generator agents simultaneously in single message
-   - Generator 1: Unique image for Article A
-   - Generator 2: Unique image for Article B
-   - Generator 3: Unique image for Article C
+   - Generator 1: SPECIFIC FILE PATH for Article A (e.g., content/science/article-1.mdx)
+   - Generator 2: SPECIFIC FILE PATH for Article B (e.g., content/technology/article-2.mdx)
+   - Generator 3: SPECIFIC FILE PATH for Article C (e.g., content/health/article-3.mdx)
    ```
+
+   **CRITICAL IMAGE ASSIGNMENT RULES:**
+   - Each image-generator agent must receive EXACT file path as parameter
+   - Agent must ONLY read and modify the specified file path
+   - NO cross-contamination between parallel agents
+   - Each agent validates image applied to correct article before completing
 
 #### Performance Benefits:
 
@@ -224,6 +231,18 @@ seo:
 - ❌ **content-creator** NEVER touches images (leaves fields empty)
 - ❌ **quality-validator** NEVER generates images (validates only)
 - ✅ **image-generator** ONLY agent that creates/assigns images
+
+#### Image Assignment Prevention Rules:
+
+**CRITICAL FILE TARGETING:** Each image-generator agent MUST:
+
+1. **Receive exact file path** in task prompt (e.g., "Generate image for content/science/fusion-article.mdx")
+2. **Read ONLY the specified file** to analyze content
+3. **Apply image ONLY to that specific file**
+4. **Validate correct file modified** before marking complete
+5. **Never touch other article files** even if running in parallel
+
+**PREVENTION:** This stops wrong images being applied when agents run simultaneously
 
 **CRITICAL:** Always use single message with multiple Task tool calls for parallel execution
 
