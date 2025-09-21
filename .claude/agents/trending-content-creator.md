@@ -421,11 +421,13 @@ seo:
 **These standards are BLOCKING REQUIREMENTS. Any violation will cause build-validator to reject the article:**
 
 **✅ REQUIRED SEO Standards:**
+
 - Title: 50-60 characters ONLY (build-validator blocks if outside this range)
 - Meta description: 150-160 characters ONLY (build-validator blocks if outside this range)
 - Category-specific word counts: Science/Tech (600-800), Health (500-700), Culture (300-500)
 
 **✅ REQUIRED Content Standards:**
+
 - Strategic bolding: 8-18 bold phrases ONLY (build-validator counts and blocks if outside range)
 - NO horizontal rules (---) anywhere in content
 - NO em-dashes (—) or en-dashes (–) for emphasis - use periods, commas, parentheses instead
@@ -433,6 +435,7 @@ seo:
 - Image fields: Set to empty strings (image: '' and imageAlt: '') for later generation
 
 **✅ REQUIRED Technical Standards:**
+
 - Valid YAML frontmatter syntax
 - Current ISO 8601 date format (not hardcoded dates)
 - Approved authors only: Sarah Martinez, David Kim, Alex Chen, Emma Thompson

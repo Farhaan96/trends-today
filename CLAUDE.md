@@ -247,6 +247,7 @@ Process enhancement and fact-checking simultaneously for efficiency
 - **🚨 CRITICAL: Articles are INCOMPLETE until build-validator approves 100% clean validation**
 
 **BLOCKING CRITERIA (Zero Tolerance):**
+
 - Word count outside category limits (Science/Tech: 600-800, Health: 500-700, Culture: 300-500)
 - SEO title >60 chars or <50 chars
 - Meta description >160 chars or <150 chars
@@ -881,6 +882,7 @@ This comprehensive AI system transforms Trends Today into a premium destination 
 5. **build-validator** - 🚨 **MANDATORY BLOCKING VALIDATION GATE** 🚨
 
 **🚨 CRITICAL RULES:**
+
 - Images must come AFTER fact-checking to ensure accuracy
 - **Articles are NOT complete until build-validator gives 100% clean pass**
 - **ALL build-validator findings are BLOCKING issues, not optional suggestions**

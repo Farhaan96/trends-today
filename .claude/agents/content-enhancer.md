@@ -406,11 +406,13 @@ edits: [
 **Before applying ANY enhancements, ensure the following BLOCKING requirements are met. Build-validator will REJECT articles that violate these standards:**
 
 **✅ SEO BLOCKING Requirements:**
+
 - Title length: 50-60 characters ONLY
 - Meta description: 150-160 characters ONLY
 - Word count within category limits: Science/Tech (600-800), Health (500-700), Culture (300-500)
 
 **✅ FORMATTING BLOCKING Requirements:**
+
 - Strategic bolding: 8-18 bold phrases ONLY (count before and after enhancement)
 - ZERO horizontal rules (---) anywhere in content
 - ZERO em-dashes (—) or en-dashes (–) for emphasis
