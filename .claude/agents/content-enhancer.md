@@ -346,18 +346,44 @@ Links that show ongoing coverage and expertise:
 - 2 links in core content (when mentioning related concepts)
 - 1 link near conclusion (for next steps/related reading)
 
+**CRITICAL: Internal Link Format Requirements:**
+
+**✅ CORRECT FORMAT (ALWAYS USE):**
+
+```markdown
+[quantum supremacy breakthrough](/technology/quantum-computing-breakthrough)
+[AI-powered medical diagnosis](/health/ai-medical-diagnosis-breakthrough)
+[latest Mars rover findings](/space/mars-rover-latest-discovery)
+```
+
+**❌ WRONG FORMATS (NEVER USE):**
+
+```markdown
+[link](../technology/article-name) ← NEVER use relative paths
+[link](https://trendstoday.vercel.app/blog/article) ← NEVER use full URLs
+[link](/content/technology/article-name) ← NEVER use /content/ prefix
+```
+
+**Internal Link Format Rules:**
+
+- Format: `/category/article-slug`
+- Categories: science, technology, space, health, psychology, culture
+- No trailing slashes
+- No file extensions
+- No domain names or full URLs
+
 **Anchor Text Optimization:**
 
 ```markdown
 // Good Examples:
-[quantum supremacy breakthrough](link)
-[AI-powered medical diagnosis](link)
-[latest Mars rover findings](link)
+[quantum supremacy breakthrough](/technology/quantum-computing-breakthrough)
+[AI-powered medical diagnosis](/health/ai-medical-diagnosis-breakthrough)
+[latest Mars rover findings](/space/mars-rover-latest-discovery)
 
 // Avoid:
-[this article](link)
-[click here](link)
-[read more](link)
+[this article](/some/link)
+[click here](/some/link)
+[read more](/some/link)
 ```
 
 ## Single-Pass Implementation

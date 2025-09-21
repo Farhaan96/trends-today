@@ -114,6 +114,7 @@ Claude Code (Orchestrator)
   - **Strategic Bolding LIMIT**: Maximum 12-18 bold phrases per article focusing on breakthrough moments, key measurements, and scientific discoveries
   - **Horizontal Rule Prohibition**: NEVER use horizontal rules (---) - use natural paragraph breaks instead
   - **Dash Elimination**: NEVER use em-dashes (—) or en-dashes (–) for emphasis - convert to periods, commas, or parentheses
+  - **Internal Link Format**: ONLY use `/category/article-name` format (NEVER `../category/` relative paths or full URLs like vercel.app)
   - **Bold only**: key researchers (first mention), critical statistics, major discoveries, important institutions
   - **Never bold**: common terms, repeated mentions, adjectives, general descriptions
 - **Optimization:** All text enhancements applied in one MultiEdit operation

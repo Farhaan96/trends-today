@@ -412,7 +412,7 @@ seo:
 - [ ] **Accessibility**: Complex concepts explained in simple terms
 - [ ] **Voice Search Ready**: Answers conversational questions
 - [ ] **Social Sharing Triggers**: Content makes readers want to share
-- [ ] **Internal Link Opportunities**: Phrases that could link to other content identified
+- [ ] **Internal Link Format**: Use ONLY `/category/article-name` format (NEVER `../category/` or full URLs)
 - [ ] **Formatting Standards**: CRITICAL requirements applied (12-18 bold limit, no horizontal rules, no em/en-dashes)
 - [ ] **Data Presentation**: NO complex tables, charts, or overwhelming numerical breakdowns - use narrative with key numbers
 
