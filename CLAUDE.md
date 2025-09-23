@@ -21,6 +21,14 @@ Create high-quality, SEO-optimized content that naturally ranks for voice search
 **Output:** Complete MDX article with natural titles and organic keyword integration
 **CRITICAL:** NEVER generate images - leave `image: ''` and `imageAlt: ''` empty for image-generator agent
 
+**MANDATORY DUPLICATE PREVENTION:**
+
+- MUST run `node utils/topic-validator.js check "title"` before writing
+- MUST perform grep search for main keywords before starting
+- MUST stop if duplicate confidence > 70%
+- MUST include validation results in article creation report
+- MUST suggest alternative angles if duplication detected
+
 ### 2. quality-validator
 
 **Purpose:** Comprehensive fact-checking + technical validation + SEO compliance
@@ -169,16 +177,75 @@ seo:
 - Provide balanced perspectives
 - Keep content current
 
-## 🚀 SIMPLIFIED WORKFLOW
+## 🔍 DUPLICATE PREVENTION PROTOCOL (MANDATORY)
+
+**CRITICAL: Every content creation MUST start with duplicate checking**
+
+### Pre-Creation Validation (Required):
+
+1. **Topic Validator Check:**
+
+   ```bash
+   node utils/topic-validator.js check "Proposed Article Title"
+   ```
+
+   - Auto-checks title similarity vs existing articles
+   - Returns confidence score (>70% = duplicate)
+   - Provides alternative angle suggestions
+
+2. **Keyword Validation:**
+
+   ```bash
+   node utils/topic-validator.js keywords "main,keywords,here"
+   ```
+
+   - Checks overlap with existing content keywords
+   - Prevents topical saturation
+
+3. **Manual Grep Verification:**
+
+   ```bash
+   grep -i "main topic keywords" content/**/*.mdx
+   ```
+
+   - Final verification for partial coverage
+   - Check if topic already covered from different angle
+
+### Agent Integration Requirements:
+
+**content-creator agents MUST:**
+
+- Run topic validation BEFORE writing
+- Include validation results in initial assessment
+- STOP if duplicate confidence > 70%
+- Suggest alternative angles if duplication detected
+
+**Validation Report Format:**
+
+```
+✅ UNIQUE TOPIC - Proceed with creation
+❌ DUPLICATE DETECTED - Confidence: 85%
+⚠️ SIMILAR CONTENT - Review: [list similar articles]
+```
+
+### Inventory Management:
+
+- **existing-articles.txt** - Auto-updated after each batch
+- **CLAUDE.md inventory** - Weekly sync with actual content
+- **Topic validation cache** - Speeds up repeat checks
+
+## 🚀 ENHANCED WORKFLOW (With Duplicate Prevention)
 
 ### Content Creation Process:
 
-1. **Research:** Find topics with genuine user interest
-2. **Title:** Create natural, engaging titles (50-70 chars)
-3. **Write:** Focus on value and natural flow
-4. **Optimize:** Add keywords naturally, not forced
-5. **Validate:** Check facts and technical requirements
-6. **Enhance:** Polish for readability and engagement
+1. **Validate:** Run duplicate prevention protocol (MANDATORY)
+2. **Research:** Find topics with genuine user interest (if unique)
+3. **Title:** Create natural, engaging titles (50-70 chars)
+4. **Write:** Focus on value and natural flow
+5. **Optimize:** Add keywords naturally, not forced
+6. **Quality Check:** Technical validation and fact verification
+7. **Enhance:** Polish for readability and engagement
+8. **Update Inventory:** Add new article to tracking system
 
 ### 📦 PARALLEL BATCH EXECUTION (CRITICAL FOR EFFICIENCY)
 
