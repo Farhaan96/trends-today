@@ -110,10 +110,42 @@ Create high-quality, SEO-optimized content that naturally ranks for voice search
 ### Natural Formatting:
 
 - **Bold for emphasis:** Use naturally, no counting
-- **Em-dashes allowed:** Use for natural flow
+- **Em-dash usage:** MAXIMUM 2 per article (ideally 0-1)
 - **Horizontal rules:** Optional for section breaks
 - **Paragraph length:** 2-4 sentences as feels natural
 - **Lists and bullets:** Use when they improve readability
+
+### ❌ AI Writing Patterns to AVOID (MANDATORY):
+
+**Em-Dash Overuse (CRITICAL):**
+
+- ❌ NEVER use more than 2 em-dashes (—) per article
+- ❌ AVOID: "concept—definition—continues" patterns
+- ❌ AVOID: Multiple em-dashes in one paragraph
+- ✅ Instead use: periods, commas, parentheses, or rewrite sentences
+
+**Examples of Em-Dash Fixes:**
+
+- ❌ BAD: "Sleep deprivation—a common problem—affects millions"
+- ✅ GOOD: "Sleep deprivation, a common problem, affects millions"
+- ❌ BAD: "The brain rewires itself—creating new pathways"
+- ✅ GOOD: "The brain rewires itself. It creates new pathways."
+- ❌ BAD: "Research shows—surprisingly—that gratitude works"
+- ✅ GOOD: "Research shows that gratitude works (surprisingly)."
+
+**Alternatives to Em-Dashes:**
+
+1. **Periods** for strong breaks → 50% of replacements
+2. **Commas** for mild pauses → 30% of replacements
+3. **Parentheses** for true asides → 15% of replacements
+4. **Rewrite** to avoid the need → 5% of replacements
+
+**Other Formulaic Patterns to Avoid:**
+
+- Excessive use of "here's the thing" or "here's why"
+- Starting multiple sentences with "The truth is"
+- Overuse of power words like "groundbreaking" or "revolutionary"
+- Repetitive sentence structures throughout article
 
 ### Content Structure (Flexible):
 
@@ -219,6 +251,10 @@ seo:
 - Include validation results in initial assessment
 - STOP if duplicate confidence > 70%
 - Suggest alternative angles if duplication detected
+- **LIMIT em-dashes to maximum 2 per article (count and verify)**
+- **Use variety in punctuation: periods, commas, parentheses**
+- **Avoid formulaic AI writing patterns (see ❌ AI Patterns section)**
+- **Self-check final article for em-dash count before submission**
 
 **Validation Report Format:**
 
@@ -319,6 +355,8 @@ seo:
 - ✅ Technical validation (build passes)
 - ✅ Natural keyword presence
 - ✅ Reader value delivered
+- ✅ **Em-dash count ≤ 2 (MANDATORY validation)**
+- ✅ No formulaic AI writing patterns
 - ✅ Image generated and validated
 
 ## 💡 NEW SEO UTILITIES
@@ -337,6 +375,12 @@ node utils/readability-scorer.js check "content/[file].mdx"
 
 # Content uniqueness checker
 node utils/uniqueness-checker.js verify "content/[file].mdx"
+
+# Em-dash counter (MANDATORY check - must be ≤ 2)
+grep -c "—" content/[file].mdx
+
+# Em-dash validator script
+node utils/em-dash-validator.js "content/[file].mdx"
 
 # Author assignment (unchanged)
 node utils/author-assignment.js assign "[category]" "[title]" "[description]" "[tags]"
@@ -375,6 +419,9 @@ node utils/author-assignment.js assign "[category]" "[title]" "[description]" "[
 - Duplicate content
 - Broken internal links
 - Plagiarism or AI detection issues
+- **Em-dash overuse (>2 per article) - dead giveaway of AI writing**
+- **Formulaic sentence structures that repeat patterns**
+- **Excessive power words without substance**
 
 ## 📚 CONTENT PHILOSOPHY
 
