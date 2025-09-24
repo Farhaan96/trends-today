@@ -96,7 +96,8 @@
       "Bash(__NEW_LINE__ echo \"\")",
       "Bash(/dev/null)",
       "Bash(git rm:*)",
-      "Bash(xargs:*)"
+      "Bash(xargs:*)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": []
