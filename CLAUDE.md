@@ -100,20 +100,49 @@ Create high-quality, SEO-optimized content that naturally ranks for voice search
 
 ## 🎨 FLEXIBLE CONTENT GUIDELINES
 
-### Word Count Ranges (±20% Flexibility):
+### 📏 Word Count Ranges (With Structure Requirements):
 
-- **Science/Technology:** 500-900 words
-- **Health/Psychology:** 400-800 words
-- **Culture/News:** 250-600 words
-- **Deep Dives:** 1000+ words when warranted
+**Target Ranges (flexible with proper visual structure):**
 
-### Natural Formatting:
+- **Psychology:** 600-1,100 words (IF properly structured with --- breaks)
+- **Science/Technology:** 700-1,200 words (IF properly structured)
+- **Health:** 600-1,000 words (IF properly structured)
+- **Culture/News:** 400-800 words
+- **Space:** 600-1,100 words (IF properly structured)
 
-- **Bold for emphasis:** Use naturally, no counting
+**Rule:** Articles over 800 words MUST have minimum 4 horizontal rules (---) for visual breathing room
+
+### ✨ FORMATTING RULES (MANDATORY):
+
+**Bold Usage (Strategic):**
+
+- Bold specific numbers/percentages: **7.76%**, **32 participants**, **49,275 women**
+- Bold study names: **Nature Scientific Reports**, **JAMA Psychiatry**, **Stanford University**
+- Bold key terms when introducing: **fMRI imaging**, **prefrontal cortex**, **neuroplasticity**
+- NOT random emphasis words or entire sentences
+
+**Horizontal Rules (CRITICAL FOR READABILITY):**
+
+- Use `---` between major topic shifts/sections
+- **Minimum 3-4 per article** (5-7 for articles over 900 words)
+- Creates visual breathing room and "chapter" feeling
+- Makes longer articles scannable and digestible
+- Place after opening section, between main sections, before conclusion
+
+**List Format (Structured):**
+
+- Use colon before list introduction
+- Format: `- **Term**: Description` or `- **Number/Finding**: Explanation`
+- Keep descriptions concise (under 20 words)
+- Group related items together
+- Include at least 2 bulleted lists per article
+
+**Paragraph Rules:**
+
 - **Em-dash usage:** MAXIMUM 2 per article (ideally 0-1)
-- **Horizontal rules:** Optional for section breaks
-- **Paragraph length:** 2-4 sentences as feels natural
-- **Lists and bullets:** Use when they improve readability
+- **Paragraph length:** 1-3 sentences (2 sentences ideal)
+- Use single-sentence paragraphs for impact
+- Avoid walls of text (max 4 sentences per paragraph)
 
 ### ❌ AI Writing Patterns to AVOID (MANDATORY):
 
@@ -147,13 +176,107 @@ Create high-quality, SEO-optimized content that naturally ranks for voice search
 - Overuse of power words like "groundbreaking" or "revolutionary"
 - Repetitive sentence structures throughout article
 
-### Content Structure (Flexible):
+### ✅ GOOD ARTICLE STRUCTURE EXAMPLES:
 
-1. **Hook** (40-80 words): Capture attention
-2. **Answer** (40-60 words): Direct response for featured snippets
-3. **Body** (Variable): Comprehensive coverage
-4. **Evidence** (As needed): Stats, quotes, research
-5. **Conclusion** (20-50 words): Key takeaway
+**Example 1: Gratitude Neuroscience Article (FOLLOW THIS)**
+
+```markdown
+Opening paragraph with question and **bold statistics**...
+
+## Brain imaging studies show gratitude meditation activates the medial prefrontal cortex, amygdala, and nucleus accumbens while reducing heart rate and anxiety levels. Just **5 minutes daily** triggers neuroplastic changes that persist long after the practice ends.
+
+Context paragraph expanding on the answer...
+
+---
+
+## The Gratitude Circuit: Your Brain's Hidden Network
+
+Advanced **fMRI imaging** reveals...
+
+This network includes:
+
+- **Medial prefrontal cortex**: Processes moral reasoning
+- **Amygdala**: Regulates emotional responses
+- **Nucleus accumbens**: Controls reward and motivation
+
+Research findings with **bold numbers**...
+
+---
+
+## Measurable Mental Health Improvements
+
+Content with specific findings:
+
+- **7.76% anxiety reduction** compared to control groups
+- **6.86% higher life satisfaction scores**
+
+> "Expert quote providing credibility"
+> **Source attribution**
+
+---
+
+## Conclusion Section
+
+Actionable takeaway or stark reality statement...
+```
+
+**Example 2: Bold Usage (Strategic)**
+
+✅ GOOD: "**32 healthy volunteers** underwent brain imaging"
+✅ GOOD: "A **2024 JAMA Psychiatry study** following **49,275 women**"
+✅ GOOD: "**fMRI imaging** has revealed what neuroscientists call"
+❌ BAD: "Research shows that **gratitude is important**" (vague emphasis)
+
+**Example 3: List Format**
+
+✅ GOOD:
+
+```
+Key findings:
+- **7.76% anxiety reduction**: Compared to control groups
+- **9% lower mortality risk**: In highest gratitude scorers
+```
+
+❌ BAD:
+
+```
+Key findings:
+- Anxiety was reduced
+- Mortality risk was lower
+```
+
+### 📖 ARTICLE STRUCTURE (MANDATORY FORMAT):
+
+**Required Elements in Order:**
+
+1. **Opening Hook** (50-80 words with bold statistic or question)
+2. **Featured Answer Block** (H2 header `##`, 40-60 words, directly answers main query)
+3. **Context paragraph** expanding on the answer
+4. **Horizontal rule** (`---`)
+5. **Main Section 1** with H2 header
+6. **Horizontal rule** (`---`)
+7. **Main Section 2** with H2 header
+8. **Horizontal rule** (`---`)
+9. **Main Section 3-5** (each with H2 header and `---` separator)
+10. **Conclusion section** with actionable takeaway or stark reality
+
+**Each Main Section Must Include:**
+
+- Clear H2 header (descriptive, not generic)
+- 2-4 paragraphs of content
+- At least 1 bulleted list OR expert quote
+- Bold numbers/studies for scanning
+- Internal link when relevant
+
+**Featured Answer Block Format (CRITICAL):**
+
+Position immediately after opening paragraph (lines 2-3). Format as H2 header with direct answer to title question.
+
+Example:
+
+```
+## Brain imaging studies show gratitude meditation activates the medial prefrontal cortex, amygdala, and nucleus accumbens while reducing heart rate and anxiety levels. Just **5 minutes daily** triggers neuroplastic changes that persist long after the practice ends.
+```
 
 ## 🔧 TECHNICAL REQUIREMENTS (Keep These Strict)
 
@@ -251,10 +374,16 @@ seo:
 - Include validation results in initial assessment
 - STOP if duplicate confidence > 70%
 - Suggest alternative angles if duplication detected
-- **LIMIT em-dashes to maximum 2 per article (count and verify)**
-- **Use variety in punctuation: periods, commas, parentheses**
-- **Avoid formulaic AI writing patterns (see ❌ AI Patterns section)**
-- **Self-check final article for em-dash count before submission**
+- **FOLLOW ARTICLE STRUCTURE: Opening → Featured Answer Block (H2) → --- → Sections → ---**
+- **Include minimum 3-4 horizontal rules (---)** for visual breaks
+- **Use Featured Answer Block (H2 format) immediately after opening**
+- **Bold numbers/studies strategically** (not random emphasis)
+- **Include 2+ structured bulleted lists** (format: **Term**: Description)
+- **LIMIT em-dashes to maximum 2 per article** (count and verify)
+- **Keep paragraphs to 1-3 sentences** (2 sentences ideal)
+- **Use variety in punctuation:** periods, commas, parentheses
+- **Avoid formulaic AI writing patterns** (see ❌ AI Patterns section)
+- **Self-check before submission:** structure, horizontal rules, bold usage, em-dash count
 
 **Validation Report Format:**
 
@@ -355,7 +484,10 @@ seo:
 - ✅ Technical validation (build passes)
 - ✅ Natural keyword presence
 - ✅ Reader value delivered
-- ✅ **Em-dash count ≤ 2 (MANDATORY validation)**
+- ✅ **Article structure followed** (Featured Answer Block, horizontal rules)
+- ✅ **Minimum 3-4 horizontal rules (---) present**
+- ✅ **Em-dash count ≤ 2** (MANDATORY validation)
+- ✅ **Strategic bold usage** (numbers/studies, not random)
 - ✅ No formulaic AI writing patterns
 - ✅ Image generated and validated
 
