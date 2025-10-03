@@ -97,7 +97,9 @@
       "Bash(/dev/null)",
       "Bash(git rm:*)",
       "Bash(xargs:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(timeout 30 npm run build)",
+      "Bash(git log:*)"
     ],
     "deny": [],
     "ask": []
