@@ -389,31 +389,6 @@ export default function ArticleList({
           baseUrl=""
           className="mb-8"
         />
-        <div className="text-center">
-          <p className="text-xs text-gray-400 mb-2">
-            For search engines and accessibility:
-          </p>
-          <nav className="flex flex-wrap justify-center gap-2 text-xs">
-            {Array.from(
-              { length: Math.min(pagination.totalPages, 10) },
-              (_, i) => i + 1
-            ).map((page) => (
-              <Link
-                key={page}
-                href={page === 1 ? '/' : `/page/${page}`}
-                className="px-2 py-1 text-gray-400 hover:text-gray-600 transition-colors"
-                aria-label={`View page ${page} of articles`}
-              >
-                Page {page}
-              </Link>
-            ))}
-            {pagination.totalPages > 10 && (
-              <span className="px-2 py-1 text-gray-400">
-                ... +{pagination.totalPages - 10} more pages
-              </span>
-            )}
-          </nav>
-        </div>
       </div>
     </>
   );
