@@ -332,72 +332,210 @@ seo:
 - Provide balanced perspectives
 - Keep content current
 
-## 🔍 DUPLICATE PREVENTION PROTOCOL (MANDATORY)
+## 🔍 ENHANCED DUPLICATE PREVENTION PROTOCOL v2.0 (MANDATORY)
 
-**CRITICAL: Every content creation MUST start with duplicate checking**
+**CRITICAL: Every content creation MUST start with 3-step semantic validation**
 
-### Pre-Creation Validation (Required):
+### 🚨 MANDATORY PRE-FLIGHT VALIDATION (Run BEFORE Research)
 
-1. **Topic Validator Check:**
+**All content-creator agents MUST complete these 3 checks sequentially:**
 
-   ```bash
-   node utils/topic-validator.js check "Proposed Article Title"
-   ```
+#### Step 1: Semantic Similarity Check (PRIMARY - NEW)
 
-   - Auto-checks title similarity vs existing articles
-   - Returns confidence score (>70% = duplicate)
-   - Provides alternative angle suggestions
+```bash
+node utils/semantic-similarity-checker.js check "Proposed Title" "Brief description" [category]
+```
 
-2. **Keyword Validation:**
+**What it does:**
 
-   ```bash
-   node utils/topic-validator.js keywords "main,keywords,here"
-   ```
+- Uses AI embeddings to detect conceptual duplicates
+- Catches "CRISPR Gene Therapy" vs "DNA Editing Treatment" (95% semantic match)
+- Detects "Gratitude Rewires Brain" vs "Neuroscience of Thankfulness" (92% match)
+- **STOP if similarity ≥ 85%** - topic is semantically duplicate
+- **PROCEED if similarity < 85%** - topic is unique enough
 
-   - Checks overlap with existing content keywords
-   - Prevents topical saturation
+**Example Output:**
 
-3. **Manual Grep Verification:**
+```
+🔍 SEMANTIC VALIDATION RESULTS
 
-   ```bash
-   grep -i "main topic keywords" content/**/*.mdx
-   ```
+✅ SEMANTIC CHECK: PASSED
+  - Highest similarity: 43% (threshold: 85%)
+  - Status: Topic is semantically unique
 
-   - Final verification for partial coverage
-   - Check if topic already covered from different angle
+✅ CROSS-CATEGORY CHECK: PASSED
+  - No similar topics in other categories
+
+🟢 PROCEED WITH CONTENT CREATION
+```
+
+#### Step 2: Category Saturation Check
+
+```bash
+node utils/content-diversity-manager.js analyze [category]
+```
+
+**What it does:**
+
+- Checks if category has too many recent articles on topic
+- Identifies oversaturated topics (3+ articles in 30 days)
+- **WARNING if topic appears in oversaturatedTopics list**
+- Helps maintain content diversity
+
+#### Step 3: Smart Topic Discovery (Optional - Use for Fresh Ideas)
+
+```bash
+node utils/smart-topic-discovery.js discover [category] 5
+```
+
+**What it does:**
+
+- Proactively finds unique topics by analyzing gaps
+- Filters trending topics against existing semantic coverage
+- Ranks by uniqueness score (0-100%)
+- Provides specific angles that differ from existing content
+
+**Example Output:**
+
+```
+✨ TOP 5 UNIQUE TOPIC OPPORTUNITIES:
+
+1. Bioelectric medicine replacing pharmaceuticals chronic pain
+   Uniqueness: 92% | Quality: high | Potential Score: 98/100
+   Suggested angles:
+     a) How bioelectric medicine transforms patient outcomes
+     b) Bioelectric medicine: From research to clinical practice
+     c) Breaking down the mechanisms of bioelectric medicine
+```
+
+### ✅ Pre-Flight Validation Checklist (MANDATORY)
+
+Before researching ANY topic, agent MUST confirm:
+
+```
+✅ Pre-Flight Validation Completed:
+  - [✓] Semantic similarity check: PASSED (max 43% similarity)
+  - [✓] Category saturation check: PASSED (4 articles/30 days)
+  - [✓] Cross-category check: PASSED (no overlap detected)
+  - [✓] Validation timestamp: 2025-01-XX
+```
+
+### 🔴 STOP Conditions (Do NOT Proceed)
+
+Agent MUST STOP and request new topic if:
+
+1. **Semantic similarity ≥ 85%** - Topic is conceptual duplicate
+2. **Category saturation detected** - Topic in oversaturatedTopics list
+3. **Cross-category duplicate ≥ 75%** - Similar topic in another category
+4. **Topic validator confidence > 70%** - String-based duplicate detected
+
+### 💡 If Validation Fails - Get New Topics
+
+**Option 1: Smart Topic Discovery**
+
+```bash
+node utils/smart-topic-discovery.js discover [category] 5
+```
+
+**Option 2: Gap Analysis**
+
+```bash
+node utils/smart-topic-discovery.js gaps [category]
+```
+
+**Option 3: Trending Topics**
+
+```bash
+node utils/smart-topic-discovery.js trending [category]
+```
 
 ### Agent Integration Requirements:
 
 **content-creator agents MUST:**
 
-- Run topic validation BEFORE writing
-- Include validation results in initial assessment
-- STOP if duplicate confidence > 70%
-- Suggest alternative angles if duplication detected
-- **FOLLOW ARTICLE STRUCTURE: Opening → Featured Answer Block (H2) → --- → Sections → ---**
-- **Include minimum 3-4 horizontal rules (---)** for visual breaks
-- **Use Featured Answer Block (H2 format) immediately after opening**
-- **Bold numbers/studies strategically** (not random emphasis)
-- **Include 2+ structured bulleted lists** (format: **Term**: Description)
-- **LIMIT em-dashes to maximum 2 per article** (count and verify)
-- **Keep paragraphs to 1-3 sentences** (2 sentences ideal)
-- **Use variety in punctuation:** periods, commas, parentheses
-- **Avoid formulaic AI writing patterns** (see ❌ AI Patterns section)
-- **Self-check before submission:** structure, horizontal rules, bold usage, em-dash count
+**BEFORE RESEARCH:**
 
-**Validation Report Format:**
+- ✅ Run semantic-similarity-checker.js (Step 1 - PRIMARY)
+- ✅ Run content-diversity-manager.js analyze (Step 2)
+- ✅ Include validation results in initial assessment
+- ✅ STOP if any validation fails
+- ✅ Use smart-topic-discovery.js if needing fresh topics
+
+**DURING WRITING:**
+
+- ✅ **FOLLOW ARTICLE STRUCTURE: Opening → Featured Answer Block (H2) → --- → Sections → ---**
+- ✅ **Include minimum 3-4 horizontal rules (---)** for visual breaks
+- ✅ **Use Featured Answer Block (H2 format) immediately after opening**
+- ✅ **Bold numbers/studies strategically** (not random emphasis)
+- ✅ **Include 2+ structured bulleted lists** (format: **Term**: Description)
+- ✅ **LIMIT em-dashes to maximum 2 per article** (count and verify)
+- ✅ **Keep paragraphs to 1-3 sentences** (2 sentences ideal)
+- ✅ **Use variety in punctuation:** periods, commas, parentheses
+- ✅ **Avoid formulaic AI writing patterns** (see ❌ AI Patterns section)
+
+**BEFORE SUBMISSION:**
+
+- ✅ Self-check: structure, horizontal rules, bold usage, em-dash count
+- ✅ Include validation report showing all checks passed
+
+### Enhanced Validation Report Format:
 
 ```
-✅ UNIQUE TOPIC - Proceed with creation
-❌ DUPLICATE DETECTED - Confidence: 85%
-⚠️ SIMILAR CONTENT - Review: [list similar articles]
+🔍 SEMANTIC VALIDATION RESULTS
+
+Proposed: "Bioelectric Medicine Breakthrough"
+Category: health
+
+✅ SEMANTIC CHECK: PASSED
+  - Highest similarity: 43% (threshold: 85%)
+  - Status: Topic is semantically unique
+
+✅ SATURATION CHECK: PASSED
+  - Health category: 4 recent articles (under 8/month threshold)
+  - No oversaturated topics detected
+
+✅ CROSS-CATEGORY CHECK: PASSED
+  - No similar topics found in other categories
+
+🟢 VERDICT: PROCEED WITH CONTENT CREATION
+
+---
+
+❌ SEMANTIC CHECK: FAILED
+  - 91% similar to "Doctors Cured Incurable Baby Custom DNA Editing"
+  - 87% similar to "CRISPR Therapeutics Breakthrough 2025"
+
+❌ SATURATION CHECK: FAILED
+  - Gene therapy/CRISPR: 4 articles in last 30 days
+
+🔴 VERDICT: STOP - DO NOT PROCEED
+
+💡 Alternative Topics Suggested:
+  1. Phage therapy renaissance for antibiotic resistance
+  2. Organ-on-chip technology replacing animal testing
+  3. Bioelectric medicine treating chronic pain
 ```
+
+### Legacy Tools (Still Available):
+
+```bash
+# String-based title similarity (legacy - less accurate than semantic)
+node utils/topic-validator.js check "Proposed Article Title"
+
+# Keyword overlap check (legacy)
+node utils/topic-validator.js keywords "main,keywords,here"
+
+# Manual grep verification (fallback)
+grep -i "main topic keywords" content/**/*.mdx
+```
+
+**Note:** Legacy tools use string matching. New semantic tools use AI embeddings for better accuracy.
 
 ### Inventory Management:
 
 - **existing-articles.txt** - Auto-updated after each batch
 - **CLAUDE.md inventory** - Weekly sync with actual content
-- **Topic validation cache** - Speeds up repeat checks
+- **Semantic embeddings cache** - Speeds up repeat checks (in-memory)
 
 ## 🚀 ENHANCED WORKFLOW (With Duplicate Prevention)
 
@@ -491,9 +629,39 @@ seo:
 - ✅ No formulaic AI writing patterns
 - ✅ Image generated and validated
 
-## 💡 NEW SEO UTILITIES
+## 💡 ENHANCED SEO & VALIDATION UTILITIES
 
-### Available Tools:
+### 🆕 Semantic Duplicate Prevention (v2.0):
+
+```bash
+# PRIMARY: Semantic similarity checker (AI-powered duplicate detection)
+node utils/semantic-similarity-checker.js check "Title" "Description" [category]
+node utils/semantic-similarity-checker.js cross-check "Title" "Description" category
+node utils/semantic-similarity-checker.js batch-analyze health
+
+# Smart topic discovery (proactive unique topic finder)
+node utils/smart-topic-discovery.js discover health 5
+node utils/smart-topic-discovery.js gaps technology
+node utils/smart-topic-discovery.js trending science
+
+# Category saturation analysis
+node utils/content-diversity-manager.js analyze health
+node utils/content-diversity-manager.js report
+node utils/content-diversity-manager.js queries psychology 3
+```
+
+### Legacy Tools (String-Based):
+
+```bash
+# String-based title similarity (less accurate than semantic)
+node utils/topic-validator.js check "Proposed Article Title"
+node utils/topic-validator.js keywords "main,keywords,here"
+
+# Topic duplicate checker (multi-factor scoring)
+node utils/topic-duplicate-checker.js check "Title" "Description" [category]
+```
+
+### SEO & Quality Tools:
 
 ```bash
 # Flexible title validation (suggests, doesn't enforce)
@@ -505,18 +673,20 @@ node utils/semantic-keywords.js analyze "content/[file].mdx"
 # Readability scoring
 node utils/readability-scorer.js check "content/[file].mdx"
 
-# Content uniqueness checker
-node utils/uniqueness-checker.js verify "content/[file].mdx"
-
 # Em-dash counter (MANDATORY check - must be ≤ 2)
 grep -c "—" content/[file].mdx
-
-# Em-dash validator script
 node utils/em-dash-validator.js "content/[file].mdx"
 
-# Author assignment (unchanged)
+# Author assignment
 node utils/author-assignment.js assign "[category]" "[title]" "[description]" "[tags]"
 ```
+
+### Tool Hierarchy (Use in This Order):
+
+1. **First: Semantic Similarity Checker** (catches conceptual duplicates)
+2. **Second: Category Saturation Analysis** (prevents topic oversaturation)
+3. **Third: Smart Topic Discovery** (finds unique opportunities if needed)
+4. **Optional: Legacy string-based tools** (fallback verification)
 
 ## 🏆 SUCCESS METRICS (Balanced)
 
