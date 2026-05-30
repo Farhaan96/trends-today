@@ -15,14 +15,19 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(messa
 logger = logging.getLogger(__name__)
 
 STYLE_GUIDE = """
-- Curious, accessible explainer tone
-- Sentence-case titles (no clickbait)
-- 600-900 words total
-- 2-4 H2 sections
-- Paragraphs ≤4 sentences
-- One rhetorical question or CTA at end
-- Include [[INTERNAL: keyword]] placeholder for internal links
-- Facts grounded in sources
+- Curious, accessible explainer tone; write for humans first, search engines second
+- Lead with a genuinely original angle or surprising insight — never a generic summary
+- Sentence-case titles, 50-70 chars, no clickbait that the body can't deliver
+- 600-900 words total, 2-4 H2 (##) sections, paragraphs ≤4 sentences
+- Open with a 50-80 word hook built around a concrete, verifiable number or stark fact
+- Immediately follow the hook with a 40-60 word "featured answer" paragraph that
+  directly answers the title's implied question (great for featured snippets / voice search)
+- Bold the specific numbers, study names, and institutions that matter (e.g. **63% faster**,
+  **Nature**, **MIT**) — not random words
+- Use periods and commas for rhythm; MAXIMUM 2 em-dashes (—) in the whole article
+- Ground every claim in the provided sources; do not invent statistics
+- Include one [[INTERNAL: keyword]] placeholder for internal linking
+- End with an actionable takeaway or a single sharp question
 """
 
 class ArticleDrafter:
@@ -36,23 +41,31 @@ class ArticleDrafter:
         """Build the article generation prompt"""
         source_text = "\n".join([
             f"- {s.get('title', 'Source')}: {s['snippet'][:300]}"
-            for s in sources[:3]
+            for s in sources[:5]
         ])
-        
-        return f"""Write an engaging tech article about: {topic}
 
-Sources:
+        return f"""You are writing for Trends Today, a general-interest publication covering
+science, technology, space, health, psychology, and culture. Write a standout article on:
+{topic}
+
+Find the most interesting, non-obvious angle the sources support — the detail a curious
+reader would repeat to a friend. Avoid generic "here's an overview" framing. If the sources
+reveal a surprising number, a counterintuitive finding, or a "wait, really?" moment, build
+the piece around it.
+
+Sources (ground every factual claim in these — do not fabricate stats):
 {source_text}
 
 Style Guide:
 {STYLE_GUIDE}
 
-Return JSON with:
-- title: ≤70 chars, sentence case
-- subtitle: Brief engaging hook
-- body_mdx: 600-900 words with 2-4 ## H2 sections
-- meta_description: ≤155 chars
-- tags: 3-5 relevant tags"""
+Return ONLY a JSON object with these keys:
+- title: sentence case, 50-70 chars, specific and curiosity-driven (no clickbait)
+- subtitle: one-sentence hook that promises a concrete payoff
+- body_mdx: 600-900 words, 2-4 ## H2 sections, opening hook + featured-answer paragraph,
+  bold key numbers, ≤2 em-dashes, one [[INTERNAL: keyword]] placeholder
+- meta_description: ≤155 chars, includes the primary search phrase naturally
+- tags: 3-5 specific, relevant tags (lowercase)"""
 
     def draft_claude(self, topic: str, sources: List[Dict]) -> Optional[Dict]:
         """Generate with Claude (Anthropic)"""

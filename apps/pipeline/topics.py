@@ -58,13 +58,23 @@ class TopicDiscovery:
                     'Content-Type': 'application/json'
                 },
                 json={
-                    'model': 'llama-3.1-sonar-small-128k-online',
+                    'model': 'sonar',
                     'messages': [{
                         'role': 'user',
-                        'content': f'List {count} trending tech topics today. Focus on: AI, gadgets, science, space, how-to guides. Return only topic titles, one per line.'
+                        'content': (
+                            f'List {count} genuinely interesting, high-search-interest story '
+                            'angles trending in the last 48 hours across science, technology, '
+                            'space, health, psychology, and culture. '
+                            'Prioritize specific, surprising, or counterintuitive developments '
+                            'with a concrete hook (a number, a named study, a "wait, really?" '
+                            'finding) over broad evergreen topics. '
+                            'Avoid generic phrasings like "the future of AI". '
+                            'Return ONLY the angles as sentence-case article titles, one per '
+                            'line, no numbering, no commentary.'
+                        )
                     }],
-                    'temperature': 0.7,
-                    'max_tokens': 500
+                    'temperature': 0.8,
+                    'max_tokens': 900
                 },
                 timeout=30
             )
@@ -96,8 +106,11 @@ class TopicDiscovery:
             return []
         
         try:
-            # Use Google Custom Search API for tech news
-            categories = ['AI news', 'gadget reviews', 'space exploration', 'tech tutorials', 'science breakthroughs']
+            # Use Google Custom Search API across the site's full category set
+            categories = [
+                'AI breakthrough', 'space discovery', 'science breakthrough',
+                'health study finding', 'psychology research', 'culture trend'
+            ]
             topics = []
             
             for category in categories:
@@ -139,7 +152,11 @@ class TopicDiscovery:
             'https://techcrunch.com/feed/',
             'https://www.theverge.com/rss/index.xml',
             'https://arstechnica.com/feed/',
-            'https://www.wired.com/feed/rss'
+            'https://www.wired.com/feed/rss',
+            'https://www.sciencedaily.com/rss/top/science.xml',
+            'https://www.sciencedaily.com/rss/top/health.xml',
+            'https://www.sciencedaily.com/rss/mind_brain.xml',
+            'https://www.space.com/feeds/all'
         ]
         
         topics = []
