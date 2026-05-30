@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Draft Module - Generate 600-900 word articles
-Uses Claude → OpenAI → Gemini with fallbacks
+Uses Claude (Opus 4.8) → OpenAI → Gemini with fallbacks
 """
 
 import os
@@ -68,26 +68,33 @@ Return JSON with:
                     'content-type': 'application/json'
                 },
                 json={
-                    'model': 'claude-3-haiku-20240307',
-                    'max_tokens': 2000,
+                    'model': 'claude-opus-4-8',
+                    'max_tokens': 3000,
+                    'system': (
+                        'You are a sharp tech reporter. Return ONLY a single valid JSON '
+                        'object matching the requested schema. No prose, no markdown code '
+                        'fences, no commentary outside the JSON.'
+                    ),
                     'messages': [{
                         'role': 'user',
                         'content': self._build_prompt(topic, sources)
                     }],
                     'temperature': 0.7
                 },
-                timeout=30
+                timeout=60
             )
             
             if response.status_code == 200:
                 content = response.json()['content'][0]['text']
-                # Try to parse as JSON
+                # Try to parse as JSON (tolerate code fences / surrounding prose)
                 try:
-                    return json.loads(content)
-                except:
+                    return json.loads(self._strip_json(content))
+                except Exception:
                     # Fallback: extract from text
                     return self._parse_text_response(content)
-                    
+            else:
+                logger.error(f"Claude HTTP {response.status_code}: {response.text[:200]}")
+
         except Exception as e:
             logger.error(f"Claude error: {e}")
         
@@ -160,6 +167,20 @@ Return JSON with:
         
         return None
     
+    def _strip_json(self, text: str) -> str:
+        """Strip markdown code fences / surrounding prose to expose the JSON object."""
+        import re
+        # Remove ```json ... ``` or ``` ... ``` fences if present
+        fence = re.search(r'```(?:json)?\s*(.*?)```', text, re.DOTALL)
+        if fence:
+            text = fence.group(1)
+        # Otherwise, grab the outermost {...} block
+        else:
+            brace = re.search(r'\{.*\}', text, re.DOTALL)
+            if brace:
+                text = brace.group(0)
+        return text.strip()
+
     def _parse_text_response(self, text: str) -> Dict:
         """Fallback parser for non-JSON responses"""
         import re

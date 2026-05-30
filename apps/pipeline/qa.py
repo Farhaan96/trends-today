@@ -7,7 +7,7 @@ Second LLM pass for content refinement
 import os
 import json
 import logging
-from typing import Dict
+from typing import Dict, List
 import requests
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(message)s')
@@ -58,15 +58,15 @@ Return the corrected body_mdx only."""
                         'content-type': 'application/json'
                     },
                     json={
-                        'model': 'claude-3-haiku-20240307',
-                        'max_tokens': 1500,
+                        'model': 'claude-opus-4-8',
+                        'max_tokens': 2000,
                         'messages': [{
                             'role': 'user',
                             'content': prompt
                         }],
                         'temperature': 0.3
                     },
-                    timeout=30
+                    timeout=60
                 )
                 
                 if response.status_code == 200:
