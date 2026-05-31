@@ -67,8 +67,45 @@ Return ONLY a JSON object with these keys:
 - meta_description: ≤155 chars, includes the primary search phrase naturally
 - tags: 3-5 specific, relevant tags (lowercase)"""
 
+    def _claude_cli(self, system: str, user_prompt: str) -> Optional[str]:
+        """Generate via the local Claude Code CLI (uses the logged-in Max
+        subscription — no API key / no per-token billing). Returns raw text,
+        or None if the CLI is unavailable or errors so callers can fall back."""
+        import shutil, subprocess
+        claude_bin = os.getenv('CLAUDE_BIN') or shutil.which('claude')
+        if not claude_bin:
+            return None
+        full = f"{system}\n\n{user_prompt}\n\nReturn ONLY the JSON object, nothing else."
+        # Strip CLAUDECODE so this still works if ever invoked from inside a
+        # Claude Code session (which otherwise blocks nested CLI launches).
+        env = {k: v for k, v in os.environ.items() if k != 'CLAUDECODE'}
+        try:
+            proc = subprocess.run(
+                [claude_bin, '-p', '--model', 'claude-opus-4-8', '--output-format', 'text'],
+                input=full, capture_output=True, text=True, timeout=240, env=env
+            )
+            if proc.returncode == 0 and proc.stdout.strip():
+                return proc.stdout.strip()
+            logger.error(f"claude CLI rc={proc.returncode}: {(proc.stderr or '')[:200]}")
+        except Exception as e:
+            logger.error(f"claude CLI error: {e}")
+        return None
+
     def draft_claude(self, topic: str, sources: List[Dict]) -> Optional[Dict]:
-        """Generate with Claude (Anthropic)"""
+        """Generate with Claude — local Claude CLI (Max subscription) first,
+        Anthropic API as fallback."""
+        _system = (
+            'You are a sharp tech reporter. Return ONLY a single valid JSON '
+            'object matching the requested schema. No prose, no markdown code '
+            'fences, no commentary outside the JSON.'
+        )
+        _cli = self._claude_cli(_system, self._build_prompt(topic, sources))
+        if _cli:
+            try:
+                return json.loads(self._strip_json(_cli))
+            except Exception:
+                return self._parse_text_response(_cli)
+
         if not self.anthropic_key:
             return None
         

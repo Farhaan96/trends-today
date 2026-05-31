@@ -42,12 +42,40 @@ Requirements:
 
 Return the corrected body_mdx only."""
 
+    def _claude_cli(self, prompt):
+        """Run the QA pass via the local Claude Code CLI (uses the logged-in Max
+        subscription — no API key / no per-token billing). Returns corrected
+        text, or None if the CLI is unavailable/errors so callers fall back."""
+        import shutil, subprocess
+        claude_bin = os.getenv('CLAUDE_BIN') or shutil.which('claude')
+        if not claude_bin:
+            return None
+        env = {k: v for k, v in os.environ.items() if k != 'CLAUDECODE'}
+        try:
+            proc = subprocess.run(
+                [claude_bin, '-p', '--model', 'claude-opus-4-8', '--output-format', 'text'],
+                input=prompt, capture_output=True, text=True, timeout=240, env=env
+            )
+            if proc.returncode == 0 and proc.stdout.strip():
+                return proc.stdout.strip()
+            logger.error(f"claude CLI (QA) rc={proc.returncode}: {(proc.stderr or '')[:200]}")
+        except Exception as e:
+            logger.error(f"claude CLI (QA) error: {e}")
+        return None
+
     def qa_check(self, article: Dict, sources: List[Dict] = None) -> Dict:
         """Run quality assurance pass"""
         sources = sources or []
         prompt = self._build_qa_prompt(article, sources)
-        
-        # Try Claude first for QA
+
+        # Prefer the local Claude CLI (Max subscription, no API billing)
+        _cli = self._claude_cli(prompt)
+        if _cli:
+            article['body_mdx'] = _cli
+            logger.info("QA pass completed with Claude CLI")
+            return article
+
+        # Try Claude API next
         if self.anthropic_key:
             try:
                 response = requests.post(
