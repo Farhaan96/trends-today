@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { formatArticleDate } from '@/lib/editorial';
 
 interface Article {
   slug: string;
@@ -91,7 +92,7 @@ export default function RelatedArticles({
                   )}
                   {articleDate && (
                     <p className="text-xs text-gray-500">
-                      {new Date(articleDate).toLocaleDateString()}
+                      {formatArticleDate(articleDate)}
                     </p>
                   )}
                 </div>

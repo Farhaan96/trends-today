@@ -3,11 +3,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getAllArticles } from '@/lib/article-utils';
-import {
-  getCategoryKey,
-  getCategoryStyles,
-  getCategoryDescription,
-} from '@/lib/categories';
+import { getCategoryKey, getCategoryDescription } from '@/lib/categories';
+import { formatArticleDate } from '@/lib/editorial';
 import {
   paginateItems,
   generatePaginationMetadata,
@@ -49,10 +46,11 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Params;
+  params: Promise<Params>;
 }): Promise<Metadata> {
-  const key = getCategoryKey(params.category);
-  const page = validatePageParam(params.page);
+  const { category, page: pageParam } = await params;
+  const key = getCategoryKey(category);
+  const page = validatePageParam(pageParam);
   const description = getCategoryDescription(key);
 
   const all = await getAllArticles();
@@ -99,11 +97,11 @@ export async function generateMetadata({
 export default async function CategoryPaginatedPage({
   params,
 }: {
-  params: Params;
+  params: Promise<Params>;
 }) {
-  const key = getCategoryKey(params.category);
-  const page = validatePageParam(params.page);
-  const styles = getCategoryStyles(key);
+  const { category, page: pageParam } = await params;
+  const key = getCategoryKey(category);
+  const page = validatePageParam(pageParam);
   const description = getCategoryDescription(key);
 
   const all = await getAllArticles();
@@ -133,25 +131,18 @@ export default async function CategoryPaginatedPage({
   ];
 
   return (
-    <main className="bg-white">
+    <main className="category-page">
       {/* Breadcrumb Schema */}
       <BreadcrumbSchema items={breadcrumbs} />
 
       {/* Themed Category Header */}
-      <section className={`border-b ${styles.headerBg}`}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
-          <div className="mb-3">
-            <span
-              className={`inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide ${styles.badge}`}
-            >
-              {title}
-            </span>
-          </div>
-          <h1 className="font-serif text-4xl font-extrabold tracking-tight text-gray-900">
+      <section className="category-header">
+        <div className="site-shell category-header__inner">
+          <h1 className="category-title">
             {title} {page > 1 && `- Page ${page}`}
           </h1>
-          {description && <p className="mt-2 text-gray-600">{description}</p>}
-          <p className="mt-3 text-sm text-gray-500">
+          {description && <p className="category-description">{description}</p>}
+          <p className="category-count">
             Page {pagination.currentPage} of {pagination.totalPages} •{' '}
             {pagination.totalItems} total articles
           </p>
@@ -159,56 +150,46 @@ export default async function CategoryPaginatedPage({
       </section>
 
       {/* Articles list */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+      <section className="site-shell category-feed">
         {pageArticles.length === 0 ? (
-          <p className="text-gray-600">No articles found on this page.</p>
+          <p className="empty-state">No articles found on this page.</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {pageArticles.map((article) => {
+          <div className="category-grid">
+            {pageArticles.map((article, index) => {
               const href = `/${key}/${article.slug}`;
               const img = (article.image || article.frontmatter?.image) as
                 | string
                 | undefined;
               const atitle = (article.title ||
                 article.frontmatter?.title) as string;
-              const date = new Date(
-                (article.publishedAt ||
-                  article.frontmatter?.publishedAt ||
-                  new Date().toISOString()) as string
-              ).toLocaleDateString();
+              const date = formatArticleDate(
+                article.publishedAt || article.frontmatter?.publishedAt
+              );
               return (
-                <article key={href} className="group">
+                <article key={href} className="category-story">
                   <Link href={href}>
-                    <div className="relative w-full aspect-square bg-gray-100 border border-gray-200 rounded-xl overflow-hidden">
+                    <div className="category-story__media">
                       {img ? (
                         <Image
                           src={img}
                           alt={atitle}
                           fill
-                          className="object-cover rounded-xl transition-transform duration-300"
+                          priority={index === 0}
+                          className="object-cover editorial-image"
                           sizes="(max-width: 1024px) 100vw, 33vw"
                           loading={page === 1 ? 'eager' : 'lazy'}
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm rounded-xl">
-                          Image
+                        <div className="editorial-image-fallback">
+                          <span>Trends Today</span>
                         </div>
                       )}
-                      <div className="absolute top-3 left-3">
-                        <span
-                          className={`inline-block px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide ${styles.badge}`}
-                        >
-                          {key}
-                        </span>
-                      </div>
                     </div>
                   </Link>
                   <Link href={href}>
-                    <h2 className="mt-3 text-lg font-bold text-gray-900 group-hover:text-gray-800 leading-snug">
-                      {atitle}
-                    </h2>
+                    <h2 className="category-story__title">{atitle}</h2>
                   </Link>
-                  <div className="text-sm text-gray-500">{date}</div>
+                  <div className="category-story__date">{date}</div>
                 </article>
               );
             })}

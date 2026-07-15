@@ -1,14 +1,8 @@
 ﻿import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { DM_Sans, Newsreader } from 'next/font/google';
 import Link from 'next/link';
 import './globals.css';
-import './minimal.css';
-import Header from '@/components/layout/Header';
-import MinimalHeader from '@/components/minimal/MinimalHeader';
-import Footer from '@/components/layout/Footer';
-import StickyNavigation from '@/components/ui/StickyNavigation';
-import BackToTop from '@/components/ui/BackToTop';
-import ReadingProgressBar from '@/components/ui/ReadingProgressBar';
+import EditorialHeader from '@/components/editorial/EditorialHeader';
 import {
   OrganizationSchema,
   WebsiteSchema,
@@ -16,13 +10,22 @@ import {
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
 
-const inter = Inter({
-  variable: '--font-inter',
+const sans = DM_Sans({
+  variable: '--font-ui',
   subsets: ['latin'],
   display: 'swap',
   preload: true,
   weight: ['400', '500', '600', '700'],
   fallback: ['system-ui', '-apple-system', 'sans-serif'],
+});
+
+const display = Newsreader({
+  variable: '--font-editorial',
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  weight: ['400', '500', '600', '700'],
+  fallback: ['Georgia', 'serif'],
 });
 
 export const metadata: Metadata = {
@@ -101,18 +104,11 @@ export const metadata: Metadata = {
       ],
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
-    yahoo: 'your-yahoo-verification-code',
-  },
   other: {
-    'google-adsense-account': 'ca-pub-xxxxxxxxxxxxxxxx',
-    monetization: '$ilp.uphold.com/your-payment-pointer',
     'apple-mobile-web-app-title': 'Trends Today',
     'application-name': 'Trends Today',
-    'msapplication-TileColor': '#0070f3',
-    'theme-color': '#0070f3',
+    'msapplication-TileColor': '#e5483e',
+    'theme-color': '#f5f2eb',
   },
 };
 
@@ -121,26 +117,36 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isMinimalTheme = true; // Force minimal theme
+  const analyticsCandidate = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+  const adsenseCandidate = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT;
+  const analyticsId =
+    analyticsCandidate && !analyticsCandidate.toUpperCase().includes('XXXX')
+      ? analyticsCandidate
+      : undefined;
+  const adsenseClient =
+    adsenseCandidate && /^ca-pub-\d{16}$/.test(adsenseCandidate)
+      ? adsenseCandidate
+      : undefined;
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`${sans.variable} ${display.variable}`}>
       <head>
         {/* SEO Schema Markup */}
         <OrganizationSchema />
         <WebsiteSchema />
 
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
+        {analyticsId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX', {
+            gtag('config', '${analyticsId}', {
               page_title: document.title,
               page_location: window.location.href,
               custom_map: {
@@ -149,38 +155,31 @@ export default function RootLayout({
               }
             });
           `}
-        </Script>
+            </Script>
+          </>
+        )}
 
-        {/* Google AdSense - Will be activated when approved */}
-        <Script
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        {adsenseClient && (
+          <Script
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
 
-        {/* Additional SEO Meta Tags */}
-        <meta name="google-adsense-account" content="ca-pub-xxxxxxxxxxxxxxxx" />
-        <meta
-          name="monetization"
-          content="$ilp.uphold.com/your-payment-pointer"
-        />
+        {adsenseClient && (
+          <meta name="google-adsense-account" content={adsenseClient} />
+        )}
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
         {/* Preconnect to improve loading performance */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
 
         {/* DNS Prefetch */}
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
 
         {/* Favicon and PWA Icons */}
@@ -190,51 +189,43 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
 
-      <body
-        className={`${inter.variable} font-sans antialiased min-h-screen flex flex-col text-[var(--color-text)] ${isMinimalTheme ? 'minimal-theme bg-[var(--color-bg)]' : 'bg-white'}`}
-      >
-        {!isMinimalTheme && <ReadingProgressBar />}
-        {isMinimalTheme ? <MinimalHeader /> : <Header />}
-        {!isMinimalTheme && <StickyNavigation />}
-        <main className="flex-1">{children}</main>
-        {isMinimalTheme ? (
-          <footer className="mt-16 border-t border-white/20 bg-gradient-to-r from-violet-600 to-blue-600">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
-              <div className="text-center text-sm text-white/80">
-                <p>
-                  &copy; {new Date().getFullYear()} Trends Today. All rights
-                  reserved.
-                </p>
-                <div className="mt-4 space-x-4">
-                  <Link
-                    href="/about"
-                    className="hover:text-white transition-colors"
-                  >
-                    About
-                  </Link>
-                  <span>•</span>
-                  <Link
-                    href="/privacy"
-                    className="hover:text-white transition-colors"
-                  >
-                    Privacy
-                  </Link>
-                  <span>•</span>
-                  <Link
-                    href="/contact"
-                    className="hover:text-white transition-colors"
-                  >
-                    Contact
-                  </Link>
-                </div>
-              </div>
+      <body className="site-body">
+        <EditorialHeader />
+        <main id="main-content" className="site-main">
+          {children}
+        </main>
+        <footer className="site-footer">
+          <div className="site-shell site-footer__inner">
+            <div>
+              <Link
+                href="/"
+                className="site-wordmark"
+                aria-label="Trends Today home"
+              >
+                <span className="site-wordmark__mark" aria-hidden="true">
+                  T
+                </span>
+                <span>Trends Today</span>
+              </Link>
+              <p className="site-footer__statement">
+                Useful reporting for people who want to understand what is
+                changing.
+              </p>
             </div>
-          </footer>
-        ) : (
-          <Footer />
-        )}
-        {!isMinimalTheme && <BackToTop />}
-        {/* Vercel Web Analytics */}
+            <nav className="site-footer__links" aria-label="Footer navigation">
+              <Link href="/about">About</Link>
+              <Link href="/authors">Authors</Link>
+              <Link href="/editorial-standards">Editorial standards</Link>
+              <Link href="/how-we-test">How we test</Link>
+              <Link href="/privacy">Privacy</Link>
+              <Link href="/contact">Contact</Link>
+            </nav>
+          </div>
+          <div className="site-shell site-footer__legal">
+            <span>&copy; {new Date().getFullYear()} Trends Today</span>
+            <span>All rights reserved.</span>
+          </div>
+        </footer>
         <Analytics />
       </body>
     </html>

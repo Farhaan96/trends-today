@@ -1,20 +1,21 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import StructuredData from '@/components/seo/StructuredData';
 import { getAllBaseSchemas } from '@/lib/schema';
 import { getAllPosts } from '@/lib/content';
-import ArticleList from '@/components/home/ArticleList';
 import {
   paginateItems,
   generatePaginationMetadata,
   validatePageParam,
 } from '@/lib/pagination';
 import PaginationLinks from '@/components/ui/PaginationLinks';
+import { formatArticleDate } from '@/lib/editorial';
 
 interface Props {
-  params: {
+  params: Promise<{
     page: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -28,7 +29,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const page = validatePageParam(params.page);
+  const { page: pageParam } = await params;
+  const page = validatePageParam(pageParam);
   const posts = await getAllPosts();
   const totalPages = Math.ceil(posts.length / 12);
 
@@ -60,7 +62,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PaginatedHomePage({ params }: Props) {
-  const page = validatePageParam(params.page);
+  const { page: pageParam } = await params;
+  const page = validatePageParam(pageParam);
   const posts = await getAllPosts();
   const paginatedResult = paginateItems(posts, page, 12, '');
 
@@ -71,53 +74,51 @@ export default async function PaginatedHomePage({ params }: Props) {
   const { items: pageArticles, pagination } = paginatedResult;
 
   return (
-    <main className="bg-white min-h-screen">
+    <main className="site-page">
       <h1 className="sr-only">Trends Today - Latest Articles - Page {page}</h1>
       <StructuredData data={getAllBaseSchemas()} />
 
-      {/* Leravi-style Layout */}
-      <section className="max-w-6xl mx-auto px-6 py-8 md:py-32">
+      <section className="site-shell category-feed">
         {/* Page indicator for SEO and user orientation */}
-        <div className="mb-8">
-          <p className="text-sm text-gray-600 mb-2">
+        <div className="archive-header">
+          <p className="category-count">
             Page {pagination.currentPage} of {pagination.totalPages} •{' '}
             {pagination.totalItems} total articles
           </p>
-          <h2 className="text-2xl font-bold text-gray-900">
+          <h2>
             Latest Articles{' '}
             {pagination.currentPage > 1 && `- Page ${pagination.currentPage}`}
           </h2>
         </div>
 
         {/* Article Grid - Static for this page */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
+        <div className="category-grid">
           {pageArticles.map((article) => (
-            <div key={article.href} className="space-y-4">
+            <article key={article.href} className="category-story">
               <a href={article.href} className="block">
-                <div className="relative w-full aspect-square bg-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                <div className="category-story__media">
                   {article.frontmatter.image ? (
-                    <img
+                    <Image
                       src={article.frontmatter.image}
                       alt={article.frontmatter.title}
-                      className="w-full h-full object-cover rounded-xl transition-transform duration-300"
-                      loading={pagination.currentPage === 1 ? 'eager' : 'lazy'}
+                      fill
+                      className="editorial-image object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority={false}
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-400">
-                      <div className="text-center">
-                        <div className="w-12 h-12 bg-gray-200 rounded-full mx-auto mb-2"></div>
-                        <p className="text-xs">Image</p>
-                      </div>
+                    <div className="editorial-image-fallback">
+                      <span>Trends Today</span>
                     </div>
                   )}
                 </div>
               </a>
               <a href={article.href} className="block">
-                <h3 className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors leading-tight break-words">
+                <h3 className="category-story__title">
                   {article.frontmatter.title}
                 </h3>
               </a>
-              <div className="text-sm text-gray-500">
+              <div className="category-story__date">
                 <span className="font-medium">
                   {typeof article.frontmatter.author === 'string'
                     ? article.frontmatter.author
@@ -125,14 +126,13 @@ export default async function PaginatedHomePage({ params }: Props) {
                 </span>
                 <span className="mx-2">•</span>
                 <span>
-                  {new Date(
+                  {formatArticleDate(
                     article.frontmatter.publishedAt ||
-                      article.frontmatter.datePublished ||
-                      new Date().toISOString()
-                  ).toLocaleDateString()}
+                      article.frontmatter.datePublished
+                  )}
                 </span>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
