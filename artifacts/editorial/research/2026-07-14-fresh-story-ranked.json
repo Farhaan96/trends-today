@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-07-15T06:17:30.098742+00:00",
+  "generatedAt": "2026-07-15T06:33:36.703596+00:00",
   "results": [
     {
-      "title": "Astronomers found raspberry sugar between the stars",
+      "title": "Astronomers found the first true sugar between the stars",
       "lane": "timely-opportunity",
       "score": 91.0,
       "decision": "brief",
@@ -11,7 +11,7 @@
         "Meets the current evidence and opportunity thresholds"
       ],
       "candidate": {
-        "title": "Astronomers found raspberry sugar between the stars",
+        "title": "Astronomers found the first true sugar between the stars",
         "category": "space",
         "lane": "timely-opportunity",
         "intendedReader": "A curious non-specialist who wants to understand what a new astrobiology result does and does not say about life's origins.",
