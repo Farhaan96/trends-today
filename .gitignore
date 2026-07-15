@@ -60,6 +60,7 @@ Trends Today/
 # cache and temp files
 .cache/
 **/.cache/
+**/__pycache__/
 reports/
 pipeline.log
 nul

@@ -1,6 +1,13 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  // The compare index reads MDX from content/ at build/runtime. Next's file
+  // tracer otherwise treats process.cwd() as unconstrained and copies every
+  // public image into this function, even though Vercel serves public/ as
+  // static assets outside the function bundle.
+  outputFileTracingExcludes: {
+    '/compare': ['./public/**/*', './apps/web/public/**/*'],
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },

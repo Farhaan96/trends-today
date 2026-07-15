@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "updatedAt": "2026-07-14",
+  "businessModel": {
+    "primary": "owned media and audience distribution",
+    "revenueSequence": [
+      "qualified attention",
+      "attributable app discovery",
+      "ads and affiliate revenue",
+      "select sponsorships after audience fit is proven"
+    ]
+  },
+  "audience": {
+    "status": "hypothesis",
+    "buyer": "busy, tech-curious professionals and operators",
+    "pain": "important technology, science, health, psychology, space, and culture changes are noisy and hard to evaluate",
+    "promise": "clear, sourced explanations that tell the reader what changed, why it matters, and what to do next"
+  },
+  "constraint": {
+    "stage": "measurement",
+    "statement": "Trends Today cannot yet connect topic choices and content quality to qualified views, returning readers, app actions, or revenue.",
+    "avoidedHardAction": "publish fewer measured experiments and kill weak topics instead of optimizing article count"
+  },
+  "portfolio": [
+    {
+      "id": "compounding-search",
+      "targetShare": 45,
+      "purpose": "durable search demand and topic authority"
+    },
+    {
+      "id": "timely-opportunity",
+      "targetShare": 30,
+      "purpose": "fresh demand with a specific, supportable angle"
+    },
+    {
+      "id": "authority-proof",
+      "targetShare": 15,
+      "purpose": "original analysis, experiments, and proof that earn trust"
+    },
+    {
+      "id": "app-distribution",
+      "targetShare": 10,
+      "purpose": "useful content naturally adjacent to one of Farhaan's apps"
+    }
+  ],
+  "opportunityScoring": {
+    "scale": {
+      "min": 0,
+      "max": 5
+    },
+    "weights": {
+      "audienceFit": 20,
+      "demandSignal": 20,
+      "evidenceStrength": 20,
+      "uniqueAngle": 15,
+      "compoundingValue": 10,
+      "monetizationFit": 5,
+      "appFit": 5,
+      "speedToUsefulDraft": 5
+    },
+    "minimumScore": 70,
+    "minimumEvidenceStrength": 3,
+    "minimumSources": 3
+  },
+  "experiment": {
+    "changedVariable": "topic selection by opportunity score instead of output quota",
+    "primaryMetric": "organic engaged sessions per published article after 28 days",
+    "leadingMetrics": [
+      "search impressions after 7 and 28 days",
+      "organic click-through rate",
+      "engaged session rate",
+      "returning reader rate",
+      "app CTA clicks by article"
+    ],
+    "guardrails": [
+      "no unsupported claims",
+      "no candidate with fewer than three usable sources",
+      "no placeholder image",
+      "no direct scheduled publishing",
+      "no public app promotion without an attributable CTA"
+    ],
+    "reviewCadence": "weekly operating review; 28-day keep, repair, or stop decision per article"
+  },
+  "release": {
+    "defaultMode": "candidate",
+    "publicPublishingRequiresHumanAuthorization": false,
+    "independentReviewRequired": true,
+    "reviewer": "claude",
+    "reviewMustMatchExactCandidateSha256": true,
+    "autonomousLoop": [
+      "research",
+      "scoring",
+      "briefing",
+      "drafting",
+      "fact checking",
+      "image creation",
+      "SEO validation",
+      "independent Claude review",
+      "repair",
+      "promotion",
+      "measurement"
+    ]
+  }
+}

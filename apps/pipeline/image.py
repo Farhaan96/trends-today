@@ -19,7 +19,7 @@ class ImageFinder:
     def __init__(self):
         self.unsplash_key = os.getenv('UNSPLASH_ACCESS_KEY')
         self.pexels_key = os.getenv('PEXELS_API_KEY')
-        self.image_dir = Path('apps/web/public/images')
+        self.image_dir = Path(__file__).resolve().parents[2] / 'public' / 'images'
         self.image_dir.mkdir(parents=True, exist_ok=True)
         
     def _generate_query(self, title: str, tags: list) -> str:

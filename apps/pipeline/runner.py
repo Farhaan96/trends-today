@@ -1,14 +1,9 @@
 #!/usr/bin/env python3
-"""
-Runner Module - Main pipeline orchestrator with scheduling
-Publishes 15 posts/day with jitter to avoid exact intervals
-"""
+"""Research, stage, and promote independently reviewed Trends Today content."""
 
 import os
 import sys
 import json
-import time
-import random
 import logging
 import argparse
 from pathlib import Path
@@ -24,7 +19,9 @@ from draft import ArticleDrafter
 from qa import QualityAssurance
 from image import ImageFinder
 from seo import SEOOptimizer
-from publish import Publisher
+from publish import Publisher, promote_candidate
+from strategy import build_research_queue
+from validation import validate_release_candidate
 
 logging.basicConfig(
     level=logging.INFO,
@@ -36,24 +33,71 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+VALID_CATEGORIES = {'science', 'technology', 'space', 'health', 'psychology', 'culture'}
+
+
+def resolve_category(topic: Dict, article: Dict) -> str:
+    """Choose one category from explicit research first, then narrow keywords."""
+    explicit = str(topic.get('category', '')).lower()
+    if explicit in VALID_CATEGORIES:
+        return explicit
+    tags = {str(tag).lower() for tag in article.get('tags', [])}
+    direct = tags & VALID_CATEGORIES
+    if direct:
+        return sorted(direct)[0]
+    text = f"{topic.get('title', '')} {article.get('title', '')}".lower()
+    keyword_map = {
+        'space': ('space', 'nasa', 'planet', 'moon', 'mars', 'asteroid', 'telescope'),
+        'health': ('health', 'medical', 'disease', 'patient', 'drug', 'cancer', 'clinical'),
+        'psychology': ('psychology', 'brain', 'behavior', 'mental', 'emotion', 'cognitive'),
+        'science': ('science', 'study', 'researcher', 'physics', 'biology', 'chemistry'),
+        'culture': ('culture', 'media', 'art', 'music', 'creator', 'social'),
+    }
+    for category, keywords in keyword_map.items():
+        if any(keyword in text for keyword in keywords):
+            return category
+    return 'technology'
+
+
+def eligible_candidates_from_payload(payload: object) -> List[Dict]:
+    """Return only fully scored candidates approved for briefing."""
+    ranked = payload.get('results', payload) if isinstance(payload, dict) else payload
+    if not isinstance(ranked, list):
+        raise ValueError('candidate file must contain a results array')
+    eligible = []
+    for result in ranked:
+        if not isinstance(result, dict) or result.get('decision') != 'brief':
+            continue
+        candidate = dict(result.get('candidate') or {})
+        candidate['title'] = result.get('title') or candidate.get('title')
+        if candidate.get('title'):
+            eligible.append(candidate)
+    return eligible
+
 class ContentPipeline:
     """Main content generation pipeline"""
     
-    def __init__(self, dry_run: bool = False):
-        self.dry_run = dry_run
+    def __init__(self, mode: str = 'candidate'):
+        if mode != 'candidate':
+            raise PermissionError('Direct production mode is disabled; promote a reviewed candidate')
+        self.mode = mode
         self.topic_discovery = TopicDiscovery()
         self.retrieval = ContentRetrieval()
         self.drafter = ArticleDrafter()
         self.qa = QualityAssurance()
         self.image_finder = ImageFinder()
         self.seo_optimizer = SEOOptimizer()
-        self.publisher = Publisher('mdx_static')
+        self.publisher = Publisher(
+            'mdx_static',
+            mode=mode,
+        )
         
         # Stats
         self.stats = {
             'started': datetime.now().isoformat(),
             'topics_found': 0,
             'articles_generated': 0,
+            'articles_staged': 0,
             'articles_published': 0,
             'errors': []
         }
@@ -78,6 +122,8 @@ class ContentPipeline:
             if not article:
                 logger.warning(f"Failed to draft: {topic_title}")
                 return False
+
+            article['category'] = resolve_category(topic, article)
             
             self.stats['articles_generated'] += 1
             
@@ -97,27 +143,28 @@ class ContentPipeline:
             # Add image to article for publisher
             article['image'] = image
             
-            # 6. Publish (unless dry run)
-            if not self.dry_run:
-                success = self.publisher.publish(article, seo, image)
-                if success:
-                    self.stats['articles_published'] += 1
-                    logger.info(f"Published: {seo['slug']}")
-                    
-                    # Log to pipeline.log
-                    self._log_publication(topic_title, sources_data, article, seo, image)
-                    
-                return success
-            else:
-                logger.info(f"[DRY RUN] Would publish: {seo['slug']}")
-                print(f"\n=== Article Preview ===")
-                print(f"Title: {article['title']}")
-                print(f"Slug: {seo['slug']}")
-                print(f"Tags: {', '.join(article.get('tags', []))}")
-                print(f"Image: {image['path']}")
-                print(f"Words: {len(article['body_mdx'].split())}")
-                print(f"======================\n")
-                return True
+            # 6. Deterministic release gate
+            validation = validate_release_candidate(article, sources, seo, image)
+            if not validation.passed:
+                logger.warning(
+                    "Candidate blocked for '%s': %s",
+                    topic_title,
+                    '; '.join(validation.errors),
+                )
+                self.stats['errors'].append({
+                    'topic': topic_title,
+                    'error': 'release validation failed',
+                    'details': validation.errors,
+                    'time': datetime.now().isoformat(),
+                })
+                return False
+
+            # 7. Stage the exact candidate for an independent Claude review.
+            success = self.publisher.publish(article, seo, image)
+            if success:
+                self.stats['articles_staged'] += 1
+                self._log_publication(topic_title, sources_data, article, seo, image)
+            return success
                 
         except Exception as e:
             logger.error(f"Pipeline error for '{topic_title}': {e}")
@@ -136,18 +183,19 @@ class ContentPipeline:
             'sources': sources.get('method', 'unknown'),
             'model': os.getenv('PRIMARY_LLM', 'claude'),
             'image_url': image['path'],
-            'published_path': f"apps/web/content/posts/{seo['slug']}.mdx",
+            'mode': self.mode,
+            'output_path': f"artifacts/editorial/release-candidates/{article.get('category', article.get('tags', ['technology'])[0])}/{seo['slug']}.mdx",
             'word_count': len(article['body_mdx'].split())
         }
         
         logger.info(f"Publication log: {json.dumps(log_entry)}")
     
-    def run(self, limit: int = 15, batch_size: int = 5):
+    def run(self, limit: int = 3, batch_size: int = 1, topics: List[Dict] = None):
         """Run the pipeline for specified number of articles"""
         logger.info(f"Starting pipeline: {limit} articles in batches of {batch_size}")
         
         # Discover topics
-        topics = self.topic_discovery.discover(limit * 3)  # Get extra for fallbacks
+        topics = topics or self.topic_discovery.discover(limit * 3)
         self.stats['topics_found'] = len(topics)
         
         if not topics:
@@ -172,19 +220,7 @@ class ContentPipeline:
                 if self.process_topic(topic):
                     published += 1
                     
-                # Add jitter between articles (30-90 seconds)
-                if not self.dry_run and published < limit:
-                    delay = random.randint(30, 90)
-                    logger.info(f"Waiting {delay}s before next article...")
-                    time.sleep(delay)
-            
             batch_num += 1
-            
-            # Longer break between batches (3-5 minutes)
-            if not self.dry_run and published < limit:
-                batch_delay = random.randint(180, 300)
-                logger.info(f"Batch complete. Waiting {batch_delay}s before next batch...")
-                time.sleep(batch_delay)
         
         # Final stats
         self.stats['completed'] = datetime.now().isoformat()
@@ -196,56 +232,67 @@ class ContentPipeline:
         with open(stats_file, 'w') as f:
             json.dump(self.stats, f, indent=2)
 
-def schedule_daily_runs(posts_per_day: int = 15, active_hours: str = "08-23"):
-    """Calculate when to run batches throughout the day"""
-    start_hour, end_hour = map(int, active_hours.split('-'))
-    active_minutes = (end_hour - start_hour) * 60
-    
-    # 3 batches per day
-    batches = [
-        {'hour': 9, 'minute': 0, 'size': 5},   # Morning
-        {'hour': 13, 'minute': 0, 'size': 5},  # Midday
-        {'hour': 17, 'minute': 0, 'size': 5},  # Evening
-    ]
-    
-    return batches
-
 def main():
-    """Main entry point"""
-    parser = argparse.ArgumentParser(description='Content Pipeline Runner')
-    parser.add_argument('--limit', type=int, default=15, help='Number of articles to generate')
-    parser.add_argument('--batch-size', type=int, default=5, help='Articles per batch')
-    parser.add_argument('--dry-run', action='store_true', help='Test without publishing')
-    parser.add_argument('--publish', action='store_true', help='Publish articles (opposite of dry-run)')
-    parser.add_argument('--schedule', action='store_true', help='Show daily schedule')
-    
+    """Research by default; candidate generation requires a scored queue."""
+    parser = argparse.ArgumentParser(description='Trends Today content operator')
+    parser.add_argument(
+        'mode',
+        nargs='?',
+        choices=['research', 'candidate', 'promote'],
+        default='research',
+    )
+    parser.add_argument('--limit', type=int, default=3, help='Maximum topics to process')
+    parser.add_argument('--batch-size', type=int, default=1, help='Topics per batch')
+    parser.add_argument('--candidate-file', type=Path, help='Ranked JSON from strategy.py')
+    parser.add_argument('--release-candidate', type=Path, help='Exact staged MDX file to promote')
+    parser.add_argument('--review-file', type=Path, help='Accepted Claude review JSON for the exact candidate')
+    parser.add_argument('--output', type=Path, help='Research queue output path')
     args = parser.parse_args()
-    
+
     # Load environment variables
     from dotenv import load_dotenv
     load_dotenv()
-    
-    if args.schedule:
-        posts_per_day = int(os.getenv('POSTS_PER_DAY', '15'))
-        active_hours = os.getenv('ACTIVE_HOURS', '08-23')
-        batches = schedule_daily_runs(posts_per_day, active_hours)
-        
-        print("\n=== Daily Publishing Schedule ===")
-        for i, batch in enumerate(batches, 1):
-            print(f"Batch {i}: {batch['hour']:02d}:{batch['minute']:02d} - {batch['size']} articles")
-        print(f"Total: {posts_per_day} articles/day")
-        print(f"Active hours: {active_hours}")
-        print("\nCron example:")
-        for batch in batches:
-            print(f"{batch['minute']} {batch['hour']} * * * cd /path/to/blog && python apps/pipeline/runner.py --limit {batch['size']} --publish")
+
+    if args.mode == 'research':
+        discovery = TopicDiscovery()
+        topics = discovery.discover(args.limit)
+        payload = {
+            'generatedAt': datetime.now().isoformat(),
+            'status': 'needs-research',
+            'topics': build_research_queue(topics),
+        }
+        output = args.output or Path('reports') / 'editorial' / f"research_queue_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(payload, indent=2) + '\n', encoding='utf-8')
+        print(f"Wrote {len(payload['topics'])} research opportunities to {output}")
         return
-    
-    # Determine dry run mode
-    dry_run = args.dry_run and not args.publish
-    
-    # Run pipeline
-    pipeline = ContentPipeline(dry_run=dry_run)
-    pipeline.run(limit=args.limit, batch_size=args.batch_size)
+
+    if args.mode == 'promote':
+        if not args.release_candidate:
+            parser.error('promote mode requires --release-candidate')
+        if not args.review_file:
+            parser.error('promote mode requires --review-file')
+        destination = promote_candidate(args.release_candidate, args.review_file)
+        print(f'Promoted reviewed candidate to {destination}')
+        return
+
+    if not args.candidate_file:
+        parser.error('candidate mode requires --candidate-file from strategy.py')
+
+    ranked_payload = json.loads(args.candidate_file.read_text(encoding='utf-8'))
+    try:
+        eligible = eligible_candidates_from_payload(ranked_payload)
+    except ValueError as exc:
+        parser.error(str(exc))
+    if not eligible:
+        parser.error('candidate file contains no topics with decision=brief')
+
+    pipeline = ContentPipeline(mode='candidate')
+    pipeline.run(
+        limit=min(args.limit, len(eligible)),
+        batch_size=args.batch_size,
+        topics=eligible[:args.limit],
+    )
 
 if __name__ == '__main__':
     main()
