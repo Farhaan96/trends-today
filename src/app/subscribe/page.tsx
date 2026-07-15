@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     'ad-free reading',
     'exclusive reviews',
   ],
+  alternates: { canonical: '/subscribe' },
 };
 
 export default function SubscribePage() {

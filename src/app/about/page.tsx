@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: 'About Trends Today | Independent Tech Reviews & Analysis',
   description:
     'Learn about Trends Today - your trusted source for independent tech reviews, in-depth analysis, and comprehensive buying guides backed by expert journalists and real-world testing.',
+  alternates: { canonical: '/about' },
 };
 
 export default function AboutPage() {
@@ -30,7 +31,7 @@ export default function AboutPage() {
   );
 
   return (
-    <main className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-blue-50 via-white to-purple-50 border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 py-16">
@@ -398,6 +399,6 @@ export default function AboutPage() {
           </div>
         </section>
       </div>
-    </main>
+    </div>
   );
 }

@@ -24,7 +24,7 @@ interface SocialPost {
 export class SocialAutomationManager {
   private readonly baseUrl: string;
 
-  constructor(baseUrl: string = 'https://trendstoday.ca') {
+  constructor(baseUrl: string = 'https://www.trendstoday.ca') {
     this.baseUrl = baseUrl;
   }
 

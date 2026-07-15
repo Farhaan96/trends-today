@@ -139,7 +139,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
       name: frontmatter.product?.name || frontmatter.title,
       brand: frontmatter.product?.brand,
       image: frontmatter.image
-        ? `https://trendstoday.ca${frontmatter.image}`
+        ? `https://www.trendstoday.ca${frontmatter.image}`
         : undefined,
     },
     author: {
@@ -161,12 +161,12 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
     publisher: {
       '@type': 'Organization',
       name: 'Trends Today',
-      url: 'https://trendstoday.ca',
+      url: 'https://www.trendstoday.ca',
     },
   };
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8">
       <StructuredData data={reviewStructuredData} />
 
       <div className="bg-white rounded-lg shadow-sm">
@@ -373,6 +373,6 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
       <div className="pt-4 pb-12">
         <UtterancesComments issueTerm="pathname" />
       </div>
-    </main>
+    </div>
   );
 }

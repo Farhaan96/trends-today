@@ -24,6 +24,7 @@ export const metadata: Metadata = {
       'Our commitment to independent, ethical, and transparent tech journalism.',
     type: 'article',
   },
+  alternates: { canonical: '/editorial-standards' },
 };
 
 export default function EditorialStandardsPage() {

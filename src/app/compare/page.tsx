@@ -122,13 +122,14 @@ export const metadata: Metadata = {
     'In-depth product comparisons to help you choose the right tech. Compare specs, features, prices, and performance.',
   keywords:
     'product comparison, tech comparison, iPhone vs Samsung, laptop comparison, gadget comparison',
+  alternates: { canonical: '/compare' },
 };
 
 export default async function ComparePage() {
   const comparisons = await getAllComparisons();
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Header */}
       <header className="mb-12 text-center">
         <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
@@ -359,6 +360,6 @@ export default async function ComparePage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

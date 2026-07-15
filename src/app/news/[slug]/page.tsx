@@ -137,7 +137,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
     headline: frontmatter.title,
     description: frontmatter.description,
     image: frontmatter.image
-      ? `https://trendstoday.ca${frontmatter.image}`
+      ? `https://www.trendstoday.ca${frontmatter.image}`
       : undefined,
     datePublished: frontmatter.publishedAt,
     dateModified: frontmatter.updatedAt || frontmatter.publishedAt,
@@ -153,17 +153,17 @@ export default async function NewsPage({ params }: NewsPageProps) {
       name: 'Trends Today',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://trendstoday.ca/logo.png',
+        url: 'https://www.trendstoday.ca/logo.png',
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://trendstoday.ca/news/${params.slug}`,
+      '@id': `https://www.trendstoday.ca/news/${params.slug}`,
     },
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white">
       <StructuredData data={articleStructuredData} />
 
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -356,6 +356,6 @@ export default async function NewsPage({ params }: NewsPageProps) {
       <div className="max-w-7xl mx-auto px-4 pb-12">
         <UtterancesComments issueTerm="pathname" />
       </div>
-    </main>
+    </div>
   );
 }

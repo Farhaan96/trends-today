@@ -83,7 +83,8 @@ export default function SEOHead({
   // JSON-LD Schema
   jsonLd,
 }: SEOHeadProps) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://trendstoday.ca';
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://www.trendstoday.ca';
   const fullCanonical = canonical ? `${siteUrl}${canonical}` : undefined;
   const fullOgUrl = ogUrl || fullCanonical || siteUrl;
   const fullOgImage = ogImage.startsWith('http')

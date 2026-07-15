@@ -67,7 +67,7 @@ export function ArticleSchema({
       name: 'Trends Today',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://trendstoday.ca/images/logo.png',
+        url: 'https://www.trendstoday.ca/images/logo.png',
       },
     },
     datePublished: publishedAt,
@@ -176,7 +176,7 @@ export function ReviewSchema({
       name: 'Trends Today',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://trendstoday.ca/images/logo.png',
+        url: 'https://www.trendstoday.ca/images/logo.png',
       },
     },
     datePublished: publishedAt,
@@ -317,10 +317,10 @@ export function OrganizationSchema() {
     '@type': 'Organization',
     name: 'Trends Today',
     alternateName: 'Trends Today Tech Blog',
-    url: 'https://trendstoday.ca',
+    url: 'https://www.trendstoday.ca',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://trendstoday.ca/images/logo.png',
+      url: 'https://www.trendstoday.ca/images/logo.png',
       width: 400,
       height: 100,
     },
@@ -360,7 +360,7 @@ export function WebsiteSchema() {
     '@type': 'WebSite',
     name: 'Trends Today',
     alternateName: 'Trends Today Tech Reviews',
-    url: 'https://trendstoday.ca',
+    url: 'https://www.trendstoday.ca',
     description:
       'Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides.',
     publisher: {
@@ -368,14 +368,14 @@ export function WebsiteSchema() {
       name: 'Trends Today',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://trendstoday.ca/images/logo.png',
+        url: 'https://www.trendstoday.ca/images/logo.png',
       },
     },
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://trendstoday.ca/search?q={search_term_string}',
+        urlTemplate: 'https://www.trendstoday.ca/search?q={search_term_string}',
       },
       'query-input': 'required name=search_term_string',
     },

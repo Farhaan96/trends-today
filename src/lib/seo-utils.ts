@@ -355,7 +355,7 @@ export function generateCanonicalUrl(
   baseUrl?: string
 ): string {
   const siteUrl =
-    baseUrl || process.env.NEXT_PUBLIC_SITE_URL || 'https://trendstoday.ca';
+    baseUrl || process.env.NEXT_PUBLIC_SITE_URL || 'https://www.trendstoday.ca';
   return `${siteUrl}${pathname}`;
 }
 

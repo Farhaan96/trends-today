@@ -33,7 +33,7 @@ export default function ContactPage() {
 
   if (submitted) {
     return (
-      <main className="bg-white min-h-screen">
+      <div className="bg-white min-h-screen">
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="text-center py-12">
             <div className="text-6xl mb-4">✅</div>
@@ -55,12 +55,12 @@ export default function ContactPage() {
             </button>
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen">
       <div className="max-w-4xl mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-8">Contact Us</h1>
 
@@ -217,6 +217,6 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

@@ -106,13 +106,14 @@ export const metadata: Metadata = {
     'Expert buying guides and recommendations for the best tech products in 2025. Find the perfect smartphone, laptop, headphones, and more.',
   keywords:
     'best tech 2025, buying guides, product recommendations, best smartphones, best laptops',
+  alternates: { canonical: '/best' },
 };
 
 export default async function BestPage() {
   const guides = await getAllGuides();
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Header */}
       <header className="mb-12 text-center">
         <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
@@ -334,6 +335,6 @@ export default async function BestPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

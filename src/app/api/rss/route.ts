@@ -6,7 +6,7 @@ export async function GET() {
     // Get all posts for RSS feed
     const posts = await getAllPosts();
     const siteUrl =
-      process.env.NEXT_PUBLIC_SITE_URL || 'https://trendstoday.ca';
+      process.env.NEXT_PUBLIC_SITE_URL || 'https://www.trendstoday.ca';
 
     const rssXml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" 
@@ -80,7 +80,7 @@ export async function POST(request: Request) {
     const allPosts = await getAllPosts();
     const posts = allPosts.filter((post) => post.type === category);
     const siteUrl =
-      process.env.NEXT_PUBLIC_SITE_URL || 'https://trendstoday.ca';
+      process.env.NEXT_PUBLIC_SITE_URL || 'https://www.trendstoday.ca';
 
     const categoryTitle = category.charAt(0).toUpperCase() + category.slice(1);
 

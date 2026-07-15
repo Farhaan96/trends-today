@@ -32,23 +32,20 @@ export default function PaginationLinks({
   };
 
   return (
-    <nav
-      className={`flex items-center justify-between border-t border-gray-200 pt-6 ${className}`}
-      aria-label="Pagination"
-    >
+    <nav className={`pagination ${className}`} aria-label="Pagination">
       {/* Previous Page Link */}
-      <div className="flex flex-1 justify-start">
+      <div className="pagination__edge">
         {hasPrevPage ? (
           <Link
             href={getPageUrl(currentPage - 1)}
-            className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors"
+            className="pagination__button"
             rel="prev"
           >
             <ChevronLeftIcon className="h-4 w-4 mr-2" aria-hidden="true" />
             Previous
           </Link>
         ) : (
-          <span className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-300 bg-gray-50 border border-gray-200 rounded-md cursor-not-allowed">
+          <span className="pagination__button is-disabled">
             <ChevronLeftIcon className="h-4 w-4 mr-2" aria-hidden="true" />
             Previous
           </span>
@@ -56,17 +53,14 @@ export default function PaginationLinks({
       </div>
 
       {/* Page Numbers */}
-      <div className="hidden md:flex">
-        <div
-          className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
-          role="group"
-        >
+      <div className="pagination__numbers-wrap">
+        <div className="pagination__numbers" role="group">
           {pageNumbers.map((pageNum, index) => {
             if (pageNum === '...') {
               return (
                 <span
                   key={`ellipsis-${index}`}
-                  className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300"
+                  className="pagination__ellipsis"
                 >
                   ...
                 </span>
@@ -81,13 +75,7 @@ export default function PaginationLinks({
               <Link
                 key={page}
                 href={url}
-                className={`relative inline-flex items-center px-4 py-2 text-sm font-medium border transition-colors ${
-                  isCurrentPage
-                    ? 'z-10 bg-blue-600 border-blue-600 text-white'
-                    : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hover:text-gray-700'
-                } ${index === 0 ? 'rounded-l-md' : ''} ${
-                  index === pageNumbers.length - 1 ? 'rounded-r-md' : ''
-                }`}
+                className={`pagination__number ${isCurrentPage ? 'is-current' : ''}`}
                 aria-current={isCurrentPage ? 'page' : undefined}
               >
                 {page}
@@ -98,25 +86,25 @@ export default function PaginationLinks({
       </div>
 
       {/* Mobile Page Info */}
-      <div className="flex md:hidden">
-        <span className="text-sm text-gray-700">
+      <div className="pagination__mobile-info">
+        <span>
           Page {currentPage} of {totalPages}
         </span>
       </div>
 
       {/* Next Page Link */}
-      <div className="flex flex-1 justify-end">
+      <div className="pagination__edge pagination__edge--next">
         {hasNextPage ? (
           <Link
             href={getPageUrl(currentPage + 1)}
-            className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 hover:text-gray-700 transition-colors"
+            className="pagination__button"
             rel="next"
           >
             Next
             <ChevronRightIcon className="h-4 w-4 ml-2" aria-hidden="true" />
           </Link>
         ) : (
-          <span className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-300 bg-gray-50 border border-gray-200 rounded-md cursor-not-allowed">
+          <span className="pagination__button is-disabled">
             Next
             <ChevronRightIcon className="h-4 w-4 ml-2" aria-hidden="true" />
           </span>
@@ -149,21 +137,14 @@ export function SubtlePaginationLinks({
   };
 
   return (
-    <nav
-      className={`text-xs text-gray-400 ${className}`}
-      aria-label="All pages"
-    >
-      <p className="mb-2 text-gray-500">All pages:</p>
-      <div className="flex flex-wrap gap-1">
+    <nav className={`subtle-pagination ${className}`} aria-label="All pages">
+      <p>All pages</p>
+      <div className="subtle-pagination__links">
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
           <Link
             key={page}
             href={getPageUrl(page)}
-            className={`px-2 py-1 rounded transition-colors ${
-              page === currentPage
-                ? 'bg-gray-200 text-gray-700 font-medium'
-                : 'hover:bg-gray-100 hover:text-gray-600'
-            }`}
+            className={page === currentPage ? 'is-current' : ''}
             aria-label={`Go to page ${page}`}
           >
             {page}

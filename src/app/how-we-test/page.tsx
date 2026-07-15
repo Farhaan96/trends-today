@@ -25,6 +25,7 @@ export const metadata: Metadata = {
       'Discover the rigorous testing process behind our trusted tech reviews.',
     type: 'article',
   },
+  alternates: { canonical: '/how-we-test' },
 };
 
 export default function HowWeTestPage() {
