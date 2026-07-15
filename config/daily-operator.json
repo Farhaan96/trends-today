@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "timezone": "America/Vancouver",
+  "daily": {
+    "maximumPublications": 1,
+    "minimumPublications": 0,
+    "preferredStartTime": "07:45",
+    "skipWhenNoCandidateQualifies": true
+  },
+  "weeklyReview": {
+    "preferredDay": "monday",
+    "preferredStartTime": "08:30",
+    "minimumComparableArticlesPerBeat": 5,
+    "windowsDays": [7, 28],
+    "changeOneMaterialVariable": true
+  },
+  "gates": [
+    "opportunity-score-and-evidence",
+    "duplicate-check",
+    "source-and-claim-validation",
+    "original-image-validation",
+    "exact-candidate-claude-review",
+    "deterministic-tests-and-build",
+    "clean-pull-request-checks",
+    "production-deployment",
+    "live-browser-verification"
+  ],
+  "measurement": {
+    "primaryMetric": "organic engaged sessions per article after 28 days",
+    "leadingMetrics": [
+      "search impressions",
+      "search clicks",
+      "organic click-through rate",
+      "engaged sessions",
+      "returning sessions",
+      "app CTA clicks"
+    ],
+    "missingValues": "unavailable",
+    "neverCoerceMissingToZero": true
+  }
+}

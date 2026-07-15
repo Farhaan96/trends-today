@@ -11,6 +11,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+from metrics import build_metrics_summary
+
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 VALID_CATEGORIES = {'science', 'culture', 'psychology', 'technology', 'health', 'space'}
@@ -51,19 +53,10 @@ def build_scorecard(content_dir: Path, analytics: Optional[Dict[str, Any]] = Non
             'lastPublishedAt': latest.isoformat() if latest else None,
             'daysSinceLastPublish': (now - latest).days if latest else None,
         },
-        'analytics': analytics or {
-            'status': 'unavailable',
-            'missing': [
-                'article-level search impressions and clicks',
-                'organic engaged sessions',
-                'returning readers',
-                'app CTA impressions and clicks',
-                'article-attributed revenue and content cost',
-            ],
-        },
+        'analytics': build_metrics_summary(analytics, now=now),
         'decision': (
             'repair-measurement-before-scaling-volume'
-            if not analytics
+            if not analytics or analytics.get('status') != 'available'
             else 'review-article-level-keep-repair-stop-decisions'
         ),
     }

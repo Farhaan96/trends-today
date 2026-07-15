@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "updatedAt": "2026-07-14",
+  "version": 2,
+  "updatedAt": "2026-07-15",
   "businessModel": {
     "primary": "owned media and audience distribution",
     "revenueSequence": [
@@ -15,6 +15,29 @@
     "buyer": "busy, tech-curious professionals and operators",
     "pain": "important technology, science, health, psychology, space, and culture changes are noisy and hard to evaluate",
     "promise": "clear, sourced explanations that tell the reader what changed, why it matters, and what to do next"
+  },
+  "editorialWedge": {
+    "status": "28-day hypothesis",
+    "positioning": "useful update intelligence for changes that affect what readers can do, buy, use, or plan today",
+    "mechanism": "earn repeat visits with a narrow recurring utility beat, then explain only the changes that clear the evidence threshold",
+    "beats": [
+      {
+        "id": "software-update-utility",
+        "targetShare": 60,
+        "readerJob": "tell me what changed in software I use, who gets it, and what I should do now"
+      },
+      {
+        "id": "vancouver-now",
+        "targetShare": 25,
+        "readerJob": "tell me which Vancouver changes affect my plans, costs, or mobility today"
+      },
+      {
+        "id": "remarkable-explained",
+        "targetShare": 15,
+        "readerJob": "explain one genuinely surprising development without hype"
+      }
+    ],
+    "reviewAfterDays": 28
   },
   "constraint": {
     "stage": "measurement",
@@ -63,7 +86,7 @@
     "minimumSources": 3
   },
   "experiment": {
-    "changedVariable": "topic selection by opportunity score instead of output quota",
+    "changedVariable": "repeatable utility beats instead of a broad stream of interesting stories",
     "primaryMetric": "organic engaged sessions per published article after 28 days",
     "leadingMetrics": [
       "search impressions after 7 and 28 days",
@@ -76,7 +99,7 @@
       "no unsupported claims",
       "no candidate with fewer than three usable sources",
       "no placeholder image",
-      "no direct scheduled publishing",
+      "no publication without an exact-candidate independent review, deterministic validation, passing deployment checks, and live verification",
       "no public app promotion without an attributable CTA"
     ],
     "reviewCadence": "weekly operating review; 28-day keep, repair, or stop decision per article"
@@ -87,6 +110,10 @@
     "independentReviewRequired": true,
     "reviewer": "claude",
     "reviewMustMatchExactCandidateSha256": true,
+    "maximumArticlesPerDailyRun": 1,
+    "minimumArticlesPerDailyRun": 0,
+    "scheduledPublishingAuthorized": true,
+    "skipWhenNoCandidateQualifies": true,
     "autonomousLoop": [
       "research",
       "scoring",
