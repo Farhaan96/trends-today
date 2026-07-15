@@ -67,6 +67,7 @@ export const metadata: Metadata = {
     'In-depth reviews of the latest smartphones, laptops, gadgets, and tech products. Expert analysis, ratings, and buying recommendations.',
   keywords:
     'tech reviews, smartphone reviews, laptop reviews, gadget reviews, product reviews',
+  alternates: { canonical: '/reviews' },
 };
 
 export default async function ReviewsPage({
@@ -110,7 +111,7 @@ export default async function ReviewsPage({
   const recentReviews = filtered.slice(0, 6);
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Header */}
       <header className="mb-12 text-center">
         <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
@@ -329,6 +330,6 @@ export default async function ReviewsPage({
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

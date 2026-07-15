@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     'editorial independence',
     'monetization policy',
   ],
+  alternates: { canonical: '/affiliate-disclosure' },
 };
 
 export default function AffiliateDisclosurePage() {

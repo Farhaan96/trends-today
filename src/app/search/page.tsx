@@ -50,7 +50,7 @@ export default function SearchPage() {
   );
 
   return (
-    <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
       <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 mb-6">
         Search
       </h1>
@@ -114,6 +114,6 @@ export default function SearchPage() {
           ))}
         </ul>
       )}
-    </main>
+    </div>
   );
 }

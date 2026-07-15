@@ -163,7 +163,7 @@ export default async function NewsPage({ params }: NewsPageProps) {
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white">
       <StructuredData data={articleStructuredData} />
 
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -356,6 +356,6 @@ export default async function NewsPage({ params }: NewsPageProps) {
       <div className="max-w-7xl mx-auto px-4 pb-12">
         <UtterancesComments issueTerm="pathname" />
       </div>
-    </main>
+    </div>
   );
 }

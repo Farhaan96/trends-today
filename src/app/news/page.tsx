@@ -65,6 +65,7 @@ export const metadata: Metadata = {
     'Latest technology news, breaking tech announcements, product launches, and industry analysis. Stay updated with the tech world.',
   keywords:
     'tech news, technology news, product launches, tech announcements, industry news',
+  alternates: { canonical: '/news' },
 };
 
 export default async function NewsPage() {
@@ -77,7 +78,7 @@ export default async function NewsPage() {
   const breakingNews = articles.slice(0, 3);
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Header */}
       <header className="mb-12 text-center">
         <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
@@ -303,6 +304,6 @@ export default async function NewsPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

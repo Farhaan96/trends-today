@@ -97,7 +97,6 @@ export const metadata: Metadata = {
     images: ['/images/twitter-card.jpg'],
   },
   alternates: {
-    canonical: 'https://www.trendstoday.ca',
     types: {
       'application/rss+xml': [
         { url: '/feed.xml', title: 'Trends Today RSS Feed' },

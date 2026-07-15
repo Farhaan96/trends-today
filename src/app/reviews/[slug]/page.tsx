@@ -166,7 +166,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
   };
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8">
       <StructuredData data={reviewStructuredData} />
 
       <div className="bg-white rounded-lg shadow-sm">
@@ -373,6 +373,6 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
       <div className="pt-4 pb-12">
         <UtterancesComments issueTerm="pathname" />
       </div>
-    </main>
+    </div>
   );
 }

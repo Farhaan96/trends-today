@@ -4,11 +4,12 @@ export const metadata: Metadata = {
   title: 'Privacy Policy | Trends Today',
   description:
     'Privacy Policy for Trends Today - Learn how we collect, use, and protect your personal information.',
+  alternates: { canonical: '/privacy' },
 };
 
 export default function PrivacyPage() {
   return (
-    <main className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen">
       <div className="max-w-4xl mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-8">
           Privacy Policy
@@ -183,6 +184,6 @@ export default function PrivacyPage() {
           </section>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

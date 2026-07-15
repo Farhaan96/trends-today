@@ -1,7 +1,14 @@
+import type { Metadata } from 'next';
 import StructuredData from '@/components/seo/StructuredData';
 import { getAllBaseSchemas } from '@/lib/schema';
 import { getAllPosts } from '@/lib/content';
 import EditorialArticleList from '@/components/editorial/EditorialArticleList';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+};
 
 export default async function HomePage() {
   const posts = await getAllPosts();

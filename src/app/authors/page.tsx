@@ -20,6 +20,7 @@ export const metadata: Metadata = {
       'Meet our team of experienced technology journalists and industry experts.',
     type: 'website',
   },
+  alternates: { canonical: '/authors' },
 };
 
 interface Author {
