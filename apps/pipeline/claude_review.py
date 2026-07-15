@@ -14,6 +14,22 @@ from review import candidate_sha256
 DEFAULT_RUNNER = Path('C:/Users/farha/.codex/scripts/invoke-claude-review.ps1')
 
 
+def validate_runner_result(result: dict, returncode: int, digest: str) -> dict:
+    """Accept only the approved runner's successful, hash-echoing verdict."""
+    if returncode != 0 or result.get('status') not in {'success', 'reviewed'}:
+        raise RuntimeError(
+            f"Claude review was not accepted: {result.get('status', 'runner failure')}"
+        )
+    if result.get('verdict') != 'NO BLOCKERS':
+        raise PermissionError('Claude returned blockers; repair and review again')
+    if not str(result.get('modelUsed', '')).strip():
+        raise RuntimeError('Claude review runner did not report modelUsed')
+    review_text = str(result.get('review', ''))
+    if digest not in review_text:
+        raise RuntimeError('Claude review did not echo the exact candidate SHA-256')
+    return result
+
+
 def _candidate_relative(candidate: Path, root: Path) -> Path:
     candidate_root = (root / 'artifacts' / 'editorial' / 'release-candidates').resolve()
     source = candidate.resolve()
@@ -68,15 +84,8 @@ def run_review(candidate: Path, repo_root: Path, runner: Path) -> Path:
         result = json.loads(completed.stdout.strip())
     except json.JSONDecodeError as exc:
         raise RuntimeError('Claude review runner did not return structured JSON') from exc
-    if completed.returncode != 0 or result.get('status') != 'reviewed':
-        raise RuntimeError(
-            f"Claude review was not accepted: {result.get('status', 'runner failure')}"
-        )
-    if result.get('verdict') != 'NO BLOCKERS':
-        raise PermissionError('Claude returned blockers; repair and review again')
+    result = validate_runner_result(result, completed.returncode, digest)
     review_text = str(result.get('review', ''))
-    if digest not in review_text:
-        raise RuntimeError('Claude review did not echo the exact candidate SHA-256')
 
     artifact = {
         'version': 1,

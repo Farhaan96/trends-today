@@ -3,6 +3,7 @@
 
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 from typing import Dict, Tuple
 
@@ -61,5 +62,14 @@ def verify_claude_review(
         raise ValueError('Review artifact is missing repositorySha')
     if not str(review.get('modelUsed', '')).strip():
         raise ValueError('Review artifact is missing modelUsed')
+
+    git_head = subprocess.run(
+        ['git', 'rev-parse', 'HEAD'],
+        cwd=root,
+        capture_output=True,
+        text=True,
+    )
+    if git_head.returncode == 0 and review.get('repositorySha') != git_head.stdout.strip():
+        raise PermissionError('Review artifact was created for a different repository SHA')
 
     return review, digest, candidate_relative, review_relative
