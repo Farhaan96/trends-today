@@ -1,0 +1,105 @@
+[
+  {
+    "title": "Astronomers found the first true sugar between the stars",
+    "category": "space",
+    "lane": "timely-opportunity",
+    "intendedReader": "A curious non-specialist who wants to understand what a new astrobiology result does and does not say about life's origins.",
+    "readerProblem": "Headlines about molecules in space often blur the line between prebiotic chemistry and evidence of life.",
+    "angle": "Explain how radio astronomers identified erythrulose by its spectral fingerprint, why its four-carbon structure is surprising, and why the finding is ingredients-not-life.",
+    "ctaHypothesis": "Invite readers into the existing K2-18b biosignature explainer while clearly separating ingredients for life from evidence of life.",
+    "confidence": "high-current-evidence",
+    "evidence": {
+      "demandEvidence": "Within two days of publication, the finding was covered by Nature, AP, Scientific American, the Guardian, Live Science and the research institution; a linked r/space discussion exceeded 7,000 votes. DataForSEO volume is unavailable because the configured account rejected API access.",
+      "demandLinks": [
+        "https://apnews.com/article/357144f4d69449b29dff17271ccd0dcd",
+        "https://www.reddit.com/r/space/comments/1uvi8cg/scientists_spot_sugar_in_interstellar_space_for/"
+      ],
+      "sourceUrls": [
+        "https://www.nature.com/articles/s41550-026-02905-7",
+        "https://arxiv.org/abs/2606.03313",
+        "https://cab.inta-csic.es/noticias/deteccion-del-primer-azucar-en-el-medio-interestelar/00/",
+        "https://www.nature.com/articles/d41586-026-02173-5",
+        "https://apnews.com/article/357144f4d69449b29dff17271ccd0dcd"
+      ],
+      "uniqueAngleEvidence": "No existing Trends Today article mentions erythrulose or an interstellar sugar detection. The article will center the detection method and the boundary between prebiotic chemistry and life claims rather than repeating a discovery headline."
+    },
+    "ratings": {
+      "audienceFit": 5,
+      "demandSignal": 5,
+      "evidenceStrength": 5,
+      "uniqueAngle": 5,
+      "compoundingValue": 4,
+      "monetizationFit": 3,
+      "appFit": 0,
+      "speedToUsefulDraft": 5
+    }
+  },
+  {
+    "title": "Scientists watched the ocean floor split open in six days",
+    "category": "science",
+    "lane": "timely-opportunity",
+    "intendedReader": "A curious professional who knows plate tectonics from school but has never seen how new ocean crust is created during a real event.",
+    "readerProblem": "Seafloor spreading is usually explained as an imperceptibly slow process, hiding the violent short events that do much of the work.",
+    "angle": "Reconstruct the six-day movement and sixteen-day eruption from the sensor array, then explain how fast rifting resolves a decades-long strain budget.",
+    "ctaHypothesis": "Use a strong science follow recommendation rather than forcing an unrelated app link.",
+    "confidence": "high-current-evidence",
+    "evidence": {
+      "demandEvidence": "The open-access Nature paper generated same-week explainers from Nature, Nature Portfolio, Discover and multiple international science outlets. Search-volume data is unavailable because the configured DataForSEO account rejected API access.",
+      "demandLinks": [
+        "https://www.nature.com/articles/d41586-026-02139-7",
+        "https://www.discovermagazine.com/seafloor-spreading-event-caught-in-real-time-starting-with-a-swarm-of-earthquakes-and-an-outpouring-of-lava-49362"
+      ],
+      "sourceUrls": [
+        "https://www.nature.com/articles/s41586-026-10785-0",
+        "https://www.nature.com/articles/d41586-026-02139-7",
+        "https://www.natureasia.com/en/info/press-releases/detail/9383",
+        "https://www.nature.com/subjects/solid-earth-sciences/nature"
+      ],
+      "uniqueAngleEvidence": "No existing Trends Today article covers seafloor spreading, the Southeast Indian Ridge event, or in-situ seismogeodesy. The narrative will emphasize the accidental timing of the observatory and the speed contrast between centimetres per year and metres in days."
+    },
+    "ratings": {
+      "audienceFit": 5,
+      "demandSignal": 3,
+      "evidenceStrength": 5,
+      "uniqueAngle": 5,
+      "compoundingValue": 4,
+      "monetizationFit": 2,
+      "appFit": 0,
+      "speedToUsefulDraft": 4
+    }
+  },
+  {
+    "title": "Meet the Maya astronomer who signed his 1,300-year-old math",
+    "category": "culture",
+    "lane": "timely-opportunity",
+    "intendedReader": "A curious reader interested in lost knowledge, astronomy and the people behind ancient scientific achievements.",
+    "readerProblem": "Popular accounts praise Maya mathematics in the abstract while the individual scholars who produced it remain anonymous.",
+    "angle": "Tell the story of Sak Tahn Waax through the signature beside a formula connecting the 260-day calendar with solar, Venus and Mars cycles, while preserving uncertainty over whether the room was his workshop or quoting him.",
+    "ctaHypothesis": "Connect naturally to the existing article about satellites finding lost Maya cities.",
+    "confidence": "high-current-evidence",
+    "evidence": {
+      "demandEvidence": "The finding received same-day coverage from Nature, Scientific American, National Geographic and Guatemala's government; related Reddit discussions in archaeology, science and Mesoamerica accumulated hundreds of votes. Keyword-volume data is unavailable because the configured DataForSEO account rejected API access.",
+      "demandLinks": [
+        "https://www.reddit.com/r/Archaeology/comments/1uwc3st/we_finally_know_the_name_of_a_maya_mathematician/",
+        "https://www.reddit.com/r/EverythingScience/comments/1uwc3fu/we_finally_know_the_name_of_a_maya_mathematician/"
+      ],
+      "sourceUrls": [
+        "https://doi.org/10.15184/aqy.2026.10378",
+        "https://www.nature.com/articles/d41586-026-02170-8",
+        "https://guatemala.gob.gt/presentan-hallazgo-del-primer-nombre-completo-de-un-astronomo-y-matematico-identificado-en-la-region-maya/",
+        "https://www.scientificamerican.com/article/we-finally-know-the-name-of-a-maya-mathematician/"
+      ],
+      "uniqueAngleEvidence": "The existing Maya article is about satellite archaeology, not a named mathematician or the Xultun wall texts. The new story treats the scholar as a person and the inscription as working mathematics, not as a generic ancient-civilization mystery."
+    },
+    "ratings": {
+      "audienceFit": 5,
+      "demandSignal": 4,
+      "evidenceStrength": 5,
+      "uniqueAngle": 5,
+      "compoundingValue": 4,
+      "monetizationFit": 2,
+      "appFit": 0,
+      "speedToUsefulDraft": 4
+    }
+  }
+]
