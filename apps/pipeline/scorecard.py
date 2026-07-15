@@ -36,15 +36,13 @@ def build_scorecard(content_dir: Path, analytics: Optional[Dict[str, Any]] = Non
             published = _published_at(article)
             if published:
                 try:
-                    dates.append(datetime.fromisoformat(published.replace('Z', '+00:00')))
+                    parsed = datetime.fromisoformat(published.replace('Z', '+00:00'))
+                    dates.append(parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc))
                 except ValueError:
                     pass
 
     latest = max(dates) if dates else None
     now = datetime.now(timezone.utc)
-    if latest and latest.tzinfo is None:
-        latest = latest.replace(tzinfo=timezone.utc)
-
     return {
         'generatedAt': now.isoformat(),
         'inventory': {

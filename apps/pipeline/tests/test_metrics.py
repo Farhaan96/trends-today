@@ -36,6 +36,20 @@ class MetricsTests(unittest.TestCase):
         )
         self.assertEqual('observe', article['decision'])
 
+    def test_invalid_publication_date_repairs_metadata(self):
+        [article] = build_article_decisions(
+            [{'slug': 'one', 'publishedAt': 'not-a-date'}],
+            now=NOW,
+        )
+        self.assertEqual('repair-metadata', article['decision'])
+
+    def test_small_mature_cohort_collects_more_reps(self):
+        [article] = build_article_decisions(
+            [{'slug': 'one', 'publishedAt': '2026-05-01T00:00:00Z'}],
+            now=NOW,
+        )
+        self.assertEqual('collect-comparable-reps', article['decision'])
+
     def test_mature_cohort_uses_relative_decisions(self):
         records = []
         for index, values in enumerate(((100, 10, 20), (120, 12, 24), (140, 14, 28), (160, 16, 32), (180, 18, 36))):
@@ -51,6 +65,31 @@ class MetricsTests(unittest.TestCase):
         result = build_article_decisions(records, now=NOW)
         self.assertEqual('stop', result[0]['decision'])
         self.assertEqual('keep', result[-1]['decision'])
+
+    def test_available_demand_with_weak_ctr_is_repaired(self):
+        records = []
+        for index in range(5):
+            records.append({
+                'slug': f'article-{index}',
+                'beat': 'vancouver-now',
+                'publishedAt': '2026-05-01T00:00:00Z',
+                'impressions': 200 if index == 0 else 100,
+                'clicks': 2 if index == 0 else 10,
+                'engagedSessions': 5 if index == 0 else 20,
+            })
+        result = build_article_decisions(records, now=NOW)
+        self.assertEqual('repair', result[0]['decision'])
+
+    def test_missing_mature_metrics_repairs_measurement(self):
+        records = [{
+            'slug': f'article-{index}',
+            'beat': 'remarkable-explained',
+            'publishedAt': '2026-05-01T00:00:00Z',
+            'impressions': 100 if index else None,
+            'engagedSessions': 10 if index else None,
+        } for index in range(5)]
+        result = build_article_decisions(records, now=NOW)
+        self.assertEqual('repair-measurement', result[0]['decision'])
 
 
 if __name__ == '__main__':

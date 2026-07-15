@@ -111,9 +111,10 @@ def build_article_decisions(
             )
             continue
 
-        engaged_median = _median(cohort, 'engagedSessions')
-        impression_median = _median(cohort, 'impressions')
-        ctr_median = _median(cohort, 'ctr')
+        peers = [candidate for candidate in cohort if candidate is not article]
+        engaged_median = _median(peers, 'engagedSessions')
+        impression_median = _median(peers, 'impressions')
+        ctr_median = _median(peers, 'ctr')
 
         if article['engagedSessions'] is None or article['impressions'] is None:
             article['decision'] = 'repair-measurement'
