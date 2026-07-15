@@ -1,7 +1,6 @@
 ﻿import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { getArticleBySlug, getAllArticles } from '@/lib/article-utils';
 import ArticleContent from '@/components/article/ArticleContent';
 import ArticleJsonLd from '@/components/seo/ArticleJsonLd';
@@ -9,6 +8,7 @@ import { BreadcrumbSchema } from '@/components/seo/SchemaMarkup';
 import { SmartRelatedArticles } from '@/components/article/RelatedArticles';
 import MoreFromAuthor from '@/components/content/MoreFromAuthor';
 import { formatArticleDate } from '@/lib/editorial';
+import EditorialImage from '@/components/editorial/EditorialImage';
 
 const categoryConfig = {
   science: { name: 'Science' },
@@ -205,15 +205,9 @@ export default async function ArticlePage({
 
           {/* Large square hero image */}
           <div className="article-hero">
-            <Image
-              src={
-                article.image ||
-                article.frontmatter?.image ||
-                '/images/placeholder.jpg'
-              }
+            <EditorialImage
+              src={article.image || article.frontmatter?.image || undefined}
               alt={article.title || article.frontmatter?.title || 'Article'}
-              fill
-              className="object-cover editorial-image"
               priority
               sizes="(max-width: 768px) 100vw, 1024px"
             />

@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import { getAllArticles } from '@/lib/article-utils';
 import { getCategoryKey, getCategoryDescription } from '@/lib/categories';
 import { formatArticleDate } from '@/lib/editorial';
 import { paginateItems } from '@/lib/pagination';
 import PaginationLinks from '@/components/ui/PaginationLinks';
+import EditorialImage from '@/components/editorial/EditorialImage';
 
 type Params = { category: string };
 
@@ -42,6 +43,17 @@ export default async function CategoryPage({
   params: Promise<Params>;
 }) {
   const { category } = await params;
+  const supportedCategories = [
+    'science',
+    'culture',
+    'psychology',
+    'technology',
+    'health',
+    'space',
+    'mystery',
+  ];
+  if (!supportedCategories.includes(category.toLowerCase())) notFound();
+
   const key = getCategoryKey(category);
   const description = getCategoryDescription(key);
 
@@ -62,7 +74,7 @@ export default async function CategoryPage({
   );
 
   return (
-    <main className="category-page">
+    <div className="category-page">
       <section className="category-header">
         <div className="site-shell category-header__inner">
           <h1 className="category-title">{title}</h1>
@@ -92,20 +104,12 @@ export default async function CategoryPage({
                 <article key={href} className="category-story">
                   <Link href={href}>
                     <div className="category-story__media">
-                      {img ? (
-                        <Image
-                          src={img}
-                          alt={atitle}
-                          fill
-                          priority={index === 0}
-                          className="object-cover editorial-image"
-                          sizes="(max-width: 1024px) 100vw, 33vw"
-                        />
-                      ) : (
-                        <div className="editorial-image-fallback">
-                          <span>Trends Today</span>
-                        </div>
-                      )}
+                      <EditorialImage
+                        src={img}
+                        alt={atitle}
+                        priority={index === 0}
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
                     </div>
                   </Link>
                   <Link href={href}>
@@ -123,6 +127,6 @@ export default async function CategoryPage({
           className="mt-16"
         />
       </section>
-    </main>
+    </div>
   );
 }

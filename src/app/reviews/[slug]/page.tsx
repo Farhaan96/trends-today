@@ -139,7 +139,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
       name: frontmatter.product?.name || frontmatter.title,
       brand: frontmatter.product?.brand,
       image: frontmatter.image
-        ? `https://trendstoday.ca${frontmatter.image}`
+        ? `https://www.trendstoday.ca${frontmatter.image}`
         : undefined,
     },
     author: {
@@ -161,7 +161,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
     publisher: {
       '@type': 'Organization',
       name: 'Trends Today',
-      url: 'https://trendstoday.ca',
+      url: 'https://www.trendstoday.ca',
     },
   };
 

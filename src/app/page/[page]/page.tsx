@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import StructuredData from '@/components/seo/StructuredData';
 import { getAllBaseSchemas } from '@/lib/schema';
 import { getAllPosts } from '@/lib/content';
@@ -11,6 +10,7 @@ import {
 } from '@/lib/pagination';
 import PaginationLinks from '@/components/ui/PaginationLinks';
 import { formatArticleDate } from '@/lib/editorial';
+import EditorialImage from '@/components/editorial/EditorialImage';
 
 interface Props {
   params: Promise<{
@@ -74,7 +74,7 @@ export default async function PaginatedHomePage({ params }: Props) {
   const { items: pageArticles, pagination } = paginatedResult;
 
   return (
-    <main className="site-page">
+    <div className="site-page">
       <h1 className="sr-only">Trends Today - Latest Articles - Page {page}</h1>
       <StructuredData data={getAllBaseSchemas()} />
 
@@ -98,13 +98,10 @@ export default async function PaginatedHomePage({ params }: Props) {
               <a href={article.href} className="block">
                 <div className="category-story__media">
                   {article.frontmatter.image ? (
-                    <Image
+                    <EditorialImage
                       src={article.frontmatter.image}
                       alt={article.frontmatter.title}
-                      fill
-                      className="editorial-image object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      priority={false}
                     />
                   ) : (
                     <div className="editorial-image-fallback">
@@ -143,6 +140,6 @@ export default async function PaginatedHomePage({ params }: Props) {
           className="mt-16 md:mt-24"
         />
       </section>
-    </main>
+    </div>
   );
 }

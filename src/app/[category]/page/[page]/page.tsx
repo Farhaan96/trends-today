@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { getAllArticles } from '@/lib/article-utils';
 import { getCategoryKey, getCategoryDescription } from '@/lib/categories';
 import { formatArticleDate } from '@/lib/editorial';
@@ -12,6 +11,7 @@ import {
 } from '@/lib/pagination';
 import PaginationLinks from '@/components/ui/PaginationLinks';
 import { BreadcrumbSchema } from '@/components/seo/SchemaMarkup';
+import EditorialImage from '@/components/editorial/EditorialImage';
 
 type Params = {
   category: string;
@@ -49,6 +49,17 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { category, page: pageParam } = await params;
+  const supportedCategories = [
+    'science',
+    'culture',
+    'psychology',
+    'technology',
+    'health',
+    'space',
+    'mystery',
+  ];
+  if (!supportedCategories.includes(category.toLowerCase())) notFound();
+
   const key = getCategoryKey(category);
   const page = validatePageParam(pageParam);
   const description = getCategoryDescription(key);
@@ -131,7 +142,7 @@ export default async function CategoryPaginatedPage({
   ];
 
   return (
-    <main className="category-page">
+    <div className="category-page">
       {/* Breadcrumb Schema */}
       <BreadcrumbSchema items={breadcrumbs} />
 
@@ -169,21 +180,12 @@ export default async function CategoryPaginatedPage({
                 <article key={href} className="category-story">
                   <Link href={href}>
                     <div className="category-story__media">
-                      {img ? (
-                        <Image
-                          src={img}
-                          alt={atitle}
-                          fill
-                          priority={index === 0}
-                          className="object-cover editorial-image"
-                          sizes="(max-width: 1024px) 100vw, 33vw"
-                          loading={page === 1 ? 'eager' : 'lazy'}
-                        />
-                      ) : (
-                        <div className="editorial-image-fallback">
-                          <span>Trends Today</span>
-                        </div>
-                      )}
+                      <EditorialImage
+                        src={img}
+                        alt={atitle}
+                        priority={index === 0}
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
                     </div>
                   </Link>
                   <Link href={href}>
@@ -203,6 +205,6 @@ export default async function CategoryPaginatedPage({
           className="mt-16"
         />
       </section>
-    </main>
+    </div>
   );
 }

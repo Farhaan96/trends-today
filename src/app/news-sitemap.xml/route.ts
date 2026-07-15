@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
     });
 
     const siteUrl =
-      process.env.NEXT_PUBLIC_SITE_URL || 'https://trendstoday.ca';
+      process.env.NEXT_PUBLIC_SITE_URL || 'https://www.trendstoday.ca';
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 

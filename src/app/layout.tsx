@@ -29,7 +29,7 @@ const display = Newsreader({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://trendstoday.ca'),
+  metadataBase: new URL('https://www.trendstoday.ca'),
   title: {
     default:
       "Trends Today - Discover What's Trending in Science, Culture, Technology & More",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: 'Trends Today Editorial Team',
-      url: 'https://trendstoday.ca/authors',
+      url: 'https://www.trendstoday.ca/authors',
     },
   ],
   creator: 'Trends Today',
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://trendstoday.ca',
+    url: 'https://www.trendstoday.ca',
     siteName: 'Trends Today',
     title: "Trends Today - Discover What's Trending Across All Topics",
     description:
@@ -97,7 +97,7 @@ export const metadata: Metadata = {
     images: ['/images/twitter-card.jpg'],
   },
   alternates: {
-    canonical: 'https://trendstoday.ca',
+    canonical: 'https://www.trendstoday.ca',
     types: {
       'application/rss+xml': [
         { url: '/feed.xml', title: 'Trends Today RSS Feed' },
