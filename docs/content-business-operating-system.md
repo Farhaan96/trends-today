@@ -39,10 +39,10 @@ The agent owns the work from research through repair:
 6. Fact-check claims, validate the article contract, create the image, and run SEO/build checks.
 7. Stage a release candidate outside the live `content/` tree.
 8. Ask Claude CLI for an independent exact-SHA review and repair valid findings.
-9. Present one release candidate gate. Promotion to public `content/`, merge, deployment, and publication happen only after human authorization.
+9. Send the exact release candidate and its SHA-256 through the approved Claude review runner. A structured `NO BLOCKERS` verdict promotes it to public `content/`; blockers return it to repair and require a fresh review.
 10. Record outcomes at 7 and 28 days, then choose `keep`, `repair`, or `stop`.
 
-This is one approval boundary, not repeated editorial interruptions.
+This is an independent-review boundary, not a human approval queue. The engine records the candidate hash, reviewer, model, verdict, and review artifact in the promoted article.
 
 ## First real experiment
 
@@ -81,4 +81,4 @@ Do not blend unavailable metrics into zeroes. Do not call revenue “profit.” 
 
 ## Approval boundary
 
-Research, scoring, briefs, drafts, images, QA, and repairs are autonomous. Public claims, app positioning, pricing or terms, merge/deployment, billing, and publication require human authorization. Claude is an independent reviewer; it is not the business owner and cannot supply that authorization.
+Research, scoring, briefs, drafts, images, QA, Claude review, repairs, content promotion, and measurement are autonomous. Pricing or commercial terms, billing, guarantees, customer commitments, and use of private customer evidence remain owner decisions because they change the business promise rather than editorial execution.

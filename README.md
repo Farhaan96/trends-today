@@ -12,7 +12,7 @@ The operating model, constraints, experiment, portfolio, and scorecard are docum
 
 Research, scoring, drafting, QA, image work, SEO validation, and repair can run autonomously. The default output is a release candidate under `artifacts/editorial/release-candidates/`, outside the live Next.js content tree.
 
-Public promotion is a single final gate. Production mode requires `--approved-by` and writes to `content/<category>/`, the directory consumed by `src/lib/article-utils.ts`. Scheduled GitHub workflows only produce research and scorecard artifacts; they do not push content or trigger a deployment.
+Public promotion is autonomous after an independent Claude review returns `NO BLOCKERS` for the exact candidate SHA-256. The accepted review artifact is recorded in the published frontmatter. Scheduled GitHub workflows only produce research and scorecard artifacts; the operator performs the reviewed promotion and measurement loop.
 
 ## Setup
 
@@ -52,7 +52,8 @@ python apps/pipeline/runner.py candidate --candidate-file reports/editorial/rank
 Promote the exact reviewed and approved candidate into the live content tree:
 
 ```powershell
-python apps/pipeline/runner.py promote --release-candidate artifacts/editorial/release-candidates/science/example.mdx --approved-by Farhaan
+python apps/pipeline/claude_review.py artifacts/editorial/release-candidates/science/example.mdx
+python apps/pipeline/runner.py promote --release-candidate artifacts/editorial/release-candidates/science/example.mdx --review-file artifacts/editorial/reviews/science/example.<sha-prefix>.json
 ```
 
 Promotion records the candidate SHA-256 and changes only release metadata. It is not deployment; merge, deploy, and public publication remain part of the same final authorized release.

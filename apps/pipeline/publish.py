@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""Stage MDX release candidates and promote approved articles to the live tree."""
+"""Stage MDX release candidates and promote independently reviewed articles."""
 
 import os
 import json
-import hashlib
 import logging
 import re
 from pathlib import Path
 from datetime import datetime
 from typing import Dict
 from abc import ABC, abstractmethod
+
+from review import verify_claude_review
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -25,28 +26,21 @@ class PublisherAdapter(ABC):
 class MDXStaticPublisher(PublisherAdapter):
     """Publisher for the active category-based MDX site.
 
-    Candidate mode is the default and writes outside the live ``content`` tree.
-    Production mode requires a named human authorization and writes to the
-    directory consumed by ``src/lib/article-utils.ts``.
+    Candidate mode writes outside the live ``content`` tree. Direct production
+    writes are disabled; an exact candidate must be promoted with an accepted
+    Claude review artifact.
     """
 
     VALID_CATEGORIES = {
         'science', 'culture', 'psychology', 'technology', 'health', 'space'
     }
 
-    def __init__(self, mode: str = 'candidate', approved_by: str = None, repo_root: Path = None):
-        if mode not in {'candidate', 'production'}:
-            raise ValueError("mode must be 'candidate' or 'production'")
-        if mode == 'production' and not (approved_by or '').strip():
-            raise PermissionError('Production publishing requires --approved-by')
-
+    def __init__(self, mode: str = 'candidate', repo_root: Path = None):
+        if mode != 'candidate':
+            raise PermissionError('Direct production writes are disabled; promote a reviewed candidate')
         self.mode = mode
-        self.approved_by = (approved_by or '').strip()
         self.repo_root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
-        if mode == 'production':
-            self.posts_dir = self.repo_root / 'content'
-        else:
-            self.posts_dir = self.repo_root / 'artifacts' / 'editorial' / 'release-candidates'
+        self.posts_dir = self.repo_root / 'artifacts' / 'editorial' / 'release-candidates'
         self.posts_dir.mkdir(parents=True, exist_ok=True)
         
     def publish(self, article: Dict, seo: Dict, image: Dict) -> bool:
@@ -77,10 +71,7 @@ class MDXStaticPublisher(PublisherAdapter):
                 'readingTime': max(1, len(article['body_mdx'].split()) // 200),
                 'slug': slug
             }
-            if self.mode == 'candidate':
-                frontmatter['status'] = 'release-candidate'
-            else:
-                frontmatter['approvedBy'] = self.approved_by
+            frontmatter['status'] = 'release-candidate'
             
             # Process body to replace internal link placeholders
             body = article['body_mdx']
@@ -144,7 +135,6 @@ class Publisher:
         self,
         adapter: str = 'mdx_static',
         mode: str = 'candidate',
-        approved_by: str = None,
         repo_root: Path = None,
     ):
         self.adapters = {
@@ -155,7 +145,7 @@ class Publisher:
         
         adapter_class = self.adapters.get(adapter, MDXStaticPublisher)
         if adapter_class is MDXStaticPublisher:
-            self.adapter = adapter_class(mode=mode, approved_by=approved_by, repo_root=repo_root)
+            self.adapter = adapter_class(mode=mode, repo_root=repo_root)
         else:
             self.adapter = adapter_class()
         self.mode = mode
@@ -197,20 +187,15 @@ class Publisher:
             logger.error(f"Index update error: {e}")
 
 
-def promote_candidate(candidate_path: Path, approved_by: str, repo_root: Path = None) -> Path:
-    """Promote the exact reviewed candidate body into the active content tree."""
-    if not (approved_by or '').strip():
-        raise PermissionError('Promotion requires a named human authorization')
-
+def promote_candidate(candidate_path: Path, review_path: Path, repo_root: Path = None) -> Path:
+    """Promote a candidate only after Claude clears its exact SHA-256."""
     root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
-    candidate_root = (root / 'artifacts' / 'editorial' / 'release-candidates').resolve()
     source = Path(candidate_path).resolve()
-    try:
-        relative = source.relative_to(candidate_root)
-    except ValueError as exc:
-        raise ValueError('Candidate must be inside artifacts/editorial/release-candidates') from exc
-    if len(relative.parts) != 2 or relative.suffix.lower() != '.mdx':
-        raise ValueError('Candidate path must be <category>/<slug>.mdx')
+    review, digest, relative, review_relative = verify_claude_review(
+        source,
+        review_path,
+        root,
+    )
     category = relative.parts[0]
     if category not in MDXStaticPublisher.VALID_CATEGORIES:
         raise ValueError(f'Unsupported category: {category}')
@@ -218,16 +203,18 @@ def promote_candidate(candidate_path: Path, approved_by: str, repo_root: Path = 
     original = source.read_text(encoding='utf-8')
     if not re.search(r'^status:\s*["\']?release-candidate["\']?\s*$', original, re.MULTILINE):
         raise ValueError('File is not marked as a release candidate')
-    digest = hashlib.sha256(original.encode('utf-8')).hexdigest()
-    approval_metadata = (
+    review_metadata = (
         'status: "published"\n'
-        f'approvedBy: {json.dumps(approved_by.strip(), ensure_ascii=False)}\n'
+        f'reviewedBy: {json.dumps(review["reviewer"], ensure_ascii=False)}\n'
+        f'reviewVerdict: {json.dumps(review["verdict"], ensure_ascii=False)}\n'
+        f'reviewModel: {json.dumps(review["modelUsed"], ensure_ascii=False)}\n'
+        f'reviewArtifact: {json.dumps(review_relative.as_posix(), ensure_ascii=False)}\n'
         f'candidateSha256: "{digest}"\n'
         f'promotedAt: "{datetime.now().isoformat()}"'
     )
     promoted = re.sub(
         r'^status:\s*["\']?release-candidate["\']?\s*$',
-        lambda _match: approval_metadata,
+        lambda _match: review_metadata,
         original,
         count=1,
         flags=re.MULTILINE,

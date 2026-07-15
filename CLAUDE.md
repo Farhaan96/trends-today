@@ -9,7 +9,7 @@ The current operating source of truth is `docs/content-business-operating-system
 - Autonomous work ends in `artifacts/editorial/release-candidates/` by default.
 - Public content lives in `content/<category>/`, not `apps/web/content/posts/`.
 - Scheduled workflows may research and measure but may not push content or deploy.
-- Claude can independently review research, copy, and code; it cannot authorize public claims, promotion, merge, deployment, or publication.
+- Claude is the independent editorial reviewer. A structured `NO BLOCKERS` review bound to the exact candidate SHA-256 authorizes content promotion; blockers require repair and a fresh review.
 - Missing analytics or evidence must remain explicitly unavailable. Never replace missing business data with invented benchmarks or zeroes.
 
 **Current Date:** 2025-09-21

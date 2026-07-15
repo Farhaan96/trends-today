@@ -83,8 +83,11 @@
   },
   "release": {
     "defaultMode": "candidate",
-    "publicPublishingRequiresHumanAuthorization": true,
-    "autonomousUntilRelease": [
+    "publicPublishingRequiresHumanAuthorization": false,
+    "independentReviewRequired": true,
+    "reviewer": "claude",
+    "reviewMustMatchExactCandidateSha256": true,
+    "autonomousLoop": [
       "research",
       "scoring",
       "briefing",
@@ -93,7 +96,9 @@
       "image creation",
       "SEO validation",
       "independent Claude review",
-      "repair"
+      "repair",
+      "promotion",
+      "measurement"
     ]
   }
 }

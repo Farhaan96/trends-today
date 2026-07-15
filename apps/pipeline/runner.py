@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""Research, stage, and explicitly promote Trends Today content."""
+"""Research, stage, and promote independently reviewed Trends Today content."""
 
 import os
 import sys
 import json
-import time
-import random
 import logging
 import argparse
 from pathlib import Path
@@ -79,9 +77,9 @@ def eligible_candidates_from_payload(payload: object) -> List[Dict]:
 class ContentPipeline:
     """Main content generation pipeline"""
     
-    def __init__(self, mode: str = 'candidate', approved_by: str = None):
-        if mode not in {'candidate', 'production'}:
-            raise ValueError("mode must be 'candidate' or 'production'")
+    def __init__(self, mode: str = 'candidate'):
+        if mode != 'candidate':
+            raise PermissionError('Direct production mode is disabled; promote a reviewed candidate')
         self.mode = mode
         self.topic_discovery = TopicDiscovery()
         self.retrieval = ContentRetrieval()
@@ -92,7 +90,6 @@ class ContentPipeline:
         self.publisher = Publisher(
             'mdx_static',
             mode=mode,
-            approved_by=approved_by,
         )
         
         # Stats
@@ -162,13 +159,10 @@ class ContentPipeline:
                 })
                 return False
 
-            # 7. Stage by default; write to the live tree only in approved production mode.
+            # 7. Stage the exact candidate for an independent Claude review.
             success = self.publisher.publish(article, seo, image)
             if success:
-                if self.mode == 'production':
-                    self.stats['articles_published'] += 1
-                else:
-                    self.stats['articles_staged'] += 1
+                self.stats['articles_staged'] += 1
                 self._log_publication(topic_title, sources_data, article, seo, image)
             return success
                 
@@ -190,11 +184,7 @@ class ContentPipeline:
             'model': os.getenv('PRIMARY_LLM', 'claude'),
             'image_url': image['path'],
             'mode': self.mode,
-            'output_path': (
-                f"content/{article.get('category', article.get('tags', ['technology'])[0])}/{seo['slug']}.mdx"
-                if self.mode == 'production'
-                else f"artifacts/editorial/release-candidates/{article.get('category', article.get('tags', ['technology'])[0])}/{seo['slug']}.mdx"
-            ),
+            'output_path': f"artifacts/editorial/release-candidates/{article.get('category', article.get('tags', ['technology'])[0])}/{seo['slug']}.mdx",
             'word_count': len(article['body_mdx'].split())
         }
         
@@ -230,19 +220,7 @@ class ContentPipeline:
                 if self.process_topic(topic):
                     published += 1
                     
-                # Only live production needs pacing. Candidate work should finish promptly.
-                if self.mode == 'production' and published < limit:
-                    delay = random.randint(30, 90)
-                    logger.info(f"Waiting {delay}s before next article...")
-                    time.sleep(delay)
-            
             batch_num += 1
-            
-            # Longer break between batches (3-5 minutes)
-            if self.mode == 'production' and published < limit:
-                batch_delay = random.randint(180, 300)
-                logger.info(f"Batch complete. Waiting {batch_delay}s before next batch...")
-                time.sleep(batch_delay)
         
         # Final stats
         self.stats['completed'] = datetime.now().isoformat()
@@ -255,7 +233,7 @@ class ContentPipeline:
             json.dump(self.stats, f, indent=2)
 
 def main():
-    """Research by default; candidate and production modes require a scored queue."""
+    """Research by default; candidate generation requires a scored queue."""
     parser = argparse.ArgumentParser(description='Trends Today content operator')
     parser.add_argument(
         'mode',
@@ -267,7 +245,7 @@ def main():
     parser.add_argument('--batch-size', type=int, default=1, help='Topics per batch')
     parser.add_argument('--candidate-file', type=Path, help='Ranked JSON from strategy.py')
     parser.add_argument('--release-candidate', type=Path, help='Exact staged MDX file to promote')
-    parser.add_argument('--approved-by', help='Named human authorization for promotion')
+    parser.add_argument('--review-file', type=Path, help='Accepted Claude review JSON for the exact candidate')
     parser.add_argument('--output', type=Path, help='Research queue output path')
     args = parser.parse_args()
 
@@ -292,9 +270,9 @@ def main():
     if args.mode == 'promote':
         if not args.release_candidate:
             parser.error('promote mode requires --release-candidate')
-        if not (args.approved_by or '').strip():
-            parser.error('promote mode requires --approved-by')
-        destination = promote_candidate(args.release_candidate, args.approved_by)
+        if not args.review_file:
+            parser.error('promote mode requires --review-file')
+        destination = promote_candidate(args.release_candidate, args.review_file)
         print(f'Promoted reviewed candidate to {destination}')
         return
 
