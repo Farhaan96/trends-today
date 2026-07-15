@@ -1,5 +1,17 @@
 # CLAUDE.md - Trends Today: Optimized Content System v2.0
 
+## 2026 content-business operating override
+
+The current operating source of truth is `docs/content-business-operating-system.md` plus `config/content-business.json`. These rules override any fixed article-count, automatic-publishing, or legacy content-path instruction below:
+
+- Diagnose and measure the content-to-audience constraint; do not optimize an article quota.
+- Research output must be evidence-enriched and scored before briefing.
+- Autonomous work ends in `artifacts/editorial/release-candidates/` by default.
+- Public content lives in `content/<category>/`, not `apps/web/content/posts/`.
+- Scheduled workflows may research and measure but may not push content or deploy.
+- Claude can independently review research, copy, and code; it cannot authorize public claims, promotion, merge, deployment, or publication.
+- Missing analytics or evidence must remain explicitly unavailable. Never replace missing business data with invented benchmarks or zeroes.
+
 **Current Date:** 2025-09-21
 **Last Updated:** 2025-09-21
 

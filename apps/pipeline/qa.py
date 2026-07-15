@@ -39,6 +39,7 @@ Requirements:
 - Maintain 2-4 H2 sections
 - Paragraphs ≤4 sentences
 - Fix any grammar issues
+- Preserve the ## Sources section and every supplied source URL
 
 Return the corrected body_mdx only."""
 
@@ -149,7 +150,7 @@ Return the corrected body_mdx only."""
         # Check word count
         words = len(body.split())
         if words < 600:
-            body += "\n\n## Looking Ahead\n\nAs this technology continues to mature, we can expect to see even more innovative applications and improvements. The potential for transformation across various industries remains significant."
+            logger.warning("QA could not repair short copy without a model; candidate remains blocked")
         elif words > 900:
             # Trim to ~900 words
             sentences = body.split('. ')

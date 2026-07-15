@@ -26,14 +26,14 @@ class TopicDiscovery:
         
     def _load_recent_posts(self, days=7) -> set:
         """Load recent post slugs to avoid duplicates"""
-        posts_dir = Path('apps/web/content/posts')
+        posts_dir = Path(__file__).resolve().parents[2] / 'content'
         if not posts_dir.exists():
             return set()
-        
+
         recent = set()
         cutoff = datetime.now() - timedelta(days=days)
         
-        for mdx_file in posts_dir.glob('*.mdx'):
+        for mdx_file in posts_dir.glob('*/*.mdx'):
             if mdx_file.stat().st_mtime > cutoff.timestamp():
                 recent.add(mdx_file.stem)
         
