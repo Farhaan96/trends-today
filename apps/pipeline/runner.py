@@ -60,6 +60,22 @@ def resolve_category(topic: Dict, article: Dict) -> str:
             return category
     return 'technology'
 
+
+def eligible_candidates_from_payload(payload: object) -> List[Dict]:
+    """Return only fully scored candidates approved for briefing."""
+    ranked = payload.get('results', payload) if isinstance(payload, dict) else payload
+    if not isinstance(ranked, list):
+        raise ValueError('candidate file must contain a results array')
+    eligible = []
+    for result in ranked:
+        if not isinstance(result, dict) or result.get('decision') != 'brief':
+            continue
+        candidate = dict(result.get('candidate') or {})
+        candidate['title'] = result.get('title') or candidate.get('title')
+        if candidate.get('title'):
+            eligible.append(candidate)
+    return eligible
+
 class ContentPipeline:
     """Main content generation pipeline"""
     
@@ -286,16 +302,10 @@ def main():
         parser.error('candidate mode requires --candidate-file from strategy.py')
 
     ranked_payload = json.loads(args.candidate_file.read_text(encoding='utf-8'))
-    ranked = ranked_payload.get('results', ranked_payload) if isinstance(ranked_payload, dict) else ranked_payload
-    if not isinstance(ranked, list):
-        parser.error('candidate file must contain a results array')
-    eligible = []
-    for result in ranked:
-        if result.get('decision') != 'brief':
-            continue
-        candidate = dict(result.get('candidate') or {})
-        candidate['title'] = result.get('title') or candidate.get('title')
-        eligible.append(candidate)
+    try:
+        eligible = eligible_candidates_from_payload(ranked_payload)
+    except ValueError as exc:
+        parser.error(str(exc))
     if not eligible:
         parser.error('candidate file contains no topics with decision=brief')
 

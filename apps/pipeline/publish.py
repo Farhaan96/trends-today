@@ -227,7 +227,7 @@ def promote_candidate(candidate_path: Path, approved_by: str, repo_root: Path = 
     )
     promoted = re.sub(
         r'^status:\s*["\']?release-candidate["\']?\s*$',
-        approval_metadata,
+        lambda _match: approval_metadata,
         original,
         count=1,
         flags=re.MULTILINE,

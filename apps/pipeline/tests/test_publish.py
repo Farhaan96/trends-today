@@ -49,11 +49,11 @@ class PublisherTests(unittest.TestCase):
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
             candidate_body = candidate.read_text(encoding='utf-8').split('---', 2)[2]
-            destination = promote_candidate(candidate, 'Farhaan', repo_root=root)
+            destination = promote_candidate(candidate, r'Ops\Owner', repo_root=root)
             promoted = destination.read_text(encoding='utf-8')
             self.assertEqual(candidate_body, promoted.split('---', 2)[2])
             self.assertIn('candidateSha256:', promoted)
-            self.assertIn('approvedBy: "Farhaan"', promoted)
+            self.assertIn(r'approvedBy: "Ops\\Owner"', promoted)
 
     def test_promotion_rejects_paths_outside_candidate_tree(self):
         with tempfile.TemporaryDirectory() as temp:
