@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "b267bb7c395154f36ddf60e12284bf41e75a3c63569bdcba2500ab7d3dff3379",
+  "reviewedAt": "2026-07-15T06:50:39.494111+00:00",
+  "repositorySha": "c142fe78fc5380abee0093c5b5007bfaed7d3613",
+  "modelUsed": "opus",
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-opus-4-8"
+  ],
+  "review": "NO BLOCKERS\n\nCANDIDATE_SHA256: b267bb7c395154f36ddf60e12284bf41e75a3c63569bdcba2500ab7d3dff3379\n\n**File:** `artifacts/editorial/release-candidates/science/scientists-watched-the-ocean-floor-split-open-in-six-days.mdx`\n\n**Factual support & internal consistency (solid):**\n- Headline figures (`4.2 m in six days`, line 22) match the body (line 49). \u2713\n- Lava volume is consistently hedged: description says \"up to 160 million\" (line 4), lead says \"as much as 160 million\" (line 22), body gives the range \"Between 148 and 160 million cubic metres\" (line 57). No overreach. \u2713\n- Eruption duration: \"sixteen-day\" (line 24) \u2248 \"about 16 days\" (line 57). \u2713\n- Timeline coheres: deployed Feb 2024 (line 26), \"two months later\" \u2192 swarm begins 26 April 2024 (line 43). \u2713\n- Geographic/geophysical details are internally plausible: Southeast Indian Ridge, Australian\u2013Antarctic plate boundary, Boomerang/Amsterdam transform faults, ~65,000 km ridge network, aseismic slip mechanism.\n\n**Title/meta fit:** Title's \"watched \u2026 split open in six days\" is directly addressed and honestly caveated in-text (line 70: \"'Watched' here means measuring the event directly \u2026 rather than inferring it years later\"). This pre-empts the main sensationalism risk. Meta description accurately summarizes the payload.\n\n**Structure & usefulness:** Clear lead, three well-scoped H2s, staged bullet lists that reinforce (not pad) the narrative, and a \"what it means\" close. Reading time (5 min) fits ~1,000 words.\n\n**Image/frontmatter integrity:** Frontmatter complete (title, description, image, alt, attribution, tags, author, slug, status). Referenced image exists at `public/images/editorial/2026/07/ocean-floor-splitting.png` and matches the alt text (cracked deep-ocean ridge, orange lava, sensor beacons, dark blue water). Attribution correctly flags it as an original AI/editorial illustration.\n\n**Reputational/legal risk:** Low. Claims are attributed to the study, appropriately hedged, no defamation, illustration properly disclosed. Four Nature-domain sources are cited.\n\n**One caveat (not a blocker):** I could not independently verify the external Nature URLs/DOIs (e.g. `s41586-026-10785-0`) from this environment \u2014 no web/hash tooling available, so the provided SHA is taken as given. The claims are internally consistent and correctly sourced-in-form; recommend a final human link-check before publish, but nothing in the text requires correction."
+}
