@@ -6,9 +6,9 @@ The current operating source of truth is `docs/content-business-operating-system
 
 - Diagnose and measure the content-to-audience constraint; do not optimize an article quota.
 - Research output must be evidence-enriched and scored before briefing.
-- Autonomous work ends in `artifacts/editorial/release-candidates/` by default.
+- Autonomous work stages candidates in `artifacts/editorial/release-candidates/` before promotion.
 - Public content lives in `content/<category>/`, not `apps/web/content/posts/`.
-- Scheduled workflows may research and measure but may not push content or deploy.
+- The owner has standing authorization for the scheduled editorial workflow to publish at most one qualifying article per daily run. It may push, merge, and deploy only after an exact-candidate Claude review, deterministic QA/build checks, a clean PR/check result, and post-deploy live verification. Zero articles is the correct result when no candidate qualifies.
 - Claude is the independent editorial reviewer. A structured `NO BLOCKERS` review bound to the exact candidate SHA-256 authorizes content promotion; blockers require repair and a fresh review.
 - Missing analytics or evidence must remain explicitly unavailable. Never replace missing business data with invented benchmarks or zeroes.
 

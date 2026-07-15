@@ -27,10 +27,33 @@ class ScorecardTests(unittest.TestCase):
 
     def test_supplied_analytics_is_preserved(self):
         with tempfile.TemporaryDirectory() as temp:
-            analytics = {'status': 'available', 'articles': [{'slug': 'one', 'clicks': 4}]}
+            analytics = {
+                'status': 'available',
+                'articles': [{
+                    'slug': 'one',
+                    'publishedAt': '2026-07-01T00:00:00Z',
+                    'clicks': 4,
+                }],
+            }
             result = build_scorecard(Path(temp), analytics)
-            self.assertEqual(analytics, result['analytics'])
+            self.assertEqual('available', result['analytics']['status'])
+            self.assertEqual(4.0, result['analytics']['articles'][0]['clicks'])
             self.assertEqual('review-article-level-keep-repair-stop-decisions', result['decision'])
+
+    def test_mixed_naive_and_aware_publication_dates_are_normalized(self):
+        with tempfile.TemporaryDirectory() as temp:
+            content = Path(temp) / 'content' / 'science'
+            content.mkdir(parents=True)
+            (content / 'aware.mdx').write_text(
+                "---\npublishedAt: '2026-07-01T00:00:00Z'\n---\n",
+                encoding='utf-8',
+            )
+            (content / 'naive.mdx').write_text(
+                "---\npublishedAt: '2026-07-02T00:00:00'\n---\n",
+                encoding='utf-8',
+            )
+            result = build_scorecard(Path(temp) / 'content')
+            self.assertEqual('2026-07-02T00:00:00+00:00', result['inventory']['lastPublishedAt'])
 
 
 if __name__ == '__main__':
