@@ -6,17 +6,23 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const navigation = [
-  { name: 'Science', href: '/science' },
-  { name: 'Culture', href: '/culture' },
-  { name: 'Psychology', href: '/psychology' },
-  { name: 'Technology', href: '/technology' },
-  { name: 'Health', href: '/health' },
-  { name: 'Space', href: '/space' },
+  { name: 'Local News', href: '/local-news' },
+  { name: 'Transit', href: '/transit' },
+  { name: 'Things to Do', href: '/things-to-do' },
+  { name: 'Food & Drink', href: '/food-drink' },
+  { name: 'Housing', href: '/housing' },
+  { name: 'Sports', href: '/sports' },
 ];
 
 export default function EditorialHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const editionDate = new Intl.DateTimeFormat('en-CA', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'America/Vancouver',
+  }).format(new Date());
 
   useEffect(() => setIsMenuOpen(false), [pathname]);
 
@@ -66,6 +72,12 @@ export default function EditorialHeader() {
             <Bars3Icon aria-hidden="true" />
           )}
         </button>
+      </div>
+
+      <div className="site-edition" aria-label="Publication edition">
+        <span>Lower Mainland</span>
+        <span>{editionDate}</span>
+        <span>Vancouver to the Fraser Valley</span>
       </div>
 
       {isMenuOpen && (

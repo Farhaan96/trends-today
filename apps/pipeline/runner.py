@@ -2,6 +2,7 @@
 """Research, stage, and promote independently reviewed Trends Today content."""
 
 import os
+import hmac
 import sys
 import json
 import logging
@@ -33,7 +34,56 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-VALID_CATEGORIES = {'science', 'technology', 'space', 'health', 'psychology', 'culture'}
+VALID_CATEGORIES = {
+    'science', 'technology', 'space', 'health', 'psychology', 'culture',
+    'local-news', 'transit', 'things-to-do', 'food-drink', 'housing', 'sports',
+}
+
+
+def seed_urls_for_topic(topic: Dict) -> List[str]:
+    """Preserve the reviewed research URLs when retrieving candidate sources."""
+    evidence = topic.get('evidence') or {}
+    urls = [topic.get('url'), topic.get('sourceUrl')]
+    urls.extend(evidence.get('primarySourceUrls') or [])
+    urls.extend(evidence.get('sourceUrls') or [])
+    return list(dict.fromkeys(str(url).strip() for url in urls if str(url or '').strip()))
+
+
+def primary_source_urls_for_topic(topic: Dict) -> set:
+    """Return URLs explicitly established as primary during discovery or research."""
+    evidence = topic.get('evidence') or {}
+    primary_urls = list(evidence.get('primarySourceUrls') or [])
+    if topic.get('sourceTier') == 'primary':
+        primary_urls.extend([topic.get('url'), topic.get('sourceUrl')])
+    return {str(url).strip() for url in primary_urls if str(url or '').strip()}
+
+
+def requires_manual_approval(topic: Dict, article: Dict, source_config: Dict) -> bool:
+    """Fail closed on common sensitive local-news signals."""
+    if topic.get('manualApprovalRequired') or article.get('manualApprovalRequired'):
+        return True
+    text = ' '.join(
+        str(value or '')
+        for value in (
+            topic.get('title'),
+            article.get('title'),
+            article.get('subtitle'),
+            article.get('meta_description'),
+            article.get('body_mdx'),
+        )
+    ).lower()
+    keywords = (
+        source_config.get('automaticPublishing', {})
+        .get('manualApprovalKeywords', [])
+    )
+    return any(str(keyword).lower() in text for keyword in keywords)
+
+
+def has_manual_approval(topic: Dict) -> bool:
+    """Accept sensitive-story approval only through an operator-provided secret."""
+    expected = os.getenv('TRENDS_TODAY_SENSITIVE_APPROVAL_TOKEN', '').strip()
+    supplied = str(topic.get('manualApprovalToken', '')).strip()
+    return bool(expected and supplied and hmac.compare_digest(expected, supplied))
 
 
 def resolve_category(topic: Dict, article: Dict) -> str:
@@ -47,6 +97,11 @@ def resolve_category(topic: Dict, article: Dict) -> str:
         return sorted(direct)[0]
     text = f"{topic.get('title', '')} {article.get('title', '')}".lower()
     keyword_map = {
+        'transit': ('translink', 'skytrain', 'bus route', 'seabus', 'road closure', 'traffic'),
+        'things-to-do': ('event', 'festival', 'concert', 'weekend', 'things to do'),
+        'food-drink': ('restaurant', 'bakery', 'cafe', 'bar', 'opening', 'closing'),
+        'housing': ('housing', 'rent', 'development', 'rezoning', 'condo'),
+        'sports': ('canucks', 'whitecaps', 'bc lions', 'giants', 'game'),
         'space': ('space', 'nasa', 'planet', 'moon', 'mars', 'asteroid', 'telescope'),
         'health': ('health', 'medical', 'disease', 'patient', 'drug', 'cancer', 'clinical'),
         'psychology': ('psychology', 'brain', 'behavior', 'mental', 'emotion', 'cognitive'),
@@ -56,7 +111,7 @@ def resolve_category(topic: Dict, article: Dict) -> str:
     for category, keywords in keyword_map.items():
         if any(keyword in text for keyword in keywords):
             return category
-    return 'technology'
+    return 'local-news'
 
 
 def eligible_candidates_from_payload(payload: object) -> List[Dict]:
@@ -109,26 +164,51 @@ class ContentPipeline:
         
         try:
             # 1. Retrieve sources
-            sources_data = self.retrieval.retrieve(topic_title)
+            seed_urls = seed_urls_for_topic(topic) or None
+            sources_data = self.retrieval.retrieve(topic_title, urls=seed_urls)
             sources = sources_data.get('sources', [])
+            primary_urls = primary_source_urls_for_topic(topic)
+            for source in sources:
+                if source.get('url') in primary_urls:
+                    source['tier'] = 'primary'
             
             if not sources:
                 logger.warning(f"No sources found for: {topic_title}")
                 return False
             
             # 2. Draft article
-            article = self.drafter.draft(topic_title, sources)
+            draft_topic = (
+                f"{topic_title}\nLocality: {topic.get('locality', 'Lower Mainland')}\n"
+                f"Story type: {topic.get('storyType', 'reported-update')}"
+            )
+            article = self.drafter.draft(draft_topic, sources)
             
             if not article:
                 logger.warning(f"Failed to draft: {topic_title}")
                 return False
 
             article['category'] = resolve_category(topic, article)
+            article['locality'] = topic.get('locality', '')
+            article['storyType'] = topic.get('storyType', 'reported-update')
+            article['readerImpact'] = (topic.get('evidence') or {}).get('readerImpact', '')
+            article['manualApprovalRequired'] = requires_manual_approval(
+                topic,
+                article,
+                self.topic_discovery.source_config,
+            )
+            # A discovered topic cannot self-assert human approval. The token is
+            # supplied interactively and is intentionally absent from automation.
+            article['manualApprovalRecorded'] = has_manual_approval(topic)
             
             self.stats['articles_generated'] += 1
             
             # 3. Quality assurance
             article = self.qa.qa_check(article, sources)
+            article['manualApprovalRequired'] = requires_manual_approval(
+                topic,
+                article,
+                self.topic_discovery.source_config,
+            )
             
             # 4. SEO optimization
             seo = self.seo_optimizer.optimize(article)
@@ -144,7 +224,18 @@ class ContentPipeline:
             article['image'] = image
             
             # 6. Deterministic release gate
-            validation = validate_release_candidate(article, sources, seo, image)
+            sensitive_keywords = (
+                self.topic_discovery.source_config
+                .get('automaticPublishing', {})
+                .get('manualApprovalKeywords', [])
+            )
+            validation = validate_release_candidate(
+                article,
+                sources,
+                seo,
+                image,
+                sensitive_keywords=sensitive_keywords,
+            )
             if not validation.passed:
                 logger.warning(
                     "Candidate blocked for '%s': %s",

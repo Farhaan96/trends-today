@@ -7,17 +7,16 @@ import ArticleJsonLd from '@/components/seo/ArticleJsonLd';
 import { BreadcrumbSchema } from '@/components/seo/SchemaMarkup';
 import { SmartRelatedArticles } from '@/components/article/RelatedArticles';
 import MoreFromAuthor from '@/components/content/MoreFromAuthor';
-import { formatArticleDate } from '@/lib/editorial';
+import { formatArticleDate, formatArticleDateTime } from '@/lib/editorial';
 import EditorialImage from '@/components/editorial/EditorialImage';
+import { CONTENT_CATEGORIES, getCategoryLabel } from '@/lib/categories';
 
-const categoryConfig = {
-  science: { name: 'Science' },
-  culture: { name: 'Culture' },
-  psychology: { name: 'Psychology' },
-  technology: { name: 'Technology' },
-  health: { name: 'Health' },
-  space: { name: 'Space' },
-} as const;
+const categoryConfig = Object.fromEntries(
+  CONTENT_CATEGORIES.map((category) => [
+    category,
+    { name: getCategoryLabel(category) },
+  ])
+) as Record<string, { name: string }>;
 
 export async function generateStaticParams() {
   const articles = await getAllArticles();
@@ -147,6 +146,7 @@ export default async function ArticlePage({
       ? readingTime
       : `${readingTime} min read`
     : null;
+  const locality = article.frontmatter?.locality as string | undefined;
 
   return (
     <article className="article-page">
@@ -182,6 +182,7 @@ export default async function ArticlePage({
               <Link href={`/${categoryKey}`} className="article-category">
                 {category.name}
               </Link>
+              {locality && <span>{locality}</span>}
               <span className="font-medium">
                 {authorId && knownAuthors.includes(authorId) ? (
                   <Link
@@ -195,9 +196,13 @@ export default async function ArticlePage({
                 )}
               </span>
               <span>
-                {formatArticleDate(
-                  article.publishedAt || article.frontmatter?.publishedAt
-                )}
+                {locality
+                  ? formatArticleDateTime(
+                      article.publishedAt || article.frontmatter?.publishedAt
+                    )
+                  : formatArticleDate(
+                      article.publishedAt || article.frontmatter?.publishedAt
+                    )}
               </span>
               {formattedReadingTime && <span>{formattedReadingTime}</span>}
             </div>

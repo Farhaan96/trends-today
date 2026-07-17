@@ -1,20 +1,38 @@
 {
-  "version": 1,
+  "version": 2,
   "timezone": "America/Vancouver",
   "daily": {
-    "maximumPublications": 1,
+    "maximumPublications": 6,
     "minimumPublications": 0,
-    "preferredStartTime": "07:45",
+    "sweeps": [
+      {
+        "name": "morning",
+        "preferredStartTime": "06:30",
+        "maximumPublications": 2
+      },
+      {
+        "name": "midday",
+        "preferredStartTime": "11:30",
+        "maximumPublications": 2
+      },
+      {
+        "name": "evening",
+        "preferredStartTime": "16:30",
+        "maximumPublications": 2
+      }
+    ],
     "skipWhenNoCandidateQualifies": true
   },
   "weeklyReview": {
     "preferredDay": "monday",
     "preferredStartTime": "08:30",
-    "minimumComparableArticlesPerBeat": 5,
+    "minimumComparableArticlesPerBeat": 8,
     "windowsDays": [7, 28],
     "changeOneMaterialVariable": true
   },
   "gates": [
+    "lower-mainland-relevance",
+    "freshness-and-reader-utility",
     "opportunity-score-and-evidence",
     "duplicate-check",
     "source-and-claim-validation",
@@ -25,6 +43,23 @@
     "production-deployment",
     "live-browser-verification"
   ],
+  "storyTypes": {
+    "bulletin": {
+      "wordRange": [250, 450],
+      "minimumSources": 1,
+      "requiresPrimarySource": true
+    },
+    "reported-update": {
+      "wordRange": [450, 800],
+      "minimumSources": 2,
+      "requiresPrimarySource": true
+    },
+    "guide-or-explainer": {
+      "wordRange": [700, 1200],
+      "minimumSources": 3,
+      "requiresPrimarySource": true
+    }
+  },
   "measurement": {
     "primaryMetric": "organic engaged sessions per article after 28 days",
     "leadingMetrics": [

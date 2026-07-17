@@ -1,21 +1,112 @@
 import sys
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 
 PIPELINE_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PIPELINE_DIR))
 
-from runner import eligible_candidates_from_payload  # noqa: E402
+from runner import (  # noqa: E402
+    eligible_candidates_from_payload,
+    primary_source_urls_for_topic,
+    requires_manual_approval,
+    has_manual_approval,
+    seed_urls_for_topic,
+)
+
+
+class RunnerSourceTests(unittest.TestCase):
+    def test_reviewed_research_urls_are_preserved_without_duplicates(self):
+        topic = {
+            'sourceUrl': 'https://city.example/news/update',
+            'sourceTier': 'primary',
+            'evidence': {
+                'primarySourceUrls': ['https://city.example/news/update'],
+                'sourceUrls': [
+                    'https://city.example/news/update',
+                    'https://transit.example/advisory',
+                ],
+            },
+        }
+
+        self.assertEqual(
+            [
+                'https://city.example/news/update',
+                'https://transit.example/advisory',
+            ],
+            seed_urls_for_topic(topic),
+        )
+
+    def test_discovery_source_is_marked_primary(self):
+        topic = {
+            'url': 'https://city.example/news/update',
+            'sourceTier': 'primary',
+            'evidence': {'sourceUrls': ['https://secondary.example/report']},
+        }
+
+        self.assertEqual(
+            {'https://city.example/news/update'},
+            primary_source_urls_for_topic(topic),
+        )
+
+    def test_sensitive_story_signal_requires_manual_approval(self):
+        config = {
+            'automaticPublishing': {
+                'manualApprovalKeywords': ['missing person', 'fatal']
+            }
+        }
+        article = {
+            'title': 'Search continues in Surrey',
+            'body_mdx': 'Police issued a missing person notice on Friday.',
+        }
+
+        self.assertTrue(requires_manual_approval({}, article, config))
+
+    def test_routine_service_update_does_not_require_manual_approval(self):
+        config = {
+            'automaticPublishing': {
+                'manualApprovalKeywords': ['missing person', 'fatal']
+            }
+        }
+        article = {
+            'title': 'Expo Line service changes this weekend',
+            'body_mdx': 'TransLink says trains will run every 12 minutes.',
+        }
+
+        self.assertFalse(requires_manual_approval({}, article, config))
+
+    def test_topic_boolean_cannot_spoof_manual_approval(self):
+        with patch.dict('os.environ', {}, clear=True):
+            self.assertFalse(has_manual_approval({'manualApprovalRecorded': True}))
+
+    def test_operator_secret_records_manual_approval(self):
+        with patch.dict(
+            'os.environ', {'TRENDS_TODAY_SENSITIVE_APPROVAL_TOKEN': 'operator-secret'}
+        ):
+            self.assertTrue(has_manual_approval({'manualApprovalToken': 'operator-secret'}))
+            self.assertFalse(has_manual_approval({'manualApprovalToken': 'wrong-secret'}))
 
 
 class RunnerEligibilityTests(unittest.TestCase):
     def test_only_brief_decisions_are_eligible(self):
         payload = {
             'results': [
-                {'title': 'Eligible', 'decision': 'brief', 'candidate': {'category': 'science'}},
-                {'title': 'Repair', 'decision': 'repair', 'candidate': {'category': 'health'}},
-                {'title': 'Missing', 'decision': 'needs-research', 'candidate': {}},
+                {
+                    'title': 'Eligible',
+                    'decision': 'brief',
+                    'candidate': {'category': 'science'},
+                },
+                {
+                    'title': 'Repair',
+                    'decision': 'repair',
+                    'candidate': {'category': 'health'},
+                },
+                {
+                    'title': 'Missing',
+                    'decision': 'needs-research',
+                    'candidate': {},
+                },
             ]
         }
         self.assertEqual(

@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { CONTENT_CATEGORIES } from './categories';
 
 export interface Article {
   slug: string;
@@ -159,15 +160,7 @@ export async function getAllPosts(): Promise<Article[]> {
   const contentBaseDir = path.join(process.cwd(), 'content');
 
   // Load articles from NEW category directories
-  const categories = [
-    'science',
-    'culture',
-    'psychology',
-    'technology',
-    'health',
-    'space',
-  ];
-  const articlePromises = categories.map((category) =>
+  const articlePromises = CONTENT_CATEGORIES.map((category) =>
     getArticlesFromCategoryDir(path.join(contentBaseDir, category), category)
   );
 

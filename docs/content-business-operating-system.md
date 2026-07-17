@@ -2,29 +2,32 @@
 
 ## Uncomfortable truth
 
-Trends Today does not have an article-volume problem. It has an evidence and feedback-loop problem. The repository contains multiple competing pipelines, fixed output targets, and publishing automation, but no trustworthy connection between a topic decision and qualified traffic, returning readers, app interest, or revenue.
+Trends Today has plenty of old broad-interest content, but it does not give a specific reader a reason to come back tomorrow. The new focus is the Lower Mainland: useful local updates with enough frequency to become a daily habit.
 
-The operating goal is therefore not “publish 15 per day.” It is to build an owned distribution asset that repeatedly turns good topic choices into measurable audience and commercial outcomes.
+The operating goal is not to imitate another publisher's brand or rewrite its stories. It is to build an original local source network and turn verified regional changes into concise, useful reporting throughout the day.
 
 ## Business mechanism
 
-The provisional audience is busy, tech-curious professionals and operators who want important technology, science, health, psychology, space, and culture changes explained clearly. This remains a hypothesis until analytics show which readers return and which topics create attributable actions.
+The provisional audience is people who live, work, commute, eat, and make plans in Metro Vancouver and the Fraser Valley. They want one fast place to learn what changed nearby and what it means for their day.
 
 The value chain is:
 
-`demand signal -> researched opportunity -> useful article -> qualified attention -> returning reader -> attributable app action -> audience revenue`
+`local signal -> verified update -> practical reader value -> return visit -> direct habit -> local audience revenue`
 
 Views are a leading asset signal. They are not the whole business. Articles must eventually influence at least one of returning readership, email audience, app discovery, ad revenue, affiliate revenue, or sponsorship demand.
 
 ## Editorial wedge
 
-The first 28-day positioning test is **useful update intelligence**, not a general-interest news feed. The model is a narrow reason to return: track a changing surface, explain the delta, identify who is affected, and give the reader a useful next action.
+The first 28-day positioning test is **the useful Lower Mainland daily briefing**. The newsroom scans primary regional sources three times each weekday and publishes only updates with clear local relevance and reader utility.
 
 The initial beat mix is:
 
-- 60% software-update utility: release notes, feature rollouts, compatibility, hidden changes, and practical consequences.
-- 25% Vancouver now: local changes that affect plans, costs, mobility, openings, closures, or services.
-- 15% remarkable explained: a small discovery lane for unusually strong science, culture, or technology stories.
+- 30% local news and civic changes.
+- 20% transit, roads, weather, and travel impacts.
+- 20% things to do and time-sensitive planning guides.
+- 15% food, drink, openings, and closures.
+- 10% housing and development.
+- 5% local sports.
 
 This mix is a test, not a brand promise. Compare the beats after comparable 7-day and 28-day windows. Change one material variable at a time.
 
@@ -32,10 +35,10 @@ This mix is a test, not a brand promise. Compare the beats after comparable 7-da
 
 The rolling 28-day target mix is configured in `config/content-business.json`:
 
-- 45% compounding search: durable questions and topic clusters.
-- 30% timely opportunity: current demand with a specific supported angle.
-- 15% authority and proof: original analysis, experiments, and evidence.
-- 10% app distribution: genuinely useful topics adjacent to one app, with an attributable CTA.
+- 50% daily local utility.
+- 20% weekend and planning coverage.
+- 20% local explainers.
+- 10% evergreen local search.
 
 The mix is a starting hypothesis, not a quota. Weak lanes lose share when results say they should.
 
@@ -52,7 +55,7 @@ The agent owns the work from research through repair:
 7. Stage a release candidate outside the live `content/` tree.
 8. Ask Claude CLI for an independent exact-SHA review and repair valid findings.
 9. Send the exact release candidate and its SHA-256 through the approved Claude review runner. A structured `NO BLOCKERS` verdict promotes it to public `content/`; blockers return it to repair and require a fresh review.
-10. Publish no more than one qualifying article in a daily run. Skipping is correct when no opportunity clears the gates.
+10. Run morning, midday, and evening sweeps. Publish no more than two qualifying articles per sweep and six per day. Skipping is correct when no opportunity clears the gates.
 11. Record outcomes at 7 and 28 days, then choose `keep`, `repair`, or `stop`.
 
 This is an independent-review boundary, not a human approval queue. The engine records the candidate hash, reviewer, model, verdict, and review artifact in the promoted article.
@@ -62,9 +65,9 @@ This is an independent-review boundary, not a human approval queue. The engine r
 - Baseline: capture the last 28 days of article-level search impressions, clicks, organic engaged sessions, returning readers, and app CTA clicks. If a metric is unavailable, record it as unavailable instead of zero.
 - Changed variable: favor repeatable utility beats over a broad stream of interesting stories while retaining the evidence score.
 - Rep: publish the highest-scoring eligible release candidate.
-- Primary success metric: organic engaged sessions per article after 28 days.
-- Leading metrics: 7-day search impressions, organic CTR, engaged-session rate, and attributable app CTA clicks.
-- Guardrails: three usable sources, no unsupported claim, no placeholder image, exact-candidate independent review, passing build/QA and deployment checks, and live post-deploy verification.
+- Primary success metric: weekly returning Lower Mainland readers.
+- Leading metrics: direct sessions, local search impressions, engaged-session rate, pages per returning session, and newsletter actions when available.
+- Guardrails: named locality, practical reader impact, story-type source threshold, at least one primary source, no unsupported claim, no placeholder image, exact-candidate independent review, passing build/QA and deployment checks, and live post-deploy verification.
 - Review: weekly operational review and a 28-day article decision.
 - Decision: keep the scoring rule if it improves qualified results; repair one weak input if results are mixed; stop the topic/format if evidence stays weak after enough comparable reps.
 
@@ -96,11 +99,11 @@ Do not blend unavailable metrics into zeroes. Do not call revenue “profit.” 
 
 1. Read the latest scorecard and learning ledger before researching.
 2. Prefer the beat furthest below its target share only when it also has current demand and strong sources.
-3. Pick the highest-scoring non-duplicate opportunity; do not fill a quota.
-4. Publish at most one article through the candidate, exact-review, validation, PR, deployment, and live-verification gates.
+3. Pick the highest-scoring non-duplicate local opportunities; do not fill a quota.
+4. Publish at most two articles per sweep and six per day through the candidate, exact-review, validation, PR, deployment, and live-verification gates.
 5. Log a skipped run with its reason when no candidate qualifies.
 6. At the weekly review, keep the wedge, repair one weak input, or stop a beat only from comparable measured cohorts. Missing metrics trigger measurement repair, not a content verdict.
 
 ## Approval boundary
 
-Research, scoring, briefs, drafts, images, QA, Claude review, repairs, content promotion, and measurement are autonomous. Pricing or commercial terms, billing, guarantees, customer commitments, and use of private customer evidence remain owner decisions because they change the business promise rather than editorial execution.
+Research, scoring, briefs, drafts, images, QA, Claude review, repairs, low-risk content promotion, and measurement are autonomous. Crime allegations, active emergencies, deaths or serious injuries, missing-person cases, claims about private people, leaked material, and sponsored coverage require manual approval. Pricing, commercial terms, billing, guarantees, and use of private evidence also remain owner decisions.

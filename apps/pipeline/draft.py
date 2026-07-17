@@ -15,20 +15,19 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(messa
 logger = logging.getLogger(__name__)
 
 STYLE_GUIDE = """
-- Curious, accessible explainer tone; write for humans first, search engines second
-- Lead with a genuinely original angle or surprising insight — never a generic summary
-- Sentence-case titles, 50-70 chars, no clickbait that the body can't deliver
-- 600-900 words total, 2-4 H2 (##) sections, paragraphs ≤4 sentences
-- Open with a 50-80 word hook built around a concrete, verifiable number or stark fact
-- Immediately follow the hook with a 40-60 word "featured answer" paragraph that
-  directly answers the title's implied question (great for featured snippets / voice search)
-- Bold the specific numbers, study names, and institutions that matter (e.g. **63% faster**,
-  **Nature**, **MIT**) — not random words
-- Use periods and commas for rhythm; MAXIMUM 2 em-dashes (—) in the whole article
+- Fast, useful local-news tone; write for Lower Mainland residents first
+- State the affected municipality and practical reader impact near the top
+- Lead with the verified change, not a generic summary or manufactured curiosity
+- Sentence-case titles, 45-75 chars, no clickbait that the body cannot deliver
+- Use the requested contract: bulletin 250-450 words, reported update 450-800,
+  or guide/explainer 700-1200; use 2-4 H2 (##) sections and short paragraphs
+- Open with the confirmed news and who it affects
+- Bold only the numbers, dates, institutions, and details that matter
+- Use periods and commas for rhythm; do not use em dashes
 - Ground every claim in the provided sources; do not invent statistics
 - Include one [[INTERNAL: keyword]] placeholder for internal linking
-- End with an actionable takeaway or a single sharp question
-- End with a ## Sources section containing markdown links to at least three provided URLs
+- End with what residents should watch or do next
+- End with a ## Sources section containing every provided source URL
 """
 
 class ArticleDrafter:
@@ -45,14 +44,12 @@ class ArticleDrafter:
             for s in sources[:5]
         ])
 
-        return f"""You are writing for Trends Today, a general-interest publication covering
-science, technology, space, health, psychology, and culture. Write a standout article on:
+        return f"""You are writing for Trends Today, a Lower Mainland local-news publication.
+Write an original, practical update on:
 {topic}
 
-Find the most interesting, non-obvious angle the sources support — the detail a curious
-reader would repeat to a friend. Avoid generic "here's an overview" framing. If the sources
-reveal a surprising number, a counterintuitive finding, or a "wait, really?" moment, build
-the piece around it.
+Use only the angle and details the sources support. Do not pad a short update into a long
+article. Do not copy source phrasing. Make the locality and resident impact explicit.
 
 Sources (ground every factual claim in these — do not fabricate stats):
 {source_text}
@@ -63,8 +60,8 @@ Style Guide:
 Return ONLY a JSON object with these keys:
 - title: sentence case, 50-70 chars, specific and curiosity-driven (no clickbait)
 - subtitle: one-sentence hook that promises a concrete payoff
-- body_mdx: 600-900 words, 2-4 ## H2 sections, opening hook + featured-answer paragraph,
-  bold key numbers, ≤2 em-dashes, one [[INTERNAL: keyword]] placeholder, and a ## Sources section
+- body_mdx: the word range required by the supplied story type, 2-4 ## H2 sections,
+  bold key details, zero em dashes, one [[INTERNAL: keyword]] placeholder, and a ## Sources section
 - meta_description: ≤155 chars, includes the primary search phrase naturally
 - tags: 3-5 specific, relevant tags (lowercase)"""
 

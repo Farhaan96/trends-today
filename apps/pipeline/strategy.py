@@ -83,6 +83,11 @@ def score_candidate(candidate: Dict[str, Any], config: Optional[Dict[str, Any]] 
 
     evidence = candidate.get("evidence") or {}
     source_urls = [url for url in evidence.get("sourceUrls", []) if str(url).strip()]
+    primary_source_urls = [
+        url for url in evidence.get("primarySourceUrls", []) if str(url).strip()
+    ]
+    story_type = str(candidate.get("storyType", "reported-update")).strip()
+    locality = str(candidate.get("locality", "")).strip()
     ratings = candidate.get("ratings") or {}
     minimum = int(scoring["scale"]["min"])
     maximum = int(scoring["scale"]["max"])
@@ -107,14 +112,25 @@ def score_candidate(candidate: Dict[str, Any], config: Optional[Dict[str, Any]] 
     score = round(weighted, 1)
 
     reasons: List[str] = []
-    if len(source_urls) < int(scoring["minimumSources"]):
+    minimum_sources = int(
+        scoring.get("minimumSourcesByStoryType", {}).get(
+            story_type, scoring["minimumSources"]
+        )
+    )
+    if len(source_urls) < minimum_sources:
         reasons.append(
-            f"Only {len(source_urls)} usable sources; {scoring['minimumSources']} required"
+            f"Only {len(source_urls)} usable sources; {minimum_sources} required for {story_type}"
         )
     if validated["evidenceStrength"] < float(scoring["minimumEvidenceStrength"]):
         reasons.append("Evidence strength is below the release threshold")
-    if not evidence.get("demandEvidence"):
-        reasons.append("No demand evidence recorded")
+    if scoring.get("primarySourceRequired") and not primary_source_urls:
+        reasons.append("No primary source recorded")
+    if not locality:
+        reasons.append("No Lower Mainland locality recorded")
+    if not evidence.get("readerImpact"):
+        reasons.append("No practical reader impact recorded")
+    if not evidence.get("freshnessEvidence"):
+        reasons.append("No freshness evidence recorded")
     if not evidence.get("uniqueAngleEvidence"):
         reasons.append("No unique-angle evidence recorded")
 
@@ -146,15 +162,23 @@ def build_research_queue(topics: Iterable[Dict[str, Any]]) -> List[Dict[str, Any
         {
             "title": str(topic.get("title", "")).strip(),
             "discoverySource": topic.get("source", "unknown"),
+            "sourceUrl": topic.get("url"),
+            "sourceName": topic.get("sourceName"),
+            "sourceTier": topic.get("sourceTier"),
+            "locality": topic.get("locality"),
+            "category": topic.get("category"),
+            "storyType": topic.get("storyType", "reported-update"),
             "discoveredAt": topic.get("discovered_at", created_at),
             "status": "needs-research",
             "requiredEvidence": [
-                "intended reader and problem",
-                "demand signal with source",
-                "three or more usable source URLs",
+                "Lower Mainland locality",
+                "practical reader impact",
+                "freshness timestamp or event date",
+                "story type and its source threshold",
+                "at least one primary source URL",
                 "specific angle not covered by existing inventory",
                 "content lane and CTA hypothesis",
-                "all eight opportunity ratings",
+                "all seven local opportunity ratings",
             ],
         }
         for topic in topics

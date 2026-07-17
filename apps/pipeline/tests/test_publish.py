@@ -2,6 +2,7 @@ import sys
 import tempfile
 import unittest
 import json
+from unittest.mock import patch
 from pathlib import Path
 
 
@@ -35,6 +36,28 @@ class PublisherTests(unittest.TestCase):
             self.assertTrue((root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx').exists())
             self.assertFalse((root / 'content/science/candidate-title.mdx').exists())
 
+    def test_local_candidate_records_newsroom_metadata(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            article = self.article()
+            article.update({
+                'category': 'transit',
+                'tags': ['transit', 'burnaby'],
+                'locality': 'Burnaby',
+                'storyType': 'reported-update',
+                'readerImpact': 'Weekend riders need a different route.',
+            })
+            publisher = Publisher(mode='candidate', repo_root=root)
+            self.assertTrue(publisher.publish(
+                article,
+                {'slug': 'burnaby-route-change', 'meta_description': 'Route details.', 'internal_links': []},
+                {'path': '/images/bus.webp', 'alt': 'Bus in Burnaby'},
+            ))
+            candidate = root / 'artifacts/editorial/release-candidates/transit/burnaby-route-change.mdx'
+            content = candidate.read_text(encoding='utf-8')
+            self.assertIn('locality: "Burnaby"', content)
+            self.assertIn('storyType: "reported-update"', content)
+
     def write_review(self, root, candidate, verdict='NO BLOCKERS', digest=None):
         review = root / 'artifacts/editorial/reviews/science/candidate-title.review.json'
         review.parent.mkdir(parents=True, exist_ok=True)
@@ -48,6 +71,13 @@ class PublisherTests(unittest.TestCase):
             'modelUsed': 'claude-opus-4-8',
         }), encoding='utf-8')
         return review
+
+    def write_source_config(self, root, keywords=None):
+        config = root / 'config/local-news-sources.json'
+        config.parent.mkdir(parents=True, exist_ok=True)
+        config.write_text(json.dumps({
+            'automaticPublishing': {'manualApprovalKeywords': keywords or ['stabbing']}
+        }), encoding='utf-8')
 
     def test_direct_production_mode_is_disabled(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -65,8 +95,12 @@ class PublisherTests(unittest.TestCase):
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
             candidate_body = candidate.read_text(encoding='utf-8').split('---', 2)[2]
+            self.write_source_config(root)
             review = self.write_review(root, candidate)
-            destination = promote_candidate(candidate, review, repo_root=root)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                destination = promote_candidate(candidate, review, repo_root=root)
             promoted = destination.read_text(encoding='utf-8')
             self.assertEqual(candidate_body, promoted.split('---', 2)[2])
             self.assertIn('candidateSha256:', promoted)
@@ -84,6 +118,7 @@ class PublisherTests(unittest.TestCase):
                 {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
+            self.write_source_config(root)
             review = self.write_review(root, candidate, digest='0' * 64)
             with self.assertRaises(PermissionError):
                 promote_candidate(candidate, review, repo_root=root)
@@ -98,6 +133,7 @@ class PublisherTests(unittest.TestCase):
                 {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
+            self.write_source_config(root)
             review = self.write_review(root, candidate, verdict='BLOCKERS')
             with self.assertRaises(PermissionError):
                 promote_candidate(candidate, review, repo_root=root)
@@ -109,6 +145,44 @@ class PublisherTests(unittest.TestCase):
             outside.write_text('---\nstatus: "release-candidate"\n---\n', encoding='utf-8')
             with self.assertRaises(ValueError):
                 promote_candidate(outside, root / 'missing-review.json', repo_root=root)
+
+    def test_promotion_rechecks_sensitive_candidate_approval(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            publisher = Publisher(mode='candidate', repo_root=root)
+            article = self.article()
+            article['body_mdx'] = '## Update\n\nOfficials confirmed a stabbing.\n\n## Sources\n\nDetails.'
+            publisher.publish(
+                article,
+                {'slug': 'candidate-title', 'meta_description': 'Candidate description', 'internal_links': []},
+                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+            )
+            candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
+            self.write_source_config(root)
+            review = self.write_review(root, candidate)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                with self.assertRaises(PermissionError):
+                    promote_candidate(candidate, review, repo_root=root)
+
+    def test_review_verification_fails_closed_without_git_sha(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            publisher = Publisher(mode='candidate', repo_root=root)
+            publisher.publish(
+                self.article(),
+                {'slug': 'candidate-title', 'meta_description': 'Candidate description', 'internal_links': []},
+                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+            )
+            candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
+            self.write_source_config(root)
+            review = self.write_review(root, candidate)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 1
+                git_run.return_value.stdout = ''
+                with self.assertRaises(PermissionError):
+                    promote_candidate(candidate, review, repo_root=root)
 
 
 if __name__ == '__main__':
