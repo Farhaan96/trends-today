@@ -1,15 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
-
-const CONTENT_CATEGORIES = [
-  'science',
-  'culture',
-  'psychology',
-  'technology',
-  'health',
-  'space',
-] as const;
+import { CONTENT_CATEGORIES } from '@/lib/categories';
 
 interface ArticleSummary {
   title: string;

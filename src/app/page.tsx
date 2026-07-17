@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const posts = await getAllPosts();
-  const initialPosts = posts.slice(0, 9); // Show first 9 articles initially
+  const initialPosts = posts.slice(0, 12);
 
   return (
     <div className="site-page">

@@ -32,7 +32,8 @@ class MDXStaticPublisher(PublisherAdapter):
     """
 
     VALID_CATEGORIES = {
-        'science', 'culture', 'psychology', 'technology', 'health', 'space'
+        'science', 'culture', 'psychology', 'technology', 'health', 'space',
+        'local-news', 'transit', 'things-to-do', 'food-drink', 'housing', 'sports'
     }
 
     def __init__(self, mode: str = 'candidate', repo_root: Path = None):
@@ -69,7 +70,10 @@ class MDXStaticPublisher(PublisherAdapter):
                 'category': category,
                 'author': 'Trends Today Team',
                 'readingTime': max(1, len(article['body_mdx'].split()) // 200),
-                'slug': slug
+                'slug': slug,
+                'locality': article.get('locality', ''),
+                'storyType': article.get('storyType', 'guide-or-explainer'),
+                'readerImpact': article.get('readerImpact', ''),
             }
             frontmatter['status'] = 'release-candidate'
             

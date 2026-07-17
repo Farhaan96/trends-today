@@ -35,6 +35,28 @@ class PublisherTests(unittest.TestCase):
             self.assertTrue((root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx').exists())
             self.assertFalse((root / 'content/science/candidate-title.mdx').exists())
 
+    def test_local_candidate_records_newsroom_metadata(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            article = self.article()
+            article.update({
+                'category': 'transit',
+                'tags': ['transit', 'burnaby'],
+                'locality': 'Burnaby',
+                'storyType': 'reported-update',
+                'readerImpact': 'Weekend riders need a different route.',
+            })
+            publisher = Publisher(mode='candidate', repo_root=root)
+            self.assertTrue(publisher.publish(
+                article,
+                {'slug': 'burnaby-route-change', 'meta_description': 'Route details.', 'internal_links': []},
+                {'path': '/images/bus.webp', 'alt': 'Bus in Burnaby'},
+            ))
+            candidate = root / 'artifacts/editorial/release-candidates/transit/burnaby-route-change.mdx'
+            content = candidate.read_text(encoding='utf-8')
+            self.assertIn('locality: "Burnaby"', content)
+            self.assertIn('storyType: "reported-update"', content)
+
     def write_review(self, root, candidate, verdict='NO BLOCKERS', digest=None):
         review = root / 'artifacts/editorial/reviews/science/candidate-title.review.json'
         review.parent.mkdir(parents=True, exist_ok=True)

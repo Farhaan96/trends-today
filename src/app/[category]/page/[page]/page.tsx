@@ -2,7 +2,12 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getAllArticles } from '@/lib/article-utils';
-import { getCategoryKey, getCategoryDescription } from '@/lib/categories';
+import {
+  CONTENT_CATEGORIES,
+  getCategoryKey,
+  getCategoryDescription,
+  getCategoryLabel,
+} from '@/lib/categories';
 import { formatArticleDate } from '@/lib/editorial';
 import {
   paginateItems,
@@ -18,24 +23,20 @@ type Params = {
   page: string;
 };
 
-export function generateStaticParams() {
-  const categories = [
-    'science',
-    'culture',
-    'psychology',
-    'technology',
-    'health',
-    'space',
-  ];
-
-  // Generate params for each category's paginated pages
-  // We'll calculate the actual pages needed in the build
+export async function generateStaticParams() {
+  const articles = await getAllArticles();
   const params: Array<{ category: string; page: string }> = [];
 
-  categories.forEach((category) => {
-    // Generate up to 10 pages per category for static generation
-    // Additional pages will be generated on-demand
-    for (let page = 2; page <= 10; page++) {
+  CONTENT_CATEGORIES.forEach((category) => {
+    const count = articles.filter(
+      (article) =>
+        (article.category || article.frontmatter?.category || '')
+          .toString()
+          .toLowerCase() === category
+    ).length;
+    const totalPages = Math.ceil(count / 12);
+
+    for (let page = 2; page <= totalPages; page++) {
       params.push({ category, page: page.toString() });
     }
   });
@@ -49,15 +50,7 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { category, page: pageParam } = await params;
-  const supportedCategories = [
-    'science',
-    'culture',
-    'psychology',
-    'technology',
-    'health',
-    'space',
-    'mystery',
-  ];
+  const supportedCategories = [...CONTENT_CATEGORIES, 'mystery'];
   if (!supportedCategories.includes(category.toLowerCase())) notFound();
 
   const key = getCategoryKey(category);
@@ -81,8 +74,8 @@ export async function generateMetadata({
   }
 
   const paginatedResult = paginateItems(posts, page, 12, `/${key}`);
-  const title = `${key.charAt(0).toUpperCase() + key.slice(1)} - Page ${page}`;
-  const baseTitle = `${key.charAt(0).toUpperCase() + key.slice(1)} | Trends Today`;
+  const title = `${getCategoryLabel(key)} - Page ${page}`;
+  const baseTitle = `${getCategoryLabel(key)} | Trends Today`;
 
   return {
     ...generatePaginationMetadata(
@@ -129,9 +122,8 @@ export default async function CategoryPaginatedPage({
   }
 
   const { items: pageArticles, pagination } = paginatedResult;
-  const title = key.charAt(0).toUpperCase() + key.slice(1);
+  const title = getCategoryLabel(key);
 
-  // Breadcrumb data
   const breadcrumbs = [
     { name: 'Home', url: 'https://www.trendstoday.ca' },
     { name: title, url: `https://www.trendstoday.ca/${key}` },
@@ -143,10 +135,8 @@ export default async function CategoryPaginatedPage({
 
   return (
     <div className="category-page">
-      {/* Breadcrumb Schema */}
       <BreadcrumbSchema items={breadcrumbs} />
 
-      {/* Themed Category Header */}
       <section className="category-header">
         <div className="site-shell category-header__inner">
           <h1 className="category-title">
@@ -154,13 +144,12 @@ export default async function CategoryPaginatedPage({
           </h1>
           {description && <p className="category-description">{description}</p>}
           <p className="category-count">
-            Page {pagination.currentPage} of {pagination.totalPages} •{' '}
+            Page {pagination.currentPage} of {pagination.totalPages} |{' '}
             {pagination.totalItems} total articles
           </p>
         </div>
       </section>
 
-      {/* Articles list */}
       <section className="site-shell category-feed">
         {pageArticles.length === 0 ? (
           <p className="empty-state">No articles found on this page.</p>
@@ -198,7 +187,6 @@ export default async function CategoryPaginatedPage({
           </div>
         )}
 
-        {/* Pagination Navigation */}
         <PaginationLinks
           pagination={pagination}
           baseUrl={`/${key}`}

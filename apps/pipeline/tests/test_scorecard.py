@@ -23,7 +23,10 @@ class ScorecardTests(unittest.TestCase):
             result = build_scorecard(content)
             self.assertEqual(1, result['inventory']['totalActiveArticles'])
             self.assertEqual('unavailable', result['analytics']['status'])
-            self.assertEqual('repair-measurement-before-scaling-volume', result['decision'])
+            self.assertEqual(
+                'repair-measurement-while-running-bounded-local-sweeps',
+                result['decision'],
+            )
 
     def test_supplied_analytics_is_preserved(self):
         with tempfile.TemporaryDirectory() as temp:

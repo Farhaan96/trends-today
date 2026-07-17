@@ -1,14 +1,17 @@
 # CLAUDE.md - Trends Today: Optimized Content System v2.0
 
-## 2026 content-business operating override
+## 2026 Lower Mainland newsroom operating override
 
 The current operating source of truth is `docs/content-business-operating-system.md` plus `config/content-business.json`. These rules override any fixed article-count, automatic-publishing, or legacy content-path instruction below:
 
-- Diagnose and measure the content-to-audience constraint; do not optimize an article quota.
+- The publication's active audience is people who live, work, commute, eat, and make plans in the Lower Mainland. Legacy national technology, science, culture, psychology, health, and space routes remain available for SEO, but new editorial work is local-first.
+- Diagnose and measure the content-to-audience constraint; do not fill an article quota.
 - Research output must be evidence-enriched and scored before briefing.
 - Autonomous work stages candidates in `artifacts/editorial/release-candidates/` before promotion.
 - Public content lives in `content/<category>/`, not `apps/web/content/posts/`.
-- The owner has standing authorization for the scheduled editorial workflow to publish at most one qualifying article per daily run. It may push, merge, and deploy only after an exact-candidate Claude review, deterministic QA/build checks, a clean PR/check result, and post-deploy live verification. Zero articles is the correct result when no candidate qualifies.
+- The owner has standing authorization for three scheduled local-news sweeps per weekday, with at most two qualifying low-risk articles per sweep and six per day. Each article still requires an exact-candidate Claude review, deterministic QA/build checks, a clean PR/check result, and post-deploy live verification. Zero articles is correct when no candidate qualifies.
+- Every new story must name a Lower Mainland locality, identify the practical reader impact, meet its story-type source threshold, and include at least one primary source.
+- Crime allegations, active emergencies, deaths or serious injuries, missing-person cases, claims about private people, leaked material, and sponsored coverage require manual approval before publication.
 - Claude is the independent editorial reviewer. A structured `NO BLOCKERS` review bound to the exact candidate SHA-256 authorizes content promotion; blockers require repair and a fresh review.
 - Missing analytics or evidence must remain explicitly unavailable. Never replace missing business data with invented benchmarks or zeroes.
 

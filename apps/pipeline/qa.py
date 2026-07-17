@@ -22,6 +22,13 @@ class QualityAssurance:
     def _build_qa_prompt(self, article: Dict, sources: List[Dict]) -> str:
         """Build QA refinement prompt"""
         source_facts = "\n".join([s['snippet'][:200] for s in sources[:3]])
+        story_type = article.get('storyType', 'guide-or-explainer')
+        word_ranges = {
+            'bulletin': '250-450',
+            'reported-update': '450-800',
+            'guide-or-explainer': '700-1200',
+        }
+        word_range = word_ranges.get(story_type, '700-1200')
         
         return f"""Review and improve this article:
 
@@ -34,10 +41,12 @@ Source Facts:
 Requirements:
 - Check claims against sources
 - Remove redundancy and fluff
-- Ensure 600-900 words
+- Ensure {word_range} words for the {story_type} contract
+- Keep the Lower Mainland locality and practical reader impact explicit
 - Keep curious, accessible tone
 - Maintain 2-4 H2 sections
-- Paragraphs ≤4 sentences
+- Paragraphs no longer than 4 sentences
+- Use zero em dashes
 - Fix any grammar issues
 - Preserve the ## Sources section and every supplied source URL
 
@@ -149,12 +158,18 @@ Return the corrected body_mdx only."""
         
         # Check word count
         words = len(body.split())
-        if words < 600:
+        story_type = article.get('storyType', 'guide-or-explainer')
+        minimum_words, maximum_words = {
+            'bulletin': (250, 450),
+            'reported-update': (450, 800),
+            'guide-or-explainer': (700, 1200),
+        }.get(story_type, (700, 1200))
+        if words < minimum_words:
             logger.warning("QA could not repair short copy without a model; candidate remains blocked")
-        elif words > 900:
-            # Trim to ~900 words
+        elif words > maximum_words:
+            # Trim proportionally to the story contract.
             sentences = body.split('. ')
-            target_sentences = int(len(sentences) * 0.9)
+            target_sentences = max(1, int(len(sentences) * (maximum_words / words)))
             body = '. '.join(sentences[:target_sentences]) + '.'
         
         article['body_mdx'] = body

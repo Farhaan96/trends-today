@@ -1,69 +1,84 @@
 {
-  "version": 2,
-  "updatedAt": "2026-07-15",
+  "version": 3,
+  "updatedAt": "2026-07-17",
   "businessModel": {
-    "primary": "owned media and audience distribution",
+    "primary": "owned local media and audience distribution",
     "revenueSequence": [
-      "qualified attention",
-      "attributable app discovery",
-      "ads and affiliate revenue",
-      "select sponsorships after audience fit is proven"
+      "repeat local readership",
+      "direct and search traffic",
+      "newsletter audience",
+      "ads and local sponsorships after audience fit is proven"
     ]
   },
   "audience": {
-    "status": "hypothesis",
-    "buyer": "busy, tech-curious professionals and operators",
-    "pain": "important technology, science, health, psychology, space, and culture changes are noisy and hard to evaluate",
-    "promise": "clear, sourced explanations that tell the reader what changed, why it matters, and what to do next"
+    "status": "28-day hypothesis",
+    "buyer": "people who live, work, commute, eat, and make plans in the Lower Mainland",
+    "pain": "useful local changes are scattered across city sites, transit notices, event calendars, teams, and business announcements",
+    "promise": "a fast, sourced view of what changed around the Lower Mainland and what residents should know or do next"
   },
   "editorialWedge": {
-    "status": "28-day hypothesis",
-    "positioning": "useful update intelligence for changes that affect what readers can do, buy, use, or plan today",
-    "mechanism": "earn repeat visits with a narrow recurring utility beat, then explain only the changes that clear the evidence threshold",
+    "status": "28-day local-news hypothesis",
+    "positioning": "the useful daily briefing for Vancouver and the Lower Mainland",
+    "mechanism": "scan primary local sources throughout the day, publish concise verified updates, and earn a repeat-reading habit through practical regional coverage",
     "beats": [
       {
-        "id": "software-update-utility",
-        "targetShare": 60,
-        "readerJob": "tell me what changed in software I use, who gets it, and what I should do now"
+        "id": "local-news",
+        "targetShare": 30,
+        "readerJob": "tell me what changed in my city and whether it affects me"
       },
       {
-        "id": "vancouver-now",
-        "targetShare": 25,
-        "readerJob": "tell me which Vancouver changes affect my plans, costs, or mobility today"
+        "id": "transit",
+        "targetShare": 20,
+        "readerJob": "tell me about disruptions, road changes, transit service, weather, and travel impacts"
       },
       {
-        "id": "remarkable-explained",
+        "id": "things-to-do",
+        "targetShare": 20,
+        "readerJob": "help me find timely events and make plans around the region"
+      },
+      {
+        "id": "food-drink",
         "targetShare": 15,
-        "readerJob": "explain one genuinely surprising development without hype"
+        "readerJob": "tell me which restaurants and local businesses are opening, closing, or worth knowing about"
+      },
+      {
+        "id": "housing",
+        "targetShare": 10,
+        "readerJob": "explain development, rent, and housing changes that affect Lower Mainland residents"
+      },
+      {
+        "id": "sports",
+        "targetShare": 5,
+        "readerJob": "give me the useful local sports update without filler"
       }
     ],
     "reviewAfterDays": 28
   },
   "constraint": {
-    "stage": "measurement",
-    "statement": "Trends Today cannot yet connect topic choices and content quality to qualified views, returning readers, app actions, or revenue.",
-    "avoidedHardAction": "publish fewer measured experiments and kill weak topics instead of optimizing article count"
+    "stage": "market and repeat-use positioning",
+    "statement": "Trends Today has broad evergreen inventory but no clear reason for a Lower Mainland reader to return several times a week.",
+    "avoidedHardAction": "commit the publication to one geography and build a real daily local reporting rhythm"
   },
   "portfolio": [
     {
-      "id": "compounding-search",
-      "targetShare": 45,
-      "purpose": "durable search demand and topic authority"
+      "id": "daily-local-utility",
+      "targetShare": 50,
+      "purpose": "fresh service, civic, weather, transit, opening, and event updates"
     },
     {
-      "id": "timely-opportunity",
-      "targetShare": 30,
-      "purpose": "fresh demand with a specific, supportable angle"
+      "id": "weekend-and-planning",
+      "targetShare": 20,
+      "purpose": "events, food, and guides that help residents make plans"
     },
     {
-      "id": "authority-proof",
-      "targetShare": 15,
-      "purpose": "original analysis, experiments, and proof that earn trust"
+      "id": "local-explainers",
+      "targetShare": 20,
+      "purpose": "housing, development, cost, and policy explainers with local context"
     },
     {
-      "id": "app-distribution",
+      "id": "evergreen-local-search",
       "targetShare": 10,
-      "purpose": "useful content naturally adjacent to one of Farhaan's apps"
+      "purpose": "durable neighbourhood, transportation, and local-service search demand"
     }
   ],
   "opportunityScoring": {
@@ -72,49 +87,60 @@
       "max": 5
     },
     "weights": {
-      "audienceFit": 20,
-      "demandSignal": 20,
+      "localRelevance": 25,
+      "readerUtility": 20,
+      "freshness": 15,
       "evidenceStrength": 20,
-      "uniqueAngle": 15,
-      "compoundingValue": 10,
-      "monetizationFit": 5,
-      "appFit": 5,
+      "uniqueAngle": 10,
+      "repeatVisitPotential": 5,
       "speedToUsefulDraft": 5
     },
-    "minimumScore": 70,
+    "minimumScore": 65,
     "minimumEvidenceStrength": 3,
-    "minimumSources": 3
+    "minimumSources": 2,
+    "minimumSourcesByStoryType": {
+      "bulletin": 1,
+      "reported-update": 2,
+      "guide-or-explainer": 3
+    },
+    "primarySourceRequired": true
   },
   "experiment": {
-    "changedVariable": "repeatable utility beats instead of a broad stream of interesting stories",
-    "primaryMetric": "organic engaged sessions per published article after 28 days",
+    "changedVariable": "a Lower Mainland daily-news focus instead of broad national technology and science coverage",
+    "primaryMetric": "weekly returning Lower Mainland readers",
     "leadingMetrics": [
-      "search impressions after 7 and 28 days",
+      "local search impressions after 7 and 28 days",
       "organic click-through rate",
       "engaged session rate",
-      "returning reader rate",
-      "app CTA clicks by article"
+      "direct sessions",
+      "articles read per returning session"
     ],
     "guardrails": [
+      "every story names its Lower Mainland locality and practical reader impact",
+      "every story meets its source threshold and includes a primary source",
+      "sensitive stories require manual approval",
       "no unsupported claims",
-      "no candidate with fewer than three usable sources",
       "no placeholder image",
       "no publication without an exact-candidate independent review, deterministic validation, passing deployment checks, and live verification",
       "no public app promotion without an attributable CTA"
     ],
-    "reviewCadence": "weekly operating review; 28-day keep, repair, or stop decision per article"
+    "reviewCadence": "weekly operating review; 28-day keep, repair, or stop decision per beat"
   },
   "release": {
     "defaultMode": "candidate",
     "publicPublishingRequiresHumanAuthorization": false,
+    "sensitiveStoryPublishingRequiresHumanAuthorization": true,
     "independentReviewRequired": true,
     "reviewer": "claude",
     "reviewMustMatchExactCandidateSha256": true,
-    "maximumArticlesPerDailyRun": 1,
+    "maximumArticlesPerDailyRun": 6,
+    "maximumArticlesPerSweep": 2,
+    "scheduledSweepsPerDay": 3,
     "minimumArticlesPerDailyRun": 0,
     "scheduledPublishingAuthorized": true,
     "skipWhenNoCandidateQualifies": true,
     "autonomousLoop": [
+      "local source scan",
       "research",
       "scoring",
       "briefing",

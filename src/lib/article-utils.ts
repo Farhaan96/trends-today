@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { CONTENT_CATEGORIES } from './categories';
 
 const contentDirectory = path.join(process.cwd(), 'content');
 
@@ -22,17 +23,9 @@ export interface Article {
 }
 
 export async function getAllArticles(): Promise<Article[]> {
-  const categories = [
-    'science',
-    'culture',
-    'psychology',
-    'technology',
-    'health',
-    'space',
-  ];
   const articles: Article[] = [];
 
-  for (const category of categories) {
+  for (const category of CONTENT_CATEGORIES) {
     const categoryPath = path.join(contentDirectory, category);
 
     if (!fs.existsSync(categoryPath)) {

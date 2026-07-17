@@ -13,21 +13,25 @@ class StrategyTests(unittest.TestCase):
     def candidate(self):
         return {
             'title': 'A researched opportunity',
-            'lane': 'compounding-search',
+            'lane': 'daily-local-utility',
+            'category': 'transit',
+            'locality': 'Burnaby',
+            'storyType': 'reported-update',
             'confidence': 'current-hypothesis',
             'ratings': {
-                'audienceFit': 5,
-                'demandSignal': 4,
+                'localRelevance': 5,
+                'readerUtility': 5,
+                'freshness': 5,
                 'evidenceStrength': 5,
                 'uniqueAngle': 4,
-                'compoundingValue': 5,
-                'monetizationFit': 3,
-                'appFit': 2,
+                'repeatVisitPotential': 4,
                 'speedToUsefulDraft': 4,
             },
             'evidence': {
-                'sourceUrls': ['https://a.example', 'https://b.example', 'https://c.example'],
-                'demandEvidence': 'Search Console query evidence',
+                'sourceUrls': ['https://a.example', 'https://b.example'],
+                'primarySourceUrls': ['https://a.example'],
+                'readerImpact': 'Changes the reader\'s Expo Line trip this weekend',
+                'freshnessEvidence': 'Official notice published today',
                 'uniqueAngleEvidence': 'Existing inventory gap',
             },
         }
@@ -39,7 +43,7 @@ class StrategyTests(unittest.TestCase):
 
     def test_missing_rating_is_not_invented(self):
         candidate = self.candidate()
-        candidate['ratings']['demandSignal'] = None
+        candidate['ratings']['freshness'] = None
         result = score_candidate(candidate)
         self.assertEqual('needs-research', result.decision)
         self.assertEqual(0, result.score)
@@ -50,6 +54,20 @@ class StrategyTests(unittest.TestCase):
         result = score_candidate(candidate)
         self.assertEqual('repair', result.decision)
         self.assertIn('Evidence strength is below the release threshold', result.reasons)
+
+    def test_missing_locality_blocks_publication(self):
+        candidate = self.candidate()
+        candidate['locality'] = ''
+        result = score_candidate(candidate)
+        self.assertEqual('repair', result.decision)
+        self.assertIn('No Lower Mainland locality recorded', result.reasons)
+
+    def test_bulletin_can_use_one_primary_source(self):
+        candidate = self.candidate()
+        candidate['storyType'] = 'bulletin'
+        candidate['evidence']['sourceUrls'] = ['https://a.example']
+        result = score_candidate(candidate)
+        self.assertEqual('brief', result.decision)
 
 
 if __name__ == '__main__':

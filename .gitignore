@@ -53,6 +53,8 @@ next-env.d.ts
 /screenshots/
 /test-results/
 /playwright-report/
+/.playwright-cli/
+/output/
 
 # nested repos
 Trends Today/

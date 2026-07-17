@@ -4,6 +4,7 @@ import { useState } from 'react';
 import ArticleCard, { type EditorialArticle } from './ArticleCard';
 import { SubtlePaginationLinks } from '@/components/ui/PaginationLinks';
 import { paginateItems } from '@/lib/pagination';
+import { isLocalNewsCategory } from '@/lib/categories';
 
 interface Article {
   href: string;
@@ -16,6 +17,8 @@ interface Article {
     image?: string;
     description?: string;
     category?: string;
+    locality?: string;
+    storyType?: string;
   };
 }
 
@@ -34,24 +37,33 @@ function normalizeArticle(article: Article): EditorialArticle {
     publishedAt:
       article.frontmatter.publishedAt || article.frontmatter.datePublished,
     category: article.category || article.frontmatter.category,
+    locality: article.frontmatter.locality,
+    storyType: article.frontmatter.storyType,
   };
 }
 
 export default function EditorialArticleList({
-  initialArticles,
   allArticles,
 }: EditorialArticleListProps) {
-  const [displayedArticles, setDisplayedArticles] = useState(initialArticles);
-  const [currentIndex, setCurrentIndex] = useState(initialArticles.length);
-  const articlesPerLoad = 6;
-  const pagination = paginateItems(allArticles, 1, 12, '').pagination;
+  const localArticles = allArticles.filter((article) =>
+    isLocalNewsCategory(article.category || article.frontmatter.category || '')
+  );
+  const localDeskIsLive = localArticles.length > 0;
+  const feedArticles = localDeskIsLive ? localArticles : allArticles;
+  const initialCount = Math.min(12, feedArticles.length);
+  const [displayedArticles, setDisplayedArticles] = useState(
+    feedArticles.slice(0, initialCount)
+  );
+  const [currentIndex, setCurrentIndex] = useState(initialCount);
+  const articlesPerLoad = 9;
+  const pagination = paginateItems(feedArticles, 1, 12, '').pagination;
 
   const loadMore = () => {
     const nextIndex = Math.min(
       currentIndex + articlesPerLoad,
-      allArticles.length
+      feedArticles.length
     );
-    setDisplayedArticles(allArticles.slice(0, nextIndex));
+    setDisplayedArticles(feedArticles.slice(0, nextIndex));
     setCurrentIndex(nextIndex);
   };
 
@@ -61,15 +73,20 @@ export default function EditorialArticleList({
   return (
     <div className="home-feed">
       <div className="home-intro">
-        <p className="home-intro__kicker">
-          Independent reporting and useful ideas
-        </p>
-        <h1>What is worth knowing today.</h1>
+        <p className="home-intro__kicker">Lower Mainland, today</p>
+        <h1>What is happening around you.</h1>
         <p>
-          Clear reporting across science, culture, psychology, technology,
-          health, and space.
+          Local news, transit, food, events, housing and sports from Vancouver
+          to the Fraser Valley.
         </p>
       </div>
+
+      {!localDeskIsLive && (
+        <div className="local-desk-note" role="status">
+          <strong>Lower Mainland desk in preparation.</strong>
+          <span>The existing Trends Today archive is shown below.</span>
+        </div>
+      )}
 
       {featuredPost && (
         <section className="lead-layout" aria-label="Featured stories">
@@ -99,8 +116,10 @@ export default function EditorialArticleList({
       {latestPosts.length > 0 && (
         <section className="latest-section" aria-labelledby="latest-heading">
           <div className="section-heading">
-            <h2 id="latest-heading">Latest stories</h2>
-            <span>{allArticles.length} articles</span>
+            <h2 id="latest-heading">
+              {localDeskIsLive ? 'Latest local updates' : 'From the archive'}
+            </h2>
+            <span>{feedArticles.length} updates</span>
           </div>
           <div className="latest-grid">
             {latestPosts.map((article, index) => (
@@ -114,13 +133,13 @@ export default function EditorialArticleList({
         </section>
       )}
 
-      {currentIndex < allArticles.length && (
+      {currentIndex < feedArticles.length && (
         <div className="feed-actions">
           <button type="button" onClick={loadMore} className="primary-button">
             Load more stories
           </button>
           <p>
-            Showing {displayedArticles.length} of {allArticles.length}
+            Showing {displayedArticles.length} of {feedArticles.length}
           </p>
         </div>
       )}

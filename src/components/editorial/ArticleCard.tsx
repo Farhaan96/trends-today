@@ -2,6 +2,7 @@ import Link from 'next/link';
 import EditorialImage from './EditorialImage';
 import {
   formatArticleDate,
+  formatArticleDateTime,
   getAuthorName,
   getCategoryFromHref,
   type EditorialAuthor,
@@ -15,6 +16,8 @@ export interface EditorialArticle {
   author?: EditorialAuthor;
   publishedAt?: string;
   category?: string;
+  locality?: string;
+  storyType?: string;
 }
 
 interface ArticleCardProps {
@@ -29,7 +32,9 @@ export default function ArticleCard({
   priority = false,
 }: ArticleCardProps) {
   const category = article.category || getCategoryFromHref(article.href);
-  const date = formatArticleDate(article.publishedAt);
+  const date = article.locality
+    ? formatArticleDateTime(article.publishedAt)
+    : formatArticleDate(article.publishedAt);
 
   return (
     <article className={`story-card story-card--${variant}`}>
@@ -68,6 +73,7 @@ export default function ArticleCard({
           <p className="story-card__description">{article.description}</p>
         )}
         <div className="story-card__meta">
+          {article.locality && <span>{article.locality}</span>}
           <span>{getAuthorName(article.author)}</span>
           {date && <time dateTime={article.publishedAt}>{date}</time>}
         </div>
