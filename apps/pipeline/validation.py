@@ -39,6 +39,7 @@ def validate_release_candidate(
     seo: Dict,
     image: Dict,
     minimum_sources: int = None,
+    sensitive_keywords: List[str] = None,
 ) -> ValidationResult:
     errors: List[str] = []
     body = str(article.get('body_mdx', ''))
@@ -82,7 +83,15 @@ def validate_release_candidate(
         errors.append('at least one primary source is required for local stories')
     if is_local and not str(article.get('locality', '')).strip():
         errors.append('Lower Mainland locality is required')
-    if article.get('manualApprovalRequired') and not article.get('manualApprovalRecorded'):
+    sensitive_text = ' '.join(
+        str(article.get(field, '') or '')
+        for field in ('title', 'subtitle', 'meta_description', 'body_mdx')
+    ).lower()
+    has_sensitive_signal = article.get('manualApprovalRequired') or any(
+        str(keyword).lower() in sensitive_text
+        for keyword in (sensitive_keywords or [])
+    )
+    if has_sensitive_signal and not article.get('manualApprovalRecorded'):
         errors.append('manual approval is required for this sensitive story')
     uncited = [url for url in source_urls if url not in body]
     if uncited:

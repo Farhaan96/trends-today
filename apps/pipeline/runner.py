@@ -194,6 +194,11 @@ class ContentPipeline:
             
             # 3. Quality assurance
             article = self.qa.qa_check(article, sources)
+            article['manualApprovalRequired'] = requires_manual_approval(
+                topic,
+                article,
+                self.topic_discovery.source_config,
+            )
             
             # 4. SEO optimization
             seo = self.seo_optimizer.optimize(article)
@@ -209,7 +214,18 @@ class ContentPipeline:
             article['image'] = image
             
             # 6. Deterministic release gate
-            validation = validate_release_candidate(article, sources, seo, image)
+            sensitive_keywords = (
+                self.topic_discovery.source_config
+                .get('automaticPublishing', {})
+                .get('manualApprovalKeywords', [])
+            )
+            validation = validate_release_candidate(
+                article,
+                sources,
+                seo,
+                image,
+                sensitive_keywords=sensitive_keywords,
+            )
             if not validation.passed:
                 logger.warning(
                     "Candidate blocked for '%s': %s",

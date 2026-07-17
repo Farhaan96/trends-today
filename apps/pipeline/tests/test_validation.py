@@ -79,6 +79,32 @@ class ValidationTests(unittest.TestCase):
         self.assertFalse(result.passed)
         self.assertIn('manual approval is required for this sensitive story', result.errors)
 
+    def test_final_post_qa_text_is_scanned_for_sensitive_signals(self):
+        article = self.article()
+        article['body_mdx'] += '\n\nOfficials said one person died at the scene.'
+        result = validate_release_candidate(
+            article,
+            self.sources(),
+            {'slug': 'sensitive-final-copy'},
+            {'path': '/images/valid.webp'},
+            sensitive_keywords=['died', 'arrest'],
+        )
+        self.assertFalse(result.passed)
+        self.assertIn('manual approval is required for this sensitive story', result.errors)
+
+    def test_recorded_approval_allows_sensitive_final_text(self):
+        article = self.article()
+        article['body_mdx'] += '\n\nOfficials said one person died at the scene.'
+        article['manualApprovalRecorded'] = True
+        result = validate_release_candidate(
+            article,
+            self.sources(),
+            {'slug': 'approved-final-copy'},
+            {'path': '/images/valid.webp'},
+            sensitive_keywords=['died'],
+        )
+        self.assertTrue(result.passed, result.errors)
+
 
 if __name__ == '__main__':
     unittest.main()
