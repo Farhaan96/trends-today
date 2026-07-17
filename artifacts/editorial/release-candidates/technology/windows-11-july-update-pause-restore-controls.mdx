@@ -1,0 +1,107 @@
+---
+title: "Windows 11 July Update: What to Check Before You Pause"
+subtitle: "KB5101650 adds useful recovery and pause controls, but some Dell PCs should wait."
+description: "Windows 11 KB5101650 changes update pause controls, point-in-time restore, and rollout cautions. Here is what to check before installing."
+publishedAt: "2026-07-17T07:55:00-07:00"
+image: "/images/editorial/2026/07/windows-11-july-update-controls.png"
+imageAlt: "A laptop displaying abstract update, calendar, restore, and security controls with no readable text"
+imageAttribution: "Original editorial illustration generated for Trends Today"
+tags:
+  - "Windows 11"
+  - "KB5101650"
+  - "Windows Update"
+  - "point-in-time restore"
+  - "software updates"
+category: "technology"
+author: "David Kim"
+readingTime: "4 min read"
+slug: "windows-11-july-update-pause-restore-controls"
+status: "release-candidate"
+---
+
+Microsoft's July Windows 11 update is not just another background patch. **KB5101650** changes how people can delay updates, adds recovery tools that matter when an update goes wrong, and includes a temporary rollout block for a narrow set of Dell devices.
+
+**The useful question is not whether to install immediately or avoid it forever. It is whether your PC is eligible, whether you need the new pause window, and whether point-in-time restore is available before you make changes.**
+
+That makes this update a practical checklist. Check your version, check the device warning, then decide whether to install now, pause briefly, or wait for your IT policy to catch up.
+
+---
+
+## KB5101650 applies to Windows 11 24H2 and 25H2
+
+Microsoft lists **KB5101650** for Windows 11 version **25H2** and **24H2**. The support page says the cumulative update includes security fixes, quality improvements, and the non-security updates from the prior optional preview release.
+
+The release also points users to the Windows release health dashboard for current status. That matters because Microsoft amended the page on **July 15, 2026** with a device-specific availability note.
+
+Before you press install, check three things:
+
+- **Windows version**: KB5101650 is the 24H2 and 25H2 package, not the 23H2 package
+- **Device maker and drivers**: Some Dell devices with Intel IPF drivers are temporarily excluded
+- **Managed device policy**: Work and school PCs may receive the update through Windows Update for Business or IT controls
+
+Microsoft also notes that Windows 11 version **24H2 Home and Pro** reaches end of updates on **October 13, 2026**. That is separate from today's install decision, but it is a reminder that staying on an older supported version has a time limit.
+
+Source: https://support.microsoft.com/en-us/servicing/os/windows-11/2026/07/july-14-2026-kb5101650-os-builds-26200-8875-and-26100-8875
+
+---
+
+## The new pause control is flexible, not permanent
+
+The most visible change is the updated Windows Update pause experience. Microsoft says the latest Pause updates experience lets you choose a specific end date and extend that pause when needed.
+
+The important limit is **35 days from the current date**. If updates are already paused, you can choose a new end date, but Microsoft says previously paused time does not get added on. You can extend again later, as long as the new date still falls inside that 35-day window.
+
+That turns pause into a short planning tool:
+
+- **Use it before travel or presentations**: Avoid surprise restarts during a fixed event
+- **Use it after a fresh warning**: Give Microsoft, Dell, or your IT team time to confirm device impact
+- **Do not use it as a security strategy**: Updates resume when the pause expires, and delaying security fixes has a cost
+
+If you resume manually, Windows checks for updates again and downloads the latest available updates. If an update is already in progress when you pause, Microsoft says that update is canceled.
+
+Source: https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/pause-updates-in-windows
+
+---
+
+## Point-in-time restore changes the recovery question
+
+The better reason to care about this release is recovery. Microsoft describes point-in-time restore as a Windows 11 feature that can return a PC to an earlier captured system state in minutes using local restore points.
+
+Restore points include the operating system, installed applications, settings, app configuration, and local user files. Microsoft says the default capture frequency is about every **24 hours**, with restore points retained for up to **72 hours** unless storage pressure or VSS limits remove older points sooner.
+
+That does not make updates risk-free. It changes the checklist before you install:
+
+- **Open Settings > System > Recovery**: Confirm whether point-in-time restore is visible on your PC
+- **Check available storage**: Microsoft says low free space can cause restore points to be removed
+- **Know the BitLocker path**: The restore flow may require a BitLocker recovery key
+- **Treat 72 hours as short-term recovery**: This is not a long archive of old system states
+
+Microsoft says point-in-time restore is on by default for eligible unmanaged Home and Pro devices with an OS volume of **200 GB or greater**. Enterprise-managed devices may have different defaults until Windows 11 version 26H2.
+
+Sources: https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore and https://learn.microsoft.com/en-us/windows/release-health/windows-message-center
+
+---
+
+## Some Dell devices should wait
+
+The clearest caution in Microsoft's KB page is narrow but important. Microsoft says KB5101650 is temporarily unavailable for a limited number of Dell devices that use **Intel Innovation Platform Framework (IPF)** drivers.
+
+The reason is an incompatibility between the update and an Intel component. Microsoft says affected devices might see changes in performance, power consumption, or system behavior, and that a fix is being prepared.
+
+For a normal home user, the practical move is simple. If Windows Update offers KB5101650, your device is probably not in the blocked group. If it does not appear on a Dell laptop that otherwise qualifies, do not force the Microsoft Update Catalog package just to be early.
+
+For small business or IT users, the safer sequence is:
+
+- **Check release health first**: Confirm whether Microsoft has updated the Dell/IPF notice
+- **Pilot before broad rollout**: Test on a small set of similar hardware
+- **Keep pause narrow**: Delay only the affected fleet, not every Windows device by habit
+- **Record the rollback path**: Know whether point-in-time restore, uninstall updates, or your management tooling is the recovery route
+
+This is the core distinction. Pausing updates can protect a deadline or buy time during a rollout issue. It should not become a way to ignore a security update indefinitely.
+
+## Sources
+
+- [Microsoft Support: July 14, 2026 KB5101650 release notes](https://support.microsoft.com/en-us/servicing/os/windows-11/2026/07/july-14-2026-kb5101650-os-builds-26200-8875-and-26100-8875)
+- [Microsoft Support: Pause updates in Windows](https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/pause-updates-in-windows)
+- [Microsoft Learn: Point-in-time restore for Windows](https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore)
+- [Microsoft Learn: Windows message center](https://learn.microsoft.com/en-us/windows/release-health/windows-message-center)

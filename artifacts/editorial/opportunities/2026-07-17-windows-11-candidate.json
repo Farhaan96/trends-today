@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Windows 11 July Update: What to Check Before You Pause",
+    "lane": "timely-opportunity",
+    "confidence": "current-hypothesis",
+    "evidence": {
+      "sourceUrls": [
+        "https://support.microsoft.com/en-us/servicing/os/windows-11/2026/07/july-14-2026-kb5101650-os-builds-26200-8875-and-26100-8875",
+        "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/pause-updates-in-windows",
+        "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore",
+        "https://learn.microsoft.com/en-us/windows/release-health/windows-message-center"
+      ],
+      "demandEvidence": "Fresh major tech coverage on the July 2026 Windows 11 update and pause controls, plus a current Microsoft KB page for KB5101650.",
+      "uniqueAngleEvidence": "Practical install/pause checklist that combines KB5101650, pause rules, point-in-time restore, and Dell/IPF rollout caution."
+    },
+    "ratings": {
+      "audienceFit": 4,
+      "demandSignal": 4,
+      "evidenceStrength": 5,
+      "uniqueAngle": 4,
+      "compoundingValue": 4,
+      "monetizationFit": 2,
+      "appFit": 1,
+      "speedToUsefulDraft": 5
+    }
+  }
+]
