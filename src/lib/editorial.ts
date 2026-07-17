@@ -19,6 +19,21 @@ export function formatArticleDate(value?: string): string {
   }).format(date);
 }
 
+export function formatArticleDateTime(value?: string): string {
+  if (!value) return '';
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+
+  return new Intl.DateTimeFormat('en-CA', {
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    timeZone: 'America/Vancouver',
+  }).format(date);
+}
+
 export function getCategoryFromHref(href: string): string {
   const category = href.split('/').filter(Boolean)[0] || 'latest';
   return category.charAt(0).toUpperCase() + category.slice(1);

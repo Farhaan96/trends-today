@@ -1,20 +1,50 @@
 #!/usr/bin/env python3
-"""
-Topic Discovery Module - Find 40-60 candidate topics daily
-Priority: Perplexity → Google News → RSS feeds
-"""
+"""Discover Lower Mainland story candidates from curated primary sources."""
 
 import os
 import json
-import hashlib
 import logging
+import re
 from datetime import datetime, timedelta
-from typing import List, Dict, Optional
+from html.parser import HTMLParser
+from typing import List, Dict
+from urllib.parse import urljoin, urlparse
 import requests
 from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+SOURCE_CONFIG = REPO_ROOT / 'config' / 'local-news-sources.json'
+
+
+class HeadlineLinkParser(HTMLParser):
+    """Collect visible link text without adding an HTML parser dependency."""
+
+    def __init__(self):
+        super().__init__()
+        self.links = []
+        self._href = None
+        self._text = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag.lower() != 'a':
+            return
+        self._href = dict(attrs).get('href')
+        self._text = []
+
+    def handle_data(self, data):
+        if self._href is not None:
+            self._text.append(data)
+
+    def handle_endtag(self, tag):
+        if tag.lower() == 'a' and self._href is not None:
+            text = re.sub(r'\s+', ' ', ' '.join(self._text)).strip()
+            if text:
+                self.links.append((text, self._href))
+            self._href = None
+            self._text = []
 
 class TopicDiscovery:
     def __init__(self):
@@ -23,6 +53,18 @@ class TopicDiscovery:
         self.cache_dir = Path('.cache/topics')
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.recent_posts = self._load_recent_posts()
+        self.source_config = self._load_source_config()
+
+    def _load_source_config(self) -> Dict:
+        with SOURCE_CONFIG.open(encoding='utf-8') as handle:
+            return json.load(handle)
+
+    @property
+    def discovery_sources(self) -> List[Dict]:
+        return [
+            source for source in self.source_config.get('sources', [])
+            if source.get('discoveryEnabled')
+        ]
         
     def _load_recent_posts(self, days=7) -> set:
         """Load recent post slugs to avoid duplicates"""
@@ -43,9 +85,99 @@ class TopicDiscovery:
         """Check if topic is too similar to recent posts"""
         topic_slug = topic.lower().replace(' ', '-')[:50]
         return any(slug in topic_slug or topic_slug in slug for slug in self.recent_posts)
+
+    def discover_official_pages(self, count: int = 30) -> List[Dict]:
+        """Pull candidate links directly from configured primary-source listings."""
+        topics = []
+        seen_urls = set()
+        ignored = {
+            'home', 'news', 'events', 'contact us', 'read more', 'learn more',
+            'media centre', 'search', 'subscribe', 'view all', 'privacy',
+        }
+        for source in self.discovery_sources:
+            try:
+                response = requests.get(
+                    source['url'],
+                    timeout=12,
+                    headers={'User-Agent': 'TrendsTodayLocalDesk/1.0'},
+                )
+                if response.status_code != 200:
+                    continue
+                response.encoding = response.apparent_encoding
+                parser = HeadlineLinkParser()
+                parser.feed(response.text)
+                accepted = 0
+                for title, href in parser.links:
+                    normalized = (
+                        title.strip(' -|')
+                        .replace('\u2013', '-')
+                        .replace('\u2014', '-')
+                        .replace('\u2026', '...')
+                    )
+                    candidate_url = urljoin(response.url, href)
+                    if (
+                        len(normalized) < 28
+                        or len(normalized) > 180
+                        or normalized.lower() in ignored
+                        or self._is_duplicate(normalized)
+                        or not self._matches_source_link(source, candidate_url)
+                        or candidate_url in seen_urls
+                    ):
+                        continue
+                    seen_urls.add(candidate_url)
+                    topics.append({
+                        'title': normalized,
+                        'source': 'primary_source_page',
+                        'sourceName': source['name'],
+                        'sourceTier': source['tier'],
+                        'url': candidate_url,
+                        'locality': source['locality'],
+                        'category': source['desks'][0],
+                        'storyType': 'reported-update',
+                        'discovered_at': datetime.now().isoformat(),
+                    })
+                    accepted += 1
+                    if accepted >= 4 or len(topics) >= count:
+                        break
+                if len(topics) >= count:
+                    break
+            except Exception as exc:
+                logger.warning('Primary source scan failed for %s: %s', source['name'], exc)
+        logger.info('Found %s candidates on primary source pages', len(topics))
+        return topics[:count]
+
+    @staticmethod
+    def _matches_source_link(source: Dict, candidate_url: str) -> bool:
+        """Accept only links that match the source's explicit article contract."""
+        parsed = urlparse(candidate_url)
+        hostname = parsed.hostname or ''
+        source_domain = source.get('domain', '')
+        if source_domain and not (
+            hostname == source_domain or hostname.endswith(f'.{source_domain}')
+        ):
+            return False
+
+        if candidate_url.rstrip('/') == source['url'].rstrip('/'):
+            return False
+
+        path_with_query = parsed.path
+        if parsed.query:
+            path_with_query += f'?{parsed.query}'
+
+        include_patterns = source.get('includeUrlPatterns', [])
+        if include_patterns and not any(
+            pattern in path_with_query for pattern in include_patterns
+        ):
+            return False
+
+        include_regex = source.get('includeUrlRegex')
+        if include_regex and not re.search(include_regex, path_with_query):
+            return False
+
+        return bool(include_patterns or include_regex)
     
     def discover_perplexity(self, count: int = 20) -> List[Dict]:
-        """Get trending tech topics from Perplexity"""
+        """Find recent Lower Mainland updates that the primary-page scan missed."""
         if not self.perplexity_key:
             logger.warning("No Perplexity API key, skipping")
             return []
@@ -62,14 +194,13 @@ class TopicDiscovery:
                     'messages': [{
                         'role': 'user',
                         'content': (
-                            f'List {count} genuinely interesting, high-search-interest story '
-                            'angles trending in the last 48 hours across science, technology, '
-                            'space, health, psychology, and culture. '
-                            'Prioritize specific, surprising, or counterintuitive developments '
-                            'with a concrete hook (a number, a named study, a "wait, really?" '
-                            'finding) over broad evergreen topics. '
-                            'Avoid generic phrasings like "the future of AI". '
-                            'Return ONLY the angles as sentence-case article titles, one per '
+                            f'List {count} verifiable updates from the last 36 hours that matter '
+                            'to people in Metro Vancouver or the Fraser Valley. Cover civic news, '
+                            'transit and roads, weather, events, restaurant openings or closures, '
+                            'housing and development, and local sports. Prefer primary sources and '
+                            'name the affected municipality in every title. Exclude national stories '
+                            'without a direct Lower Mainland impact and exclude rumours. '
+                            'Return only sentence-case article titles, one per '
                             'line, no numbering, no commentary.'
                         )
                     }],
@@ -100,16 +231,18 @@ class TopicDiscovery:
         return []
     
     def discover_google_news(self, count: int = 20) -> List[Dict]:
-        """Fallback to Google News for topics"""
+        """Use search as a fallback for local candidates."""
         if not self.google_key:
             logger.warning("No Google API key, skipping")
             return []
         
         try:
-            # Use Google Custom Search API across the site's full category set
             categories = [
-                'AI breakthrough', 'space discovery', 'science breakthrough',
-                'health study finding', 'psychology research', 'culture trend'
+                'Lower Mainland local news',
+                'Metro Vancouver transit road closure weather',
+                'Vancouver Surrey Burnaby Richmond events opening closing',
+                'Metro Vancouver housing development council',
+                'Vancouver local sports update',
             ]
             topics = []
             
@@ -119,7 +252,7 @@ class TopicDiscovery:
                     params={
                         'key': self.google_key,
                         'cx': '017576662512468239146:omuauf_lfve',  # Google's news search engine
-                        'q': f'{category} {datetime.now().strftime("%Y-%m")}',
+                        'q': f'{category} {datetime.now().strftime("%Y-%m-%d")}',
                         'num': 5,
                         'sort': 'date'
                     },
@@ -135,6 +268,9 @@ class TopicDiscovery:
                                 'title': title,
                                 'source': 'google_news',
                                 'url': item.get('link'),
+                                'locality': 'Lower Mainland',
+                                'category': 'local-news',
+                                'storyType': 'reported-update',
                                 'discovered_at': datetime.now().isoformat()
                             })
             
@@ -147,55 +283,24 @@ class TopicDiscovery:
         return []
     
     def discover_feeds(self, count: int = 20) -> List[Dict]:
-        """Fallback to RSS feeds"""
-        feeds = [
-            'https://techcrunch.com/feed/',
-            'https://www.theverge.com/rss/index.xml',
-            'https://arstechnica.com/feed/',
-            'https://www.wired.com/feed/rss',
-            'https://www.sciencedaily.com/rss/top/science.xml',
-            'https://www.sciencedaily.com/rss/top/health.xml',
-            'https://www.sciencedaily.com/rss/mind_brain.xml',
-            'https://www.space.com/feeds/all'
-        ]
-        
-        topics = []
-        try:
-            for feed_url in feeds:
-                response = requests.get(feed_url, timeout=10)
-                if response.status_code == 200:
-                    # Simple RSS parsing without dependencies
-                    import re
-                    titles = re.findall(r'<title><!\[CDATA\[(.*?)\]\]></title>', response.text)
-                    if not titles:
-                        titles = re.findall(r'<title>(.*?)</title>', response.text)
-                    
-                    for title in titles[:5]:
-                        if title and not self._is_duplicate(title):
-                            topics.append({
-                                'title': title,
-                                'source': 'rss_feed',
-                                'discovered_at': datetime.now().isoformat()
-                            })
-        
-        except Exception as e:
-            logger.error(f"RSS feed error: {e}")
-        
-        logger.info(f"Found {len(topics)} topics from RSS feeds")
-        return topics[:count]
+        """Backward-compatible alias for the curated local source scan."""
+        return self.discover_official_pages(count)
     
     def discover(self, target: int = 50) -> List[Dict]:
-        """Main discovery method with fallbacks"""
+        """Scan primary local sources first, then fill gaps with search."""
         all_topics = []
         
-        # Try each source in priority order
-        all_topics.extend(self.discover_perplexity(20))
+        all_topics.extend(self.discover_official_pages(min(target, 30)))
         
         if len(all_topics) < target:
-            all_topics.extend(self.discover_google_news(20))
+            all_topics.extend(
+                self.discover_perplexity(min(20, target - len(all_topics)))
+            )
         
         if len(all_topics) < target:
-            all_topics.extend(self.discover_feeds(20))
+            all_topics.extend(
+                self.discover_google_news(min(20, target - len(all_topics)))
+            )
         
         # Deduplicate by title similarity
         seen = set()

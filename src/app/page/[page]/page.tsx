@@ -11,6 +11,7 @@ import {
 import PaginationLinks from '@/components/ui/PaginationLinks';
 import { formatArticleDate } from '@/lib/editorial';
 import EditorialImage from '@/components/editorial/EditorialImage';
+import { isLocalNewsCategory } from '@/lib/categories';
 
 interface Props {
   params: Promise<{
@@ -18,8 +19,20 @@ interface Props {
   }>;
 }
 
-export async function generateStaticParams() {
+async function getHomepageFeed() {
   const posts = await getAllPosts();
+  const localPosts = posts.filter((post) =>
+    isLocalNewsCategory(post.category || post.frontmatter.category)
+  );
+
+  return {
+    posts: localPosts.length > 0 ? localPosts : posts,
+    localDeskIsLive: localPosts.length > 0,
+  };
+}
+
+export async function generateStaticParams() {
+  const { posts } = await getHomepageFeed();
   const totalPages = Math.ceil(posts.length / 12);
 
   // Generate pages 2 through totalPages (page 1 is handled by /page.tsx)
@@ -31,7 +44,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { page: pageParam } = await params;
   const page = validatePageParam(pageParam);
-  const posts = await getAllPosts();
+  const { posts, localDeskIsLive } = await getHomepageFeed();
   const totalPages = Math.ceil(posts.length / 12);
 
   if (page > totalPages) {
@@ -42,15 +55,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const paginatedResult = paginateItems(posts, page, 12, '');
-  const baseTitle =
-    "Trends Today - Discover What's Trending in Science, Culture, Technology & More";
+  const baseTitle = localDeskIsLive
+    ? 'Trends Today | Lower Mainland News and Things to Do'
+    : 'Trends Today | Article Archive';
 
   return {
     ...generatePaginationMetadata(paginatedResult.pagination, '', baseTitle),
-    description: `Page ${page} of trending discoveries, breakthrough research, and fascinating insights across science, psychology, technology, culture, and more.`,
+    description: localDeskIsLive
+      ? `Page ${page} of local news, transit updates, events, food, housing, and sports across the Lower Mainland.`
+      : `Page ${page} of the existing Trends Today article archive.`,
     openGraph: {
       title: `Page ${page} | Trends Today`,
-      description: `Explore page ${page} of trending topics and breakthrough insights across all categories.`,
+      description: localDeskIsLive
+        ? `Explore page ${page} of useful updates from Vancouver to the Fraser Valley.`
+        : `Explore page ${page} of the existing Trends Today article archive.`,
       type: 'website',
       url: `https://www.trendstoday.ca/page/${page}`,
     },
@@ -64,7 +82,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PaginatedHomePage({ params }: Props) {
   const { page: pageParam } = await params;
   const page = validatePageParam(pageParam);
-  const posts = await getAllPosts();
+  const { posts, localDeskIsLive } = await getHomepageFeed();
   const paginatedResult = paginateItems(posts, page, 12, '');
 
   if (page > paginatedResult.pagination.totalPages) {
@@ -75,23 +93,26 @@ export default async function PaginatedHomePage({ params }: Props) {
 
   return (
     <div className="site-page">
-      <h1 className="sr-only">Trends Today - Latest Articles - Page {page}</h1>
+      <h1 className="sr-only">
+        {localDeskIsLive
+          ? 'Trends Today local updates'
+          : 'Trends Today archive'}
+        , page {page}
+      </h1>
       <StructuredData data={getAllBaseSchemas()} />
 
       <section className="site-shell category-feed">
-        {/* Page indicator for SEO and user orientation */}
         <div className="archive-header">
           <p className="category-count">
-            Page {pagination.currentPage} of {pagination.totalPages} •{' '}
+            Page {pagination.currentPage} of {pagination.totalPages} |{' '}
             {pagination.totalItems} total articles
           </p>
           <h2>
-            Latest Articles{' '}
-            {pagination.currentPage > 1 && `- Page ${pagination.currentPage}`}
+            {localDeskIsLive ? 'Latest local updates' : 'From the archive'}{' '}
+            {pagination.currentPage > 1 && `| Page ${pagination.currentPage}`}
           </h2>
         </div>
 
-        {/* Article Grid - Static for this page */}
         <div className="category-grid">
           {pageArticles.map((article) => (
             <article key={article.href} className="category-story">
@@ -121,7 +142,7 @@ export default async function PaginatedHomePage({ params }: Props) {
                     ? article.frontmatter.author
                     : article.frontmatter.author?.name || 'Trends Today'}
                 </span>
-                <span className="mx-2">•</span>
+                <span className="mx-2">|</span>
                 <span>
                   {formatArticleDate(
                     article.frontmatter.publishedAt ||
@@ -133,7 +154,6 @@ export default async function PaginatedHomePage({ params }: Props) {
           ))}
         </div>
 
-        {/* Pagination Navigation */}
         <PaginationLinks
           pagination={pagination}
           baseUrl=""

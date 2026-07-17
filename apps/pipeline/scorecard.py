@@ -15,7 +15,10 @@ from metrics import build_metrics_summary
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-VALID_CATEGORIES = {'science', 'culture', 'psychology', 'technology', 'health', 'space'}
+VALID_CATEGORIES = {
+    'local-news', 'transit', 'things-to-do', 'food-drink', 'housing', 'sports',
+    'science', 'culture', 'psychology', 'technology', 'health', 'space',
+}
 
 
 def _published_at(path: Path) -> Optional[str]:
@@ -53,7 +56,7 @@ def build_scorecard(content_dir: Path, analytics: Optional[Dict[str, Any]] = Non
         },
         'analytics': build_metrics_summary(analytics, now=now),
         'decision': (
-            'repair-measurement-before-scaling-volume'
+            'repair-measurement-while-running-bounded-local-sweeps'
             if not analytics or analytics.get('status') != 'available'
             else 'review-article-level-keep-repair-stop-decisions'
         ),

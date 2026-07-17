@@ -2,7 +2,12 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllArticles } from '@/lib/article-utils';
-import { getCategoryKey, getCategoryDescription } from '@/lib/categories';
+import {
+  CONTENT_CATEGORIES,
+  getCategoryKey,
+  getCategoryDescription,
+  getCategoryLabel,
+} from '@/lib/categories';
 import { formatArticleDate } from '@/lib/editorial';
 import { paginateItems } from '@/lib/pagination';
 import PaginationLinks from '@/components/ui/PaginationLinks';
@@ -11,15 +16,7 @@ import EditorialImage from '@/components/editorial/EditorialImage';
 type Params = { category: string };
 
 export function generateStaticParams() {
-  const categories = [
-    'science',
-    'culture',
-    'psychology',
-    'technology',
-    'health',
-    'space',
-  ];
-  return categories.map((c) => ({ category: c }));
+  return CONTENT_CATEGORIES.map((category) => ({ category }));
 }
 
 export async function generateMetadata({
@@ -29,7 +26,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { category } = await params;
   const key = getCategoryKey(category);
-  const title = key.charAt(0).toUpperCase() + key.slice(1);
+  const title = getCategoryLabel(key);
   const description = getCategoryDescription(key);
   return {
     title,
@@ -46,15 +43,7 @@ export default async function CategoryPage({
   params: Promise<Params>;
 }) {
   const { category } = await params;
-  const supportedCategories = [
-    'science',
-    'culture',
-    'psychology',
-    'technology',
-    'health',
-    'space',
-    'mystery',
-  ];
+  const supportedCategories = [...CONTENT_CATEGORIES, 'mystery'];
   if (!supportedCategories.includes(category.toLowerCase())) notFound();
 
   const key = getCategoryKey(category);
@@ -68,7 +57,7 @@ export default async function CategoryPage({
       key
   );
 
-  const title = key.charAt(0).toUpperCase() + key.slice(1);
+  const title = getCategoryLabel(key);
   const { items: pageArticles, pagination } = paginateItems(
     posts,
     1,

@@ -46,6 +46,39 @@ class ValidationTests(unittest.TestCase):
         self.assertTrue(any('absent' in error for error in result.errors))
         self.assertTrue(any('placeholder' in error for error in result.errors))
 
+    def test_local_reported_update_uses_shorter_contract(self):
+        urls = ['https://city.example/update', 'https://transit.example/context']
+        article = {
+            'title': 'Burnaby road work changes two bus routes',
+            'meta_description': 'What Burnaby riders need to know this weekend.',
+            'category': 'transit',
+            'locality': 'Burnaby',
+            'storyType': 'reported-update',
+            'body_mdx': (
+                'Opening\n\n## What changed\n\n'
+                + ' '.join(['local'] * 470)
+                + '\n\n## Sources\n\n'
+                + '\n'.join(urls)
+            ),
+        }
+        sources = [
+            {'url': urls[0], 'tier': 'primary'},
+            {'url': urls[1], 'tier': 'secondary'},
+        ]
+        result = validate_release_candidate(
+            article, sources, {'slug': 'burnaby-bus-change'}, {'path': '/images/bus.webp'}
+        )
+        self.assertTrue(result.passed, result.errors)
+
+    def test_sensitive_local_story_requires_recorded_approval(self):
+        article = self.article()
+        article['manualApprovalRequired'] = True
+        result = validate_release_candidate(
+            article, self.sources(), {'slug': 'sensitive'}, {'path': '/images/valid.webp'}
+        )
+        self.assertFalse(result.passed)
+        self.assertIn('manual approval is required for this sensitive story', result.errors)
+
 
 if __name__ == '__main__':
     unittest.main()

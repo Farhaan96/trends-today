@@ -1,0 +1,231 @@
+{
+  "version": 1,
+  "updatedAt": "2026-07-17",
+  "region": "Lower Mainland, British Columbia",
+  "localities": [
+    "Vancouver",
+    "Surrey",
+    "Burnaby",
+    "Richmond",
+    "New Westminster",
+    "Coquitlam",
+    "Port Coquitlam",
+    "Port Moody",
+    "Delta",
+    "Langley",
+    "North Shore",
+    "Maple Ridge",
+    "Pitt Meadows",
+    "White Rock",
+    "Fraser Valley"
+  ],
+  "desks": [
+    "local-news",
+    "transit",
+    "things-to-do",
+    "food-drink",
+    "housing",
+    "sports"
+  ],
+  "sources": [
+    {
+      "name": "City of Vancouver news",
+      "url": "https://vancouver.ca/news-calendar/news.aspx",
+      "domain": "vancouver.ca",
+      "locality": "Vancouver",
+      "desks": ["local-news", "transit", "housing"],
+      "tier": "primary",
+      "discoveryEnabled": false,
+      "disabledReason": "listing page blocks automated requests"
+    },
+    {
+      "name": "City of Vancouver events",
+      "url": "https://vancouver.ca/news-calendar/calendar-of-events.aspx",
+      "domain": "vancouver.ca",
+      "locality": "Vancouver",
+      "desks": ["things-to-do"],
+      "tier": "primary",
+      "discoveryEnabled": false,
+      "disabledReason": "listing page blocks automated requests"
+    },
+    {
+      "name": "City of Surrey news",
+      "url": "https://www.surrey.ca/news-events/news",
+      "domain": "surrey.ca",
+      "locality": "Surrey",
+      "desks": ["local-news", "things-to-do", "housing"],
+      "tier": "primary",
+      "discoveryEnabled": true,
+      "includeUrlPatterns": ["/news-events/news/"]
+    },
+    {
+      "name": "City of Burnaby news",
+      "url": "https://www.burnaby.ca/our-city/news",
+      "domain": "burnaby.ca",
+      "locality": "Burnaby",
+      "desks": ["local-news", "housing"],
+      "tier": "primary",
+      "discoveryEnabled": false,
+      "disabledReason": "configured listing URL currently returns 404"
+    },
+    {
+      "name": "City of Burnaby events",
+      "url": "https://www.burnaby.ca/recreation-and-arts/events",
+      "domain": "burnaby.ca",
+      "locality": "Burnaby",
+      "desks": ["things-to-do"],
+      "tier": "primary",
+      "discoveryEnabled": true,
+      "includeUrlPatterns": ["/recreation-and-arts/events/"]
+    },
+    {
+      "name": "City of Richmond news",
+      "url": "https://www.richmond.ca/city-hall/news.htm",
+      "domain": "richmond.ca",
+      "locality": "Richmond",
+      "desks": ["local-news", "things-to-do", "housing"],
+      "tier": "primary",
+      "discoveryEnabled": true,
+      "includeUrlPatterns": ["/city-hall/news/"]
+    },
+    {
+      "name": "City of New Westminster news",
+      "url": "https://www.newwestcity.ca/city_hall/media/press_releases.php",
+      "domain": "newwestcity.ca",
+      "locality": "New Westminster",
+      "desks": ["local-news", "things-to-do", "housing"],
+      "tier": "primary",
+      "discoveryEnabled": false,
+      "disabledReason": "listing content is not exposed as article links"
+    },
+    {
+      "name": "City of Coquitlam news",
+      "url": "https://www.coquitlam.ca/CivicAlerts.aspx",
+      "domain": "coquitlam.ca",
+      "locality": "Coquitlam",
+      "desks": ["local-news", "things-to-do", "housing"],
+      "tier": "primary",
+      "discoveryEnabled": true,
+      "includeUrlPatterns": ["/m/newsflash/Home/Detail/"]
+    },
+    {
+      "name": "City of Delta news",
+      "url": "https://www.delta.ca/community-culture/happening-delta/news",
+      "domain": "delta.ca",
+      "locality": "Delta",
+      "desks": ["local-news", "things-to-do", "housing"],
+      "tier": "primary",
+      "discoveryEnabled": true,
+      "includeUrlPatterns": ["/community-culture/happening-delta/news/"]
+    },
+    {
+      "name": "Township of Langley news",
+      "url": "https://www.tol.ca/en/news/index.aspx",
+      "domain": "tol.ca",
+      "locality": "Langley",
+      "desks": ["local-news", "things-to-do", "housing"],
+      "tier": "primary",
+      "discoveryEnabled": false,
+      "disabledReason": "configured listing URL currently returns 404"
+    },
+    {
+      "name": "Metro Vancouver media releases",
+      "url": "https://metrovancouver.org/media-room/Pages/media-releases.aspx",
+      "domain": "metrovancouver.org",
+      "locality": "Lower Mainland",
+      "desks": ["local-news", "housing"],
+      "tier": "primary",
+      "discoveryEnabled": false,
+      "disabledReason": "listing content is rendered client-side"
+    },
+    {
+      "name": "TransLink news",
+      "url": "https://www.translink.ca/news",
+      "domain": "translink.ca",
+      "locality": "Lower Mainland",
+      "desks": ["transit", "local-news"],
+      "tier": "primary",
+      "discoveryEnabled": false,
+      "disabledReason": "listing content is rendered client-side"
+    },
+    {
+      "name": "BC Ferries media room",
+      "url": "https://www.bcferries.com/contact-us/media-room",
+      "domain": "bcferries.com",
+      "locality": "Lower Mainland",
+      "desks": ["transit", "local-news"],
+      "tier": "primary",
+      "discoveryEnabled": false,
+      "disabledReason": "listing content is rendered client-side"
+    },
+    {
+      "name": "BC Government news",
+      "url": "https://news.gov.bc.ca/",
+      "domain": "news.gov.bc.ca",
+      "locality": "British Columbia",
+      "desks": ["local-news", "transit", "housing"],
+      "tier": "primary",
+      "discoveryEnabled": false,
+      "disabledReason": "province-wide feed requires locality filtering before discovery"
+    },
+    {
+      "name": "YVR media releases",
+      "url": "https://www.yvr.ca/en/media/news-releases",
+      "domain": "yvr.ca",
+      "locality": "Richmond",
+      "desks": ["transit", "local-news"],
+      "tier": "primary",
+      "discoveryEnabled": false,
+      "disabledReason": "listing page blocks automated requests"
+    },
+    {
+      "name": "Vancouver Canucks news",
+      "url": "https://www.nhl.com/canucks/news/",
+      "domain": "nhl.com",
+      "locality": "Vancouver",
+      "desks": ["sports"],
+      "tier": "primary",
+      "discoveryEnabled": true,
+      "includeUrlPatterns": ["/canucks/news/"]
+    },
+    {
+      "name": "Vancouver Whitecaps news",
+      "url": "https://www.whitecapsfc.com/news/",
+      "domain": "whitecapsfc.com",
+      "locality": "Vancouver",
+      "desks": ["sports"],
+      "tier": "primary",
+      "discoveryEnabled": true,
+      "includeUrlPatterns": ["/news/"]
+    },
+    {
+      "name": "BC Lions news",
+      "url": "https://www.bclions.com/news/",
+      "domain": "bclions.com",
+      "locality": "Vancouver",
+      "desks": ["sports"],
+      "tier": "primary",
+      "discoveryEnabled": true,
+      "includeUrlRegex": "^/\\d{4}/\\d{2}/\\d{2}/"
+    }
+  ],
+  "automaticPublishing": {
+    "allowed": [
+      "service changes",
+      "road and transit notices",
+      "officially announced events",
+      "openings and closures confirmed by the business",
+      "civic decisions and public consultations",
+      "weather and travel advisories",
+      "sports schedules and results from official sources"
+    ],
+    "manualApprovalRequired": [
+      "crime allegations or naming an accused person",
+      "active emergencies where facts are changing",
+      "death, serious injury, or missing-person coverage",
+      "claims about private people",
+      "investigations based on leaks or anonymous sources",
+      "sponsored or commercial coverage"
+    ]
+  }
+}

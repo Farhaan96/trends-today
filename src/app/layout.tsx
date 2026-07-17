@@ -31,24 +31,21 @@ const display = Newsreader({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.trendstoday.ca'),
   title: {
-    default:
-      "Trends Today - Discover What's Trending in Science, Culture, Technology & More",
+    default: 'Trends Today | Lower Mainland News and Events',
     template: '%s | Trends Today',
   },
   description:
-    "Explore trending discoveries, breakthrough research, and fascinating insights across science, psychology, technology, culture, and more. Your daily source for what's new and noteworthy.",
+    'Local news, transit, events, food, housing, and sports from Vancouver and the Lower Mainland.',
   keywords: [
-    'trending topics',
-    'scientific discoveries',
-    'psychology insights',
-    'cultural phenomena',
-    'technology breakthroughs',
-    'health research',
-    'environmental news',
-    'future predictions',
-    'mysteries explained',
-    'lifestyle trends',
-    "what's trending today",
+    'Lower Mainland news',
+    'Vancouver news',
+    'Metro Vancouver events',
+    'TransLink updates',
+    'Vancouver restaurants',
+    'Lower Mainland housing',
+    'Surrey news',
+    'Burnaby news',
+    'Richmond news',
   ],
   authors: [
     {
@@ -58,7 +55,7 @@ export const metadata: Metadata = {
   ],
   creator: 'Trends Today',
   publisher: 'Trends Today',
-  category: 'Technology',
+  category: 'Local News',
   robots: {
     index: true,
     follow: true,
@@ -75,23 +72,23 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://www.trendstoday.ca',
     siteName: 'Trends Today',
-    title: "Trends Today - Discover What's Trending Across All Topics",
+    title: 'Trends Today | Lower Mainland News and Events',
     description:
-      "Daily discoveries and insights across science, culture, technology, psychology, and more. Explore what's trending and why it matters.",
+      'Useful local updates from Vancouver, Metro Vancouver, and the Fraser Valley.',
     images: [
       {
         url: '/images/og-default.jpg',
         width: 1200,
         height: 630,
-        alt: 'Trends Today - Tech Reviews and Buying Guides',
+        alt: 'Trends Today Lower Mainland news',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Trends Today - What's Trending Now",
+    title: 'Trends Today | Lower Mainland News',
     description:
-      'Discover breakthrough findings and trending topics across science, culture, tech, and more.',
+      'Local news, transit, events, food, housing, and sports from the Lower Mainland.',
     site: '@trendstoday',
     creator: '@trendstoday',
     images: ['/images/twitter-card.jpg'],
@@ -207,8 +204,7 @@ export default function RootLayout({
                 <span>Trends Today</span>
               </Link>
               <p className="site-footer__statement">
-                Useful reporting for people who want to understand what is
-                changing.
+                Useful local reporting from Vancouver to the Fraser Valley.
               </p>
             </div>
             <nav className="site-footer__links" aria-label="Footer navigation">

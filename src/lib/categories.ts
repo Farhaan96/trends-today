@@ -1,4 +1,10 @@
 export type CategoryKey =
+  | 'local-news'
+  | 'transit'
+  | 'things-to-do'
+  | 'food-drink'
+  | 'housing'
+  | 'sports'
   | 'science'
   | 'culture'
   | 'psychology'
@@ -7,6 +13,53 @@ export type CategoryKey =
   | 'space'
   | 'lifestyle';
 
+export const LOCAL_NEWS_CATEGORIES: CategoryKey[] = [
+  'local-news',
+  'transit',
+  'things-to-do',
+  'food-drink',
+  'housing',
+  'sports',
+];
+
+export const LEGACY_CATEGORIES: CategoryKey[] = [
+  'science',
+  'culture',
+  'psychology',
+  'technology',
+  'health',
+  'space',
+];
+
+export const CONTENT_CATEGORIES: CategoryKey[] = [
+  ...LOCAL_NEWS_CATEGORIES,
+  ...LEGACY_CATEGORIES,
+];
+
+export function isLocalNewsCategory(input?: string): boolean {
+  return LOCAL_NEWS_CATEGORIES.includes(input as CategoryKey);
+}
+
+const categoryLabels: Record<CategoryKey, string> = {
+  'local-news': 'Local News',
+  transit: 'Transit',
+  'things-to-do': 'Things to Do',
+  'food-drink': 'Food & Drink',
+  housing: 'Housing',
+  sports: 'Sports',
+  science: 'Science',
+  culture: 'Culture',
+  psychology: 'Psychology',
+  technology: 'Technology',
+  health: 'Health',
+  space: 'Space',
+  lifestyle: 'Lifestyle',
+};
+
+export function getCategoryLabel(input?: string): string {
+  return categoryLabels[getCategoryKey(input)];
+}
+
 type Style = {
   badge: string; // pill background + text
   text: string; // text accent color
@@ -14,6 +67,36 @@ type Style = {
 };
 
 const styles: Record<CategoryKey, Style> = {
+  'local-news': {
+    badge: 'bg-red-600 text-white',
+    text: 'text-red-700',
+    headerBg: 'bg-red-50',
+  },
+  transit: {
+    badge: 'bg-red-600 text-white',
+    text: 'text-red-700',
+    headerBg: 'bg-red-50',
+  },
+  'things-to-do': {
+    badge: 'bg-red-600 text-white',
+    text: 'text-red-700',
+    headerBg: 'bg-red-50',
+  },
+  'food-drink': {
+    badge: 'bg-red-600 text-white',
+    text: 'text-red-700',
+    headerBg: 'bg-red-50',
+  },
+  housing: {
+    badge: 'bg-red-600 text-white',
+    text: 'text-red-700',
+    headerBg: 'bg-red-50',
+  },
+  sports: {
+    badge: 'bg-red-600 text-white',
+    text: 'text-red-700',
+    headerBg: 'bg-red-50',
+  },
   science: {
     badge: 'bg-gradient-to-r from-sky-500 to-cyan-600 text-white',
     text: 'text-sky-600',
@@ -66,6 +149,18 @@ export function getCategoryStyles(input?: string): Style {
 
 export function getCategoryDescription(input?: string): string {
   switch (getCategoryKey(input)) {
+    case 'local-news':
+      return 'The latest civic, community, weather, and service updates across the Lower Mainland.';
+    case 'transit':
+      return 'SkyTrain, bus, road, ferry, airport, and travel changes that affect your day.';
+    case 'things-to-do':
+      return 'Events, festivals, and useful ideas for making plans around the Lower Mainland.';
+    case 'food-drink':
+      return 'Restaurant openings, closures, neighbourhood food news, and local dining guides.';
+    case 'housing':
+      return 'Housing, rent, development, and city-building changes across the region.';
+    case 'sports':
+      return 'Canucks, Whitecaps, Lions, Giants, and the local sports stories worth knowing.';
     case 'science':
       return 'Breakthrough discoveries, research, and the science shaping tomorrow.';
     case 'culture':

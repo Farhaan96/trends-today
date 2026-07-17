@@ -142,10 +142,10 @@ class ContentRetrieval:
         
         return {}
     
-    def retrieve(self, topic: str) -> Dict:
+    def retrieve(self, topic: str, urls: List[str] = None) -> Dict:
         """Main retrieval with fallbacks"""
         # Try each method in order
-        result = self.retrieve_firecrawl(topic)
+        result = self.retrieve_firecrawl(topic, urls=urls)
         
         if not result or not result.get('sources'):
             result = self.retrieve_perplexity(topic)
