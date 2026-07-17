@@ -1,0 +1,42 @@
+{
+  "researchedAt": "2026-07-17T07:55:00-07:00",
+  "beat": "software-update-utility",
+  "lane": "timely-opportunity",
+  "title": "Windows 11 July Update: What to Check Before You Pause",
+  "readerJob": "Tell me what changed in the July Windows 11 update, whether my PC is affected, and what to do before pausing or installing.",
+  "constraintBaseline": {
+    "vercelWebAnalytics": "enabled in site, provider export unavailable to repository endpoint",
+    "googleAnalytics": "unavailable",
+    "googleSearchConsole": "unavailable",
+    "articleLevelMetrics": "unavailable",
+    "missingValuesPolicy": "unavailable values were not converted to zero"
+  },
+  "demandEvidence": [
+    {
+      "type": "fresh coverage",
+      "source": "The Verge",
+      "url": "https://www.theverge.com/tech/965643/microsoft-windows-11-july-2026-patch-tuesday-updates",
+      "note": "Major tech coverage focused on the new Windows Update pause controls."
+    },
+    {
+      "type": "fresh coverage",
+      "source": "Windows Central",
+      "url": "https://www.windowscentral.com/microsoft/windows-11/windows-11s-latest-update-will-let-you-pause-updates-indefinitely",
+      "note": "Fresh user-facing coverage focused on pause controls and point-in-time restore."
+    }
+  ],
+  "sourceUrls": [
+    "https://support.microsoft.com/en-us/servicing/os/windows-11/2026/07/july-14-2026-kb5101650-os-builds-26200-8875-and-26100-8875",
+    "https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/pause-updates-in-windows",
+    "https://learn.microsoft.com/en-us/windows/configuration/point-in-time-restore",
+    "https://learn.microsoft.com/en-us/windows/release-health/windows-message-center"
+  ],
+  "uniqueAngleEvidence": "Most coverage treats the release as a feature or patch-count story. This candidate turns it into a checklist: who gets KB5101650, why Dell/IPF devices should wait, how the 35-day pause extension really works, and what point-in-time restore can and cannot recover.",
+  "hypothesis": "A utility article tied to a current software change should earn more repeat-qualified traffic than a broad technology curiosity post because it answers an immediate decision.",
+  "singleChangedVariable": "Publish one software-update utility article instead of another remarkable-explained science/culture story.",
+  "knownCost": {
+    "cash": null,
+    "api": "built-in image generation, no project API key used",
+    "humanApproval": "not required for guarded editorial routine"
+  }
+}
