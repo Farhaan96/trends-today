@@ -8,9 +8,7 @@
       "score": 93.0,
       "decision": "brief",
       "confidence": "verified-primary-sources",
-      "reasons": [
-        "Meets the current evidence and opportunity thresholds"
-      ],
+      "reasons": ["Meets the current evidence and opportunity thresholds"],
       "candidate": {
         "title": "Free VSO concert returns to Burnaby's Deer Lake Park",
         "lane": "weekend-and-planning",

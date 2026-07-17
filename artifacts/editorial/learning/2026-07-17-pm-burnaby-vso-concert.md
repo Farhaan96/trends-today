@@ -2,12 +2,14 @@
 
 ## Outcome
 
-- Decision: `release-candidate-staged`
+- Decision: `published-candidate-promoted`
 - Beat: `things-to-do`
 - Lane: `weekend-and-planning`
 - Article: `Free VSO concert returns to Burnaby's Deer Lake Park`
 - Slug: `/things-to-do/free-vso-concert-burnaby-deer-lake-park`
-- Candidate status: awaiting exact-candidate Claude review, deterministic QA, PR, deploy, and live verification.
+- Candidate SHA-256: `20d4c03d78565f82efc1f4ff782374e64b90402f501a93813a6ae8be65fcacbc`
+- Review: `NO BLOCKERS` from Claude via `fable` at repository SHA `e458fae4d43b4da2b6c79e47fdd4f91e40c84d11`.
+- Promotion: content file written to `content/things-to-do/free-vso-concert-burnaby-deer-lake-park.mdx`; PR, deployment, and live verification still pending.
 
 ## Baseline and constraint
 
