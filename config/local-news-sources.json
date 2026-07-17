@@ -226,6 +226,25 @@
       "claims about private people",
       "investigations based on leaks or anonymous sources",
       "sponsored or commercial coverage"
+    ],
+    "manualApprovalKeywords": [
+      "arrest",
+      "charged",
+      "crime",
+      "homicide",
+      "murder",
+      "missing person",
+      "missing child",
+      "death",
+      "died",
+      "killed",
+      "fatal",
+      "serious injury",
+      "active emergency",
+      "evacuation order",
+      "anonymous source",
+      "leaked document",
+      "sponsored"
     ]
   }
 }

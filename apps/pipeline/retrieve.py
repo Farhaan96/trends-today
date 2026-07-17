@@ -7,12 +7,55 @@ Priority: Firecrawl → Perplexity search → Google search
 import os
 import json
 import logging
+import re
+from html.parser import HTMLParser
 from typing import List, Dict, Optional
 import requests
 from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+
+class VisibleTextParser(HTMLParser):
+    """Extract enough readable page text for a fail-safe direct-source fallback."""
+
+    def __init__(self):
+        super().__init__()
+        self.text = []
+        self.title = []
+        self.description = ''
+        self._ignored_depth = 0
+        self._in_title = False
+
+    def handle_starttag(self, tag, attrs):
+        tag = tag.lower()
+        if tag in {'script', 'style', 'noscript'}:
+            self._ignored_depth += 1
+        elif tag == 'title':
+            self._in_title = True
+        elif tag == 'meta':
+            attributes = {key.lower(): value for key, value in attrs if value}
+            if attributes.get('name', '').lower() == 'description':
+                self.description = attributes.get('content', '')
+
+    def handle_endtag(self, tag):
+        tag = tag.lower()
+        if tag in {'script', 'style', 'noscript'} and self._ignored_depth:
+            self._ignored_depth -= 1
+        elif tag == 'title':
+            self._in_title = False
+
+    def handle_data(self, data):
+        if self._ignored_depth:
+            return
+        normalized = re.sub(r'\s+', ' ', data).strip()
+        if not normalized:
+            return
+        if self._in_title:
+            self.title.append(normalized)
+        else:
+            self.text.append(normalized)
 
 class ContentRetrieval:
     def __init__(self):
@@ -141,17 +184,78 @@ class ContentRetrieval:
             logger.error(f"Google search error: {e}")
         
         return {}
+
+    def retrieve_direct_urls(self, urls: List[str]) -> Dict:
+        """Read reviewed URLs directly when Firecrawl is unavailable."""
+        sources = []
+        for url in (urls or [])[:3]:
+            try:
+                response = requests.get(
+                    url,
+                    timeout=20,
+                    headers={'User-Agent': 'TrendsTodayLocalDesk/1.0'},
+                )
+                if response.status_code != 200:
+                    continue
+                response.encoding = response.apparent_encoding
+                parser = VisibleTextParser()
+                parser.feed(response.text)
+                snippet = re.sub(
+                    r'\s+',
+                    ' ',
+                    ' '.join([parser.description, *parser.text]),
+                ).strip()
+                if len(snippet) < 80:
+                    continue
+                sources.append({
+                    'url': url,
+                    'snippet': snippet[:2000],
+                    'title': ' '.join(parser.title)[:200],
+                })
+            except Exception as exc:
+                logger.warning('Direct retrieval failed for %s: %s', url, exc)
+        return {'sources': sources, 'method': 'direct'} if sources else {}
+
+    @staticmethod
+    def _merge_sources(*results: Dict) -> Dict:
+        sources = []
+        methods = []
+        seen = set()
+        for result in results:
+            if not result:
+                continue
+            if result.get('method'):
+                methods.append(result['method'])
+            for source in result.get('sources', []):
+                url = str(source.get('url', '')).strip()
+                if not url or url in seen:
+                    continue
+                seen.add(url)
+                sources.append(source)
+                if len(sources) >= 3:
+                    return {'sources': sources, 'method': '+'.join(dict.fromkeys(methods))}
+        return {
+            'sources': sources,
+            'method': '+'.join(dict.fromkeys(methods)) or 'unknown',
+        }
     
     def retrieve(self, topic: str, urls: List[str] = None) -> Dict:
-        """Main retrieval with fallbacks"""
-        # Try each method in order
-        result = self.retrieve_firecrawl(topic, urls=urls)
-        
-        if not result or not result.get('sources'):
-            result = self.retrieve_perplexity(topic)
-        
-        if not result or not result.get('sources'):
-            result = self.retrieve_google(topic)
+        """Retrieve reviewed URLs first, then fill the source contract by search."""
+        results = [self.retrieve_firecrawl(topic, urls=urls)]
+        current = self._merge_sources(*results)
+
+        if urls and len(current.get('sources', [])) < 3:
+            results.append(self.retrieve_direct_urls(urls))
+            current = self._merge_sources(*results)
+
+        if len(current.get('sources', [])) < 3:
+            results.append(self.retrieve_perplexity(topic))
+            current = self._merge_sources(*results)
+
+        if len(current.get('sources', [])) < 3:
+            results.append(self.retrieve_google(topic))
+
+        result = self._merge_sources(*results)
         
         # Cache the result
         if result and result.get('sources'):

@@ -57,6 +57,27 @@ def primary_source_urls_for_topic(topic: Dict) -> set:
     return {str(url).strip() for url in primary_urls if str(url or '').strip()}
 
 
+def requires_manual_approval(topic: Dict, article: Dict, source_config: Dict) -> bool:
+    """Fail closed on common sensitive local-news signals."""
+    if topic.get('manualApprovalRequired') or article.get('manualApprovalRequired'):
+        return True
+    text = ' '.join(
+        str(value or '')
+        for value in (
+            topic.get('title'),
+            article.get('title'),
+            article.get('subtitle'),
+            article.get('meta_description'),
+            article.get('body_mdx'),
+        )
+    ).lower()
+    keywords = (
+        source_config.get('automaticPublishing', {})
+        .get('manualApprovalKeywords', [])
+    )
+    return any(str(keyword).lower() in text for keyword in keywords)
+
+
 def resolve_category(topic: Dict, article: Dict) -> str:
     """Choose one category from explicit research first, then narrow keywords."""
     explicit = str(topic.get('category', '')).lower()
@@ -162,7 +183,11 @@ class ContentPipeline:
             article['locality'] = topic.get('locality', '')
             article['storyType'] = topic.get('storyType', 'reported-update')
             article['readerImpact'] = (topic.get('evidence') or {}).get('readerImpact', '')
-            article['manualApprovalRequired'] = topic.get('manualApprovalRequired', False)
+            article['manualApprovalRequired'] = requires_manual_approval(
+                topic,
+                article,
+                self.topic_discovery.source_config,
+            )
             article['manualApprovalRecorded'] = topic.get('manualApprovalRecorded', False)
             
             self.stats['articles_generated'] += 1

@@ -9,6 +9,7 @@ sys.path.insert(0, str(PIPELINE_DIR))
 from runner import (  # noqa: E402
     eligible_candidates_from_payload,
     primary_source_urls_for_topic,
+    requires_manual_approval,
     seed_urls_for_topic,
 )
 
@@ -46,6 +47,32 @@ class RunnerSourceTests(unittest.TestCase):
             {'https://city.example/news/update'},
             primary_source_urls_for_topic(topic),
         )
+
+    def test_sensitive_story_signal_requires_manual_approval(self):
+        config = {
+            'automaticPublishing': {
+                'manualApprovalKeywords': ['missing person', 'fatal']
+            }
+        }
+        article = {
+            'title': 'Search continues in Surrey',
+            'body_mdx': 'Police issued a missing person notice on Friday.',
+        }
+
+        self.assertTrue(requires_manual_approval({}, article, config))
+
+    def test_routine_service_update_does_not_require_manual_approval(self):
+        config = {
+            'automaticPublishing': {
+                'manualApprovalKeywords': ['missing person', 'fatal']
+            }
+        }
+        article = {
+            'title': 'Expo Line service changes this weekend',
+            'body_mdx': 'TransLink says trains will run every 12 minutes.',
+        }
+
+        self.assertFalse(requires_manual_approval({}, article, config))
 
 
 class RunnerEligibilityTests(unittest.TestCase):
