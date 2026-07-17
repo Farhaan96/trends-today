@@ -7,7 +7,7 @@
 - Lane: `timely-opportunity`
 - Article: `Windows 11 July Update: What to Check Before You Pause`
 - Slug: `/technology/windows-11-july-update-pause-restore-controls`
-- Candidate SHA-256: `a04205a698171691fba5740c78df3ba830eee1d2f781871c954699d9589ee1c1`
+- Candidate SHA-256: `390abf8fb7b61ffb6a1e495a1df0985ae770d3f19a979cc4bffccdb0f66eedaf`
 - Review: `NO BLOCKERS` from Claude via `fable`
 
 ## Baseline and constraint
