@@ -2,6 +2,7 @@
 """Research, stage, and promote independently reviewed Trends Today content."""
 
 import os
+import hmac
 import sys
 import json
 import logging
@@ -76,6 +77,13 @@ def requires_manual_approval(topic: Dict, article: Dict, source_config: Dict) ->
         .get('manualApprovalKeywords', [])
     )
     return any(str(keyword).lower() in text for keyword in keywords)
+
+
+def has_manual_approval(topic: Dict) -> bool:
+    """Accept sensitive-story approval only through an operator-provided secret."""
+    expected = os.getenv('TRENDS_TODAY_SENSITIVE_APPROVAL_TOKEN', '').strip()
+    supplied = str(topic.get('manualApprovalToken', '')).strip()
+    return bool(expected and supplied and hmac.compare_digest(expected, supplied))
 
 
 def resolve_category(topic: Dict, article: Dict) -> str:
@@ -188,7 +196,9 @@ class ContentPipeline:
                 article,
                 self.topic_discovery.source_config,
             )
-            article['manualApprovalRecorded'] = topic.get('manualApprovalRecorded', False)
+            # A discovered topic cannot self-assert human approval. The token is
+            # supplied interactively and is intentionally absent from automation.
+            article['manualApprovalRecorded'] = has_manual_approval(topic)
             
             self.stats['articles_generated'] += 1
             

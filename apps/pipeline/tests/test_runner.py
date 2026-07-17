@@ -1,5 +1,6 @@
 import sys
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 
@@ -10,6 +11,7 @@ from runner import (  # noqa: E402
     eligible_candidates_from_payload,
     primary_source_urls_for_topic,
     requires_manual_approval,
+    has_manual_approval,
     seed_urls_for_topic,
 )
 
@@ -73,6 +75,17 @@ class RunnerSourceTests(unittest.TestCase):
         }
 
         self.assertFalse(requires_manual_approval({}, article, config))
+
+    def test_topic_boolean_cannot_spoof_manual_approval(self):
+        with patch.dict('os.environ', {}, clear=True):
+            self.assertFalse(has_manual_approval({'manualApprovalRecorded': True}))
+
+    def test_operator_secret_records_manual_approval(self):
+        with patch.dict(
+            'os.environ', {'TRENDS_TODAY_SENSITIVE_APPROVAL_TOKEN': 'operator-secret'}
+        ):
+            self.assertTrue(has_manual_approval({'manualApprovalToken': 'operator-secret'}))
+            self.assertFalse(has_manual_approval({'manualApprovalToken': 'wrong-secret'}))
 
 
 class RunnerEligibilityTests(unittest.TestCase):

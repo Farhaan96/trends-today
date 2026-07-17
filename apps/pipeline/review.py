@@ -69,7 +69,9 @@ def verify_claude_review(
         capture_output=True,
         text=True,
     )
-    if git_head.returncode == 0 and review.get('repositorySha') != git_head.stdout.strip():
+    if git_head.returncode != 0:
+        raise PermissionError('Unable to verify the current repository SHA')
+    if review.get('repositorySha') != git_head.stdout.strip():
         raise PermissionError('Review artifact was created for a different repository SHA')
 
     return review, digest, candidate_relative, review_relative

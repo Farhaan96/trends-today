@@ -74,6 +74,8 @@ class MDXStaticPublisher(PublisherAdapter):
                 'locality': article.get('locality', ''),
                 'storyType': article.get('storyType', 'guide-or-explainer'),
                 'readerImpact': article.get('readerImpact', ''),
+                'manualApprovalRequired': bool(article.get('manualApprovalRequired')),
+                'manualApprovalRecorded': bool(article.get('manualApprovalRecorded')),
             }
             frontmatter['status'] = 'release-candidate'
             
@@ -207,6 +209,20 @@ def promote_candidate(candidate_path: Path, review_path: Path, repo_root: Path =
     original = source.read_text(encoding='utf-8')
     if not re.search(r'^status:\s*["\']?release-candidate["\']?\s*$', original, re.MULTILINE):
         raise ValueError('File is not marked as a release candidate')
+    source_config_path = root / 'config' / 'local-news-sources.json'
+    source_config = json.loads(source_config_path.read_text(encoding='utf-8'))
+    sensitive_keywords = (
+        source_config.get('automaticPublishing', {}).get('manualApprovalKeywords', [])
+    )
+    requires_approval = bool(
+        re.search(r'^manualApprovalRequired:\s*true\s*$', original, re.MULTILINE)
+        or any(str(keyword).lower() in original.lower() for keyword in sensitive_keywords)
+    )
+    approval_recorded = bool(
+        re.search(r'^manualApprovalRecorded:\s*true\s*$', original, re.MULTILINE)
+    )
+    if requires_approval and not approval_recorded:
+        raise PermissionError('Sensitive candidate requires recorded human approval')
     review_metadata = (
         'status: "published"\n'
         f'reviewedBy: {json.dumps(review["reviewer"], ensure_ascii=False)}\n'
