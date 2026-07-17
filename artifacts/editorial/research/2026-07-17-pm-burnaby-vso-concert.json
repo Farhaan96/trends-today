@@ -1,0 +1,50 @@
+{
+  "generatedAt": "2026-07-17T16:45:00-07:00",
+  "status": "researched",
+  "results": [
+    {
+      "title": "Free VSO concert returns to Burnaby's Deer Lake Park",
+      "lane": "weekend-and-planning",
+      "score": 93.0,
+      "decision": "brief",
+      "confidence": "verified-primary-sources",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Free VSO concert returns to Burnaby's Deer Lake Park",
+        "lane": "weekend-and-planning",
+        "source": "primary_source_page",
+        "sourceName": "City of Burnaby events",
+        "sourceTier": "primary",
+        "url": "https://www.burnaby.ca/recreation-and-arts/events/symphony-park-featuring-vso",
+        "locality": "Burnaby",
+        "category": "things-to-do",
+        "storyType": "reported-update",
+        "confidence": "verified-primary-sources",
+        "evidence": {
+          "readerImpact": "Readers can decide whether to attend Saturday's free Deer Lake Park concert and plan arrival, seating, transit, parking, food, and accessibility needs.",
+          "freshnessEvidence": "Event is scheduled for Saturday, July 18, 2026, one day after this sweep.",
+          "uniqueAngleEvidence": "No existing local-section articles are published; this is a concise practical planning bulletin rather than a generic event listing.",
+          "sourceUrls": [
+            "https://www.burnaby.ca/recreation-and-arts/events/symphony-park-featuring-vso",
+            "https://www.vancouversymphony.ca/event/symphony-in-the-park/"
+          ],
+          "primarySourceUrls": [
+            "https://www.burnaby.ca/recreation-and-arts/events/symphony-park-featuring-vso",
+            "https://www.vancouversymphony.ca/event/symphony-in-the-park/"
+          ]
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 5,
+          "freshness": 5,
+          "evidenceStrength": 4,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 5,
+          "speedToUsefulDraft": 5
+        }
+      }
+    }
+  ]
+}
