@@ -1,4 +1,4 @@
-# Daily publisher learning - 2026-07-17 PM
+﻿# Daily publisher learning - 2026-07-17 PM
 
 ## Outcome
 
@@ -30,8 +30,8 @@ The sweep prioritized a time-sensitive, free Lower Mainland event with confirmed
 
 ## Sources
 
-- City of Burnaby event page: https://www.burnaby.ca/recreation-and-arts/events/symphony-park-featuring-vso
-- Vancouver Symphony Orchestra event page: https://www.vancouversymphony.ca/event/symphony-in-the-park/
+- [City of Burnaby event page](https://www.burnaby.ca/recreation-and-arts/events/symphony-park-featuring-vso)
+- [Vancouver Symphony Orchestra event page](https://www.vancouversymphony.ca/event/symphony-in-the-park/)
 
 ## Known cost
 
@@ -46,3 +46,12 @@ The sweep prioritized a time-sensitive, free Lower Mainland event with confirmed
 ## Next test
 
 Repair measurement while continuing bounded local sweeps; compare free-event planning bulletins against service-change bulletins once comparable cohorts exist.
+
+## 2026-07-17 source-link hotfix
+
+- Live browser verification found the two source URLs rendered as plain text, not clickable anchors.
+- Repair: converted the City of Burnaby and Vancouver Symphony Orchestra source bullets to Markdown links in the release candidate and promoted article.
+- Hotfix candidate SHA-256: `caf66ce86b3cad27db3f022130708ae72639dcb1784437992f194c9d8a99c973`.
+- Hotfix review artifact: `2026-07-17-pm-burnaby-vso-concert-source-link-review.json`.
+- Hotfix promotedAt: `2026-07-17T17:25:00-07:00`.
+- Changed variable: source discoverability and reader trust, without changing factual claims, headline, event details, or image.
