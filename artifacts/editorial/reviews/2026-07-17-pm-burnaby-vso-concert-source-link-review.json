@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "caf66ce86b3cad27db3f022130708ae72639dcb1784437992f194c9d8a99c973",
+  "repositorySha": "33278f921278c2914d200abc583f8d23c61097b2",
+  "reviewedAt": "2026-07-18T00:24:00Z",
+  "modelUsed": "fable",
+  "requestedModels": ["fable"],
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-fable-5"],
+  "fallbackUsed": false,
+  "review": "NO BLOCKERS for the Burnaby VSO source-link hotfix candidate at repository SHA 33278f921278c2914d200abc583f8d23c61097b2. The candidate digest is caf66ce86b3cad27db3f022130708ae72639dcb1784437992f194c9d8a99c973. The content change converts the City of Burnaby and Vancouver Symphony Orchestra source bullets from bare URLs to Markdown links without changing factual claims, event details, source URLs, headline, image, or sensitive-story status."
+}

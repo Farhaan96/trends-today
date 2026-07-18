@@ -1,18 +1,13 @@
 {
-    "version":  1,
-    "reviewer":  "claude",
-    "verdict":  "NO BLOCKERS",
-    "candidateSha256":  "caf66ce86b3cad27db3f022130708ae72639dcb1784437992f194c9d8a99c973",
-    "repositorySha":  "33278f921278c2914d200abc583f8d23c61097b2",
-    "reviewedAt":  "2026-07-18T00:19:00Z",
-    "modelUsed":  "fable",
-    "requestedModels":  [
-                            "fable"
-                        ],
-    "observedModels":  [
-                           "claude-haiku-4-5-20251001",
-                           "claude-fable-5"
-                       ],
-    "fallbackUsed":  false,
-    "review":  "NO BLOCKERS for the Burnaby VSO source-link hotfix candidate at repository SHA 33278f921278c2914d200abc583f8d23c61097b2. The candidate digest is caf66ce86b3cad27db3f022130708ae72639dcb1784437992f194c9d8a99c973. The only content change converts the City of Burnaby and Vancouver Symphony Orchestra source bullets from bare URLs to Markdown links without changing factual claims, event details, source URLs, headline, image, or sensitive-story status."
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "db4577ee41b83ce2eeb2ac33a9ae53b175c089802b4f0dfb0b08b4420def31ce",
+  "repositorySha": "b16ee89f7f7995b973172848b0847cd89c74e6ca",
+  "reviewedAt": "2026-07-17T23:50:20.4152266Z",
+  "modelUsed": "fable",
+  "requestedModels": ["fable"],
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-fable-5"],
+  "fallbackUsed": false,
+  "review": "NO BLOCKERS\n\n**Verdict: NO BLOCKERS.** The candidate at `artifacts/editorial/release-candidates/things-to-do/free-vso-concert-burnaby-deer-lake-park.mdx`, as it exists in the clean working tree at `b16ee89`, passes all five blocker categories. One audit-trail discrepancy is flagged below; it does not change the content verdict.\n\n**1. Factual claims, headline, sources, phrasing — pass.**\n- July 18, 2026 is a Saturday, matching the article\u0027s framing, and `publishedAt` (July 17) makes the event one day out — consistent with the research record\u0027s freshness claim.\n- Every operational detail (7:30–9:30 p.m. concert, 3 p.m. family programming, Festival Lawn at 6450 Deer Lake Avenue, free/no tickets, food trucks, Burnaby Central Secondary offsite parking 3–11 p.m., Shadbolt/SPARC parking, eastbound Deer Lake Avenue closure at 4 p.m. with full closure at 9 p.m., accessible seating platform, Bettear app, do-not-bring list) is explicitly attributed to the City of Burnaby or the VSO rather than asserted independently, and matches the research artifact\u0027s verified-primary-sources record. This environment has no web access, so I could not fetch the two live URLs; verification is against the repository research record, calendar math, and the consistent in-text attribution.\n- Headline claims (\"free\", \"returns\") are supported in the body by both sources. Both scoped source URLs appear verbatim in the Sources section (candidate lines 62–63). Prose is summary-style attribution, not copied phrasing.\n\n**2. Lower Mainland gates — pass.** Against the deterministic contract in `apps/pipeline/validation.py`: `locality: \u0027Burnaby\u0027` is set and named throughout the body; `readerImpact` states a concrete planning decision; `reported-update` requires 450–800 words and 2 sources (`validation.py:15`) — the body is roughly 490 words with exactly 2 valid source URLs, both cited in the body; both sources are tagged `primary` in the research file (city government page plus the performing organization\u0027s own listing), satisfying the primary-source floor (`validation.py:82-83`).\n\n**3. Sensitive-story approval — not required.** A free public concert bulletin touches none of the manual-approval categories; `manualApprovalRequired: false` is correct and no sensitive keywords appear.\n\n**4. MDX/frontmatter contract — pass.** All expected fields are present and well-formed; `category: \u0027things-to-do\u0027` is a valid local category; slug matches the filename; four H2 sections (validator requires ≥2); zero em dashes in the body, satisfying the local no-em-dash rule (`validation.py:75`); the file uses LF line endings and clean YAML quoting.\n\n**5. Image gate — pass.** `public/images/editorial/2026/07/burnaby-vso-deer-lake-concert.png` exists and I rendered it: a real evening lakeside orchestra illustration with an audience on a lawn, matching the alt text — not a placeholder. The attribution honestly discloses it as an original generated editorial illustration rather than implying event photography.\n\n**Audit-trail discrepancy (flagged, not a content blocker).** The candidate SHA-256 in this review\u0027s scope (`DB4577EE…DEF31CE`) does not match the `candidateSha256` recorded in both the prior review artifact (`artifacts/editorial/reviews/2026-07-17-pm-burnaby-vso-concert-review.json`) and the promoted file\u0027s frontmatter (`20d4c03d…cfacbc`). Since the file is LF-only, line-ending conversion doesn\u0027t explain it: the candidate\u0027s bytes changed between the prior review at `e458fae` and the promote commit `b16ee89`, or one of the hashes was computed on different content. Mitigating facts: the current candidate\u0027s body is word-for-word identical to the promoted `content/things-to-do/...` file, so what was published matches what I reviewed here, and this fresh review is bound to the current bytes at `b16ee89` under the scope-stated hash. The prior artifact\u0027s NO BLOCKERS verdict should not be treated as covering the current file, but this review does. Recommend the pipeline recompute and re-record `candidateSha256` so the provenance chain is consistent; I have no hashing tool in this environment to do so myself.\n\n**Non-blocking nit:** \"Saint Saens\" (line 42) would conventionally be \"Saint-Saëns\" — worth a later copyedit pass, especially if it doesn\u0027t mirror the city\u0027s own listing."
 }

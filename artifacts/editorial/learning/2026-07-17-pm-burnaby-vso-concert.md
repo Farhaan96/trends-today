@@ -1,4 +1,4 @@
-# Daily publisher learning - 2026-07-17 PM
+﻿# Daily publisher learning - 2026-07-17 PM
 
 ## Outcome
 
@@ -7,8 +7,8 @@
 - Lane: `weekend-and-planning`
 - Article: `Free VSO concert returns to Burnaby's Deer Lake Park`
 - Slug: `/things-to-do/free-vso-concert-burnaby-deer-lake-park`
-- Candidate SHA-256: `caf66ce86b3cad27db3f022130708ae72639dcb1784437992f194c9d8a99c973`
-- Review: `NO BLOCKERS` from Claude via `fable` for candidate SHA `caf66ce86b3cad27db3f022130708ae72639dcb1784437992f194c9d8a99c973`; source-link hotfix exact-SHA review is recorded in this run.
+- Candidate SHA-256: `db4577ee41b83ce2eeb2ac33a9ae53b175c089802b4f0dfb0b08b4420def31ce`
+- Review: `NO BLOCKERS` from Claude via `fable` at repository SHA `b16ee89f7f7995b973172848b0847cd89c74e6ca`.
 - Promotion: content file written to `content/things-to-do/free-vso-concert-burnaby-deer-lake-park.mdx`; PR, deployment, and live verification still pending.
 
 ## Baseline and constraint
@@ -51,4 +51,7 @@ Repair measurement while continuing bounded local sweeps; compare free-event pla
 
 - Live browser verification found the two source URLs rendered as plain text, not clickable anchors.
 - Repair: converted the City of Burnaby and Vancouver Symphony Orchestra source bullets to Markdown links in the release candidate and promoted article.
+- Hotfix candidate SHA-256: `caf66ce86b3cad27db3f022130708ae72639dcb1784437992f194c9d8a99c973`.
+- Hotfix review artifact: `2026-07-17-pm-burnaby-vso-concert-source-link-review.json`.
+- Hotfix promotedAt: `2026-07-17T17:25:00-07:00`.
 - Changed variable: source discoverability and reader trust, without changing factual claims, headline, event details, or image.
