@@ -7,7 +7,7 @@
 - Lane: `weekend-and-planning`
 - Article: `Free VSO concert returns to Burnaby's Deer Lake Park`
 - Slug: `/things-to-do/free-vso-concert-burnaby-deer-lake-park`
-- Candidate SHA-256: `db4577ee41b83ce2eeb2ac33a9ae53b175c089802b4f0dfb0b08b4420def31ce`
+- Candidate SHA-256: `caf66ce86b3cad27db3f022130708ae72639dcb1784437992f194c9d8a99c973`
 - Review: `NO BLOCKERS` from Claude via `fable` at repository SHA `b16ee89f7f7995b973172848b0847cd89c74e6ca`.
 - Promotion: content file written to `content/things-to-do/free-vso-concert-burnaby-deer-lake-park.mdx`; PR, deployment, and live verification still pending.
 
@@ -30,8 +30,8 @@ The sweep prioritized a time-sensitive, free Lower Mainland event with confirmed
 
 ## Sources
 
-- City of Burnaby event page: https://www.burnaby.ca/recreation-and-arts/events/symphony-park-featuring-vso
-- Vancouver Symphony Orchestra event page: https://www.vancouversymphony.ca/event/symphony-in-the-park/
+- [City of Burnaby event page](https://www.burnaby.ca/recreation-and-arts/events/symphony-park-featuring-vso)
+- [Vancouver Symphony Orchestra event page](https://www.vancouversymphony.ca/event/symphony-in-the-park/)
 
 ## Known cost
 
@@ -46,3 +46,9 @@ The sweep prioritized a time-sensitive, free Lower Mainland event with confirmed
 ## Next test
 
 Repair measurement while continuing bounded local sweeps; compare free-event planning bulletins against service-change bulletins once comparable cohorts exist.
+
+## 2026-07-17 source-link hotfix
+
+- Live browser verification found the two source URLs rendered as plain text, not clickable anchors.
+- Repair: converted the City of Burnaby and Vancouver Symphony Orchestra source bullets to Markdown links in the release candidate and promoted article.
+- Changed variable: source discoverability and reader trust, without changing factual claims, headline, event details, or image.
