@@ -1,0 +1,63 @@
+{
+  "generatedAt": "2026-07-18T13:44:28.189825+00:00",
+  "results": [
+    {
+      "title": "FIFA Fan Festival transit plan for the final weekend",
+      "lane": "daily-local-utility",
+      "score": 93.0,
+      "decision": "brief",
+      "confidence": "verified-internal-fact-plus-primary-sources",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "FIFA Fan Festival transit plan for the final weekend",
+        "slug": "fifa-fan-festival-transit-final-weekend-hastings-park",
+        "lane": "daily-local-utility",
+        "category": "transit",
+        "locality": "Vancouver",
+        "storyType": "reported-update",
+        "confidence": "verified-internal-fact-plus-primary-sources",
+        "evidence": {
+          "readerImpact": "Readers can decide whether to use transit, bike valet, ride-share, or paid parking for the July 18-19 final Fan Festival weekend at Hastings Park.",
+          "freshnessEvidence": "Host City schedule lists Saturday July 18 from 11 a.m. to 8 p.m. and Sunday July 19 from 9 a.m. to 7 p.m.; production check was run on 2026-07-18 morning.",
+          "uniqueAngleEvidence": "Existing Lower Mainland inventory has no transit articles and no FIFA Fan Festival planner; this frames the event around arrival, gates, and service planning instead of general World Cup coverage.",
+          "sourceUrls": [
+            "https://vancouverfwc26.ca/fifa-fan-festival",
+            "https://vancouverfwc26.ca/fifa-fan-festival/schedule",
+            "https://vancouverfwc26.ca/know-before-you-go/getting-to-fifa-fan-festival",
+            "https://www.translink.ca/schedules-and-maps/service-changes"
+          ],
+          "primarySourceUrls": [
+            "https://vancouverfwc26.ca/fifa-fan-festival",
+            "https://vancouverfwc26.ca/fifa-fan-festival/schedule",
+            "https://vancouverfwc26.ca/know-before-you-go/getting-to-fifa-fan-festival",
+            "https://www.translink.ca/schedules-and-maps/service-changes"
+          ],
+          "keyFacts": [
+            "FIFA Fan Festival Vancouver runs June 11 to July 19, 2026 at the PNE Grounds at Hastings Park.",
+            "The schedule lists Saturday July 18 from 11 a.m. to 8 p.m. and Sunday July 19 from 9 a.m. to 7 p.m.",
+            "The Host City page recommends transit because parking is limited and names the 11 Fan Festival Express between 29th Avenue Station, Renfrew Station, and the festival.",
+            "TransLink says it is adding service for FIFA World Cup 2026 Vancouver, including dedicated service for the Fan Festival, more downtown bus service, more frequent SkyTrain before and after BC Place matches, extra SeaBus sailings, and no World Cup fare increase.",
+            "The Host City page lists entry gates at Renfrew Street and East Hastings Street, Renfrew Street, Renfrew Street and Miller Drive, Miller Drive, and East Hastings Street."
+          ]
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 5,
+          "freshness": 5,
+          "evidenceStrength": 4,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 4,
+          "speedToUsefulDraft": 5
+        },
+        "sourceReview": {
+          "duplicates": "rg found no prior FIFA Fan Festival, Fan Festival Express, Hastings Park, or World Cup transit article in content or staged release candidates.",
+          "legacyTopicValidator": "Windows utility failed to enumerate files because it shells out to Unix find, but its fallback report marked the title unique.",
+          "categorySaturation": "content-diversity-manager returned no transit saturation.",
+          "sensitiveGate": "No configured manual-approval keywords or sensitive story categories were triggered."
+        }
+      }
+    }
+  ]
+}
