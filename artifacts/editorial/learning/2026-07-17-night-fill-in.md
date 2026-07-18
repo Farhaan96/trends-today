@@ -2,12 +2,17 @@
 
 ## Outcome
 
-- Decision: `fill-in-candidates-built`
-- Publication target: up to two articles, pending exact-SHA review, promotion, PR, deployment, and live browser verification.
-- Candidate 1: `Free Vancouver Opera concert takes over Deer Lake Park`
-- Candidate 2: `Whitecaps say 30,000 tickets sold for BC Place return`
+- Decision: `published-candidates-promoted`
+- Publication target: two articles promoted after exact-SHA Claude review; PR, deployment, and live browser verification still pending.
+- Candidate 1: `Free Vancouver Opera concert takes over Deer Lake Park` at `/things-to-do/free-vancouver-opera-deer-lake-park-burnaby`
+- Candidate 2: `Whitecaps say 30,000 tickets sold for BC Place return` at `/sports/whitecaps-30000-tickets-bc-place-return-lafc`
 - Categories: `things-to-do` and `sports`
 - Municipalities: Burnaby and Vancouver
+- Candidate review SHA: `f888c0abb2f02000a5ebefd9ba3a91110125b0bc`.
+- Claude review: `NO BLOCKERS` via `fable`; fallback not used.
+- Opera candidate SHA-256: `fe84a2f5ee1af33aabd3d8fcee8ebaf248ed837878b38ece6e46db8252df7995`.
+- Whitecaps candidate SHA-256: `38c454f3b7ed906425a93e3bc0e44e6bd9f646bad6514ece02fc8e87e7bd9aab`.
+- Review artifacts: `artifacts/editorial/reviews/things-to-do/free-vancouver-opera-deer-lake-park-burnaby.fe84a2f5ee1a.json` and `artifacts/editorial/reviews/sports/whitecaps-30000-tickets-bc-place-return-lafc.38c454f3b7ed.json`.
 
 ## Baseline and constraint
 

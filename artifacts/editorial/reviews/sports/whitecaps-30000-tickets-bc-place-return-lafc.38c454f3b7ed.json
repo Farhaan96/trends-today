@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "reviewedAt": "2026-07-18T02:49:24.2865941Z",
+  "repositorySha": "f888c0abb2f02000a5ebefd9ba3a91110125b0bc",
+  "modelUsed": "fable",
+  "requestedModels": ["fable"],
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-fable-5"],
+  "fallbackUsed": false,
+  "reviewRunnerArtifact": "artifacts/editorial/reviews/2026-07-17-night-fill-in-claude-review-runner.json",
+  "reviewSummary": "NO BLOCKERS for two Lower Mainland fill-in candidates; official source, duplicate, sensitive, and promotion-safety gates passed.",
+  "candidatePath": "artifacts/editorial/release-candidates/sports/whitecaps-30000-tickets-bc-place-return-lafc.mdx",
+  "candidateSha256": "38c454f3b7ed906425a93e3bc0e44e6bd9f646bad6514ece02fc8e87e7bd9aab"
+}

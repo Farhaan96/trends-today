@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "reviewedAt": "2026-07-18T02:49:24.2865941Z",
+  "repositorySha": "f888c0abb2f02000a5ebefd9ba3a91110125b0bc",
+  "modelUsed": "fable",
+  "requestedModels": ["fable"],
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-fable-5"],
+  "fallbackUsed": false,
+  "reviewRunnerArtifact": "artifacts/editorial/reviews/2026-07-17-night-fill-in-claude-review-runner.json",
+  "reviewSummary": "NO BLOCKERS for two Lower Mainland fill-in candidates; official source, duplicate, sensitive, and promotion-safety gates passed.",
+  "candidatePath": "artifacts/editorial/release-candidates/things-to-do/free-vancouver-opera-deer-lake-park-burnaby.mdx",
+  "candidateSha256": "fe84a2f5ee1af33aabd3d8fcee8ebaf248ed837878b38ece6e46db8252df7995"
+}
