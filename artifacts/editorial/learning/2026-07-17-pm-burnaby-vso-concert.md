@@ -8,7 +8,7 @@
 - Article: `Free VSO concert returns to Burnaby's Deer Lake Park`
 - Slug: `/things-to-do/free-vso-concert-burnaby-deer-lake-park`
 - Candidate SHA-256: `caf66ce86b3cad27db3f022130708ae72639dcb1784437992f194c9d8a99c973`
-- Review: `NO BLOCKERS` from Claude via `fable` at repository SHA `b16ee89f7f7995b973172848b0847cd89c74e6ca`.
+- Review: `NO BLOCKERS` from Claude via `fable` for candidate SHA `caf66ce86b3cad27db3f022130708ae72639dcb1784437992f194c9d8a99c973`; source-link hotfix exact-SHA review is recorded in this run.
 - Promotion: content file written to `content/things-to-do/free-vso-concert-burnaby-deer-lake-park.mdx`; PR, deployment, and live verification still pending.
 
 ## Baseline and constraint
