@@ -1,0 +1,79 @@
+{
+  "generatedAt": "2026-07-17T19:55:00-07:00",
+  "baseline": {
+    "localInventoryConstraint": "Only one active Lower Mainland article was live before this fill-in run; the active local categories local-news, transit, food-drink, housing, and sports were empty.",
+    "analyticsAvailability": "Vercel Web Analytics is embedded, but article-level export was unavailable through the repository endpoint. Google Analytics and Search Console were unavailable. Missing values were not converted to zero.",
+    "dailyLimit": 6,
+    "sweepLimit": 2
+  },
+  "selected": [
+    {
+      "slug": "free-vancouver-opera-deer-lake-park-burnaby",
+      "category": "things-to-do",
+      "locality": "Burnaby",
+      "storyType": "reported-update",
+      "decision": "brief",
+      "whyThisQualifies": "Immediate free weekend event with confirmed date, time, location, no-ticket cost, transit, parking, road-closure, food, and accessibility details from official sources.",
+      "readerJob": "Decide whether to attend Sunday's free outdoor opera concert and plan arrival.",
+      "sourceThreshold": "Met: two primary sources.",
+      "sources": [
+        {
+          "name": "City of Burnaby event page",
+          "url": "https://www.burnaby.ca/recreation-and-arts/events/opera-park-featuring-vancouver-opera",
+          "tier": "primary"
+        },
+        {
+          "name": "Vancouver Opera event page",
+          "url": "https://www.vancouveropera.ca/opera-in-the-park/",
+          "tier": "primary"
+        }
+      ],
+      "rejectedRisks": [
+        "Not a duplicate of the existing VSO article because this is a Sunday Vancouver Opera event with separate official source pages and program details.",
+        "No sensitive-story gate triggered."
+      ]
+    },
+    {
+      "slug": "whitecaps-30000-tickets-bc-place-return-lafc",
+      "category": "sports",
+      "locality": "Vancouver",
+      "storyType": "reported-update",
+      "decision": "brief",
+      "whyThisQualifies": "Confirmed Vancouver sports event with an official attendance-demand signal, fixed date, kickoff time, opponent, venue, ticket status, and official event listings.",
+      "readerJob": "Decide whether to attend or plan around the August 1 BC Place match.",
+      "sourceThreshold": "Met: three official sources, including the club announcement, club schedule, and BC Place event listing.",
+      "sources": [
+        {
+          "name": "Whitecaps announcement",
+          "url": "https://www.whitecapsfc.com/news/30000-bc-place-return",
+          "tier": "primary"
+        },
+        {
+          "name": "Whitecaps schedule",
+          "url": "https://www.whitecapsfc.com/schedule/matches",
+          "tier": "primary"
+        },
+        {
+          "name": "BC Place event page",
+          "url": "https://www.bcplace.com/?event=vancouver-whitecaps-fc-vs-lafc",
+          "tier": "primary"
+        }
+      ],
+      "rejectedRisks": [
+        "No invented attendance beyond the club's own 30,000-plus statement.",
+        "No player availability claim stated as guaranteed.",
+        "No sensitive-story gate triggered."
+      ]
+    }
+  ],
+  "rejected": [
+    {
+      "title": "Symphony in the Park featuring the VSO",
+      "reason": "Duplicate of the already published Burnaby VSO story."
+    },
+    {
+      "title": "Generic civic updates and older sports posts",
+      "reason": "Lower reader-interest signal for the user's fill-in goal or insufficient timeliness compared with selected candidates."
+    }
+  ]
+}

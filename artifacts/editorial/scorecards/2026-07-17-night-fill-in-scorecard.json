@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-07-18T02:35:01.529724+00:00",
+  "inventory": {
+    "totalActiveArticles": 125,
+    "byCategory": {
+      "culture": 12,
+      "health": 22,
+      "psychology": 21,
+      "science": 30,
+      "space": 14,
+      "technology": 25,
+      "things-to-do": 1
+    },
+    "lastPublishedAt": "2026-07-17T16:45:00-07:00",
+    "daysSinceLastPublish": 0
+  },
+  "analytics": {
+    "status": "unavailable",
+    "missing": [
+      "article-level search impressions and clicks",
+      "organic engaged sessions",
+      "returning sessions",
+      "app CTA clicks"
+    ],
+    "decision": "repair-measurement",
+    "articles": []
+  },
+  "decision": "repair-measurement-while-running-bounded-local-sweeps"
+}
