@@ -1,0 +1,98 @@
+{
+  "runStartedAt": "2026-07-19T16:32:00-07:00",
+  "baseline": {
+    "vercelWebAnalytics": "embedded-in-site; provider article-level export unavailable from repository endpoint",
+    "googleAnalytics": "unavailable",
+    "googleSearchConsole": "unavailable",
+    "articleLevelMetrics": {
+      "searchImpressions": null,
+      "searchClicks": null,
+      "engagedSessions": null,
+      "returningSessions": null,
+      "eventGuideEngagement": null,
+      "repeatVisits": null,
+      "appCtaClicks": null,
+      "revenue": null
+    },
+    "missingValuesRule": "missing metrics are unavailable, not zero",
+    "productionInventoryBeforeRun": {
+      "totalArticles": 131,
+      "local-news": 1,
+      "transit": 1,
+      "things-to-do": 2,
+      "sports": 1,
+      "food-drink": 1,
+      "housing": 1
+    }
+  },
+  "constraint": {
+    "business": "measurement remains unavailable at article level",
+    "editorial": "local category depth is improving, but transit has only one article and things-to-do needs genuinely useful plan-now coverage rather than filler"
+  },
+  "selected": [
+    {
+      "title": "What TransLink fares cost after the July increase",
+      "slug": "translink-july-fare-increase-what-riders-pay",
+      "category": "transit",
+      "municipality": "Lower Mainland",
+      "storyType": "bulletin",
+      "hypothesis": "A current fare explainer should earn repeat utility because riders need exact post-increase amounts for Compass loading, passes, airport trips, and cross-zone planning.",
+      "singleChangedVariable": "Add a region-wide price utility bulletin instead of another event-only transit piece.",
+      "score": 88,
+      "evidenceStrength": 5,
+      "manualApprovalRequired": false,
+      "duplicateCheck": "No exact or near-topic match found for TransLink fare increase, Compass fares, or July fare increase in content or editorial learning.",
+      "sources": [
+        {
+          "name": "TransLink pricing and fare zones",
+          "url": "https://www.translink.ca/transit-fares/pricing-and-fare-zones",
+          "tier": "primary"
+        }
+      ]
+    },
+    {
+      "title": "Free Burnaby park events to plan this week",
+      "slug": "free-burnaby-park-events-this-week",
+      "category": "things-to-do",
+      "municipality": "Burnaby",
+      "storyType": "reported-update",
+      "hypothesis": "A concise, source-linked family planning bulletin should perform better than generic event aggregation because it answers dates, times, location, price, weather caveat, and parking/transit choice.",
+      "singleChangedVariable": "Use two official Burnaby park-event pages to create a practical this-week planner for families.",
+      "score": 84,
+      "evidenceStrength": 5,
+      "manualApprovalRequired": false,
+      "duplicateCheck": "No exact or near-topic match found for Summer Stages, Jim Lorimer Park reopening, or Burnaby free park events in existing local content.",
+      "sources": [
+        {
+          "name": "City of Burnaby events calendar",
+          "url": "https://www.burnaby.ca/recreation-and-arts/events",
+          "tier": "primary"
+        },
+        {
+          "name": "City of Burnaby Summer Stages",
+          "url": "https://www.burnaby.ca/recreation-and-arts/events/summer-stages",
+          "tier": "primary"
+        },
+        {
+          "name": "City of Burnaby Jim Lorimer Park Re-opening Celebration",
+          "url": "https://www.burnaby.ca/recreation-and-arts/events/jim-lorimer-park-re-opening-celebration",
+          "tier": "primary"
+        }
+      ]
+    }
+  ],
+  "rejectedOrDeferred": [
+    {
+      "topic": "Richmond Pride Week kickoff",
+      "reason": "Good official future event, but it is one week out and this sweep had stronger immediate transit and Burnaby family utility."
+    },
+    {
+      "topic": "Summer Lights in English Bay",
+      "reason": "Strong future Vancouver event, but the City says timing, road closures, transit recommendations, accessibility, and safety details are still forthcoming."
+    },
+    {
+      "topic": "BC Ferries current capacity pages",
+      "reason": "Current conditions are too volatile for a durable article unless tied to an official service notice or travel-planning pattern."
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "run": "2026-07-19-evening",
+  "scoringVersion": "content-business-v3-local",
+  "minimumScore": 65,
+  "maximumPublicationsThisSweep": 2,
+  "dailyCeiling": 6,
+  "alreadyPublishedTodayBeforeRun": 3,
+  "candidates": [
+    {
+      "slug": "translink-july-fare-increase-what-riders-pay",
+      "category": "transit",
+      "storyType": "bulletin",
+      "localRelevance": 5,
+      "readerUtility": 5,
+      "freshness": 4,
+      "evidenceStrength": 5,
+      "uniqueAngle": 4,
+      "repeatVisitPotential": 4,
+      "speedToUsefulDraft": 5,
+      "weightedScore": 88,
+      "verdict": "release-candidate"
+    },
+    {
+      "slug": "free-burnaby-park-events-this-week",
+      "category": "things-to-do",
+      "storyType": "reported-update",
+      "localRelevance": 5,
+      "readerUtility": 5,
+      "freshness": 5,
+      "evidenceStrength": 5,
+      "uniqueAngle": 3,
+      "repeatVisitPotential": 3,
+      "speedToUsefulDraft": 5,
+      "weightedScore": 84,
+      "verdict": "release-candidate"
+    }
+  ],
+  "metricsAvailability": {
+    "searchConsole": "unavailable",
+    "ga4": "unavailable",
+    "vercelArticleExport": "unavailable",
+    "returningLowerMainlandReaders": "unavailable",
+    "repeatVisits": "unavailable",
+    "eventGuideEngagement": "unavailable"
+  }
+}
