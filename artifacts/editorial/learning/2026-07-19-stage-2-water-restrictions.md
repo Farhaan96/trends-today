@@ -2,8 +2,9 @@
 
 ## Outcome
 
-- Decision: `release-candidate-built`
+- Decision: `published`
 - Candidate: `What Metro Vancouver Stage 2 water rules allow now`
+- Live URL: `https://www.trendstoday.ca/local-news/metro-vancouver-stage-2-water-restrictions-july-2026`
 - Category: `local-news`
 - Municipality: Metro Vancouver region
 
@@ -36,6 +37,8 @@ This run filled the first `local-news` shelf slot with a current public-service 
 
 - Cash/API cost: no project API key was used for built-in image generation.
 - Human approval: not required because this is a public-service update from official sources and no configured sensitive gate triggered.
+- Review: Claude Fable exact-SHA review returned `NO BLOCKERS` for candidate SHA `bf2fd69737a3bc3c9547488151f56bd801e8004927fcc891607c204106c40f11`.
+- QA: deterministic candidate validation passed; Python suite passed 48 tests; typecheck passed; lint passed with existing warnings only; targeted Prettier passed; production build passed. `npm ci` reported the existing 22 audit vulnerabilities.
 
 ## Checkpoints
 
