@@ -1,0 +1,39 @@
+[
+  {
+    "title": "What Metro Vancouver Stage 2 water rules allow now",
+    "lane": "daily-local-utility",
+    "category": "local-news",
+    "locality": "Metro Vancouver",
+    "storyType": "reported-update",
+    "sourceName": "Metro Vancouver water restrictions",
+    "sourceTier": "primary",
+    "sourceUrl": "https://metrovancouver.org/services/water/water-restrictions",
+    "confidence": "verified-official-sources",
+    "evidence": {
+      "readerImpact": "Readers can decide whether they may water lawns, gardens, trees, wash vehicles, top up pools, or report local non-compliance under the region's current Stage 2 rules.",
+      "freshnessEvidence": "Metro Vancouver says Stage 2 restrictions are in effect as of July 16, 2026; Delta posted a July 16, 2026 notice and Vancouver says Stage 2 runs until October 15, 2026 unless changed.",
+      "uniqueAngleEvidence": "Current local inventory has no local-news shelf articles and no water-restriction service bulletin; this focuses on allowed actions rather than a civic quote recap.",
+      "sourceUrls": [
+        "https://metrovancouver.org/services/water/water-restrictions",
+        "https://vancouver.ca/home-property-development/understanding-watering-restrictions.aspx",
+        "https://www.richmond.ca/services/water-sewer-flood/water-services/savewater/lawn.htm",
+        "https://www.delta.ca/community-culture/happening-delta/news/stage-2-water-restrictions-activated-metro-vancouver-0"
+      ],
+      "primarySourceUrls": [
+        "https://metrovancouver.org/services/water/water-restrictions",
+        "https://vancouver.ca/home-property-development/understanding-watering-restrictions.aspx",
+        "https://www.richmond.ca/services/water-sewer-flood/water-services/savewater/lawn.htm",
+        "https://www.delta.ca/community-culture/happening-delta/news/stage-2-water-restrictions-activated-metro-vancouver-0"
+      ]
+    },
+    "ratings": {
+      "localRelevance": 5,
+      "readerUtility": 5,
+      "freshness": 5,
+      "evidenceStrength": 5,
+      "uniqueAngle": 4,
+      "repeatVisitPotential": 4,
+      "speedToUsefulDraft": 5
+    }
+  }
+]
