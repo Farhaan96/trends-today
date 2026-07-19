@@ -1,0 +1,104 @@
+{
+  "runStartedAt": "2026-07-19T11:38:38-07:00",
+  "baseline": {
+    "vercelWebAnalytics": "embedded-in-site; provider article-level export unavailable from repository endpoint",
+    "googleAnalytics": "unavailable",
+    "googleSearchConsole": "unavailable",
+    "articleLevelMetrics": {
+      "searchImpressions": null,
+      "searchClicks": null,
+      "engagedSessions": null,
+      "returningSessions": null,
+      "eventGuideEngagement": null,
+      "repeatVisits": null,
+      "appCtaClicks": null,
+      "revenue": null
+    },
+    "missingValuesRule": "missing metrics are unavailable, not zero",
+    "productionInventoryBeforeRun": {
+      "totalArticles": 129,
+      "local-news": 1,
+      "transit": 1,
+      "things-to-do": 2,
+      "sports": 1,
+      "food-drink": 0,
+      "housing": 0
+    }
+  },
+  "constraint": {
+    "business": "measurement remains unavailable at article level",
+    "editorial": "food-drink and housing shelves are empty while category-depth direction asks for useful Lower Mainland depth without filler"
+  },
+  "selected": [
+    {
+      "title": "Ramen Danbo sets Main Street opening dates",
+      "slug": "ramen-danbo-main-st-opening-vancouver",
+      "category": "food-drink",
+      "municipality": "Vancouver",
+      "storyType": "bulletin",
+      "hypothesis": "A confirmed neighbourhood restaurant opening with exact hours helps Mount Pleasant readers plan a near-term visit and begins the food-drink shelf.",
+      "singleChangedVariable": "Use a business-confirmed opening bulletin rather than secondary restaurant roundups.",
+      "score": 86,
+      "evidenceStrength": 4,
+      "manualApprovalRequired": false,
+      "duplicateCheck": "No exact or near-topic match found for Ramen Danbo, Main Street, or 3982 Main in content or editorial artifacts.",
+      "sources": [
+        {
+          "name": "Ramen Danbo Main St opening announcement",
+          "url": "https://ramendanbo.com/ramen-danbo-main-st-soft-grand-opening-schedule-officially-announced/",
+          "tier": "primary"
+        },
+        {
+          "name": "Ramen Danbo locations page",
+          "url": "https://ramendanbo.com/locations/",
+          "tier": "primary"
+        }
+      ]
+    },
+    {
+      "title": "Burnaby tenant protection bylaw is now in effect",
+      "slug": "burnaby-tenant-protection-bylaw-now-in-effect",
+      "category": "housing",
+      "municipality": "Burnaby",
+      "storyType": "guide-or-explainer",
+      "hypothesis": "A plain-language Burnaby tenant-protection explainer should be useful because the bylaw took effect July 1 and affected renters need timing and eligibility context.",
+      "singleChangedVariable": "Fill the first housing shelf slot with an official-source renter utility explainer instead of another event item.",
+      "score": 91,
+      "evidenceStrength": 5,
+      "manualApprovalRequired": false,
+      "duplicateCheck": "No exact or near-topic match found for Burnaby Tenant Protection Bylaw or Tenant Assistance Policy in content or editorial artifacts.",
+      "sources": [
+        {
+          "name": "City of Burnaby tenant protection page",
+          "url": "https://www.burnaby.ca/our-city/programs-and-policies/housing/tenant-protection",
+          "tier": "primary"
+        },
+        {
+          "name": "City of Burnaby housing page",
+          "url": "https://www.burnaby.ca/our-city/programs-and-policies/housing",
+          "tier": "primary"
+        },
+        {
+          "name": "City of Burnaby May 28 announcement",
+          "url": "https://www.burnaby.ca/our-city/news/2026-05-28/city-burnaby-strengthens-tenant-protections-new-tenant-protection-bylaw",
+          "tier": "primary"
+        },
+        {
+          "name": "Burnaby Tenant Protection Bylaw 2026 PDF",
+          "url": "https://bylaws.burnaby.ca/media/14000/14821.pdf",
+          "tier": "primary"
+        }
+      ]
+    }
+  ],
+  "rejectedOrDeferred": [
+    {
+      "topic": "Summer Lights in English Bay",
+      "reason": "Strong future things-to-do opportunity, but food-drink and housing shelves had stronger current category-depth need and Summer Lights road/transit details are still incomplete."
+    },
+    {
+      "topic": "Secondary restaurant-opening roundups",
+      "reason": "Rejected as source material unless the business or official page confirmed the opening details directly."
+    }
+  ]
+}
