@@ -1,0 +1,46 @@
+{
+  "run": "2026-07-19-midday",
+  "scoringVersion": "content-business-v3-local",
+  "minimumScore": 65,
+  "maximumPublicationsThisSweep": 2,
+  "dailyCeiling": 6,
+  "alreadyPublishedTodayBeforeRun": 1,
+  "candidates": [
+    {
+      "slug": "ramen-danbo-main-st-opening-vancouver",
+      "category": "food-drink",
+      "storyType": "bulletin",
+      "localRelevance": 5,
+      "readerUtility": 4,
+      "freshness": 5,
+      "evidenceStrength": 4,
+      "uniqueAngle": 4,
+      "repeatVisitPotential": 3,
+      "speedToUsefulDraft": 5,
+      "weightedScore": 86,
+      "verdict": "release-candidate"
+    },
+    {
+      "slug": "burnaby-tenant-protection-bylaw-now-in-effect",
+      "category": "housing",
+      "storyType": "guide-or-explainer",
+      "localRelevance": 5,
+      "readerUtility": 5,
+      "freshness": 4,
+      "evidenceStrength": 5,
+      "uniqueAngle": 4,
+      "repeatVisitPotential": 4,
+      "speedToUsefulDraft": 4,
+      "weightedScore": 91,
+      "verdict": "release-candidate"
+    }
+  ],
+  "metricsAvailability": {
+    "searchConsole": "unavailable",
+    "ga4": "unavailable",
+    "vercelArticleExport": "unavailable",
+    "returningLowerMainlandReaders": "unavailable",
+    "repeatVisits": "unavailable",
+    "eventGuideEngagement": "unavailable"
+  }
+}
