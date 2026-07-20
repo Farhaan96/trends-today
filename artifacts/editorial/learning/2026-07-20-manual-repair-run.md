@@ -2,10 +2,13 @@
 
 ## Outcome
 
-- Decision: `repair-only`; zero new stories were researched or published.
+- Decision: `repair-only`; a post-repair source scan produced six opportunities, but zero new stories qualified for promotion or were published.
 - Reason: the prior run left three live related-article links pointing at false category routes, one reported update below the contextual-link contract, and two carried-over local articles without the v4 commercial metadata.
 - Base production SHA: `52293d4b157f6401073a53ba84ed75acfd70451d`.
-- Release evidence: this entry will be updated with the final reviewed SHA, PR, merge, deployment, and post-deploy browser verification after the guarded release completes.
+- Release implementation SHA: `4d10da0ffa42f30b44c92403bc4d9e3fdb261fe9`.
+- Pull request: [#19](https://github.com/Farhaan96/trends-today/pull/19), opened as draft, Vercel preview green, marked ready, and merged without deleting the branch.
+- Production merge SHA: `bbdb49070b52ce228b425c4b38720bf26f8af57f`.
+- Production deployment: GitHub deployment `5524226075`, Vercel status `success`, completed `2026-07-20T15:23:31Z`.
 
 ## Verified baseline and constraint
 
@@ -62,8 +65,20 @@ This is the only measurement repair selected for this run. No length band, topic
 - Production build: passed; Next.js generated all 182 static pages and next-sitemap completed.
 - Local browser verification: both carried-over article canonicals rendered with the correct headlines and loaded hero images, all three related cards now use their real categories, the new contextual link rendered, and both pages had zero console errors.
 - Local comprehensive link audit: all 11 unique internal links rendered in the two affected article bodies/supporting sections returned 200; the false author-profile link is no longer rendered.
-- Independent exact-SHA review: pending.
-- Pull request, checks, merge, production deployment, and final browser/link verification: pending.
+- Independent exact-SHA review: approved runner/Fable returned `NO BLOCKERS` on release implementation SHA `4d10da0ffa42f30b44c92403bc4d9e3fdb261fe9`; fallback and paid credits were not used.
+- Independent production-snapshot review: after the concurrent merge changed the integration target, the same approved runner/Fable returned `NO BLOCKERS` on exact production SHA `bbdb49070b52ce228b425c4b38720bf26f8af57f`; fallback and paid credits were not used.
+- Pull request checks: Vercel and Vercel Preview Comments passed before merge.
+- Production deployment `5524226075`: `success` for merge SHA `bbdb49070b52ce228b425c4b38720bf26f8af57f`.
+- Both carried production articles rendered the expected title, H1, canonical, and loaded hero image with zero console errors.
+- The Burnaby body renders the resolving contextual anchor `current TransLink fares after the July increase`; neither carried page renders a false category route or `/author/trends-today-team`.
+- Complete production internal-link audit, all valid with zero console errors: the two carried articles, Ramen Danbo, Burnaby tenant protection, FIFA transit, Metro Vancouver Stage 2 water restrictions, Windows 11 controls, the VSO concert, and Vancouver Opera.
+- Complete production official-source audit, all loaded with their expected H1: TransLink pricing and fare zones, City of Burnaby events, Summer Stages, and Jim Lorimer Park Re-opening Celebration.
+
+## Fresh source scan after repair
+
+- The post-repair scanner found six primary-source opportunities and recorded them in `artifacts/editorial/research/2026-07-20-manual-closeout-queue.json`.
+- Decision: zero new stories promoted. Two civic-dispute items require balanced evidence and owner-sensitive-story approval; three items did not meet the two-source reported-update and specific-reader-job gates; the Jim Lorimer listing duplicated the carried Burnaby article.
+- No headline, body, image, public claim, sponsored coverage, outreach, pricing, billing, or customer commitment was created from these leads.
 
 ## Checkpoints and decision rule
 
