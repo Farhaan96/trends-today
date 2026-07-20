@@ -16,15 +16,20 @@ const navigation = [
 
 export default function EditorialHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [editionDate, setEditionDate] = useState('');
   const pathname = usePathname();
-  const editionDate = new Intl.DateTimeFormat('en-CA', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-    timeZone: 'America/Vancouver',
-  }).format(new Date());
 
   useEffect(() => setIsMenuOpen(false), [pathname]);
+  useEffect(() => {
+    setEditionDate(
+      new Intl.DateTimeFormat('en-CA', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'America/Vancouver',
+      }).format(new Date())
+    );
+  }, []);
 
   return (
     <header className="site-header">
@@ -76,7 +81,7 @@ export default function EditorialHeader() {
 
       <div className="site-edition" aria-label="Publication edition">
         <span>Lower Mainland</span>
-        <span>{editionDate}</span>
+        <span>{editionDate || ' '}</span>
         <span>Vancouver to the Fraser Valley</span>
       </div>
 
