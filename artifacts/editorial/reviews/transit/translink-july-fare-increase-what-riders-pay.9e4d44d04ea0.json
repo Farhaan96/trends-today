@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "9e4d44d04ea0d3de2bc75790f962acebde74ad1dc2d33ee0c920be91a96ac411",
+  "reviewedAt": "2026-07-20T15:11:00Z",
+  "repositorySha": "d16f84bc188b4e6f297629e6b51b21e1d274794e",
+  "modelUsed": "fable",
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-fable-5"],
+  "review": "NO BLOCKERS\n\nReviewed the exact repository SHA d16f84bc188b4e6f297629e6b51b21e1d274794e through the approved exact-SHA runner. The candidate hash matches the current release-candidate bytes. The carried article's fare claims remain tied to its official TransLink source capture, its commercial metadata is explicitly hypothesis-only, and the component-level routing repair sends related articles to their own categories. No sensitive, sponsored, branded, pricing, billing, or customer-commitment approval gate was triggered."
+}
