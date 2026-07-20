@@ -2,7 +2,7 @@
 
 ## Outcome
 
-- Decision: `release-candidate-built`
+- Decision: `published`
 - Candidates:
   - `What TransLink fares cost after the July increase`
   - `Free Burnaby park events to plan this week`
@@ -42,6 +42,9 @@ Burnaby source capture on 2026-07-19 recorded Summer Stages dates, showtimes, fr
 
 - Cash/API cost: no project API key was used for built-in image generation.
 - Human approval: not required because both stories are low-risk public utility updates from primary sources and no configured sensitive gate triggered.
+- Review: Claude Fable exact-SHA review returned `NO BLOCKERS` for candidate SHA `068c433658ecf27351bc102f9bc1bd12b5225ed170bea30877ccb25a449f669a` and candidate SHA `430c8b636870c5df85993a2a35e38227824f0b7f6c52dbc13f1f8ee40a25e0d3`.
+- Repair note: initial reviews blocked until the TransLink fare table and Burnaby event facts were captured from live official pages; the final candidates include those dated source captures.
+- QA: deterministic candidate validation passed; Python suite passed 48 tests; sensitive scan passed; targeted Prettier passed; typecheck passed; quiet lint passed; production build and sitemap generation passed. `npm ci` reported the existing 22 audit vulnerabilities.
 
 ## Checkpoints
 
@@ -50,4 +53,4 @@ Burnaby source capture on 2026-07-19 recorded Summer Stages dates, showtimes, fr
 
 ## Next test
 
-If these clear review and publish, the next sweep should prefer a new municipality or a true service impact before adding another Burnaby event item.
+The next sweep should prefer a new municipality or a true service impact before adding another Burnaby event item.
