@@ -9,7 +9,7 @@ import os
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional
+from typing import Any, Callable, Dict, List, Mapping, Optional
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -103,14 +103,16 @@ def _request_page_views(
     token: str,
     team_id: Optional[str],
     team_slug: Optional[str],
-    opener: Callable[[Request], Any],
+    opener: Callable[..., Any],
+    timeout_seconds: int = 30,
 ) -> Optional[float]:
+    escaped_request_path = request_path.replace("'", "''")
     query = {
         'projectId': project_id,
         'since': since,
         'until': until,
         'by': 'requestPath',
-        'filter': f"requestPath eq '{request_path}'",
+        'filter': f"requestPath eq '{escaped_request_path}'",
         'limit': '1',
     }
     if team_id:
@@ -126,7 +128,7 @@ def _request_page_views(
             'User-Agent': 'trends-today-weekly-growth-review',
         },
     )
-    with opener(request) as response:
+    with opener(request, timeout=timeout_seconds) as response:
         payload = json.loads(response.read().decode('utf-8'))
     return _extract_page_views(payload)
 
@@ -137,7 +139,7 @@ def build_export(
     since: str,
     until: str,
     env: Mapping[str, str] = os.environ,
-    opener: Callable[[Request], Any] = urlopen,
+    opener: Callable[..., Any] = urlopen,
 ) -> Dict[str, Any]:
     articles = discover_articles(content_dir)
     token = env.get('VERCEL_ANALYTICS_TOKEN') or env.get('VERCEL_TOKEN')

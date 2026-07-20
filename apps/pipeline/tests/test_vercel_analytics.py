@@ -71,8 +71,8 @@ class VercelAnalyticsTests(unittest.TestCase):
     def test_imports_page_views_and_keeps_other_metrics_null(self):
         calls = []
 
-        def opener(request):
-            calls.append(request)
+        def opener(request, timeout=None):
+            calls.append((request, timeout))
             return FakeResponse({'data': [{'requestPath': '/transit/fare-update', 'pageViews': 17}]})
 
         with tempfile.TemporaryDirectory() as tmp:
@@ -95,11 +95,13 @@ class VercelAnalyticsTests(unittest.TestCase):
         self.assertEqual(17, article['pageViews'])
         self.assertIsNone(article['engagedSessions'])
         self.assertIsNone(article['qualifiedSponsorInquiries'])
-        parsed = urlparse(calls[0].full_url)
+        request, timeout = calls[0]
+        self.assertEqual(30, timeout)
+        parsed = urlparse(request.full_url)
         query = parse_qs(parsed.query)
         self.assertEqual(['prj_test'], query['projectId'])
         self.assertEqual(["requestPath eq '/transit/fare-update'"], query['filter'])
-        self.assertEqual('Bearer token', calls[0].headers['Authorization'])
+        self.assertEqual('Bearer token', request.headers['Authorization'])
 
 
 if __name__ == '__main__':
