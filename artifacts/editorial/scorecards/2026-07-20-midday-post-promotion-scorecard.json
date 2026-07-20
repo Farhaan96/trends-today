@@ -1,0 +1,37 @@
+{
+  "generatedAt": "2026-07-20T19:02:47.386832+00:00",
+  "inventory": {
+    "totalActiveArticles": 135,
+    "byCategory": {
+      "culture": 12,
+      "food-drink": 1,
+      "health": 22,
+      "housing": 2,
+      "local-news": 1,
+      "psychology": 21,
+      "science": 30,
+      "space": 14,
+      "sports": 1,
+      "technology": 25,
+      "things-to-do": 3,
+      "transit": 3
+    },
+    "lastPublishedAt": "2026-07-20T11:50:00-07:00",
+    "daysSinceLastPublish": 0
+  },
+  "analytics": {
+    "status": "unavailable",
+    "missing": [
+      "article-level search impressions and clicks",
+      "organic engaged sessions",
+      "returning sessions",
+      "app CTA clicks",
+      "page views and ad revenue",
+      "measurable and viewable ad impressions",
+      "qualified sponsor inquiries"
+    ],
+    "decision": "repair-measurement",
+    "articles": []
+  },
+  "decision": "repair-measurement-while-running-bounded-local-sweeps"
+}
