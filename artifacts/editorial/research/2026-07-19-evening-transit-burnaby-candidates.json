@@ -76,6 +76,22 @@
       "evidenceStrength": 5,
       "manualApprovalRequired": false,
       "duplicateCheck": "No exact or near-topic match found for Summer Stages, Jim Lorimer Park reopening, or Burnaby free park events in existing local content.",
+      "sourceCapture": {
+        "capturedAt": "2026-07-19T17:08:00-07:00",
+        "method": "Invoke-WebRequest live HTML extraction",
+        "facts": [
+          "City of Burnaby Summer Stages page says the series runs July 14-August 27, 2026 at Confederation Park, 250 Willingdon Ave, by the spray park.",
+          "Summer Stages page lists Tuesday and Wednesday shows at 11 am, 12:15 pm, and 2:30 pm; Thursday Family Nights from 5:30-8:30 pm.",
+          "Summer Stages page says events run rain or shine, but may be cancelled due to extreme weather, and asks readers to check the page for updates.",
+          "Summer Stages July 21 listing includes Vancouver Puppet Theatre, The Trollsons, and Cosmo's Pop Up Clown Circus.",
+          "Summer Stages July 22 listing includes Russell Hirsch storytelling, Kellie Haines ventriloquism, and Zlatna Mountain Balkan Folk Music.",
+          "Summer Stages July 23 evening listing includes Celtic Cowboys, Vancouver Morris Men, and The Colours of Juggling featuring Yuki & Friends.",
+          "Jim Lorimer Park Re-opening Celebration page lists Wed, Jul 22 2026, 1-2 pm, at 2338 Gilmore Ave.",
+          "Jim Lorimer page says the event includes free ice cream while supplies last, brand-new playground equipment, a new play tower and slide, swings and spinners, and a dedicated toddler play area.",
+          "Jim Lorimer page says there is an official ribbon-cutting at 1 pm.",
+          "Jim Lorimer page says there is no parking onsite and recommends walking, rolling, cycling, or riding SkyTrain to Gilmore SkyTrain Station next to the park."
+        ]
+      },
       "sources": [
         {
           "name": "City of Burnaby events calendar",

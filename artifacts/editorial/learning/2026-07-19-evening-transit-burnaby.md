@@ -36,6 +36,8 @@ This run adds immediate utility across two planning jobs: "what does my transit 
 
 TransLink source capture on 2026-07-19 recorded current adult cash/contactless fares, adult Stored Value fares, concession fares, monthly passes, DayPasses, the $6.50 YVR Airport AddFare, and the 90-minute fare-validity note from the live pricing page.
 
+Burnaby source capture on 2026-07-19 recorded Summer Stages dates, showtimes, location, weather caveat, July 21-23 performer listings, and Jim Lorimer Park reopening date, time, address, ribbon-cutting, ice cream, playground details, and no-parking/SkyTrain guidance from the live City of Burnaby pages.
+
 ## Known cost
 
 - Cash/API cost: no project API key was used for built-in image generation.
