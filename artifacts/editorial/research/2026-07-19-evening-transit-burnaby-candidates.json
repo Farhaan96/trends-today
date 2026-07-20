@@ -1,0 +1,131 @@
+{
+  "runStartedAt": "2026-07-19T16:32:00-07:00",
+  "baseline": {
+    "vercelWebAnalytics": "embedded-in-site; provider article-level export unavailable from repository endpoint",
+    "googleAnalytics": "unavailable",
+    "googleSearchConsole": "unavailable",
+    "articleLevelMetrics": {
+      "searchImpressions": null,
+      "searchClicks": null,
+      "engagedSessions": null,
+      "returningSessions": null,
+      "eventGuideEngagement": null,
+      "repeatVisits": null,
+      "appCtaClicks": null,
+      "revenue": null
+    },
+    "missingValuesRule": "missing metrics are unavailable, not zero",
+    "productionInventoryBeforeRun": {
+      "totalArticles": 131,
+      "local-news": 1,
+      "transit": 1,
+      "things-to-do": 2,
+      "sports": 1,
+      "food-drink": 1,
+      "housing": 1
+    }
+  },
+  "constraint": {
+    "business": "measurement remains unavailable at article level",
+    "editorial": "local category depth is improving, but transit has only one article and things-to-do needs genuinely useful plan-now coverage rather than filler"
+  },
+  "selected": [
+    {
+      "title": "What TransLink fares cost after the July increase",
+      "slug": "translink-july-fare-increase-what-riders-pay",
+      "category": "transit",
+      "municipality": "Lower Mainland",
+      "storyType": "bulletin",
+      "hypothesis": "A current fare explainer should earn repeat utility because riders need exact post-increase amounts for Compass loading, passes, airport trips, and cross-zone planning.",
+      "singleChangedVariable": "Add a region-wide price utility bulletin instead of another event-only transit piece.",
+      "score": 88,
+      "evidenceStrength": 5,
+      "manualApprovalRequired": false,
+      "duplicateCheck": "No exact or near-topic match found for TransLink fare increase, Compass fares, or July fare increase in content or editorial learning.",
+      "sourceCapture": {
+        "capturedAt": "2026-07-19T16:58:00-07:00",
+        "method": "Invoke-WebRequest live HTML extraction",
+        "facts": [
+          "TransLink page says fares increased by an average of 5% on July 1, 2026.",
+          "Adult cash/contactless current fares: 1-Zone $3.50 (+$0.15), 2-Zone $5.10 (+$0.25), 3-Zone $6.70 (+$0.10).",
+          "Adult Stored Value current fares: 1-Zone $2.85 (+$0.15), 2-Zone $4.20 (+$0.20), 3-Zone $5.40 (+$0.30).",
+          "Concession current fares: 1-Zone $2.30 (+$0.05), 2-Zone $3.40 (+$0.10), 3-Zone $4.60 (+$0.10).",
+          "Adult monthly passes: $117.20, $156.70, and $211.65; concession monthly pass: $66.95.",
+          "Adult DayPass: $12.55; concession DayPass: $9.75.",
+          "Journeys starting at YVR-Airport, Sea Island Centre, or Templeton stations include a $6.50 YVR Airport AddFare at all times.",
+          "The page says buses and HandyDART are 1-Zone at all times; SkyTrain and SeaBus vary by zone and time; single fares are valid for 90 minutes."
+        ]
+      },
+      "sources": [
+        {
+          "name": "TransLink pricing and fare zones",
+          "url": "https://www.translink.ca/transit-fares/pricing-and-fare-zones",
+          "tier": "primary"
+        }
+      ]
+    },
+    {
+      "title": "Free Burnaby park events to plan this week",
+      "slug": "free-burnaby-park-events-this-week",
+      "category": "things-to-do",
+      "municipality": "Burnaby",
+      "storyType": "reported-update",
+      "hypothesis": "A concise, source-linked family planning bulletin should perform better than generic event aggregation because it answers dates, times, location, price, weather caveat, and parking/transit choice.",
+      "singleChangedVariable": "Use two official Burnaby park-event pages to create a practical this-week planner for families.",
+      "score": 84,
+      "evidenceStrength": 5,
+      "manualApprovalRequired": false,
+      "duplicateCheck": "No exact or near-topic match found for Summer Stages, Jim Lorimer Park reopening, or Burnaby free park events in existing local content.",
+      "sourceCapture": {
+        "capturedAt": "2026-07-19T17:08:00-07:00",
+        "method": "Invoke-WebRequest live HTML extraction",
+        "facts": [
+          "City of Burnaby Summer Stages page says the series runs July 14-August 27, 2026 at Confederation Park, 250 Willingdon Ave, by the spray park.",
+          "City of Burnaby Summer Stages page calls it a free live performance series.",
+          "Summer Stages page lists Tuesday and Wednesday shows at 11 am, 12:15 pm, and 2:30 pm; Thursday Family Nights from 5:30-8:30 pm.",
+          "Summer Stages page says there are free family-friendly art sessions and lawn games between performances.",
+          "Summer Stages page says events run rain or shine, but may be cancelled due to extreme weather, and asks readers to check the page for updates.",
+          "Summer Stages July 21 listing includes Vancouver Puppet Theatre, The Trollsons, and Cosmo's Pop Up Clown Circus.",
+          "Summer Stages July 22 listing includes Russell Hirsch storytelling, Kellie Haines ventriloquism, and Zlatna Mountain Balkan Folk Music.",
+          "Summer Stages July 23 evening listing includes Celtic Cowboys, Vancouver Morris Men, and The Colours of Juggling featuring Yuki & Friends.",
+          "Jim Lorimer Park Re-opening Celebration page lists Wed, Jul 22 2026, 1-2 pm, at 2338 Gilmore Ave.",
+          "Jim Lorimer page describes the celebration as a free, family-friendly day of fun.",
+          "Jim Lorimer page says the event includes free ice cream while supplies last, brand-new playground equipment, a new play tower and slide, swings and spinners, and a dedicated toddler play area.",
+          "Jim Lorimer page says there is an official ribbon-cutting at 1 pm.",
+          "Jim Lorimer page says there is no parking onsite and recommends walking, rolling, cycling, or riding SkyTrain to Gilmore SkyTrain Station next to the park."
+        ]
+      },
+      "sources": [
+        {
+          "name": "City of Burnaby events calendar",
+          "url": "https://www.burnaby.ca/recreation-and-arts/events",
+          "tier": "primary"
+        },
+        {
+          "name": "City of Burnaby Summer Stages",
+          "url": "https://www.burnaby.ca/recreation-and-arts/events/summer-stages",
+          "tier": "primary"
+        },
+        {
+          "name": "City of Burnaby Jim Lorimer Park Re-opening Celebration",
+          "url": "https://www.burnaby.ca/recreation-and-arts/events/jim-lorimer-park-re-opening-celebration",
+          "tier": "primary"
+        }
+      ]
+    }
+  ],
+  "rejectedOrDeferred": [
+    {
+      "topic": "Richmond Pride Week kickoff",
+      "reason": "Good official future event, but it is one week out and this sweep had stronger immediate transit and Burnaby family utility."
+    },
+    {
+      "topic": "Summer Lights in English Bay",
+      "reason": "Strong future Vancouver event, but the City says timing, road closures, transit recommendations, accessibility, and safety details are still forthcoming."
+    },
+    {
+      "topic": "BC Ferries current capacity pages",
+      "reason": "Current conditions are too volatile for a durable article unless tied to an official service notice or travel-planning pattern."
+    }
+  ]
+}
