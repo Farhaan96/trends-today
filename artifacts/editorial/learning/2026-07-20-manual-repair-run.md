@@ -5,7 +5,9 @@
 - Decision: `repair-only`; zero new stories were researched or published.
 - Reason: the prior run left three live related-article links pointing at false category routes, one reported update below the contextual-link contract, and two carried-over local articles without the v4 commercial metadata.
 - Base production SHA: `52293d4b157f6401073a53ba84ed75acfd70451d`.
-- Release evidence: this entry will be updated with the final reviewed SHA, PR, merge, deployment, and post-deploy browser verification after the guarded release completes.
+- Repair commit: `4d10da0ffa42f30b44c92403bc4d9e3fdb261fe9`.
+- Independent exact-SHA verdict: `NO BLOCKERS` from `claude-fable-5`; no fallback or paid credits were used.
+- Primary release: PR #19 merged as `bbdb49070b52ce228b425c4b38720bf26f8af57f`; production deployment `5524226075` completed successfully.
 
 ## Verified baseline and constraint
 
@@ -62,13 +64,18 @@ This is the only measurement repair selected for this run. No length band, topic
 - Production build: passed; Next.js generated all 182 static pages and next-sitemap completed.
 - Local browser verification: both carried-over article canonicals rendered with the correct headlines and loaded hero images, all three related cards now use their real categories, the new contextual link rendered, and both pages had zero console errors.
 - Local comprehensive link audit: all 11 unique internal links rendered in the two affected article bodies/supporting sections returned 200; the false author-profile link is no longer rendered.
-- Independent exact-SHA review: pending.
-- Pull request, checks, merge, production deployment, and final browser/link verification: pending.
+- Independent exact-SHA review: `NO BLOCKERS` for `4d10da0ffa42f30b44c92403bc4d9e3fdb261fe9`; requested model `fable`, observed models `claude-fable-5` and `claude-haiku-4-5-20251001`, fallback false, paid credits false.
+- Pull request: #19 passed the configured Vercel and Vercel Preview Comments checks, was marked ready, and merged without deleting `issue/daily-publisher-repair-2026-07-20`.
+- Merge SHA: `bbdb49070b52ce228b425c4b38720bf26f8af57f`.
+- Production: deployment `5524226075` completed successfully for the merge SHA.
+- Final hydration verification: both affected live article pages retained the correct canonical, headline, date, body, and loaded 819 by 546 hero image; each page had zero browser console errors.
+- Final link verification: all 15 unique rendered links across the two live articles were navigated in the browser. Every internal category, contextual, author-supporting, and related link resolved to a non-404 page; all four official source links resolved. The three repaired canonicals resolved under `/local-news`, `/technology`, and `/housing`.
+- Run result: repair completed; zero new stories published.
 
 ## Checkpoints and decision rule
 
-- 7-day checkpoint: 2026-07-26. Attempt the single Vercel `requestPath` import for both carried-over articles; record page views if authenticated data is available and keep every other missing metric unavailable.
-- 28-day checkpoint: 2026-08-16. Compare only verified article-level results; do not infer commercial performance from topic labels.
+- 7-day checkpoint: 2026-07-27. Attempt the single Vercel `requestPath` import for both carried-over articles; record page views if authenticated data is available and keep every other missing metric unavailable.
+- 28-day checkpoint: 2026-08-17. Compare only verified article-level results; do not infer commercial performance from topic labels.
 - `keep`: all related and contextual links resolve on production, both hydration pages remain console-clean, and the measurement import returns truthful path-level data.
 - `repair`: any related-card route, contextual link, source link, canonical, hero image, or console check fails, or the Vercel import cannot join by canonical path.
 - `stop`: pause new automated stories if link-generation regression returns or release/live-verification gates cannot be satisfied.
