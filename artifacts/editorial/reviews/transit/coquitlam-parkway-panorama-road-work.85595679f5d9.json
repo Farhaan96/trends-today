@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "85595679f5d93fe909b1d3ce2486dac11534019b7ba091c67a60a0ef1ffe6a46",
+  "reviewedAt": "2026-07-20T19:05:30Z",
+  "repositorySha": "ea10284f9654f97019efb0361a4eedba44faa0ba",
+  "modelUsed": "fable",
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-fable-5"],
+  "review": "NO BLOCKERS\n\nCANDIDATE_SHA256: 85595679f5d93fe909b1d3ce2486dac11534019b7ba091c67a60a0ef1ffe6a46\n\nReviewed artifacts/editorial/release-candidates/transit/coquitlam-parkway-panorama-road-work.mdx against the run's research queue, qualified-candidates capture, scorecard, image asset, and prior transit precedent. Core timeframe and source URLs are supported by repo evidence; detailed work-hour claims are attributed to the City of Coquitlam and low-risk. Title, meta, structure, image/frontmatter integrity, v4 commercial metadata, and legal/reputational risk all passed."
+}

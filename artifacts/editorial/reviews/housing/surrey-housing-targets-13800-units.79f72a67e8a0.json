@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "79f72a67e8a09862b989fb2345685fa9e4b9b6fbf9ea66dafc39482f92c6bb68",
+  "reviewedAt": "2026-07-20T19:09:30Z",
+  "repositorySha": "ea10284f9654f97019efb0361a4eedba44faa0ba",
+  "modelUsed": "fable",
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-fable-5"],
+  "review": "NO BLOCKERS\n\nCANDIDATE_SHA256: 79f72a67e8a09862b989fb2345685fa9e4b9b6fbf9ea66dafc39482f92c6bb68\n\nReviewed artifacts/editorial/release-candidates/housing/surrey-housing-targets-13800-units.mdx against the run's research artifacts, published inventory, and image asset. The previous internal-monetization language blocker was removed. Load-bearing claims are attributed to three City of Surrey primary sources, the August 31 permit deadline gives practical reader utility, the Burnaby housing internal link resolves, and title/meta, structure, image/frontmatter integrity, brand safety, and legal/reputational risk all passed."
+}
