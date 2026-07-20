@@ -271,7 +271,7 @@ class ContentPipeline:
                 })
                 return False
 
-            # 7. Stage the exact candidate for an independent Claude review.
+            # 7. Stage the exact candidate for GPT editorial and Claude release reviews.
             success = self.publisher.publish(article, seo, image)
             if success:
                 self.stats['articles_staged'] += 1
@@ -357,6 +357,7 @@ def main():
     parser.add_argument('--batch-size', type=int, default=1, help='Topics per batch')
     parser.add_argument('--candidate-file', type=Path, help='Ranked JSON from strategy.py')
     parser.add_argument('--release-candidate', type=Path, help='Exact staged MDX file to promote')
+    parser.add_argument('--gpt-review-file', type=Path, help='Passing GPT editorial review for the exact candidate')
     parser.add_argument('--review-file', type=Path, help='Accepted Claude review JSON for the exact candidate')
     parser.add_argument('--output', type=Path, help='Research queue output path')
     args = parser.parse_args()
@@ -384,7 +385,13 @@ def main():
             parser.error('promote mode requires --release-candidate')
         if not args.review_file:
             parser.error('promote mode requires --review-file')
-        destination = promote_candidate(args.release_candidate, args.review_file)
+        if not args.gpt_review_file:
+            parser.error('promote mode requires --gpt-review-file')
+        destination = promote_candidate(
+            args.release_candidate,
+            args.review_file,
+            args.gpt_review_file,
+        )
         print(f'Promoted reviewed candidate to {destination}')
         return
 

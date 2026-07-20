@@ -62,6 +62,27 @@ def _paragraphs(body: str) -> List[str]:
     return paragraphs
 
 
+def count_prose_em_dashes(body: str) -> int:
+    """Count em dashes in editorial prose, not quotes or source citations."""
+    prose_lines = []
+    in_sources = False
+
+    for line in body.splitlines():
+        stripped = line.strip()
+        if re.match(r'^##\s+sources\s*$', stripped, re.IGNORECASE):
+            in_sources = True
+            continue
+        if in_sources and re.match(r'^##\s+\S', stripped):
+            in_sources = False
+        if in_sources or line.lstrip().startswith('>'):
+            continue
+
+        # Preserve exact punctuation inside direct quotations.
+        prose_lines.append(re.sub(r'"[^"\r\n]*"', '', line))
+
+    return '\n'.join(prose_lines).count('—')
+
+
 def _sentence_count(paragraph: str) -> int:
     without_urls = re.sub(r'https?://\S+', '', paragraph)
     return len(re.findall(r'[.!?](?=\s|$)', without_urls))
@@ -145,11 +166,8 @@ def validate_release_candidate(
                 f'paragraph {index} has {paragraph_sentences} sentences; '
                 f"maximum is {formatting['maximumParagraphSentences']}"
             )
-    if body.count('—') > (0 if is_local else 2):
-        errors.append(
-            'local stories must not use em dashes'
-            if is_local else 'more than two em dashes'
-        )
+    if count_prose_em_dashes(body):
+        errors.append('article prose must not use em dashes')
     if len(source_urls) < minimum_sources:
         errors.append(f'only {len(source_urls)} valid source URLs; {minimum_sources} required')
     if is_local and not primary_sources:

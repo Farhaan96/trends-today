@@ -75,12 +75,12 @@ The agent owns the work from research through repair:
 5. Draft against primary or authoritative sources and preserve citations.
 6. Fact-check claims, validate the article contract, create the image, and run SEO/build checks.
 7. Stage a release candidate outside the live `content/` tree.
-8. Ask Claude CLI for an independent exact-SHA review and repair valid findings.
-9. Send the exact release candidate and its SHA-256 through the approved Claude review runner. A structured `NO BLOCKERS` verdict promotes it to public `content/`; blockers return it to repair and require a fresh review.
-10. Run morning, midday, and evening sweeps. Publish no more than two qualifying articles per sweep and six per day. Skipping is correct when no opportunity clears the gates.
+8. Send the exact release candidate through the GPT editorial gate. Every factual-support, quality, readability, formatting, and engagement score must be at least 4/5, authorial prose must contain zero em dashes, and blockers must be empty. Repair valid findings and run a fresh GPT review.
+9. Send the same exact candidate and its SHA-256 through the approved independent Claude release-review runner. A structured `NO BLOCKERS` verdict, together with the passing GPT artifact, promotes it to public `content/`; blockers return it to repair and require fresh GPT and Claude reviews.
+10. Run sweeps every two hours from 06:30 through 18:30 America/Vancouver. Publish no more than two qualifying articles per sweep and six per day. Skipping is correct when no opportunity clears the gates.
 11. Record outcomes at 7 and 28 days, then choose `keep`, `repair`, or `stop`.
 
-This is an independent-review boundary, not a human approval queue. The engine records the candidate hash, reviewer, model, verdict, and review artifact in the promoted article.
+This is a dual-review boundary, not a human approval queue. The engine records the candidate hash, each reviewer, model, verdict, scorecard, and review artifact in the promoted article.
 
 ## First real experiment
 
@@ -89,7 +89,7 @@ This is an independent-review boundary, not a human approval queue. The engine r
 - Rep: publish the highest-scoring eligible release candidate.
 - Primary success metric: weekly returning Lower Mainland readers.
 - Leading metrics: direct sessions, local search impressions, engaged-session rate, pages per returning session, and newsletter actions when available.
-- Guardrails: named locality, practical reader impact, story-type source threshold, at least one primary source, no unsupported claim, no placeholder image, exact-candidate independent review, passing build/QA and deployment checks, and live post-deploy verification.
+- Guardrails: named locality, practical reader impact, story-type source threshold, at least one primary source, no unsupported claim, no placeholder image, passing exact-candidate GPT editorial and Claude release reviews, passing build/QA and deployment checks, and live post-deploy verification.
 - Review: weekly operational review and a 28-day article decision.
 - Decision: keep the scoring rule if it improves qualified results; repair one weak input if results are mixed; stop the topic/format if evidence stays weak after enough comparable reps.
 
@@ -132,4 +132,4 @@ Until commercial measurement exists, the weekly review must choose one measureme
 
 ## Approval boundary
 
-Research, scoring, briefs, drafts, images, QA, Claude review, repairs, low-risk content promotion, and measurement are autonomous. Crime allegations, active emergencies, deaths or serious injuries, missing-person cases, claims about private people, leaked material, and sponsored coverage require manual approval. Pricing, commercial terms, billing, guarantees, and use of private evidence also remain owner decisions.
+Research, scoring, briefs, drafts, images, QA, GPT editorial review, Claude release review, repairs, low-risk content promotion, and measurement are autonomous. Crime allegations, active emergencies, deaths or serious injuries, missing-person cases, claims about private people, leaked material, and sponsored coverage require manual approval. Pricing, commercial terms, billing, guarantees, and use of private evidence also remain owner decisions.

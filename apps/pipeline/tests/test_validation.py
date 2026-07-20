@@ -57,6 +57,43 @@ class ValidationTests(unittest.TestCase):
         )
         self.assertTrue(result.passed, result.errors)
 
+    def test_prose_em_dash_blocks_release(self):
+        article = self.article()
+        article['body_mdx'] = article['body_mdx'].replace(
+            'Opening', 'Opening—with a formulaic aside'
+        )
+        result = validate_release_candidate(
+            article, self.sources(), {'slug': 'em-dash'}, {'path': '/images/valid.webp'}
+        )
+        self.assertFalse(result.passed)
+        self.assertIn('article prose must not use em dashes', result.errors)
+
+    def test_quote_attribution_em_dash_is_allowed(self):
+        article = self.article()
+        article['body_mdx'] = article['body_mdx'].replace(
+            '\n\n## Sources', '\n\n> A direct quote.\n> — Source Name\n\n## Sources'
+        )
+        result = validate_release_candidate(
+            article,
+            self.sources(),
+            {'slug': 'attribution-dash'},
+            {'path': '/images/valid.webp'},
+        )
+        self.assertTrue(result.passed, result.errors)
+
+    def test_em_dash_inside_exact_direct_quote_is_allowed(self):
+        article = self.article()
+        article['body_mdx'] = article['body_mdx'].replace(
+            'Opening', 'Opening with "an exact quote—including its punctuation"'
+        )
+        result = validate_release_candidate(
+            article,
+            self.sources(),
+            {'slug': 'direct-quote-dash'},
+            {'path': '/images/valid.webp'},
+        )
+        self.assertTrue(result.passed, result.errors)
+
     def test_placeholder_and_missing_citations_block_release(self):
         article = self.article()
         article['body_mdx'] = article['body_mdx'].replace('https://c.example/source', '')

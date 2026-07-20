@@ -5,11 +5,31 @@ const path = require('path');
 
 /**
  * Em-Dash Validator
- * Ensures articles don't exceed the maximum allowed em-dashes (2)
+ * Ensures article prose does not use em dashes.
+ * Direct quotes, quote attributions, and source-list titles are exempt.
  * Usage: node utils/em-dash-validator.js "content/category/article.mdx"
  */
 
-const MAX_EM_DASHES = 2;
+function proseEmDashCount(content) {
+  let inSources = false;
+
+  return content.split(/\r?\n/).reduce((count, line) => {
+    const trimmed = line.trim();
+    if (/^##\s+sources\s*$/i.test(trimmed)) {
+      inSources = true;
+      return count;
+    }
+    if (inSources && /^##\s+\S/.test(trimmed)) {
+      inSources = false;
+    }
+    if (inSources || line.trimStart().startsWith('>')) {
+      return count;
+    }
+
+    const withoutDirectQuotes = line.replace(/"[^"\r\n]*"/g, '');
+    return count + (withoutDirectQuotes.match(/—/g) || []).length;
+  }, 0);
+}
 
 function validateEmDashes(filepath) {
   if (!fs.existsSync(filepath)) {
@@ -18,17 +38,16 @@ function validateEmDashes(filepath) {
   }
 
   const content = fs.readFileSync(filepath, 'utf8');
-  const emDashMatches = content.match(/—/g);
-  const count = emDashMatches ? emDashMatches.length : 0;
+  const count = proseEmDashCount(content);
 
   const filename = path.basename(filepath);
 
   console.log(`\n📄 Analyzing: ${filename}`);
   console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
 
-  if (count > MAX_EM_DASHES) {
+  if (count > 0) {
     console.error(
-      `❌ FAIL: ${count} em-dashes found (maximum allowed: ${MAX_EM_DASHES})`
+      `❌ FAIL: ${count} em-dash${count === 1 ? '' : 'es'} found in article prose`
     );
     console.error(`\n⚠️  Em-dash overuse is a formulaic AI writing pattern.`);
     console.error(`\n💡 Fix suggestions:`);
@@ -38,12 +57,8 @@ function validateEmDashes(filepath) {
     console.error(`   • Rewrite sentences to be more natural`);
     console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);
     process.exit(1);
-  } else if (count === 0) {
-    console.log(`✅ EXCELLENT: No em-dashes found (ideal!)`);
   } else {
-    console.log(
-      `✅ PASS: ${count} em-dash${count === 1 ? '' : 'es'} found (within limit)`
-    );
+    console.log(`✅ EXCELLENT: No em dashes found in article prose`);
   }
 
   console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);

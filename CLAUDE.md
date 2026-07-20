@@ -9,10 +9,11 @@ The current operating source of truth is `docs/content-business-operating-system
 - Research output must be evidence-enriched and scored before briefing.
 - Autonomous work stages candidates in `artifacts/editorial/release-candidates/` before promotion.
 - Public content lives in `content/<category>/`, not `apps/web/content/posts/`.
-- The owner has standing authorization for three scheduled local-news sweeps per weekday, with at most two qualifying low-risk articles per sweep and six per day. Each article still requires an exact-candidate Claude review, deterministic QA/build checks, a clean PR/check result, and post-deploy live verification. Zero articles is correct when no candidate qualifies.
+- The owner has standing authorization for scheduled local-news sweeps every two hours from 06:30 through 18:30 America/Vancouver, with at most two qualifying low-risk articles per sweep and six per day. Each article still requires a passing exact-candidate GPT editorial scorecard, an exact-candidate Claude release review, deterministic QA/build checks, a clean PR/check result, and post-deploy live verification. Zero articles is correct when no candidate qualifies.
 - Every new story must name a Lower Mainland locality, identify the practical reader impact, meet its story-type source threshold, and include at least one primary source.
 - Crime allegations, active emergencies, deaths or serious injuries, missing-person cases, claims about private people, leaked material, and sponsored coverage require manual approval before publication.
-- Claude is the independent editorial reviewer. A structured `NO BLOCKERS` review bound to the exact candidate SHA-256 authorizes content promotion; blockers require repair and a fresh review.
+- GPT is the second editorial gate for factual support, quality, readability, formatting, engagement, and zero authorial em dashes. Every score must be at least 4/5, the blocker list must be empty, and the artifact must match the exact candidate and repository hashes.
+- Claude remains the independent release reviewer. A structured `NO BLOCKERS` review bound to the same exact candidate SHA-256 is also required; blockers require repair and fresh GPT and Claude reviews.
 - Missing analytics or evidence must remain explicitly unavailable. Never replace missing business data with invented benchmarks or zeroes.
 
 **Current Date:** 2025-09-21
@@ -154,19 +155,21 @@ Create high-quality, SEO-optimized content that naturally ranks for voice search
 
 **Paragraph Rules:**
 
-- **Em-dash usage:** MAXIMUM 2 per article (ideally 0-1)
+- **Em-dash usage:** ZERO in article prose; use direct punctuation instead
 - **Paragraph length:** 1-3 sentences (2 sentences ideal)
 - Use single-sentence paragraphs for impact
 - Avoid walls of text (max 4 sentences per paragraph)
 
 ### ❌ AI Writing Patterns to AVOID (MANDATORY):
 
-**Em-Dash Overuse (CRITICAL):**
+**Em-Dash Ban in Prose (CRITICAL):**
 
-- ❌ NEVER use more than 2 em-dashes (—) per article
+- ❌ NEVER use em dashes (—) in article prose
 - ❌ AVOID: "concept—definition—continues" patterns
 - ❌ AVOID: Multiple em-dashes in one paragraph
 - ✅ Instead use: periods, commas, parentheses, or rewrite sentences
+- ✅ Preserve an em dash only when it is part of an exact direct quote, a
+  blockquote attribution, or a source title
 
 **Examples of Em-Dash Fixes:**
 
@@ -483,7 +486,7 @@ node utils/smart-topic-discovery.js trending [category]
 - ✅ **Use Featured Answer Block (H2 format) immediately after opening**
 - ✅ **Bold numbers/studies strategically** (not random emphasis)
 - ✅ **Include 2+ structured bulleted lists** (format: **Term**: Description)
-- ✅ **LIMIT em-dashes to maximum 2 per article** (count and verify)
+- ✅ **USE zero em-dashes in article prose** (count and verify)
 - ✅ **Keep paragraphs to 1-3 sentences** (2 sentences ideal)
 - ✅ **Use variety in punctuation:** periods, commas, parentheses
 - ✅ **Avoid formulaic AI writing patterns** (see ❌ AI Patterns section)
@@ -688,8 +691,7 @@ node utils/semantic-keywords.js analyze "content/[file].mdx"
 # Readability scoring
 node utils/readability-scorer.js check "content/[file].mdx"
 
-# Em-dash counter (MANDATORY check - must be ≤ 2)
-grep -c "—" content/[file].mdx
+# Em-dash validator (MANDATORY check - prose count must be 0)
 node utils/em-dash-validator.js "content/[file].mdx"
 
 # Author assignment

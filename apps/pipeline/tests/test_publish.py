@@ -73,6 +73,38 @@ class PublisherTests(unittest.TestCase):
         }), encoding='utf-8')
         return review
 
+    def write_gpt_review(self, root, candidate, **overrides):
+        review = root / 'artifacts/editorial/reviews/gpt/science/candidate-title.review.json'
+        review.parent.mkdir(parents=True, exist_ok=True)
+        payload = {
+            'version': 1,
+            'reviewer': 'openai-gpt',
+            'verdict': 'PASS',
+            'candidateSha256': candidate_sha256(candidate),
+            'reviewedAt': '2026-07-20T20:00:00+00:00',
+            'repositorySha': 'a' * 40,
+            'modelUsed': 'gpt-5.6-sol',
+            'reviewBackend': 'responses-api',
+            'reviewRunId': 'resp_test',
+            'scores': {
+                'factualSupport': 4,
+                'quality': 4,
+                'readability': 4,
+                'formatting': 4,
+                'engagement': 4,
+            },
+            'proseEmDashCount': 0,
+            'blockers': [],
+            'summary': 'Ready for independent release review.',
+        }
+        payload.update(overrides)
+        review.write_text(json.dumps(payload), encoding='utf-8')
+        return review
+
+    def promote(self, root, candidate, review, **gpt_overrides):
+        gpt_review = self.write_gpt_review(root, candidate, **gpt_overrides)
+        return promote_candidate(candidate, review, gpt_review, repo_root=root)
+
     def write_source_config(self, root, keywords=None):
         config = root / 'config/local-news-sources.json'
         config.parent.mkdir(parents=True, exist_ok=True)
@@ -108,13 +140,15 @@ class PublisherTests(unittest.TestCase):
             with patch('review.subprocess.run') as git_run:
                 git_run.return_value.returncode = 0
                 git_run.return_value.stdout = 'a' * 40
-                destination = promote_candidate(candidate, review, repo_root=root)
+                destination = self.promote(root, candidate, review)
             promoted = destination.read_text(encoding='utf-8')
             self.assertEqual(candidate_body, promoted.split('---', 2)[2])
             self.assertIn('candidateSha256:', promoted)
             self.assertIn('reviewedBy: "claude"', promoted)
             self.assertIn('reviewVerdict: "NO BLOCKERS"', promoted)
             self.assertIn('reviewModel: "claude-opus-4-8"', promoted)
+            self.assertIn('editorialReviewVerdict: "PASS"', promoted)
+            self.assertIn('editorialReviewModel: "gpt-5.6-sol"', promoted)
 
     def test_promotion_rejects_review_for_different_candidate_hash(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -128,8 +162,9 @@ class PublisherTests(unittest.TestCase):
             candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
             self.write_source_config(root)
             review = self.write_review(root, candidate, digest='0' * 64)
+            gpt_review = self.write_gpt_review(root, candidate)
             with self.assertRaises(PermissionError):
-                promote_candidate(candidate, review, repo_root=root)
+                promote_candidate(candidate, review, gpt_review, repo_root=root)
 
     def test_promotion_rejects_claude_blockers(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -143,8 +178,46 @@ class PublisherTests(unittest.TestCase):
             candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
             self.write_source_config(root)
             review = self.write_review(root, candidate, verdict='BLOCKERS')
+            gpt_review = self.write_gpt_review(root, candidate)
             with self.assertRaises(PermissionError):
-                promote_candidate(candidate, review, repo_root=root)
+                promote_candidate(candidate, review, gpt_review, repo_root=root)
+
+    def test_promotion_rejects_low_gpt_editorial_score(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            publisher = Publisher(mode='candidate', repo_root=root)
+            publisher.publish(
+                self.article(),
+                {'slug': 'candidate-title', 'meta_description': 'Candidate description', 'internal_links': []},
+                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+            )
+            candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
+            self.write_source_config(root)
+            review = self.write_review(root, candidate)
+            weak_scores = {
+                'factualSupport': 4,
+                'quality': 4,
+                'readability': 3,
+                'formatting': 4,
+                'engagement': 4,
+            }
+            with self.assertRaises(PermissionError):
+                self.promote(root, candidate, review, scores=weak_scores)
+
+    def test_promotion_rejects_gpt_review_for_different_candidate_hash(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            publisher = Publisher(mode='candidate', repo_root=root)
+            publisher.publish(
+                self.article(),
+                {'slug': 'candidate-title', 'meta_description': 'Candidate description', 'internal_links': []},
+                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+            )
+            candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
+            self.write_source_config(root)
+            review = self.write_review(root, candidate)
+            with self.assertRaises(PermissionError):
+                self.promote(root, candidate, review, candidateSha256='0' * 64)
 
     def test_promotion_rejects_paths_outside_candidate_tree(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -152,7 +225,12 @@ class PublisherTests(unittest.TestCase):
             outside = root / 'outside.mdx'
             outside.write_text('---\nstatus: "release-candidate"\n---\n', encoding='utf-8')
             with self.assertRaises(ValueError):
-                promote_candidate(outside, root / 'missing-review.json', repo_root=root)
+                promote_candidate(
+                    outside,
+                    root / 'missing-review.json',
+                    root / 'missing-gpt-review.json',
+                    repo_root=root,
+                )
 
     def test_promotion_rechecks_sensitive_candidate_approval(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -172,7 +250,7 @@ class PublisherTests(unittest.TestCase):
                 git_run.return_value.returncode = 0
                 git_run.return_value.stdout = 'a' * 40
                 with self.assertRaises(PermissionError):
-                    promote_candidate(candidate, review, repo_root=root)
+                    self.promote(root, candidate, review)
 
     def test_promotion_rechecks_commercial_candidate_approval(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -193,7 +271,7 @@ class PublisherTests(unittest.TestCase):
                 git_run.return_value.returncode = 0
                 git_run.return_value.stdout = 'a' * 40
                 with self.assertRaises(PermissionError):
-                    promote_candidate(candidate, review, repo_root=root)
+                    self.promote(root, candidate, review)
 
     def test_promotion_accepts_commercial_candidate_with_owner_approval(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -213,7 +291,7 @@ class PublisherTests(unittest.TestCase):
             with patch('review.subprocess.run') as git_run:
                 git_run.return_value.returncode = 0
                 git_run.return_value.stdout = 'a' * 40
-                destination = promote_candidate(candidate, review, repo_root=root)
+                destination = self.promote(root, candidate, review)
             self.assertTrue(destination.exists())
 
     def test_promotion_rejects_missing_sponsorship_status(self):
@@ -237,7 +315,7 @@ class PublisherTests(unittest.TestCase):
                 git_run.return_value.returncode = 0
                 git_run.return_value.stdout = 'a' * 40
                 with self.assertRaises(PermissionError):
-                    promote_candidate(candidate, review, repo_root=root)
+                    self.promote(root, candidate, review)
 
     def test_body_text_cannot_spoof_commercial_approval(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -259,7 +337,7 @@ class PublisherTests(unittest.TestCase):
                 git_run.return_value.returncode = 0
                 git_run.return_value.stdout = 'a' * 40
                 with self.assertRaises(PermissionError):
-                    promote_candidate(candidate, review, repo_root=root)
+                    self.promote(root, candidate, review)
 
     def test_review_verification_fails_closed_without_git_sha(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -277,7 +355,7 @@ class PublisherTests(unittest.TestCase):
                 git_run.return_value.returncode = 1
                 git_run.return_value.stdout = ''
                 with self.assertRaises(PermissionError):
-                    promote_candidate(candidate, review, repo_root=root)
+                    self.promote(root, candidate, review)
 
 
 if __name__ == '__main__':

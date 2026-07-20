@@ -10,7 +10,7 @@ from datetime import datetime
 from typing import Dict
 from abc import ABC, abstractmethod
 
-from review import verify_claude_review
+from review import verify_claude_review, verify_gpt_review
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -27,8 +27,8 @@ class MDXStaticPublisher(PublisherAdapter):
     """Publisher for the active category-based MDX site.
 
     Candidate mode writes outside the live ``content`` tree. Direct production
-    writes are disabled; an exact candidate must be promoted with an accepted
-    Claude review artifact.
+    writes are disabled; an exact candidate must be promoted with accepted GPT
+    editorial and Claude release-review artifacts.
     """
 
     VALID_CATEGORIES = {
@@ -199,15 +199,27 @@ class Publisher:
             logger.error(f"Index update error: {e}")
 
 
-def promote_candidate(candidate_path: Path, review_path: Path, repo_root: Path = None) -> Path:
-    """Promote a candidate only after Claude clears its exact SHA-256."""
+def promote_candidate(
+    candidate_path: Path,
+    review_path: Path,
+    gpt_review_path: Path,
+    repo_root: Path = None,
+) -> Path:
+    """Promote only after GPT editorial and Claude release reviews pass."""
     root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
     source = Path(candidate_path).resolve()
+    gpt_review, gpt_digest, _, gpt_review_relative = verify_gpt_review(
+        source,
+        gpt_review_path,
+        root,
+    )
     review, digest, relative, review_relative = verify_claude_review(
         source,
         review_path,
         root,
     )
+    if gpt_digest != digest:
+        raise PermissionError('Editorial and release reviews do not cover the same candidate')
     category = relative.parts[0]
     if category not in MDXStaticPublisher.VALID_CATEGORIES:
         raise ValueError(f'Unsupported category: {category}')
@@ -255,6 +267,11 @@ def promote_candidate(candidate_path: Path, review_path: Path, repo_root: Path =
         raise PermissionError('Commercial candidate requires recorded owner approval')
     review_metadata = (
         'status: "published"\n'
+        f'editorialReviewedBy: {json.dumps(gpt_review["reviewer"], ensure_ascii=False)}\n'
+        f'editorialReviewVerdict: {json.dumps(gpt_review["verdict"], ensure_ascii=False)}\n'
+        f'editorialReviewModel: {json.dumps(gpt_review["modelUsed"], ensure_ascii=False)}\n'
+        f'editorialReviewScores: {json.dumps(gpt_review["scores"], ensure_ascii=False)}\n'
+        f'editorialReviewArtifact: {json.dumps((Path("gpt") / gpt_review_relative).as_posix(), ensure_ascii=False)}\n'
         f'reviewedBy: {json.dumps(review["reviewer"], ensure_ascii=False)}\n'
         f'reviewVerdict: {json.dumps(review["verdict"], ensure_ascii=False)}\n'
         f'reviewModel: {json.dumps(review["modelUsed"], ensure_ascii=False)}\n'
