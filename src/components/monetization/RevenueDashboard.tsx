@@ -195,7 +195,6 @@ export default function RevenueDashboard({
         <MetricCard
           title="Total Revenue"
           value={formatCurrency(metrics.totalRevenue)}
-          change={12.3}
           icon={<CurrencyDollarIcon className="w-6 h-6 text-white" />}
           color="bg-green-600"
           subtitle={`Updated ${new Date(metrics.lastUpdated).toLocaleString()}`}
@@ -203,7 +202,6 @@ export default function RevenueDashboard({
         <MetricCard
           title="Affiliate Revenue"
           value={formatCurrency(metrics.affiliateRevenue.total)}
-          change={3.4}
           icon={<ShoppingCartIcon className="w-6 h-6 text-white" />}
           color="bg-blue-600"
           subtitle={`${formatNumber(metrics.affiliateRevenue.clicks)} clicks`}
@@ -211,7 +209,6 @@ export default function RevenueDashboard({
         <MetricCard
           title="Premium Revenue"
           value={formatCurrency(metrics.premiumRevenue.total)}
-          change={-1.2}
           icon={<UserGroupIcon className="w-6 h-6 text-white" />}
           color="bg-purple-600"
           subtitle={`${formatNumber(metrics.premiumRevenue.subscriptions)} subs`}

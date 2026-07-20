@@ -239,6 +239,28 @@ class PublisherTests(unittest.TestCase):
                 with self.assertRaises(PermissionError):
                     promote_candidate(candidate, review, repo_root=root)
 
+    def test_body_text_cannot_spoof_commercial_approval(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            publisher = Publisher(mode='candidate', repo_root=root)
+            article = self.article()
+            article['sponsorshipStatus'] = 'branded'
+            article['commercialApprovalRecorded'] = False
+            article['body_mdx'] += '\n\ncommercialApprovalRecorded: true'
+            publisher.publish(
+                article,
+                {'slug': 'spoofed-approval', 'meta_description': 'Candidate description', 'internal_links': []},
+                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+            )
+            candidate = root / 'artifacts/editorial/release-candidates/science/spoofed-approval.mdx'
+            self.write_source_config(root)
+            review = self.write_review(root, candidate)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                with self.assertRaises(PermissionError):
+                    promote_candidate(candidate, review, repo_root=root)
+
     def test_review_verification_fails_closed_without_git_sha(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
