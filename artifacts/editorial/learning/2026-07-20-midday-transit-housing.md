@@ -2,17 +2,23 @@
 
 ## Outcome
 
-- Decision: `promoted-for-release`.
+- Decision: `published`.
 - Candidates:
   - `Coquitlam road work is affecting Parkway and Panorama`
   - `Surrey says it passed 13,800 housing units`
 - Categories: `transit`, `housing`.
 - Municipalities: Coquitlam, Surrey.
 - Sweep count: 2 of 2 allowed for this sweep; 2 of 6 known new stories for July 20.
+- Release PR: [#24](https://github.com/Farhaan96/trends-today/pull/24), merged at `fc3bbf6e28c53bd6d7eb9c4119b8987011ca8a99`.
+- Production deployment: `5527340348`, successful at 2026-07-20 12:13 p.m. Pacific, target URL `https://trends-today-43x4h9gni-farhaans-projects-088cb374.vercel.app`.
+- Live URLs verified:
+  - `https://www.trendstoday.ca/transit/coquitlam-parkway-panorama-road-work`
+  - `https://www.trendstoday.ca/housing/surrey-housing-targets-13800-units`
 
 ## Baseline and constraint
 
 - Production `/api/analytics` before the run reported 133 active articles, with local inventory at `local-news` 1, `transit` 2, `things-to-do` 3, `food-drink` 1, `housing` 1, and `sports` 1.
+- Production `/api/analytics` after deployment reported 135 active articles, with `transit` 3 and `housing` 2.
 - Vercel Web Analytics is embedded, but the new Vercel import could not run because `VERCEL_TOKEN` or `VERCEL_ANALYTICS_TOKEN` and `VERCEL_PROJECT_ID` were unavailable in the automation environment.
 - Google Analytics, Google Search Console, page views, engaged sessions, returning sessions, scroll depth, measurable ad impressions, viewable ad impressions, Active View rate, ad revenue, page RPM, sponsor inquiries, qualified sponsor inquiries, sponsorship revenue, and content cost remain unavailable.
 - Missing values were not converted to zero.
@@ -50,6 +56,8 @@ This sweep added one Coquitlam route-planning bulletin and one Surrey housing-su
 - Coquitlam first review found blockers on the image path and unsupported `northeast Coquitlam` descriptor. The image was copied to root `public/images`, the descriptor was removed, and the source URL was normalized.
 - Surrey first review found internal monetization-test language in reader-facing copy. The sentence was removed and replaced with a resident-useful transit-area watch point.
 - Final exact-SHA Fable reviews returned `NO BLOCKERS` for both candidates at repository SHA `ea10284f9654f97019efb0361a4eedba44faa0ba`. Fallback and paid credits were not used.
+- Local validation passed: `python -m unittest discover -s apps/pipeline/tests`, `npm run typecheck`, `npm run lint -- --quiet`, `git diff --check`, and `npm run build`.
+- Production browser verification passed for both canonical URLs: status 200, expected H1, canonical tag, required body facts, article image load, source links, and no page console errors.
 
 ## Checkpoints
 
