@@ -16,6 +16,28 @@ The value chain is:
 
 Views are a leading asset signal. They are not the whole business. Articles must eventually influence at least one of returning readership, email audience, app discovery, ad revenue, affiliate revenue, or sponsorship demand.
 
+## Monetization reality and editorial contract
+
+Trends Today cannot honestly optimize for the "highest-paying" article yet because article-level ad revenue, RPM, Active View, sponsor inquiries, and sponsorship revenue are unavailable. Missing measurements remain unavailable, never zero. Until the measurement path is connected, commercial fit is a documented hypothesis and may only break a tie between stories that already clear reader-utility, locality, evidence, source, freshness, brand-safety, and quality gates.
+
+The v4 contract in `config/content-business.json` applies to every future candidate:
+
+- Select length from the reader job and story type. Bulletin, reported-update, and guide/explainer ranges are tunable priors, not targets to fill. Use the shortest complete treatment and never pad copy to create more ad slots.
+- Keep paragraphs short, use descriptive H2 sections, and use lists when the information is genuinely enumerable. Formatting should make the story easier to consume, not make every story look identical.
+- Add contextual internal links with concise descriptive anchors. Links must resolve to already published Trends Today articles, help the reader continue the same local topic journey, and never point back to the current article.
+- Record `commercialIntent`, `commercialFitReason`, `brandSafety`, and `sponsorshipStatus` on every local candidate. The automation default is independent editorial coverage. Supported or branded coverage remains owner-approved.
+- Never select a weak story because it looks commercially attractive. Sponsor and ad fit come after editorial qualification.
+
+This contract follows current publisher guidance rather than copied SEO folklore: Google says it has no preferred word count, recommends contextual crawlable internal links, and ties display-inventory value to viewability, engaging content, responsive layout, speed, and user experience. Google News also requires clear sponsorship and publisher transparency. Daily Hive's supported-content and branded-content model is a competitive pattern worth testing, not evidence that its sponsor categories will convert for Trends Today.
+
+Research references:
+
+- https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+- https://developers.google.com/search/docs/crawling-indexing/links-crawlable
+- https://support.google.com/adsense/answer/6219980
+- https://support.google.com/news/publisher-center/answer/6204050
+- https://dailyhive.com/page/content-funding
+
 ## Editorial wedge
 
 The first 28-day positioning test is **the useful Lower Mainland daily briefing**. The newsroom scans primary regional sources three times each weekday and publishes only updates with clear local relevance and reader utility.
@@ -47,7 +69,7 @@ The mix is a starting hypothesis, not a quota. Weak lanes lose share when result
 The agent owns the work from research through repair:
 
 1. Discover demand signals and record where each signal came from.
-2. Research the intended reader, pain, existing coverage, sources, unique angle, and CTA hypothesis.
+2. Research the intended reader, pain, existing coverage, sources, unique angle, and CTA hypothesis. After the story qualifies, record its ad/sponsor-fit hypothesis; commercial fit may only break a tie between equally qualified candidates.
 3. Score the opportunity with `apps/pipeline/strategy.py`. Missing evidence remains missing; it is never replaced with a neutral invented score.
 4. Brief only candidates that clear the current score and evidence thresholds.
 5. Draft against primary or authoritative sources and preserve citations.
@@ -83,10 +105,14 @@ Track these by article and by content lane:
 - Newsletter or follow action, when implemented.
 - App CTA impressions, clicks, and downstream activation where available.
 - Ad, affiliate, or sponsorship revenue attributed to the article.
+- Page views, measurable ad impressions, viewable ad impressions, Active View rate, and page RPM when connected.
+- Sponsor inquiries, qualified sponsor inquiries, and sponsorship revenue when connected.
 - Research, drafting, editing, and image cost.
 - Final `keep`, `repair`, or `stop` decision and reason.
 
 Do not blend unavailable metrics into zeroes. Do not call revenue “profit.” Record content cost separately so contribution can be calculated honestly.
+
+Until commercial measurement exists, the weekly review must choose one measurement repair instead of changing article strategy blindly. After comparable data exists, change only one material variable at a time: one story type's length band, one internal-link range, one formatting rule, or one beat mix. Every experiment needs a baseline, success metric, guardrails, review date, and `keep / repair / stop` decision.
 
 ## Stop conditions
 

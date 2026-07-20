@@ -15,9 +15,17 @@ from typing import Any, Dict, Iterable, List, Optional
 NUMERIC_FIELDS = (
     'impressions',
     'clicks',
+    'pageViews',
     'engagedSessions',
     'returningSessions',
     'appCtaClicks',
+    'averageScrollDepth',
+    'measurableAdImpressions',
+    'viewableAdImpressions',
+    'adRevenue',
+    'sponsorInquiries',
+    'qualifiedSponsorInquiries',
+    'sponsorshipRevenue',
     'revenue',
     'contentCost',
 )
@@ -60,6 +68,26 @@ def normalize_articles(records: Iterable[Dict[str, Any]]) -> List[Dict[str, Any]
         impressions = item['impressions']
         clicks = item['clicks']
         item['ctr'] = clicks / impressions if impressions and clicks is not None else None
+        measurable = item['measurableAdImpressions']
+        viewable = item['viewableAdImpressions']
+        item['activeViewRate'] = (
+            viewable / measurable
+            if measurable and viewable is not None
+            else None
+        )
+        page_views = item['pageViews']
+        item['pageRpm'] = (
+            item['adRevenue'] * 1000 / page_views
+            if page_views and item['adRevenue'] is not None
+            else None
+        )
+        if item['revenue'] is None:
+            revenue_components = (item['adRevenue'], item['sponsorshipRevenue'])
+            item['revenue'] = (
+                sum(revenue_components)
+                if all(value is not None for value in revenue_components)
+                else None
+            )
         if item['revenue'] is not None and item['contentCost'] is not None:
             item['contribution'] = item['revenue'] - item['contentCost']
         else:
@@ -160,6 +188,9 @@ def build_metrics_summary(
                 'organic engaged sessions',
                 'returning sessions',
                 'app CTA clicks',
+                'page views and ad revenue',
+                'measurable and viewable ad impressions',
+                'qualified sponsor inquiries',
             ]),
             'decision': 'repair-measurement',
             'articles': [],

@@ -74,6 +74,12 @@ class MDXStaticPublisher(PublisherAdapter):
                 'locality': article.get('locality', ''),
                 'storyType': article.get('storyType', 'guide-or-explainer'),
                 'readerImpact': article.get('readerImpact', ''),
+                'lengthRationale': article.get('lengthRationale', ''),
+                'commercialIntent': article.get('commercialIntent', 'none'),
+                'commercialFitReason': article.get('commercialFitReason', ''),
+                'brandSafety': article.get('brandSafety', 'standard'),
+                'sponsorshipStatus': article.get('sponsorshipStatus', 'editorial'),
+                'commercialApprovalRecorded': bool(article.get('commercialApprovalRecorded')),
                 'manualApprovalRequired': bool(article.get('manualApprovalRequired')),
                 'manualApprovalRecorded': bool(article.get('manualApprovalRecorded')),
             }
@@ -207,7 +213,11 @@ def promote_candidate(candidate_path: Path, review_path: Path, repo_root: Path =
         raise ValueError(f'Unsupported category: {category}')
 
     original = source.read_text(encoding='utf-8')
-    if not re.search(r'^status:\s*["\']?release-candidate["\']?\s*$', original, re.MULTILINE):
+    frontmatter_match = re.match(r'^---\s*\n(.*?)\n---\s*\n', original, re.DOTALL)
+    if not frontmatter_match:
+        raise ValueError('Candidate frontmatter is missing or malformed')
+    frontmatter = frontmatter_match.group(1)
+    if not re.search(r'^status:\s*["\']?release-candidate["\']?\s*$', frontmatter, re.MULTILINE):
         raise ValueError('File is not marked as a release candidate')
     source_config_path = root / 'config' / 'local-news-sources.json'
     source_config = json.loads(source_config_path.read_text(encoding='utf-8'))
@@ -215,14 +225,34 @@ def promote_candidate(candidate_path: Path, review_path: Path, repo_root: Path =
         source_config.get('automaticPublishing', {}).get('manualApprovalKeywords', [])
     )
     requires_approval = bool(
-        re.search(r'^manualApprovalRequired:\s*true\s*$', original, re.MULTILINE)
+        re.search(r'^manualApprovalRequired:\s*true\s*$', frontmatter, re.MULTILINE)
         or any(str(keyword).lower() in original.lower() for keyword in sensitive_keywords)
     )
     approval_recorded = bool(
-        re.search(r'^manualApprovalRecorded:\s*true\s*$', original, re.MULTILINE)
+        re.search(r'^manualApprovalRecorded:\s*true\s*$', frontmatter, re.MULTILINE)
     )
     if requires_approval and not approval_recorded:
         raise PermissionError('Sensitive candidate requires recorded human approval')
+    business_config_path = root / 'config' / 'content-business.json'
+    business_config = json.loads(business_config_path.read_text(encoding='utf-8-sig'))
+    monetization = business_config['monetization']
+    allowed_sponsorship_statuses = set(monetization['sponsorshipStatusValues'])
+    automated_status = monetization['automatedDefaultSponsorshipStatus']
+    sponsorship_match = re.search(
+        r'^sponsorshipStatus:\s*["\']?([a-z-]+)["\']?\s*$',
+        frontmatter,
+        re.MULTILINE,
+    )
+    if not sponsorship_match or sponsorship_match.group(1) not in allowed_sponsorship_statuses:
+        raise PermissionError('Candidate has missing or unsupported sponsorship status')
+    commercial_approval_recorded = bool(
+        re.search(r'^commercialApprovalRecorded:\s*true\s*$', frontmatter, re.MULTILINE)
+    )
+    if (
+        sponsorship_match.group(1) != automated_status
+        and not commercial_approval_recorded
+    ):
+        raise PermissionError('Commercial candidate requires recorded owner approval')
     review_metadata = (
         'status: "published"\n'
         f'reviewedBy: {json.dumps(review["reviewer"], ensure_ascii=False)}\n'

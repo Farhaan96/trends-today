@@ -8,10 +8,11 @@ export default function ContactPage() {
     name: '',
     email: '',
     subject: '',
+    partnershipInterest: '',
     message: '',
   });
 
-  const [submitted, setSubmitted] = useState(false);
+  const [draftOpened, setDraftOpened] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -26,32 +27,58 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In production, this would send to your email service
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
+    const subjectLabels: Record<string, string> = {
+      general: 'General inquiry',
+      feedback: 'Reader feedback',
+      partnership: 'Advertising or sponsorship inquiry',
+      press: 'Press or PR inquiry',
+      technical: 'Technical issue',
+      other: 'Other inquiry',
+    };
+    const emailSubject = `[Trends Today] ${subjectLabels[formData.subject] || 'Inquiry'}`;
+    const emailBody = [
+      `Name: ${formData.name}`,
+      `Reply email: ${formData.email}`,
+      formData.partnershipInterest
+        ? `Partnership interest: ${formData.partnershipInterest}`
+        : null,
+      '',
+      formData.message,
+    ]
+      .filter((line): line is string => line !== null)
+      .join('\n');
+
+    window.location.href = `mailto:hello@trendstoday.ca?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    setDraftOpened(true);
   };
 
-  if (submitted) {
+  if (draftOpened) {
     return (
       <div className="bg-white min-h-screen">
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="text-center py-12">
             <div className="text-6xl mb-4">✅</div>
             <h1 className="text-3xl font-bold text-gray-900 mb-4">
-              Thank You!
+              Your email draft is ready
             </h1>
             <p className="text-gray-700 text-lg mb-8">
-              Your message has been received. We&apos;ll get back to you within
-              24-48 hours.
+              Nothing has been sent yet. Review the draft in your email app,
+              then send it when you are ready.
             </p>
             <button
               onClick={() => {
-                setSubmitted(false);
-                setFormData({ name: '', email: '', subject: '', message: '' });
+                setDraftOpened(false);
+                setFormData({
+                  name: '',
+                  email: '',
+                  subject: '',
+                  partnershipInterest: '',
+                  message: '',
+                });
               }}
               className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
             >
-              Send Another Message
+              Back to the form
             </button>
           </div>
         </div>
@@ -104,11 +131,20 @@ export default function ContactPage() {
             </div>
 
             <div className="mt-8 p-4 bg-blue-50 rounded-lg">
-              <h3 className="font-semibold mb-2">For PR & Partnerships</h3>
+              <h3 className="font-semibold mb-2">
+                Advertising, sponsorships, and PR
+              </h3>
               <p className="text-gray-700 text-sm">
-                If you&apos;re interested in partnership opportunities or have a
-                press release, please mention it in your message subject.
+                Tell us the audience or Lower Mainland topic you want to reach.
+                We keep editorial coverage separate from paid partnerships and
+                clearly label commercial work.
               </p>
+              <a
+                href="mailto:hello@trendstoday.ca?subject=%5BTrends%20Today%5D%20Advertising%20or%20sponsorship%20inquiry"
+                className="mt-3 inline-block text-sm font-semibold text-blue-700 underline"
+              >
+                Email hello@trendstoday.ca
+              </a>
             </div>
           </div>
 
@@ -169,12 +205,47 @@ export default function ContactPage() {
                   <option value="">Select a subject</option>
                   <option value="general">General Inquiry</option>
                   <option value="feedback">Feedback</option>
-                  <option value="partnership">Partnership Opportunity</option>
+                  <option value="partnership">
+                    Advertising or Sponsorship
+                  </option>
                   <option value="press">Press/PR</option>
                   <option value="technical">Technical Issue</option>
                   <option value="other">Other</option>
                 </select>
               </div>
+
+              {formData.subject === 'partnership' && (
+                <div>
+                  <label
+                    htmlFor="partnershipInterest"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    Partnership interest
+                  </label>
+                  <select
+                    id="partnershipInterest"
+                    name="partnershipInterest"
+                    value={formData.partnershipInterest}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    <option value="">Select an area</option>
+                    <option value="Supported editorial series">
+                      Supported editorial series
+                    </option>
+                    <option value="Clearly labelled branded content">
+                      Clearly labelled branded content
+                    </option>
+                    <option value="Display advertising">
+                      Display advertising
+                    </option>
+                    <option value="Local event or guide sponsorship">
+                      Local event or guide sponsorship
+                    </option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              )}
 
               <div>
                 <label
@@ -199,13 +270,13 @@ export default function ContactPage() {
                 type="submit"
                 className="w-full bg-gradient-to-r from-blue-500 via-purple-600 to-blue-700 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all transform hover:scale-[1.02]"
               >
-                Send Message
+                Open Email Draft
               </button>
             </form>
 
             <p className="text-xs text-gray-500 mt-4">
-              * Required fields. We respect your privacy and will never share
-              your information. See our{' '}
+              * Required fields. This form opens your email app and does not
+              transmit or store your message on this website. See our{' '}
               <Link
                 href="/privacy"
                 className="text-blue-600 hover:text-blue-800 underline"

@@ -6,7 +6,14 @@ module.exports = {
   changefreq: 'daily',
   priority: 0.7,
   sitemapSize: 5000,
-  exclude: ['/api/*', '/admin/*', '/demo-article', '/_next/*', '/images/*'],
+  exclude: [
+    '/api/*',
+    '/admin/*',
+    '/demo-article',
+    '/subscribe',
+    '/_next/*',
+    '/images/*',
+  ],
   transform: async (config, path) => {
     // Custom priorities based on page type
     let priority = 0.7;
