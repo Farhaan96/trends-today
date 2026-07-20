@@ -1,0 +1,145 @@
+{
+  "generatedAt": "2026-07-20T08:31:45.407123",
+  "status": "no-qualified-candidate",
+  "runDecision": "Zero new stories promoted. None of the six discovered opportunities cleared the evidence, duplication, utility, source-threshold, and approval gates in this run.",
+  "topics": [
+    {
+      "title": "Statement from the Mayor: Growing support for Metro Vancouver inquiry",
+      "discoverySource": "primary_source_page",
+      "sourceUrl": "https://www.surrey.ca/news-events/news/statement-mayor-growing-support-metro-vancouver-inquiry-0",
+      "sourceName": "City of Surrey news",
+      "sourceTier": "primary",
+      "locality": "Surrey",
+      "category": "local-news",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-20T08:31:44.659071",
+      "status": "held-sensitive",
+      "decisionReason": "A political accountability dispute requires a balanced evidence packet and owner-sensitive-story approval; the single mayoral statement is not sufficient for autonomous publication.",
+      "requiredEvidence": [
+        "Lower Mainland locality",
+        "practical reader impact",
+        "freshness timestamp or event date",
+        "story type and its source threshold",
+        "at least one primary source URL",
+        "specific angle not covered by existing inventory",
+        "content lane and CTA hypothesis",
+        "all seven local opportunity ratings"
+      ]
+    },
+    {
+      "title": "Surrey exceeds housing targets ahead of schedule, with over 13,800 units issued",
+      "discoverySource": "primary_source_page",
+      "sourceUrl": "https://www.surrey.ca/news-events/news/surrey-exceeds-housing-targets-ahead-of-schedule-over-13800-units-issued",
+      "sourceName": "City of Surrey news",
+      "sourceTier": "primary",
+      "locality": "Surrey",
+      "category": "local-news",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-20T08:31:44.659071",
+      "status": "not-qualified",
+      "decisionReason": "The single municipal announcement does not yet meet the two-source reported-update threshold or establish a concrete resident decision beyond the city's aggregate claim.",
+      "requiredEvidence": [
+        "Lower Mainland locality",
+        "practical reader impact",
+        "freshness timestamp or event date",
+        "story type and its source threshold",
+        "at least one primary source URL",
+        "specific angle not covered by existing inventory",
+        "content lane and CTA hypothesis",
+        "all seven local opportunity ratings"
+      ]
+    },
+    {
+      "title": "What's Happening this Summer in Community Art",
+      "discoverySource": "primary_source_page",
+      "sourceUrl": "https://www.surrey.ca/news-events/news/whats-happening-summer-community-art",
+      "sourceName": "City of Surrey news",
+      "sourceTier": "primary",
+      "locality": "Surrey",
+      "category": "local-news",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-20T08:31:44.659071",
+      "status": "not-qualified",
+      "decisionReason": "The single source was not developed into a dated, specific reader job and does not yet meet the two-source reported-update threshold.",
+      "requiredEvidence": [
+        "Lower Mainland locality",
+        "practical reader impact",
+        "freshness timestamp or event date",
+        "story type and its source threshold",
+        "at least one primary source URL",
+        "specific angle not covered by existing inventory",
+        "content lane and CTA hypothesis",
+        "all seven local opportunity ratings"
+      ]
+    },
+    {
+      "title": "City of Surrey responds to inaccurate claims about property acquisitions",
+      "discoverySource": "primary_source_page",
+      "sourceUrl": "https://www.surrey.ca/news-events/news/city-of-surrey-responds-inaccurate-claims-about-property-acquisitions",
+      "sourceName": "City of Surrey news",
+      "sourceTier": "primary",
+      "locality": "Surrey",
+      "category": "local-news",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-20T08:31:44.659071",
+      "status": "held-sensitive",
+      "decisionReason": "A contested property-acquisition statement requires independent corroboration, a balanced evidence packet, and owner-sensitive-story approval; the city's response alone is insufficient.",
+      "requiredEvidence": [
+        "Lower Mainland locality",
+        "practical reader impact",
+        "freshness timestamp or event date",
+        "story type and its source threshold",
+        "at least one primary source URL",
+        "specific angle not covered by existing inventory",
+        "content lane and CTA hypothesis",
+        "all seven local opportunity ratings"
+      ]
+    },
+    {
+      "title": "Michael de Courcy: one in a million",
+      "discoverySource": "primary_source_page",
+      "sourceUrl": "https://www.burnaby.ca/recreation-and-arts/events/michael-de-courcy-one-million",
+      "sourceName": "City of Burnaby events",
+      "sourceTier": "primary",
+      "locality": "Burnaby",
+      "category": "things-to-do",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-20T08:31:45.404123",
+      "status": "not-qualified",
+      "decisionReason": "The listing was not developed into a time-bounded reader decision and does not yet meet the two-source reported-update threshold.",
+      "requiredEvidence": [
+        "Lower Mainland locality",
+        "practical reader impact",
+        "freshness timestamp or event date",
+        "story type and its source threshold",
+        "at least one primary source URL",
+        "specific angle not covered by existing inventory",
+        "content lane and CTA hypothesis",
+        "all seven local opportunity ratings"
+      ]
+    },
+    {
+      "title": "Jim Lorimer Park Re-opening Celebration",
+      "discoverySource": "primary_source_page",
+      "sourceUrl": "https://www.burnaby.ca/recreation-and-arts/events/jim-lorimer-park-re-opening-celebration",
+      "sourceName": "City of Burnaby events",
+      "sourceTier": "primary",
+      "locality": "Burnaby",
+      "category": "things-to-do",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-20T08:31:45.404123",
+      "status": "rejected-duplicate",
+      "decisionReason": "This event is already covered in free-burnaby-park-events-this-week, so another article would duplicate the same reader job and source.",
+      "requiredEvidence": [
+        "Lower Mainland locality",
+        "practical reader impact",
+        "freshness timestamp or event date",
+        "story type and its source threshold",
+        "at least one primary source URL",
+        "specific angle not covered by existing inventory",
+        "content lane and CTA hypothesis",
+        "all seven local opportunity ratings"
+      ]
+    }
+  ]
+}
