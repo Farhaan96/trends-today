@@ -1,0 +1,3 @@
+content/**/*.mdx text eol=lf
+artifacts/editorial/**/*.mdx text eol=lf
+artifacts/editorial/**/*.json text eol=lf
