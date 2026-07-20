@@ -7,13 +7,14 @@
 - Category: `sports`.
 - Municipality: Vancouver.
 - Sweep count: 1 of 2 allowed for this sweep; 3 of 6 known new stories for July 20.
-- Release PR: pending.
-- Production deployment: pending.
-- Live URL to verify after deploy: `https://www.trendstoday.ca/sports/canucks-2026-home-opener-ticket-dates`.
+- Release PR: [#27](https://github.com/Farhaan96/trends-today/pull/27), merged at `f7a6139ab3a8b9a958fbb43a71bf4f452e74aa1e`.
+- Production deployment: `5529423091`, successful at 2026-07-20 2:58 p.m. Pacific, target URL `https://trends-today-3x49ie3wm-farhaans-projects-088cb374.vercel.app`.
+- Live URL verified: `https://www.trendstoday.ca/sports/canucks-2026-home-opener-ticket-dates`.
 
 ## Baseline and constraint
 
 - Production `/api/analytics` before the run reported 135 active articles, with local inventory at `local-news` 1, `transit` 3, `things-to-do` 3, `food-drink` 1, `housing` 2, and `sports` 1.
+- Production `/api/analytics` after deployment reported 136 active articles, with `sports` 2.
 - The latest production deployment before this sweep was deployment `5528804290` for SHA `f30e7c9c934240046b077bf5624bea4418250c66`, and browser verification found the homepage plus the two midday articles live with matching canonicals, loaded hero images, and zero page console errors.
 - Vercel Web Analytics is embedded, but the Vercel import could not run because `VERCEL_TOKEN` or `VERCEL_ANALYTICS_TOKEN` and `VERCEL_PROJECT_ID` were unavailable in the automation environment.
 - Google Analytics, Google Search Console, page views, engaged sessions, returning sessions, scroll depth, measurable ad impressions, viewable ad impressions, Active View rate, ad revenue, page RPM, sponsor inquiries, qualified sponsor inquiries, sponsorship revenue, and content cost remain unavailable.
@@ -50,6 +51,8 @@ This sweep added one Vancouver sports schedule bulletin instead of filling the s
 - Final exact-candidate GPT review returned `PASS` for candidate SHA `dcace1ca3c0bad6941098611b269b02d1f9eb80c50ad5475366c2d34439870bb`, with all scores at least 4/5 and zero authorial em dashes.
 - The Fable meter was unavailable from direct `claude /usage`, so the release review was routed to Opus 4.8 with fallback disabled and no paid credits.
 - Claude exact-candidate release review returned `NO BLOCKERS` at repository SHA `e427f1fa4643e3fc853f2efc73cb5129809a3d8a`.
+- Local validation passed: `python -m unittest discover -s apps/pipeline/tests`, `npm run typecheck`, `npm run lint -- --quiet`, targeted `npx prettier --check`, `git diff --check`, and `npm run build`.
+- Production browser verification passed for the canonical URL: status 200, expected H1, matching canonical tag, required October 1 and August 10-12 details, source links, homepage listing, loaded hero image, and zero page console errors. Direct HTTP checks confirmed both Canucks source links and the optimized hero image URL returned 200.
 
 ## Checkpoints
 
