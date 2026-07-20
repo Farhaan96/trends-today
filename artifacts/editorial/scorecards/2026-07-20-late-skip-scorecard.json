@@ -1,0 +1,119 @@
+{
+  "generatedAt": "2026-07-20T16:45:00-07:00",
+  "decision": "skip",
+  "publishedCount": 0,
+  "sweepLimit": 2,
+  "knownJuly20PublishedCountBeforeSweep": 3,
+  "dailyLimit": 6,
+  "metrics": {
+    "status": "unavailable",
+    "constraint": "Vercel Web Analytics provider export is credential-blocked, and GA/Search Console/ad/sponsor sources are unavailable in this automation environment.",
+    "missing": [
+      "page views",
+      "engaged sessions",
+      "returning sessions",
+      "scroll depth",
+      "measurable ad impressions",
+      "viewable ad impressions",
+      "Active View rate",
+      "ad revenue",
+      "page RPM",
+      "sponsor inquiries",
+      "qualified sponsor inquiries",
+      "sponsorship revenue",
+      "content cost"
+    ],
+    "measurementRepair": "Provide VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN plus VERCEL_PROJECT_ID so the read-only Vercel importer can join path-level page views without inventing unsupported fields."
+  },
+  "scan": {
+    "source": "enabled primary local sources in config/local-news-sources.json",
+    "candidateCount": 30,
+    "researchQueue": "artifacts/editorial/research/2026-07-20-late-primary-source-queue.json",
+    "metricsExport": "artifacts/editorial/metrics/2026-07-20-late-vercel-analytics.json"
+  },
+  "reviewedCandidates": [
+    {
+      "title": "Surrey Fusion Festival attendance update",
+      "municipality": "Surrey",
+      "category": "local-news",
+      "decision": "reject",
+      "reason": "Retrospective attendance item with weak next-step reader utility after the event ended."
+    },
+    {
+      "title": "Surrey Soccer Fan Zones attendance update",
+      "municipality": "Surrey",
+      "category": "local-news",
+      "decision": "reject",
+      "reason": "Retrospective count and already adjacent to prior FIFA/fan-festival coverage."
+    },
+    {
+      "title": "Metro Vancouver inquiry statement",
+      "municipality": "Surrey",
+      "category": "local-news",
+      "decision": "hold",
+      "reason": "Civic-dispute framing needs balanced evidence and is not a low-risk unattended bulletin."
+    },
+    {
+      "title": "Surrey housing targets",
+      "municipality": "Surrey",
+      "category": "housing",
+      "decision": "reject",
+      "reason": "Duplicate of the live July 20 Surrey housing article."
+    },
+    {
+      "title": "Burnaby Environmental Stewardship Events",
+      "municipality": "Burnaby",
+      "category": "things-to-do",
+      "decision": "reject",
+      "reason": "Generic ongoing event page with weaker immediate reader job than the already live Burnaby park-events planner."
+    },
+    {
+      "title": "Burnaby Michael de Courcy event",
+      "municipality": "Burnaby",
+      "category": "things-to-do",
+      "decision": "reject",
+      "reason": "Single exhibition/event page, limited urgency, and insufficient value over existing Burnaby things-to-do depth."
+    },
+    {
+      "title": "Richmond climate-friendly homes",
+      "municipality": "Richmond",
+      "category": "local-news",
+      "decision": "hold",
+      "reason": "Potential housing or home-energy utility, but the July 8 item needs a stronger current application deadline and supporting source before a reported update."
+    },
+    {
+      "title": "Coquitlam transportation road safety program",
+      "municipality": "Coquitlam",
+      "category": "local-news",
+      "decision": "hold",
+      "reason": "Potential explainer, but not as time-sensitive as live road-work coverage and needs plan/source context before publication."
+    },
+    {
+      "title": "Coquitlam Fraser Mills community centre renderings",
+      "municipality": "Coquitlam",
+      "category": "local-news",
+      "decision": "reject",
+      "reason": "Long-horizon 2031 facility preview with weaker immediate reader action."
+    },
+    {
+      "title": "Whitecaps Chicago match rescheduled",
+      "municipality": "Vancouver",
+      "category": "sports",
+      "decision": "reject",
+      "reason": "Useful for fans, but away-match viewing logistics are weaker Lower Mainland utility than the already published Canucks local schedule bulletin."
+    }
+  ],
+  "commercial": {
+    "status": "not_applied",
+    "reason": "No story cleared editorial qualification; commercial fit was not used to rescue any candidate."
+  },
+  "nextCheckpoints": {
+    "sevenDay": "2026-07-27",
+    "twentyEightDay": "2026-08-17"
+  },
+  "keepRepairStop": {
+    "keep": "Keep the two-hour sweep rhythm when primary-source items produce concrete reader action.",
+    "repair": "Repair measurement credentials before using topic mix, length, or ad-fit hypotheses as optimization signals.",
+    "stop": "Stop the sweep when only duplicate, retrospective, sensitive, or weak-utility items remain."
+  }
+}
