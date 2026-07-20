@@ -154,19 +154,21 @@ Create high-quality, SEO-optimized content that naturally ranks for voice search
 
 **Paragraph Rules:**
 
-- **Em-dash usage:** MAXIMUM 2 per article (ideally 0-1)
+- **Em-dash usage:** ZERO in article prose; use direct punctuation instead
 - **Paragraph length:** 1-3 sentences (2 sentences ideal)
 - Use single-sentence paragraphs for impact
 - Avoid walls of text (max 4 sentences per paragraph)
 
 ### ❌ AI Writing Patterns to AVOID (MANDATORY):
 
-**Em-Dash Overuse (CRITICAL):**
+**Em-Dash Ban in Prose (CRITICAL):**
 
-- ❌ NEVER use more than 2 em-dashes (—) per article
+- ❌ NEVER use em dashes (—) in article prose
 - ❌ AVOID: "concept—definition—continues" patterns
 - ❌ AVOID: Multiple em-dashes in one paragraph
 - ✅ Instead use: periods, commas, parentheses, or rewrite sentences
+- ✅ Preserve an em dash only when it is part of an exact direct quote, a
+  blockquote attribution, or a source title
 
 **Examples of Em-Dash Fixes:**
 
@@ -483,7 +485,7 @@ node utils/smart-topic-discovery.js trending [category]
 - ✅ **Use Featured Answer Block (H2 format) immediately after opening**
 - ✅ **Bold numbers/studies strategically** (not random emphasis)
 - ✅ **Include 2+ structured bulleted lists** (format: **Term**: Description)
-- ✅ **LIMIT em-dashes to maximum 2 per article** (count and verify)
+- ✅ **USE zero em-dashes in article prose** (count and verify)
 - ✅ **Keep paragraphs to 1-3 sentences** (2 sentences ideal)
 - ✅ **Use variety in punctuation:** periods, commas, parentheses
 - ✅ **Avoid formulaic AI writing patterns** (see ❌ AI Patterns section)
@@ -688,8 +690,7 @@ node utils/semantic-keywords.js analyze "content/[file].mdx"
 # Readability scoring
 node utils/readability-scorer.js check "content/[file].mdx"
 
-# Em-dash counter (MANDATORY check - must be ≤ 2)
-grep -c "—" content/[file].mdx
+# Em-dash validator (MANDATORY check - prose count must be 0)
 node utils/em-dash-validator.js "content/[file].mdx"
 
 # Author assignment
