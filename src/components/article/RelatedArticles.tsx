@@ -55,7 +55,11 @@ export default function RelatedArticles({
             const articleDescription = article.frontmatter?.description;
             const articleDate =
               article.publishedAt || article.frontmatter?.publishedAt;
-            const href = `/${currentCategory}/${article.slug}`;
+            const articleCategory =
+              article.category ||
+              article.frontmatter?.category ||
+              currentCategory;
+            const href = `/${articleCategory}/${article.slug}`;
 
             return (
               <Link
