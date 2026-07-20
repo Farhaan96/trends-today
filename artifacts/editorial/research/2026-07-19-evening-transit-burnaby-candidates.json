@@ -42,6 +42,20 @@
       "evidenceStrength": 5,
       "manualApprovalRequired": false,
       "duplicateCheck": "No exact or near-topic match found for TransLink fare increase, Compass fares, or July fare increase in content or editorial learning.",
+      "sourceCapture": {
+        "capturedAt": "2026-07-19T16:58:00-07:00",
+        "method": "Invoke-WebRequest live HTML extraction",
+        "facts": [
+          "TransLink page says fares increased by an average of 5% on July 1, 2026.",
+          "Adult cash/contactless current fares: 1-Zone $3.50 (+$0.15), 2-Zone $5.10 (+$0.25), 3-Zone $6.70 (+$0.10).",
+          "Adult Stored Value current fares: 1-Zone $2.85 (+$0.15), 2-Zone $4.20 (+$0.20), 3-Zone $5.40 (+$0.30).",
+          "Concession current fares: 1-Zone $2.30 (+$0.05), 2-Zone $3.40 (+$0.10), 3-Zone $4.60 (+$0.10).",
+          "Adult monthly passes: $117.20, $156.70, and $211.65; concession monthly pass: $66.95.",
+          "Adult DayPass: $12.55; concession DayPass: $9.75.",
+          "Journeys starting at YVR-Airport, Sea Island Centre, or Templeton stations include a $6.50 YVR Airport AddFare at all times.",
+          "The page says buses and HandyDART are 1-Zone at all times; SkyTrain and SeaBus vary by zone and time; single fares are valid for 90 minutes."
+        ]
+      },
       "sources": [
         {
           "name": "TransLink pricing and fare zones",

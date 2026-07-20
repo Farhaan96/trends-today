@@ -34,6 +34,8 @@ This run adds immediate utility across two planning jobs: "what does my transit 
 - [City of Burnaby Summer Stages](https://www.burnaby.ca/recreation-and-arts/events/summer-stages)
 - [City of Burnaby Jim Lorimer Park Re-opening Celebration](https://www.burnaby.ca/recreation-and-arts/events/jim-lorimer-park-re-opening-celebration)
 
+TransLink source capture on 2026-07-19 recorded current adult cash/contactless fares, adult Stored Value fares, concession fares, monthly passes, DayPasses, the $6.50 YVR Airport AddFare, and the 90-minute fare-validity note from the live pricing page.
+
 ## Known cost
 
 - Cash/API cost: no project API key was used for built-in image generation.
