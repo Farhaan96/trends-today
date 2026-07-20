@@ -47,6 +47,17 @@ class MetricsTests(unittest.TestCase):
         self.assertEqual(124, article['revenue'])
         self.assertEqual(94, article['contribution'])
 
+    def test_partial_revenue_components_do_not_create_a_false_total(self):
+        [article] = normalize_articles([{
+            'slug': 'partial-commercial-test',
+            'pageViews': 2000,
+            'adRevenue': 24,
+            'contentCost': 30,
+        }])
+        self.assertEqual(12, article['pageRpm'])
+        self.assertIsNone(article['revenue'])
+        self.assertIsNone(article['contribution'])
+
     def test_young_article_is_observed(self):
         [article] = build_article_decisions(
             [{'slug': 'one', 'publishedAt': '2026-07-10T00:00:00Z'}],

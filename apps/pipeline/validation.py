@@ -50,7 +50,11 @@ def _paragraphs(body: str) -> List[str]:
     paragraphs = []
     for block in re.split(r'\n\s*\n', body):
         text = block.strip()
-        if not text or text.startswith(('#', '-', '*', '>', '|')):
+        if (
+            not text
+            or text.startswith(('#', '>', '|'))
+            or re.match(r'^(?:[-*+]\s+|\d+\.\s+)', text)
+        ):
             continue
         if re.fullmatch(r'https?://\S+', text):
             continue
@@ -167,12 +171,14 @@ def validate_release_candidate(
         )
         if article.get('brandSafety') != expected_brand_safety:
             errors.append(f'brand safety must be {expected_brand_safety}')
-        sponsorship_status = str(article.get('sponsorshipStatus', '')).strip()
-        if sponsorship_status not in monetization['sponsorshipStatusValues']:
-            errors.append('sponsorship status is missing or unsupported')
-        elif sponsorship_status != monetization['automatedDefaultSponsorshipStatus']:
-            if not article.get('commercialApprovalRecorded'):
-                errors.append('commercial coverage requires recorded owner approval')
+    sponsorship_status = str(article.get('sponsorshipStatus', '')).strip()
+    if not sponsorship_status and not is_local:
+        sponsorship_status = monetization['automatedDefaultSponsorshipStatus']
+    if sponsorship_status not in monetization['sponsorshipStatusValues']:
+        errors.append('sponsorship status is missing or unsupported')
+    elif sponsorship_status != monetization['automatedDefaultSponsorshipStatus']:
+        if not article.get('commercialApprovalRecorded'):
+            errors.append('commercial coverage requires recorded owner approval')
     sensitive_text = ' '.join(
         str(article.get(field, '') or '')
         for field in ('title', 'subtitle', 'meta_description', 'body_mdx')

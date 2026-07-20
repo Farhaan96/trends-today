@@ -82,12 +82,12 @@ def normalize_articles(records: Iterable[Dict[str, Any]]) -> List[Dict[str, Any]
             else None
         )
         if item['revenue'] is None:
-            known_revenue = [
-                value
-                for value in (item['adRevenue'], item['sponsorshipRevenue'])
-                if value is not None
-            ]
-            item['revenue'] = sum(known_revenue) if known_revenue else None
+            revenue_components = (item['adRevenue'], item['sponsorshipRevenue'])
+            item['revenue'] = (
+                sum(revenue_components)
+                if all(value is not None for value in revenue_components)
+                else None
+            )
         if item['revenue'] is not None and item['contentCost'] is not None:
             item['contribution'] = item['revenue'] - item['contentCost']
         else:

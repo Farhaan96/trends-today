@@ -229,6 +229,20 @@ def promote_candidate(candidate_path: Path, review_path: Path, repo_root: Path =
     )
     if requires_approval and not approval_recorded:
         raise PermissionError('Sensitive candidate requires recorded human approval')
+    sponsorship_match = re.search(
+        r'^sponsorshipStatus:\s*["\']?([a-z-]+)["\']?\s*$',
+        original,
+        re.MULTILINE,
+    )
+    commercial_approval_recorded = bool(
+        re.search(r'^commercialApprovalRecorded:\s*true\s*$', original, re.MULTILINE)
+    )
+    if (
+        sponsorship_match
+        and sponsorship_match.group(1) != 'editorial'
+        and not commercial_approval_recorded
+    ):
+        raise PermissionError('Commercial candidate requires recorded owner approval')
     review_metadata = (
         'status: "published"\n'
         f'reviewedBy: {json.dumps(review["reviewer"], ensure_ascii=False)}\n'

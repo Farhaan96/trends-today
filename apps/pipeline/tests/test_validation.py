@@ -193,6 +193,59 @@ class ValidationTests(unittest.TestCase):
         self.assertFalse(result.passed)
         self.assertIn('commercial coverage requires recorded owner approval', result.errors)
 
+    def test_bold_first_paragraph_still_respects_length_limit(self):
+        article = {
+            'title': 'Burnaby service bulletin',
+            'meta_description': 'A concise Burnaby service bulletin.',
+            'category': 'local-news',
+            'locality': 'Burnaby',
+            'storyType': 'bulletin',
+            'body_mdx': (
+                '**Important:** '
+                + ' '.join(['detail'] * 130)
+                + '\n\n## What changed\n\n'
+                + ' '.join(['update'] * 60)
+                + '\n\n## What to do\n\n'
+                + ' '.join(['action'] * 60)
+                + '\n\n## Sources\n\nhttps://a.example/source'
+            ),
+            **self.local_metadata(),
+        }
+        result = validate_release_candidate(
+            article,
+            [{'url': 'https://a.example/source', 'tier': 'primary'}],
+            {'slug': 'burnaby-service-bulletin'},
+            {'path': '/images/burnaby.webp'},
+        )
+        self.assertFalse(result.passed)
+        self.assertTrue(any('paragraph 1 has' in error for error in result.errors))
+
+    def test_non_local_commercial_coverage_requires_owner_approval(self):
+        article = {
+            'title': 'Science explainer',
+            'meta_description': 'A complete science explainer.',
+            'category': 'science',
+            'storyType': 'legacy',
+            'sponsorshipStatus': 'branded',
+            'commercialApprovalRecorded': False,
+            'body_mdx': (
+                'Opening.\n\n## What happened\n\n'
+                + ' '.join(['science'] * 300)
+                + '\n\n## Why it matters\n\n'
+                + ' '.join(['evidence'] * 300)
+                + '\n\n## Sources\n\nhttps://a.example/source\n\n'
+                + 'https://b.example/source\n\nhttps://c.example/source'
+            ),
+        }
+        result = validate_release_candidate(
+            article,
+            self.sources(),
+            {'slug': 'science-explainer'},
+            {'path': '/images/science.webp'},
+        )
+        self.assertFalse(result.passed)
+        self.assertIn('commercial coverage requires recorded owner approval', result.errors)
+
     def test_sensitive_local_story_requires_recorded_approval(self):
         article = self.article()
         article['manualApprovalRequired'] = True
