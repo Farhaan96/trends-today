@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-20T18:41:32.151050+00:00",
+  "generatedAt": "2026-07-20T18:49:04.572290+00:00",
   "results": [
     {
       "title": "Coquitlam road work is affecting Parkway and Panorama",
@@ -11,7 +11,7 @@
       "candidate": {
         "title": "Coquitlam road work is affecting Parkway and Panorama",
         "lane": "daily-local-utility",
-        "sourceUrl": "https://coquitlam.ca/m/newsflash/Home/Detail/2003",
+        "sourceUrl": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2003",
         "sourceName": "City of Coquitlam road work notice",
         "sourceTier": "primary",
         "locality": "Coquitlam",
@@ -28,11 +28,11 @@
           "freshnessEvidence": "City notice posted July 19, 2026; work is underway and expected to continue through late August.",
           "uniqueAngleEvidence": "Existing published local inventory has no Coquitlam road-work bulletin and no Parkway/Panorama route-planning update.",
           "sourceUrls": [
-            "https://coquitlam.ca/m/newsflash/Home/Detail/2003",
+            "https://www.coquitlam.ca/m/newsflash/Home/Detail/2003",
             "https://www.coquitlam.ca/198/Traffic-Hotspots"
           ],
           "primarySourceUrls": [
-            "https://coquitlam.ca/m/newsflash/Home/Detail/2003",
+            "https://www.coquitlam.ca/m/newsflash/Home/Detail/2003",
             "https://www.coquitlam.ca/198/Traffic-Hotspots"
           ]
         },
