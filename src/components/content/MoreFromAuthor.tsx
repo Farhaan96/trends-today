@@ -109,7 +109,7 @@ export default function MoreFromAuthor({
         ))}
       </div>
 
-      {authorId && authorId !== 'trends-today-editorial' && (
+      {authorId && authorData && (
         <div className="author-more__action">
           <Link href={`/author/${authorId}`} className="primary-button">
             View all articles by {authorName} →
