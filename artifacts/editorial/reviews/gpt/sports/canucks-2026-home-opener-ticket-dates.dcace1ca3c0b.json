@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "dcace1ca3c0bad6941098611b269b02d1f9eb80c50ad5475366c2d34439870bb",
+  "repositorySha": "f30e7c9c934240046b077bf5624bea4418250c66",
+  "reviewedAt": "2026-07-20T21:44:44.011628+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f817c-9dd4-7362-afb9-bd72b0689f4e",
+  "scores": {
+    "engagement": 5,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "All material dates, opponents, times, ticket windows, and access groups are supported by the cited official Canucks announcement. The bulletin is clear, locally useful, scannable, and closes with a practical next step. Minor repetition in the closing paragraph keeps quality at 4 but does not require revision."
+}

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "071daadd645e764f4d5b2488b8ab1a2d5ff6b78a21ae4dfd2c88e5d57c21b3ec",
+  "repositorySha": "f30e7c9c934240046b077bf5624bea4418250c66",
+  "reviewedAt": "2026-07-20T21:43:36.213509+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f817b-274c-7390-92c3-416a69aa9104",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "\u201cThose dates give fans a simple planning window before fall calendars fill up\u201d manufactures urgency without adding supported or useful information.",
+    "\u201cThis is a schedule-planning item for Vancouver readers\u201d is self-referential filler, and the abrupt Whitecaps cross-link weakens the transition between Canucks schedule details and ticket access."
+  ],
+  "summary": "The dates, opponents, times, and ticket windows are supported by the cited official Canucks announcement. The MDX is clear and properly structured, with no authorial em dashes. Revision is still required because the middle section introduces manufactured stakes, editorial meta-commentary, and a distracting transition."
+}
