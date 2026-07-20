@@ -9,10 +9,11 @@ The current operating source of truth is `docs/content-business-operating-system
 - Research output must be evidence-enriched and scored before briefing.
 - Autonomous work stages candidates in `artifacts/editorial/release-candidates/` before promotion.
 - Public content lives in `content/<category>/`, not `apps/web/content/posts/`.
-- The owner has standing authorization for three scheduled local-news sweeps per weekday, with at most two qualifying low-risk articles per sweep and six per day. Each article still requires an exact-candidate Claude review, deterministic QA/build checks, a clean PR/check result, and post-deploy live verification. Zero articles is correct when no candidate qualifies.
+- The owner has standing authorization for scheduled local-news sweeps every two hours from 06:30 through 18:30 America/Vancouver, with at most two qualifying low-risk articles per sweep and six per day. Each article still requires a passing exact-candidate GPT editorial scorecard, an exact-candidate Claude release review, deterministic QA/build checks, a clean PR/check result, and post-deploy live verification. Zero articles is correct when no candidate qualifies.
 - Every new story must name a Lower Mainland locality, identify the practical reader impact, meet its story-type source threshold, and include at least one primary source.
 - Crime allegations, active emergencies, deaths or serious injuries, missing-person cases, claims about private people, leaked material, and sponsored coverage require manual approval before publication.
-- Claude is the independent editorial reviewer. A structured `NO BLOCKERS` review bound to the exact candidate SHA-256 authorizes content promotion; blockers require repair and a fresh review.
+- GPT is the second editorial gate for factual support, quality, readability, formatting, engagement, and zero authorial em dashes. Every score must be at least 4/5, the blocker list must be empty, and the artifact must match the exact candidate and repository hashes.
+- Claude remains the independent release reviewer. A structured `NO BLOCKERS` review bound to the same exact candidate SHA-256 is also required; blockers require repair and fresh GPT and Claude reviews.
 - Missing analytics or evidence must remain explicitly unavailable. Never replace missing business data with invented benchmarks or zeroes.
 
 **Current Date:** 2025-09-21

@@ -62,7 +62,7 @@ def _paragraphs(body: str) -> List[str]:
     return paragraphs
 
 
-def _prose_em_dash_count(body: str) -> int:
+def count_prose_em_dashes(body: str) -> int:
     """Count em dashes in editorial prose, not quotes or source citations."""
     prose_lines = []
     in_sources = False
@@ -166,7 +166,7 @@ def validate_release_candidate(
                 f'paragraph {index} has {paragraph_sentences} sentences; '
                 f"maximum is {formatting['maximumParagraphSentences']}"
             )
-    if _prose_em_dash_count(body):
+    if count_prose_em_dashes(body):
         errors.append('article prose must not use em dashes')
     if len(source_urls) < minimum_sources:
         errors.append(f'only {len(source_urls)} valid source URLs; {minimum_sources} required')

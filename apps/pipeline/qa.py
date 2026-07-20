@@ -43,11 +43,15 @@ Requirements:
 - Remove redundancy and fluff
 - Ensure {word_range} words for the {story_type} contract
 - Keep the Lower Mainland locality and practical reader impact explicit
-- Keep curious, accessible tone
+- Strengthen the opening with a concrete supported detail and reader consequence
+- Use active verbs, varied sentence openings, and natural sentence-length variation
+- Make each section earn its place by answering a practical reader question
+- Keep the tone curious and accessible without clickbait, hype, or manufactured stakes
 - Maintain 2-4 H2 sections
 - Paragraphs no longer than 4 sentences
 - Use zero em dashes
 - Fix any grammar issues
+- End with a specific next step, date, decision, or useful unanswered question
 - Preserve the ## Sources section and every supplied source URL
 
 Return the corrected body_mdx only."""

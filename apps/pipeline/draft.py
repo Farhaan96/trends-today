@@ -18,6 +18,9 @@ STYLE_GUIDE = """
 - Fast, useful local-news tone; write for Lower Mainland residents first
 - State the affected municipality and practical reader impact near the top
 - Lead with the verified change, not a generic summary or manufactured curiosity
+- Put a concrete, source-supported detail and the resident consequence in the first 80 words
+- Use active verbs, varied sentence openings, and a mix of short and medium sentences
+- Make every section answer a practical reader question; cut throat-clearing and filler
 - Sentence-case titles, 45-75 chars, no clickbait that the body cannot deliver
 - Use the requested contract: bulletin 250-450 words, reported update 450-800,
   or guide/explainer 700-1200; use 2-4 H2 (##) sections and short paragraphs
@@ -27,6 +30,7 @@ STYLE_GUIDE = """
 - Ground every claim in the provided sources; do not invent statistics
 - Include one [[INTERNAL: keyword]] placeholder for internal linking
 - End with what residents should watch or do next
+- Leave readers with a specific next step, date, decision, or unanswered local question
 - End with a ## Sources section containing every provided source URL
 """
 
