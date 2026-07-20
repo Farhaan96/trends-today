@@ -7,7 +7,7 @@ from pathlib import Path
 PIPELINE_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PIPELINE_DIR))
 
-from metrics import build_article_decisions, build_metrics_summary  # noqa: E402
+from metrics import build_article_decisions, build_metrics_summary, normalize_articles  # noqa: E402
 
 
 NOW = datetime(2026, 7, 15, tzinfo=timezone.utc)
@@ -28,6 +28,24 @@ class MetricsTests(unittest.TestCase):
         self.assertIsNone(article['impressions'])
         self.assertIsNone(article['engagedSessions'])
         self.assertIsNone(article['ctr'])
+        self.assertIsNone(article['pageRpm'])
+        self.assertIsNone(article['activeViewRate'])
+
+    def test_ad_and_sponsor_metrics_are_derived_only_when_available(self):
+        [article] = normalize_articles([{
+            'slug': 'commercial-test',
+            'pageViews': 2000,
+            'measurableAdImpressions': 1000,
+            'viewableAdImpressions': 650,
+            'adRevenue': 24,
+            'sponsorshipRevenue': 100,
+            'contentCost': 30,
+            'qualifiedSponsorInquiries': 1,
+        }])
+        self.assertEqual(12, article['pageRpm'])
+        self.assertEqual(0.65, article['activeViewRate'])
+        self.assertEqual(124, article['revenue'])
+        self.assertEqual(94, article['contribution'])
 
     def test_young_article_is_observed(self):
         [article] = build_article_decisions(

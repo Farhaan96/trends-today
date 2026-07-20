@@ -191,10 +191,26 @@ class ContentPipeline:
             article['locality'] = topic.get('locality', '')
             article['storyType'] = topic.get('storyType', 'reported-update')
             article['readerImpact'] = (topic.get('evidence') or {}).get('readerImpact', '')
+            article['lengthRationale'] = topic.get(
+                'lengthRationale',
+                f"Use the {article['storyType']} prior because it matches the reader job.",
+            )
+            article['commercialIntent'] = topic.get('commercialIntent', 'none')
+            article['commercialFitReason'] = topic.get(
+                'commercialFitReason',
+                'No commercial fit is asserted; editorial utility leads.',
+            )
+            article['sponsorshipStatus'] = topic.get('sponsorshipStatus', 'editorial')
+            article['commercialApprovalRecorded'] = False
             article['manualApprovalRequired'] = requires_manual_approval(
                 topic,
                 article,
                 self.topic_discovery.source_config,
+            )
+            article['brandSafety'] = (
+                'sensitive-owner-review'
+                if article['manualApprovalRequired']
+                else 'standard'
             )
             # A discovered topic cannot self-assert human approval. The token is
             # supplied interactively and is intentionally absent from automation.
@@ -208,6 +224,11 @@ class ContentPipeline:
                 topic,
                 article,
                 self.topic_discovery.source_config,
+            )
+            article['brandSafety'] = (
+                'sensitive-owner-review'
+                if article['manualApprovalRequired']
+                else 'standard'
             )
             
             # 4. SEO optimization

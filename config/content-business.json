@@ -1,6 +1,6 @@
 {
-  "version": 3,
-  "updatedAt": "2026-07-17",
+  "version": 4,
+  "updatedAt": "2026-07-19",
   "businessModel": {
     "primary": "owned local media and audience distribution",
     "revenueSequence": [
@@ -105,6 +105,133 @@
     },
     "primarySourceRequired": true
   },
+  "editorialContract": {
+    "principles": {
+      "length": "Use the shortest complete treatment that satisfies the reader job. Word ranges are tunable priors, not SEO targets, and copy must never be padded for ad inventory.",
+      "formatting": "Make the answer easy to scan without turning every story into a template.",
+      "internalLinks": "Add only contextual links that help the reader continue a relevant Lower Mainland topic journey."
+    },
+    "storyTypes": {
+      "bulletin": {
+        "readerJob": "give me the essential confirmed change and what to do now",
+        "wordRange": {
+          "min": 250,
+          "max": 450,
+          "tunable": true
+        },
+        "minimumSources": 1,
+        "minimumH2": 2,
+        "minimumLists": 0,
+        "internalLinks": {
+          "min": 0,
+          "max": 1
+        }
+      },
+      "reported-update": {
+        "readerJob": "explain what changed, who is affected, and the practical next step",
+        "wordRange": {
+          "min": 450,
+          "max": 800,
+          "tunable": true
+        },
+        "minimumSources": 2,
+        "minimumH2": 2,
+        "minimumLists": 0,
+        "internalLinks": {
+          "min": 1,
+          "max": 3
+        }
+      },
+      "guide-or-explainer": {
+        "readerJob": "help me compare options, make a plan, or understand a durable local issue",
+        "wordRange": {
+          "min": 700,
+          "max": 1200,
+          "tunable": true
+        },
+        "minimumSources": 3,
+        "minimumH2": 3,
+        "minimumLists": 1,
+        "internalLinks": {
+          "min": 2,
+          "max": 5
+        }
+      },
+      "legacy": {
+        "readerJob": "fully answer the supported non-local query",
+        "wordRange": {
+          "min": 600,
+          "max": 1200,
+          "tunable": true
+        },
+        "minimumSources": 3,
+        "minimumH2": 2,
+        "minimumLists": 0,
+        "internalLinks": {
+          "min": 0,
+          "max": 5
+        }
+      }
+    },
+    "formatting": {
+      "maximumParagraphWords": 120,
+      "maximumParagraphSentences": 3,
+      "noEmDashesForLocalStories": true,
+      "listsOnlyWhenContentIsEnumerable": true
+    },
+    "internalLinks": {
+      "mustResolveToPublishedArticle": true,
+      "mustUseCrawlableMarkdownLink": true,
+      "descriptiveAnchorRequired": true,
+      "forbiddenAnchors": [
+        "click here",
+        "read more",
+        "learn more",
+        "this article"
+      ],
+      "selfLinksForbidden": true
+    }
+  },
+  "monetization": {
+    "principle": "Reader utility, evidence, locality, and brand safety qualify the story first. Commercial fit may only break a tie between equally qualified candidates.",
+    "commercialIntentValues": [
+      "none",
+      "ad-fit",
+      "sponsor-fit",
+      "ad-and-sponsor-fit"
+    ],
+    "commercialFitMayOnlyBreakQualifiedTie": true,
+    "sponsorVerticalHypotheses": [
+      "food-drink",
+      "events-entertainment",
+      "hospitality-tourism",
+      "home-services-housing",
+      "health-wellness",
+      "energy-community",
+      "sports-experiences",
+      "local-retail"
+    ],
+    "sponsorshipStatusValues": ["editorial", "supported", "branded"],
+    "automatedDefaultSponsorshipStatus": "editorial",
+    "ownerApprovalRequiredForCommercialCoverage": true,
+    "measurement": {
+      "missingValues": "unavailable",
+      "neverCoerceMissingToZero": true,
+      "articleFields": [
+        "page views",
+        "engaged sessions",
+        "scroll depth",
+        "measurable ad impressions",
+        "viewable ad impressions",
+        "ad revenue",
+        "page RPM",
+        "sponsor inquiries",
+        "qualified sponsor inquiries",
+        "sponsorship revenue",
+        "content cost"
+      ]
+    }
+  },
   "experiment": {
     "changedVariable": "a Lower Mainland daily-news focus instead of broad national technology and science coverage",
     "primaryMetric": "weekly returning Lower Mainland readers",
@@ -113,7 +240,9 @@
       "organic click-through rate",
       "engaged session rate",
       "direct sessions",
-      "articles read per returning session"
+      "articles read per returning session",
+      "viewable ad impressions and page RPM when available",
+      "qualified sponsor inquiries when available"
     ],
     "guardrails": [
       "every story names its Lower Mainland locality and practical reader impact",

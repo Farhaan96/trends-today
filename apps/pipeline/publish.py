@@ -74,6 +74,12 @@ class MDXStaticPublisher(PublisherAdapter):
                 'locality': article.get('locality', ''),
                 'storyType': article.get('storyType', 'guide-or-explainer'),
                 'readerImpact': article.get('readerImpact', ''),
+                'lengthRationale': article.get('lengthRationale', ''),
+                'commercialIntent': article.get('commercialIntent', 'none'),
+                'commercialFitReason': article.get('commercialFitReason', ''),
+                'brandSafety': article.get('brandSafety', 'standard'),
+                'sponsorshipStatus': article.get('sponsorshipStatus', 'editorial'),
+                'commercialApprovalRecorded': bool(article.get('commercialApprovalRecorded')),
                 'manualApprovalRequired': bool(article.get('manualApprovalRequired')),
                 'manualApprovalRecorded': bool(article.get('manualApprovalRecorded')),
             }
