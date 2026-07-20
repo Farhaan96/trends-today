@@ -229,17 +229,23 @@ def promote_candidate(candidate_path: Path, review_path: Path, repo_root: Path =
     )
     if requires_approval and not approval_recorded:
         raise PermissionError('Sensitive candidate requires recorded human approval')
+    business_config_path = root / 'config' / 'content-business.json'
+    business_config = json.loads(business_config_path.read_text(encoding='utf-8-sig'))
+    monetization = business_config['monetization']
+    allowed_sponsorship_statuses = set(monetization['sponsorshipStatusValues'])
+    automated_status = monetization['automatedDefaultSponsorshipStatus']
     sponsorship_match = re.search(
         r'^sponsorshipStatus:\s*["\']?([a-z-]+)["\']?\s*$',
         original,
         re.MULTILINE,
     )
+    if not sponsorship_match or sponsorship_match.group(1) not in allowed_sponsorship_statuses:
+        raise PermissionError('Candidate has missing or unsupported sponsorship status')
     commercial_approval_recorded = bool(
         re.search(r'^commercialApprovalRecorded:\s*true\s*$', original, re.MULTILINE)
     )
     if (
-        sponsorship_match
-        and sponsorship_match.group(1) != 'editorial'
+        sponsorship_match.group(1) != automated_status
         and not commercial_approval_recorded
     ):
         raise PermissionError('Commercial candidate requires recorded owner approval')

@@ -99,6 +99,7 @@ export default function RevenueDashboard({
   period = '30d',
 }: RevenueDashboardProps) {
   const [metrics, setMetrics] = useState<RevenueMetrics | null>(null);
+  const [unavailableReason, setUnavailableReason] = useState('');
   const [loading, setLoading] = useState(true);
   const [selectedPeriod, setSelectedPeriod] = useState(period);
 
@@ -115,9 +116,17 @@ export default function RevenueDashboard({
       const data = await response.json();
       if (data.success) {
         setMetrics(data.metrics);
+        setUnavailableReason('');
+      } else {
+        setMetrics(null);
+        setUnavailableReason(
+          data.reason || 'Verified revenue measurement is not connected.'
+        );
       }
     } catch (error) {
       console.error('Failed to fetch revenue metrics:', error);
+      setMetrics(null);
+      setUnavailableReason('Verified revenue measurement is unavailable.');
     } finally {
       setLoading(false);
     }
@@ -146,11 +155,12 @@ export default function RevenueDashboard({
   if (!metrics) {
     return (
       <div
-        className={`bg-red-50 border border-red-200 rounded-lg p-6 ${className}`}
+        className={`bg-amber-50 border border-amber-200 rounded-lg p-6 ${className}`}
       >
-        <p className="text-red-700">
-          Failed to load revenue metrics. Please try again.
+        <p className="font-semibold text-amber-900">
+          Revenue measurement unavailable
         </p>
+        <p className="mt-1 text-amber-800">{unavailableReason}</p>
       </div>
     );
   }

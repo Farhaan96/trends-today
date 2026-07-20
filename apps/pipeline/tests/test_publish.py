@@ -2,6 +2,7 @@ import sys
 import tempfile
 import unittest
 import json
+import re
 from unittest.mock import patch
 from pathlib import Path
 
@@ -77,6 +78,13 @@ class PublisherTests(unittest.TestCase):
         config.parent.mkdir(parents=True, exist_ok=True)
         config.write_text(json.dumps({
             'automaticPublishing': {'manualApprovalKeywords': keywords or ['stabbing']}
+        }), encoding='utf-8')
+        business_config = root / 'config/content-business.json'
+        business_config.write_text(json.dumps({
+            'monetization': {
+                'sponsorshipStatusValues': ['editorial', 'supported', 'branded'],
+                'automatedDefaultSponsorshipStatus': 'editorial',
+            }
         }), encoding='utf-8')
 
     def test_direct_production_mode_is_disabled(self):
@@ -179,6 +187,50 @@ class PublisherTests(unittest.TestCase):
                 {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/commercial-candidate.mdx'
+            self.write_source_config(root)
+            review = self.write_review(root, candidate)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                with self.assertRaises(PermissionError):
+                    promote_candidate(candidate, review, repo_root=root)
+
+    def test_promotion_accepts_commercial_candidate_with_owner_approval(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            publisher = Publisher(mode='candidate', repo_root=root)
+            article = self.article()
+            article['sponsorshipStatus'] = 'branded'
+            article['commercialApprovalRecorded'] = True
+            publisher.publish(
+                article,
+                {'slug': 'approved-commercial', 'meta_description': 'Candidate description', 'internal_links': []},
+                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+            )
+            candidate = root / 'artifacts/editorial/release-candidates/science/approved-commercial.mdx'
+            self.write_source_config(root)
+            review = self.write_review(root, candidate)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                destination = promote_candidate(candidate, review, repo_root=root)
+            self.assertTrue(destination.exists())
+
+    def test_promotion_rejects_missing_sponsorship_status(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            publisher = Publisher(mode='candidate', repo_root=root)
+            publisher.publish(
+                self.article(),
+                {'slug': 'missing-status', 'meta_description': 'Candidate description', 'internal_links': []},
+                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+            )
+            candidate = root / 'artifacts/editorial/release-candidates/science/missing-status.mdx'
+            content = candidate.read_text(encoding='utf-8')
+            candidate.write_text(
+                re.sub(r'^sponsorshipStatus:.*\n', '', content, flags=re.MULTILINE),
+                encoding='utf-8',
+            )
             self.write_source_config(root)
             review = self.write_review(root, candidate)
             with patch('review.subprocess.run') as git_run:

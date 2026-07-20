@@ -125,51 +125,17 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-  // Revenue analytics endpoint
   const { searchParams } = new URL(request.url);
   const period = searchParams.get('period') || '30d';
   const metric = searchParams.get('metric') || 'all';
 
-  // In a real implementation, you'd query your analytics database
-  // This is mock data for demonstration
-  const mockMetrics = {
-    affiliateRevenue: {
-      total: 2847.32,
-      clicks: 1234,
-      conversions: 89,
-      conversionRate: 7.2,
-      topProviders: [
-        { provider: 'amazon', revenue: 1456.78, clicks: 567 },
-        { provider: 'bestbuy', revenue: 892.45, clicks: 234 },
-        { provider: 'target', revenue: 498.09, clicks: 433 },
-      ],
-    },
-    premiumRevenue: {
-      total: 1999.99,
-      subscriptions: 67,
-      churn: 3.2,
-      mrr: 334.65,
-      newSignups: 12,
-      cancellations: 2,
-    },
-    adRevenue: {
-      total: 456.78,
-      impressions: 45678,
-      clicks: 234,
-      ctr: 0.51,
-      rpm: 10.01,
-    },
-    totalRevenue: 5303.09,
-    period,
-    lastUpdated: new Date().toISOString(),
-  };
-
   return NextResponse.json({
-    success: true,
-    metrics:
-      metric === 'all'
-        ? mockMetrics
-        : mockMetrics[metric as keyof typeof mockMetrics],
+    success: false,
+    status: 'unavailable',
+    metrics: null,
+    metric,
     period,
+    reason:
+      'No verified revenue provider is connected. Missing revenue metrics are unavailable, not zero.',
   });
 }
