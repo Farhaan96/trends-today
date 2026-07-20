@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-07-20T18:41:32.151050+00:00",
+  "results": [
+    {
+      "title": "Coquitlam road work is affecting Parkway and Panorama",
+      "lane": "daily-local-utility",
+      "score": 92.0,
+      "decision": "brief",
+      "confidence": "verified-internal-fact-plus-primary-sources",
+      "reasons": ["Meets the current evidence and opportunity thresholds"],
+      "candidate": {
+        "title": "Coquitlam road work is affecting Parkway and Panorama",
+        "lane": "daily-local-utility",
+        "sourceUrl": "https://coquitlam.ca/m/newsflash/Home/Detail/2003",
+        "sourceName": "City of Coquitlam road work notice",
+        "sourceTier": "primary",
+        "locality": "Coquitlam",
+        "category": "transit",
+        "storyType": "bulletin",
+        "confidence": "verified-internal-fact-plus-primary-sources",
+        "commercialIntent": "ad-fit",
+        "commercialFitReason": "Road-work updates serve recurring commuter and local-service planning intent, which may support contextual local ads; page views, ad revenue, RPM, and sponsor demand remain unavailable.",
+        "brandSafety": "standard",
+        "sponsorshipStatus": "editorial",
+        "lengthRationale": "A bulletin is the shortest complete format because the reader needs the location, hours, timing, and traffic impact, not a broader transportation explainer.",
+        "evidence": {
+          "readerImpact": "Drivers using Parkway Boulevard and Panorama Drive can plan extra travel time or choose another route while intersection work continues.",
+          "freshnessEvidence": "City notice posted July 19, 2026; work is underway and expected to continue through late August.",
+          "uniqueAngleEvidence": "Existing published local inventory has no Coquitlam road-work bulletin and no Parkway/Panorama route-planning update.",
+          "sourceUrls": [
+            "https://coquitlam.ca/m/newsflash/Home/Detail/2003",
+            "https://www.coquitlam.ca/198/Traffic-Hotspots"
+          ],
+          "primarySourceUrls": [
+            "https://coquitlam.ca/m/newsflash/Home/Detail/2003",
+            "https://www.coquitlam.ca/198/Traffic-Hotspots"
+          ]
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 5,
+          "freshness": 5,
+          "evidenceStrength": 4,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        }
+      }
+    },
+    {
+      "title": "Surrey says it passed 13,800 housing units",
+      "lane": "local-explainers",
+      "score": 88.0,
+      "decision": "brief",
+      "confidence": "verified-internal-fact-plus-primary-sources",
+      "reasons": ["Meets the current evidence and opportunity thresholds"],
+      "candidate": {
+        "title": "Surrey says it passed 13,800 housing units",
+        "lane": "local-explainers",
+        "sourceUrl": "https://www.surrey.ca/news-events/news/surrey-exceeds-housing-targets-ahead-of-schedule-over-13800-units-issued",
+        "sourceName": "City of Surrey housing target update",
+        "sourceTier": "primary",
+        "locality": "Surrey",
+        "category": "housing",
+        "storyType": "reported-update",
+        "confidence": "verified-internal-fact-plus-primary-sources",
+        "commercialIntent": "ad-fit",
+        "commercialFitReason": "Housing-supply and permit-process updates may attract local real-estate, home-service, and civic-planning reader intent, but advertiser demand, sponsor inquiries, ad revenue, and RPM remain unavailable.",
+        "brandSafety": "standard",
+        "sponsorshipStatus": "editorial",
+        "lengthRationale": "A reported update is appropriate because the story needs the headline number, the program context, the remaining work, and one practical follow-up for readers.",
+        "evidence": {
+          "readerImpact": "Surrey renters, buyers, builders, and civic watchers can see what housing-supply milestone the city is claiming and which permit incentives still have deadlines.",
+          "freshnessEvidence": "City of Surrey update dated July 15, 2026; development incentive permit deadline remains August 31, 2026.",
+          "uniqueAngleEvidence": "Existing published local inventory has only one housing article, about Burnaby tenant protections; this story adds a Surrey housing-supply and permitting angle.",
+          "sourceUrls": [
+            "https://www.surrey.ca/news-events/news/surrey-exceeds-housing-targets-ahead-of-schedule-over-13800-units-issued",
+            "https://www.surrey.ca/renovating-building-development/housing-accelerator-fund",
+            "https://www.surrey.ca/renovating-building-development/housing-accelerator-fund/development-incentive-programs"
+          ],
+          "primarySourceUrls": [
+            "https://www.surrey.ca/news-events/news/surrey-exceeds-housing-targets-ahead-of-schedule-over-13800-units-issued",
+            "https://www.surrey.ca/renovating-building-development/housing-accelerator-fund",
+            "https://www.surrey.ca/renovating-building-development/housing-accelerator-fund/development-incentive-programs"
+          ]
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 4,
+          "freshness": 4,
+          "evidenceStrength": 5,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 4
+        }
+      }
+    }
+  ]
+}
