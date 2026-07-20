@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "dcace1ca3c0bad6941098611b269b02d1f9eb80c50ad5475366c2d34439870bb",
+  "repositorySha": "e427f1fa4643e3fc853f2efc73cb5129809a3d8a",
+  "reviewedAt": "2026-07-20T21:50:00Z",
+  "modelUsed": "opus",
+  "requestedModels": ["opus"],
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-opus-4-8"],
+  "fallbackUsed": false,
+  "summary": "NO BLOCKERS. The sports bulletin is locally relevant, source-grounded, non-sensitive, editorial rather than sponsored, zero-em-dash, and aligned with the shortest-complete bulletin contract.",
+  "review": "NO BLOCKERS\n\nHash, metadata, source, sensitive-story, commercial, zero-em-dash, and bulletin-contract checks passed for the exact candidate SHA-256 dcace1ca3c0bad6941098611b269b02d1f9eb80c50ad5475366c2d34439870bb at repository SHA e427f1fa4643e3fc853f2efc73cb5129809a3d8a. Publishing may proceed."
+}
