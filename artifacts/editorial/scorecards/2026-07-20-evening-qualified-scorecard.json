@@ -1,0 +1,92 @@
+{
+  "generatedAt": "2026-07-20T21:41:00Z",
+  "measurement": {
+    "status": "unavailable",
+    "missing": [
+      "VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN",
+      "VERCEL_PROJECT_ID",
+      "Google Analytics",
+      "Google Search Console",
+      "page views",
+      "engaged sessions",
+      "returning sessions",
+      "scroll depth",
+      "measurable ad impressions",
+      "viewable ad impressions",
+      "Active View rate",
+      "ad revenue",
+      "page RPM",
+      "sponsor inquiries",
+      "qualified sponsor inquiries",
+      "sponsorship revenue",
+      "content cost"
+    ],
+    "missingValuesWereCoercedToZero": false,
+    "measurementRepair": "Provide a scoped Vercel token and project ID so apps/pipeline/vercel_analytics.py can import path-level page views while unsupported commercial fields remain unavailable."
+  },
+  "dailyCapacity": {
+    "publishedBeforeSweep": 2,
+    "dailyCeiling": 6,
+    "sweepCeiling": 2
+  },
+  "results": [
+    {
+      "title": "Canucks set 2026 home opener and ticket sale dates",
+      "lane": "daily-local-utility",
+      "category": "sports",
+      "locality": "Vancouver",
+      "storyType": "bulletin",
+      "score": 84.0,
+      "decision": "brief",
+      "confidence": "verified-primary-source",
+      "reasons": [
+        "Official team source confirms the schedule release, opening dates, home opener, first homestand, and ticket sale windows.",
+        "The sports shelf has one live article, so a concise schedule bulletin adds useful category depth without padding.",
+        "Reader job is narrow and time-sensitive: mark Rogers Arena dates and ticket sale windows."
+      ],
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 4,
+        "freshness": 4,
+        "evidenceStrength": 4,
+        "uniqueAngle": 4,
+        "repeatVisitPotential": 4,
+        "speedToUsefulDraft": 5
+      },
+      "commercialIntent": "ad-fit",
+      "commercialFitReason": "A local sports schedule bulletin may support contextual event, hospitality, and fan-experience ads, but page views, ad revenue, RPM, viewability, and sponsor demand remain unavailable.",
+      "brandSafety": "standard",
+      "sponsorshipStatus": "editorial",
+      "sources": [
+        "https://www.nhl.com/canucks/news/canucks-announce-2026-27-regular-season-schedule",
+        "https://www.nhl.com/canucks/schedule"
+      ]
+    }
+  ],
+  "rejected": [
+    {
+      "title": "Surrey Fusion Festival attendance recap",
+      "reason": "Retrospective attendance result has limited forward reader action compared with schedule or service updates."
+    },
+    {
+      "title": "Surrey Soccer Fan Zones attendance recap",
+      "reason": "Retrospective attendance result is already past the reader planning window."
+    },
+    {
+      "title": "Statement from the Mayor: Growing support for Metro Vancouver inquiry",
+      "reason": "Civic dispute item needs broader balanced evidence and could become sensitive political coverage."
+    },
+    {
+      "title": "Jim Lorimer Park Re-opening Celebration",
+      "reason": "Duplicate of the already published Burnaby events article."
+    },
+    {
+      "title": "Coquitlam Parkway and Panorama road work",
+      "reason": "Duplicate of the already published Coquitlam road-work bulletin."
+    },
+    {
+      "title": "Whitecaps Chicago match rescheduled",
+      "reason": "Away-match reschedule has weaker Lower Mainland reader utility than the existing Whitecaps BC Place planning article."
+    }
+  ]
+}
