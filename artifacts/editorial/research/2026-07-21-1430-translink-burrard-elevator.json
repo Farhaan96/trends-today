@@ -32,9 +32,7 @@
       "title": "TransLink Alerts",
       "url": "https://www.translink.ca/alerts",
       "tier": "primary",
-      "usedFor": [
-        "reader next step to check current station-access alerts"
-      ]
+      "usedFor": ["reader next step to check current station-access alerts"]
     }
   ],
   "commercialIntent": "ad-fit",
