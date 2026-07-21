@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "9091901257c909a5013ae1950a4eb4777546438e9fade3d08c5b5ffd0fa05494",
+  "repositorySha": "ed25e167fd308e0e02f642f9b73647eb37deba87",
+  "reviewedAt": "2026-07-21T01:45:52.405194+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8257-9fe7-79a2-b262-da9c17b17f26",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate is concise, locally relevant, well structured, and faithful to Richmond\u2019s notice. It leads with the deadline, clearly explains eligibility and participation details, and closes with direct registration and contact options."
+}

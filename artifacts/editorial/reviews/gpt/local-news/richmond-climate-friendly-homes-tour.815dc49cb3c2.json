@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "815dc49cb3c2dc2d636329bf380b19a04e3dc8360aa4a803712561afdc9452a9",
+  "repositorySha": "ed25e167fd308e0e02f642f9b73647eb37deba87",
+  "reviewedAt": "2026-07-21T01:42:18.524251+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8255-ce57-7790-819b-7a8fde4e14c9",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 4,
+    "formatting": 4,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "\u201cThe reader job is narrow\u201d is internal editorial language rather than reader-facing reporting. It interrupts the article, repeats the deadline already established in the lead, and weakens quality and engagement.",
+    "The close is not sufficiently actionable: it mentions the registration page without linking it where the call to action appears, leaving the actual registration link buried in Sources.",
+    "\u201cWhat it cost to maintain\u201d is more specific than the city notice, which separately mentions costs and ongoing upkeep. Revise to avoid implying that the cited source specifically discusses maintenance costs."
+  ],
+  "summary": "The bulletin is concise, scannable, locally relevant, and contains no authorial em dashes. It does not pass the strict second gate because meta-editorial phrasing, a buried registration action, and one overly specific characterization of the source require revision."
+}
