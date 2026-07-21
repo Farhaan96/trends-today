@@ -1,0 +1,20 @@
+﻿{
+    "status":  "malformed_verdict",
+    "verdict":  "NOT_REVIEWED",
+    "modelUsed":  "fable",
+    "requestedModels":  [
+                            "fable"
+                        ],
+    "observedModels":  [
+                           "claude-haiku-4-5-20251001",
+                           "claude-fable-5"
+                       ],
+    "fallbackUsed":  false,
+    "primaryModel":  "fable",
+    "fallbackModel":  "opus",
+    "fallbackDisabled":  false,
+    "reviewedSha":  "e746a45ce562e38d4281cd2192b24724c6c977af",
+    "workingDir":  "C:\\Users\\farha\\.codex\\worktrees\\trends-daily-2026-07-21-1230",
+    "message":  "Review must begin with NO BLOCKERS or BLOCKERS.",
+    "review":  "**NO BLOCKERS**\n\nThe candidate at `artifacts/editorial/release-candidates/local-news/richmond-recycling-contamination-audits.mdx` is publication-ready under the v4 local-news contract. Verification detail:\n\n- **Locality**: Richmond frontmatter locality, tags, and body all anchor to a Lower Mainland municipality with municipality-specific instructions (grey glass bin, Richmond Recycling app, RecycleSearch tool).\n- **Freshness**: The City of Richmond notice (dated July 7, 2026 per its URL) was discovered in the 12:30 primary-source sweep today (`artifacts/editorial/research/2026-07-21-1230-primary-source-queue.json:250`), and the audits are active this month, so the story is current and actionable at the July 21 publish time.\n- **Reader utility**: Concrete reader jobs are present: the sticker feedback system, the three sorting checks, and the lookup tool before collection day. `readerImpact` and `lengthRationale` are populated and match the bulletin format.\n- **Primary-source support**: All body claims (3% threshold, 7.3% curbside and 11.3% multi-family rates, 25% reduction by end of 2026, gold-star/\"Oops\" stickers) trace to the cited City of Richmond notice. The matching GPT artifact (`richmond-recycling-contamination-audits.2915deed4ef2.json`) verifies the candidate SHA-256 exactly as stated, verdict PASS with factualSupport 5. The prior revision\u0027s blocker (unsupported \"bins miss targets\" headline, review `d3c7faf8ccad`) is resolved; the current title claims only that audits start after contamination rose, which the notice supports.\n- **Em dashes**: Zero authorial em dashes in frontmatter or body; GPT\u0027s independent `proseEmDashCount` is also 0.\n- **Source URLs**: Three well-formed URLs appear in the body and Sources section, all matching the discovery queue entries (richmond.ca notice, richmond.ca RecycleSearch, recyclebc.ca guide).\n- **Image**: `public/images/editorial/2026/07/richmond-recycling-contamination-audits.png` exists; I viewed it — sorted blue bins, cardboard/paper, and glass containers on a residential curb, matching the alt text and topic, with attribution marked as original generated editorial imagery. No people, text artifacts, or misleading depictions.\n- **Commercial metadata**: `sponsorshipStatus: editorial`, `commercialIntent: ad-fit` with a reason that correctly notes revenue signals are unavailable, `brandSafety: standard`, and all approval flags false. Consistent with the scorecard.\n- **Approval triggers**: Not a sensitive story and not sponsored; `manualApprovalRequired` is false, correctly. (The scorecard shows sensitive candidates like the Oval forensic audit were held instead.)\n- **Copy quality**: The bulletin is tight at ~230 words with no padding, hedging, or filler sections.\n\nOne process note, not a blocker: my toolset in this session has no shell access, so I could not independently recompute the file\u0027s SHA-256; I relied on the exact hash match recorded in the GPT review artifact against the hash you supplied. Also, the GPT review\u0027s `repositorySha` (`fde49ff`) is the parent of the review SHA (`e746a45`) because the review ran before the staging commit — the candidate hash match confirms the reviewed content is identical."
+}
