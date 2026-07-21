@@ -1,0 +1,72 @@
+{
+  "generatedAt": "2026-07-21T14:34:33.020666",
+  "status": "needs-research",
+  "topics": [
+    {
+      "title": "Surrey targets three more properties for unpermitted construction",
+      "discoverySource": "primary_source_page",
+      "sourceUrl": "https://www.surrey.ca/news-events/news/surrey-targets-three-more-properties-unpermitted-construction",
+      "sourceName": "City of Surrey news",
+      "sourceTier": "primary",
+      "locality": "Surrey",
+      "category": "local-news",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-21T14:34:33.017666",
+      "status": "needs-research",
+      "requiredEvidence": [
+        "Lower Mainland locality",
+        "practical reader impact",
+        "freshness timestamp or event date",
+        "story type and its source threshold",
+        "at least one primary source URL",
+        "specific angle not covered by existing inventory",
+        "content lane and CTA hypothesis",
+        "all seven local opportunity ratings"
+      ]
+    },
+    {
+      "title": "More than 80,000 attend 19th annual Surrey Fusion Festival featuring headliners 54\u202240 and Kulwinder Billa",
+      "discoverySource": "primary_source_page",
+      "sourceUrl": "https://www.surrey.ca/news-events/news/more-80000-attend-19th-annual-surrey-fusion-festival-featuring-headliners-5440-and-kulwinder-billa",
+      "sourceName": "City of Surrey news",
+      "sourceTier": "primary",
+      "locality": "Surrey",
+      "category": "local-news",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-21T14:34:33.017666",
+      "status": "needs-research",
+      "requiredEvidence": [
+        "Lower Mainland locality",
+        "practical reader impact",
+        "freshness timestamp or event date",
+        "story type and its source threshold",
+        "at least one primary source URL",
+        "specific angle not covered by existing inventory",
+        "content lane and CTA hypothesis",
+        "all seven local opportunity ratings"
+      ]
+    },
+    {
+      "title": "Surrey Soccer Fan Zones draw more than 175,000 fans during FIFA World Cup 2026\u2122",
+      "discoverySource": "primary_source_page",
+      "sourceUrl": "https://www.surrey.ca/news-events/news/surrey-soccer-fan-zones-draw-more-175000-fans-during-fifa-world-cup-2026tm",
+      "sourceName": "City of Surrey news",
+      "sourceTier": "primary",
+      "locality": "Surrey",
+      "category": "local-news",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-21T14:34:33.017666",
+      "status": "needs-research",
+      "requiredEvidence": [
+        "Lower Mainland locality",
+        "practical reader impact",
+        "freshness timestamp or event date",
+        "story type and its source threshold",
+        "at least one primary source URL",
+        "specific angle not covered by existing inventory",
+        "content lane and CTA hypothesis",
+        "all seven local opportunity ratings"
+      ]
+    }
+  ]
+}
