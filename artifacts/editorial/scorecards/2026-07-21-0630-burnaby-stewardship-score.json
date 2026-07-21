@@ -1,0 +1,51 @@
+{
+  "generatedAt": "2026-07-21T13:40:12.719590+00:00",
+  "results": [
+    {
+      "title": "Burnaby park stewardship dates need registration",
+      "lane": "weekend-and-planning",
+      "score": 85.0,
+      "decision": "brief",
+      "confidence": "current-hypothesis",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Burnaby park stewardship dates need registration",
+        "lane": "weekend-and-planning",
+        "category": "things-to-do",
+        "locality": "Burnaby",
+        "storyType": "bulletin",
+        "confidence": "current-hypothesis",
+        "evidence": {
+          "readerImpact": "Burnaby residents can decide whether to register for the July 24 Robert Burnaby Park or July 31 Deer Lake Park volunteer stewardship sessions.",
+          "freshnessEvidence": "City of Burnaby lists upcoming 2026 event dates on July 24 and July 31, with registration required.",
+          "uniqueAngleEvidence": "Existing Trends Today Burnaby events coverage covers Summer Stages and Jim Lorimer Park, not the stewardship volunteer dates.",
+          "sourceUrls": [
+            "https://www.burnaby.ca/recreation-and-arts/events/environmental-stewardship-events",
+            "https://docs.google.com/forms/d/e/1FAIpQLSfOg1RUqAgbSIZ-yfvg3HU48qBp--shftVFMwJmmQIOVAyQUg/viewform",
+            "https://iscmv.ca/"
+          ],
+          "primarySourceUrls": [
+            "https://www.burnaby.ca/recreation-and-arts/events/environmental-stewardship-events"
+          ]
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 4,
+          "freshness": 4,
+          "evidenceStrength": 4,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        },
+        "commercialIntent": "ad-and-sponsor-fit",
+        "commercialFitReason": "The official Burnaby event page documents outdoor volunteer and park-planning intent, which may fit local recreation, garden, environmental-service, and community-retail contexts; sponsor demand, ad revenue, RPM, and viewability remain unavailable.",
+        "brandSafety": "standard",
+        "sponsorshipStatus": "editorial",
+        "sensitiveStorySignals": [],
+        "decision": "release-candidate"
+      }
+    }
+  ]
+}
