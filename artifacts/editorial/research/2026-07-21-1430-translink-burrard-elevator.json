@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-07-21T21:45:00Z",
+  "topic": "Burrard Station elevator closes for replacement",
+  "category": "transit",
+  "locality": "Vancouver",
+  "storyType": "bulletin",
+  "sourceTier": "primary",
+  "sources": [
+    {
+      "title": "Station upgrades continue to improve customer accessibility on SkyTrain",
+      "url": "https://www.translink.ca/news/2026/july/station%20upgrades%20continue%20to%20improve%20customer%20accessibility%20on%20skytrain",
+      "tier": "primary",
+      "usedFor": [
+        "July 21 Burrard elevator closure",
+        "spring 2027 duration",
+        "Granville Station and #5 bus detour",
+        "20-minute extra travel time",
+        "Royal Oak July 28 follow-up closure"
+      ]
+    },
+    {
+      "title": "Elevator and Escalator Replacement",
+      "url": "https://www.translink.ca/plans-and-projects/projects/maintenance-and-upgrade-program/rail-projects/elevator-and-escalator-replacement",
+      "tier": "primary",
+      "usedFor": [
+        "Burrard Station detour details",
+        "Royal Oak detour details",
+        "program context"
+      ]
+    },
+    {
+      "title": "TransLink Alerts",
+      "url": "https://www.translink.ca/alerts",
+      "tier": "primary",
+      "usedFor": [
+        "reader next step to check current station-access alerts"
+      ]
+    }
+  ],
+  "commercialIntent": "ad-fit",
+  "commercialFitReason": "Accessible transit detours serve recurring commuter and downtown trip-planning intent, which may support contextual local-service ads; page views, ad revenue, RPM, and sponsor demand remain unavailable.",
+  "brandSafety": "standard",
+  "sponsorshipStatus": "editorial",
+  "manualApprovalRequired": false
+}

@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-07-21T21:45:00Z",
+  "results": [
+    {
+      "title": "Burrard Station elevator closes for replacement",
+      "lane": "daily-local-utility",
+      "score": 92.0,
+      "decision": "brief",
+      "confidence": "verified-official-source",
+      "reasons": [
+        "Fresh official TransLink closure with current rider action, primary-source evidence, and clear Lower Mainland transit utility"
+      ],
+      "candidate": {
+        "title": "Burrard Station elevator closes for replacement",
+        "lane": "daily-local-utility",
+        "category": "transit",
+        "locality": "Vancouver",
+        "storyType": "bulletin",
+        "sourceTier": "primary",
+        "sourceUrl": "https://www.translink.ca/news/2026/july/station%20upgrades%20continue%20to%20improve%20customer%20accessibility%20on%20skytrain",
+        "evidence": {
+          "readerImpact": "SkyTrain riders who need elevator access at Burrard Station can plan the Granville Station or #5 bus detour before travelling downtown.",
+          "freshnessEvidence": "TransLink says Burrard Station elevator replacement starts July 21, 2026 and lasts until spring 2027.",
+          "uniqueAngleEvidence": "Existing Trends Today transit articles cover fares, FIFA transit, and Coquitlam road work, not Burrard Station accessible detours.",
+          "sourceUrls": [
+            "https://www.translink.ca/news/2026/july/station%20upgrades%20continue%20to%20improve%20customer%20accessibility%20on%20skytrain",
+            "https://www.translink.ca/plans-and-projects/projects/maintenance-and-upgrade-program/rail-projects/elevator-and-escalator-replacement",
+            "https://www.translink.ca/alerts"
+          ],
+          "primarySourceUrls": [
+            "https://www.translink.ca/news/2026/july/station%20upgrades%20continue%20to%20improve%20customer%20accessibility%20on%20skytrain",
+            "https://www.translink.ca/plans-and-projects/projects/maintenance-and-upgrade-program/rail-projects/elevator-and-escalator-replacement"
+          ],
+          "commercialFitReason": "Accessible transit detours serve recurring commuter and downtown trip-planning intent, which may support contextual local-service ads; page views, ad revenue, RPM, and sponsor demand remain unavailable.",
+          "brandSafety": "standard",
+          "sponsorshipStatus": "editorial"
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 5,
+          "freshness": 5,
+          "evidenceStrength": 5,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 4,
+          "speedToUsefulDraft": 5
+        }
+      }
+    }
+  ],
+  "rejected": [
+    {
+      "title": "Surrey targets three more properties for unpermitted construction",
+      "reason": "Fresh and official, but enforcement/private-property coverage requires broader balance and a sensitive-story approval posture before unattended publishing."
+    },
+    {
+      "title": "More than 80,000 attend 19th annual Surrey Fusion Festival featuring headliners 54-40 and Kulwinder Billa",
+      "reason": "Retrospective attendance count after the event ended; weak current reader action."
+    },
+    {
+      "title": "Surrey Soccer Fan Zones draw more than 175,000 fans during FIFA World Cup 2026",
+      "reason": "Retrospective attendance count after the event ended; weak current reader action."
+    }
+  ]
+}
