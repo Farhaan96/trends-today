@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "1e642bbdf7473192e4faa07b92ae48ce394b8ffd9a8be9e41754d44e4e62dc91",
+  "reviewedAt": "2026-07-21T01:57:40.000000+00:00",
+  "repositorySha": "0a992adba220a8d5ac5f92097fc2c15ac3387701",
+  "modelUsed": "opus",
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-opus-4-8"],
+  "review": "NO BLOCKERS\nCANDIDATE_SHA256: 1e642bbdf7473192e4faa07b92ae48ce394b8ffd9a8be9e41754d44e4e62dc91\n\nReview summary (Trends Today v4 local-news contract):\n\n- Factual support and source alignment: Body claims align with the primary Richmond notice and the qualified scorecard. Weekdays check out: July 31 2026 is a Friday, Aug 22 a Saturday, Aug 30 a Sunday.\n- Locality and freshness: Clearly Richmond; notice dated July 8, deadline July 31, published July 20. Actionable and current.\n- Reader utility: Bulletin gives who qualifies, deadline, dates, where to register. Length rationale fits.\n- Duplicate risk: Only the promoted twin shares the body; no competing distinct story. Not a blocker.\n- Gates: sponsorshipStatus editorial, brandSafety standard, no manual or commercial approval required or falsely asserted; non-sensitive civic event. Gates satisfied.\n- Internal link safety: /local-news/metro-vancouver-stage-2-water-restrictions-july-2026 resolves to a published article. Safe.\n- Source links: Primary Richmond notice and registration link both present in Sources and inline.\n- Image: /images/editorial/2026/07/richmond-climate-friendly-homes-tour.png exists; alt text fits the story.\n- Em dashes: None in authorial prose.\n\nPromotion is safe."
+}

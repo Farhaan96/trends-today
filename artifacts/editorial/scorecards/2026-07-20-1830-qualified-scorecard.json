@@ -1,0 +1,48 @@
+{
+  "generatedAt": "2026-07-21T01:40:49.505119+00:00",
+  "results": [
+    {
+      "title": "Richmond seeks climate-friendly homes for August tour",
+      "lane": "daily-local-utility",
+      "score": 80.0,
+      "decision": "brief",
+      "confidence": "current-hypothesis",
+      "reasons": ["Meets the current evidence and opportunity thresholds"],
+      "candidate": {
+        "title": "Richmond seeks climate-friendly homes for August tour",
+        "lane": "daily-local-utility",
+        "locality": "Richmond",
+        "category": "local-news",
+        "storyType": "bulletin",
+        "confidence": "current-hypothesis",
+        "sourceTier": "primary",
+        "commercialIntent": "ad-and-sponsor-fit",
+        "commercialFitReason": "Richmond's official homeowner call may attract home-energy, garden, renovation, and local-service reader intent; sponsor demand, ad revenue, RPM, and inquiry data remain unavailable.",
+        "sponsorshipStatus": "editorial",
+        "lengthRationale": "A bulletin is the shortest complete format because the reader job is to know the July 31 registration deadline, August tour dates, eligibility focus, and where to register.",
+        "evidence": {
+          "readerImpact": "Richmond homeowners can decide whether to register their climate-friendly home or garden before the July 31 deadline, and residents can note the August tour dates.",
+          "freshnessEvidence": "The official City of Richmond notice is dated July 8, 2026 and the homeowner registration deadline is Friday, July 31, 2026.",
+          "uniqueAngleEvidence": "No existing Trends Today article covers Richmond's climate-friendly home tour call; the closest local article covers regional water restrictions, which is only a contextual gardening link.",
+          "sourceUrls": [
+            "https://www.richmond.ca/city-hall/news/2026/climatefriendlyhomes08jul2026.htm",
+            "https://bit.ly/ClimateFriendlyTour2026"
+          ],
+          "primarySourceUrls": [
+            "https://www.richmond.ca/city-hall/news/2026/climatefriendlyhomes08jul2026.htm"
+          ],
+          "sponsorCategoryHypothesis": "home-services-housing"
+        },
+        "ratings": {
+          "localRelevance": 4,
+          "readerUtility": 4,
+          "freshness": 4,
+          "evidenceStrength": 4,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        }
+      }
+    }
+  ]
+}

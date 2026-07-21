@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "9091901257c909a5013ae1950a4eb4777546438e9fade3d08c5b5ffd0fa05494",
+  "repositorySha": "78ef58ca39de3b98ebd9bdf55b092943bf6e6846",
+  "reviewedAt": "2026-07-21T01:53:42.147982+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8260-2429-7fd0-847f-274f33a3382f",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The exact candidate hash and repository SHA were verified. The article accurately reflects the cited City of Richmond notice, presents the deadline and local relevance clearly, uses valid scannable MDX, closes with concrete registration and contact options, and contains no authorial em dashes."
+}
