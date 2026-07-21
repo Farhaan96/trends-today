@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "9091901257c909a5013ae1950a4eb4777546438e9fade3d08c5b5ffd0fa05494",
+  "reviewedAt": "2026-07-21T01:51:55.000000+00:00",
+  "repositorySha": "78ef58ca39de3b98ebd9bdf55b092943bf6e6846",
+  "modelUsed": "opus",
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-opus-4-8"],
+  "review": "NO BLOCKERS\nCANDIDATE_SHA256: 9091901257c909a5013ae1950a4eb4777546438e9fade3d08c5b5ffd0fa05494\n\nVerification summary:\n- Factual support and source alignment: body matches the July 8, 2026 Richmond notice, including the July 31 registration deadline, eligible features, one-or-both-dates participation, orientation sessions, and expert availability. Tour dates check out: Aug 22, 2026 is Saturday and Aug 30, 2026 is Sunday. No overreach; prior draft blockers are resolved.\n- Locality and freshness: Richmond; published 2026-07-20 ahead of an active July 31 deadline.\n- Reader utility: leads with deadline, states eligibility, and links the registration page inline plus contact email.\n- Duplicate risk: no existing Richmond climate-tour article; the water-restrictions piece is only a contextual link.\n- Commercial and sensitive gates: sponsorshipStatus editorial, manualApprovalRequired false, brandSafety standard. No sponsor placed; safe.\n- Internal link safety: /local-news/metro-vancouver-stage-2-water-restrictions-july-2026 resolves to a published file in content/local-news/.\n- Source links: primary Richmond URL matches scope; bit.ly is the city's official registration shortlink.\n- Image: public/images/editorial/2026/07/richmond-climate-friendly-homes-tour.png exists; alt text fits.\n- Em dashes: zero authorial em dashes; GPT proseEmDashCount is 0.\n- GPT review: PASS, candidateSha256 matches; scorecard decision brief, score 80.\n\nPromotion is safe."
+}

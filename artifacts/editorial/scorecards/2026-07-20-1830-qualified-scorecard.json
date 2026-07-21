@@ -7,9 +7,7 @@
       "score": 80.0,
       "decision": "brief",
       "confidence": "current-hypothesis",
-      "reasons": [
-        "Meets the current evidence and opportunity thresholds"
-      ],
+      "reasons": ["Meets the current evidence and opportunity thresholds"],
       "candidate": {
         "title": "Richmond seeks climate-friendly homes for August tour",
         "lane": "daily-local-utility",
