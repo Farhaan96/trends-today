@@ -42,7 +42,7 @@ This sweep added one practical Burnaby volunteer bulletin instead of filling a s
 ## Sources
 
 - [City of Burnaby Environmental Stewardship Events](https://www.burnaby.ca/recreation-and-arts/events/environmental-stewardship-events)
-- [Burnaby stewardship event registration](https://docs.google.com/forms/d/e/1FAIpQLSfOg1RUqAgbSIZ-yfvg3HU48qBp--shftVFMwJmmQIOVAyQUg/viewform)
+- [Burnaby stewardship event registration](https://docs.google.com/forms/d/e/1FAIpQLSdDmBcedvJdnniwV6aeHcJRfVExluzpkCUPC3GqVbcAU_xpCg/viewform)
 - [Invasive Species Council of Metro Vancouver](https://iscmv.ca/)
 
 ## Review and repairs
@@ -52,6 +52,7 @@ This sweep added one practical Burnaby volunteer bulletin instead of filling a s
 - Final exact-candidate GPT review returned `PASS` for candidate SHA `bd683b0af481a9946c5c7f774de3856d312ae3bb1bc3db11735c2f1df5df50dd`, repository SHA `da8bffb01f59e338a37807632acee12202f93e43`, all scores at least 4/5, no blockers, and zero authorial em dashes.
 - Fable usage was inspected and logged before release review.
 - Claude exact-SHA release review used Fable with no fallback and returned `NO BLOCKERS` at repository SHA `da8bffb01f59e338a37807632acee12202f93e43` for the same candidate SHA.
+- Live source-link verification after PR #32 found the original Google Forms registration URL returned 404. The official City of Burnaby page linked to the current form URL ending `SdDmBcedvJdnniwV6aeHcJRfVExluzpkCUPC3GqVbcAU_xpCg`, so the article, release candidate, research metadata, scorecard, and this learning entry were repaired before final closeout.
 
 ## Checkpoints
 

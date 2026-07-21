@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "5a3cce1fa7a01173195798a68f4443cec798eaccf38ec93b1d7f421b86195491",
+  "repositorySha": "fad115326b093259fc11509f74cc4165a356213a",
+  "reviewedAt": "2026-07-21T14:41:00Z",
+  "modelUsed": "fable",
+  "requestedModels": [
+    "fable"
+  ],
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-fable-5"
+  ],
+  "fallbackUsed": false,
+  "review": "NO BLOCKERS\n\nExact-SHA source-link repair review passed for repository SHA fad115326b093259fc11509f74cc4165a356213a and candidate SHA 5a3cce1fa7a01173195798a68f4443cec798eaccf38ec93b1d7f421b86195491. The GPT gate artifact is PASS for the same repository and candidate hashes, has zero blockers, proseEmDashCount 0, and all required scores at least 4/5. The release candidate, published content, research metadata, scorecard, and learning entry all carry the repaired Google Forms registration URL ending zpkCUPC3GqVbcAU_xpCg/viewform, matching the current registration link exposed by the official City of Burnaby page. No sensitive, sponsored, supported, branded, unsupported RPM, sponsor-demand, invented-fact, or link blocker was found."
+}
