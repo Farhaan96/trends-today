@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "2915deed4ef21a1ae29edd5c2bfe1315662d4f6e44d8aeb6b50f350873db2a9b",
+  "repositorySha": "738f66325d97f0038edc92ac026cf2fbf411cfc0",
+  "reviewedAt": "2026-07-21T19:49:59.500170+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8639-d223-7a40-bae7-573e164f3b8c",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate is fully supported by its cited primary sources, clearly organized, locally relevant, actionable, and free of authorial em dashes. The lead and close are practical without manufacturing urgency."
+}
