@@ -1,0 +1,74 @@
+{
+  "generatedAt": "2026-07-21T17:45:00Z",
+  "sweep": "2026-07-21 10:30 America/Vancouver",
+  "dailyPublishedBeforeSweep": 1,
+  "sweepCandidatesPublished": 1,
+  "dailyCeiling": 6,
+  "sweepCeiling": 2,
+  "metrics": {
+    "status": "unavailable",
+    "source": "artifacts/editorial/metrics/2026-07-21-1030-vercel-analytics.json",
+    "missing": [
+      "VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN",
+      "VERCEL_PROJECT_ID",
+      "engaged sessions",
+      "returning sessions",
+      "scroll depth",
+      "measurable ad impressions",
+      "viewable ad impressions",
+      "Active View rate",
+      "ad revenue",
+      "page RPM",
+      "sponsor inquiries",
+      "qualified sponsor inquiries",
+      "sponsorship revenue",
+      "content cost"
+    ],
+    "repair": "Connect Vercel analytics token and project id so path-level page views can be imported before commercial fit steers topic mix."
+  },
+  "qualified": [
+    {
+      "title": "Coquitlam posts heat-safety resources as temperatures climb",
+      "category": "local-news",
+      "municipality": "Coquitlam",
+      "score": 92,
+      "decision": "brief",
+      "readerJob": "Help residents make a same-day cooling and check-in plan from official sources.",
+      "commercialIntent": "ad-fit",
+      "sponsorshipStatus": "editorial",
+      "lengthRationale": "Bulletin because the reader needs current weather context, official resources, and next actions."
+    }
+  ],
+  "heldOrRejected": [
+    {
+      "title": "Surrey targets three more properties for unpermitted construction",
+      "reason": "Enforcement/property-title item needs more balanced evidence and may identify private-property disputes."
+    },
+    {
+      "title": "Surrey Fusion Festival and soccer fan-zone attendance posts",
+      "reason": "Retrospective attendance posts have weak forward-looking reader utility."
+    },
+    {
+      "title": "Burnaby Environmental Stewardship Events and Jim Lorimer Park",
+      "reason": "Already covered by live Trends Today articles or too close to the same Burnaby event shelf."
+    },
+    {
+      "title": "Coquitlam Parkway/Panorama road work and Metro Vancouver Stage 2 water restrictions",
+      "reason": "Duplicates of live Trends Today articles."
+    },
+    {
+      "title": "Richmond Olympic Oval audits and Surrey Metro Vancouver inquiry statement",
+      "reason": "Civic dispute/audit items need balanced reporting and approval-level caution."
+    },
+    {
+      "title": "Canucks and Whitecaps items",
+      "reason": "Mostly duplicate, away-match, or low-utility sports filler after the Canucks schedule bulletin."
+    }
+  ],
+  "singleChangedVariable": "Publish a same-day public-service weather bulletin from official local and weather-health sources instead of filling the second slot.",
+  "keepRepairStop": {
+    "keep": "Keep heat-safety bulletins when they are same-day, official-source, practical, and link-verified.",
+    "repair": "Repair measurement credentials before using commercial intent to steer more weather or public-service coverage.",
+    "stop": "Stop if there is no concrete forecast/resource change or if the item becomes an alert/emergency story requiring human approval."
+  }
+}

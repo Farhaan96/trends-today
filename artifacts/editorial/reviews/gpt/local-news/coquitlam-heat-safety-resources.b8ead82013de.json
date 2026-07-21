@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "b8ead82013de307d37b6e051d24575db41d379b4ef0f2aee29a0eb3a7362d7e4",
+  "repositorySha": "7f9850537170f20e69ae688ad7610a8a484ba6d4",
+  "reviewedAt": "2026-07-21T18:16:18.136218+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f85e2-4c8c-7960-a87a-26ce3b0eb25f",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "Exact candidate hash and repository SHA verified. The concise local bulletin is well supported, scannable, readable, and actionable, with zero em dashes in authorial prose."
+}

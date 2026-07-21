@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-07-21T17:40:01.816852+00:00",
+  "results": [
+    {
+      "title": "Coquitlam posts heat-safety resources as temperatures climb",
+      "lane": "daily-local-utility",
+      "score": 96.0,
+      "decision": "brief",
+      "confidence": "current-hypothesis",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Coquitlam posts heat-safety resources as temperatures climb",
+        "sourceName": "City of Coquitlam heat-safety resources",
+        "sourceTier": "primary",
+        "sourceUrl": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2004",
+        "locality": "Coquitlam",
+        "category": "local-news",
+        "lane": "daily-local-utility",
+        "storyType": "bulletin",
+        "readerImpact": "Coquitlam residents can check cooling options, strata and rental-building resources, and senior safety steps before the hottest part of the day.",
+        "lengthRationale": "A bulletin is the shortest complete format because the reader needs same-day heat context and practical preparation steps.",
+        "commercialIntent": "ad-fit",
+        "commercialFitReason": "The official city notice and weather forecast create practical local intent around cooling, home comfort, hydration, and community recreation contexts; sponsor demand and RPM are unavailable.",
+        "sponsorshipStatus": "editorial",
+        "evidence": {
+          "primarySourceUrls": [
+            "https://www.coquitlam.ca/m/newsflash/Home/Detail/2004",
+            "https://weather.gc.ca/en/location/index.html?coords=49.2838%2C-122.7932",
+            "https://www.weather.gc.ca/warnings/report_e.html?bcrm1517=",
+            "https://www.fraserhealth.ca/health-topics-a-to-z/sun-safety/during-a-heat-event"
+          ],
+          "sourceUrls": [
+            "https://www.coquitlam.ca/m/newsflash/Home/Detail/2004",
+            "https://weather.gc.ca/en/location/index.html?coords=49.2838%2C-122.7932",
+            "https://www.weather.gc.ca/warnings/report_e.html?bcrm1517=",
+            "https://www.fraserhealth.ca/health-topics-a-to-z/sun-safety/during-a-heat-event"
+          ],
+          "readerImpact": "Residents can make a cooling and check-in plan before hot indoor temperatures build.",
+          "freshnessEvidence": "City of Coquitlam posted the notice on July 21, 2026; Environment Canada issued the forecast at 5 a.m. July 21 and current conditions at 10 a.m.",
+          "uniqueAngleEvidence": "No live Trends Today article covers Coquitlam heat-safety resources or same-day heat planning.",
+          "brandSafety": "standard"
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 5,
+          "freshness": 5,
+          "evidenceStrength": 5,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        }
+      }
+    }
+  ]
+}
