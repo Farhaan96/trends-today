@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "bd683b0af481a9946c5c7f774de3856d312ae3bb1bc3db11735c2f1df5df50dd",
+  "repositorySha": "da8bffb01f59e338a37807632acee12202f93e43",
+  "reviewedAt": "2026-07-21T14:10:00Z",
+  "modelUsed": "fable",
+  "requestedModels": [
+    "fable"
+  ],
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-fable-5"
+  ],
+  "fallbackUsed": false,
+  "review": "NO BLOCKERS\n\nExact-SHA release review passed for repository SHA da8bffb01f59e338a37807632acee12202f93e43 and candidate SHA bd683b0af481a9946c5c7f774de3856d312ae3bb1bc3db11735c2f1df5df50dd. The GPT gate artifact is PASS for the same repository and candidate hashes, has zero blockers, proseEmDashCount 0, and all required scores at least 4/5. The Burnaby stewardship bulletin has concrete Lower Mainland reader utility, is not duplicate filler, and is supported by City of Burnaby source material for dates, times, parks, registration, activities, equipment/instruction, refreshments, and later dates. No sensitive, sponsored, supported, branded, unsupported RPM, sponsor-demand, invented-fact, or link blocker was found. Non-blocking note: the scorecard predates one commercialFitReason wording repair, but the candidate and research metadata carry the corrected sourced hypothesis."
+}

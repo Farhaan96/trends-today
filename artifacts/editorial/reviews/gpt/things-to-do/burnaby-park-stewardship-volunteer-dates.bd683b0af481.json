@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "bd683b0af481a9946c5c7f774de3856d312ae3bb1bc3db11735c2f1df5df50dd",
+  "repositorySha": "da8bffb01f59e338a37807632acee12202f93e43",
+  "reviewedAt": "2026-07-21T14:03:10.632810+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f84fc-8527-70d3-8059-b7cc2cbf9935",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The cited City of Burnaby material supports the dates, locations, times, activities, registration requirement, session leadership, supplied equipment, refreshments, and later dates. The bulletin is concise, scannable, locally relevant, and closes with a practical registration action. No authorial prose em dashes were found."
+}
