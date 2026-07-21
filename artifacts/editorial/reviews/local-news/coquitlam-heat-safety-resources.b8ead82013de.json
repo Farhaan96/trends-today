@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "b8ead82013de307d37b6e051d24575db41d379b4ef0f2aee29a0eb3a7362d7e4",
+  "repositorySha": "7f9850537170f20e69ae688ad7610a8a484ba6d4",
+  "reviewedAt": "2026-07-21T18:12:45Z",
+  "modelUsed": "fable",
+  "reviewBackend": "invoke-claude-review.ps1",
+  "requestedModels": ["fable"],
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-fable-5"],
+  "fallbackUsed": false,
+  "review": "NO BLOCKERS\n\nReviewed artifacts/editorial/release-candidates/local-news/coquitlam-heat-safety-resources.mdx in a clean working tree at repository SHA 7f9850537170f20e69ae688ad7610a8a484ba6d4 against the 10:30 sweep research capture, primary-source queue, scorecard, config contract, and image asset. Factual support, reader utility, duplication, sensitive/commercial triggers, metadata, image integrity, internal links, story length, targeted Prettier formatting, and zero-em-dash requirements pass. The candidate is eligible for promotion alongside its passing GPT editorial artifact."
+}
