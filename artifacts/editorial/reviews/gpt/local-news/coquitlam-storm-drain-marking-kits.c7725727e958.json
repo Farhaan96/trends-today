@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "c7725727e958993a0a248fa9ffe509ccef41153214649b5dba08c2fa04f4dc50",
+  "repositorySha": "26187515eae435af8898f2d0d5e606b2f286d4dd",
+  "reviewedAt": "2026-07-21T23:49:56.982453+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8714-8874-7e12-be00-ca9636a2ab2a",
+  "scores": {
+    "engagement": 5,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The concise local bulletin is well supported, clearly organized, easy to scan, and closes with practical sign-up, disposal, and reporting actions. Minor repetition keeps quality below perfect but does not require revision."
+}

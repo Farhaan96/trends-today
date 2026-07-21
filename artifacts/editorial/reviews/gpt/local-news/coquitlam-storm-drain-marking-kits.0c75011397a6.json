@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "0c75011397a6c0a417f256f93ec2f7746648d821ebf495d9dc7b39bc70fb63dd",
+  "repositorySha": "26187515eae435af8898f2d0d5e606b2f286d4dd",
+  "reviewedAt": "2026-07-21T23:44:31.190200+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8710-521a-7922-b9ce-9545b7ebf089",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The statement that this is an \u201congoing city program\u201d is not established by the cited material. The notice describes the program and sign-up process but does not explicitly confirm its duration or ongoing status.",
+    "The title \u201cCoquitlam storm drain marking kits are open now\u201d is awkward and imprecise because kits are not themselves \u201copen\u201d; the sign-up or program is open. This weakens an otherwise concrete lead."
+  ],
+  "summary": "The article is scannable, practical, locally relevant, and free of prose em dashes. Most details closely track the city notice, but the unsupported duration claim and imprecise title require revision before release."
+}
