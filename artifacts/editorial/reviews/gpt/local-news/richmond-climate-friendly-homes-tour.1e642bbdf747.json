@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "1e642bbdf7473192e4faa07b92ae48ce394b8ffd9a8be9e41754d44e4e62dc91",
+  "repositorySha": "0a992adba220a8d5ac5f92097fc2c15ac3387701",
+  "reviewedAt": "2026-07-21T02:03:16.060880+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8268-c040-74e1-82aa-ade4617fb967",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The exact candidate hash and repository SHA were independently confirmed. The City of Richmond notice supports the deadline, tour dates, eligible features, participation details, expert availability, orientation, visitor benefits, registration link, and contact email. The bulletin is concise, scannable, locally relevant, and ends with a clear registration action."
+}
