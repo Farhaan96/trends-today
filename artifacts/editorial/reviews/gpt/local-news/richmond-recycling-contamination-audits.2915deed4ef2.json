@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "2915deed4ef21a1ae29edd5c2bfe1315662d4f6e44d8aeb6b50f350873db2a9b",
+  "repositorySha": "fde49ffb73ab28ad6524cddceed3e5e5a887c63b",
+  "reviewedAt": "2026-07-21T19:42:29.830185+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8632-878d-7dd2-bf4d-f75148421982",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The concise bulletin has a concrete local lead, clearly explains the household and utility-cost stakes, accurately reflects the cited primary sources, and closes with a practical action. Its MDX structure is clean and scannable, and the authorial prose contains no em dashes."
+}

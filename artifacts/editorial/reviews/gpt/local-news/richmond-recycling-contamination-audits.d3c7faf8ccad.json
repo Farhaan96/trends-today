@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "d3c7faf8ccadeeaff6ed4f8ef62bfcaa151f60afdf7e77e140c86f7106ec5dea",
+  "repositorySha": "fde49ffb73ab28ad6524cddceed3e5e5a887c63b",
+  "reviewedAt": "2026-07-21T19:40:52.632851+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8631-3c2e-71f3-a3c5-3835aaab2be5",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The headline claim that \u201cbins miss targets\u201d is unsupported and materially misleading. The cited notice reports citywide contamination rates above Recycle BC\u2019s threshold; it does not establish targets for individual bins or say that audited bins have missed them."
+  ],
+  "summary": "The file and repository hashes match exactly. The bulletin is clear, scannable, locally useful, and ends with a concrete action. Its body closely tracks the cited City of Richmond notice, but the unsupported headline framing prevents passage at this strict factual gate."
+}

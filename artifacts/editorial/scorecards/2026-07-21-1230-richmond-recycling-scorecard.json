@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-07-21T12:43:00-07:00",
+  "sweep": "12:30",
+  "dailyCountBeforeRun": 2,
+  "dailyCeiling": 6,
+  "candidate": {
+    "title": "Richmond recycling audits start after contamination rises",
+    "category": "local-news",
+    "municipality": "Richmond",
+    "storyType": "bulletin",
+    "sourceUrls": [
+      "https://www.richmond.ca/city-hall/news/2026/reducerecyclingcontamination07jul2026.htm",
+      "https://www.richmond.ca/services/recycling-garbage/search.htm",
+      "https://recyclebc.ca/what-can-i-recycle/"
+    ],
+    "ratings": {
+      "localRelevance": 5,
+      "readerUtility": 4,
+      "freshness": 3,
+      "evidenceStrength": 5,
+      "uniqueAngle": 4,
+      "repeatVisitPotential": 3,
+      "speedToUsefulDraft": 5
+    },
+    "weightedScore": 83,
+    "decision": "brief",
+    "editorialFitReason": "Official Richmond notice gives residents a current July action: visual audits, contamination rates, sticker feedback, and a lookup path before collection day.",
+    "commercialIntent": "ad-fit",
+    "commercialFitReason": "Household utility intent may support contextual local-service and home-organization ads, but ad revenue, page RPM, Active View, and sponsor demand are unavailable.",
+    "brandSafety": "standard",
+    "sponsorshipStatus": "editorial",
+    "lengthRationale": "Bulletin treatment is sufficient because the reader job is to check sorting rules before pickup, not to read a full recycling explainer."
+  },
+  "rejectedOrHeld": [
+    {
+      "title": "Surrey targets three more properties for unpermitted construction",
+      "reason": "Civic enforcement/property dispute; private-property implications require broader evidence and likely manual approval."
+    },
+    {
+      "title": "Surrey Fusion Festival attendance",
+      "reason": "Retrospective attendance item with weak immediate reader action."
+    },
+    {
+      "title": "Surrey Soccer Fan Zones attendance",
+      "reason": "Retrospective attendance item and duplicate World Cup/fan-zone shelf depth."
+    },
+    {
+      "title": "Mayor statement on Metro Vancouver inquiry",
+      "reason": "Political/civic dispute requiring balanced evidence; not safe for unattended bulletin."
+    },
+    {
+      "title": "Burnaby Environmental Stewardship Events",
+      "reason": "Duplicate of the July 21 06:30 published article."
+    },
+    {
+      "title": "Coquitlam heat-safety resources",
+      "reason": "Duplicate of the July 21 10:30 published article."
+    },
+    {
+      "title": "Coquitlam Parkway and Panorama road work",
+      "reason": "Duplicate of the July 20 published article."
+    },
+    {
+      "title": "Delta Stage 2 water restrictions",
+      "reason": "Duplicate of the July 19 Metro Vancouver water-restrictions article."
+    },
+    {
+      "title": "Richmond Olympic Oval audits",
+      "reason": "Forensic-audit coverage is sensitive civic accountability work requiring deeper evidence and approval."
+    },
+    {
+      "title": "Whitecaps match at Chicago on Apple TV",
+      "reason": "Away-match viewing logistics are lower local utility than the Richmond household-service candidate."
+    }
+  ],
+  "measurement": {
+    "status": "unavailable",
+    "repair": "Provide VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN plus VERCEL_PROJECT_ID to enable path-level page-view import; GA, Search Console, ad viewability, revenue, and sponsor inquiry feeds remain unavailable."
+  }
+}
