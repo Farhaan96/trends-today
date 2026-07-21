@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "73fcd22e07964241b341641571ee0aebe68daa4f31cf91804d5e07b9517f66fe",
+  "repositorySha": "59f4f5dc869b363f8354dacabb3d780241ba6585",
+  "reviewedAt": "2026-07-21T21:58:00Z",
+  "modelUsed": "fable",
+  "reviewBackend": "invoke-claude-review.ps1",
+  "fallbackUsed": false,
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-fable-5"],
+  "summary": "NO BLOCKERS. The formatted Burrard Station elevator bulletin passed factual support, editorial independence, sensitive-story, reader-job, formatting, source-link, and zero authorial em dash checks."
+}
