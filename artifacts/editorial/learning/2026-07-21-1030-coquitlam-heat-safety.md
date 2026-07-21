@@ -2,17 +2,22 @@
 
 ## Outcome
 
-- Decision: `published-pending-pr-deploy`.
+- Decision: `published-live-verified`.
 - Candidate: `Coquitlam posts heat-safety resources as temperatures climb`.
 - Category: `local-news`.
 - Municipality: Coquitlam.
-- Sweep count: 1 of 2 allowed for this sweep; 2 of 6 known new stories for July 21 if merged and deployed.
+- Sweep count: 1 of 2 allowed for this sweep; 2 of 6 known new stories for July 21 after merge and deployment.
 - Release worktree: `C:\Users\farha\.codex\worktrees\trends-daily-2026-07-21-1030-final`.
 - Release branch: `issue/lm-daily-2026-07-21-1030-final`.
+- Pull request: [#35](https://github.com/Farhaan96/trends-today/pull/35).
+- Merge commit: `d0a1f0c3b65368b27c1015f719faac1e7f1939e3`.
+- Production deployment: `5543748104`, successful at `2026-07-21T18:37:17Z`.
+- Canonical URL: [https://www.trendstoday.ca/local-news/coquitlam-heat-safety-resources](https://www.trendstoday.ca/local-news/coquitlam-heat-safety-resources).
 
 ## Baseline and constraint
 
 - Production `/api/analytics` before this sweep reported 138 active articles, with local inventory at `local-news` 2, `transit` 3, `things-to-do` 4, `food-drink` 1, `housing` 2, and `sports` 2.
+- Production `/api/analytics` after deployment reported 139 active articles, with `local-news` at 3 and this Coquitlam bulletin first in recent articles.
 - Only one July 21 story was live before this sweep: `Burnaby park stewardship dates need registration`.
 - The Vercel importer wrote `artifacts/editorial/metrics/2026-07-21-1030-vercel-analytics.json` with status `unavailable` because `VERCEL_TOKEN` or `VERCEL_ANALYTICS_TOKEN` and `VERCEL_PROJECT_ID` were not available in the automation environment.
 - Google Analytics, Google Search Console, page views, engaged sessions, returning sessions, scroll depth, measurable ad impressions, viewable ad impressions, Active View rate, ad revenue, page RPM, sponsor inquiries, qualified sponsor inquiries, sponsorship revenue, and content cost remain unavailable.
@@ -53,6 +58,18 @@ This sweep added one same-day public-service weather bulletin instead of filling
 - Final exact-candidate GPT review returned `PASS` for candidate SHA `b8ead82013de307d37b6e051d24575db41d379b4ef0f2aee29a0eb3a7362d7e4`, repository SHA `7f9850537170f20e69ae688ad7610a8a484ba6d4`, all scores at least 4/5, no blockers, and zero authorial em dashes.
 - Fable usage was inspected and logged before Claude review.
 - Claude exact-SHA release review used Fable with no fallback and returned `NO BLOCKERS` at repository SHA `7f9850537170f20e69ae688ad7610a8a484ba6d4` for the same candidate SHA.
+- PR #35 checks passed before merge: Vercel and Vercel Preview Comments both succeeded.
+- Local validation passed before merge: `python -m unittest discover -s apps/pipeline/tests`, `npm ci`, `npm run typecheck`, `npm run lint -- --quiet`, targeted Prettier check, `git diff --check`, and `npm run build`.
+
+## Live verification
+
+- Browser verification returned HTTP 200 for the canonical URL.
+- H1 matched `Coquitlam posts heat-safety resources as temperatures climb`.
+- Canonical tag matched the live article URL.
+- Body contained the key date, forecast, no-alert context, and Fraser Health indoor-temperature thresholds.
+- Hero image loaded through Next Image with natural dimensions `1024x576`; rendered alt text was the article headline.
+- Source links resolved with HTTP 200 for Coquitlam, Environment Canada forecast, Environment Canada alerts, and Fraser Health.
+- Browser console and request-failure logs were clean during verification.
 
 ## Checkpoints
 
