@@ -7,9 +7,7 @@
       "score": 84.0,
       "decision": "brief",
       "confidence": "verified-primary-sources",
-      "reasons": [
-        "Meets the current evidence and opportunity thresholds"
-      ],
+      "reasons": ["Meets the current evidence and opportunity thresholds"],
       "candidate": {
         "title": "Coquitlam road safety plan proposes 22 actions",
         "lane": "daily-local-utility",
