@@ -3,19 +3,19 @@
   "reviewer": "openai-gpt",
   "verdict": "PASS",
   "candidateSha256": "c7725727e958993a0a248fa9ffe509ccef41153214649b5dba08c2fa04f4dc50",
-  "repositorySha": "26187515eae435af8898f2d0d5e606b2f286d4dd",
-  "reviewedAt": "2026-07-21T23:49:56.982453+00:00",
+  "repositorySha": "7e3a1d92b98f4e87a399671bbd138a191024ff95",
+  "reviewedAt": "2026-07-22T00:00:30.935830+00:00",
   "modelUsed": "gpt-5.6-sol",
   "reviewBackend": "codex-cli-oauth",
-  "reviewRunId": "019f8714-8874-7e12-be00-ca9636a2ab2a",
+  "reviewRunId": "019f871e-a38d-76f3-8387-94a3dcc14e54",
   "scores": {
-    "engagement": 5,
-    "factualSupport": 5,
+    "engagement": 4,
+    "factualSupport": 4,
     "formatting": 5,
     "quality": 4,
     "readability": 5
   },
   "proseEmDashCount": 0,
   "blockers": [],
-  "summary": "The concise local bulletin is well supported, clearly organized, easy to scan, and closes with practical sign-up, disposal, and reporting actions. Minor repetition keeps quality below perfect but does not require revision."
+  "summary": "The exact candidate hash and repository SHA were verified. The article is concise, well structured, locally relevant, and actionable. Its factual claims are appropriately attributed and align with the cited source set. The lead establishes immediate local stakes, the headings and list make the MDX scannable, the ending provides official reporting contacts, and authorial prose contains no em dashes."
 }
