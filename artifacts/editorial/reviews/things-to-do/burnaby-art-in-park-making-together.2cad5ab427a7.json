@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "2cad5ab427a70e94dd118496f713ba0b4253846ab160fd6134aa7e5bd09b17e2",
+  "reviewedAt": "2026-07-22T23:54:10+00:00",
+  "repositorySha": "4514aec787994d6d39e417143fa6041c8ca7422a",
+  "modelUsed": "opus",
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-opus-4-8"],
+  "review": "NO BLOCKERS\n\nCANDIDATE_SHA256: 2cad5ab427a70e94dd118496f713ba0b4253846ab160fd6134aa7e5bd09b17e2\n\nFactual support and source use are clean. The single primary source is the official City of Burnaby event page, linked in the body and Sources section, and every factual claim is attributed to Burnaby or the city. Dates and days are correct: July 27, 2026 is Monday, July 30 is Thursday, and July 31 is Friday. The five sessions and five parks match the title, subtitle, description, and schedule bullets. The July 31 videographer note is included and scoped to the Edmonds Park and Keswick Park sessions. Title, meta, bulletin structure, schedule list, wayfinding, materials, seating guidance, internal link, image path, alt text, AI attribution, slug, and reading time are consistent. Reputational and legal risk is low for a free municipal community event. No corrections required before public publication."
+}
