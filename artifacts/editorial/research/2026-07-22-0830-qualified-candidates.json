@@ -1,0 +1,102 @@
+{
+  "runId": "2026-07-22-0830",
+  "generatedAt": "2026-07-22T08:55:00-07:00",
+  "metrics": {
+    "source": "artifacts/editorial/metrics/2026-07-22-0830-vercel.json",
+    "status": "unavailable",
+    "constraint": "Article-level page views, engaged sessions, returning sessions, scroll depth, ad viewability, revenue, RPM, sponsor inquiries, sponsorship revenue, and content cost remain unavailable from configured sources.",
+    "measurementRepair": "Connect VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN plus VERCEL_PROJECT_ID, then add Search Console, GA, ad, and sponsor inquiry exports before using commercial results to steer topic mix."
+  },
+  "dailyCeiling": {
+    "publishedBeforeRun": 1,
+    "maximumDailyStories": 6,
+    "maximumPerSweep": 2
+  },
+  "selected": [
+    {
+      "title": "Expo 86 photo show opens across Burnaby libraries",
+      "candidatePath": "artifacts/editorial/release-candidates/things-to-do/burnaby-expo86-photo-exhibition-libraries.mdx",
+      "category": "things-to-do",
+      "locality": "Burnaby",
+      "storyType": "bulletin",
+      "readerJob": "Help Lower Mainland readers plan a current Burnaby library culture stop with the two branch dates, locations, and hours.",
+      "editorialQualification": {
+        "locality": "Burnaby, with Lower Mainland arts and Expo 86 heritage relevance.",
+        "freshness": "The exhibition opened July 7 and July 8, 2026 and remains current through October 19 and October 20.",
+        "readerUtility": "Readers can decide which branch to visit and when.",
+        "evidence": "Supported by the City of Burnaby event page, Burnaby Art Gallery offsite exhibition page, and Burnaby Public Library location/hour pages.",
+        "primarySource": "City of Burnaby and Burnaby Public Library.",
+        "corroboration": "Burnaby's event page and offsite exhibition page independently list the exhibition, dates, branch split, and gallery context.",
+        "uniqueness": "No existing Trends Today article covers the Michael de Courcy Expo 86 library exhibition.",
+        "brandSafety": "standard",
+        "sensitiveStory": false
+      },
+      "commercial": {
+        "commercialIntent": "ad-and-sponsor-fit",
+        "commercialFitReason": "Local arts, heritage, library, and trip-planning intent may fit events-entertainment, hospitality-tourism, and local-retail contexts; this is a sourced hypothesis only because article-level revenue, RPM, viewability, and sponsor demand are unavailable.",
+        "sponsorshipStatus": "editorial"
+      },
+      "lengthRationale": "A bulletin is enough because the reader needs the exhibition identity, branch dates, addresses, hours, and planning caveat without a full Expo 86 explainer.",
+      "sources": [
+        "https://www.burnaby.ca/recreation-and-arts/events/michael-de-courcy-one-million",
+        "https://www.burnaby.ca/recreation-and-arts/arts-and-culture-facilities/burnaby-art-gallery/exhibitions/offsite-exhibitions",
+        "https://bpl.bc.ca/people-help/locations-hours",
+        "https://bpl.bc.ca/people-help/locations-hours/mcgill"
+      ]
+    }
+  ],
+  "rejected": [
+    {
+      "title": "Jim Lorimer Park Re-opening Celebration",
+      "reason": "Duplicate: Trends Today already covered the July 22 Jim Lorimer playground reopening in content/things-to-do/free-burnaby-park-events-this-week.mdx."
+    },
+    {
+      "title": "Surrey targets three more properties for unpermitted construction",
+      "reason": "Rejected for unattended publishing because it names property addresses and enforcement allegations, making it too sensitive for this autonomous sweep."
+    },
+    {
+      "title": "Richmond Olympic Oval Corporation - Performance & Forensic Audits",
+      "reason": "Rejected for unattended publishing because forensic audit coverage is sensitive civic/accountability coverage requiring human review."
+    },
+    {
+      "title": "More than 80,000 attend 19th annual Surrey Fusion Festival",
+      "reason": "Retrospective attendance item with limited forward-looking reader job."
+    },
+    {
+      "title": "Surrey Soccer Fan Zones draw more than 175,000 fans during FIFA World Cup 2026",
+      "reason": "Retrospective attendance item and no immediate reader action."
+    },
+    {
+      "title": "Seeking Climate-Friendly Homes",
+      "reason": "Duplicate: Richmond climate-friendly homes tour was already published on July 20."
+    },
+    {
+      "title": "Reduce Recycling Contamination",
+      "reason": "Duplicate: Richmond recycling audits story was already published on July 21."
+    },
+    {
+      "title": "PSA: Coquitlam Shares Heat Safety Resources",
+      "reason": "Duplicate: Coquitlam heat-safety bulletin was already published on July 21."
+    },
+    {
+      "title": "Coquitlam Advancing Transportation Plan with Road Safety Program",
+      "reason": "Duplicate: Coquitlam road-safety plan story was already published at 06:45 on July 22."
+    },
+    {
+      "title": "Help Keep Coquitlam's Waterways Clean with Storm Drain Marking",
+      "reason": "Duplicate: Coquitlam storm-drain marking story was already published on July 21."
+    },
+    {
+      "title": "Road Work - Intersection of Parkway Boulevard and Panorama Drive",
+      "reason": "Duplicate: Coquitlam Parkway and Panorama road-work story was already published on July 20."
+    },
+    {
+      "title": "Stage 2 Water Restrictions Activated by Metro Vancouver",
+      "reason": "Duplicate: Stage 2 water restrictions bulletin was already published on July 19."
+    },
+    {
+      "title": "Sports feed items",
+      "reason": "Rejected because discovered Canucks, Whitecaps, and BC Lions items were either previously covered, stale, retrospective, weakly actionable, or not strong enough to beat the selected things-to-do utility item."
+    }
+  ]
+}

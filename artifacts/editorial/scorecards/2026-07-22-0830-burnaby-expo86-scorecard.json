@@ -1,0 +1,36 @@
+{
+  "runId": "2026-07-22-0830",
+  "candidate": "Expo 86 photo show opens across Burnaby libraries",
+  "category": "things-to-do",
+  "locality": "Burnaby",
+  "storyType": "bulletin",
+  "scores": {
+    "localRelevance": 5,
+    "readerUtility": 4,
+    "freshness": 4,
+    "evidenceStrength": 4,
+    "uniqueAngle": 4,
+    "repeatVisitPotential": 3,
+    "speedToUsefulDraft": 5
+  },
+  "weightedScore": 83,
+  "minimumScore": 65,
+  "minimumEvidenceStrength": 3,
+  "minimumSources": 1,
+  "primarySourceRequired": true,
+  "qualified": true,
+  "commercialIntent": "ad-and-sponsor-fit",
+  "commercialFitReason": "Local arts, heritage, library, and trip-planning intent may fit events-entertainment, hospitality-tourism, and local-retail contexts; no Trends Today revenue or sponsor-demand proof is available.",
+  "sponsorshipStatus": "editorial",
+  "brandSafety": "standard",
+  "manualApprovalRequired": false,
+  "singleChangedVariable": "Test an ongoing free-time culture bulletin tied to Expo 86 heritage, rather than another civic service bulletin or one-day park event.",
+  "measurementStatus": "unavailable",
+  "measurementRepair": "Connect Vercel article export credentials and configured Search Console, GA, ad, and sponsor inquiry sources.",
+  "sources": [
+    "https://www.burnaby.ca/recreation-and-arts/events/michael-de-courcy-one-million",
+    "https://www.burnaby.ca/recreation-and-arts/arts-and-culture-facilities/burnaby-art-gallery/exhibitions/offsite-exhibitions",
+    "https://bpl.bc.ca/people-help/locations-hours",
+    "https://bpl.bc.ca/people-help/locations-hours/mcgill"
+  ]
+}
