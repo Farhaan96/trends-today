@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "9d26f8e91c4885e4cd20fdc77a31563081864f060bb59415fb84519f80930e7b",
+  "repositorySha": "a2718df1544db82d98adb0ccd7b7b0da6baa16dd",
+  "reviewedAt": "2026-07-22T17:44:02.618707+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8aec-77ad-7b00-95e8-9783fb8bed7f",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The exact candidate hash and repository SHA were verified. The article accurately reflects the cited City of Surrey notice, delivers useful local guidance in clean, scannable MDX, closes with actionable advice, and contains no countable authorial em dashes."
+}
