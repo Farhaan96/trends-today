@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "9c28a06ac408210324131079e1d949c0c4ff0a7b40328a2c9e6c5bd4bed5b709",
+  "repositorySha": "23c35eddb77c9df1a91023aec9b001ead46e8f4b",
+  "reviewedAt": "2026-07-22T17:50:19.248318+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8af2-318c-7993-9364-4d83532d6c02",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "PASS. The primary sources support the warning details, forecast, cooling locations, vulnerable groups, and contact guidance. The bulletin is clear, locally useful, scannable, and ends with actionable advice. The exact candidate and repository hashes were verified, and authorial prose contains no em dashes."
+}
