@@ -1,0 +1,65 @@
+[
+  {
+    "title": "Coquitlam invites residents to mark storm drains",
+    "lane": "daily-local-utility",
+    "category": "local-news",
+    "locality": "Coquitlam",
+    "storyType": "bulletin",
+    "source": "primary_source_page",
+    "sourceName": "City of Coquitlam news",
+    "sourceUrl": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2000",
+    "sourceTier": "primary",
+    "confidence": "current-hypothesis",
+    "commercialIntent": "ad-and-sponsor-fit",
+    "commercialFitReason": "The official city notice creates practical local intent around home maintenance, waste disposal, environmental volunteering, and community-service contexts; article-level revenue, RPM, viewability, and sponsor demand remain unavailable.",
+    "brandSafety": "standard",
+    "sponsorshipStatus": "editorial",
+    "evidence": {
+      "readerImpact": "Residents, community groups, and businesses can borrow a city kit, mark storm drains near them, and check safe disposal options before pollutants reach local streams.",
+      "freshnessEvidence": "City of Coquitlam notice posted July 15, 2026; the city provides a sign-up page for storm drain marking.",
+      "uniqueAngleEvidence": "No existing Trends Today content covers Coquitlam storm drain marking, yellow fish markers, or the city's 17,000-drain waterway reminder.",
+      "sourceUrls": [
+        "https://www.coquitlam.ca/m/newsflash/Home/Detail/2000",
+        "https://www.coquitlam.ca/StormDrain",
+        "https://www.coquitlam.ca/WasteWizard",
+        "https://rcbc.ca/"
+      ],
+      "primarySourceUrls": [
+        "https://www.coquitlam.ca/m/newsflash/Home/Detail/2000",
+        "https://www.coquitlam.ca/StormDrain",
+        "https://www.coquitlam.ca/WasteWizard"
+      ],
+      "rejectedAlternates": [
+        {
+          "title": "Surrey targets three more properties for unpermitted construction",
+          "reason": "Private-property and enforcement framing needs broader care and is not a low-risk unattended utility story."
+        },
+        {
+          "title": "More than 80,000 attend Surrey Fusion Festival",
+          "reason": "Retrospective attendance note with weak next reader action."
+        },
+        {
+          "title": "Michael de Courcy: one in a million",
+          "reason": "Already rejected in prior learning as weaker event depth than active Burnaby planning utility."
+        },
+        {
+          "title": "Jim Lorimer Park Re-opening Celebration",
+          "reason": "Duplicate with already live Burnaby park events coverage."
+        },
+        {
+          "title": "Environmental Stewardship Events",
+          "reason": "Duplicate with already live Burnaby park stewardship coverage."
+        }
+      ]
+    },
+    "ratings": {
+      "localRelevance": 5,
+      "readerUtility": 4,
+      "freshness": 4,
+      "evidenceStrength": 4,
+      "uniqueAngle": 4,
+      "repeatVisitPotential": 3,
+      "speedToUsefulDraft": 5
+    }
+  }
+]

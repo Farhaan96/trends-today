@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "e47202ce2972d30cae0a6da8138886ff69d2118f5924c48b7df75f5b50ab92f9",
+  "repositorySha": "26187515eae435af8898f2d0d5e606b2f286d4dd",
+  "reviewedAt": "2026-07-21T23:46:15.870384+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8711-b104-79a1-a346-34b380b0f375",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 4,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The final section repeats the sign-up, map, and route advice without developing the promised local stakes. It buries the concrete creek, wildlife, pollution, and potential-penalty consequences stated by the city, then ends flatly.",
+    "\u201cKeep the drain route small enough to finish cleanly\u201d is awkward, repeated guidance that is not established by the cited city material. It should be replaced with a supported, concrete closing action."
+  ],
+  "summary": "The exact candidate and repository hashes were verified. The MDX is clean and scannable, and the core factual claims are supported, but the repetitive final section, buried local impact, and weak unsupported closing advice require revision."
+}

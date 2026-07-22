@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "853143ccefff7de112f94ac0e576776f259012b12bf1bebc17867ddd097c9cee",
+  "repositorySha": "26187515eae435af8898f2d0d5e606b2f286d4dd",
+  "reviewedAt": "2026-07-21T23:47:30.590788+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8713-2c00-74b3-a410-5740d45c3223",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The advice to check disposal options before \u201cdraining outdoor water\u201d is broader than the cited city guidance, which specifically addresses pools and hot tubs and gives particular disposal instructions. Narrow or directly support this claim.",
+    "The closing phrase \u201ckeep disposal questions out of the drain system\u201d is awkward and logically unclear. It weakens an otherwise actionable close and requires revision.",
+    "The opening and body repeatedly direct readers to the sign-up page without adding much progression, while the strongest local stake, direct flow into fish-bearing creeks and streams, arrives only after the generic first sentence. Tighten the lead and reduce repetition."
+  ],
+  "summary": "The candidate is well structured, scannable, and largely grounded in the City of Coquitlam notice. It fails the strict gate because one disposal statement overgeneralizes the source, the lead repeats rather than advances, and the final sentence lands awkwardly instead of delivering a clear action. No countable em dashes appear in the authorial prose."
+}
