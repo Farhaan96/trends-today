@@ -1,0 +1,90 @@
+{
+  "generatedAt": "2026-07-22T13:41:21.396376+00:00",
+  "results": [
+    {
+      "title": "Coquitlam road safety plan proposes 22 actions",
+      "lane": "daily-local-utility",
+      "score": 84.0,
+      "decision": "brief",
+      "confidence": "verified-primary-sources",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Coquitlam road safety plan proposes 22 actions",
+        "lane": "daily-local-utility",
+        "category": "transit",
+        "locality": "Coquitlam",
+        "storyType": "reported-update",
+        "source": "primary_source_page",
+        "sourceName": "City of Coquitlam news",
+        "sourceUrl": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2001",
+        "sourceTier": "primary",
+        "confidence": "verified-primary-sources",
+        "commercialIntent": "ad-fit",
+        "commercialFitReason": "The official transportation update creates commuter, family, active-transportation, and local-service intent around safer streets and travel choices; article-level page views, RPM, ad viewability, and sponsor demand remain unavailable.",
+        "brandSafety": "standard",
+        "sponsorshipStatus": "editorial",
+        "evidence": {
+          "readerImpact": "Coquitlam residents, drivers, walkers, cyclists, and scooter users can see which draft road-safety actions may shape local streets and where to follow the Transportation Plan update.",
+          "freshnessEvidence": "City of Coquitlam notice posted July 15, 2026; the transportation-plan project page says the city is in phase 4 of 5 and expects adoption in 2027.",
+          "uniqueAngleEvidence": "Existing Trends Today Coquitlam transit coverage is a specific Parkway/Panorama work-zone bulletin, not a citywide draft road-safety program or transportation-plan update.",
+          "sourceUrls": [
+            "https://www.coquitlam.ca/m/newsflash/Home/Detail/2001",
+            "https://coquitlam.ca/175/Transportation-Planning",
+            "https://letstalkcoquitlam.ca/transportationplan",
+            "https://coquitlam.ca.granicus.com/MetaViewer.php?view_id=2&clip_id=3308&meta_id=91339"
+          ],
+          "primarySourceUrls": [
+            "https://www.coquitlam.ca/m/newsflash/Home/Detail/2001",
+            "https://coquitlam.ca/175/Transportation-Planning",
+            "https://letstalkcoquitlam.ca/transportationplan"
+          ],
+          "rejectedAlternates": [
+            {
+              "title": "Surrey targets three more properties for unpermitted construction",
+              "reason": "Private-property and enforcement framing is approval-bound and not a low-risk unattended utility story."
+            },
+            {
+              "title": "More than 80,000 attend 19th annual Surrey Fusion Festival",
+              "reason": "Retrospective attendance post with weak current reader action."
+            },
+            {
+              "title": "Surrey Soccer Fan Zones draw more than 175,000 fans",
+              "reason": "Retrospective event-performance post with weak current planning utility."
+            },
+            {
+              "title": "Statement from the Mayor: Growing support for Metro Vancouver inquiry",
+              "reason": "Political statement without a concrete resident action for this sweep."
+            },
+            {
+              "title": "Jim Lorimer Park Re-opening Celebration",
+              "reason": "Already covered through the live Burnaby park events article."
+            },
+            {
+              "title": "Environmental Stewardship Events",
+              "reason": "Already covered through the live Burnaby stewardship article."
+            },
+            {
+              "title": "BC Supreme Court Decision - Impact on Property Titles",
+              "reason": "Legal/property title notice needs more careful owner-reviewed framing than this unattended sweep."
+            },
+            {
+              "title": "Richmond Olympic Oval Corporation - Performance & Forensic Audits",
+              "reason": "Audit and forensic framing is sensitive and not suitable for unattended publication."
+            }
+          ]
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 4,
+          "freshness": 4,
+          "evidenceStrength": 4,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 4
+        }
+      }
+    }
+  ]
+}
