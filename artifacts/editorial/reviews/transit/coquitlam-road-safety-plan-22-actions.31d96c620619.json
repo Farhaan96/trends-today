@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "31d96c620619ee8f82af56a69d9ef2a27be35f7bc5cc04343483b407c3c66e96",
+  "repositorySha": "ff73fdb46a0ead6b67bed798d2b890bb2cd41497",
+  "reviewedAt": "2026-07-22T13:52:38Z",
+  "modelUsed": "opus",
+  "requestedModels": ["opus"],
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-opus-4-8"],
+  "fallbackUsed": false,
+  "fallbackDisabled": true,
+  "review": "NO BLOCKERS\n\nIndependent exact-SHA release review passed via the approved Opus 4.8 route with fallback disabled. The candidate was reviewed at repository SHA ff73fdb46a0ead6b67bed798d2b890bb2cd41497 against config/content-business.json v4, config/local-news-sources.json, the research queue, qualified candidate record, ranked scorecard, metrics artifact, internal-link target, and the generated image. The review found factual support from cited City of Coquitlam primary sources, no unsupported claims, no scraping or rewriting another publisher, Coquitlam locality and current reader utility, editorial commercial metadata with no sponsor approval required, no manual-approval trigger, useful source and internal links, a non-placeholder article-specific image, reported-update formatting compliance, and zero authorial em dashes."
+}
