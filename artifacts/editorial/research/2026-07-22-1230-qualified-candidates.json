@@ -1,0 +1,72 @@
+[
+  {
+    "title": "Coquitlam signal work will darken Lougheed and Dewdney lights",
+    "sourceName": "City of Coquitlam traffic signal maintenance notice",
+    "sourceUrl": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2007",
+    "locality": "Coquitlam",
+    "category": "transit",
+    "storyType": "bulletin",
+    "readerJob": "Help late-night drivers plan around the July 23 signal outage at Lougheed Highway and Dewdney Trunk Road.",
+    "commercialIntent": "ad-fit",
+    "commercialFitReason": "Overnight route-planning, traffic-control, commuter, local-service, and navigation intent may fit standard contextual local ads, but Trends Today has no verified article-level page views, Active View, RPM, ad revenue, or sponsor demand for this format.",
+    "brandSafety": "standard",
+    "sponsorshipStatus": "editorial",
+    "ratings": {
+      "localRelevance": 5,
+      "readerUtility": 5,
+      "freshness": 5,
+      "evidenceStrength": 4,
+      "uniqueAngle": 4,
+      "repeatVisitPotential": 3,
+      "speedToUsefulDraft": 5
+    },
+    "decision": "brief",
+    "sources": [
+      {
+        "name": "City of Coquitlam traffic signal maintenance notice",
+        "url": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2007",
+        "tier": "primary"
+      },
+      {
+        "name": "City of Coquitlam Traffic Hotspots",
+        "url": "https://www.coquitlam.ca/198/Traffic-Hotspots",
+        "tier": "primary"
+      },
+      {
+        "name": "DriveBC Lougheed at Dewdney Trunk Road camera",
+        "url": "https://www.drivebc.ca/cameras/366",
+        "tier": "primary"
+      }
+    ]
+  },
+  {
+    "title": "Surrey targets three more properties for unpermitted construction",
+    "decision": "reject",
+    "reason": "Rejected for unattended publishing because enforcement against specific properties carries legal and private-property sensitivity."
+  },
+  {
+    "title": "BC Supreme Court Decision - Impact on Property Titles",
+    "decision": "reject",
+    "reason": "Rejected for unattended publishing because a property-title legal decision can affect private owners and needs manual legal/sensitivity review."
+  },
+  {
+    "title": "Richmond Olympic Oval Corporation - Performance & Forensic Audits",
+    "decision": "reject",
+    "reason": "Rejected for unattended publishing because forensic-audit coverage can imply misconduct and needs human review before publication."
+  },
+  {
+    "title": "Michael de Courcy: one in a million",
+    "decision": "reject",
+    "reason": "Duplicate: Trends Today already published the Burnaby Expo 86 library exhibition bulletin on July 22."
+  },
+  {
+    "title": "Environmental Stewardship Events",
+    "decision": "reject",
+    "reason": "Duplicate: Trends Today already published Burnaby stewardship dates, including the Environmental Stewardship Events source."
+  },
+  {
+    "title": "Vancouver Whitecaps FC MLS regular season match at Chicago Fire FC rescheduled due to poor air quality conditions",
+    "decision": "reject",
+    "reason": "Rejected again because away-match rescheduling has weaker Lower Mainland reader utility than local event, transit, and civic-service updates."
+  }
+]

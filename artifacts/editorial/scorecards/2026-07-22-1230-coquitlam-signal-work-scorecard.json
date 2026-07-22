@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-07-22T12:45:00-07:00",
+  "sweep": "2026-07-22-1230",
+  "dailyCeiling": {
+    "maximum": 6,
+    "alreadyPublishedBeforeSweep": 3,
+    "plannedPublicationCount": 1,
+    "stateAfterSweepIfPublished": 4
+  },
+  "measurement": {
+    "status": "unavailable",
+    "sourceArtifact": "artifacts/editorial/metrics/2026-07-22-1230-vercel-analytics.json",
+    "constraint": "Configured article-level Vercel, Search Console, GA, ad, sponsor, revenue, and content-cost metrics remain unavailable.",
+    "repair": "Connect VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN plus VERCEL_PROJECT_ID, then add configured Search Console, GA, ad, and sponsor exports."
+  },
+  "selectedCandidate": {
+    "title": "Coquitlam signal work will darken Lougheed and Dewdney lights",
+    "category": "transit",
+    "municipality": "Coquitlam",
+    "storyType": "bulletin",
+    "readerJob": "Help late-night drivers plan around the July 23 signal outage at Lougheed Highway and Dewdney Trunk Road.",
+    "score": 88,
+    "commercialIntent": "ad-fit",
+    "sponsorshipStatus": "editorial",
+    "brandSafety": "standard",
+    "manualApprovalRequired": false
+  },
+  "rejections": [
+    "Surrey heat and Coquitlam road/heat/storm-drain items were duplicates of live articles.",
+    "Surrey unpermitted construction, Richmond property-title, and Richmond forensic-audit items were rejected by sensitivity/legal-risk gates.",
+    "Burnaby Michael de Courcy and Environmental Stewardship Events were duplicates of already published Burnaby things-to-do coverage.",
+    "Whitecaps away-match reschedule was lower local utility than a route-impact bulletin."
+  ]
+}

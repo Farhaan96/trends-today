@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "3dbf618efe28d874ad3f646ecc1430f1c6a03a6e5a6f15e6fc181a96625c3ab3",
+  "repositorySha": "453a209b7e2538337e6f918a57545b8199479075",
+  "reviewedAt": "2026-07-22T19:38:26.929266+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8b55-7231-7a71-af47-89564ecd86bb",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The claim that the intersection affects \u201ca major east-west route and a busy connection near northeast Coquitlam\u201d is not established by the cited material. It adds unsupported significance to the local stakes.",
+    "The late-shift, airport-pickup, delivery, and early-morning examples manufacture a broader impact that the sources do not document. They also distract from the supported consequence: overnight traffic control and possible delays.",
+    "The opening is generic (\u201cone more overnight road note\u201d), and the article repeats the same route-planning advice across the lead, impact section, source explanation, and closing. This weakens specificity and creates filler in a short bulletin.",
+    "The closing merely repeats the earlier instruction to check the official notice. It is actionable but flat and does not add a concise final reminder of the supported work hours and traffic-control condition."
+  ],
+  "summary": "The core intersection, date, overnight window, dark signal, traffic-control setup, weather caveat, safety advice, related city work, and DriveBC camera reference are supported. The MDX is clean and scannable, with zero countable em dashes. Revision is required because unsupported local-stakes language, manufactured trip scenarios, repetition, and a weak close keep factual support, quality, and engagement below the pass threshold."
+}
