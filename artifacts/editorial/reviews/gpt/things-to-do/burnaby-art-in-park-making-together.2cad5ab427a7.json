@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "2cad5ab427a70e94dd118496f713ba0b4253846ab160fd6134aa7e5bd09b17e2",
+  "repositorySha": "4514aec787994d6d39e417143fa6041c8ca7422a",
+  "reviewedAt": "2026-07-22T23:52:09.433394+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8c3d-ad7e-77c2-9677-0c97eb90c42a",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The exact candidate hash and repository SHA were verified. The City of Burnaby source supports the dates, locations, drop-in rules, activities, materials, seating guidance, and July 31 videographer note. The bulletin is specific, scannable, actionable, and contains no authorial em dashes."
+}
