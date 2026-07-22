@@ -1,21 +1,25 @@
 {
   "version": 1,
   "reviewer": "openai-gpt",
-  "verdict": "PASS",
+  "verdict": "BLOCKERS",
   "candidateSha256": "9d26f8e91c4885e4cd20fdc77a31563081864f060bb59415fb84519f80930e7b",
-  "repositorySha": "a2718df1544db82d98adb0ccd7b7b0da6baa16dd",
-  "reviewedAt": "2026-07-22T17:44:02.618707+00:00",
+  "repositorySha": "90e8ac25c0cef06e5fcc117e0607ac81b1762880",
+  "reviewedAt": "2026-07-22T17:47:59.119539+00:00",
   "modelUsed": "gpt-5.6-sol",
   "reviewBackend": "codex-cli-oauth",
-  "reviewRunId": "019f8aec-77ad-7b00-95e8-9783fb8bed7f",
+  "reviewRunId": "019f8af0-46b6-7381-9475-4284a28a8fbf",
   "scores": {
-    "engagement": 4,
-    "factualSupport": 5,
+    "engagement": 3,
+    "factualSupport": 3,
     "formatting": 5,
     "quality": 4,
-    "readability": 5
+    "readability": 4
   },
   "proseEmDashCount": 0,
-  "blockers": [],
-  "summary": "The exact candidate hash and repository SHA were verified. The article accurately reflects the cited City of Surrey notice, delivers useful local guidance in clean, scannable MDX, closes with actionable advice, and contains no countable authorial em dashes."
+  "blockers": [
+    "The lead, subtitle, and description call the source a July 22 notice, but the cited City of Surrey page is dated June 15, 2026. No cited material supports the July 22 posting claim.",
+    "The advice to check on someone \"before the warmest part of the day\" is not supported by the cited page, which recommends checking regularly but does not prescribe that timing.",
+    "Because the concrete lead depends on the unsupported July 22 framing, the opening does not meet the supported-lead requirement."
+  ],
+  "summary": "BLOCKED. The article is clear, useful, scannable, and contains zero authorial em dashes, but its central July 22 framing and one timing recommendation are unsupported by the sole cited source."
 }
