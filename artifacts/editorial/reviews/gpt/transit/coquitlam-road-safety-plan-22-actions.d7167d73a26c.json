@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "d7167d73a26cb2c2d23652a0edba6e4ba1871199e495b30210283dd244484f02",
+  "repositorySha": "e07e741597653cc8177da13a8249a9992b8faf77",
+  "reviewedAt": "2026-07-22T13:57:22.995807+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8a1c-cd66-7bc1-a9c7-d3b71805069c",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate accurately reflects the cited City of Coquitlam material, clearly explains the local implications, uses valid and scannable MDX, and closes with a specific action for residents. Some repeated attribution and planning language keep the prose from earning top marks, but no revision-blocking issue remains."
+}

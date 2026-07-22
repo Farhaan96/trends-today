@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "31d96c620619ee8f82af56a69d9ef2a27be35f7bc5cc04343483b407c3c66e96",
+  "repositorySha": "ff73fdb46a0ead6b67bed798d2b890bb2cd41497",
+  "reviewedAt": "2026-07-22T13:48:45.857570+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8a15-181c-7693-8866-44bebc694209",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The cited City of Coquitlam material supports the article\u2019s substantive claims, figures, planning phase, goals, and timeline. The MDX is clear, scannable, locally relevant, and closes with a practical tracking action. No authorial prose em dashes were found."
+}
