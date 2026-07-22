@@ -1,0 +1,46 @@
+{
+  "generatedAt": "2026-07-22T14:45:00-07:00",
+  "candidate": "artifacts/editorial/release-candidates/local-news/delta-air-quality-warning-smoke-heat.mdx",
+  "title": "Delta air-quality warning covers smoke and heat",
+  "category": "local-news",
+  "municipality": "Delta",
+  "storyType": "bulletin",
+  "readerJob": "Help Delta residents decide whether to adjust outdoor plans during the July 22 air-quality warning.",
+  "score": 89.0,
+  "decision": "release-candidate",
+  "editorialQualification": {
+    "locality": "Delta, within the Lower Mainland",
+    "freshness": "City of Delta notice is dated July 22, 2026 and Environment Canada AQHI values were current the same afternoon.",
+    "readerUtility": "Residents get the warning reason, the health-risk context, immediate actions, and where to check current conditions.",
+    "evidence": "Three primary/official sources support the bulletin.",
+    "uniqueness": "No existing Trends Today article covers Delta's July 22 air-quality warning or AQHI values.",
+    "brandSafety": "standard public-service weather and air-quality update",
+    "sensitiveStory": "No manual-approval trigger found for crime, death, serious injury, missing person, leaked material, private-person claim, sponsored, supported, or branded coverage."
+  },
+  "commercialResearch": {
+    "commercialIntent": "ad-fit",
+    "commercialFitReason": "The official warning creates practical local intent around home comfort, cooling, recreation planning, health precautions, and public-service information. This is a sourced hypothesis only because Trends Today has no verified article-level page views, viewability, RPM, ad revenue, or sponsor demand for this format.",
+    "sponsorshipStatus": "editorial",
+    "approvalBoundary": "No sponsor outreach, pricing, rates, terms, guarantees, supported placement, or customer commitment was made."
+  },
+  "lengthAndLinks": {
+    "lengthRationale": "Bulletin length is enough for the warning, AQHI context, immediate actions, and update links without padding for ad inventory.",
+    "internalLinks": ["/local-news/surrey-extreme-heat-cooling-locations"]
+  },
+  "sources": [
+    "https://www.delta.ca/community-culture/happening-delta/news/air-quality-warning-july-22-2026",
+    "https://metrovancouver.org/services/air-quality-climate-action/air-quality-data-and-advisories",
+    "https://weather.gc.ca/airquality/pages/provincial_summary/bc_e.html"
+  ],
+  "metricsAvailability": "Vercel analytics token/project id, GA, Search Console, ad, sponsor, and content-cost exports are unavailable; values are not coerced to zero.",
+  "singleChangedVariable": "Added an air-quality warning bulletin tied to wildfire smoke and AQHI context instead of another heat-only or event item.",
+  "checkpoints": {
+    "sevenDay": "2026-07-29",
+    "twentyEightDay": "2026-08-19"
+  },
+  "keepRepairStop": {
+    "keep": "Keep weather and air-quality bulletins when they have current official-source utility, named locality, and a clear plan-changing action.",
+    "repair": "Add more neighbourhood-specific action context only when official sources provide it and engagement justifies the extra length.",
+    "stop": "Stop if air-quality stories become generic weather rewrites or commercial assumptions start steering publication without comparable data."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "b0598525f52b4ed9f23d47c6251a28dc3b3e072299d2d6fe38680d0883e74509",
+  "repositorySha": "e92d443a80eae4f0a179da52aa4ac428ecda403f",
+  "reviewedAt": "2026-07-22T14:56:05-07:00",
+  "modelUsed": "opus",
+  "reviewRoute": "opus-with-disable-fallback",
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-opus-4-8"],
+  "fallbackUsed": false,
+  "summary": "NO BLOCKERS. The formatted release candidate is locally relevant, same-day fresh, concise, useful, source-linked, standard brand safety, editorial sponsorship status, no sensitive-story trigger, and contains zero authorial em dashes. Claude noted that source fetch and digest computation were outside its read-only tool scope; local deterministic checks and GPT gate verified live source support and the candidate SHA."
+}

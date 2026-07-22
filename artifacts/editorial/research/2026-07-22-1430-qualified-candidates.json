@@ -1,0 +1,103 @@
+{
+  "generatedAt": "2026-07-22T14:45:00-07:00",
+  "sweep": "14:30",
+  "dailyCeilingState": {
+    "beforeSweep": 4,
+    "maximum": 6,
+    "selectedForRelease": 1,
+    "remainingAfterSelection": 1
+  },
+  "metricsConstraint": {
+    "status": "unavailable",
+    "missing": [
+      "VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN",
+      "VERCEL_PROJECT_ID",
+      "GA_PROPERTY_ID",
+      "GOOGLE_APPLICATION_CREDENTIALS",
+      "page views",
+      "engaged sessions",
+      "returning sessions",
+      "scroll depth",
+      "measurable ad impressions",
+      "viewable ad impressions",
+      "Active View rate",
+      "ad revenue",
+      "page RPM",
+      "sponsor inquiries",
+      "qualified sponsor inquiries",
+      "sponsorship revenue",
+      "content cost"
+    ],
+    "measurementRepair": "Connect Vercel analytics credentials plus Search Console, GA, ad, and sponsor inquiry exports before changing topic mix from commercial performance assumptions."
+  },
+  "selected": [
+    {
+      "title": "Delta air-quality warning covers smoke and heat",
+      "lane": "daily-local-utility",
+      "category": "local-news",
+      "locality": "Delta",
+      "storyType": "bulletin",
+      "score": 89.0,
+      "decision": "brief",
+      "confidence": "current-hypothesis",
+      "evidence": {
+        "readerImpact": "Delta residents can check the July 22 air-quality warning, understand why smoke and heat matter, and decide whether to reduce outdoor activity or use cooler indoor spaces.",
+        "freshnessEvidence": "City of Delta page is dated July 22, 2026; Environment Canada AQHI summary was updated the same afternoon.",
+        "uniqueAngleEvidence": "Trends Today has a Surrey heat-cooling bulletin and Coquitlam heat-safety item, but no Delta or AQHI air-quality warning bulletin.",
+        "sourceUrls": [
+          "https://www.delta.ca/community-culture/happening-delta/news/air-quality-warning-july-22-2026",
+          "https://metrovancouver.org/services/air-quality-climate-action/air-quality-data-and-advisories",
+          "https://weather.gc.ca/airquality/pages/provincial_summary/bc_e.html"
+        ],
+        "primarySourceUrls": [
+          "https://www.delta.ca/community-culture/happening-delta/news/air-quality-warning-july-22-2026",
+          "https://metrovancouver.org/services/air-quality-climate-action/air-quality-data-and-advisories",
+          "https://weather.gc.ca/airquality/pages/provincial_summary/bc_e.html"
+        ]
+      },
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 4,
+        "freshness": 5,
+        "evidenceStrength": 4,
+        "uniqueAngle": 4,
+        "repeatVisitPotential": 4,
+        "speedToUsefulDraft": 5
+      },
+      "commercialIntent": "ad-fit",
+      "commercialFitReason": "The official air-quality warning creates practical local intent around home comfort, cooling, recreation planning, health precautions, and public-service information; article-level views, Active View, RPM, ad revenue, and sponsor demand remain unavailable.",
+      "brandSafety": "standard",
+      "sponsorshipStatus": "editorial"
+    }
+  ],
+  "rejected": [
+    {
+      "title": "Staying Cool During Extreme Heat",
+      "reason": "Duplicate of the already published Surrey July 22 cooling-place bulletin."
+    },
+    {
+      "title": "Michael de Courcy: one in a million",
+      "reason": "Duplicate of the already published Burnaby Expo 86 library exhibition bulletin."
+    },
+    {
+      "title": "Jim Lorimer Park Re-opening Celebration",
+      "reason": "The July 22 event ended at 2 p.m., before this sweep's candidate selection."
+    },
+    {
+      "title": "Environmental Stewardship Events",
+      "reason": "Duplicate of the already published Burnaby park stewardship registration bulletin."
+    },
+    {
+      "title": "Traffic Signal Maintenance Work - Intersection of Lougheed Highway and Dewdney Trunk Road",
+      "reason": "Duplicate of the already published Coquitlam signal-work bulletin."
+    },
+    {
+      "title": "Stage 2 Water Restrictions Activated by Metro Vancouver",
+      "reason": "Duplicate of the existing Metro Vancouver Stage 2 water-restrictions article."
+    },
+    {
+      "title": "Sports team notes from Canucks, Whitecaps, and BC Lions listings",
+      "reason": "No stronger immediate Lower Mainland reader job than the current air-quality warning; several were roster, podcast, retrospective, or non-local event items."
+    }
+  ]
+}
