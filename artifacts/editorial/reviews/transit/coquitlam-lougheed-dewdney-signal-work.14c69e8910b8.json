@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "14c69e8910b8d3133b79f6dafbac543eb5fff3c8f14e8c7d0db37de86999304c",
+  "repositorySha": "1b8b2935fd8dfee9bcd39e14711fd1d532597522",
+  "reviewedAt": "2026-07-22T19:47:08Z",
+  "modelUsed": "opus",
+  "requestedModels": ["opus"],
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-opus-4-8"],
+  "fallbackUsed": false,
+  "fallbackDisabled": true,
+  "review": "NO BLOCKERS\n\nVerified against SHA `1b8b2935fd8dfee9bcd39e14711fd1d532597522`.\n\nCandidate checks: frontmatter complete and internally consistent; dates coherent for the July 23 overnight work window; internal link resolves to published content/transit/coquitlam-parkway-panorama-road-work.mdx; hero image exists; three sources present; claims attribute to city notice; no prose em dashes. GPT gate: embedded PASS artifact has verdict PASS, no blockers, all scores at least 4, candidateSha256 14c69e8910b8d3133b79f6dafbac543eb5fff3c8f14e8c7d0db37de86999304c, and repositorySha 1b8b2935fd8dfee9bcd39e14711fd1d532597522. Non-blocking note: hash binding was confirmed from matching embedded and stated values because hashing tools were outside the read-only Claude scope."
+}

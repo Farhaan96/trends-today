@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "14c69e8910b8d3133b79f6dafbac543eb5fff3c8f14e8c7d0db37de86999304c",
+  "repositorySha": "1b8b2935fd8dfee9bcd39e14711fd1d532597522",
+  "reviewedAt": "2026-07-22T19:42:46.475294+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8b59-5a52-75f0-84d7-aa6a7c704713",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate is factual, locally useful, scannable, and actionable. Official sources support the work window, dark signal, traffic-control setup, route-planning advice, overlapping summer work, and DriveBC camera. The prose contains no em dashes."
+}
