@@ -2,10 +2,13 @@
 
 ## Result
 
-- Release candidate built: `Coquitlam signal work will darken Lougheed and Dewdney lights`.
+- Published: `Coquitlam signal work will darken Lougheed and Dewdney lights`.
 - Category and municipality: `transit`, Coquitlam.
-- Planned publication time: 2026-07-22 12:45 America/Vancouver.
-- Daily ceiling state: 3 of 6 stories used before this sweep, 4 of 6 if this candidate publishes.
+- Publication time: 2026-07-22 12:45 America/Vancouver.
+- Canonical URL: https://www.trendstoday.ca/transit/coquitlam-lougheed-dewdney-signal-work
+- Production deployment: GitHub deployment `5561993617`, merge SHA `5324380a0ad83d711e9520e051b9e3712fdac349`, status `success`.
+- Live verification: 2026-07-22 13:00 America/Vancouver, Chrome render returned 200 with matching canonical URL, headline, body details, source links, internal link, loaded hero image, and no console or page errors.
+- Daily ceiling state: 3 of 6 stories used before this sweep, 4 of 6 after publication.
 
 ## Reader Job
 
