@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "e100fecafe9c74a7bf8eafa987718b3e0acf6733f5d7ae17456bd8bb91a6f532",
+  "repositorySha": "6d67e5ec73b8b44544819e4000169466904ed82d",
+  "reviewedAt": "2026-07-22T23:40:40.177192+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8c33-8476-7e31-b812-5641ab6ac9cd",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The candidate omits the City\u2019s notice that a videographer will be onsite July 31. That is material planning information for families and other attendees, especially in an article framed around practical and comfort details.",
+    "The closing sentence abruptly diverts readers to an unrelated registration-based volunteer bulletin. It creates a weak transition and flat promotional ending instead of giving readers an actionable close for Art in the Park."
+  ],
+  "summary": "The event details are accurately supported by the cited City of Burnaby page, the MDX is clean and scannable, and the authorial prose contains no em dashes. Revision is required because a material July 31 filming notice is missing and the article ends with an unrelated cross-promotion rather than a useful action for this event."
+}
