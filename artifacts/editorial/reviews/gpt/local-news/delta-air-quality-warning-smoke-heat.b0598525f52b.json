@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "b0598525f52b4ed9f23d47c6251a28dc3b3e072299d2d6fe38680d0883e74509",
+  "repositorySha": "e92d443a80eae4f0a179da52aa4ac428ecda403f",
+  "reviewedAt": "2026-07-22T21:53:58.124573+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8bd0-fb0d-7a22-83c6-553e26972f12",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 4,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The exact release-candidate artifact and repository HEAD match the supplied hashes. The bulletin is concise, locally specific, well structured, and actionable. Its central warning, AQHI figures, health guidance, and expected timing are supported by the cited official material. Authorial prose contains no em dashes."
+}
