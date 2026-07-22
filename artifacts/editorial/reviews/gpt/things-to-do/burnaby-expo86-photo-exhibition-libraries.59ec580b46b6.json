@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "59ec580b46b6345b235a6c7df6b337ac0fe42d7869051904c86e52e44f04e282",
+  "repositorySha": "5157bb939a0f144062df69ab44ff39885d280c80",
+  "reviewedAt": "2026-07-22T15:50:14.224110+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8a84-415b-71a1-af88-d7b15731739f",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The exact candidate hash and repository SHA were verified. Official cited sources support the exhibition dates, branch locations, hours, archive size, Expo 86 context, anniversary framing, and practical location details. The bulletin is concise, scannable, locally useful, and ends with clear trip-planning guidance without clickbait."
+}

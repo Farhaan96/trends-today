@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "59ec580b46b6345b235a6c7df6b337ac0fe42d7869051904c86e52e44f04e282",
+  "repositorySha": "5157bb939a0f144062df69ab44ff39885d280c80",
+  "reviewedAt": "2026-07-22T16:12:00Z",
+  "modelUsed": "fable",
+  "requestedModels": ["fable"],
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-fable-5"],
+  "fallbackUsed": false,
+  "summary": "NO BLOCKERS. Candidate facts, source threshold, locality, image, sponsorship status, sensitive-story gate, no-duplicate check, and zero-em-dash requirement passed for the exact candidate SHA."
+}
