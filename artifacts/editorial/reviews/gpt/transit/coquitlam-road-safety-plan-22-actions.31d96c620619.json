@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "31d96c620619ee8f82af56a69d9ef2a27be35f7bc5cc04343483b407c3c66e96",
+  "repositorySha": "0662a9352399856de0e9dd598a9aa6b9464237a9",
+  "reviewedAt": "2026-07-22T13:43:15.632161+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8a10-9077-74d1-ab93-f0022e6d41be",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate clears the strict editorial gate. Its factual claims align with the cited City of Coquitlam materials, the MDX is valid and scannable, the local implications are clear, and the close gives readers a practical next step. Authorial prose contains no em dashes."
+}
