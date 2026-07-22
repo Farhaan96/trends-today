@@ -2,11 +2,14 @@
 
 ## Result
 
-- Published candidate prepared: 1 article.
-- Article: `Expo 86 photo show opens across Burnaby libraries`
-- Planned canonical path: `/things-to-do/burnaby-expo86-photo-exhibition-libraries`
+- Published: 1 article.
+- Article: [Expo 86 photo show opens across Burnaby libraries](https://www.trendstoday.ca/things-to-do/burnaby-expo86-photo-exhibition-libraries)
 - Category and municipality: `things-to-do`, Burnaby.
-- Daily ceiling state: 2 of 6 stories planned for 2026-07-22 if this release deploys; no second story was selected because the remaining discovered items were duplicate, retrospective, weak-utility, or sensitive for unattended publishing.
+- Publication time: 2026-07-22 09:15 America/Vancouver.
+- Daily ceiling state: 2 of 6 stories used for 2026-07-22; no second story was selected because the remaining discovered items were duplicate, retrospective, weak-utility, or sensitive for unattended publishing.
+- Pull request: https://github.com/Farhaan96/trends-today/pull/45
+- Merge SHA: `bdc5bf1e4535b1b23b8aa5c76fb3064e1ce5a858`
+- Production deployment: GitHub deployment `5558804162`, Vercel target `https://trends-today-hnwmymz77-farhaans-projects-088cb374.vercel.app`
 
 ## Reader Job
 
@@ -55,7 +58,8 @@ Tested an ongoing local culture bulletin tied to Expo 86 heritage, rather than a
 
 - GPT review: PASS for candidate SHA `59ec580b46b6345b235a6c7df6b337ac0fe42d7869051904c86e52e44f04e282`, with no blockers, zero authorial em dashes, and scores at least 4 of 5.
 - Independent review: Claude Fable exact-SHA review returned `NO BLOCKERS` for repository SHA `5157bb939a0f144062df69ab44ff39885d280c80`.
-- Production deployment and browser verification: pending.
+- Production browser verification: canonical URL returned 200; H1, canonical tag, date block, body lead, date ranges, source links, hero image, and console state passed in the in-app browser.
+- Live API verification: `/api/analytics` reports `totalArticles: 144`, `things-to-do: 5`, and the Burnaby Expo 86 article as the newest recent article.
 
 ## Checkpoints
 
