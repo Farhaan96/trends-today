@@ -25,9 +25,7 @@
   },
   "lengthAndLinks": {
     "lengthRationale": "Bulletin length is enough for the warning, AQHI context, immediate actions, and update links without padding for ad inventory.",
-    "internalLinks": [
-      "/local-news/surrey-extreme-heat-cooling-locations"
-    ]
+    "internalLinks": ["/local-news/surrey-extreme-heat-cooling-locations"]
   },
   "sources": [
     "https://www.delta.ca/community-culture/happening-delta/news/air-quality-warning-july-22-2026",
