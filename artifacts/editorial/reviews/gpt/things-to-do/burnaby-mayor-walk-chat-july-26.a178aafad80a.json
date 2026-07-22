@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "a178aafad80a570eaa023a9dcb05de6c13a91f50cd2626822439eaff2a8e0c16",
+  "repositorySha": "a2718df1544db82d98adb0ccd7b7b0da6baa16dd",
+  "reviewedAt": "2026-07-22T17:44:55.052395+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8aed-e84e-73d3-bf22-b506307aa651",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The article repeats the July 26 date, 9-to-10 timing, venue, rain-or-shine note, and breakfast timing without adding enough new value. This repetition makes the short bulletin feel padded.",
+    "The closing section is flat and partly filler. \u201cThe main decision is whether the timing fits a Sunday morning\u201d states the obvious, while the final paragraph repeats the schedule instead of ending with a sharper actionable takeaway."
+  ],
+  "summary": "The cited City of Burnaby page supports the event dates, hours, address, phone number, rain-or-shine policy, mayor participation, and $2 breakfast details. The MDX is valid and scannable, and the authorial prose contains no em dashes. Revision is still required to remove repetition and strengthen the ending."
+}

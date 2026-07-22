@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "0b388b9b7f2f29f73faef018ecb1d803b0d7933b1c1ef967ce287d45188be64b",
+  "repositorySha": "a2718df1544db82d98adb0ccd7b7b0da6baa16dd",
+  "reviewedAt": "2026-07-22T17:43:36.304771+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8aec-77ad-7d51-81f8-4abf512ee7b9",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The claim that this is a \u201clow-cost morning option\u201d is not fully supported. The source confirms a $2 breakfast but does not state the walk's cost or that participation is free.",
+    "The closing advice says the breakfast is \u201cnot an all-morning drop-in,\u201d but the cited source only says breakfast is served at 10 a.m.; it does not establish drop-in rules or eligibility for people who skip the walk.",
+    "The article repeats the meeting place, July time, breakfast timing, and remaining-date information without adding enough practical detail. Phrases such as \u201cThe extra planning note,\u201d \u201cnext practical option,\u201d and \u201cThe main decision\u201d read as filler.",
+    "The lead and ending are serviceable but flat: the lead relies on the unsupported low-cost framing, while the close ends on an unsupported restriction rather than a clearly sourced action."
+  ],
+  "summary": "BLOCKED. The exact candidate hash and repository SHA were verified. The official City of Burnaby page supports the core date, time, location, rain-or-shine schedule, Mayor Hurley description, monthly schedule, and $2 breakfast details. Revision is required for two unsupported inferences, repetition, and a weak close. Authorial prose contains zero em dashes."
+}

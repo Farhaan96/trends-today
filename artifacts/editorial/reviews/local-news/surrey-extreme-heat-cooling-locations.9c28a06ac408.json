@@ -1,0 +1,15 @@
+{
+    "version":  1,
+    "reviewer":  "claude",
+    "verdict":  "NO BLOCKERS",
+    "candidateSha256":  "9c28a06ac408210324131079e1d949c0c4ff0a7b40328a2c9e6c5bd4bed5b709",
+    "reviewedAt":  "2026-07-22T17:52:07.7288928Z",
+    "repositorySha":  "ddc81b2d731a4f5f4263e434af785456ea7b94fc",
+    "modelUsed":  "opus",
+    "observedModels":  [
+                           "claude-opus-4-8",
+                           "claude-haiku-4-5-20251001"
+                       ],
+    "review":  "NO BLOCKERS\n\nCANDIDATE_SHA256: 9c28a06ac408210324131079e1d949c0c4ff0a7b40328a2c9e6c5bd4bed5b709\n\n**GPT review artifact (verified PASS):** `artifacts/editorial/reviews/gpt/local-news/surrey-extreme-heat-cooling-locations.9c28a06ac408.json` records `verdict: \"PASS\"`, `candidateSha256` exactly matching the target, `blockers: []`, and scores ≥4 (factualSupport/formatting 5). Reviewed at repositorySha 23c35ed — the \"Repair Surrey heat candidate sourcing\" commit — then committed as HEAD ddc81b2 (\"Record Surrey heat GPT review\"), which only adds the review JSON, so the candidate SHA remains valid at the requested repo SHA.\n\n**Prior blocked version resolved:** The earlier artifact `9d26f8e91c48.json` (BLOCKERS) flagged (a) the July 22 framing resting on a June 15 Surrey page, and (b) an unsupported \"before the warmest part of the day\" timing. The repaired candidate now anchors the July 22 framing to Environment Canada\u0027s warning \"issued at 5:19 a.m. Wednesday, July 22\" (surrey.ca is not used for that claim), and the check-in advice reads \"check regularly\" (line 54) — both blockers cleared.\n\n**Factual support / sourcing:** All quantitative claims trace to the three cited primaries — warning level, forecast (27 C / 35 C inland, humidex 34/41), heat triggers (32–33 C day, 15 C night), the color-coded levels, the pet-friendly centre list, contact numbers (9-1-1/8-1-1/2-1-1), and vulnerable groups. Sources block (lines 56–60) lists City of Surrey notice + two Environment Canada pages.\n\n**Structure / usefulness:** Clear bulletin arc (what the warning says → where to cool down → who to check on), scannable H2s, actionable close. `readerImpact`/`lengthRationale` are coherent for a bulletin.\n\n**Integrity / gates:** Image `/images/editorial/2026/07/surrey-extreme-heat-cooling.png` exists; internal link `/local-news/coquitlam-heat-safety-resources` resolves to `content/local-news/coquitlam-heat-safety-resources.mdx`. AI-image attribution present. Frontmatter well-formed; `manualApprovalRequired: false`, `brandSafety: standard`, `sponsorshipStatus: editorial` — appropriate for a public-service heat bulletin, no sensitive/commercial gate triggered. No prose em dashes (artifact `proseEmDashCount: 0`).\n\n**Reputational/legal risk:** Low — public-safety information attributed to official municipal/federal sources.\n\nOne caveat: no shell tool is available in this session, so I could not recompute the file\u0027s SHA-256 independently; hash verification relies on the recorded artifact `candidateSha256`, which matches exactly. Content review surfaced no correction needed before publication."
+}
+

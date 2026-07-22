@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "9c28a06ac408210324131079e1d949c0c4ff0a7b40328a2c9e6c5bd4bed5b709",
+  "repositorySha": "ddc81b2d731a4f5f4263e434af785456ea7b94fc",
+  "reviewedAt": "2026-07-22T17:53:11.864915+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8af5-0845-7d22-9e24-4406f965aa57",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The primary sources support the warning details, forecast figures, heat thresholds, cooling options, pet-friendly facilities, risk groups, and phone guidance. The bulletin is concise, scannable, locally useful, and ends with clear actions."
+}
