@@ -1,8 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { UserIcon } from '@heroicons/react/24/outline';
-import authorsData from '../../../data/authors.json';
 import { formatArticleDate } from '@/lib/editorial';
+import {
+  getNewsroomProfileByName,
+  getNewsroomProfileId,
+  normalizeAuthorName,
+} from '@/lib/newsroom';
 
 interface Author {
   id?: string;
@@ -30,15 +34,13 @@ export default function MoreFromAuthor({
   author,
   articles = [],
 }: MoreFromAuthorProps) {
-  const authorName = typeof author === 'string' ? author : author.name;
+  const rawAuthorName = typeof author === 'string' ? author : author.name;
+  const authorName = normalizeAuthorName(rawAuthorName);
   const authorId =
     typeof author === 'object' && author.id
       ? author.id
-      : authorName.toLowerCase().replace(/\s+/g, '-');
-
-  // Get author data from JSON for profile image
-  const authors = authorsData as Record<string, { avatar?: string }>;
-  const authorData = authors[authorId];
+      : getNewsroomProfileId(rawAuthorName);
+  const authorData = getNewsroomProfileByName(rawAuthorName);
 
   const displayArticles = articles.slice(0, 3);
 
@@ -48,17 +50,7 @@ export default function MoreFromAuthor({
     <section className="author-more">
       <div className="author-more__header">
         <div className="author-more__avatar">
-          {authorData?.avatar ? (
-            <Image
-              src={authorData.avatar}
-              alt={authorName}
-              width={64}
-              height={64}
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            <UserIcon aria-hidden="true" />
-          )}
+          <UserIcon aria-hidden="true" />
         </div>
         <div>
           <h3>More from {authorName}</h3>
@@ -109,7 +101,7 @@ export default function MoreFromAuthor({
         ))}
       </div>
 
-      {authorData && authorId !== 'trends-today-editorial' && (
+      {authorData && authorId && (
         <div className="author-more__action">
           <Link href={`/author/${authorId}`} className="primary-button">
             View all articles by {authorName} →

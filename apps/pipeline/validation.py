@@ -38,8 +38,8 @@ def _valid_source_urls(sources: List[Dict]) -> List[str]:
 def _load_contract(config_path: Path = None) -> Dict:
     path = Path(config_path) if config_path else CONTENT_BUSINESS_CONFIG
     payload = json.loads(path.read_text(encoding='utf-8-sig'))
-    if payload.get('version', 0) < 4:
-        raise ValueError('content-business config v4 or newer is required')
+    if payload.get('version', 0) < 5:
+        raise ValueError('content-business config v5 or newer is required')
     return {
         'editorial': payload['editorialContract'],
         'monetization': payload['monetization'],
@@ -176,6 +176,43 @@ def validate_release_candidate(
         errors.append('Lower Mainland locality is required')
     if is_local and not str(article.get('lengthRationale', '')).strip():
         errors.append('length rationale is required for local stories')
+    if is_local:
+        highlights = article.get('highlights')
+        minimum_highlights = formatting.get('minimumHighlights', 3)
+        maximum_highlights = formatting.get('maximumHighlights', 5)
+        if not isinstance(highlights, list):
+            errors.append('article highlights are required for local stories')
+        else:
+            clean_highlights = [
+                str(highlight).strip() for highlight in highlights
+                if str(highlight).strip()
+            ]
+            if not minimum_highlights <= len(clean_highlights) <= maximum_highlights:
+                errors.append(
+                    f'local stories require {minimum_highlights}-{maximum_highlights} highlights'
+                )
+            if len(set(clean_highlights)) != len(clean_highlights):
+                errors.append('article highlights must be unique')
+        if (
+            formatting.get('reportingMethodRequired')
+            and not str(article.get('reportingMethod', '')).strip()
+        ):
+            errors.append('reporting method is required for local stories')
+        utility_text = ' '.join(
+            str(article.get(field, '') or '')
+            for field in ('title', 'subtitle', 'readerImpact')
+        ).lower()
+        location_promise = bool(
+            re.search(r'\b(where|location|locations|places|centres|centers)\b', utility_text)
+        )
+        if location_promise:
+            headings = ' '.join(
+                re.findall(r'^##\s+(.+)$', body, re.MULTILINE)
+            ).lower()
+            if not re.search(r'\b(where|find|location|locations|places)\b', headings):
+                errors.append('location promise requires a find-or-location section')
+            if list_count < 3:
+                errors.append('location promise requires at least three concrete list items')
     if is_local:
         commercial_intent = str(article.get('commercialIntent', '')).strip()
         if commercial_intent not in monetization['commercialIntentValues']:

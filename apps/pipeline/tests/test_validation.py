@@ -13,9 +13,9 @@ from validation import validate_release_candidate  # noqa: E402
 class ValidationTests(unittest.TestCase):
     def article(self):
         filler = '\n\n'.join(
-            ' '.join(['evidence'] * 100)
-            for _ in range(6)
-        ) + '\n\n' + ' '.join(['evidence'] * 10)
+            ' '.join(['evidence'] * 70)
+            for _ in range(9)
+        )
         urls = '\n'.join([
             'https://a.example/source',
             'https://b.example/source',
@@ -42,6 +42,12 @@ class ValidationTests(unittest.TestCase):
             'brandSafety': 'standard',
             'sponsorshipStatus': 'editorial',
             'commercialApprovalRecorded': False,
+            'highlights': [
+                'The confirmed change and its local effect.',
+                'The practical action residents can take now.',
+                'The timing or condition readers should verify.',
+            ],
+            'reportingMethod': 'Checked against the supplied primary and secondary sources today.',
         }
         metadata.update(overrides)
         return metadata
@@ -114,14 +120,11 @@ class ValidationTests(unittest.TestCase):
             'storyType': 'reported-update',
             'body_mdx': (
                 'Opening for Burnaby riders.\n\n## What changed\n\n'
-                + ' '.join(['local'] * 110)
+                + '\n\n'.join(' '.join(['local'] * 70) for _ in range(4))
                 + '\n\nSee [earlier Burnaby transit changes](/transit/burnaby-context).'
                 + '\n\n## What riders should do\n\n'
-                + ' '.join(['local'] * 110)
-                + '\n\n'
-                + ' '.join(['local'] * 110)
-                + '\n\n'
-                + ' '.join(['local'] * 110)
+                + '\n\n'.join(' '.join(['action'] * 70) for _ in range(4))
+                + '\n\n- Check the revised route.\n- Allow extra time.\n- Confirm the affected stop.'
                 + '\n\n## Sources\n\n'
                 + '\n'.join(urls)
             ),
@@ -142,6 +145,34 @@ class ValidationTests(unittest.TestCase):
                 published_content_dir=content_dir,
             )
             self.assertTrue(result.passed, result.errors)
+
+    def test_local_location_promise_requires_concrete_directory(self):
+        article = {
+            'title': 'Where to cool down in Surrey',
+            'meta_description': 'Find Surrey cooling locations.',
+            'category': 'local-news',
+            'locality': 'Surrey',
+            'storyType': 'reported-update',
+            'readerImpact': 'Residents can find cooling locations.',
+            'body_mdx': (
+                'Opening.\n\n## What changed\n\n'
+                + '\n\n'.join(' '.join(['local'] * 70) for _ in range(8))
+                + '\n\n## What to do\n\nCheck the city website.'
+                + '\n\n## Sources\n\nhttps://a.example/source\nhttps://b.example/source'
+            ),
+            **self.local_metadata(),
+        }
+        result = validate_release_candidate(
+            article,
+            [
+                {'url': 'https://a.example/source', 'tier': 'primary'},
+                {'url': 'https://b.example/source', 'tier': 'secondary'},
+            ],
+            {'slug': 'surrey-cooling'},
+            {'path': '/images/surrey.webp'},
+        )
+        self.assertFalse(result.passed)
+        self.assertTrue(any('location promise' in error for error in result.errors))
 
     def test_local_reported_update_requires_contextual_resolving_link(self):
         article = {

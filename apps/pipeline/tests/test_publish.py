@@ -47,6 +47,8 @@ class PublisherTests(unittest.TestCase):
                 'locality': 'Burnaby',
                 'storyType': 'reported-update',
                 'readerImpact': 'Weekend riders need a different route.',
+                'highlights': ['Route change', 'Weekend timing', 'Alternate stop'],
+                'reportingMethod': 'Checked against TransLink source material.',
             })
             publisher = Publisher(mode='candidate', repo_root=root)
             self.assertTrue(publisher.publish(
@@ -58,6 +60,9 @@ class PublisherTests(unittest.TestCase):
             content = candidate.read_text(encoding='utf-8')
             self.assertIn('locality: "Burnaby"', content)
             self.assertIn('storyType: "reported-update"', content)
+            self.assertIn('author: "Trends Today Newsroom"', content)
+            self.assertIn('editor: "Farhaan"', content)
+            self.assertIn('reportingMethod: "Checked against TransLink source material."', content)
 
     def write_review(self, root, candidate, verdict='NO BLOCKERS', digest=None):
         review = root / 'artifacts/editorial/reviews/science/candidate-title.review.json'

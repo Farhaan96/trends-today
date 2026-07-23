@@ -213,6 +213,7 @@ export default function RootLayout({
               <Link href="/editorial-standards">Editorial standards</Link>
               <Link href="/how-we-test">How we test</Link>
               <Link href="/privacy">Privacy</Link>
+              <Link href="/advertise">Advertise</Link>
               <Link href="/contact">Contact</Link>
             </nav>
           </div>

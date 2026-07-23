@@ -47,8 +47,8 @@ const getRelatedArticles = async (
         publishedAt: '2025-09-06T10:00:00Z',
         readingTime: 8,
         author: {
-          name: 'Alex Chen',
-          avatar: '/images/authors/alex-chen.jpg',
+          name: 'Trends Today Newsroom',
+          avatar: '/images/news-team.jpg',
         },
       },
       {
@@ -61,8 +61,8 @@ const getRelatedArticles = async (
         publishedAt: '2025-09-05T14:30:00Z',
         readingTime: 6,
         author: {
-          name: 'Sarah Martinez',
-          avatar: '/images/authors/sarah-martinez.jpg',
+          name: 'Trends Today Newsroom',
+          avatar: '/images/news-team.jpg',
         },
       },
       {
@@ -75,8 +75,8 @@ const getRelatedArticles = async (
         publishedAt: '2025-09-04T16:15:00Z',
         readingTime: 7,
         author: {
-          name: 'David Kim',
-          avatar: '/images/authors/david-kim.jpg',
+          name: 'Trends Today Newsroom',
+          avatar: '/images/news-team.jpg',
         },
       },
     ],
@@ -91,8 +91,8 @@ const getRelatedArticles = async (
         publishedAt: '2025-09-07T08:00:00Z',
         readingTime: 4,
         author: {
-          name: 'Emma Thompson',
-          avatar: '/images/authors/emma-thompson.jpg',
+          name: 'Trends Today Newsroom',
+          avatar: '/images/news-team.jpg',
         },
       },
       {
@@ -105,8 +105,8 @@ const getRelatedArticles = async (
         publishedAt: '2025-09-06T12:00:00Z',
         readingTime: 5,
         author: {
-          name: 'Alex Chen',
-          avatar: '/images/authors/alex-chen.jpg',
+          name: 'Trends Today Newsroom',
+          avatar: '/images/news-team.jpg',
         },
       },
     ],

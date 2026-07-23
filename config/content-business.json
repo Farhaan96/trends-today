@@ -1,6 +1,6 @@
 {
-  "version": 4,
-  "updatedAt": "2026-07-19",
+  "version": 5,
+  "updatedAt": "2026-07-23",
   "businessModel": {
     "primary": "owned local media and audience distribution",
     "revenueSequence": [
@@ -115,13 +115,13 @@
       "bulletin": {
         "readerJob": "give me the essential confirmed change and what to do now",
         "wordRange": {
-          "min": 250,
-          "max": 450,
+          "min": 300,
+          "max": 600,
           "tunable": true
         },
         "minimumSources": 1,
-        "minimumH2": 2,
-        "minimumLists": 0,
+        "minimumH2": 3,
+        "minimumLists": 2,
         "internalLinks": {
           "min": 0,
           "max": 1
@@ -130,30 +130,30 @@
       "reported-update": {
         "readerJob": "explain what changed, who is affected, and the practical next step",
         "wordRange": {
-          "min": 450,
-          "max": 800,
+          "min": 550,
+          "max": 950,
           "tunable": true
         },
         "minimumSources": 2,
-        "minimumH2": 2,
-        "minimumLists": 0,
+        "minimumH2": 3,
+        "minimumLists": 3,
         "internalLinks": {
-          "min": 1,
+          "min": 0,
           "max": 3
         }
       },
       "guide-or-explainer": {
         "readerJob": "help me compare options, make a plan, or understand a durable local issue",
         "wordRange": {
-          "min": 700,
-          "max": 1200,
+          "min": 800,
+          "max": 1400,
           "tunable": true
         },
         "minimumSources": 3,
-        "minimumH2": 3,
-        "minimumLists": 1,
+        "minimumH2": 4,
+        "minimumLists": 5,
         "internalLinks": {
-          "min": 2,
+          "min": 0,
           "max": 5
         }
       },
@@ -174,10 +174,14 @@
       }
     },
     "formatting": {
-      "maximumParagraphWords": 120,
+      "maximumParagraphWords": 80,
       "maximumParagraphSentences": 3,
       "noEmDashesForLocalStories": true,
-      "listsOnlyWhenContentIsEnumerable": true
+      "listsOnlyWhenContentIsEnumerable": true,
+      "minimumHighlights": 3,
+      "maximumHighlights": 5,
+      "reportingMethodRequired": true,
+      "utilityPromiseMustBeDelivered": true
     },
     "internalLinks": {
       "mustResolveToPublishedArticle": true,
