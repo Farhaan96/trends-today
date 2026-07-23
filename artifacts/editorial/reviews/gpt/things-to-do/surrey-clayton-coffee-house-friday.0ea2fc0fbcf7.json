@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "0ea2fc0fbcf7887715d372573b85c391f6cfa861272424f0b4aba597caf7c9e5",
+  "repositorySha": "25de17f68d76b87a6ab9710c89c827b58c7ea2ba",
+  "reviewedAt": "2026-07-23T17:41:19.027108+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9010-62a3-7180-ad1d-a5ce545bd1cf",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate is fully supported by the cited City of Surrey material, clearly presents the event logistics and limited-capacity stakes, uses valid and scannable MDX, and closes with a practical pre-departure check. Minor repetition of logistics keeps quality and engagement at 4, but no revision-blocking issue is present."
+}
