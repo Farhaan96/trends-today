@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "6189c6f70b5f92c68470e302b27a7fab5dd0704a1600a6589f9d39f14514dcc6",
+  "repositorySha": "48f605eae152c9de45a5da5c7a001042b126dfc9",
+  "reviewedAt": "2026-07-23T17:52:37.830468+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f901a-cbd9-7360-a627-69a99e49af23",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The cited material supports the event details and contextual claims. The bulletin is concrete, useful, scannable, and ends with clear pre-departure guidance. Minor repetition and slightly functional phrasing keep quality, readability, and engagement at 4, but none requires revision."
+}
