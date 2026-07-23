@@ -1,0 +1,90 @@
+{
+  "generatedAt": "2026-07-23T08:45:00-07:00",
+  "sweep": "08:30",
+  "dailyCeilingState": {
+    "beforeSweep": 1,
+    "maximum": 6,
+    "selectedForRelease": 1,
+    "remainingAfterSelection": 4
+  },
+  "metricsConstraint": {
+    "status": "unavailable",
+    "missing": [
+      "VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN",
+      "VERCEL_PROJECT_ID",
+      "engaged sessions",
+      "returning sessions",
+      "scroll depth",
+      "measurable ad impressions",
+      "viewable ad impressions",
+      "Active View rate",
+      "ad revenue",
+      "page RPM",
+      "sponsor inquiries",
+      "qualified sponsor inquiries",
+      "sponsorship revenue",
+      "content cost"
+    ],
+    "measurementRepair": "Connect Vercel analytics credentials plus Search Console, GA, ad, and sponsor inquiry exports before using commercial results to change topic mix or article length."
+  },
+  "selected": [
+    {
+      "title": "Free Surrey Coffee House runs Friday at Clayton",
+      "lane": "weekend-and-planning",
+      "category": "things-to-do",
+      "locality": "Surrey",
+      "storyType": "bulletin",
+      "score": 90.0,
+      "decision": "brief",
+      "confidence": "verified-primary-source",
+      "evidence": {
+        "readerImpact": "Surrey residents can decide whether to attend the July 24 Clayton Coffee House and know the time, address, free admission rule, limited-capacity caveat, and performer format before going.",
+        "freshnessEvidence": "The City of Surrey event page lists the next Clayton Coffee House for July 24, 2026, one day after this sweep.",
+        "uniqueAngleEvidence": "Existing Trends Today local things-to-do coverage includes Burnaby events and Surrey festival retrospectives, but no Clayton Coffee House or Surrey community-art bulletin.",
+        "sourceUrls": [
+          "https://www.surrey.ca/news-events/events/clayton-coffee-house",
+          "https://www.surrey.ca/news-events/news/whats-happening-summer-community-art"
+        ],
+        "primarySourceUrls": [
+          "https://www.surrey.ca/news-events/events/clayton-coffee-house",
+          "https://www.surrey.ca/news-events/news/whats-happening-summer-community-art"
+        ]
+      },
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 4,
+        "freshness": 5,
+        "evidenceStrength": 4,
+        "uniqueAngle": 5,
+        "repeatVisitPotential": 3,
+        "speedToUsefulDraft": 5
+      },
+      "commercialIntent": "ad-and-sponsor-fit",
+      "commercialFitReason": "The official City of Surrey pages show local arts, all-ages events, community-centre, evening outing, and neighbourhood planning intent; article-level views, ad viewability, RPM, revenue, and sponsor demand remain unavailable.",
+      "brandSafety": "standard",
+      "sponsorshipStatus": "editorial"
+    }
+  ],
+  "rejected": [
+    {
+      "title": "Burnaby Summer Stages",
+      "reason": "Rejected as a duplicate because the published July 19 Burnaby park-events article already covers the July 23 Summer Stages family night and ongoing series details."
+    },
+    {
+      "title": "Surrey exceeds housing targets ahead of schedule",
+      "reason": "Rejected as a duplicate because the published Surrey housing-targets article already covers the 13,844-unit update."
+    },
+    {
+      "title": "Burnaby Blues + Roots Festival",
+      "reason": "Held despite strong event-planning utility because the August 8 date is less urgent than July 24 and the official page includes branded festival elements better reviewed in a later planning sweep."
+    },
+    {
+      "title": "Delta Community Animal Expo",
+      "reason": "Held for later planning because August 9 is not the strongest same-day or next-day reader job and the notice is co-presented with FortisBC."
+    },
+    {
+      "title": "Delta Winskill Park baseball diamonds",
+      "reason": "Rejected as stale for this sweep because the official opening notice was published June 29 and the same-week reader action has passed."
+    }
+  ]
+}
