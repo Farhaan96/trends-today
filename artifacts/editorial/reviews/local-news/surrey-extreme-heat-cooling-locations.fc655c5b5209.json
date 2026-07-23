@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "fc655c5b520943461de88cb31b1b5262eb07204d6998996f8c44e47d9ffacc58",
+  "reviewedAt": "2026-07-23T15:25:30+00:00",
+  "repositorySha": "d37713ca66ce251cebd9e94a26c4a0fe5892aa17",
+  "modelUsed": "claude-opus-4-8",
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-opus-4-8"
+  ],
+  "review": "NO BLOCKERS\n\nCANDIDATE_SHA256: fc655c5b520943461de88cb31b1b5262eb07204d6998996f8c44e47d9ffacc58\n\nThe passing GPT artifact covers this exact candidate. The time-stamped alert wording is hedged and directs readers to current alerts. Indoor facility names, addresses, eight pet-friendly designations, eight outdoor pools, 11 spray parks, emergency and health contacts, title, metadata, structure, image attribution, and frontmatter were reviewed. The article contains zero authorial em dashes. No correction is required before publication."
+}
