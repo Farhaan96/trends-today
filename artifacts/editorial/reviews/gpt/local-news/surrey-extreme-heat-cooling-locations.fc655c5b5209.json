@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "fc655c5b520943461de88cb31b1b5262eb07204d6998996f8c44e47d9ffacc58",
+  "repositorySha": "a4fa667e17bc5a25c3a568500f2fdec3b35371ab",
+  "reviewedAt": "2026-07-23T15:22:18.557241+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8f91-237f-74f3-a8c7-e20177539321",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 5,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The cited City of Surrey and Environment Canada material supports the facility names, addresses, pet-friendly designations, outdoor options, risk groups, phone numbers, and time-stamped alert status. The article is specific, practical, well organized, readable, and closes with actionable guidance. No authorial prose em dashes found."
+}
