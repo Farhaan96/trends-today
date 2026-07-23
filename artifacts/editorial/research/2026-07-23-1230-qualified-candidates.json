@@ -1,0 +1,55 @@
+{
+  "generatedAt": "2026-07-23T19:38:28.263615+00:00",
+  "results": [
+    {
+      "title": "Coquitlam is hiring 250 election workers for October vote",
+      "lane": "daily-local-utility",
+      "score": 90.0,
+      "decision": "brief",
+      "confidence": "verified-primary-source",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Coquitlam is hiring 250 election workers for October vote",
+        "lane": "daily-local-utility",
+        "category": "local-news",
+        "locality": "Coquitlam",
+        "storyType": "bulletin",
+        "confidence": "verified-primary-source",
+        "sourceName": "City of Coquitlam news",
+        "sourceTier": "primary",
+        "sourceUrl": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2005",
+        "evidence": {
+          "readerImpact": "Coquitlam residents can decide whether to apply for paid temporary election work and know the roles, pay ranges, training requirement, voting dates, and eligibility rules before applying.",
+          "freshnessEvidence": "The City of Coquitlam posted the recruitment notice on July 23, 2026, the same day as this sweep.",
+          "uniqueAngleEvidence": "Existing Trends Today Coquitlam coverage covers heat, road safety, storm drains, and signal work, but no 2026 local-election worker recruitment or election staffing application story.",
+          "sourceUrls": [
+            "https://www.coquitlam.ca/m/newsflash/Home/Detail/2005",
+            "https://workerapplication.voterview.ca/8002/1",
+            "https://www.coquitlam.ca/729/Elections"
+          ],
+          "primarySourceUrls": [
+            "https://www.coquitlam.ca/m/newsflash/Home/Detail/2005",
+            "https://workerapplication.voterview.ca/8002/1",
+            "https://www.coquitlam.ca/729/Elections"
+          ]
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 4,
+          "freshness": 5,
+          "evidenceStrength": 4,
+          "uniqueAngle": 5,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        },
+        "lengthRationale": "A bulletin is the shortest complete format because the reader job is a same-day official recruitment notice with roles, pay, dates, eligibility, and an application path.",
+        "commercialIntent": "none",
+        "commercialFitReason": "The official source creates civic-participation and local temporary-work intent, but no verified Trends Today ad, sponsor, or RPM data supports treating this as a commercial story.",
+        "brandSafety": "standard",
+        "sponsorshipStatus": "editorial"
+      }
+    }
+  ]
+}

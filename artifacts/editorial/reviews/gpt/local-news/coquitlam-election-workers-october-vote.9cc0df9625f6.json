@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "9cc0df9625f62cbb075bccfcd94dc1862a78defeae3b856f05d18d7275db0e52",
+  "repositorySha": "332a077d0615ed8a7fb079d11504bb0ec1bc84a6",
+  "reviewedAt": "2026-07-23T19:41:50.751031+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f907e-d15d-7240-8514-7877606313cd",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 4,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The concise bulletin is well supported by the cited City materials, clearly presents the roles, compensation, schedule, eligibility requirements, and application path, and closes with an actionable next step. The MDX is valid and scannable, and the authorial prose contains no em dashes."
+}

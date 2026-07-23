@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "6cf98e2bbd254de063925e7cc80ed4e3428ee4a193328b9b239ceb0c341fcb1f",
+  "repositorySha": "332a077d0615ed8a7fb079d11504bb0ec1bc84a6",
+  "reviewedAt": "2026-07-23T19:40:09.609291+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f907d-3e98-72e3-9175-86a6b4882549",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The headline says Coquitlam is hiring 250 workers, while the official election-worker page says it hires over 250. The exact quantity claim should preserve that distinction.",
+    "The article obscures an important scheduling condition. The official election-worker page says all workers will be scheduled for general voting day and may also work advance voting, but the candidate presents the dates as selectable alternatives and says workers must work their selected day.",
+    "The close is awkward and manufactures mild urgency with \u201cbefore waiting for fall,\u201d although no application deadline or stated reason to act immediately is cited. It needs a more concrete, supported final action."
+  ],
+  "summary": "Strong, scannable bulletin structure with clear pay and eligibility information, but the worker-count headline, scheduling explanation, and unsupported urgency in the ending require revision before release."
+}
