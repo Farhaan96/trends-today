@@ -3,11 +3,11 @@
   "reviewer": "openai-gpt",
   "verdict": "PASS",
   "candidateSha256": "fc655c5b520943461de88cb31b1b5262eb07204d6998996f8c44e47d9ffacc58",
-  "repositorySha": "a4fa667e17bc5a25c3a568500f2fdec3b35371ab",
-  "reviewedAt": "2026-07-23T15:22:18.557241+00:00",
+  "repositorySha": "97e0e46f908e9bcd9c94606febcdf0e5a071a01a",
+  "reviewedAt": "2026-07-23T15:28:51.052500+00:00",
   "modelUsed": "gpt-5.6-sol",
   "reviewBackend": "codex-cli-oauth",
-  "reviewRunId": "019f8f91-237f-74f3-a8c7-e20177539321",
+  "reviewRunId": "019f8f96-8ef1-7341-bffd-57c603c20865",
   "scores": {
     "engagement": 4,
     "factualSupport": 5,
@@ -17,5 +17,5 @@
   },
   "proseEmDashCount": 0,
   "blockers": [],
-  "summary": "The cited City of Surrey and Environment Canada material supports the facility names, addresses, pet-friendly designations, outdoor options, risk groups, phone numbers, and time-stamped alert status. The article is specific, practical, well organized, readable, and closes with actionable guidance. No authorial prose em dashes found."
+  "summary": "The cited City of Surrey and Environment Canada material supports the locations, addresses, pet designations, outdoor options, risk groups, contact numbers, and time-stamped alert status. The guide is specific, useful, highly scannable, and ends with actionable safety guidance. No authorial prose em dashes were found."
 }
