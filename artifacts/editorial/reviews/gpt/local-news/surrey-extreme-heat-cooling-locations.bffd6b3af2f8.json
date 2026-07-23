@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "bffd6b3af2f87dc1eb4100dc3726bc5ce4453c825c08597a0ecb409362249eb4",
+  "repositorySha": "14f3c1a157fc13403c65063d9489d7caa1b3a319",
+  "reviewedAt": "2026-07-23T15:20:32.479960+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8f90-0f76-74e3-bb0d-5f7897648fb5",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The instruction to check the Surrey forecast \"including any air-quality notice\" is not supported by the cited forecast page; air-quality advisories require an appropriate air-quality source or narrower wording.",
+    "The statement that \"shopping malls, shaded public spaces, libraries, and other air-conditioned buildings can also provide relief\" extends beyond what the cited City of Surrey material establishes. Add a supporting source or narrow the claim to the options supported by the cited material."
+  ],
+  "summary": "BLOCKERS. The guide is useful, coherent, highly scannable, and has no countable em dashes. However, two practical claims extend beyond the cited material, so factualSupport is below 4 and the candidate cannot pass the strict gate."
+}
