@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "c204061de8176248b94e8d9264a8ad77bfa152590a6e5ee67a95577ff640afc6",
+  "repositorySha": "afadb637270fd7da5fe298961338697e7d69f154",
+  "reviewedAt": "2026-07-23T14:10:23.536574+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8f4f-560b-79d1-ba0f-359de6eec7a3",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate accurately reflects the cited City of Surrey material, clearly separates the two park plans, foregrounds timing and resident impact, uses clean scannable MDX, and closes with a practical monitoring action. Some phrasing is mildly repetitive, but no revision-level issue warrants blocking release."
+}

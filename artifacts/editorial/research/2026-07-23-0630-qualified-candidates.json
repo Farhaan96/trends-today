@@ -1,0 +1,137 @@
+{
+  "generatedAt": "2026-07-23T06:45:00-07:00",
+  "sweep": "06:30",
+  "dailyCeilingState": {
+    "beforeSweep": 0,
+    "maximum": 6,
+    "selectedForRelease": 2,
+    "remainingAfterSelection": 4
+  },
+  "metricsConstraint": {
+    "status": "unavailable",
+    "missing": [
+      "VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN",
+      "VERCEL_PROJECT_ID",
+      "engaged sessions",
+      "returning sessions",
+      "scroll depth",
+      "measurable ad impressions",
+      "viewable ad impressions",
+      "Active View rate",
+      "ad revenue",
+      "page RPM",
+      "sponsor inquiries",
+      "qualified sponsor inquiries",
+      "sponsorship revenue",
+      "content cost"
+    ],
+    "measurementRepair": "Connect Vercel analytics credentials plus Search Console, GA, ad, and sponsor inquiry exports before using commercial results to change topic mix or article length."
+  },
+  "selected": [
+    {
+      "title": "Burnaby Pride takes over Civic Square on Saturday",
+      "lane": "weekend-and-planning",
+      "category": "things-to-do",
+      "locality": "Burnaby",
+      "storyType": "bulletin",
+      "score": 90.0,
+      "decision": "brief",
+      "confidence": "verified-primary-source",
+      "evidence": {
+        "readerImpact": "Burnaby residents can decide whether to attend the July 25 Pride festival and know the time, place, family-friendly format, and where to watch for final program details.",
+        "freshnessEvidence": "The City of Burnaby and Burnaby Pride pages list the event for Saturday, July 25, 2026, two days after this sweep.",
+        "uniqueAngleEvidence": "Existing Trends Today Burnaby things-to-do coverage includes art, library, stewardship, and park-event items, but no Pride festival bulletin.",
+        "sourceUrls": [
+          "https://www.burnaby.ca/recreation-and-arts/events/burnaby-pride",
+          "https://www.burnabypride.com/event/burnaby-pride-2026/"
+        ],
+        "primarySourceUrls": [
+          "https://www.burnaby.ca/recreation-and-arts/events/burnaby-pride"
+        ]
+      },
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 4,
+        "freshness": 5,
+        "evidenceStrength": 4,
+        "uniqueAngle": 5,
+        "repeatVisitPotential": 4,
+        "speedToUsefulDraft": 5
+      },
+      "commercialIntent": "ad-and-sponsor-fit",
+      "commercialFitReason": "The official event pages show local event, family outing, arts, community, hospitality, transit, and retail intent; article-level views, ad viewability, RPM, revenue, and sponsor demand remain unavailable.",
+      "brandSafety": "standard",
+      "sponsorshipStatus": "editorial"
+    },
+    {
+      "title": "Surrey says Newton park upgrades start this summer",
+      "lane": "daily-local-utility",
+      "category": "local-news",
+      "locality": "Surrey",
+      "storyType": "bulletin",
+      "score": 83.0,
+      "decision": "brief",
+      "confidence": "verified-primary-source",
+      "evidence": {
+        "readerImpact": "Newton residents, athletes, families, and park users can see which amenities are planned at Newton Athletic Park and Unwin Park and when work is expected to begin.",
+        "freshnessEvidence": "The City of Surrey published the park-upgrade announcement on July 22, 2026 and says construction begins this summer.",
+        "uniqueAngleEvidence": "Existing Trends Today Surrey coverage includes heat, housing, and prior event notes, but not Newton Athletic Park or Unwin Park capital upgrades.",
+        "sourceUrls": [
+          "https://www.surrey.ca/news-events/news/major-upgrades-coming-popular-newton-parks",
+          "https://www.surrey.ca/about-surrey/capital-projects"
+        ],
+        "primarySourceUrls": [
+          "https://www.surrey.ca/news-events/news/major-upgrades-coming-popular-newton-parks",
+          "https://www.surrey.ca/about-surrey/capital-projects"
+        ]
+      },
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 4,
+        "freshness": 5,
+        "evidenceStrength": 4,
+        "uniqueAngle": 4,
+        "repeatVisitPotential": 3,
+        "speedToUsefulDraft": 5
+      },
+      "commercialIntent": "ad-and-sponsor-fit",
+      "commercialFitReason": "The official Surrey notices create local intent around recreation, youth sport, active families, municipal facilities, accessibility, and neighbourhood planning; article-level views, ad viewability, RPM, revenue, and sponsor demand remain unavailable.",
+      "brandSafety": "standard",
+      "sponsorshipStatus": "editorial"
+    }
+  ],
+  "rejected": [
+    {
+      "title": "Staying Cool During Extreme Heat",
+      "reason": "Duplicate of the already published Surrey July 22 cooling-place bulletin."
+    },
+    {
+      "title": "Surrey targets three more properties for unpermitted construction",
+      "reason": "Rejected for unattended publishing because enforcement against specific properties carries legal and private-property sensitivity."
+    },
+    {
+      "title": "More than 80,000 attend 19th annual Surrey Fusion Festival",
+      "reason": "Rejected as retrospective attendance coverage with weak same-day reader action."
+    },
+    {
+      "title": "Michael de Courcy: one in a million",
+      "reason": "Duplicate of the already published Burnaby Expo 86 library exhibition bulletin."
+    },
+    {
+      "title": "Environmental Stewardship Events",
+      "reason": "Duplicate of the already published Burnaby park stewardship registration bulletin."
+    },
+    {
+      "title": "Walk and Chat with the Mayor",
+      "reason": "Rejected because the official page did not support enough incremental practical value beyond date, place, breakfast, and rain-or-shine notes."
+    },
+    {
+      "title": "Richmond property-title and forensic-audit notices",
+      "reason": "Rejected for unattended publishing because legal and forensic-audit framing requires human review."
+    },
+    {
+      "title": "Sports team notes from Canucks, Whitecaps, and BC Lions listings",
+      "reason": "Rejected because roster, road-result, training-camp, and stale BC Lions items had weaker Lower Mainland reader utility than the selected event and civic facility candidates."
+    }
+  ]
+}
