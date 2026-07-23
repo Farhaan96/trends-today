@@ -98,6 +98,30 @@ def _article_links(body: str) -> List[Dict[str, str]]:
     return links
 
 
+def validate_published_content_tree(content_dir: Path = None) -> ValidationResult:
+    """Fail when a staged or pending candidate is placed in the public content tree."""
+    root = Path(content_dir) if content_dir else REPO_ROOT / 'content'
+    errors: List[str] = []
+
+    for article_path in root.glob('**/*.mdx'):
+        text = article_path.read_text(encoding='utf-8')
+        frontmatter_match = re.match(r'^---\s*\n(.*?)\n---\s*\n', text, re.DOTALL)
+        if not frontmatter_match:
+            continue
+        status_match = re.search(
+            r'^status:\s*["\']?([^"\'\n]+)["\']?\s*$',
+            frontmatter_match.group(1),
+            re.MULTILINE,
+        )
+        if status_match and status_match.group(1).strip().lower() != 'published':
+            errors.append(
+                f'{article_path.relative_to(root).as_posix()} has non-public status '
+                f'{status_match.group(1).strip()}'
+            )
+
+    return ValidationResult(passed=not errors, errors=errors)
+
+
 def validate_release_candidate(
     article: Dict,
     sources: List[Dict],

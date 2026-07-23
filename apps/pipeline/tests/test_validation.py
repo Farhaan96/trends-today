@@ -7,7 +7,10 @@ from pathlib import Path
 PIPELINE_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PIPELINE_DIR))
 
-from validation import validate_release_candidate  # noqa: E402
+from validation import (  # noqa: E402
+    validate_published_content_tree,
+    validate_release_candidate,
+)
 
 
 class ValidationTests(unittest.TestCase):
@@ -62,6 +65,29 @@ class ValidationTests(unittest.TestCase):
             self.article(), self.sources(), {'slug': 'valid'}, {'path': '/images/valid.webp'}
         )
         self.assertTrue(result.passed, result.errors)
+
+    def test_public_content_tree_rejects_pending_candidate(self):
+        with tempfile.TemporaryDirectory() as temp:
+            content_dir = Path(temp)
+            published = content_dir / 'local-news/published.mdx'
+            pending = content_dir / 'local-news/pending.mdx'
+            published.parent.mkdir(parents=True)
+            published.write_text(
+                '---\nstatus: published\n---\n\nPublished.\n',
+                encoding='utf-8',
+            )
+            pending.write_text(
+                '---\nstatus: release-candidate\n---\n\nPending.\n',
+                encoding='utf-8',
+            )
+
+            result = validate_published_content_tree(content_dir)
+
+        self.assertFalse(result.passed)
+        self.assertEqual(
+            result.errors,
+            ['local-news/pending.mdx has non-public status release-candidate'],
+        )
 
     def test_prose_em_dash_blocks_release(self):
         article = self.article()

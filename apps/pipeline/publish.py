@@ -207,6 +207,7 @@ def promote_candidate(
     review_path: Path,
     gpt_review_path: Path,
     repo_root: Path = None,
+    replace_existing: bool = False,
 ) -> Path:
     """Promote only after GPT editorial and Claude release reviews pass."""
     root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
@@ -292,7 +293,39 @@ def promote_candidate(
 
     destination = root / 'content' / category / relative.name
     if destination.exists():
-        raise FileExistsError(f'Refusing to overwrite existing article: {destination}')
+        if not replace_existing:
+            raise FileExistsError(f'Refusing to overwrite existing article: {destination}')
+        existing = destination.read_text(encoding='utf-8')
+        existing_frontmatter_match = re.match(
+            r'^---\s*\n(.*?)\n---\s*\n',
+            existing,
+            re.DOTALL,
+        )
+        if not existing_frontmatter_match:
+            raise ValueError('Existing article frontmatter is missing or malformed')
+        existing_frontmatter = existing_frontmatter_match.group(1)
+        if not re.search(
+            r'^status:\s*["\']?published["\']?\s*$',
+            existing_frontmatter,
+            re.MULTILINE,
+        ):
+            raise PermissionError('Only an existing published article may be revised')
+        existing_slug = re.search(
+            r'^slug:\s*["\']?([^"\'\n]+)["\']?\s*$',
+            existing_frontmatter,
+            re.MULTILINE,
+        )
+        candidate_slug = re.search(
+            r'^slug:\s*["\']?([^"\'\n]+)["\']?\s*$',
+            frontmatter,
+            re.MULTILINE,
+        )
+        if (
+            not existing_slug
+            or not candidate_slug
+            or existing_slug.group(1).strip() != candidate_slug.group(1).strip()
+        ):
+            raise PermissionError('Revision candidate slug must match the published article')
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(promoted, encoding='utf-8')
     logger.info('Promoted reviewed candidate %s to %s', source, destination)

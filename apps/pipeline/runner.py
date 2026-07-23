@@ -359,6 +359,11 @@ def main():
     parser.add_argument('--release-candidate', type=Path, help='Exact staged MDX file to promote')
     parser.add_argument('--gpt-review-file', type=Path, help='Passing GPT editorial review for the exact candidate')
     parser.add_argument('--review-file', type=Path, help='Accepted Claude review JSON for the exact candidate')
+    parser.add_argument(
+        '--replace-existing',
+        action='store_true',
+        help='Replace an existing published article after both exact-candidate reviews pass',
+    )
     parser.add_argument('--output', type=Path, help='Research queue output path')
     args = parser.parse_args()
 
@@ -391,6 +396,7 @@ def main():
             args.release_candidate,
             args.review_file,
             args.gpt_review_file,
+            replace_existing=args.replace_existing,
         )
         print(f'Promoted reviewed candidate to {destination}')
         return

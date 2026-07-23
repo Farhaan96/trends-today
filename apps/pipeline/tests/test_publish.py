@@ -171,6 +171,59 @@ class PublisherTests(unittest.TestCase):
             with self.assertRaises(PermissionError):
                 promote_candidate(candidate, review, gpt_review, repo_root=root)
 
+    def test_revision_promotion_requires_explicit_replace(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            publisher = Publisher(mode='candidate', repo_root=root)
+            publisher.publish(
+                self.article(),
+                {
+                    'slug': 'candidate-title',
+                    'meta_description': 'Candidate description',
+                    'internal_links': [],
+                },
+                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+            )
+            candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
+            destination = root / 'content/science/candidate-title.mdx'
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_text(
+                '---\n'
+                'title: Existing article\n'
+                'category: science\n'
+                'slug: candidate-title\n'
+                'status: published\n'
+                '---\n\nOld body.\n',
+                encoding='utf-8',
+            )
+            self.write_source_config(root)
+            review = self.write_review(root, candidate)
+            gpt_review = self.write_gpt_review(root, candidate)
+
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                with self.assertRaises(FileExistsError):
+                    promote_candidate(
+                        candidate,
+                        review,
+                        gpt_review,
+                        repo_root=root,
+                    )
+
+                promoted = promote_candidate(
+                    candidate,
+                    review,
+                    gpt_review,
+                    repo_root=root,
+                    replace_existing=True,
+                )
+
+            content = promoted.read_text(encoding='utf-8')
+            self.assertIn('status: "published"', content)
+            self.assertIn('Useful copy.', content)
+            self.assertNotIn('Old body.', content)
+
     def test_promotion_rejects_claude_blockers(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
