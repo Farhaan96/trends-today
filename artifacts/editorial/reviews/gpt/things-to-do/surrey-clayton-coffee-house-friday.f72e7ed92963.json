@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "f72e7ed92963a9aed047ca3d338e93adcf7e991af09de9352cb6eab425a20b12",
+  "repositorySha": "e4b697746b48520b1346bcc1e2f28a67575bce8a",
+  "reviewedAt": "2026-07-23T15:45:41.708029+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8fa6-abe9-7953-8608-6844cae4e052",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The release candidate passes the strict second editorial gate. Its event details, monthly format, performer guidance, and related summer programming are supported by the cited City of Surrey pages. The MDX is concise, scannable, actionable, and contains no authorial em dashes."
+}
