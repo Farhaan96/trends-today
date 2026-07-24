@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "9b63eda226a41e1bf1297dc8ae852e92d9ea186de4c9ea987c5bf3352ce85d59",
+  "repositorySha": "d4e85481db74f599dbe9f40ed8fed996736fccc1",
+  "reviewedAt": "2026-07-24T13:42:38.314862+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f945c-6333-7343-a92a-815bc7b57643",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The claim that platform changes and service notices \u201ccan shift closer to travel time\u201d is not supported by the cited material. The sources advise riders to check alerts and station screens, but do not state that notices may change closer to departure.",
+    "The audience-stakes sentence naming early workers, airport connectors, event-goers, and tight transfers presents uncited impact scenarios. These are plausible, but the candidate\u2019s strict every-claim support standard requires attribution, evidence, or narrower wording grounded in the sources."
+  ],
+  "summary": "The candidate matches both supplied hashes, contains zero authorial em dashes, and is clean, readable, scannable, locally relevant, and actionable. It does not pass the strict factual-support gate because two passages extend beyond what the cited TransLink sources establish."
+}

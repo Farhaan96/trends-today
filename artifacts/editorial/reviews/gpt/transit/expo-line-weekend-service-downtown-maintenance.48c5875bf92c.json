@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "48c5875bf92cf55d55e818cb2cd3aed25a8cc72edfad68dcedffbaf9b1e4d112",
+  "repositorySha": "d4e85481db74f599dbe9f40ed8fed996736fccc1",
+  "reviewedAt": "2026-07-24T13:56:29.831864+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9469-428f-7773-9b47-6af5a3d68c2e",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate matches the supplied SHA-256 and repository SHA. Its service windows, affected stations, expected delay, maintenance scope, rider instructions, and project figures are supported by the cited TransLink material. The bulletin is clear, useful, scannable, actionable, and contains no authorial em dashes."
+}

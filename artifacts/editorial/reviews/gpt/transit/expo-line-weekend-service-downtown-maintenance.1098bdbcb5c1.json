@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "1098bdbcb5c142ca0220cfccc07633a34df361fd87ec1776ec664ab657da2beb",
+  "repositorySha": "d4e85481db74f599dbe9f40ed8fed996736fccc1",
+  "reviewedAt": "2026-07-24T13:44:37.106731+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f945e-68b3-7eb0-a95b-45e82185e715",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate matches both supplied hashes. Its factual claims are supported by the cited TransLink material, the MDX is valid and scannable, and the bulletin gives riders clear timing, impact, and next steps. Some phrasing repeats \u201cdowntown Vancouver\u201d and \u201cweekend windows,\u201d but not enough to require revision."
+}

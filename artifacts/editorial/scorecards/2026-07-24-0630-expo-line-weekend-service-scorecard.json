@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "generatedAt": "2026-07-24T13:45:00Z",
+  "candidate": {
+    "title": "Expo Line weekend service drops downtown Saturday",
+    "slug": "expo-line-weekend-service-downtown-maintenance",
+    "category": "transit",
+    "locality": "Vancouver",
+    "storyType": "bulletin",
+    "wordCountTarget": "300-600",
+    "lengthRationale": "A bulletin is the shortest complete format because riders mainly need the start date, affected service windows, expected delay, and official alert path."
+  },
+  "editorialQualification": {
+    "score": 91,
+    "minimumScore": 65,
+    "primarySourceRequired": true,
+    "minimumSourcesRequired": 1,
+    "sourcesUsed": 2,
+    "passes": true,
+    "brandSafety": "standard",
+    "manualApprovalRequired": false
+  },
+  "commercial": {
+    "commercialIntent": "ad-fit",
+    "sponsorshipStatus": "editorial",
+    "commercialFitReason": "Downtown weekend transit disruption coverage may fit standard commuter, trip-planning, local-service, and events-ad context; page views, Active View, RPM, ad revenue, and sponsor demand remain unavailable.",
+    "commercialApprovalRequired": false
+  },
+  "measurement": {
+    "status": "unavailable",
+    "missingValuesWereCoercedToZero": false,
+    "repair": "Connect Vercel analytics credentials plus GA/Search Console/ad/sponsor exports."
+  },
+  "changedVariable": "Test a next-day downtown transit-disruption bulletin at the start of the July 24 local-day sweep.",
+  "decisionRule": "Keep weekend transit disruption bulletins when they have official-source service windows, concrete trip-planning action, verified links/images, and truthful metric availability; repair discovery when stale source items consume sweep time; stop if the item is generic infrastructure filler."
+}

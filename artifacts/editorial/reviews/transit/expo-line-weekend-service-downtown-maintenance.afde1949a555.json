@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "afde1949a555170333251ff4926df73e02e2adfdeb880206e5822a57048b12d8",
+  "repositorySha": "8f3facb650e95a4e927514e461c464f8fb6df0fa",
+  "reviewedAt": "2026-07-24T14:26:52Z",
+  "modelUsed": "opus",
+  "requestedModels": ["opus"],
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-opus-4-8"],
+  "fallbackUsed": false,
+  "fallbackDisabled": true,
+  "reviewBackend": "invoke-claude-review.ps1",
+  "summary": "Independent review passed. The promoted body matches the formatted release candidate, the GPT artifact path and candidate hash are fresh, factual claims are attributed to TransLink, no authorial em dashes were found, no duplicate/sensitive/sponsored approval gate was triggered, and locality, freshness, utility, formatting, image, and source gates passed.",
+  "residualRisk": "The reviewer could not fetch the live TransLink URLs inside the review environment, so source-specific figures were verified through the cited-source attribution and GPT factual-support passes rather than offline source text."
+}

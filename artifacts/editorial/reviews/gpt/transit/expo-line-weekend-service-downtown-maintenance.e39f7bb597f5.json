@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "e39f7bb597f5fa2ab116899025efe4d3fbba3d80e42914422303abf66c0499ff",
+  "repositorySha": "d4e85481db74f599dbe9f40ed8fed996736fccc1",
+  "reviewedAt": "2026-07-24T13:43:41.995911+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f945d-7852-7161-97f9-8d1087b33f86",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The Burrard cross-link describes an \u201congoing Burrard Station elevator replacement,\u201d but none of the listed sources supports that claim. The cited TransLink project page instead describes replacement of five escalators at Burrard Station.",
+    "The middle section repeats the guidance about station entrance screens and repeatedly uses nearly identical \u201ctravelling through or using downtown Vancouver stations\u201d phrasing. This needs consolidation to remove repetition and improve editorial quality."
+  ],
+  "summary": "The hashes match the supplied release candidate and repository state. The core service dates, windows, affected segment, delay guidance, unaffected lines, and LIM program details are supported, but an unsupported Burrard project claim and material repetition prevent release."
+}
