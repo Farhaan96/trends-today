@@ -1,6 +1,6 @@
 # 2026-07-24 06:30 sweep: Expo Line weekend service bulletin
 
-- Outcome: selected and promoted one qualified Lower Mainland transit bulletin for release. No second story qualified above duplicate, approval-gated, stale, thin, or low-utility alternatives in this sweep.
+- Outcome: published and browser-verified one qualified Lower Mainland transit bulletin. No second story qualified above duplicate, approval-gated, stale, thin, or low-utility alternatives in this sweep.
 - Article: `Expo Line weekend service drops downtown Saturday`, canonical path `/transit/expo-line-weekend-service-downtown-maintenance`.
 - Category and municipality: transit / Vancouver.
 - Reader job: tell Expo Line riders when downtown weekend service is reduced and what to check before travelling.
@@ -13,6 +13,9 @@
 - Costs and metrics: editorial labour cost unavailable. Vercel article-level export, Search Console, GA, scroll depth, measurable and viewable ad impressions, Active View rate, ad revenue/RPM, sponsor inquiries, qualified sponsor inquiries, sponsorship revenue, and content cost remain unavailable, never zero.
 - Measurement repair: connect `VERCEL_TOKEN` or `VERCEL_ANALYTICS_TOKEN` plus `VERCEL_PROJECT_ID`, then add configured GA/Search Console/ad/sponsor exports so article-level views, engagement, viewable inventory, revenue, and sponsor demand can be compared.
 - Review: GPT exact-candidate PASS for candidate SHA `afde1949a555170333251ff4926df73e02e2adfdeb880206e5822a57048b12d8`, scores factual support 5, quality 4, readability 4, formatting 5, engagement 4, no blockers, zero authorial em dashes. Independent Claude Opus review with fallback disabled returned `NO BLOCKERS` on exact repository SHA `8f3facb650e95a4e927514e461c464f8fb6df0fa`; this final artifact commit records that review without changing the article body.
+- Publication: PR #63 merged to `main` at merge SHA `87a39f0d71eb5e33b958c484c2db1291678be672`. Production deployment `5590416049` succeeded at `2026-07-24T14:29:22Z`.
+- Browser verification: canonical URL `/transit/expo-line-weekend-service-downtown-maintenance` returned 200 and rendered the expected headline, July 24, 2026 date, Trends Today Newsroom/Moe byline signals, article image, two TransLink source links, no console errors, and no authorial em dashes.
+- Live content count: `/api/analytics` returned success with 152 active articles, transit count 7, and the Expo Line bulletin first in recent articles. Provider-level commercial metrics remain unavailable.
 - 7-day checkpoint: 2026-07-31.
 - 28-day checkpoint: 2026-08-21.
 - Keep/repair/stop rule: keep weekend transit-disruption bulletins when they have official-source service windows, concrete trip-planning action, verified links/images, and truthful metric availability; repair discovery when stale source items consume sweep time; stop if the item is generic infrastructure filler or commercial assumptions steer publication.
