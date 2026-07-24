@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "runStartedAt": "2026-07-24T08:31:00-07:00",
+  "timezone": "America/Vancouver",
+  "sourceScan": {
+    "configuredEnabledSourcesScanned": [
+      "City of Surrey news",
+      "City of Burnaby events",
+      "City of Richmond news",
+      "City of Coquitlam news",
+      "City of Delta news",
+      "Vancouver Canucks news",
+      "Vancouver Whitecaps news",
+      "BC Lions news"
+    ],
+    "configuredScanFound": 30,
+    "fallbackOfficialSearchUsed": true,
+    "fallbackReason": "The configured enabled-source scan repeated mostly rejected or published items; a live official City of Vancouver search surfaced a stronger upcoming free event with current planning utility."
+  },
+  "dailyCeiling": {
+    "dateLocal": "2026-07-24",
+    "publishedBeforeSweep": 1,
+    "dailyMaximum": 6,
+    "sweepMaximum": 2,
+    "ceilingReached": false
+  },
+  "measurement": {
+    "artifact": "artifacts/editorial/metrics/2026-07-24-0830-vercel-analytics.json",
+    "status": "unavailable",
+    "missing": [
+      "VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN",
+      "VERCEL_PROJECT_ID",
+      "GA_PROPERTY_ID",
+      "GOOGLE_APPLICATION_CREDENTIALS",
+      "ad and sponsor exports"
+    ],
+    "repair": "Connect Vercel analytics credentials plus GA/Search Console/ad/sponsor exports so article-level views, engaged sessions, viewable inventory, revenue, and sponsor inquiries are available."
+  },
+  "selected": [
+    {
+      "title": "Summer Lights fireworks set for English Bay July 31",
+      "slug": "summer-lights-english-bay-fireworks",
+      "category": "things-to-do",
+      "locality": "Vancouver",
+      "storyType": "bulletin",
+      "readerJob": "Help Vancouver residents decide whether to attend the free July 31 English Bay fireworks event and plan around access, parking, transit, and crowd rules.",
+      "score": 88,
+      "scoring": {
+        "localRelevance": 5,
+        "readerUtility": 5,
+        "freshness": 4,
+        "evidenceStrength": 5,
+        "uniqueAngle": 5,
+        "repeatVisitPotential": 3,
+        "speedToUsefulDraft": 5
+      },
+      "qualification": {
+        "locality": "pass",
+        "freshness": "pass",
+        "readerUtility": "pass",
+        "evidence": "pass",
+        "primarySource": "pass",
+        "corroboration": "pass",
+        "uniqueness": "pass",
+        "brandSafety": "standard",
+        "sensitiveStory": "not triggered",
+        "quality": "pass"
+      },
+      "sources": [
+        {
+          "title": "City of Vancouver Summer Lights in English Bay",
+          "url": "https://vancouver.ca/parks-recreation-culture/summer-lights-in-english-bay.aspx",
+          "tier": "primary"
+        },
+        {
+          "title": "City of Vancouver announcement on Summer Lights in English Bay",
+          "url": "https://vancouver.ca/news-calendar/announcing-summer-lights-in-english-bay-june-2026.aspx",
+          "tier": "primary"
+        },
+        {
+          "title": "TransLink Transit Alerts",
+          "url": "https://www.translink.ca/alerts",
+          "tier": "primary"
+        }
+      ],
+      "commercialIntent": "ad-and-sponsor-fit",
+      "commercialFitReason": "Free summer event, waterfront, food truck, transit, hospitality, tourism, local restaurant, and family outing intent may fit standard ads or future event and hospitality sponsor categories; this is a sourced hypothesis only, not proof of RPM or sponsor demand.",
+      "sponsorshipStatus": "editorial"
+    }
+  ],
+  "rejectedOrHeld": [
+    {
+      "title": "Staying Cool During Extreme Heat",
+      "reason": "Duplicate of the July 22 Surrey heat-safety bulletin."
+    },
+    {
+      "title": "Major upgrades coming to popular Newton parks",
+      "reason": "Duplicate of the July 23 Surrey Newton park-upgrades bulletin."
+    },
+    {
+      "title": "Surrey targets three more properties for unpermitted construction",
+      "reason": "Approval-gated property enforcement item."
+    },
+    {
+      "title": "More than 80,000 attend 19th annual Surrey Fusion Festival",
+      "reason": "Retrospective attendance item with weak next action."
+    },
+    {
+      "title": "Michael de Courcy: one in a million",
+      "reason": "Duplicate of the already published Burnaby Expo 86 photo exhibition bulletin."
+    },
+    {
+      "title": "Environmental Stewardship Events",
+      "reason": "Duplicate of the already published Burnaby stewardship dates bulletin."
+    },
+    {
+      "title": "Walk and Chat with the Mayor",
+      "reason": "Too thin as a standalone update after direct source check."
+    },
+    {
+      "title": "Art in the Park: Making Together",
+      "reason": "Duplicate of the already published Burnaby Art in the Park bulletin."
+    },
+    {
+      "title": "BC Supreme Court Decision - Impact on Property Titles",
+      "reason": "Approval-gated legal/property-title item."
+    },
+    {
+      "title": "Richmond Olympic Oval Corporation - Performance & Forensic Audits",
+      "reason": "Approval-gated audit item."
+    },
+    {
+      "title": "Coquitlam, Delta, Canucks, Whitecaps, and BC Lions feed items",
+      "reason": "Already covered, stale, out of the Lower Mainland reader-action window, retrospective, or weak utility."
+    }
+  ]
+}

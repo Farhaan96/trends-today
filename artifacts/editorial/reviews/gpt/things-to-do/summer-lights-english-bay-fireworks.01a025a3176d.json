@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "01a025a3176dba916dc39e30c53b841302dabe10ff56dfc06881c1e3c8e29aac",
+  "repositorySha": "d03362ea4325ee791d811fb72e5640adad143bf8",
+  "reviewedAt": "2026-07-24T15:41:06.735200+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f94c8-8c95-72e2-b712-706839bcae7a",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The candidate expands the City's geographic warning beyond the cited support. It says large crowds, road closures, and traffic delays are expected around Kitsilano, and the highlights also associate bus impacts with Kitsilano. The City limits its crowd, closure, and traffic-delay warning to the West End, English Bay, and downtown; it separately identifies parking-lot closures at Kits Beach, Hadden Park, and Vanier Park. Revise the geographic attribution so each impact matches the source.",
+    "\u201cThis is not a routine listing item\u201d is unsupported promotional framing. The following sentence already provides the concrete local stakes, so this manufactured distinction should be removed or replaced with a sourced, specific consequence."
+  ],
+  "summary": "BLOCKERS. The artifact and repository hashes match exactly, the MDX is clean and scannable, and authorial prose contains no em dashes. The candidate needs revision for one material source overreach and one unsupported hype line."
+}
