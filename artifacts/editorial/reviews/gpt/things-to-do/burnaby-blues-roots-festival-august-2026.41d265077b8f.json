@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "41d265077b8f281d128850aa05b6991e595331bca59c8c84935f8f3e2bce27bc",
+  "repositorySha": "fa9a638156c2f00ea687da83c3aafa02561b9a0a",
+  "reviewedAt": "2026-07-24T17:44:56.378152+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f953a-6727-74e1-a895-13f90a86856d",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate is well supported by the cited city material, useful for local event planning, cleanly structured, and ends with concrete arrival options. Minor repetition of the date, admission, location, and lineup keeps quality, readability, and engagement from scoring 5, but no revision-level blocker remains."
+}
