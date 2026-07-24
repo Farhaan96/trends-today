@@ -1437,6 +1437,50 @@ img,
   }
 }
 
+.contact-page {
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.contact-page .text-gray-900,
+.contact-page .text-gray-700,
+.contact-page .text-gray-600,
+.contact-page .text-gray-500 {
+  color: var(--color-text);
+}
+
+.contact-page label {
+  color: var(--color-text-soft);
+}
+
+.contact-page input,
+.contact-page select,
+.contact-page textarea {
+  border-color: var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.contact-page input:focus,
+.contact-page select:focus,
+.contact-page textarea:focus {
+  border-color: var(--color-accent);
+  outline: 2px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+}
+
+.contact-page .bg-blue-50 {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.contact-page .text-amber-800 {
+  color: #f1b66b;
+}
+
+.contact-page .text-blue-600 {
+  color: var(--color-accent);
+}
+
 /* Newsroom, trust, and advertising pages */
 .section-kicker {
   margin: 0 0 0.75rem;

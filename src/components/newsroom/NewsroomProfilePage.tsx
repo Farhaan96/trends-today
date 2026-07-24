@@ -6,7 +6,7 @@ import {
   UserIcon,
   UsersIcon,
 } from '@heroicons/react/24/outline';
-import { getArticlesByAuthor } from '@/lib/article-utils';
+import { getAllArticles, getArticlesByAuthor } from '@/lib/article-utils';
 import { newsroomProfiles } from '@/lib/newsroom';
 import { formatArticleDate } from '@/lib/editorial';
 
@@ -18,9 +18,14 @@ export default async function NewsroomProfilePage({ slug }: { slug: string }) {
     profile.id === 'trends-today-newsroom'
       ? ['Trends Today Newsroom', 'Trends Today Team', 'Trends Today']
       : [profile.name];
-  const articleGroups = await Promise.all(
-    authorNames.map((name) => getArticlesByAuthor(name))
-  );
+  const articleGroups =
+    profile.id === 'moe'
+      ? [
+          (await getAllArticles()).filter(
+            (article) => article.frontmatter?.editor === profile.name
+          ),
+        ]
+      : await Promise.all(authorNames.map((name) => getArticlesByAuthor(name)));
   const articles = articleGroups
     .flat()
     .filter(

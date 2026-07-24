@@ -56,7 +56,7 @@ export default function ContactPage() {
 
   if (draftOpened) {
     return (
-      <div className="bg-white min-h-screen">
+      <div className="contact-page min-h-screen">
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="text-center py-12">
             <div className="text-6xl mb-4" aria-hidden="true">
@@ -91,7 +91,7 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="contact-page min-h-screen">
       <div className="max-w-4xl mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-8">Contact Us</h1>
 

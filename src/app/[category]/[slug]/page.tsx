@@ -271,7 +271,9 @@ export default async function ArticlePage({
             </p>
           </aside>
         )}
-        <ArticleHighlights highlights={highlights} />
+        <ArticleHighlights
+          highlights={needsSourceRefresh ? undefined : highlights}
+        />
         <ArticleContent content={article.content || article.mdxContent} />
         {reportingMethod && (
           <aside className="article-method" aria-labelledby="reporting-method">
