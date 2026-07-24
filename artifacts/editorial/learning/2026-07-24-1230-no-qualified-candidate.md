@@ -1,0 +1,22 @@
+# 2026-07-24 12:30 sweep: no qualified candidate
+
+- Outcome: skipped publication. Zero articles were published because no available official-source opportunity cleared the editorial gates.
+- Daily ceiling: 3 of 6 Vancouver-day articles were already live before this sweep, so the ceiling did not force the skip.
+- Source scan: configured enabled official sources produced 30 candidates across Surrey, Burnaby, Richmond, Coquitlam, Delta, the Canucks, the Whitecaps, and the BC Lions.
+- Metrics: `artifacts/editorial/metrics/2026-07-24-1230-vercel-analytics.json` records article-level commercial measurement as unavailable because `VERCEL_TOKEN` or `VERCEL_ANALYTICS_TOKEN` and `VERCEL_PROJECT_ID` were missing. GA/Search Console/ad/sponsor exports also remain unavailable. Missing metrics stayed unavailable, never zero.
+- Measurement repair: connect Vercel analytics credentials plus GA/Search Console/ad/sponsor exports so article-level views, engaged sessions, returning sessions, scroll depth, viewable inventory, RPM, revenue, and sponsor demand can be compared.
+- Rejected duplicates: Surrey heat, Surrey Newton parks, Burnaby Blues + Roots, Michael de Courcy/Expo 86 libraries, Burnaby stewardship, Richmond climate-friendly homes, Richmond recycling, Coquitlam election workers, Coquitlam heat, Coquitlam transportation plan, Coquitlam signal work, Delta air quality, and Delta water restrictions.
+- Rejected or held for approval: Surrey unpermitted-construction enforcement, Richmond property-title legal notice, and Richmond Olympic Oval performance/forensic audit.
+- Rejected for weak reader job: Surrey Fusion Festival attendance was retrospective; Delta's July 27 council agenda exposed only a meeting time, venue, and agenda link in this pass; Delta banner winners were retrospective; Burnaby's Walk and Chat with the Mayor was still too thin as a standalone bulletin; the Cammi Granato Canucks role update was fresh and local but did not provide enough practical reader utility.
+- Category and municipality: none published.
+- Reader job: no available item delivered a strong enough current Lower Mainland action, planning, or public-service job without duplicating existing coverage.
+- Commercial hypothesis: no commercial hypothesis was advanced because no story qualified editorially. Commercial fit remains a post-qualification tie-breaker only.
+- Brand safety and approval: no public story was shipped. Approval-gated legal, audit, and property-enforcement items were held.
+- Length rationale: no article length was selected; zero was better than padding a weak item.
+- Internal links: none added because no article was published.
+- Single changed variable: kept the topic mix unchanged and tested whether the configured official-source queue had a fresh post-10:30 qualified item.
+- Sources: City of Surrey news, City of Burnaby events, City of Richmond news, City of Coquitlam news, City of Delta news, Vancouver Canucks news, Vancouver Whitecaps news, and BC Lions news.
+- Costs and metrics: editorial labour cost unavailable. Page views, engaged sessions, returning sessions, scroll depth, measurable and viewable ad impressions, Active View rate, ad revenue/RPM, sponsor inquiries, qualified sponsor inquiries, sponsorship revenue, and content cost remain unavailable.
+- 7-day checkpoint: 2026-07-31.
+- 28-day checkpoint: 2026-08-21.
+- Keep/repair/stop rule: keep the guarded skip behaviour when only duplicates, thin notices, sensitive items, or weak sports updates are available; repair measurement credentials before making topic-mix decisions; stop any pressure to publish retrospective or commercially tempting filler.

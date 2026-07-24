@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "runStartedAt": "2026-07-24T12:30:00-07:00",
+  "timezone": "America/Vancouver",
+  "sourceScan": {
+    "configuredEnabledSourcesScanned": [
+      "City of Surrey news",
+      "City of Burnaby events",
+      "City of Richmond news",
+      "City of Coquitlam news",
+      "City of Delta news",
+      "Vancouver Canucks news",
+      "Vancouver Whitecaps news",
+      "BC Lions news"
+    ],
+    "configuredScanFound": 30,
+    "fallbackOfficialSearchUsed": false
+  },
+  "dailyCeiling": {
+    "dateLocal": "2026-07-24",
+    "publishedBeforeSweep": 3,
+    "dailyMaximum": 6,
+    "sweepMaximum": 2,
+    "ceilingReached": false
+  },
+  "measurement": {
+    "artifact": "artifacts/editorial/metrics/2026-07-24-1230-vercel-analytics.json",
+    "status": "unavailable",
+    "missing": [
+      "VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN",
+      "VERCEL_PROJECT_ID",
+      "GA_PROPERTY_ID",
+      "GOOGLE_APPLICATION_CREDENTIALS",
+      "ad and sponsor exports"
+    ],
+    "repair": "Connect Vercel analytics credentials plus GA/Search Console/ad/sponsor exports so article-level views, engaged sessions, viewable inventory, revenue, and sponsor inquiries are available."
+  },
+  "selected": [],
+  "rejectedOrHeld": [
+    {
+      "title": "Staying Cool During Extreme Heat",
+      "reason": "Duplicate of the July 22 Surrey heat-safety bulletin."
+    },
+    {
+      "title": "Major upgrades coming to popular Newton parks",
+      "reason": "Duplicate of the July 23 Surrey Newton park-upgrades bulletin."
+    },
+    {
+      "title": "Surrey targets three more properties for unpermitted construction",
+      "reason": "Approval-gated property-enforcement item."
+    },
+    {
+      "title": "More than 80,000 attend 19th annual Surrey Fusion Festival",
+      "reason": "Retrospective attendance item with weak next action for readers."
+    },
+    {
+      "title": "Burnaby Blues + Roots Festival",
+      "reason": "Duplicate of the July 24 10:30 Burnaby Blues bulletin."
+    },
+    {
+      "title": "Michael de Courcy: one in a million",
+      "reason": "Duplicate of the already published Burnaby Expo 86 photo exhibition bulletin."
+    },
+    {
+      "title": "Walk and Chat with the Mayor",
+      "reason": "Near-term Burnaby event, but still too thin as a standalone update after direct source check."
+    },
+    {
+      "title": "Environmental Stewardship Events",
+      "reason": "Duplicate of the already published Burnaby stewardship dates bulletin."
+    },
+    {
+      "title": "BC Supreme Court Decision - Impact on Property Titles",
+      "reason": "Approval-gated legal/property-title item."
+    },
+    {
+      "title": "Richmond Olympic Oval Corporation - Performance & Forensic Audits",
+      "reason": "Approval-gated audit item."
+    },
+    {
+      "title": "Seeking Climate-Friendly Homes",
+      "reason": "Duplicate of the already published Richmond climate-friendly homes bulletin."
+    },
+    {
+      "title": "Reduce Recycling Contamination",
+      "reason": "Duplicate of the already published Richmond recycling contamination bulletin."
+    },
+    {
+      "title": "Coquitlam source items",
+      "reason": "Election-worker, heat-safety, transportation-plan, and traffic-signal items are already covered."
+    },
+    {
+      "title": "Regular Council Meeting Agenda - July 27, 2026",
+      "reason": "Thin agenda notice with time, venue, and agenda link but not enough practical reader detail for a standalone article."
+    },
+    {
+      "title": "Delta air-quality and water-restriction notices",
+      "reason": "Duplicates of existing Delta/Metro Vancouver public-service coverage."
+    },
+    {
+      "title": "Delta Community Banner Contest winners",
+      "reason": "Retrospective recognition item with weak time-sensitive reader utility."
+    },
+    {
+      "title": "Cammi Granato takes on new role with Vancouver Canucks",
+      "reason": "Fresh and local, but a hockey-operations role change has weak practical reader utility and does not beat the editorial quality gate."
+    },
+    {
+      "title": "Remaining Canucks, Whitecaps, and BC Lions feed items",
+      "reason": "Stale, out of market, retrospective, or below the current Lower Mainland reader-action threshold."
+    }
+  ],
+  "decision": {
+    "outcome": "skip",
+    "reason": "No candidate cleared the editorial qualification gates. Commercial fit was not used to rescue weak stories.",
+    "articlesPublished": 0
+  }
+}
