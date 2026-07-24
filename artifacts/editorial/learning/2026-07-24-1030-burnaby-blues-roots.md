@@ -1,0 +1,22 @@
+# 2026-07-24 10:30 sweep: Burnaby Blues + Roots Festival bulletin
+
+- Outcome: published and browser-verified one qualified Lower Mainland things-to-do bulletin. No second story was promoted because remaining configured-source opportunities were duplicate, stale, thin, approval-gated, sensitive, out of market, or below editorial gates.
+- Article: `Burnaby Blues + Roots Festival is free Aug. 8`, canonical path `/things-to-do/burnaby-blues-roots-festival-august-2026`.
+- Category and municipality: things-to-do / Burnaby.
+- Reader job: help Lower Mainland readers decide whether to attend the free Aug. 8 Deer Lake Park music festival and plan around set times, transit, parking, accessibility, food, and site rules.
+- Editorial fit: the City of Burnaby event page confirms the date, free admission, Deer Lake Park Festival Lawn location, main-stage and satellite-stage timing, parking limits, transit notes, accessibility details, bike valet, food and beer garden, and site rules. This is a current official-source public event with a concrete planning job.
+- Commercial hypothesis: `commercialIntent` is `ad-and-sponsor-fit` for free regional music, food truck, beer garden, transit, hospitality, tourism, local restaurant, and family outing context. This is a sourced hypothesis only; `sponsorshipStatus` remains `editorial`.
+- Brand safety and approval: brand safety `standard`; no sensitive-story, sponsored, supported, branded, pricing, outreach, billing, customer commitment, or private-evidence trigger was present, so no human approval gate was required.
+- Length rationale: bulletin, 514 words after repair, because the reader needs the date, place, free admission rule, key set times, transit and parking warnings, accessibility notes, food options, site rules, and source link. Copy was not padded for ad slots.
+- Internal links: one contextual link to `/things-to-do/burnaby-art-in-park-making-together` using the anchor `Burnaby Art in the Park dates`, because it gives readers another free Burnaby city-run activity before August.
+- Single changed variable: tested a free official-source Burnaby music-festival bulletin with practical arrival-planning utility after the July 24 morning event and transit bulletins.
+- Sources: City of Burnaby Burnaby Blues + Roots Festival event page.
+- Costs and metrics: editorial labour cost unavailable. Vercel article-level export, Search Console, GA, returning sessions, engaged sessions, scroll depth, measurable and viewable ad impressions, Active View rate, ad revenue/RPM, sponsor inquiries, qualified sponsor inquiries, sponsorship revenue, and content cost remain unavailable, never zero.
+- Measurement repair: connect `VERCEL_TOKEN` or `VERCEL_ANALYTICS_TOKEN` plus `VERCEL_PROJECT_ID`, then add configured GA/Search Console/ad/sponsor exports so article-level views, engagement, viewable inventory, revenue, and sponsor demand can be compared.
+- Review: GPT exact-candidate PASS after repair for candidate SHA `41d265077b8f281d128850aa05b6991e595331bca59c8c84935f8f3e2bce27bc`, scores factual support 5, quality 4, readability 5, formatting 5, engagement 4, no blockers, zero authorial em dashes. Independent Claude Opus review with fallback disabled returned `NO BLOCKERS` on exact repository SHA `851edcba24d5112afc3002372a798368c25ba0a2`.
+- Publication: article PR #68 merged to `main` at merge SHA `2211e5c89b22fb02a7f36eaea03e3e447a381a1a`. Production deployment `5593113673` succeeded at `2026-07-24T17:58:31Z`.
+- Browser verification: canonical URL `/things-to-do/burnaby-blues-roots-festival-august-2026` returned 200 and rendered the expected canonical URL, headline, July 24 10:45 a.m. date, byline signals, loaded 1024 x 512 hero image, official City of Burnaby source/body links as anchors, the Burnaby Art in the Park internal link as an anchor, key free-admission, Deer Lake, parking, and lineup facts, no authorial em dashes, and zero console or page errors.
+- Live content count: `/api/analytics` after deployment returned success with 154 active articles, things-to-do count 9, and the Burnaby Blues + Roots bulletin first in recent articles. Provider-level commercial metrics remain unavailable.
+- 7-day checkpoint: 2026-07-31.
+- 28-day checkpoint: 2026-08-21.
+- Keep/repair/stop rule: keep official-source free-event bulletins when they answer a current reader planning job and links render cleanly; repair measurement gaps before scaling topic mix; stop if the item becomes generic event filler or commercial assumptions steer publication.
