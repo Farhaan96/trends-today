@@ -35,7 +35,7 @@ export async function generateMetadata({
       description: post.description,
       type: 'article',
       publishedTime: post.date,
-      authors: [post.author || 'Trends Today Team'],
+      authors: [post.author || 'Trends Today Newsroom'],
       images: [
         {
           url: post.image || '/images/placeholder.svg',
@@ -93,7 +93,7 @@ export default async function PostPage({
 
         <div className="flex items-center justify-between mb-6 text-sm text-gray-500">
           <div className="flex items-center gap-4">
-            <span>{post.author || 'Trends Today Team'}</span>
+            <span>{post.author || 'Trends Today Newsroom'}</span>
             <span>•</span>
             <time>
               {new Date(post.date).toLocaleDateString('en-US', {

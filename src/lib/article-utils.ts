@@ -5,6 +5,13 @@ import { CONTENT_CATEGORIES } from './categories';
 
 const contentDirectory = path.join(process.cwd(), 'content');
 
+function isPublished(frontmatter: Record<string, unknown>): boolean {
+  const status = String(frontmatter.status || '')
+    .trim()
+    .toLowerCase();
+  return !status || status === 'published';
+}
+
 export interface Article {
   slug: string;
   category: string;
@@ -42,6 +49,7 @@ export async function getAllArticles(): Promise<Article[]> {
       const filePath = path.join(categoryPath, file);
       const fileContent = fs.readFileSync(filePath, 'utf-8');
       const { data, content } = matter(fileContent);
+      if (!isPublished(data)) continue;
 
       articles.push({
         slug: file.replace('.mdx', ''),
@@ -85,6 +93,7 @@ export async function getArticleBySlug(
 
   const fileContent = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(fileContent);
+  if (!isPublished(data)) return null;
 
   return {
     slug: slug,
@@ -123,6 +132,7 @@ export async function getArticlesByCategory(
     const filePath = path.join(categoryPath, file);
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const { data, content } = matter(fileContent);
+    if (!isPublished(data)) continue;
 
     articles.push({
       slug: file.replace('.mdx', ''),

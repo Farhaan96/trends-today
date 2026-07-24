@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "fc655c5b520943461de88cb31b1b5262eb07204d6998996f8c44e47d9ffacc58",
+  "reviewedAt": "2026-07-23T15:29:10+00:00",
+  "repositorySha": "97e0e46f908e9bcd9c94606febcdf0e5a071a01a",
+  "modelUsed": "claude-opus-4-8",
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-opus-4-8"
+  ],
+  "review": "NO BLOCKERS\n\nCANDIDATE_SHA256: fc655c5b520943461de88cb31b1b5262eb07204d6998996f8c44e47d9ffacc58\n\nIndependent review confirmed the time-stamped and hedged alert wording, 19 addressed indoor facilities, eight matching pet-friendly designations, eight outdoor pools, 11 spray parks, BC emergency and health contacts, title and metadata fit, image attribution, frontmatter integrity, actionable structure, and zero authorial em dashes. The paired GPT review covers the same exact candidate and records factualSupport 5. No correction is required before publication."
+}
