@@ -3,19 +3,19 @@
   "reviewer": "openai-gpt",
   "verdict": "PASS",
   "candidateSha256": "3b5561411b4b464c6f2336f977319cc7165db53b9ffceb0cc413f545ac959b99",
-  "repositorySha": "d03362ea4325ee791d811fb72e5640adad143bf8",
-  "reviewedAt": "2026-07-24T15:43:17.183484+00:00",
+  "repositorySha": "34abe6d46ee79252958276a1cfc716388fddd0ca",
+  "reviewedAt": "2026-07-24T15:48:51.575850+00:00",
   "modelUsed": "gpt-5.6-sol",
   "reviewBackend": "codex-cli-oauth",
-  "reviewRunId": "019f94ca-dfb8-75d1-9c67-a36bcbf0413f",
+  "reviewRunId": "019f94cf-c76e-7e01-845f-7f0978c236ab",
   "scores": {
     "engagement": 4,
     "factualSupport": 5,
     "formatting": 5,
     "quality": 4,
-    "readability": 4
+    "readability": 5
   },
   "proseEmDashCount": 0,
   "blockers": [],
-  "summary": "Strict editorial gate passed. The event details, transportation warnings, parking restrictions, safety rules, boating guidance, and related-event reference are supported by the cited material. The bulletin is concise, scannable, locally useful, and ends with a practical planning action. Both hashes were verified exactly, and authorial prose contains no em dashes."
+  "summary": "The exact candidate hash and repository SHA were verified. The bulletin is well supported by its cited primary sources, concise, scannable, locally relevant, and ends with practical next steps. No authorial em dashes or release-blocking editorial issues were found."
 }
