@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "runStartedAt": "2026-07-24T08:31:00-07:00",
+  "article": {
+    "title": "Summer Lights fireworks set for English Bay July 31",
+    "slug": "summer-lights-english-bay-fireworks",
+    "category": "things-to-do",
+    "locality": "Vancouver",
+    "storyType": "bulletin",
+    "readerJob": "Help Vancouver residents decide whether to attend the free July 31 English Bay fireworks event and plan around access, parking, transit, and crowd rules.",
+    "lengthRationale": "A bulletin is the shortest complete format because readers mainly need the date, location, ticket rule, crowd and transport warnings, and what to check before leaving."
+  },
+  "qualification": {
+    "locality": "pass",
+    "freshness": "pass",
+    "readerUtility": "pass",
+    "evidence": "pass",
+    "primarySource": "pass",
+    "corroboration": "pass",
+    "uniqueness": "pass",
+    "brandSafety": "standard",
+    "sensitiveStory": "not triggered",
+    "quality": "pass"
+  },
+  "score": 88,
+  "ratings": {
+    "localRelevance": 5,
+    "readerUtility": 5,
+    "freshness": 4,
+    "evidenceStrength": 5,
+    "uniqueAngle": 5,
+    "repeatVisitPotential": 3,
+    "speedToUsefulDraft": 5
+  },
+  "commercial": {
+    "commercialIntent": "ad-and-sponsor-fit",
+    "commercialFitReason": "Free summer event, waterfront, food truck, transit, hospitality, tourism, local restaurant, and family outing intent may fit standard ads or future event and hospitality sponsor categories; this is a sourced hypothesis only, not proof of RPM or sponsor demand.",
+    "brandSafety": "standard",
+    "sponsorshipStatus": "editorial"
+  },
+  "metrics": {
+    "artifact": "artifacts/editorial/metrics/2026-07-24-0830-vercel-analytics.json",
+    "status": "unavailable",
+    "missingValues": "unavailable",
+    "repair": "Connect Vercel analytics credentials plus GA/Search Console/ad/sponsor exports."
+  },
+  "singleChangedVariable": "Test a free Vancouver event-planning bulletin one week before a major long-weekend waterfront event.",
+  "keepRepairStop": {
+    "keep": "Keep free major-event planning bulletins when official sources provide date, location, access, transit, parking, crowd, and safety details.",
+    "repair": "Repair if event pages omit key reader logistics such as timing or transit changes by waiting for official updates instead of padding.",
+    "stop": "Stop if the topic becomes generic event-calendar filler or sponsor assumptions steer publication before editorial qualification."
+  }
+}
