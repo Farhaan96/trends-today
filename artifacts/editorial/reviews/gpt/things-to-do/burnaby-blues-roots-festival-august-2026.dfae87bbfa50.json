@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "dfae87bbfa502202877aa12fe45818dde1b57cc2d5ef7856b16e8e5d9aa7691d",
+  "repositorySha": "fa9a638156c2f00ea687da83c3aafa02561b9a0a",
+  "reviewedAt": "2026-07-24T17:43:38.235184+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9538-8592-71b3-aaf0-f0631b0dd23d",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The cited festival page confirms that food trucks will be available but does not support the six named vendors. Those names appear on separate City of Burnaby event pages, which are not cited here.",
+    "The article repeats its planning-value premise in \u201cWhat is confirmed\u201d and again in \u201cWhy it matters for August plans.\u201d The latter paragraph largely restates the same set-times, transit, food, accessibility, and parking points without adding reader value."
+  ],
+  "summary": "The exact candidate file and repository hashes were verified. The MDX is clean, readable, locally relevant, and contains zero authorial em dashes, but the unsupported vendor list and repetitive closing section require revision before release."
+}

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "9cf2092b19084027ccd5d78ca34e03bc2875e6cfd0c4bf2d7e928ab91ac2937f",
+  "repositorySha": "fa9a638156c2f00ea687da83c3aafa02561b9a0a",
+  "reviewedAt": "2026-07-24T17:41:37.981289+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9537-38f8-71b1-af0c-853b8d5a7adb",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The claim that barbecues are prohibited is not supported by the cited Burnaby Blues + Roots Festival page and appears to come from rules for other Deer Lake Park events.",
+    "The statement that portable washrooms will be placed throughout the site goes beyond the cited page, which confirms accessible portable toilets but does not specify distribution throughout the site.",
+    "The opening is generic rather than concrete, and the reference to planning around late-evening crowds manufactures an unsupported stake."
+  ],
+  "summary": "BLOCKED. The candidate is clear, scannable, and structurally sound, with zero authorial em dashes. It requires revision because two logistical claims exceed the cited material, while the generic lead and unsupported crowd framing keep engagement below the passing threshold."
+}
