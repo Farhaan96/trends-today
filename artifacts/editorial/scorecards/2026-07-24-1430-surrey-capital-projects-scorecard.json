@@ -1,0 +1,63 @@
+{
+  "generatedAt": "2026-07-24T21:44:13.579972+00:00",
+  "results": [
+    {
+      "title": "Surrey maps four capital projects through 2031",
+      "lane": "local-explainers",
+      "score": 92.0,
+      "decision": "brief",
+      "confidence": "current-hypothesis",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Surrey maps four capital projects through 2031",
+        "lane": "local-explainers",
+        "category": "local-news",
+        "storyType": "reported-update",
+        "locality": "Surrey",
+        "candidatePath": "artifacts/editorial/release-candidates/local-news/surrey-capital-projects-2031-buildout.mdx",
+        "sourceTitle": "Big Things Are Happening: Four Major Projects Shaping Surrey's Future",
+        "sourceUrl": "https://www.surrey.ca/news-events/news/big-things-are-happening-four-major-projects-shaping-surreys-future",
+        "publishedOrUpdatedAt": "2026-07-24",
+        "evidence": {
+          "sourceUrls": [
+            "https://www.surrey.ca/news-events/news/big-things-are-happening-four-major-projects-shaping-surreys-future",
+            "https://www.surrey.ca/about-surrey/capital-projects",
+            "https://www.surrey.ca/about-surrey/capital-projects/newton-community-centre",
+            "https://www.surrey.ca/about-surrey/capital-projects/72-avenue-improvements-extensions",
+            "https://www.surrey.ca/about-surrey/capital-projects/centre-block",
+            "https://www.surrey.ca/about-surrey/capital-projects/city-centre-arena"
+          ],
+          "primarySourceUrls": [
+            "https://www.surrey.ca/news-events/news/big-things-are-happening-four-major-projects-shaping-surreys-future",
+            "https://www.surrey.ca/about-surrey/capital-projects"
+          ],
+          "readerImpact": "Surrey residents can see which major city projects are moving, where they sit, and which timelines matter for recreation, roads, downtown growth, and events.",
+          "freshnessEvidence": "City of Surrey published the capital-projects update on July 24, 2026.",
+          "uniqueAngleEvidence": "Earlier Trends Today Surrey coverage focused on Newton park upgrades; this candidate connects four larger capital projects and their distinct timelines.",
+          "sensitiveStoryGate": "No crime, death, active emergency, private-person allegation, legal dispute coverage, or sponsored coverage is advanced."
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 4,
+          "freshness": 5,
+          "evidenceStrength": 5,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        },
+        "commercialIntent": "ad-fit",
+        "commercialFitReason": "The official Surrey project update may create contextual ad fit around local real estate, recreation, construction, commuting, civic planning, and neighbourhood services; article-level views, Active View, RPM, revenue, and sponsor demand remain unavailable.",
+        "brandSafety": "standard",
+        "sponsorshipStatus": "editorial",
+        "lengthRationale": "A reported update is the shortest complete format because the July 24 city update spans four separate projects, each with location and timing details.",
+        "internalLinks": [
+          "/local-news/surrey-newton-park-upgrades"
+        ],
+        "decision": "release-candidate",
+        "confidence": "current-hypothesis"
+      }
+    }
+  ]
+}
