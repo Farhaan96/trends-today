@@ -5,6 +5,7 @@ interface Author {
   bio?: string;
   avatar?: string;
   url?: string;
+  type?: 'Person' | 'Organization';
 }
 
 interface ArticleJsonLdProps {
@@ -34,7 +35,8 @@ export default function ArticleJsonLd({
   readingTime,
   keywords,
 }: ArticleJsonLdProps) {
-  const authorData = typeof author === 'string' ? { name: author } : author;
+  const authorData: Author =
+    typeof author === 'string' ? { name: author } : author;
 
   const schema = {
     '@context': 'https://schema.org',
@@ -43,7 +45,7 @@ export default function ArticleJsonLd({
     description,
     image: image ? [image] : undefined,
     author: {
-      '@type': 'Person',
+      '@type': authorData.type || 'Person',
       name: authorData.name,
       description: authorData.bio,
       image: authorData.avatar,
@@ -111,7 +113,7 @@ export function NewsArticleJsonLd({
   isBreakingNews,
   ...props
 }: NewsArticleJsonLdProps) {
-  const authorData =
+  const authorData: Author =
     typeof props.author === 'string' ? { name: props.author } : props.author;
 
   const schema = {
@@ -121,7 +123,7 @@ export function NewsArticleJsonLd({
     description: props.description,
     image: props.image ? [props.image] : undefined,
     author: {
-      '@type': 'Person',
+      '@type': authorData.type || 'Person',
       name: authorData.name,
       description: authorData.bio,
       image: authorData.avatar,
@@ -177,7 +179,7 @@ export function NewsArticleJsonLd({
  * BlogPosting schema for blog-style content
  */
 export function BlogPostingJsonLd(props: ArticleJsonLdProps) {
-  const authorData =
+  const authorData: Author =
     typeof props.author === 'string' ? { name: props.author } : props.author;
 
   const schema = {
@@ -187,7 +189,7 @@ export function BlogPostingJsonLd(props: ArticleJsonLdProps) {
     description: props.description,
     image: props.image ? [props.image] : undefined,
     author: {
-      '@type': 'Person',
+      '@type': authorData.type || 'Person',
       name: authorData.name,
       description: authorData.bio,
       image: authorData.avatar,

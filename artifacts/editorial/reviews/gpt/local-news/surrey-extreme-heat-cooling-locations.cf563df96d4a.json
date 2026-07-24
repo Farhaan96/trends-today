@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "cf563df96d4a44df7a3e0986741045e326d0216fa00a992c70893d867e1ffa70",
+  "repositorySha": "03fc1aac17344498f37c4f7cc3dac53c562f7c83",
+  "reviewedAt": "2026-07-23T15:16:07.271550+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8f8a-302f-7970-bf84-ad9d4cca1498",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 2,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The warning status is contradicted by the cited Environment Canada page: it reported \u201cNo alerts in effect\u201d at 7:26 a.m. PDT on July 23, while the candidate was modified at 7:35 a.m. and says a yellow heat warning still appeared early Thursday.",
+    "The pet-policy paragraph adds claims not supported by the cited City page, including a two-metre leash limit, refusal of aggressive or disruptive pets, and permission for service animals.",
+    "The spray-park list says \u201cBridgeview Community Centre,\u201d but the cited City page lists \u201cBridgeview Park.\u201d",
+    "Surrey Sport and Leisure Complex is grouped under Guildford and Fraser Heights, although the cited City directory places it under Fleetwood."
+  ],
+  "summary": "Strong structure, readability, local utility, and actionable guidance, with zero authorial em dashes. Release is blocked by a contradicted warning status and several source-to-copy discrepancies requiring factual revision."
+}

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SubtlePaginationLinks } from '@/components/ui/PaginationLinks';
 import { paginateItems } from '@/lib/pagination';
+import { getNewsroomProfileId, normalizeAuthorName } from '@/lib/newsroom';
 
 interface Article {
   href: string;
@@ -104,22 +105,14 @@ export default function ArticleList({
                   By{' '}
                   {(() => {
                     const author = featuredPost.frontmatter.author;
-                    const authorName =
+                    const rawAuthorName =
                       typeof author === 'string'
                         ? author
                         : author?.name || 'Trends Today';
-                    const authorId =
-                      typeof author === 'string'
-                        ? author.toLowerCase().replace(/\s+/g, '-')
-                        : null;
-                    const knownAuthors = [
-                      'alex-chen',
-                      'sarah-martinez',
-                      'david-kim',
-                      'emma-thompson',
-                    ];
+                    const authorName = normalizeAuthorName(rawAuthorName);
+                    const authorId = getNewsroomProfileId(rawAuthorName);
 
-                    return authorId && knownAuthors.includes(authorId) ? (
+                    return authorId ? (
                       <Link
                         href={`/author/${authorId}`}
                         className="font-medium text-blue-600 hover:text-blue-800 transition-colors"
@@ -189,9 +182,11 @@ export default function ArticleList({
             </Link>
             <div className="text-sm text-gray-500">
               <span className="font-medium">
-                {typeof secondPost.frontmatter.author === 'string'
-                  ? secondPost.frontmatter.author
-                  : secondPost.frontmatter.author?.name || 'Trends Today'}
+                {normalizeAuthorName(
+                  typeof secondPost.frontmatter.author === 'string'
+                    ? secondPost.frontmatter.author
+                    : secondPost.frontmatter.author?.name
+                )}
               </span>
               <span className="mx-2">•</span>
               <span>
@@ -241,22 +236,14 @@ export default function ArticleList({
             <div className="text-sm text-gray-500">
               {(() => {
                 const author = thirdPost.frontmatter.author;
-                const authorName =
+                const rawAuthorName =
                   typeof author === 'string'
                     ? author
                     : author?.name || 'Trends Today';
-                const authorId =
-                  typeof author === 'string'
-                    ? author.toLowerCase().replace(/\s+/g, '-')
-                    : null;
-                const knownAuthors = [
-                  'alex-chen',
-                  'sarah-martinez',
-                  'david-kim',
-                  'emma-thompson',
-                ];
+                const authorName = normalizeAuthorName(rawAuthorName);
+                const authorId = getNewsroomProfileId(rawAuthorName);
 
-                return authorId && knownAuthors.includes(authorId) ? (
+                return authorId ? (
                   <Link
                     href={`/author/${authorId}`}
                     className="font-medium text-blue-600 hover:text-blue-800 transition-colors"
@@ -320,22 +307,14 @@ export default function ArticleList({
                 <div className="text-sm text-gray-500">
                   {(() => {
                     const author = article.frontmatter.author;
-                    const authorName =
+                    const rawAuthorName =
                       typeof author === 'string'
                         ? author
                         : author?.name || 'Trends Today';
-                    const authorId =
-                      typeof author === 'string'
-                        ? author.toLowerCase().replace(/\s+/g, '-')
-                        : null;
-                    const knownAuthors = [
-                      'alex-chen',
-                      'sarah-martinez',
-                      'david-kim',
-                      'emma-thompson',
-                    ];
+                    const authorName = normalizeAuthorName(rawAuthorName);
+                    const authorId = getNewsroomProfileId(rawAuthorName);
 
-                    return authorId && knownAuthors.includes(authorId) ? (
+                    return authorId ? (
                       <Link
                         href={`/author/${authorId}`}
                         className="font-medium text-blue-600 hover:text-blue-800 transition-colors"

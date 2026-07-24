@@ -15,7 +15,7 @@ export default function PrivacyPage() {
           Privacy Policy
         </h1>
 
-        <p className="text-gray-600 mb-8">Last updated: January 2025</p>
+        <p className="text-gray-600 mb-8">Last updated: July 23, 2026</p>
 
         <div className="prose prose-lg max-w-none text-gray-900">
           <section className="mb-8">
@@ -28,8 +28,9 @@ export default function PrivacyPage() {
             </p>
             <ul className="list-disc pl-6 space-y-2 text-gray-700">
               <li>
-                <strong>Information you provide:</strong> Email addresses when
-                you subscribe to our newsletter
+                <strong>Information you provide:</strong> Your name, email
+                address, message, and any attachments when you contact us, plus
+                your email address if you subscribe
               </li>
               <li>
                 <strong>Automatically collected information:</strong> IP
@@ -54,6 +55,10 @@ export default function PrivacyPage() {
               <li>Improve our website and content</li>
               <li>Analyze usage patterns and trends</li>
               <li>Detect and prevent fraud or abuse</li>
+              <li>
+                Triage publication email, draft a proposed response, and alert
+                the publisher when a message needs review
+              </li>
               <li>Comply with legal obligations</li>
             </ul>
           </section>
@@ -70,8 +75,8 @@ export default function PrivacyPage() {
               <li>To comply with legal obligations or court orders</li>
               <li>To protect our rights, property, or safety</li>
               <li>
-                With service providers who assist in operating our website
-                (under strict confidentiality agreements)
+                With service providers who assist in operating our website and
+                publication inbox
               </li>
             </ul>
           </section>
@@ -101,15 +106,19 @@ export default function PrivacyPage() {
             </p>
             <ul className="list-disc pl-6 space-y-2 text-gray-700">
               <li>
-                <strong>Google Analytics:</strong> For website traffic analysis
+                <strong>Vercel:</strong> Website hosting and site analytics
               </li>
               <li>
-                <strong>Affiliate Networks:</strong> Amazon Associates and
-                others for product links
+                <strong>Resend:</strong> Sending, receiving, and routing
+                publication email
               </li>
               <li>
-                <strong>Content Delivery Networks:</strong> For faster content
-                delivery
+                <strong>OpenAI:</strong> Classifying incoming messages and
+                drafting proposed replies for human review
+              </li>
+              <li>
+                <strong>Twilio:</strong> Optional urgent text-message alerts to
+                the publisher
               </li>
             </ul>
             <p className="text-gray-700 mt-4">
@@ -119,7 +128,25 @@ export default function PrivacyPage() {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-4">6. Data Security</h2>
+            <h2 className="text-2xl font-bold mb-4">
+              6. AI-Assisted Inbox Review
+            </h2>
+            <p className="text-gray-700 mb-4">
+              When you email Trends Today, the message may be processed by an AI
+              service to identify its topic and urgency, summarize it, and
+              prepare a proposed reply. The system is configured not to store
+              model responses for later retrieval through the model API.
+            </p>
+            <p className="text-gray-700">
+              AI does not make publication, correction, advertising, legal, or
+              financial decisions for Trends Today. Moe reviews messages that
+              need judgment and must approve the exact wording before a reply is
+              sent.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold mb-4">7. Data Security</h2>
             <p className="text-gray-700">
               We implement appropriate technical and organizational measures to
               protect your personal information against unauthorized access,
@@ -129,7 +156,7 @@ export default function PrivacyPage() {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-4">7. Your Rights</h2>
+            <h2 className="text-2xl font-bold mb-4">8. Your Rights</h2>
             <p className="text-gray-700 mb-4">You have the right to:</p>
             <ul className="list-disc pl-6 space-y-2 text-gray-700">
               <li>Access the personal information we hold about you</li>
@@ -142,7 +169,9 @@ export default function PrivacyPage() {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-4">8. Children's Privacy</h2>
+            <h2 className="text-2xl font-bold mb-4">
+              9. Children&apos;s Privacy
+            </h2>
             <p className="text-gray-700">
               Our website is not intended for children under 13 years of age. We
               do not knowingly collect personal information from children under
@@ -153,7 +182,7 @@ export default function PrivacyPage() {
 
           <section className="mb-8">
             <h2 className="text-2xl font-bold mb-4">
-              9. Changes to This Policy
+              10. Changes to This Policy
             </h2>
             <p className="text-gray-700">
               We may update this Privacy Policy from time to time. We will
@@ -163,15 +192,13 @@ export default function PrivacyPage() {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-4">10. Contact Us</h2>
+            <h2 className="text-2xl font-bold mb-4">11. Contact Us</h2>
             <p className="text-gray-700">
               If you have questions about this Privacy Policy or our data
               practices, please contact us at:
             </p>
             <div className="bg-gray-50 p-4 rounded-lg mt-4">
               <p className="text-gray-700">
-                <strong>Email:</strong> privacy@trendstoday.ca
-                <br />
                 <strong>Website:</strong>{' '}
                 <a
                   href="/contact"

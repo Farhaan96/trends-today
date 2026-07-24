@@ -22,13 +22,17 @@ STYLE_GUIDE = """
 - Use active verbs, varied sentence openings, and a mix of short and medium sentences
 - Make every section answer a practical reader question; cut throat-clearing and filler
 - Sentence-case titles, 45-75 chars, no clickbait that the body cannot deliver
-- Use the requested contract: bulletin 250-450 words, reported update 450-800,
-  or guide/explainer 700-1200; use 2-4 H2 (##) sections and short paragraphs
+- Use the requested contract: bulletin 300-600 words, reported update 550-950,
+  or guide/explainer 800-1400; use at least 3 useful H2 (##) sections
+- Keep paragraphs under 80 words and use lists for enumerable locations, prices,
+  dates, schedules, eligibility rules, or steps
+- If the headline or opening promises locations, prices, schedules, eligibility,
+  or steps, provide the concrete answer in a clearly named section
 - Open with the confirmed news and who it affects
 - Bold only the numbers, dates, institutions, and details that matter
 - Use periods and commas for rhythm; do not use em dashes
 - Ground every claim in the provided sources; do not invent statistics
-- Include one [[INTERNAL: keyword]] placeholder for internal linking
+- Add an internal link only when a published article directly helps the reader
 - End with what residents should watch or do next
 - Leave readers with a specific next step, date, decision, or unanswered local question
 - End with a ## Sources section containing every provided source URL
@@ -65,9 +69,12 @@ Return ONLY a JSON object with these keys:
 - title: sentence case, 50-70 chars, specific and curiosity-driven (no clickbait)
 - subtitle: one-sentence hook that promises a concrete payoff
 - body_mdx: the word range required by the supplied story type, 2-4 ## H2 sections,
-  bold key details, zero em dashes, one [[INTERNAL: keyword]] placeholder, and a ## Sources section
+	  bold key details, zero em dashes, scannable lists where useful, and a ## Sources section
 - meta_description: ≤155 chars, includes the primary search phrase naturally
-- tags: 3-5 specific, relevant tags (lowercase)"""
+- tags: 3-5 specific, relevant tags (lowercase)
+- highlights: 3-5 distinct, concrete takeaways for an At a glance panel
+- reportingMethod: one sentence stating which sources were checked, what was
+  verified, and when the information was checked"""
 
     def _claude_cli(self, system: str, user_prompt: str) -> Optional[str]:
         """Generate via the local Claude Code CLI (uses the logged-in Max

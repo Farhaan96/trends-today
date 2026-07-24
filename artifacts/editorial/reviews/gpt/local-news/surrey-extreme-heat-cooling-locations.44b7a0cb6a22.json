@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "44b7a0cb6a22f8602cef777da8279b5d0f4d9c76ea2f17ed310c0693aa41cd1c",
+  "repositorySha": "5c69f4aa9efafc5cd077fe44ee8e3eac5e0532e6",
+  "reviewedAt": "2026-07-23T15:19:17.013993+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f8f8d-abde-7cc2-9512-eb64718e06c6",
+  "scores": {
+    "engagement": 5,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 5,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The cited material does not support every category in the higher-risk list. The City of Surrey page supports young and older people, outdoor workers, people with chronic heart or lung conditions, people living alone, and people experiencing homelessness, but the candidate additionally names pregnant people, people taking certain medications, and people without air conditioning without citing support. Add an authoritative health source or remove those categories.",
+    "The claim that pool and spray-park hours may change because of maintenance, staffing, or weather is not supported by the three cited pages. Cite an applicable City source or narrow the sentence to the supported instruction to confirm current opening times."
+  ],
+  "summary": "Strong, highly usable local guide with clear organization, a concrete lead, accurate facility lists, an actionable close, and no authorial em dashes. It does not pass the strict factual-support gate because two factual passages extend beyond the cited material."
+}

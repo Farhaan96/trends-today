@@ -1,3 +1,7 @@
+const fs = require('fs');
+const nodePath = require('path');
+const matter = require('gray-matter');
+
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: 'https://www.trendstoday.ca',
@@ -15,6 +19,25 @@ module.exports = {
     '/images/*',
   ],
   transform: async (config, path) => {
+    const articleMatch = path.match(/^\/([^/]+)\/([^/]+)$/);
+    if (articleMatch) {
+      const articlePath = nodePath.join(
+        process.cwd(),
+        'content',
+        articleMatch[1],
+        `${articleMatch[2]}.mdx`
+      );
+      if (fs.existsSync(articlePath)) {
+        const source = fs.readFileSync(articlePath, 'utf8');
+        const { data } = matter(source);
+        if (
+          data.archiveReviewStatus === 'format-reviewed-needs-source-refresh'
+        ) {
+          return null;
+        }
+      }
+    }
+
     // Custom priorities based on page type
     let priority = 0.7;
     let changefreq = 'daily';
