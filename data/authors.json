@@ -1,10 +1,10 @@
 {
-  "farhaan": {
-    "id": "farhaan",
-    "name": "Farhaan",
+  "moe": {
+    "id": "moe",
+    "name": "Moe",
     "title": "Publisher",
-    "bio": "Farhaan sets editorial priorities, reviews sensitive coverage, and handles advertising and partnership inquiries for Trends Today.",
-    "longBio": "Farhaan is the publisher of Trends Today, an independent publication focused on useful reporting for people across Vancouver, the Lower Mainland, and the Fraser Valley.",
+    "bio": "Moe sets editorial priorities, reviews sensitive coverage, and handles advertising and partnership inquiries for Trends Today.",
+    "longBio": "Moe is the publisher of Trends Today, an independent publication focused on useful reporting for people across Vancouver, the Lower Mainland, and the Fraser Valley.",
     "expertise": [
       "Editorial direction",
       "Local publishing",
@@ -12,9 +12,9 @@
     ],
     "credentials": ["Publisher of Trends Today"],
     "socialMedia": {
-      "email": "hello@trendstoday.ca"
+      "email": ""
     },
-    "avatar": "",
+    "avatar": "/images/newsroom/moe.jpg",
     "specializations": [
       "Editorial accountability",
       "Corrections",
@@ -38,7 +38,7 @@
     ],
     "credentials": ["Organizational newsroom byline"],
     "socialMedia": {
-      "email": "hello@trendstoday.ca"
+      "email": ""
     },
     "avatar": "",
     "specializations": ["Local news", "Guides", "Explainers"],

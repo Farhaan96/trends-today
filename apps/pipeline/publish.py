@@ -69,7 +69,7 @@ class MDXStaticPublisher(PublisherAdapter):
                 'tags': article.get('tags', ['technology']),
                 'category': category,
                 'author': 'Trends Today Newsroom',
-                'editor': article.get('editor', 'Farhaan'),
+                'editor': article.get('editor', 'Moe'),
                 'readingTime': max(1, len(article['body_mdx'].split()) // 200),
                 'slug': slug,
                 'locality': article.get('locality', ''),

@@ -68,7 +68,8 @@ export default function CurrentEditorialStandards() {
             <p>
               Material errors are corrected promptly. Significant changes should
               update the modification time and explain what changed. Concerns
-              can be sent to hello@trendstoday.ca.
+              will be accepted through the verified publication contact shown on
+              this site.
             </p>
           </div>
         </article>
@@ -81,9 +82,9 @@ export default function CurrentEditorialStandards() {
         </div>
         <div>
           <p>
-            Email <a href="mailto:hello@trendstoday.ca">hello@trendstoday.ca</a>{' '}
-            with the article link, the specific concern, and supporting evidence
-            when available.
+            Include the article link, the specific concern, and supporting
+            evidence when using the verified publication contact shown on this
+            site.
           </p>
           <div className="trust-page__actions">
             <Link href="/authors">Who is responsible</Link>

@@ -60,6 +60,9 @@ export async function generateMetadata({
   const description = article.description || article.frontmatter?.description;
   const image = article.image || article.frontmatter?.image;
   const url = `https://www.trendstoday.ca/${category}/${slug}`;
+  const needsSourceRefresh =
+    article.frontmatter?.archiveReviewStatus ===
+    'format-reviewed-needs-source-refresh';
 
   return {
     title,
@@ -101,7 +104,7 @@ export async function generateMetadata({
       images: [image || '/images/placeholder.jpg'],
     },
     robots: {
-      index: true,
+      index: !needsSourceRefresh,
       follow: true,
     },
   };
@@ -166,6 +169,11 @@ export default async function ArticlePage({
   const reportingMethod = article.frontmatter?.reportingMethod as
     | string
     | undefined;
+  const archiveReviewStatus = article.frontmatter?.archiveReviewStatus as
+    | string
+    | undefined;
+  const needsSourceRefresh =
+    archiveReviewStatus === 'format-reviewed-needs-source-refresh';
 
   return (
     <article className="article-page">
@@ -252,6 +260,17 @@ export default async function ArticlePage({
 
       {/* Article Content */}
       <div className="site-shell article-content-shell">
+        {needsSourceRefresh && (
+          <aside className="article-archive-notice">
+            <p className="article-method__eyebrow">Archive transparency</p>
+            <p>
+              This article received a July 2026 readability and source-display
+              pass, but its underlying claims have not yet received a fresh
+              source review. It is temporarily excluded from search indexing.
+              Check the linked sources for current information.
+            </p>
+          </aside>
+        )}
         <ArticleHighlights highlights={highlights} />
         <ArticleContent content={article.content || article.mdxContent} />
         {reportingMethod && (

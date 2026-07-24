@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { EnvelopeIcon, UserIcon, UsersIcon } from '@heroicons/react/24/outline';
 import { newsroomProfiles } from '@/lib/newsroom';
@@ -23,7 +24,19 @@ export default function NewsroomDirectory() {
           <article className="newsroom-card" key={profile.id}>
             <div className="newsroom-card__identity">
               <div className="newsroom-avatar" aria-hidden="true">
-                {profile.entityType === 'Person' ? <UserIcon /> : <UsersIcon />}
+                {profile.avatar ? (
+                  <Image
+                    src={profile.avatar}
+                    alt=""
+                    width={144}
+                    height={144}
+                    sizes="72px"
+                  />
+                ) : profile.entityType === 'Person' ? (
+                  <UserIcon />
+                ) : (
+                  <UsersIcon />
+                )}
               </div>
               <div>
                 <p className="newsroom-card__role">{profile.role}</p>
@@ -38,10 +51,12 @@ export default function NewsroomDirectory() {
             </ul>
             <div className="newsroom-card__actions">
               <Link href={`/author/${profile.id}`}>View profile</Link>
-              <a href={`mailto:${profile.email}`}>
-                <EnvelopeIcon aria-hidden="true" />
-                {profile.email}
-              </a>
+              {profile.email && (
+                <a href={`mailto:${profile.email}`}>
+                  <EnvelopeIcon aria-hidden="true" />
+                  {profile.email}
+                </a>
+              )}
             </div>
           </article>
         ))}
@@ -60,9 +75,9 @@ export default function NewsroomDirectory() {
             fabricated biography.
           </p>
           <p>
-            Corrections, source concerns, news tips, and commercial inquiries
-            can all be sent to{' '}
-            <a href="mailto:hello@trendstoday.ca">hello@trendstoday.ca</a>.
+            The publication contact address is being verified before this
+            newsroom page is released. We will not display an inbox that has no
+            confirmed delivery path.
           </p>
         </div>
       </section>

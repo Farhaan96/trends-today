@@ -41,7 +41,7 @@ export default function PublicationAbout() {
         </div>
         <div>
           <p>
-            Farhaan is the publisher and handles editorial accountability,
+            Moe is the publisher and handles editorial accountability,
             corrections, advertising, and partnerships. The Trends Today
             Newsroom is a shared organizational byline for work produced through
             the publication’s research and review process.
@@ -63,10 +63,9 @@ export default function PublicationAbout() {
         </div>
         <div>
           <p>
-            Send corrections, source concerns, news tips, and general questions
-            to <a href="mailto:hello@trendstoday.ca">hello@trendstoday.ca</a>.
-            Advertising inquiries can use the same monitored publication
-            address.
+            The publication email address is being verified before release. We
+            will publish it here only after delivery to a monitored inbox is
+            confirmed.
           </p>
           <div className="trust-page__actions">
             <Link href="/contact">Contact Trends Today</Link>

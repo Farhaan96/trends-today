@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 export default function ContactPage() {
+  const inboxReady = process.env.NEXT_PUBLIC_INBOX_READY === 'true';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,6 +28,7 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!inboxReady) return;
     const subjectLabels: Record<string, string> = {
       general: 'General inquiry',
       feedback: 'Reader feedback',
@@ -57,7 +59,9 @@ export default function ContactPage() {
       <div className="bg-white min-h-screen">
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="text-center py-12">
-            <div className="text-6xl mb-4">✅</div>
+            <div className="text-6xl mb-4" aria-hidden="true">
+              ✓
+            </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-4">
               Your email draft is ready
             </h1>
@@ -96,36 +100,36 @@ export default function ContactPage() {
           <div>
             <h2 className="text-2xl font-bold mb-4">Get in Touch</h2>
             <p className="text-gray-700 mb-6">
-              Have a question, feedback, or want to work with us? We&apos;d love
-              to hear from you. Fill out the form or use the contact information
-              below.
+              Have a question, correction, story tip, or advertising inquiry?
+              Write to our monitored publication inbox. An inbox agent organizes
+              messages and drafts replies, while Moe approves anything sent in
+              our name.
             </p>
 
             <div className="space-y-4">
               <div className="flex items-start">
-                <span className="text-2xl mr-4">📧</span>
+                <span className="text-sm font-bold mr-4" aria-hidden="true">
+                  EMAIL
+                </span>
                 <div>
                   <h3 className="font-semibold">Email</h3>
-                  <p className="text-gray-600">hello@trendstoday.ca</p>
+                  <p className="text-gray-600">
+                    {inboxReady
+                      ? 'hello@trendstoday.ca'
+                      : 'Inbox activation in progress'}
+                  </p>
                 </div>
               </div>
 
               <div className="flex items-start">
-                <span className="text-2xl mr-4">🕒</span>
+                <span className="text-sm font-bold mr-4" aria-hidden="true">
+                  REVIEW
+                </span>
                 <div>
-                  <h3 className="font-semibold">Response Time</h3>
-                  <p className="text-gray-600">24-48 hours (Mon-Fri)</p>
-                </div>
-              </div>
-
-              <div className="flex items-start">
-                <span className="text-2xl mr-4">🌐</span>
-                <div>
-                  <h3 className="font-semibold">Social Media</h3>
-                  <div className="space-y-1 text-gray-600">
-                    <p>Twitter: @trendstoday</p>
-                    <p>LinkedIn: /company/trends-today</p>
-                  </div>
+                  <h3 className="font-semibold">Human approval</h3>
+                  <p className="text-gray-600">
+                    AI helps triage and draft. Moe approves public replies.
+                  </p>
                 </div>
               </div>
             </div>
@@ -139,12 +143,19 @@ export default function ContactPage() {
                 We keep editorial coverage separate from paid partnerships and
                 clearly label commercial work.
               </p>
-              <a
-                href="mailto:hello@trendstoday.ca?subject=%5BTrends%20Today%5D%20Advertising%20or%20sponsorship%20inquiry"
-                className="mt-3 inline-block text-sm font-semibold text-blue-700 underline"
-              >
-                Email hello@trendstoday.ca
-              </a>
+              {inboxReady ? (
+                <a
+                  href="mailto:hello@trendstoday.ca?subject=%5BTrends%20Today%5D%20Advertising%20or%20sponsorship%20inquiry"
+                  className="mt-3 inline-block text-sm font-semibold text-blue-700 underline"
+                >
+                  Email hello@trendstoday.ca
+                </a>
+              ) : (
+                <p className="mt-3 text-sm font-semibold text-amber-800">
+                  We will publish the address after delivery and owner alerts
+                  pass a live test.
+                </p>
+              )}
             </div>
           </div>
 
@@ -268,15 +279,19 @@ export default function ContactPage() {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 via-purple-600 to-blue-700 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all transform hover:scale-[1.02]"
+                disabled={!inboxReady}
+                className="w-full bg-gradient-to-r from-blue-500 via-purple-600 to-blue-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all transform hover:scale-[1.02]"
               >
-                Open Email Draft
+                {inboxReady
+                  ? 'Open Email Draft'
+                  : 'Inbox activation in progress'}
               </button>
             </form>
 
             <p className="text-xs text-gray-500 mt-4">
-              * Required fields. This form opens your email app and does not
-              transmit or store your message on this website. See our{' '}
+              * Required fields. When the inbox is active, this form opens your
+              email app and does not transmit or store your message on this
+              website. See our{' '}
               <Link
                 href="/privacy"
                 className="text-blue-600 hover:text-blue-800 underline"

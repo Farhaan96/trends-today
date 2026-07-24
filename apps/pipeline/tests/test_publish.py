@@ -61,7 +61,7 @@ class PublisherTests(unittest.TestCase):
             self.assertIn('locality: "Burnaby"', content)
             self.assertIn('storyType: "reported-update"', content)
             self.assertIn('author: "Trends Today Newsroom"', content)
-            self.assertIn('editor: "Farhaan"', content)
+            self.assertIn('editor: "Moe"', content)
             self.assertIn('reportingMethod: "Checked against TransLink source material."', content)
 
     def write_review(self, root, candidate, verdict='NO BLOCKERS', digest=None):

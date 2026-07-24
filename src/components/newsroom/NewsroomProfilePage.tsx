@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import {
   EnvelopeIcon,
@@ -35,7 +36,19 @@ export default async function NewsroomProfilePage({ slug }: { slug: string }) {
           className="newsroom-avatar newsroom-avatar--large"
           aria-hidden="true"
         >
-          {profile.entityType === 'Person' ? <UserIcon /> : <UsersIcon />}
+          {profile.avatar ? (
+            <Image
+              src={profile.avatar}
+              alt=""
+              width={288}
+              height={288}
+              sizes="(max-width: 640px) 96px, 144px"
+            />
+          ) : profile.entityType === 'Person' ? (
+            <UserIcon />
+          ) : (
+            <UsersIcon />
+          )}
         </div>
         <div>
           <p className="section-kicker">{profile.role}</p>
@@ -46,10 +59,12 @@ export default async function NewsroomProfilePage({ slug }: { slug: string }) {
               <MapPinIcon aria-hidden="true" />
               {profile.location}
             </span>
-            <a href={`mailto:${profile.email}`}>
-              <EnvelopeIcon aria-hidden="true" />
-              {profile.email}
-            </a>
+            {profile.email && (
+              <a href={`mailto:${profile.email}`}>
+                <EnvelopeIcon aria-hidden="true" />
+                {profile.email}
+              </a>
+            )}
           </div>
         </div>
       </header>

@@ -2,13 +2,9 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import {
   ChartBarIcon,
-  EnvelopeIcon,
   MapPinIcon,
   ShieldCheckIcon,
 } from '@heroicons/react/24/outline';
-
-const advertisingEmail =
-  'mailto:hello@trendstoday.ca?subject=Advertising%20inquiry%20for%20Trends%20Today';
 
 export const metadata: Metadata = {
   title: 'Advertise with Trends Today',
@@ -18,6 +14,8 @@ export const metadata: Metadata = {
 };
 
 export default function AdvertisePage() {
+  const inboxReady = process.env.NEXT_PUBLIC_INBOX_READY === 'true';
+
   return (
     <main className="advertise-page">
       <header className="site-shell advertise-hero">
@@ -29,9 +27,8 @@ export default function AdvertisePage() {
           message is relevant to those readers and keep paid work clearly
           separated from editorial decisions.
         </p>
-        <a className="primary-button" href={advertisingEmail}>
-          <EnvelopeIcon aria-hidden="true" />
-          Email an advertising inquiry
+        <a className="primary-button" href="#advertiser-contact-status">
+          Check advertiser contact status
         </a>
       </header>
 
@@ -113,20 +110,38 @@ export default function AdvertisePage() {
         </ol>
       </section>
 
-      <section className="site-shell advertise-contact">
+      <section
+        className="site-shell advertise-contact"
+        id="advertiser-contact-status"
+      >
         <div>
           <p className="section-kicker">Talk to the publisher</p>
           <h2>Tell us what outcome you need</h2>
           <p>
             Include your organization, target geography, timing, budget range,
-            and desired outcome. Farhaan, the publisher, will reply from the
-            Trends Today inbox with the next practical step.
+            and desired outcome. Moe, the publisher, personally reviews
+            qualified advertising inquiries.
           </p>
         </div>
         <div className="advertise-contact__details">
-          <strong>Farhaan</strong>
+          <strong>Moe</strong>
           <span>Publisher, Trends Today</span>
-          <a href={advertisingEmail}>hello@trendstoday.ca</a>
+          {inboxReady ? (
+            <>
+              <p>
+                Email is triaged by our inbox agent. Moe reviews qualified
+                advertising inquiries and approves every public reply.
+              </p>
+              <a href="mailto:hello@trendstoday.ca?subject=%5BTrends%20Today%5D%20Advertising%20inquiry">
+                hello@trendstoday.ca
+              </a>
+            </>
+          ) : (
+            <p>
+              Direct email is being configured. This page will not be released
+              with an unverified inbox.
+            </p>
+          )}
           <Link href="/editorial-standards">Read our editorial standards</Link>
         </div>
       </section>

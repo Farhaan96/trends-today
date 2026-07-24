@@ -6,21 +6,21 @@ export type NewsroomProfile = {
   shortBio: string;
   longBio: string[];
   responsibilities: string[];
-  email: string;
+  email?: string;
   location: string;
   avatar?: string;
 };
 
 export const newsroomProfiles: Record<string, NewsroomProfile> = {
-  farhaan: {
-    id: 'farhaan',
-    name: 'Farhaan',
+  moe: {
+    id: 'moe',
+    name: 'Moe',
     role: 'Publisher',
     entityType: 'Person',
     shortBio:
-      'Farhaan sets editorial priorities, reviews sensitive coverage, and handles advertising and partnership inquiries for Trends Today.',
+      'Moe sets editorial priorities, reviews sensitive coverage, and handles advertising and partnership inquiries for Trends Today.',
     longBio: [
-      'Farhaan is the publisher of Trends Today, an independent publication focused on useful reporting for people across Vancouver, the Lower Mainland, and the Fraser Valley.',
+      'Moe is the publisher of Trends Today, an independent publication focused on useful reporting for people across Vancouver, the Lower Mainland, and the Fraser Valley.',
       'He is responsible for editorial direction, final publication decisions, corrections, advertising relationships, and keeping commercial work separate from newsroom judgments.',
     ],
     responsibilities: [
@@ -28,8 +28,8 @@ export const newsroomProfiles: Record<string, NewsroomProfile> = {
       'Corrections, reader feedback, and accountability',
       'Advertising and partnership inquiries',
     ],
-    email: 'hello@trendstoday.ca',
     location: 'Lower Mainland, British Columbia',
+    avatar: '/images/newsroom/moe.jpg',
   },
   'trends-today-newsroom': {
     id: 'trends-today-newsroom',
@@ -47,7 +47,6 @@ export const newsroomProfiles: Record<string, NewsroomProfile> = {
       'Practical guides, public-service updates, and explainers',
       'Source disclosure and post-publication corrections',
     ],
-    email: 'hello@trendstoday.ca',
     location: 'Lower Mainland, British Columbia',
   },
 };
@@ -56,6 +55,10 @@ const legacyNewsroomNames = new Set([
   'Trends Today',
   'Trends Today Team',
   'Trends Today Editorial Team',
+  'Alex Chen',
+  'David Kim',
+  'Emma Thompson',
+  'Sarah Martinez',
 ]);
 
 export function normalizeAuthorName(name?: string): string {
