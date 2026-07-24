@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "41d265077b8f281d128850aa05b6991e595331bca59c8c84935f8f3e2bce27bc",
+  "repositorySha": "851edcba24d5112afc3002372a798368c25ba0a2",
+  "reviewedAt": "2026-07-24T17:50:54.393182+00:00",
+  "modelUsed": "opus",
+  "requestedModels": [
+    "opus"
+  ],
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-opus-4-8"
+  ],
+  "fallbackUsed": false,
+  "fallbackDisabled": true,
+  "review": "NO BLOCKERS\n\nThe release candidate passes every scope criterion.\n\n**Verification performed:**\n\n| Check | Result |\n|---|---|\n| Locally useful | \u2705 Actionable Lower Mainland event-planning bulletin: date, set times, transit/parking warnings, access, site rules |\n| Source support | \u2705 Single primary source (City of Burnaby event page) cited and linked; research artifact `2026-07-24-1030-qualified-candidates.json` records `evidence: pass`, `primarySource: pass`, corroboration not required for a bulletin. All body claims attributed to \"the city says\" |\n| Non-sensitive | \u2705 Research qualification: `sensitiveStory: not triggered`; a free public city event |\n| Not sponsored/supported/branded | \u2705 `sponsorshipStatus: editorial`, `brandSafety: standard`, `commercialApprovalRecorded: false`; no promotional/sponsor language \u2014 commercial intent is a sourced hypothesis only |\n| Zero authorial em dashes | \u2705 Grep found no `\u2014`; GPT review reports `proseEmDashCount: 0` |\n| Resolving internal link | \u2705 `/things-to-do/burnaby-art-in-park-making-together` resolves to `content/things-to-do/burnaby-art-in-park-making-together.mdx` (`status: published`) |\n| No owner approval required | \u2705 `manualApprovalRequired: false`, `manualApprovalRecorded: false`; not among the approval-gated items in `rejectedOrHeld` |\n\n**Integrity confirmations:**\n- Candidate SHA-256 matches the review artifact's `candidateSha256` (`41d265077b8f\u20262bce27bc`), confirming I reviewed the exact release candidate.\n- The matching GPT review (`burnaby-blues-roots-festival-august-2026.41d265077b8f.json`) returned `verdict: PASS` with an empty `blockers` array.\n- Referenced image `/images/editorial/2026/07/burnaby-blues-roots-deer-lake.png` exists in the repo.\n\nNo edits were made. The candidate is clear for publication."
+}
