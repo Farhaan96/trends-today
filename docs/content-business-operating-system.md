@@ -20,27 +20,36 @@ Views are a leading asset signal. They are not the whole business. Articles must
 
 Trends Today cannot honestly optimize for the "highest-paying" article yet because article-level ad revenue, RPM, Active View, sponsor inquiries, and sponsorship revenue are unavailable. Missing measurements remain unavailable, never zero. Until the measurement path is connected, commercial fit is a documented hypothesis and may only break a tie between stories that already clear reader-utility, locality, evidence, source, freshness, brand-safety, and quality gates.
 
-The v4 contract in `config/content-business.json` applies to every future candidate:
+The v5 contract in `config/content-business.json` applies to every future candidate:
 
 - Select length from the reader job and story type. Bulletin, reported-update, and guide/explainer ranges are tunable priors, not targets to fill. Use the shortest complete treatment and never pad copy to create more ad slots.
-- Keep paragraphs short, use descriptive H2 sections, and use lists when the information is genuinely enumerable. Formatting should make the story easier to consume, not make every story look identical.
-- Add contextual internal links with concise descriptive anchors. Links must resolve to already published Trends Today articles, help the reader continue the same local topic journey, and never point back to the current article.
+- Every local candidate includes three to five concrete highlights and a reporting-method note. Keep paragraphs under 80 words, use descriptive H2 sections, and turn enumerable locations, prices, schedules, dates, eligibility rules, or steps into scannable lists.
+- A utility promise must be delivered. If the headline or introduction promises where to go, what it costs, when it happens, who qualifies, or what to do, the body must provide that information in a clearly named section.
+- Add contextual internal links only when they help. Links must resolve to already published Trends Today articles, use concise descriptive anchors, and never point back to the current article. Zero links is correct when no published story adds value.
 - Record `commercialIntent`, `commercialFitReason`, `brandSafety`, and `sponsorshipStatus` on every local candidate. The automation default is independent editorial coverage. Supported or branded coverage remains owner-approved.
 - Never select a weak story because it looks commercially attractive. Sponsor and ad fit come after editorial qualification.
 
-This contract follows current publisher guidance rather than copied SEO folklore: Google says it has no preferred word count, recommends contextual crawlable internal links, and ties display-inventory value to viewability, engaging content, responsive layout, speed, and user experience. Google News also requires clear sponsorship and publisher transparency. Daily Hive's supported-content and branded-content model is a competitive pattern worth testing, not evidence that its sponsor categories will convert for Trends Today.
+This contract follows current publisher guidance rather than copied SEO folklore: Google says it has no preferred word count and asks whether a reader leaves feeling satisfied without another search. Google News expects clear dates, bylines, publisher information, contact information, and sponsorship labels. The Trust Project similarly emphasizes journalist identity, methods, references, local sourcing, and actionable feedback.
+
+Advertisers are not buying word count. They need a clear audience, suitable context, measurable delivery, useful attention, brand safety, and a reachable commercial contact. Google defines a display impression as viewable when at least 50% of its pixels remain on screen for at least one second, and notes that advertisers use viewability when deciding how to bid. That makes a restrained, responsive, readable article more valuable than a cluttered page engineered for extra ad slots. Better Ads Standards rule out intrusive formats such as pop-ups, autoplay video with sound, prestitial countdowns, high ad density, and large sticky ads.
+
+The first advertiser offer remains deliberately honest: Lower Mainland context, a defined placement and campaign period, available measurements, clear paid labels, and direct publisher contact through `hello@trendstoday.ca`. Audience size, RPM, viewability, conversion, and sponsor demand remain unavailable until verified.
 
 Research references:
 
 - https://developers.google.com/search/docs/fundamentals/creating-helpful-content
-- https://developers.google.com/search/docs/crawling-indexing/links-crawlable
-- https://support.google.com/adsense/answer/6219980
 - https://support.google.com/news/publisher-center/answer/6204050
-- https://dailyhive.com/page/content-funding
+- https://support.google.com/news/publisher-center/answer/9607104
+- https://support.google.com/adsense/answer/4510652
+- https://support.google.com/adsense/answer/1282097
+- https://www.betterads.org/standards/
+- https://thetrustproject.org/
+- https://journalismtrustinitiative.org/frequently-asked-questions/
+- https://www.iab.com/wp-content/uploads/2025/01/IAB_Outlook_-Study_January_16_2025_v2.pdf
 
 ## Editorial wedge
 
-The first 28-day positioning test is **the useful Lower Mainland daily briefing**. The newsroom scans primary regional sources three times each weekday and publishes only updates with clear local relevance and reader utility.
+The first 28-day positioning test is **the useful Lower Mainland daily briefing**. The newsroom scans primary regional sources throughout the day and publishes only updates with clear local relevance and reader utility.
 
 The initial beat mix is:
 
@@ -85,13 +94,13 @@ This is a dual-review boundary, not a human approval queue. The engine records t
 ## First real experiment
 
 - Baseline: capture the last 28 days of article-level search impressions, clicks, organic engaged sessions, returning readers, and app CTA clicks. If a metric is unavailable, record it as unavailable instead of zero.
-- Changed variable: favor repeatable utility beats over a broad stream of interesting stories while retaining the evidence score.
-- Rep: publish the highest-scoring eligible release candidate.
-- Primary success metric: weekly returning Lower Mainland readers.
-- Leading metrics: direct sessions, local search impressions, engaged-session rate, pages per returning session, and newsletter actions when available.
-- Guardrails: named locality, practical reader impact, story-type source threshold, at least one primary source, no unsupported claim, no placeholder image, passing exact-candidate GPT editorial and Claude release reviews, passing build/QA and deployment checks, and live post-deploy verification.
-- Review: weekly operational review and a 28-day article decision.
-- Decision: keep the scoring rule if it improves qualified results; repair one weak input if results are mixed; stop the topic/format if evidence stays weak after enough comparable reps.
+- Changed variable: publish future local stories with the v5 completeness and readability contract while preserving source and qualification thresholds.
+- First rep: repair the Surrey cooling-location guide at its existing URL, then apply the contract to the next eligible local candidate.
+- Primary success metric: engaged-session rate for v5 local articles compared with the prior local cohort when analytics are available.
+- Leading metrics: scroll depth, articles per returning session, direct sessions, local search impressions, advertising inquiries, and viewable ad impressions when available.
+- Guardrails: named locality, practical reader impact, three to five highlights, reporting method, delivered utility promise, story-type source threshold, at least one primary source, no unsupported claim, no placeholder image, passing exact-candidate GPT editorial and Claude release reviews, passing build/QA and deployment checks, and live post-deploy verification.
+- Review: first 8 comparable v5 local articles or 28 days, whichever takes longer.
+- Decision: keep if engagement improves without more corrections or production time beyond the agreed ceiling; repair one layout or contract variable if results are mixed; stop the added element if it adds work without measurable reader value.
 
 ## Scoreboard
 

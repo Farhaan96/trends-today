@@ -14,7 +14,10 @@ export async function GET() {
       if (!publishedAt) return false;
       const publishedDate = new Date(publishedAt);
       return (
-        !Number.isNaN(publishedDate.getTime()) && publishedDate >= twoDaysAgo
+        article.frontmatter?.archiveReviewStatus !==
+          'format-reviewed-needs-source-refresh' &&
+        !Number.isNaN(publishedDate.getTime()) &&
+        publishedDate >= twoDaysAgo
       );
     });
 

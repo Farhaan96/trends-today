@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "timezone": "America/Vancouver",
   "daily": {
     "maximumPublications": 6,
@@ -66,17 +66,17 @@
   ],
   "storyTypes": {
     "bulletin": {
-      "wordRange": [250, 450],
+      "wordRange": [300, 600],
       "minimumSources": 1,
       "requiresPrimarySource": true
     },
     "reported-update": {
-      "wordRange": [450, 800],
+      "wordRange": [550, 950],
       "minimumSources": 2,
       "requiresPrimarySource": true
     },
     "guide-or-explainer": {
-      "wordRange": [700, 1200],
+      "wordRange": [800, 1400],
       "minimumSources": 3,
       "requiresPrimarySource": true
     }

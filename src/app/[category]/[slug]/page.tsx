@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getArticleBySlug, getAllArticles } from '@/lib/article-utils';
 import ArticleContent from '@/components/article/ArticleContent';
+import ArticleHighlights from '@/components/article/ArticleHighlights';
 import ArticleJsonLd from '@/components/seo/ArticleJsonLd';
 import { BreadcrumbSchema } from '@/components/seo/SchemaMarkup';
 import { SmartRelatedArticles } from '@/components/article/RelatedArticles';
@@ -10,6 +11,11 @@ import MoreFromAuthor from '@/components/content/MoreFromAuthor';
 import { formatArticleDate, formatArticleDateTime } from '@/lib/editorial';
 import EditorialImage from '@/components/editorial/EditorialImage';
 import { CONTENT_CATEGORIES, getCategoryLabel } from '@/lib/categories';
+import {
+  getNewsroomProfileByName,
+  getNewsroomProfileId,
+  normalizeAuthorName,
+} from '@/lib/newsroom';
 
 const categoryConfig = Object.fromEntries(
   CONTENT_CATEGORIES.map((category) => [
@@ -54,6 +60,9 @@ export async function generateMetadata({
   const description = article.description || article.frontmatter?.description;
   const image = article.image || article.frontmatter?.image;
   const url = `https://www.trendstoday.ca/${category}/${slug}`;
+  const needsSourceRefresh =
+    article.frontmatter?.archiveReviewStatus ===
+    'format-reviewed-needs-source-refresh';
 
   return {
     title,
@@ -72,9 +81,11 @@ export async function generateMetadata({
         article.publishedAt ||
         article.frontmatter?.publishedAt,
       authors: [
-        article.author?.name ||
-          article.frontmatter?.author?.name ||
-          'Trends Today',
+        normalizeAuthorName(
+          typeof (article.author || article.frontmatter?.author) === 'string'
+            ? article.author || article.frontmatter?.author
+            : article.author?.name || article.frontmatter?.author?.name
+        ),
       ],
       section: category,
       images: [
@@ -93,7 +104,7 @@ export async function generateMetadata({
       images: [image || '/images/placeholder.jpg'],
     },
     robots: {
-      index: true,
+      index: !needsSourceRefresh,
       follow: true,
     },
   };
@@ -118,8 +129,21 @@ export default async function ArticlePage({
   const image = article.image || article.frontmatter?.image;
   const publishedAt = article.publishedAt || article.frontmatter?.publishedAt;
   const modifiedAt = article.frontmatter?.modifiedAt || publishedAt;
-  const author = article.author ||
-    article.frontmatter?.author || { name: 'Trends Today' };
+  const rawAuthor = article.author || article.frontmatter?.author;
+  const rawAuthorName =
+    typeof rawAuthor === 'string'
+      ? rawAuthor
+      : rawAuthor?.name || 'Trends Today Newsroom';
+  const authorName = normalizeAuthorName(rawAuthorName);
+  const authorProfile = getNewsroomProfileByName(rawAuthorName);
+  const author = authorProfile
+    ? {
+        name: authorProfile.name,
+        bio: authorProfile.shortBio,
+        url: `https://www.trendstoday.ca/author/${authorProfile.id}`,
+        type: authorProfile.entityType,
+      }
+    : rawAuthor || { name: authorName };
   const url = `https://www.trendstoday.ca/${categoryKey}/${slug}`;
 
   // Breadcrumb data
@@ -132,14 +156,7 @@ export default async function ArticlePage({
     { name: title, url },
   ];
 
-  const authorName = article.author?.name || 'Trends Today';
-  const authorId = authorName.toLowerCase().replace(/\s+/g, '-');
-  const knownAuthors = [
-    'alex-chen',
-    'sarah-martinez',
-    'david-kim',
-    'emma-thompson',
-  ];
+  const authorId = getNewsroomProfileId(authorName);
   const readingTime = article.frontmatter?.readingTime;
   const formattedReadingTime = readingTime
     ? typeof readingTime === 'string' && readingTime.includes('min read')
@@ -147,6 +164,16 @@ export default async function ArticlePage({
       : `${readingTime} min read`
     : null;
   const locality = article.frontmatter?.locality as string | undefined;
+  const editor = article.frontmatter?.editor as string | undefined;
+  const highlights = article.frontmatter?.highlights as string[] | undefined;
+  const reportingMethod = article.frontmatter?.reportingMethod as
+    | string
+    | undefined;
+  const archiveReviewStatus = article.frontmatter?.archiveReviewStatus as
+    | string
+    | undefined;
+  const needsSourceRefresh =
+    archiveReviewStatus === 'format-reviewed-needs-source-refresh';
 
   return (
     <article className="article-page">
@@ -184,7 +211,7 @@ export default async function ArticlePage({
               </Link>
               {locality && <span>{locality}</span>}
               <span className="font-medium">
-                {authorId && knownAuthors.includes(authorId) ? (
+                {authorId ? (
                   <Link
                     href={`/author/${authorId}`}
                     className="article-author-link"
@@ -195,6 +222,17 @@ export default async function ArticlePage({
                   authorName
                 )}
               </span>
+              {editor && (
+                <span>
+                  Edited by{' '}
+                  <Link
+                    href={`/author/${editor.toLowerCase().replace(/\s+/g, '-')}`}
+                    className="article-author-link"
+                  >
+                    {editor}
+                  </Link>
+                </span>
+              )}
               <span>
                 {locality
                   ? formatArticleDateTime(
@@ -222,7 +260,28 @@ export default async function ArticlePage({
 
       {/* Article Content */}
       <div className="site-shell article-content-shell">
+        {needsSourceRefresh && (
+          <aside className="article-archive-notice">
+            <p className="article-method__eyebrow">Archive transparency</p>
+            <p>
+              This article received a July 2026 readability and source-display
+              pass, but its underlying claims have not yet received a fresh
+              source review. It is temporarily excluded from search indexing.
+              Check the linked sources for current information.
+            </p>
+          </aside>
+        )}
+        <ArticleHighlights
+          highlights={needsSourceRefresh ? undefined : highlights}
+        />
         <ArticleContent content={article.content || article.mdxContent} />
+        {reportingMethod && (
+          <aside className="article-method" aria-labelledby="reporting-method">
+            <p className="article-method__eyebrow">Transparency</p>
+            <h2 id="reporting-method">How we reported this</h2>
+            <p>{reportingMethod}</p>
+          </aside>
+        )}
       </div>
 
       {/* More from Author */}

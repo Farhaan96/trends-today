@@ -43,7 +43,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       imageAttribution: data.imageAttribution,
       tags: data.tags || [],
       category: data.category || 'Technology',
-      author: data.author || 'Trends Today Team',
+      author: data.author || 'Trends Today Newsroom',
       readingTime: data.readingTime || '5 min read',
     };
   } catch (error) {
