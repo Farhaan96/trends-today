@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-07-24T23:39:49.373416+00:00",
+  "results": [
+    {
+      "title": "Burnaby mayor walk returns Sunday morning",
+      "lane": "weekend-and-planning",
+      "score": 84.0,
+      "decision": "brief",
+      "confidence": "current-hypothesis",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Burnaby mayor walk returns Sunday morning",
+        "lane": "weekend-and-planning",
+        "category": "things-to-do",
+        "storyType": "bulletin",
+        "locality": "Burnaby",
+        "candidatePath": "artifacts/editorial/release-candidates/things-to-do/burnaby-mayor-walk-chat-sunday.mdx",
+        "sourceTitle": "Walk and Chat with the Mayor",
+        "sourceUrl": "https://www.burnaby.ca/recreation-and-arts/events/walk-and-chat-mayor",
+        "publishedOrUpdatedAt": "current event page checked 2026-07-24",
+        "evidence": {
+          "sourceUrls": [
+            "https://www.burnaby.ca/recreation-and-arts/events/walk-and-chat-mayor"
+          ],
+          "primarySourceUrls": [
+            "https://www.burnaby.ca/recreation-and-arts/events/walk-and-chat-mayor"
+          ],
+          "readerImpact": "Burnaby residents can decide whether to join a July 26 one-hour community walk and plan around the Christine Sinclair Community Centre meeting point plus the $2 pancake breakfast.",
+          "freshnessEvidence": "The next listed event date is Sunday, July 26, 2026, two days after this sweep.",
+          "uniqueAngleEvidence": "No current Trends Today article covers the Walk and Chat with the Mayor event, while the nearest Burnaby event coverage focuses on concerts, stewardship sessions, art sessions, and the Aug. 8 music festival.",
+          "sensitiveStoryGate": "No crime, death, active emergency, private-person allegation, legal dispute coverage, or sponsored coverage is advanced."
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 3,
+          "freshness": 5,
+          "evidenceStrength": 4,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        },
+        "commercialIntent": "ad-fit",
+        "commercialFitReason": "The official Burnaby event page creates local weekend, recreation, family, wellness, and neighbourhood outing intent that may fit standard contextual ads; article-level page views, Active View, RPM, ad revenue, and sponsor demand remain unavailable.",
+        "brandSafety": "standard",
+        "sponsorshipStatus": "editorial",
+        "lengthRationale": "A bulletin is the shortest complete format because the official page provides one current date, one meeting point, a one-hour walk window, and one breakfast detail.",
+        "internalLinks": [
+          "/things-to-do/burnaby-art-in-park-making-together"
+        ],
+        "decision": "release-candidate",
+        "confidence": "current-hypothesis"
+      }
+    }
+  ]
+}
