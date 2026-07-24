@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "9cc0df9625f62cbb075bccfcd94dc1862a78defeae3b856f05d18d7275db0e52",
+  "repositorySha": "bec3a681c0305757ab149c39f740d5ada403b786",
+  "reviewedAt": "2026-07-23T19:48:24Z",
+  "modelUsed": "opus",
+  "requestedModels": ["opus"],
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-opus-4-8"],
+  "fallbackUsed": false,
+  "fallbackDisabled": true,
+  "review": "NO BLOCKERS\n\nCandidate: artifacts/editorial/release-candidates/local-news/coquitlam-election-workers-october-vote.mdx\nCandidate SHA-256: 9cc0df9625f62cbb075bccfcd94dc1862a78defeae3b856f05d18d7275db0e52\nRepository SHA: bec3a681c0305757ab149c39f740d5ada403b786\n\nVerified read-only: dual-review gate satisfied; cited source URLs match the research artifact primarySourceUrls; no authorial em dashes; generated image exists and is not a placeholder; frontmatter and MDX match the local-news candidate contract; utility is non-duplicate; no sensitive or sponsored coverage trigger. Caveat: live URL fetch was unavailable in the Claude environment, so source-content confirmation relies on the matching research artifact and the passing GPT review with source access. Safe to promote."
+}

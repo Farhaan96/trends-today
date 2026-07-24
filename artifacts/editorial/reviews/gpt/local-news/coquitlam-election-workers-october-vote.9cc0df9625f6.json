@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "9cc0df9625f62cbb075bccfcd94dc1862a78defeae3b856f05d18d7275db0e52",
+  "repositorySha": "bec3a681c0305757ab149c39f740d5ada403b786",
+  "reviewedAt": "2026-07-23T19:50:06.080023+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9086-7cb5-70e1-a5cd-511ed215f778",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 4,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate is well supported by the cited City of Coquitlam materials, clearly organized, locally relevant, and ends with a practical application step. Some phrasing is mildly repetitive, but it does not require revision. No authorial prose em dashes were found."
+}

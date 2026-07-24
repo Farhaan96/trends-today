@@ -1,0 +1,121 @@
+{
+  "generatedAt": "2026-07-23T12:50:00-07:00",
+  "sweep": "12:30",
+  "dailyCeilingState": {
+    "beforeSweep": 2,
+    "maximum": 6,
+    "selectedForRelease": 1,
+    "remainingAfterSelection": 3
+  },
+  "metricsConstraint": {
+    "status": "unavailable",
+    "source": "artifacts/editorial/metrics/2026-07-23-1230-vercel-analytics.json",
+    "missing": [
+      "VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN",
+      "VERCEL_PROJECT_ID",
+      "engaged sessions",
+      "returning sessions",
+      "scroll depth",
+      "measurable ad impressions",
+      "viewable ad impressions",
+      "Active View rate",
+      "ad revenue",
+      "page RPM",
+      "sponsor inquiries",
+      "qualified sponsor inquiries",
+      "sponsorship revenue",
+      "content cost"
+    ],
+    "measurementRepair": "Connect Vercel analytics credentials plus Search Console, GA, ad, and sponsor inquiry exports before using commercial results to change topic mix or article length."
+  },
+  "selected": [
+    {
+      "title": "Coquitlam opens election worker applications for October vote",
+      "lane": "daily-local-utility",
+      "category": "local-news",
+      "locality": "Coquitlam",
+      "storyType": "bulletin",
+      "score": 90.0,
+      "decision": "brief",
+      "confidence": "verified-primary-source",
+      "candidateSha256": "9cc0df9625f62cbb075bccfcd94dc1862a78defeae3b856f05d18d7275db0e52",
+      "readerJob": "Help Coquitlam residents decide whether to apply for paid temporary election work before the October local election.",
+      "sourceUrls": [
+        "https://www.coquitlam.ca/m/newsflash/Home/Detail/2005",
+        "https://workerapplication.voterview.ca/8002/1",
+        "https://www.coquitlam.ca/729/Elections"
+      ],
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 4,
+        "freshness": 5,
+        "evidenceStrength": 4,
+        "uniqueAngle": 5,
+        "repeatVisitPotential": 3,
+        "speedToUsefulDraft": 5
+      },
+      "commercialIntent": "none",
+      "commercialFitReason": "The official source creates civic-participation and local temporary-work intent, but no verified Trends Today ad, sponsor, or RPM data supports treating this as a commercial story.",
+      "brandSafety": "standard",
+      "sponsorshipStatus": "editorial"
+    }
+  ],
+  "rejected": [
+    {
+      "title": "Staying Cool During Extreme Heat",
+      "reason": "Duplicate of the already published Surrey July 22 cooling-place bulletin."
+    },
+    {
+      "title": "Major upgrades coming to popular Newton parks",
+      "reason": "Duplicate of the already published July 23 Surrey Newton park-upgrades bulletin."
+    },
+    {
+      "title": "Surrey targets three more properties for unpermitted construction",
+      "reason": "Held for unattended publishing because enforcement against specific properties carries legal and private-property sensitivity."
+    },
+    {
+      "title": "More than 80,000 attend 19th annual Surrey Fusion Festival",
+      "reason": "Rejected as retrospective attendance coverage with weak same-day reader action."
+    },
+    {
+      "title": "Burnaby event listings",
+      "reason": "Rejected or held as duplicate previously published Burnaby event coverage, previously GPT-blocked thin mayor-walk value, or lower utility than the selected same-day civic application story."
+    },
+    {
+      "title": "Richmond property-title and forensic-audit notices",
+      "reason": "Held for unattended publishing because legal and forensic-audit framing requires human review."
+    },
+    {
+      "title": "Delta air quality, water restrictions, and banner contest items",
+      "reason": "Duplicate, lower freshness, or weak practical reader action compared with the selected Coquitlam application story."
+    },
+    {
+      "title": "Canucks, Whitecaps, and BC Lions listings",
+      "reason": "Rejected because stale team notes, out-of-region training-camp timing, and post-game/roster updates had weaker Lower Mainland utility than the selected civic notice."
+    }
+  ],
+  "reviewGates": {
+    "gpt": {
+      "verdict": "PASS",
+      "artifact": "artifacts/editorial/reviews/gpt/local-news/coquitlam-election-workers-october-vote.9cc0df9625f6.json",
+      "scores": {
+        "factualSupport": 4,
+        "quality": 4,
+        "readability": 4,
+        "formatting": 5,
+        "engagement": 4
+      }
+    },
+    "claude": {
+      "verdict": "NO BLOCKERS",
+      "artifact": "artifacts/editorial/reviews/local-news/coquitlam-election-workers-october-vote.9cc0df9625f6.json",
+      "model": "opus",
+      "candidateSha256": "9cc0df9625f62cbb075bccfcd94dc1862a78defeae3b856f05d18d7275db0e52"
+    }
+  },
+  "keepRepairStop": {
+    "keep": "Keep civic recruitment bulletins when official same-day sources give concrete resident action, eligibility, dates, and truthful metric availability.",
+    "repair": "Repair when the application path or schedule condition is vague.",
+    "stop": "Stop if civic job notices become generic staffing filler or commercial fit starts steering publication."
+  }
+}
