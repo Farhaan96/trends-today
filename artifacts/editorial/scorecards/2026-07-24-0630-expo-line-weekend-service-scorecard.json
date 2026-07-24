@@ -15,7 +15,7 @@
     "minimumScore": 65,
     "primarySourceRequired": true,
     "minimumSourcesRequired": 1,
-    "sourcesUsed": 3,
+    "sourcesUsed": 2,
     "passes": true,
     "brandSafety": "standard",
     "manualApprovalRequired": false
