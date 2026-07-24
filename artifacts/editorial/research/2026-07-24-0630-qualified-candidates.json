@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "runStartedAt": "2026-07-24T06:32:43-07:00",
+  "timezone": "America/Vancouver",
+  "sourceScan": {
+    "configuredEnabledSourcesScanned": [
+      "City of Surrey news",
+      "City of Burnaby events",
+      "City of Richmond news",
+      "City of Coquitlam news",
+      "City of Delta news",
+      "Vancouver Canucks news",
+      "Vancouver Whitecaps news",
+      "BC Lions news"
+    ],
+    "configuredScanFound": 30,
+    "fallbackOfficialSearchUsed": true,
+    "fallbackReason": "The configured enabled-source scan repeated the 2026-07-23 rejected queue; a live official search surfaced a new TransLink service-impact item."
+  },
+  "dailyCeiling": {
+    "dateLocal": "2026-07-24",
+    "publishedBeforeSweep": 0,
+    "dailyMaximum": 6,
+    "sweepMaximum": 2,
+    "ceilingReached": false
+  },
+  "measurement": {
+    "artifact": "artifacts/editorial/metrics/2026-07-24-0630-vercel-analytics.json",
+    "status": "unavailable",
+    "missing": [
+      "VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN",
+      "VERCEL_PROJECT_ID",
+      "GA_PROPERTY_ID",
+      "GOOGLE_APPLICATION_CREDENTIALS",
+      "ad and sponsor exports"
+    ],
+    "repair": "Connect Vercel analytics credentials plus GA/Search Console/ad/sponsor exports so article-level views, engaged sessions, viewable inventory, revenue, and sponsor inquiries are available."
+  },
+  "selected": [
+    {
+      "title": "Expo Line weekend service drops downtown Saturday",
+      "slug": "expo-line-weekend-service-downtown-maintenance",
+      "category": "transit",
+      "locality": "Vancouver",
+      "storyType": "bulletin",
+      "readerJob": "Tell downtown Expo Line riders when weekend service is reduced and what to do before travelling.",
+      "score": 91,
+      "scoring": {
+        "localRelevance": 5,
+        "readerUtility": 5,
+        "freshness": 4,
+        "evidenceStrength": 5,
+        "uniqueAngle": 4,
+        "repeatVisitPotential": 4,
+        "speedToUsefulDraft": 5
+      },
+      "qualification": {
+        "locality": "pass",
+        "freshness": "pass",
+        "readerUtility": "pass",
+        "evidence": "pass",
+        "primarySource": "pass",
+        "corroboration": "pass",
+        "uniqueness": "pass",
+        "brandSafety": "standard",
+        "sensitiveStory": "not triggered",
+        "quality": "pass"
+      },
+      "sources": [
+        {
+          "title": "Expo Line weekend maintenance work resumes in downtown Vancouver",
+          "url": "https://www.translink.ca/news/2026/july/expo%20line%20weekend%20maintenance%20work%20resumes%20in%20downtown%20vancouver",
+          "tier": "primary"
+        },
+        {
+          "title": "Rail Projects",
+          "url": "https://www.translink.ca/plans-and-projects/projects/maintenance-and-upgrade-program/rail-projects",
+          "tier": "primary"
+        },
+        {
+          "title": "Alerts",
+          "url": "https://www.translink.ca/alerts",
+          "tier": "primary"
+        }
+      ],
+      "commercialIntent": "ad-fit",
+      "commercialFitReason": "Downtown weekend transit disruption coverage may fit standard commuter, trip-planning, local-service, and events-ad context; this is a sourced hypothesis only and not proof of RPM or sponsor demand.",
+      "sponsorshipStatus": "editorial"
+    }
+  ],
+  "rejectedOrHeld": [
+    {
+      "title": "Staying Cool During Extreme Heat",
+      "reason": "Duplicate of the July 22 Surrey heat-safety bulletin."
+    },
+    {
+      "title": "Major upgrades coming to popular Newton parks",
+      "reason": "Duplicate of the July 23 Surrey Newton park-upgrades bulletin."
+    },
+    {
+      "title": "Surrey targets three more properties for unpermitted construction",
+      "reason": "Approval-gated property enforcement item."
+    },
+    {
+      "title": "Richmond Olympic Oval Corporation - Performance & Forensic Audits",
+      "reason": "Approval-gated audit/investigation-sensitive item."
+    },
+    {
+      "title": "Regular Council Meeting Agenda - July 27, 2026",
+      "reason": "Thin agenda notice without enough practical reader utility in this pass."
+    },
+    {
+      "title": "BC Lions and older sports feed items",
+      "reason": "Stale or outside current Lower Mainland reader-action window."
+    }
+  ]
+}
