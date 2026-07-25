@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "d328048f6dca7957348b5211ade41f1a3e0a1e24f1f1a9b721e2a410c6e86267",
+  "repositorySha": "5dbc11e5be554cb22b9372b0df2c9c3ef3240e0d",
+  "reviewedAt": "2026-07-25T17:40:49.810034+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9a5c-8303-7d20-88a1-a8cae0d0a9e7",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The two-minute bulletin repeats the same viewing logistics in the opening, the \u201cWhat is fixed\u201d list, and the final checklist. This creates noticeable padding instead of adding utility.",
+    "The ending restates earlier advice to consult the club preview and check near kickoff. It is actionable but flat and repetitive, so the close needs a sharper final reader action."
+  ],
+  "summary": "The cited Whitecaps material supports the match details, broadcast options, road-trip context, result, matchup record, and Selemani roster note. The MDX is clean and readable, with zero authorial em dashes. It does not pass the strict editorial gate because repetition weakens quality and leaves the ending without enough force."
+}

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "b6399f3b997eaa45ab98cc3820f08b3334ce73f2b897d965371d66d7996a7ce4",
+  "repositorySha": "5dbc11e5be554cb22b9372b0df2c9c3ef3240e0d",
+  "reviewedAt": "2026-07-25T17:46:41.687850+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9a62-39f2-70d2-8e42-9b0717bd516a",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The article repeats the same watch, listen, and bar options across the lead, setup, Match details section, final section, and closing sentence, making a short bulletin feel padded.",
+    "The opening is generic and the final instruction largely restates the kickoff time and source link, producing a flat close instead of a sharper actionable takeaway.",
+    "Phrases such as \u201cwhere the match is listed\u201d and the heading \u201cWhat changes the plan\u201d are vague and weaken otherwise clear matchday guidance."
+  ],
+  "summary": "The candidate matches both supplied hashes, contains no prose em dashes, and its factual claims are supported by the cited Whitecaps preview. It does not pass the strict editorial gate because repetition, vague transitions, and a flat ending reduce quality and engagement below 4."
+}

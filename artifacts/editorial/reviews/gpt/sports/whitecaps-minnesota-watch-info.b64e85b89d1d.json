@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "b64e85b89d1d924d507a4648dd13def39c9f4c0d7724aa3083521b707d6e81ae",
+  "repositorySha": "5dbc11e5be554cb22b9372b0df2c9c3ef3240e0d",
+  "reviewedAt": "2026-07-25T17:42:26.506425+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9a5e-57a2-7462-b2f4-e514642e14b5",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 4,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The cited Selemani URL could not be verified, leaving the article's roster claims unsupported by accessible cited material, including that this is his fourth short-term agreement overall and the club's first such agreement this season.",
+    "The opening manufactures vague urgency with \u201cbefore Saturday evening fills up.\u201d Nothing cited establishes scarcity or explains what is expected to fill up.",
+    "The article repeatedly restates the same narrow logistics and roster note across the lead, \u201cWhat is fixed,\u201d \u201cWhy Selemani is part of the update,\u201d and the close. This creates filler instead of adding useful reporting.",
+    "\u201cThat makes the match a quick bounce-back test\u201d is a generic transition rather than a specific, supported explanation of the local stakes."
+  ],
+  "summary": "The match logistics and recent-result context are supported by the official preview, and the MDX is clean and scannable. However, the inaccessible roster citation, manufactured opening urgency, repetition, and generic stakes require revision before release."
+}
