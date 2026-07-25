@@ -2,7 +2,9 @@ export {};
 
 declare global {
   interface Window {
-    gtag: (command: string, targetId: string, config?: any) => void;
+    dataLayer: unknown[][];
+    gtag: (...args: unknown[]) => void;
+    __trendsTodayGaMeasurementId?: string;
     clarity: (method: string, ...args: any[]) => void;
     fbq: (method: string, ...args: any[]) => void;
   }

@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { DM_Sans, Newsreader } from 'next/font/google';
 import Link from 'next/link';
 import './globals.css';
@@ -9,6 +10,7 @@ import {
 } from '@/components/seo/SchemaMarkup';
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
+import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 
 const sans = DM_Sans({
   variable: '--font-ui',
@@ -116,7 +118,7 @@ export default function RootLayout({
   const analyticsCandidate = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
   const adsenseCandidate = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT;
   const analyticsId =
-    analyticsCandidate && !analyticsCandidate.toUpperCase().includes('XXXX')
+    analyticsCandidate && /^G-[A-Z0-9]+$/i.test(analyticsCandidate)
       ? analyticsCandidate
       : undefined;
   const adsenseClient =
@@ -130,30 +132,6 @@ export default function RootLayout({
         {/* SEO Schema Markup */}
         <OrganizationSchema />
         <WebsiteSchema />
-
-        {analyticsId && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`}
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${analyticsId}', {
-              page_title: document.title,
-              page_location: window.location.href,
-              custom_map: {
-                'custom_parameter_1': 'seo_score',
-                'custom_parameter_2': 'content_type'
-              }
-            });
-          `}
-            </Script>
-          </>
-        )}
 
         {adsenseClient && (
           <Script
@@ -222,6 +200,11 @@ export default function RootLayout({
             <span>All rights reserved.</span>
           </div>
         </footer>
+        {analyticsId && (
+          <Suspense fallback={null}>
+            <GoogleAnalytics measurementId={analyticsId} />
+          </Suspense>
+        )}
         <Analytics />
       </body>
     </html>
