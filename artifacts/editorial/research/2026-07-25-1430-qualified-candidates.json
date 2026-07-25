@@ -1,0 +1,126 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-25-1430",
+  "generatedAt": "2026-07-25T14:45:00-07:00",
+  "sourceQueue": "artifacts/editorial/research/2026-07-25-1430-source-queue.json",
+  "status": "no-qualified-candidate",
+  "dailyCeiling": {
+    "dateLocal": "2026-07-25",
+    "publishedBeforeSweep": 0,
+    "maximumPublications": 6,
+    "ceilingReached": false
+  },
+  "sweepLimit": {
+    "maximumPublications": 2,
+    "published": 0
+  },
+  "qualified": [],
+  "candidateHashes": [],
+  "review": {
+    "gptEditorialGate": "not-run",
+    "gptReason": "No candidate qualified for exact-artifact review.",
+    "claudeOpus5ReleaseReview": "not-run",
+    "claudeReason": "Independent review is required only after a qualified exact candidate exists."
+  },
+  "sourceAvailability": {
+    "officialSourceScan": "available",
+    "perplexity": "unavailable",
+    "googleCustomSearch": "unavailable"
+  },
+  "results": [
+    {
+      "title": "Previously covered or unchanged official-source items",
+      "decision": "reject",
+      "count": 18,
+      "examples": [
+        "Surrey capital projects",
+        "Surrey heat resources",
+        "Surrey Newton park upgrades",
+        "Burnaby Blues + Roots Festival",
+        "Burnaby Walk and Chat with the Mayor",
+        "Burnaby Michael de Courcy / Expo 86 exhibition",
+        "Burnaby environmental stewardship events",
+        "Richmond climate-friendly homes",
+        "Richmond recycling contamination",
+        "Coquitlam election workers",
+        "Coquitlam heat resources",
+        "Coquitlam road-safety plan",
+        "Coquitlam Parkway and Panorama road work",
+        "Delta air-quality warning",
+        "Delta Stage 2 water restrictions",
+        "Delta banner contest"
+      ],
+      "reasons": [
+        "Duplicative of published Trends Today coverage or unchanged from earlier July 25 sweeps."
+      ]
+    },
+    {
+      "title": "Approval-gated civic, legal, and audit items",
+      "decision": "hold",
+      "count": 3,
+      "examples": [
+        "Surrey unpermitted-construction enforcement",
+        "Richmond property-title decision",
+        "Richmond Olympic Oval audit coverage"
+      ],
+      "reasons": [
+        "Legal, enforcement, audit, or property-title subjects require owner review before publication."
+      ]
+    },
+    {
+      "title": "Delta July 27 council agenda",
+      "sourceUrl": "https://www.delta.ca/community-culture/happening-delta/news/regular-council-meeting-agenda-july-27-2026",
+      "sourceName": "City of Delta news",
+      "locality": "Delta",
+      "category": "local-news",
+      "storyType": "reported-update",
+      "decision": "reject",
+      "reasons": [
+        "Fresh official agenda listing, but the configured source scan did not isolate a specific agenda decision or resident consequence.",
+        "Would require agenda-level reporting beyond the automated listing before a supported article could be written."
+      ],
+      "commercialIntent": "none",
+      "sponsorshipStatus": "editorial",
+      "brandSafety": "standard"
+    },
+    {
+      "title": "Canucks podcast, front-office, prospect, and Penticton training-camp items",
+      "decision": "reject",
+      "examples": [
+        "Kevin Lankinen and Linus Karlsson podcast",
+        "Cammi Granato role update",
+        "Kieren Dervin prospect feature",
+        "Canucks 2026 training camp in Penticton"
+      ],
+      "reasons": [
+        "Official and current or recent, but the items are team content, internal hockey operations, prospect features, or outside the Lower Mainland.",
+        "No clear resident action, schedule, cost, route, service, ticketing, or event-planning consequence cleared the current sports utility bar."
+      ],
+      "commercialIntent": "none",
+      "sponsorshipStatus": "editorial",
+      "brandSafety": "standard"
+    },
+    {
+      "title": "Whitecaps and BC Lions sports carryovers",
+      "decision": "reject",
+      "examples": [
+        "Whitecaps Selemani short-term agreement",
+        "Whitecaps Minnesota preview",
+        "Ryan Gauld Team of Matchday",
+        "Whitecaps Cincinnati recap",
+        "BC Lions archive links"
+      ],
+      "reasons": [
+        "Selemani remained too narrow as a one-source roster bulletin.",
+        "The Minnesota preview was already attempted in the 10:30 sweep and blocked after GPT review.",
+        "Other Whitecaps and BC Lions items were retrospective, stale, or weakly actionable for Lower Mainland readers."
+      ],
+      "commercialIntent": "none",
+      "sponsorshipStatus": "editorial",
+      "brandSafety": "standard"
+    }
+  ],
+  "commercialFitPolicy": {
+    "status": "not-applied",
+    "reason": "No candidate first cleared editorial qualification; commercial fit cannot rescue a weak, stale, approval-gated, or duplicate story."
+  }
+}
