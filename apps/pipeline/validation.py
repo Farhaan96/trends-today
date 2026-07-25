@@ -5,7 +5,7 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 from urllib.parse import urlparse
 
 
@@ -17,12 +17,80 @@ ARTICLE_CATEGORIES = LOCAL_CATEGORIES | {
 }
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CONTENT_BUSINESS_CONFIG = REPO_ROOT / 'config' / 'content-business.json'
+ATTRIBUTION_LED_TITLE = re.compile(
+    r'^\s*(?P<source>'
+    r'(?:(?:[Tt]he\s+)?'
+    r'(?:[Cc]ity|[Tt]ownship|[Dd]istrict|[Vv]illage)\s+of\s+)?'
+    r'[A-Z][\w.\'’-]*(?:\s+[A-Z][\w.\'’-]*){0,2}'
+    r')'
+    r'(?:\s+officials?)?\s+(?:says?|said)\b',
+)
+MONETARY_FACT = re.compile(
+    r'(?:[$€£]\s?\d[\d,.]*(?:\s?(?:million|billion|m|bn))?'
+    r'|\b\d+(?:\.\d+)?\s+(?:million|billion)\s+'
+    r'(?:dollars?|CAD|USD)\b)',
+    re.IGNORECASE,
+)
+PROJECT_START_FACT = re.compile(
+    r'\b(?:work|construction|upgrades?|repairs?)\s+'
+    r'(?:is\s+|are\s+)?(?:set\s+to\s+)?'
+    r'(?:starts?|begins?|opens?)\s+'
+    r'(?:(?:this|next)\s+(?:spring|summer|fall|autumn|winter|month|year)'
+    r'|(?:in|on|by)\s+[A-Z][a-z]+\s+\d{1,2}(?:,\s+\d{4})?'
+    r'|(?:in|by)\s+\d{4})\b',
+    re.IGNORECASE,
+)
 
 
 @dataclass(frozen=True)
 class ValidationResult:
     passed: bool
     errors: List[str]
+
+
+def attribution_led_title_issue(title: str, sources: List[Dict]) -> Optional[str]:
+    """Flag a narrow weak-attribution pattern only when sources contain a stronger lead."""
+    match = ATTRIBUTION_LED_TITLE.match(str(title or '').strip())
+    if not match:
+        return None
+
+    source_name = re.sub(
+        r'^(?:the\s+)?(?:city|township|district|village)\s+of\s+',
+        '',
+        match.group('source'),
+        flags=re.IGNORECASE,
+    ).strip()
+    generic_sources = {
+        'analysis',
+        'data',
+        'experts',
+        'police',
+        'report',
+        'research',
+        'study',
+        'survey',
+    }
+    if source_name.lower() in generic_sources:
+        return None
+
+    source_text = ' '.join(
+        str(source.get(field, '') or '')
+        for source in sources
+        for field in ('title', 'snippet', 'description', 'content')
+    )
+    if source_name and source_name.lower() not in source_text.lower():
+        return None
+    if MONETARY_FACT.search(source_text):
+        fact_kind = 'monetary fact'
+    elif PROJECT_START_FACT.search(source_text):
+        fact_kind = 'project timing fact'
+    else:
+        return None
+
+    return (
+        'title leads with weak attribution even though sources contain '
+        f'a stronger supported {fact_kind}'
+    )
 
 
 def _valid_source_urls(sources: List[Dict]) -> List[str]:
@@ -163,8 +231,13 @@ def validate_release_candidate(
         or source.get('isPrimary') is True
     ]
 
-    if not str(article.get('title', '')).strip():
+    title = str(article.get('title', '')).strip()
+    if not title:
         errors.append('title is missing')
+    else:
+        headline_issue = attribution_led_title_issue(title, sources)
+        if headline_issue:
+            errors.append(headline_issue)
     if not str(article.get('meta_description', '')).strip():
         errors.append('meta description is missing')
     if words < minimum_words or words > maximum_words:

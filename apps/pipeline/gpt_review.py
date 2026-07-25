@@ -87,12 +87,16 @@ Score each dimension from 1 to 5:
 - readability: clear language, varied sentence rhythm, short paragraphs, and minimal jargon
 - formatting: valid, scannable MDX with useful headings, restrained emphasis, and a Sources section
 - engagement: a concrete supported lead, clear local stakes, active verbs, and an actionable close without clickbait
+- headlineStrength: the title leads with the strongest supported newsworthy fact and
+  active factual subject, rather than weak attribution such as "Surrey says" when a
+  commitment, amount, concrete change, or start date provides a stronger lead
 
 Return PASS only when every score is at least 4, blockers is empty, and authorial prose
 contains zero em dashes. Do not count an em dash inside an exact direct quotation,
 blockquote, source title, or Sources section. Treat unsupported hype, manufactured stakes,
-generic openings, repetitive phrasing, weak transitions, buried reader impact, or a flat
-ending as blockers when they require revision. Do not edit the article. Echo both hashes exactly.
+generic openings, repetitive phrasing, weak transitions, buried reader impact, weak
+attribution ahead of a stronger supported newsworthy fact, or a flat ending as blockers
+when they require revision. Do not edit the article. Echo both hashes exactly.
 
 <candidate>
 {candidate_text}

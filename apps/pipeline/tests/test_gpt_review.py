@@ -13,6 +13,7 @@ sys.path.insert(0, str(PIPELINE_DIR))
 from gpt_review import (  # noqa: E402
     REVIEW_SCHEMA,
     _codex_cli_review,
+    _prompt,
     _response_text,
     _responses_api_review,
 )
@@ -24,8 +25,21 @@ class GPTReviewTests(unittest.TestCase):
         scores = REVIEW_SCHEMA['properties']['scores']
         self.assertEqual(GPT_SCORE_FIELDS, set(scores['required']))
         self.assertFalse(scores['additionalProperties'])
+        self.assertIn('headlineStrength', scores['required'])
         self.assertIn('proseEmDashCount', REVIEW_SCHEMA['required'])
         self.assertIn('blockers', REVIEW_SCHEMA['required'])
+
+    def test_prompt_scores_strongest_supported_news_value_first(self):
+        prompt = _prompt(
+            "title: 'Surrey says Newton park upgrades are moving ahead'",
+            Path('local-news/newton-parks.mdx'),
+            'a' * 64,
+            'b' * 40,
+        )
+
+        self.assertIn('headlineStrength', prompt)
+        self.assertIn('strongest supported newsworthy fact', prompt)
+        self.assertIn('weak attribution', prompt)
 
     def test_response_text_reads_structured_output_message(self):
         expected = {'verdict': 'PASS'}

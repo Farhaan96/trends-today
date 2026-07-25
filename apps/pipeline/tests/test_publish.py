@@ -97,6 +97,7 @@ class PublisherTests(unittest.TestCase):
                 'readability': 4,
                 'formatting': 4,
                 'engagement': 4,
+                'headlineStrength': 4,
             },
             'proseEmDashCount': 0,
             'blockers': [],
@@ -258,6 +259,7 @@ class PublisherTests(unittest.TestCase):
                 'readability': 3,
                 'formatting': 4,
                 'engagement': 4,
+                'headlineStrength': 4,
             }
             with self.assertRaises(PermissionError):
                 self.promote(root, candidate, review, scores=weak_scores)

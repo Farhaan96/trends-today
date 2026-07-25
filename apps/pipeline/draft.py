@@ -11,6 +11,8 @@ from typing import Dict, List, Optional
 import requests
 from pathlib import Path
 
+from validation import attribution_led_title_issue
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -29,6 +31,10 @@ STYLE_GUIDE = """
 - If the headline or opening promises locations, prices, schedules, eligibility,
   or steps, provide the concrete answer in a clearly named section
 - Open with the confirmed news and who it affects
+- Lead the title with the strongest verified newsworthy fact the sources support,
+  such as a commitment, amount, concrete change, or start date
+- Do not lead with attribution such as "Surrey says" when the sources support a
+  stronger factual subject and active verb
 - Bold only the numbers, dates, institutions, and details that matter
 - Use periods and commas for rhythm; do not use em dashes
 - Ground every claim in the provided sources; do not invent statistics
@@ -66,7 +72,8 @@ Style Guide:
 {STYLE_GUIDE}
 
 Return ONLY a JSON object with these keys:
-- title: sentence case, 50-70 chars, specific and curiosity-driven (no clickbait)
+- title: sentence case, 50-70 chars, led by the strongest verified newsworthy fact,
+  specific and useful (no clickbait or weak attribution when a stronger fact is supported)
 - subtitle: one-sentence hook that promises a concrete payoff
 - body_mdx: the word range required by the supplied story type, 2-4 ## H2 sections,
 	  bold key details, zero em dashes, scannable lists where useful, and a ## Sources section
@@ -284,6 +291,23 @@ Return ONLY a JSON object with these keys:
         if not article:
             logger.error("All drafting models failed; no candidate was created")
             return None
+
+        headline_issue = attribution_led_title_issue(article.get('title', ''), sources)
+        if headline_issue:
+            logger.warning("Retrying weak headline: %s", headline_issue)
+            retry_topic = (
+                f"{topic}\nHeadline correction: {headline_issue}. "
+                "Redraft the article once, leading the title with the strongest "
+                "verified fact in the supplied sources."
+            )
+            if self.primary_llm == 'openai':
+                retry_article = self.draft_openai(retry_topic, sources)
+            elif self.primary_llm == 'gemini':
+                retry_article = self.draft_gemini(retry_topic, sources)
+            else:
+                retry_article = self.draft_claude(retry_topic, sources)
+            if retry_article:
+                article = retry_article
 
         words = len(article['body_mdx'].split())
         logger.info(f"Drafted article: {article['title']} ({words} words)")

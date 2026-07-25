@@ -8,6 +8,7 @@ PIPELINE_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PIPELINE_DIR))
 
 from validation import (  # noqa: E402
+    attribution_led_title_issue,
     validate_published_content_tree,
     validate_release_candidate,
 )
@@ -65,6 +66,74 @@ class ValidationTests(unittest.TestCase):
             self.article(), self.sources(), {'slug': 'valid'}, {'path': '/images/valid.webp'}
         )
         self.assertTrue(result.passed, result.errors)
+
+    def test_newton_attribution_title_is_flagged_when_amount_is_supported(self):
+        sources = self.sources()
+        sources[0]['snippet'] = (
+            'Surrey committed $27.5 million to Newton park upgrades, '
+            'with construction starting this summer.'
+        )
+        article = self.article()
+        article['title'] = 'Surrey says Newton park upgrades are moving ahead'
+
+        issue = attribution_led_title_issue(article['title'], sources)
+        result = validate_release_candidate(
+            article,
+            sources,
+            {'slug': 'newton-parks'},
+            {'path': '/images/valid.webp'},
+        )
+
+        self.assertIn('stronger supported monetary fact', issue)
+        self.assertIn(issue, result.errors)
+
+    def test_newton_fact_led_title_passes_headline_validation(self):
+        sources = self.sources()
+        sources[0]['snippet'] = (
+            'Surrey committed $27.5 million to Newton park upgrades, '
+            'with construction starting this summer.'
+        )
+        article = self.article()
+        article['title'] = (
+            'Surrey commits $27.5M to Newton parks; work starts this summer'
+        )
+
+        issue = attribution_led_title_issue(article['title'], sources)
+        result = validate_release_candidate(
+            article,
+            sources,
+            {'slug': 'newton-parks'},
+            {'path': '/images/valid.webp'},
+        )
+
+        self.assertIsNone(issue)
+        self.assertTrue(result.passed, result.errors)
+
+    def test_city_attribution_is_flagged_for_supported_project_start(self):
+        sources = [{
+            'title': 'Surrey schedules Newton park construction',
+            'snippet': 'City of Surrey construction starts this summer.',
+        }]
+
+        issue = attribution_led_title_issue(
+            'City of Surrey says Newton park upgrades are moving ahead',
+            sources,
+        )
+
+        self.assertIn('stronger supported project timing fact', issue)
+
+    def test_generic_study_attribution_is_not_treated_as_municipal_attribution(self):
+        sources = [{
+            'title': 'Study estimates park costs',
+            'snippet': 'The study says Surrey could spend $27.5 million over five years.',
+        }]
+
+        issue = attribution_led_title_issue(
+            'Study says Surrey could spend $27.5 million on parks',
+            sources,
+        )
+
+        self.assertIsNone(issue)
 
     def test_public_content_tree_rejects_pending_candidate(self):
         with tempfile.TemporaryDirectory() as temp:

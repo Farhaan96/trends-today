@@ -85,6 +85,7 @@ GPT_SCORE_FIELDS = {
     'readability',
     'formatting',
     'engagement',
+    'headlineStrength',
 }
 
 
