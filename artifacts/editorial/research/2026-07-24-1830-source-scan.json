@@ -113,10 +113,7 @@
     },
     {
       "group": "prior quality failure or date uncertainty",
-      "items": [
-        "Burnaby Pride",
-        "Parkway Alive"
-      ],
+      "items": ["Burnaby Pride", "Parkway Alive"],
       "reason": "Burnaby Pride was previously rejected after repeated GPT blockers; Parkway Alive had conflicting displayed event-year evidence."
     },
     {
