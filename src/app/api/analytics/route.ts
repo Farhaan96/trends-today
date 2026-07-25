@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import { CONTENT_CATEGORIES } from '@/lib/categories';
+import { getGoogleReportingConfig } from '@/lib/google-reporting.mjs';
 
 interface ArticleSummary {
   title: string;
@@ -17,6 +18,7 @@ function configured(name: string): boolean {
 export async function GET() {
   try {
     const content = await getContentStats();
+    const reportingConfig = getGoogleReportingConfig();
     return NextResponse.json({
       success: true,
       data: {
@@ -30,28 +32,37 @@ export async function GET() {
             status: configured('NEXT_PUBLIC_GOOGLE_ANALYTICS_ID')
               ? 'configured'
               : 'unavailable',
+            dataExportStatus: reportingConfig.analyticsConfigured
+              ? 'configured'
+              : 'unavailable',
           },
           googleSearchConsole: {
             propertyStatus: configured('GOOGLE_SEARCH_CONSOLE_SITE_URL')
               ? 'configured'
               : 'unavailable',
-            dataExportStatus:
-              configured('GOOGLE_SEARCH_CONSOLE_SITE_URL') &&
-              configured('GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN')
-                ? 'configured'
-                : 'unavailable',
+            dataExportStatus: reportingConfig.searchConsoleConfigured
+              ? 'configured'
+              : 'unavailable',
+            status: reportingConfig.searchConsoleConfigured
+              ? 'configured'
+              : 'unavailable',
+          },
+          protectedReporting: {
             status:
-              configured('GOOGLE_SEARCH_CONSOLE_SITE_URL') &&
-              configured('GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN')
+              reportingConfig.analyticsConfigured &&
+              reportingConfig.searchConsoleConfigured &&
+              configured('ANALYTICS_REPORTING_TOKEN')
                 ? 'configured'
                 : 'unavailable',
+            endpoint: '/api/analytics/reporting',
+            authentication: 'bearer-token',
           },
           missingRule: 'Unavailable metrics are never represented as zero.',
         },
         growth: {
           status: 'unavailable',
           reason:
-            'No verified article-level analytics source is connected to this endpoint.',
+            'Traffic and search metrics are available only through the protected reporting endpoint.',
           projections: [],
         },
         generatedAt: new Date().toISOString(),
