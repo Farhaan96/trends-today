@@ -1,0 +1,86 @@
+{
+  "generatedAt": "2026-07-25T06:40:00-07:00",
+  "sweep": "2026-07-25 06:30 America/Vancouver",
+  "status": "no-qualified-candidate",
+  "dailyPublicationCountBeforeSweep": 0,
+  "dailyPublicationCeiling": 6,
+  "maximumPublicationsThisSweep": 2,
+  "metrics": {
+    "artifact": "artifacts/editorial/metrics/2026-07-25-0630-vercel-analytics.json",
+    "status": "unavailable",
+    "unavailableFields": [
+      "page views",
+      "engaged sessions",
+      "returning sessions",
+      "scroll depth",
+      "measurable ad impressions",
+      "viewable ad impressions",
+      "Active View rate",
+      "ad revenue",
+      "page RPM",
+      "sponsor inquiries",
+      "qualified sponsor inquiries",
+      "sponsorship revenue",
+      "content cost"
+    ],
+    "measurementRepair": "Connect Vercel analytics credentials plus the configured GA/Search Console/ad/sponsor reporting exports so the protected reporting endpoint can expose article-level results."
+  },
+  "sourceQueue": {
+    "artifact": "artifacts/editorial/research/2026-07-25-0630-source-queue.json",
+    "enabledOfficialSourceCandidates": 30,
+    "perplexityAvailable": false,
+    "googleCustomSearchAvailable": false
+  },
+  "qualified": [],
+  "rejectedOrHeld": [
+    {
+      "group": "duplicates",
+      "items": [
+        "Surrey capital projects",
+        "Surrey heat resources",
+        "Surrey Newton park upgrades",
+        "Burnaby Blues + Roots Festival",
+        "Burnaby Walk and Chat with the Mayor",
+        "Burnaby environmental stewardship events",
+        "Burnaby Michael de Courcy / Expo 86 exhibition",
+        "Richmond climate-friendly homes",
+        "Richmond recycling contamination",
+        "Coquitlam election workers",
+        "Coquitlam heat resources",
+        "Coquitlam transportation road-safety plan",
+        "Coquitlam Parkway and Panorama road work",
+        "Delta air-quality warning",
+        "Delta Stage 2 water restrictions",
+        "Delta community banner winners"
+      ],
+      "reason": "Already covered by a recent published Trends Today article or rejected in a recent sweep with no material new reader utility found in this pass."
+    },
+    {
+      "group": "approval-gated",
+      "items": [
+        "Surrey unpermitted-construction enforcement",
+        "Richmond property-title court decision",
+        "Richmond Olympic Oval performance and forensic audits"
+      ],
+      "reason": "Legal, enforcement, or audit coverage requires human approval before unattended publication."
+    },
+    {
+      "group": "below editorial bar",
+      "items": [
+        "Delta July 27 council agenda",
+        "Canucks offseason podcast with Kevin Lankinen and Linus Karlsson",
+        "Canucks Cammi Granato role update",
+        "Canucks NCAA-development and Penticton training-camp items",
+        "Whitecaps Cincinnati match recap and older Whitecaps features",
+        "BC Lions stale archive items"
+      ],
+      "reason": "The items were thin, stale, retrospective, out of the top editorial priorities, or lacked a strong enough practical Lower Mainland reader job for this sweep."
+    }
+  ],
+  "commercialPolicy": {
+    "commercialIntentAdvanced": false,
+    "reason": "No story qualified editorially, so no ad-fit or sponsor-fit hypothesis was used.",
+    "sponsorshipStatus": "editorial"
+  },
+  "decision": "skip-publication"
+}
