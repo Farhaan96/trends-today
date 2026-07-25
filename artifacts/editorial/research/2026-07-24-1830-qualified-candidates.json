@@ -1,0 +1,55 @@
+{
+  "generatedAt": "2026-07-25T01:40:35.070878+00:00",
+  "results": [
+    {
+      "title": "Burnaby Farm Tour map runs through Sept. 7",
+      "lane": "weekend-and-planning",
+      "score": 86.0,
+      "decision": "brief",
+      "confidence": "verified-primary-source",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Burnaby Farm Tour map runs through Sept. 7",
+        "lane": "weekend-and-planning",
+        "category": "things-to-do",
+        "storyType": "bulletin",
+        "locality": "Burnaby",
+        "sourceTitle": "Burnaby Farm Tour",
+        "sourceUrl": "https://www.burnaby.ca/recreation-and-arts/events/burnaby-farm-tour",
+        "publishedOrUpdatedAt": "current event page checked 2026-07-24",
+        "evidence": {
+          "sourceUrls": [
+            "https://www.burnaby.ca/recreation-and-arts/events/burnaby-farm-tour"
+          ],
+          "primarySourceUrls": [
+            "https://www.burnaby.ca/recreation-and-arts/events/burnaby-farm-tour"
+          ],
+          "readerImpact": "Lower Mainland readers can decide whether to use Burnaby's self-guided Big Bend farm route for a summer food, nursery, or local shopping outing before Sept. 7.",
+          "freshnessEvidence": "The City of Burnaby lists the Farm Tour as running from May 1 to Sept. 7, 2026, and it remains active during the July 24 evening sweep.",
+          "uniqueAngleEvidence": "Recent Trends Today Burnaby coverage includes art sessions, concerts, stewardship, Expo 86, and a mayor walk, but no Big Bend farm-tour or local farm-products guide.",
+          "sensitiveStoryGate": "No crime, death, active emergency, private-person allegation, legal dispute coverage, or sponsored coverage is advanced."
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 4,
+          "freshness": 4,
+          "evidenceStrength": 4,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 4,
+          "speedToUsefulDraft": 5
+        },
+        "commercialIntent": "ad-and-sponsor-fit",
+        "commercialFitReason": "The official Burnaby page creates local food, farm-products, nursery, garden, weekend outing, and neighbourhood retail intent that may fit standard contextual ads or future local sponsorships; article-level page views, Active View, RPM, ad revenue, and sponsor demand remain unavailable.",
+        "brandSafety": "standard",
+        "sponsorshipStatus": "editorial",
+        "lengthRationale": "A bulletin is the shortest complete format because the city page confirms the season dates, Big Bend framing, self-guided route, farm-products/nursery draw, online map, and printed-map locations.",
+        "internalLinks": [
+          "/things-to-do/burnaby-mayor-walk-chat-sunday"
+        ],
+        "confidence": "verified-primary-source"
+      }
+    }
+  ]
+}
