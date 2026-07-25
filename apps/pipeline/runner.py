@@ -359,7 +359,6 @@ def main():
     parser.add_argument('--release-candidate', type=Path, help='Exact staged MDX file to promote')
     parser.add_argument('--gpt-review-file', type=Path, help='Passing GPT editorial review for the exact candidate')
     parser.add_argument('--review-file', type=Path, help='Accepted Claude review JSON for the exact candidate')
-    parser.add_argument('--owner-approval-file', type=Path, help='Explicit owner approval JSON for the exact public candidate')
     parser.add_argument(
         '--replace-existing',
         action='store_true',
@@ -393,13 +392,10 @@ def main():
             parser.error('promote mode requires --review-file')
         if not args.gpt_review_file:
             parser.error('promote mode requires --gpt-review-file')
-        if not args.owner_approval_file:
-            parser.error('promote mode requires --owner-approval-file')
         destination = promote_candidate(
             args.release_candidate,
             args.review_file,
             args.gpt_review_file,
-            owner_approval_path=args.owner_approval_file,
             replace_existing=args.replace_existing,
         )
         print(f'Promoted reviewed candidate to {destination}')

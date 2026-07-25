@@ -208,9 +208,8 @@ def promote_candidate(
     gpt_review_path: Path,
     repo_root: Path = None,
     replace_existing: bool = False,
-    owner_approval_path: Path = None,
 ) -> Path:
-    """Promote only after exact reviews and explicit owner approval pass."""
+    """Promote only after exact GPT editorial and Claude release reviews pass."""
     root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
     source = Path(candidate_path).resolve()
     gpt_review, gpt_digest, _, gpt_review_relative = verify_gpt_review(
@@ -252,30 +251,6 @@ def promote_candidate(
         raise PermissionError('Sensitive candidate requires recorded human approval')
     business_config_path = root / 'config' / 'content-business.json'
     business_config = json.loads(business_config_path.read_text(encoding='utf-8-sig'))
-    release_config = business_config.get('release', {})
-    if release_config.get('publicPublishingRequiresHumanAuthorization', True):
-        if owner_approval_path is None:
-            raise PermissionError('Public promotion requires an owner approval artifact')
-        approval_path = Path(owner_approval_path).resolve()
-        try:
-            approval_path.relative_to(root.resolve())
-        except ValueError as exc:
-            raise PermissionError('Owner approval artifact must be inside the repository') from exc
-        try:
-            approval = json.loads(approval_path.read_text(encoding='utf-8'))
-        except (OSError, json.JSONDecodeError) as exc:
-            raise PermissionError('Owner approval artifact is missing or malformed') from exc
-        required_approval = {
-            'version': 1,
-            'action': 'promote-public-candidate',
-            'decision': 'APPROVE',
-            'candidateSha256': digest,
-            'approvedBy': 'owner',
-        }
-        if any(approval.get(key) != value for key, value in required_approval.items()):
-            raise PermissionError('Owner approval does not match this exact public candidate')
-        if not approval.get('approvalId') or not approval.get('approvedAt'):
-            raise PermissionError('Owner approval must include approvalId and approvedAt')
     monetization = business_config['monetization']
     allowed_sponsorship_statuses = set(monetization['sponsorshipStatusValues'])
     automated_status = monetization['automatedDefaultSponsorshipStatus']

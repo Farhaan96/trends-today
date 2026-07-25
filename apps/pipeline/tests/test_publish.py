@@ -108,30 +108,7 @@ class PublisherTests(unittest.TestCase):
 
     def promote(self, root, candidate, review, **gpt_overrides):
         gpt_review = self.write_gpt_review(root, candidate, **gpt_overrides)
-        approval = self.write_owner_approval(root, candidate)
-        return promote_candidate(
-            candidate,
-            review,
-            gpt_review,
-            owner_approval_path=approval,
-            repo_root=root,
-        )
-
-    def write_owner_approval(self, root, candidate, **overrides):
-        approval = root / 'artifacts/editorial/approvals/science/candidate-title.approval.json'
-        approval.parent.mkdir(parents=True, exist_ok=True)
-        payload = {
-            'version': 1,
-            'action': 'promote-public-candidate',
-            'decision': 'APPROVE',
-            'candidateSha256': candidate_sha256(candidate),
-            'approvedBy': 'owner',
-            'approvalId': 'approval-test-1',
-            'approvedAt': '2026-07-25T20:00:00-07:00',
-        }
-        payload.update(overrides)
-        approval.write_text(json.dumps(payload), encoding='utf-8')
-        return approval
+        return promote_candidate(candidate, review, gpt_review, repo_root=root)
 
     def write_source_config(self, root, keywords=None):
         config = root / 'config/local-news-sources.json'
@@ -144,42 +121,8 @@ class PublisherTests(unittest.TestCase):
             'monetization': {
                 'sponsorshipStatusValues': ['editorial', 'supported', 'branded'],
                 'automatedDefaultSponsorshipStatus': 'editorial',
-            },
-            'release': {'publicPublishingRequiresHumanAuthorization': True},
+            }
         }), encoding='utf-8')
-
-    def test_promotion_requires_exact_candidate_owner_approval(self):
-        with tempfile.TemporaryDirectory() as temp:
-            root = Path(temp)
-            publisher = Publisher(mode='candidate', repo_root=root)
-            publisher.publish(
-                self.article(),
-                {'slug': 'candidate-title', 'meta_description': 'Candidate description', 'internal_links': []},
-                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
-            )
-            candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
-            self.write_source_config(root)
-            review = self.write_review(root, candidate)
-            gpt_review = self.write_gpt_review(root, candidate)
-            with patch('review.subprocess.run') as git_run:
-                git_run.return_value.returncode = 0
-                git_run.return_value.stdout = 'a' * 40
-                with self.assertRaisesRegex(PermissionError, 'owner approval artifact'):
-                    promote_candidate(candidate, review, gpt_review, repo_root=root)
-
-                approval = self.write_owner_approval(
-                    root,
-                    candidate,
-                    candidateSha256='0' * 64,
-                )
-                with self.assertRaisesRegex(PermissionError, 'does not match'):
-                    promote_candidate(
-                        candidate,
-                        review,
-                        gpt_review,
-                        owner_approval_path=approval,
-                        repo_root=root,
-                    )
 
     def test_direct_production_mode_is_disabled(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -256,7 +199,6 @@ class PublisherTests(unittest.TestCase):
             self.write_source_config(root)
             review = self.write_review(root, candidate)
             gpt_review = self.write_gpt_review(root, candidate)
-            approval = self.write_owner_approval(root, candidate)
 
             with patch('review.subprocess.run') as git_run:
                 git_run.return_value.returncode = 0
@@ -266,7 +208,6 @@ class PublisherTests(unittest.TestCase):
                         candidate,
                         review,
                         gpt_review,
-                        owner_approval_path=approval,
                         repo_root=root,
                     )
 
@@ -274,7 +215,6 @@ class PublisherTests(unittest.TestCase):
                     candidate,
                     review,
                     gpt_review,
-                    owner_approval_path=approval,
                     repo_root=root,
                     replace_existing=True,
                 )

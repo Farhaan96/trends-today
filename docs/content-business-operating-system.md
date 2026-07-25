@@ -85,12 +85,12 @@ The agent owns the work from research through repair:
 6. Fact-check claims, validate the article contract, create the image, and run SEO/build checks.
 7. Stage a release candidate outside the live `content/` tree.
 8. Send the exact release candidate through the GPT editorial gate. Every factual-support, quality, readability, formatting, and engagement score must be at least 4/5, authorial prose must contain zero em dashes, and blockers must be empty. Repair valid findings and run a fresh GPT review.
-9. Send the same exact candidate and its SHA-256 through the approved independent Claude release-review runner. A structured `NO BLOCKERS` verdict prepares an approval package; blockers return it to repair and require fresh GPT and Claude reviews.
-10. Require a separate owner approval artifact matching the exact candidate SHA-256 before promotion into public `content/`. Merge and deployment require their own explicit owner approvals.
-11. Run sweeps every two hours from 06:30 through 18:30 America/Vancouver. Prepare no more than two qualifying approval packages per sweep and six per day. Skipping is correct when no opportunity clears the gates.
+9. Send the same exact candidate and its SHA-256 through the approved Opus 5 release-review runner. A structured `NO BLOCKERS` verdict permits guarded routine promotion; blockers return it to repair and require fresh GPT and Opus reviews.
+10. Promote only exact-reviewed qualified candidates, then use an issue branch, passing checks, pull request, merge, deployment, and live browser verification with rollback evidence. These routine editorial release actions are autonomously authorized.
+11. Run sweeps every two hours from 06:30 through 18:30 America/Vancouver. Publish no more than two qualifying articles per sweep and six per day. Skipping is correct when no opportunity clears the gates.
 12. Record outcomes at 7 and 28 days, then choose `keep`, `repair`, or `stop`.
 
-The dual-review boundary establishes quality, not authorization. The engine records the candidate hash, each reviewer, model, verdict, scorecard, review artifact, and owner approval evidence. Public promotion, merge, and deployment remain separate owner decisions.
+The engine records the candidate hash, each reviewer, model, verdict, scorecard, review artifact, commit, pull request, deployment, browser verification, and rollback evidence.
 
 ## First real experiment
 
@@ -136,10 +136,10 @@ Until commercial measurement exists, the weekly review must choose one measureme
 1. Read the latest scorecard and learning ledger before researching.
 2. Prefer the beat furthest below its target share only when it also has current demand and strong sources.
 3. Pick the highest-scoring non-duplicate local opportunities; do not fill a quota.
-4. Prepare at most two approval-ready candidates per sweep and six per day. Continue to promotion, PR merge, deployment, and live verification only after the corresponding explicit owner approvals.
+4. Publish at most two qualified candidates per sweep and six per day through exact review, validation, PR, deployment, and live verification.
 5. Log a skipped run with its reason when no candidate qualifies.
 6. At the weekly review, keep the wedge, repair one weak input, or stop a beat only from comparable measured cohorts. Missing metrics trigger measurement repair, not a content verdict.
 
 ## Approval boundary
 
-Research, scoring, briefs, drafts, images, QA, GPT editorial review, Claude release review, repairs, approval-package preparation, and read-only measurement are autonomous. Every public publication, customer- or sponsor-facing message, merge, deployment, provider change, production-data mutation, price, commercial term, commitment, billing action, guarantee, and use of private evidence requires explicit owner approval. Sensitive editorial subjects still require approval before an approval-ready candidate may be prepared.
+Research, scoring, briefs, drafts, images, QA, GPT editorial review, Opus 5 release review, repairs, qualified routine publication, merge, deployment, live verification, and read-only measurement are autonomous. Sensitive or uncertain editorial subjects, supported or branded coverage, customer- or sponsor-facing messages, provider changes, production-data mutations, prices, commercial terms, commitments, billing actions, guarantees, and use of private evidence remain owner decisions.

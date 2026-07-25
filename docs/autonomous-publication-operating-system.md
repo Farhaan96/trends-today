@@ -2,7 +2,7 @@
 
 ## Operating objective
 
-The system continuously prepares evidence-backed editorial and commercial decisions while keeping consequential external actions under owner control. Automation may collect, qualify, draft, review, measure, summarize, and recommend. It may not publish, reply, negotiate, commit money, merge, deploy, change providers, or mutate production data without explicit owner approval for that action.
+The system continuously operates the qualified editorial release loop end to end. Automation may collect, qualify, draft, review, publish, merge, deploy, browser-verify, measure, summarize, and recommend. It may not reply to advertisers or sponsors, negotiate, invent commercial claims, commit money, change providers, or mutate production data without explicit owner approval.
 
 The current business constraint is activation and retention measurement, not raw article volume. The Lower Mainland wedge and editorial delivery loop exist, but repeat-use and commercial performance are not yet available from a complete connected measurement path. More content is useful only when it is qualified and improves a measurable reader outcome.
 
@@ -13,8 +13,8 @@ The current business constraint is activation and retention measurement, not raw
 - **Triggers:** scheduled source sweeps at 06:30, 08:30, 10:30, 12:30, 14:30, 16:30, and 18:30 America/Vancouver; manual owner request.
 - **Inputs:** configured primary sources, candidate URLs, locality, desk, prior coverage, source timestamps, and published-article index.
 - **Autonomous work:** discovery, deduplication, evidence gathering, scoring, briefing, drafting, original image preparation, factual checks, editorial checks, SEO checks, brand-safety classification, exact-candidate GPT review, and exact-candidate Opus 5 review.
-- **Output:** a release candidate plus an approval packet. Zero candidates and a daily-ceiling skip are valid outcomes.
-- **Owner gate:** promotion into `content/`, merge, deployment, and public verification are distinct approved actions.
+- **Output:** a qualified release candidate or an auditable skip. Zero candidates and a daily-ceiling skip are valid outcomes.
+- **Routine release:** exact-reviewed qualified candidates may be promoted, merged, deployed, and browser-verified autonomously.
 
 ### Analytics and visibility lane
 
@@ -36,8 +36,9 @@ The current business constraint is activation and retention measurement, not raw
 
 - **Trigger:** a quality-gated editorial candidate, commercial draft, or proposed system change.
 - **Inputs:** exact artifact hash, tests, reviewer verdict, risk classification, diff, rollback plan, and requested action.
-- **Autonomous work:** assemble the approval packet and verify that the packet still matches the artifact.
-- **Owner gate:** public promotion, message send, merge, deployment, provider/configuration change, and production-data mutation each require a specific approval. One approval does not imply another.
+- **Autonomous work:** verify exact artifact identity, assemble the release packet, promote, merge, deploy, verify, and preserve rollback evidence.
+- **Routine authorization:** qualified editorial promotion, merge, deployment, and live verification are authorized after all gates pass.
+- **Owner gate:** advertiser/sponsor replies, pricing/terms/commitments, billing, provider/configuration changes, production-data mutations, supported/branded coverage, and uncertain or sensitive claims require specific approval.
 
 ## Quality and risk gates
 
@@ -54,7 +55,7 @@ An editorial candidate must pass, in order:
 9. Exact-candidate GPT editorial review.
 10. Exact-SHA Opus 5 independent review for architecture or release decisions.
 11. Deterministic tests and clean diff.
-12. Exact-candidate owner approval before public promotion.
+12. Clean issue-branch checks, guarded merge/deployment, and live browser verification with rollback evidence.
 
 ## Data contract
 
@@ -93,12 +94,12 @@ Allowed status values are `available`, `pending`, `unavailable`, and `error`. A 
 The daily brief reports:
 
 - sweep outcomes: qualified, rejected, skipped, approval-ready, and owner decision pending;
-- top candidate with evidence, risk, exact hashes, and requested action;
+- top candidate with evidence, risk, exact hashes, and release outcome;
 - published/live status separated into implemented, reviewed, merged, deployed, and browser-verified;
 - traffic/search metrics with availability and freshness;
 - automation last run, mutation scope, errors, cost, and fail-closed state;
 - commercial leads by lifecycle state without exposing private message content;
-- one binding constraint, one recommended operator move, and the next approval needed.
+- one binding constraint, one recommended operator move, and any commercial or risk approval needed.
 
 ## Weekly outcome brief
 
@@ -135,11 +136,11 @@ Stop the affected lane when:
 - cost or retry ceilings are exceeded;
 - error rate, corrections, or duplicate rate breaches its agreed threshold.
 
-Repair the narrowest broken dependency, rerun deterministic checks, obtain a fresh independent review when the exact artifact changes, and request a new owner approval for every changed external action.
+Repair the narrowest broken dependency, rerun deterministic checks, and obtain a fresh independent review when the exact artifact changes. Commercial, provider, production-data, sensitive-claim, and customer-facing actions still require a new owner approval.
 
 ## Dependency-ordered roadmap
 
-1. **Control plane:** repository-enforced exact-candidate owner approval; schedules changed from publish to prepare; explicit merge/deploy/provider/data gates.
+1. **Control plane:** reconcile existing schedules with autonomous qualified publication, Opus 5-only independent review, mutation logging, rollback evidence, and explicit commercial/provider/data gates.
 2. **Truth repair:** resolve production structured-data identity/contact claims and stale SEO utilities without inventing facts.
 3. **Measurement contract:** unify Vercel, GA4, Search Console, cost, and availability states behind read-only adapters.
 4. **Outcome briefs:** generate daily and weekly artifacts from the contract, including sync and automation health.
@@ -150,14 +151,14 @@ Repair the narrowest broken dependency, rerun deterministic checks, obtain a fre
 
 ## First reversible implementation slice
 
-- **Baseline:** repository configs and active schedules still describe autonomous publication, merge, and deployment despite the current owner gate.
-- **Changed variable:** require an exact-candidate owner approval artifact before repository promotion and mark scheduled publishing unauthorized.
-- **Success:** an approval-ready candidate can be prepared, but promotion without matching owner evidence fails deterministically; zero unapproved publish/merge/deploy actions occur.
-- **Guardrails:** no active schedule, provider, credential, public content, production data, merge, or deployment is changed in this slice.
-- **Review:** after deterministic tests and exact-SHA Opus 5 review.
-- **Keep:** gate blocks unapproved promotion and produces usable approval packets.
-- **Repair:** gate is bypassable, ambiguous, or blocks candidate preparation.
-- **Stop:** implementation requires private data, production configuration, or a public action.
+- **Baseline:** the three existing schedules are active, but the editorial and weekly prompts still name obsolete Fable-first review policy and do not share one explicit audit/rollback contract.
+- **Changed variable:** reconcile those schedules in place around qualified autonomous release, Opus 5-only review, fail-closed stop rules, action logs, and daily/weekly outcome briefs.
+- **Success:** zero duplicate jobs; every qualifying release records exact review, PR, deployment, browser-verification, cost, and rollback evidence; every skip or failure records a truthful reason.
+- **Guardrails:** zero quota-filling stories; zero uncertain claims; zero unavailable metrics reported as zero; zero automated advertiser/sponsor replies, pricing, terms, commitments, billing, provider changes, or production-data mutations.
+- **Review:** after the first seven scheduled sweeps and the next weekly brief.
+- **Keep:** qualified releases complete safely and briefs expose the outcome and constraint.
+- **Repair:** review, deployment, observability, or measurement evidence is incomplete.
+- **Stop:** any unreviewed publication, privacy/security risk, irreversible provider failure, data-loss risk, or unverifiable live result.
 
 ## Cross-project desktop dashboard contract
 

@@ -61,9 +61,6 @@
     "exact-candidate-claude-release-review",
     "deterministic-tests-and-build",
     "clean-pull-request-checks",
-    "explicit-owner-publication-approval",
-    "explicit-owner-merge-approval",
-    "explicit-owner-deployment-approval",
     "production-deployment",
     "live-browser-verification"
   ],

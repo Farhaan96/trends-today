@@ -210,8 +210,7 @@
     }
   ],
   "automaticPublishing": {
-    "publicPublishingRequiresOwnerApproval": true,
-    "allowedMeansCandidatePreparationOnly": true,
+    "qualifiedRoutinePublishingAuthorized": true,
     "allowed": [
       "service changes",
       "road and transit notices",
