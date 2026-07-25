@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "d46592bf1a3122e61660522a37c7782d98dab92e10b68f3bbfb944f9dcf13029",
+  "repositorySha": "92547a8cb4a3a1cdde864eb506f7e6f2efc2a51b",
+  "reviewedAt": "2026-07-24T21:49:58.466885+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f961a-9000-7b03-8c27-6168d73992f5",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 4,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate clears the strict editorial gate. Its material claims align with the cited City of Surrey sources, the MDX is valid and scannable, the local stakes and timelines are clear, and the close gives residents a practical next step. No authorial prose em dashes were found."
+}

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "d46592bf1a3122e61660522a37c7782d98dab92e10b68f3bbfb944f9dcf13029",
+  "reviewedAt": "2026-07-24T21:52:20Z",
+  "repositorySha": "92547a8cb4a3a1cdde864eb506f7e6f2efc2a51b",
+  "modelUsed": "opus",
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-opus-4-8"
+  ],
+  "review": "NO BLOCKERS\nCANDIDATE_SHA256: d46592bf1a3122e61660522a37c7782d98dab92e10b68f3bbfb944f9dcf13029\n\nIntegrity\n- SHA confirmed: the sibling GPT review surrey-capital-projects-2031-buildout.d46592bf1a31.json records candidateSha256 identical to the target hash.\n- Image exists: public/images/editorial/2026/07/surrey-capital-projects-2026.png. Alt text and attribution are present.\n- Internal link target exists: content/local-news/surrey-newton-park-upgrades.mdx backs /local-news/surrey-newton-park-upgrades.\n- All six cited sources are official City of Surrey URLs matching the scorecard evidence list.\n\nFactual support and sourcing\n- Every substantive claim is attributed to the July 24 announcement and linked project pages. GPT gate passed with factualSupport 4 and no blockers; scorecard evidenceStrength is 5.\n- Figures and segment timelines are sourced to the cited City pages.\n\nInternal consistency\n- Highlights, lead, and body agree: Newton site preparation complete and early works in summer 2026, completion spring 2030; 72 Avenue from 152 Street to Highway 15 complete 2031; Centre Block phase-one late 2026 to 2030; Arena 2027 start and 2029/2030 completion. Title and four-project framing are aligned.\n\nTitle/meta, structure, usefulness\n- Title, subtitle, and description are accurate and non-clickbait. The H2 structure is scannable by project and the close gives concrete reader actions.\n\nCommercial, sponsorship, and risk\n- sponsorshipStatus is editorial, commercialIntent is ad-fit, brandSafety is standard, and approval flags are false. This is non-sponsored civic coverage. No sensitive-story trigger or reputational/legal exposure identified.\n\nReady for public publication."
+}

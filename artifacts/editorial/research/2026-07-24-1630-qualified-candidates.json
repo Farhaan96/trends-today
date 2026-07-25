@@ -1,0 +1,116 @@
+{
+  "generatedAt": "2026-07-24T23:45:00Z",
+  "sweep": "2026-07-24 16:30 America/Vancouver",
+  "dailyInventory": {
+    "publishedTodayBeforeSweep": 4,
+    "dailyCeiling": 6,
+    "remainingSlots": 2,
+    "source": "https://www.trendstoday.ca/api/analytics"
+  },
+  "metricsConstraint": {
+    "artifact": "artifacts/editorial/metrics/2026-07-24-1630-vercel-analytics.json",
+    "status": "unavailable",
+    "missing": [
+      "VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN",
+      "VERCEL_PROJECT_ID",
+      "GA_PROPERTY_ID",
+      "Google Search Console export",
+      "ad and sponsor exports"
+    ],
+    "repair": "Connect Vercel analytics credentials plus GA/Search Console/ad/sponsor exports so article-level views, engaged sessions, viewable inventory, revenue, and sponsor inquiries are available."
+  },
+  "candidates": [
+    {
+      "title": "Burnaby mayor walk returns Sunday morning",
+      "lane": "weekend-and-planning",
+      "category": "things-to-do",
+      "storyType": "bulletin",
+      "locality": "Burnaby",
+      "candidatePath": "artifacts/editorial/release-candidates/things-to-do/burnaby-mayor-walk-chat-sunday.mdx",
+      "sourceTitle": "Walk and Chat with the Mayor",
+      "sourceUrl": "https://www.burnaby.ca/recreation-and-arts/events/walk-and-chat-mayor",
+      "publishedOrUpdatedAt": "current event page checked 2026-07-24",
+      "evidence": {
+        "sourceUrls": [
+          "https://www.burnaby.ca/recreation-and-arts/events/walk-and-chat-mayor"
+        ],
+        "primarySourceUrls": [
+          "https://www.burnaby.ca/recreation-and-arts/events/walk-and-chat-mayor"
+        ],
+        "readerImpact": "Burnaby residents can decide whether to join a July 26 one-hour community walk and plan around the Christine Sinclair Community Centre meeting point plus the $2 pancake breakfast.",
+        "freshnessEvidence": "The next listed event date is Sunday, July 26, 2026, two days after this sweep.",
+        "uniqueAngleEvidence": "No current Trends Today article covers the Walk and Chat with the Mayor event, while the nearest Burnaby event coverage focuses on concerts, stewardship sessions, art sessions, and the Aug. 8 music festival.",
+        "sensitiveStoryGate": "No crime, death, active emergency, private-person allegation, legal dispute coverage, or sponsored coverage is advanced."
+      },
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 3,
+        "freshness": 5,
+        "evidenceStrength": 4,
+        "uniqueAngle": 4,
+        "repeatVisitPotential": 3,
+        "speedToUsefulDraft": 5
+      },
+      "commercialIntent": "ad-fit",
+      "commercialFitReason": "The official Burnaby event page creates local weekend, recreation, family, wellness, and neighbourhood outing intent that may fit standard contextual ads; article-level page views, Active View, RPM, ad revenue, and sponsor demand remain unavailable.",
+      "brandSafety": "standard",
+      "sponsorshipStatus": "editorial",
+      "lengthRationale": "A bulletin is the shortest complete format because the official page provides one current date, one meeting point, a one-hour walk window, and one breakfast detail.",
+      "internalLinks": [
+        "/things-to-do/burnaby-art-in-park-making-together"
+      ],
+      "decision": "release-candidate",
+      "confidence": "current-hypothesis"
+    }
+  ],
+  "rejectedOrHeld": [
+    {
+      "group": "duplicates",
+      "items": [
+        "Surrey capital projects",
+        "Surrey heat",
+        "Surrey Newton parks",
+        "Burnaby Blues + Roots",
+        "Michael de Courcy / Expo 86",
+        "Burnaby stewardship",
+        "Richmond climate-friendly homes",
+        "Richmond recycling",
+        "Coquitlam election workers",
+        "Coquitlam heat",
+        "Coquitlam transportation plan",
+        "Coquitlam signal work",
+        "Delta air quality",
+        "Delta water restrictions"
+      ],
+      "reason": "Already covered by live Trends Today articles or materially duplicative of recent Lower Mainland coverage."
+    },
+    {
+      "group": "manual approval or sensitive gates",
+      "items": [
+        "Surrey unpermitted construction enforcement",
+        "Richmond BC Supreme Court property-title notice",
+        "Richmond Olympic Oval performance and forensic audits"
+      ],
+      "reason": "Legal, enforcement, audit, or property-dispute framing requires human approval before public coverage."
+    },
+    {
+      "group": "weak, stale, retrospective, or out of market",
+      "items": [
+        "Delta July 27 council agenda",
+        "Delta community banner winners",
+        "Canucks Cammi Granato role update",
+        "Canucks NCAA prospect item",
+        "Canucks Penticton training camp",
+        "Canucks Abbotsford development culture item",
+        "Whitecaps Cincinnati result",
+        "Whitecaps stale match preview",
+        "Whitecaps 2030 player list",
+        "Whitecaps U-20 roster item",
+        "BC Lions 2024 offensive-line feature",
+        "BC Lions 2022 Orange Shirt Day item"
+      ],
+      "reason": "Did not provide enough current practical Lower Mainland reader utility for this sweep."
+    }
+  ],
+  "commercialTieBreak": "Commercial fit did not select the story; the candidate first cleared locality, freshness, source, utility, duplicate, brand-safety, and quality gates."
+}

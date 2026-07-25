@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "91adcb3731e72a3ec74393ac759b03eadc1f9755cd503454e5bce38d39c8cc6c",
+  "repositorySha": "fbd29f394a765786bdb989cce632be8cb5badbbd",
+  "reviewedAt": "2026-07-24T23:48:33.671966+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9687-560a-7553-8317-5d70c34c5b07",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The official City of Burnaby listing supports the event dates, time, location, address, rain-or-shine note, and $2 firefighter-served pancake breakfast. The concise bulletin is clear, scannable, locally useful, and ends with practical next steps. Some planning details repeat, but not enough to require revision."
+}
