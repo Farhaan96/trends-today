@@ -329,7 +329,7 @@ This document summarizes the comprehensive SEO optimization deployment for the T
 2. **Update Environment Variables:**
 
    ```bash
-   NEXT_PUBLIC_SITE_URL=https://trendstoday.ca
+   NEXT_PUBLIC_SITE_URL=https://www.trendstoday.ca
    ```
 
 3. **Run SEO Audit:**
