@@ -2,7 +2,7 @@
   "buildCommand": "npm run build",
   "framework": "nextjs",
   "env": {
-    "NEXT_PUBLIC_SITE_URL": "https://trendstoday.ca",
+    "NEXT_PUBLIC_SITE_URL": "https://www.trendstoday.ca",
     "NEXT_PUBLIC_SITE_NAME": "Trends Today"
   },
   "functions": {
