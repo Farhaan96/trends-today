@@ -32,6 +32,14 @@ export async function GET() {
               : 'unavailable',
           },
           googleSearchConsole: {
+            propertyStatus: configured('GOOGLE_SEARCH_CONSOLE_SITE_URL')
+              ? 'configured'
+              : 'unavailable',
+            dataExportStatus:
+              configured('GOOGLE_SEARCH_CONSOLE_SITE_URL') &&
+              configured('GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN')
+                ? 'configured'
+                : 'unavailable',
             status:
               configured('GOOGLE_SEARCH_CONSOLE_SITE_URL') &&
               configured('GOOGLE_SEARCH_CONSOLE_REFRESH_TOKEN')
