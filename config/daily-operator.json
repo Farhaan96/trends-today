@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "timezone": "America/Vancouver",
   "daily": {
     "maximumPublications": 6,
@@ -61,6 +61,9 @@
     "exact-candidate-claude-release-review",
     "deterministic-tests-and-build",
     "clean-pull-request-checks",
+    "explicit-owner-publication-approval",
+    "explicit-owner-merge-approval",
+    "explicit-owner-deployment-approval",
     "production-deployment",
     "live-browser-verification"
   ],
@@ -92,6 +95,8 @@
       "app CTA clicks"
     ],
     "missingValues": "unavailable",
-    "neverCoerceMissingToZero": true
+    "neverCoerceMissingToZero": true,
+    "availabilityStates": ["available", "pending", "unavailable", "error"],
+    "zeroRequiresVerifiedProviderResponse": true
   }
 }
