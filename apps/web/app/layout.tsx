@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: 'Trends Today - Tech News & Reviews',
   description: 'Discover the latest in technology, gadgets, AI, and innovation',
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://trends-today.vercel.app'
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://www.trendstoday.ca'
   ),
   openGraph: {
     title: 'Trends Today',
