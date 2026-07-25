@@ -74,7 +74,7 @@ class PublisherTests(unittest.TestCase):
             'candidateSha256': digest or candidate_sha256(candidate),
             'reviewedAt': '2026-07-14T20:00:00+00:00',
             'repositorySha': 'a' * 40,
-            'modelUsed': 'claude-opus-4-8',
+            'modelUsed': 'claude-opus-5',
         }), encoding='utf-8')
         return review
 
@@ -121,8 +121,35 @@ class PublisherTests(unittest.TestCase):
             'monetization': {
                 'sponsorshipStatusValues': ['editorial', 'supported', 'branded'],
                 'automatedDefaultSponsorshipStatus': 'editorial',
-            }
+            },
+            'release': {
+                'publicPublishingRequiresHumanAuthorization': False,
+                'routineEditorialPublishingAuthorized': True,
+            },
         }), encoding='utf-8')
+
+    def test_promotion_fails_closed_when_routine_authorization_is_disabled(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            publisher = Publisher(mode='candidate', repo_root=root)
+            publisher.publish(
+                self.article(),
+                {'slug': 'candidate-title', 'meta_description': 'Candidate description', 'internal_links': []},
+                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+            )
+            candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
+            self.write_source_config(root)
+            business_path = root / 'config/content-business.json'
+            business = json.loads(business_path.read_text(encoding='utf-8'))
+            business['release']['routineEditorialPublishingAuthorized'] = False
+            business_path.write_text(json.dumps(business), encoding='utf-8')
+            review = self.write_review(root, candidate)
+            gpt_review = self.write_gpt_review(root, candidate)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                with self.assertRaisesRegex(PermissionError, 'disabled'):
+                    promote_candidate(candidate, review, gpt_review, repo_root=root)
 
     def test_direct_production_mode_is_disabled(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -151,7 +178,7 @@ class PublisherTests(unittest.TestCase):
             self.assertIn('candidateSha256:', promoted)
             self.assertIn('reviewedBy: "claude"', promoted)
             self.assertIn('reviewVerdict: "NO BLOCKERS"', promoted)
-            self.assertIn('reviewModel: "claude-opus-4-8"', promoted)
+            self.assertIn('reviewModel: "claude-opus-5"', promoted)
             self.assertIn('editorialReviewVerdict: "PASS"', promoted)
             self.assertIn('editorialReviewModel: "gpt-5.6-sol"', promoted)
 

@@ -12,6 +12,7 @@ from review import candidate_sha256
 
 
 DEFAULT_RUNNER = Path('C:/Users/farha/.codex/scripts/invoke-claude-review.ps1')
+APPROVED_RELEASE_MODEL = 'claude-opus-5'
 
 
 def validate_runner_result(result: dict, returncode: int, digest: str) -> dict:
@@ -22,8 +23,8 @@ def validate_runner_result(result: dict, returncode: int, digest: str) -> dict:
         )
     if result.get('verdict') != 'NO BLOCKERS':
         raise PermissionError('Claude returned blockers; repair and review again')
-    if not str(result.get('modelUsed', '')).strip():
-        raise RuntimeError('Claude review runner did not report modelUsed')
+    if str(result.get('modelUsed', '')).strip().lower() != APPROVED_RELEASE_MODEL:
+        raise PermissionError('Release review must use claude-opus-5')
     review_text = str(result.get('review', ''))
     if digest not in review_text:
         raise RuntimeError('Claude review did not echo the exact candidate SHA-256')
@@ -75,9 +76,8 @@ def run_review(candidate: Path, repo_root: Path, runner: Path) -> Path:
         '-ExpectedSha',
         repository_sha,
         '-PrimaryModel',
-        'fable',
-        '-FallbackModel',
-        'opus',
+        APPROVED_RELEASE_MODEL,
+        '-DisableFallback',
     ]
     completed = subprocess.run(command, cwd=root, capture_output=True, text=True)
     try:

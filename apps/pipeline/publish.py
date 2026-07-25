@@ -251,6 +251,11 @@ def promote_candidate(
         raise PermissionError('Sensitive candidate requires recorded human approval')
     business_config_path = root / 'config' / 'content-business.json'
     business_config = json.loads(business_config_path.read_text(encoding='utf-8-sig'))
+    release_config = business_config.get('release', {})
+    if release_config.get('publicPublishingRequiresHumanAuthorization', True):
+        raise PermissionError('Routine autonomous public promotion is not authorized')
+    if not release_config.get('routineEditorialPublishingAuthorized', False):
+        raise PermissionError('Routine autonomous public promotion is disabled')
     monetization = business_config['monetization']
     allowed_sponsorship_statuses = set(monetization['sponsorshipStatusValues'])
     automated_status = monetization['automatedDefaultSponsorshipStatus']

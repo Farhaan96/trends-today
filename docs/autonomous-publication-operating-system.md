@@ -11,6 +11,7 @@ The current business constraint is activation and retention measurement, not raw
 ### Editorial lane
 
 - **Triggers:** scheduled source sweeps at 06:30, 08:30, 10:30, 12:30, 14:30, 16:30, and 18:30 America/Vancouver; manual owner request.
+- **Schedule authority:** the active Codex automations are authoritative for the seven sweeps, 09:00 daily pulse, and Monday 08:30 weekly review. The repository GitHub Actions are separate read-only research/scorecard jobs, not the publication scheduler.
 - **Inputs:** configured primary sources, candidate URLs, locality, desk, prior coverage, source timestamps, and published-article index.
 - **Autonomous work:** discovery, deduplication, evidence gathering, scoring, briefing, drafting, original image preparation, factual checks, editorial checks, SEO checks, brand-safety classification, exact-candidate GPT review, and exact-candidate Opus 5 review.
 - **Output:** a qualified release candidate or an auditable skip. Zero candidates and a daily-ceiling skip are valid outcomes.
