@@ -72,14 +72,16 @@
 ## Release State
 
 - Qualified: no final publishable candidate because GPT blocked the only attempted candidate.
-- Implemented/staged: candidate and generated image were staged as evidence only.
+- Implemented/staged: candidate and generated image were committed as evidence only in `e17d2ee86c1e4be39a8e1b5026c8884bb4687064`.
 - Reviewed: GPT reviewed and blocked; Claude not run.
 - Promoted: no.
-- Merged: no.
-- Deployed: no.
-- Browser-verified new article: no.
-- Production proof: `/api/analytics` stayed healthy with 157 active articles and no July 25 story.
-- Rollback point: `origin/main` at `5dbc11e5be554cb22b9372b0df2c9c3ef3240e0d`; no public content changed.
+- PR: `#83` (`https://github.com/Farhaan96/trends-today/pull/83`), opened for the evidence-only skip ledger.
+- Merged: yes, merge commit `1696450cd4a4ccb5fdf266d21f4bec672bbc5c9d`; branch was not deleted.
+- Deployed: yes, Vercel production status `success` at `2026-07-25T18:00:29Z`, target `https://vercel.com/farhaans-projects-088cb374/trends-today/ENBusovhjt4LC3PERhrnsE62GNfd`.
+- Browser-verified new article: no new article existed to verify because the candidate failed GPT; rejected slug `/sports/whitecaps-minnesota-watch-info` returned `404`.
+- Production proof: `/api/analytics` stayed healthy at `2026-07-25T18:01:09Z` with 157 active articles and no July 25 story.
+- Browser proof: production homepage returned HTTP `200`, canonical `https://www.trendstoday.ca`, title `Trends Today | Lower Mainland News and Events`, and zero captured console/page errors.
+- Rollback point: pre-run `origin/main` at `5dbc11e5be554cb22b9372b0df2c9c3ef3240e0d`; evidence merge at `1696450cd4a4ccb5fdf266d21f4bec672bbc5c9d`; no public article changed.
 
 ## Costs
 
