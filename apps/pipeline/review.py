@@ -62,8 +62,8 @@ def verify_claude_review(
         raise ValueError('Review artifact is missing reviewedAt')
     if not str(review.get('repositorySha', '')).strip():
         raise ValueError('Review artifact is missing repositorySha')
-    if not str(review.get('modelUsed', '')).strip():
-        raise ValueError('Review artifact is missing modelUsed')
+    if str(review.get('modelUsed', '')).strip().lower() != 'claude-opus-5':
+        raise PermissionError('Independent release review must use claude-opus-5')
 
     git_head = subprocess.run(
         ['git', 'rev-parse', 'HEAD'],

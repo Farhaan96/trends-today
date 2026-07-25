@@ -1,6 +1,6 @@
 {
-  "version": 5,
-  "updatedAt": "2026-07-23",
+  "version": 6,
+  "updatedAt": "2026-07-25",
   "businessModel": {
     "primary": "owned local media and audience distribution",
     "revenueSequence": [
@@ -55,9 +55,9 @@
     "reviewAfterDays": 28
   },
   "constraint": {
-    "stage": "market and repeat-use positioning",
-    "statement": "Trends Today has broad evergreen inventory but no clear reason for a Lower Mainland reader to return several times a week.",
-    "avoidedHardAction": "commit the publication to one geography and build a real daily local reporting rhythm"
+    "stage": "activation and retention measurement",
+    "statement": "The Lower Mainland editorial loop can produce qualified reporting, but the publication cannot yet verify a repeat-use habit or commercial performance from complete connected data.",
+    "avoidedHardAction": "measure whether qualified local reporting creates repeat readership before increasing volume or selling unproven audience value"
   },
   "portfolio": [
     {
@@ -262,6 +262,11 @@
   "release": {
     "defaultMode": "candidate",
     "publicPublishingRequiresHumanAuthorization": false,
+    "routineEditorialPublishingAuthorized": true,
+    "routineEditorialMergeAuthorized": true,
+    "routineEditorialDeploymentAuthorized": true,
+    "providerChangesRequireHumanAuthorization": true,
+    "productionDataChangesRequireHumanAuthorization": true,
     "sensitiveStoryPublishingRequiresHumanAuthorization": true,
     "independentReviewRequired": true,
     "reviewer": "claude",
@@ -299,6 +304,8 @@
       "independent Claude review",
       "repair",
       "promotion",
+      "merge and deployment",
+      "live browser verification",
       "measurement"
     ]
   }

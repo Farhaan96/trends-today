@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "updatedAt": "2026-07-17",
+  "version": 2,
+  "updatedAt": "2026-07-25",
   "region": "Lower Mainland, British Columbia",
   "localities": [
     "Vancouver",
@@ -210,6 +210,7 @@
     }
   ],
   "automaticPublishing": {
+    "qualifiedRoutinePublishingAuthorized": true,
     "allowed": [
       "service changes",
       "road and transit notices",

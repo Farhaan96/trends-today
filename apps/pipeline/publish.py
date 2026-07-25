@@ -209,7 +209,7 @@ def promote_candidate(
     repo_root: Path = None,
     replace_existing: bool = False,
 ) -> Path:
-    """Promote only after GPT editorial and Claude release reviews pass."""
+    """Promote only after exact GPT editorial and Claude release reviews pass."""
     root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
     source = Path(candidate_path).resolve()
     gpt_review, gpt_digest, _, gpt_review_relative = verify_gpt_review(
@@ -251,6 +251,11 @@ def promote_candidate(
         raise PermissionError('Sensitive candidate requires recorded human approval')
     business_config_path = root / 'config' / 'content-business.json'
     business_config = json.loads(business_config_path.read_text(encoding='utf-8-sig'))
+    release_config = business_config.get('release', {})
+    if release_config.get('publicPublishingRequiresHumanAuthorization', True):
+        raise PermissionError('Routine autonomous public promotion is not authorized')
+    if not release_config.get('routineEditorialPublishingAuthorized', False):
+        raise PermissionError('Routine autonomous public promotion is disabled')
     monetization = business_config['monetization']
     allowed_sponsorship_statuses = set(monetization['sponsorshipStatusValues'])
     automated_status = monetization['automatedDefaultSponsorshipStatus']

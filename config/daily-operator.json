@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "timezone": "America/Vancouver",
   "daily": {
     "maximumPublications": 6,
@@ -92,6 +92,8 @@
       "app CTA clicks"
     ],
     "missingValues": "unavailable",
-    "neverCoerceMissingToZero": true
+    "neverCoerceMissingToZero": true,
+    "availabilityStates": ["available", "pending", "unavailable", "error"],
+    "zeroRequiresVerifiedProviderResponse": true
   }
 }

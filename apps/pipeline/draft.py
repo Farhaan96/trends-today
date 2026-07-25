@@ -90,7 +90,7 @@ Return ONLY a JSON object with these keys:
         env = {k: v for k, v in os.environ.items() if k != 'CLAUDECODE'}
         try:
             proc = subprocess.run(
-                [claude_bin, '-p', '--model', 'claude-opus-4-8', '--output-format', 'text'],
+                [claude_bin, '-p', '--model', 'claude-opus-5', '--output-format', 'text'],
                 input=full, capture_output=True, text=True, timeout=240, env=env
             )
             if proc.returncode == 0 and proc.stdout.strip():
@@ -127,7 +127,7 @@ Return ONLY a JSON object with these keys:
                     'content-type': 'application/json'
                 },
                 json={
-                    'model': 'claude-opus-4-8',
+                    'model': 'claude-opus-5',
                     'max_tokens': 3000,
                     'system': (
                         'You are a sharp tech reporter. Return ONLY a single valid JSON '
