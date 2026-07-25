@@ -102,6 +102,9 @@ export const metadata: Metadata = {
       ],
     },
   },
+  verification: {
+    google: 'oAPJEjeNfe8VZk1Fal5AslDln72irXfaV2-sAzVFYbM',
+  },
   other: {
     'apple-mobile-web-app-title': 'Trends Today',
     'application-name': 'Trends Today',
