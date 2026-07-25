@@ -1,0 +1,9 @@
+{
+    "status":  "unavailable",
+    "statusCode":  401,
+    "retrievedAt":  "2026-07-25T21:32:48.3475373Z",
+    "reason":  "The remote server returned an error: (401) Unauthorized.",
+    "missing":  [
+                    "TRENDS_ANALYTICS_REPORTING_TOKEN when endpoint is protected"
+                ]
+}
