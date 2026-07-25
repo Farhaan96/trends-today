@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "6ced9b01bb7024a27daabc29f8dc0feeac4754e23bf1bede207fdc64de1e468f",
+  "repositorySha": "5dbc11e5be554cb22b9372b0df2c9c3ef3240e0d",
+  "reviewedAt": "2026-07-25T17:45:11.160010+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9a60-7e29-7063-b595-ae3ef8d197e4",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The cited preview supports the kickoff, venue, broadcast options, bar listing, Cincinnati result, matchup record, and Aug. 1 home return, but it does not support the claims that a match centre will provide late kickoff, broadcast, availability, or lineup changes.",
+    "The article repeats essentially the same instruction in three places: confirm the bar details, confirm late updates, and check again before kickoff. This pads a short bulletin instead of adding useful information.",
+    "The close is flat and partly unsupported. Calling 5:30 p.m. a useful cutoff for lineup, viewing, and audio changes does not give readers a clearly sourced or meaningfully actionable final step.",
+    "The subtitle says viewing options are available \u201cfollowing Saturday's road game,\u201d which can mean after the match; the intended meaning appears to be \u201cfor Saturday's road game.\u201d"
+  ],
+  "summary": "The candidate is cleanly formatted, readable, and contains no authorial em dashes. It does not pass because unsupported match-centre claims and repetitive logistics advice weaken factual support, quality, and the actionable close."
+}

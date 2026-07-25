@@ -1,0 +1,105 @@
+{
+  "generatedAt": "2026-07-25T10:45:00-07:00",
+  "sweep": "10:30",
+  "timezone": "America/Vancouver",
+  "dailyPublicationCountBeforeSweep": 0,
+  "dailyPublicationCeiling": 6,
+  "sweepPublicationCeiling": 2,
+  "discoverySources": [
+    "City of Surrey news",
+    "City of Burnaby events",
+    "City of Richmond news",
+    "City of Coquitlam news",
+    "City of Delta news",
+    "Vancouver Canucks news",
+    "Vancouver Whitecaps news",
+    "BC Lions news"
+  ],
+  "results": [
+    {
+      "title": "Whitecaps visit Minnesota July 25 at 5:30 p.m.",
+      "lane": "daily-local-utility",
+      "score": 84,
+      "decision": "brief",
+      "confidence": "verified-official-source",
+      "reasons": [
+        "Same-day Vancouver sports utility item with kickoff, broadcast, radio, and away-match viewing details from an official team source.",
+        "Distinct from the existing August 1 BC Place return article."
+      ],
+      "candidate": {
+        "title": "Whitecaps visit Minnesota July 25 at 5:30 p.m.",
+        "lane": "daily-local-utility",
+        "sourceUrl": "https://www.whitecapsfc.com/news/preview-caps-look-to-bounce-back-in-minnesota",
+        "sourceName": "Vancouver Whitecaps news",
+        "sourceTier": "primary",
+        "locality": "Vancouver",
+        "category": "sports",
+        "storyType": "bulletin",
+        "discoveredAt": "2026-07-25T10:34:22.597852",
+        "evidence": {
+          "readerImpact": "Vancouver soccer fans can confirm the July 25 kickoff time, broadcast options, radio feed, and away-match bar listing before the Whitecaps finish their road trip.",
+          "freshnessEvidence": "Official Whitecaps preview was live in the July 25 10:30 source scan and lists the same-day match details.",
+          "uniqueAngleEvidence": "Existing Whitecaps coverage is about the August 1 BC Place return and LAFC ticket count, not the July 25 Minnesota away-match viewing logistics.",
+          "sourceUrls": [
+            "https://www.whitecapsfc.com/news/preview-caps-look-to-bounce-back-in-minnesota"
+          ],
+          "primarySourceUrls": [
+            "https://www.whitecapsfc.com/news/preview-caps-look-to-bounce-back-in-minnesota"
+          ]
+        },
+        "ratings": {
+          "localRelevance": 4,
+          "readerUtility": 4,
+          "freshness": 5,
+          "evidenceStrength": 4,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        },
+        "commercialIntent": "ad-fit",
+        "commercialFitReason": "A same-day sports viewing bulletin may fit local hospitality or sports-experience advertising, but the article is independent editorial coverage.",
+        "sponsorshipStatus": "editorial",
+        "brandSafety": "standard",
+        "lengthRationale": "A bulletin is enough because the reader job is matchday logistics from one official team preview."
+      }
+    }
+  ],
+  "rejectedOrHeld": [
+    {
+      "title": "Surrey capital projects, Newton park upgrades, Surrey heat resources",
+      "reason": "Duplicate or unchanged from recent published Surrey coverage."
+    },
+    {
+      "title": "Surrey unpermitted-construction enforcement",
+      "reason": "Approval-gated property enforcement item; no autonomous publication."
+    },
+    {
+      "title": "Burnaby Blues + Roots, mayor walk, farm tour, Expo 86, stewardship events",
+      "reason": "Already published or duplicate/unchanged event coverage."
+    },
+    {
+      "title": "Richmond property-title decision and Richmond Olympic Oval audit",
+      "reason": "Sensitive legal/audit subjects requiring owner approval."
+    },
+    {
+      "title": "Richmond climate-friendly homes and recycling contamination",
+      "reason": "Duplicate or unchanged from recent published Richmond coverage."
+    },
+    {
+      "title": "Coquitlam election workers, heat resources, road-safety plan, and road work",
+      "reason": "Duplicate or unchanged from recent published Coquitlam coverage."
+    },
+    {
+      "title": "Delta July 27 council agenda, air-quality warning, water restrictions, and banner winners",
+      "reason": "Agenda remained too thin for a standalone bulletin; other Delta items were stale, duplicate, or below utility threshold."
+    },
+    {
+      "title": "Canucks podcast, Granato role, Dervin profile, and Penticton camp",
+      "reason": "Fresh or recent official team items, but lower practical Lower Mainland utility than the Whitecaps same-day watch bulletin."
+    },
+    {
+      "title": "Whitecaps Selemani standalone, Gauld Team of Matchday, Cincinnati recap, and BC Lions archive links",
+      "reason": "The Selemani item was not used after GPT could not verify it; the others were retrospective, stale, or weakly actionable."
+    }
+  ]
+}
