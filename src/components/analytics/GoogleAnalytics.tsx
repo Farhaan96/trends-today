@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
+import { createGoogleTagCommandQueue } from '@/lib/google-analytics.mjs';
 
 interface GoogleAnalyticsProps {
   measurementId: string;
@@ -18,11 +19,7 @@ export default function GoogleAnalytics({
 
   useEffect(() => {
     window.dataLayer = window.dataLayer || [];
-    window.gtag =
-      window.gtag ||
-      ((...args: unknown[]) => {
-        window.dataLayer.push(args);
-      });
+    window.gtag = window.gtag || createGoogleTagCommandQueue(window.dataLayer);
 
     if (window.__trendsTodayGaMeasurementId !== measurementId) {
       window.gtag('js', new Date());
