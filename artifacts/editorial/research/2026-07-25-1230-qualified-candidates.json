@@ -1,0 +1,168 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-25-1230",
+  "generatedAt": "2026-07-25T12:40:00-07:00",
+  "sourceQueue": "artifacts/editorial/research/2026-07-25-1230-source-queue.json",
+  "status": "no-qualified-candidate",
+  "dailyCeiling": {
+    "dateLocal": "2026-07-25",
+    "publishedBeforeSweep": 0,
+    "maximumPublications": 6,
+    "ceilingReached": false
+  },
+  "sweepLimit": {
+    "maximumPublications": 2,
+    "published": 0
+  },
+  "qualified": [],
+  "candidateHashes": [],
+  "review": {
+    "gptEditorialGate": "not-run",
+    "gptReason": "No candidate qualified for exact-artifact review.",
+    "claudeOpus5ReleaseReview": "not-run",
+    "claudeReason": "Independent review is required only after a qualified exact candidate exists."
+  },
+  "sourceAvailability": {
+    "officialSourceScan": "available",
+    "perplexity": "unavailable",
+    "googleCustomSearch": "unavailable"
+  },
+  "results": [
+    {
+      "title": "Whitecaps FC sign WFC2 forward Johnny Selemani to MLS short-term agreement",
+      "sourceUrl": "https://www.whitecapsfc.com/news/selemani-call-up-1",
+      "sourceName": "Vancouver Whitecaps news",
+      "locality": "Vancouver",
+      "category": "sports",
+      "storyType": "bulletin",
+      "decision": "repair",
+      "score": 57,
+      "reasons": [
+        "Fresh official source and Lower Mainland team relevance are present.",
+        "Practical reader utility is narrow: the item mainly updates a short-term roster transaction for an away match.",
+        "Only one primary source was usable; that is allowed for a bulletin, but the supported angle is too thin for the current engagement and quality bar."
+      ],
+      "commercialIntent": "none",
+      "sponsorshipStatus": "editorial",
+      "brandSafety": "standard"
+    },
+    {
+      "title": "PREVIEW: 'Caps look to bounce back in Minnesota | Watch on Apple TV",
+      "sourceUrl": "https://www.whitecapsfc.com/news/preview-caps-look-to-bounce-back-in-minnesota",
+      "sourceName": "Vancouver Whitecaps news",
+      "locality": "Vancouver",
+      "category": "sports",
+      "storyType": "bulletin",
+      "decision": "reject",
+      "reasons": [
+        "Same item was attempted in the 10:30 sweep and failed the GPT editorial gate after repair attempts.",
+        "Repeats watch, listen, and bar logistics without enough distinct verified reader utility."
+      ],
+      "commercialIntent": "none",
+      "sponsorshipStatus": "editorial",
+      "brandSafety": "standard"
+    },
+    {
+      "title": "Kevin Lankinen and Linus Karlsson Join Canucks Insider Podcast to Discuss Offseason Work Jul 25, 2026",
+      "sourceUrl": "https://www.nhl.com/canucks/news/kevin-lankinen-and-linus-karlsson-join-canucks-insider-podcast-to-discuss-offseason-work",
+      "sourceName": "Vancouver Canucks news",
+      "locality": "Vancouver",
+      "category": "sports",
+      "storyType": "reported-update",
+      "decision": "reject",
+      "reasons": [
+        "Fresh official item, but it is a podcast/content promotion rather than a useful local update.",
+        "No clear resident action, schedule, cost, route, service, or event-planning consequence."
+      ],
+      "commercialIntent": "none",
+      "sponsorshipStatus": "editorial",
+      "brandSafety": "standard"
+    },
+    {
+      "title": "CAMMI GRANATO TAKES ON NEW ROLE WITH VANCOUVER CANUCKS Jul 24, 2026",
+      "sourceUrl": "https://www.nhl.com/canucks/news/cammi-granato-takes-on-new-role-with-vancouver-canucks",
+      "sourceName": "Vancouver Canucks news",
+      "locality": "Vancouver",
+      "category": "sports",
+      "storyType": "reported-update",
+      "decision": "reject",
+      "reasons": [
+        "Official and current, but primarily an internal hockey-operations staffing update.",
+        "The Lower Mainland reader impact is too indirect for a public article."
+      ],
+      "commercialIntent": "none",
+      "sponsorshipStatus": "editorial",
+      "brandSafety": "standard"
+    },
+    {
+      "title": "Regular Council Meeting Agenda - July 27, 2026",
+      "sourceUrl": "https://www.delta.ca/community-culture/happening-delta/news/regular-council-meeting-agenda-july-27-2026",
+      "sourceName": "City of Delta news",
+      "locality": "Delta",
+      "category": "local-news",
+      "storyType": "reported-update",
+      "decision": "reject",
+      "reasons": [
+        "Fresh official agenda page, but no specific decision or practical resident consequence was isolated from the listing.",
+        "Would require agenda-level reporting beyond the configured discovery snippet before a supported article could be written."
+      ],
+      "commercialIntent": "none",
+      "sponsorshipStatus": "editorial",
+      "brandSafety": "standard"
+    },
+    {
+      "title": "Previously covered or unchanged official-source items",
+      "decision": "reject",
+      "count": 18,
+      "examples": [
+        "Surrey capital projects",
+        "Surrey heat resources",
+        "Surrey Newton parks",
+        "Burnaby Blues + Roots Festival",
+        "Burnaby mayor walk",
+        "Burnaby Expo 86 photo exhibition",
+        "Burnaby environmental stewardship",
+        "Richmond climate-friendly homes",
+        "Richmond recycling contamination",
+        "Coquitlam election workers",
+        "Coquitlam heat resources",
+        "Coquitlam road safety",
+        "Coquitlam Parkway and Panorama work",
+        "Delta air-quality warning",
+        "Delta Stage 2 water restrictions",
+        "Delta banner contest"
+      ],
+      "reasons": [
+        "Duplicative of published Trends Today coverage or unchanged from earlier July 25 sweeps."
+      ]
+    },
+    {
+      "title": "Approval-gated civic/legal items",
+      "decision": "hold",
+      "count": 3,
+      "examples": [
+        "Surrey unpermitted-construction enforcement",
+        "Richmond property-title decision",
+        "Richmond Olympic Oval audit coverage"
+      ],
+      "reasons": [
+        "Legal, enforcement, audit, or property-title subjects require owner review before publication."
+      ]
+    },
+    {
+      "title": "Stale or out-of-window sports archive items",
+      "decision": "reject",
+      "count": 2,
+      "examples": [
+        "Emerging O-Line Giving The Lions An Extra Push",
+        "Lions Announce Details For 2nd Annual Orange Shirt Day Game"
+      ],
+      "reasons": [
+        "Configured BC Lions feed returned old archive links rather than fresh 2026 Lower Mainland updates."
+      ]
+    }
+  ],
+  "commercialFitPolicy": {
+    "status": "not-applied",
+    "reason": "No candidate first cleared editorial qualification; commercial fit cannot rescue a weak or duplicate story."
+  }
+}
