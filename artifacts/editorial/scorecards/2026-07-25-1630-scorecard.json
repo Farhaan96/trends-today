@@ -1,0 +1,55 @@
+{
+  "generatedAt": "2026-07-25T23:34:30.660004+00:00",
+  "inventory": {
+    "totalActiveArticles": 157,
+    "byCategory": {
+      "local-news": 10,
+      "transit": 7,
+      "things-to-do": 11,
+      "food-drink": 1,
+      "housing": 2,
+      "sports": 2,
+      "science": 30,
+      "culture": 12,
+      "psychology": 21,
+      "technology": 25,
+      "health": 22,
+      "space": 14
+    },
+    "lastPublishedAt": "2026-07-24T16:45:00-07:00",
+    "july25RecentArticles": 0
+  },
+  "analytics": {
+    "publicAnalyticsStatus": "available",
+    "protectedReportingStatus": "unavailable",
+    "vercelExport": {
+      "status": "unavailable",
+      "missing": [
+        "VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN",
+        "VERCEL_PROJECT_ID",
+        "engaged sessions",
+        "returning sessions",
+        "scroll depth",
+        "measurable ad impressions",
+        "viewable ad impressions",
+        "Active View rate",
+        "ad revenue",
+        "page RPM",
+        "sponsor inquiries",
+        "qualified sponsor inquiries",
+        "sponsorship revenue",
+        "content cost"
+      ],
+      "decision": "repair-measurement",
+      "generatedAt": "2026-07-25T23:32:45.975765+00:00"
+    },
+    "decision": "repair-measurement"
+  },
+  "sourceScan": {
+    "status": "available",
+    "candidateCount": 30,
+    "sourceQueue": "artifacts/editorial/research/2026-07-25-1630-source-queue.json",
+    "qualifiedCandidates": 0
+  },
+  "decision": "skip-no-qualified-candidate-while-repairing-measurement"
+}
