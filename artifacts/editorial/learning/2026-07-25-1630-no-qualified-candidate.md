@@ -59,10 +59,15 @@
 - Implemented/staged: skip evidence artifacts, scorecard, metrics artifacts, and this learning entry only.
 - Build side effects: `public/robots.txt` and `public/sitemap.xml` were refreshed by `next-sitemap`.
 - Reviewed: no GPT or Claude review required because no candidate qualified.
-- Commit: pending.
-- PR: pending.
-- Merge/deployment/browser verification: pending.
-- Rollback point: pre-run `origin/main` at `bfe9420d27937adc38051133c97a925a5c4be51c`.
+- Commit: `cac6b3cf124d8c2d277e6ba91ff6769d624aada7`, pushed to `origin/issue/lm-daily-2026-07-25-1631`.
+- PR: `#89`, `https://github.com/Farhaan96/trends-today/pull/89`.
+- PR checks: Vercel and Vercel Preview Comments passed on `cac6b3cf124d8c2d277e6ba91ff6769d624aada7`.
+- Merged: yes, merge commit `966c434e0f45c4f2740de08839c97413c8abf4f6`, 2026-07-25T23:40:05Z; branch was not deleted.
+- Production deployment: GitHub deployment `5605785924`, success at 2026-07-25T23:41:37Z, target `https://trends-today-ezbp6hpe7-farhaans-projects-088cb374.vercel.app`.
+- Browser proof: production homepage returned canonical `https://www.trendstoday.ca/`, title `Trends Today | Lower Mainland News and Events`, H1 `What is happening around you.`, Organization and WebSite structured data, zero captured console errors, and 12 homepage images loaded with nonzero dimensions after scroll.
+- Final `/api/analytics`: HTTP `200`, `157` active articles, and no July 25 story in recent articles.
+- Final `/sitemap.xml`: HTTP `200` with production lastmod `2026-07-25T23:41:20.410Z`.
+- Rollback point: pre-run `origin/main` at `bfe9420d27937adc38051133c97a925a5c4be51c`; post-release main is `966c434e0f45c4f2740de08839c97413c8abf4f6`.
 
 ## Costs
 
