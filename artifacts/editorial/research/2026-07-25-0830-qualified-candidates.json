@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-07-25T15:45:00Z",
+  "sweep": "08:30",
+  "timezone": "America/Vancouver",
+  "dailyPublicationCountBeforeSweep": 0,
+  "dailyPublicationLimit": 6,
+  "sweepPublicationLimit": 2,
+  "qualifiedCandidates": [],
+  "decision": "skip",
+  "reason": "No enabled official-source item cleared the Lower Mainland editorial gates without duplicating recent coverage, falling below reader-utility standards, or triggering manual approval.",
+  "rejectedOrHeld": {
+    "duplicatesOrUnchangedCarryovers": [
+      "Surrey capital projects",
+      "Surrey heat resources",
+      "Surrey Newton park upgrades",
+      "Burnaby Blues + Roots Festival",
+      "Burnaby Walk and Chat with the Mayor",
+      "Burnaby environmental stewardship events",
+      "Burnaby Michael de Courcy / Expo 86 exhibition",
+      "Richmond climate-friendly homes",
+      "Richmond recycling contamination",
+      "Coquitlam election workers",
+      "Coquitlam heat resources",
+      "Coquitlam road-safety plan",
+      "Coquitlam Parkway and Panorama road work",
+      "Delta air-quality warning",
+      "Delta Stage 2 water restrictions",
+      "Delta banner winners"
+    ],
+    "manualApprovalRequired": [
+      "Surrey unpermitted-construction enforcement",
+      "Richmond property-title court decision",
+      "Richmond Olympic Oval performance and forensic audits"
+    ],
+    "belowEditorialBar": [
+      "Delta July 27 council agenda",
+      "Canucks offseason podcast with Kevin Lankinen and Linus Karlsson",
+      "Canucks Cammi Granato role update",
+      "Canucks prospect and training-camp items",
+      "Whitecaps retrospective or stale match/team items",
+      "BC Lions stale archive items"
+    ]
+  },
+  "commercialResearch": {
+    "advanced": false,
+    "reason": "No story qualified editorially, so commercial intent and sponsor fit were not used."
+  },
+  "measurement": {
+    "status": "unavailable",
+    "missingFieldsStayUnavailable": true,
+    "repair": "Connect Vercel analytics credentials and the configured GA/Search Console/ad/sponsor reporting exports."
+  }
+}
