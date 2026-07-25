@@ -65,6 +65,7 @@
     "test:e2e": "playwright test",
     "test:google-analytics": "node --test tests/google-analytics.test.mjs",
     "test:google-reporting": "node --test tests/google-reporting.test.mjs",
+    "test:schema-truth": "node --test tests/schema-truth.test.mjs",
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",
     "test:headed": "playwright test --headed"

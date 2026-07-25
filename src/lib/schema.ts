@@ -5,69 +5,20 @@ import {
   OrganizationSchema,
   BreadcrumbListSchema,
   FAQPageSchema,
-  LocalBusinessSchema,
   PersonSchema,
   WebSiteSchema,
 } from '@/types/schema';
+import {
+  organizationSchema as truthfulOrganizationSchema,
+  websiteSchema as truthfulWebsiteSchema,
+} from '@/lib/site-schema.mjs';
 
 // Organization Schema for the site
-export const organizationSchema: OrganizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Trends Today',
-  alternateName: 'Trends Today Tech Blog',
-  url: 'https://www.trendstoday.ca',
-  logo: {
-    '@type': 'ImageObject',
-    url: 'https://www.trendstoday.ca/images/logo.png',
-    width: 400,
-    height: 100,
-  },
-  description:
-    'Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides. Stay ahead with the latest tech trends.',
-  foundingDate: '2025',
-  founder: {
-    '@type': 'Person',
-    name: 'Trends Today Editorial Team',
-  },
-  contactPoint: {
-    '@type': 'ContactPoint',
-    telephone: '+1-800-TRENDS',
-    contactType: 'customer service',
-    email: 'contact@trendstoday.ca',
-  },
-  sameAs: [
-    'https://twitter.com/trendstoday',
-    'https://facebook.com/trendstoday',
-    'https://linkedin.com/company/trends-today',
-    'https://youtube.com/@trendstoday',
-  ],
-  address: {
-    '@type': 'PostalAddress',
-    addressCountry: 'CA',
-    addressRegion: 'ON',
-  },
-};
+export const organizationSchema =
+  truthfulOrganizationSchema as OrganizationSchema;
 
 // Website Schema
-export const websiteSchema: WebSiteSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'Trends Today',
-  alternateName: 'Trends Today Tech Reviews',
-  url: 'https://www.trendstoday.ca',
-  description:
-    'Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides.',
-  publisher: organizationSchema,
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: 'https://www.trendstoday.ca/search?q={search_term_string}',
-    },
-    'query-input': 'required name=search_term_string',
-  },
-};
+export const websiteSchema = truthfulWebsiteSchema as WebSiteSchema;
 
 // Generate Article Schema
 export function generateArticleSchema(data: {
@@ -341,30 +292,6 @@ export function generatePersonSchema(data: {
     jobTitle: data.jobTitle,
     worksFor: data.worksFor ? data.worksFor : organizationSchema,
     sameAs: data.sameAs,
-  };
-}
-
-// Generate Local Business Schema (if applicable)
-export function generateLocalBusinessSchema(): LocalBusinessSchema {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: 'Trends Today',
-    description: 'Tech reviews and buying guides',
-    url: 'https://www.trendstoday.ca',
-    telephone: '+1-800-TRENDS',
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'CA',
-      addressRegion: 'ON',
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 43.6532,
-      longitude: -79.3832,
-    },
-    openingHours: 'Mo,Tu,We,Th,Fr,Sa,Su 00:00-23:59',
-    priceRange: 'Free',
   };
 }
 

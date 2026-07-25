@@ -1,4 +1,5 @@
 import Script from 'next/script';
+import { organizationSchema } from '@/lib/site-schema.mjs';
 
 interface Author {
   name: string;
@@ -51,22 +52,7 @@ export default function ArticleJsonLd({
       image: authorData.avatar,
       url: authorData.url,
     },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Trends Today',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.trendstoday.ca/images/logo.png',
-        width: 400,
-        height: 100,
-      },
-      url: 'https://www.trendstoday.ca',
-      sameAs: [
-        'https://twitter.com/trendstoday',
-        'https://facebook.com/trendstoday',
-        'https://linkedin.com/company/trends-today',
-      ],
-    },
+    publisher: organizationSchema,
     datePublished: publishedAt,
     dateModified: modifiedAt || publishedAt,
     mainEntityOfPage: {
@@ -129,17 +115,7 @@ export function NewsArticleJsonLd({
       image: authorData.avatar,
       url: authorData.url,
     },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Trends Today',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.trendstoday.ca/images/logo.png',
-        width: 400,
-        height: 100,
-      },
-      url: 'https://www.trendstoday.ca',
-    },
+    publisher: organizationSchema,
     datePublished: props.publishedAt,
     dateModified: props.modifiedAt || props.publishedAt,
     mainEntityOfPage: {
@@ -195,17 +171,7 @@ export function BlogPostingJsonLd(props: ArticleJsonLdProps) {
       image: authorData.avatar,
       url: authorData.url,
     },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Trends Today',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.trendstoday.ca/images/logo.png',
-        width: 400,
-        height: 100,
-      },
-      url: 'https://www.trendstoday.ca',
-    },
+    publisher: organizationSchema,
     datePublished: props.publishedAt,
     dateModified: props.modifiedAt || props.publishedAt,
     mainEntityOfPage: {

@@ -1,4 +1,8 @@
 import Script from 'next/script';
+import {
+  organizationSchema,
+  websiteSchema,
+} from '@/lib/site-schema.mjs';
 
 interface SchemaMarkupProps {
   schema: any;
@@ -312,74 +316,12 @@ export function FAQSchema({ faqs }: FAQSchemaProps) {
 
 // Organization Schema Component
 export function OrganizationSchema() {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Trends Today',
-    alternateName: 'Trends Today Tech Blog',
-    url: 'https://www.trendstoday.ca',
-    logo: {
-      '@type': 'ImageObject',
-      url: 'https://www.trendstoday.ca/images/logo.png',
-      width: 400,
-      height: 100,
-    },
-    description:
-      'Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides. Stay ahead with the latest tech trends.',
-    foundingDate: '2025',
-    founder: {
-      '@type': 'Person',
-      name: 'Trends Today Editorial Team',
-    },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+1-800-TRENDS',
-      contactType: 'customer service',
-      email: 'contact@trendstoday.ca',
-    },
-    sameAs: [
-      'https://twitter.com/trendstoday',
-      'https://facebook.com/trendstoday',
-      'https://linkedin.com/company/trends-today',
-      'https://youtube.com/@trendstoday',
-    ],
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'CA',
-      addressRegion: 'ON',
-    },
-  };
-
-  return <SchemaMarkup schema={schema} id="organization-schema" />;
+  return (
+    <SchemaMarkup schema={organizationSchema} id="organization-schema" />
+  );
 }
 
 // Website Schema Component
 export function WebsiteSchema() {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'Trends Today',
-    alternateName: 'Trends Today Tech Reviews',
-    url: 'https://www.trendstoday.ca',
-    description:
-      'Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides.',
-    publisher: {
-      '@type': 'Organization',
-      name: 'Trends Today',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.trendstoday.ca/images/logo.png',
-      },
-    },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: 'https://www.trendstoday.ca/search?q={search_term_string}',
-      },
-      'query-input': 'required name=search_term_string',
-    },
-  };
-
-  return <SchemaMarkup schema={schema} id="website-schema" />;
+  return <SchemaMarkup schema={websiteSchema} id="website-schema" />;
 }
