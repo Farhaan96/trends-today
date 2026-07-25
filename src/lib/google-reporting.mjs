@@ -5,6 +5,7 @@ const SEARCH_CONSOLE_SCOPE =
   'https://www.googleapis.com/auth/webmasters.readonly';
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const REPORTING_CACHE_MS = 10 * 60 * 1000;
+const UNAVAILABLE_CACHE_MS = 60 * 1000;
 const REQUEST_TIMEOUT_MS = 8_000;
 
 let cachedAccessToken = null;
@@ -54,7 +55,8 @@ export function getGoogleReportingConfig(env = process.env) {
 export function getCompleteDateRange(
   now = Date.now(),
   days = 28,
-  timeZone = 'America/Vancouver'
+  timeZone = 'America/Vancouver',
+  endOffsetDays = 1
 ) {
   const parts = new Intl.DateTimeFormat('en-CA', {
     timeZone,
@@ -72,7 +74,7 @@ export function getCompleteDateRange(
     Number(value.month) - 1,
     Number(value.day)
   );
-  const endDate = new Date(localTodayUtc - 24 * 60 * 60 * 1000);
+  const endDate = new Date(localTodayUtc - endOffsetDays * 24 * 60 * 60 * 1000);
   const startDate = new Date(
     endDate.getTime() - (days - 1) * 24 * 60 * 60 * 1000
   );
@@ -83,6 +85,7 @@ export function getCompleteDateRange(
     days,
     timeZone,
     completeness: 'complete-local-days',
+    endOffsetDays,
   };
 }
 
@@ -363,19 +366,23 @@ export async function getGoogleReportingSnapshot({
   accessTokenProvider = getAccessToken,
   bypassCache = false,
 } = {}) {
+  const config = getGoogleReportingConfig(env);
+  const cacheKey = `${config.analyticsPropertyId}|${config.searchConsoleSiteUrl}`;
   if (
     !bypassCache &&
     cachedSnapshot?.expiresAt > now &&
-    cachedSnapshot.cacheKey ===
-      `${env.GOOGLE_ANALYTICS_PROPERTY_ID || ''}|${
-        env.GOOGLE_SEARCH_CONSOLE_SITE_URL || ''
-      }`
+    cachedSnapshot.cacheKey === cacheKey
   ) {
     return cachedSnapshot.value;
   }
 
-  const config = getGoogleReportingConfig(env);
-  const dateRange = getCompleteDateRange(now);
+  const analyticsDateRange = getCompleteDateRange(now);
+  const searchConsoleDateRange = getCompleteDateRange(
+    now,
+    28,
+    'America/Vancouver',
+    3
+  );
   let googleAnalytics = unavailable('missing_configuration');
   let googleSearchConsole = unavailable('missing_configuration');
 
@@ -387,7 +394,7 @@ export async function getGoogleReportingSnapshot({
           ? fetchGa4Report({
               accessToken,
               analyticsPropertyId: config.analyticsPropertyId,
-              dateRange,
+              dateRange: analyticsDateRange,
               fetchImpl,
             })
           : Promise.resolve(unavailable('missing_configuration')),
@@ -395,7 +402,7 @@ export async function getGoogleReportingSnapshot({
           ? fetchSearchConsoleReport({
               accessToken,
               searchConsoleSiteUrl: config.searchConsoleSiteUrl,
-              dateRange,
+              dateRange: searchConsoleDateRange,
               fetchImpl,
             })
           : Promise.resolve(unavailable('missing_configuration')),
@@ -429,7 +436,13 @@ export async function getGoogleReportingSnapshot({
         : availableProviders === 1
           ? 'partial'
           : 'unavailable',
-    window: dateRange,
+    windows: {
+      googleAnalytics: analyticsDateRange,
+      googleSearchConsole: {
+        ...searchConsoleDateRange,
+        completeness: 'final-data-lag-adjusted',
+      },
+    },
     googleAnalytics,
     googleSearchConsole,
     generatedAt: new Date(now).toISOString(),
@@ -439,9 +452,13 @@ export async function getGoogleReportingSnapshot({
 
   if (!bypassCache) {
     cachedSnapshot = {
-      cacheKey: `${config.analyticsPropertyId}|${config.searchConsoleSiteUrl}`,
+      cacheKey,
       value,
-      expiresAt: now + REPORTING_CACHE_MS,
+      expiresAt:
+        now +
+        (value.status === 'unavailable'
+          ? UNAVAILABLE_CACHE_MS
+          : REPORTING_CACHE_MS),
     };
   }
 
@@ -453,7 +470,7 @@ export function hasValidReportingToken(request, expectedToken) {
   const authorization = request.headers.get('authorization') || '';
   if (!authorization.startsWith('Bearer ')) return false;
   const suppliedToken = authorization.slice('Bearer '.length);
-  const expected = Buffer.from(expectedToken);
+  const expected = Buffer.from(expectedToken.trim());
   const supplied = Buffer.from(suppliedToken);
   return (
     expected.length === supplied.length && timingSafeEqual(expected, supplied)

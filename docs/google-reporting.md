@@ -1,8 +1,9 @@
 # Google reporting
 
 Trends Today reads GA4 and Search Console data through a single Google service
-account. Reporting access is read-only and the returned window uses the most
-recent 28 complete days in `America/Vancouver`.
+account. Reporting access is read-only. GA4 uses the most recent 28 complete
+days in `America/Vancouver`; Search Console ends three days back so its 28-day
+window uses finalized rather than fresh, incomplete search data.
 
 ## Google configuration
 
@@ -38,6 +39,6 @@ The response contains:
 - a provider status of `available`, `partial`, or `unavailable`;
 - `null` or omitted values for unavailable metrics, never fabricated zeros.
 
-The server caches successful and partial snapshots for ten minutes. Provider
-requests time out independently, so a Search Console failure does not erase a
-valid GA4 result.
+The server caches successful and partial snapshots for ten minutes and fully
+unavailable snapshots for one minute. Provider requests time out independently,
+so a Search Console failure does not erase a valid GA4 result.

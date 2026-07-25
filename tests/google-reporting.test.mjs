@@ -29,6 +29,26 @@ test('builds a 28-day window from complete Vancouver days', () => {
       days: 28,
       timeZone: 'America/Vancouver',
       completeness: 'complete-local-days',
+      endOffsetDays: 1,
+    }
+  );
+});
+
+test('lags the Search Console window to finalized data', () => {
+  assert.deepEqual(
+    getCompleteDateRange(
+      Date.parse('2026-07-25T05:00:00.000Z'),
+      28,
+      'America/Vancouver',
+      3
+    ),
+    {
+      startDate: '2026-06-24',
+      endDate: '2026-07-21',
+      days: 28,
+      timeZone: 'America/Vancouver',
+      completeness: 'complete-local-days',
+      endOffsetDays: 3,
     }
   );
 });
@@ -168,6 +188,10 @@ test('keeps a failed provider unavailable while returning verified data', async 
   assert.equal(snapshot.googleAnalytics.status, 'available');
   assert.equal(snapshot.googleSearchConsole.status, 'unavailable');
   assert.equal(snapshot.googleSearchConsole.totals, null);
+  assert.equal(
+    snapshot.windows.googleSearchConsole.completeness,
+    'final-data-lag-adjusted'
+  );
 });
 
 test('uses constant-time bearer token validation semantics', () => {
@@ -176,5 +200,6 @@ test('uses constant-time bearer token validation semantics', () => {
   });
 
   assert.equal(hasValidReportingToken(request, 'correct-token'), true);
+  assert.equal(hasValidReportingToken(request, 'correct-token\n'), true);
   assert.equal(hasValidReportingToken(request, 'wrong-token'), false);
 });
