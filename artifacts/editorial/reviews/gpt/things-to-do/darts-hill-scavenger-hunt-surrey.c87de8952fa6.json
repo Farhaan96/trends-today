@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "c87de8952fa6d772f65fa4aa3fb00923acc465f23d7ce112a0ded92d522e6dc3",
+  "repositorySha": "1d2a00fd434daa3873bf3cfea8092d95db6b237f",
+  "reviewedAt": "2026-07-26T15:46:19.825151+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9f1a-aee9-72e1-afc8-7f0d61e0e973",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The July 26 date and hours are repeated in the lead, confirmed-details list, and later-dates list. In such a short bulletin, this creates noticeable repetition and reduces editorial value.",
+    "The article ends with an unrelated cross-promotion rather than a direct, actionable close for this event. Move the official-page check or another supported planning action to the final sentence."
+  ],
+  "summary": "The City of Surrey source supports the event dates, hours, address, free admission, categories, recurrence, and activity description. The MDX is clean and contains zero authorial em dashes, but repetition and the flat promotional ending keep quality and engagement below the passing threshold."
+}
