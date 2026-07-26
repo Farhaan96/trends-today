@@ -11,15 +11,17 @@
       "storyType": "bulletin",
       "sourceUrls": [
         "https://www.surrey.ca/news-events/events/family-scavenger-hunt-darts-hill",
-        "https://www.surrey.ca/parks-recreation/parks/darts-hill-garden-park"
+        "https://www.surrey.ca/parks-recreation/parks/park-features-amenities/display-feature-gardens/darts-hill-garden-park",
+        "https://dartshill.ca/visit-the-garden/"
       ],
       "primarySourceUrls": [
         "https://www.surrey.ca/news-events/events/family-scavenger-hunt-darts-hill",
-        "https://www.surrey.ca/parks-recreation/parks/darts-hill-garden-park"
+        "https://www.surrey.ca/parks-recreation/parks/park-features-amenities/display-feature-gardens/darts-hill-garden-park",
+        "https://dartshill.ca/visit-the-garden/"
       ],
       "candidatePath": "artifacts/editorial/release-candidates/things-to-do/surrey-darts-hill-scavenger-hunt-july-26.mdx",
-      "candidateSha256": "af34380de78e2a698c2650012046c439b2c485c240cd8327265cc679c6b5ec75",
-      "qualificationReason": "Same-day official Surrey family event with named locality, date, time, address, free cost, primary-source support, practical reader utility, standard brand safety, editorial sponsorship status, generated original image provenance, and no sensitive-story signals.",
+      "candidateSha256": "b1ba4c46e581ef3e1c4d098b47e09c113ad2f67907dcdcfa7ab48beb29fac32c",
+      "qualificationReason": "Same-day official Surrey family event with named locality, date, time, address, donation-based admission disclosure, primary-source support, practical reader utility, standard brand safety, editorial sponsorship status, generated original image provenance, and no sensitive-story signals.",
       "commercialIntent": "ad-fit",
       "commercialFitReason": "Commercial fit was considered only after editorial qualification; audience, ad, Active View, RPM, revenue, and sponsor demand metrics remain unavailable."
     }
