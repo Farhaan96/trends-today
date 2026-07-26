@@ -84,15 +84,30 @@ def primary_source_urls_for_topic(topic: Dict) -> set:
 def apply_source_tiers(sources: List[Dict], topic: Dict) -> None:
     """Label retrieved sources without collapsing distinct query-keyed pages."""
     primary_urls = {
-        canonical_http_url(url)
+        canonical
         for url in primary_source_urls_for_topic(topic)
+        if (canonical := canonical_http_url(url))
     }
     for source in sources:
+        canonical = canonical_http_url(source.get('url'))
         source['tier'] = (
             'primary'
-            if canonical_http_url(source.get('url')) in primary_urls
+            if canonical and canonical in primary_urls
             else 'secondary'
         )
+
+
+def remove_discovery_lead_sources(
+    sources: List[Dict],
+    topic: Dict,
+) -> List[Dict]:
+    """Keep search fallback from reintroducing the publication that led us."""
+    blocked_hosts = lead_hosts(topic)
+    return [
+        source
+        for source in sources
+        if not url_matches_any_host(source.get('url'), blocked_hosts)
+    ]
 
 
 def requires_manual_approval(topic: Dict, article: Dict, source_config: Dict) -> bool:
@@ -136,8 +151,8 @@ def resolve_category(topic: Dict, article: Dict) -> str:
     keyword_map = {
         'transit': ('translink', 'skytrain', 'bus route', 'seabus', 'road closure', 'traffic'),
         'food-drink': (
-            'restaurant', 'bakery', 'cafe', 'coffee shop', 'bar', 'pub',
-            'brewery', 'eatery', 'diner',
+            'restaurant', 'restaurants', 'bakery', 'bakeries', 'cafe',
+            'coffee shop', 'bar', 'pub', 'brewery', 'eatery', 'diner',
         ),
         'local-news': (
             'retailer', 'retail store', 'store closing', 'store opening',
@@ -155,7 +170,10 @@ def resolve_category(topic: Dict, article: Dict) -> str:
         'psychology': ('psychology', 'brain', 'behavior', 'mental', 'emotion', 'cognitive'),
         'science': ('science', 'study', 'researcher', 'physics', 'biology', 'chemistry'),
         'culture': ('culture', 'media', 'art', 'music', 'creator', 'social'),
-        'things-to-do': ('event', 'festival', 'concert', 'weekend', 'things to do'),
+        'things-to-do': (
+            'event', 'events', 'festival', 'festivals', 'concert',
+            'concerts', 'weekend', 'things to do',
+        ),
     }
     for category, keywords in keyword_map.items():
         if any(
@@ -232,7 +250,11 @@ class ContentPipeline:
             # 1. Retrieve sources
             seed_urls = seed_urls_for_topic(topic) or None
             sources_data = self.retrieval.retrieve(topic_title, urls=seed_urls)
-            sources = sources_data.get('sources', [])
+            sources = remove_discovery_lead_sources(
+                sources_data.get('sources', []),
+                topic,
+            )
+            sources_data['sources'] = sources
             apply_source_tiers(sources, topic)
             
             if not sources:

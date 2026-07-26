@@ -23,8 +23,13 @@ def _parsed_http_url(url: object):
     raw = str(url or '').strip()
     if not raw:
         return None
-    parsed = urlparse(raw)
-    if parsed.scheme.lower() not in {'http', 'https'} or not parsed.hostname:
+    try:
+        parsed = urlparse(raw)
+        hostname = parsed.hostname
+        parsed.port
+    except ValueError:
+        return None
+    if parsed.scheme.lower() not in {'http', 'https'} or not hostname:
         return None
     return parsed
 
@@ -37,7 +42,10 @@ def url_host(url: object) -> str:
     raw = str(url or '').strip()
     if raw and '://' not in raw:
         raw = f'//{raw}'
-    host = (urlparse(raw).hostname or '').lower()
+    try:
+        host = (urlparse(raw).hostname or '').lower()
+    except ValueError:
+        return ''
     return host.removeprefix('www.')
 
 
@@ -63,8 +71,8 @@ def canonical_http_url(url: object) -> str:
         parsed.scheme.lower(),
         f'{host}{port}',
         path,
+        parsed.params,
         query,
-        '',
         '',
     ))
 

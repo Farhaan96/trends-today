@@ -13,6 +13,8 @@ import requests
 from pathlib import Path
 
 from source_policy import (
+    automated_access_approved,
+    canonical_http_url,
     configured_source_for_url,
     robots_allows,
 )
@@ -78,12 +80,8 @@ class TopicDiscovery:
             source for source in self.source_config.get('sources', [])
             if source.get('discoveryEnabled')
             and (
-                source.get('tier') != 'secondary'
-                or source.get('discoveryRole') != 'lead'
-                or (
-                    source.get('automatedAccessApproved') is True
-                    and str(source.get('writtenPermissionReference', '')).strip()
-                )
+                source.get('tier') == 'primary'
+                or automated_access_approved(source.get('url'), self.source_config)
             )
         ]
         
@@ -110,7 +108,21 @@ class TopicDiscovery:
     def _resolve_locality(self, *texts: object) -> str:
         """Return a configured locality only when the result itself supports it."""
         blob = ' '.join(str(text or '') for text in texts).lower()
-        for locality in self._approved_search_localities():
+        excluded_phrases = {
+            str(phrase).lower()
+            for phrase in (
+                self.source_config
+                .get('searchDiscovery', {})
+                .get('localityExclusions', [])
+            )
+        }
+        if any(phrase in blob for phrase in excluded_phrases):
+            return ''
+        for locality in sorted(
+            self._approved_search_localities(),
+            key=len,
+            reverse=True,
+        ):
             if re.search(
                 rf'(?<!\w){re.escape(locality.lower())}(?!\w)',
                 blob,
@@ -487,6 +499,7 @@ class TopicDiscovery:
                 'Vancouver local sports update',
             ]
             topics = []
+            seen_result_keys = set()
             
             for category in categories:
                 response = requests.get(
@@ -507,6 +520,12 @@ class TopicDiscovery:
                         title = item.get('title', '')
                         if title and not self._is_duplicate(title):
                             source_url = item.get('link')
+                            result_key = (
+                                canonical_http_url(source_url)
+                                or re.sub(r'\W+', ' ', title.lower()).strip()
+                            )
+                            if result_key in seen_result_keys:
+                                continue
                             configured_source = configured_source_for_url(
                                 source_url,
                                 self.source_config,
@@ -553,6 +572,7 @@ class TopicDiscovery:
                                 'sourceTopic': source_topic,
                                 'discovered_at': datetime.now().isoformat()
                             })
+                            seen_result_keys.add(result_key)
             
             logger.info(f"Found {len(topics)} topics from Google Custom Search")
             return topics[:count]

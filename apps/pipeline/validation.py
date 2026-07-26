@@ -17,6 +17,7 @@ ARTICLE_CATEGORIES = LOCAL_CATEGORIES | {
 }
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CONTENT_BUSINESS_CONFIG = REPO_ROOT / 'config' / 'content-business.json'
+LOCAL_SOURCE_CONFIG = REPO_ROOT / 'config' / 'local-news-sources.json'
 
 
 @dataclass(frozen=True)
@@ -33,6 +34,19 @@ def _valid_source_urls(sources: List[Dict]) -> List[str]:
         if parsed.scheme in {'http', 'https'} and parsed.netloc:
             urls.append(url)
     return list(dict.fromkeys(urls))
+
+
+def _approved_localities() -> set:
+    config = json.loads(LOCAL_SOURCE_CONFIG.read_text(encoding='utf-8'))
+    values = list(config.get('localities', []))
+    values.extend(
+        config.get('searchDiscovery', {}).get('approvedRegionalLabels', [])
+    )
+    return {
+        str(value).strip().lower()
+        for value in values
+        if str(value).strip()
+    }
 
 
 def _load_contract(config_path: Path = None) -> Dict:
@@ -198,6 +212,8 @@ def validate_release_candidate(
         errors.append('at least one primary source is required for local stories')
     if is_local and not locality:
         errors.append('Lower Mainland locality is required')
+    if is_local and locality and locality.lower() not in _approved_localities():
+        errors.append('locality is not in the approved Lower Mainland coverage area')
     if is_local and not str(article.get('lengthRationale', '')).strip():
         errors.append('length rationale is required for local stories')
     if is_local:

@@ -279,6 +279,23 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         self.assertEqual([], discovery.discover_official_pages(5))
         get.assert_not_called()
 
+    def test_secondary_source_without_role_still_needs_written_permission(self):
+        discovery = TopicDiscovery()
+        discovery.source_config = {
+            'sources': [{
+                'name': 'Unapproved secondary source',
+                'url': 'https://publication.example/local',
+                'domain': 'publication.example',
+                'locality': 'Vancouver',
+                'desks': ['local-news'],
+                'tier': 'secondary',
+                'discoveryEnabled': True,
+                'automatedAccessApproved': True,
+            }]
+        }
+
+        self.assertEqual([], discovery.discovery_sources)
+
     def test_source_yield_summary_groups_candidates_for_skip_reports(self):
         summary = TopicDiscovery.summarize_source_yield([
             {
@@ -429,6 +446,83 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         self.assertEqual(5, len(topics))
         self.assertEqual(local_changes, topics[:2])
         changes.assert_called_once_with(2)
+
+    def test_locality_resolution_prefers_longest_match_and_excludes_homonyms(self):
+        discovery = TopicDiscovery()
+
+        self.assertEqual(
+            'Port Coquitlam',
+            discovery._resolve_locality(
+                'Port Coquitlam hardware store closing sale',
+            ),
+        )
+        self.assertEqual(
+            'North Vancouver',
+            discovery._resolve_locality(
+                'North Vancouver retailer announces new location',
+            ),
+        )
+        self.assertEqual(
+            '',
+            discovery._resolve_locality(
+                'Surrey, England high street retailer shutters',
+            ),
+        )
+        self.assertEqual(
+            '',
+            discovery._resolve_locality(
+                'Delta Air Lines opens new airport lounge',
+            ),
+        )
+
+    @patch('topics.requests.get')
+    def test_duplicate_google_results_do_not_consume_reserved_lane(self, get):
+        response = Mock()
+        response.status_code = 200
+        response.json.return_value = {
+            'items': [{
+                'title': 'Burnaby hardware store announces closing sale',
+                'snippet': 'The Burnaby, B.C. store closes next month.',
+                'link': 'https://publication.example/burnaby/store-closing',
+            }]
+        }
+        get.return_value = response
+        discovery = TopicDiscovery()
+        discovery.google_key = 'test-key'
+        discovery.google_cse_id = 'test-cse'
+        discovery.source_config = {
+            'localities': ['Burnaby'],
+            'searchDiscovery': {
+                'enabled': True,
+                'localChangeQueries': ['query one', 'query two'],
+                'approvedRegionalLabels': [],
+            },
+            'sources': [],
+        }
+        perplexity_fill = [{
+            'title': 'Burnaby retailer relocates',
+            'source': 'perplexity',
+        }, {
+            'title': 'Burnaby storefront reopens',
+            'source': 'perplexity',
+        }]
+
+        with patch.object(
+            discovery,
+            'discover_perplexity',
+            return_value=perplexity_fill,
+        ) as perplexity:
+            topics = discovery.discover_local_changes(3)
+
+        self.assertEqual(3, len(topics))
+        self.assertEqual(
+            1,
+            len([
+                topic for topic in topics
+                if topic.get('source') == 'google_local_change'
+            ]),
+        )
+        perplexity.assert_called_once_with(2, local_changes_only=True)
 
     @patch('topics.requests.get')
     def test_google_search_includes_local_business_change_queries(self, get):

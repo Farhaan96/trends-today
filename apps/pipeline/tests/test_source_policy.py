@@ -48,6 +48,19 @@ class SourcePolicyTests(unittest.TestCase):
         )
         self.assertNotEqual(first, second)
         self.assertNotEqual(first, listing)
+        self.assertEqual(
+            'https://coquitlam.ca/Calendar.aspx?EID=1234',
+            first,
+        )
+        self.assertNotEqual(
+            canonical_http_url('https://example.com/page?b=2'),
+            canonical_http_url('https://example.com/page;a=1?b=2'),
+        )
+
+    def test_malformed_ipv6_url_fails_closed(self):
+        self.assertEqual('', url_host('http://[::1/path'))
+        self.assertFalse(is_http_url('http://[::1/path'))
+        self.assertEqual('', canonical_http_url('http://[::1/path'))
 
     def test_lead_subdomain_does_not_block_parent_domain(self):
         self.assertFalse(

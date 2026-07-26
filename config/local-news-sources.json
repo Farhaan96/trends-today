@@ -5,6 +5,8 @@
   "officialCandidateLimit": 60,
   "localities": [
     "Vancouver",
+    "North Vancouver",
+    "West Vancouver",
     "Surrey",
     "Burnaby",
     "Richmond",
@@ -46,6 +48,14 @@
       "Lower Mainland",
       "Metro Vancouver",
       "Fraser Valley"
+    ],
+    "localityExclusions": [
+      "Surrey, England",
+      "Surrey England",
+      "Delta Air Lines",
+      "Delta Airlines",
+      "Richmond, Virginia",
+      "Richmond, VA"
     ],
     "localChangeQueries": [
       "Metro Vancouver retail store local business opening closing relocation closing sale",

@@ -15,6 +15,7 @@ from runner import (  # noqa: E402
     has_manual_approval,
     resolve_category,
     resolve_story_type,
+    remove_discovery_lead_sources,
     seed_urls_for_topic,
 )
 
@@ -141,6 +142,43 @@ class RunnerSourceTests(unittest.TestCase):
         self.assertEqual(
             ['secondary', 'primary'],
             [source['tier'] for source in sources],
+        )
+
+    def test_unparseable_primary_url_cannot_mark_url_less_sources_primary(self):
+        topic = {
+            'evidence': {
+                'primarySourceUrls': ['https://city.example:99999/notice'],
+            },
+        }
+        sources = [
+            {'url': ''},
+            {},
+            {'url': 'mailto:tips@city.example'},
+        ]
+
+        apply_source_tiers(sources, topic)
+
+        self.assertEqual(
+            ['secondary', 'secondary', 'secondary'],
+            [source['tier'] for source in sources],
+        )
+
+    def test_search_fallback_cannot_reintroduce_discovery_lead_domain(self):
+        topic = {
+            'sourceTier': 'secondary',
+            'url': 'https://publication.example/vancouver/store-closing',
+        }
+        sources = [{
+            'url': 'https://publication.example/vancouver/context',
+        }, {
+            'url': 'https://retailer.example/store/vancouver',
+        }]
+
+        filtered = remove_discovery_lead_sources(sources, topic)
+
+        self.assertEqual(
+            ['https://retailer.example/store/vancouver'],
+            [source['url'] for source in filtered],
         )
 
     def test_sensitive_story_signal_requires_manual_approval(self):
@@ -284,6 +322,20 @@ class RunnerCategoryTests(unittest.TestCase):
             resolve_category({
                 'title': 'New Westminster bakery announces new location',
             }, {}),
+        )
+
+    def test_plural_category_keywords_still_route_to_their_desks(self):
+        self.assertEqual(
+            'things-to-do',
+            resolve_category({'title': 'Vancouver summer events guide'}, {}),
+        )
+        self.assertEqual(
+            'things-to-do',
+            resolve_category({'title': 'Richmond festivals return this month'}, {}),
+        )
+        self.assertEqual(
+            'food-drink',
+            resolve_category({'title': 'New restaurants opening in Coquitlam'}, {}),
         )
 
 

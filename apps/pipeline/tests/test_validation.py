@@ -218,6 +218,30 @@ class ValidationTests(unittest.TestCase):
         )
         self.assertNotIn('Lower Mainland locality is required', result.errors)
 
+    def test_unapproved_locality_cannot_clear_local_release_gate(self):
+        article = self.article()
+        article.update({
+            'category': 'local-news',
+            'locality': 'Toronto',
+            'storyType': 'reported-update',
+            **self.local_metadata(),
+        })
+
+        result = validate_release_candidate(
+            article,
+            [
+                {'url': 'https://a.example/source', 'tier': 'primary'},
+                {'url': 'https://b.example/source', 'tier': 'secondary'},
+            ],
+            {'slug': 'toronto-store-change'},
+            {'path': '/images/store.webp'},
+        )
+
+        self.assertIn(
+            'locality is not in the approved Lower Mainland coverage area',
+            result.errors,
+        )
+
     def test_local_location_promise_requires_concrete_directory(self):
         article = {
             'title': 'Where to cool down in Surrey',
