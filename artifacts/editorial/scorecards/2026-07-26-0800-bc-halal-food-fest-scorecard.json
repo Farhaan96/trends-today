@@ -53,9 +53,33 @@
       "productionBuild": "passed",
       "staticPages": 208
     },
-    "pullRequest": "pending",
-    "deployment": "pending",
-    "productionBrowserVerification": "pending"
+    "pullRequest": {
+      "status": "merged",
+      "number": 95,
+      "headSha": "46cbc384e2603ffef2a77a8ee1e157137fc06d18",
+      "mergeSha": "0d27e76ccef9b7456a0b09013aeeef73cc35ebe4",
+      "checks": "Vercel and Vercel Preview Comments passed"
+    },
+    "deployment": {
+      "status": "success",
+      "id": 5611535085,
+      "sha": "0d27e76ccef9b7456a0b09013aeeef73cc35ebe4",
+      "completedAt": "2026-07-26T15:32:21Z",
+      "target": "https://trends-today-6e8w1j0hx-farhaans-projects-088cb374.vercel.app"
+    },
+    "productionBrowserVerification": {
+      "status": "passed",
+      "verifiedAt": "2026-07-26T08:35:19-07:00",
+      "url": "https://www.trendstoday.ca/things-to-do/bc-halal-food-fest-cloverdale-final-day",
+      "httpStatus": 200,
+      "canonical": "passed",
+      "h1": "passed",
+      "sourceAnchors": 2,
+      "structuredData": "passed",
+      "image": "loaded 946x473",
+      "consoleErrors": 0,
+      "pageErrors": 0
+    }
   },
   "stopCondition": "Do not publish if factual, editorial, exact-candidate, exact-SHA, source-link, canonical, structured-data, image, deployment, or production browser verification fails."
 }
