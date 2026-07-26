@@ -1,0 +1,172 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-25-1830",
+  "generatedAt": "2026-07-26T01:34:40.636965+00:00",
+  "sourceQueue": "artifacts/editorial/research/2026-07-25-1830-source-queue.json",
+  "status": "no-qualified-candidate",
+  "dailyCeiling": {
+    "dateLocal": "2026-07-25",
+    "publishedBeforeSweep": 0,
+    "maximumPublications": 6,
+    "ceilingReached": false
+  },
+  "sweepLimit": {
+    "maximumPublications": 2,
+    "published": 0
+  },
+  "queueComparison": {
+    "priorQueue": "artifacts/editorial/research/2026-07-25-1630-source-queue.json",
+    "currentCount": 30,
+    "priorCount": 30,
+    "currentTitleFingerprint": "e95bd8fcd40d314bfdcacf9b976493cb268bf69353e8b5b7ffcabcb10db2793d",
+    "priorTitleFingerprint": "e95bd8fcd40d314bfdcacf9b976493cb268bf69353e8b5b7ffcabcb10db2793d",
+    "matchedPriorByTitle": true
+  },
+  "qualified": [],
+  "candidateHashes": [],
+  "review": {
+    "gptEditorialGate": "not-run",
+    "gptReason": "No candidate qualified for exact-artifact review.",
+    "claudeOpus5ReleaseReview": "not-run",
+    "claudeReason": "Independent review is required only after a qualified exact candidate exists."
+  },
+  "sourceAvailability": {
+    "officialSourceScan": "available",
+    "enabledOfficialSources": 8,
+    "perplexity": "unavailable",
+    "googleCustomSearch": "unavailable"
+  },
+  "results": [
+    {
+      "title": "Previously covered or unchanged official-source items",
+      "decision": "reject",
+      "count": 18,
+      "sourceUrls": [
+        "https://www.surrey.ca/news-events/news/big-things-are-happening-four-major-projects-shaping-surreys-future",
+        "https://www.surrey.ca/news-events/news/staying-cool-during-extreme-heat",
+        "https://www.surrey.ca/news-events/news/major-upgrades-coming-popular-newton-parks",
+        "https://www.burnaby.ca/recreation-and-arts/events/burnaby-blues-roots-festival",
+        "https://www.burnaby.ca/recreation-and-arts/events/michael-de-courcy-one-million",
+        "https://www.burnaby.ca/recreation-and-arts/events/walk-and-chat-mayor",
+        "https://www.burnaby.ca/recreation-and-arts/events/environmental-stewardship-events",
+        "https://www.richmond.ca/city-hall/news/2026/climatefriendlyhomes08jul2026.htm",
+        "https://www.richmond.ca/city-hall/news/2026/reducerecyclingcontamination07jul2026.htm",
+        "https://www.coquitlam.ca/m/newsflash/Home/Detail/2005",
+        "https://www.coquitlam.ca/m/newsflash/Home/Detail/2004",
+        "https://www.coquitlam.ca/m/newsflash/Home/Detail/2001",
+        "https://www.coquitlam.ca/m/newsflash/Home/Detail/2003",
+        "https://www.delta.ca/community-culture/happening-delta/news/air-quality-warning-july-22-2026",
+        "https://www.delta.ca/community-culture/happening-delta/news/stage-2-water-restrictions-activated-metro-vancouver-0",
+        "https://www.delta.ca/community-culture/happening-delta/news/news-release-delta-celebrates-2026-community-banner-contest"
+      ],
+      "examples": [
+        "Surrey capital projects",
+        "Surrey heat resources",
+        "Surrey Newton park upgrades",
+        "Burnaby Blues + Roots Festival",
+        "Burnaby Walk and Chat with the Mayor",
+        "Burnaby Michael de Courcy / Expo 86 exhibition",
+        "Burnaby environmental stewardship events",
+        "Richmond climate-friendly homes",
+        "Richmond recycling contamination",
+        "Coquitlam election workers",
+        "Coquitlam heat resources",
+        "Coquitlam road-safety plan",
+        "Coquitlam Parkway and Panorama road work",
+        "Delta air-quality warning",
+        "Delta Stage 2 water restrictions",
+        "Delta banner contest"
+      ],
+      "reasons": [
+        "Duplicative of published Trends Today coverage or unchanged from earlier July 25 sweeps."
+      ]
+    },
+    {
+      "title": "Approval-gated civic, legal, and audit items",
+      "decision": "hold",
+      "count": 3,
+      "sourceUrls": [
+        "https://www.surrey.ca/news-events/news/surrey-targets-three-more-properties-unpermitted-construction",
+        "https://www.richmond.ca/city-hall/news/public-notices/propertytitle.htm",
+        "https://www.richmond.ca/city-hall/news/public-notices/ovalaudit.htm"
+      ],
+      "examples": [
+        "Surrey unpermitted-construction enforcement",
+        "Richmond property-title decision",
+        "Richmond Olympic Oval audit coverage"
+      ],
+      "reasons": [
+        "Legal, enforcement, audit, or property-title subjects require owner review before publication."
+      ]
+    },
+    {
+      "title": "Regular Council Meeting Agenda - July 27, 2026",
+      "sourceUrl": "https://www.delta.ca/community-culture/happening-delta/news/regular-council-meeting-agenda-july-27-2026",
+      "sourceName": "City of Delta news",
+      "locality": "Delta",
+      "category": "local-news",
+      "storyType": "reported-update",
+      "decision": "reject",
+      "reasons": [
+        "Fresh official agenda listing, but the configured source scan did not isolate a specific agenda decision or resident consequence.",
+        "Would require agenda-level reporting beyond the automated listing before a supported article could be written."
+      ],
+      "commercialIntent": "none",
+      "sponsorshipStatus": "editorial",
+      "brandSafety": "standard"
+    },
+    {
+      "title": "Canucks podcast, front-office, prospect, and Penticton training-camp items",
+      "decision": "reject",
+      "sourceUrls": [
+        "https://www.nhl.com/canucks/news/kevin-lankinen-and-linus-karlsson-join-canucks-insider-podcast-to-discuss-offseason-work",
+        "https://www.nhl.com/canucks/news/cammi-granato-takes-on-new-role-with-vancouver-canucks",
+        "https://www.nhl.com/canucks/news/kieren-dervin-prepares-for-the-pace-of-ncaa-hockey",
+        "https://www.nhl.com/canucks/news/vancouver-canucks-to-host-2026-training-camp-in-penticton-bc"
+      ],
+      "examples": [
+        "Kevin Lankinen and Linus Karlsson podcast",
+        "Cammi Granato role update",
+        "Kieren Dervin prospect feature",
+        "Canucks 2026 training camp in Penticton"
+      ],
+      "reasons": [
+        "Official and current or recent, but the items are team content, internal hockey operations, prospect features, or outside the Lower Mainland.",
+        "No clear resident action, schedule, cost, route, service, ticketing, or event-planning consequence cleared the current sports utility bar."
+      ],
+      "commercialIntent": "none",
+      "sponsorshipStatus": "editorial",
+      "brandSafety": "standard"
+    },
+    {
+      "title": "Whitecaps and BC Lions sports carryovers",
+      "decision": "reject",
+      "sourceUrls": [
+        "https://www.whitecapsfc.com/news/selemani-call-up-1",
+        "https://www.whitecapsfc.com/news/preview-caps-look-to-bounce-back-in-minnesota",
+        "https://www.whitecapsfc.com/news/gauld-totm-16-17",
+        "https://www.whitecapsfc.com/news/caps-fall-in-wild-match-in-cincinnati",
+        "https://www.bclions.com/2024/09/18/emerging-o-line-giving-the-lions-an-extra-push/",
+        "https://www.bclions.com/2022/09/13/446004/"
+      ],
+      "examples": [
+        "Whitecaps Selemani short-term agreement",
+        "Whitecaps Minnesota preview",
+        "Ryan Gauld Team of Matchday",
+        "Whitecaps Cincinnati recap",
+        "BC Lions archive links"
+      ],
+      "reasons": [
+        "Selemani remained too narrow as a one-source roster bulletin.",
+        "The Minnesota preview was already attempted in the 10:30 sweep and blocked after GPT review, with no new official facts in this scan.",
+        "Other Whitecaps and BC Lions items were retrospective, stale, or weakly actionable for Lower Mainland readers."
+      ],
+      "commercialIntent": "none",
+      "sponsorshipStatus": "editorial",
+      "brandSafety": "standard"
+    }
+  ],
+  "commercialFitPolicy": {
+    "status": "not-applied",
+    "reason": "No candidate first cleared editorial qualification; commercial fit cannot rescue a weak, stale, approval-gated, or duplicate story."
+  }
+}

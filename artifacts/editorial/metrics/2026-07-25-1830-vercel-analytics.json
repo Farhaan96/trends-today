@@ -1,0 +1,23 @@
+{
+  "status": "unavailable",
+  "sources": [],
+  "missing": [
+    "VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN",
+    "VERCEL_PROJECT_ID",
+    "engaged sessions",
+    "returning sessions",
+    "scroll depth",
+    "measurable ad impressions",
+    "viewable ad impressions",
+    "Active View rate",
+    "ad revenue",
+    "page RPM",
+    "sponsor inquiries",
+    "qualified sponsor inquiries",
+    "sponsorship revenue",
+    "content cost"
+  ],
+  "decision": "repair-measurement",
+  "articles": [],
+  "generatedAt": "2026-07-26T01:33:19.266692+00:00"
+}
