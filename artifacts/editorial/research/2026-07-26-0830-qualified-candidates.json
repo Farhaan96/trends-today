@@ -8,6 +8,10 @@
     {
       "title": "Free Darts Hill scavenger hunt runs Sunday in Surrey",
       "candidatePath": "artifacts/editorial/release-candidates/things-to-do/darts-hill-scavenger-hunt-surrey.mdx",
+      "candidateSha256": "bef499b3f2a16b23450b648ea52211e5d8ebf42d47c6422d11c02579882bc233",
+      "finalPromotedPath": "content/things-to-do/darts-hill-scavenger-hunt-surrey.mdx",
+      "gptReviewArtifact": "artifacts/editorial/reviews/gpt/things-to-do/darts-hill-scavenger-hunt-surrey.bef499b3f2a1.json",
+      "claudeReviewArtifact": "artifacts/editorial/reviews/things-to-do/darts-hill-scavenger-hunt-surrey.bef499b3f2a1.json",
       "sourceUrls": [
         "https://www.surrey.ca/news-events/events/family-scavenger-hunt-darts-hill"
       ],
