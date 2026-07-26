@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "79c1bbf94b0975a2d7617d39d3dcde98eb9a190f358eca3934d218c89e6e63a3",
+  "repositorySha": "b75d26079be3e7d425b4a85f7d3aefb5d57c9084",
+  "reviewedAt": "2026-07-26T19:48:03.630021+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9ff7-d367-73f0-b356-fc3c453ca1ec",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 5,
+    "formatting": 4,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The article repeats the same activity information in the opening, the setup paragraph, and the activity list. The list then adds generic glosses such as \"Outdoor play at the park\" and \"A listed activity on both Surrey pages,\" creating filler rather than useful detail.",
+    "The ending is flat and repetitive. It tells readers to use the two pages already linked and mentions contact information without supplying the shared phone number, so the most actionable detail remains buried on the source pages.",
+    "The dates-and-locations list places each address in a separate top-level bullet, weakening the pairing between each session and its location."
+  ],
+  "summary": "The event dates, times, addresses, pricing, recurrence, activities, contact-number claim, and omissions are supported by the two City listings. The candidate is accurate and contains no authorial em dashes, but repetition, low-value activity descriptions, awkward list structure, and a weak close prevent release."
+}

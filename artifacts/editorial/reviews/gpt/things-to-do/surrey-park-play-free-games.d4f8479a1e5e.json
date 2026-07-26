@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "d4f8479a1e5ea6b65b5a4f32d85129f1a253d2d103738c8d57d6ed9d9fb3ec22",
+  "repositorySha": "b75d26079be3e7d425b4a85f7d3aefb5d57c9084",
+  "reviewedAt": "2026-07-26T19:42:03.563217+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9ff2-38cc-72b1-9682-baa47342a0dc",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 4,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The cited event pages do not establish that both parks are in Newton. Robertson Drive Park is tagged \u201cFocus Newton,\u201d but the T.E. Scott Park listing does not identify its neighbourhood.",
+    "The activity descriptions add unsupported characterization: \u201cdrop-in,\u201d \u201csimple,\u201d and \u201cfor families who want a structured option\u201d do not appear in the cited material.",
+    "The close says families can fill an afternoon \u201cwithout booking a program,\u201d but the sources only omit registration information; they do not affirm that no booking or registration is required.",
+    "The article repeatedly restates the same two dates, free admission, and weekday choice across the lead, schedule, significance section, and close. This padding weakens originality and makes the ending feel flat rather than adding useful guidance."
+  ],
+  "summary": "The file and repository hashes match exactly, and the authorial prose contains no em dashes. The MDX is valid and readable, but unsupported local and participation claims plus repetitive framing prevent release."
+}

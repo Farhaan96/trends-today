@@ -1,0 +1,97 @@
+{
+  "generatedAt": "2026-07-26T12:45:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-26-1230",
+  "dailyCountBeforeSweep": 2,
+  "dailyCeiling": 6,
+  "sweepLimit": 2,
+  "sourceQueue": "artifacts/editorial/research/2026-07-26-1230-source-queue.json",
+  "qualified": [
+    {
+      "title": "Free Surrey park play kits run at two Newton parks",
+      "candidatePath": "artifacts/editorial/release-candidates/things-to-do/surrey-park-play-free-games.mdx",
+      "candidateSha256": "461a8b0f1450219c581f2d08b9ba67edf2374327f9bdfaeea7c3d43eee400250",
+      "sourceUrls": [
+        "https://www.surrey.ca/news-events/events/park-play-te-scott-park",
+        "https://www.surrey.ca/news-events/events/park-play-robertson-drive-park"
+      ],
+      "primarySourceUrls": [
+        "https://www.surrey.ca/news-events/events/park-play-te-scott-park",
+        "https://www.surrey.ca/news-events/events/park-play-robertson-drive-park"
+      ],
+      "locality": "Surrey",
+      "category": "things-to-do",
+      "storyType": "bulletin",
+      "lane": "daily-local-utility",
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 4,
+        "freshness": 5,
+        "evidenceStrength": 4,
+        "uniqueAngle": 4,
+        "repeatVisitPotential": 3,
+        "speedToUsefulDraft": 5
+      },
+      "gptReviewArtifact": "artifacts/editorial/reviews/gpt/things-to-do/surrey-park-play-free-games.461a8b0f1450.json",
+      "editorialDecision": "blocked-by-gpt-editorial-gate",
+      "qualificationReason": "Two official City of Surrey event pages provide fresh July 27 and July 29 free family recreation sessions with times, addresses, recurring schedule, activity description, primary-source support, low brand risk, and no published duplicate.",
+      "blockReason": "After multiple repairs, GPT editorial review still scored quality 3/5 because the short bulletin repeated the same activity list, dates, timing distinction, and shared program details instead of adding enough useful standalone value.",
+      "commercialIntent": "ad-fit",
+      "commercialFitReason": "Ad fit considered only after editorial qualification; audience and revenue metrics remain unavailable.",
+      "sponsorshipStatus": "editorial"
+    }
+  ],
+  "heldOrRejected": [
+    {
+      "title": "Big Things Are Happening: Four Major Projects Shaping Surrey's Future",
+      "reason": "Duplicate of already published Surrey capital-projects article."
+    },
+    {
+      "title": "Family Scavenger Hunt at Darts Hill",
+      "reason": "Duplicate of already published July 26 Darts Hill article."
+    },
+    {
+      "title": "Burnaby Blues + Roots Festival",
+      "reason": "Duplicate of already published Burnaby Blues + Roots Festival article."
+    },
+    {
+      "title": "Michael de Courcy: one in a million",
+      "reason": "Duplicate of already published Burnaby Expo 86 library exhibition article."
+    },
+    {
+      "title": "Coquitlam Seeking Workers for Upcoming Local Election",
+      "reason": "Duplicate of already published Coquitlam election-worker article."
+    },
+    {
+      "title": "BC Supreme Court Decision - Impact on Property Titles",
+      "reason": "Property-title/legal subject remains sensitive and owner-review gated."
+    },
+    {
+      "title": "Richmond Olympic Oval Corporation - Performance & Forensic Audits",
+      "reason": "Audit/investigation subject remains sensitive and owner-review gated."
+    },
+    {
+      "title": "Fired Up for Football - free Foosball tables in Recreation Facilities",
+      "reason": "Stale: official New Westminster page lists June 11 through July 19, 2026."
+    },
+    {
+      "title": "Summer Discovery Days: Colours of the Fraser",
+      "reason": "Stale: official New Westminster page lists June 27, June 28, and July 1, 2026."
+    },
+    {
+      "title": "Downtown Front Yard: Royal City Concert Band",
+      "reason": "Stale: official New Westminster page lists July 2, 2026."
+    },
+    {
+      "title": "Cinema Under the Stars",
+      "reason": "Future Port Coquitlam movie series remains useful but less timely than this week's free Surrey park sessions."
+    },
+    {
+      "title": "Music in the Square",
+      "reason": "Next listed Port Coquitlam dates are August 9 and August 23, so it is less timely than this week's free Surrey park sessions."
+    },
+    {
+      "title": "Sports and team-content items",
+      "reason": "Several items are stale, team-podcast/quote content, out-of-market, or below the local sports utility bar."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "461a8b0f1450219c581f2d08b9ba67edf2374327f9bdfaeea7c3d43eee400250",
+  "repositorySha": "b75d26079be3e7d425b4a85f7d3aefb5d57c9084",
+  "reviewedAt": "2026-07-26T19:50:17.982546+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9ff9-cd80-7143-a0c8-8506a14972f6",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The short bulletin repeatedly restates the same activity list, dates, timing distinction, and shared program details. The \u201cWhat the City says is offered\u201d section largely duplicates the opening and schedule rather than adding useful information, creating repetition and filler that requires revision."
+  ],
+  "summary": "The candidate and repository hashes match exactly, all factual claims are supported by the two City of Surrey listings, the MDX is valid and scannable, and the authorial prose contains no em dashes. It does not pass the strict gate because its repetition reduces editorial quality below 4."
+}

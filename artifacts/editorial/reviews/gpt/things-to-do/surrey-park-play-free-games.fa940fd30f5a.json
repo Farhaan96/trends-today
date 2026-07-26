@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "fa940fd30f5ab4341907b2e66b3f5a20b2f81f1d6982c897dd4345e63191d64e",
+  "repositorySha": "b75d26079be3e7d425b4a85f7d3aefb5d57c9084",
+  "reviewedAt": "2026-07-26T19:44:10.563053+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9ff4-1dc9-7262-a36b-b28b79f24491",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 4,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The final two sections repeat the same advice to choose a time and recheck the City page before leaving. This repetition adds little practical value and produces a flat ending; consolidate it into one sharper, actionable close."
+  ],
+  "summary": "The exact candidate hash and repository SHA were verified. The City pages support the dates, times, addresses, free admission, recurrence, and activities. MDX is valid and scannable, and authorial prose contains no em dashes. The candidate is blocked only by repetitive closing material that lowers editorial quality below the required threshold."
+}

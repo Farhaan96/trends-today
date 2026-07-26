@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "72dcd3dcc50e05c3e88acd6c16025ad9ec79ee1adea7664544f5e17d53d7faea",
+  "repositorySha": "b75d26079be3e7d425b4a85f7d3aefb5d57c9084",
+  "reviewedAt": "2026-07-26T19:46:10.891127+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9ff5-e572-7ff0-be0a-40558f5dd8ca",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 4,
+    "formatting": 4,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The final two sections repeat the same advice about checking weather, accessibility, and activities before leaving, creating noticeable repetition in a two-minute bulletin.",
+    "The claim that the \"practical risk\" is arriving late or missing a schedule change manufactures stakes not established by the cited listings.",
+    "The close is flat: it ends by noting that contact information exists instead of giving readers a direct, useful final action."
+  ],
+  "summary": "The candidate bytes and repository commit match both supplied hashes. Dates, times, addresses, pricing, recurrence, activities, and contact availability are supported by the cited City of Surrey pages. The release remains blocked by repetitive guidance, an unsupported risk framing, and a weak ending."
+}
