@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "c87de8952fa6d772f65fa4aa3fb00923acc465f23d7ce112a0ded92d522e6dc3",
+  "repositorySha": "0d27e76ccef9b7456a0b09013aeeef73cc35ebe4",
+  "reviewedAt": "2026-07-26T15:40:43.271530+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9f15-81c5-7202-b6cd-979136ce8187",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The official City listing supports the event dates, hours, location, free pricing, categories, monthly recurrence, and activity description. The bulletin is clear, useful, scannable, locally relevant, and actionable. Repetition is limited to practical logistics appropriate for a short event bulletin, and the authorial prose contains no em dashes."
+}

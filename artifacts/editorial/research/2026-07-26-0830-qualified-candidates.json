@@ -1,0 +1,71 @@
+{
+  "generatedAt": "2026-07-26T08:40:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-26-0830",
+  "dailyCountBeforeSweep": 1,
+  "dailyCeiling": 6,
+  "sourceQueue": "artifacts/editorial/research/2026-07-26-0830-source-queue.json",
+  "qualified": [
+    {
+      "title": "Free Darts Hill scavenger hunt runs Sunday in Surrey",
+      "candidatePath": "artifacts/editorial/release-candidates/things-to-do/darts-hill-scavenger-hunt-surrey.mdx",
+      "sourceUrls": [
+        "https://www.surrey.ca/news-events/events/family-scavenger-hunt-darts-hill"
+      ],
+      "primarySourceUrls": [
+        "https://www.surrey.ca/news-events/events/family-scavenger-hunt-darts-hill"
+      ],
+      "locality": "Surrey",
+      "category": "things-to-do",
+      "storyType": "bulletin",
+      "lane": "daily-local-utility",
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 4,
+        "freshness": 5,
+        "evidenceStrength": 4,
+        "uniqueAngle": 4,
+        "repeatVisitPotential": 3,
+        "speedToUsefulDraft": 5
+      },
+      "editorialDecision": "qualified-for-review",
+      "qualificationReason": "Same-day free Surrey family event with official date, time, address, pricing, activity description, primary-source support, low brand risk, and no duplicate published article.",
+      "commercialIntent": "ad-fit",
+      "commercialFitReason": "Ad fit considered only after editorial qualification; audience and revenue metrics remain unavailable.",
+      "sponsorshipStatus": "editorial"
+    }
+  ],
+  "heldOrRejected": [
+    {
+      "title": "Big Things Are Happening: Four Major Projects Shaping Surrey's Future",
+      "reason": "Duplicate of already published Surrey capital-projects article."
+    },
+    {
+      "title": "Burnaby Blues + Roots Festival",
+      "reason": "Duplicate of already published Burnaby Blues + Roots Festival article."
+    },
+    {
+      "title": "Coquitlam Seeking Workers for Upcoming Local Election",
+      "reason": "Duplicate of already published Coquitlam election-worker article."
+    },
+    {
+      "title": "BC Supreme Court Decision - Impact on Property Titles",
+      "reason": "Property-title/legal subject remains sensitive and owner-review gated."
+    },
+    {
+      "title": "Richmond Olympic Oval Corporation - Performance & Forensic Audits",
+      "reason": "Audit/investigation subject remains sensitive and owner-review gated."
+    },
+    {
+      "title": "Regular Council Meeting Agenda - July 27, 2026",
+      "reason": "Thin agenda-only notice without enough standalone reader utility for a Sunday publication."
+    },
+    {
+      "title": "Cinema Under the Stars",
+      "reason": "Next movie is August 8; useful but less urgent than the same-day Darts Hill activity."
+    },
+    {
+      "title": "Sports and team-content items",
+      "reason": "Several items are stale, team-podcast/quote content, out-of-market, already held by prior sweeps, or below the local sports utility bar."
+    }
+  ]
+}
