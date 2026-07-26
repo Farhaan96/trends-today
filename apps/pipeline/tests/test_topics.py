@@ -139,9 +139,67 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
                 'category': 'things-to-do',
                 'sourceTopic': 'civic events',
                 'count': 2,
+                'acceptedCount': 0,
+                'includedCount': 2,
                 'sampleTitles': ['Event one', 'Event two'],
             }
         ], summary)
+
+    @patch('topics.requests.get')
+    def test_primary_source_scan_round_robins_across_sources(self, get):
+        first = Mock()
+        first.status_code = 200
+        first.url = 'https://first.example/news'
+        first.text = ''.join(
+            f'<a href="/news/story-{index}">First city service update number {index}</a>'
+            for index in range(1, 5)
+        )
+        second = Mock()
+        second.status_code = 200
+        second.url = 'https://second.example/events'
+        second.text = ''.join(
+            f'<a href="/events/story-{index}">Second city event listing number {index}</a>'
+            for index in range(1, 5)
+        )
+        get.side_effect = [first, second]
+
+        discovery = TopicDiscovery()
+        discovery.source_config = {
+            'sources': [
+                {
+                    'name': 'First source',
+                    'url': 'https://first.example/news',
+                    'domain': 'first.example',
+                    'locality': 'Surrey',
+                    'desks': ['local-news'],
+                    'tier': 'primary',
+                    'discoveryEnabled': True,
+                    'includeUrlPatterns': ['/news/'],
+                    'maxCandidatesPerSweep': 4,
+                },
+                {
+                    'name': 'Second source',
+                    'url': 'https://second.example/events',
+                    'domain': 'second.example',
+                    'locality': 'New Westminster',
+                    'desks': ['things-to-do'],
+                    'tier': 'primary',
+                    'discoveryEnabled': True,
+                    'includeUrlPatterns': ['/events/'],
+                    'maxCandidatesPerSweep': 4,
+                },
+            ]
+        }
+
+        candidates = discovery.discover_official_pages(3)
+
+        self.assertEqual(3, len(candidates))
+        self.assertEqual(
+            ['First source', 'Second source', 'First source'],
+            [candidate['sourceName'] for candidate in candidates],
+        )
+        self.assertEqual(4, discovery.last_source_scan[0]['acceptedCount'])
+        self.assertEqual(4, discovery.last_source_scan[1]['acceptedCount'])
 
 
 if __name__ == '__main__':

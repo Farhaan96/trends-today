@@ -34,7 +34,7 @@ python -m pip install requests python-dotenv
 Create an unscored research queue. Discovery output is never silently treated as proof:
 
 ```powershell
-python apps/pipeline/runner.py research --limit 15 --output reports/editorial/research-queue.json
+python apps/pipeline/runner.py research --limit 60 --output reports/editorial/research-queue.json
 ```
 
 After enriching candidates with demand, audience, source, angle, lane, CTA, and rating evidence, rank them:
