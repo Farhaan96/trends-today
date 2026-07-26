@@ -107,6 +107,30 @@ class TopicDiscovery:
         topic_slug = topic.lower().replace(' ', '-')[:50]
         return any(slug in topic_slug or topic_slug in slug for slug in self.recent_posts)
 
+    def _resolve_locality(self, *texts: object) -> str:
+        """Return a configured locality only when the result itself supports it."""
+        blob = ' '.join(str(text or '') for text in texts).lower()
+        for locality in self._approved_search_localities():
+            if re.search(
+                rf'(?<!\w){re.escape(locality.lower())}(?!\w)',
+                blob,
+            ):
+                return locality
+        return ''
+
+    def _approved_search_localities(self) -> List[str]:
+        approved = list(self.source_config.get('localities', []))
+        approved.extend(
+            self.source_config
+            .get('searchDiscovery', {})
+            .get('approvedRegionalLabels', [])
+        )
+        return [
+            str(locality).strip()
+            for locality in approved
+            if str(locality).strip()
+        ]
+
     def discover_official_pages(self, count: int = 30) -> List[Dict]:
         """Pull candidate links directly from configured local-source listings."""
         source_batches = []
@@ -487,6 +511,29 @@ class TopicDiscovery:
                                 source_url,
                                 self.source_config,
                             )
+                            configured_locality = (
+                                str(configured_source.get('locality', '')).strip()
+                                if configured_source else ''
+                            )
+                            approved_localities = {
+                                locality.lower()
+                                for locality in self._approved_search_localities()
+                            }
+                            locality = (
+                                configured_locality
+                                if configured_locality.lower() in approved_localities
+                                else ''
+                            ) or self._resolve_locality(
+                                title,
+                                item.get('snippet'),
+                                source_url,
+                            )
+                            if not locality:
+                                logger.info(
+                                    'Skipping search result without an approved locality: %s',
+                                    title,
+                                )
+                                continue
                             source_tier = (
                                 configured_source.get('tier')
                                 if configured_source else 'secondary'
@@ -500,7 +547,7 @@ class TopicDiscovery:
                                     if source_tier == 'primary' else 'lead'
                                 ),
                                 'url': source_url,
-                                'locality': 'Lower Mainland',
+                                'locality': locality,
                                 'category': 'local-news',
                                 'storyType': 'reported-update',
                                 'sourceTopic': source_topic,

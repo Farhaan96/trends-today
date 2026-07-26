@@ -30,6 +30,12 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
             ],
             0,
         )
+        self.assertIn(
+            'Lower Mainland',
+            discovery.source_config['searchDiscovery'][
+                'googleCseScopeRequirement'
+            ],
+        )
 
     @patch('topics.requests.get')
     def test_primary_source_link_becomes_local_candidate(self, get):
@@ -454,6 +460,7 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         self.assertEqual('secondary', candidates[0]['sourceTier'])
         self.assertEqual('lead', candidates[0]['discoveryRole'])
         self.assertEqual('google_local_change', candidates[0]['source'])
+        self.assertEqual('Burnaby', candidates[0]['locality'])
 
     @patch('topics.requests.get')
     def test_google_result_on_configured_primary_domain_keeps_primary_tier(self, get):
@@ -471,10 +478,12 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         discovery.google_key = 'test-key'
         discovery.google_cse_id = 'test-cse'
         discovery.source_config = {
+            'localities': ['Vancouver'],
             'sources': [{
                 'name': 'City of Vancouver news',
                 'url': 'https://vancouver.ca/news-calendar/news.aspx',
                 'domain': 'vancouver.ca',
+                'locality': 'Vancouver',
                 'tier': 'primary',
             }]
         }
@@ -486,6 +495,102 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
 
         self.assertEqual('primary', candidates[0]['sourceTier'])
         self.assertEqual('evidence', candidates[0]['discoveryRole'])
+        self.assertEqual('Vancouver', candidates[0]['locality'])
+
+    @patch('topics.requests.get')
+    def test_google_result_without_approved_locality_is_dropped(self, get):
+        response = Mock()
+        response.status_code = 200
+        response.json.return_value = {
+            'items': [{
+                'title': 'Queen Street shop closes after 40 years',
+                'snippet': 'The Toronto retailer will close next month.',
+                'link': 'https://publication.example/toronto/shop-closes',
+            }]
+        }
+        get.return_value = response
+
+        discovery = TopicDiscovery()
+        discovery.google_key = 'test-key'
+        discovery.google_cse_id = 'test-cse'
+        discovery.source_config = {
+            'localities': ['Vancouver', 'Burnaby', 'Richmond'],
+            'searchDiscovery': {
+                'approvedRegionalLabels': ['Lower Mainland'],
+            },
+            'sources': [],
+        }
+
+        candidates = discovery.discover_google_news(
+            1,
+            categories=['retail store closures'],
+        )
+
+        self.assertEqual([], candidates)
+
+    @patch('topics.requests.get')
+    def test_province_wide_configured_source_still_needs_local_evidence(self, get):
+        response = Mock()
+        response.status_code = 200
+        response.json.return_value = {
+            'items': [{
+                'title': 'Northern highway project receives approval',
+                'snippet': 'The project is located near Prince George.',
+                'link': 'https://news.gov.bc.ca/releases/2026TT001',
+            }]
+        }
+        get.return_value = response
+
+        discovery = TopicDiscovery()
+        discovery.google_key = 'test-key'
+        discovery.google_cse_id = 'test-cse'
+        discovery.source_config = {
+            'localities': ['Vancouver', 'Burnaby', 'Richmond'],
+            'searchDiscovery': {'approvedRegionalLabels': ['Lower Mainland']},
+            'sources': [{
+                'name': 'BC Government news',
+                'url': 'https://news.gov.bc.ca/',
+                'domain': 'news.gov.bc.ca',
+                'locality': 'British Columbia',
+                'tier': 'primary',
+            }],
+        }
+
+        candidates = discovery.discover_google_news(
+            1,
+            categories=['British Columbia government news'],
+        )
+
+        self.assertEqual([], candidates)
+
+    @patch('topics.requests.get')
+    def test_google_result_locality_comes_from_result_text(self, get):
+        response = Mock()
+        response.status_code = 200
+        response.json.return_value = {
+            'items': [{
+                'title': 'Independent hardware store closes after 40 years',
+                'snippet': 'The Burnaby shop will close at the end of July.',
+                'link': 'https://publication.example/local/shop-closes',
+            }]
+        }
+        get.return_value = response
+
+        discovery = TopicDiscovery()
+        discovery.google_key = 'test-key'
+        discovery.google_cse_id = 'test-cse'
+        discovery.source_config = {
+            'localities': ['Vancouver', 'Burnaby', 'Richmond'],
+            'searchDiscovery': {'approvedRegionalLabels': []},
+            'sources': [],
+        }
+
+        candidates = discovery.discover_google_news(
+            1,
+            categories=['retail store closures'],
+        )
+
+        self.assertEqual('Burnaby', candidates[0]['locality'])
 
 
 if __name__ == '__main__':

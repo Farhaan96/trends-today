@@ -29,6 +29,26 @@ class SourcePolicyTests(unittest.TestCase):
             canonical_http_url('https://city.example/news/update'),
         )
 
+    def test_canonical_url_preserves_semantic_query_identity(self):
+        first = canonical_http_url(
+            'https://www.coquitlam.ca/Calendar.aspx?EID=1234&utm_source=x'
+        )
+        second = canonical_http_url(
+            'https://coquitlam.ca/Calendar.aspx?EID=9999'
+        )
+        listing = canonical_http_url(
+            'https://coquitlam.ca/Calendar.aspx'
+        )
+
+        self.assertEqual(
+            first,
+            canonical_http_url(
+                'https://coquitlam.ca/Calendar.aspx?EID=1234'
+            ),
+        )
+        self.assertNotEqual(first, second)
+        self.assertNotEqual(first, listing)
+
     def test_lead_subdomain_does_not_block_parent_domain(self):
         self.assertFalse(
             host_is_same_or_subdomain(

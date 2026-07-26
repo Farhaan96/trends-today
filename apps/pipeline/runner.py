@@ -81,6 +81,20 @@ def primary_source_urls_for_topic(topic: Dict) -> set:
     }
 
 
+def apply_source_tiers(sources: List[Dict], topic: Dict) -> None:
+    """Label retrieved sources without collapsing distinct query-keyed pages."""
+    primary_urls = {
+        canonical_http_url(url)
+        for url in primary_source_urls_for_topic(topic)
+    }
+    for source in sources:
+        source['tier'] = (
+            'primary'
+            if canonical_http_url(source.get('url')) in primary_urls
+            else 'secondary'
+        )
+
+
 def requires_manual_approval(topic: Dict, article: Dict, source_config: Dict) -> bool:
     """Fail closed on common sensitive local-news signals."""
     if topic.get('manualApprovalRequired') or article.get('manualApprovalRequired'):
@@ -121,7 +135,6 @@ def resolve_category(topic: Dict, article: Dict) -> str:
     text = f"{topic.get('title', '')} {article.get('title', '')}".lower()
     keyword_map = {
         'transit': ('translink', 'skytrain', 'bus route', 'seabus', 'road closure', 'traffic'),
-        'things-to-do': ('event', 'festival', 'concert', 'weekend', 'things to do'),
         'food-drink': (
             'restaurant', 'bakery', 'cafe', 'coffee shop', 'bar', 'pub',
             'brewery', 'eatery', 'diner',
@@ -142,6 +155,7 @@ def resolve_category(topic: Dict, article: Dict) -> str:
         'psychology': ('psychology', 'brain', 'behavior', 'mental', 'emotion', 'cognitive'),
         'science': ('science', 'study', 'researcher', 'physics', 'biology', 'chemistry'),
         'culture': ('culture', 'media', 'art', 'music', 'creator', 'social'),
+        'things-to-do': ('event', 'festival', 'concert', 'weekend', 'things to do'),
     }
     for category, keywords in keyword_map.items():
         if any(
@@ -219,15 +233,7 @@ class ContentPipeline:
             seed_urls = seed_urls_for_topic(topic) or None
             sources_data = self.retrieval.retrieve(topic_title, urls=seed_urls)
             sources = sources_data.get('sources', [])
-            primary_urls = {
-                canonical_http_url(url)
-                for url in primary_source_urls_for_topic(topic)
-            }
-            for source in sources:
-                if canonical_http_url(source.get('url')) in primary_urls:
-                    source['tier'] = 'primary'
-                else:
-                    source['tier'] = 'secondary'
+            apply_source_tiers(sources, topic)
             
             if not sources:
                 logger.warning(f"No sources found for: {topic_title}")

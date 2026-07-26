@@ -8,6 +8,7 @@ PIPELINE_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PIPELINE_DIR))
 
 from runner import (  # noqa: E402
+    apply_source_tiers,
     eligible_candidates_from_payload,
     primary_source_urls_for_topic,
     requires_manual_approval,
@@ -116,6 +117,30 @@ class RunnerSourceTests(unittest.TestCase):
         self.assertEqual(
             {'https://example.com/official-notice'},
             primary_source_urls_for_topic(topic),
+        )
+
+    def test_query_keyed_sibling_page_is_not_marked_primary(self):
+        topic = {
+            'sourceTier': 'primary',
+            'evidence': {
+                'primarySourceUrls': [
+                    'https://www.coquitlam.ca/Calendar.aspx?EID=1234',
+                ],
+            },
+        }
+        sources = [{
+            'url': 'https://www.coquitlam.ca/Calendar.aspx?EID=9999',
+        }, {
+            'url': (
+                'https://coquitlam.ca/Calendar.aspx?EID=1234&utm_source=search'
+            ),
+        }]
+
+        apply_source_tiers(sources, topic)
+
+        self.assertEqual(
+            ['secondary', 'primary'],
+            [source['tier'] for source in sources],
         )
 
     def test_sensitive_story_signal_requires_manual_approval(self):
@@ -235,6 +260,30 @@ class RunnerCategoryTests(unittest.TestCase):
         self.assertEqual(
             'reported-update',
             resolve_story_type({}, 'local-news'),
+        )
+
+    def test_business_change_signal_outweighs_generic_weekend_or_event(self):
+        self.assertEqual(
+            'local-news',
+            resolve_category({
+                'title': (
+                    'Gastown shop closing sale runs this weekend'
+                ),
+            }, {}),
+        )
+        self.assertEqual(
+            'local-news',
+            resolve_category({
+                'title': (
+                    'Surrey hardware store shutters after farewell event'
+                ),
+            }, {}),
+        )
+        self.assertEqual(
+            'food-drink',
+            resolve_category({
+                'title': 'New Westminster bakery announces new location',
+            }, {}),
         )
 
 

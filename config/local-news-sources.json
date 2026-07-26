@@ -41,6 +41,12 @@
     "providers": ["Google Custom Search", "Perplexity"],
     "sourceTier": "secondary",
     "discoveryRole": "lead",
+    "googleCseScopeRequirement": "Lower Mainland and Fraser Valley sources only",
+    "approvedRegionalLabels": [
+      "Lower Mainland",
+      "Metro Vancouver",
+      "Fraser Valley"
+    ],
     "localChangeQueries": [
       "Metro Vancouver retail store local business opening closing relocation closing sale",
       "Vancouver neighbourhood business new location major renovation long-running shop",

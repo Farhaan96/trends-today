@@ -4,12 +4,15 @@
 import json
 from pathlib import Path
 from typing import Callable, Dict, Iterable, Optional
-from urllib.parse import urlparse, urlunparse
+from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 from urllib.robotparser import RobotFileParser
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SOURCE_CONFIG = REPO_ROOT / 'config' / 'local-news-sources.json'
+TRACKING_QUERY_PARAMS = {
+    'fbclid', 'gclid', 'igshid', 'mc_cid', 'mc_eid', 'msclkid',
+}
 
 
 def load_source_config(path: Path = DEFAULT_SOURCE_CONFIG) -> Dict:
@@ -48,11 +51,19 @@ def canonical_http_url(url: object) -> str:
     except ValueError:
         return ''
     path = parsed.path.rstrip('/') or '/'
+    query = urlencode(sorted(
+        (key, value)
+        for key, value in parse_qsl(parsed.query, keep_blank_values=True)
+        if (
+            not key.lower().startswith('utm_')
+            and key.lower() not in TRACKING_QUERY_PARAMS
+        )
+    ))
     return urlunparse((
         parsed.scheme.lower(),
         f'{host}{port}',
         path,
-        '',
+        query,
         '',
         '',
     ))
