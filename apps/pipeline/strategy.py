@@ -165,6 +165,7 @@ def build_research_queue(topics: Iterable[Dict[str, Any]]) -> List[Dict[str, Any
             "sourceUrl": topic.get("url"),
             "sourceName": topic.get("sourceName"),
             "sourceTier": topic.get("sourceTier"),
+            "discoveryRole": topic.get("discoveryRole", "evidence"),
             "locality": topic.get("locality"),
             "category": topic.get("category"),
             "sourceTopic": topic.get("sourceTopic"),
@@ -174,7 +175,8 @@ def build_research_queue(topics: Iterable[Dict[str, Any]]) -> List[Dict[str, Any
             "skipReasonIfUnqualified": (
                 "Do not publish unless research supplies locality, freshness, "
                 "reader impact, non-duplicate angle, required source count, "
-                "primary-source support, brand-safety clearance, and all "
+                "primary-source support, independent reporting when a secondary "
+                "lead opened the research, brand-safety clearance, and all "
                 "opportunity ratings."
             ),
             "requiredEvidence": [
@@ -183,6 +185,7 @@ def build_research_queue(topics: Iterable[Dict[str, Any]]) -> List[Dict[str, Any
                 "freshness timestamp or event date",
                 "story type and its source threshold",
                 "at least one primary source URL",
+                "independent reporting angle not copied from a discovery lead",
                 "specific angle not covered by existing inventory",
                 "content lane and CTA hypothesis",
                 "all seven local opportunity ratings",

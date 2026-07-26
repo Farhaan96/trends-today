@@ -99,7 +99,10 @@ def resolve_category(topic: Dict, article: Dict) -> str:
     keyword_map = {
         'transit': ('translink', 'skytrain', 'bus route', 'seabus', 'road closure', 'traffic'),
         'things-to-do': ('event', 'festival', 'concert', 'weekend', 'things to do'),
-        'food-drink': ('restaurant', 'bakery', 'cafe', 'bar', 'opening', 'closing'),
+        'food-drink': (
+            'restaurant', 'bakery', 'cafe', 'coffee shop', 'bar', 'pub',
+            'brewery', 'eatery', 'diner',
+        ),
         'housing': ('housing', 'rent', 'development', 'rezoning', 'condo'),
         'sports': ('canucks', 'whitecaps', 'bc lions', 'giants', 'game'),
         'space': ('space', 'nasa', 'planet', 'moon', 'mars', 'asteroid', 'telescope'),

@@ -12,6 +12,7 @@ from runner import (  # noqa: E402
     primary_source_urls_for_topic,
     requires_manual_approval,
     has_manual_approval,
+    resolve_category,
     seed_urls_for_topic,
 )
 
@@ -117,6 +118,28 @@ class RunnerEligibilityTests(unittest.TestCase):
     def test_invalid_payload_is_rejected(self):
         with self.assertRaises(ValueError):
             eligible_candidates_from_payload({'results': 'not-a-list'})
+
+
+class RunnerCategoryTests(unittest.TestCase):
+    def test_non_food_store_closing_routes_to_local_news(self):
+        topic = {
+            'title': 'Vancouver Sport Chek store set to close after nearly 20 years'
+        }
+
+        self.assertEqual('local-news', resolve_category(topic, {}))
+
+    def test_restaurant_opening_stays_in_food_and_drink(self):
+        topic = {'title': 'Family-run Vancouver restaurant opening in Kitsilano'}
+
+        self.assertEqual('food-drink', resolve_category(topic, {}))
+
+    def test_explicit_researched_category_still_wins(self):
+        topic = {
+            'title': 'Neighbourhood cafe closes after 20 years',
+            'category': 'local-news',
+        }
+
+        self.assertEqual('local-news', resolve_category(topic, {}))
 
 
 if __name__ == '__main__':

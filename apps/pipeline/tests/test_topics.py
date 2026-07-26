@@ -16,7 +16,17 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         self.assertEqual('Lower Mainland, British Columbia', discovery.source_config['region'])
         self.assertTrue(discovery.discovery_sources)
         self.assertTrue(
-            all(source['tier'] == 'primary' for source in discovery.discovery_sources)
+            any(source['tier'] == 'primary' for source in discovery.discovery_sources)
+        )
+        self.assertTrue(
+            all(
+                source['tier'] == 'primary'
+                or (
+                    source['tier'] == 'secondary'
+                    and source.get('discoveryRole') == 'lead'
+                )
+                for source in discovery.discovery_sources
+            )
         )
 
     @patch('topics.requests.get')
@@ -117,6 +127,44 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         self.assertEqual(1, len(candidates))
         self.assertEqual('Neighbourhood picnic in the plaza', candidates[0]['title'])
 
+    @patch('topics.requests.get')
+    def test_secondary_lead_source_requires_a_local_change_title(self, get):
+        response = Mock()
+        response.status_code = 200
+        response.url = 'https://publication.example/vancouver/closings'
+        response.text = (
+            '<a title="Sporting goods store set to close" '
+            'href="/vancouver/store-closing">'
+            '<span>Retail</span><h3>Sporting goods store set to close</h3>'
+            '<span>Reporter Name</span></a>'
+            '<a href="/vancouver/neighbourhood-profile">A guide to the neighbourhood</a>'
+        )
+        get.return_value = response
+
+        discovery = TopicDiscovery()
+        discovery.source_config = {
+            'sources': [{
+                'name': 'Local publication leads',
+                'url': 'https://publication.example/vancouver/closings',
+                'domain': 'publication.example',
+                'locality': 'Vancouver',
+                'desks': ['local-news'],
+                'tier': 'secondary',
+                'discoveryRole': 'lead',
+                'discoveryEnabled': True,
+                'includeUrlPatterns': ['/vancouver/'],
+                'includeTitleRegex': r'\b(closing|close|opening|open)\b',
+            }]
+        }
+
+        candidates = discovery.discover_official_pages(5)
+
+        self.assertEqual(1, len(candidates))
+        self.assertEqual('secondary_lead_page', candidates[0]['source'])
+        self.assertEqual('lead', candidates[0]['discoveryRole'])
+        self.assertEqual('secondary', candidates[0]['sourceTier'])
+        self.assertEqual('Sporting goods store set to close', candidates[0]['title'])
+
     def test_source_yield_summary_groups_candidates_for_skip_reports(self):
         summary = TopicDiscovery.summarize_source_yield([
             {
@@ -200,6 +248,45 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         )
         self.assertEqual(4, discovery.last_source_scan[0]['acceptedCount'])
         self.assertEqual(4, discovery.last_source_scan[1]['acceptedCount'])
+
+    @patch('topics.requests.post')
+    def test_perplexity_search_includes_non_event_local_changes(self, post):
+        response = Mock()
+        response.status_code = 200
+        response.json.return_value = {'choices': [{'message': {'content': ''}}]}
+        post.return_value = response
+
+        discovery = TopicDiscovery()
+        discovery.perplexity_key = 'test-key'
+        discovery.discover_perplexity(5)
+
+        prompt = post.call_args.kwargs['json']['messages'][0]['content']
+        self.assertIn('local retail and business openings, closures, relocations', prompt)
+        self.assertIn('useful non-event changes', prompt)
+        self.assertIn('discovery leads only', prompt)
+        self.assertIn('primary source', prompt)
+
+    @patch('topics.requests.get')
+    def test_google_search_includes_local_business_change_queries(self, get):
+        response = Mock()
+        response.status_code = 200
+        response.json.return_value = {'items': []}
+        get.return_value = response
+
+        discovery = TopicDiscovery()
+        discovery.google_key = 'test-key'
+        discovery.discover_google_news(5)
+
+        queries = [
+            call.kwargs['params']['q']
+            for call in get.call_args_list
+        ]
+        self.assertTrue(
+            any(
+                'retail store local business opening closing relocation' in query
+                for query in queries
+            )
+        )
 
 
 if __name__ == '__main__':

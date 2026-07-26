@@ -55,6 +55,19 @@ class StrategyTests(unittest.TestCase):
         self.assertEqual('repair', result.decision)
         self.assertIn('Evidence strength is below the release threshold', result.reasons)
 
+    def test_secondary_lead_cannot_qualify_without_primary_source(self):
+        candidate = self.candidate()
+        candidate['evidence']['sourceUrls'] = [
+            'https://publication.example/vancouver/store-closing',
+            'https://context.example/neighbourhood',
+        ]
+        candidate['evidence']['primarySourceUrls'] = []
+
+        result = score_candidate(candidate)
+
+        self.assertEqual('repair', result.decision)
+        self.assertIn('No primary source recorded', result.reasons)
+
     def test_missing_locality_blocks_publication(self):
         candidate = self.candidate()
         candidate['locality'] = ''
@@ -87,6 +100,24 @@ class StrategyTests(unittest.TestCase):
         self.assertEqual('reported-update', queue[0]['storyType'])
         self.assertIn('skipReasonIfUnqualified', queue[0])
         self.assertIn('primary-source support', queue[0]['skipReasonIfUnqualified'])
+
+    def test_research_queue_preserves_secondary_discovery_lead_boundary(self):
+        queue = build_research_queue([{
+            'title': 'Longtime Vancouver store set to close',
+            'sourceName': 'Local publication leads',
+            'sourceTier': 'secondary',
+            'discoveryRole': 'lead',
+            'url': 'https://publication.example/vancouver/store-closing',
+            'locality': 'Vancouver',
+            'category': 'local-news',
+        }])
+
+        self.assertEqual('secondary', queue[0]['sourceTier'])
+        self.assertEqual('lead', queue[0]['discoveryRole'])
+        self.assertIn(
+            'independent reporting angle not copied from a discovery lead',
+            queue[0]['requiredEvidence'],
+        )
 
 
 if __name__ == '__main__':

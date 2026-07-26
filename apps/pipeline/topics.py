@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Discover Lower Mainland story candidates from curated primary sources."""
+"""Discover Lower Mainland story candidates from curated evidence and lead sources."""
 
 import os
 import json
@@ -26,12 +26,15 @@ class HeadlineLinkParser(HTMLParser):
         super().__init__()
         self.links = []
         self._href = None
+        self._title = None
         self._text = []
 
     def handle_starttag(self, tag, attrs):
         if tag.lower() != 'a':
             return
-        self._href = dict(attrs).get('href')
+        attributes = dict(attrs)
+        self._href = attributes.get('href')
+        self._title = attributes.get('title')
         self._text = []
 
     def handle_data(self, data):
@@ -40,10 +43,12 @@ class HeadlineLinkParser(HTMLParser):
 
     def handle_endtag(self, tag):
         if tag.lower() == 'a' and self._href is not None:
-            text = re.sub(r'\s+', ' ', ' '.join(self._text)).strip()
+            text = self._title or ' '.join(self._text)
+            text = re.sub(r'\s+', ' ', text).strip()
             if text:
                 self.links.append((text, self._href))
             self._href = None
+            self._title = None
             self._text = []
 
 class TopicDiscovery:
@@ -88,7 +93,7 @@ class TopicDiscovery:
         return any(slug in topic_slug or topic_slug in slug for slug in self.recent_posts)
 
     def discover_official_pages(self, count: int = 30) -> List[Dict]:
-        """Pull candidate links directly from configured primary-source listings."""
+        """Pull candidate links directly from configured local-source listings."""
         source_batches = []
         scan_rows = []
         seen_urls = set()
@@ -132,6 +137,7 @@ class TopicDiscovery:
                         or len(normalized) > maximum_title_length
                         or normalized.startswith('/')
                         or normalized.lower() in ignored
+                        or not self._matches_title_inclusion(source, normalized)
                         or self._matches_title_exclusion(source, normalized)
                         or self._is_duplicate(normalized)
                         or not self._matches_source_link(source, candidate_url)
@@ -139,11 +145,17 @@ class TopicDiscovery:
                     ):
                         continue
                     seen_urls.add(candidate_url)
+                    discovery_role = source.get('discoveryRole', 'evidence')
                     source_topics.append({
                         'title': normalized,
-                        'source': 'primary_source_page',
+                        'source': (
+                            'secondary_lead_page'
+                            if discovery_role == 'lead'
+                            else 'primary_source_page'
+                        ),
                         'sourceName': source['name'],
                         'sourceTier': source['tier'],
+                        'discoveryRole': discovery_role,
                         'url': candidate_url,
                         'locality': source['locality'],
                         'category': source.get('category', source['desks'][0]),
@@ -163,7 +175,7 @@ class TopicDiscovery:
                     'accepted candidates' if source_topics else 'no matching candidate links',
                 ))
             except Exception as exc:
-                logger.warning('Primary source scan failed for %s: %s', source['name'], exc)
+                logger.warning('Source scan failed for %s: %s', source['name'], exc)
                 scan_rows.append(self._source_scan_row(source, None, 0, str(exc)))
         self.last_source_scan = scan_rows
 
@@ -177,7 +189,7 @@ class TopicDiscovery:
                         break
             if len(topics) >= count:
                 break
-        logger.info('Found %s candidates on primary source pages', len(topics))
+        logger.info('Found %s candidates on configured source pages', len(topics))
         return topics[:count]
 
     @staticmethod
@@ -232,6 +244,11 @@ class TopicDiscovery:
             return False
 
         return bool(include_patterns or include_regex)
+
+    @staticmethod
+    def _matches_title_inclusion(source: Dict, title: str) -> bool:
+        include_regex = source.get('includeTitleRegex')
+        return not include_regex or bool(re.search(include_regex, title, re.IGNORECASE))
 
     @staticmethod
     def _matches_title_exclusion(source: Dict, title: str) -> bool:
@@ -312,8 +329,16 @@ class TopicDiscovery:
                         'content': (
                             f'List {count} verifiable updates from the last 36 hours that matter '
                             'to people in Metro Vancouver or the Fraser Valley. Cover civic news, '
-                            'transit and roads, weather, events, restaurant openings or closures, '
-                            'housing and development, and local sports. Prefer primary sources and '
+                            'transit and roads, weather, events, restaurant changes, local retail '
+                            'and business openings, closures, relocations, closing sales, major '
+                            'renovations, and long-running neighbourhood institutions that are '
+                            'changing, plus housing, development, and local sports. Include useful '
+                            'non-event changes that residents would tell a neighbour about. Treat '
+                            'local-publication coverage and community sightings as discovery leads '
+                            'only; prefer items with a business announcement, official current '
+                            'store page, property or lease document, municipal record, or another '
+                            'primary source available for independent verification. Prefer primary '
+                            'sources and '
                             'name the affected municipality in every title. Exclude national stories '
                             'without a direct Lower Mainland impact and exclude rumours. '
                             'Return only sentence-case article titles, one per '
@@ -356,7 +381,9 @@ class TopicDiscovery:
             categories = [
                 'Lower Mainland local news',
                 'Metro Vancouver transit road closure weather',
-                'Vancouver Surrey Burnaby Richmond events opening closing',
+                'Vancouver Surrey Burnaby Richmond events',
+                'Metro Vancouver retail store local business opening closing relocation closing sale',
+                'Vancouver neighbourhood business new location major renovation long-running shop',
                 'Metro Vancouver housing development council',
                 'Vancouver local sports update',
             ]
