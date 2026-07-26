@@ -67,11 +67,11 @@
 - Reviewed: GPT final gate returned `BLOCKERS`; no passing final GPT review for the final candidate SHA.
 - Independent Opus release review: not run because GPT did not pass.
 - Promoted: no.
-- PR: pending.
-- Merged: pending.
-- Deployment: pending.
-- Browser/live proof: pending.
-- Rollback point: pre-run `origin/main` at `2f5d4a095c96f87339328e533f0b2e1f87175aa9`; no public article promotion.
+- PR: `https://github.com/Farhaan96/trends-today/pull/103`; labels `codex` and `codex-automation`; Vercel checks passed.
+- Merged: yes; merge commit `ab491675640207d017539b2f9546dff3ee2386a2` at `2026-07-26T23:51:14Z`; branch retained.
+- Deployment: production deployment `5615221232` succeeded at `2026-07-26T23:52:50Z`; target `https://trends-today-ft00a43md-farhaans-projects-088cb374.vercel.app`.
+- Browser/live proof: `https://www.trendstoday.ca/api/analytics?codex=202607261630-postmerge` returned HTTP 200 with `totalArticles: 159`; Playwright verified homepage HTTP 200, title `Trends Today | Lower Mainland News and Events`, H1 `What is happening around you.`, first article heading `Free Darts Hill scavenger hunt runs Sunday in Surrey`, and zero homepage console/page errors; blocked Surrey article route returned HTTP 404, confirming no failed candidate was published.
+- Rollback point: pre-run `origin/main` at `2f5d4a095c96f87339328e533f0b2e1f87175aa9`; evidence commit `218d60e2bb827bd62ce830893a0ef73e2149a16a`; evidence merge `ab491675640207d017539b2f9546dff3ee2386a2`; no public article promotion.
 - Cost: unavailable.
 - Root checkout preservation: the root checkout was not cleaned, reset, or used for mutation.
 - Inbox: fail-closed. No advertiser/sponsor replies, terms, pricing, billing, private data use, provider changes, or production-data mutations were performed.
