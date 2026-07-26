@@ -66,19 +66,22 @@
   - Blockers were the inert production cap/ordered-source crowd-out and lingering unsupported article publisher `sameAs` claims.
   - Second completed exact-SHA review of `29657ab9a5e9e322dd5b3ef4380c6b5ece9365d9` returned `BLOCKERS`; artifact `C:\Users\farha\.codex\review-artifacts\trends-today\discovery-breadth-schema-29657ab9a5e9e322dd5b3ef4380c6b5ece9365d9-final.json`.
   - Blockers were source-config `storyType: bulletin` weakening source-count gates and unsupported WebSite `SearchAction` claims.
-  - Both blockers were repaired; final exact-SHA review is pending.
+  - Final exact-SHA review of `da8245a016c1ea1b6f40830712b88934e676be56` returned `NO BLOCKERS`; artifact `C:\Users\farha\.codex\review-artifacts\trends-today\discovery-breadth-schema-da8245a016c1ea1b6f40830712b88934e676be56-final-strict.json`.
 - Tests:
   - `python -m unittest discover apps\pipeline\tests`: passed, `87` tests.
   - `git diff --check`: passed.
   - `npm run typecheck`: passed.
   - `npm run lint`: passed with `0` errors and `133` pre-existing warnings.
   - `npm run build`: passed; generated `public/sitemap.xml` timestamp churn was restored before review.
-- PR: pending.
-- Merge SHA: pending.
-- Deployment: pending.
-- Browser proof: pending.
+- PR: `#92`, `https://github.com/Farhaan96/trends-today/pull/92`, labelled `codex` and `codex-automation`.
+- Merge SHA: `75118e35d4d79646be4a04986a944ad1425f3852`, merged 2026-07-26T05:36:39Z.
+- Deployment: Vercel status for merge SHA `75118e35d4d79646be4a04986a944ad1425f3852` returned `success` with target `https://vercel.com/farhaans-projects-088cb374/trends-today/4DWa2iaGoJdHBL5iqZpjNch8aFFK`; direct production verification used `https://www.trendstoday.ca/`.
+- Browser proof:
+  - Homepage `https://www.trendstoday.ca/`: HTTP `200`, canonical `https://www.trendstoday.ca`, rendered H1 `What is happening around you.`, `12/12` images loaded after scroll, no console errors, no page errors.
+  - Article `https://www.trendstoday.ca/local-news/surrey-capital-projects-2031-buildout`: HTTP `200`, canonical matched URL, rendered H1 `Surrey's $1.6B capital plan spans four projects through 2031`, source links to six City of Surrey URLs rendered, internal links rendered, `7/7` images loaded after scroll, no console errors, no page errors.
+  - Live JSON-LD check: homepage and article schema had no `SearchAction`, no unsupported `sameAs`, no placeholder contact claim, and no Ontario region claim.
 - Rollback point: `a65f2a87f8bf7a579e587e770d009130634b7435`.
-- Metrics: production `/api/analytics` from the 18:30 sweep showed `157` active articles and no July 25 story; protected reporting and provider article-level metrics remained unavailable/protected, not zero.
+- Metrics: production `/api/analytics` at 2026-07-26T05:44:00.542Z returned `157` active articles and no July 25 story; protected reporting and provider article-level metrics remained unavailable/protected, not zero.
 - Cost: unavailable.
 
 ## Keep / Repair / Stop
