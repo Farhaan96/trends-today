@@ -1,4 +1,5 @@
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import Mock, patch
@@ -17,6 +18,17 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         self.assertTrue(discovery.discovery_sources)
         self.assertTrue(
             all(source['tier'] == 'primary' for source in discovery.discovery_sources)
+        )
+        self.assertTrue(
+            discovery.source_config['leadSourcePolicy'][
+                'directFetchRequiresConfiguredAccessAndRobotsApproval'
+            ]
+        )
+        self.assertGreater(
+            discovery.source_config['searchDiscovery'][
+                'reservedLocalChangeCandidates'
+            ],
+            0,
         )
 
     @patch('topics.requests.get')
@@ -121,6 +133,33 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         )
 
     @patch('topics.requests.get')
+    def test_primary_source_drops_image_only_title_attribute(self, get):
+        response = Mock()
+        response.status_code = 200
+        response.url = 'https://city.example/news'
+        response.text = (
+            '<a title="Invisible promotional headline" href="/news/promo">'
+            '<img src="promo.jpg"></a>'
+        )
+        get.return_value = response
+
+        discovery = TopicDiscovery()
+        discovery.source_config = {
+            'sources': [{
+                'name': 'Test city source',
+                'url': 'https://city.example/news',
+                'domain': 'city.example',
+                'locality': 'Richmond',
+                'desks': ['local-news'],
+                'tier': 'primary',
+                'discoveryEnabled': True,
+                'includeUrlPatterns': ['/news/'],
+            }]
+        }
+
+        self.assertEqual([], discovery.discover_official_pages(1))
+
+    @patch('topics.requests.get')
     def test_source_contract_can_exclude_application_links(self, get):
         response = Mock()
         response.status_code = 200
@@ -177,6 +216,7 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
                 'discoveryRole': 'lead',
                 'discoveryEnabled': True,
                 'automatedAccessApproved': True,
+                'writtenPermissionReference': 'publisher-email-2026-07-25',
                 'includeUrlPatterns': ['/vancouver/'],
                 'includeTitleRegex': r'\b(closing|close|opening|open)\b',
             }]
@@ -189,6 +229,30 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         self.assertEqual('lead', candidates[0]['discoveryRole'])
         self.assertEqual('secondary', candidates[0]['sourceTier'])
         self.assertEqual('Sporting goods store set to close', candidates[0]['title'])
+
+    @patch('topics.requests.get')
+    def test_robots_disallow_blocks_configured_source_page(self, get):
+        robots = Mock()
+        robots.status_code = 200
+        robots.text = 'User-agent: TrendsTodayLocalDesk\nDisallow: /news'
+        get.return_value = robots
+
+        discovery = TopicDiscovery()
+        discovery.source_config = {
+            'sources': [{
+                'name': 'Blocked city source',
+                'url': 'https://city.example/news',
+                'domain': 'city.example',
+                'locality': 'Surrey',
+                'desks': ['local-news'],
+                'tier': 'primary',
+                'discoveryEnabled': True,
+            }]
+        }
+
+        self.assertEqual([], discovery.discover_official_pages(1))
+        self.assertEqual(1, get.call_count)
+        self.assertIn('robots policy', discovery.last_source_scan[0]['status'])
 
     @patch('topics.requests.get')
     def test_secondary_lead_without_access_approval_is_not_requested(self, get):
@@ -253,7 +317,10 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
             f'<a href="/events/story-{index}">Second city event listing number {index}</a>'
             for index in range(1, 5)
         )
-        get.side_effect = [first, second]
+        robots = Mock()
+        robots.status_code = 404
+        robots.text = ''
+        get.side_effect = [robots, first, robots, second]
 
         discovery = TopicDiscovery()
         discovery.source_config = {
@@ -300,7 +367,9 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         response.json.return_value = {
             'choices': [{
                 'message': {
-                    'content': 'Richmond retailer announces a new location'
+                    'content': (
+                        'Richmond | Richmond retailer announces a new location'
+                    )
                 }
             }]
         }
@@ -318,6 +387,43 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         self.assertEqual('secondary', candidates[0]['sourceTier'])
         self.assertEqual('lead', candidates[0]['discoveryRole'])
 
+    def test_discovery_reserves_local_change_lane_when_official_queue_is_full(self):
+        discovery = TopicDiscovery()
+        discovery.source_config = {
+            'officialCandidateLimit': 5,
+            'searchDiscovery': {
+                'enabled': True,
+                'reservedLocalChangeCandidates': 2,
+            },
+        }
+        local_changes = [
+            {'title': f'Local business change {index}', 'source': 'search'}
+            for index in range(2)
+        ]
+        official = [
+            {'title': f'Official event update {index}', 'source': 'official'}
+            for index in range(5)
+        ]
+        with tempfile.TemporaryDirectory() as temp:
+            discovery.cache_dir = Path(temp)
+            with (
+                patch.object(
+                    discovery,
+                    'discover_local_changes',
+                    return_value=local_changes,
+                ) as changes,
+                patch.object(
+                    discovery,
+                    'discover_official_pages',
+                    return_value=official,
+                ),
+            ):
+                topics = discovery.discover(5)
+
+        self.assertEqual(5, len(topics))
+        self.assertEqual(local_changes, topics[:2])
+        changes.assert_called_once_with(2)
+
     @patch('topics.requests.get')
     def test_google_search_includes_local_business_change_queries(self, get):
         response = Mock()
@@ -332,7 +438,8 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
 
         discovery = TopicDiscovery()
         discovery.google_key = 'test-key'
-        candidates = discovery.discover_google_news(5)
+        discovery.google_cse_id = 'test-cse'
+        candidates = discovery.discover_local_changes(5)
 
         queries = [
             call.kwargs['params']['q']
@@ -346,6 +453,39 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         )
         self.assertEqual('secondary', candidates[0]['sourceTier'])
         self.assertEqual('lead', candidates[0]['discoveryRole'])
+        self.assertEqual('google_local_change', candidates[0]['source'])
+
+    @patch('topics.requests.get')
+    def test_google_result_on_configured_primary_domain_keeps_primary_tier(self, get):
+        response = Mock()
+        response.status_code = 200
+        response.json.return_value = {
+            'items': [{
+                'title': 'Vancouver confirms a new community service location',
+                'link': 'https://vancouver.ca/news-calendar/new-location.aspx',
+            }]
+        }
+        get.return_value = response
+
+        discovery = TopicDiscovery()
+        discovery.google_key = 'test-key'
+        discovery.google_cse_id = 'test-cse'
+        discovery.source_config = {
+            'sources': [{
+                'name': 'City of Vancouver news',
+                'url': 'https://vancouver.ca/news-calendar/news.aspx',
+                'domain': 'vancouver.ca',
+                'tier': 'primary',
+            }]
+        }
+
+        candidates = discovery.discover_google_news(
+            1,
+            categories=['Vancouver local service updates'],
+        )
+
+        self.assertEqual('primary', candidates[0]['sourceTier'])
+        self.assertEqual('evidence', candidates[0]['discoveryRole'])
 
 
 if __name__ == '__main__':

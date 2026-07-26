@@ -9,30 +9,17 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
-from urllib.parse import urlparse
+
+from source_policy import (
+    is_discovery_lead,
+    is_http_url,
+    lead_hosts,
+    url_matches_any_host,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = REPO_ROOT / "config" / "content-business.json"
-
-
-def _url_host(url: object) -> str:
-    host = (urlparse(str(url or "").strip()).hostname or "").lower()
-    return host.removeprefix("www.")
-
-
-def _same_host_family(first: object, second: object) -> bool:
-    first_host = _url_host(first)
-    second_host = _url_host(second)
-    return bool(
-        first_host
-        and second_host
-        and (
-            first_host == second_host
-            or first_host.endswith(f".{second_host}")
-            or second_host.endswith(f".{first_host}")
-        )
-    )
 
 
 class StrategyError(ValueError):
@@ -102,17 +89,27 @@ def score_candidate(candidate: Dict[str, Any], config: Optional[Dict[str, Any]] 
         raise StrategyError(f"lane must be one of: {', '.join(sorted(valid_lanes))}")
 
     evidence = candidate.get("evidence") or {}
-    source_urls = [url for url in evidence.get("sourceUrls", []) if str(url).strip()]
-    primary_source_urls = [
+    raw_source_urls = [
+        url for url in evidence.get("sourceUrls", []) if str(url).strip()
+    ]
+    invalid_source_urls = [
+        url for url in raw_source_urls if not is_http_url(url)
+    ]
+    source_urls = [url for url in raw_source_urls if is_http_url(url)]
+    raw_primary_source_urls = [
         url for url in evidence.get("primarySourceUrls", []) if str(url).strip()
     ]
-    lead_host = ""
-    if candidate.get("discoveryRole") == "lead":
-        lead_host = _url_host(candidate.get("sourceUrl", ""))
+    invalid_primary_source_urls = [
+        url for url in raw_primary_source_urls if not is_http_url(url)
+    ]
+    primary_source_urls = [
+        url for url in raw_primary_source_urls if is_http_url(url)
+    ]
+    blocked_lead_hosts = lead_hosts(candidate)
     invalid_lead_primary_urls = [
         url
         for url in primary_source_urls
-        if lead_host and _same_host_family(url, candidate.get("sourceUrl", ""))
+        if url_matches_any_host(url, blocked_lead_hosts)
     ]
     if invalid_lead_primary_urls:
         primary_source_urls = [
@@ -153,10 +150,14 @@ def score_candidate(candidate: Dict[str, Any], config: Optional[Dict[str, Any]] 
         reasons.append(
             f"Only {len(source_urls)} usable sources; {minimum_sources} required for {story_type}"
         )
+    if invalid_source_urls:
+        reasons.append("Source URLs must use http or https")
     if validated["evidenceStrength"] < float(scoring["minimumEvidenceStrength"]):
         reasons.append("Evidence strength is below the release threshold")
     if scoring.get("primarySourceRequired") and not primary_source_urls:
         reasons.append("No primary source recorded")
+    if invalid_primary_source_urls:
+        reasons.append("Primary source URLs must use http or https")
     if invalid_lead_primary_urls:
         reasons.append("Discovery-lead domain cannot be used as a primary source")
     if not locality:
@@ -199,7 +200,9 @@ def build_research_queue(topics: Iterable[Dict[str, Any]]) -> List[Dict[str, Any
             "sourceUrl": topic.get("url"),
             "sourceName": topic.get("sourceName"),
             "sourceTier": topic.get("sourceTier"),
-            "discoveryRole": topic.get("discoveryRole", "evidence"),
+            "discoveryRole": topic.get("discoveryRole") or (
+                "lead" if is_discovery_lead(topic) else "evidence"
+            ),
             "locality": topic.get("locality"),
             "category": topic.get("category"),
             "sourceTopic": topic.get("sourceTopic"),

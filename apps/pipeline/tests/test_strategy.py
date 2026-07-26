@@ -89,6 +89,36 @@ class StrategyTests(unittest.TestCase):
         )
         self.assertIn('No primary source recorded', result.reasons)
 
+    def test_secondary_tier_without_role_still_cannot_self_declare_primary(self):
+        candidate = self.candidate()
+        candidate['sourceTier'] = 'secondary'
+        candidate['url'] = 'https://publication.example/store-closing'
+        candidate['evidence']['primarySourceUrls'] = [
+            'https://publication.example/store-closing',
+        ]
+
+        result = score_candidate(candidate)
+
+        self.assertEqual('repair', result.decision)
+        self.assertIn(
+            'Discovery-lead domain cannot be used as a primary source',
+            result.reasons,
+        )
+
+    def test_scheme_less_primary_source_is_rejected(self):
+        candidate = self.candidate()
+        candidate['evidence']['primarySourceUrls'] = [
+            'city.example/official-notice',
+        ]
+
+        result = score_candidate(candidate)
+
+        self.assertEqual('repair', result.decision)
+        self.assertIn(
+            'Primary source URLs must use http or https',
+            result.reasons,
+        )
+
     def test_missing_locality_blocks_publication(self):
         candidate = self.candidate()
         candidate['locality'] = ''

@@ -13,6 +13,12 @@ from typing import List, Dict, Optional
 import requests
 from pathlib import Path
 
+from source_policy import (
+    automated_access_approved,
+    load_source_config,
+    robots_allows,
+)
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -58,12 +64,32 @@ class VisibleTextParser(HTMLParser):
             self.text.append(normalized)
 
 class ContentRetrieval:
-    def __init__(self):
+    def __init__(self, source_config: Dict = None):
         self.firecrawl_key = os.getenv('FIRECRAWL_API_KEY')
         self.perplexity_key = os.getenv('PERPLEXITY_API_KEY')
         self.google_key = os.getenv('GOOGLE_API_KEY')
+        self.google_cse_id = os.getenv('GOOGLE_CSE_ID')
         self.cache_dir = Path('.cache/sources')
         self.cache_dir.mkdir(parents=True, exist_ok=True)
+        self.source_config = source_config or load_source_config()
+        self._robots_cache = {}
+
+    def _approved_fetch_urls(self, urls: List[str]) -> List[str]:
+        approved = []
+        for url in urls or []:
+            if not automated_access_approved(url, self.source_config):
+                logger.warning('Direct retrieval skipped for unapproved host: %s', url)
+                continue
+            if not robots_allows(
+                url,
+                'TrendsTodayLocalDesk/1.0',
+                requests.get,
+                self._robots_cache,
+            ):
+                logger.warning('Direct retrieval blocked by robots policy: %s', url)
+                continue
+            approved.append(url)
+        return approved
         
     def retrieve_firecrawl(self, topic: str, urls: List[str] = None) -> Dict:
         """Scrape content from URLs using Firecrawl"""
@@ -72,7 +98,7 @@ class ContentRetrieval:
         
         try:
             # If no URLs provided, search first
-            if not urls:
+            if urls is None:
                 search_response = requests.post(
                     'https://api.firecrawl.dev/v1/search',
                     headers={'Authorization': f'Bearer {self.firecrawl_key}'},
@@ -82,6 +108,7 @@ class ContentRetrieval:
                 if search_response.status_code == 200:
                     results = search_response.json().get('data', [])
                     urls = [r['url'] for r in results[:3]]
+            urls = self._approved_fetch_urls(urls or [])
             
             sources = []
             for url in urls[:3]:
@@ -153,7 +180,7 @@ class ContentRetrieval:
     
     def retrieve_google(self, topic: str) -> Dict:
         """Fallback to Google search for sources"""
-        if not self.google_key:
+        if not self.google_key or not self.google_cse_id:
             return {}
         
         try:
@@ -161,7 +188,7 @@ class ContentRetrieval:
                 'https://www.googleapis.com/customsearch/v1',
                 params={
                     'key': self.google_key,
-                    'cx': '017576662512468239146:omuauf_lfve',
+                    'cx': self.google_cse_id,
                     'q': topic,
                     'num': 3
                 },
@@ -188,7 +215,7 @@ class ContentRetrieval:
     def retrieve_direct_urls(self, urls: List[str]) -> Dict:
         """Read reviewed URLs directly when Firecrawl is unavailable."""
         sources = []
-        for url in (urls or [])[:3]:
+        for url in self._approved_fetch_urls(urls or [])[:3]:
             try:
                 response = requests.get(
                     url,

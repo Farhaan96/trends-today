@@ -141,12 +141,7 @@ def validate_release_candidate(
     declared_story_type = str(
         article.get('storyType') or article.get('story_type') or ''
     ).strip()
-    local_story_types = {'bulletin', 'reported-update', 'guide-or-explainer'}
-    is_local = (
-        category in LOCAL_CATEGORIES
-        or bool(locality)
-        or declared_story_type in local_story_types
-    )
+    is_local = category in LOCAL_CATEGORIES or bool(locality)
     story_type = declared_story_type or ('reported-update' if is_local else 'legacy')
     contract = _load_contract(config_path)
     story_contracts = contract['editorial']['storyTypes']

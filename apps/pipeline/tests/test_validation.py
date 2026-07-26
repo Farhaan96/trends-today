@@ -198,6 +198,26 @@ class ValidationTests(unittest.TestCase):
             result.errors,
         )
 
+    def test_non_local_reported_update_does_not_gain_local_requirements(self):
+        article = self.article()
+        article.update({
+            'category': 'science',
+            'storyType': 'reported-update',
+        })
+
+        result = validate_release_candidate(
+            article,
+            self.sources(),
+            {'slug': 'science-update'},
+            {'path': '/images/science.webp'},
+        )
+
+        self.assertNotIn(
+            'at least one primary source is required for local stories',
+            result.errors,
+        )
+        self.assertNotIn('Lower Mainland locality is required', result.errors)
+
     def test_local_location_promise_requires_concrete_directory(self):
         article = {
             'title': 'Where to cool down in Surrey',

@@ -11,7 +11,6 @@ import re
 from pathlib import Path
 from datetime import datetime, timedelta
 from typing import Dict, List
-from urllib.parse import urlparse
 
 # Add current directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
@@ -25,6 +24,12 @@ from seo import SEOOptimizer
 from publish import Publisher, promote_candidate
 from strategy import build_research_queue
 from validation import validate_release_candidate
+from source_policy import (
+    canonical_http_url,
+    is_http_url,
+    lead_hosts,
+    url_matches_any_host,
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -42,44 +47,20 @@ VALID_CATEGORIES = {
 }
 
 
-def _url_host(url: object) -> str:
-    host = (urlparse(str(url or '').strip()).hostname or '').lower()
-    return host.removeprefix('www.')
-
-
-def _matches_any_host(url: object, blocked_hosts: set) -> bool:
-    host = _url_host(url)
-    return any(
-        host == blocked
-        or host.endswith(f'.{blocked}')
-        or blocked.endswith(f'.{host}')
-        for blocked in blocked_hosts
-        if host and blocked
-    )
-
-
-def discovery_lead_hosts(topic: Dict) -> set:
-    """Return hosts that supplied a lead but cannot serve as primary evidence."""
-    if topic.get('discoveryRole') != 'lead' and topic.get('sourceTier') != 'secondary':
-        return set()
-    return {
-        host
-        for host in (_url_host(topic.get('url')), _url_host(topic.get('sourceUrl')))
-        if host
-    }
-
-
 def seed_urls_for_topic(topic: Dict) -> List[str]:
     """Preserve reviewed evidence URLs without scraping the discovery lead."""
     evidence = topic.get('evidence') or {}
     urls = [topic.get('url'), topic.get('sourceUrl')]
     urls.extend(evidence.get('primarySourceUrls') or [])
     urls.extend(evidence.get('sourceUrls') or [])
-    lead_hosts = discovery_lead_hosts(topic)
+    blocked_hosts = lead_hosts(topic)
     return list(dict.fromkeys(
         str(url).strip()
         for url in urls
-        if str(url or '').strip() and not _matches_any_host(url, lead_hosts)
+        if (
+            is_http_url(url)
+            and not url_matches_any_host(url, blocked_hosts)
+        )
     ))
 
 
@@ -89,11 +70,14 @@ def primary_source_urls_for_topic(topic: Dict) -> set:
     primary_urls = list(evidence.get('primarySourceUrls') or [])
     if topic.get('sourceTier') == 'primary':
         primary_urls.extend([topic.get('url'), topic.get('sourceUrl')])
-    lead_hosts = discovery_lead_hosts(topic)
+    blocked_hosts = lead_hosts(topic)
     return {
         str(url).strip()
         for url in primary_urls
-        if str(url or '').strip() and not _matches_any_host(url, lead_hosts)
+        if (
+            is_http_url(url)
+            and not url_matches_any_host(url, blocked_hosts)
+        )
     }
 
 
@@ -144,11 +128,16 @@ def resolve_category(topic: Dict, article: Dict) -> str:
         ),
         'local-news': (
             'retailer', 'retail store', 'store closing', 'store opening',
-            'local business', 'closing sale', 'new location',
+            'retail space', 'retail', 'storefront', 'shop closing',
+            'shop closes', 'local business', 'closing sale',
+            'liquidation sale', 'new location', 'shutters',
         ),
         'housing': ('housing', 'rent', 'development', 'rezoning', 'condo'),
         'sports': ('canucks', 'whitecaps', 'bc lions', 'giants', 'game'),
-        'space': ('space', 'nasa', 'planet', 'moon', 'mars', 'asteroid', 'telescope'),
+        'space': (
+            'outer space', 'spacecraft', 'space station', 'spaceflight',
+            'nasa', 'planet', 'moon', 'mars', 'asteroid', 'telescope',
+        ),
         'health': ('health', 'medical', 'disease', 'patient', 'drug', 'cancer', 'clinical'),
         'psychology': ('psychology', 'brain', 'behavior', 'mental', 'emotion', 'cognitive'),
         'science': ('science', 'study', 'researcher', 'physics', 'biology', 'chemistry'),
@@ -161,6 +150,20 @@ def resolve_category(topic: Dict, article: Dict) -> str:
         ):
             return category
     return 'local-news'
+
+
+def resolve_story_type(topic: Dict, category: str) -> str:
+    explicit = str(topic.get('storyType') or '').strip()
+    if explicit:
+        return explicit
+    return (
+        'reported-update'
+        if category in {
+            'local-news', 'transit', 'things-to-do', 'food-drink',
+            'housing', 'sports',
+        }
+        else 'legacy'
+    )
 
 
 def eligible_candidates_from_payload(payload: object) -> List[Dict]:
@@ -216,9 +219,12 @@ class ContentPipeline:
             seed_urls = seed_urls_for_topic(topic) or None
             sources_data = self.retrieval.retrieve(topic_title, urls=seed_urls)
             sources = sources_data.get('sources', [])
-            primary_urls = primary_source_urls_for_topic(topic)
+            primary_urls = {
+                canonical_http_url(url)
+                for url in primary_source_urls_for_topic(topic)
+            }
             for source in sources:
-                if source.get('url') in primary_urls:
+                if canonical_http_url(source.get('url')) in primary_urls:
                     source['tier'] = 'primary'
                 else:
                     source['tier'] = 'secondary'
@@ -240,7 +246,7 @@ class ContentPipeline:
 
             article['category'] = resolve_category(topic, article)
             article['locality'] = topic.get('locality', '')
-            article['storyType'] = topic.get('storyType', 'reported-update')
+            article['storyType'] = resolve_story_type(topic, article['category'])
             article['readerImpact'] = (topic.get('evidence') or {}).get('readerImpact', '')
             article['lengthRationale'] = topic.get(
                 'lengthRationale',

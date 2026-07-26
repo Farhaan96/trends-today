@@ -13,6 +13,7 @@ from runner import (  # noqa: E402
     requires_manual_approval,
     has_manual_approval,
     resolve_category,
+    resolve_story_type,
     seed_urls_for_topic,
 )
 
@@ -77,6 +78,43 @@ class RunnerSourceTests(unittest.TestCase):
         )
         self.assertEqual(
             {'https://retailer.example/store/vancouver'},
+            primary_source_urls_for_topic(topic),
+        )
+
+    def test_scheme_less_lead_url_cannot_be_primary_or_retrieved(self):
+        topic = {
+            'sourceUrl': 'https://publication.example/vancouver/store-closing',
+            'sourceTier': 'secondary',
+            'discoveryRole': 'lead',
+            'evidence': {
+                'primarySourceUrls': [
+                    'publication.example/vancouver/store-closing',
+                ],
+                'sourceUrls': [
+                    'publication.example/vancouver/store-closing',
+                ],
+            },
+        }
+
+        self.assertEqual([], seed_urls_for_topic(topic))
+        self.assertEqual(set(), primary_source_urls_for_topic(topic))
+
+    def test_lead_subdomain_does_not_block_independent_parent_domain(self):
+        topic = {
+            'sourceUrl': 'https://blog.example.com/store-closing',
+            'sourceTier': 'secondary',
+            'discoveryRole': 'lead',
+            'evidence': {
+                'primarySourceUrls': ['https://example.com/official-notice'],
+            },
+        }
+
+        self.assertEqual(
+            ['https://example.com/official-notice'],
+            seed_urls_for_topic(topic),
+        )
+        self.assertEqual(
+            {'https://example.com/official-notice'},
             primary_source_urls_for_topic(topic),
         )
 
@@ -186,9 +224,18 @@ class RunnerCategoryTests(unittest.TestCase):
         self.assertEqual('food-drink', resolve_category(topic, {}))
 
     def test_retail_space_phrase_does_not_route_to_space(self):
-        topic = {'title': 'New retailer takes over vacant Vancouver retail space'}
+        topic = {
+            'title': 'Longtime Gastown shop vacates retail space after 40 years'
+        }
 
         self.assertEqual('local-news', resolve_category(topic, {}))
+
+    def test_non_local_topic_defaults_to_legacy_story_contract(self):
+        self.assertEqual('legacy', resolve_story_type({}, 'science'))
+        self.assertEqual(
+            'reported-update',
+            resolve_story_type({}, 'local-news'),
+        )
 
 
 if __name__ == '__main__':
