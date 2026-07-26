@@ -1,0 +1,81 @@
+{
+  "generatedAt": "2026-07-26T14:45:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-26-1430",
+  "dailyCountBeforeSweep": 2,
+  "dailyCeiling": 6,
+  "sweepLimit": 2,
+  "sourceQueue": "artifacts/editorial/research/2026-07-26-1430-source-queue.json",
+  "qualified": [
+    {
+      "title": "Remaining free Port Coquitlam movie and music dates start Aug. 8",
+      "candidatePath": "artifacts/editorial/release-candidates/things-to-do/port-coquitlam-free-august-events-2026.mdx",
+      "candidateSha256": "b6e3928b61f7ec07a191191635e7f85f82002d1e3681e5e01641169d949c0e7d",
+      "gptReviewArtifact": "artifacts/editorial/reviews/gpt/things-to-do/port-coquitlam-free-august-events-2026.b6e3928b61f7.json",
+      "sourceUrls": [
+        "https://www.portcoquitlam.ca/explore-poco/events/cinema-under-stars",
+        "https://www.portcoquitlam.ca/explore-poco/events/music-square"
+      ],
+      "primarySourceUrls": [
+        "https://www.portcoquitlam.ca/explore-poco/events/cinema-under-stars",
+        "https://www.portcoquitlam.ca/explore-poco/events/music-square"
+      ],
+      "locality": "Port Coquitlam",
+      "category": "things-to-do",
+      "storyType": "reported-update",
+      "lane": "weekend-and-planning",
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 4,
+        "freshness": 4,
+        "evidenceStrength": 5,
+        "uniqueAngle": 4,
+        "repeatVisitPotential": 4,
+        "speedToUsefulDraft": 4
+      },
+      "editorialDecision": "blocked-by-gpt-editorial-gate",
+      "qualificationReason": "Two official City of Port Coquitlam event pages provide free August movie and music dates, times, locations, seating and concession details, performer schedules, primary-source support, and no published Trends Today duplicate.",
+      "blockReason": "Final GPT review verified factual support but returned BLOCKERS because the short reported update still repeated the same date, afternoon-versus-late, and concession/popcorn guidance and used generic transitions.",
+      "commercialIntent": "ad-fit",
+      "commercialFitReason": "Ad fit considered only after editorial qualification; audience, viewability, revenue, sponsor, RPM, and demand metrics remain unavailable.",
+      "sponsorshipStatus": "editorial"
+    }
+  ],
+  "heldOrRejected": [
+    {
+      "title": "Big Things Are Happening: Four Major Projects Shaping Surrey's Future",
+      "reason": "Duplicate of already published Surrey capital-projects article."
+    },
+    {
+      "title": "Family Scavenger Hunt at Darts Hill",
+      "reason": "Duplicate of already published July 26 Darts Hill article."
+    },
+    {
+      "title": "Burnaby Blues + Roots Festival",
+      "reason": "Duplicate of already published Burnaby Blues + Roots Festival article."
+    },
+    {
+      "title": "Park Play at T.E. Scott Park / Robertson Drive Park",
+      "reason": "Same Surrey Park Play package was blocked by the 12:30 GPT editorial gate for thin, repetitive utility."
+    },
+    {
+      "title": "BC Supreme Court Decision - Impact on Property Titles",
+      "reason": "Property-title/legal subject remains sensitive and owner-review gated."
+    },
+    {
+      "title": "Richmond Olympic Oval Corporation - Performance & Forensic Audits",
+      "reason": "Audit/investigation subject remains sensitive and owner-review gated."
+    },
+    {
+      "title": "Surrey targets three more properties for unpermitted construction",
+      "reason": "Enforcement/legal property item remains sensitive and owner-review gated."
+    },
+    {
+      "title": "Regular Council Meeting Agenda - July 27, 2026",
+      "reason": "Agenda-only notice without enough standalone Sunday reader utility."
+    },
+    {
+      "title": "Sports and team-content items",
+      "reason": "Several items are stale, team-podcast/quote content, out-of-market, or below the local sports utility bar."
+    }
+  ]
+}

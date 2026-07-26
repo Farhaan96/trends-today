@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "1a6ba996951b55cd435ef52e120f3c8094f666289143e263d458df60abc8cf9c",
+  "repositorySha": "c85726cda88940c57caa59a1543426883c68bcfe",
+  "reviewedAt": "2026-07-26T21:45:20.331349+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa063-2f25-70e1-9e0e-68ef3761c996",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The exact candidate hash and repository SHA were verified. Dates, times, locations, performers, seating advice, concessions, food trucks, and free admission are supported by the cited City pages. The article is clear, useful, scannable, and actionable, with no authorial em dashes. Some schedule details recur, but the repetition remains functional and does not require revision."
+}

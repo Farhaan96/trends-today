@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "721e56032ba534b75d1ca2ec74b9dbeba2c7919bb205bff6564886b4c1410489",
+  "repositorySha": "a6957d1a6dc11e49890d95b6026ed61378b33098",
+  "reviewedAt": "2026-07-26T22:00:46.899496+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa070-ea45-7eb2-90c6-3de9eb8fa760",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The sentence stating that groups can stay out \u201cafter sunset\u201d is not supported by either cited City page. The sources provide start times but no sunset information. Remove the sunset claim or support it with an appropriate cited source."
+  ],
+  "summary": "BLOCKED on one unsupported factual claim. The exact candidate hash and repository SHA were verified, all listed event dates, times, locations, performers, seating advice, concessions, food trucks, and free admission match the official City pages, and authorial prose contains zero em dashes. The article is otherwise clear, scannable, locally useful, and ends with an actionable schedule-check reminder."
+}
