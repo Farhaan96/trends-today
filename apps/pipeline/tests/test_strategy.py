@@ -68,6 +68,27 @@ class StrategyTests(unittest.TestCase):
         self.assertEqual('repair', result.decision)
         self.assertIn('No primary source recorded', result.reasons)
 
+    def test_secondary_lead_cannot_self_declare_as_primary_source(self):
+        candidate = self.candidate()
+        candidate['discoveryRole'] = 'lead'
+        candidate['sourceUrl'] = 'https://publication.example/vancouver/store-closing'
+        candidate['evidence']['sourceUrls'] = [
+            'https://publication.example/vancouver/store-closing',
+            'https://context.example/neighbourhood',
+        ]
+        candidate['evidence']['primarySourceUrls'] = [
+            'https://www.publication.example/vancouver/store-closing',
+        ]
+
+        result = score_candidate(candidate)
+
+        self.assertEqual('repair', result.decision)
+        self.assertIn(
+            'Discovery-lead domain cannot be used as a primary source',
+            result.reasons,
+        )
+        self.assertIn('No primary source recorded', result.reasons)
+
     def test_missing_locality_blocks_publication(self):
         candidate = self.candidate()
         candidate['locality'] = ''

@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 2,
   "updatedAt": "2026-07-25",
   "region": "Lower Mainland, British Columbia",
   "officialCandidateLimit": 60,
@@ -28,30 +28,7 @@
     "housing",
     "sports"
   ],
-  "leadSourcePolicy": {
-    "secondaryCoverageMayOnlyOpenResearch": true,
-    "primarySourceRequiredBeforeQualification": true,
-    "independentAngleRequired": true,
-    "competitorCopyMayNotBeRepublishedOrCloselyParaphrased": true
-  },
   "sources": [
-    {
-      "name": "Daily Hive Vancouver local-change leads",
-      "url": "https://dailyhive.com/vancouver/curated/category/closings",
-      "domain": "dailyhive.com",
-      "locality": "Lower Mainland",
-      "desks": ["local-news", "food-drink"],
-      "category": "local-news",
-      "topicGroup": "local business and retail changes",
-      "tier": "secondary",
-      "discoveryRole": "lead",
-      "discoveryEnabled": true,
-      "maxCandidatesPerSweep": 6,
-      "minimumTitleLength": 18,
-      "includeUrlPatterns": ["/vancouver/"],
-      "includeTitleRegex": "\\b(closing|closes?|closed|shutters?|shutting|opening|opens?|opened|relocat(?:e|es|ed|ing|ion)|moving|moves?|closing sale|new location)\\b",
-      "excludeTitleRegex": "daily hive|subscribe|sign in|advertise|contact|privacy|terms"
-    },
     {
       "name": "City of Vancouver news",
       "url": "https://vancouver.ca/news-calendar/news.aspx",

@@ -16,17 +16,7 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         self.assertEqual('Lower Mainland, British Columbia', discovery.source_config['region'])
         self.assertTrue(discovery.discovery_sources)
         self.assertTrue(
-            any(source['tier'] == 'primary' for source in discovery.discovery_sources)
-        )
-        self.assertTrue(
-            all(
-                source['tier'] == 'primary'
-                or (
-                    source['tier'] == 'secondary'
-                    and source.get('discoveryRole') == 'lead'
-                )
-                for source in discovery.discovery_sources
-            )
+            all(source['tier'] == 'primary' for source in discovery.discovery_sources)
         )
 
     @patch('topics.requests.get')
@@ -97,6 +87,40 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         self.assertEqual([], discovery.discover_official_pages(1))
 
     @patch('topics.requests.get')
+    def test_primary_source_uses_visible_headline_not_title_attribute(self, get):
+        response = Mock()
+        response.status_code = 200
+        response.url = 'https://city.example/news'
+        response.text = (
+            '<a title="Read more" href="/news/water-main-work">'
+            'Richmond water-main work closes two lanes Monday'
+            '</a>'
+        )
+        get.return_value = response
+
+        discovery = TopicDiscovery()
+        discovery.source_config = {
+            'sources': [{
+                'name': 'Test city source',
+                'url': 'https://city.example/news',
+                'domain': 'city.example',
+                'locality': 'Richmond',
+                'desks': ['local-news'],
+                'tier': 'primary',
+                'discoveryEnabled': True,
+                'includeUrlPatterns': ['/news/'],
+            }]
+        }
+
+        candidates = discovery.discover_official_pages(1)
+
+        self.assertEqual(1, len(candidates))
+        self.assertEqual(
+            'Richmond water-main work closes two lanes Monday',
+            candidates[0]['title'],
+        )
+
+    @patch('topics.requests.get')
     def test_source_contract_can_exclude_application_links(self, get):
         response = Mock()
         response.status_code = 200
@@ -152,6 +176,7 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
                 'tier': 'secondary',
                 'discoveryRole': 'lead',
                 'discoveryEnabled': True,
+                'automatedAccessApproved': True,
                 'includeUrlPatterns': ['/vancouver/'],
                 'includeTitleRegex': r'\b(closing|close|opening|open)\b',
             }]
@@ -164,6 +189,25 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         self.assertEqual('lead', candidates[0]['discoveryRole'])
         self.assertEqual('secondary', candidates[0]['sourceTier'])
         self.assertEqual('Sporting goods store set to close', candidates[0]['title'])
+
+    @patch('topics.requests.get')
+    def test_secondary_lead_without_access_approval_is_not_requested(self, get):
+        discovery = TopicDiscovery()
+        discovery.source_config = {
+            'sources': [{
+                'name': 'Unapproved publication leads',
+                'url': 'https://publication.example/vancouver/closings',
+                'domain': 'publication.example',
+                'locality': 'Vancouver',
+                'desks': ['local-news'],
+                'tier': 'secondary',
+                'discoveryRole': 'lead',
+                'discoveryEnabled': True,
+            }]
+        }
+
+        self.assertEqual([], discovery.discover_official_pages(5))
+        get.assert_not_called()
 
     def test_source_yield_summary_groups_candidates_for_skip_reports(self):
         summary = TopicDiscovery.summarize_source_yield([
@@ -253,29 +297,42 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
     def test_perplexity_search_includes_non_event_local_changes(self, post):
         response = Mock()
         response.status_code = 200
-        response.json.return_value = {'choices': [{'message': {'content': ''}}]}
+        response.json.return_value = {
+            'choices': [{
+                'message': {
+                    'content': 'Richmond retailer announces a new location'
+                }
+            }]
+        }
         post.return_value = response
 
         discovery = TopicDiscovery()
         discovery.perplexity_key = 'test-key'
-        discovery.discover_perplexity(5)
+        candidates = discovery.discover_perplexity(5)
 
         prompt = post.call_args.kwargs['json']['messages'][0]['content']
         self.assertIn('local retail and business openings, closures, relocations', prompt)
         self.assertIn('useful non-event changes', prompt)
         self.assertIn('discovery leads only', prompt)
         self.assertIn('primary source', prompt)
+        self.assertEqual('secondary', candidates[0]['sourceTier'])
+        self.assertEqual('lead', candidates[0]['discoveryRole'])
 
     @patch('topics.requests.get')
     def test_google_search_includes_local_business_change_queries(self, get):
         response = Mock()
         response.status_code = 200
-        response.json.return_value = {'items': []}
+        response.json.return_value = {
+            'items': [{
+                'title': 'Burnaby retailer confirms store relocation',
+                'link': 'https://publication.example/burnaby/store-relocation',
+            }]
+        }
         get.return_value = response
 
         discovery = TopicDiscovery()
         discovery.google_key = 'test-key'
-        discovery.discover_google_news(5)
+        candidates = discovery.discover_google_news(5)
 
         queries = [
             call.kwargs['params']['q']
@@ -287,6 +344,8 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
                 for query in queries
             )
         )
+        self.assertEqual('secondary', candidates[0]['sourceTier'])
+        self.assertEqual('lead', candidates[0]['discoveryRole'])
 
 
 if __name__ == '__main__':

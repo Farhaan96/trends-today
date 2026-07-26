@@ -7,9 +7,11 @@ import sys
 import json
 import logging
 import argparse
+import re
 from pathlib import Path
 from datetime import datetime, timedelta
 from typing import Dict, List
+from urllib.parse import urlparse
 
 # Add current directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
@@ -40,13 +42,45 @@ VALID_CATEGORIES = {
 }
 
 
+def _url_host(url: object) -> str:
+    host = (urlparse(str(url or '').strip()).hostname or '').lower()
+    return host.removeprefix('www.')
+
+
+def _matches_any_host(url: object, blocked_hosts: set) -> bool:
+    host = _url_host(url)
+    return any(
+        host == blocked
+        or host.endswith(f'.{blocked}')
+        or blocked.endswith(f'.{host}')
+        for blocked in blocked_hosts
+        if host and blocked
+    )
+
+
+def discovery_lead_hosts(topic: Dict) -> set:
+    """Return hosts that supplied a lead but cannot serve as primary evidence."""
+    if topic.get('discoveryRole') != 'lead' and topic.get('sourceTier') != 'secondary':
+        return set()
+    return {
+        host
+        for host in (_url_host(topic.get('url')), _url_host(topic.get('sourceUrl')))
+        if host
+    }
+
+
 def seed_urls_for_topic(topic: Dict) -> List[str]:
-    """Preserve the reviewed research URLs when retrieving candidate sources."""
+    """Preserve reviewed evidence URLs without scraping the discovery lead."""
     evidence = topic.get('evidence') or {}
     urls = [topic.get('url'), topic.get('sourceUrl')]
     urls.extend(evidence.get('primarySourceUrls') or [])
     urls.extend(evidence.get('sourceUrls') or [])
-    return list(dict.fromkeys(str(url).strip() for url in urls if str(url or '').strip()))
+    lead_hosts = discovery_lead_hosts(topic)
+    return list(dict.fromkeys(
+        str(url).strip()
+        for url in urls
+        if str(url or '').strip() and not _matches_any_host(url, lead_hosts)
+    ))
 
 
 def primary_source_urls_for_topic(topic: Dict) -> set:
@@ -55,7 +89,12 @@ def primary_source_urls_for_topic(topic: Dict) -> set:
     primary_urls = list(evidence.get('primarySourceUrls') or [])
     if topic.get('sourceTier') == 'primary':
         primary_urls.extend([topic.get('url'), topic.get('sourceUrl')])
-    return {str(url).strip() for url in primary_urls if str(url or '').strip()}
+    lead_hosts = discovery_lead_hosts(topic)
+    return {
+        str(url).strip()
+        for url in primary_urls
+        if str(url or '').strip() and not _matches_any_host(url, lead_hosts)
+    }
 
 
 def requires_manual_approval(topic: Dict, article: Dict, source_config: Dict) -> bool:
@@ -103,6 +142,10 @@ def resolve_category(topic: Dict, article: Dict) -> str:
             'restaurant', 'bakery', 'cafe', 'coffee shop', 'bar', 'pub',
             'brewery', 'eatery', 'diner',
         ),
+        'local-news': (
+            'retailer', 'retail store', 'store closing', 'store opening',
+            'local business', 'closing sale', 'new location',
+        ),
         'housing': ('housing', 'rent', 'development', 'rezoning', 'condo'),
         'sports': ('canucks', 'whitecaps', 'bc lions', 'giants', 'game'),
         'space': ('space', 'nasa', 'planet', 'moon', 'mars', 'asteroid', 'telescope'),
@@ -112,7 +155,10 @@ def resolve_category(topic: Dict, article: Dict) -> str:
         'culture': ('culture', 'media', 'art', 'music', 'creator', 'social'),
     }
     for category, keywords in keyword_map.items():
-        if any(keyword in text for keyword in keywords):
+        if any(
+            re.search(rf'(?<!\w){re.escape(keyword)}(?!\w)', text)
+            for keyword in keywords
+        ):
             return category
     return 'local-news'
 
@@ -174,6 +220,8 @@ class ContentPipeline:
             for source in sources:
                 if source.get('url') in primary_urls:
                     source['tier'] = 'primary'
+                else:
+                    source['tier'] = 'secondary'
             
             if not sources:
                 logger.warning(f"No sources found for: {topic_title}")

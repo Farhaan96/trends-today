@@ -9,10 +9,30 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
+from urllib.parse import urlparse
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = REPO_ROOT / "config" / "content-business.json"
+
+
+def _url_host(url: object) -> str:
+    host = (urlparse(str(url or "").strip()).hostname or "").lower()
+    return host.removeprefix("www.")
+
+
+def _same_host_family(first: object, second: object) -> bool:
+    first_host = _url_host(first)
+    second_host = _url_host(second)
+    return bool(
+        first_host
+        and second_host
+        and (
+            first_host == second_host
+            or first_host.endswith(f".{second_host}")
+            or second_host.endswith(f".{first_host}")
+        )
+    )
 
 
 class StrategyError(ValueError):
@@ -86,6 +106,18 @@ def score_candidate(candidate: Dict[str, Any], config: Optional[Dict[str, Any]] 
     primary_source_urls = [
         url for url in evidence.get("primarySourceUrls", []) if str(url).strip()
     ]
+    lead_host = ""
+    if candidate.get("discoveryRole") == "lead":
+        lead_host = _url_host(candidate.get("sourceUrl", ""))
+    invalid_lead_primary_urls = [
+        url
+        for url in primary_source_urls
+        if lead_host and _same_host_family(url, candidate.get("sourceUrl", ""))
+    ]
+    if invalid_lead_primary_urls:
+        primary_source_urls = [
+            url for url in primary_source_urls if url not in invalid_lead_primary_urls
+        ]
     story_type = str(candidate.get("storyType", "reported-update")).strip()
     locality = str(candidate.get("locality", "")).strip()
     ratings = candidate.get("ratings") or {}
@@ -125,6 +157,8 @@ def score_candidate(candidate: Dict[str, Any], config: Optional[Dict[str, Any]] 
         reasons.append("Evidence strength is below the release threshold")
     if scoring.get("primarySourceRequired") and not primary_source_urls:
         reasons.append("No primary source recorded")
+    if invalid_lead_primary_urls:
+        reasons.append("Discovery-lead domain cannot be used as a primary source")
     if not locality:
         reasons.append("No Lower Mainland locality recorded")
     if not evidence.get("readerImpact"):

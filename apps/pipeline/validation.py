@@ -137,12 +137,17 @@ def validate_release_candidate(
     words = len(body.split())
     source_urls = _valid_source_urls(sources)
     category = str(article.get('category', '')).lower()
-    is_local = category in LOCAL_CATEGORIES
-    story_type = str(
-        article.get('storyType')
-        or article.get('story_type')
-        or ('reported-update' if is_local else 'legacy')
+    locality = str(article.get('locality', '')).strip()
+    declared_story_type = str(
+        article.get('storyType') or article.get('story_type') or ''
+    ).strip()
+    local_story_types = {'bulletin', 'reported-update', 'guide-or-explainer'}
+    is_local = (
+        category in LOCAL_CATEGORIES
+        or bool(locality)
+        or declared_story_type in local_story_types
     )
+    story_type = declared_story_type or ('reported-update' if is_local else 'legacy')
     contract = _load_contract(config_path)
     story_contracts = contract['editorial']['storyTypes']
     story_contract = story_contracts.get(story_type, story_contracts['legacy'])
@@ -196,7 +201,7 @@ def validate_release_candidate(
         errors.append(f'only {len(source_urls)} valid source URLs; {minimum_sources} required')
     if is_local and not primary_sources:
         errors.append('at least one primary source is required for local stories')
-    if is_local and not str(article.get('locality', '')).strip():
+    if is_local and not locality:
         errors.append('Lower Mainland locality is required')
     if is_local and not str(article.get('lengthRationale', '')).strip():
         errors.append('length rationale is required for local stories')

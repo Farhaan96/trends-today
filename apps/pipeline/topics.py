@@ -43,10 +43,10 @@ class HeadlineLinkParser(HTMLParser):
 
     def handle_endtag(self, tag):
         if tag.lower() == 'a' and self._href is not None:
-            text = self._title or ' '.join(self._text)
-            text = re.sub(r'\s+', ' ', text).strip()
-            if text:
-                self.links.append((text, self._href))
+            visible_text = re.sub(r'\s+', ' ', ' '.join(self._text)).strip()
+            title_text = re.sub(r'\s+', ' ', self._title or '').strip()
+            if visible_text or title_text:
+                self.links.append((visible_text, self._href, title_text))
             self._href = None
             self._title = None
             self._text = []
@@ -70,6 +70,11 @@ class TopicDiscovery:
         return [
             source for source in self.source_config.get('sources', [])
             if source.get('discoveryEnabled')
+            and (
+                source.get('tier') != 'secondary'
+                or source.get('discoveryRole') != 'lead'
+                or source.get('automatedAccessApproved') is True
+            )
         ]
         
     def _load_recent_posts(self, days=7) -> set:
@@ -103,6 +108,7 @@ class TopicDiscovery:
         }
         for source in self.discovery_sources:
             try:
+                discovery_role = source.get('discoveryRole', 'evidence')
                 response = requests.get(
                     source['url'],
                     timeout=12,
@@ -124,7 +130,12 @@ class TopicDiscovery:
                 max_per_source = int(source.get('maxCandidatesPerSweep', 4))
                 minimum_title_length = int(source.get('minimumTitleLength', 28))
                 maximum_title_length = int(source.get('maximumTitleLength', 180))
-                for title, href in parser.links:
+                for visible_title, href, title_attribute in parser.links:
+                    title = (
+                        title_attribute
+                        if discovery_role == 'lead' and title_attribute
+                        else visible_title or title_attribute
+                    )
                     normalized = (
                         title.strip(' -|')
                         .replace('\u2013', '-')
@@ -145,7 +156,6 @@ class TopicDiscovery:
                     ):
                         continue
                     seen_urls.add(candidate_url)
-                    discovery_role = source.get('discoveryRole', 'evidence')
                     source_topics.append({
                         'title': normalized,
                         'source': (
@@ -360,6 +370,8 @@ class TopicDiscovery:
                         topics.append({
                             'title': line,
                             'source': 'perplexity',
+                            'sourceTier': 'secondary',
+                            'discoveryRole': 'lead',
                             'discovered_at': datetime.now().isoformat()
                         })
                 
@@ -410,6 +422,8 @@ class TopicDiscovery:
                             topics.append({
                                 'title': title,
                                 'source': 'google_news',
+                                'sourceTier': 'secondary',
+                                'discoveryRole': 'lead',
                                 'url': item.get('link'),
                                 'locality': 'Lower Mainland',
                                 'category': 'local-news',

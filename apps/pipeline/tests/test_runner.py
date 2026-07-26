@@ -51,6 +51,35 @@ class RunnerSourceTests(unittest.TestCase):
             primary_source_urls_for_topic(topic),
         )
 
+    def test_discovery_lead_is_not_retrieved_or_treated_as_primary(self):
+        topic = {
+            'sourceUrl': 'https://publication.example/vancouver/store-closing',
+            'sourceTier': 'secondary',
+            'discoveryRole': 'lead',
+            'evidence': {
+                'primarySourceUrls': [
+                    'https://www.publication.example/vancouver/store-closing',
+                    'https://retailer.example/store/vancouver',
+                ],
+                'sourceUrls': [
+                    'https://publication.example/vancouver/store-closing',
+                    'https://city.example/permits/store-renovation',
+                ],
+            },
+        }
+
+        self.assertEqual(
+            [
+                'https://retailer.example/store/vancouver',
+                'https://city.example/permits/store-renovation',
+            ],
+            seed_urls_for_topic(topic),
+        )
+        self.assertEqual(
+            {'https://retailer.example/store/vancouver'},
+            primary_source_urls_for_topic(topic),
+        )
+
     def test_sensitive_story_signal_requires_manual_approval(self):
         config = {
             'automaticPublishing': {
@@ -138,6 +167,26 @@ class RunnerCategoryTests(unittest.TestCase):
             'title': 'Neighbourhood cafe closes after 20 years',
             'category': 'local-news',
         }
+
+        self.assertEqual('local-news', resolve_category(topic, {}))
+
+    def test_public_hearing_routes_to_housing_not_food_and_drink(self):
+        topic = {'title': 'Public hearing set for Vancouver rezoning proposal'}
+
+        self.assertEqual('housing', resolve_category(topic, {}))
+
+    def test_public_consultation_defaults_to_local_news(self):
+        topic = {'title': 'Public consultation opens on Richmond community plan'}
+
+        self.assertEqual('local-news', resolve_category(topic, {}))
+
+    def test_actual_pub_closing_routes_to_food_and_drink(self):
+        topic = {'title': 'Long-running Vancouver pub closes at end of month'}
+
+        self.assertEqual('food-drink', resolve_category(topic, {}))
+
+    def test_retail_space_phrase_does_not_route_to_space(self):
+        topic = {'title': 'New retailer takes over vacant Vancouver retail space'}
 
         self.assertEqual('local-news', resolve_category(topic, {}))
 

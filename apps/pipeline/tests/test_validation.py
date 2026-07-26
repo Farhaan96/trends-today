@@ -172,6 +172,32 @@ class ValidationTests(unittest.TestCase):
             )
             self.assertTrue(result.passed, result.errors)
 
+    def test_locality_keeps_primary_source_gate_after_category_misroute(self):
+        article = self.article()
+        article.update({
+            'category': 'space',
+            'locality': 'Richmond',
+            'storyType': 'reported-update',
+            **self.local_metadata(),
+        })
+        sources = [
+            {'url': source['url'], 'tier': 'secondary'}
+            for source in self.sources()
+        ]
+
+        result = validate_release_candidate(
+            article,
+            sources,
+            {'slug': 'richmond-store-change'},
+            {'path': '/images/store.webp'},
+        )
+
+        self.assertFalse(result.passed)
+        self.assertIn(
+            'at least one primary source is required for local stories',
+            result.errors,
+        )
+
     def test_local_location_promise_requires_concrete_directory(self):
         article = {
             'title': 'Where to cool down in Surrey',
