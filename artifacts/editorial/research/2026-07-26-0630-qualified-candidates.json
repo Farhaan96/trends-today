@@ -1,0 +1,70 @@
+{
+  "generatedAt": "2026-07-26T13:45:00Z",
+  "sweep": "2026-07-26 06:30 America/Vancouver",
+  "dailyPublicationCountBeforeSweep": 0,
+  "dailyPublicationCeiling": 6,
+  "qualified": [
+    {
+      "title": "Surrey Darts Hill scavenger hunt is free July 26",
+      "category": "things-to-do",
+      "locality": "Surrey",
+      "storyType": "bulletin",
+      "sourceUrls": [
+        "https://www.surrey.ca/news-events/events/family-scavenger-hunt-darts-hill",
+        "https://www.surrey.ca/parks-recreation/parks/darts-hill-garden-park"
+      ],
+      "primarySourceUrls": [
+        "https://www.surrey.ca/news-events/events/family-scavenger-hunt-darts-hill",
+        "https://www.surrey.ca/parks-recreation/parks/darts-hill-garden-park"
+      ],
+      "candidatePath": "artifacts/editorial/release-candidates/things-to-do/surrey-darts-hill-scavenger-hunt-july-26.mdx",
+      "candidateSha256": "af34380de78e2a698c2650012046c439b2c485c240cd8327265cc679c6b5ec75",
+      "qualificationReason": "Same-day official Surrey family event with named locality, date, time, address, free cost, primary-source support, practical reader utility, standard brand safety, editorial sponsorship status, generated original image provenance, and no sensitive-story signals.",
+      "commercialIntent": "ad-fit",
+      "commercialFitReason": "Commercial fit was considered only after editorial qualification; audience, ad, Active View, RPM, revenue, and sponsor demand metrics remain unavailable."
+    }
+  ],
+  "rejectedOrHeldSummary": [
+    {
+      "reason": "duplicate or recently published",
+      "examples": [
+        "Surrey capital projects",
+        "Burnaby Blues + Roots Festival",
+        "Coquitlam election workers",
+        "Surrey cooling locations",
+        "Surrey Newton parks",
+        "Burnaby mayor walk",
+        "Richmond climate-friendly homes",
+        "Richmond recycling contamination",
+        "Delta air quality",
+        "Metro Vancouver Stage 2 water restrictions"
+      ]
+    },
+    {
+      "reason": "approval-gated or legally sensitive",
+      "examples": [
+        "Richmond property-title decision",
+        "Richmond Olympic Oval audit",
+        "Surrey unpermitted construction enforcement"
+      ]
+    },
+    {
+      "reason": "stale, already passed, or thin calendar item",
+      "examples": [
+        "New Westminster July 1 and July 2 events",
+        "Richmond June events",
+        "New Westminster July 19 foosball tables",
+        "single-page calendar listings without enough fresh reader utility"
+      ]
+    },
+    {
+      "reason": "sports items below utility threshold",
+      "examples": [
+        "Canucks podcast or profile items",
+        "Whitecaps roster and old preview items",
+        "BC Lions post-game or archive items"
+      ]
+    }
+  ],
+  "skipIfNotPromotedReason": "Do not publish unless the exact candidate passes GPT editorial review, Opus 5 release review, deterministic checks, PR checks, deployment, and live browser verification."
+}
