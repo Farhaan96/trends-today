@@ -107,6 +107,9 @@ class TopicDiscovery:
                 parser = HeadlineLinkParser()
                 parser.feed(response.text)
                 accepted = 0
+                max_per_source = int(source.get('maxCandidatesPerSweep', 4))
+                minimum_title_length = int(source.get('minimumTitleLength', 28))
+                maximum_title_length = int(source.get('maximumTitleLength', 180))
                 for title, href in parser.links:
                     normalized = (
                         title.strip(' -|')
@@ -116,9 +119,11 @@ class TopicDiscovery:
                     )
                     candidate_url = urljoin(response.url, href)
                     if (
-                        len(normalized) < 28
-                        or len(normalized) > 180
+                        len(normalized) < minimum_title_length
+                        or len(normalized) > maximum_title_length
+                        or normalized.startswith('/')
                         or normalized.lower() in ignored
+                        or self._matches_title_exclusion(source, normalized)
                         or self._is_duplicate(normalized)
                         or not self._matches_source_link(source, candidate_url)
                         or candidate_url in seen_urls
@@ -132,12 +137,13 @@ class TopicDiscovery:
                         'sourceTier': source['tier'],
                         'url': candidate_url,
                         'locality': source['locality'],
-                        'category': source['desks'][0],
-                        'storyType': 'reported-update',
+                        'category': source.get('category', source['desks'][0]),
+                        'storyType': source.get('storyType', 'reported-update'),
+                        'sourceTopic': source.get('topicGroup', source['desks'][0]),
                         'discovered_at': datetime.now().isoformat(),
                     })
                     accepted += 1
-                    if accepted >= 4 or len(topics) >= count:
+                    if accepted >= max_per_source or len(topics) >= count:
                         break
                 if len(topics) >= count:
                     break
@@ -174,7 +180,51 @@ class TopicDiscovery:
         if include_regex and not re.search(include_regex, path_with_query):
             return False
 
+        exclude_patterns = source.get('excludeUrlPatterns', [])
+        if exclude_patterns and any(
+            pattern in path_with_query for pattern in exclude_patterns
+        ):
+            return False
+
+        exclude_regex = source.get('excludeUrlRegex')
+        if exclude_regex and re.search(exclude_regex, path_with_query):
+            return False
+
         return bool(include_patterns or include_regex)
+
+    @staticmethod
+    def _matches_title_exclusion(source: Dict, title: str) -> bool:
+        exclude_regex = source.get('excludeTitleRegex')
+        return bool(exclude_regex and re.search(exclude_regex, title, re.IGNORECASE))
+
+    @staticmethod
+    def summarize_source_yield(topics: List[Dict]) -> List[Dict]:
+        """Group discovery output for audit-friendly skip and yield reporting."""
+        grouped: Dict[str, Dict] = {}
+        for topic in topics:
+            source_name = topic.get('sourceName') or topic.get('source') or 'unknown'
+            category = topic.get('category') or 'unknown'
+            source_topic = topic.get('sourceTopic') or category
+            key = f'{source_name}\0{category}\0{source_topic}'
+            if key not in grouped:
+                grouped[key] = {
+                    'sourceName': source_name,
+                    'category': category,
+                    'sourceTopic': source_topic,
+                    'count': 0,
+                    'sampleTitles': [],
+                }
+            grouped[key]['count'] += 1
+            if len(grouped[key]['sampleTitles']) < 3:
+                grouped[key]['sampleTitles'].append(topic.get('title'))
+        return sorted(
+            grouped.values(),
+            key=lambda item: (
+                str(item['category']),
+                str(item['sourceName']),
+                str(item['sourceTopic']),
+            ),
+        )
     
     def discover_perplexity(self, count: int = 20) -> List[Dict]:
         """Find recent Lower Mainland updates that the primary-page scan missed."""
@@ -290,7 +340,8 @@ class TopicDiscovery:
         """Scan primary local sources first, then fill gaps with search."""
         all_topics = []
         
-        all_topics.extend(self.discover_official_pages(min(target, 30)))
+        official_limit = int(self.source_config.get('officialCandidateLimit', target))
+        all_topics.extend(self.discover_official_pages(min(target, official_limit)))
         
         if len(all_topics) < target:
             all_topics.extend(

@@ -15,7 +15,7 @@ export const organizationSchema: OrganizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Trends Today',
-  alternateName: 'Trends Today Tech Blog',
+  alternateName: 'Trends Today Lower Mainland News',
   url: 'https://www.trendstoday.ca',
   logo: {
     '@type': 'ImageObject',
@@ -24,28 +24,11 @@ export const organizationSchema: OrganizationSchema = {
     height: 100,
   },
   description:
-    'Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides. Stay ahead with the latest tech trends.',
+    'Useful local reporting for Vancouver, Metro Vancouver, and the Fraser Valley.',
   foundingDate: '2025',
   founder: {
     '@type': 'Person',
     name: 'Trends Today Editorial Team',
-  },
-  contactPoint: {
-    '@type': 'ContactPoint',
-    telephone: '+1-800-TRENDS',
-    contactType: 'customer service',
-    email: 'contact@trendstoday.ca',
-  },
-  sameAs: [
-    'https://twitter.com/trendstoday',
-    'https://facebook.com/trendstoday',
-    'https://linkedin.com/company/trends-today',
-    'https://youtube.com/@trendstoday',
-  ],
-  address: {
-    '@type': 'PostalAddress',
-    addressCountry: 'CA',
-    addressRegion: 'ON',
   },
 };
 
@@ -54,10 +37,10 @@ export const websiteSchema: WebSiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Trends Today',
-  alternateName: 'Trends Today Tech Reviews',
+  alternateName: 'Trends Today Lower Mainland News',
   url: 'https://www.trendstoday.ca',
   description:
-    'Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides.',
+    'Local news, transit, events, food, housing, and sports from Vancouver and the Lower Mainland.',
   publisher: organizationSchema,
   potentialAction: {
     '@type': 'SearchAction',
@@ -350,18 +333,13 @@ export function generateLocalBusinessSchema(): LocalBusinessSchema {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'Trends Today',
-    description: 'Tech reviews and buying guides',
+    description:
+      'Local news, transit, events, food, housing, and sports from Vancouver and the Lower Mainland.',
     url: 'https://www.trendstoday.ca',
-    telephone: '+1-800-TRENDS',
     address: {
       '@type': 'PostalAddress',
       addressCountry: 'CA',
-      addressRegion: 'ON',
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 43.6532,
-      longitude: -79.3832,
+      addressRegion: 'BC',
     },
     openingHours: 'Mo,Tu,We,Th,Fr,Sa,Su 00:00-23:59',
     priceRange: 'Free',
