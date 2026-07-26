@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "3c0961dea58d01828afcf4f6c45bf269a0f4c4b4c1d8895383f01d3118d448ef",
+  "repositorySha": "e51abd27cc0bf3a73684b02165ad91ff3bd38f4d",
+  "reviewedAt": "2026-07-26T14:05:34.696426+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9ebe-2256-7113-a37f-8cbdf2c7738b",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The cited sources support the event details, admission rules, repeat dates, garden history, and acreage claims. The bulletin is clear, scannable, locally useful, and closes with practical guidance. Some phrasing is mildly repetitive, but it does not require revision."
+}
