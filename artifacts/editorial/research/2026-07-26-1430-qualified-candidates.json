@@ -10,7 +10,7 @@
       "title": "Remaining free Port Coquitlam movie and music dates start Aug. 8",
       "candidatePath": "artifacts/editorial/release-candidates/things-to-do/port-coquitlam-free-august-events-2026.mdx",
       "candidateSha256": "b6e3928b61f7ec07a191191635e7f85f82002d1e3681e5e01641169d949c0e7d",
-      "gptReviewArtifact": "pending fresh GPT review after unsupported sunset-phrase repair",
+      "gptReviewArtifact": "artifacts/editorial/reviews/gpt/things-to-do/port-coquitlam-free-august-events-2026.b6e3928b61f7.json",
       "sourceUrls": [
         "https://www.portcoquitlam.ca/explore-poco/events/cinema-under-stars",
         "https://www.portcoquitlam.ca/explore-poco/events/music-square"
@@ -32,8 +32,9 @@
         "repeatVisitPotential": 4,
         "speedToUsefulDraft": 4
       },
-      "editorialDecision": "qualified-for-review",
+      "editorialDecision": "blocked-by-gpt-editorial-gate",
       "qualificationReason": "Two official City of Port Coquitlam event pages provide free August movie and music dates, times, locations, seating and concession details, performer schedules, primary-source support, and no published Trends Today duplicate.",
+      "blockReason": "Final GPT review verified factual support but returned BLOCKERS because the short reported update still repeated the same date, afternoon-versus-late, and concession/popcorn guidance and used generic transitions.",
       "commercialIntent": "ad-fit",
       "commercialFitReason": "Ad fit considered only after editorial qualification; audience, viewability, revenue, sponsor, RPM, and demand metrics remain unavailable.",
       "sponsorshipStatus": "editorial"

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "b6e3928b61f7ec07a191191635e7f85f82002d1e3681e5e01641169d949c0e7d",
+  "repositorySha": "2e6ef3500cdab9f95496507029a6781ba1ca1a63",
+  "reviewedAt": "2026-07-26T22:02:36.797664+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa073-03a6-7651-94a9-df26dc81746a",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The article repeats the same decision guidance too often. The August dates, afternoon-versus-late comparison, and Gates Park concession versus Evergreen Park popcorn distinction appear in the schedule, explanatory sections, and closing checklist with little added value.",
+    "Several transitions rely on generic framing such as \u201cThe useful decision is simple,\u201d \u201cThe practical thing to remember,\u201d and \u201cThe practical move.\u201d Tightening these passages would make the short update more original and less padded."
+  ],
+  "summary": "The official City pages support the dates, times, locations, performers, seating advice, concessions, food trucks, and free admission claims. The MDX is clear, valid, scannable, and contains zero authorial em dashes. It does not pass the strict gate because repetition and generic connective phrasing reduce editorial quality below 4."
+}
