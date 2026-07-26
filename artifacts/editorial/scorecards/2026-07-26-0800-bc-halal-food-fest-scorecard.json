@@ -43,7 +43,16 @@
       "fallbackDisabled": true,
       "artifact": "artifacts/editorial/reviews/things-to-do/bc-halal-food-fest-cloverdale-final-day.f3c80eba55cb.json"
     },
-    "deterministicValidation": "pending",
+    "deterministicValidation": {
+      "status": "passed",
+      "pipelineTests": "87 passed",
+      "typecheck": "passed",
+      "lint": "passed",
+      "prettier": "passed",
+      "emDashValidation": "passed",
+      "productionBuild": "passed",
+      "staticPages": 208
+    },
     "pullRequest": "pending",
     "deployment": "pending",
     "productionBrowserVerification": "pending"
