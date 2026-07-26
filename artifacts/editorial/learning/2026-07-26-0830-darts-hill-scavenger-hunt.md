@@ -7,6 +7,7 @@
 - Branch: `issue/lm-daily-2026-07-26-0832`
 - Base SHA: `0d27e76ccef9b7456a0b09013aeeef73cc35ebe4`
 - Current pre-release SHA: `4b7fbcd1d706e83fbb403117fcaf1e67e042bcdc`
+- Final branch SHA before merge: `9fcf9b94645cfa1681b7b4403bf585f6f97d258a`
 - Required docs/config read: inline AGENTS instructions from the automation prompt; `CLAUDE.md`; `docs/autonomous-publication-operating-system.md`; `docs/content-business-operating-system.md`; `config/content-business.json`; `config/daily-operator.json`; `config/local-news-sources.json`; latest prior learning `artifacts/editorial/learning/2026-07-25-discovery-breadth-structured-data-repair.md`
 - Note: `AGENTS.md` was not present in either the dirty root checkout or the clean issue worktree, so the automation-provided AGENTS instructions were treated as active context.
 
@@ -51,11 +52,11 @@
 
 ## Release Status
 
-- PR: pending.
-- Checks: pending.
-- Merge SHA: pending.
-- Deployment: pending.
-- Browser proof: pending.
+- PR: `https://github.com/Farhaan96/trends-today/pull/97`; labels `codex`, `codex-automation`.
+- Checks: PR Vercel and Vercel Preview Comments passed before merge.
+- Merge SHA: `1cadebdb075f644a1f5cf582c65f63233049499e`; merged `2026-07-26T16:06:55Z`.
+- Deployment: production Vercel deployment `5611822589`; status success; created `2026-07-26T16:08:33Z`; target `https://trends-today-27qc0219n-farhaans-projects-088cb374.vercel.app`.
+- Browser proof: production URL `https://www.trendstoday.ca/things-to-do/darts-hill-scavenger-hunt-surrey?codex_browser=202607260910` returned HTTP 200 at `2026-07-26T16:09:51.849Z`; canonical URL was `https://www.trendstoday.ca/things-to-do/darts-hill-scavenger-hunt-surrey`; rendered H1 matched the headline; lead, July 26 date, 10 a.m. to 4 p.m. hours, 1633 170 St address, August 30 and September 27 later dates, and both City of Surrey source links rendered; the Darts Hill image loaded with natural size `1024x546`; structured data contained only the truthful site Organization object; console messages and page errors were empty.
 - Rollback point: current production main before merge, `0d27e76ccef9b7456a0b09013aeeef73cc35ebe4`.
 - Cost: unavailable.
 - Root checkout preservation: dirty root was not cleaned or reset. Two evidence files were accidentally written to the stale root before being reapplied in the clean worktree; they were left preserved.
