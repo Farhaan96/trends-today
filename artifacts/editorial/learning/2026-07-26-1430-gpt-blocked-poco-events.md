@@ -72,11 +72,11 @@
 - Reviewed: GPT final gate returned `BLOCKERS`; no passing final GPT review for the final candidate SHA.
 - Independent Opus release review: not run on final candidate because GPT did not pass.
 - Promoted: no.
-- PR: pending.
-- Merged: no.
-- Deployment: none.
-- Browser/live proof: no article route was promoted.
-- Rollback point: pre-run `origin/main` at `c85726cda88940c57caa59a1543426883c68bcfe`; candidate checkpoint `2e6ef3500cdab9f95496507029a6781ba1ca1a63`.
+- PR: `https://github.com/Farhaan96/trends-today/pull/101`, labelled `codex` and `codex-automation`.
+- Merged: yes, merge SHA `f790cdcc9adf36c1ab128d910381d1c0e5eccb71` at `2026-07-26T22:11:30Z`; branch `issue/lm-daily-2026-07-26-1432` preserved.
+- Deployment: Vercel commit status for merge SHA `f790cdcc9adf36c1ab128d910381d1c0e5eccb71` reported `success` with target `https://vercel.com/farhaans-projects-088cb374/trends-today/76iFw5xrKKWWwVAUcScrFNZCaqw3`; GitHub deployments polling did not show a distinct `Production` deployment row for that exact merge SHA, so the production-deployment record remains partially ambiguous.
+- Browser/live proof: `https://www.trendstoday.ca/api/analytics?codex=202607261430-postmerge` returned HTTP 200 with `totalArticles: 159`; `https://www.trendstoday.ca/things-to-do/port-coquitlam-free-august-events-2026?codex=202607261430-postmerge` returned HTTP 404; Playwright home-page check returned HTTP 200, title `Trends Today | Lower Mainland News and Events`, first article still `Free Darts Hill scavenger hunt runs Sunday in Surrey`, and zero console/page errors.
+- Rollback point: pre-run `origin/main` at `c85726cda88940c57caa59a1543426883c68bcfe`; evidence merge SHA `f790cdcc9adf36c1ab128d910381d1c0e5eccb71`; candidate checkpoint `2e6ef3500cdab9f95496507029a6781ba1ca1a63`.
 - Cost: unavailable.
 - Root checkout preservation: the root checkout was not cleaned or reset. Two accidental text artifacts were created in the dirty root by a patch-tool working-directory limitation and were preserved rather than deleted: `artifacts/editorial/release-candidates/things-to-do/port-coquitlam-free-august-events-2026.mdx` and `artifacts/editorial/research/2026-07-26-1430-qualified-candidates.json`. A stale root `.git/index.lock` was observed after an accidental root `git add`; deletion was blocked by the autonomy safety hook, and issue-worktree staging continued safely with `git -C`.
 - Review worktree: `C:\Users\farha\.codex\worktrees\trends-review-poco-2e6ef35` was created detached at `2e6ef3500cdab9f95496507029a6781ba1ca1a63` for clean Opus review readiness, but no final Opus review was run after GPT blocked.
