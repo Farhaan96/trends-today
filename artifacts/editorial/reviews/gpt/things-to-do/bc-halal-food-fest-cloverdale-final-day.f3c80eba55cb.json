@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "f3c80eba55cbf0d862ef767126e71b07e667b212890bdd0430c90e190d62acd1",
+  "repositorySha": "2c19e886acd381579382e61532733de1d3256608",
+  "reviewedAt": "2026-07-26T08:13:48-07:00",
+  "modelUsed": "gpt-5.6-sol",
+  "modelReported": "GPT-5",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019f9efa-2b1b-7712-9ccd-d32a181c1fc4",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The clean HEAD candidate is complete, useful, and supported by the research artifact and current City of Surrey information. It excludes promotional vendor totals and attendance estimates, includes primary-source links, uses a fitting existing image, records sponsorshipStatus as editorial, and presents no sensitive or approval issue."
+}

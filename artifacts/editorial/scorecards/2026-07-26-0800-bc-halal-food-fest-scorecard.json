@@ -30,7 +30,11 @@
     "publicationAuthorization": "Owner explicitly authorized publication in automation publish-bc-halal-food-fest-article."
   },
   "reviewGates": {
-    "exactCandidateGpt": "pending",
+    "exactCandidateGpt": {
+      "status": "passed",
+      "candidateSha256": "f3c80eba55cbf0d862ef767126e71b07e667b212890bdd0430c90e190d62acd1",
+      "artifact": "artifacts/editorial/reviews/gpt/things-to-do/bc-halal-food-fest-cloverdale-final-day.f3c80eba55cb.json"
+    },
     "exactShaOpus5": "pending",
     "deterministicValidation": "pending",
     "pullRequest": "pending",
