@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "6d5bd976cd75eeae369157f8ce29cd0d2f0fc707456eef2a273e3c06cfe3b929",
+  "repositorySha": "c85726cda88940c57caa59a1543426883c68bcfe",
+  "reviewedAt": "2026-07-26T21:43:47.845724+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa061-a464-7782-bf85-59802b7e9679",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The title and description say the free summer dates \u201cstart Aug. 8,\u201d but the cited City pages show both series began in July. They need to specify that the remaining or upcoming dates start Aug. 8.",
+    "The article repeats the complete movie schedule after already presenting it in the quick schedule, then repeats the concession details and August movie time again. This material repetition requires consolidation.",
+    "\u201cLowest-effort afternoon\u201d is an unsupported subjective ranking. The sources support that the concerts run in the afternoon, but not that they require the least effort."
+  ],
+  "summary": "BLOCKERS. The file and repository hashes match exactly, and the body is clear, scannable, locally useful, and contains zero authorial em dashes. Release is blocked by misleading start-date language, an unsupported effort ranking, and substantial repetition."
+}

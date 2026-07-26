@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "f6651c2143763e7774be991985cfe1b6108960be451d841e8bc55d80b1d46616",
+  "repositorySha": "c85726cda88940c57caa59a1543426883c68bcfe",
+  "reviewedAt": "2026-07-26T21:40:12.539513+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa05e-4971-7883-b3e4-b7828079a364",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The candidate repeatedly presents all listed events as free, but the cited Downtown PoCo Car Show page confirms only its date, time, link, and category. It does not establish free admission. The blanket claim therefore lacks cited support.",
+    "The closing claim that the City pages are the source of record for weather changes and timing changes is not established by the cited pages. Recast it as advice to check for updates, or cite an explicit City policy."
+  ],
+  "summary": "BLOCKERS. The exact candidate hash and repository SHA were verified. The guide is clear, scannable, locally useful, and contains zero authorial em dashes, but two unsupported claims prevent release."
+}
