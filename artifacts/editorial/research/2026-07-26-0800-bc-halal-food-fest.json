@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "runStartedAt": "2026-07-26T08:00:00-07:00",
+  "timezone": "America/Vancouver",
+  "candidate": {
+    "title": "BC Halal Food Fest wraps Sunday in Cloverdale",
+    "slug": "bc-halal-food-fest-cloverdale-final-day",
+    "category": "things-to-do",
+    "locality": "Surrey",
+    "storyType": "bulletin",
+    "readerJob": "Help Surrey and Lower Mainland readers decide whether to attend the festival on its final day and confirm the official hours, location, admission price, and listed activities.",
+    "qualification": {
+      "locality": "pass",
+      "freshness": "pass",
+      "readerUtility": "pass",
+      "evidence": "pass",
+      "primarySource": "pass",
+      "corroboration": "not required for a community-event bulletin; all published event facts come from the current City of Surrey listing",
+      "uniqueness": "pass",
+      "brandSafety": "standard",
+      "sensitiveStory": "not triggered",
+      "quality": "pending exact-candidate review"
+    }
+  },
+  "freshVerification": {
+    "checkedAt": "2026-07-26T08:04:10-07:00",
+    "sourceHttpStatus": 200,
+    "facts": {
+      "eventName": "BC Halal Food Fest",
+      "classification": "Community-Hosted",
+      "schedule": [
+        "July 24, 2026, 3:00 p.m. to 11:00 p.m.",
+        "July 25, 2026, 11:00 a.m. to 11:00 p.m.",
+        "July 26, 2026, 11:00 a.m. to 9:00 p.m."
+      ],
+      "address": "Bill Reid Millennium Amphitheatre, 17728 64 Ave, Surrey, BC",
+      "admission": "Free",
+      "listedActivities": [
+        "halal cuisine",
+        "local market vendors",
+        "carnival rides",
+        "live entertainment",
+        "family-friendly activities"
+      ]
+    },
+    "excludedClaims": [
+      "No attendance estimate is used.",
+      "The City page's food-vendor and market-vendor counts are excluded because they were not independently supported.",
+      "No vendor roster, performance schedule, parking rule, or transit claim is inferred beyond the City listing."
+    ]
+  },
+  "duplicateCheck": {
+    "query": "halal food fest|halal cuisine|Bill Reid Millennium|Cloverdale.*food",
+    "scopes": [
+      "content",
+      "artifacts/editorial/release-candidates",
+      "artifacts/editorial/research"
+    ],
+    "priorMatches": 0
+  },
+  "dailyCeiling": {
+    "dateLocal": "2026-07-26",
+    "publishedBeforeRun": 0,
+    "dailyMaximum": 6,
+    "runMaximum": 1,
+    "ceilingReached": false
+  },
+  "sources": [
+    {
+      "title": "City of Surrey BC Halal Food Fest",
+      "url": "https://www.surrey.ca/news-events/events/bc-halal-food-fest",
+      "tier": "primary",
+      "checkedAt": "2026-07-26T08:04:10-07:00",
+      "httpStatus": 200
+    }
+  ],
+  "commercialIntent": "ad-fit",
+  "commercialFitReason": "A free regional food and family event may fit standard local dining, tourism, family-outing, and transportation ad categories after editorial qualification; page views, viewability, RPM, revenue, and sponsor demand remain unavailable.",
+  "sponsorshipStatus": "editorial"
+}

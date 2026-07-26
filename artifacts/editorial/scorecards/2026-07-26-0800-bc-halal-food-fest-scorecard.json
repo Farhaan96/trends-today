@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "runStartedAt": "2026-07-26T08:00:00-07:00",
+  "dateLocal": "2026-07-26",
+  "dailyPublishedBeforeRun": 0,
+  "dailyMaximum": 6,
+  "selected": {
+    "slug": "bc-halal-food-fest-cloverdale-final-day",
+    "score": 88,
+    "scoring": {
+      "localRelevance": 5,
+      "readerUtility": 5,
+      "freshness": 5,
+      "evidenceStrength": 5,
+      "uniqueAngle": 5,
+      "repeatVisitPotential": 2,
+      "speedToUsefulDraft": 5
+    },
+    "readerJob": "Confirm the festival's final-day hours, location, free admission, and listed activities before deciding whether to go.",
+    "sourceReview": {
+      "primarySource": "City of Surrey event listing",
+      "freshHttpStatus": 200,
+      "duplicateMatches": 0,
+      "unsupportedPromotionalClaimsExcluded": true
+    },
+    "brandSafety": "standard",
+    "sensitiveStory": "not triggered",
+    "sponsorshipStatus": "editorial",
+    "manualApprovalRequired": false,
+    "publicationAuthorization": "Owner explicitly authorized publication in automation publish-bc-halal-food-fest-article."
+  },
+  "reviewGates": {
+    "exactCandidateGpt": "pending",
+    "exactShaOpus5": "pending",
+    "deterministicValidation": "pending",
+    "pullRequest": "pending",
+    "deployment": "pending",
+    "productionBrowserVerification": "pending"
+  },
+  "stopCondition": "Do not publish if factual, editorial, exact-candidate, exact-SHA, source-link, canonical, structured-data, image, deployment, or production browser verification fails."
+}
