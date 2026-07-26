@@ -7,14 +7,16 @@ import Footer from '../components/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Trends Today - Tech News & Reviews',
-  description: 'Discover the latest in technology, gadgets, AI, and innovation',
+  title: 'Trends Today | Lower Mainland News and Events',
+  description:
+    'Local news, transit, events, food, housing, and sports from Vancouver and the Lower Mainland.',
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || 'https://www.trendstoday.ca'
   ),
   openGraph: {
     title: 'Trends Today',
-    description: 'Discover the latest in technology',
+    description:
+      'Useful local updates from Vancouver, Metro Vancouver, and the Fraser Valley.',
     url: '/',
     siteName: 'Trends Today',
     locale: 'en_US',
@@ -23,7 +25,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Trends Today',
-    description: 'Discover the latest in technology',
+    description:
+      'Local news, transit, events, food, housing, and sports from the Lower Mainland.',
   },
   robots: {
     index: true,

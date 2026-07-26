@@ -167,9 +167,16 @@ def build_research_queue(topics: Iterable[Dict[str, Any]]) -> List[Dict[str, Any
             "sourceTier": topic.get("sourceTier"),
             "locality": topic.get("locality"),
             "category": topic.get("category"),
+            "sourceTopic": topic.get("sourceTopic"),
             "storyType": topic.get("storyType", "reported-update"),
             "discoveredAt": topic.get("discovered_at", created_at),
             "status": "needs-research",
+            "skipReasonIfUnqualified": (
+                "Do not publish unless research supplies locality, freshness, "
+                "reader impact, non-duplicate angle, required source count, "
+                "primary-source support, brand-safety clearance, and all "
+                "opportunity ratings."
+            ),
             "requiredEvidence": [
                 "Lower Mainland locality",
                 "practical reader impact",

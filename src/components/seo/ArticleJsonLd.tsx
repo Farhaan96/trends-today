@@ -61,11 +61,6 @@ export default function ArticleJsonLd({
         height: 100,
       },
       url: 'https://www.trendstoday.ca',
-      sameAs: [
-        'https://twitter.com/trendstoday',
-        'https://facebook.com/trendstoday',
-        'https://linkedin.com/company/trends-today',
-      ],
     },
     datePublished: publishedAt,
     dateModified: modifiedAt || publishedAt,

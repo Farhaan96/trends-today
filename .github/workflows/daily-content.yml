@@ -33,7 +33,7 @@ jobs:
 
       - name: Build evidence queue
         run: >-
-          python apps/pipeline/runner.py research --limit 15
+          python apps/pipeline/runner.py research --limit 60
           --output reports/editorial/research-queue.json
 
       - name: Upload research queue

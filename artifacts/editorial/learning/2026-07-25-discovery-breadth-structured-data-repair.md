@@ -1,0 +1,88 @@
+# 2026-07-25 urgent discovery breadth and structured-data repair
+
+## Run
+
+- Run ID: `urgent-trends-discovery-breadth-structured-data-2026-07-25`.
+- Trigger: owner-confirmed urgent diagnosis after no July 25 article had posted by late afternoon.
+- Worktree: `C:\Users\farha\.codex\worktrees\trends-discovery-breadth-20260725`.
+- Branch: `issue/trends-discovery-breadth-20260725`.
+- Base code SHA: `a65f2a87f8bf7a579e587e770d009130634b7435`.
+- Root checkout: preserved dirty and untracked; no root mutation.
+
+## Diagnosis
+
+- Schedule: the July 25 artifacts show all seven configured sweeps ran or were represented: 06:30, 08:30, 10:30, 12:30, 14:30, 16:30, and 18:30 America/Vancouver.
+- Daily ceiling: not the cause. July 25 production inventory stayed at `0` of `6` local-day publications before each recorded skip.
+- Candidate quality: a 10:30 Whitecaps bulletin reached candidate review but failed GPT quality and engagement gates, so it was correctly not promoted.
+- Source breadth: a material cause. The repeated official-source queue was capped at `30` candidates from `8` enabled sources and repeated the same city-news/sports pool through the day.
+- Release truth gate: a separate blocker. Production homepage structured data still exposed unsupported legacy technology-publisher, Ontario region, placeholder phone, and placeholder email claims.
+
+## Repair
+
+- Expanded official-source discovery while preserving primary-source, locality, freshness, duplicate, source-count, brand-safety, and review gates.
+- Added crawlable municipal event pages for Surrey, Richmond, New Westminster, Coquitlam, Langley City, and Port Coquitlam.
+- Raised the configured official candidate limit from `30` to `60`.
+- Raised the scheduled research workflow and README operator command from `15` to `60` so the wider queue is actually exercised by routine research runs.
+- Changed official-source selection from ordered first-source fill to source fair-share round robin after scanning enabled sources, preventing early high-yield sources from crowding out newer civic/event sources.
+- Added source-specific `category`, `topicGroup`, `maxCandidatesPerSweep`, title-length, title-exclusion, and URL-exclusion controls.
+- Kept official-source opportunities on the stricter `reported-update` story contract; source configuration cannot downgrade event opportunities to the one-source `bulletin` contract.
+- Added durable source-yield reporting to research queue artifacts, including accepted, included, and status rows per enabled source.
+- Added `skipReasonIfUnqualified` to each research opportunity so candidate skips preserve the evidence required before publication.
+- Corrected homepage Organization and WebSite structured data to factual Lower Mainland publisher descriptions and removed unsupported contact/social/address claims from the rendered base schema paths.
+- Removed unsupported WebSite `SearchAction` claims because the current search page does not hydrate from the query-string URL advertised by JSON-LD.
+- Removed unsupported publisher `sameAs` claims from article JSON-LD so article pages do not retain stale social-profile assertions.
+
+## Scoreboard
+
+- Baseline July 25 repeated queue: `30` candidates from `8` enabled official sources.
+- Repaired dry run artifact: `artifacts/editorial/research/2026-07-25-discovery-repair-source-queue.json`.
+- Repaired dry run: `58` candidates from `14` source/topic groups.
+- Old-limit proof artifact after fair-share repair: `artifacts/editorial/research/2026-07-25-discovery-repair-source-queue-limit15.json`.
+- Old-limit proof: `15` candidates from `14` sources across `9` localities, showing the previous `15` item workflow cap no longer collapses to the earliest configured sources.
+- Story contract proof: both repaired dry-run artifacts carry `reported-update` for every official-source opportunity (`15/15` at limit `15`; `58/58` at limit `60`).
+- Source/topic yield:
+  - City of Surrey news, local-news: `4`.
+  - City of Burnaby events, things-to-do: `4`.
+  - City of Richmond news, local-news: `4`.
+  - City of Coquitlam news, local-news: `4`.
+  - City of Delta news, local-news: `4`.
+  - Vancouver Canucks news, sports: `4`.
+  - Vancouver Whitecaps news, sports: `4`.
+  - BC Lions news, sports: `4`.
+  - City of Surrey events, civic/community things-to-do: `5`.
+  - City of Richmond special events, cultural/community things-to-do: `5`.
+  - City of New Westminster events, civic/community things-to-do: `8`.
+  - City of Coquitlam calendar, civic/community things-to-do: `1`.
+  - Langley City events, civic/community things-to-do: `1`.
+  - Port Coquitlam events, civic/community things-to-do: `6`.
+
+## Gate State
+
+- Qualified candidates: not selected in this repair run; publication was not forced.
+- Candidate hashes: none, because no article candidate was promoted.
+- GPT editorial gate: not run; no exact article candidate was selected.
+- Claude Opus 5 exact-SHA review:
+  - First completed exact-SHA review of `c539068500c1e946890ebd41c7b1f1e735354247` returned `BLOCKERS`; artifact `C:\Users\farha\.codex\review-artifacts\trends-today\discovery-breadth-schema-c539068500c1e946890ebd41c7b1f1e735354247-readonly.json`.
+  - Blockers were the inert production cap/ordered-source crowd-out and lingering unsupported article publisher `sameAs` claims.
+  - Second completed exact-SHA review of `29657ab9a5e9e322dd5b3ef4380c6b5ece9365d9` returned `BLOCKERS`; artifact `C:\Users\farha\.codex\review-artifacts\trends-today\discovery-breadth-schema-29657ab9a5e9e322dd5b3ef4380c6b5ece9365d9-final.json`.
+  - Blockers were source-config `storyType: bulletin` weakening source-count gates and unsupported WebSite `SearchAction` claims.
+  - Both blockers were repaired; final exact-SHA review is pending.
+- Tests:
+  - `python -m unittest discover apps\pipeline\tests`: passed, `87` tests.
+  - `git diff --check`: passed.
+  - `npm run typecheck`: passed.
+  - `npm run lint`: passed with `0` errors and `133` pre-existing warnings.
+  - `npm run build`: passed; generated `public/sitemap.xml` timestamp churn was restored before review.
+- PR: pending.
+- Merge SHA: pending.
+- Deployment: pending.
+- Browser proof: pending.
+- Rollback point: `a65f2a87f8bf7a579e587e770d009130634b7435`.
+- Metrics: production `/api/analytics` from the 18:30 sweep showed `157` active articles and no July 25 story; protected reporting and provider article-level metrics remained unavailable/protected, not zero.
+- Cost: unavailable.
+
+## Keep / Repair / Stop
+
+- Keep zero-publication behavior when candidates are duplicate, stale, approval-gated, low utility, or fail GPT/Claude/release checks.
+- Repair discovery breadth and structured-data truth through this branch before the next publishing sweep relies on the old pool.
+- Stop before publication if a widened-source candidate lacks fresh official evidence, primary-source support, locality, practical reader value, image provenance, structured-data truth, or exact-artifact review.

@@ -6,7 +6,7 @@ from pathlib import Path
 PIPELINE_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PIPELINE_DIR))
 
-from strategy import score_candidate  # noqa: E402
+from strategy import build_research_queue, score_candidate  # noqa: E402
 
 
 class StrategyTests(unittest.TestCase):
@@ -68,6 +68,25 @@ class StrategyTests(unittest.TestCase):
         candidate['evidence']['sourceUrls'] = ['https://a.example']
         result = score_candidate(candidate)
         self.assertEqual('brief', result.decision)
+
+    def test_research_queue_preserves_source_topic_and_skip_contract(self):
+        queue = build_research_queue([
+            {
+                'title': 'Community market returns Saturday',
+                'sourceName': 'City events',
+                'sourceTier': 'primary',
+                'url': 'https://city.example/events/community-market',
+                'locality': 'Port Coquitlam',
+                'category': 'things-to-do',
+                'sourceTopic': 'civic and community events',
+                'storyType': 'reported-update',
+            }
+        ])
+
+        self.assertEqual('civic and community events', queue[0]['sourceTopic'])
+        self.assertEqual('reported-update', queue[0]['storyType'])
+        self.assertIn('skipReasonIfUnqualified', queue[0])
+        self.assertIn('primary-source support', queue[0]['skipReasonIfUnqualified'])
 
 
 if __name__ == '__main__':

@@ -2,6 +2,7 @@
   "version": 2,
   "updatedAt": "2026-07-25",
   "region": "Lower Mainland, British Columbia",
+  "officialCandidateLimit": 60,
   "localities": [
     "Vancouver",
     "Surrey",
@@ -59,6 +60,25 @@
       "includeUrlPatterns": ["/news-events/news/"]
     },
     {
+      "name": "City of Surrey events",
+      "url": "https://www.surrey.ca/news-events/events",
+      "domain": "surrey.ca",
+      "locality": "Surrey",
+      "desks": ["things-to-do", "local-news"],
+      "category": "things-to-do",
+      "topicGroup": "civic and community events",
+      "tier": "primary",
+      "discoveryEnabled": true,
+      "maxCandidatesPerSweep": 6,
+      "includeUrlPatterns": ["/news-events/events/"],
+      "excludeUrlPatterns": [
+        "/news-events/events/list-event",
+        "/news-events/events/community-event-hosting-application",
+        "/news-events/events/cloverdale-fairgrounds"
+      ],
+      "excludeTitleRegex": "application|list an event|fairgrounds|hosting|vendor|sponsorship|business participation"
+    },
+    {
       "name": "City of Burnaby news",
       "url": "https://www.burnaby.ca/our-city/news",
       "domain": "burnaby.ca",
@@ -89,6 +109,20 @@
       "includeUrlPatterns": ["/city-hall/news/"]
     },
     {
+      "name": "City of Richmond special events",
+      "url": "https://www.richmond.ca/culture/calendar/special-events.htm",
+      "domain": "richmond.ca",
+      "locality": "Richmond",
+      "desks": ["things-to-do"],
+      "category": "things-to-do",
+      "topicGroup": "cultural and community events",
+      "tier": "primary",
+      "discoveryEnabled": true,
+      "maxCandidatesPerSweep": 5,
+      "includeUrlPatterns": ["/culture/calendar/special-events/"],
+      "excludeTitleRegex": "registration|program registration"
+    },
+    {
       "name": "City of New Westminster news",
       "url": "https://www.newwestcity.ca/city_hall/media/press_releases.php",
       "domain": "newwestcity.ca",
@@ -99,6 +133,20 @@
       "disabledReason": "listing content is not exposed as article links"
     },
     {
+      "name": "City of New Westminster events",
+      "url": "https://www.newwestcity.ca/calendar-of-events",
+      "domain": "newwestcity.ca",
+      "locality": "New Westminster",
+      "desks": ["things-to-do", "local-news"],
+      "category": "things-to-do",
+      "topicGroup": "civic and community events",
+      "tier": "primary",
+      "discoveryEnabled": true,
+      "maxCandidatesPerSweep": 8,
+      "includeUrlPatterns": ["/calendar-of-events/events/"],
+      "excludeTitleRegex": "cancelled"
+    },
+    {
       "name": "City of Coquitlam news",
       "url": "https://www.coquitlam.ca/CivicAlerts.aspx",
       "domain": "coquitlam.ca",
@@ -107,6 +155,20 @@
       "tier": "primary",
       "discoveryEnabled": true,
       "includeUrlPatterns": ["/m/newsflash/Home/Detail/"]
+    },
+    {
+      "name": "City of Coquitlam calendar",
+      "url": "https://www.coquitlam.ca/Calendar.aspx",
+      "domain": "coquitlam.ca",
+      "locality": "Coquitlam",
+      "desks": ["things-to-do", "local-news"],
+      "category": "things-to-do",
+      "topicGroup": "civic and community events",
+      "tier": "primary",
+      "discoveryEnabled": true,
+      "maxCandidatesPerSweep": 4,
+      "includeUrlRegex": "^/Calendar\\.aspx\\?EID=",
+      "excludeTitleRegex": "cancelled"
     },
     {
       "name": "City of Delta news",
@@ -127,6 +189,36 @@
       "tier": "primary",
       "discoveryEnabled": false,
       "disabledReason": "configured listing URL currently returns 404"
+    },
+    {
+      "name": "Langley City events",
+      "url": "https://www.langleycity.ca/community-culture/events",
+      "domain": "langleycity.ca",
+      "locality": "Langley",
+      "desks": ["things-to-do", "local-news"],
+      "category": "things-to-do",
+      "topicGroup": "civic and community events",
+      "tier": "primary",
+      "discoveryEnabled": true,
+      "maxCandidatesPerSweep": 4,
+      "minimumTitleLength": 20,
+      "includeUrlPatterns": ["/community-culture/events/"],
+      "excludeTitleRegex": "hosting|application|permit"
+    },
+    {
+      "name": "Port Coquitlam events",
+      "url": "https://www.portcoquitlam.ca/explore-poco/events",
+      "domain": "portcoquitlam.ca",
+      "locality": "Port Coquitlam",
+      "desks": ["things-to-do", "local-news"],
+      "category": "things-to-do",
+      "topicGroup": "civic and community events",
+      "tier": "primary",
+      "discoveryEnabled": true,
+      "maxCandidatesPerSweep": 6,
+      "minimumTitleLength": 18,
+      "includeUrlPatterns": ["/explore-poco/events/"],
+      "excludeTitleRegex": "application|sponsorship|entertainer|vendor|business participation"
     },
     {
       "name": "Metro Vancouver media releases",

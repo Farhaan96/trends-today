@@ -377,6 +377,10 @@ def main():
         payload = {
             'generatedAt': datetime.now().isoformat(),
             'status': 'needs-research',
+            'sourceSummary': discovery.summarize_source_yield(
+                topics,
+                discovery.last_source_scan,
+            ),
             'topics': build_research_queue(topics),
         }
         output = args.output or Path('reports') / 'editorial' / f"research_queue_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"

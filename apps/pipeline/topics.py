@@ -54,6 +54,7 @@ class TopicDiscovery:
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.recent_posts = self._load_recent_posts()
         self.source_config = self._load_source_config()
+        self.last_source_scan = []
 
     def _load_source_config(self) -> Dict:
         with SOURCE_CONFIG.open(encoding='utf-8') as handle:
@@ -88,7 +89,8 @@ class TopicDiscovery:
 
     def discover_official_pages(self, count: int = 30) -> List[Dict]:
         """Pull candidate links directly from configured primary-source listings."""
-        topics = []
+        source_batches = []
+        scan_rows = []
         seen_urls = set()
         ignored = {
             'home', 'news', 'events', 'contact us', 'read more', 'learn more',
@@ -101,12 +103,22 @@ class TopicDiscovery:
                     timeout=12,
                     headers={'User-Agent': 'TrendsTodayLocalDesk/1.0'},
                 )
+                source_topics = []
                 if response.status_code != 200:
+                    scan_rows.append(self._source_scan_row(
+                        source,
+                        response.status_code,
+                        0,
+                        'non-200 response',
+                    ))
                     continue
                 response.encoding = response.apparent_encoding
                 parser = HeadlineLinkParser()
                 parser.feed(response.text)
                 accepted = 0
+                max_per_source = int(source.get('maxCandidatesPerSweep', 4))
+                minimum_title_length = int(source.get('minimumTitleLength', 28))
+                maximum_title_length = int(source.get('maximumTitleLength', 180))
                 for title, href in parser.links:
                     normalized = (
                         title.strip(' -|')
@@ -116,35 +128,70 @@ class TopicDiscovery:
                     )
                     candidate_url = urljoin(response.url, href)
                     if (
-                        len(normalized) < 28
-                        or len(normalized) > 180
+                        len(normalized) < minimum_title_length
+                        or len(normalized) > maximum_title_length
+                        or normalized.startswith('/')
                         or normalized.lower() in ignored
+                        or self._matches_title_exclusion(source, normalized)
                         or self._is_duplicate(normalized)
                         or not self._matches_source_link(source, candidate_url)
                         or candidate_url in seen_urls
                     ):
                         continue
                     seen_urls.add(candidate_url)
-                    topics.append({
+                    source_topics.append({
                         'title': normalized,
                         'source': 'primary_source_page',
                         'sourceName': source['name'],
                         'sourceTier': source['tier'],
                         'url': candidate_url,
                         'locality': source['locality'],
-                        'category': source['desks'][0],
-                        'storyType': 'reported-update',
+                        'category': source.get('category', source['desks'][0]),
+                    'storyType': 'reported-update',
+                        'sourceTopic': source.get('topicGroup', source['desks'][0]),
                         'discovered_at': datetime.now().isoformat(),
                     })
                     accepted += 1
-                    if accepted >= 4 or len(topics) >= count:
+                    if accepted >= max_per_source:
                         break
-                if len(topics) >= count:
-                    break
+                if source_topics:
+                    source_batches.append(source_topics)
+                scan_rows.append(self._source_scan_row(
+                    source,
+                    response.status_code,
+                    len(source_topics),
+                    'accepted candidates' if source_topics else 'no matching candidate links',
+                ))
             except Exception as exc:
                 logger.warning('Primary source scan failed for %s: %s', source['name'], exc)
+                scan_rows.append(self._source_scan_row(source, None, 0, str(exc)))
+        self.last_source_scan = scan_rows
+
+        topics = []
+        max_batch_size = max((len(batch) for batch in source_batches), default=0)
+        for index in range(max_batch_size):
+            for batch in source_batches:
+                if index < len(batch):
+                    topics.append(batch[index])
+                    if len(topics) >= count:
+                        break
+            if len(topics) >= count:
+                break
         logger.info('Found %s candidates on primary source pages', len(topics))
         return topics[:count]
+
+    @staticmethod
+    def _source_scan_row(source: Dict, status_code, accepted_count: int, status: str) -> Dict:
+        return {
+            'sourceName': source.get('name'),
+            'category': source.get('category', source.get('desks', ['unknown'])[0]),
+            'sourceTopic': source.get('topicGroup', source.get('desks', ['unknown'])[0]),
+            'locality': source.get('locality'),
+            'url': source.get('url'),
+            'httpStatus': status_code,
+            'acceptedCount': accepted_count,
+            'status': status,
+        }
 
     @staticmethod
     def _matches_source_link(source: Dict, candidate_url: str) -> bool:
@@ -174,7 +221,76 @@ class TopicDiscovery:
         if include_regex and not re.search(include_regex, path_with_query):
             return False
 
+        exclude_patterns = source.get('excludeUrlPatterns', [])
+        if exclude_patterns and any(
+            pattern in path_with_query for pattern in exclude_patterns
+        ):
+            return False
+
+        exclude_regex = source.get('excludeUrlRegex')
+        if exclude_regex and re.search(exclude_regex, path_with_query):
+            return False
+
         return bool(include_patterns or include_regex)
+
+    @staticmethod
+    def _matches_title_exclusion(source: Dict, title: str) -> bool:
+        exclude_regex = source.get('excludeTitleRegex')
+        return bool(exclude_regex and re.search(exclude_regex, title, re.IGNORECASE))
+
+    @staticmethod
+    def summarize_source_yield(topics: List[Dict], source_scan: List[Dict] = None) -> List[Dict]:
+        """Group discovery output for audit-friendly skip and yield reporting."""
+        grouped: Dict[str, Dict] = {}
+        for topic in topics:
+            source_name = topic.get('sourceName') or topic.get('source') or 'unknown'
+            category = topic.get('category') or 'unknown'
+            source_topic = topic.get('sourceTopic') or category
+            key = f'{source_name}\0{category}\0{source_topic}'
+            if key not in grouped:
+                grouped[key] = {
+                    'sourceName': source_name,
+                    'category': category,
+                    'sourceTopic': source_topic,
+                    'count': 0,
+                    'acceptedCount': 0,
+                    'includedCount': 0,
+                    'sampleTitles': [],
+                }
+            grouped[key]['count'] += 1
+            grouped[key]['includedCount'] += 1
+            if len(grouped[key]['sampleTitles']) < 3:
+                grouped[key]['sampleTitles'].append(topic.get('title'))
+
+        for row in source_scan or []:
+            source_name = row.get('sourceName') or 'unknown'
+            category = row.get('category') or 'unknown'
+            source_topic = row.get('sourceTopic') or category
+            key = f'{source_name}\0{category}\0{source_topic}'
+            if key not in grouped:
+                grouped[key] = {
+                    'sourceName': source_name,
+                    'category': category,
+                    'sourceTopic': source_topic,
+                    'count': 0,
+                    'acceptedCount': int(row.get('acceptedCount') or 0),
+                    'includedCount': 0,
+                    'sampleTitles': [],
+                }
+            else:
+                grouped[key]['acceptedCount'] = int(row.get('acceptedCount') or 0)
+            grouped[key]['locality'] = row.get('locality')
+            grouped[key]['url'] = row.get('url')
+            grouped[key]['httpStatus'] = row.get('httpStatus')
+            grouped[key]['status'] = row.get('status')
+        return sorted(
+            grouped.values(),
+            key=lambda item: (
+                str(item['category']),
+                str(item['sourceName']),
+                str(item['sourceTopic']),
+            ),
+        )
     
     def discover_perplexity(self, count: int = 20) -> List[Dict]:
         """Find recent Lower Mainland updates that the primary-page scan missed."""
@@ -290,7 +406,8 @@ class TopicDiscovery:
         """Scan primary local sources first, then fill gaps with search."""
         all_topics = []
         
-        all_topics.extend(self.discover_official_pages(min(target, 30)))
+        official_limit = int(self.source_config.get('officialCandidateLimit', target))
+        all_topics.extend(self.discover_official_pages(min(target, official_limit)))
         
         if len(all_topics) < target:
             all_topics.extend(

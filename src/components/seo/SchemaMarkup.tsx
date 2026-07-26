@@ -316,7 +316,7 @@ export function OrganizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Trends Today',
-    alternateName: 'Trends Today Tech Blog',
+    alternateName: 'Trends Today Lower Mainland News',
     url: 'https://www.trendstoday.ca',
     logo: {
       '@type': 'ImageObject',
@@ -325,28 +325,11 @@ export function OrganizationSchema() {
       height: 100,
     },
     description:
-      'Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides. Stay ahead with the latest tech trends.',
+      'Useful local reporting for Vancouver, Metro Vancouver, and the Fraser Valley.',
     foundingDate: '2025',
     founder: {
       '@type': 'Person',
       name: 'Trends Today Editorial Team',
-    },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+1-800-TRENDS',
-      contactType: 'customer service',
-      email: 'contact@trendstoday.ca',
-    },
-    sameAs: [
-      'https://twitter.com/trendstoday',
-      'https://facebook.com/trendstoday',
-      'https://linkedin.com/company/trends-today',
-      'https://youtube.com/@trendstoday',
-    ],
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'CA',
-      addressRegion: 'ON',
     },
   };
 
@@ -359,10 +342,10 @@ export function WebsiteSchema() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Trends Today',
-    alternateName: 'Trends Today Tech Reviews',
+    alternateName: 'Trends Today Lower Mainland News',
     url: 'https://www.trendstoday.ca',
     description:
-      'Your trusted source for in-depth tech reviews, product comparisons, and comprehensive buying guides.',
+      'Local news, transit, events, food, housing, and sports from Vancouver and the Lower Mainland.',
     publisher: {
       '@type': 'Organization',
       name: 'Trends Today',
@@ -370,14 +353,6 @@ export function WebsiteSchema() {
         '@type': 'ImageObject',
         url: 'https://www.trendstoday.ca/images/logo.png',
       },
-    },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: 'https://www.trendstoday.ca/search?q={search_term_string}',
-      },
-      'query-input': 'required name=search_term_string',
     },
   };
 
