@@ -52,7 +52,7 @@ class LocalTopicDiscoveryTests(unittest.TestCase):
         self.assertEqual(1, len(candidates))
         self.assertEqual('Burnaby', candidates[0]['locality'])
         self.assertEqual('transit', candidates[0]['category'])
-        self.assertEqual('bulletin', candidates[0]['storyType'])
+        self.assertEqual('reported-update', candidates[0]['storyType'])
         self.assertEqual('community services', candidates[0]['sourceTopic'])
         self.assertEqual('primary', candidates[0]['sourceTier'])
         self.assertEqual(

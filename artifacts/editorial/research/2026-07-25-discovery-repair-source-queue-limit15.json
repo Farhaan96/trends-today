@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-25T22:05:18.716880",
+  "generatedAt": "2026-07-25T22:22:16.041494",
   "status": "needs-research",
   "sourceSummary": [
     {
@@ -225,7 +225,7 @@
       "category": "local-news",
       "sourceTopic": "local-news",
       "storyType": "reported-update",
-      "discoveredAt": "2026-07-25T22:05:04.654628",
+      "discoveredAt": "2026-07-25T22:22:09.325436",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [
@@ -248,8 +248,8 @@
       "locality": "Surrey",
       "category": "things-to-do",
       "sourceTopic": "civic and community events",
-      "storyType": "bulletin",
-      "discoveredAt": "2026-07-25T22:05:14.700134",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-25T22:22:10.624655",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [
@@ -273,7 +273,7 @@
       "category": "things-to-do",
       "sourceTopic": "things-to-do",
       "storyType": "reported-update",
-      "discoveredAt": "2026-07-25T22:05:15.577600",
+      "discoveredAt": "2026-07-25T22:22:11.454368",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [
@@ -297,7 +297,7 @@
       "category": "local-news",
       "sourceTopic": "local-news",
       "storyType": "reported-update",
-      "discoveredAt": "2026-07-25T22:05:15.705547",
+      "discoveredAt": "2026-07-25T22:22:11.601411",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [
@@ -320,8 +320,8 @@
       "locality": "Richmond",
       "category": "things-to-do",
       "sourceTopic": "cultural and community events",
-      "storyType": "bulletin",
-      "discoveredAt": "2026-07-25T22:05:15.807672",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-25T22:22:11.707751",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [
@@ -344,8 +344,8 @@
       "locality": "New Westminster",
       "category": "things-to-do",
       "sourceTopic": "civic and community events",
-      "storyType": "bulletin",
-      "discoveredAt": "2026-07-25T22:05:16.061748",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-25T22:22:12.059606",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [
@@ -369,7 +369,7 @@
       "category": "local-news",
       "sourceTopic": "local-news",
       "storyType": "reported-update",
-      "discoveredAt": "2026-07-25T22:05:16.821216",
+      "discoveredAt": "2026-07-25T22:22:12.848122",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [
@@ -392,8 +392,8 @@
       "locality": "Coquitlam",
       "category": "things-to-do",
       "sourceTopic": "civic and community events",
-      "storyType": "bulletin",
-      "discoveredAt": "2026-07-25T22:05:17.359008",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-25T22:22:13.401469",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [
@@ -417,7 +417,7 @@
       "category": "local-news",
       "sourceTopic": "local-news",
       "storyType": "reported-update",
-      "discoveredAt": "2026-07-25T22:05:17.845659",
+      "discoveredAt": "2026-07-25T22:22:13.910326",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [
@@ -440,8 +440,8 @@
       "locality": "Langley",
       "category": "things-to-do",
       "sourceTopic": "civic and community events",
-      "storyType": "bulletin",
-      "discoveredAt": "2026-07-25T22:05:18.231052",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-25T22:22:14.330311",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [
@@ -464,8 +464,8 @@
       "locality": "Port Coquitlam",
       "category": "things-to-do",
       "sourceTopic": "civic and community events",
-      "storyType": "bulletin",
-      "discoveredAt": "2026-07-25T22:05:18.436723",
+      "storyType": "reported-update",
+      "discoveredAt": "2026-07-25T22:22:14.800004",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [
@@ -489,7 +489,7 @@
       "category": "sports",
       "sourceTopic": "sports",
       "storyType": "reported-update",
-      "discoveredAt": "2026-07-25T22:05:18.518658",
+      "discoveredAt": "2026-07-25T22:22:15.070394",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [
@@ -513,7 +513,7 @@
       "category": "sports",
       "sourceTopic": "sports",
       "storyType": "reported-update",
-      "discoveredAt": "2026-07-25T22:05:18.638488",
+      "discoveredAt": "2026-07-25T22:22:15.478015",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [
@@ -537,7 +537,7 @@
       "category": "sports",
       "sourceTopic": "sports",
       "storyType": "reported-update",
-      "discoveredAt": "2026-07-25T22:05:18.713877",
+      "discoveredAt": "2026-07-25T22:22:16.038494",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [
@@ -561,7 +561,7 @@
       "category": "local-news",
       "sourceTopic": "local-news",
       "storyType": "reported-update",
-      "discoveredAt": "2026-07-25T22:05:04.654628",
+      "discoveredAt": "2026-07-25T22:22:09.325436",
       "status": "needs-research",
       "skipReasonIfUnqualified": "Do not publish unless research supplies locality, freshness, reader impact, non-duplicate angle, required source count, primary-source support, brand-safety clearance, and all opportunity ratings.",
       "requiredEvidence": [

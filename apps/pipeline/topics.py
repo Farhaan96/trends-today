@@ -147,7 +147,7 @@ class TopicDiscovery:
                         'url': candidate_url,
                         'locality': source['locality'],
                         'category': source.get('category', source['desks'][0]),
-                        'storyType': source.get('storyType', 'reported-update'),
+                    'storyType': 'reported-update',
                         'sourceTopic': source.get('topicGroup', source['desks'][0]),
                         'discovered_at': datetime.now().isoformat(),
                     })

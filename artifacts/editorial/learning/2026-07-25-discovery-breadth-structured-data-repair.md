@@ -24,10 +24,12 @@
 - Raised the configured official candidate limit from `30` to `60`.
 - Raised the scheduled research workflow and README operator command from `15` to `60` so the wider queue is actually exercised by routine research runs.
 - Changed official-source selection from ordered first-source fill to source fair-share round robin after scanning enabled sources, preventing early high-yield sources from crowding out newer civic/event sources.
-- Added source-specific `storyType`, `category`, `topicGroup`, `maxCandidatesPerSweep`, title-length, title-exclusion, and URL-exclusion controls.
+- Added source-specific `category`, `topicGroup`, `maxCandidatesPerSweep`, title-length, title-exclusion, and URL-exclusion controls.
+- Kept official-source opportunities on the stricter `reported-update` story contract; source configuration cannot downgrade event opportunities to the one-source `bulletin` contract.
 - Added durable source-yield reporting to research queue artifacts, including accepted, included, and status rows per enabled source.
 - Added `skipReasonIfUnqualified` to each research opportunity so candidate skips preserve the evidence required before publication.
 - Corrected homepage Organization and WebSite structured data to factual Lower Mainland publisher descriptions and removed unsupported contact/social/address claims from the rendered base schema paths.
+- Removed unsupported WebSite `SearchAction` claims because the current search page does not hydrate from the query-string URL advertised by JSON-LD.
 - Removed unsupported publisher `sameAs` claims from article JSON-LD so article pages do not retain stale social-profile assertions.
 
 ## Scoreboard
@@ -37,6 +39,7 @@
 - Repaired dry run: `58` candidates from `14` source/topic groups.
 - Old-limit proof artifact after fair-share repair: `artifacts/editorial/research/2026-07-25-discovery-repair-source-queue-limit15.json`.
 - Old-limit proof: `15` candidates from `14` sources across `9` localities, showing the previous `15` item workflow cap no longer collapses to the earliest configured sources.
+- Story contract proof: both repaired dry-run artifacts carry `reported-update` for every official-source opportunity (`15/15` at limit `15`; `58/58` at limit `60`).
 - Source/topic yield:
   - City of Surrey news, local-news: `4`.
   - City of Burnaby events, things-to-do: `4`.
@@ -61,7 +64,9 @@
 - Claude Opus 5 exact-SHA review:
   - First completed exact-SHA review of `c539068500c1e946890ebd41c7b1f1e735354247` returned `BLOCKERS`; artifact `C:\Users\farha\.codex\review-artifacts\trends-today\discovery-breadth-schema-c539068500c1e946890ebd41c7b1f1e735354247-readonly.json`.
   - Blockers were the inert production cap/ordered-source crowd-out and lingering unsupported article publisher `sameAs` claims.
-  - Final post-repair exact-SHA review is pending.
+  - Second completed exact-SHA review of `29657ab9a5e9e322dd5b3ef4380c6b5ece9365d9` returned `BLOCKERS`; artifact `C:\Users\farha\.codex\review-artifacts\trends-today\discovery-breadth-schema-29657ab9a5e9e322dd5b3ef4380c6b5ece9365d9-final.json`.
+  - Blockers were source-config `storyType: bulletin` weakening source-count gates and unsupported WebSite `SearchAction` claims.
+  - Both blockers were repaired; final exact-SHA review is pending.
 - Tests:
   - `python -m unittest discover apps\pipeline\tests`: passed, `87` tests.
   - `git diff --check`: passed.

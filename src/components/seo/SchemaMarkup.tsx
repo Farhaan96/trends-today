@@ -354,14 +354,6 @@ export function WebsiteSchema() {
         url: 'https://www.trendstoday.ca/images/logo.png',
       },
     },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: 'https://www.trendstoday.ca/search?q={search_term_string}',
-      },
-      'query-input': 'required name=search_term_string',
-    },
   };
 
   return <SchemaMarkup schema={schema} id="website-schema" />;

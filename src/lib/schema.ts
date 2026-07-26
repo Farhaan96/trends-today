@@ -42,14 +42,6 @@ export const websiteSchema: WebSiteSchema = {
   description:
     'Local news, transit, events, food, housing, and sports from Vancouver and the Lower Mainland.',
   publisher: organizationSchema,
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: 'https://www.trendstoday.ca/search?q={search_term_string}',
-    },
-    'query-input': 'required name=search_term_string',
-  },
 };
 
 // Generate Article Schema

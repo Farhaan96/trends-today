@@ -79,12 +79,12 @@ class StrategyTests(unittest.TestCase):
                 'locality': 'Port Coquitlam',
                 'category': 'things-to-do',
                 'sourceTopic': 'civic and community events',
-                'storyType': 'bulletin',
+                'storyType': 'reported-update',
             }
         ])
 
         self.assertEqual('civic and community events', queue[0]['sourceTopic'])
-        self.assertEqual('bulletin', queue[0]['storyType'])
+        self.assertEqual('reported-update', queue[0]['storyType'])
         self.assertIn('skipReasonIfUnqualified', queue[0])
         self.assertIn('primary-source support', queue[0]['skipReasonIfUnqualified'])
 
