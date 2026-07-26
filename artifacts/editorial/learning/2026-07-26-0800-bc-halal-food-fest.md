@@ -1,0 +1,22 @@
+# 2026-07-26 08:00 BC Halal Food Fest publication
+
+- Outcome: published and production-verified one authorized Surrey things-to-do bulletin about the final day of BC Halal Food Fest.
+- Article: `BC Halal Food Fest wraps Sunday in Cloverdale`, canonical path `/things-to-do/bc-halal-food-fest-cloverdale-final-day`.
+- Source: the City of Surrey BC Halal Food Fest event page was checked fresh on July 26, 2026 and returned HTTP 200. It confirmed the July 24 to 26 schedule, Sunday hours of 11 a.m. to 9 p.m., free admission, Bill Reid Millennium Amphitheatre at 17728 64 Ave, Community-Hosted classification, halal food, local market vendors, carnival rides, live entertainment, and family activities.
+- Claim discipline: no attendance estimate was used. The City listing's promotional food-vendor and market-vendor totals were excluded because they were not independently supported.
+- Reader job: help Surrey and Lower Mainland readers make a same-day attendance decision from the official final-day hours, location, price, and broad activity categories.
+- Commercial posture: `commercialIntent` is `ad-fit` only after editorial qualification; `sponsorshipStatus` remains `editorial`. Article-level page views, ad viewability, RPM, revenue, and sponsor demand remain unavailable, never zero.
+- Image: original AI-generated editorial image at `/images/editorial/2026/07/bc-halal-food-fest-cloverdale.png`, direct production HTTP 200.
+- Exact candidate: SHA-256 `f3c80eba55cbf0d862ef767126e71b07e667b212890bdd0430c90e190d62acd1`.
+- GPT gate: PASS on repository SHA `2c19e886acd381579382e61532733de1d3256608` with engagement 4, factual support 5, formatting 5, quality 4, readability 5, zero blockers, and zero prose em dashes.
+- Independent release gate: Claude Opus 5 returned `NO BLOCKERS` for exact repository SHA `7465ed2e4e3e5f3548aab15c25614608b1b18353`; requested and observed model included `claude-opus-5`, fallback was disabled, and the candidate hash matched.
+- Validation: 87 Python pipeline tests passed; typecheck passed; quiet lint passed; targeted Prettier passed; em-dash validation passed; `git diff --check` passed; production build generated 208 static pages.
+- Known repository issue: the normal pre-commit hook failed on 564 unrelated legacy Prettier warnings. The release used the documented `--no-verify` scoped-check exception after all targeted checks passed.
+- Release: PR #95 merged at `0d27e76ccef9b7456a0b09013aeeef73cc35ebe4`. Vercel preview and preview comments checks passed.
+- Production: GitHub deployment `5611535085` succeeded for exact merge SHA `0d27e76ccef9b7456a0b09013aeeef73cc35ebe4` at `2026-07-26T15:32:21Z`, target `https://trends-today-6e8w1j0hx-farhaans-projects-088cb374.vercel.app`.
+- Direct production checks: the canonical article URL, original image URL, and City of Surrey source URL each returned HTTP 200.
+- Browser verification: `https://www.trendstoday.ca/things-to-do/bc-halal-food-fest-cloverdale-final-day` rendered the exact canonical URL and H1, both City source anchors as visible links, key hours/free-admission/address and claim-exclusion text, and Article JSON-LD with the correct headline, publication date, main entity URL, author, publisher, and image.
+- Image verification: the production hero completed successfully with natural dimensions 946 by 473.
+- Error verification: zero browser console warnings/errors and zero observed page errors.
+- Production inventory: `/api/analytics` returned success with 158 active articles, things-to-do count 12, and this article first in recent articles.
+- Local safety: the dirty root checkout was untouched. Build-generated changes to `public/robots.txt` and `public/sitemap.xml` remain unstaged only in the isolated release worktree and were not included in the release.
