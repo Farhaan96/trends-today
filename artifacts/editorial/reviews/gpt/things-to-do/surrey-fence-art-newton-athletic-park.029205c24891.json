@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "029205c248913552ba40f6fa4ab1eb3f974f0387e35c560deb96f55325e3920a",
+  "repositorySha": "2f5d4a095c96f87339328e533f0b2e1f87175aa9",
+  "reviewedAt": "2026-07-26T23:44:28.539617+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa0d0-4339-7233-9365-6cea935a03b7",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 4,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The article repeats the same two ideas several times: checking the city listing before leaving and following the Our City link for other events. This creates filler in a very short bulletin.",
+    "The sentence contrasting the activity with \u201ca ticketed show\u201d is manufactured framing not established by the source and adds little practical value.",
+    "The close is flat and repetitive: it restates the instruction to check the event page instead of ending with the clearest actionable details, such as when to arrive and where to find the tent."
+  ],
+  "summary": "The City of Surrey source supports the core date, time, address, free drop-in format, tent location, fence-art activity, placemaking description, and link to other Our City events. The MDX is clean and contains no authorial em dashes, but repetition, unsupported framing, and a weak ending keep quality and engagement below the release threshold."
+}
