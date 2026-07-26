@@ -5,7 +5,7 @@
   "dailyPublicationCeiling": 6,
   "qualified": [
     {
-      "title": "Surrey Darts Hill scavenger hunt is free July 26",
+      "title": "Surrey Darts Hill scavenger hunt runs July 26",
       "category": "things-to-do",
       "locality": "Surrey",
       "storyType": "bulletin",
@@ -20,7 +20,7 @@
         "https://dartshill.ca/visit-the-garden/"
       ],
       "candidatePath": "artifacts/editorial/release-candidates/things-to-do/surrey-darts-hill-scavenger-hunt-july-26.mdx",
-      "candidateSha256": "b1ba4c46e581ef3e1c4d098b47e09c113ad2f67907dcdcfa7ab48beb29fac32c",
+      "candidateSha256": "3c0961dea58d01828afcf4f6c45bf269a0f4c4b4c1d8895383f01d3118d448ef",
       "qualificationReason": "Same-day official Surrey family event with named locality, date, time, address, donation-based admission disclosure, primary-source support, practical reader utility, standard brand safety, editorial sponsorship status, generated original image provenance, and no sensitive-story signals.",
       "commercialIntent": "ad-fit",
       "commercialFitReason": "Commercial fit was considered only after editorial qualification; audience, ad, Active View, RPM, revenue, and sponsor demand metrics remain unavailable."
