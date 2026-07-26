@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "bf99240666483a35ae86fa330f67caadebb2102fb63ec7029cb317da5cf87ab6",
+  "repositorySha": "2f5d4a095c96f87339328e533f0b2e1f87175aa9",
+  "reviewedAt": "2026-07-26T23:40:28.968936+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa0cc-c1ef-7991-94c9-27fa7db88fae",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The subtitle calls the fence art \u201ctemporary,\u201d but the cited City of Surrey page does not say the artwork is temporary.",
+    "The audience claim that the event is useful for \u201cfamilies, nearby residents, youth, and park users\u201d is not supported by the cited material.",
+    "\u201cBring water if the hot weather continues into Tuesday\u201d relies on an uncited current-weather claim.",
+    "The reference to \u201crecently announced park-upgrade work\u201d is a factual claim unsupported by the sole source listed in this candidate.",
+    "\u201cNot a performance or formal class\u201d goes beyond the source, which describes fence art and a free drop-in but does not expressly establish either negative claim.",
+    "The article repeats the date, time, free admission, drop-in format, tent instruction, and fence-art description without adding enough useful detail. Phrases such as \u201cThe practical part is simple,\u201d \u201cthe main planning details,\u201d and \u201cthe reader job mostly logistical\u201d feel like filler.",
+    "The close loses focus by ending on an unrelated park-upgrade cross-link after the actionable event checklist, producing a flat transition rather than a clean event-focused finish."
+  ],
+  "summary": "The core date, time, location, cost, drop-in format, tent instruction, and fence-art activity match the cited City of Surrey event page. The candidate is valid and scannable MDX with zero authorial em dashes, but unsupported details, repetition, awkward editorial phrasing, and the unfocused ending require revision."
+}

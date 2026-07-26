@@ -1,0 +1,6 @@
+﻿{
+    "status":  "unavailable",
+    "message":  "The remote server returned an error: (401) Unauthorized.",
+    "statusCode":  401,
+    "reason":  "protected reporting endpoint requires authorization token"
+}

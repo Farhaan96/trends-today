@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2026-07-26T23:42:00Z",
+  "runId": "run-trends-today-daily-publisher-2026-07-26-1630",
+  "status": "one-qualified-candidate",
+  "dailyCeiling": {
+    "date": "2026-07-26",
+    "timezone": "America/Vancouver",
+    "alreadyLiveBeforeSweep": 2,
+    "maximumDailyPublications": 6,
+    "maximumSweepPublications": 2,
+    "ceilingReached": false
+  },
+  "qualified": [
+    {
+      "title": "Surrey fence-art meetup runs Tuesday at Newton Athletic Park",
+      "sourceName": "City of Surrey events",
+      "sourceTier": "primary",
+      "sourceUrls": [
+        "https://www.surrey.ca/news-events/events/our-city-placemaking-meetups-fence-art-newton-athletic-park"
+      ],
+      "locality": "Surrey",
+      "category": "things-to-do",
+      "lane": "daily-local-utility",
+      "storyType": "bulletin",
+      "decision": "brief",
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 4,
+        "freshness": 5,
+        "evidenceStrength": 4,
+        "uniqueAngle": 4,
+        "repeatVisitPotential": 3,
+        "speedToUsefulDraft": 5
+      },
+      "score": 86,
+      "evidence": {
+        "primarySourceUrls": [
+          "https://www.surrey.ca/news-events/events/our-city-placemaking-meetups-fence-art-newton-athletic-park"
+        ],
+        "sourceUrls": [
+          "https://www.surrey.ca/news-events/events/our-city-placemaking-meetups-fence-art-newton-athletic-park"
+        ],
+        "readerImpact": "Surrey residents can decide whether to drop in for a free two-hour fence-art placemaking activity at Newton Athletic Park on July 28.",
+        "freshnessEvidence": "The official City of Surrey event page lists July 28, 2026, 4:00 p.m. to 6:00 p.m., which is two days after this July 26 sweep.",
+        "uniqueAngleEvidence": "Published Trends Today Surrey coverage includes Newton Athletic Park capital upgrades and heat resources, but not the July 28 Our City fence-art meetup.",
+        "brandSafety": "standard",
+        "sensitiveSubject": false
+      },
+      "commercialIntent": "ad-fit",
+      "commercialFitReason": "Only after editorial qualification, a free local park activity has ordinary local-events ad context; no sponsor demand or revenue is asserted.",
+      "sponsorshipStatus": "editorial",
+      "candidateSha256": "029205c248913552ba40f6fa4ab1eb3f974f0387e35c560deb96f55325e3920a"
+    }
+  ],
+  "rejectedOrHeld": [
+    {
+      "title": "Port Coquitlam free August events",
+      "reason": "Held by the 14:30 stop rule. The prior final candidate was GPT-blocked for repetition and generic transitions; no materially different source facts were found in this sweep."
+    },
+    {
+      "title": "Surrey Park Play at T.E. Scott Park and Robertson Drive Park",
+      "reason": "Held by the 12:30 GPT-blocked result. Facts remain useful but too thin and repetitive for a standalone article without a new reader decision."
+    },
+    {
+      "title": "New Westminster July 4 and July 7 event pages",
+      "reason": "Rejected as stale for the July 26 sweep despite appearing in the source listing."
+    },
+    {
+      "title": "Richmond property-title decision, Richmond Olympic Oval audits, and Surrey unpermitted-construction enforcement",
+      "reason": "Manual approval required because legal, audit, or enforcement subject matter is sensitive."
+    },
+    {
+      "title": "Duplicate civic, heat, capital-project, and team/news items",
+      "reason": "Rejected as already published, stale, unchanged, or below the local reader-utility threshold."
+    }
+  ]
+}

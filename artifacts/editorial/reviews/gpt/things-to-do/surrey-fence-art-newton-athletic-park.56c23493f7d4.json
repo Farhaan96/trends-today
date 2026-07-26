@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "56c23493f7d48dc9336910935f23f53371106cda54ad10b23625e6b1723f0746",
+  "repositorySha": "2f5d4a095c96f87339328e533f0b2e1f87175aa9",
+  "reviewedAt": "2026-07-26T23:42:30.543047+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa0ce-6ed3-7603-b2be-3ac126bf92bf",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The date, time, address, free drop-in format, tent instruction, and narrow event scope are repeated across the lead, details section, checklist, and final paragraph, creating noticeable repetition and filler.",
+    "The final paragraph switches to internal editorial-process commentary about treating the item as a narrow bulletin. It adds no reader value and produces a flat ending instead of closing on the useful action: checking the city listing before leaving."
+  ],
+  "summary": "The event facts are accurately supported by the cited City of Surrey page, the MDX is clear and scannable, and the authorial prose contains no em dashes. The candidate does not pass the strict gate because repetition and the newsroom-facing final paragraph weaken quality and engagement."
+}
