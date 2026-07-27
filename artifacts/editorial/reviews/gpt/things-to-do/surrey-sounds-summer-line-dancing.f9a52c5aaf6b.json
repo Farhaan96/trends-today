@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "f9a52c5aaf6b0e4ddd6c87a22b87f9b631b67b406fb9669fe807e42d4ab75591",
+  "repositorySha": "6dd6b08cefcb2ff566bceba5456d8c44c01bb6fc",
+  "reviewedAt": "2026-07-27T01:45:16.291558+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa13d-fe8a-7042-9ad4-c659cab87304",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "\u201cBring a chair if you want a guaranteed seat\u201d overstates the cited material. The City says seating is limited and advises visitors to bring a chair, but it does not guarantee seating or space."
+  ],
+  "summary": "Strong, concise local bulletin with clear logistics, scannable MDX, an actionable close, and no authorial em dashes. One unsupported guarantee prevents passage through the strict factual-support gate."
+}

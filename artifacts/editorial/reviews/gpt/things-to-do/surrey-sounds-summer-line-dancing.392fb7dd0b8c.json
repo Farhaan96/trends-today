@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "392fb7dd0b8c5d4720a279666f9bc05ec93a3b7b6b173f96a3c236c522580565",
+  "repositorySha": "6dd6b08cefcb2ff566bceba5456d8c44c01bb6fc",
+  "reviewedAt": "2026-07-27T01:42:45.864854+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa13c-86b3-7e10-963f-a9e29ecb44fd",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The \u201cWhy this one is useful\u201d section repeats the free price, specific venue, and advance-planning value already established in the lead and preceding sections. It adds filler instead of new reader value and requires revision.",
+    "The close is actionable only in a generic sense: it advises checking the City page across several broad concerns without identifying a concrete update to verify, leaving the article with a flat ending."
+  ],
+  "summary": "The City listing supports the event, timing, location, admission, performer, instruction, seating, parking, pet, accessibility, food, and alcohol details. The candidate is readable, cleanly formatted, locally useful, and contains zero countable em dashes. It fails the strict second gate because its final two paragraphs become repetitive and generic rather than sustaining the otherwise specific, practical reporting."
+}

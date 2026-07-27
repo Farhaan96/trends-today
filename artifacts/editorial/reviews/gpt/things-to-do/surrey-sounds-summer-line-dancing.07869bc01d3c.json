@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "07869bc01d3c3cd1d8bd335288dd124a96cd535f09901b7b1f417141d07d01fe",
+  "repositorySha": "6dd6b08cefcb2ff566bceba5456d8c44c01bb6fc",
+  "reviewedAt": "2026-07-27T01:48:55.839425+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa140-61d9-7cf0-8c55-1b0e75a2ea53",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The official City of Surrey listing supports the event details, performer description, admission, venue, accessibility, parking, seating, pet, food, and alcohol claims. The bulletin is clear, useful, well structured, and closes with actionable planning advice. Some checklist repetition and one slightly mechanical transition keep quality, readability, and engagement below 5, but neither requires revision."
+}
