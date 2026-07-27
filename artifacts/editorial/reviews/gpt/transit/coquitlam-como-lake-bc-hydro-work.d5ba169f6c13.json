@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "d5ba169f6c13e1e3341f66b59ff2812fd89964bbff0de624c998f702acface70",
+  "repositorySha": "1d8c2057d03f511c9719ccd693f941539f604513",
+  "reviewedAt": "2026-07-27T19:49:20.481696+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa51f-2378-7730-85ff-46ae7a4a6b50",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate is a clear, useful local traffic bulletin. Its route, schedule, lane restrictions, exclusions, safety guidance, contact details, and practical recommendations are supported by the cited City of Coquitlam material. The MDX is scannable, the lead and close serve drivers directly, and the authorial prose contains no em dashes."
+}

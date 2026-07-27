@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "d221ee2d817162f986281adb4c04ed31ad9d24d94c60d94f431ac594c408f2f5",
+  "repositorySha": "15b329bb59f5b3d0f1ef0d34aea6806bfd4f253c",
+  "reviewedAt": "2026-07-27T20:04:53.852475+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa52d-005e-7662-bd08-d017083afdc2",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 4,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The central reader impact is buried: the article body never plainly states that traffic will be limited to one lane in each direction. That crucial detail appears only in metadata and is softened under \u201cWhat changes\u201d to traffic continuing in both directions.",
+    "The bulletin repeats the absence of a closure or off-hours work while giving less prominence to the actual lane configuration. This weakens specificity and creates a slightly padded middle.",
+    "\u201cFor project questions during the work window\u201d adds an unsupported timing qualification to the city contact information; the cited notice lists the contact details without limiting questions to construction hours."
+  ],
+  "summary": "The core dates, route, hours, exclusions, traffic guidance, and contact details are supported, and the MDX is clean and scannable with zero prose em dashes. Revision is required because the body understates the defining one-lane-each-direction impact, repeats secondary schedule observations, and adds an unsupported contact-time qualification."
+}

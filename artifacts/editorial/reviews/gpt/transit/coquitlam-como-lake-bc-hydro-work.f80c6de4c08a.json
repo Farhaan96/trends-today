@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "f80c6de4c08aac27e42c49e36d6a9bb85528f169d8db3e95f0601cae80a9a31c",
+  "repositorySha": "1f64c7a582218ed1dda6907701166546b7568202",
+  "reviewedAt": "2026-07-27T20:02:38.263073+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa52b-6eb2-7752-a4c7-cc8c89f41ed9",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 4,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The lane reduction is repeated in the lead, the following paragraph, and the opening of \u201cWhat changes on Como Lake Avenue,\u201d making this short bulletin noticeably repetitive and requiring consolidation."
+  ],
+  "summary": "The candidate is clear, useful, scannable, actionable, and contains no authorial em dashes. It does not pass the strict gate because repetitive treatment of the central traffic impact lowers quality below 4."
+}
