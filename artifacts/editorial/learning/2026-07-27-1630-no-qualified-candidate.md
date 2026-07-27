@@ -3,9 +3,13 @@
 - Run ID: `2026-07-27-1630-lm-publisher`
 - Trigger: scheduled `run-trends-today-daily-publisher` automation, every two hours
 - Operator worktree: `C:\Users\farha\.codex\worktrees\trends-daily-2026-07-27-1632`
+- Closeout worktree: `C:\Users\farha\.codex\worktrees\trends-daily-2026-07-27-1630-closeout`
 - Branch: `codex/lm-daily-2026-07-27-1632`
+- Closeout branch: `codex/lm-daily-2026-07-27-1630-closeout`
 - Base code SHA: `577b96eb0c254dc608d62c844b0f4dfdeb68466c`
-- Rollback point: no article promotion was prepared; revert this audit-only run after merge if the ledger itself needs removal.
+- Audit commit SHA: `e415eb71e6eb5afdb19bc4c79d88bf3cf9af925c`
+- Merge SHA: `23dd6530b5b1f3e0f797725a478a31b09c23c6c6`
+- Rollback point: no article promotion was prepared; revert merge `23dd6530b5b1f3e0f797725a478a31b09c23c6c6` if the audit ledger itself needs removal.
 
 ## Metrics first
 
@@ -52,7 +56,15 @@
 
 ## PR, merge, deployment, and browser proof
 
-- Pending at initial audit commit.
+- Audit PR: `https://github.com/Farhaan96/trends-today/pull/116`
+- Labels: `codex`, `codex-automation`
+- PR checks: Vercel Preview Comments passed; Vercel passed
+- Merge method: merge commit, branch retained
+- Merge SHA: `23dd6530b5b1f3e0f797725a478a31b09c23c6c6`
+- Production deployment: GitHub deployment `5631691370`, success for merge SHA `23dd6530b5b1f3e0f797725a478a31b09c23c6c6`, target `https://trends-today-n9ntizzq7-farhaans-projects-088cb374.vercel.app`
+- Browser proof artifact: `artifacts/editorial/browser-proof/2026-07-27-1630-live-verification.json`
+- Browser proof: homepage canonical `https://www.trendstoday.ca/`, title `Trends Today | Lower Mainland News and Events`, H1 `What is happening around you.`, first article still `Coquitlam plans Partington Creek wildlife corridor`, primary image loaded, no `Post-Practice July 27` article present, and zero captured console errors.
+- Post-merge public analytics: HTTP 200, 163 total articles, same four July 27 articles in recent articles, and missing growth metrics still unavailable.
 
 ## Operational learning
 

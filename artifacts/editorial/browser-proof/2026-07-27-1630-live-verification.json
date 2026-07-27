@@ -1,0 +1,66 @@
+{
+  "runId": "2026-07-27-1630-lm-publisher",
+  "verifiedAt": "2026-07-27T23:46:09.407Z",
+  "deployment": {
+    "id": 5631691370,
+    "environment": "Production",
+    "sha": "23dd6530b5b1f3e0f797725a478a31b09c23c6c6",
+    "state": "success",
+    "targetUrl": "https://trends-today-n9ntizzq7-farhaans-projects-088cb374.vercel.app",
+    "createdAt": "2026-07-27T23:45:04Z",
+    "updatedAt": "2026-07-27T23:45:05Z"
+  },
+  "browser": {
+    "surface": "Codex in-app browser",
+    "url": "https://www.trendstoday.ca/?codex=publisher-20260727-1630",
+    "title": "Trends Today | Lower Mainland News and Events",
+    "canonical": "https://www.trendstoday.ca/",
+    "h1": "What is happening around you.",
+    "firstArticleHref": "https://www.trendstoday.ca/local-news/coquitlam-partington-creek-wildlife-corridor",
+    "firstArticleTitle": "Coquitlam plans Partington Creek wildlife corridor",
+    "hasBCLionsPostPractice": false,
+    "primaryImage": {
+      "alt": "Coquitlam plans Partington Creek wildlife corridor",
+      "complete": true,
+      "naturalWidth": 793,
+      "naturalHeight": 446,
+      "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fcoquitlam-partington-creek-wildlife-corridor.png&w=1080&q=75"
+    },
+    "consoleErrors": []
+  },
+  "publicAnalytics": {
+    "url": "https://www.trendstoday.ca/api/analytics?codex=publisher-20260727-1630-final",
+    "httpStatus": 200,
+    "success": true,
+    "totalArticles": 163,
+    "recentArticles": [
+      {
+        "title": "Coquitlam plans Partington Creek wildlife corridor",
+        "category": "local-news",
+        "publishedAt": "2026-07-27T14:45:00-07:00",
+        "slug": "coquitlam-partington-creek-wildlife-corridor"
+      },
+      {
+        "title": "Como Lake Avenue lanes narrow July 29 to Aug. 7",
+        "category": "transit",
+        "publishedAt": "2026-07-27T12:45:00-07:00",
+        "slug": "coquitlam-como-lake-bc-hydro-work"
+      },
+      {
+        "title": "Surrey youth stewardship has July 29 volunteer date",
+        "category": "things-to-do",
+        "publishedAt": "2026-07-27T08:45:00-07:00",
+        "slug": "surrey-youth-stewardship-volunteer-dates"
+      },
+      {
+        "title": "Free Surrey line-dancing concert runs Wednesday",
+        "category": "things-to-do",
+        "publishedAt": "2026-07-27T06:45:00-07:00",
+        "slug": "surrey-sounds-summer-line-dancing"
+      }
+    ],
+    "missingRule": "Unavailable metrics are never represented as zero.",
+    "growthStatus": "unavailable"
+  },
+  "verdict": "browser-verified audit-only skip; no new article was published"
+}
