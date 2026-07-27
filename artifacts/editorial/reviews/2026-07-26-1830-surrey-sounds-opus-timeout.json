@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "status": "timeout",
+  "verdict": "NOT_REVIEWED",
+  "reviewer": "claude",
+  "requestedModel": "claude-opus-5",
+  "fallbackDisabled": true,
+  "repositorySha": "ceb06754a1b48c614c3b2cb39b92a5b1ed57ad48",
+  "candidateSha256": "07869bc01d3c3cd1d8bd335288dd124a96cd535f09901b7b1f417141d07d01fe",
+  "startedAtLocal": "2026-07-26T19:04:20-07:00",
+  "timedOutAfterSeconds": 604,
+  "boundedWaitAfterTimeoutSeconds": 180,
+  "processStopped": true,
+  "reason": "The approved Opus 5 runner process exceeded the tool timeout and remained running after a bounded wait; no structured verdict was retrievable, so the release gate failed closed."
+}
