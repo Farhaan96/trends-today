@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "d5b8bcf84b8ffaa48663ee691c78a0475c2403bbd32f086ba5c76798a2861c24",
+  "repositorySha": "a4efdd7ba1400a18d045a589e89c7da00f4aabde",
+  "reviewedAt": "2026-07-27T15:46:35.395819+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa440-9ef8-7c71-bc13-e72dea7ca4a4",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The ending is flat rather than actionable. After explaining registration, the final body paragraph diverts readers to a Burnaby article instead of closing with a clear Surrey sign-up or event-planning action. The Surrey reader impact is therefore buried at the close and requires revision."
+  ],
+  "summary": "The local candidate hash and repository SHA match exactly. The City of Surrey source supports the dates, times, locations, age range, activities, registration requirements, preparation guidance, cancellation caveat, and volunteer-account details. The MDX is clean and scannable, and authorial prose contains no em dashes. The unsupported weakness is engagement: the tangential Burnaby redirect displaces the actionable Surrey close."
+}
