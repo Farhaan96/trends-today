@@ -1,0 +1,6 @@
+﻿{
+    "url":  "https://www.trendstoday.ca/api/analytics/reporting?codex=202607270632",
+    "httpStatus":  401,
+    "body":  "The remote server returned an error: (401) Unauthorized.",
+    "checkedAt":  "2026-07-27T13:34:46.0953974Z"
+}
