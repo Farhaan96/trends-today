@@ -1,0 +1,134 @@
+{
+  "checkedAt": "2026-07-27T21:59:58.286Z",
+  "url": "https://www.trendstoday.ca/local-news/coquitlam-partington-creek-wildlife-corridor",
+  "status": 200,
+  "finalUrl": "https://www.trendstoday.ca/local-news/coquitlam-partington-creek-wildlife-corridor",
+  "title": "Coquitlam plans Partington Creek wildlife corridor | Trends Today",
+  "h1": "Coquitlam plans Partington Creek wildlife corridor",
+  "canonical": "https://www.trendstoday.ca/local-news/coquitlam-partington-creek-wildlife-corridor",
+  "metaDescription": "Coquitlam's Partington Creek corridor plan would protect Burke Mountain habitat, add parkland, and set buffers beside a salmon-bearing creek.",
+  "requiredTextResults": {
+    "Coquitlam plans Partington Creek wildlife corridor": true,
+    "Partington Creek": true,
+    "Burke Mountain": true,
+    "Cedar Drive": true,
+    "Victoria Drive": true,
+    "50-metre corridor": true,
+    "100-metre buffer": true,
+    "57 species": true,
+    "400,000 wildlife images": true,
+    "31,000 images of black bears": true,
+    "May 25, 2026": true,
+    "June 22, 2026": true
+  },
+  "sourceAnchors": [
+    {
+      "text": "City of Coquitlam: Coquitlam Protecting Key Wildlife Corridor along Partington Creek",
+      "href": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2009"
+    }
+  ],
+  "images": [
+    {
+      "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fcoquitlam-partington-creek-wildlife-corridor.png&w=1080&q=75",
+      "alt": "Coquitlam plans Partington Creek wildlife corridor",
+      "complete": true,
+      "naturalWidth": 1024,
+      "naturalHeight": 576
+    },
+    {
+      "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fcoquitlam-como-lake-bc-hydro-work.png&w=3840&q=75",
+      "alt": "Como Lake Avenue lanes narrow July 29 to Aug. 7",
+      "complete": false,
+      "naturalWidth": 0,
+      "naturalHeight": 0
+    },
+    {
+      "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fsurrey-youth-stewardship-volunteer-dates.png&w=3840&q=75",
+      "alt": "Surrey youth stewardship has July 29 volunteer date",
+      "complete": false,
+      "naturalWidth": 0,
+      "naturalHeight": 0
+    },
+    {
+      "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fsurrey-sounds-summer-line-dancing.png&w=3840&q=75",
+      "alt": "Free Surrey line-dancing concert runs Wednesday",
+      "complete": false,
+      "naturalWidth": 0,
+      "naturalHeight": 0
+    },
+    {
+      "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fsurrey-capital-projects-2026.png&w=3840&q=75",
+      "alt": "Surrey's $1.6B capital plan spans four projects through 2031",
+      "complete": false,
+      "naturalWidth": 0,
+      "naturalHeight": 0
+    },
+    {
+      "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fcoquitlam-election-workers.png&w=3840&q=75",
+      "alt": "Coquitlam seeks 250 election workers at up to $38 an hour",
+      "complete": false,
+      "naturalWidth": 0,
+      "naturalHeight": 0
+    },
+    {
+      "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fcoquitlam-storm-drain-marking.png&w=3840&q=75",
+      "alt": "Coquitlam invites residents to mark storm drains",
+      "complete": false,
+      "naturalWidth": 0,
+      "naturalHeight": 0
+    }
+  ],
+  "articleStructuredData": {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Coquitlam plans Partington Creek wildlife corridor",
+    "description": "Coquitlam's Partington Creek corridor plan would protect Burke Mountain habitat, add parkland, and set buffers beside a salmon-bearing creek.",
+    "image": [
+      "/images/editorial/2026/07/coquitlam-partington-creek-wildlife-corridor.png"
+    ],
+    "author": {
+      "@type": "Organization",
+      "name": "Trends Today Newsroom",
+      "description": "The Trends Today Newsroom reports practical local updates using primary sources, documented checks, and editor review.",
+      "url": "https://www.trendstoday.ca/author/trends-today-newsroom"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Trends Today",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.trendstoday.ca/images/logo.png",
+        "width": 400,
+        "height": 100
+      },
+      "url": "https://www.trendstoday.ca"
+    },
+    "datePublished": "2026-07-27T14:45:00-07:00",
+    "dateModified": "2026-07-27T14:45:00-07:00",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.trendstoday.ca/local-news/coquitlam-partington-creek-wildlife-corridor"
+    },
+    "articleSection": "Local News",
+    "timeRequired": "PT2M",
+    "inLanguage": "en-US",
+    "isAccessibleForFree": true,
+    "potentialAction": {
+      "@type": "ReadAction",
+      "target": "https://www.trendstoday.ca/local-news/coquitlam-partington-creek-wildlife-corridor"
+    }
+  },
+  "consoleErrors": [],
+  "analytics": {
+    "url": "https://www.trendstoday.ca/api/analytics?codex=publisher-20260727-1430-postmerge-final",
+    "status": 200,
+    "totalArticles": 163,
+    "firstRecentArticle": {
+      "title": "Coquitlam plans Partington Creek wildlife corridor",
+      "category": "local-news",
+      "publishedAt": "2026-07-27T14:45:00-07:00",
+      "slug": "coquitlam-partington-creek-wildlife-corridor"
+    }
+  },
+  "passed": true
+}
