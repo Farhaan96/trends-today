@@ -1,0 +1,8 @@
+﻿{
+    "status":  "unavailable",
+    "httpStatus":  401,
+    "source":  "https://www.trendstoday.ca/api/analytics/reporting",
+    "retrievedAt":  "2026-07-27T21:35:04.9519002Z",
+    "reason":  "The remote server returned an error: (401) Unauthorized.",
+    "missing":  "authorized bearer token"
+}

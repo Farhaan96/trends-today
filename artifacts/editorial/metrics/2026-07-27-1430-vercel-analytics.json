@@ -1,0 +1,10 @@
+﻿{
+    "status":  "unavailable",
+    "source":  "Vercel Analytics API",
+    "retrievedAt":  "2026-07-27T21:35:04.9603960Z",
+    "missing":  [
+                    "VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN",
+                    "VERCEL_PROJECT_ID"
+                ],
+    "reason":  "Missing VERCEL_TOKEN or VERCEL_ANALYTICS_TOKEN and VERCEL_PROJECT_ID"
+}

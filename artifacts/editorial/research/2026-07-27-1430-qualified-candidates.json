@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-07-27T21:39:31.454879+00:00",
+  "results": [
+    {
+      "title": "Coquitlam protects Partington Creek wildlife corridor",
+      "lane": "daily-local-utility",
+      "score": 88.0,
+      "decision": "brief",
+      "confidence": "verified-official-source",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Coquitlam protects Partington Creek wildlife corridor",
+        "lane": "daily-local-utility",
+        "locality": "Coquitlam",
+        "category": "local-news",
+        "storyType": "bulletin",
+        "sourceName": "City of Coquitlam news",
+        "sourceTier": "primary",
+        "sourceUrl": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2009",
+        "sourceTopic": "local-news",
+        "discoverySource": "primary_source_page",
+        "discoveredAt": "2026-07-27T14:35:20-07:00",
+        "confidence": "verified-official-source",
+        "commercialIntent": "none",
+        "commercialFitReason": "No commercial fit is asserted. Editorial utility, locality, source support, and brand safety qualified the candidate first.",
+        "sponsorshipStatus": "editorial",
+        "brandSafety": "standard",
+        "lengthRationale": "Bulletin treatment is appropriate because the official source supplies a concise civic update with clear location, proposal stage, habitat details, and resident impact.",
+        "evidence": {
+          "sourceUrls": [
+            "https://www.coquitlam.ca/m/newsflash/Home/Detail/2009"
+          ],
+          "primarySourceUrls": [
+            "https://www.coquitlam.ca/m/newsflash/Home/Detail/2009"
+          ],
+          "readerImpact": "Residents can understand where the proposed Burke Mountain habitat corridor would be protected, how wide it would be, and how it connects to development approvals.",
+          "freshnessEvidence": "City of Coquitlam page is posted July 27, 2026, with a July 20, 2026 city release date.",
+          "uniqueAngleEvidence": "No current published Trends Today article covers the Partington Creek wildlife corridor or the Burke Mountain development-approval protection mechanism.",
+          "claimSupport": [
+            "City says the corridor would connect Pinecone Burke Provincial Park, Minnekhada Regional Park, and surrounding Burke Mountain green spaces.",
+            "City says monitoring captured more than 400,000 wildlife images documenting 57 species.",
+            "City says the first phase would run between Cedar Drive and Victoria Drive, include a 50-metre corridor, and widen to 100 metres at a wildlife hot spot.",
+            "City says the first development proposal received first reading May 25, 2026 and second and third readings after a June 22, 2026 public hearing."
+          ]
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 4,
+          "freshness": 5,
+          "evidenceStrength": 4,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        },
+        "manualApprovalRequired": false,
+        "manualApprovalReason": null
+      }
+    }
+  ]
+}
