@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "6e442a2079ee43d1542b4bcc9497e90c7d5d6fd8a2d4b9b77b5719fc456c211c",
+  "repositorySha": "2661f21f9e1d57594da29a42e2078ead01c3e49f",
+  "reviewedAt": "2026-07-27T15:48:53.469152+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa442-ae12-7bc1-b541-d470dd8d0500",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The exact candidate and repository hashes match. The cited City material supports the event details, eligibility, activities, preparation guidance, registration requirements, and actionable close. The MDX is valid and scannable, with no em dashes in authorial prose."
+}
