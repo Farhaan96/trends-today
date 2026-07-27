@@ -1,0 +1,60 @@
+{
+  "generatedAt": "2026-07-27T19:37:39.205809+00:00",
+  "results": [
+    {
+      "title": "Road Work - Como Lake Avenue between Clarke Road and North Road",
+      "lane": "daily-local-utility",
+      "score": 92.0,
+      "decision": "brief",
+      "confidence": "verified-primary-source",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Road Work - Como Lake Avenue between Clarke Road and North Road",
+        "lane": "daily-local-utility",
+        "locality": "Coquitlam",
+        "category": "transit",
+        "storyType": "bulletin",
+        "sourceName": "City of Coquitlam news",
+        "sourceTier": "primary",
+        "sourceUrl": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2008",
+        "status": "researched",
+        "confidence": "verified-primary-source",
+        "evidence": {
+          "sourceUrls": [
+            "https://www.coquitlam.ca/m/newsflash/Home/Detail/2008"
+          ],
+          "primarySourceUrls": [
+            "https://www.coquitlam.ca/m/newsflash/Home/Detail/2008"
+          ],
+          "readerImpact": "Drivers using Como Lake Avenue between Clarke Road and North Road should expect one lane in each direction during daytime BC Hydro utility work.",
+          "freshnessEvidence": "City of Coquitlam notice posted July 27, 2026; work starts Wednesday, July 29, 2026.",
+          "uniqueAngleEvidence": "No published Trends Today article covers the Como Lake Avenue Clarke-to-North Road work window; existing Coquitlam road-work articles cover different locations.",
+          "primaryFacts": [
+            "BC Hydro utility work is scheduled on Como Lake Avenue between Clarke Road and North Road.",
+            "The work window is Wednesday, July 29 to Friday, August 7, excluding Sunday, August 2 and Monday, August 3.",
+            "Active work is listed from 9 a.m. to 3 p.m.",
+            "Traffic will be limited to one lane in each direction during active construction.",
+            "The city advises drivers to plan an alternate route or extra time and to obey traffic personnel, signs, and construction speed limits."
+          ]
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 5,
+          "freshness": 5,
+          "evidenceStrength": 4,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        },
+        "commercialIntent": "ad-fit",
+        "commercialFitReason": "A low-risk local traffic bulletin may be suitable for general local display advertising after editorial qualification; no sponsor claim is made.",
+        "sponsorshipStatus": "editorial",
+        "brandSafety": "standard",
+        "manualApprovalRequired": false,
+        "lengthRationale": "A bulletin is the shortest complete treatment because the reader needs the route, dates, hours, lane impact, and next step."
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "d38683d76eb031f494b7253f4e13092e2a51fb04c772ea7d135c13e351ded8ed",
+  "repositorySha": "d20cc3f78d3ca87ea70e8784b24afdf209662ae6",
+  "reviewedAt": "2026-07-27T20:11:35.579122+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa533-3e90-7e43-89b9-417c9f7439ee",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate hash and repository SHA match. The city material supports the route, dates, hours, BC Hydro work, lane reduction, safety guidance, contact details, and practical travel advice. The bulletin is clear, scannable, locally useful, and ends with actionable guidance. Some details repeat, but not enough to require revision."
+}

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "814e3d628983132ed7da9247a4a4e1a94acaab4d24d9d143e7d61808247fd219",
+  "repositorySha": "881536d5feeb10c01c77bb9eec6bd689c2723286",
+  "reviewedAt": "2026-07-27T19:42:32.083447+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa518-df7f-7080-b0e1-993bfa1b5df4",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The opening says the work begins \u201cnext week,\u201d but the article is dated Monday, July 27, 2026 and work starts Wednesday, July 29, which is the same week.",
+    "The article repeats the one-lane-each-direction impact and alternate-route/extra-time advice several times. The final \u201cBest call\u201d restates the preceding bullets rather than adding a distinct, stronger close."
+  ],
+  "summary": "The core route, dates, hours, exclusions, traffic impact, and driver guidance match the recorded primary-source evidence, and the MDX is clean and scannable with no authorial em dashes. Release is blocked by the incorrect relative-date lead and repetition that weakens the short bulletin."
+}
