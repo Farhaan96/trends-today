@@ -1,0 +1,84 @@
+{
+  "generatedAt": "2026-07-27T17:44:00Z",
+  "runId": "run-trends-today-daily-publisher/2026-07-27T10:31:57.5832417-07:00",
+  "sourceQueue": "artifacts/editorial/research/2026-07-27-1030-source-queue.json",
+  "qualified": [],
+  "dailyCountBeforeSweep": 2,
+  "dailyLimit": 6,
+  "decision": "skip",
+  "skipReason": "No enabled official-source opportunity cleared locality, freshness, non-duplicate, reader-utility, evidence, brand-safety, source-support, and article-contract gates after the 08:30 publication.",
+  "heldOrRejected": [
+    {
+      "group": "duplicate or already covered",
+      "examples": [
+        "Richmond Climate-Friendly Homes",
+        "Surrey Youth Stewardship Squad",
+        "Sounds of Summer: The Boot Scooters & Line Dancing",
+        "Burnaby Blues + Roots Festival",
+        "Art in the Park: Making Together",
+        "Coquitlam road safety and election-worker items"
+      ],
+      "reason": "Existing published content or prior exact-review artifacts already cover the useful reader job."
+    },
+    {
+      "group": "stale or retrospective event listings",
+      "examples": [
+        "New Westminster foosball tables",
+        "Royal City Concert Band",
+        "hand embroidery workshop",
+        "Canadian Injury Prevention Day illumination",
+        "Downtown Front Yard lawn games listing with July 7 start date"
+      ],
+      "reason": "Official pages either describe past dates or a recurring listing without a fresh, distinct reader decision for this sweep."
+    },
+    {
+      "group": "thin civic and event notices",
+      "examples": [
+        "Port Coquitlam Cinema Under the Stars",
+        "Port Coquitlam Music in the Square",
+        "Port Coquitlam Summer in the City",
+        "Langley Village Cafe Series",
+        "Surrey Park Play pages"
+      ],
+      "reason": "Pages contain factual schedule details, but prior gates showed these roundups become repetitive without a single new practical decision."
+    },
+    {
+      "group": "sensitive or one-sided civic/legal items",
+      "examples": [
+        "Surrey mayor statement on Metro Vancouver governance reform",
+        "Richmond property-title court decision",
+        "Richmond Olympic Oval forensic audit"
+      ],
+      "reason": "Material claims require additional balanced source support or owner review before publication."
+    },
+    {
+      "group": "low-utility sports items",
+      "examples": [
+        "BC Lions Lorenzo Mauldin signing",
+        "Canucks podcast or role-change items",
+        "Whitecaps roster and all-star notes",
+        "old BC Lions posts still surfaced by the listing"
+      ],
+      "reason": "Official-team notes did not clear the local sports utility bar for a standalone article in this sweep."
+    }
+  ],
+  "commercialFit": {
+    "status": "not-considered",
+    "reason": "Commercial fit is considered only after editorial qualification; zero candidates qualified."
+  },
+  "reviewGates": {
+    "gptEditorialReview": "not-run-no-qualified-candidate",
+    "claudeOpusReleaseReview": "not-run-no-qualified-candidate",
+    "candidateSha256": null
+  },
+  "metrics": {
+    "publicAnalytics": "artifacts/editorial/metrics/2026-07-27-1030-public-analytics.json",
+    "protectedReporting": "artifacts/editorial/metrics/2026-07-27-1030-reporting-endpoint.json",
+    "vercelAnalytics": "artifacts/editorial/metrics/2026-07-27-1030-vercel-analytics.json"
+  },
+  "keepRepairStop": {
+    "keep": "Publish nothing when the source pool is duplicate, stale, thin, sensitive, or below the reader-utility bar.",
+    "repair": "Improve source breadth and measurement credentials before using commercial or audience claims.",
+    "stop": "Do not send a candidate to GPT, Opus, promotion, PR publication, or deployment without exact qualified candidate bytes."
+  }
+}
