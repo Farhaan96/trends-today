@@ -1,0 +1,67 @@
+{
+  "generatedAt": "2026-07-27T15:42:53.520389+00:00",
+  "results": [
+    {
+      "title": "Surrey youth stewardship dates include July 29 session",
+      "lane": "daily-local-utility",
+      "score": 96.0,
+      "decision": "brief",
+      "confidence": "verified-official-source",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Surrey youth stewardship dates include July 29 session",
+        "url": "https://www.surrey.ca/news-events/events/surrey-youth-stewardship-squad",
+        "sourceUrl": "https://www.surrey.ca/news-events/events/surrey-youth-stewardship-squad",
+        "sourceName": "City of Surrey events",
+        "sourceTier": "primary",
+        "category": "things-to-do",
+        "lane": "daily-local-utility",
+        "storyType": "bulletin",
+        "locality": "Surrey",
+        "publishedAt": "2026-07-27T08:30:00-07:00",
+        "freshness": "current",
+        "confidence": "verified-official-source",
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 5,
+          "freshness": 5,
+          "evidenceStrength": 5,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        },
+        "score": 92,
+        "evidence": {
+          "sourceUrls": [
+            "https://www.surrey.ca/news-events/events/surrey-youth-stewardship-squad"
+          ],
+          "primarySourceUrls": [
+            "https://www.surrey.ca/news-events/events/surrey-youth-stewardship-squad"
+          ],
+          "readerImpact": "Surrey families and youth can decide whether to pre-register for the July 29 Godwin Farm session or the Aug. 11 Darts Hill session, with the age range, times, locations, activity type, preparation notes, and weather cancellation note from the City page.",
+          "freshnessEvidence": "The official City of Surrey page lists a future July 29, 2026 session two days after this 2026-07-27 sweep, plus an Aug. 11 future session.",
+          "uniqueAngleEvidence": "No existing Trends Today article covers Surrey Youth Stewardship Squad; nearby stewardship coverage is Burnaby-specific and separate from this Surrey youth volunteer program.",
+          "factualSupport": [
+            "City of Surrey describes the Surrey Youth Stewardship Squad as parks volunteering for youth aged 13 to 18.",
+            "The page lists work including removing invasive plants, planting trees and shrubs, cleaning up litter, and enhancing habitat.",
+            "Tools and training are provided, and no experience is required.",
+            "The July 29 session is listed as Stewardship as Community Care from 4:00pm to 6:30pm at Godwin Farm Biodiversity Preserve Park, 9016 164 St, with pre-registration required.",
+            "The Aug. 11 session is listed as Beyond the Garden Gate from 5:00pm to 7:00pm at Darts Hill Garden Park, 1633 170 St, with pre-registration required.",
+            "The City says to dress for weather, bring water, look for Surrey Parks tents and staff, and that programs may be cancelled due to extreme weather.",
+            "Groups of more than five are asked to email at least one week in advance."
+          ],
+          "brandSafety": "standard civic event; no crime, injury, enforcement, litigation, politics, or private individual claim.",
+          "articleContract": "bulletin",
+          "imagePlan": "Use an original AI-generated editorial image with non-identifying distant youth volunteers in a park; no logos, readable text, or close-up faces."
+        },
+        "manualApprovalRequired": false,
+        "commercialIntent": "ad-fit",
+        "commercialFitReason": "A Surrey parks volunteer bulletin may fit ordinary local recreation, outdoor gear, garden, community-service, or family-events ad context after editorial qualification; audience size, viewability, RPM, revenue, sponsor demand, pricing, and placement claims remain unavailable.",
+        "sponsorshipStatus": "editorial",
+        "lengthRationale": "A short bulletin is complete because one official City of Surrey event page supplies the future dates, times, locations, registration note, age range, volunteer tasks, preparation notes, and weather cancellation caveat."
+      }
+    }
+  ]
+}
