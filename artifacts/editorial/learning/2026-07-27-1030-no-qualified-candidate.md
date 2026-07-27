@@ -5,6 +5,8 @@
 - **Worktree**: `C:\Users\farha\.codex\worktrees\trends-daily-2026-07-27-1032`
 - **Branch**: `codex/lm-daily-2026-07-27-1032`
 - **Base SHA**: `4abd51e86f79856def49fbe6414762dbd4a00213`
+- **Evidence commit**: `c6782a46d9f7d20389f1282077ce14c98e226d39`
+- **Merge SHA**: `e86e3b124b76a734bf7b25ee22248832af519858`
 - **Root checkout**: preserved dirty and behind; no intentional root mutation performed
 
 ## Metrics
@@ -56,9 +58,13 @@
 
 - **Implemented**: audit and qualification artifacts only
 - **Reviewed**: no editorial candidate reviewed
-- **Merged**: pending PR
-- **Deployed**: pending PR
-- **Browser-verified**: pending deployment
+- **PR**: `https://github.com/Farhaan96/trends-today/pull/111`
+- **Labels**: `codex`, `codex-automation`
+- **Checks**: Vercel Preview Comments passed; Vercel passed
+- **Merged**: PR #111 merged 2026-07-27T17:45:53Z at `e86e3b124b76a734bf7b25ee22248832af519858`
+- **Deployment**: GitHub deployment `5627216931`, Production, success, target `https://trends-today-hvqwfyoyw-farhaans-projects-088cb374.vercel.app`
+- **Browser-verified**: homepage HTTP 200, canonical matched, expected two July 27 stories remained visible, no Lorenzo Mauldin story was present, and Playwright captured zero console errors, page errors, or relevant request failures
+- **Browser proof artifact**: `artifacts/editorial/live-verification/2026-07-27-1030-no-qualified-candidate.json`
 - **Published article**: none
 - **Rollback point**: `4abd51e86f79856def49fbe6414762dbd4a00213`
 - **Cost**: unavailable from local tooling
