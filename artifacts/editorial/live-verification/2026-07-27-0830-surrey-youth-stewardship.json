@@ -1,0 +1,116 @@
+{
+  "checkedAt": "2026-07-27T16:06:23.348Z",
+  "url": "https://www.trendstoday.ca/things-to-do/surrey-youth-stewardship-volunteer-dates",
+  "httpStatus": 200,
+  "deployment": {
+    "id": 5625736573,
+    "mergeSha": "c0590e0b21a9308d9b070f1bb628515de6f0a8ec",
+    "state": "success"
+  },
+  "checks": {
+    "statusIs200": true,
+    "canonicalMatches": true,
+    "headlineRendered": true,
+    "bodyFactsRendered": true,
+    "sourceLinkPresent": true,
+    "internalLinkPresent": true,
+    "mainImageLoaded": true,
+    "structuredDataHeadlineMatches": true,
+    "structuredDataDateMatches": true,
+    "structuredDataImageReferencesArticleImage": true,
+    "noConsoleErrors": true,
+    "noPageErrors": true,
+    "noRelevantRequestFailures": true
+  },
+  "observed": {
+    "canonical": "https://www.trendstoday.ca/things-to-do/surrey-youth-stewardship-volunteer-dates",
+    "h1": "Surrey youth stewardship has July 29 volunteer date",
+    "title": "Surrey youth stewardship has July 29 volunteer date | Trends Today",
+    "bodyFacts": {
+      "july29": true,
+      "godwinFarm": true,
+      "address9016": true,
+      "aug11": true,
+      "dartsHill": true,
+      "ageRange": true,
+      "preregistration": true
+    },
+    "mainImage": {
+      "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fsurrey-youth-stewardship-volunteer-dates.png&w=1080&q=75",
+      "attrSrc": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fsurrey-youth-stewardship-volunteer-dates.png&w=3840&q=75",
+      "alt": "Surrey youth stewardship has July 29 volunteer date",
+      "complete": true,
+      "naturalWidth": 1024,
+      "naturalHeight": 576,
+      "width": 1280,
+      "height": 688
+    },
+    "sourceLinks": [
+      {
+        "text": "The City of Surrey's event listing",
+        "href": "https://www.surrey.ca/news-events/events/surrey-youth-stewardship-squad"
+      },
+      {
+        "text": "summer park stewardship volunteer dates",
+        "href": "https://www.trendstoday.ca/things-to-do/burnaby-park-stewardship-volunteer-dates"
+      },
+      {
+        "text": "City of Surrey Surrey Youth Stewardship Squad",
+        "href": "https://www.surrey.ca/news-events/events/surrey-youth-stewardship-squad"
+      },
+      {
+        "text": "Burnaby seeks park volunteers for July 24 and 31Burnaby has upcoming environmental stewardship volunteer sessions on July 24 and July 31. Here are the dates, pa",
+        "href": "https://www.trendstoday.ca/things-to-do/burnaby-park-stewardship-volunteer-dates"
+      }
+    ],
+    "articleJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Surrey youth stewardship has July 29 volunteer date",
+      "description": "Surrey Youth Stewardship Squad has a July 29 volunteer session at Godwin Farm and an Aug. 11 date at Darts Hill. See the times, age range, and registration note.",
+      "image": [
+        "/images/editorial/2026/07/surrey-youth-stewardship-volunteer-dates.png"
+      ],
+      "author": {
+        "@type": "Organization",
+        "name": "Trends Today Newsroom",
+        "description": "The Trends Today Newsroom reports practical local updates using primary sources, documented checks, and editor review.",
+        "url": "https://www.trendstoday.ca/author/trends-today-newsroom"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Trends Today",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.trendstoday.ca/images/logo.png",
+          "width": 400,
+          "height": 100
+        },
+        "url": "https://www.trendstoday.ca"
+      },
+      "datePublished": "2026-07-27T08:45:00-07:00",
+      "dateModified": "2026-07-27T08:45:00-07:00",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.trendstoday.ca/things-to-do/surrey-youth-stewardship-volunteer-dates"
+      },
+      "articleSection": "Things to Do",
+      "timeRequired": "PT2M",
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
+      "potentialAction": {
+        "@type": "ReadAction",
+        "target": "https://www.trendstoday.ca/things-to-do/surrey-youth-stewardship-volunteer-dates"
+      }
+    },
+    "consoleMessages": [],
+    "pageErrors": [],
+    "ignoredAnalyticsFailures": [
+      {
+        "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-VM7KVV19XC&gtm=45je67o1h2v9259363743za200zd9259363743&_p=1785168382617&gcd=13l3l3l3l1l1&npa=0&dma=0&are=1&cid=663063284.1785168383&frm=0&ngs=1&pscdl=noapi&rcb=1&sr=1366x900&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.184%7CGoogle%2520Chrome%3B150.0.7871.184&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-us&_s=1&tag_exp=115616985~115938466~115938468~118897920~118897930~119896802&dl=https%3A%2F%2Fwww.trendstoday.ca%2Fthings-to-do%2Fsurrey-youth-stewardship-volunteer-dates&dp=%2Fthings-to-do%2Fsurrey-youth-stewardship-volunteer-dates&dt=Surrey%20youth%20stewardship%20has%20July%2029%20volunteer%20date%20%7C%20Trends%20Today&sid=1785168382&sct=1&seg=0&en=page_view&_fv=1&_nsi=1&_ss=1&_ee=1&tfd=604",
+        "failure": "net::ERR_ABORTED"
+      }
+    ],
+    "relevantRequestFailures": []
+  }
+}
