@@ -3,11 +3,11 @@
   "reviewer": "openai-gpt",
   "verdict": "PASS",
   "candidateSha256": "c2a17bd6db861de99921c71ca7d9600b68db425c3e3353d8584c288d35e61e1b",
-  "repositorySha": "e5e9983a37b589c56056b90a5f3129bb19d192ed",
-  "reviewedAt": "2026-07-27T21:40:29.668677+00:00",
+  "repositorySha": "f1c3a28ba31a86d54531313bc6abbbc77e96dc9e",
+  "reviewedAt": "2026-07-27T21:43:30.282046+00:00",
   "modelUsed": "gpt-5.6-sol",
   "reviewBackend": "codex-cli-oauth",
-  "reviewRunId": "019fa584-ec31-7523-852a-6b2ff97718ba",
+  "reviewRunId": "019fa587-b500-75e1-a013-3a3568c9d9ad",
   "scores": {
     "engagement": 4,
     "factualSupport": 5,
@@ -17,5 +17,5 @@
   },
   "proseEmDashCount": 0,
   "blockers": [],
-  "summary": "The cited City of Coquitlam notice supports the candidate\u2019s substantive claims. The bulletin is specific, readable, well structured, locally relevant, and closes with practical approval milestones for residents to watch."
+  "summary": "The candidate hash and repository SHA are verified. The cited City of Coquitlam notice supports the article\u2019s material factual claims. The MDX is clear, scannable, locally relevant, and closes with concrete approval-stage items residents can monitor."
 }
