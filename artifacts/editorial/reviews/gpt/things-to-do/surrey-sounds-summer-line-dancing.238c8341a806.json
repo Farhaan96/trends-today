@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "238c8341a8065a1f5c3c78745c6d79f1152043718dff63ee61787db2f407f825",
+  "repositorySha": "d6b6488226821f0fbe58083f3d4eb236fd2fb68a",
+  "reviewedAt": "2026-07-27T13:39:07.815937+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa3cc-7714-7ce3-9ea3-b1efe979c1b1",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate is factual, concise, locally useful, and well structured. Its practical lead and checklist give readers a clear reason to act, while all material event details are supported by the cited City of Surrey listing."
+}
