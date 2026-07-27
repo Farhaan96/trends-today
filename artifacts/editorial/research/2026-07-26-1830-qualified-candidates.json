@@ -1,0 +1,59 @@
+{
+  "generatedAt": "2026-07-27T01:38:49.448563+00:00",
+  "results": [
+    {
+      "title": "Free Surrey line-dancing concert runs Wednesday at Civic Plaza",
+      "lane": "daily-local-utility",
+      "score": 96.0,
+      "decision": "brief",
+      "confidence": "verified-official-source",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Free Surrey line-dancing concert runs Wednesday at Civic Plaza",
+        "sourceName": "City of Surrey events",
+        "sourceTier": "primary",
+        "sourceUrl": "https://www.surrey.ca/news-events/events/sounds-of-summer-boot-scooters-line-dancing",
+        "locality": "Surrey",
+        "category": "things-to-do",
+        "lane": "daily-local-utility",
+        "storyType": "bulletin",
+        "confidence": "verified-official-source",
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 5,
+          "freshness": 5,
+          "evidenceStrength": 5,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        },
+        "evidence": {
+          "primarySourceUrls": [
+            "https://www.surrey.ca/news-events/events/sounds-of-summer-boot-scooters-line-dancing"
+          ],
+          "sourceUrls": [
+            "https://www.surrey.ca/news-events/events/sounds-of-summer-boot-scooters-line-dancing"
+          ],
+          "readerImpact": "Surrey residents can decide whether to attend a free no-ticket outdoor country concert and line-dancing session at Surrey Civic Plaza on July 29, with practical planning details for seating, parking, accessibility, pets, washrooms, food, and alcohol rules.",
+          "freshnessEvidence": "The official City of Surrey event page lists July 29, 2026, 6:30 p.m. to 8:00 p.m., three days after this July 26 evening sweep.",
+          "uniqueAngleEvidence": "Published Trends Today Surrey coverage includes Darts Hill, Halal Food Fest, Clayton Coffee House, Newton park upgrades, capital projects, and heat resources, but no Surrey Civic Plaza Sounds of Summer line-dancing concert article.",
+          "brandSafety": "standard",
+          "sensitiveSubject": false,
+          "factualSupport": [
+            "The official event page says the concert is free and no ticket is required.",
+            "The official event page names Surrey Civic Plaza at 13450 104 Avenue as the venue.",
+            "The official event page says seating is limited and attendees should bring their own chair.",
+            "The official event page lists washrooms at Surrey City Hall, paid parking in the City Hall parkade, service-animal access, accessible parking, accessible washrooms, and advice to leave pets at home.",
+            "The official event page says alcohol is not permitted in unlicensed public spaces."
+          ]
+        },
+        "commercialIntent": "ad-fit",
+        "commercialFitReason": "Only after editorial qualification, a free civic concert has ordinary local-events ad context; no sponsor demand, pricing, audience size, revenue, or placement claim is asserted.",
+        "sponsorshipStatus": "editorial",
+        "lengthRationale": "Use the bulletin prior because one official source supplies a clear future event and enough practical planning details for a concise reader-service article without padding."
+      }
+    }
+  ]
+}
