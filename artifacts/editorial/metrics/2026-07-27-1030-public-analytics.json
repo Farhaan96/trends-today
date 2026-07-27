@@ -1,0 +1,58 @@
+{
+  "status": "available",
+  "source": "https://www.trendstoday.ca/api/analytics",
+  "retrievedAt": "2026-07-27T17:34:09.610Z",
+  "freshnessTarget": "per sweep public inventory check",
+  "content": {
+    "totalArticles": 161,
+    "byCategory": {
+      "local-news": 10,
+      "transit": 7,
+      "things-to-do": 15,
+      "food-drink": 1,
+      "housing": 2,
+      "sports": 2,
+      "science": 30,
+      "culture": 12,
+      "psychology": 21,
+      "technology": 25,
+      "health": 22,
+      "space": 14
+    },
+    "recentArticles": [
+      {
+        "title": "Surrey youth stewardship has July 29 volunteer date",
+        "category": "things-to-do",
+        "publishedAt": "2026-07-27T08:45:00-07:00",
+        "slug": "surrey-youth-stewardship-volunteer-dates"
+      },
+      {
+        "title": "Free Surrey line-dancing concert runs Wednesday",
+        "category": "things-to-do",
+        "publishedAt": "2026-07-27T06:45:00-07:00",
+        "slug": "surrey-sounds-summer-line-dancing"
+      }
+    ]
+  },
+  "measurement": {
+    "vercelWebAnalytics": {
+      "status": "enabled-in-site",
+      "note": "Page-view collection is embedded. Provider data is not exposed by this repository endpoint."
+    },
+    "googleAnalytics": {
+      "status": "configured",
+      "dataExportStatus": "configured"
+    },
+    "googleSearchConsole": {
+      "propertyStatus": "configured",
+      "dataExportStatus": "configured",
+      "status": "configured"
+    },
+    "protectedReporting": {
+      "status": "configured",
+      "endpoint": "/api/analytics/reporting",
+      "authentication": "bearer-token"
+    },
+    "missingRule": "Unavailable metrics are never represented as zero."
+  }
+}

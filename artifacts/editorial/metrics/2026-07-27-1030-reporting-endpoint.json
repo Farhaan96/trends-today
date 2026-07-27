@@ -1,0 +1,9 @@
+{
+  "status": "unavailable",
+  "source": "https://www.trendstoday.ca/api/analytics/reporting",
+  "retrievedAt": "2026-07-27T17:34:09.700Z",
+  "httpStatus": 401,
+  "error": "Unauthorized.",
+  "window": "per sweep protected reporting check",
+  "missingRule": "Unauthorized protected reporting is unavailable, not zero."
+}
