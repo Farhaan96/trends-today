@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-07-27T21:45:00Z",
+  "queueArtifact": "artifacts/editorial/research/2026-07-27-1430-source-queue.json",
+  "summary": {
+    "officialSourceOpportunities": 58,
+    "qualifiedForBriefing": 1,
+    "rejectedOrHeld": 57
+  },
+  "rejectionGroups": [
+    {
+      "reason": "duplicate or already covered",
+      "examples": [
+        "Road Work - Como Lake Avenue between Clarke Road and North Road",
+        "Surrey Youth Stewardship Squad",
+        "Sounds of Summer: The Boot Scooters & Line Dancing",
+        "Burnaby Blues + Roots Festival",
+        "Art in the Park: Making Together",
+        "Staying Cool During Extreme Heat",
+        "Air Quality Warning (July 22, 2026)",
+        "Stage 2 Water Restrictions Activated by Metro Vancouver"
+      ]
+    },
+    {
+      "reason": "thin or repetitive event page with no distinct reader decision beyond schedule or location",
+      "examples": [
+        "Park Play at T.E. Scott Park",
+        "Park Play at Robertson Drive Park",
+        "Cinema Under the Stars",
+        "Music in the Square",
+        "Village Cafe Series Events",
+        "PoCo's Soccer Socials",
+        "Uptown Live Summer Series - Circus & Magic"
+      ]
+    },
+    {
+      "reason": "stale, retrospective, or outside the current practical window",
+      "examples": [
+        "National Indigenous History Month",
+        "Canada Day & Steveston Salmon Festival",
+        "City Hall Illumination - Green - Canadian Injury Prevention Day",
+        "Intro to Hand Embroidery Workshop",
+        "Downtown's Front Yard: Lawn Games at the Pier"
+      ]
+    },
+    {
+      "reason": "sensitive, legal, audit, one-sided, or owner-review territory",
+      "examples": [
+        "Mayor's statement on Metro Vancouver governance reform",
+        "BC Supreme Court Decision - Impact on Property Titles",
+        "Richmond Olympic Oval Corporation - Performance & Forensic Audits",
+        "Regular Council Meeting - Public Hearing"
+      ]
+    },
+    {
+      "reason": "sports item did not clear standalone local utility bar",
+      "examples": [
+        "Whitecaps FC gain hard-earned point on the road before returning to BC Place",
+        "Kevin Lankinen and Linus Karlsson Join Canucks Insider Podcast to Discuss Offseason Work",
+        "CAMMI GRANATO TAKES ON NEW ROLE WITH VANCOUVER CANUCKS",
+        "Whitecaps FC sign WFC2 forward Johnny Selemani to MLS short-term agreement",
+        "Lions Sign Two-Time All-CFL DL Lorenzo Mauldin IV"
+      ]
+    }
+  ]
+}
