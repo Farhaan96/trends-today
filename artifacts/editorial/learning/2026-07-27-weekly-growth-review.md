@@ -36,7 +36,7 @@
 - Current production inventory: 160 active articles and 36 local-category articles, an increase of 27 active articles and 27 local-category articles during the week.
 - Successful live-verified editorial releases in the learning ledger included transit, housing, local-news, sports, and things-to-do bulletins and updates, including the July 27 Surrey Sounds publication.
 - Correct fail-closed outcomes included daily-ceiling skips, zero-qualified-candidate skips, GPT-blocked Whitecaps, Park Play, Port Coquitlam, and Surrey fence-art candidates, plus the July 26 Surrey Sounds Opus timeout before the July 27 repaired release.
-- Implemented, reviewed, merged, deployed, browser-verified state for current canonical release: Surrey Sounds is implemented, GPT-reviewed, Opus-reviewed, merged in PR #106, deployed, and browser-verified. This weekly audit entry is evidence-only and not yet merged or deployed.
+- Implemented, reviewed, merged, deployed, browser-verified state for current canonical release: Surrey Sounds is implemented, GPT-reviewed, Opus-reviewed, merged in PR #106, deployed, and browser-verified. This weekly audit entry is evidence-only in draft PR #108, with Vercel and Vercel Preview Comments checks successful. It is not merged or deployed to production.
 
 ## Metrics
 
@@ -122,6 +122,7 @@ These are pageviews only. They are not engagement, retention, search, ad, sponso
 - Production article HTTP/source check: passed, HTTP 200 with expected H1, canonical, source link, hero markup, and Article JSON-LD.
 - Playwright screenshot render: passed, screenshot captured.
 - `/ads.txt` check: failed readiness, HTTP 404.
+- Draft audit PR: #108, branch `codex/weekly-growth-review-2026-07-27`, commit `c55693517678420f87244e760527d84d20706d61`, merge state clean, Vercel and Vercel Preview Comments successful at closeout.
 
 ## Rollback
 
