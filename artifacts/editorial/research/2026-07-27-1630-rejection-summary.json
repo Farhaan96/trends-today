@@ -1,0 +1,50 @@
+{
+  "generatedAt": "2026-07-27T23:36:00Z",
+  "runId": "2026-07-27-1630-lm-publisher",
+  "decision": "skip-no-qualified-candidate",
+  "dailyCeiling": {
+    "dateLocal": "2026-07-27",
+    "maximumPublications": 6,
+    "publishedBeforeSweep": 4,
+    "status": "not-reached"
+  },
+  "sourceScan": {
+    "sourceQueue": "artifacts/editorial/research/2026-07-27-1630-source-queue.json",
+    "primarySourceCandidatesFound": 58,
+    "uniqueResearchOpportunities": 57,
+    "perplexityStatus": "unavailable-no-api-key",
+    "googleCustomSearchStatus": "unavailable-no-api-key"
+  },
+  "qualifiedCandidates": [],
+  "newSincePreviousSweep": [
+    {
+      "title": "Post-Practice July 27 | Justin McInnis",
+      "sourceName": "BC Lions news",
+      "sourceUrl": "https://www.bclions.com/2026/07/27/post-practice-july-27-justin-mcinnis/",
+      "locality": "Vancouver",
+      "category": "sports",
+      "decision": "rejected",
+      "reason": "Official team media clip, but no distinct Lower Mainland reader decision, schedule change, result, roster impact, or practical utility was supported."
+    },
+    {
+      "title": "Post-Practice July 27 | Chase Brice",
+      "sourceName": "BC Lions news",
+      "sourceUrl": "https://www.bclions.com/2026/07/27/post-practice-july-27-chase-brice/",
+      "locality": "Vancouver",
+      "category": "sports",
+      "decision": "rejected",
+      "reason": "Official team media clip, but no distinct Lower Mainland reader decision, schedule change, result, roster impact, or practical utility was supported."
+    }
+  ],
+  "heldOrRejectedClasses": [
+    "duplicate or already-covered July 27 Coquitlam wildlife corridor, Como Lake road work, Surrey stewardship, and Surrey line-dancing items",
+    "stale or previously rejected municipal event pages whose reader utility did not improve",
+    "approval-gated Richmond property-title and audit items",
+    "thin sports/team-content posts without standalone local reader utility"
+  ],
+  "commercialStatus": {
+    "status": "not-considered",
+    "reason": "Commercial fit is only evaluated after editorial qualification; no candidate qualified."
+  },
+  "stopRule": "Skip publication when no enabled official-source candidate clears locality, freshness, reader utility, evidence, source, brand-safety, duplicate, and article-contract gates."
+}
