@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "verifiedAt": "2026-07-27T17:58:54Z",
+  "productionUrl": "https://www.trendstoday.ca/",
+  "mergeSha": "e86e3b124b76a734bf7b25ee22248832af519858",
+  "deployment": {
+    "id": 5627216931,
+    "state": "success",
+    "environment": "Production",
+    "targetUrl": "https://trends-today-hvqwfyoyw-farhaans-projects-088cb374.vercel.app",
+    "createdAt": "2026-07-27T17:47:35Z"
+  },
+  "publicAnalytics": {
+    "httpStatus": 200,
+    "totalArticles": 161,
+    "recentArticlesFirstTwo": [
+      "surrey-youth-stewardship-volunteer-dates",
+      "surrey-sounds-summer-line-dancing"
+    ],
+    "july27ArticleCountVisibleInRecentArticles": 2,
+    "unexpectedPublishedCandidate": false
+  },
+  "browser": {
+    "httpStatus": 200,
+    "url": "https://www.trendstoday.ca/",
+    "title": "Trends Today | Lower Mainland News and Events",
+    "canonical": "https://www.trendstoday.ca/",
+    "h1": "What is happening around you.",
+    "bodyHasYouthStory": true,
+    "bodyHasLineDancingStory": true,
+    "bodyHasUnexpectedLionsStory": false,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "requestFailures": []
+  }
+}
