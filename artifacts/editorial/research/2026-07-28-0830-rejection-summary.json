@@ -1,0 +1,61 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-28-0830",
+  "generatedAt": "2026-07-28T08:45:00-07:00",
+  "sourceQueue": "artifacts/editorial/research/2026-07-28-0830-source-queue.json",
+  "summary": "One official-source Surrey arts event qualified. All other candidates were rejected, held, or treated as already covered because they lacked a fresh distinct reader decision, repeated prior queues, required owner approval, had stale source dates, or were already published.",
+  "rejectionGroups": [
+    {
+      "reason": "already covered or duplicate",
+      "examples": [
+        "Community Picnic at Adams Road Park",
+        "Coquitlam Protecting Key Wildlife Corridor along Partington Creek",
+        "Road Work - Como Lake Avenue between Clarke Road and North Road",
+        "Surrey Youth Stewardship Squad",
+        "Sounds of Summer: The Boot Scooters & Line Dancing",
+        "Burnaby Blues + Roots Festival",
+        "Big Things Are Happening: Four Major Projects Shaping Surrey's Future"
+      ]
+    },
+    {
+      "reason": "stale source date or retrospective item",
+      "examples": [
+        "Emerging O-Line Giving The Lions An Extra Push",
+        "Lions Announce Details For 2nd Annual Orange Shirt Day Game",
+        "Summer Discovery Days: Colours of the Fraser",
+        "Downtown Front Yard: Royal City Concert Band",
+        "City Hall Illumination - Green - Canadian Injury Prevention Day",
+        "Fired Up for Football Watch Party - Canada vs Morocco"
+      ]
+    },
+    {
+      "reason": "thin or repetitive calendar listing without a stronger standalone reader decision this sweep",
+      "examples": [
+        "Park Play at Robertson Drive Park",
+        "Cinema Under the Stars",
+        "Music in the Square",
+        "Summer in the City",
+        "Village Cafe Series Events",
+        "Intro to Hand Embroidery Workshop",
+        "Downtown's Front Yard: Lawn Games at the Pier"
+      ]
+    },
+    {
+      "reason": "one-sided, sensitive, or owner-review civic/legal/audit topic",
+      "examples": [
+        "Mayor's statement on Metro Vancouver governance reform",
+        "BC Supreme Court Decision - Impact on Property Titles",
+        "Richmond Olympic Oval Corporation - Performance & Forensic Audits",
+        "Regular Council Meeting Agenda - July 27, 2026"
+      ]
+    },
+    {
+      "reason": "sports/team-media item lacked immediate Lower Mainland planning utility or source independence",
+      "examples": [
+        "Kevin Lankinen and Linus Karlsson Join Canucks Insider Podcast",
+        "Whitecaps FC gain hard-earned point on the road before returning to BC Place",
+        "Jim Evenson Earns Posthumous Induction To Canadian Football Hall Of Fame",
+        "Post-Practice July 27 | Justin McInnis"
+      ]
+    }
+  ]
+}

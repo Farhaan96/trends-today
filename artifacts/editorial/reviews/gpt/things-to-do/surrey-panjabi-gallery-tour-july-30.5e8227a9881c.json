@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "5e8227a9881cb003d4b304faace12aafa4461cdabd816554e969a741445dfb13",
+  "repositorySha": "943a4d03e0b5cde3b86c5a41552289e44c68cd64",
+  "reviewedAt": "2026-07-28T15:41:31.980248+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa962-f871-78e0-a037-5a96c13f9223",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The cited City of Surrey listing supports the event details, program description, language format, live performance, English context, and registration guidance. The bulletin is clear, useful, well structured, actionable, and contains no authorial em dashes."
+}

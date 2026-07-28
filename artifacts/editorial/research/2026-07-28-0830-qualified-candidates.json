@@ -1,0 +1,47 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-28-0830",
+  "generatedAt": "2026-07-28T08:45:00-07:00",
+  "dailyCountBefore": 0,
+  "candidateCount": 57,
+  "qualified": [
+    {
+      "title": "Free Panjabi gallery tour runs Thursday in Surrey",
+      "sourceTitle": "Thursday Artist Talk: Panjabi Tour with Keerat Kaur",
+      "sourceUrl": "https://www.surrey.ca/news-events/events/thursday-artist-talk-panjabi-tour-keerat-kaur",
+      "sourceName": "City of Surrey events",
+      "locality": "Surrey",
+      "category": "things-to-do",
+      "storyType": "bulletin",
+      "lane": "daily-local-utility",
+      "candidatePath": "artifacts/editorial/release-candidates/things-to-do/surrey-panjabi-gallery-tour-july-30.mdx",
+      "candidateSha256": "5e8227a9881cb003d4b304faace12aafa4461cdabd816554e969a741445dfb13",
+      "evidence": {
+        "sourceUrls": [
+          "https://www.surrey.ca/news-events/events/thursday-artist-talk-panjabi-tour-keerat-kaur"
+        ],
+        "primarySourceUrls": [
+          "https://www.surrey.ca/news-events/events/thursday-artist-talk-panjabi-tour-keerat-kaur"
+        ],
+        "freshnessEvidence": "City of Surrey event page published 2026-07-21, modified 2026-07-22, for a July 30, 2026 event.",
+        "readerImpact": "Residents can decide whether to attend a free July 30 Panjabi artist talk and gallery tour with no registration required.",
+        "uniqueAngleEvidence": "No existing Trends Today article covers this Surrey Art Gallery Panjabi tour.",
+        "brandSafety": "standard",
+        "factualSupport": "Official page supports date, time, venue, free price, no-registration note, live performance, Panjabi tour, and English context."
+      },
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 4,
+        "freshness": 4,
+        "evidenceStrength": 4,
+        "uniqueAngle": 4,
+        "repeatVisitPotential": 3,
+        "speedToUsefulDraft": 5
+      },
+      "score": 83,
+      "decision": "brief",
+      "commercialIntent": "ad-fit",
+      "commercialFitReason": "Considered only after editorial qualification; no audience, pricing, revenue, or sponsor-demand claim is made.",
+      "sponsorshipStatus": "editorial"
+    }
+  ]
+}
