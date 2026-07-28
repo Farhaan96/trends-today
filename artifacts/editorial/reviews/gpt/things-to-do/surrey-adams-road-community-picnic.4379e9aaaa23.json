@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "4379e9aaaa23af67dc6346feac6ab4e2e23768be3c75280dd8b228767f2d9af1",
+  "repositorySha": "6963f46eb6728c5f99fd8ff01f72ea8c91e7f100",
+  "reviewedAt": "2026-07-28T01:43:26.938123+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa662-f1b2-7682-be26-a9381705bcb1",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The phrase \u201cno-ticket\u201d is unsupported. The cited City page says the event is free but does not say that no ticket or registration is required.",
+    "The article closes with a partner list and cross-promotion instead of an actionable event-specific close. Move the same-day source check or another practical next step to the ending.",
+    "\u201cThe practical decision is simple\u201d is generic framing, while \u201cfull meal plan\u201d and \u201csame City source network\u201d are awkward phrases that weaken an otherwise useful bulletin."
+  ],
+  "summary": "The exact candidate and repository hashes were verified. Core event details, activities, food-item limit, Park Play information, and partner names match the City source. MDX structure is clean and no authorial em dashes appear, but unsupported ticket wording and the flat ending block release."
+}
