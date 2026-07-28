@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "70fd98042bfaf5eebac536a31807ac49968feb08aefba99be35b08d2dd774be8",
+  "repositorySha": "34888bb5ef43b06c1152c35298a04bd93b365331",
+  "reviewedAt": "2026-07-28T20:00:46.794271+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019faa4f-cc47-7601-b2ce-73bcd76beb3b",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 4,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The exact candidate hash and repository SHA were verified. This is a concise, well-supported local bulletin with a concrete lead, clear reader impact, scannable service details, useful emergency instructions, and an actionable close. The cited City of Delta material supports the factual claims, including the conflicting McKee maintenance dates. Authorial prose contains zero em dashes."
+}

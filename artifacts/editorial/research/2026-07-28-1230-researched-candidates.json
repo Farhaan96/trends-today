@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Delta lists BC Day holiday hours for Monday, Aug. 3",
+    "lane": "daily-local-utility",
+    "category": "local-news",
+    "locality": "Delta",
+    "storyType": "bulletin",
+    "sourceName": "City of Delta news",
+    "sourceTier": "primary",
+    "sourceUrl": "https://www.delta.ca/community-culture/happening-delta/news/2026-bc-day-holiday-hours-operation",
+    "discoverySource": "primary_source_page",
+    "discoveredAt": "2026-07-28T12:34:26.806371",
+    "confidence": "verified-official-source",
+    "ratings": {
+      "localRelevance": 5,
+      "readerUtility": 4,
+      "freshness": 5,
+      "evidenceStrength": 4,
+      "uniqueAngle": 4,
+      "repeatVisitPotential": 3,
+      "speedToUsefulDraft": 5
+    },
+    "evidence": {
+      "sourceUrls": [
+        "https://www.delta.ca/community-culture/happening-delta/news/2026-bc-day-holiday-hours-operation",
+        "https://www.delta.ca/parks-recreation/parks-trails/park-and-amenity-search/mckee-seniors-recreation-centre"
+      ],
+      "primarySourceUrls": [
+        "https://www.delta.ca/community-culture/happening-delta/news/2026-bc-day-holiday-hours-operation",
+        "https://www.delta.ca/parks-recreation/parks-trails/park-and-amenity-search/mckee-seniors-recreation-centre"
+      ],
+      "readerImpact": "Delta residents can check City Hall, Municipal Services Office, animal shelter, seniors centre, discovery centre, McKee maintenance notes, and recreation-facility holiday hours before making an Aug. 3 trip.",
+      "freshnessEvidence": "The official City of Delta page is dated July 28, 2026 and covers the upcoming Monday, Aug. 3, 2026 BC Day holiday.",
+      "uniqueAngleEvidence": "Repository and source-queue checks found no published Trends Today article about Delta's 2026 BC Day municipal holiday hours.",
+      "factualSupport": [
+        "The City of Delta notice lists BC Day as Monday, Aug. 3, 2026.",
+        "The notice lists City Hall, the Municipal Services Office, Delta Community Animal Shelter, McKee Seniors Recreation Centre, and Kennedy Seniors Recreation Centre as closed for BC Day.",
+        "The BC Day notice says McKee Seniors Recreation Centre is closed from Aug. 3 to 10 for annual maintenance.",
+        "The McKee facility page says McKee is closed for annual maintenance from Aug. 3 to 9, 2026.",
+        "The notice says Douglas J. Husband Discovery Centre is open noon to 5 p.m.",
+        "The notice says North Delta Recreation Centre and all other Parks, Recreation & Culture recreation facilities have regular operating hours, except named closures.",
+        "The notice gives 604-940-7111, press 1, for animal emergencies."
+      ]
+    },
+    "commercialIntent": "none",
+    "commercialFitReason": "No commercial fit is asserted. Editorial utility, locality, source support, freshness, and brand safety qualified the candidate first.",
+    "sponsorshipStatus": "editorial",
+    "brandSafety": "standard",
+    "manualApprovalRequired": false,
+    "lengthRationale": "A short bulletin is complete because official City of Delta pages supply the holiday date, affected facilities, closure list, recreation notes, McKee maintenance-date conflict, and emergency animal-shelter instruction."
+  }
+]

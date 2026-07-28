@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "a1ba311548835d15e2e8b6dc10254c6a4d381bf71e3e27b6d06d9d8991fb6379",
+  "repositorySha": "f0bf68d9436809d97e3e6c733a5f6150c47be0db",
+  "reviewedAt": "2026-07-28T19:43:12.597179+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019faa3f-aeeb-7ea3-b872-b8251112752a",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The recreation-hours point is repeated in the opening, planning-details list, explanatory paragraph, and closing, making this short bulletin noticeably repetitive.",
+    "The McKee maintenance paragraph introduces a later-week planning concern but omits the maintenance dates supplied by the city notice and gives readers no direct McKee contact path; the resulting advice is vague rather than actionable.",
+    "The close largely restates earlier instructions and ends on another explanation of the schedule distinction, producing a flat finish instead of a sharper facility-check action."
+  ],
+  "summary": "Exact candidate and repository hashes were verified. The civic closures, holiday date, recreation hours, and animal-emergency instructions are supported, the MDX is clean, and authorial prose contains no em dashes. The candidate fails the strict second gate because repetition, vague McKee guidance, and a flat ending keep quality and engagement below 4."
+}

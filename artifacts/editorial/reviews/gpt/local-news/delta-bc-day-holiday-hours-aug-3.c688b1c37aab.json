@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "c688b1c37aabf6313277901df798a4efd59991a895886250c44c43319c33b551",
+  "repositorySha": "62e2340a4280e72b4a52d12fb06f108010f41909",
+  "reviewedAt": "2026-07-28T19:51:16.134101+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019faa47-3c82-77a2-9294-d0b8eefa292b",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 4,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "A concise, well-supported local service bulletin with a concrete lead, scannable facility details, clear emergency instructions, and an actionable close. The prose contains no em dashes."
+}
