@@ -1,0 +1,92 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-28-1030",
+  "generatedAt": "2026-07-28T10:44:00-07:00",
+  "baseSha": "595072bcd7f50ea6b56bfd09926620ec1c991f02",
+  "decision": "no-qualified-candidate",
+  "dailyCeilingReached": false,
+  "rejectionGroups": [
+    {
+      "reason": "already covered or unchanged duplicate",
+      "examples": [
+        "Thursday Artist Talk: Panjabi Tour with Keerat Kaur",
+        "Community Picnic at Adams Road Park",
+        "Coquitlam Protecting Key Wildlife Corridor along Partington Creek",
+        "Road Work - Como Lake Avenue between Clarke Road and North Road",
+        "Burnaby Blues + Roots Festival",
+        "Surrey Youth Stewardship Squad"
+      ]
+    },
+    {
+      "reason": "previous GPT blocker without materially new official facts",
+      "examples": [
+        "Cinema Under the Stars",
+        "Music in the Square",
+        "Remaining free Port Coquitlam movie and music dates start Aug. 8"
+      ],
+      "support": "The 2026-07-26 14:30 learning entry records the Port Coquitlam guide as GPT-blocked for repetition; current official pages did not add a new fact pattern."
+    },
+    {
+      "reason": "stale event date",
+      "examples": [
+        "Fired Up for Football Watch Party - Canada vs Morocco",
+        "Intro to Hand Embroidery Workshop",
+        "Downtown's Front Yard: Lawn Games at the Pier",
+        "Fired Up for Football - free Foosball tables in Recreation Facilities"
+      ],
+      "support": "Targeted source extraction found July 4, July 7, or June 11-July 19 dates, all before the July 28 sweep."
+    },
+    {
+      "reason": "thin or repetitive calendar listing with weak standalone utility",
+      "examples": [
+        "Village Cafe Series Events",
+        "Park Play at Robertson Drive Park",
+        "Summer in the City",
+        "PoCo's Soccer Socials",
+        "City Hall Illumination - Green - Canadian Injury Prevention Day"
+      ]
+    },
+    {
+      "reason": "sensitive, legal, audit, property, or one-sided civic item requiring stronger sourcing or owner review",
+      "examples": [
+        "BC Supreme Court Decision - Impact on Property Titles",
+        "Richmond Olympic Oval Corporation - Performance & Forensic Audits",
+        "Mayor's statement on Metro Vancouver governance reform",
+        "Regular Council Meeting Agenda - July 27, 2026"
+      ]
+    },
+    {
+      "reason": "sports item lacked a practical reader decision, schedule/result impact, or sufficient local utility",
+      "examples": [
+        "Lions Bring Back OL Christian Olmstead",
+        "Kevin Lankinen and Linus Karlsson Join Canucks Insider Podcast to Discuss Offseason Work",
+        "Andres Cubas named to 2026 MLS All-Star roster",
+        "Emerging O-Line Giving The Lions An Extra Push"
+      ],
+      "support": "The July 28 BC Lions transaction page only confirms a practice-roster signing and player background; it does not change a game, ticket, schedule, or fan planning decision."
+    }
+  ],
+  "sourceUrlsChecked": [
+    "https://www.trendstoday.ca/api/analytics?codex=publisher-20260728-1030-pre",
+    "https://www.trendstoday.ca/api/analytics/reporting",
+    "https://www.portcoquitlam.ca/explore-poco/events/cinema-under-stars",
+    "https://www.portcoquitlam.ca/explore-poco/events/music-square",
+    "https://www.newwestcity.ca/calendar-of-events/events/8928.php",
+    "https://www.newwestcity.ca/calendar-of-events/events/8872.php",
+    "https://www.newwestcity.ca/calendar-of-events/events/8878.php",
+    "https://www.newwestcity.ca/calendar-of-events/events/8946.php",
+    "https://www.bclions.com/2026/07/28/lions-bring-back-ol-christian-olmstead/",
+    "https://www.surrey.ca/news-events/news/city-of-surrey-and-prologis-advance-proposed-lease-major-campbell-heights-development"
+  ],
+  "artifactInputs": [
+    "artifacts/editorial/research/2026-07-28-1030-source-queue.json",
+    "artifacts/editorial/research/2026-07-28-1030-selected-source-snippets.json",
+    "artifacts/editorial/research/2026-07-28-1030-targeted-source-extracts.json",
+    "artifacts/editorial/metrics/2026-07-28-1030-public-analytics.json",
+    "artifacts/editorial/metrics/2026-07-28-1030-protected-reporting.json"
+  ],
+  "keepRepairStop": {
+    "keep": "Keep zero-publication sweeps when the official-source queue is duplicate, stale, thin, sensitive, one-sided, or below the reader-utility bar.",
+    "repair": "Repair source discovery freshness and measurement credentials; the strongest commercial bottleneck remains unavailable article-level audience and revenue data.",
+    "stop": "Stop before GPT, Opus, promotion, PR release, or deployment when no exact qualified candidate exists."
+  }
+}
