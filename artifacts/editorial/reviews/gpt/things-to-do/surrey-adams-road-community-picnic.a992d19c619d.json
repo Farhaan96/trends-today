@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "a992d19c619d9e04e9b106fa7892f9ce034686be089ad17587b5577d40d68fd4",
+  "repositorySha": "72c6da45f7d0fbf74b70f9752924c79db3f1f7e5",
+  "reviewedAt": "2026-07-28T01:47:08.683318+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa666-d33b-7912-bb9f-e1e0d8f0abe0",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The second paragraph is generic and awkwardly framed around \u201cthe practical decision\u201d instead of immediately explaining the event\u2019s concrete value to Surrey families.",
+    "The article repeats the date, time, address, price, and food-item details across the introduction, confirmed-details section, planning notes, and closing sentence. This makes a very short bulletin feel padded.",
+    "The ending is flat and repetitive: it sends readers back to reconfirm details already presented instead of closing with a concise, useful planning action."
+  ],
+  "summary": "The City listing supports the event date, time, location, price, activities, Park Play details, food-item limit, and named partners. The MDX is clean and contains no authorial em dashes, but repetitive presentation, a generic reader-impact transition, and a weak closing keep quality and engagement below the release threshold."
+}
