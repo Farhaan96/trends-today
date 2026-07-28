@@ -1,0 +1,299 @@
+{
+  "checkedAt": "2026-07-28T02:23:08.682Z",
+  "url": "https://www.trendstoday.ca/things-to-do/surrey-adams-road-community-picnic",
+  "status": 200,
+  "responseUrl": "https://www.trendstoday.ca/things-to-do/surrey-adams-road-community-picnic",
+  "ok": true,
+  "expectedCanonical": "https://www.trendstoday.ca/things-to-do/surrey-adams-road-community-picnic",
+  "screenshotPath": "C:\\Users\\farha\\.codex\\worktrees\\trends-daily-2026-07-27-1832\\artifacts\\editorial\\browser-proof\\2026-07-27-1830-surrey-adams-road-community-picnic-live.png",
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "pageErrors": [],
+  "failedRequests": [
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-VM7KVV19XC&gtm=45je67o1v9259363743za200zd9259363743&_p=1785205387016&gcd=13l3l3l3l1l1&npa=0&dma=0&are=1&cid=579818959.1785205387&frm=0&ngs=1&pscdl=noapi&rcb=0&sr=1365x900&uaa=x86&uab=64&uafvl=Chromium%3B140.0.7339.16%7CNot%253DA%253FBrand%3B24.0.0.0%7CHeadlessChrome%3B140.0.7339.16&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-ca&_s=1&tag_exp=115938465~115938468~118395335~118897920~118897930~119527020~119896803~120084215&dl=https%3A%2F%2Fwww.trendstoday.ca%2Fthings-to-do%2Fsurrey-adams-road-community-picnic&dp=%2Fthings-to-do%2Fsurrey-adams-road-community-picnic&dt=Free%20Surrey%20picnic%20runs%20July%2030%20at%20Adams%20Road%20Park%20%7C%20Trends%20Today&sid=1785205387&sct=1&seg=0&en=page_view&_fv=1&_nsi=1&_ss=1&_ee=1&tfd=332",
+      "failure": "net::ERR_ABORTED"
+    }
+  ],
+  "nonAnalyticsFailedRequests": [],
+  "rendered": {
+    "title": "Free Surrey picnic runs July 30 at Adams Road Park | Trends Today",
+    "h1": "Free Surrey picnic runs July 30 at Adams Road Park",
+    "canonical": "https://www.trendstoday.ca/things-to-do/surrey-adams-road-community-picnic",
+    "sourceLinks": [
+      {
+        "href": "https://www.surrey.ca/news-events/events/community-picnic-adams-road-park",
+        "text": "The City of Surrey's event listing"
+      },
+      {
+        "href": "https://www.surrey.ca/news-events/events/community-picnic-adams-road-park",
+        "text": "City of Surrey Community Picnic at Adams Road Park"
+      }
+    ],
+    "internalLinks": [
+      {
+        "href": "https://www.trendstoday.ca/",
+        "text": "TTrends Today"
+      },
+      {
+        "href": "https://www.trendstoday.ca/local-news",
+        "text": "Local News"
+      },
+      {
+        "href": "https://www.trendstoday.ca/transit",
+        "text": "Transit"
+      },
+      {
+        "href": "https://www.trendstoday.ca/things-to-do",
+        "text": "Things to Do"
+      },
+      {
+        "href": "https://www.trendstoday.ca/food-drink",
+        "text": "Food & Drink"
+      },
+      {
+        "href": "https://www.trendstoday.ca/housing",
+        "text": "Housing"
+      },
+      {
+        "href": "https://www.trendstoday.ca/sports",
+        "text": "Sports"
+      },
+      {
+        "href": "https://www.trendstoday.ca/things-to-do",
+        "text": "Things to Do"
+      },
+      {
+        "href": "https://www.trendstoday.ca/author/trends-today-newsroom",
+        "text": "Trends Today Newsroom"
+      },
+      {
+        "href": "https://www.trendstoday.ca/author/moe",
+        "text": "Moe"
+      },
+      {
+        "href": "https://www.trendstoday.ca/local-news/coquitlam-partington-creek-wildlife-corridor",
+        "text": "Coquitlam plans Partington Creek wildlife corridorlocal-news•2 min readCoquitlam's Partington Creek corridor plan would protect Burke Mountain habitat, add parkland, and set buffers beside a salmon-bearing creek.Jul 27, 2026"
+      },
+      {
+        "href": "https://www.trendstoday.ca/transit/coquitlam-como-lake-bc-hydro-work",
+        "text": "Como Lake Avenue lanes narrow July 29 to Aug. 7transit•2 min readCoquitlam says daytime BC Hydro work will reduce Como Lake Avenue lanes between Clarke Road and North Road from July 29 to Aug. 7.Jul 27, 2026"
+      },
+      {
+        "href": "https://www.trendstoday.ca/things-to-do/surrey-youth-stewardship-volunteer-dates",
+        "text": "Surrey youth stewardship has July 29 volunteer datethings-to-do•2 min readSurrey Youth Stewardship Squad has a July 29 volunteer session at Godwin Farm and an Aug. 11 date at Darts Hill. See the times, age range, and registration note.Jul 27, 2026"
+      },
+      {
+        "href": "https://www.trendstoday.ca/author/trends-today-newsroom",
+        "text": "View all articles by Trends Today Newsroom →"
+      },
+      {
+        "href": "https://www.trendstoday.ca/things-to-do/darts-hill-scavenger-hunt-surrey",
+        "text": "Free Darts Hill scavenger hunt runs Sunday in SurreySurrey's free Darts Hill scavenger hunt runs July 26 from 10 a.m. to 4 p.m. See the address, later dates, and what the city says to expect.Jul 26, 2026"
+      },
+      {
+        "href": "https://www.trendstoday.ca/things-to-do/free-burnaby-park-events-this-week",
+        "text": "Free Burnaby park events to plan this weekBurnaby has free family park events this week, including Summer Stages at Confederation Park and the Jim Lorimer Park playground reopening.Jul 20, 2026"
+      },
+      {
+        "href": "https://www.trendstoday.ca/things-to-do/surrey-sounds-summer-line-dancing",
+        "text": "Free Surrey line-dancing concert runs WednesdaySurrey's free Sounds of Summer line-dancing concert runs July 29 at Civic Plaza. See the time, address, seating, parking, and accessibility notes.Jul 27, 2026"
+      },
+      {
+        "href": "https://www.trendstoday.ca/",
+        "text": "TTrends Today"
+      },
+      {
+        "href": "https://www.trendstoday.ca/about",
+        "text": "About"
+      },
+      {
+        "href": "https://www.trendstoday.ca/authors",
+        "text": "Authors"
+      }
+    ],
+    "images": [
+      {
+        "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fsurrey-adams-road-community-picnic.png&w=1080&q=75",
+        "decodedSrc": "https://www.trendstoday.ca/_next/image?url=/images/editorial/2026/07/surrey-adams-road-community-picnic.png&w=1080&q=75",
+        "alt": "Free Surrey picnic runs July 30 at Adams Road Park",
+        "complete": true,
+        "naturalWidth": 1024,
+        "naturalHeight": 512
+      },
+      {
+        "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fcoquitlam-partington-creek-wildlife-corridor.png&w=3840&q=75",
+        "decodedSrc": "https://www.trendstoday.ca/_next/image?url=/images/editorial/2026/07/coquitlam-partington-creek-wildlife-corridor.png&w=3840&q=75",
+        "alt": "Coquitlam plans Partington Creek wildlife corridor",
+        "complete": false,
+        "naturalWidth": 0,
+        "naturalHeight": 0
+      },
+      {
+        "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fcoquitlam-como-lake-bc-hydro-work.png&w=3840&q=75",
+        "decodedSrc": "https://www.trendstoday.ca/_next/image?url=/images/editorial/2026/07/coquitlam-como-lake-bc-hydro-work.png&w=3840&q=75",
+        "alt": "Como Lake Avenue lanes narrow July 29 to Aug. 7",
+        "complete": false,
+        "naturalWidth": 0,
+        "naturalHeight": 0
+      },
+      {
+        "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fsurrey-youth-stewardship-volunteer-dates.png&w=3840&q=75",
+        "decodedSrc": "https://www.trendstoday.ca/_next/image?url=/images/editorial/2026/07/surrey-youth-stewardship-volunteer-dates.png&w=3840&q=75",
+        "alt": "Surrey youth stewardship has July 29 volunteer date",
+        "complete": false,
+        "naturalWidth": 0,
+        "naturalHeight": 0
+      },
+      {
+        "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fdarts-hill-scavenger-hunt-surrey.png&w=3840&q=75",
+        "decodedSrc": "https://www.trendstoday.ca/_next/image?url=/images/editorial/2026/07/darts-hill-scavenger-hunt-surrey.png&w=3840&q=75",
+        "alt": "Free Darts Hill scavenger hunt runs Sunday in Surrey",
+        "complete": false,
+        "naturalWidth": 0,
+        "naturalHeight": 0
+      },
+      {
+        "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fburnaby-summer-stages-jim-lorimer.png&w=3840&q=75",
+        "decodedSrc": "https://www.trendstoday.ca/_next/image?url=/images/editorial/2026/07/burnaby-summer-stages-jim-lorimer.png&w=3840&q=75",
+        "alt": "Free Burnaby park events to plan this week",
+        "complete": false,
+        "naturalWidth": 0,
+        "naturalHeight": 0
+      },
+      {
+        "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fsurrey-sounds-summer-line-dancing.png&w=3840&q=75",
+        "decodedSrc": "https://www.trendstoday.ca/_next/image?url=/images/editorial/2026/07/surrey-sounds-summer-line-dancing.png&w=3840&q=75",
+        "alt": "Free Surrey line-dancing concert runs Wednesday",
+        "complete": false,
+        "naturalWidth": 0,
+        "naturalHeight": 0
+      }
+    ],
+    "ldJson": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Trends Today",
+        "alternateName": "Trends Today Lower Mainland News",
+        "url": "https://www.trendstoday.ca",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.trendstoday.ca/images/logo.png",
+          "width": 400,
+          "height": 100
+        },
+        "description": "Useful local reporting for Vancouver, Metro Vancouver, and the Fraser Valley.",
+        "foundingDate": "2025",
+        "founder": {
+          "@type": "Person",
+          "name": "Trends Today Editorial Team"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Trends Today",
+        "alternateName": "Trends Today Lower Mainland News",
+        "url": "https://www.trendstoday.ca",
+        "description": "Local news, transit, events, food, housing, and sports from Vancouver and the Lower Mainland.",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Trends Today",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.trendstoday.ca/images/logo.png"
+          }
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Free Surrey picnic runs July 30 at Adams Road Park",
+        "description": "Surrey's free Adams Road Park community picnic runs July 30 from 5:30 to 7:30 p.m. See the address, activities, and food-item note.",
+        "image": [
+          "/images/editorial/2026/07/surrey-adams-road-community-picnic.png"
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "Trends Today Newsroom",
+          "description": "The Trends Today Newsroom reports practical local updates using primary sources, documented checks, and editor review.",
+          "url": "https://www.trendstoday.ca/author/trends-today-newsroom"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Trends Today",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.trendstoday.ca/images/logo.png",
+            "width": 400,
+            "height": 100
+          },
+          "url": "https://www.trendstoday.ca"
+        },
+        "datePublished": "2026-07-27T18:45:00-07:00",
+        "dateModified": "2026-07-27T18:45:00-07:00",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://www.trendstoday.ca/things-to-do/surrey-adams-road-community-picnic"
+        },
+        "articleSection": "Things to Do",
+        "timeRequired": "PT2M",
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
+        "potentialAction": {
+          "@type": "ReadAction",
+          "target": "https://www.trendstoday.ca/things-to-do/surrey-adams-road-community-picnic"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.trendstoday.ca"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Things to Do",
+            "item": "https://www.trendstoday.ca/things-to-do"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Free Surrey picnic runs July 30 at Adams Road Park",
+            "item": "https://www.trendstoday.ca/things-to-do/surrey-adams-road-community-picnic"
+          }
+        ]
+      }
+    ],
+    "requiredSnippetResults": {
+      "Free Surrey picnic runs July 30 at Adams Road Park": true,
+      "Thursday, July 30": true,
+      "5:30 to 7:30 p.m.": true,
+      "Adams Road Park": true,
+      "18160 68 Ave": true,
+      "first 200 people": true,
+      "Park Play": true,
+      "free food item": true
+    },
+    "textSample": "Skip to content\nT\nTrends Today\nLocal News\nTransit\nThings to Do\nFood & Drink\nHousing\nSports\nLower Mainland\nMonday, July 27\nVancouver to the Fraser Valley\nFree Surrey picnic runs July 30 at Adams Road Park\n\nSurrey's free Adams Road Park community picnic runs July 30 from 5:30 to 7:30 p.m. See the address, activities, and food-item note.\n\nTHINGS TO DO\nSurrey\nTrends Today Newsroom\nEdited by Moe\nJul 27, 6:45 p.m.\n2 min read\n\nAT A GLANCE\n\nWhat you need to know\nThe picnic runs Thursday, July 30, from 5:30 to 7:30 p.m.\nThe City lists the event at Adams Road Park, 18160 68 Ave.\nTickets and pricing are listed as free.\nThe first 200 people at each picnic in the series can receive a free food item, according to the City.\n\nThe City of Surrey's event listing says a free Community Picnic at Adams Road Park is scheduled for Thursday, July 30.\n\nFor Surrey families, the useful value is a low-commitment park evening: bring food, let children try self-directed games through Park Play, and know that the City says the first 200 people at each picnic in the series can receive a free food item.\n\nWhat is confirmed\n\nThe City lists the core event details this way:\n\nDate: Thursday, July 30, 2026\nTime: 5:30 to"
+  },
+  "checks": {
+    "status200": true,
+    "canonicalMatches": true,
+    "headlineMatches": true,
+    "allRequiredSnippetsPresent": true,
+    "sourceLinkPresent": true,
+    "targetEditorialImageLoaded": true,
+    "articleStructuredDataPresent": true,
+    "zeroConsoleErrors": true,
+    "zeroPageErrors": true,
+    "zeroNonAnalyticsFailedRequests": true
+  },
+  "pass": true
+}
