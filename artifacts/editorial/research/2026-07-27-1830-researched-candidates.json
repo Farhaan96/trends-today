@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Free Surrey picnic runs July 30 at Adams Road Park",
+    "lane": "weekend-and-planning",
+    "locality": "Surrey",
+    "category": "things-to-do",
+    "storyType": "bulletin",
+    "confidence": "official-primary-source",
+    "sourceName": "City of Surrey events",
+    "sourceTier": "primary",
+    "sourceUrl": "https://www.surrey.ca/news-events/events/community-picnic-adams-road-park",
+    "discoveredAt": "2026-07-27T18:34:01.892445-07:00",
+    "lengthRationale": "A short bulletin is complete because one official City of Surrey event page supplies the date, time, address, price, activity, food-item note, and event-planning details.",
+    "commercialIntent": "ad-fit",
+    "commercialFitReason": "A free Surrey family picnic may fit ordinary local-events ad context after editorial qualification; audience size, viewability, RPM, revenue, sponsor demand, pricing, and placement claims remain unavailable.",
+    "sponsorshipStatus": "editorial",
+    "brandSafety": "standard",
+    "manualApprovalRequired": false,
+    "evidence": {
+      "sourceUrls": [
+        "https://www.surrey.ca/news-events/events/community-picnic-adams-road-park"
+      ],
+      "primarySourceUrls": [
+        "https://www.surrey.ca/news-events/events/community-picnic-adams-road-park"
+      ],
+      "readerImpact": "Surrey residents can decide whether to attend a free July 30 community picnic at Adams Road Park, with the time, address, activity, and first-200 food-item note before planning.",
+      "freshnessEvidence": "The official City of Surrey event page lists the event for July 30, 2026, two days after this sweep.",
+      "uniqueAngleEvidence": "The item newly entered the official source queue after the 16:30 sweep and is not in the published Trends Today inventory.",
+      "claimSupport": [
+        "Date and time: July 30, 2026, 5:30 to 7:30 p.m.",
+        "Location: Adams Road Park, 18160 68 Ave.",
+        "Tickets and pricing: Free.",
+        "Activities: community networking, activities, games, Park Play, borrowed sports equipment, and self-directed outdoor games.",
+        "Food note: the first 200 people at each picnic can receive a free food item."
+      ]
+    },
+    "ratings": {
+      "localRelevance": 5,
+      "readerUtility": 4,
+      "freshness": 5,
+      "evidenceStrength": 4,
+      "uniqueAngle": 4,
+      "repeatVisitPotential": 3,
+      "speedToUsefulDraft": 5
+    }
+  }
+]

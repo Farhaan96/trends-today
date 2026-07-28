@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "206d7f5f8dd3623f432b9100cdb2bedb7d7653e4dc014407677ef6a1b153c3da",
+  "repositorySha": "302da1c5d9d2fd56d1db9f93d34bb1a9cb352df4",
+  "reviewedAt": "2026-07-28T01:49:04.982708+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa668-8903-7480-879b-e224e21a5838",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The concise local-event bulletin is fully supported by the cited City of Surrey listing, clearly organized, easy to scan, and ends with practical attendance guidance. No blocking editorial issues or authorial em dashes were found."
+}

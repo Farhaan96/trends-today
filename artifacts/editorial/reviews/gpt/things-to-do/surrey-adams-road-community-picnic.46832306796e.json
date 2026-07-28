@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "46832306796e8135542bf8c9e79357b66ef0e5520c090ce45559dd4add60c20d",
+  "repositorySha": "578d4f1916a459844c5c8e3916a78195823e564e",
+  "reviewedAt": "2026-07-28T01:45:11.613648+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa665-3b1f-7d23-abaa-49a0d898c7a0",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The closing claim that the linked Surrey line-dancing concert occurs on July 29 is not supported by the sole source cited in the candidate. Add supporting cited material or remove the date-specific claim.",
+    "The instruction to check the City listing for weather, schedule, or park-program changes implies that the page provides such updates, but the cited page does not establish that. Recast it as general advice without specifying unsupported update categories."
+  ],
+  "summary": "The City source supports the picnic's date, time, location, price, activities, Park Play details, partner list, and first-200 food-item offer. The candidate is cleanly formatted, readable, locally useful, and contains zero authorial em dashes, but two unsupported claims prevent a pass under the every-claim-supported standard."
+}
