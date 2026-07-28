@@ -1,4 +1,4 @@
-{
+﻿{
   "runId": "run-trends-today-daily-publisher-2026-07-28-0830",
   "generatedAt": "2026-07-28T08:45:00-07:00",
   "dailyCountBefore": 0,
@@ -14,7 +14,7 @@
       "storyType": "bulletin",
       "lane": "daily-local-utility",
       "candidatePath": "artifacts/editorial/release-candidates/things-to-do/surrey-panjabi-gallery-tour-july-30.mdx",
-      "candidateSha256": "5e8227a9881cb003d4b304faace12aafa4461cdabd816554e969a741445dfb13",
+      "candidateSha256": "18186499ef93908978d83ca9722612d4a663d2c090c4582fabcf489b186fe95c",
       "evidence": {
         "sourceUrls": [
           "https://www.surrey.ca/news-events/events/thursday-artist-talk-panjabi-tour-keerat-kaur"
@@ -45,3 +45,4 @@
     }
   ]
 }
+

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "18186499ef93908978d83ca9722612d4a663d2c090c4582fabcf489b186fe95c",
+  "repositorySha": "55e7aaf4b3c2f0b0ccfde13fb5eba511dc580547",
+  "reviewedAt": "2026-07-28T15:55:32.936749+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa96f-652c-70b0-8d4d-df81e0a41bd2",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The exact candidate hash and repository SHA were verified. The official City listing supports the event details, program sequence, language information, curator role, price, and registration guidance. The bulletin is clear, scannable, locally useful, and ends with an actionable planning reminder."
+}
