@@ -1,0 +1,41 @@
+[
+  {
+    "title": "Richmond election voter registration closes Aug. 18",
+    "originalDiscoveryTitle": "Richmond Election - October 17",
+    "sourceUrl": "https://www.richmond.ca/city-hall/news/2026/rmdelection28jul2026.htm",
+    "sourceName": "City of Richmond news",
+    "sourceTier": "primary",
+    "locality": "Richmond",
+    "category": "local-news",
+    "lane": "daily-local-utility",
+    "storyType": "bulletin",
+    "status": "researched",
+    "confidence": "verified-primary-source",
+    "evidence": {
+      "sourceUrls": [
+        "https://www.richmond.ca/city-hall/news/2026/rmdelection28jul2026.htm",
+        "https://www.richmond.ca/city-hall/elections.htm"
+      ],
+      "primarySourceUrls": [
+        "https://www.richmond.ca/city-hall/news/2026/rmdelection28jul2026.htm",
+        "https://www.richmond.ca/city-hall/elections.htm"
+      ],
+      "freshnessEvidence": "City of Richmond notice dated July 28, 2026; checked during the July 28 14:30 sweep.",
+      "readerImpact": "Richmond voters can register by Aug. 18 and plan for General Voting Day on Oct. 17 or advance voting on Oct. 3, 7, 8, 9 and 10.",
+      "uniqueAngleEvidence": "Distinct from existing Coquitlam election-worker article because this is voter registration and voting-options guidance for Richmond residents.",
+      "brandSafety": "standard civic service bulletin; no candidate claims, allegations, crime, private-person claims or sponsored coverage."
+    },
+    "ratings": {
+      "localRelevance": 5,
+      "readerUtility": 4,
+      "freshness": 5,
+      "evidenceStrength": 4,
+      "uniqueAngle": 4,
+      "repeatVisitPotential": 3,
+      "speedToUsefulDraft": 5
+    },
+    "commercialIntent": "none",
+    "commercialFitReason": "No commercial fit is asserted; this is independent civic service coverage.",
+    "sponsorshipStatus": "editorial"
+  }
+]
