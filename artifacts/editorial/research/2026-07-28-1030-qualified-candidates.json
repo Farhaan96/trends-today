@@ -1,0 +1,39 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-28-1030",
+  "trigger": "recurring automation, every two hours",
+  "generatedAt": "2026-07-28T10:44:00-07:00",
+  "baseSha": "595072bcd7f50ea6b56bfd09926620ec1c991f02",
+  "dailyPublicationState": {
+    "date": "2026-07-28",
+    "timezone": "America/Vancouver",
+    "publicAnalyticsStatus": "available",
+    "publicAnalyticsTotalArticles": 165,
+    "publishedTodayBeforeSweep": 1,
+    "dailyMaximum": 6,
+    "dailyCeilingReached": false
+  },
+  "sourceScan": {
+    "sourceQueuePath": "artifacts/editorial/research/2026-07-28-1030-source-queue.json",
+    "uniqueResearchOpportunities": 57,
+    "officialSourceCandidates": 58,
+    "perplexityStatus": "unavailable: PERPLEXITY_API_KEY absent",
+    "googleStatus": "unavailable: GOOGLE_API_KEY absent"
+  },
+  "qualifiedCandidates": [],
+  "qualificationDecision": "skip",
+  "skipReason": "Zero candidates cleared locality, freshness, non-duplicate, reader-utility, evidence, primary-source, brand-safety, and article-contract gates. The only fresh new official-source item was a BC Lions practice-roster signing that lacked a standalone Lower Mainland reader decision; the Port Coquitlam movie/music guide remained blocked by prior GPT quality findings without materially new official facts.",
+  "reviewGate": {
+    "gptEditorialReviewRun": false,
+    "claudeOpusReviewRun": false,
+    "reason": "No exact release candidate qualified, so no candidate SHA-256 existed."
+  },
+  "commercialFit": {
+    "considered": false,
+    "reason": "Commercial fit is considered only after editorial qualification."
+  },
+  "models": {
+    "gptEditorial": "not run",
+    "independentReleaseReviewer": "not run",
+    "fable": "not started"
+  }
+}
