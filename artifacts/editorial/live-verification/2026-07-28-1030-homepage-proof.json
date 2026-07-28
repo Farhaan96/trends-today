@@ -1,0 +1,45 @@
+{
+  "checkedAt": "2026-07-28T17:52:19.954Z",
+  "method": "Playwright rendered page using local Chrome, full-page scroll before image sampling",
+  "deployment": {
+    "mergeSha": "7824ee1fd0316a24a3406e2372cfa96a716ce362",
+    "vercelStatusUrl": "https://vercel.com/farhaans-projects-088cb374/trends-today/A7f4RNgf47tahf49Q4HkCKp1WPFc",
+    "statusState": "success",
+    "statusDescription": "Deployment has completed"
+  },
+  "page": {
+    "url": "https://www.trendstoday.ca/",
+    "status": 200,
+    "finalUrl": "https://www.trendstoday.ca/",
+    "title": "Trends Today | Lower Mainland News and Events",
+    "canonicalRaw": "https://www.trendstoday.ca",
+    "canonical": "https://www.trendstoday.ca",
+    "canonicalExpected": "https://www.trendstoday.ca",
+    "h1s": ["What is happening around you."],
+    "panjabiVisible": true,
+    "noNewHeldStories": true,
+    "imageCountSampled": 12,
+    "brokenImages": [],
+    "structuredDataScripts": 3,
+    "structuredDataParseErrors": [],
+    "consoleMessages": [],
+    "pageErrors": [],
+    "screenshotPath": "C:/Users/farha/.codex/worktrees/trends-daily-2026-07-28-1030/artifacts/editorial/live-verification/2026-07-28-1030-homepage-rerun.png"
+  },
+  "analytics": {
+    "publicStatus": 200,
+    "publicBodySample": "{\"success\":true,\"data\":{\"content\":{\"totalArticles\":165,\"byCategory\":{\"local-news\":11,\"transit\":8,\"things-to-do\":17,\"food-drink\":1,\"housing\":2,\"sports\":2,\"science\":30,\"culture\":12,\"psychology\":21,\"technology\":25,\"health\":22,\"space\":14},\"recentArticles\":[{\"title\":\"Free Panjabi gallery tour runs Thursday in Surrey\",\"category\":\"things-to-do\",\"publishedAt\":\"2026-07-28T08:45:00-07:00\",\"slug\":\"surrey-panjabi-gallery-tour-july-30\"},{\"title\":\"Free Surrey picnic runs July 30 at Adams Road Park\",\"category\"",
+    "publicKeys": ["success", "data"],
+    "publicTotalArticles": 165,
+    "publicNewestTitle": "Free Panjabi gallery tour runs Thursday in Surrey",
+    "protectedStatus": 401,
+    "protectedStatusMeaning": "unavailable-auth-required",
+    "publicNewestSlug": "surrey-panjabi-gallery-tour-july-30",
+    "publicNewestPublishedAt": "2026-07-28T08:45:00-07:00",
+    "publicWindow": "live public analytics endpoint at post-merge check"
+  },
+  "result": {
+    "browserVerified": true,
+    "publishedNewArticle": false
+  }
+}
