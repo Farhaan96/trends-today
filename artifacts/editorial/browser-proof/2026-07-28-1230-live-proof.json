@@ -1,0 +1,112 @@
+{
+  "checkedAt": "2026-07-28T20:13:22.879Z",
+  "url": "https://www.trendstoday.ca/local-news/delta-bc-day-holiday-hours-aug-3",
+  "status": 200,
+  "finalUrl": "https://www.trendstoday.ca/local-news/delta-bc-day-holiday-hours-aug-3",
+  "canonical": "https://www.trendstoday.ca/local-news/delta-bc-day-holiday-hours-aug-3",
+  "title": "Delta lists BC Day holiday hours for Monday, Aug. 3 | Trends Today",
+  "h1": "Delta lists BC Day holiday hours for Monday, Aug. 3",
+  "requiredText": {
+    "Delta lists BC Day holiday hours for Monday, Aug. 3": true,
+    "BC Day on Monday, Aug. 3, 2026": true,
+    "McKee Seniors Recreation Centre": true,
+    "Aug. 3 to 10": true,
+    "Aug. 3 to 9": true,
+    "604-940-7111": true,
+    "press 1": true,
+    "City of Delta: 2026 BC Day Holiday Hours of Operation": true,
+    "City of Delta: McKee Seniors Recreation Centre": true
+  },
+  "imageChecks": [
+    {
+      "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fdelta-bc-day-holiday-hours.png&w=1080&q=75",
+      "alt": "Delta lists BC Day holiday hours for Monday, Aug. 3",
+      "complete": true,
+      "naturalWidth": 1024,
+      "naturalHeight": 512
+    }
+  ],
+  "sourceStatuses": [
+    {
+      "href": "https://www.delta.ca/community-culture/happening-delta/news/2026-bc-day-holiday-hours-operation",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "href": "https://www.delta.ca/parks-recreation/parks-trails/park-and-amenity-search/mckee-seniors-recreation-centre",
+      "status": 200,
+      "ok": true
+    }
+  ],
+  "internalLinksSeen": [
+    {
+      "text": "Skip to content",
+      "href": "https://www.trendstoday.ca/local-news/delta-bc-day-holiday-hours-aug-3#main-content"
+    },
+    {
+      "text": "Local News",
+      "href": "https://www.trendstoday.ca/local-news"
+    },
+    {
+      "text": "LOCAL NEWS",
+      "href": "https://www.trendstoday.ca/local-news"
+    },
+    {
+      "text": "Trends Today Newsroom",
+      "href": "https://www.trendstoday.ca/author/trends-today-newsroom"
+    },
+    {
+      "text": "Moe",
+      "href": "https://www.trendstoday.ca/author/moe"
+    },
+    {
+      "text": "The City of Delta says",
+      "href": "https://www.delta.ca/community-culture/happening-delta/news/2026-bc-day-holiday-hours-operation"
+    },
+    {
+      "text": "City of Delta: 2026 BC Day Holiday Hours of Operation",
+      "href": "https://www.delta.ca/community-culture/happening-delta/news/2026-bc-day-holiday-hours-operation"
+    },
+    {
+      "text": "City of Delta: McKee Seniors Recreation Centre",
+      "href": "https://www.delta.ca/parks-recreation/parks-trails/park-and-amenity-search/mckee-seniors-recreation-centre"
+    },
+    {
+      "text": "Coquitlam plans Partington Creek wildlife corridor\nLOCAL-NEWS\n2 min read\n\nCoquitlam's Partington Creek corridor plan would protect Burke Mountain habitat, add parkland, and set buffers beside a salmon-bearing creek.\n\nJul 27, 2026",
+      "href": "https://www.trendstoday.ca/local-news/coquitlam-partington-creek-wildlife-corridor"
+    },
+    {
+      "text": "View all articles by Trends Today Newsroom →",
+      "href": "https://www.trendstoday.ca/author/trends-today-newsroom"
+    },
+    {
+      "text": "Delta air-quality warning covers smoke and heat\n\nDelta residents are under a July 22 yellow air-quality warning as wildfire smoke, heat, and local emissions raise health-risk concerns.\n\nJul 22, 2026",
+      "href": "https://www.trendstoday.ca/local-news/delta-air-quality-warning-smoke-heat"
+    },
+    {
+      "text": "Coquitlam seeks 250 election workers at up to $38 an hour\n\nCoquitlam has opened paid temporary election-worker applications for advance voting and general voting day on Oct. 17.\n\nJul 23, 2026",
+      "href": "https://www.trendstoday.ca/local-news/coquitlam-election-workers-october-vote"
+    },
+    {
+      "text": "Coquitlam plans Partington Creek wildlife corridor\n\nCoquitlam's Partington Creek corridor plan would protect Burke Mountain habitat, add parkland, and set buffers beside a salmon-bearing creek.\n\nJul 27, 2026",
+      "href": "https://www.trendstoday.ca/local-news/coquitlam-partington-creek-wildlife-corridor"
+    }
+  ],
+  "structuredDataChecks": {
+    "hasJsonLd": true,
+    "hasHeadline": true,
+    "hasDatePublished": true,
+    "hasCanonicalUrl": true,
+    "hasImage": true
+  },
+  "consoleErrors": [],
+  "pageErrors": [],
+  "requestFailures": [
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-VM7KVV19XC&gtm=45je67r0h1v9259363743za200zd9259363743&_p=1785269600281&gcd=13l3l3l3l1l1&npa=0&dma=0&are=1&cid=529639040.1785269600&frm=0&ngs=1&pscdl=noapi&rcb=14&sr=1440x1200&uaa=x86&uab=64&uafvl=Chromium%3B140.0.7339.16%7CNot%253DA%253FBrand%3B24.0.0.0%7CHeadlessChrome%3B140.0.7339.16&uam=&uamb=0&uap=Windows&uapv=19.0.0&uaw=0&ul=en-ca&_s=1&tag_exp=115938465~115938468~118395334~118897920~118897930~119527020~119896802&dl=https%3A%2F%2Fwww.trendstoday.ca%2Flocal-news%2Fdelta-bc-day-holiday-hours-aug-3&dp=%2Flocal-news%2Fdelta-bc-day-holiday-hours-aug-3&dt=Delta%20lists%20BC%20Day%20holiday%20hours%20for%20Monday%2C%20Aug.%203%20%7C%20Trends%20Today&sid=1785269600&sct=1&seg=0&en=page_view&_fv=1&_nsi=1&_ss=1&_ee=1&tfd=1777",
+      "failure": "net::ERR_ABORTED"
+    }
+  ],
+  "screenshotPath": "C:\\Users\\farha\\.codex\\worktrees\\trends-daily-2026-07-28-1230\\artifacts\\editorial\\browser-proof\\2026-07-28-1230-delta-bc-day.png",
+  "failures": []
+}
