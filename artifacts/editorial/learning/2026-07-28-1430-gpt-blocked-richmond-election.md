@@ -55,8 +55,14 @@
 ## Tests And Release
 
 - Deterministic local candidate validation: passed after repairs, 391 words, required H2/list/source/image contract satisfied, zero prose em dashes.
-- Full validation commands will be recorded below after this learning entry is committed and checks finish.
-- PR: not opened yet at the time of this entry.
+- `git diff --check` passed.
+- `python -m unittest discover -s apps\pipeline\tests` passed, 87 tests OK.
+- `npm ci` passed from the lockfile; npm audit output still reported existing 22 vulnerabilities: 4 moderate, 17 high, 1 critical.
+- `npm run typecheck` passed.
+- `npm run lint -- --quiet` passed.
+- `npm run build` passed; Next.js generated 218 static pages and did not include a Richmond candidate route because the candidate was not promoted.
+- Local build side effects: `public/robots.txt` and `public/sitemap.xml` were modified by `next-sitemap` timestamp generation and left uncommitted.
+- PR: evidence branch pending push/open at the time of this entry.
 - Merge: none.
 - Deployment: none.
 - Browser proof: none, because no article was promoted or deployed.
