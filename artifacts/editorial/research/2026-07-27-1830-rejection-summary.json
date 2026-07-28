@@ -1,0 +1,52 @@
+{
+  "generatedAt": "2026-07-28T01:45:00Z",
+  "runId": "2026-07-27-1830-lm-publisher",
+  "decision": "qualified-candidate-staged",
+  "dailyCeiling": {
+    "dateLocal": "2026-07-27",
+    "maximumPublications": 6,
+    "publishedBeforeSweep": 4,
+    "status": "not-reached"
+  },
+  "sourceScan": {
+    "sourceQueue": "artifacts/editorial/research/2026-07-27-1830-source-queue.json",
+    "primarySourceCandidatesFound": 58,
+    "uniqueResearchOpportunities": 57,
+    "perplexityStatus": "unavailable-no-api-key",
+    "googleCustomSearchStatus": "unavailable-no-api-key"
+  },
+  "qualifiedCandidates": [
+    {
+      "title": "Free Surrey picnic runs July 30 at Adams Road Park",
+      "sourceName": "City of Surrey events",
+      "sourceUrl": "https://www.surrey.ca/news-events/events/community-picnic-adams-road-park",
+      "locality": "Surrey",
+      "category": "things-to-do",
+      "storyType": "bulletin",
+      "decision": "staged-for-exact-review",
+      "reason": "New official City of Surrey event page with near-term date, free admission, exact time and address, clear family planning utility, standard brand safety, and no duplicate published story."
+    }
+  ],
+  "newSincePreviousSweep": [
+    {
+      "title": "Community Picnic at Adams Road Park",
+      "sourceName": "City of Surrey events",
+      "sourceUrl": "https://www.surrey.ca/news-events/events/community-picnic-adams-road-park",
+      "locality": "Surrey",
+      "category": "things-to-do",
+      "decision": "qualified",
+      "reason": "Official near-term Surrey event with free admission, a clear attendee decision, source-supported planning details, and no sensitive or sponsored claims."
+    }
+  ],
+  "heldOrRejectedClasses": [
+    "duplicate or already-covered July 27 Coquitlam wildlife corridor, Como Lake road work, Surrey stewardship, and Surrey line-dancing items",
+    "stale or previously rejected municipal event pages whose reader utility did not improve",
+    "approval-gated Richmond property-title and audit items",
+    "thin sports/team-content posts without standalone local reader utility"
+  ],
+  "commercialStatus": {
+    "status": "post-qualification-hypothesis-only",
+    "reason": "The staged Surrey picnic bulletin is independent editorial coverage with sponsorshipStatus editorial; ad fit is not an audience, pricing, sponsor, or revenue claim."
+  },
+  "stopRule": "Promote only if the exact candidate passes deterministic validation, GPT editorial review, Opus 5 exact-SHA release review, checks, PR, deployment, and live browser verification."
+}
