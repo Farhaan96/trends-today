@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "a0413910360bd8e0b6a344c4e125142c23f94e5262c602b2f93e86fd42764f5f",
+  "repositorySha": "7fe184f507725a503e68e4877bdb54299189785b",
+  "reviewedAt": "2026-07-28T16:09:36.907429+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fa97c-2314-7b00-ab26-5a4309077f00",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The cited City of Surrey listing supports the event date, time, price, address, registration guidance, program sequence, exhibition, language focus, art forms, and English portions. The bulletin is clear, scannable, locally useful, and ends with practical planning guidance. Minor repetition keeps quality, readability, and engagement from scoring 5, but it does not require revision."
+}
