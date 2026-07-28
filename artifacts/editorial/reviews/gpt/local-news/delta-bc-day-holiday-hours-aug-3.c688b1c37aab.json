@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "c688b1c37aabf6313277901df798a4efd59991a895886250c44c43319c33b551",
+  "repositorySha": "f0bf68d9436809d97e3e6c733a5f6150c47be0db",
+  "reviewedAt": "2026-07-28T19:46:26.625560+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019faa42-d7db-7441-9df7-c6e42ce5ef22",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The exact candidate and repository hashes match. The official-source extract supports the date, closures, operating hours, and animal-emergency instructions. The bulletin is clear, scannable, locally useful, actionable, and contains no authorial em dashes."
+}

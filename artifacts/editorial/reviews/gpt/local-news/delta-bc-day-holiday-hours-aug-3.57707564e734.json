@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "57707564e734c2ec92896058517848446bbbdea39ea558d268863cead205f81f",
+  "repositorySha": "f0bf68d9436809d97e3e6c733a5f6150c47be0db",
+  "reviewedAt": "2026-07-28T19:39:23.153270+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019faa3c-3839-74e0-adf0-f8d7f25d2213",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The McKee maintenance dates require correction or reconciliation. The candidate says Aug. 3 to Aug. 10, while the City of Delta\u2019s current McKee facility page says Aug. 3 to Aug. 9, 2026.",
+    "The opening repeats the same check-before-visiting takeaway in two generic paragraphs before providing useful details, weakening specificity and momentum.",
+    "The close is flat and partly repetitive: it again tells readers to consult the notice and check the closure list, without adding a sharper supported action such as confirming the destination\u2019s posted hours immediately before departure."
+  ],
+  "summary": "BLOCKERS. The MDX is clean, scannable, readable, and contains no authorial em dashes, but the conflicting McKee maintenance dates create a factual-support problem. Repetitive framing and an underpowered close also keep quality and engagement below the required threshold."
+}

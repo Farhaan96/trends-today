@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "5e7a0ce35bbde3cdcc39537b1873468fe7afba6a18883b944889dc1be5b41760",
+  "repositorySha": "f0bf68d9436809d97e3e6c733a5f6150c47be0db",
+  "reviewedAt": "2026-07-28T19:41:27.904239+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019faa3d-fdb9-7a32-95d3-04f0079665f6",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 4,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The opening repeats the check-before-leaving message before delivering the closure details, weakening momentum and adding avoidable filler.",
+    "The closing largely repeats the closure list and earlier advice to check the city notice. It needs a sharper, non-redundant actionable finish."
+  ],
+  "summary": "The exact local candidate and both hashes were verified. Its core service details are supported, the MDX is clean and scannable, and authorial prose contains no em dashes. Repetitive framing and a flat, duplicative close keep quality and engagement below the release threshold."
+}

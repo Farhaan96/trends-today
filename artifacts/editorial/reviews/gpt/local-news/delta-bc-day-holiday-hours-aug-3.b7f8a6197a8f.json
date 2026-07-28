@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "b7f8a6197a8fe7d536799d17fcf9a702e49a3472a96a4b2752bbcf359168805f",
+  "repositorySha": "f0bf68d9436809d97e3e6c733a5f6150c47be0db",
+  "reviewedAt": "2026-07-28T19:45:03.573337+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019faa41-9fab-7db2-b324-6b58b2b95de8",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 4,
+    "formatting": 4,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The article repeats its setup in \u201cThe City of Delta notice lists these service-hour notes\u201d and \u201cKey planning details,\u201d adding filler before the second list.",
+    "The final paragraph largely restates the preceding actionable advice instead of delivering a sharper close, creating a repetitive, flat ending."
+  ],
+  "summary": "The bulletin is clear, locally useful, scannable, and free of prose em dashes. It does not pass the strict editorial gate because repeated setup and a redundant final paragraph weaken quality and the close."
+}
