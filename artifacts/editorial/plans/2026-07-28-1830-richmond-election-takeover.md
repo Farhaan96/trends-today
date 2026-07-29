@@ -12,7 +12,7 @@ This run found that the 16:30 automation prepared a qualified Richmond election 
 - Public production analytics retrieved at `2026-07-28T18:35:48.1483612-07:00`: HTTP 200, 166 total articles, two July 28 publications, so the daily ceiling is not reached.
 - Protected reporting returned HTTP 401. Vercel, GA4, Search Console, ad, sponsor, revenue, and cost metrics are unavailable, not zero.
 - The 18:30 official-source scan found 58 opportunities. The queue is materially unchanged from 16:30.
-- The 16:30 candidate commit is `676e81e5fef260b338c5ffbf0a44cb3c22ff5a4e`, with candidate SHA-256 `bf4991b89c7a524c17073338ed28c6e5fe05850a4e360a82cf31252f20e733f1`.
+- The 16:30 candidate commit is `676e81e5fef260b338c5ffbf0a44cb3c22ff5a4e`. Its SHA-256 `bf4991b89c7a524c17073338ed28c6e5fe05850a4e360a82cf31252f20e733f1` is historical only because the takeover must change `publishedAt` from the abandoned 16:30 sweep to `2026-07-28T18:45:00-07:00`.
 - The candidate uses two City of Richmond primary sources:
   - `https://www.richmond.ca/city-hall/news/2026/rmdelection28jul2026.htm`
   - `https://www.richmond.ca/city-hall/elections.htm`
@@ -22,23 +22,27 @@ This run found that the 16:30 automation prepared a qualified Richmond election 
 
 ## Proposed executable route
 
-1. Import only the committed 16:30 evidence commit into the clean 18:30 branch. Do not read from or mutate the 16:30 worktree during mutation.
-2. Re-verify source URLs, candidate bytes/hash, image provenance, duplicate status, current production inventory, and daily ceiling.
-3. Treat the 16:30 GPT and Opus outputs as historical evidence only. Run a fresh GPT editorial gate bound to the candidate SHA and current repository SHA.
-4. Commit the fresh GPT artifact, then run `C:\Users\farha\.codex\scripts\invoke-claude-review.ps1` with `-PrimaryModel claude-opus-5 -DisableFallback` against the exact clean SHA.
-5. If either review finds a blocker, repair the candidate in this worktree, create a new hash, and repeat both reviews. Stop on malformed, unavailable, mismatched, or incomplete review output.
-6. Run full Python pipeline tests, em-dash validation, `git diff --check`, `npm ci`, typecheck, quiet lint, and production build.
-7. Promote only the exact reviewed candidate through the repository promotion command. Commit the promoted article and exact review artifact on the 18:30 branch.
-8. Push the branch, open a PR, add `codex` and `codex-automation` labels, wait for required checks, merge without deleting the branch, wait for the matching production deployment, and verify the live canonical page in a browser.
-9. Verify HTTP 200, canonical, rendered headline/body, source/internal links, dates, image load, Article structured-data truth, and zero console/page/non-analytics request errors.
-10. Record the 18:30 learning entry, rollback point, release evidence, and final state. If the learning entry requires a post-merge closeout PR, use a new clean worktree from the new `origin/main`.
+1. Import the committed 16:30 evidence commit into the clean 18:30 branch, then remove the four imported `artifacts/editorial/reviews/gpt/**` files so stale 16:30 PASS artifacts cannot become ambiguous release evidence. Do not mutate the 16:30 worktree.
+2. Change only the candidate `publishedAt` to `2026-07-28T18:45:00-07:00`; recompute and record the new candidate SHA-256. Re-verify both source URLs, factual extracts, image provenance, duplicate status, current production inventory, and daily ceiling.
+3. Write a dated `2026-07-28-1830-qualified-candidates.json` tied to the 58-topic 18:30 queue. It must record Richmond's editorial score and the carry-forward/rejection treatment for the remaining queue.
+4. Commit the imported and repaired evidence. Record that commit as `EVIDENCE_SHA`.
+5. Run the fresh GPT editorial gate in the 18:30 worktree at `EVIDENCE_SHA` and leave its artifact uncommitted. Use at most two attempts; stop fail-closed on repeated absent-candidate, malformed, unavailable, mismatched, or blocking output.
+6. Add a new detached review worktree at `EVIDENCE_SHA`, copy the uncommitted GPT artifact into the same relative path there, and run `C:\Users\farha\.codex\scripts\invoke-claude-review.ps1` in that clean detached worktree with `-ExpectedSha EVIDENCE_SHA -PrimaryModel claude-opus-5 -DisableFallback`. The Opus prompt must inspect the candidate and the copied exact-candidate GPT artifact; no build or other mutation may precede this review.
+7. Copy the accepted Opus artifact back to the 18:30 worktree without changing `HEAD`. Assert immediately before promotion that GPT `repositorySha`, Opus `repositorySha`, and `git rev-parse HEAD` all equal `EVIDENCE_SHA`, and that both candidate hashes equal the on-disk SHA-256.
+8. If either review finds a content blocker, repair the candidate, create a new evidence commit/hash, and repeat both gates. Material scope changes require another plan amendment review.
+9. Promote only the exact reviewed candidate while `HEAD == EVIDENCE_SHA`, then run full Python pipeline tests, em-dash validation, `git diff --check`, `npm ci`, typecheck, quiet lint, and production build. Treat only the candidate, exact review artifacts, promoted article, image, qualification evidence, and generated sitemap/robots changes as in scope.
+10. Commit the promoted article and both exact-candidate review artifacts together.
+11. Push the branch, open a PR, add `codex` and `codex-automation` labels, wait for required checks, merge without deleting the branch, wait for the matching production deployment, and verify the live canonical page in a browser.
+12. Verify HTTP 200, canonical, rendered headline/body, source/internal links, dates including JSON-LD `datePublished: 2026-07-28T18:45:00-07:00`, image load, Article structured-data truth, and zero console/page/non-analytics request errors.
+13. Record the 14:30, 16:30, and 18:30 attempt history, learning entry, rollback point, release evidence, and final state. If the learning entry requires a post-merge closeout PR, use a new clean worktree from the new `origin/main`.
 
 ## Acceptance tests
 
 - No mutation in the root or 16:30 worktree.
-- Candidate SHA-256 is recorded and matches both fresh GPT and Opus artifacts.
-- Both reviews are non-empty, structured, exact-SHA, and use `gpt-5.6-sol` plus `claude-opus-5` with fallback disabled.
-- All deterministic checks pass.
+- The repaired candidate has `publishedAt: "2026-07-28T18:45:00-07:00"` and a recorded SHA-256 different from `bf4991b89c7a524c17073338ed28c6e5fe05850a4e360a82cf31252f20e733f1`.
+- A dated 18:30 qualification record ties the candidate and rejection/carry-forward decisions to the 58-topic queue.
+- Immediately before promotion, both review artifacts are non-empty and structured; both repository SHAs equal `EVIDENCE_SHA == HEAD`; both candidate hashes match the repaired candidate; GPT uses `gpt-5.6-sol`; Opus uses `claude-opus-5` with fallback disabled.
+- Full Python tests, em-dash validation, `git diff --check`, `npm ci`, typecheck, quiet lint, and production build pass.
 - PR checks pass; merge SHA and matching deployment are recorded.
 - Production browser proof passes every canonical/content/link/date/image/structured-data/error assertion.
 - A rollback commit is identifiable.
@@ -47,5 +51,6 @@ This run found that the 16:30 automation prepared a qualified Richmond election 
 
 - The exact reason the 16:30 automation stopped after review is unknown. This plan avoids relying on its mutable state.
 - Analytics credentials remain unavailable.
+- Until the imported evidence has been pushed, do not run worktree prune, branch deletion, fetch with pruning, or garbage collection that could remove the sole 16:30 local commit.
 - Stop before publication on changed source facts, source conflict, sensitive or partisan material, dirty-scope ambiguity, review mismatch, failed checks, deployment ambiguity, or unverifiable live state.
 - Routine qualified editorial publication, merge, and deployment are authorized. No advertiser/sponsor reply, price, commercial term, provider change, production-data mutation, or inbox activation is authorized.
