@@ -2,6 +2,7 @@
   "version": 1,
   "reviewer": "claude-opus-5",
   "reviewType": "material-plan-gate",
+  "reviewedAt": "2026-07-29T06:48:00-07:00",
   "reviewedSha": "5d5f1855189a73a44fe71ed341e2bf1221fd8a67",
   "verdict": "BLOCKERS",
   "status": "success-recovered-from-session-transcript",

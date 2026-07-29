@@ -2,6 +2,7 @@
   "version": 1,
   "reviewer": "claude-opus-5",
   "reviewType": "material-plan-amendment-gate",
+  "reviewedAt": "2026-07-29T07:04:48.7168738-07:00",
   "reviewedSha": "af3d62a7e9dfbf6d7daeb74f25027933b80c195b",
   "verdict": "BLOCKERS",
   "status": "review_blocked",
