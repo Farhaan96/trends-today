@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "runId": "run-trends-today-daily-publisher-2026-07-29-0630",
+  "verifiedAt": "2026-07-29T08:18:34-07:00",
+  "productionUrl": "https://www.trendstoday.ca/sports/bc-lions-winnipeg-july-30-watch-guide",
+  "release": {
+    "pr": "https://github.com/Farhaan96/trends-today/pull/129",
+    "mergeSha": "5020679ef8afcbb8653c63b4193b54d89aeb84e8",
+    "deploymentStatusContext": "Vercel",
+    "deploymentStatus": "success",
+    "deploymentTarget": "https://vercel.com/farhaans-projects-088cb374/trends-today/4KQoSL4NcYu2YCZq4NsCFLTdEBka",
+    "deploymentIdentity": "The Vercel success status is attached directly to merge SHA 5020679ef8afcbb8653c63b4193b54d89aeb84e8. GitHub's deployments endpoint returned no separate deployment object for this integration."
+  },
+  "http": {
+    "articleStatus": 200,
+    "articleContentType": "text/html; charset=utf-8",
+    "imageStatus": 200,
+    "imageContentType": "image/png",
+    "imageBytes": 2342714,
+    "sitemapStatus": 200,
+    "sitemapContainsCanonical": true
+  },
+  "page": {
+    "canonical": "https://www.trendstoday.ca/sports/bc-lions-winnipeg-july-30-watch-guide",
+    "title": "BC Lions visit Winnipeg Thursday; kickoff is 5:30 p.m. | Trends Today",
+    "h1": "BC Lions visit Winnipeg Thursday; kickoff is 5:30 p.m.",
+    "renderedChecks": {
+      "opponentWinnipegBlueBombers": true,
+      "dateThursdayJuly302026": true,
+      "kickoff530Pacific": true,
+      "venuePrincessAutoStadium": true,
+      "broadcastTsnRdsCflPlus": true,
+      "sourceMismatchDisclosure": true,
+      "sourcesHeading": true,
+      "reportingMethod": true
+    },
+    "uniqueSourceLinks": [
+      "https://www.bclions.com/2026/07/29/1st-and-now-solomon-elimimian-stops-by-plus-we-talk-salkter-bomber-battle/",
+      "https://www.bclions.com/schedule/2026/",
+      "https://www.cfl.ca/2026-cfl-broadcast-schedule/",
+      "https://www.bluebombers.com/individual-game-day-tickets/",
+      "https://www.bclions.com/wheretowatch/"
+    ],
+    "testedInternalLinks": [
+      {
+        "url": "https://www.trendstoday.ca/sports",
+        "status": 200
+      },
+      {
+        "url": "https://www.trendstoday.ca/author/trends-today-newsroom",
+        "status": 200
+      },
+      {
+        "url": "https://www.trendstoday.ca/sports/canucks-2026-home-opener-ticket-dates",
+        "status": 200
+      },
+      {
+        "url": "https://www.trendstoday.ca/sports/whitecaps-30000-tickets-bc-place-return-lafc",
+        "status": 200
+      }
+    ],
+    "heroImage": {
+      "loaded": true,
+      "naturalWidth": 891,
+      "naturalHeight": 501,
+      "renderedAlt": "BC Lions visit Winnipeg Thursday; kickoff is 5:30 p.m."
+    },
+    "articleJsonLd": {
+      "type": "Article",
+      "headline": "BC Lions visit Winnipeg Thursday; kickoff is 5:30 p.m.",
+      "datePublished": "2026-07-29T07:20:00-07:00",
+      "dateModified": "2026-07-29T07:20:00-07:00",
+      "mainEntityOfPage": "https://www.trendstoday.ca/sports/bc-lions-winnipeg-july-30-watch-guide",
+      "authorType": "Organization",
+      "authorName": "Trends Today Newsroom",
+      "articleSection": "Sports",
+      "wordCountOmitted": true,
+      "keywordsOmitted": true
+    }
+  },
+  "diagnostics": {
+    "consoleErrors": 0,
+    "pageExceptions": 0,
+    "httpResponsesAtOrAbove400": 0,
+    "nonAnalyticsRequestFailures": 0,
+    "analyticsRequestFailures": 1,
+    "analyticsFailure": "A canceled Google Analytics collect request returned net::ERR_ABORTED and is excluded from the page-error gate.",
+    "warnings": [
+      "The browser logged the same non-failing hero-image preload warning twice after reload."
+    ]
+  },
+  "knownRouteLimitations": [
+    "The current category article route renders the article headline as the hero image alt instead of the candidate imageAlt field.",
+    "The current category article route does not render imageAttribution. AI provenance remains in frontmatter and the PNG's embedded C2PA manifest, not visible page copy."
+  ],
+  "screenshot": "artifacts/editorial/browser-proof/2026-07-29-0630-bc-lions-winnipeg-live.png",
+  "rollbackPoint": "Revert merge commit 5020679ef8afcbb8653c63b4193b54d89aeb84e8 in a new reviewed pull request."
+}
