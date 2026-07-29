@@ -76,5 +76,47 @@
     "confirmedOutsideCanadaStream": "CFL+",
     "excludedUncertainClaim": "Kaidon Salter's expected first start",
     "sourceConflictTreatment": "Disclose and link the BC Lions where-to-watch opponent mismatch in the reporting-method section and body, then rely on the mutually confirming fresh schedule, podcast, league broadcast schedule, and host-club listing."
+  },
+  "preReleaseRecheck": {
+    "completedAt": "2026-07-29T07:21:30.3628834-07:00",
+    "status": "passed-unchanged",
+    "summary": "All five official URLs returned HTTP 200 with content hashes unchanged from initial retrieval. The four-source Winnipeg confirmation and the BC Lions where-to-watch Saskatchewan mismatch remain unchanged.",
+    "sources": [
+      {
+        "url": "https://www.bclions.com/2026/07/29/1st-and-now-solomon-elimimian-stops-by-plus-we-talk-salkter-bomber-battle/",
+        "httpStatus": 200,
+        "retrievedAt": "2026-07-29T07:21:29.2675520-07:00",
+        "contentSha256": "960a8fa679d94208f21dd191a41c4e53ef295153d39e05640244ae6c0a985551",
+        "changedSinceInitialRetrieval": false
+      },
+      {
+        "url": "https://www.bclions.com/schedule/2026/",
+        "httpStatus": 200,
+        "retrievedAt": "2026-07-29T07:21:29.5749405-07:00",
+        "contentSha256": "448370c865ef24a90375adea29dc1780671d870a592216143d6e3e81befd678f",
+        "changedSinceInitialRetrieval": false
+      },
+      {
+        "url": "https://www.cfl.ca/2026-cfl-broadcast-schedule/",
+        "httpStatus": 200,
+        "retrievedAt": "2026-07-29T07:21:29.8321512-07:00",
+        "contentSha256": "d50e8d80ee1449eca5b9d5bce3b797ac52eb5cae9cab0c6cd623698726d51db2",
+        "changedSinceInitialRetrieval": false
+      },
+      {
+        "url": "https://www.bluebombers.com/individual-game-day-tickets/",
+        "httpStatus": 200,
+        "retrievedAt": "2026-07-29T07:21:30.1656951-07:00",
+        "contentSha256": "4644be3b54c7b71e5a884c263872f06b0b19993b11db3f072979a8258b02405f",
+        "changedSinceInitialRetrieval": false
+      },
+      {
+        "url": "https://www.bclions.com/wheretowatch/",
+        "httpStatus": 200,
+        "retrievedAt": "2026-07-29T07:21:30.3628834-07:00",
+        "contentSha256": "44e4b03ac8e2590361d3f1963cffb2556670e4a048e2195079ba29e483ac4133",
+        "changedSinceInitialRetrieval": false
+      }
+    ]
   }
 }
