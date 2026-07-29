@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-07-29T06:45:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-29-0630",
+  "sourceQueue": "artifacts/editorial/research/2026-07-29-0630-source-queue.json",
+  "dailyCountBeforeSweep": 0,
+  "dailyCeiling": 6,
+  "summary": {
+    "sourceCandidates": 58,
+    "qualifiedForCandidateStaging": 1,
+    "rejectedOrHeld": 57
+  },
+  "qualified": [
+    {
+      "title": "BC Lions visit Winnipeg Thursday; kickoff is 5:30 p.m.",
+      "reason": "The only new source URL since the July 28 18:30 sweep is a fresh official BC Lions preview for a July 30 game. Multiple official sources confirm the opponent, time, venue, and viewing route; one conflicting BC Lions page is disclosed and not used as opponent support."
+    }
+  ],
+  "rejectedOrHeld": [
+    {
+      "title": "Previously covered or unchanged municipal, event, and sports items",
+      "reason": "The other 57 opportunities are unchanged carryovers and remain already covered, duplicate, recurring, stale, retrospective, sensitive, thin, or below the standalone reader-utility and evidence thresholds documented in prior run artifacts."
+    },
+    {
+      "title": "Expected first start for Kaidon Salter",
+      "reason": "The fresh BC Lions podcast describes the start as expected and the lineup news as possible. The claim is uncertain and is excluded unless a later official depth chart confirms it."
+    }
+  ],
+  "commercialFitPolicy": "Commercial fit was considered only after editorial qualification. The qualified candidate remains independent editorial coverage with sponsorshipStatus editorial and no audience, price, sponsor, guarantee, or revenue claim."
+}

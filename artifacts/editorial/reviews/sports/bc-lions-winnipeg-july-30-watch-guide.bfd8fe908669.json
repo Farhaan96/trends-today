@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "bfd8fe90866978d9ff030f74b138738f7bfb5fc21c6bf03a086632dfbdcca792",
+  "reviewedAt": "2026-07-29T07:43:05.7665118-07:00",
+  "repositorySha": "8b7c89f0025d55ee08428a0d766a63f5feac18ba",
+  "modelUsed": "claude-opus-5",
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-opus-5"],
+  "fallbackDisabled": true,
+  "fallbackUsed": false,
+  "runnerStatus": "success",
+  "runnerOutput": "C:\\Users\\farha\\.codex\\review-output\\trends-2026-07-29-bc-lions-release-opus-bfd8fe90.json",
+  "review": "Independent exact-SHA review passed with no blockers. Opus recomputed the candidate hash and repository SHA, verified all five source records and the four-source Winnipeg consensus, confirmed the BC Lions where-to-watch Saskatchewan mismatch is disclosed and not used as opponent evidence, and found no uncertain lineup, betting, attendance, performance, or audience claim. It reproduced zero sensitive-keyword hits, zero prose em dashes, a passing release-candidate validation, and 87 passing Python tests. The article, SEO, canonical route, structured-data omissions, review schema, promotion contract, and scoped image path were consistent. The image was visually inspected and its embedded C2PA manifest independently confirmed trained-algorithmic origin from the OpenAI Media Service; no legible logo, text, watermark, identifiable player, or real-venue claim was found. Node install, typecheck, lint, and build remained required in the promotion worktree. The route's pre-existing behaviour of rendering the headline rather than imageAlt and not rendering imageAttribution must be recorded honestly after publication."
+}

@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "reviewer": "claude-opus-5",
+  "reviewType": "material-plan-gate",
+  "reviewedAt": "2026-07-29T06:48:00-07:00",
+  "reviewedSha": "5d5f1855189a73a44fe71ed341e2bf1221fd8a67",
+  "verdict": "BLOCKERS",
+  "status": "success-recovered-from-session-transcript",
+  "fallbackDisabled": true,
+  "fallbackUsed": false,
+  "observedModels": [
+    "claude-opus-5"
+  ],
+  "sessionId": "0c3ff074-d752-4eb9-bc5c-6f770371c20d",
+  "recoverableOutput": "C:\\Users\\farha\\.claude\\projects\\C--Users-farha--codex-worktrees-trends-daily-2026-07-29-0633\\0c3ff074-d752-4eb9-bc5c-6f770371c20d.jsonl",
+  "summary": "Opus found two blockers and eight required deltas. Remove the unretrieved media-guide claim, require a labelled link to the mismatched where-to-watch page, and tighten validator, review-schema, source-recheck, exact-SHA, image-alt, sensitive-keyword, deployment-identity, and Windows prompt-transport controls.",
+  "blockers": [
+    "B1 - The plan and conflict record named a BC Lions media guide as corroboration even though no media-guide URL, retrieval timestamp, HTTP status, or content hash had been collected. Remove that source claim or retrieve and record it before implementation.",
+    "B2 - The plan had not decided whether the conflicting BC Lions where-to-watch page would be cited in the article. Either link the page in the discrepancy disclosure or remove it from candidate sources; do not keep it as an uncited source."
+  ],
+  "requiredDeltas": [
+    "D1 - If title, subtitle, or readerImpact promises where or location guidance, include a matching where/find/location H2 and enough enumerable list items to satisfy the article contract.",
+    "D2 - Convert the accepted runner result into the canonical Claude review artifact schema with exact candidate and repository hashes before promotion.",
+    "D3 - Require the complete GPT review artifact schema, exact candidate and repository hashes, five integer scores of at least 4, zero prose em dashes, and an empty blockers array.",
+    "D4 - Keep HEAD at the release evidence SHA from both reviews through promotion; any intervening commit invalidates both review artifacts and requires a full re-review.",
+    "D5 - Scan the entire candidate file against every manualApprovalKeywords substring and do not use manualApprovalRecorded true as an escape for this routine run.",
+    "D6 - Re-retrieve source pages immediately before the release evidence commit and again read-only before promotion; stop and refresh evidence if the discrepancy changes.",
+    "D7 - Record that the current article route renders the headline as image alt and does not render imageAttribution; do not claim live alt-description or attribution proof.",
+    "D8 - Invoke the standard runner with a short repository-path prompt, exact WorkingDirectory and ExpectedSha, claude-opus-5, and DisableFallback to avoid Windows command-line transport failure."
+  ],
+  "review": "The independent review blocked on two evidence and citation defects and required eight executable controls. B1 required removing or retrieving an unsupported BC Lions media-guide corroborator. B2 required explicitly linking the conflicting BC Lions where-to-watch page in the discrepancy disclosure or removing it from candidate sources. D1 required satisfying the location-promise heading and list contract. D2 and D3 required complete canonical Claude and GPT artifacts bound to the exact candidate and repository hashes. D4 prohibited any commit between exact reviews and promotion. D5 required a whole-file sensitive-keyword scan with no manual-approval bypass. D6 required recorded pre-evidence retrieval plus a read-only pre-promotion recheck. D7 required honest disclosure that the live route does not render the supplied alt description or image attribution. D8 required the standard exact-SHA Opus runner with a short path-based prompt and fallback disabled.",
+  "disposition": "Plan amended at af3d62a7e9dfbf6d7daeb74f25027933b80c195b; B1, B2, and D1-D8 were independently confirmed resolved. Implementation remains paused pending confirmation of this self-contained evidence repair."
+}

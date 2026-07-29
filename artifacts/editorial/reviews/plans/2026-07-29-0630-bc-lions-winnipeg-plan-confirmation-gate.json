@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "reviewer": "claude-opus-5",
+  "reviewType": "material-plan-confirmation-gate",
+  "reviewedAt": "2026-07-29T07:10:40.1456608-07:00",
+  "reviewedSha": "532463db1df48fb606db7b6a9f60b919df684bf0",
+  "verdict": "BLOCKERS",
+  "status": "review_blocked",
+  "fallbackDisabled": true,
+  "fallbackUsed": false,
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-opus-5"
+  ],
+  "recoverableOutput": "C:\\Users\\farha\\.codex\\review-output\\trends-2026-07-29-0630-plan-confirmation-opus-532463d.json",
+  "resolved": [
+    "B3 - The tracked initial gate now enumerates B1, B2, D1-D8, contains a self-contained review narrative and disposition, and no longer depends on a machine-local transcript.",
+    "D-a - The location-promise acceptance test now requires at least three list items.",
+    "D-b - The plan now enumerates the three read-only pre-promotion source URLs and records the observation in the learning entry."
+  ],
+  "blockers": [
+    "D-c - The plan's ambiguous existing-sports-candidate reference did not explicitly name locality, storyType: bulletin, or lengthRationale, even though those fields are hard-required for this local 300-to-600-word bulletin."
+  ],
+  "requiredDeltas": [
+    "Replace the ambiguous exemplar reference with the exact known-good whitecaps-minnesota-watch-info.mdx path and enumerate every required local frontmatter field, including locality, storyType: bulletin, and lengthRationale."
+  ],
+  "review": "Opus confirmed the self-contained evidence repair, list-count acceptance test, and exact pre-promotion URLs. It blocked only on an ambiguous sports-candidate template reference that could resolve to a reported-update example and omit locality, storyType, or lengthRationale. The 87-test Python pipeline suite passed at the reviewed SHA.",
+  "disposition": "Exact frontmatter contract enumerated in the plan; implementation remains paused pending exact-SHA confirmation."
+}
