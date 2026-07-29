@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "claude-opus-5",
+  "reviewType": "material-plan-amendment-gate",
+  "reviewedSha": "e53f3eddb2f14c0b1c4a01066887d50684a43c02",
+  "verdict": "BLOCKERS",
+  "status": "review_blocked",
+  "fallbackDisabled": true,
+  "fallbackUsed": false,
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-opus-5"
+  ],
+  "recoverableOutput": "C:\\Users\\farha\\.codex\\review-output\\trends-2026-07-28-1830-plan-amendment3-opus.json",
+  "requiredDeltas": [
+    "Mirror the real npm PowerShell shim to native-executable transport in the argv probe.",
+    "Assert the native dump carries the prompt as one value with matching UTF-8 SHA-256 and eleven total arguments.",
+    "Fail closed on quotes, trailing backslash, prompt length at or above 30000, missing dump, split argv, hash mismatch, or detached-worktree dirt."
+  ],
+  "disposition": "Plan amended again; implementation remains paused pending independent amendment review."
+}
