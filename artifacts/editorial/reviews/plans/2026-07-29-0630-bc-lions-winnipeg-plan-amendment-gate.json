@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "reviewer": "claude-opus-5",
+  "reviewType": "material-plan-amendment-gate",
+  "reviewedSha": "af3d62a7e9dfbf6d7daeb74f25027933b80c195b",
+  "verdict": "BLOCKERS",
+  "status": "review_blocked",
+  "fallbackDisabled": true,
+  "fallbackUsed": false,
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-opus-5"
+  ],
+  "recoverableOutput": "C:\\Users\\farha\\.codex\\review-output\\trends-2026-07-29-0630-plan-amendment-opus-af3d62a.json",
+  "blockers": [
+    "B3 - The tracked initial gate artifact summarized B1, B2, and D1-D8 but did not enumerate them, so a fresh clone could not reconstruct the required plan changes without a machine-local Claude transcript."
+  ],
+  "requiredDeltas": [
+    "Add blockers, requiredDeltas, disposition, and a self-contained review summary to the initial gate artifact.",
+    "Extend the location-promise acceptance test to require at least three body list items.",
+    "Enumerate the three read-only pre-promotion recheck URLs and record the observation in the learning entry.",
+    "Name all required local-news frontmatter fields before drafting to avoid a late hash-changing repair."
+  ],
+  "review": "Opus independently confirmed that B1, B2, and D1-D8 were resolved against the amended plan and implementation code. It blocked only because the tracked initial gate artifact did not enumerate those findings and depended on an untracked machine-local transcript. The executable route itself was accepted. Three non-blocking deltas clarified the list-count branch, the exact pre-promotion URLs, and required frontmatter. The 87-test Python pipeline suite passed at the reviewed SHA.",
+  "disposition": "Evidence artifact and three plan clarifications repaired; implementation remains paused pending exact-SHA confirmation."
+}
