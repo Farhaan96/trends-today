@@ -1,0 +1,55 @@
+{
+  "generatedAt": "2026-07-28T19:22:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-28-1830",
+  "sourceQueue": "artifacts/editorial/research/2026-07-28-1830-source-queue.json",
+  "results": [
+    {
+      "title": "Richmond election is Oct. 17; key voter dates are posted",
+      "lane": "daily-local-utility",
+      "score": 92.0,
+      "decision": "brief",
+      "confidence": "verified-official-source",
+      "reasons": [
+        "Meets the current locality, freshness, reader utility, evidence, originality, and brand-safety thresholds",
+        "Carries forward the 16:30 scorecard after a live 18:30 source and duplicate re-check"
+      ],
+      "candidate": {
+        "title": "Richmond election is Oct. 17; key voter dates are posted",
+        "lane": "daily-local-utility",
+        "sourceUrl": "https://www.richmond.ca/city-hall/news/2026/rmdelection28jul2026.htm",
+        "sourceName": "City of Richmond news",
+        "sourceTier": "primary",
+        "locality": "Richmond",
+        "category": "local-news",
+        "storyType": "bulletin",
+        "confidence": "verified-official-source",
+        "evidence": {
+          "sourceUrls": [
+            "https://www.richmond.ca/city-hall/news/2026/rmdelection28jul2026.htm",
+            "https://www.richmond.ca/city-hall/elections.htm"
+          ],
+          "primarySourceUrls": [
+            "https://www.richmond.ca/city-hall/news/2026/rmdelection28jul2026.htm",
+            "https://www.richmond.ca/city-hall/elections.htm"
+          ],
+          "readerImpact": "Richmond residents can confirm the Oct. 17 election date, Aug. 18 resident early-registration date, advance-voting dates, nomination period, mail-ballot application opening, and accessible voting options.",
+          "freshnessEvidence": "City of Richmond notice dated July 28, 2026; the live elections page was rechecked during the 18:30 sweep and still lists the 2026 schedule.",
+          "uniqueAngleEvidence": "No published Trends Today Richmond voter-date bulletin exists; existing Coquitlam election coverage concerns paid temporary election work.",
+          "brandSafety": "standard"
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 5,
+          "freshness": 5,
+          "evidenceStrength": 4,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        },
+        "commercialIntent": "none",
+        "commercialFitReason": "Commercial fit was considered only after editorial qualification; no commercial fit or claim is asserted.",
+        "sponsorshipStatus": "editorial"
+      }
+    }
+  ]
+}

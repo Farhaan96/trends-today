@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-07-28T19:22:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-28-1830",
+  "sourceQueue": "artifacts/editorial/research/2026-07-28-1830-source-queue.json",
+  "dailyCountBeforeSweep": 2,
+  "dailyCeiling": 6,
+  "summary": {
+    "sourceCandidates": 58,
+    "qualifiedForCandidateStaging": 1,
+    "rejectedOrHeld": 57
+  },
+  "qualified": [
+    {
+      "title": "Richmond election is Oct. 17; key voter dates are posted",
+      "reason": "Fresh official Richmond election notice with an Oct. 17 decision date, Aug. 18 resident early-registration date, five advance-voting dates, nomination and mail-ballot dates, accessible voting options, and no duplicate Richmond voter-date article."
+    }
+  ],
+  "rejectedOrHeld": [
+    {
+      "title": "Park Play at Friday Fun Days",
+      "reason": "The City page is a recurring July-August program, published in 2025 and modified June 30, 2026; it is not newly fresh for this sweep and repeats a thin Park Play format that previously failed the standalone-utility gate."
+    },
+    {
+      "title": "Surrey advances climate action goals through major energy-efficiency upgrades",
+      "reason": "Fresh and official, but no near-term resident action, deadline, service change, closure, or public-input decision; it remains below the standalone utility and source-depth threshold."
+    },
+    {
+      "title": "Lions Bring Back OL Christian Olmstead",
+      "reason": "Fresh official sports transaction, but no standalone Lower Mainland reader decision, schedule change, ticketing impact, or broader practical utility."
+    },
+    {
+      "title": "Richmond Election - October 17",
+      "reason": "Selected and retitled as the sole qualified Richmond voter-date candidate."
+    },
+    {
+      "title": "Previously covered or unchanged municipal and event items",
+      "reason": "The remaining queue is materially unchanged from 16:30; already covered, duplicate, recurring, stale, retrospective, sensitive, or thin items retain the rejection and hold reasons recorded in the 16:30 research artifacts."
+    }
+  ],
+  "commercialFitPolicy": "Commercial fit was considered only after editorial qualification. The qualified Richmond candidate remains independent editorial coverage with sponsorshipStatus editorial and no audience, pricing, guarantee, sponsor, or revenue claim."
+}

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "reviewer": "claude-opus-5",
+  "reviewType": "material-plan-amendment-gate",
+  "reviewedSha": "cc7034a1ff4feedb88e17448d63af5dbb7a3c647",
+  "verdict": "NO BLOCKERS",
+  "status": "success",
+  "fallbackDisabled": true,
+  "fallbackUsed": false,
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-opus-5"
+  ],
+  "recoverableOutput": "C:\\Users\\farha\\.codex\\review-output\\trends-2026-07-28-1830-plan-amendment4-opus.json",
+  "summary": "The exact-SHA takeover route is executable. It preserves the root and dirty 16:30 worktree, binds both release reviews to one evidence SHA, corrects the sweep timestamp, removes stale review ambiguity, persists the 18:30 qualification chain, and proves native prompt transport before the Opus release review."
+}

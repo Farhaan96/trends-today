@@ -1,0 +1,140 @@
+{
+  "generatedAt": "2026-07-28T23:43:36.719550+00:00",
+  "results": [
+    {
+      "title": "Richmond election is Oct. 17; key voter dates are posted",
+      "lane": "daily-local-utility",
+      "score": 92.0,
+      "decision": "brief",
+      "confidence": "verified-official-source",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Richmond election is Oct. 17; key voter dates are posted",
+        "lane": "daily-local-utility",
+        "sourceUrl": "https://www.richmond.ca/city-hall/news/2026/rmdelection28jul2026.htm",
+        "sourceName": "City of Richmond news",
+        "sourceTier": "primary",
+        "locality": "Richmond",
+        "category": "local-news",
+        "storyType": "bulletin",
+        "confidence": "verified-official-source",
+        "evidence": {
+          "sourceUrls": [
+            "https://www.richmond.ca/city-hall/news/2026/rmdelection28jul2026.htm",
+            "https://www.richmond.ca/city-hall/elections.htm"
+          ],
+          "primarySourceUrls": [
+            "https://www.richmond.ca/city-hall/news/2026/rmdelection28jul2026.htm",
+            "https://www.richmond.ca/city-hall/elections.htm"
+          ],
+          "readerImpact": "Richmond residents can confirm the Oct. 17 election date, Aug. 18 early-registration date, advance-voting dates, and accessible/mail-ballot options before voting.",
+          "freshnessEvidence": "City of Richmond notice dated July 28, 2026; elections page lists the 2026 election schedule.",
+          "uniqueAngleEvidence": "No published Trends Today Richmond voter-date bulletin exists; existing Coquitlam election coverage is about paid temporary election workers.",
+          "brandSafety": "standard"
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 5,
+          "freshness": 5,
+          "evidenceStrength": 4,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        },
+        "commercialIntent": "none",
+        "commercialFitReason": "No commercial fit is asserted. Editorial utility, locality, source support, freshness, and brand safety qualified the candidate first.",
+        "sponsorshipStatus": "editorial"
+      }
+    },
+    {
+      "title": "Surrey advances climate action goals through major energy-efficiency upgrades",
+      "lane": "daily-local-utility",
+      "score": 72.0,
+      "decision": "repair",
+      "confidence": "verified-official-source",
+      "reasons": [
+        "Only 1 usable sources; 2 required for reported-update"
+      ],
+      "candidate": {
+        "title": "Surrey advances climate action goals through major energy-efficiency upgrades",
+        "lane": "daily-local-utility",
+        "sourceUrl": "https://www.surrey.ca/news-events/news/surrey-advances-climate-action-goals-through-major-energy-efficiency-upgrades",
+        "sourceName": "City of Surrey news",
+        "sourceTier": "primary",
+        "locality": "Surrey",
+        "category": "local-news",
+        "storyType": "reported-update",
+        "confidence": "verified-official-source",
+        "evidence": {
+          "sourceUrls": [
+            "https://www.surrey.ca/news-events/news/surrey-advances-climate-action-goals-through-major-energy-efficiency-upgrades"
+          ],
+          "primarySourceUrls": [
+            "https://www.surrey.ca/news-events/news/surrey-advances-climate-action-goals-through-major-energy-efficiency-upgrades"
+          ],
+          "readerImpact": "The notice describes civic operating-cost and emissions reductions, but it does not yet give residents a near-term action, deadline, service change, facility closure, or public decision.",
+          "freshnessEvidence": "City of Surrey notice dated July 28, 2026.",
+          "uniqueAngleEvidence": "Fresh official item, but the immediate reader utility is weaker than the Richmond voter deadline."
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 2,
+          "freshness": 5,
+          "evidenceStrength": 3,
+          "uniqueAngle": 3,
+          "repeatVisitPotential": 2,
+          "speedToUsefulDraft": 4
+        },
+        "commercialIntent": "none",
+        "commercialFitReason": "Commercial fit was not considered because the item did not clear the reader-utility gate.",
+        "sponsorshipStatus": "editorial"
+      }
+    },
+    {
+      "title": "Lions Bring Back OL Christian Olmstead",
+      "lane": "daily-local-utility",
+      "score": 55.0,
+      "decision": "repair",
+      "confidence": "verified-official-source",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Lions Bring Back OL Christian Olmstead",
+        "lane": "daily-local-utility",
+        "sourceUrl": "https://www.bclions.com/2026/07/28/lions-bring-back-ol-christian-olmstead/",
+        "sourceName": "BC Lions news",
+        "sourceTier": "primary",
+        "locality": "Vancouver",
+        "category": "sports",
+        "storyType": "bulletin",
+        "confidence": "verified-official-source",
+        "evidence": {
+          "sourceUrls": [
+            "https://www.bclions.com/2026/07/28/lions-bring-back-ol-christian-olmstead/"
+          ],
+          "primarySourceUrls": [
+            "https://www.bclions.com/2026/07/28/lions-bring-back-ol-christian-olmstead/"
+          ],
+          "readerImpact": "The item confirms a practice-roster transaction but does not create a standalone Lower Mainland reader decision, schedule change, ticketing impact, or broader practical utility.",
+          "freshnessEvidence": "BC Lions transaction item dated July 28, 2026.",
+          "uniqueAngleEvidence": "Fresh roster item, but below the sports utility threshold."
+        },
+        "ratings": {
+          "localRelevance": 3,
+          "readerUtility": 1,
+          "freshness": 5,
+          "evidenceStrength": 3,
+          "uniqueAngle": 2,
+          "repeatVisitPotential": 1,
+          "speedToUsefulDraft": 4
+        },
+        "commercialIntent": "none",
+        "commercialFitReason": "Commercial fit was not considered because the item failed the editorial utility gate.",
+        "sponsorshipStatus": "editorial"
+      }
+    }
+  ]
+}

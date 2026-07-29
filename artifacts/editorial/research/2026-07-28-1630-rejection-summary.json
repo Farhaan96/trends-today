@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-07-28T16:42:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-28-1630",
+  "sourceQueue": "artifacts/editorial/research/2026-07-28-1630-source-queue.json",
+  "dailyCountBeforeSweep": 2,
+  "dailyCeiling": 6,
+  "summary": {
+    "sourceCandidates": 58,
+    "qualifiedForCandidateStaging": 1,
+    "rejectedOrHeld": 57
+  },
+  "qualified": [
+    {
+      "title": "Richmond election is Oct. 17; key voter dates are posted",
+      "reason": "Fresh official Richmond election notice with a clear Oct. 17 voting date, Aug. 18 early-registration date, advance-voting dates, accessible voting options, and no duplicate Richmond voter-date article."
+    }
+  ],
+  "rejectedOrHeld": [
+    {
+      "title": "Surrey advances climate action goals through major energy-efficiency upgrades",
+      "reason": "Fresh and official, but weaker near-term reader decision than the Richmond voter deadline; no resident action, service change, deadline, closure, or public input step in the notice."
+    },
+    {
+      "title": "Lions Bring Back OL Christian Olmstead",
+      "reason": "Fresh official sports transaction, but no standalone Lower Mainland reader utility beyond team-interest roster awareness."
+    },
+    {
+      "title": "Richmond Election - October 17",
+      "reason": "Selected and retitled as the qualified Richmond voter-date candidate."
+    },
+    {
+      "title": "Previously covered or unchanged municipal/event items",
+      "reason": "Coquitlam Partington Creek, Delta BC Day hours, Coquitlam Como Lake road work, Surrey line dancing, Surrey picnic, Surrey Panjabi tour, Surrey youth stewardship, and other unchanged items already have published coverage or remain duplicate/unchanged."
+    },
+    {
+      "title": "Sensitive civic/legal/audit/property items",
+      "reason": "Richmond property-title decision, Richmond Oval audits, Surrey lease/governance items, and comparable legal or governance material require deeper context or owner review before publication."
+    },
+    {
+      "title": "Thin or stale events and team-media items",
+      "reason": "Low-utility sports clips/results, recurring calendars, stale events, retrospective items, and broad festival/listing pages lacked a distinct practical reader job for this sweep."
+    }
+  ],
+  "commercialFitPolicy": "Commercial fit was considered only after editorial qualification. The qualified Richmond candidate remains independent editorial coverage with sponsorshipStatus editorial and no audience, pricing, guarantee, sponsor, or revenue claim."
+}
