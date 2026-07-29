@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "bfd8fe90866978d9ff030f74b138738f7bfb5fc21c6bf03a086632dfbdcca792",
+  "repositorySha": "8b7c89f0025d55ee08428a0d766a63f5feac18ba",
+  "reviewedAt": "2026-07-29T14:25:18.739380+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fae43-1bf9-7591-b4ba-6fd8599a29ce",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The official sources support the matchup, date, venue, kickoff conversion, broadcast routes, and disclosed opponent mismatch. The concise bulletin is clear, scannable, locally relevant, and ends with actionable checks. Some logistics are repeated, but not enough to require revision."
+}
