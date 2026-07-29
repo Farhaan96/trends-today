@@ -1,0 +1,38 @@
+{
+  "checkedAt": "2026-07-29T02:45:51.503Z",
+  "source": "https://www.trendstoday.ca/api/analytics?codex=publisher-20260728-1830-postdeploy",
+  "httpStatus": 200,
+  "status": "available",
+  "totalArticles": 167,
+  "dailyWindow": {
+    "dateLocal": "2026-07-28",
+    "timezone": "America/Vancouver",
+    "published": 3,
+    "maximum": 6,
+    "ceilingReached": false
+  },
+  "recentArticlesForDate": [
+    {
+      "title": "Richmond election is Oct. 17; key voter dates are posted",
+      "slug": "richmond-election-october-17-voter-dates",
+      "publishedAt": "2026-07-28T18:45:00-07:00"
+    },
+    {
+      "title": "Delta lists BC Day holiday hours for Monday, Aug. 3",
+      "slug": "delta-bc-day-holiday-hours-aug-3",
+      "publishedAt": "2026-07-28T12:45:00-07:00"
+    },
+    {
+      "title": "Free Panjabi gallery tour runs Thursday in Surrey",
+      "slug": "surrey-panjabi-gallery-tour-july-30",
+      "publishedAt": "2026-07-28T08:45:00-07:00"
+    }
+  ],
+  "measurement": {
+    "vercelWebAnalytics": "enabled-in-site; provider values unavailable from the public endpoint",
+    "googleAnalytics": "configured; export unavailable in this environment",
+    "googleSearchConsole": "configured; export unavailable in this environment",
+    "protectedReporting": "configured; HTTP 401 without the bearer credential",
+    "adSponsorRevenueCost": "unavailable, not zero"
+  }
+}

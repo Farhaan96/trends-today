@@ -1,0 +1,71 @@
+{
+  "checkedAt": "2026-07-29T02:44:30Z",
+  "url": "https://www.trendstoday.ca/local-news/richmond-election-october-17-voter-dates",
+  "status": 200,
+  "finalUrl": "https://www.trendstoday.ca/local-news/richmond-election-october-17-voter-dates",
+  "canonical": "https://www.trendstoday.ca/local-news/richmond-election-october-17-voter-dates",
+  "title": "Richmond election is Oct. 17; key voter dates are posted | Trends Today",
+  "h1": "Richmond election is Oct. 17; key voter dates are posted",
+  "requiredText": {
+    "Oct. 17 election date": true,
+    "Aug. 18 resident early-registration date": true,
+    "Oct. 3, 7, 8, 9, and 10 advance-voting dates": true,
+    "Sept. 1 to 11 nomination period": true,
+    "Sept. 15 mail-ballot application opening": true,
+    "one mayor, eight councillors, and seven school board trustees": true,
+    "curb-side voting": true,
+    "accessible ballot-marking device": true
+  },
+  "imageChecks": [
+    {
+      "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Frichmond-election-october-17.png&w=1920&q=75",
+      "alt": "Richmond election is Oct. 17; key voter dates are posted",
+      "complete": true,
+      "naturalWidth": 891,
+      "naturalHeight": 501
+    }
+  ],
+  "sourceStatuses": [
+    {
+      "href": "https://www.richmond.ca/city-hall/news/2026/rmdelection28jul2026.htm",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "href": "https://www.richmond.ca/city-hall/elections.htm",
+      "status": 200,
+      "ok": true
+    }
+  ],
+  "internalLinks": {
+    "checked": 9,
+    "allStatus200": true,
+    "urls": [
+      "https://www.trendstoday.ca/local-news",
+      "https://www.trendstoday.ca/author/trends-today-newsroom",
+      "https://www.trendstoday.ca/author/moe",
+      "https://www.trendstoday.ca/local-news/delta-bc-day-holiday-hours-aug-3",
+      "https://www.trendstoday.ca/things-to-do/surrey-panjabi-gallery-tour-july-30",
+      "https://www.trendstoday.ca/things-to-do/surrey-adams-road-community-picnic",
+      "https://www.trendstoday.ca/local-news/coquitlam-election-workers-october-vote",
+      "https://www.trendstoday.ca/local-news/richmond-recycling-contamination-audits",
+      "https://www.trendstoday.ca/local-news/richmond-climate-friendly-homes-tour"
+    ]
+  },
+  "structuredData": {
+    "type": "Article",
+    "headline": "Richmond election is Oct. 17; key voter dates are posted",
+    "datePublished": "2026-07-28T18:45:00-07:00",
+    "dateModified": "2026-07-28T18:45:00-07:00",
+    "articleSection": "Local News",
+    "canonicalId": "https://www.trendstoday.ca/local-news/richmond-election-october-17-voter-dates",
+    "image": "/images/editorial/2026/07/richmond-election-october-17.png"
+  },
+  "consoleErrors": [],
+  "pageErrors": [],
+  "requestFailures": [],
+  "nonAnalyticsBadResponses": [],
+  "screenshotPath": "artifacts/editorial/browser-proof/2026-07-28-1830-richmond-election.png",
+  "screenshotSha256": "a4f24deebd32aba452511f350e0a4b7be005c9ce1d1bec3c74ea1940dc3ddc17",
+  "failures": []
+}
