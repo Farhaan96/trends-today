@@ -1,0 +1,63 @@
+{
+  "generatedAt": "2026-07-29T06:45:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-29-0630",
+  "sourceQueue": "artifacts/editorial/research/2026-07-29-0630-source-queue.json",
+  "results": [
+    {
+      "title": "BC Lions visit Winnipeg Thursday; kickoff is 5:30 p.m.",
+      "lane": "daily-local-utility",
+      "score": 89.0,
+      "decision": "brief",
+      "confidence": "verified-official-source-with-disclosed-conflict",
+      "reasons": [
+        "Fresh July 29 official preview for a July 30 game with a clear Lower Mainland reader job: when and how BC fans can watch.",
+        "Four mutually confirming official sources support Winnipeg, Thursday, July 30, and 5:30 p.m. Pacific.",
+        "The conflicting opponent on one BC Lions where-to-watch page is explicitly recorded and must be disclosed rather than silently ignored.",
+        "No published Trends Today BC Lions game guide exists."
+      ],
+      "candidate": {
+        "title": "BC Lions visit Winnipeg Thursday; kickoff is 5:30 p.m.",
+        "lane": "daily-local-utility",
+        "sourceUrl": "https://www.bclions.com/2026/07/29/1st-and-now-solomon-elimimian-stops-by-plus-we-talk-salkter-bomber-battle/",
+        "sourceName": "BC Lions news",
+        "sourceTier": "primary",
+        "locality": "Vancouver",
+        "category": "sports",
+        "storyType": "bulletin",
+        "confidence": "verified-official-source-with-disclosed-conflict",
+        "evidence": {
+          "sourceUrls": [
+            "https://www.bclions.com/2026/07/29/1st-and-now-solomon-elimimian-stops-by-plus-we-talk-salkter-bomber-battle/",
+            "https://www.bclions.com/schedule/2026/",
+            "https://www.cfl.ca/2026-cfl-broadcast-schedule/",
+            "https://www.bluebombers.com/individual-game-day-tickets/",
+            "https://www.bclions.com/wheretowatch/"
+          ],
+          "primarySourceUrls": [
+            "https://www.bclions.com/2026/07/29/1st-and-now-solomon-elimimian-stops-by-plus-we-talk-salkter-bomber-battle/",
+            "https://www.bclions.com/schedule/2026/",
+            "https://www.cfl.ca/2026-cfl-broadcast-schedule/",
+            "https://www.bluebombers.com/individual-game-day-tickets/",
+            "https://www.bclions.com/wheretowatch/"
+          ],
+          "readerImpact": "Lower Mainland BC Lions fans can confirm the July 30 kickoff, opponent, venue, and official broadcast or streaming route before the game.",
+          "freshnessEvidence": "The BC Lions published the podcast preview on July 29, 2026, one day before the game.",
+          "uniqueAngleEvidence": "No published Trends Today BC Lions game guide exists; the article also resolves an official-page opponent mismatch transparently.",
+          "brandSafety": "standard"
+        },
+        "ratings": {
+          "localRelevance": 4,
+          "readerUtility": 5,
+          "freshness": 5,
+          "evidenceStrength": 4,
+          "uniqueAngle": 5,
+          "repeatVisitPotential": 3,
+          "speedToUsefulDraft": 5
+        },
+        "commercialIntent": "none",
+        "commercialFitReason": "Commercial fit was considered only after editorial qualification; no commercial fit or claim is asserted.",
+        "sponsorshipStatus": "editorial"
+      }
+    }
+  ]
+}

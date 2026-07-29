@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-07-29T06:42:06.3560971-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-29-0630",
+  "candidate": "BC Lions visit Winnipeg Thursday; kickoff is 5:30 p.m.",
+  "sources": [
+    {
+      "url": "https://www.bclions.com/2026/07/29/1st-and-now-solomon-elimimian-stops-by-plus-we-talk-salkter-bomber-battle/",
+      "sourceName": "BC Lions",
+      "tier": "primary",
+      "httpStatus": 200,
+      "retrievedAt": "2026-07-29T06:42:03.6758064-07:00",
+      "contentSha256": "960a8fa679d94208f21dd191a41c4e53ef295153d39e05640244ae6c0a985551",
+      "supportedFacts": [
+        "The page is dated July 29, 2026.",
+        "The fresh podcast preview identifies a Thursday night game against the Winnipeg Blue Bombers.",
+        "The page describes possible lineup news and an expected first start for Kaidon Salter; those points are not treated as confirmed facts for publication."
+      ]
+    },
+    {
+      "url": "https://www.bclions.com/schedule/2026/",
+      "sourceName": "BC Lions schedule",
+      "tier": "primary",
+      "httpStatus": 200,
+      "retrievedAt": "2026-07-29T06:42:04.0246154-07:00",
+      "contentSha256": "448370c865ef24a90375adea29dc1780671d870a592216143d6e3e81befd678f",
+      "supportedFacts": [
+        "The Week 9 listing is BC at Winnipeg.",
+        "The embedded kickoff is 2026-07-30T19:30:00-05:00, equivalent to Thursday, July 30 at 5:30 p.m. Pacific.",
+        "The listing points readers to official broadcast information."
+      ]
+    },
+    {
+      "url": "https://www.cfl.ca/2026-cfl-broadcast-schedule/",
+      "sourceName": "Canadian Football League",
+      "tier": "primary",
+      "httpStatus": 200,
+      "retrievedAt": "2026-07-29T06:42:04.9758367-07:00",
+      "contentSha256": "d50e8d80ee1449eca5b9d5bce3b797ac52eb5cae9cab0c6cd623698726d51db2",
+      "supportedFacts": [
+        "The Week 9 schedule lists BC at Winnipeg on July 30 at 8:30 p.m. Eastern, equivalent to 5:30 p.m. Pacific.",
+        "The Canadian broadcast listing is TSN and RDS.",
+        "The United States and international listing is CFL+."
+      ]
+    },
+    {
+      "url": "https://www.bluebombers.com/individual-game-day-tickets/",
+      "sourceName": "Winnipeg Blue Bombers",
+      "tier": "primary",
+      "httpStatus": 200,
+      "retrievedAt": "2026-07-29T06:42:06.3560971-07:00",
+      "contentSha256": "4644be3b54c7b71e5a884c263872f06b0b19993b11db3f072979a8258b02405f",
+      "supportedFacts": [
+        "The host club lists the BC Lions on Thursday, July 30, 2026.",
+        "The host-club kickoff is 7:30 p.m. Central, equivalent to 5:30 p.m. Pacific.",
+        "The venue is Princess Auto Stadium in Winnipeg."
+      ]
+    },
+    {
+      "url": "https://www.bclions.com/wheretowatch/",
+      "sourceName": "BC Lions where-to-watch page",
+      "tier": "primary",
+      "httpStatus": 200,
+      "retrievedAt": "2026-07-29T06:42:05.4890771-07:00",
+      "contentSha256": "44e4b03ac8e2590361d3f1963cffb2556670e4a048e2195079ba29e483ac4133",
+      "supportedFacts": [
+        "The page lists a July 30 game at 5:30 p.m. Pacific with TSN and RDS in Canada and CFL+ outside Canada."
+      ],
+      "conflict": "The page labels Saskatchewan as the opponent. The fresh BC Lions podcast, BC Lions schedule, CFL broadcast schedule, BC Lions media guide, and Winnipeg Blue Bombers listing identify Winnipeg. The candidate must disclose this discrepancy and must not use the where-to-watch page as support for the opponent."
+    }
+  ],
+  "editorialDecision": {
+    "confirmedOpponent": "Winnipeg Blue Bombers",
+    "confirmedKickoff": "2026-07-30T17:30:00-07:00",
+    "confirmedVenue": "Princess Auto Stadium, Winnipeg",
+    "confirmedCanadianBroadcast": ["TSN", "RDS"],
+    "confirmedOutsideCanadaStream": "CFL+",
+    "excludedUncertainClaim": "Kaidon Salter's expected first start",
+    "sourceConflictTreatment": "Disclose the BC Lions where-to-watch opponent mismatch in the reporting-method section and rely on the mutually confirming fresh schedule, podcast, league broadcast schedule, and host-club listing."
+  }
+}
