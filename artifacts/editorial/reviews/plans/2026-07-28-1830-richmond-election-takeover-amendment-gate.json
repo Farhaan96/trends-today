@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "claude-opus-5",
+  "reviewType": "material-plan-amendment-gate",
+  "reviewedSha": "ba92c275d54f1796b9e983b6bf701b51e1e2ef02",
+  "verdict": "BLOCKERS",
+  "status": "review_blocked",
+  "fallbackDisabled": true,
+  "fallbackUsed": false,
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-opus-5"
+  ],
+  "recoverableOutput": "C:\\Users\\farha\\.codex\\review-output\\trends-2026-07-28-1830-plan-amendment-opus.json",
+  "requiredDeltas": [
+    "Keep the detached Opus review worktree byte-clean and pass the external GPT artifact path and full JSON body inline in the prompt.",
+    "Materialize the Claude release artifact from runner stdout only after exit 0 and post-review clean-scope confirmation.",
+    "Explicitly link the already committed 18:30 source queue and add a standard dated rejection summary."
+  ],
+  "disposition": "Plan amended again; implementation remains paused pending independent amendment review."
+}
