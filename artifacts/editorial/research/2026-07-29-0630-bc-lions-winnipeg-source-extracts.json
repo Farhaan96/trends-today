@@ -65,7 +65,7 @@
       "supportedFacts": [
         "The page lists a July 30 game at 5:30 p.m. Pacific with TSN and RDS in Canada and CFL+ outside Canada."
       ],
-      "conflict": "The page labels Saskatchewan as the opponent. The fresh BC Lions podcast, BC Lions schedule, CFL broadcast schedule, BC Lions media guide, and Winnipeg Blue Bombers listing identify Winnipeg. The candidate must disclose this discrepancy and must not use the where-to-watch page as support for the opponent."
+      "conflict": "The page labels Saskatchewan as the opponent. The fresh BC Lions podcast, BC Lions schedule, CFL broadcast schedule, and Winnipeg Blue Bombers listing identify Winnipeg. The candidate must disclose this discrepancy, link this page as the mismatched source, and must not use it as support for the opponent."
     }
   ],
   "editorialDecision": {
@@ -75,6 +75,6 @@
     "confirmedCanadianBroadcast": ["TSN", "RDS"],
     "confirmedOutsideCanadaStream": "CFL+",
     "excludedUncertainClaim": "Kaidon Salter's expected first start",
-    "sourceConflictTreatment": "Disclose the BC Lions where-to-watch opponent mismatch in the reporting-method section and rely on the mutually confirming fresh schedule, podcast, league broadcast schedule, and host-club listing."
+    "sourceConflictTreatment": "Disclose and link the BC Lions where-to-watch opponent mismatch in the reporting-method section and body, then rely on the mutually confirming fresh schedule, podcast, league broadcast schedule, and host-club listing."
   }
 }

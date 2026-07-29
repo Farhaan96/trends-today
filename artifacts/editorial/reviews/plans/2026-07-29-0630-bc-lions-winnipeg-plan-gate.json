@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "reviewer": "claude-opus-5",
+  "reviewType": "material-plan-gate",
+  "reviewedSha": "5d5f1855189a73a44fe71ed341e2bf1221fd8a67",
+  "verdict": "BLOCKERS",
+  "status": "success-recovered-from-session-transcript",
+  "fallbackDisabled": true,
+  "fallbackUsed": false,
+  "observedModels": [
+    "claude-opus-5"
+  ],
+  "sessionId": "0c3ff074-d752-4eb9-bc5c-6f770371c20d",
+  "recoverableOutput": "C:\\Users\\farha\\.claude\\projects\\C--Users-farha--codex-worktrees-trends-daily-2026-07-29-0633\\0c3ff074-d752-4eb9-bc5c-6f770371c20d.jsonl",
+  "summary": "Opus found two blockers and eight required deltas. Remove the unretrieved media-guide claim, require a labelled link to the mismatched where-to-watch page, and tighten validator, review-schema, source-recheck, exact-SHA, image-alt, sensitive-keyword, deployment-identity, and Windows prompt-transport controls."
+}
