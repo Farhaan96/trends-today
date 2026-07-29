@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "claude-opus-5",
+  "reviewType": "material-plan-amendment-gate",
+  "reviewedSha": "25be335e3bd212e72b5a18e7cfb2a0914bf6b6b5",
+  "verdict": "BLOCKERS",
+  "status": "review_blocked",
+  "fallbackDisabled": true,
+  "fallbackUsed": false,
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-opus-5"
+  ],
+  "recoverableOutput": "C:\\Users\\farha\\.codex\\review-output\\trends-2026-07-28-1830-plan-amendment2-opus.json",
+  "requiredDeltas": [
+    "Replace raw inline GPT JSON with a quote-free flattened full-field rendering plus the external artifact SHA-256.",
+    "Prove the saved prompt round-trips byte-identically as one native argv entry through an argv-dumping runner mock.",
+    "Require the accepted Opus review to attest the candidate hash, external GPT artifact hash, and gpt-5.6-sol."
+  ],
+  "disposition": "Plan amended again; implementation remains paused pending independent amendment review."
+}

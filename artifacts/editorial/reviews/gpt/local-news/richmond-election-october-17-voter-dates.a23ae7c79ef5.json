@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "a23ae7c79ef52d364f1ce1987191446282a4d5e6483896ef5ffa22df19b1b5c7",
+  "repositorySha": "96765e1a2becd33f88077310d031230e3e169e7d",
+  "reviewedAt": "2026-07-29T02:25:58.587960+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fabb0-c9cc-7810-897a-41a3bc7b5eb8",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "Concrete, well-supported local bulletin with clear dates, accessible-voting details, scannable structure, and a practical close. The prose is slightly repetitive around registration but does not require revision."
+}

@@ -1,0 +1,119 @@
+﻿{
+    "status":  "available",
+    "httpStatus":  200,
+    "source":  "https://www.trendstoday.ca/api/analytics?codex=publisher-20260728-1630-pre",
+    "retrievedAt":  "2026-07-28T23:33:15.3654263Z",
+    "body":  {
+                 "success":  true,
+                 "data":  {
+                              "content":  {
+                                              "totalArticles":  166,
+                                              "byCategory":  {
+                                                                 "local-news":  12,
+                                                                 "transit":  8,
+                                                                 "things-to-do":  17,
+                                                                 "food-drink":  1,
+                                                                 "housing":  2,
+                                                                 "sports":  2,
+                                                                 "science":  30,
+                                                                 "culture":  12,
+                                                                 "psychology":  21,
+                                                                 "technology":  25,
+                                                                 "health":  22,
+                                                                 "space":  14
+                                                             },
+                                              "recentArticles":  [
+                                                                     {
+                                                                         "title":  "Delta lists BC Day holiday hours for Monday, Aug. 3",
+                                                                         "category":  "local-news",
+                                                                         "publishedAt":  "2026-07-28T12:45:00-07:00",
+                                                                         "slug":  "delta-bc-day-holiday-hours-aug-3"
+                                                                     },
+                                                                     {
+                                                                         "title":  "Free Panjabi gallery tour runs Thursday in Surrey",
+                                                                         "category":  "things-to-do",
+                                                                         "publishedAt":  "2026-07-28T08:45:00-07:00",
+                                                                         "slug":  "surrey-panjabi-gallery-tour-july-30"
+                                                                     },
+                                                                     {
+                                                                         "title":  "Free Surrey picnic runs July 30 at Adams Road Park",
+                                                                         "category":  "things-to-do",
+                                                                         "publishedAt":  "2026-07-27T18:45:00-07:00",
+                                                                         "slug":  "surrey-adams-road-community-picnic"
+                                                                     },
+                                                                     {
+                                                                         "title":  "Coquitlam plans Partington Creek wildlife corridor",
+                                                                         "category":  "local-news",
+                                                                         "publishedAt":  "2026-07-27T14:45:00-07:00",
+                                                                         "slug":  "coquitlam-partington-creek-wildlife-corridor"
+                                                                     },
+                                                                     {
+                                                                         "title":  "Como Lake Avenue lanes narrow July 29 to Aug. 7",
+                                                                         "category":  "transit",
+                                                                         "publishedAt":  "2026-07-27T12:45:00-07:00",
+                                                                         "slug":  "coquitlam-como-lake-bc-hydro-work"
+                                                                     },
+                                                                     {
+                                                                         "title":  "Surrey youth stewardship has July 29 volunteer date",
+                                                                         "category":  "things-to-do",
+                                                                         "publishedAt":  "2026-07-27T08:45:00-07:00",
+                                                                         "slug":  "surrey-youth-stewardship-volunteer-dates"
+                                                                     },
+                                                                     {
+                                                                         "title":  "Free Surrey line-dancing concert runs Wednesday",
+                                                                         "category":  "things-to-do",
+                                                                         "publishedAt":  "2026-07-27T06:45:00-07:00",
+                                                                         "slug":  "surrey-sounds-summer-line-dancing"
+                                                                     },
+                                                                     {
+                                                                         "title":  "Free Darts Hill scavenger hunt runs Sunday in Surrey",
+                                                                         "category":  "things-to-do",
+                                                                         "publishedAt":  "2026-07-26T08:40:00-07:00",
+                                                                         "slug":  "darts-hill-scavenger-hunt-surrey"
+                                                                     },
+                                                                     {
+                                                                         "title":  "BC Halal Food Fest wraps Sunday in Cloverdale",
+                                                                         "category":  "things-to-do",
+                                                                         "publishedAt":  "2026-07-26T08:15:00-07:00",
+                                                                         "slug":  "bc-halal-food-fest-cloverdale-final-day"
+                                                                     },
+                                                                     {
+                                                                         "title":  "Burnaby mayor walk returns July 26 with $2 breakfast",
+                                                                         "category":  "things-to-do",
+                                                                         "publishedAt":  "2026-07-24T16:45:00-07:00",
+                                                                         "slug":  "burnaby-mayor-walk-chat-sunday"
+                                                                     }
+                                                                 ]
+                                          },
+                              "measurement":  {
+                                                  "vercelWebAnalytics":  {
+                                                                             "status":  "enabled-in-site",
+                                                                             "note":  "Page-view collection is embedded. Provider data is not exposed by this repository endpoint."
+                                                                         },
+                                                  "googleAnalytics":  {
+                                                                          "status":  "configured",
+                                                                          "dataExportStatus":  "configured"
+                                                                      },
+                                                  "googleSearchConsole":  {
+                                                                              "propertyStatus":  "configured",
+                                                                              "dataExportStatus":  "configured",
+                                                                              "status":  "configured"
+                                                                          },
+                                                  "protectedReporting":  {
+                                                                             "status":  "configured",
+                                                                             "endpoint":  "/api/analytics/reporting",
+                                                                             "authentication":  "bearer-token"
+                                                                         },
+                                                  "missingRule":  "Unavailable metrics are never represented as zero."
+                                              },
+                              "growth":  {
+                                             "status":  "unavailable",
+                                             "reason":  "Traffic and search metrics are available only through the protected reporting endpoint.",
+                                             "projections":  [
+
+                                                             ]
+                                         },
+                              "generatedAt":  "2026-07-28T23:33:15.426Z"
+                          }
+             }
+}

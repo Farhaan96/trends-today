@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "reviewer": "claude-opus-5",
+  "reviewType": "material-plan-gate",
+  "reviewedSha": "f6a78793bb1e79c874c8ec3f1d70bfcd5b5829f6",
+  "verdict": "BLOCKERS",
+  "status": "review_blocked",
+  "fallbackDisabled": true,
+  "fallbackUsed": false,
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-opus-5"
+  ],
+  "recoverableOutput": "C:\\Users\\farha\\.codex\\review-output\\trends-2026-07-28-1830-plan-opus.json",
+  "requiredDeltas": [
+    "Keep GPT and Opus review artifacts bound to one unchanged evidence SHA by using a detached Opus review worktree.",
+    "Change publishedAt from the abandoned 16:30 sweep to 2026-07-28T18:45:00-07:00 and recompute candidate identity.",
+    "Exclude imported stale 16:30 GPT artifacts from release evidence.",
+    "Create a dated 18:30 qualification record tied to the current 58-topic queue."
+  ],
+  "disposition": "Plan amended; implementation remains paused pending independent amendment review."
+}
