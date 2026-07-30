@@ -8,7 +8,8 @@
     "addedUrls": [],
     "removedUrls": [],
     "titleChanges": [],
-    "urlTitleSetSha256": "2a5ec504035147b219298600cd8f8dfbda57156e31ffac9d35d874b391a91ce5"
+    "urlTitleSetSha256": "cf90b57803102c8087985b9e92b7e9ab2d006319585b4d2e15fd65980fd90904",
+    "serialization": "Sort 56 UTF-8 lines lexicographically as <sourceUrl>\\t<title>, join with \\n, and omit a trailing newline."
   },
   "sources": [
     {
@@ -42,16 +43,17 @@
       "materialFacts": [
         "The program is for private properties in Surrey and Surrey residents.",
         "The purchasing card must use a Surrey billing name and address; purchases using an outside-Surrey billing address are cancelled.",
-        "The eligibility section says a maximum of two trees per Surrey address, based on the billing address; the tree-list section also says two trees per household.",
+        "The eligibility section says a maximum of two trees per Surrey address, based on the billing address.",
+        "The tree-list section says two trees per household. This sentence is newly itemized at 12:30 and was not itemized in the 10:30 extract, so it is not certified as unchanged against that artifact.",
         "All trees cost $20; most are in 3- or 5-gallon pots and are 5 to 12 feet tall.",
         "The Aug. 18 online store runs from 9 a.m. to Sept. 1 while supplies last, with pickup Sept. 13.",
         "The Sept. 29 online store runs from 9 a.m. to Oct. 13 while supplies last, with pickup Oct. 25.",
         "Pickup is at the Surrey Operations Centre, 6651 148 Street, and buyers select a pickup time at checkout.",
         "Items in a cart are not held until payment has been processed.",
         "Each sale has approximately 1,000 trees available first come, first served.",
-        "All listed load-bearing facts match the 10:30 capture; the candidate must quote or closely track each source's distinct limit wording and must not infer a cross-sale entitlement."
+        "Every fact itemized in both the 10:30 and 12:30 extracts matches. The candidate must quote or closely track all three current source phrasings and must not infer a cross-sale entitlement."
       ]
     }
   ],
-  "continuityDecision": "The queue and all load-bearing Surrey facts are unchanged. The dynamic whole-page hashes changed, which is expected and does not by itself reset the scope."
+  "continuityDecision": "The queue and every fact itemized in both captures are unchanged. The program page's separate household wording is newly itemized at 12:30, so no 10:30 continuity claim is made for that sentence. Dynamic whole-page hashes changed, which is expected and does not by itself reset the scope."
 }
