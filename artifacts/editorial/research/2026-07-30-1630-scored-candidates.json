@@ -1,0 +1,83 @@
+{
+  "generatedAt": "2026-07-30T23:43:30.599418+00:00",
+  "results": [
+    {
+      "title": "Whitecaps FC acquire Canadian international forward Kwasi Poku",
+      "lane": "daily-local-utility",
+      "score": 79.0,
+      "decision": "repair",
+      "confidence": "verified-transaction-insufficient-utility",
+      "reasons": ["No practical reader impact recorded"],
+      "candidate": {
+        "title": "Whitecaps FC acquire Canadian international forward Kwasi Poku",
+        "lane": "daily-local-utility",
+        "locality": "Vancouver",
+        "category": "sports",
+        "storyType": "bulletin",
+        "confidence": "verified-transaction-insufficient-utility",
+        "evidence": {
+          "sourceUrls": [
+            "https://www.whitecapsfc.com/news/vwfc-acquire-kwasi-poku"
+          ],
+          "primarySourceUrls": [
+            "https://www.whitecapsfc.com/news/vwfc-acquire-kwasi-poku"
+          ],
+          "freshnessEvidence": "The official transaction is dated July 30, 2026, and the exact response hash is unchanged from 14:30.",
+          "uniqueAngleEvidence": "No published Trends Today article covers Kwasi Poku joining the Whitecaps.",
+          "readerImpact": null,
+          "readerImpactFinding": "The source confirms a roster move but no ticketing, match-day, viewing, debut, eligibility timing, schedule, or other practical Lower Mainland reader decision."
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 2,
+          "freshness": 5,
+          "evidenceStrength": 4,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 2,
+          "speedToUsefulDraft": 5
+        }
+      }
+    },
+    {
+      "title": "Emergency Preparedness Funding",
+      "lane": "daily-local-utility",
+      "score": 65.0,
+      "decision": "repair",
+      "confidence": "source-conflict",
+      "reasons": [
+        "Evidence strength is below the release threshold",
+        "No practical reader impact recorded"
+      ],
+      "candidate": {
+        "title": "Emergency Preparedness Funding",
+        "lane": "daily-local-utility",
+        "locality": "Richmond",
+        "category": "local-news",
+        "storyType": "reported-update",
+        "confidence": "source-conflict",
+        "evidence": {
+          "sourceUrls": [
+            "https://www.richmond.ca/city-hall/news/2026/eocfunding30jul2026.htm",
+            "https://archive.news.gov.bc.ca/releases/news_releases_2024-2028/2026EMCR0031-000853.htm"
+          ],
+          "primarySourceUrls": [
+            "https://www.richmond.ca/city-hall/news/2026/eocfunding30jul2026.htm",
+            "https://archive.news.gov.bc.ca/releases/news_releases_2024-2028/2026EMCR0031-000853.htm"
+          ],
+          "freshnessEvidence": "The City page is dated July 30, 2026; the provincial backgrounder is dated July 21, 2026. Both exact response hashes are unchanged from 14:30.",
+          "uniqueAngleEvidence": "No published Trends Today article covers this Richmond EOC funding.",
+          "sourceConflict": "Richmond reports $29,522 from the named fund while the provincial backgrounder lists $10,899 for Richmond temporary EOC displays."
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 2,
+          "freshness": 5,
+          "evidenceStrength": 1,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 1,
+          "speedToUsefulDraft": 4
+        }
+      }
+    }
+  ]
+}

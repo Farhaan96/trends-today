@@ -1,0 +1,9 @@
+{
+  "generatedAt": "2026-07-30T16:41:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-30-1635",
+  "sourceQueue": "artifacts/editorial/research/2026-07-30-1630-source-queue.json",
+  "dailyCountBeforeSweep": 1,
+  "dailyCeiling": 6,
+  "results": [],
+  "decision": "skip-no-qualified-candidate"
+}

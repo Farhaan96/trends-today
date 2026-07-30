@@ -1,0 +1,7 @@
+{
+  "status": "unavailable",
+  "httpStatus": 401,
+  "source": "https://www.trendstoday.ca/api/analytics/reporting?codex=publisher-20260730-1635-20260730163933",
+  "retrievedAt": "2026-07-30T16:39:35-07:00",
+  "reason": "Protected reporting credentials are unavailable in this task environment."
+}
