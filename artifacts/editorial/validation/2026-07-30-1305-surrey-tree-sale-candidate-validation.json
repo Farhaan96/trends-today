@@ -1,0 +1,82 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-30-1232",
+  "validatedAt": "2026-07-30T13:05:00-07:00",
+  "candidatePath": "artifacts/editorial/release-candidates/local-news/surrey-20-dollar-tree-sale-august-18.mdx",
+  "candidateSha256": "bb784c49205f32e98a44c999b962c09cd2b53a26bb4d4d9fe9af362ab4796a23",
+  "deterministicValidator": {
+    "function": "apps.pipeline.validation.validate_release_candidate",
+    "passed": true,
+    "errors": [],
+    "storyType": "bulletin",
+    "bodyWords": 393,
+    "h2Count": 4,
+    "listItemCount": 8,
+    "sourceCount": 2,
+    "primarySourceCount": 2,
+    "maximumParagraphWordsObserved": 38,
+    "maximumParagraphSentencesObserved": 3
+  },
+  "sensitiveSignalScan": {
+    "surfaces": [
+      "title",
+      "subtitle",
+      "meta_description",
+      "highlights",
+      "body_mdx"
+    ],
+    "keywords": [
+      "arrest",
+      "charged",
+      "crime",
+      "shooting",
+      "stabbing",
+      "assault",
+      "collision",
+      "overdose",
+      "injured",
+      "homicide",
+      "murder",
+      "missing person",
+      "missing child",
+      "death",
+      "died",
+      "killed",
+      "fatal",
+      "serious injury",
+      "active emergency",
+      "evacuation order",
+      "anonymous source",
+      "leaked document",
+      "sponsored"
+    ],
+    "hits": {
+      "title": [],
+      "subtitle": [],
+      "meta_description": [],
+      "highlights": [],
+      "body_mdx": []
+    },
+    "approvalTokenSet": false,
+    "decision": "standard-brand-safety-path"
+  },
+  "sourceConflictChecks": {
+    "datedReleaseTwoTreesPerSale": true,
+    "programTwoTreesPerSurreyAddress": true,
+    "programTwoTreesPerHousehold": true,
+    "noCombinedEntitlementInferred": true,
+    "cartNotHeldUntilPaymentProcessed": true
+  },
+  "imageChecks": {
+    "provenance": "artifacts/editorial/images/2026-07-30-1230-surrey-tree-sale-image-provenance.json",
+    "publicPath": "/images/editorial/2026/07/surrey-20-dollar-tree-sale-august-18.png",
+    "sha256": "1fd7fb669fcc412bfcf3a22f125e641200af13ad02236b60c16b15b259e1dc78",
+    "dimensions": "1693x929",
+    "visualInspectionPassed": true,
+    "originalAndDistinct": true
+  },
+  "formatting": {
+    "command": "npx prettier --check artifacts/editorial/release-candidates/local-news/surrey-20-dollar-tree-sale-august-18.mdx",
+    "passed": true
+  },
+  "decision": "ready-for-exact-artifact-review"
+}

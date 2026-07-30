@@ -1,0 +1,42 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-30-1232",
+  "generatedAt": "2026-07-30T13:01:00-07:00",
+  "toolRoute": "built-in image_gen",
+  "modelIdentifier": null,
+  "modelIdentifierStatus": "unavailable because the built-in tool response did not report a model ID",
+  "generationOutputId": "019fb483-1ec6-7be3-b569-4d60c55b9a64",
+  "sourcePath": "C:\\Users\\farha\\.codex\\generated_images\\019fb483-1ec6-7be3-b569-4d60c55b9a64\\call_hRX7DLDkk787zh6K9m4Osx8J.png",
+  "projectPath": "public/images/editorial/2026/07/surrey-20-dollar-tree-sale-august-18.png",
+  "publicPath": "/images/editorial/2026/07/surrey-20-dollar-tree-sale-august-18.png",
+  "sha256": "1fd7fb669fcc412bfcf3a22f125e641200af13ad02236b60c16b15b259e1dc78",
+  "dimensions": {
+    "width": 1693,
+    "height": 929,
+    "mode": "RGB",
+    "format": "PNG"
+  },
+  "prompt": "Use case: photorealistic-natural\nAsset type: editorial news article hero image for Trends Today\nPrimary request: Create a realistic editorial illustration of a municipal-style tree pickup staging area with rows of young fruit trees and ornamental trees in simple black nursery pots, neatly arranged on clean pavement beside a generic low operations building.\nScene/backdrop: Generic Pacific Northwest summer setting, soft greenery in the distance, no identifiable city or location.\nSubject: Healthy young potted apple, cherry, plum, dogwood, maple, and magnolia-like trees, varied foliage and modest sizes, ready for residents to collect.\nStyle/medium: Natural documentary-style photography, realistic textures, credible nursery plants, restrained local-news aesthetic.\nComposition/framing: Wide landscape hero composition, eye-level, organized rows leading through the frame, enough visual breathing room for responsive cropping.\nLighting/mood: Bright soft overcast daylight, practical and welcoming, not glossy advertising.\nColor palette: Natural greens, dark nursery pots, neutral pavement and building tones.\nConstraints: No people. No Surrey or City branding. No readable labels, signs, prices, logos, vehicles, storefronts, or text. Do not imply this is a photograph of the actual Surrey sale or a real named location. No watermark. Avoid excessive saturation, fantasy plants, decorative typography, and staged commercial product-shot polish.",
+  "attribution": "Original Trends Today editorial illustration generated with AI; not a photograph of the Surrey sale",
+  "visualInspection": {
+    "status": "passed",
+    "checks": {
+      "genericPickupScene": true,
+      "noReadableText": true,
+      "noBranding": true,
+      "noIdentifiablePeople": true,
+      "noFakeSurreyLocationClaim": true,
+      "subjectMatchesArticle": true
+    }
+  },
+  "distinctness": {
+    "method": "64-bit difference hash on 9x8 grayscale resize; Hamming distance, where larger is more distinct",
+    "closestExistingEditorialOrSiteImageDistance": 21,
+    "preserved1030ImageDistance": 29,
+    "preserved1030ImageSha256": "1f16074a34971ffa994f11fb4ec7cc561f156e56f7e4ca128cb41b722ac843c4",
+    "byteDistinctFromPreserved1030Image": true
+  },
+  "cost": {
+    "status": "unavailable",
+    "reason": "The built-in image tool response did not expose per-call cost."
+  }
+}
