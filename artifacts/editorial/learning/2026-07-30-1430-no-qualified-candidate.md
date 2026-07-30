@@ -58,11 +58,14 @@
 
 ## PR, deployment, browser proof, and rollback
 
-- Evidence PR: pending.
-- Evidence merge SHA: pending.
-- Production deployment: pending.
-- Final browser proof: pending.
-- Rollback point: the eventual audit-only merge commit. No public article route or content file was added in this run.
+- Evidence PR: `https://github.com/Farhaan96/trends-today/pull/135`, merged after the Vercel and Vercel Preview Comments checks passed. Labels: `codex`, `codex-automation`.
+- Exact PR head: `dfcc8ac9818b5e2f87258691b345a33ae036bae0`.
+- Evidence merge SHA: `c6fc09a7c89302156e94a91e95918ea122b6ae62`.
+- Production deployment: GitHub deployment `5683229960` reached `success` at `2026-07-30T22:21:20Z` for exact merge SHA `c6fc09a7c89302156e94a91e95918ea122b6ae62`. Vercel target: `https://trends-today-j2c1objkc-farhaans-projects-088cb374.vercel.app`.
+- Final browser proof: `artifacts/editorial/browser-proof/2026-07-30-1430-homepage-and-latest.json`.
+- Browser result: the public homepage returned the correct title, canonical, H1, July 30 featured article, loaded images, and Organization/WebSite structured data with zero console warnings or errors. The latest article rendered its headline, 25 body paragraphs, four official-source link instances, internal links, published date, loaded hero image, and matching Article structured data with zero console warnings or errors.
+- The browser client blocked direct navigation to the analytics API. This did not replace or downgrade the independent HTTP 200 metric evidence collected at 14:37 Pacific.
+- Rollback point: revert audit-only merge `c6fc09a7c89302156e94a91e95918ea122b6ae62` through a new reviewed PR. No public article route or content file was added in this run.
 
 ## Metric source, window, freshness, and status
 
@@ -83,3 +86,4 @@
 - Repair: keep source-list discovery broad, but require a resolved material fact and a distinct reader decision before spending candidate-review or image capacity.
 - Stop: do not publish the Richmond funding story until the amount discrepancy is reconciled by authoritative evidence; do not turn a one-source roster transaction into a padded bulletin without practical reader utility.
 - Inbox: remains fail-closed. No provider, DNS, secret, signature, idempotency, or live end-to-end activation proof was established. No advertiser or sponsor message was sent.
+- Finished: `2026-07-30T15:25:27-07:00`.
