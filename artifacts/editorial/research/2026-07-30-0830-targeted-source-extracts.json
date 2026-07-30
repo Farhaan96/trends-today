@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-07-30T08:43:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-30-0837",
+  "sources": [
+    {
+      "url": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2008",
+      "httpStatus": 200,
+      "bytes": 107002,
+      "sha256": "dc56b3f283566af4df3371ef814de78d0ae5d12f3d2cb33bcb35827cbf357324",
+      "materialFacts": [
+        "BC Hydro utility work is stated for Como Lake Avenue between Blue Mountain Street and North Road.",
+        "The stated window is July 29 to Aug. 1, 9 a.m. to 3 p.m., weather permitting.",
+        "Traffic is stated as one lane in each direction."
+      ],
+      "comparison": "Byte-identical to the 06:30 run; no material evidence reset."
+    },
+    {
+      "url": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2012",
+      "httpStatus": 200,
+      "bytes": 107456,
+      "sha256": "5f02477a69100fd3fc18bc07d457fe66fc6d7b35ed153f8d07383a6dea5c748d",
+      "materialFacts": [
+        "Scott Creek Bridge deck-surface repairs are stated for Lougheed Highway between Barnet Highway and Dewdney Trunk Road.",
+        "The stated window is 6 a.m. July 31 to 6 a.m. Aug. 1, weather permitting.",
+        "Southbound Lougheed traffic is stated as one lane."
+      ],
+      "comparison": "Byte-identical to the prior qualified-source evidence; fact budget remains unchanged."
+    },
+    {
+      "url": "https://www.nhl.com/canucks/news/building-blue-brooks-rogowski-combines-towering-size-and-slick-hands-with-an-eagerness-to-grow-his-game-and-be-a-top-six-centre",
+      "httpStatus": 200,
+      "bytes": 180759,
+      "sha256": "1ba5e78742958a117172d17f526d63342efb7a3efa454f09fee1a8d83ac96b81",
+      "materialFacts": [
+        "The official Canucks profile is dated July 29, 2026.",
+        "It is a prospect-development profile rather than a schedule, ticketing, result, or roster-action bulletin."
+      ],
+      "readerUtilityDecision": "Reject for no immediate practical Lower Mainland reader decision."
+    }
+  ]
+}

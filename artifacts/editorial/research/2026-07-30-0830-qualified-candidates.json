@@ -1,0 +1,10 @@
+{
+  "generatedAt": "2026-07-30T08:44:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-30-0837",
+  "sourceQueue": "artifacts/editorial/research/2026-07-30-0830-source-queue.json",
+  "dailyCountBeforeSweep": 0,
+  "dailyCeiling": 6,
+  "results": [],
+  "decision": "skip",
+  "reason": "No current opportunity cleared all locality, freshness, reader-utility, evidence, primary-source, duplicate, brand-safety, article-contract, and non-padding gates."
+}

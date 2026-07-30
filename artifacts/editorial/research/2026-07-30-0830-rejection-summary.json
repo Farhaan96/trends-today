@@ -1,0 +1,39 @@
+{
+  "generatedAt": "2026-07-30T08:44:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-30-0837",
+  "sourceQueue": "artifacts/editorial/research/2026-07-30-0830-source-queue.json",
+  "comparisonQueue": "C:/Users/farha/.codex/worktrees/trends-daily-2026-07-30-0636/artifacts/editorial/research/2026-07-30-0630-researched-candidates.json",
+  "dailyCountBeforeSweep": 0,
+  "dailyCeiling": 6,
+  "summary": {
+    "sourceCandidates": 56,
+    "previousSourceCandidates": 56,
+    "addedUrls": 0,
+    "removedUrls": 0,
+    "titleChanges": 0,
+    "qualifiedForCandidateStaging": 0,
+    "rejectedOrHeld": 56
+  },
+  "rejectedOrHeld": [
+    {
+      "title": "Update - Road Work - Como Lake Avenue between Blue Mountain Street and North Road",
+      "sourceUrl": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2008",
+      "reason": "The City page bytes are unchanged from the terminal 06:30 run. The prior exact-candidate Opus review found unresolved correction causality, directional, and source-history conflicts. No materially reset evidence exists, so the lane remains stopped and no third unchanged-scope review is authorized."
+    },
+    {
+      "title": "Road Work - Lougheed Highway between Barnet Highway and Dewdney Trunk Road",
+      "sourceUrl": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2012",
+      "reason": "The official page bytes are unchanged. The one-source fact budget remains too thin to support the 300-word bulletin floor without repeating traffic and safety language or padding, so the story is dropped."
+    },
+    {
+      "title": "Building Blue: Brooks Rogowski Combines Towering Size and Slick Hands with An Eagerness to Grow His Game and Be a Top-Six Centre",
+      "sourceUrl": "https://www.nhl.com/canucks/news/building-blue-brooks-rogowski-combines-towering-size-and-slick-hands-with-an-eagerness-to-grow-his-game-and-be-a-top-six-centre",
+      "reason": "The prospect profile was already present in the 06:30 queue. It provides no immediate Lower Mainland reader decision, schedule or ticketing change, game result, roster transaction, or other practical standalone utility."
+    },
+    {
+      "title": "Other unchanged municipal, event, and sports opportunities",
+      "reason": "The remaining 53 URLs and titles are unchanged carryovers and remain already covered, duplicate, recurring, stale, retrospective, sensitive or one-sided, thin, or below the standalone reader-utility and evidence thresholds documented in prior run artifacts."
+    }
+  ],
+  "commercialFitPolicy": "Commercial fit was not considered because no story first cleared editorial qualification. No audience, price, sponsor, guarantee, or revenue claim was made."
+}
