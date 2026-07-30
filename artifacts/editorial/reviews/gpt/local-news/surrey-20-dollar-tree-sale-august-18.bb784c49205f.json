@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "bb784c49205f32e98a44c999b962c09cd2b53a26bb4d4d9fe9af362ab4796a23",
+  "repositorySha": "7368153442d4c1b945e5b886c74094914bcc57d2",
+  "reviewedAt": "2026-07-30T20:14:51.445190+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fb4a9-68e5-7d10-b371-2bddd503ad2c",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate is specific, well-supported, cleanly structured, and immediately useful to Surrey residents. It handles the City\u2019s conflicting limit language responsibly, foregrounds the ordering dates and eligibility rules, and closes with practical selection guidance. Authorial prose contains no em dashes."
+}

@@ -1,0 +1,58 @@
+{
+  "status": "available",
+  "httpStatus": 200,
+  "source": "https://www.trendstoday.ca/api/analytics?codex=publisher-20260730-123914",
+  "retrievedAt": "2026-07-30T12:39:14.1783016-07:00",
+  "body": {
+    "success": true,
+    "data": {
+      "content": {
+        "totalArticles": 168,
+        "todayPublicationCount": 0,
+        "todayPublicationCountMethod": "No July 30 item appears in the public recent-article snapshot, whose newest item is dated July 29, and the canonical origin/main content tree contains no July 30 publishedAt value.",
+        "byCategory": {
+          "local-news": 13,
+          "transit": 8,
+          "things-to-do": 17,
+          "food-drink": 1,
+          "housing": 2,
+          "sports": 3,
+          "science": 30,
+          "culture": 12,
+          "psychology": 21,
+          "technology": 25,
+          "health": 22,
+          "space": 14
+        },
+        "recentArticles": [
+          {
+            "title": "BC Lions visit Winnipeg Thursday; kickoff is 5:30 p.m.",
+            "category": "sports",
+            "publishedAt": "2026-07-29T07:20:00-07:00",
+            "slug": "bc-lions-winnipeg-july-30-watch-guide"
+          },
+          {
+            "title": "Richmond election is Oct. 17; key voter dates are posted",
+            "category": "local-news",
+            "publishedAt": "2026-07-28T18:45:00-07:00",
+            "slug": "richmond-election-october-17-voter-dates"
+          },
+          {
+            "title": "Delta lists BC Day holiday hours for Monday, Aug. 3",
+            "category": "local-news",
+            "publishedAt": "2026-07-28T12:45:00-07:00",
+            "slug": "delta-bc-day-holiday-hours-aug-3"
+          }
+        ]
+      },
+      "measurement": {
+        "vercelWebAnalytics": "enabled in site but provider export credentials unavailable",
+        "googleAnalytics": "configured but reporting credentials unavailable",
+        "googleSearchConsole": "configured but reporting credentials unavailable",
+        "protectedReporting": "configured but unavailable without bearer credentials",
+        "missingRule": "Unavailable metrics are never represented as zero."
+      },
+      "generatedAt": "2026-07-30T19:39:15.633Z"
+    }
+  }
+}

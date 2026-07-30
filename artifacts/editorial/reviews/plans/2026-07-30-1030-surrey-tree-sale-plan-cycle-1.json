@@ -1,0 +1,23 @@
+{
+  "status": "unrecoverable_existing_review_record",
+  "verdict": "BLOCKERS",
+  "modelUsed": null,
+  "requestedModels": ["claude-opus-5"],
+  "observedModels": [],
+  "fallbackUsed": null,
+  "fallbackDisabled": true,
+  "reviewedSha": "15ba0d0ee2b96f18232e08b66336d2b2594f3dbd",
+  "reconciledSha": "ea867eafc9f375916d090ec2b252d81c942fbf68",
+  "rawOutputRecovered": false,
+  "recoveryNote": "The prior automation committed the evidence SHA and a coherent reconciliation commit but did not persist the runner output in the repository or the preserved worktree. The exact raw verdict body, blocker text, model-used observation, and provider metadata could not be recovered. They are intentionally not reconstructed.",
+  "reconciliationEvidence": {
+    "source": "git diff 15ba0d0ee2b96f18232e08b66336d2b2594f3dbd..ea867eafc9f375916d090ec2b252d81c942fbf68",
+    "summary": [
+      "Separated the dated release's per-sale limit from the program page's billing-address limit and prohibited a combined entitlement inference.",
+      "Documented the queue-to-bulletin story-type reclassification.",
+      "Pinned complete local-release frontmatter, required facts, sensitive scanning, image provenance/distinctness, exact canonical, and pre-release fact refresh."
+    ],
+    "limitation": "This map documents the observable reconciliation diff only. It does not claim to reproduce the unavailable cycle-one blocker list."
+  },
+  "cycleAccountingDecision": "Counted as completed cycle one because the prior run recorded and reconciled a blocking Opus verdict. No additional review was started to replace the missing artifact."
+}

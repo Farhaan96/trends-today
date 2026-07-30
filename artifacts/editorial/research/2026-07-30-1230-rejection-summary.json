@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-07-30T12:42:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-30-1232",
+  "sourceQueue": "artifacts/editorial/research/2026-07-30-1230-source-queue.json",
+  "comparisonQueue": "artifacts/editorial/research/2026-07-30-1030-source-queue.json",
+  "dailyCountBeforeSweep": 0,
+  "dailyCeiling": 6,
+  "summary": {
+    "sourceCandidates": 56,
+    "previousSourceCandidates": 56,
+    "addedUrls": 0,
+    "removedUrls": 0,
+    "titleChanges": 0,
+    "qualifiedForPlanReview": 1,
+    "rejectedOrHeld": 55
+  },
+  "rejectedOrHeld": [
+    {
+      "title": "Whitecaps FC transfers Sebastian Berhalter to Middlesbrough FC",
+      "sourceUrl": "https://www.whitecapsfc.com/news/vwfc-transfers-berhalter",
+      "reason": "The official transaction offers no immediate ticketing, match-day, viewing, eligibility, schedule, or other practical Lower Mainland reader decision."
+    },
+    {
+      "title": "Game Trailer | Anything Can Happen",
+      "sourceUrl": "https://www.bclions.com/2026/07/30/game-trailer-anything-can-happen/",
+      "reason": "Its practical date, time, and venue facts are already delivered by the live July 29 BC Lions watch guide."
+    },
+    {
+      "title": "Update - Road Work - Como Lake Avenue between Blue Mountain Street and North Road",
+      "sourceUrl": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2008",
+      "reason": "The source evidence remains unchanged from the terminal two-cycle Opus stop. No material evidence reset exists, so no third unchanged-scope review is authorized."
+    },
+    {
+      "title": "Road Work - Lougheed Highway between Barnet Highway and Dewdney Trunk Road",
+      "sourceUrl": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2012",
+      "reason": "The source and one-source fact budget remain unchanged and cannot support the 300-word bulletin floor without repetition or padding."
+    },
+    {
+      "title": "Other unchanged municipal, event, and sports opportunities",
+      "reason": "The remaining 51 URLs and titles are unchanged carryovers already covered, duplicate, recurring, stale, retrospective, sensitive or one-sided, thin, or below the standalone utility and evidence thresholds recorded in prior run artifacts."
+    }
+  ],
+  "commercialFitPolicy": "Commercial fit was considered only for the editorially qualified Surrey candidate. No audience, price, sponsor, guarantee, or revenue claim was made."
+}
