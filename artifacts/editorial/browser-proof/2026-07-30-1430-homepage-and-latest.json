@@ -1,0 +1,63 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-30-1433",
+  "verifiedAt": "2026-07-30T15:25:27-07:00",
+  "deployment": {
+    "gitSha": "c6fc09a7c89302156e94a91e95918ea122b6ae62",
+    "githubDeploymentId": 5683229960,
+    "environment": "Production",
+    "status": "success",
+    "statusAt": "2026-07-30T22:21:20Z",
+    "targetUrl": "https://trends-today-j2c1objkc-farhaans-projects-088cb374.vercel.app",
+    "publicUrl": "https://www.trendstoday.ca"
+  },
+  "homepage": {
+    "url": "https://www.trendstoday.ca/?codex=publisher-20260730-1430",
+    "title": "Trends Today | Lower Mainland News and Events",
+    "canonical": "https://www.trendstoday.ca/",
+    "h1": "What is happening around you.",
+    "featuredHeadline": "Surrey $20 tree sales open Aug. 18 and Sept. 29",
+    "july30PublicationLabels": ["Jul 30, 12:45 p.m."],
+    "loadedAboveFoldImages": 6,
+    "brokenLoadedImages": 0,
+    "structuredData": ["Organization", "WebSite"],
+    "consoleWarningsOrErrors": 0
+  },
+  "latestArticle": {
+    "url": "https://www.trendstoday.ca/local-news/surrey-20-dollar-tree-sale-august-18?codex=publisher-20260730-1430",
+    "title": "Surrey $20 tree sales open Aug. 18 and Sept. 29 | Trends Today",
+    "canonical": "https://www.trendstoday.ca/local-news/surrey-20-dollar-tree-sale-august-18",
+    "headline": "Surrey $20 tree sales open Aug. 18 and Sept. 29",
+    "renderedParagraphs": 25,
+    "officialSourceLinks": 4,
+    "internalLinksObserved": 10,
+    "heroImage": {
+      "loaded": true,
+      "naturalWidth": 902,
+      "naturalHeight": 495
+    },
+    "articleStructuredData": {
+      "type": "Article",
+      "datePublished": "2026-07-30T12:45:00-07:00",
+      "dateModified": "2026-07-30T12:45:00-07:00",
+      "headlineMatches": true,
+      "canonicalMatchesMainEntity": true
+    },
+    "consoleWarningsOrErrors": 0
+  },
+  "analytics": {
+    "httpEvidenceAt": "2026-07-30T14:37:02-07:00",
+    "publicEndpointStatus": 200,
+    "activeArticles": 169,
+    "july30Articles": 1,
+    "protectedReportingStatus": 401,
+    "browserApiTab": "unavailable: navigation was blocked client-side; the independent HTTP 200 response is the metric source"
+  },
+  "releaseOutcome": {
+    "qualified": 0,
+    "implemented": 0,
+    "gptReviewed": 0,
+    "opusReviewed": 0,
+    "published": 0,
+    "publicStateUnchanged": true
+  }
+}
