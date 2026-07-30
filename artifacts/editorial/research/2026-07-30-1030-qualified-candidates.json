@@ -11,6 +11,7 @@
       "locality": "Surrey",
       "category": "local-news",
       "storyType": "bulletin",
+      "storyTypeReclassification": "The discovery queue assigns its conservative default reported-update type. Qualification reclassifies this topic to bulletin because the verified fact budget is a single dated municipal purchase notice that can fully satisfy the reader job in 300 to 600 words without padding.",
       "readerJob": "Tell eligible Surrey residents when the $20 tree sales open, what they can buy, how the limit works, and where pickup happens.",
       "readerImpact": "Surrey residents can prepare before the first-come, first-served Aug. 18 sale and avoid an invalid order.",
       "sourceUrls": [
@@ -18,6 +19,7 @@
         "https://www.surrey.ca/renovating-building-development/trees-yard-garden/tree-sale-program"
       ],
       "primarySourceCount": 2,
+      "sourceConflict": "The media release says two trees per sale; the live program page says two trees per Surrey billing address. The article must attribute both statements separately and may not infer a combined entitlement across both sales.",
       "duplicateDecision": "No published Trends Today article covers Surrey's 2026 $20 municipal tree sales.",
       "ratings": {
         "localRelevance": 5,
