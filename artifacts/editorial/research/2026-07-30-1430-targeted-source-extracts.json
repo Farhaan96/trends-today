@@ -1,0 +1,83 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-30-1433",
+  "generatedAt": "2026-07-30T14:40:30.170711-07:00",
+  "sources": [
+    {
+      "id": "richmond-eoc-funding",
+      "url": "https://www.richmond.ca/city-hall/news/2026/eocfunding30jul2026.htm",
+      "facts": {
+        "publishedDate": "2026-07-30",
+        "amountCad": 29522,
+        "project": "Emergency Operations Centre communications and information technology upgrades, including portable displays, large-format printing, and collaboration technology",
+        "fund": "2026 Emergency Operations Centres Equipment and Training stream under the Community Emergency Preparedness Fund"
+      },
+      "httpStatus": 200,
+      "retrievedAt": "2026-07-30T14:40:30.170711-07:00",
+      "responseBytes": 98147,
+      "responseSha256": "db0f7d82cbbff5d1a4b3cd4904230f46b20fdbc5ed02ecdf531b0aa5b6ea90b4",
+      "factTextChecks": {
+        "richmond29522Present": true,
+        "richmond10899Present": null,
+        "pokuContractPresent": null,
+        "pokuTransactionPresent": null
+      }
+    },
+    {
+      "id": "bc-eoc-funding-backgrounder",
+      "url": "https://archive.news.gov.bc.ca/releases/news_releases_2024-2028/2026EMCR0031-000853.htm",
+      "facts": {
+        "publishedDate": "2026-07-21",
+        "richmondApprovedAmountCad": 10899,
+        "richmondProject": "Temporary EOC information displays to enhance emergency communications infrastructure",
+        "provinceTotalCadApprox": 3500000,
+        "projectCount": 110
+      },
+      "httpStatus": 200,
+      "retrievedAt": "2026-07-30T14:40:30.170711-07:00",
+      "responseBytes": 31536,
+      "responseSha256": "f46c905c1894506458e9725f8a69f8199777f38d08beb0a35a4a8364873ff1a5",
+      "factTextChecks": {
+        "richmond29522Present": null,
+        "richmond10899Present": true,
+        "pokuContractPresent": null,
+        "pokuTransactionPresent": null
+      }
+    },
+    {
+      "id": "whitecaps-kwasi-poku",
+      "url": "https://www.whitecapsfc.com/news/vwfc-acquire-kwasi-poku",
+      "facts": {
+        "transactionDate": "2026-07-30",
+        "player": "Kwasi Poku",
+        "position": "striker",
+        "fromClub": "RWDM Brussels",
+        "contractThrough": "2027-28 MLS season",
+        "clubOption": "2028-29 season",
+        "rosterCondition": "pending receipt of international transfer certificate",
+        "verifiedReaderDecision": null
+      },
+      "httpStatus": 200,
+      "retrievedAt": "2026-07-30T14:40:30.170711-07:00",
+      "responseBytes": 182429,
+      "responseSha256": "3a49fae6ed1b0fdeb9003a9f4d587068d0ac2714bb88332b79d8c1ef0407f4e8",
+      "factTextChecks": {
+        "richmond29522Present": null,
+        "richmond10899Present": null,
+        "pokuContractPresent": true,
+        "pokuTransactionPresent": true
+      }
+    }
+  ],
+  "qualificationFindings": [
+    {
+      "candidate": "Emergency Preparedness Funding",
+      "status": "rejected-source-conflict",
+      "finding": "The City reports $29,522 from the named fund for the Richmond EOC project, while the provincial backgrounder lists $10,899 for Richmond temporary EOC displays. The difference is material and unreconciled."
+    },
+    {
+      "candidate": "Whitecaps FC acquire Canadian international forward Kwasi Poku",
+      "status": "rejected-insufficient-reader-utility",
+      "finding": "The official transaction verifies the player, contract term, prior club, and pending transfer certificate, but provides no immediate ticketing, schedule, viewing, debut, or other practical Lower Mainland reader decision."
+    }
+  ]
+}
