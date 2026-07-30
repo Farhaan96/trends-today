@@ -1,0 +1,64 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-30-0837",
+  "verifiedAt": "2026-07-30T09:04:00-07:00",
+  "deployment": {
+    "mergeSha": "fec9e29c32998a48d18076f7614a063b5ead9269",
+    "provider": "Vercel",
+    "status": "success",
+    "completedAt": "2026-07-30T16:03:30Z",
+    "statusUrl": "https://vercel.com/farhaans-projects-088cb374/trends-today/7hRo4MzAyJPP13teqiHLMvE1ZL7Q"
+  },
+  "homepage": {
+    "url": "https://www.trendstoday.ca/",
+    "canonical": "https://www.trendstoday.ca",
+    "title": "Lower Mainland News and Events",
+    "h1": "What is happening around you.",
+    "topStory": "BC Lions visit Winnipeg Thursday; kickoff is 5:30 p.m.",
+    "sampledCardImages": 5,
+    "sampledCardImagesLoaded": 5,
+    "structuredData": ["Organization", "WebSite"],
+    "consoleErrors": 0
+  },
+  "latestArticle": {
+    "url": "https://www.trendstoday.ca/sports/bc-lions-winnipeg-july-30-watch-guide",
+    "canonical": "https://www.trendstoday.ca/sports/bc-lions-winnipeg-july-30-watch-guide",
+    "h1": "BC Lions visit Winnipeg Thursday; kickoff is 5:30 p.m.",
+    "heroImage": {
+      "loaded": true,
+      "naturalWidth": 891,
+      "naturalHeight": 501
+    },
+    "bodyChecks": {
+      "confirmedJuly30Game": true,
+      "confirmedKickoffPacific": "5:30 p.m.",
+      "confirmedVenue": "Princess Auto Stadium",
+      "confirmedViewingOptions": ["TSN", "RDS", "CFL+"],
+      "scheduleMismatchDisclosurePresent": true
+    },
+    "officialSourceLinks": 5,
+    "internalLinksPresent": true,
+    "articleStructuredData": {
+      "valid": true,
+      "headline": "BC Lions visit Winnipeg Thursday; kickoff is 5:30 p.m.",
+      "datePublished": "2026-07-29T07:20:00-07:00",
+      "dateModified": "2026-07-29T07:20:00-07:00",
+      "authorType": "Organization",
+      "mainEntityOfPageMatchesCanonical": true
+    },
+    "consoleErrors": 0
+  },
+  "networkAndRuntime": {
+    "capturedRelevantEvents": 17,
+    "httpResponsesAtOrAbove400": 0,
+    "loadingFailures": 0,
+    "runtimeExceptions": 0,
+    "runtimeErrorLogs": 0,
+    "consoleErrors": 0
+  },
+  "publicationDecision": {
+    "qualifiedStories": 0,
+    "newArticlesPublished": 0,
+    "productionContentChanged": false,
+    "browserVerificationMeaning": "The exact evidence-only merge deployed successfully and the existing production homepage and latest article remained healthy."
+  }
+}
