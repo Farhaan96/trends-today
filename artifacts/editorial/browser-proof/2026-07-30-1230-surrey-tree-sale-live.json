@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "runId": "run-trends-today-daily-publisher-2026-07-30-1232",
+  "verifiedAt": "2026-07-30T13:37:51-07:00",
+  "productionUrl": "https://www.trendstoday.ca/local-news/surrey-20-dollar-tree-sale-august-18",
+  "release": {
+    "pr": "https://github.com/Farhaan96/trends-today/pull/133",
+    "publishedBranchHead": "8377abd6c1ad8946556941184a96e0ee7b48430f",
+    "mergeSha": "0a03bd02b5ca8bb991131bdd31928d98723d0b19",
+    "deploymentId": 5681883987,
+    "deploymentStatusId": 16156729543,
+    "deploymentEnvironment": "Production",
+    "deploymentStatus": "success",
+    "deploymentCreatedAt": "2026-07-30T20:34:02Z",
+    "deploymentTarget": "https://trends-today-lex9134jc-farhaans-projects-088cb374.vercel.app",
+    "deploymentStatusUrl": "https://vercel.com/farhaans-projects-088cb374/trends-today/8VvajdFwsFfSwEcpMQyHbGFh6GWH",
+    "deploymentIdentity": "GitHub deployment 5681883987 and the successful Vercel commit status are both bound to merge SHA 0a03bd02b5ca8bb991131bdd31928d98723d0b19."
+  },
+  "http": {
+    "article": {
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 68131
+    },
+    "originalImage": {
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 2741844
+    },
+    "sitemap": {
+      "status": 200,
+      "contentType": "application/xml",
+      "bytes": 17146,
+      "containsCanonical": true
+    }
+  },
+  "page": {
+    "canonical": "https://www.trendstoday.ca/local-news/surrey-20-dollar-tree-sale-august-18",
+    "title": "Surrey $20 tree sales open Aug. 18 and Sept. 29 | Trends Today",
+    "h1": "Surrey $20 tree sales open Aug. 18 and Sept. 29",
+    "requiredHeadings": {
+      "whenTheTwoSalesOpen": true,
+      "whoCanOrderAndHowTheLimitIsStated": true,
+      "whereAndWhenToPickUpYourTrees": true,
+      "sources": true
+    },
+    "requiredFacts": {
+      "price20": true,
+      "august18Sale": true,
+      "september29Sale": true,
+      "september13Pickup": true,
+      "october25Pickup": true,
+      "pickupAddress6651_148Street": true,
+      "twoTreesPerSale": true,
+      "twoTreesPerSurreyAddress": true,
+      "twoTreesPerHousehold": true,
+      "noCombinedEntitlement": true,
+      "cartNotHeldUntilPaymentProcessed": true
+    },
+    "renderedSourceLinks": [
+      {
+        "url": "https://www.surrey.ca/news-events/news/surreys-popular-20-tree-sales-return-summer",
+        "rendered": true,
+        "status": 200
+      },
+      {
+        "url": "https://www.surrey.ca/renovating-building-development/trees-yard-garden/tree-sale-program",
+        "rendered": true,
+        "status": 200
+      }
+    ],
+    "testedInternalLinks": [
+      {
+        "url": "https://www.trendstoday.ca/local-news",
+        "status": 200
+      },
+      {
+        "url": "https://www.trendstoday.ca/author/trends-today-newsroom",
+        "status": 200
+      },
+      {
+        "url": "https://www.trendstoday.ca/author/moe",
+        "status": 200
+      },
+      {
+        "url": "https://www.trendstoday.ca/sports/bc-lions-winnipeg-july-30-watch-guide",
+        "status": 200
+      },
+      {
+        "url": "https://www.trendstoday.ca/local-news/richmond-election-october-17-voter-dates",
+        "status": 200
+      },
+      {
+        "url": "https://www.trendstoday.ca/local-news/delta-bc-day-holiday-hours-aug-3",
+        "status": 200
+      },
+      {
+        "url": "https://www.trendstoday.ca/local-news/surrey-capital-projects-2031-buildout",
+        "status": 200
+      },
+      {
+        "url": "https://www.trendstoday.ca/local-news/surrey-newton-park-upgrades",
+        "status": 200
+      },
+      {
+        "url": "https://www.trendstoday.ca/local-news/surrey-extreme-heat-cooling-locations",
+        "status": 200
+      }
+    ],
+    "heroImage": {
+      "loaded": true,
+      "naturalWidth": 902,
+      "naturalHeight": 495,
+      "renderedAlt": "Surrey $20 tree sales open Aug. 18 and Sept. 29",
+      "source": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fsurrey-20-dollar-tree-sale-august-18.png&w=1920&q=75"
+    },
+    "articleJsonLd": {
+      "type": "Article",
+      "headline": "Surrey $20 tree sales open Aug. 18 and Sept. 29",
+      "description": "Surrey's $20 tree sales open Aug. 18 and Sept. 29. Check eligibility, City limit wording, pickup dates, and how online inventory is held.",
+      "datePublished": "2026-07-30T12:45:00-07:00",
+      "dateModified": "2026-07-30T12:45:00-07:00",
+      "mainEntityOfPage": "https://www.trendstoday.ca/local-news/surrey-20-dollar-tree-sale-august-18",
+      "image": "/images/editorial/2026/07/surrey-20-dollar-tree-sale-august-18.png",
+      "authorType": "Organization",
+      "authorName": "Trends Today Newsroom",
+      "articleSection": "Local News",
+      "isAccessibleForFree": true
+    }
+  },
+  "diagnostics": {
+    "cdpCursorStart": 17,
+    "cdpCursorEnd": 207,
+    "cdpEventsTruncated": false,
+    "consoleErrors": 0,
+    "pageExceptions": 0,
+    "httpResponsesAtOrAbove400": 0,
+    "nonAnalyticsRequestFailures": 0,
+    "analyticsRequestFailures": 1,
+    "analyticsFailure": "One Google Analytics collect request was canceled with net::ERR_ABORTED and is excluded from the page-error gate.",
+    "warnings": [
+      "The browser logged the same non-failing hero-image preload warning twice after reload."
+    ]
+  },
+  "screenshot": {
+    "status": "unavailable",
+    "reason": "The in-app browser Page.captureScreenshot command timed out on both full-page and viewport attempts. No screenshot artifact was claimed or created."
+  },
+  "knownRouteLimitations": [
+    "The current category article route renders the article headline as the hero image alt instead of the candidate imageAlt field.",
+    "The current category article route does not render imageAttribution. AI provenance remains in frontmatter and the committed provenance artifact."
+  ],
+  "rollbackPoint": "Revert merge commit 0a03bd02b5ca8bb991131bdd31928d98723d0b19 in a new reviewed pull request."
+}

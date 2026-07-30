@@ -7,9 +7,12 @@
 - Starting base: `e1acf7dc539575d12be7fd746865cf5511ca8a2c`
 - Exact release evidence SHA: `7368153442d4c1b945e5b886c74094914bcc57d2`
 - Candidate SHA-256: `bb784c49205f32e98a44c999b962c09cd2b53a26bb4d4d9fe9af362ab4796a23`
+- Published branch head: `8377abd6c1ad8946556941184a96e0ee7b48430f`
+- Merge SHA: `0a03bd02b5ca8bb991131bdd31928d98723d0b19`
 - Mutation worktree: `C:\Users\farha\.codex\worktrees\trends-daily-2026-07-30-1232`
 - GPT review worktree: `C:\Users\farha\.codex\worktrees\trends-daily-2026-07-30-1232-gpt`
 - Opus review worktree: `C:\Users\farha\.codex\worktrees\trends-daily-2026-07-30-1232-opus`
+- Closeout worktree: `C:\Users\farha\.codex\worktrees\trends-daily-2026-07-30-1232-closeout`
 - Root checkout and every pre-existing dirty or untracked artifact were preserved.
 - The unfinished 10:30 worktree and its untracked image were preserved without mutation.
 
@@ -21,7 +24,7 @@
 4. Qualification: one Surrey municipal purchase bulletin scored 99 and qualified. The remaining 55 opportunities were already covered, duplicates, recurring listings, thin notices, retrospective items, sensitive or insufficiently supported civic items, or lacked a distinct immediate reader decision.
 5. Verification: both City of Surrey primary pages returned HTTP 200. The dated release and live program page used three different tree-limit statements. The article attributed all three separately and prohibited a combined cross-sale entitlement inference.
 6. Exact reviews: GPT passed the exact candidate, then Claude Opus 5 passed the independent exact-SHA release review with fallback disabled. No Fable call was started.
-7. Release and learning: one article was promoted after both exact gates. PR, merge, deployment, and browser proof remain pending in this initial entry and must be added by the closeout commit.
+7. Release and learning: one article was promoted after both exact gates, merged, deployed from the exact merge SHA, and browser-verified. The daily count moved from 0 to 1 of 6; the sweep count was 1 of 2.
 
 ## Source evidence
 
@@ -62,14 +65,21 @@
 ## PR, deployment, and browser proof
 
 - Branch: `codex/lm-daily-2026-07-30-1232`
-- PR: pending
-- Labels: pending (`codex`, `codex-automation`)
-- Checks: pending
-- Merge SHA: pending
-- Production deployment: pending
+- PR: `https://github.com/Farhaan96/trends-today/pull/133`
+- Labels: `codex`, `codex-automation`
+- Checks: Vercel and Vercel Preview Comments passed.
+- Merge: PR #133 merged at `2026-07-30T20:32:12Z` as `0a03bd02b5ca8bb991131bdd31928d98723d0b19`; the source branch was retained.
+- Production deployment: GitHub deployment `5681883987`, Production, success, created `2026-07-30T20:34:02Z`, bound to the exact merge SHA.
+- Production target: `https://trends-today-lex9134jc-farhaans-projects-088cb374.vercel.app`
+- Vercel status URL: `https://vercel.com/farhaans-projects-088cb374/trends-today/8VvajdFwsFfSwEcpMQyHbGFh6GWH`
 - Live URL: `https://www.trendstoday.ca/local-news/surrey-20-dollar-tree-sale-august-18`
-- Browser proof: pending
-- Rollback point: until merge, abandon the scoped branch. After merge, revert the exact merge commit in a new reviewed PR.
+- Browser proof: `artifacts/editorial/browser-proof/2026-07-30-1230-surrey-tree-sale-live.json`
+- HTTP proof: article 200, original image 200 with 2,741,844 bytes, sitemap 200 with the exact canonical present.
+- Browser proof: exact canonical, title, H1, every required body fact, both City source links, tested internal links, loaded hero image, and truthful Article JSON-LD passed.
+- Diagnostics: zero console errors, zero runtime exceptions, zero HTTP responses at or above 400, and zero non-analytics request failures. One canceled Google Analytics request was excluded. The browser repeated one non-failing hero-image preload warning.
+- Screenshot: unavailable because the in-app browser capture command timed out on both full-page and viewport attempts. No screenshot was claimed.
+- Route limitation: the page renders the headline as hero alt text and does not render `imageAttribution`; do not claim the frontmatter alt description or AI attribution is visible live.
+- Rollback point: revert merge commit `0a03bd02b5ca8bb991131bdd31928d98723d0b19` in a new reviewed PR.
 
 ## Metric source, window, freshness, and status
 
@@ -77,7 +87,7 @@
 | -------------------------------------- | -------------------------- | ---------------------------------- | --------------------- |
 | Active article inventory               | `/api/analytics`           | Rechecked 2026-07-30 13:23 Pacific | 168                   |
 | July 30 publication count before sweep | Public snapshot and Git    | Rechecked 2026-07-30 13:23 Pacific | 0                     |
-| July 30 publication count after run    | Release ledger             | Pending merge                      | 0 live; 1 promoted    |
+| July 30 publication count after run    | Release ledger and live    | Verified 2026-07-30 13:37 Pacific  | 1 of 6                |
 | Protected reporting                    | `/api/analytics/reporting` | Current run                        | Unavailable, HTTP 401 |
 | Vercel Analytics                       | Environment/export         | Current run                        | Unavailable           |
 | GA4                                    | Environment/export         | Current run                        | Unavailable           |
