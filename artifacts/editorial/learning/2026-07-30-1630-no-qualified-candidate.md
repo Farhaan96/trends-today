@@ -60,11 +60,14 @@
 
 ## PR, deployment, browser proof, and rollback
 
-- Evidence PR: pending.
-- Exact PR head: pending the audit commit.
-- Merge SHA: pending.
-- Production deployment: pending.
-- Browser proof: pending post-deployment verification.
+- Evidence PR: [#137](https://github.com/Farhaan96/trends-today/pull/137), merged after required Vercel checks passed. Labels: `codex`, `codex-automation`.
+- Exact PR head: `9120d099d89209fbc6fa28c928588d5d3a7a9f19`.
+- Merge SHA: `e339ba9454aa02435988c1a1806b06fec70e3b8b`.
+- Production deployment: GitHub deployment `5684209102`, environment `Production`, status `success`, completed `2026-07-31T00:05:39Z`. Deployment URL: `https://trends-today-qcxqwx45w-farhaans-projects-088cb374.vercel.app`.
+- Browser proof: `artifacts/editorial/browser-proof/2026-07-30-1630-homepage-and-latest.json`.
+- Homepage: canonical, title, H1, latest-card headline/link, Organization/WebSite structured data, and the featured image were verified. Console and page errors were zero; HTTP 4xx/5xx responses were zero. One Google Analytics beacon was cancelled after the same request returned HTTP 204 and is classified as non-page telemetry noise.
+- Latest article: canonical, rendered headline, 25 body paragraphs, four primary-source link instances across the two City of Surrey URLs, internal links, loaded 902x495 hero image, and Article/BreadcrumbList truth were verified. Console/page errors, HTTP 4xx/5xx responses, and network failures were zero.
+- Final public analytics: HTTP 200 at `2026-07-31T00:10:46.438Z`, 169 active articles, and one July 30 publication.
 - Rollback point: `f158da48d631c52a2667c068b50d6380d83b8c0f`. No public article route or content file was added.
 
 ## Metric source, window, freshness, and status
