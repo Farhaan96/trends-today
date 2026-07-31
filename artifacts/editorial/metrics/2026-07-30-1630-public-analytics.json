@@ -1,0 +1,59 @@
+{
+  "status": "available",
+  "httpStatus": 200,
+  "source": "https://www.trendstoday.ca/api/analytics?codex=publisher-20260730-1635-20260730163933",
+  "retrievedAt": "2026-07-30T16:39:35-07:00",
+  "body": {
+    "success": true,
+    "data": {
+      "content": {
+        "totalArticles": 169,
+        "todayPublicationCount": 1,
+        "todayPublicationCountMethod": "The public recent-article snapshot and current origin/main content tree both contain the July 30 Surrey tree-sale article.",
+        "byCategory": {
+          "local-news": 14,
+          "transit": 8,
+          "things-to-do": 17,
+          "food-drink": 1,
+          "housing": 2,
+          "sports": 3,
+          "science": 30,
+          "culture": 12,
+          "psychology": 21,
+          "technology": 25,
+          "health": 22,
+          "space": 14
+        },
+        "recentArticles": [
+          {
+            "title": "Surrey $20 tree sales open Aug. 18 and Sept. 29",
+            "category": "local-news",
+            "publishedAt": "2026-07-30T12:45:00-07:00",
+            "slug": "surrey-20-dollar-tree-sale-august-18"
+          },
+          {
+            "title": "BC Lions visit Winnipeg Thursday; kickoff is 5:30 p.m.",
+            "category": "sports",
+            "publishedAt": "2026-07-29T07:20:00-07:00",
+            "slug": "bc-lions-winnipeg-july-30-watch-guide"
+          },
+          {
+            "title": "Richmond election is Oct. 17; key voter dates are posted",
+            "category": "local-news",
+            "publishedAt": "2026-07-28T18:45:00-07:00",
+            "slug": "richmond-election-october-17-voter-dates"
+          }
+        ]
+      },
+      "measurement": {
+        "vercelWebAnalytics": "enabled in site but provider export credentials unavailable",
+        "googleAnalytics": "configured but reporting credentials unavailable",
+        "googleSearchConsole": "configured but reporting credentials unavailable",
+        "protectedReporting": "configured but unavailable without bearer credentials",
+        "advertisingSponsorRevenueCost": "unavailable",
+        "missingRule": "Unavailable metrics are never represented as zero."
+      },
+      "generatedAt": "2026-07-30T23:39:35.590Z"
+    }
+  }
+}
