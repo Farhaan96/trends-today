@@ -1,0 +1,77 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-30-1635",
+  "verifiedAt": "2026-07-30T17:10:46-07:00",
+  "deployment": {
+    "evidencePr": 137,
+    "exactPrHead": "9120d099d89209fbc6fa28c928588d5d3a7a9f19",
+    "mergeSha": "e339ba9454aa02435988c1a1806b06fec70e3b8b",
+    "githubDeploymentId": 5684209102,
+    "environment": "Production",
+    "status": "success",
+    "completedAt": "2026-07-31T00:05:39Z",
+    "environmentUrl": "https://trends-today-qcxqwx45w-farhaans-projects-088cb374.vercel.app"
+  },
+  "homepage": {
+    "url": "https://www.trendstoday.ca/?codex=publisher-20260730-1630-postmerge",
+    "title": "Trends Today | Lower Mainland News and Events",
+    "canonical": "https://www.trendstoday.ca/",
+    "h1": "What is happening around you.",
+    "featuredHeadline": "Surrey $20 tree sales open Aug. 18 and Sept. 29",
+    "featuredHref": "https://www.trendstoday.ca/local-news/surrey-20-dollar-tree-sale-august-18",
+    "featuredImage": {
+      "complete": true,
+      "naturalWidth": 793,
+      "naturalHeight": 435,
+      "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fsurrey-20-dollar-tree-sale-august-18.png&w=1080&q=75"
+    },
+    "structuredDataTypes": ["Organization", "WebSite"],
+    "consoleOrPageErrors": [],
+    "http4xxOr5xx": [],
+    "networkFailures": [
+      {
+        "url": "https://www.google-analytics.com/g/collect",
+        "error": "net::ERR_ABORTED",
+        "classification": "non-page telemetry cancellation after the same request returned HTTP 204"
+      }
+    ]
+  },
+  "latestArticle": {
+    "url": "https://www.trendstoday.ca/local-news/surrey-20-dollar-tree-sale-august-18?codex=publisher-20260730-1630-postmerge",
+    "title": "Surrey $20 tree sales open Aug. 18 and Sept. 29 | Trends Today",
+    "canonical": "https://www.trendstoday.ca/local-news/surrey-20-dollar-tree-sale-august-18",
+    "h1": "Surrey $20 tree sales open Aug. 18 and Sept. 29",
+    "paragraphCount": 25,
+    "sourceLinks": [
+      "https://www.surrey.ca/news-events/news/surreys-popular-20-tree-sales-return-summer",
+      "https://www.surrey.ca/renovating-building-development/trees-yard-garden/tree-sale-program"
+    ],
+    "internalLinksVerified": true,
+    "heroImage": {
+      "complete": true,
+      "naturalWidth": 902,
+      "naturalHeight": 495,
+      "src": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fsurrey-20-dollar-tree-sale-august-18.png&w=1920&q=75"
+    },
+    "structuredData": {
+      "types": ["Organization", "WebSite", "Article", "BreadcrumbList"],
+      "parseErrors": [],
+      "headline": "Surrey $20 tree sales open Aug. 18 and Sept. 29",
+      "datePublished": "2026-07-30T12:45:00-07:00",
+      "dateModified": "2026-07-30T12:45:00-07:00",
+      "mainEntityOfPage": "https://www.trendstoday.ca/local-news/surrey-20-dollar-tree-sale-august-18",
+      "image": "/images/editorial/2026/07/surrey-20-dollar-tree-sale-august-18.png"
+    },
+    "consoleOrPageErrors": [],
+    "http4xxOr5xx": [],
+    "networkFailures": []
+  },
+  "finalPublicAnalytics": {
+    "url": "https://www.trendstoday.ca/api/analytics?codex=publisher-20260730-1630-final-inspect",
+    "httpStatus": 200,
+    "generatedAt": "2026-07-31T00:10:46.438Z",
+    "activeArticles": 169,
+    "july30PublicationCount": 1,
+    "latestTitle": "Surrey $20 tree sales open Aug. 18 and Sept. 29"
+  },
+  "result": "Production content and structured-data truth verified. No article was published by this zero-candidate sweep."
+}
