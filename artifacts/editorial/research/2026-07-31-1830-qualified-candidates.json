@@ -36,12 +36,10 @@
       "storyType": "reported-update",
       "score": 95,
       "sourceUrls": [
-        "https://www.whitecapsfc.com/news/spectator-aug-1-2026-pride-presented-telus",
         "https://www.bcplace.com/?event=vancouver-whitecaps-fc-vs-lafc",
         "https://www.whitecapsfc.com/schedule/matches"
       ],
       "primarySourceUrls": [
-        "https://www.whitecapsfc.com/news/spectator-aug-1-2026-pride-presented-telus",
         "https://www.bcplace.com/?event=vancouver-whitecaps-fc-vs-lafc"
       ],
       "commercialIntent": "none",

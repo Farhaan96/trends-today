@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "2de862c9fcc0246465328beace2aa2a09f84c14271c5c3d8e22b7930a8034ec0",
+  "repositorySha": "8a2daeac42bfd89bd420f60f97686cd6c77a1b28",
+  "reviewedAt": "2026-08-01T02:35:13.094249+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fbb2c-1335-7f00-acc3-c59ee2d6620a",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The cited Whitecaps spectator-information URL does not resolve, so claims specifically attributed to that page, including the statement that two official pages agree, are not presently verifiable from the candidate's cited material.",
+    "The article repeats the same arrival, ticket, bag and venue-page checks across the introduction, section summaries, stadium-access checklist and final checklist. This creates material filler and requires consolidation."
+  ],
+  "summary": "BLOCKERS. The BC Place source supports most operational details, and the article is readable, well formatted and actionable. However, a non-resolving primary citation leaves explicit source-attribution claims unsupported, while substantial repetition lowers editorial quality below the release threshold."
+}
