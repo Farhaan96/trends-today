@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "runId": "run-trends-today-daily-publisher-2026-07-31-1840",
+  "verifiedAt": "2026-08-01T03:10:05.854Z",
+  "mergeSha": "c8b9d35ad0c578d79e171d03df1a3bc751b301e6",
+  "deployment": {
+    "id": 5701135971,
+    "environment": "Production",
+    "state": "success",
+    "createdAt": "2026-08-01T03:08:05Z",
+    "environmentUrl": "https://trends-today-hrxs524id-farhaans-projects-088cb374.vercel.app",
+    "sha": "c8b9d35ad0c578d79e171d03df1a3bc751b301e6"
+  },
+  "article": {
+    "url": "https://www.trendstoday.ca/local-news/coquitlam-fall-recreation-registration-august-2026",
+    "httpStatus": 200,
+    "canonical": "https://www.trendstoday.ca/local-news/coquitlam-fall-recreation-registration-august-2026",
+    "title": "Coquitlam lists four more fall registration dates from Aug. 4 | Trends Today",
+    "h1": "Coquitlam lists four more fall registration dates from Aug. 4",
+    "renderedDate": "Jul 31, 7:15 p.m.",
+    "bodyChecks": {
+      "remainingFourScope": true,
+      "august4At830": true,
+      "august6At830": true,
+      "august11At830": true,
+      "august13At830": true,
+      "phone6049274386": true,
+      "assistance50VisitsAnd225Credit": true
+    },
+    "officialSourceLinks": {
+      "uniqueCount": 4,
+      "renderedInstances": 8,
+      "urls": [
+        "https://www.coquitlam.ca/m/newsflash/Home/Detail/2010",
+        "https://www.coquitlam.ca/294/Recreation-Registration",
+        "https://www.coquitlam.ca/343/Program-Guide",
+        "https://www.coquitlam.ca/FinancialAssistanceRec"
+      ]
+    },
+    "internalLinks": {
+      "rendered": true,
+      "testedHttp200": [
+        "https://www.trendstoday.ca/local-news",
+        "https://www.trendstoday.ca/author/trends-today-newsroom",
+        "https://www.trendstoday.ca/author/moe"
+      ]
+    },
+    "heroImage": {
+      "renderedAlt": "Coquitlam lists four more fall registration dates from Aug. 4",
+      "loaded": true,
+      "naturalWidth": 946,
+      "naturalHeight": 473,
+      "optimizedSrc": "https://www.trendstoday.ca/_next/image?url=%2Fimages%2Feditorial%2F2026%2F07%2Fcoquitlam-fall-recreation-registration.png&w=1920&q=75",
+      "originalUrl": "https://www.trendstoday.ca/images/editorial/2026/07/coquitlam-fall-recreation-registration.png",
+      "originalHttpStatus": 200,
+      "originalBytes": 1885220,
+      "visibleAttributionClaimed": false
+    },
+    "structuredData": {
+      "parseErrors": 0,
+      "articleType": "Article",
+      "headline": "Coquitlam lists four more fall registration dates from Aug. 4",
+      "datePublished": "2026-07-31T19:15:00-07:00",
+      "dateModified": "2026-07-31T19:15:00-07:00",
+      "mainEntityOfPage": "https://www.trendstoday.ca/local-news/coquitlam-fall-recreation-registration-august-2026",
+      "image": "/images/editorial/2026/07/coquitlam-fall-recreation-registration.png",
+      "breadcrumbListPresent": true,
+      "breadcrumbItems": [
+        {
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.trendstoday.ca"
+        },
+        {
+          "position": 2,
+          "name": "Local News",
+          "item": "https://www.trendstoday.ca/local-news"
+        },
+        {
+          "position": 3,
+          "name": "Coquitlam lists four more fall registration dates from Aug. 4",
+          "item": "https://www.trendstoday.ca/local-news/coquitlam-fall-recreation-registration-august-2026"
+        }
+      ]
+    },
+    "diagnostics": {
+      "consoleErrors": 0,
+      "pageExceptions": 0,
+      "failedRequests": 0,
+      "http4xxOr5xx": 0,
+      "logErrors": 0,
+      "eventBufferTruncated": false
+    }
+  },
+  "sitemap": {
+    "url": "https://www.trendstoday.ca/sitemap.xml",
+    "httpStatus": 200,
+    "canonicalPresent": true
+  },
+  "homepage": {
+    "url": "https://www.trendstoday.ca/",
+    "canonical": "https://www.trendstoday.ca",
+    "h1": "What is happening around you.",
+    "articleListedInFeaturedStories": true,
+    "articleHeadline": "Coquitlam lists four more fall registration dates from Aug. 4",
+    "articleImageLoaded": true,
+    "articleImageNaturalWidth": 793,
+    "articleImageNaturalHeight": 396,
+    "structuredDataTypes": ["Organization", "WebSite"],
+    "structuredDataParseErrors": 0,
+    "consoleErrors": 0
+  },
+  "heldWhitecapsRoute": {
+    "url": "https://www.trendstoday.ca/sports/whitecaps-30000-tickets-bc-place-return-lafc",
+    "canonical": "https://www.trendstoday.ca/sports/whitecaps-30000-tickets-bc-place-return-lafc",
+    "h1": "Whitecaps sell 30,000 tickets for BC Place return",
+    "unchangedFromBase": true,
+    "consoleErrors": 0
+  },
+  "finalAnalytics": {
+    "source": "https://www.trendstoday.ca/api/analytics",
+    "status": "available",
+    "generatedAt": "2026-08-01T03:10:05.854Z",
+    "activeArticles": 170,
+    "publicationsOn2026-07-31": 1,
+    "dailyCeiling": 6,
+    "newestTitle": "Coquitlam lists four more fall registration dates from Aug. 4"
+  }
+}
