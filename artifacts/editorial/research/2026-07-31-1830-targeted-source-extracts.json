@@ -99,5 +99,23 @@
     "sha256": "2a2eb3ad3f0e4fa676712f5b6c157e84de46ce518b4dceca6a569076a07bb4c3",
     "bytes": 2875265,
     "inspection": "Direct visual inspection confirmed an original text-free soccer-stadium illustration that remains subject-matched for the same Aug. 1 match route. No new Whitecaps image is planned."
+  },
+  "preDraftRefetch": {
+    "retrievedAt": "2026-07-31T19:03:55-07:00",
+    "productionAnalytics": {
+      "httpStatus": 200,
+      "activeArticles": 169,
+      "publicationsOnLocalDate": 0,
+      "generatedAt": "2026-08-01T02:03:55.618Z"
+    },
+    "sources": [
+      {"url": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2010", "httpStatus": 200, "rawSha256": "c7a45fbb1dfefc895898401af1760e9ae5b6ffd64d2ee9b79552989f64154833", "materialFactsStatus": "unchanged"},
+      {"url": "https://www.coquitlam.ca/343/Program-Guide", "httpStatus": 200, "rawSha256": "050c12aaf9da8553e04fbb386d8063e10d9b953b997ace18575445d4ee79d72e", "materialFactsStatus": "unchanged"},
+      {"url": "https://www.coquitlam.ca/294/Recreation-Registration", "httpStatus": 200, "rawSha256": "93aac8b80c2f8029d01b1f7040dad1f38de81829f338114e5acf36ee30124e48", "materialFactsStatus": "unchanged"},
+      {"url": "https://www.coquitlam.ca/FinancialAssistanceRec", "httpStatus": 200, "rawSha256": "99c3c4d0762174105aa49118ce359c24de6745e788444716fcd5aeb79e6d7110", "materialFactsStatus": "unchanged"},
+      {"url": "https://www.whitecapsfc.com/news/spectator-aug-1-2026-pride-presented-telus", "httpStatus": 200, "rawSha256": "81989a0ad3f53c6c3e206b2d36c655c13da090638976de9b2232138598fbb247", "materialFactsStatus": "unchanged; dynamic page bytes drifted"},
+      {"url": "https://www.bcplace.com/?event=vancouver-whitecaps-fc-vs-lafc", "httpStatus": 200, "rawSha256": "565f696c30b87476f9cfedf03be44df97704545968ff31fcf27a56cbf10f5fd4", "materialFactsStatus": "unchanged; dynamic page bytes drifted"},
+      {"url": "https://www.whitecapsfc.com/schedule/matches", "httpStatus": 200, "rawSha256": "97ada401524875b294a6048fcc144929694edd365a237558729204c8896a6d9d", "materialFactsStatus": "route available; client-rendered rows remain non-material corroboration"}
+    ]
   }
 }

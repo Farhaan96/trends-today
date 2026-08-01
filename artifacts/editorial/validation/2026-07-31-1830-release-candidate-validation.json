@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "runId": "run-trends-today-daily-publisher-2026-07-31-1840",
+  "validatedAt": "2026-08-01T02:10:03.0113924Z",
+  "validator": "apps.pipeline.validation.validate_release_candidate plus mechanical full-file assertions",
+  "manualApprovalKeywordCount": 23,
+  "candidates": [
+    {
+      "path": "artifacts/editorial/release-candidates/local-news/coquitlam-fall-recreation-registration-august-2026.mdx",
+      "sha256": "f5b6e370fd54d37296656b33e5b3ebb12c02426657ba7683a58b796f64149069",
+      "bodyWords": 558,
+      "h2Count": 5,
+      "listItemCount": 15,
+      "highlightCount": 4,
+      "fullFileEmDashCount": 0,
+      "manualApprovalKeywordHits": [],
+      "sourceUrlCount": 4,
+      "uncitedSourceUrls": [],
+      "validationPassed": true,
+      "errors": []
+    },
+    {
+      "path": "artifacts/editorial/release-candidates/sports/whitecaps-30000-tickets-bc-place-return-lafc.mdx",
+      "sha256": "e49a949b8e63af1b96730d182bc2c2373221d07fa61165c30529617ccf1d4e9f",
+      "bodyWords": 624,
+      "h2Count": 5,
+      "listItemCount": 18,
+      "highlightCount": 4,
+      "fullFileEmDashCount": 0,
+      "manualApprovalKeywordHits": [],
+      "sourceUrlCount": 3,
+      "uncitedSourceUrls": [],
+      "attendanceScopeHits": [],
+      "legacySlug30000Count": 1,
+      "validationPassed": true,
+      "errors": []
+    }
+  ]
+}
