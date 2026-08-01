@@ -4,30 +4,62 @@
   "minimumEvidenceStrength": 3,
   "results": [
     {
-      "title": "Coquitlam fall recreation registration opens Aug. 4",
+      "title": "Coquitlam lists four more fall registration dates from Aug. 4",
       "score": 96,
-      "ratings": {"localRelevance": 5, "readerUtility": 5, "freshness": 5, "evidenceStrength": 5, "uniqueAngle": 5, "repeatVisitPotential": 3, "speedToUsefulDraft": 5},
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 5,
+        "freshness": 5,
+        "evidenceStrength": 5,
+        "uniqueAngle": 5,
+        "repeatVisitPotential": 3,
+        "speedToUsefulDraft": 5
+      },
       "decision": "brief",
-      "reason": "Fresh primary notice plus live program, registration, and assistance pages support four opening dates, the 8:30 a.m. time, channels, preparation, and assistance."
+      "reason": "Fresh primary notice plus live program, registration, and assistance pages support four remaining opening dates after the July swimming and skating phases, the 8:30 a.m. time, channels, preparation, and assistance."
     },
     {
       "title": "Whitecaps Aug. 1 matchday guide: gates, bags and mobile entry",
       "score": 95,
-      "ratings": {"localRelevance": 5, "readerUtility": 5, "freshness": 5, "evidenceStrength": 5, "uniqueAngle": 4, "repeatVisitPotential": 4, "speedToUsefulDraft": 5},
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 5,
+        "freshness": 5,
+        "evidenceStrength": 5,
+        "uniqueAngle": 4,
+        "repeatVisitPotential": 4,
+        "speedToUsefulDraft": 5
+      },
       "decision": "brief-refresh",
       "reason": "A same-route refresh replaces promotional attendance framing with fresh, independently corroborated stadium logistics for tomorrow."
     },
     {
       "title": "Whitecaps Canadian Championship semifinal schedule",
       "score": 84,
-      "ratings": {"localRelevance": 5, "readerUtility": 3, "freshness": 5, "evidenceStrength": 5, "uniqueAngle": 4, "repeatVisitPotential": 4, "speedToUsefulDraft": 4},
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 3,
+        "freshness": 5,
+        "evidenceStrength": 5,
+        "uniqueAngle": 4,
+        "repeatVisitPotential": 4,
+        "speedToUsefulDraft": 4
+      },
       "decision": "hold",
       "reason": "Useful but premature; public ticket sale is Aug. 10 and the match is Sept. 2."
     },
     {
       "title": "Surrey City Hall Closure Notice",
       "score": 82,
-      "ratings": {"localRelevance": 5, "readerUtility": 4, "freshness": 5, "evidenceStrength": 4, "uniqueAngle": 3, "repeatVisitPotential": 2, "speedToUsefulDraft": 4},
+      "ratings": {
+        "localRelevance": 5,
+        "readerUtility": 4,
+        "freshness": 5,
+        "evidenceStrength": 4,
+        "uniqueAngle": 3,
+        "repeatVisitPotential": 2,
+        "speedToUsefulDraft": 4
+      },
       "decision": "reject-article-contract",
       "reason": "The fact budget cannot support the minimum complete bulletin without padding."
     },

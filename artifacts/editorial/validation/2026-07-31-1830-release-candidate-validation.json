@@ -7,8 +7,8 @@
   "candidates": [
     {
       "path": "artifacts/editorial/release-candidates/local-news/coquitlam-fall-recreation-registration-august-2026.mdx",
-      "sha256": "b9c2432d91887bca0a9d8ec07ece561126c4add61df59e547dd110b94401da10",
-      "bodyWords": 556,
+      "sha256": "378480b8284ab018832fcf3ad9a9f2fae6dbd64587bf67e7ea1342c00525bdb6",
+      "bodyWords": 592,
       "h2Count": 5,
       "listItemCount": 15,
       "highlightCount": 4,
@@ -43,7 +43,14 @@
       "Unsupported instruction to attach every participant to the household account.",
       "Repetitive ending without a practical final action."
     ],
-    "repair": "Removed the unsupported account instruction and replaced the close with source-backed address checking plus first-and-backup program selection during the official preview period."
+    "repair": "Removed the unsupported account instruction and replaced the close with source-backed address checking plus first-and-backup program selection during the official preview period.",
+    "laterBlockedCandidateSha256": "b9c2432d91887bca0a9d8ec07ece561126c4add61df59e547dd110b94401da10",
+    "laterBlockedReviewArtifact": "artifacts/editorial/reviews/gpt/local-news/coquitlam-fall-recreation-registration-august-2026.b9c2432d9188.json",
+    "laterBlockers": [
+      "The title and lead incorrectly framed Aug. 4 as the start of all fall registration.",
+      "The four August dates were presented as the complete schedule even though swimming and skating opened in July."
+    ],
+    "laterRepair": "Reframed the story as four remaining Pro-D/general openings and added the July 21/23 swimming and July 28/30 skating phases from the official registration page."
   },
   "whitecapsGptRepairBeforeFinalOpus": {
     "blockedCandidateSha256": "e49a949b8e63af1b96730d182bc2c2373221d07fa61165c30529617ccf1d4e9f",
