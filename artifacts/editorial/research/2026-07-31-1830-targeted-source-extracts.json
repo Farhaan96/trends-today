@@ -1,0 +1,103 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-31-1840",
+  "retrievedAt": "2026-07-31T18:42:00-07:00",
+  "queueUrlTitleSha256": "f520bca07b42e5a19a5cc9ebd272db8aba5f32bd26df7fa177496e54266e0534",
+  "sources": [
+    {
+      "candidate": "Coquitlam fall recreation registration",
+      "url": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2010",
+      "httpStatus": 200,
+      "rawSha256": "c7a45fbb1dfefc895898401af1760e9ae5b6ffd64d2ee9b79552989f64154833",
+      "facts": [
+        "Posted and last updated July 31, 2026.",
+        "Pro-D Day camp registration opens Aug. 4 for Coquitlam residents and Aug. 6 for non-residents.",
+        "General fitness and parks registration opens Aug. 11 for residents and Aug. 13 for non-residents.",
+        "Registration opens at 8:30 a.m. online, in person, and by phone at 604-927-4386.",
+        "Programs are visible online at least four days before registration begins.",
+        "The City asks residents to verify the exact address, unit number, Coquitlam spelling, and postal code in their account.",
+        "Eligible residents may receive 50 drop-in visits plus a $225 recreation credit through the financial-assistance program."
+      ]
+    },
+    {
+      "candidate": "Coquitlam fall recreation registration",
+      "url": "https://www.coquitlam.ca/343/Program-Guide",
+      "httpStatus": 200,
+      "rawSha256": "050c12aaf9da8553e04fbb386d8063e10d9b953b997ace18575445d4ee79d72e",
+      "facts": [
+        "The Fall 2026 Program Guide covers registered programs from September through December.",
+        "The page links the official Fall Program Guide PDF."
+      ]
+    },
+    {
+      "candidate": "Coquitlam fall recreation registration",
+      "url": "https://www.coquitlam.ca/294/Recreation-Registration",
+      "httpStatus": 200,
+      "rawSha256": "93aac8b80c2f8029d01b1f7040dad1f38de81829f338114e5acf36ee30124e48",
+      "facts": [
+        "The official registration page independently lists the same Aug. 4, Aug. 6, Aug. 11, and Aug. 13 opening dates and the 8:30 a.m. opening time.",
+        "It says programs become visible online at least four days before registration day.",
+        "It links the Sign Me Up system and repeats account-address preparation guidance."
+      ]
+    },
+    {
+      "candidate": "Coquitlam fall recreation registration",
+      "url": "https://www.coquitlam.ca/FinancialAssistanceRec",
+      "finalUrl": "https://www.coquitlam.ca/499/Financial-Assistance-for-Recreation",
+      "httpStatus": 200,
+      "rawSha256": "99c3c4d0762174105aa49118ce359c24de6745e788444716fcd5aeb79e6d7110",
+      "facts": [
+        "The official program page says each eligible family member receives 50 drop-in passes and a $225 credit.",
+        "It requires Coquitlam residency and income verification and provides an official application path."
+      ]
+    },
+    {
+      "candidate": "Whitecaps Aug. 1 matchday refresh",
+      "url": "https://www.whitecapsfc.com/news/spectator-aug-1-2026-pride-presented-telus",
+      "httpStatus": 200,
+      "rawSha256": "09031dcc97e5c7b22190ad8028d64ac68da5d0407ea1ac040903520b027d3b86",
+      "datePublished": "2026-07-31T15:49:54.996Z",
+      "dateModified": "2026-08-01T00:30:57.859Z",
+      "facts": [
+        "Whitecaps host LAFC at BC Place on Saturday, Aug. 1, with a 4:30 p.m. Pacific kickoff.",
+        "Public gates open at 3 p.m.; the club recommends early arrival because electronic turnstiles are in use.",
+        "The ticket office is at Gate B.",
+        "The venue recommends no bag; permitted clear bags are smaller than 12 by 12 by 6 inches and one small opaque bag cannot exceed 6.5 by 8.5 inches.",
+        "Mobile tickets are required and BC Place is cashless, with a cash-to-card kiosk listed at Section 235.",
+        "Home supporter sections 201-207 and 248-254 prohibit LAFC colours and visiting-team support; affected guests may be relocated."
+      ],
+      "excludedClaims": [
+        "Promotional crowd or ticket-sales figures.",
+        "50/50 purchase, prize, odds, draw, proceeds, or charitable-impact claims.",
+        "Sponsor activations and promotional vendor claims.",
+        "Any personal or medical details about attendees or participants."
+      ]
+    },
+    {
+      "candidate": "Whitecaps Aug. 1 matchday refresh",
+      "url": "https://www.bcplace.com/?event=vancouver-whitecaps-fc-vs-lafc",
+      "httpStatus": 200,
+      "rawSha256": "91010b18f010c297673dce6cc91f0f8ffd73823296d1d47094afac9f8538f10f",
+      "facts": [
+        "BC Place independently lists Aug. 1, 2026 at 4:30 p.m. Pacific and all gates at 3 p.m.",
+        "It says parking and street access may be limited because several events are occurring in the stadium district.",
+        "It documents the electronic turnstile and mobile-ticket process, clear-bag dimensions, no in-and-out privileges, cashless venue policy, and accessibility supports."
+      ]
+    },
+    {
+      "candidate": "Whitecaps Aug. 1 matchday refresh",
+      "url": "https://www.whitecapsfc.com/schedule/matches",
+      "httpStatus": 200,
+      "rawSha256": "6dd28a1984fad2050988d2ee2683fa85637f6ed7cf4c20b983972bd47f82d22e",
+      "facts": [
+        "The official schedule route returned HTTP 200 but rendered match rows client-side in this retrieval path.",
+        "It is retained as a live official schedule link, not as sole evidence for a material claim."
+      ]
+    }
+  ],
+  "existingWhitecapsHero": {
+    "path": "public/images/editorial/2026/07/whitecaps-bc-place-return-lafc.png",
+    "sha256": "2a2eb3ad3f0e4fa676712f5b6c157e84de46ce518b4dceca6a569076a07bb4c3",
+    "bytes": 2875265,
+    "inspection": "Direct visual inspection confirmed an original text-free soccer-stadium illustration that remains subject-matched for the same Aug. 1 match route. No new Whitecaps image is planned."
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-31-1840",
+  "sourceCandidates": 56,
+  "comparisonCandidates": 55,
+  "addedUrls": 8,
+  "removedUrls": 7,
+  "retainedTitleChanges": 0,
+  "queueUrlTitleSha256": "f520bca07b42e5a19a5cc9ebd272db8aba5f32bd26df7fa177496e54266e0534",
+  "materiallyResearched": [
+    {
+      "title": "Registration Opening Soon: Sign Up for Fun Fall Programs",
+      "sourceUrl": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2010",
+      "locality": "Coquitlam",
+      "category": "local-news",
+      "storyType": "reported-update",
+      "readerJob": "Tell Coquitlam residents when fall recreation registration opens and how to avoid an account-residency problem before the first deadline.",
+      "decision": "qualified-selected"
+    },
+    {
+      "title": "Spectator Information: 'Caps celebrate Pride Match with big crowd in BC Place return | Match presented by TELUS",
+      "sourceUrl": "https://www.whitecapsfc.com/news/spectator-aug-1-2026-pride-presented-telus",
+      "locality": "Vancouver",
+      "category": "sports",
+      "storyType": "reported-update",
+      "readerJob": "Help Aug. 1 attendees arrive, enter, and pay without avoidable stadium friction.",
+      "existingRoute": "/sports/whitecaps-30000-tickets-bc-place-return-lafc",
+      "decision": "qualified-selected-refresh"
+    },
+    {
+      "title": "Surrey City Hall Closure Notice",
+      "sourceUrl": "https://www.surrey.ca/news-events/news/surrey-city-hall-closure-notice-1",
+      "locality": "Surrey",
+      "decision": "reject",
+      "reason": "Fresh and useful, but the source supports only the Monday closure, Tuesday reopening, and generic service links. A standalone 300-word bulletin would require padding; the already-published Delta BC Day hours guide covers the broader holiday-service reader job."
+    },
+    {
+      "title": "Whitecaps FC continue chase for Hi5tory against CF Montreal in TELUS Canadian Championship semifinal",
+      "sourceUrl": "https://www.whitecapsfc.com/news/canchamp-sf2026",
+      "locality": "Vancouver",
+      "decision": "hold",
+      "reason": "Official schedule and ticket-sale dates are useful, but public sale does not open until Aug. 10 and the home match is Sept. 2. The immediate Aug. 1 matchday and Aug. 4 Coquitlam deadlines outrank it this sweep."
+    },
+    {
+      "title": "Kirk McLean Joins Canucks Insider Podcast to Reflect on his Professional Career and Connecting with the Community Jul 31, 2026",
+      "sourceUrl": "https://www.nhl.com/canucks/news/kirk-mclean-joins-canucks-insider-podcast-to-reflect-on-his-professional-career-and-connecting-with-the-community",
+      "locality": "Vancouver",
+      "decision": "reject",
+      "reason": "Fresh team profile and podcast promotion, but no schedule, ticket, viewing, eligibility, travel, or other practical Lower Mainland reader decision."
+    },
+    {
+      "title": "Community Picnic at Hawthorne Rotary Park",
+      "sourceUrl": "https://www.surrey.ca/news-events/events/community-picnic-hawthorne-rotary-park",
+      "locality": "Surrey",
+      "decision": "reject",
+      "reason": "Recurring event in the same City picnic series already covered at Adams Road Park; a location swap does not create a sufficiently distinct article angle."
+    },
+    {
+      "title": "Outdoor Movie Night at T.E. Scott Park",
+      "sourceUrl": "https://www.surrey.ca/news-events/events/outdoor-movie-night-te-scott-park",
+      "locality": "Surrey",
+      "decision": "hold",
+      "reason": "Single official event listing and recurring outdoor-movie format; below the two selected lanes on evidence depth and practical urgency."
+    },
+    {
+      "title": "Sounds of Summer: Ben Dunnill",
+      "sourceUrl": "https://www.surrey.ca/news-events/events/sounds-of-summer-ben-dunnill",
+      "locality": "Surrey",
+      "decision": "reject",
+      "reason": "Recurring concert-series listing without a distinct service change or reader decision beyond the calendar entry."
+    }
+  ],
+  "unchangedCarryovers": {
+    "count": 48,
+    "decision": "retain-prior-rejection-or-hold",
+    "reference": "codex/lm-daily-2026-07-31-0835:artifacts/editorial/research/2026-07-31-0830-rejection-summary.json",
+    "rule": "URL and title were unchanged and no new material evidence was observed; prior covered, duplicate, recurring, stale, retrospective, sensitive, thin, or insufficient-utility decisions remain in force."
+  }
+}

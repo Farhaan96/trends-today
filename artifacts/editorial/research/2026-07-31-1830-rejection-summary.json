@@ -1,0 +1,28 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-31-1840",
+  "sourceCandidates": 56,
+  "qualifiedSelected": 2,
+  "rejectedOrHeld": 54,
+  "summary": {
+    "unchangedPriorDecisions": 48,
+    "newExplicitRejectionsOrHolds": 6,
+    "addedUrls": 8,
+    "removedUrls": 7,
+    "retainedTitleChanges": 0
+  },
+  "newExplicitDecisions": [
+    {"title": "Surrey City Hall Closure Notice", "decision": "reject", "reason": "Too thin for the minimum complete bulletin without padding; broader BC Day service coverage already exists for Delta."},
+    {"title": "Whitecaps FC continue chase for Hi5tory against CF Montreal in TELUS Canadian Championship semifinal", "decision": "hold", "reason": "Public ticket sale begins Aug. 10 and the match is Sept. 2; lower immediate utility than the selected lanes."},
+    {"title": "Kirk McLean Joins Canucks Insider Podcast", "decision": "reject", "reason": "No immediate ticket, schedule, viewing, travel, eligibility, or service decision."},
+    {"title": "Community Picnic at Hawthorne Rotary Park", "decision": "reject", "reason": "Recurring City picnic series already covered at Adams Road Park; location swap is not a distinct article angle."},
+    {"title": "Outdoor Movie Night at T.E. Scott Park", "decision": "hold", "reason": "Single recurring event listing below selected lanes on evidence depth and urgency."},
+    {"title": "Sounds of Summer: Ben Dunnill", "decision": "reject", "reason": "Recurring concert listing without a distinct reader decision beyond the calendar entry."}
+  ],
+  "unchangedDecisionReference": "codex/lm-daily-2026-07-31-0835:artifacts/editorial/research/2026-07-31-0830-rejection-summary.json",
+  "terminalHoldsPreserved": [
+    "Surrey strata webinar remains held after two unchanged-scope plan reviews.",
+    "Whitecaps 50/50 remains held on the owner-policy/config blocker.",
+    "Richmond emergency-preparedness funding remains held after the two-review cap."
+  ],
+  "commercialFitPolicy": "Commercial fit was considered only after the two editorial candidates qualified. It did not change selection; both remain independent editorial coverage with unavailable commercial measurements."
+}

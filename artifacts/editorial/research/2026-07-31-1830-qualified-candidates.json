@@ -1,0 +1,58 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-31-1840",
+  "dailyCountBeforeSweep": 0,
+  "dailyCeiling": 6,
+  "sweepCeiling": 2,
+  "qualifiedSelected": [
+    {
+      "slug": "coquitlam-fall-recreation-registration-august-2026",
+      "title": "Coquitlam fall recreation registration opens Aug. 4",
+      "category": "local-news",
+      "locality": "Coquitlam",
+      "storyType": "reported-update",
+      "score": 96,
+      "sourceUrls": [
+        "https://www.coquitlam.ca/m/newsflash/Home/Detail/2010",
+        "https://www.coquitlam.ca/343/Program-Guide",
+        "https://www.coquitlam.ca/294/Recreation-Registration",
+        "https://www.coquitlam.ca/FinancialAssistanceRec"
+      ],
+      "primarySourceUrls": [
+        "https://www.coquitlam.ca/m/newsflash/Home/Detail/2010",
+        "https://www.coquitlam.ca/294/Recreation-Registration"
+      ],
+      "commercialIntent": "none",
+      "commercialFitReason": "Editorial service bulletin; no sponsor or revenue claim is available.",
+      "brandSafety": "standard",
+      "sponsorshipStatus": "editorial",
+      "manualApprovalRequired": false,
+      "releaseMode": "new"
+    },
+    {
+      "slug": "whitecaps-30000-tickets-bc-place-return-lafc",
+      "title": "Whitecaps Aug. 1 matchday guide: gates, bags and mobile entry",
+      "category": "sports",
+      "locality": "Vancouver",
+      "storyType": "reported-update",
+      "score": 95,
+      "sourceUrls": [
+        "https://www.whitecapsfc.com/news/spectator-aug-1-2026-pride-presented-telus",
+        "https://www.bcplace.com/?event=vancouver-whitecaps-fc-vs-lafc",
+        "https://www.whitecapsfc.com/schedule/matches"
+      ],
+      "primarySourceUrls": [
+        "https://www.whitecapsfc.com/news/spectator-aug-1-2026-pride-presented-telus",
+        "https://www.bcplace.com/?event=vancouver-whitecaps-fc-vs-lafc"
+      ],
+      "commercialIntent": "none",
+      "commercialFitReason": "Independent editorial matchday utility; sponsor activations and promotional attendance claims are excluded.",
+      "brandSafety": "standard",
+      "sponsorshipStatus": "editorial",
+      "manualApprovalRequired": false,
+      "releaseMode": "replace-existing",
+      "existingPath": "content/sports/whitecaps-30000-tickets-bc-place-return-lafc.mdx"
+    }
+  ],
+  "commercialFitConsideredAfterQualification": true,
+  "commercialSelectionEffect": "none"
+}

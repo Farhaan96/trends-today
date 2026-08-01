@@ -1,0 +1,17 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-31-1840",
+  "retrievedAt": "2026-08-01T01:38:32.237Z",
+  "source": "https://www.trendstoday.ca/api/analytics",
+  "httpStatus": 200,
+  "status": "available",
+  "activeArticles": 169,
+  "localDate": "2026-07-31",
+  "publicationsToday": 0,
+  "dailyCeiling": 6,
+  "remainingDailyCapacity": 6,
+  "newestArticle": {
+    "title": "Surrey $20 tree sales open Aug. 18 and Sept. 29",
+    "publishedAt": "2026-07-30T12:45:00-07:00",
+    "slug": "surrey-20-dollar-tree-sale-august-18"
+  }
+}
