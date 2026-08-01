@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "runId": "run-trends-today-daily-publisher-2026-07-31-1840",
+  "toolRoute": "built-in image_gen",
+  "generationId": "019fbaf2-cde0-7fb3-852c-4fd514da4625",
+  "initialOutput": "exec-494f46cf-d00e-4ae1-93d5-756f29aa6327.png",
+  "finalOutput": "exec-5ab6acc4-7f51-40fe-9ebe-e02f4739c3a5.png",
+  "destination": "public/images/editorial/2026/07/coquitlam-fall-recreation-registration.png",
+  "dimensions": "1774x887",
+  "bytes": 1885220,
+  "sha256": "8187418be79df41c80480097f3736a7fbd95cef37b539d7fc2857834090bf15e",
+  "initialPrompt": "Photorealistic natural editorial hero of an unbranded community recreation registration desk in a bright civic recreation lobby, with a laptop, text-free activity guide, swim goggles, basketball and reusable bottle; no people, logos, readable text, watermark, payment card, government seal or copied City imagery.",
+  "repairPrompt": "Change only the activity guide cover to text-free muted geometric shapes; preserve all other objects, framing and lighting; require no people anywhere, including printed material or reflections, and no text, logos, brands, seals or watermark.",
+  "repairReason": "The initial guide cover contained small photographs of people, contrary to the image contract.",
+  "inspection": "The final wide image was visually inspected at full displayed resolution. It shows a generic, unbranded recreation registration still-life with no people, readable text, logos, seals, payment cards or watermark.",
+  "alt": "A laptop, text-free activity guide, basketball and swim goggles on a recreation-centre registration desk",
+  "attribution": "Original Trends Today editorial image generated with AI; not a photograph of a City of Coquitlam facility"
+}

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "b9c2432d91887bca0a9d8ec07ece561126c4add61df59e547dd110b94401da10",
+  "repositorySha": "98afb99f99580f28ff21a8afbc6489c6c0355e2a",
+  "reviewedAt": "2026-08-01T02:26:48.550753+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fbb24-a64c-7dc0-8e85-1d8890d579a2",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The title, description and opening claim that Coquitlam fall recreation registration begins or starts Aug. 4 are materially overbroad. The cited City registration page says Fall 2026 registration began earlier for swimming on July 21 and skating on July 28; Aug. 4 begins only resident registration for Pro-D Day camps.",
+    "The article presents four dates as \"The four registration dates\" without clearly identifying them as the four remaining dates for Pro-D Day camps and general programs. This omission manufactures a misleading sense that the schedule is complete and weakens the lead's factual support and local utility."
+  ],
+  "summary": "The candidate is clean, readable and well formatted, with zero authorial em dashes. Most operational details are supported, but the central framing incorrectly treats Aug. 4 as the beginning of fall recreation registration and the listed four dates as the complete fall schedule, despite the cited City page showing swimming and skating registration already opened in July."
+}

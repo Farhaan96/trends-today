@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "d4b4c951057fcebed7269dcc6a0106bcb8d9afa24bf4955ccdf7d600eb92ae9a",
+  "repositorySha": "9afd38f7c7c6731a4cd878297a0627a749ec1863",
+  "reviewedAt": "2026-08-01T02:24:13.724336+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fbb21-e8b0-7af3-b549-a555e3eef5a8",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The clear-bag limit is misstated twice. The candidate says the bag must be \u201csmaller than\u201d 12 by 12 by 6 inches, while BC Place permits bags \u201cno larger than\u201d those dimensions. The candidate incorrectly excludes a bag exactly at the published maximum.",
+    "The closing section repeats essentially the same ticket, bag, section and venue-page instructions immediately after the checklist. This repetition weakens the ending and adds filler.",
+    "Several specific instructions attributed to official guidance, including increasing screen brightness, using Gate B for ticket help and the supporter-section restrictions, could not be verified from the accessible cited material. The Whitecaps spectator page was unavailable through the review route, so strict support for those claims remains unconfirmed."
+  ],
+  "summary": "BLOCKERS. The article is readable, scannable and locally useful, with no authorial em dashes. It needs correction of the clear-bag threshold, a tighter non-repetitive close and verification of claims unique to the unavailable Whitecaps spectator page before release."
+}

@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "runId": "run-trends-today-daily-publisher-2026-07-31-1840",
+  "validatedAt": "2026-08-01T03:01:17.7524457Z",
+  "validator": "apps.pipeline.validation.validate_release_candidate plus mechanical full-file assertions",
+  "manualApprovalKeywordCount": 23,
+  "candidates": [
+    {
+      "path": "artifacts/editorial/release-candidates/local-news/coquitlam-fall-recreation-registration-august-2026.mdx",
+      "sha256": "378480b8284ab018832fcf3ad9a9f2fae6dbd64587bf67e7ea1342c00525bdb6",
+      "bodyWords": 592,
+      "h2Count": 5,
+      "listItemCount": 14,
+      "highlightCount": 4,
+      "fullFileEmDashCount": 0,
+      "manualApprovalKeywordHits": [],
+      "sourceUrlCount": 4,
+      "uncitedSourceUrls": [],
+      "validationPassed": true,
+      "errors": []
+    },
+    {
+      "path": "artifacts/editorial/release-candidates/sports/whitecaps-30000-tickets-bc-place-return-lafc.mdx",
+      "sha256": "ddc76fbfed1876892c7e71664e4d169d031abdbfbac9db43325213705da5df86",
+      "bodyWords": 557,
+      "h2Count": 5,
+      "listItemCount": 18,
+      "highlightCount": 4,
+      "fullFileEmDashCount": 0,
+      "manualApprovalKeywordHits": [],
+      "sourceUrlCount": 2,
+      "uncitedSourceUrls": [],
+      "attendanceScopeHits": [],
+      "legacySlug30000Count": 1,
+      "validationPassed": true,
+      "errors": []
+    }
+  ],
+  "gptRepairBeforeFinalOpus": {
+    "blockedCandidateSha256": "f5b6e370fd54d37296656b33e5b3ebb12c02426657ba7683a58b796f64149069",
+    "blockedReviewArtifact": "artifacts/editorial/reviews/gpt/local-news/coquitlam-fall-recreation-registration-august-2026.f5b6e370fd54.json",
+    "blockers": [
+      "Unsupported instruction to attach every participant to the household account.",
+      "Repetitive ending without a practical final action."
+    ],
+    "repair": "Removed the unsupported account instruction and replaced the close with source-backed address checking plus first-and-backup program selection during the official preview period.",
+    "laterBlockedCandidateSha256": "b9c2432d91887bca0a9d8ec07ece561126c4add61df59e547dd110b94401da10",
+    "laterBlockedReviewArtifact": "artifacts/editorial/reviews/gpt/local-news/coquitlam-fall-recreation-registration-august-2026.b9c2432d9188.json",
+    "laterBlockers": [
+      "The title and lead incorrectly framed Aug. 4 as the start of all fall registration.",
+      "The four August dates were presented as the complete schedule even though swimming and skating opened in July."
+    ],
+    "laterRepair": "Reframed the story as four remaining Pro-D/general openings and added the July 21/23 swimming and July 28/30 skating phases from the official registration page."
+  },
+  "whitecapsGptRepairBeforeFinalOpus": {
+    "blockedCandidateSha256": "e49a949b8e63af1b96730d182bc2c2373221d07fa61165c30529617ccf1d4e9f",
+    "blockedReviewArtifact": "artifacts/editorial/reviews/gpt/sports/whitecaps-30000-tickets-bc-place-return-lafc.e49a949b8e63.json",
+    "blockers": [
+      "The two official pages conflict on the cash-to-card station number.",
+      "The draft exposed internal editorial-process language, called the schedule fixed, repeated instructions and ended weakly."
+    ],
+    "repair": "Removed the disputed station number, kept only the shared cashless fact, replaced internal process language, softened the schedule claim, consolidated repeated instructions and added a direct final checklist.",
+    "secondBlockedCandidateSha256": "d4b4c951057fcebed7269dcc6a0106bcb8d9afa24bf4955ccdf7d600eb92ae9a",
+    "secondBlockedReviewArtifact": "artifacts/editorial/reviews/gpt/sports/whitecaps-30000-tickets-bc-place-return-lafc.d4b4c951057f.json",
+    "secondBlockers": [
+      "The clear-bag maximum was incorrectly written as smaller than the published maximum.",
+      "The ending repeated the preceding checklist.",
+      "Claims unique to the spectator page could not be reopened through the GPT review route."
+    ],
+    "secondRepair": "Changed the clear-bag language to no larger than, removed the repeated close and stripped Gate B, screen-brightness and supporter-section claims that the GPT route could not independently reopen.",
+    "thirdBlockedCandidateSha256": "5994a6bb2ae1a83c6ba1a39a742c89bca243bf33c2d24e1eb2eea76496ca5af7",
+    "thirdBlockedReviewArtifact": "artifacts/editorial/reviews/gpt/sports/whitecaps-30000-tickets-bc-place-return-lafc.5994a6bb2ae1.json",
+    "thirdBlockers": [
+      "The candidate incorrectly implied every electronic turnstile requires a mobile ticket.",
+      "Repeated caveats crowded out concise matchday guidance."
+    ],
+    "thirdRepair": "Rewrote entry around BC Place's exact Mobile Wallet tap, Ticketmaster-app barcode, physical-ticket barcode and multiple-ticket sequence; removed defensive caveats and changed the title from mobile entry to ticket entry.",
+    "fourthBlockedCandidateSha256": "2de862c9fcc0246465328beace2aa2a09f84c14271c5c3d8e22b7930a8034ec0",
+    "fourthBlockedReviewArtifact": "artifacts/editorial/reviews/gpt/sports/whitecaps-30000-tickets-bc-place-return-lafc.2de862c9fcc0.json",
+    "fourthBlockers": [
+      "The GPT route still could not resolve the Whitecaps spectator URL.",
+      "Arrival, ticket, bag and venue-page checks remained repetitive."
+    ],
+    "fourthRepair": "Removed the inaccessible spectator URL from the exact release source set, retained BC Place plus the official schedule, and consolidated repeated guidance into one entry sequence, one bag section, one access section and one final checklist.",
+    "terminalBlockedCandidateSha256": "ddc76fbfed1876892c7e71664e4d169d031abdbfbac9db43325213705da5df86",
+    "terminalBlockedReviewArtifact": "artifacts/editorial/reviews/gpt/sports/whitecaps-30000-tickets-bc-place-return-lafc.ddc76fbfed18.json",
+    "terminalBlockers": [
+      "The final two-source candidate still added opaque and one-bag qualifiers absent from the accessible venue source.",
+      "The schedule link was described as a match route instead of a match listing.",
+      "Repeated current-guidance caveats and imprecise bag wording kept factual support and quality below four."
+    ],
+    "terminalDisposition": "Hold Whitecaps for this sweep. Do not run Opus, promote, replace the existing article, merge, deploy or browser-claim this candidate."
+  }
+}

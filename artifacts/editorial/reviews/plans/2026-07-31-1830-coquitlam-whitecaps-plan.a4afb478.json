@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "reviewType": "material-plan",
+  "verdict": "BLOCKERS",
+  "status": "review_blocked",
+  "recordedAt": "2026-08-01T02:03:13.1674338Z",
+  "repositorySha": "a4afb4789ee26561de4e3e6af1bce9005e7b2eee",
+  "modelUsed": "claude-opus-5",
+  "requestedModels": ["claude-opus-5"],
+  "observedModels": ["claude-haiku-4-5-20251001", "claude-opus-5"],
+  "fallbackUsed": false,
+  "fallbackDisabled": true,
+  "runnerSessionId": 37500,
+  "blockers": [
+    "Add required lengthRationale to both local candidates and deterministic validation.",
+    "Rewrite Whitecaps reportingMethod and drop stale archive review fields.",
+    "Cite or remove the Whitecaps schedule URL so source validation is coherent.",
+    "Scope attendance-figure exclusion around the legacy slug required by replace-existing.",
+    "Rewrite Whitecaps highlights, subtitle, imageAlt, and readerImpact, not only body copy."
+  ],
+  "executableDeltas": [
+    "Scan all 23 manualApprovalKeywords over full candidate bytes.",
+    "Run em-dash validation over the full candidate including frontmatter.",
+    "Use the mechanical 550-950 body token range enforced by validation.",
+    "Handle the utility-promise H2 and list trap explicitly.",
+    "Reserve Opus cycle 2 for the final exact release SHA and stop on its blockers.",
+    "Commit all four review artifacts after promotion so frontmatter paths resolve.",
+    "Pin GPT artifact category depth and compare remote origin/main for drift.",
+    "Correct production snapshot provenance for derived daily fields."
+  ],
+  "authorization": "Plan review only. No candidate, image, content, push, merge, deployment, publication, or contact was authorized by this verdict."
+}

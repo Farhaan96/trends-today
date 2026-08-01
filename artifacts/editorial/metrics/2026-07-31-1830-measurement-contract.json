@@ -1,0 +1,78 @@
+{
+  "runId": "run-trends-today-daily-publisher-2026-07-31-1840",
+  "windowStart": "2026-07-31T00:00:00-07:00",
+  "windowEnd": "2026-07-31T18:38:32-07:00",
+  "retrievedAt": "2026-07-31T18:38:32-07:00",
+  "metrics": [
+    {
+      "metric": "content.activeArticles",
+      "value": 169,
+      "unit": "count",
+      "status": "available",
+      "source": "public /api/analytics",
+      "freshnessTarget": "each sweep"
+    },
+    {
+      "metric": "content.publicationsToday",
+      "value": 0,
+      "unit": "count",
+      "status": "available",
+      "source": "public /api/analytics plus publishedAt inventory",
+      "freshnessTarget": "each sweep"
+    },
+    {
+      "metric": "reporting.protectedEndpoint",
+      "value": null,
+      "unit": "response",
+      "status": "unavailable",
+      "source": "https://www.trendstoday.ca/api/analytics/reporting",
+      "freshnessTarget": "each sweep",
+      "reason": "HTTP 401 without a reporting credential in this task environment"
+    },
+    {
+      "metric": "vercel.pageViews",
+      "value": null,
+      "unit": "count",
+      "status": "unavailable",
+      "source": "Vercel Web Analytics export",
+      "freshnessTarget": "daily complete day",
+      "reason": "No Vercel reporting credential is available in this task environment"
+    },
+    {
+      "metric": "ga4.pageViews",
+      "value": null,
+      "unit": "count",
+      "status": "unavailable",
+      "source": "GA4 Data API",
+      "freshnessTarget": "daily complete day",
+      "reason": "No GA4 property or reporting credential is available in this task environment"
+    },
+    {
+      "metric": "searchConsole.clicks",
+      "value": null,
+      "unit": "count",
+      "status": "unavailable",
+      "source": "Google Search Console API",
+      "freshnessTarget": "daily after provider processing",
+      "reason": "No Search Console site or reporting credential is available in this task environment"
+    },
+    {
+      "metric": "commercial.revenue",
+      "value": null,
+      "unit": "CAD",
+      "status": "unavailable",
+      "source": "approved ad, sponsor, and revenue systems",
+      "freshnessTarget": "per run",
+      "reason": "No approved connected source is available"
+    },
+    {
+      "metric": "run.modelCost",
+      "value": null,
+      "unit": "USD",
+      "status": "unavailable",
+      "source": "provider usage receipts",
+      "freshnessTarget": "per run",
+      "reason": "No cost receipt was available before the plan review"
+    }
+  ]
+}
