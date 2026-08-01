@@ -7,6 +7,7 @@ import sys
 import json
 import logging
 import argparse
+import re
 from pathlib import Path
 from datetime import datetime, timedelta
 from typing import Dict, List
@@ -23,6 +24,12 @@ from seo import SEOOptimizer
 from publish import Publisher, promote_candidate
 from strategy import build_research_queue
 from validation import validate_release_candidate
+from source_policy import (
+    canonical_http_url,
+    is_http_url,
+    lead_hosts,
+    url_matches_any_host,
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -41,12 +48,20 @@ VALID_CATEGORIES = {
 
 
 def seed_urls_for_topic(topic: Dict) -> List[str]:
-    """Preserve the reviewed research URLs when retrieving candidate sources."""
+    """Preserve reviewed evidence URLs without scraping the discovery lead."""
     evidence = topic.get('evidence') or {}
     urls = [topic.get('url'), topic.get('sourceUrl')]
     urls.extend(evidence.get('primarySourceUrls') or [])
     urls.extend(evidence.get('sourceUrls') or [])
-    return list(dict.fromkeys(str(url).strip() for url in urls if str(url or '').strip()))
+    blocked_hosts = lead_hosts(topic)
+    return list(dict.fromkeys(
+        str(url).strip()
+        for url in urls
+        if (
+            is_http_url(url)
+            and not url_matches_any_host(url, blocked_hosts)
+        )
+    ))
 
 
 def primary_source_urls_for_topic(topic: Dict) -> set:
@@ -55,7 +70,44 @@ def primary_source_urls_for_topic(topic: Dict) -> set:
     primary_urls = list(evidence.get('primarySourceUrls') or [])
     if topic.get('sourceTier') == 'primary':
         primary_urls.extend([topic.get('url'), topic.get('sourceUrl')])
-    return {str(url).strip() for url in primary_urls if str(url or '').strip()}
+    blocked_hosts = lead_hosts(topic)
+    return {
+        str(url).strip()
+        for url in primary_urls
+        if (
+            is_http_url(url)
+            and not url_matches_any_host(url, blocked_hosts)
+        )
+    }
+
+
+def apply_source_tiers(sources: List[Dict], topic: Dict) -> None:
+    """Label retrieved sources without collapsing distinct query-keyed pages."""
+    primary_urls = {
+        canonical
+        for url in primary_source_urls_for_topic(topic)
+        if (canonical := canonical_http_url(url))
+    }
+    for source in sources:
+        canonical = canonical_http_url(source.get('url'))
+        source['tier'] = (
+            'primary'
+            if canonical and canonical in primary_urls
+            else 'secondary'
+        )
+
+
+def remove_discovery_lead_sources(
+    sources: List[Dict],
+    topic: Dict,
+) -> List[Dict]:
+    """Keep search fallback from reintroducing the publication that led us."""
+    blocked_hosts = lead_hosts(topic)
+    return [
+        source
+        for source in sources
+        if not url_matches_any_host(source.get('url'), blocked_hosts)
+    ]
 
 
 def requires_manual_approval(topic: Dict, article: Dict, source_config: Dict) -> bool:
@@ -98,20 +150,52 @@ def resolve_category(topic: Dict, article: Dict) -> str:
     text = f"{topic.get('title', '')} {article.get('title', '')}".lower()
     keyword_map = {
         'transit': ('translink', 'skytrain', 'bus route', 'seabus', 'road closure', 'traffic'),
-        'things-to-do': ('event', 'festival', 'concert', 'weekend', 'things to do'),
-        'food-drink': ('restaurant', 'bakery', 'cafe', 'bar', 'opening', 'closing'),
+        'food-drink': (
+            'restaurant', 'restaurants', 'bakery', 'bakeries', 'cafe',
+            'coffee shop', 'bar', 'pub', 'brewery', 'eatery', 'diner',
+        ),
+        'local-news': (
+            'retailer', 'retail store', 'store closing', 'store opening',
+            'retail space', 'retail', 'storefront', 'shop closing',
+            'shop closes', 'local business', 'closing sale',
+            'liquidation sale', 'new location', 'shutters',
+        ),
         'housing': ('housing', 'rent', 'development', 'rezoning', 'condo'),
         'sports': ('canucks', 'whitecaps', 'bc lions', 'giants', 'game'),
-        'space': ('space', 'nasa', 'planet', 'moon', 'mars', 'asteroid', 'telescope'),
+        'space': (
+            'outer space', 'spacecraft', 'space station', 'spaceflight',
+            'nasa', 'planet', 'moon', 'mars', 'asteroid', 'telescope',
+        ),
         'health': ('health', 'medical', 'disease', 'patient', 'drug', 'cancer', 'clinical'),
         'psychology': ('psychology', 'brain', 'behavior', 'mental', 'emotion', 'cognitive'),
         'science': ('science', 'study', 'researcher', 'physics', 'biology', 'chemistry'),
         'culture': ('culture', 'media', 'art', 'music', 'creator', 'social'),
+        'things-to-do': (
+            'event', 'events', 'festival', 'festivals', 'concert',
+            'concerts', 'weekend', 'things to do',
+        ),
     }
     for category, keywords in keyword_map.items():
-        if any(keyword in text for keyword in keywords):
+        if any(
+            re.search(rf'(?<!\w){re.escape(keyword)}(?!\w)', text)
+            for keyword in keywords
+        ):
             return category
     return 'local-news'
+
+
+def resolve_story_type(topic: Dict, category: str) -> str:
+    explicit = str(topic.get('storyType') or '').strip()
+    if explicit:
+        return explicit
+    return (
+        'reported-update'
+        if category in {
+            'local-news', 'transit', 'things-to-do', 'food-drink',
+            'housing', 'sports',
+        }
+        else 'legacy'
+    )
 
 
 def eligible_candidates_from_payload(payload: object) -> List[Dict]:
@@ -166,11 +250,12 @@ class ContentPipeline:
             # 1. Retrieve sources
             seed_urls = seed_urls_for_topic(topic) or None
             sources_data = self.retrieval.retrieve(topic_title, urls=seed_urls)
-            sources = sources_data.get('sources', [])
-            primary_urls = primary_source_urls_for_topic(topic)
-            for source in sources:
-                if source.get('url') in primary_urls:
-                    source['tier'] = 'primary'
+            sources = remove_discovery_lead_sources(
+                sources_data.get('sources', []),
+                topic,
+            )
+            sources_data['sources'] = sources
+            apply_source_tiers(sources, topic)
             
             if not sources:
                 logger.warning(f"No sources found for: {topic_title}")
@@ -189,7 +274,7 @@ class ContentPipeline:
 
             article['category'] = resolve_category(topic, article)
             article['locality'] = topic.get('locality', '')
-            article['storyType'] = topic.get('storyType', 'reported-update')
+            article['storyType'] = resolve_story_type(topic, article['category'])
             article['readerImpact'] = (topic.get('evidence') or {}).get('readerImpact', '')
             article['lengthRationale'] = topic.get(
                 'lengthRationale',
