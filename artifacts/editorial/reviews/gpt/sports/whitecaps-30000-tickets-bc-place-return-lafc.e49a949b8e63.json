@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "e49a949b8e63af1b96730d182bc2c2373221d07fa61165c30529617ccf1d4e9f",
+  "repositorySha": "89e0deff2f37ae8a1cf8be42816a82fd037fea85",
+  "reviewedAt": "2026-08-01T02:20:51.000945+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fbb1f-0200-7093-9905-8ff584c76ec1",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The claim that the core schedule is \u201cfixed\u201d is stronger than the cited pages establish and conflicts with the article\u2019s own advice to perform a final schedule check.",
+    "The cash-to-card guidance presents Section 235 without acknowledging that the cited BC Place event page currently lists stations at Sections 234 and 446. The conflicting official information requires clarification before release.",
+    "\u201cThis guide replaces the route's earlier attendance-focused framing\u201d is internal editorial-process language, not useful reader-facing copy, and weakens the opening.",
+    "The article repeats variations of checking the venue page, preparing the mobile ticket, respecting bag limits and arriving after gates open without adding enough new information.",
+    "The final paragraph is bureaucratic and flat. Phrases such as \u201cThe matchday reader job is narrow\u201d and \u201cconfirmed sequence\u201d weaken an otherwise actionable checklist instead of ending with a direct reader instruction."
+  ],
+  "summary": "Strong MDX structure and generally clear service information, with zero authorial em dashes. Release is blocked by conflicting cash-to-card locations, an unsupported assertion that the schedule is fixed, exposed editorial-process language, repetition and a weak closing."
+}

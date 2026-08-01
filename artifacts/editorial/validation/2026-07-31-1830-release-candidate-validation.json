@@ -21,8 +21,8 @@
     },
     {
       "path": "artifacts/editorial/release-candidates/sports/whitecaps-30000-tickets-bc-place-return-lafc.mdx",
-      "sha256": "e49a949b8e63af1b96730d182bc2c2373221d07fa61165c30529617ccf1d4e9f",
-      "bodyWords": 624,
+      "sha256": "d4b4c951057fcebed7269dcc6a0106bcb8d9afa24bf4955ccdf7d600eb92ae9a",
+      "bodyWords": 609,
       "h2Count": 5,
       "listItemCount": 18,
       "highlightCount": 4,
@@ -44,5 +44,14 @@
       "Repetitive ending without a practical final action."
     ],
     "repair": "Removed the unsupported account instruction and replaced the close with source-backed address checking plus first-and-backup program selection during the official preview period."
+  },
+  "whitecapsGptRepairBeforeFinalOpus": {
+    "blockedCandidateSha256": "e49a949b8e63af1b96730d182bc2c2373221d07fa61165c30529617ccf1d4e9f",
+    "blockedReviewArtifact": "artifacts/editorial/reviews/gpt/sports/whitecaps-30000-tickets-bc-place-return-lafc.e49a949b8e63.json",
+    "blockers": [
+      "The two official pages conflict on the cash-to-card station number.",
+      "The draft exposed internal editorial-process language, called the schedule fixed, repeated instructions and ended weakly."
+    ],
+    "repair": "Removed the disputed station number, kept only the shared cashless fact, replaced internal process language, softened the schedule claim, consolidated repeated instructions and added a direct final checklist."
   }
 }
