@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "ddc76fbfed1876892c7e71664e4d169d031abdbfbac9db43325213705da5df86",
+  "repositorySha": "447f479c2519a3aad337778053d05d17a80778a5",
+  "reviewedAt": "2026-08-01T02:40:15.961757+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fbb30-aa39-7c33-80f2-9b2c878b16fa",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The candidate repeatedly calls the 6.5-by-8.5-inch option \u201cone small opaque bag,\u201d but the cited BC Place event page only says \u201cbags no larger than 6.5 by 8.5 inches.\u201d It does not support either \u201copaque\u201d or the one-bag limit.",
+    "The statement that the Whitecaps schedule is useful for checking the Aug. 1 \u201cmatch route\u201d is unsupported and misleading. The cited schedule is a match listing, not a source for transportation routes or stadium access.",
+    "Several passages repeat the same instruction to check current venue guidance, especially in the accessibility and stadium-access sections. This padding weakens specificity and momentum enough to require revision.",
+    "The sentence telling anyone over the bag limits to \u201cchoose an item that fits\u201d is imprecise: the policy regulates the bag, not every item being carried. The wording obscures the practical reader action."
+  ],
+  "summary": "The release candidate has strong MDX structure, a concrete service lead, useful local details, and no authorial em dashes. It does not pass the strict gate because two claims exceed what the cited sources support, while repetitive guidance and imprecise bag wording keep the editorial quality below 4."
+}

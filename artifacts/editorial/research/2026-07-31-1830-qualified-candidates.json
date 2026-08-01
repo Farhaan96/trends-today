@@ -3,7 +3,7 @@
   "dailyCountBeforeSweep": 0,
   "dailyCeiling": 6,
   "sweepCeiling": 2,
-  "qualifiedSelected": [
+  "editoriallyQualified": [
     {
       "slug": "coquitlam-fall-recreation-registration-august-2026",
       "title": "Coquitlam lists four more fall registration dates from Aug. 4",
@@ -26,7 +26,8 @@
       "brandSafety": "standard",
       "sponsorshipStatus": "editorial",
       "manualApprovalRequired": false,
-      "releaseMode": "new"
+      "releaseMode": "new",
+      "gptGateStatus": "pending-rerun-at-final-evidence-sha"
     },
     {
       "slug": "whitecaps-30000-tickets-bc-place-return-lafc",
@@ -48,9 +49,15 @@
       "sponsorshipStatus": "editorial",
       "manualApprovalRequired": false,
       "releaseMode": "replace-existing",
-      "existingPath": "content/sports/whitecaps-30000-tickets-bc-place-return-lafc.mdx"
+      "existingPath": "content/sports/whitecaps-30000-tickets-bc-place-return-lafc.mdx",
+      "gptGateStatus": "terminal-hold-after-five-blocked-exact-candidate-artifacts",
+      "terminalHoldArtifact": "artifacts/editorial/reviews/gpt/sports/whitecaps-30000-tickets-bc-place-return-lafc.ddc76fbfed18.json"
     }
   ],
+  "releaseSelectedSlugs": [
+    "coquitlam-fall-recreation-registration-august-2026"
+  ],
+  "reviewBlockedSlugs": ["whitecaps-30000-tickets-bc-place-return-lafc"],
   "commercialFitConsideredAfterQualification": true,
   "commercialSelectionEffect": "none"
 }

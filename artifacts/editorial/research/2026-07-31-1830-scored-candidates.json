@@ -31,7 +31,9 @@
         "speedToUsefulDraft": 5
       },
       "decision": "brief-refresh",
-      "reason": "A same-route refresh replaces promotional attendance framing with fresh BC Place stadium instructions and official team-schedule corroboration for tomorrow's match."
+      "reason": "A same-route refresh replaces promotional attendance framing with fresh BC Place stadium instructions and official team-schedule corroboration for tomorrow's match.",
+      "releaseDecision": "hold-gpt-blockers",
+      "releaseDecisionReason": "The editorial idea remained qualified, but five exact GPT artifacts did not pass strict factual-support and quality gates."
     },
     {
       "title": "Whitecaps Canadian Championship semifinal schedule",

@@ -81,6 +81,14 @@
       "The GPT route still could not resolve the Whitecaps spectator URL.",
       "Arrival, ticket, bag and venue-page checks remained repetitive."
     ],
-    "fourthRepair": "Removed the inaccessible spectator URL from the exact release source set, retained BC Place plus the official schedule, and consolidated repeated guidance into one entry sequence, one bag section, one access section and one final checklist."
+    "fourthRepair": "Removed the inaccessible spectator URL from the exact release source set, retained BC Place plus the official schedule, and consolidated repeated guidance into one entry sequence, one bag section, one access section and one final checklist.",
+    "terminalBlockedCandidateSha256": "ddc76fbfed1876892c7e71664e4d169d031abdbfbac9db43325213705da5df86",
+    "terminalBlockedReviewArtifact": "artifacts/editorial/reviews/gpt/sports/whitecaps-30000-tickets-bc-place-return-lafc.ddc76fbfed18.json",
+    "terminalBlockers": [
+      "The final two-source candidate still added opaque and one-bag qualifiers absent from the accessible venue source.",
+      "The schedule link was described as a match route instead of a match listing.",
+      "Repeated current-guidance caveats and imprecise bag wording kept factual support and quality below four."
+    ],
+    "terminalDisposition": "Hold Whitecaps for this sweep. Do not run Opus, promote, replace the existing article, merge, deploy or browser-claim this candidate."
   }
 }
