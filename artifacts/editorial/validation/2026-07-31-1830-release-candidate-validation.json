@@ -21,8 +21,8 @@
     },
     {
       "path": "artifacts/editorial/release-candidates/sports/whitecaps-30000-tickets-bc-place-return-lafc.mdx",
-      "sha256": "d4b4c951057fcebed7269dcc6a0106bcb8d9afa24bf4955ccdf7d600eb92ae9a",
-      "bodyWords": 609,
+      "sha256": "5994a6bb2ae1a83c6ba1a39a742c89bca243bf33c2d24e1eb2eea76496ca5af7",
+      "bodyWords": 594,
       "h2Count": 5,
       "listItemCount": 18,
       "highlightCount": 4,
@@ -52,6 +52,14 @@
       "The two official pages conflict on the cash-to-card station number.",
       "The draft exposed internal editorial-process language, called the schedule fixed, repeated instructions and ended weakly."
     ],
-    "repair": "Removed the disputed station number, kept only the shared cashless fact, replaced internal process language, softened the schedule claim, consolidated repeated instructions and added a direct final checklist."
+    "repair": "Removed the disputed station number, kept only the shared cashless fact, replaced internal process language, softened the schedule claim, consolidated repeated instructions and added a direct final checklist.",
+    "secondBlockedCandidateSha256": "d4b4c951057fcebed7269dcc6a0106bcb8d9afa24bf4955ccdf7d600eb92ae9a",
+    "secondBlockedReviewArtifact": "artifacts/editorial/reviews/gpt/sports/whitecaps-30000-tickets-bc-place-return-lafc.d4b4c951057f.json",
+    "secondBlockers": [
+      "The clear-bag maximum was incorrectly written as smaller than the published maximum.",
+      "The ending repeated the preceding checklist.",
+      "Claims unique to the spectator page could not be reopened through the GPT review route."
+    ],
+    "secondRepair": "Changed the clear-bag language to no larger than, removed the repeated close and stripped Gate B, screen-brightness and supporter-section claims that the GPT route could not independently reopen."
   }
 }
