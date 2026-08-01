@@ -1,7 +1,7 @@
 {
   "runId": "run-trends-today-daily-publisher-2026-07-31-1840",
   "retrievedAt": "2026-08-01T01:38:32.237Z",
-  "source": "https://www.trendstoday.ca/api/analytics",
+  "source": "https://www.trendstoday.ca/api/analytics plus recentArticles publishedAt inventory",
   "httpStatus": 200,
   "status": "available",
   "activeArticles": 169,
