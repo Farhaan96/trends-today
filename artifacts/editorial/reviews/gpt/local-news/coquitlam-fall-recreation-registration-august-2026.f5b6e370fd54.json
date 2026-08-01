@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "f5b6e370fd54d37296656b33e5b3ebb12c02426657ba7683a58b796f64149069",
+  "repositorySha": "022da424ee15318cdf3867c8c49e62c85d72ed98",
+  "reviewedAt": "2026-08-01T02:17:24.686315+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fbb1b-a4c7-7250-8ab2-fb013d673037",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The instruction to confirm that every prospective participant is attached to the household account is not supported by any cited candidate source.",
+    "The ending merely repeats the registration sequence and 8:30 a.m. timing. It does not provide the required actionable close, such as checking residency status or choosing programs and backups before the applicable date."
+  ],
+  "summary": "BLOCKED. The artifact and repository hashes match exactly, and the authorial prose contains no em dashes. The dates, preview timing, account-address fields, program-guide period, registration channels, phone number, and financial-assistance amounts are supported. Valid, clean MDX and strong readability are outweighed by one unsupported preparation instruction and a flat, repetitive ending."
+}

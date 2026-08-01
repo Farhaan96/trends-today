@@ -7,8 +7,8 @@
   "candidates": [
     {
       "path": "artifacts/editorial/release-candidates/local-news/coquitlam-fall-recreation-registration-august-2026.mdx",
-      "sha256": "f5b6e370fd54d37296656b33e5b3ebb12c02426657ba7683a58b796f64149069",
-      "bodyWords": 558,
+      "sha256": "b9c2432d91887bca0a9d8ec07ece561126c4add61df59e547dd110b94401da10",
+      "bodyWords": 556,
       "h2Count": 5,
       "listItemCount": 15,
       "highlightCount": 4,
@@ -35,5 +35,14 @@
       "validationPassed": true,
       "errors": []
     }
-  ]
+  ],
+  "gptRepairBeforeFinalOpus": {
+    "blockedCandidateSha256": "f5b6e370fd54d37296656b33e5b3ebb12c02426657ba7683a58b796f64149069",
+    "blockedReviewArtifact": "artifacts/editorial/reviews/gpt/local-news/coquitlam-fall-recreation-registration-august-2026.f5b6e370fd54.json",
+    "blockers": [
+      "Unsupported instruction to attach every participant to the household account.",
+      "Repetitive ending without a practical final action."
+    ],
+    "repair": "Removed the unsupported account instruction and replaced the close with source-backed address checking plus first-and-backup program selection during the official preview period."
+  }
 }
