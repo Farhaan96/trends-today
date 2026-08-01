@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "5994a6bb2ae1a83c6ba1a39a742c89bca243bf33c2d24e1eb2eea76496ca5af7",
+  "repositorySha": "79a3a630018b1db05885f85b14da1a2a3c1771fe",
+  "reviewedAt": "2026-08-01T02:30:51.041965+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fbb28-89cb-70b0-be39-5bec6037bf2d",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The highlight claiming that electronic turnstiles \u201crequire a mobile ticket\u201d overstates the cited BC Place guidance. The venue page explicitly provides entry instructions for physical tickets as well as Mobile Wallet and Ticketmaster tickets.",
+    "The repeated qualifications about wait-time predictions, route delays, screenshots, bag-policy interpretation and operational information make the article defensive and repetitive. They weaken transitions and crowd out the concise matchday guidance readers need.",
+    "The phone-wallet instructions are framed too categorically. The cited venue page presents Mobile Wallet, the Ticketmaster app and physical tickets as supported entry methods, while the article repeatedly steers every guest toward a phone wallet."
+  ],
+  "summary": "Strong structure, scannable MDX, useful local details and no authorial em dashes. Revision is required because the mobile-ticket framing conflicts with the cited venue instructions, while repetitive caveats reduce quality and momentum."
+}

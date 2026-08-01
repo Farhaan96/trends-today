@@ -21,8 +21,8 @@
     },
     {
       "path": "artifacts/editorial/release-candidates/sports/whitecaps-30000-tickets-bc-place-return-lafc.mdx",
-      "sha256": "5994a6bb2ae1a83c6ba1a39a742c89bca243bf33c2d24e1eb2eea76496ca5af7",
-      "bodyWords": 594,
+      "sha256": "2de862c9fcc0246465328beace2aa2a09f84c14271c5c3d8e22b7930a8034ec0",
+      "bodyWords": 583,
       "h2Count": 5,
       "listItemCount": 18,
       "highlightCount": 4,
@@ -67,6 +67,13 @@
       "The ending repeated the preceding checklist.",
       "Claims unique to the spectator page could not be reopened through the GPT review route."
     ],
-    "secondRepair": "Changed the clear-bag language to no larger than, removed the repeated close and stripped Gate B, screen-brightness and supporter-section claims that the GPT route could not independently reopen."
+    "secondRepair": "Changed the clear-bag language to no larger than, removed the repeated close and stripped Gate B, screen-brightness and supporter-section claims that the GPT route could not independently reopen.",
+    "thirdBlockedCandidateSha256": "5994a6bb2ae1a83c6ba1a39a742c89bca243bf33c2d24e1eb2eea76496ca5af7",
+    "thirdBlockedReviewArtifact": "artifacts/editorial/reviews/gpt/sports/whitecaps-30000-tickets-bc-place-return-lafc.5994a6bb2ae1.json",
+    "thirdBlockers": [
+      "The candidate incorrectly implied every electronic turnstile requires a mobile ticket.",
+      "Repeated caveats crowded out concise matchday guidance."
+    ],
+    "thirdRepair": "Rewrote entry around BC Place's exact Mobile Wallet tap, Ticketmaster-app barcode, physical-ticket barcode and multiple-ticket sequence; removed defensive caveats and changed the title from mobile entry to ticket entry."
   }
 }
