@@ -1,7 +1,7 @@
 {
   "version": 1,
   "runId": "run-trends-today-daily-publisher-2026-07-31-1840",
-  "validatedAt": "2026-08-01T02:10:03.0113924Z",
+  "validatedAt": "2026-08-01T03:01:17.7524457Z",
   "validator": "apps.pipeline.validation.validate_release_candidate plus mechanical full-file assertions",
   "manualApprovalKeywordCount": 23,
   "candidates": [
@@ -10,7 +10,7 @@
       "sha256": "378480b8284ab018832fcf3ad9a9f2fae6dbd64587bf67e7ea1342c00525bdb6",
       "bodyWords": 592,
       "h2Count": 5,
-      "listItemCount": 15,
+      "listItemCount": 14,
       "highlightCount": 4,
       "fullFileEmDashCount": 0,
       "manualApprovalKeywordHits": [],

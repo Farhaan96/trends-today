@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "378480b8284ab018832fcf3ad9a9f2fae6dbd64587bf67e7ea1342c00525bdb6",
+  "repositorySha": "a26429c15d1aea426fc8442c2d1e4279018b0625",
+  "reviewedAt": "2026-08-01T02:43:21.497018+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019fbb33-c02c-7202-bee2-63c7c71242b5",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The candidate is factually supported, locally useful, coherent, scannable, and actionable. Its MDX structure and Sources section are sound, and the authorial prose contains no em dashes."
+}
