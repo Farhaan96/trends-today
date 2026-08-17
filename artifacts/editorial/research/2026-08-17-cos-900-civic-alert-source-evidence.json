@@ -1,0 +1,37 @@
+{
+  "issue": "COS-900",
+  "capturedAt": "2026-08-17T19:32:51Z",
+  "source": {
+    "name": "City of Coquitlam CivicAlert",
+    "url": "https://www.coquitlam.ca/CivicAlerts.aspx?AID=2024",
+    "authority": "sole-authoritative-source",
+    "postedDate": "2026-08-10",
+    "httpFetchSucceeded": true,
+    "snapshotSha256": "af7a5c3b2dda30834555543b29377cb8d637b1b65b8dd947629b17681f3b2000"
+  },
+  "verifiedClaims": {
+    "work": "Intersection Safety Improvements",
+    "locations": [
+      "Guildford Way at Falcon Drive",
+      "Guildford Way at Lansdowne Drive"
+    ],
+    "startDate": "2026-08-10",
+    "duration": "about one month",
+    "weatherDependent": true,
+    "weekdayHours": "Monday to Friday, 7 a.m. to 7 p.m.",
+    "possibleSaturdayHours": "9 a.m. to 6 p.m.",
+    "trafficImpact": "Traffic flow will be impacted during construction and some traffic delays are expected.",
+    "cityAdvice": "Plan an alternate route to avoid delays or plan extra time.",
+    "contact": {
+      "name": "Public Works Liaison",
+      "phone": "604-927-3550",
+      "email": "pwl@coquitlam.ca"
+    }
+  },
+  "editorialBoundary": {
+    "secondarySourcesUsed": false,
+    "inventedClaimsAdded": false,
+    "artifactStatus": "draft-release-candidate",
+    "publicationAuthorized": false
+  }
+}
