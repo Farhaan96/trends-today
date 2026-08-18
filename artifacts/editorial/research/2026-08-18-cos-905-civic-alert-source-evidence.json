@@ -1,0 +1,42 @@
+{
+  "issue": "COS-905",
+  "capturedAt": "2026-08-18T15:18:28.904148Z",
+  "source": {
+    "name": "City of Coquitlam CivicAlert",
+    "url": "https://www.coquitlam.ca/CivicAlerts.aspx?AID=2006",
+    "effectiveUrl": "https://www.coquitlam.ca/m/newsflash/home/detail/2006",
+    "authority": "sole-authoritative-source",
+    "postedDate": "2026-08-17",
+    "httpStatus": 200,
+    "httpFetchSucceeded": true,
+    "snapshotBytes": 107541,
+    "snapshotSha256": "6c4bea7abe460fe585d92e7facce060771af4a28a8a6425ee2eae9a80814346f"
+  },
+  "verifiedClaims": {
+    "work": "Traffic Signal Upgrades",
+    "location": "Intersection of David Avenue and Shaughnessy Street",
+    "scheduledDates": "Tuesday, August 18 to Thursday, August 20",
+    "weatherPermitting": true,
+    "workHours": "9 a.m. to 3 p.m.",
+    "trafficImpact": "Traffic signals at the intersection will be temporarily out of service during active work.",
+    "trafficControl": "Traffic personnel will be in place to direct road users.",
+    "cityAdvice": "Plan an alternate route to avoid delays or plan extra time when using this route.",
+    "safetyReminders": [
+      "Drive with extreme caution and follow construction speed limits.",
+      "Keep a close watch for work crews and heavy machinery.",
+      "Obey all construction signage and instructions from traffic personnel."
+    ],
+    "contact": {
+      "name": "Public Works Liaison",
+      "phone": "604-927-3550",
+      "email": "pwl@coquitlam.ca"
+    }
+  },
+  "editorialBoundary": {
+    "secondarySourcesUsed": false,
+    "inventedClaimsAdded": false,
+    "trafficNumbersAdded": false,
+    "artifactStatus": "draft-release-candidate",
+    "publicationAuthorized": false
+  }
+}
