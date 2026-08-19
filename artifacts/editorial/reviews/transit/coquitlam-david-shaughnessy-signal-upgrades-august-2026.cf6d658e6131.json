@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "reviewer": "claude",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "cf6d658e6131fe2baff0b416e437c98dce8d6b2c4a4e110e365d21d39c706877",
+  "reviewedAt": "2026-08-19T20:48:57Z",
+  "repositorySha": "6aec6e44f6ca21a0aafa6cbe32790fd50e5122d6",
+  "modelUsed": "claude-sonnet-5",
+  "reviewPath": "manual-direct",
+  "reviewNote": "COS-905 was reviewed and promoted directly by Claude (Sonnet 5) via Claude Code at the owner's explicit instruction to bypass the automated gpt-5.6-sol GPT editorial gate and the claude-opus-5 release-review runner for this one-off publication task. No editorialReviewedBy/editorialReviewModel (GPT) fields were added because that automated review did not run.",
+  "review": "Re-fetched https://www.coquitlam.ca/CivicAlerts.aspx?AID=2006 on 2026-08-19 and confirmed the live alert body still matches the candidate exactly: traffic signal upgrades at David Avenue and Shaughnessy Street; Tuesday Aug 18 to Thursday Aug 20, 2026, 9 a.m.-3 p.m., weather permitting; signals temporarily out of service during active work with traffic personnel directing; PWL contact 604-927-3550 / pwl@coquitlam.ca. Compared the exact PR 145 candidate (commit 9fdd53a9b06bc481c78f12903320a2fb60c44b26, candidate SHA-256 cf6d658e6131fe2baff0b416e437c98dce8d6b2c4a4e110e365d21d39c706877) against that live source: no unsupported claims, no invented traffic numbers, correct locality and reader impact, complete story-type coverage (location, dates, hours, traffic impact, safety guidance, contact), one primary source cited and linked, zero em dashes in prose (verified with utils/em-dash-validator.js), valid MDX structure with descriptive H2 headings and a Sources section. No factual, structural, legal, or reputational blockers found. CANDIDATE_SHA256: cf6d658e6131fe2baff0b416e437c98dce8d6b2c4a4e110e365d21d39c706877"
+}
