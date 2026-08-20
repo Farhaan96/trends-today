@@ -182,6 +182,32 @@ class PublisherTests(unittest.TestCase):
             self.assertIn('editorialReviewVerdict: "PASS"', promoted)
             self.assertIn('editorialReviewModel: "gpt-5.6-sol"', promoted)
 
+    def test_promotion_rejects_blank_image_frontmatter(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            candidate_dir = root / 'artifacts/editorial/release-candidates/science'
+            candidate_dir.mkdir(parents=True, exist_ok=True)
+            candidate = candidate_dir / 'candidate-title.mdx'
+            candidate.write_text(
+                '---\n'
+                'title: "Candidate title"\n'
+                'category: "science"\n'
+                'slug: "candidate-title"\n'
+                'image: "   "\n'
+                'imageAlt: "Candidate image"\n'
+                'imageAttribution: "Candidate attribution"\n'
+                'status: "release-candidate"\n'
+                '---\n\nBody.\n',
+                encoding='utf-8',
+            )
+            self.write_source_config(root)
+            review = self.write_review(root, candidate)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                with self.assertRaisesRegex(ValueError, 'blank or whitespace-only image'):
+                    self.promote(root, candidate, review)
+
     def test_promotion_rejects_review_for_different_candidate_hash(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

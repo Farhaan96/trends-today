@@ -235,6 +235,10 @@ def promote_candidate(
     frontmatter = frontmatter_match.group(1)
     if not re.search(r'^status:\s*["\']?release-candidate["\']?\s*$', frontmatter, re.MULTILINE):
         raise ValueError('File is not marked as a release candidate')
+    image_match = re.search(r'^image:\s*(.*)$', frontmatter, re.MULTILINE)
+    image_value = image_match.group(1).strip() if image_match else ''
+    if not image_value.strip('"\'').strip():
+        raise ValueError('Candidate has a blank or whitespace-only image')
     source_config_path = root / 'config' / 'local-news-sources.json'
     source_config = json.loads(source_config_path.read_text(encoding='utf-8'))
     sensitive_keywords = (
