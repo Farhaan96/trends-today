@@ -64,6 +64,17 @@ class PublisherTests(unittest.TestCase):
             self.assertIn('editor: "Moe"', content)
             self.assertIn('reportingMethod: "Checked against TransLink source material."', content)
 
+    def official_image(self, **overrides):
+        image = {
+            'path': '/images/candidate.webp',
+            'alt': 'Candidate image',
+            'attribution': 'City of Coquitlam Engineering Department',
+            'sourceType': 'official-diagram',
+            'relevanceConfirmed': True,
+        }
+        image.update(overrides)
+        return image
+
     def write_review(self, root, candidate, verdict='NO BLOCKERS', digest=None):
         review = root / 'artifacts/editorial/reviews/science/candidate-title.review.json'
         review.parent.mkdir(parents=True, exist_ok=True)
@@ -135,7 +146,7 @@ class PublisherTests(unittest.TestCase):
             publisher.publish(
                 self.article(),
                 {'slug': 'candidate-title', 'meta_description': 'Candidate description', 'internal_links': []},
-                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+                self.official_image(),
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
             self.write_source_config(root)
@@ -163,7 +174,7 @@ class PublisherTests(unittest.TestCase):
             publisher.publish(
                 self.article(),
                 {'slug': 'candidate-title', 'meta_description': 'Candidate description', 'internal_links': []},
-                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+                self.official_image(),
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
             candidate_body = candidate.read_text(encoding='utf-8').split('---', 2)[2]
@@ -208,6 +219,94 @@ class PublisherTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'blank or whitespace-only image'):
                     self.promote(root, candidate, review)
 
+    def test_promotion_rejects_missing_image_source_metadata(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            candidate_dir = root / 'artifacts/editorial/release-candidates/science'
+            candidate_dir.mkdir(parents=True, exist_ok=True)
+            candidate = candidate_dir / 'candidate-title.mdx'
+            candidate.write_text(
+                '---\n'
+                'title: "Candidate title"\n'
+                'category: "science"\n'
+                'slug: "candidate-title"\n'
+                'image: "/images/candidate.webp"\n'
+                'imageAlt: "Candidate image"\n'
+                'imageAttribution: "Candidate attribution"\n'
+                'sponsorshipStatus: "editorial"\n'
+                'status: "release-candidate"\n'
+                '---\n\nBody.\n',
+                encoding='utf-8',
+            )
+            self.write_source_config(root)
+            review = self.write_review(root, candidate)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                with self.assertRaisesRegex(ValueError, 'official/licensed source visual'):
+                    self.promote(root, candidate, review)
+
+    def test_promotion_rejects_unrelated_stock_or_ai_generated_image(self):
+        rejected_source_types = ['stock-photo', 'ai-generated', 'decorative-ai', 'unrelated']
+        for source_type in rejected_source_types:
+            with self.subTest(source_type=source_type):
+                with tempfile.TemporaryDirectory() as temp:
+                    root = Path(temp)
+                    candidate_dir = root / 'artifacts/editorial/release-candidates/science'
+                    candidate_dir.mkdir(parents=True, exist_ok=True)
+                    candidate = candidate_dir / 'candidate-title.mdx'
+                    candidate.write_text(
+                        '---\n'
+                        'title: "Candidate title"\n'
+                        'category: "science"\n'
+                        'slug: "candidate-title"\n'
+                        'image: "/images/pretty-but-unrelated-skyline.webp"\n'
+                        'imageAlt: "Generic skyline image"\n'
+                        'imageAttribution: "Stock library"\n'
+                        f'imageSourceType: "{source_type}"\n'
+                        'imageRelevanceConfirmed: true\n'
+                        'sponsorshipStatus: "editorial"\n'
+                        'status: "release-candidate"\n'
+                        '---\n\nBody.\n',
+                        encoding='utf-8',
+                    )
+                    self.write_source_config(root)
+                    review = self.write_review(root, candidate)
+                    with patch('review.subprocess.run') as git_run:
+                        git_run.return_value.returncode = 0
+                        git_run.return_value.stdout = 'a' * 40
+                        with self.assertRaisesRegex(ValueError, 'official/licensed source visual'):
+                            self.promote(root, candidate, review)
+
+    def test_promotion_accepts_official_low_resolution_source_visual(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            candidate_dir = root / 'artifacts/editorial/release-candidates/science'
+            candidate_dir.mkdir(parents=True, exist_ok=True)
+            candidate = candidate_dir / 'candidate-title.mdx'
+            candidate.write_text(
+                '---\n'
+                'title: "Candidate title"\n'
+                'category: "science"\n'
+                'slug: "candidate-title"\n'
+                'image: "/images/city-work-area-diagram-320x240.webp"\n'
+                'imageAlt: "Official city work area diagram, low-resolution scan"\n'
+                'imageAttribution: "City of Coquitlam Engineering Department"\n'
+                'imageSourceType: "work-area-diagram"\n'
+                'imageRelevanceConfirmed: true\n'
+                'sponsorshipStatus: "editorial"\n'
+                'status: "release-candidate"\n'
+                '---\n\nBody.\n',
+                encoding='utf-8',
+            )
+            self.write_source_config(root)
+            review = self.write_review(root, candidate)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                destination = self.promote(root, candidate, review)
+            self.assertTrue(destination.exists())
+
     def test_promotion_rejects_review_for_different_candidate_hash(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
@@ -235,7 +334,7 @@ class PublisherTests(unittest.TestCase):
                     'meta_description': 'Candidate description',
                     'internal_links': [],
                 },
-                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+                self.official_image(),
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
             destination = root / 'content/science/candidate-title.mdx'
@@ -352,7 +451,7 @@ class PublisherTests(unittest.TestCase):
             publisher.publish(
                 article,
                 {'slug': 'candidate-title', 'meta_description': 'Candidate description', 'internal_links': []},
-                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+                self.official_image(),
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
             self.write_source_config(root)
@@ -373,7 +472,7 @@ class PublisherTests(unittest.TestCase):
             publisher.publish(
                 article,
                 {'slug': 'commercial-candidate', 'meta_description': 'Candidate description', 'internal_links': []},
-                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+                self.official_image(),
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/commercial-candidate.mdx'
             self.write_source_config(root)
@@ -394,7 +493,7 @@ class PublisherTests(unittest.TestCase):
             publisher.publish(
                 article,
                 {'slug': 'approved-commercial', 'meta_description': 'Candidate description', 'internal_links': []},
-                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+                self.official_image(),
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/approved-commercial.mdx'
             self.write_source_config(root)
@@ -412,7 +511,7 @@ class PublisherTests(unittest.TestCase):
             publisher.publish(
                 self.article(),
                 {'slug': 'missing-status', 'meta_description': 'Candidate description', 'internal_links': []},
-                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+                self.official_image(),
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/missing-status.mdx'
             content = candidate.read_text(encoding='utf-8')
@@ -439,7 +538,7 @@ class PublisherTests(unittest.TestCase):
             publisher.publish(
                 article,
                 {'slug': 'spoofed-approval', 'meta_description': 'Candidate description', 'internal_links': []},
-                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+                self.official_image(),
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/spoofed-approval.mdx'
             self.write_source_config(root)
