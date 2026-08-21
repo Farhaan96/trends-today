@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "a0afa1867c4a60d4932f610ce172fd503cc481c07f6a067f09c7be3314f8f62d",
+  "repositorySha": "847a3cf2ca1fda563ad81730c2debf4c6b80509b",
+  "reviewedAt": "2026-07-28T21:51:02.865600+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019faab4-d12e-7e62-bb61-e80c925e80e0",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The candidate file is absent from the repository worktree at the specified path, so its local SHA-256 and exact correspondence to the supplied candidate text cannot be verified. An exact-artifact editorial gate must fail closed."
+  ],
+  "summary": "The supplied article is concise, readable, well structured, actionable, and its election details are supported by Richmond's cited material. The repository SHA matches, but the missing local candidate prevents exact-hash verification."
+}
