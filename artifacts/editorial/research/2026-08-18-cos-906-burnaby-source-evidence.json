@@ -1,0 +1,76 @@
+{
+  "issue": "COS-906",
+  "capturedAt": "2026-08-18T17:32:45.110931Z",
+  "source": {
+    "name": "City of Burnaby news release",
+    "title": "Burnaby launches Car Free Day festivities at Edmonds",
+    "url": "https://www.burnaby.ca/our-city/news/2026-08-14/burnaby-launches-car-free-day-festivities-edmonds",
+    "effectiveUrl": "https://www.burnaby.ca/our-city/news/2026-08-14/burnaby-launches-car-free-day-festivities-edmonds",
+    "authority": "sole-authoritative-source",
+    "postedDate": "2026-08-14",
+    "pageLastUpdatedLabel": "August 14, 2026",
+    "httpStatus": 200,
+    "httpFetchSucceeded": true,
+    "snapshotBytes": 89650,
+    "snapshotSha256": "bf28faa1e70622eda60292247d46b9e67a839f03ddcd3b60899f601538e76e50"
+  },
+  "verifiedClaims": {
+    "event": "Car Free Day",
+    "presentingPartner": "TransLink",
+    "location": "Edmonds Street, from Kingsway to Mary Avenue",
+    "date": "Sunday, August 30, 2026",
+    "time": "Noon to 5 pm",
+    "admission": "Free",
+    "features": [
+      "Live entertainment including a family stage",
+      "Fun activities and games for the whole family",
+      "Delicious local food and drinks",
+      "Community booths",
+      "And much more!"
+    ],
+    "roadClosures": {
+      "window": "5 am to 10 pm on August 30",
+      "streets": [
+        "Edmonds Street: from Kingsway to Mary Avenue",
+        "Humphries Avenue: from 19th Ave to Elwell Street",
+        "Linden Ave: from 7216 Linden to Edmonds Street, which includes no access at Edmonds Street and Linden to underground building parking of commercial or residential buildings",
+        "Noble Lane: from the driveway 7303 Noble Lane to Edmonds Street",
+        "Fulton Ave: from mid-block of Fulton Ave to Edmonds Street"
+      ]
+    },
+    "parkingRestriction": "No Parking from 11:59 pm on August 29 to 12:01 pm on August 31",
+    "siteMapUrl": "https://burnaby.widen.net/s/cbfxzjnkrd/car-free-day-site-map-horizontal",
+    "busImpacts": [
+      "106 Edmonds: regular route to Edmonds & Canada Way then via Canada Way, onto 10 Ave, Kingsway, and back onto Edmonds for the regular route",
+      "106 New West: regular route to Edmonds & Kingsway then via Kingsway, onto 10 Ave, Canada Way, and back onto Edmonds for the regular route",
+      "During event hours, additional bus service has been added from Edmonds skytrain station to the event"
+    ],
+    "supportAcknowledged": ["Lime", "Alegría Soy"],
+    "quotes": [
+      {
+        "speaker": "Kevin Quinn, TransLink CEO",
+        "statements": [
+          "Car Free Day is a great opportunity to experience our communities in a different way and consider the many ways we can get around without a car.",
+          "We’re focused on making it easier for people to choose sustainable transportation — whether that’s taking transit, walking, cycling, or rolling — and are proud to support Burnaby’s Car Free Day once again."
+        ]
+      },
+      {
+        "speaker": "Mike Hurley, Mayor of Burnaby",
+        "statements": [
+          "We're thrilled to once again be hosting Car Free Day in Edmonds, one of the most vibrant neighbourhoods in Burnaby.",
+          "Last year's event was a celebration of community and sustainability, and we're so excited to be building on that again this year."
+        ]
+      }
+    ],
+    "communityBoothSignup": "unavailable (source lists an email obfuscated by anti-scraping encoding rather than plain text; not extracted)",
+    "eventPageUrl": "https://www.burnaby.ca/recreation-and-arts/events/car-free-day",
+    "sourceTagCategories": ["Announcement", "Community"]
+  },
+  "editorialBoundary": {
+    "secondarySourcesUsed": false,
+    "inventedClaimsAdded": false,
+    "trafficNumbersAdded": false,
+    "artifactStatus": "release-candidate",
+    "publicationAuthorized": false
+  }
+}
