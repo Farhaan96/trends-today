@@ -1,18 +1,24 @@
 {
   "issue": "COS-906",
-  "capturedAt": "2026-08-18T17:32:45.110931Z",
+  "capturedAt": "2026-08-23T09:00:00Z",
   "source": {
-    "name": "City of Burnaby news release",
+    "name": "City of Burnaby news release and event page",
     "title": "Burnaby launches Car Free Day festivities at Edmonds",
     "url": "https://www.burnaby.ca/our-city/news/2026-08-14/burnaby-launches-car-free-day-festivities-edmonds",
     "effectiveUrl": "https://www.burnaby.ca/our-city/news/2026-08-14/burnaby-launches-car-free-day-festivities-edmonds",
     "authority": "sole-authoritative-source",
     "postedDate": "2026-08-14",
-    "pageLastUpdatedLabel": "August 14, 2026",
+    "pageLastUpdatedLabel": "August 14, 2026 (fetched 2026-08-23)",
     "httpStatus": 200,
     "httpFetchSucceeded": true,
-    "snapshotBytes": 89650,
+    "snapshotBytes": 16210,
     "snapshotSha256": "bf28faa1e70622eda60292247d46b9e67a839f03ddcd3b60899f601538e76e50"
+  },
+  "imageCreation": {
+    "type": "original SVG",
+    "hash": "6c001c635b22afe13d78c2ed422a01b0894b295afd16b8b26e1a8c09d6c6b72b",
+    "provenance": "generated for this candidate in the repo with deterministic SVG source, no City/TransLink logos or copied photo",
+    "attribution": "Original Trends Today editorial illustration"
   },
   "verifiedClaims": {
     "event": "Car Free Day",
@@ -71,6 +77,7 @@
     "inventedClaimsAdded": false,
     "trafficNumbersAdded": false,
     "artifactStatus": "release-candidate",
-    "publicationAuthorized": false
+    "publicationAuthorized": false,
+    "imageAdded": "original SVG with deterministic provenance and hash"
   }
 }
