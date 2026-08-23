@@ -9,9 +9,16 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: weekly-content-business-scorecard
+  cancel-in-progress: false
+
 jobs:
   build-scorecard:
     runs-on: ubuntu-latest
+    env:
+      # Boolean only. The secret value itself is passed to a single step below.
+      HAS_REPORTING_TOKEN: ${{ secrets.ANALYTICS_REPORTING_TOKEN != '' }}
 
     steps:
       - name: Checkout repository
@@ -24,15 +31,42 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Build repository scorecard
+      - name: Export protected analytics
+        if: env.HAS_REPORTING_TOKEN == 'true'
+        # A reporting outage stays visible but never blocks the repository
+        # scorecard, which is measurable without any secret.
+        continue-on-error: true
+        env:
+          ANALYTICS_REPORTING_TOKEN: ${{ secrets.ANALYTICS_REPORTING_TOKEN }}
         run: >-
-          python apps/pipeline/scorecard.py
-          --output reports/editorial/weekly-scorecard.json
+          python apps/pipeline/publishing_health.py
+          --output reports/editorial/weekly-publishing-health-receipt.json
+          --markdown-output reports/editorial/weekly-publishing-health-receipt.md
+          --analytics-output reports/editorial/weekly-analytics-export.json
+
+      - name: Build repository scorecard
+        run: |
+          set -euo pipefail
+          args=(
+            apps/pipeline/scorecard.py
+            --output reports/editorial/weekly-scorecard.json
+          )
+          # Without the optional secret the scorecard keeps its current
+          # secret-free behaviour and reports analytics as unavailable.
+          if [ -f reports/editorial/weekly-analytics-export.json ]; then
+            args+=(--analytics reports/editorial/weekly-analytics-export.json)
+          fi
+          python "${args[@]}"
 
       - name: Upload scorecard
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: trends-today-weekly-scorecard
-          path: reports/editorial/weekly-scorecard.json
-          if-no-files-found: error
+          path: |
+            reports/editorial/weekly-scorecard.json
+            reports/editorial/weekly-publishing-health-receipt.json
+            reports/editorial/weekly-publishing-health-receipt.md
+            reports/editorial/weekly-analytics-export.json
+          if-no-files-found: warn
           retention-days: 30

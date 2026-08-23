@@ -1,0 +1,159 @@
+name: Publishing Health Receipt
+
+on:
+  # The canonical daily research workflow is the only trigger. It already carries
+  # the one bounded daily timer, so a second schedule here would build two
+  # receipts a day and drift against America/Vancouver across DST. `completed`
+  # fires on every conclusion, and the job below is deliberately unguarded so a
+  # failed research run still produces a receipt that records that failure.
+  workflow_run:
+    workflows: ['Daily Content Opportunity Research']
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      candidate-evidence-path:
+        description: >-
+          Repository path to a JSON file holding exact-candidate review evidence
+          (candidateSha256 plus the matching GPT and Claude review artifacts).
+          Leave empty unless a reviewed candidate already exists; the receipt
+          never infers qualify from research output.
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+  actions: read
+  pull-requests: read
+
+concurrency:
+  group: publishing-health
+  cancel-in-progress: false
+
+jobs:
+  build-receipt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Collect research workflow metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_EVENT: ${{ github.event_name }}
+          SOURCE_NAME: ${{ github.event.workflow_run.name }}
+          SOURCE_STATUS: ${{ github.event.workflow_run.status }}
+          SOURCE_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          SOURCE_CREATED_AT: ${{ github.event.workflow_run.created_at }}
+          SOURCE_UPDATED_AT: ${{ github.event.workflow_run.updated_at }}
+          SOURCE_URL: ${{ github.event.workflow_run.html_url }}
+        run: |
+          set -euo pipefail
+          mkdir -p reports/editorial
+          if [ "$SOURCE_EVENT" = "workflow_run" ]; then
+            # Use the triggering run's own conclusion so a failed or cancelled
+            # research run reaches the receipt as a research-workflow repair
+            # check. An absent conclusion is recorded as "unknown", which also
+            # fails closed into repair rather than reading as success.
+            jq -n \
+              --arg name "$SOURCE_NAME" \
+              --arg status "$SOURCE_STATUS" \
+              --arg conclusion "$SOURCE_CONCLUSION" \
+              --arg createdAt "$SOURCE_CREATED_AT" \
+              --arg updatedAt "$SOURCE_UPDATED_AT" \
+              --arg url "$SOURCE_URL" \
+              '[{
+                 name: $name,
+                 path: ".github/workflows/daily-content.yml",
+                 status: $status,
+                 conclusion: (if $conclusion == "" then "unknown" else $conclusion end),
+                 createdAt: $createdAt,
+                 updatedAt: $updatedAt,
+                 completedAt: $updatedAt,
+                 url: $url
+               }]' \
+              > reports/editorial/research-run.json
+          else
+            gh run list \
+              --repo "$GITHUB_REPOSITORY" \
+              --workflow daily-content.yml \
+              --limit 1 \
+              --json name,status,conclusion,createdAt,updatedAt,url \
+              > reports/editorial/research-run.json
+          fi
+
+      - name: Collect open pull request metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # Every open pull request is collected for observability. The receipt
+          # decides which of them are editorial article drafts (isDraft plus a
+          # "draft/" head branch); only those can raise a stale repair.
+          gh pr list \
+            --repo "$GITHUB_REPOSITORY" \
+            --state open \
+            --limit 100 \
+            --json number,title,headRefName,isDraft,createdAt,updatedAt,url \
+            > reports/editorial/open-pull-requests.json
+
+      - name: Build publishing health receipt
+        env:
+          # Optional. When the secret is absent the receipt still succeeds and
+          # records protected reporting as unavailable, never as zero.
+          ANALYTICS_REPORTING_TOKEN: ${{ secrets.ANALYTICS_REPORTING_TOKEN }}
+          CANDIDATE_EVIDENCE_PATH: ${{ inputs.candidate-evidence-path }}
+        run: |
+          set -euo pipefail
+          args=(
+            apps/pipeline/publishing_health.py
+            --output reports/editorial/publishing-health-receipt.json
+            --markdown-output reports/editorial/publishing-health-receipt.md
+            --analytics-output reports/editorial/analytics-export.json
+            --research-file reports/editorial/research-run.json
+            --drafts-file reports/editorial/open-pull-requests.json
+          )
+          if [ -n "${CANDIDATE_EVIDENCE_PATH:-}" ]; then
+            if [ ! -f "$CANDIDATE_EVIDENCE_PATH" ]; then
+              echo "::error::candidate-evidence-path does not exist: $CANDIDATE_EVIDENCE_PATH"
+              exit 1
+            fi
+            args+=(--candidate-file "$CANDIDATE_EVIDENCE_PATH")
+          fi
+          python "${args[@]}"
+
+      - name: Publish receipt summary
+        if: always()
+        run: |
+          set -euo pipefail
+          summary=reports/editorial/publishing-health-receipt.md
+          if [ -f "$summary" ]; then
+            cat "$summary" >> "$GITHUB_STEP_SUMMARY"
+            action=$(python -c "import json,sys;print(json.load(open(sys.argv[1]))['disposition']['action'])" \
+              reports/editorial/publishing-health-receipt.json)
+            if [ "$action" = "repair" ]; then
+              echo "::warning::Publishing health receipt requires repair before the next candidate."
+            fi
+          else
+            echo "::error::No publishing health receipt was produced."
+          fi
+
+      - name: Upload publishing health receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trends-today-publishing-health-receipt
+          path: |
+            reports/editorial/publishing-health-receipt.json
+            reports/editorial/publishing-health-receipt.md
+            reports/editorial/analytics-export.json
+            reports/editorial/research-run.json
+            reports/editorial/open-pull-requests.json
+          if-no-files-found: warn
+          retention-days: 30

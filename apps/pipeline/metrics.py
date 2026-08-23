@@ -3,6 +3,11 @@
 
 The input contract is deliberately provider-neutral so Search Console, GA4, or
 an exported analytics file can be joined without treating missing values as 0.
+
+The decision window is a parameter, not a constant. A caller that supplies
+seven-day data must also declare a seven-day maturity so a keep or stop is never
+emitted from one window using another window's semantics. The defaults are the
+28-day contract, so existing callers are unchanged.
 """
 
 from __future__ import annotations
@@ -29,6 +34,14 @@ NUMERIC_FIELDS = (
     'revenue',
     'contentCost',
 )
+
+DEFAULT_MATURITY_DAYS = 28
+EARLY_OBSERVATION_DAYS = 7
+
+
+def period_label_for(maturity_days: int) -> str:
+    """Name a decision window the way its reasons should read."""
+    return f'{maturity_days}-day'
 
 
 def _number(value: Any) -> Optional[float]:
@@ -67,7 +80,13 @@ def normalize_articles(records: Iterable[Dict[str, Any]]) -> List[Dict[str, Any]
 
         impressions = item['impressions']
         clicks = item['clicks']
-        item['ctr'] = clicks / impressions if impressions and clicks is not None else None
+        # A provider that reports page-level CTR directly is believed. Deriving
+        # it from clicks and impressions is only the fallback, because a report
+        # can carry CTR without carrying both of its components. An absent CTR
+        # with no derivable components stays None and never becomes 0.
+        reported_ctr = _number(record.get('ctr'))
+        derived_ctr = clicks / impressions if impressions and clicks is not None else None
+        item['ctr'] = reported_ctr if reported_ctr is not None else derived_ctr
         measurable = item['measurableAdImpressions']
         viewable = item['viewableAdImpressions']
         item['activeViewRate'] = (
@@ -106,14 +125,28 @@ def build_article_decisions(
     *,
     now: Optional[datetime] = None,
     minimum_comparable: int = 5,
+    maturity_days: int = DEFAULT_MATURITY_DAYS,
+    period_label: Optional[str] = None,
 ) -> List[Dict[str, Any]]:
+    """Decide per article inside one declared measurement window.
+
+    ``maturity_days`` is the age at which an article's window is complete, and
+    ``period_label`` names that window in every reason string. The defaults are
+    the 28-day contract. A seven-day caller must pass ``maturity_days=7`` so a
+    keep or stop is never emitted from seven-day data under 28-day semantics.
+    """
     now = now or datetime.now(timezone.utc)
+    maturity_days = max(1, int(maturity_days))
+    label = period_label or period_label_for(maturity_days)
+    early_window_days = min(EARLY_OBSERVATION_DAYS, maturity_days)
     articles = normalize_articles(records)
     mature = []
     for article in articles:
         published = _parse_date(article.get('publishedAt'))
         article['ageDays'] = (now - published).days if published else None
-        if article['ageDays'] is not None and article['ageDays'] >= 28:
+        article['decisionPeriod'] = label
+        article['maturityDays'] = maturity_days
+        if article['ageDays'] is not None and article['ageDays'] >= maturity_days:
             mature.append(article)
 
     for article in articles:
@@ -122,13 +155,15 @@ def build_article_decisions(
             article['decision'] = 'repair-metadata'
             article['decisionReason'] = 'publishedAt is missing or invalid'
             continue
-        if age < 7:
+        if age < early_window_days:
             article['decision'] = 'observe'
-            article['decisionReason'] = 'first 7-day measurement window is incomplete'
+            article['decisionReason'] = (
+                f'first {early_window_days}-day measurement window is incomplete'
+            )
             continue
-        if age < 28:
+        if age < maturity_days:
             article['decision'] = 'observe'
-            article['decisionReason'] = '28-day decision window is incomplete'
+            article['decisionReason'] = f'{label} decision window is incomplete'
             continue
 
         cohort = [candidate for candidate in mature if candidate['beat'] == article['beat']]
@@ -146,7 +181,7 @@ def build_article_decisions(
 
         if article['engagedSessions'] is None or article['impressions'] is None:
             article['decision'] = 'repair-measurement'
-            article['decisionReason'] = 'required 28-day traffic metrics are unavailable'
+            article['decisionReason'] = f'required {label} traffic metrics are unavailable'
         elif engaged_median is not None and article['engagedSessions'] >= engaged_median:
             article['decision'] = 'keep'
             article['decisionReason'] = 'engaged sessions meet or exceed the mature beat median'
@@ -179,10 +214,14 @@ def build_metrics_summary(
     *,
     now: Optional[datetime] = None,
     minimum_comparable: int = 5,
+    maturity_days: int = DEFAULT_MATURITY_DAYS,
+    period_label: Optional[str] = None,
 ) -> Dict[str, Any]:
     if not analytics or analytics.get('status') != 'available':
         return {
             'status': 'unavailable',
+            'period': period_label or period_label_for(max(1, int(maturity_days))),
+            'maturityDays': max(1, int(maturity_days)),
             'missing': (analytics or {}).get('missing', [
                 'article-level search impressions and clicks',
                 'organic engaged sessions',
@@ -200,10 +239,14 @@ def build_metrics_summary(
         analytics.get('articles', []),
         now=now,
         minimum_comparable=minimum_comparable,
+        maturity_days=maturity_days,
+        period_label=period_label,
     )
     return {
         'status': 'available',
         'sources': analytics.get('sources', []),
+        'period': period_label or period_label_for(max(1, int(maturity_days))),
+        'maturityDays': max(1, int(maturity_days)),
         'articles': decisions,
         'decisionCounts': {
             decision: sum(1 for article in decisions if article['decision'] == decision)

@@ -15,6 +15,32 @@ from review import verify_claude_review, verify_gpt_review
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+# Approved source categories for a promoted hero visual: an official map, an
+# official/work-area diagram, or an attributed primary-source/licensed photo.
+# Sharpness, resolution, and dimensions are deliberately excluded: a low-resolution
+# official or licensed visual must still pass this gate.
+ALLOWED_IMAGE_SOURCE_TYPES = {
+    'official-map',
+    'official-diagram',
+    'work-area-diagram',
+    'official-photo',
+    'primary-source-photo',
+    'licensed-photo',
+}
+
+# Explicitly rejected regardless of how polished or on-topic the visual looks.
+REJECTED_IMAGE_SOURCE_TYPES = {
+    'stock',
+    'stock-photo',
+    'ai-generated',
+    'decorative',
+    'decorative-ai',
+    'illustrative',
+    'generic',
+    'unrelated',
+    'invented',
+}
+
 class PublisherAdapter(ABC):
     """Base publisher adapter interface"""
     
@@ -66,6 +92,8 @@ class MDXStaticPublisher(PublisherAdapter):
                 'image': image['path'],
                 'imageAlt': image['alt'],
                 'imageAttribution': image.get('attribution', ''),
+                'imageSourceType': image.get('sourceType', ''),
+                'imageRelevanceConfirmed': bool(image.get('relevanceConfirmed', False)),
                 'tags': article.get('tags', ['technology']),
                 'category': category,
                 'author': 'Trends Today Newsroom',
@@ -235,6 +263,35 @@ def promote_candidate(
     frontmatter = frontmatter_match.group(1)
     if not re.search(r'^status:\s*["\']?release-candidate["\']?\s*$', frontmatter, re.MULTILINE):
         raise ValueError('File is not marked as a release candidate')
+    image_match = re.search(r'^image:\s*(.*)$', frontmatter, re.MULTILINE)
+    image_value = image_match.group(1).strip() if image_match else ''
+    if not image_value.strip('"\'').strip():
+        raise ValueError('Candidate has a blank or whitespace-only image')
+
+    source_type_match = re.search(r'^imageSourceType:\s*(.*)$', frontmatter, re.MULTILINE)
+    image_source_type = (
+        source_type_match.group(1).strip().strip('"\'').strip().lower() if source_type_match else ''
+    )
+    if not image_source_type or image_source_type in REJECTED_IMAGE_SOURCE_TYPES:
+        raise ValueError(
+            'Candidate hero image must be an official/licensed source visual '
+            '(e.g. an official map, work-area diagram, or attributed primary-source photo), '
+            'not a stock, decorative AI, invented, or unrelated image'
+        )
+    if image_source_type not in ALLOWED_IMAGE_SOURCE_TYPES:
+        raise ValueError(f'Candidate hero image source type "{image_source_type}" is not an approved source visual category')
+
+    relevance_match = re.search(r'^imageRelevanceConfirmed:\s*(true|false)\s*$', frontmatter, re.MULTILINE)
+    if not relevance_match or relevance_match.group(1) != 'true':
+        raise ValueError('Candidate hero image relevance to the story has not been confirmed')
+
+    attribution_match = re.search(r'^imageAttribution:\s*(.*)$', frontmatter, re.MULTILINE)
+    image_attribution = (
+        attribution_match.group(1).strip().strip('"\'').strip() if attribution_match else ''
+    )
+    if not image_attribution:
+        raise ValueError('Candidate hero image is missing required source attribution')
+
     source_config_path = root / 'config' / 'local-news-sources.json'
     source_config = json.loads(source_config_path.read_text(encoding='utf-8'))
     sensitive_keywords = (
