@@ -9,7 +9,7 @@ export async function GET() {
   try {
     const articles = await getAllArticles();
     const twoDaysAgo = new Date(Date.now() - 2 * 24 * 60 * 60 * 1000);
-    const recentNews = articles.filter((article) => {
+    let recentNews = articles.filter((article) => {
       const publishedAt = article.frontmatter?.publishedAt;
       if (!publishedAt) return false;
       const publishedDate = new Date(publishedAt);
@@ -20,6 +20,33 @@ export async function GET() {
         publishedDate >= twoDaysAgo
       );
     });
+
+    if (recentNews.length === 0) {
+      const dated = articles
+        .filter((article) => {
+          const publishedAt =
+            article.frontmatter?.publishedAt || article.publishedAt;
+          if (!publishedAt) return false;
+          const publishedDate = new Date(publishedAt);
+          return (
+            article.frontmatter?.archiveReviewStatus !==
+              'format-reviewed-needs-source-refresh' &&
+            !Number.isNaN(publishedDate.getTime())
+          );
+        })
+        .sort((a, b) => {
+          const aDate = new Date(
+            a.frontmatter?.publishedAt || a.publishedAt || 0
+          ).getTime();
+          const bDate = new Date(
+            b.frontmatter?.publishedAt || b.publishedAt || 0
+          ).getTime();
+          return bDate - aDate;
+        });
+      if (dated[0]) {
+        recentNews = [dated[0]];
+      }
+    }
 
     const siteUrl =
       process.env.NEXT_PUBLIC_SITE_URL || 'https://www.trendstoday.ca';
