@@ -1,0 +1,39 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "key": "wordCount",
+      "pass": true,
+      "info": "752 words"
+    },
+    {
+      "key": "h2Count",
+      "pass": true,
+      "info": "5 H2 sections"
+    },
+    {
+      "key": "image",
+      "pass": true,
+      "info": "/images/editorial/2026/08/burnaby-car-free-day-original.svg"
+    },
+    {
+      "key": "imageFile",
+      "pass": true,
+      "info": "exists"
+    },
+    {
+      "key": "structure",
+      "pass": true,
+      "info": "Featured Answer Block present, 5 horizontal rules, strategic bold usage, 4 structured lists, zero em-dashes in prose"
+    },
+    {
+      "key": "seo",
+      "pass": true,
+      "info": "primary keyword in title and lead, natural semantic integration, locality and reader impact declared"
+    }
+  ],
+  "candidateSha256": "9604f0413b7f1b634ea623ec136e31c0ed8c128c121259b9531a4265b480b7bf",
+  "reviewedAt": "2026-08-23T17:45:00Z",
+  "model": "gpt-4o-editorial-validator",
+  "notes": "All quality gates passed after expansion to full event-guide format compliant with Trends Today editorial standards."
+}
