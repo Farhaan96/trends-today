@@ -345,6 +345,153 @@ export async function fetchSearchConsoleReport({
   };
 }
 
+const PAGE_ROW_LIMIT = 500;
+const DECISION_PERIODS = ['day7', 'day28'];
+
+function aggregateGa4PageRows(report) {
+  const byPath = new Map();
+  for (const row of report?.rows || []) {
+    const path = row.dimensionValues?.[0]?.value;
+    if (!path) continue;
+    const audience = (row.dimensionValues?.[1]?.value || '').toLowerCase();
+    const entry = byPath.get(path) || {
+      path,
+      pageViews: 0,
+      sessions: 0,
+      engagedSessions: 0,
+      returningSessions: null,
+    };
+    const sessions = numericValue(row.metricValues?.[1]?.value, 0);
+    entry.pageViews += numericValue(row.metricValues?.[0]?.value, 0);
+    entry.sessions += sessions;
+    entry.engagedSessions += numericValue(row.metricValues?.[2]?.value, 0);
+    if (audience === 'returning') {
+      entry.returningSessions = (entry.returningSessions ?? 0) + sessions;
+    }
+    byPath.set(path, entry);
+  }
+  return [...byPath.values()];
+}
+
+/**
+ * Article-level page rows for the day-7 and day-28 decision windows.
+ * A page missing from a window is absent, never a zero row.
+ */
+export async function fetchGa4PagePeriods({
+  accessToken,
+  analyticsPropertyId,
+  ranges,
+  fetchImpl = fetch,
+}) {
+  const data = await fetchJson(
+    `https://analyticsdata.googleapis.com/v1beta/properties/${encodeURIComponent(
+      analyticsPropertyId
+    )}:batchRunReports`,
+    {
+      method: 'POST',
+      headers: bearerHeaders(accessToken),
+      body: JSON.stringify({
+        requests: DECISION_PERIODS.map((period) => ({
+          dateRanges: [
+            {
+              startDate: ranges[period].startDate,
+              endDate: ranges[period].endDate,
+            },
+          ],
+          dimensions: [{ name: 'pagePath' }, { name: 'newVsReturning' }],
+          metrics: [
+            { name: 'screenPageViews' },
+            { name: 'sessions' },
+            { name: 'engagedSessions' },
+          ],
+          limit: String(PAGE_ROW_LIMIT),
+        })),
+      }),
+    },
+    { fetchImpl, provider: 'google_analytics' }
+  );
+
+  return Object.fromEntries(
+    DECISION_PERIODS.map((period, index) => [
+      period,
+      {
+        window: ranges[period],
+        pages: aggregateGa4PageRows(data.reports?.[index]),
+      },
+    ])
+  );
+}
+
+/**
+ * Article-level Search Console page rows for both decision windows.
+ */
+export async function fetchSearchConsolePagePeriods({
+  accessToken,
+  searchConsoleSiteUrl,
+  ranges,
+  fetchImpl = fetch,
+}) {
+  const endpoint = `https://searchconsole.googleapis.com/webmasters/v3/sites/${encodeURIComponent(
+    searchConsoleSiteUrl
+  )}/searchAnalytics/query`;
+
+  const results = [];
+  for (const period of DECISION_PERIODS) {
+    const data = await fetchJson(
+      endpoint,
+      {
+        method: 'POST',
+        headers: bearerHeaders(accessToken),
+        body: JSON.stringify({
+          startDate: ranges[period].startDate,
+          endDate: ranges[period].endDate,
+          type: 'web',
+          dataState: 'final',
+          dimensions: ['page'],
+          aggregationType: 'byPage',
+          rowLimit: PAGE_ROW_LIMIT,
+        }),
+      },
+      { fetchImpl, provider: 'search_console' }
+    );
+    results.push([
+      period,
+      {
+        window: ranges[period],
+        pages: (data.rows || []).map((row) => ({
+          url: row.keys?.[0] || null,
+          clicks: numericValue(row.clicks, 0),
+          impressions: numericValue(row.impressions, 0),
+          ctr: numericValue(row.ctr),
+          position: numericValue(row.position),
+        })),
+      },
+    ]);
+  }
+  return Object.fromEntries(results);
+}
+
+function emptyPeriods() {
+  return Object.fromEntries(
+    DECISION_PERIODS.map((period) => [
+      period,
+      { googleAnalytics: null, googleSearchConsole: null },
+    ])
+  );
+}
+
+function composePeriods(analyticsPeriods, searchConsolePeriods) {
+  return Object.fromEntries(
+    DECISION_PERIODS.map((period) => [
+      period,
+      {
+        googleAnalytics: analyticsPeriods?.[period] || null,
+        googleSearchConsole: searchConsolePeriods?.[period] || null,
+      },
+    ])
+  );
+}
+
 function unavailable(reason) {
   return {
     status: 'unavailable',
@@ -383,13 +530,27 @@ export async function getGoogleReportingSnapshot({
     'America/Vancouver',
     3
   );
+  const analyticsRanges = {
+    day7: getCompleteDateRange(now, 7),
+    day28: analyticsDateRange,
+  };
+  const searchConsoleRanges = {
+    day7: getCompleteDateRange(now, 7, 'America/Vancouver', 3),
+    day28: searchConsoleDateRange,
+  };
   let googleAnalytics = unavailable('missing_configuration');
   let googleSearchConsole = unavailable('missing_configuration');
+  let periods = emptyPeriods();
 
   if (config.analyticsConfigured || config.searchConsoleConfigured) {
     try {
       const accessToken = await accessTokenProvider(config, fetchImpl, now);
-      const [analyticsResult, searchConsoleResult] = await Promise.allSettled([
+      const [
+        analyticsResult,
+        searchConsoleResult,
+        analyticsPeriodsResult,
+        searchConsolePeriodsResult,
+      ] = await Promise.allSettled([
         config.analyticsConfigured
           ? fetchGa4Report({
               accessToken,
@@ -406,6 +567,22 @@ export async function getGoogleReportingSnapshot({
               fetchImpl,
             })
           : Promise.resolve(unavailable('missing_configuration')),
+        config.analyticsConfigured
+          ? fetchGa4PagePeriods({
+              accessToken,
+              analyticsPropertyId: config.analyticsPropertyId,
+              ranges: analyticsRanges,
+              fetchImpl,
+            })
+          : Promise.resolve(null),
+        config.searchConsoleConfigured
+          ? fetchSearchConsolePagePeriods({
+              accessToken,
+              searchConsoleSiteUrl: config.searchConsoleSiteUrl,
+              ranges: searchConsoleRanges,
+              fetchImpl,
+            })
+          : Promise.resolve(null),
       ]);
 
       googleAnalytics =
@@ -416,6 +593,14 @@ export async function getGoogleReportingSnapshot({
         searchConsoleResult.status === 'fulfilled'
           ? searchConsoleResult.value
           : unavailable(failureReason(searchConsoleResult.reason));
+      periods = composePeriods(
+        analyticsPeriodsResult.status === 'fulfilled'
+          ? analyticsPeriodsResult.value
+          : null,
+        searchConsolePeriodsResult.status === 'fulfilled'
+          ? searchConsolePeriodsResult.value
+          : null
+      );
     } catch (error) {
       const reason = failureReason(error);
       if (config.analyticsConfigured) googleAnalytics = unavailable(reason);
@@ -445,6 +630,7 @@ export async function getGoogleReportingSnapshot({
     },
     googleAnalytics,
     googleSearchConsole,
+    periods,
     generatedAt: new Date(now).toISOString(),
     missingRule:
       'Unavailable metrics are null or omitted and are never represented as zero.',

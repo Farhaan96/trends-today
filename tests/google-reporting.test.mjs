@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import {
+  fetchGa4PagePeriods,
   fetchGa4Report,
+  fetchSearchConsolePagePeriods,
   fetchSearchConsoleReport,
   getCompleteDateRange,
   getGoogleReportingConfig,
@@ -192,6 +194,194 @@ test('keeps a failed provider unavailable while returning verified data', async 
     snapshot.windows.googleSearchConsole.completeness,
     'final-data-lag-adjusted'
   );
+});
+
+test('aggregates GA4 page rows into day-7 and day-28 article periods', async () => {
+  const ranges = {
+    day7: getCompleteDateRange(Date.parse('2026-07-25T05:00:00.000Z'), 7),
+    day28: getCompleteDateRange(Date.parse('2026-07-25T05:00:00.000Z'), 28),
+  };
+  let requestBody = null;
+  const periods = await fetchGa4PagePeriods({
+    accessToken: 'test-token',
+    analyticsPropertyId: '547027376',
+    ranges,
+    fetchImpl: async (url, options) => {
+      requestBody = JSON.parse(options.body);
+      return jsonResponse({
+        reports: [
+          {
+            rows: [
+              {
+                dimensionValues: [{ value: '/local-news/a' }, { value: 'new' }],
+                metricValues: [{ value: '2' }, { value: '2' }, { value: '1' }],
+              },
+            ],
+          },
+          {
+            rows: [
+              {
+                dimensionValues: [{ value: '/local-news/a' }, { value: 'new' }],
+                metricValues: [{ value: '4' }, { value: '3' }, { value: '2' }],
+              },
+              {
+                dimensionValues: [
+                  { value: '/local-news/a' },
+                  { value: 'returning' },
+                ],
+                metricValues: [{ value: '10' }, { value: '8' }, { value: '6' }],
+              },
+            ],
+          },
+        ],
+      });
+    },
+  });
+
+  assert.equal(requestBody.requests.length, 2);
+  assert.deepEqual(periods.day28.window, ranges.day28);
+  assert.deepEqual(periods.day28.pages, [
+    {
+      path: '/local-news/a',
+      pageViews: 14,
+      sessions: 11,
+      engagedSessions: 8,
+      returningSessions: 8,
+    },
+  ]);
+  assert.equal(periods.day7.pages[0].returningSessions, null);
+  assert.equal(periods.day7.pages[0].sessions, 2);
+});
+
+test('reads Search Console page rows for both decision windows', async () => {
+  const ranges = {
+    day7: getCompleteDateRange(
+      Date.parse('2026-07-25T05:00:00.000Z'),
+      7,
+      'America/Vancouver',
+      3
+    ),
+    day28: getCompleteDateRange(
+      Date.parse('2026-07-25T05:00:00.000Z'),
+      28,
+      'America/Vancouver',
+      3
+    ),
+  };
+  const bodies = [];
+  const periods = await fetchSearchConsolePagePeriods({
+    accessToken: 'test-token',
+    searchConsoleSiteUrl: 'https://www.trendstoday.ca/',
+    ranges,
+    fetchImpl: async (url, options) => {
+      bodies.push(JSON.parse(options.body));
+      return jsonResponse({
+        rows: [
+          {
+            keys: ['https://www.trendstoday.ca/local-news/a'],
+            clicks: 3,
+            impressions: 120,
+            ctr: 0.025,
+            position: 14.2,
+          },
+        ],
+      });
+    },
+  });
+
+  assert.equal(bodies.length, 2);
+  assert.equal(bodies[0].startDate, ranges.day7.startDate);
+  assert.deepEqual(periods.day28.pages[0], {
+    url: 'https://www.trendstoday.ca/local-news/a',
+    clicks: 3,
+    impressions: 120,
+    ctr: 0.025,
+    position: 14.2,
+  });
+});
+
+test('an unreported page click-through rate stays null, never zero', async () => {
+  const ranges = {
+    day7: getCompleteDateRange(Date.parse('2026-07-25T05:00:00.000Z'), 7),
+    day28: getCompleteDateRange(Date.parse('2026-07-25T05:00:00.000Z'), 28),
+  };
+  const periods = await fetchSearchConsolePagePeriods({
+    accessToken: 'test-token',
+    searchConsoleSiteUrl: 'https://www.trendstoday.ca/',
+    ranges,
+    fetchImpl: async () =>
+      jsonResponse({
+        rows: [
+          {
+            keys: ['https://www.trendstoday.ca/local-news/a'],
+            clicks: 3,
+            impressions: 120,
+          },
+        ],
+      }),
+  });
+
+  assert.equal(periods.day28.pages[0].ctr, null);
+  assert.equal(periods.day28.pages[0].position, null);
+});
+
+test('exposes article periods and keeps an unavailable provider null', async () => {
+  resetGoogleReportingCacheForTests();
+  const snapshot = await getGoogleReportingSnapshot({
+    env: {
+      GOOGLE_SERVICE_ACCOUNT_EMAIL: 'reader@example.iam.gserviceaccount.com',
+      GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY: 'unused-in-test',
+      GOOGLE_ANALYTICS_PROPERTY_ID: '547027376',
+      GOOGLE_SEARCH_CONSOLE_SITE_URL: 'https://www.trendstoday.ca/',
+    },
+    now: Date.parse('2026-07-25T05:00:00.000Z'),
+    bypassCache: true,
+    accessTokenProvider: async () => 'test-token',
+    fetchImpl: async (url) => {
+      if (url.includes('analyticsdata.googleapis.com')) {
+        return jsonResponse({
+          reports: [
+            {
+              rows: [
+                {
+                  metricValues: [
+                    { value: '1' },
+                    { value: '2' },
+                    { value: '3' },
+                  ],
+                },
+              ],
+            },
+            { rows: [] },
+            { rows: [] },
+            { rows: [] },
+          ],
+        });
+      }
+      return jsonResponse({}, 403);
+    },
+  });
+
+  assert.equal(snapshot.periods.day28.googleAnalytics.window.days, 28);
+  assert.deepEqual(snapshot.periods.day7.googleAnalytics.pages, []);
+  assert.equal(snapshot.periods.day28.googleSearchConsole, null);
+  assert.equal(snapshot.googleAnalytics.status, 'available');
+});
+
+test('omits article periods entirely when no provider is configured', async () => {
+  resetGoogleReportingCacheForTests();
+  const snapshot = await getGoogleReportingSnapshot({
+    env: {},
+    now: Date.parse('2026-07-25T05:00:00.000Z'),
+    bypassCache: true,
+    fetchImpl: async () => {
+      throw new Error('no provider should be contacted');
+    },
+  });
+
+  assert.equal(snapshot.status, 'unavailable');
+  assert.equal(snapshot.periods.day7.googleAnalytics, null);
+  assert.equal(snapshot.periods.day28.googleSearchConsole, null);
 });
 
 test('uses constant-time bearer token validation semantics', () => {
