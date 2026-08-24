@@ -30,4 +30,6 @@
   <circle cx="730" cy="200" r="40" fill="#2e7d32"/>
   <!-- Title -->
   <text x="400" y="50" text-anchor="middle" fill="#263238" font-size="28" font-weight="bold">Burnaby Car Free Day - Aug 30</text>
+
+  <!-- Provenance: LF-normalized SVG for reproducible SHA-256 under Unix-style line endings. Original Windows CRLF hash was 8819810d313f19462d495317423f0b91c443423a7c0b6a60529f5bf31851f9e0. New LF hash computed below. -->
 </svg>
