@@ -16,8 +16,8 @@
   },
   "imageCreation": {
     "type": "original SVG",
-    "hash": "6c001c635b22afe13d78c2ed422a01b0894b295afd16b8b26e1a8c09d6c6b72b",
-    "provenance": "generated for this candidate in the repo with deterministic SVG source, no City/TransLink logos or copied photo",
+    "hash": "21771f0a6e1aec54a976947c77c988ef72a758e7b163952176ab699e3e6c70ef",
+    "provenance": "generated for this candidate in the repo with deterministic SVG source, no City/TransLink logos or copied photo; current live file hash verified and unified across MDX/evidence/txt (readback confirmed match to svg_new_hash.txt and live SVG file)",
     "attribution": "Original Trends Today editorial illustration"
   },
   "verifiedClaims": {
