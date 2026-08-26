@@ -307,6 +307,35 @@ class PublisherTests(unittest.TestCase):
                 destination = self.promote(root, candidate, review)
             self.assertTrue(destination.exists())
 
+    def test_promotion_accepts_original_editorial_artwork_with_provenance(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            candidate_dir = root / 'artifacts/editorial/release-candidates/things-to-do'
+            candidate_dir.mkdir(parents=True, exist_ok=True)
+            candidate = candidate_dir / 'candidate-title.mdx'
+            candidate.write_text(
+                '---\n'
+                'title: "Candidate title"\n'
+                'category: "things-to-do"\n'
+                'slug: "candidate-title"\n'
+                'image: "/images/original-event-artwork.svg"\n'
+                'imageAlt: "Original newsroom illustration of the event"\n'
+                'imageAttribution: "Original Trends Today editorial artwork"\n'
+                'imageSourceType: "original-editorial-artwork"\n'
+                'imageRelevanceConfirmed: true\n'
+                'sponsorshipStatus: "editorial"\n'
+                'status: "release-candidate"\n'
+                '---\n\nBody.\n',
+                encoding='utf-8',
+            )
+            self.write_source_config(root)
+            review = self.write_review(root, candidate)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                destination = self.promote(root, candidate, review)
+            self.assertTrue(destination.exists())
+
     def test_promotion_rejects_review_for_different_candidate_hash(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

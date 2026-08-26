@@ -20,6 +20,7 @@ logger = logging.getLogger(__name__)
 # Sharpness, resolution, and dimensions are deliberately excluded: a low-resolution
 # official or licensed visual must still pass this gate.
 ALLOWED_IMAGE_SOURCE_TYPES = {
+    'original-editorial-artwork',
     'official-map',
     'official-diagram',
     'work-area-diagram',

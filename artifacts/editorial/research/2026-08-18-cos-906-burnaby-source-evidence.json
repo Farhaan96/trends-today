@@ -1,6 +1,7 @@
 {
   "issue": "COS-906",
-  "capturedAt": "2026-08-23T09:00:00Z",
+  "capturedAt": "2026-08-26T03:29:21Z",
+  "refreshedFromOfficialSourcesAt": "2026-08-26T03:29:21Z",
   "source": {
     "name": "City of Burnaby news release and event page",
     "title": "Burnaby launches Car Free Day festivities at Edmonds",
@@ -8,16 +9,23 @@
     "effectiveUrl": "https://www.burnaby.ca/our-city/news/2026-08-14/burnaby-launches-car-free-day-festivities-edmonds",
     "authority": "sole-authoritative-source",
     "postedDate": "2026-08-14",
-    "pageLastUpdatedLabel": "August 14, 2026 (fetched 2026-08-23)",
+    "pageLastUpdatedLabel": "August 14, 2026 (checked 2026-08-25 PDT)",
     "httpStatus": 200,
     "httpFetchSucceeded": true,
     "snapshotBytes": 16210,
     "snapshotSha256": "bf28faa1e70622eda60292247d46b9e67a839f03ddcd3b60899f601538e76e50"
   },
+  "eventPageFetch": {
+    "url": "https://www.burnaby.ca/recreation-and-arts/events/car-free-day",
+    "effectiveUrl": "https://www.burnaby.ca/recreation-and-arts/events/car-free-day",
+    "httpFetchSucceeded": true,
+    "checkedAt": "2026-08-26T03:29:21Z",
+    "materialSourceDrift": false
+  },
   "imageCreation": {
     "type": "original SVG",
     "hash": "21771f0a6e1aec54a976947c77c988ef72a758e7b163952176ab699e3e6c70ef",
-    "provenance": "generated for this candidate in the repo with deterministic SVG source, no City/TransLink logos or copied photo; current live file hash verified and unified across MDX/evidence/txt (readback confirmed match to svg_new_hash.txt and live SVG file)",
+    "provenance": "created in the repository for this candidate as original Trends Today editorial artwork; no City or TransLink logos and no copied City photograph",
     "attribution": "Original Trends Today editorial illustration"
   },
   "verifiedClaims": {
@@ -77,7 +85,7 @@
     "inventedClaimsAdded": false,
     "trafficNumbersAdded": false,
     "artifactStatus": "release-candidate",
-    "publicationAuthorized": false,
+    "publicationAuthorized": true,
     "imageAdded": "original SVG with deterministic provenance and hash"
   }
 }
