@@ -18,12 +18,51 @@ export interface EditorialArticle {
   category?: string;
   locality?: string;
   storyType?: string;
+  eventEndDate?: string;
+  city?: string;
+  tags?: string[];
 }
 
 interface ArticleCardProps {
   article: EditorialArticle;
   variant?: 'lead' | 'standard' | 'compact' | 'wide';
   priority?: boolean;
+}
+
+function inferCity(article: EditorialArticle): string | null {
+  if (article.city) return article.city;
+  if (article.locality) {
+    const loc = article.locality.toLowerCase();
+    if (loc === 'metro vancouver' || loc.includes('translink'))
+      return 'Regional';
+    return article.locality;
+  }
+  const tags = article.tags || [];
+  const title = article.title.toLowerCase();
+  const tagStr = tags.join(' ').toLowerCase();
+  const combined = `${title} ${tagStr}`;
+  if (combined.includes('translink') || combined.includes('metro vancouver'))
+    return 'Regional';
+  if (combined.includes('surrey')) return 'Surrey';
+  if (combined.includes('burnaby')) return 'Burnaby';
+  if (combined.includes('richmond')) return 'Richmond';
+  if (combined.includes('vancouver') && !combined.includes('metro vancouver'))
+    return 'Vancouver';
+  if (combined.includes('coquitlam')) return 'Coquitlam';
+  if (combined.includes('delta')) return 'Delta';
+  if (combined.includes('langley')) return 'Langley';
+  if (combined.includes('new westminster')) return 'New Westminster';
+  return null;
+}
+
+function getEventStatus(
+  article: EditorialArticle
+): 'still-on' | 'ended' | null {
+  if (!article.eventEndDate) return null;
+  const endDate = new Date(article.eventEndDate);
+  if (Number.isNaN(endDate.getTime())) return null;
+  const now = new Date();
+  return endDate < now ? 'ended' : 'still-on';
 }
 
 export default function ArticleCard({
@@ -35,6 +74,8 @@ export default function ArticleCard({
   const date = article.locality
     ? formatArticleDateTime(article.publishedAt)
     : formatArticleDate(article.publishedAt);
+  const cityChip = inferCity(article);
+  const eventStatus = getEventStatus(article);
 
   return (
     <article className={`story-card story-card--${variant}`}>
@@ -57,11 +98,24 @@ export default function ArticleCard({
                   : '(max-width: 768px) 100vw, 32vw'
             }
           />
+          {eventStatus && (
+            <span
+              className={`story-card__status story-card__status--${eventStatus}`}
+              aria-label={
+                eventStatus === 'ended' ? 'Event ended' : 'Event still on'
+              }
+            >
+              {eventStatus === 'ended' ? 'Ended' : 'Still on'}
+            </span>
+          )}
         </div>
       </Link>
 
       <div className="story-card__body">
-        <div className="story-card__category">{category}</div>
+        <div className="story-card__header">
+          <span className="story-card__category">{category}</span>
+          {cityChip && <span className="story-card__city">{cityChip}</span>}
+        </div>
         <Link
           href={article.href}
           prefetch={false}
