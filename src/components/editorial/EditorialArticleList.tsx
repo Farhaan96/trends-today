@@ -19,6 +19,9 @@ interface Article {
     category?: string;
     locality?: string;
     storyType?: string;
+    eventEndDate?: string;
+    city?: string;
+    tags?: string[];
   };
 }
 
@@ -39,7 +42,64 @@ function normalizeArticle(article: Article): EditorialArticle {
     category: article.category || article.frontmatter.category,
     locality: article.frontmatter.locality,
     storyType: article.frontmatter.storyType,
+    eventEndDate: article.frontmatter.eventEndDate,
+    city: article.frontmatter.city,
+    tags: article.frontmatter.tags,
   };
+}
+
+const PIN_CANDIDATES = [
+  '/local-news/surrey-20-dollar-tree-sale-august-18',
+  '/things-to-do/burnaby-farm-tour-big-bend',
+  '/transit/translink-fall-service-changes-september-2026',
+];
+
+function isIntersectionStory(article: Article): boolean {
+  const href = article.href.toLowerCase();
+  const title = article.frontmatter.title?.toLowerCase() || '';
+  return (
+    href.includes('intersection') ||
+    href.includes('signal-work') ||
+    href.includes('signal-upgrades') ||
+    title.includes('intersection') ||
+    title.includes('signal work') ||
+    title.includes('signal upgrades')
+  );
+}
+
+function isStillOn(article: Article): boolean {
+  const endDate = article.frontmatter.eventEndDate;
+  if (!endDate) return true;
+  const end = new Date(endDate);
+  if (Number.isNaN(end.getTime())) return true;
+  return end >= new Date();
+}
+
+function applyPinning(articles: Article[]): Article[] {
+  if (articles.length < 3) return articles;
+
+  const firstThree = articles.slice(0, 3);
+  const allIntersections = firstThree.every(isIntersectionStory);
+  if (!allIntersections) {
+    const hasNonIntersectionStillOn = firstThree.some(
+      (a) => !isIntersectionStory(a) && isStillOn(a)
+    );
+    if (hasNonIntersectionStillOn) return articles;
+  }
+
+  for (const candidateHref of PIN_CANDIDATES) {
+    const idx = articles.findIndex((a) => a.href === candidateHref);
+    if (idx === -1) continue;
+    const candidate = articles[idx];
+    if (!isStillOn(candidate)) continue;
+    if (idx < 3) return articles;
+    const reordered = [...articles];
+    reordered.splice(idx, 1);
+    reordered.splice(0, 0, candidate);
+    return reordered;
+  }
+
+  return articles;
 }
 
 export default function EditorialArticleList({
@@ -49,7 +109,8 @@ export default function EditorialArticleList({
     isLocalNewsCategory(article.category || article.frontmatter.category || '')
   );
   const localDeskIsLive = localArticles.length > 0;
-  const feedArticles = localDeskIsLive ? localArticles : allArticles;
+  const baseFeed = localDeskIsLive ? localArticles : allArticles;
+  const feedArticles = applyPinning(baseFeed);
   const initialCount = Math.min(12, feedArticles.length);
   const [displayedArticles, setDisplayedArticles] = useState(
     feedArticles.slice(0, initialCount)
