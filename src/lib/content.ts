@@ -167,29 +167,35 @@ export async function getAllPosts(): Promise<Article[]> {
   const articleArrays = await Promise.all(articlePromises);
 
   // Combine all articles and sort by date (newest first) with validation
-  const allArticles = articleArrays.flat().sort((a, b) => {
-    // Helper function to safely parse dates
-    const parseDate = (article: Article) => {
-      const dateStr =
-        article.frontmatter.publishedAt || article.frontmatter.datePublished;
-      if (!dateStr) {
-        console.warn(`Missing date for article: ${article.slug}`);
-        return new Date('1970-01-01');
-      }
+  // Exclude articles marked as eventEnded from the homepage feed
+  const allArticles = articleArrays
+    .flat()
+    .filter((article) => !article.frontmatter.eventEnded)
+    .sort((a, b) => {
+      // Helper function to safely parse dates
+      const parseDate = (article: Article) => {
+        const dateStr =
+          article.frontmatter.publishedAt || article.frontmatter.datePublished;
+        if (!dateStr) {
+          console.warn(`Missing date for article: ${article.slug}`);
+          return new Date('1970-01-01');
+        }
 
-      const date = new Date(dateStr);
-      if (isNaN(date.getTime())) {
-        console.warn(`Invalid date "${dateStr}" for article: ${article.slug}`);
-        return new Date('1970-01-01');
-      }
+        const date = new Date(dateStr);
+        if (isNaN(date.getTime())) {
+          console.warn(
+            `Invalid date "${dateStr}" for article: ${article.slug}`
+          );
+          return new Date('1970-01-01');
+        }
 
-      return date;
-    };
+        return date;
+      };
 
-    const dateA = parseDate(a);
-    const dateB = parseDate(b);
-    return dateB.getTime() - dateA.getTime(); // Sort by date, newest first
-  });
+      const dateA = parseDate(a);
+      const dateB = parseDate(b);
+      return dateB.getTime() - dateA.getTime(); // Sort by date, newest first
+    });
 
   return allArticles;
 }

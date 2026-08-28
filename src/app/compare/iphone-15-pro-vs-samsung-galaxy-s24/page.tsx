@@ -1,8 +1,17 @@
 import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
 export const dynamic = 'force-static';
+
+export const metadata: Metadata = {
+  title: 'iPhone 15 Pro vs Samsung Galaxy S24',
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 function loadData() {
   const p = path.join(

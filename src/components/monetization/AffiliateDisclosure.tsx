@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
 
 interface AffiliateDisclosureProps {
   variant?: 'full' | 'compact' | 'inline';
@@ -13,8 +13,8 @@ export default function AffiliateDisclosure({
   if (variant === 'inline') {
     return (
       <span className={`text-xs text-gray-900 ${className}`}>
-        <span className="text-yellow-600">*</span> We earn a commission if you
-        make a purchase
+        <span className="text-blue-600">*</span> Some links may support our
+        operations
       </span>
     );
   }
@@ -22,13 +22,14 @@ export default function AffiliateDisclosure({
   if (variant === 'compact') {
     return (
       <div
-        className={`bg-yellow-50 border border-yellow-200 rounded-lg p-3 ${className}`}
+        className={`bg-blue-50 border border-blue-200 rounded-lg p-3 ${className}`}
       >
         <div className="flex items-start gap-2">
-          <ExclamationTriangleIcon className="w-4 h-4 text-yellow-600 mt-0.5 flex-shrink-0" />
-          <div className="text-xs text-yellow-700">
-            <strong>Affiliate Disclosure:</strong> We earn commission from
-            purchases made through our affiliate links at no extra cost to you.
+          <InformationCircleIcon className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+          <div className="text-xs text-blue-700">
+            <strong>Note:</strong> Trends Today is an independent local news
+            publication. We do not currently operate affiliate programs or
+            sponsored content.
           </div>
         </div>
       </div>
@@ -37,49 +38,45 @@ export default function AffiliateDisclosure({
 
   return (
     <div
-      className={`bg-yellow-50 border border-yellow-200 rounded-lg p-6 ${className}`}
+      className={`bg-blue-50 border border-blue-200 rounded-lg p-6 ${className}`}
     >
       <div className="flex items-start gap-3">
-        <ExclamationTriangleIcon className="w-6 h-6 text-yellow-600 mt-1 flex-shrink-0" />
+        <InformationCircleIcon className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0" />
         <div>
-          <h3 className="text-lg font-semibold text-yellow-800 mb-3">
-            🔍 Transparency & Affiliate Disclosure
+          <h3 className="text-lg font-semibold text-blue-800 mb-3">
+            About Trends Today
           </h3>
-          <div className="text-sm text-yellow-700 space-y-3">
+          <div className="text-sm text-blue-700 space-y-3">
             <div>
-              <strong>Independent Testing & Reviews:</strong>
+              <strong>What We Publish:</strong>
               <p className="mt-1">
-                We purchase products with our own funds for completely
-                independent testing. Manufacturers do not provide review units,
-                and our opinions are never influenced by affiliate partnerships
-                or sponsorship opportunities.
-              </p>
-            </div>
-
-            <div>
-              <strong>Affiliate Partnerships:</strong>
-              <p className="mt-1">
-                This page contains affiliate links to retailers including
-                Amazon, Best Buy, Target, and others. When you purchase through
-                these links, Trends Today earns a small commission at no
-                additional cost to you. These commissions help support our
-                independent testing, detailed reviews, and free content.
+                Trends Today covers local news, transit updates, civic
+                bulletins, and community events across the Lower Mainland. Our
+                content focuses on practical information for residents.
               </p>
             </div>
 
             <div>
               <strong>Editorial Independence:</strong>
               <p className="mt-1">
-                Our affiliate partnerships never influence our editorial
-                opinions, product recommendations, or review scores. We only
-                recommend products we would purchase ourselves and that we
-                believe provide genuine value to our readers.
+                We do not currently operate affiliate marketing programs,
+                sponsored content arrangements, or product review services. Our
+                editorial decisions are made independently.
               </p>
             </div>
 
-            <div className="bg-yellow-100 border border-yellow-300 rounded p-3 mt-4">
-              <p className="font-medium text-yellow-800">
-                Questions about our monetization or editorial policies?
+            <div>
+              <strong>Sources:</strong>
+              <p className="mt-1">
+                Our articles cite official municipal sources, TransLink, Metro
+                Vancouver, provincial agencies, and other public records. We
+                link to primary sources where available.
+              </p>
+            </div>
+
+            <div className="bg-blue-100 border border-blue-300 rounded p-3 mt-4">
+              <p className="font-medium text-blue-800">
+                Questions about our editorial approach?{' '}
                 <a
                   href="mailto:editorial@trendstoday.ca"
                   className="underline hover:no-underline"
