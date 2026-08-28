@@ -54,16 +54,23 @@ const PIN_CANDIDATES = [
   '/transit/translink-fall-service-changes-september-2026',
 ];
 
-function isIntersectionStory(article: Article): boolean {
+function isWorkAreaStory(article: Article): boolean {
   const href = article.href.toLowerCase();
   const title = article.frontmatter.title?.toLowerCase() || '';
+  const combined = `${href} ${title}`;
   return (
-    href.includes('intersection') ||
-    href.includes('signal-work') ||
-    href.includes('signal-upgrades') ||
-    title.includes('intersection') ||
-    title.includes('signal work') ||
-    title.includes('signal upgrades')
+    combined.includes('intersection') ||
+    combined.includes('signal-work') ||
+    combined.includes('signal-upgrades') ||
+    combined.includes('signal work') ||
+    combined.includes('water-main') ||
+    combined.includes('water main') ||
+    combined.includes('lane-closure') ||
+    combined.includes('lane closure') ||
+    combined.includes('road-work') ||
+    combined.includes('road work') ||
+    combined.includes('trunk') ||
+    combined.includes('work-area')
   );
 }
 
@@ -79,12 +86,12 @@ function applyPinning(articles: Article[]): Article[] {
   if (articles.length < 3) return articles;
 
   const firstThree = articles.slice(0, 3);
-  const allIntersections = firstThree.every(isIntersectionStory);
-  if (!allIntersections) {
-    const hasNonIntersectionStillOn = firstThree.some(
-      (a) => !isIntersectionStory(a) && isStillOn(a)
+  const allWorkArea = firstThree.every(isWorkAreaStory);
+  if (!allWorkArea) {
+    const hasNonWorkAreaStillOn = firstThree.some(
+      (a) => !isWorkAreaStory(a) && isStillOn(a)
     );
-    if (hasNonIntersectionStillOn) return articles;
+    if (hasNonWorkAreaStillOn) return articles;
   }
 
   for (const candidateHref of PIN_CANDIDATES) {
