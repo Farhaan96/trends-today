@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { formatArticleDate } from '@/lib/editorial';
+import {
+  selectRelatedStories,
+  selectCategoryFallbackStories,
+} from '@/lib/story-visibility.mjs';
 
 interface Article {
   slug: string;
@@ -16,6 +20,10 @@ interface Article {
     description?: string;
     keywords?: string[];
     tags?: string[];
+    locality?: string;
+    city?: string;
+    eventEndDate?: string;
+    eventEnded?: boolean;
   };
 }
 
@@ -122,6 +130,8 @@ interface SmartRelatedArticlesProps {
       category?: string;
       keywords?: string[];
       tags?: string[];
+      locality?: string;
+      city?: string;
     };
   };
   allArticles: Article[];
@@ -137,81 +147,21 @@ export function SmartRelatedArticles({
 }: SmartRelatedArticlesProps) {
   const currentCategory =
     currentArticle.category || currentArticle.frontmatter?.category;
-  const currentTitle =
-    currentArticle.title || currentArticle.frontmatter?.title;
-  const currentKeywords = currentArticle.frontmatter?.keywords || [];
-  const currentTags = currentArticle.frontmatter?.tags || [];
 
-  // Filter and score related articles
-  const relatedArticles = allArticles
-    .filter((article) => {
-      // Exclude current article
-      if (article.slug === currentArticle.slug) return false;
-
-      // Must have a title
-      if (!article.title && !article.frontmatter?.title) return false;
-
-      return true;
-    })
-    .map((article) => {
-      let score = 0;
-      const articleCategory = article.category || article.frontmatter?.category;
-      const articleTitle = article.title || article.frontmatter?.title;
-      const articleKeywords = article.frontmatter?.keywords || [];
-      const articleTags = article.frontmatter?.tags || [];
-
-      // Same category gets highest score
-      if (articleCategory === currentCategory) {
-        score += 10;
-      }
-
-      // Keyword matches
-      const keywordMatches = currentKeywords.filter(
-        (keyword) =>
-          articleKeywords.includes(keyword) ||
-          articleTitle?.toLowerCase().includes(keyword.toLowerCase())
-      );
-      score += keywordMatches.length * 5;
-
-      // Tag matches
-      const tagMatches = currentTags.filter((tag) => articleTags.includes(tag));
-      score += tagMatches.length * 3;
-
-      // Title word similarity (basic)
-      if (currentTitle && articleTitle) {
-        const currentWords = currentTitle
-          .toLowerCase()
-          .split(' ')
-          .filter((w) => w.length > 3);
-        const articleWords = articleTitle
-          .toLowerCase()
-          .split(' ')
-          .filter((w) => w.length > 3);
-        const wordMatches = currentWords.filter((word) =>
-          articleWords.some((aw) => aw.includes(word) || word.includes(aw))
-        );
-        score += wordMatches.length * 2;
-      }
-
-      return { article, score };
-    })
-    .filter(({ score }) => score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, maxArticles)
-    .map(({ article }) => article);
+  // Still-on stories only, preferring same city or same beat
+  const relatedArticles: Article[] = selectRelatedStories(
+    currentArticle,
+    allArticles,
+    maxArticles
+  );
 
   if (relatedArticles.length === 0) {
-    // Fallback: just get recent articles from the same category
-    const fallbackArticles = allArticles
-      .filter((article) => {
-        const articleCategory =
-          article.category || article.frontmatter?.category;
-        return (
-          articleCategory === currentCategory &&
-          article.slug !== currentArticle.slug
-        );
-      })
-      .slice(0, maxArticles);
+    // Fallback: recent still-on articles from the same category
+    const fallbackArticles: Article[] = selectCategoryFallbackStories(
+      currentArticle,
+      allArticles,
+      maxArticles
+    );
 
     if (fallbackArticles.length === 0) return null;
 

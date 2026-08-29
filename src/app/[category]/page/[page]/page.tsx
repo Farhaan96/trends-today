@@ -9,6 +9,7 @@ import {
   getCategoryLabel,
 } from '@/lib/categories';
 import { formatArticleDate } from '@/lib/editorial';
+import { isNoindexCategoryHub } from '@/lib/story-visibility.mjs';
 import {
   paginateItems,
   generatePaginationMetadata,
@@ -92,7 +93,7 @@ export async function generateMetadata({
       url: `https://www.trendstoday.ca/${key}/page/${page}`,
     },
     robots: {
-      index: true,
+      index: !isNoindexCategoryHub(key),
       follow: true,
     },
   };

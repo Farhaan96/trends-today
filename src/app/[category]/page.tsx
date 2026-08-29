@@ -9,6 +9,7 @@ import {
   getCategoryLabel,
 } from '@/lib/categories';
 import { formatArticleDate } from '@/lib/editorial';
+import { isNoindexCategoryHub } from '@/lib/story-visibility.mjs';
 import { paginateItems } from '@/lib/pagination';
 import PaginationLinks from '@/components/ui/PaginationLinks';
 import EditorialImage from '@/components/editorial/EditorialImage';
@@ -34,6 +35,9 @@ export async function generateMetadata({
     alternates: {
       canonical: `/${key}`,
     },
+    ...(isNoindexCategoryHub(key)
+      ? { robots: { index: false, follow: true } }
+      : {}),
   };
 }
 

@@ -8,6 +8,7 @@ import ArticleJsonLd from '@/components/seo/ArticleJsonLd';
 import { BreadcrumbSchema } from '@/components/seo/SchemaMarkup';
 import { SmartRelatedArticles } from '@/components/article/RelatedArticles';
 import MoreFromAuthor from '@/components/content/MoreFromAuthor';
+import { selectAuthorStories } from '@/lib/story-visibility.mjs';
 import { formatArticleDate, formatArticleDateTime } from '@/lib/editorial';
 import EditorialImage from '@/components/editorial/EditorialImage';
 import { CONTENT_CATEGORIES, getCategoryLabel } from '@/lib/categories';
@@ -294,25 +295,21 @@ export default async function ArticlePage({
                 ? currentAuthor
                 : currentAuthor?.name || currentAuthor;
 
-            // Filter articles by the same author, excluding current article
-            const authorArticles = allArticles
-              .filter((a) => {
-                const articleAuthor =
-                  a.author?.name ||
-                  a.frontmatter?.author?.name ||
-                  a.frontmatter?.author;
-                return articleAuthor === authorName && a.slug !== slug;
-              })
-              .slice(0, 3)
-              .map((a) => ({
-                title: a.title || a.frontmatter?.title,
-                description: a.description || a.frontmatter?.description,
-                href: `/${a.category}/${a.slug}`,
-                publishedAt: a.publishedAt || a.frontmatter?.publishedAt,
-                image: a.image || a.frontmatter?.image,
-                category: a.category,
-                readingTime: a.frontmatter?.readingTime || '2',
-              }));
+            // Still-on stories by the same author, preferring same city or beat
+            const authorArticles = selectAuthorStories(
+              article,
+              allArticles,
+              authorName,
+              3
+            ).map((a: (typeof allArticles)[number]) => ({
+              title: a.title || a.frontmatter?.title,
+              description: a.description || a.frontmatter?.description,
+              href: `/${a.category}/${a.slug}`,
+              publishedAt: a.publishedAt || a.frontmatter?.publishedAt,
+              image: a.image || a.frontmatter?.image,
+              category: a.category,
+              readingTime: a.frontmatter?.readingTime || '2',
+            }));
 
             return (
               <MoreFromAuthor
