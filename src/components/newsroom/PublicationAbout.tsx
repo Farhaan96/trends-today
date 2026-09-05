@@ -63,8 +63,8 @@ export default function PublicationAbout() {
         </div>
         <div>
           <p>
-            The publication contact channel is being verified before release.
-            We will publish it here only after delivery and human ownership are
+            The publication contact channel is being verified before release. We
+            will publish it here only after delivery and human ownership are
             confirmed.
           </p>
           <div className="trust-page__actions">
