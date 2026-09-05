@@ -1,8 +1,9 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import { DM_Sans, Newsreader } from 'next/font/google';
+import localFont from 'next/font/local';
 import Link from 'next/link';
 import './globals.css';
+import './cinematic.css';
 import EditorialHeader from '@/components/editorial/EditorialHeader';
 import {
   OrganizationSchema,
@@ -12,21 +13,18 @@ import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/next';
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 
-const sans = DM_Sans({
+const sans = localFont({
+  src: '../../public/fonts/editorial-a.woff2',
   variable: '--font-ui',
-  subsets: ['latin'],
   display: 'swap',
-  preload: true,
-  weight: ['400', '500', '600', '700'],
+  weight: '400 700',
   fallback: ['system-ui', '-apple-system', 'sans-serif'],
 });
-
-const display = Newsreader({
+const display = localFont({
+  src: '../../public/fonts/editorial-b.woff2',
   variable: '--font-editorial',
-  subsets: ['latin'],
   display: 'swap',
-  preload: true,
-  weight: ['400', '500', '600', '700'],
+  weight: '400 700',
   fallback: ['Georgia', 'serif'],
 });
 
@@ -109,7 +107,7 @@ export const metadata: Metadata = {
     'apple-mobile-web-app-title': 'Trends Today',
     'application-name': 'Trends Today',
     'msapplication-TileColor': '#e5483e',
-    'theme-color': '#f5f2eb',
+    'theme-color': '#071c17',
   },
 };
 
@@ -179,10 +177,7 @@ export default function RootLayout({
                 className="site-wordmark"
                 aria-label="Trends Today home"
               >
-                <span className="site-wordmark__mark" aria-hidden="true">
-                  T
-                </span>
-                <span>Trends Today</span>
+                <span>trends today.</span>
               </Link>
               <p className="site-footer__statement">
                 Useful local reporting from Vancouver to the Fraser Valley.
