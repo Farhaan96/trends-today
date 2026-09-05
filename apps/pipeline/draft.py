@@ -32,6 +32,9 @@ STYLE_GUIDE = """
 - Bold only the numbers, dates, institutions, and details that matter
 - Use periods and commas for rhythm; do not use em dashes
 - Ground every claim in the provided sources; do not invent statistics
+- Treat secondary local-publication coverage as a discovery lead, not a writing
+  template; independently frame the story from primary evidence and never mirror
+  another publication's structure, distinctive phrasing, or unsupported inference
 - Add an internal link only when a published article directly helps the reader
 - End with what residents should watch or do next
 - Leave readers with a specific next step, date, decision, or unanswered local question
@@ -48,7 +51,9 @@ class ArticleDrafter:
     def _build_prompt(self, topic: str, sources: List[Dict]) -> str:
         """Build the article generation prompt"""
         source_text = "\n".join([
-            f"- {s.get('title', 'Source')} ({s.get('url', 'URL unavailable')}): {s['snippet'][:300]}"
+            f"- [{s.get('tier', s.get('sourceTier', 'unclassified'))}] "
+            f"{s.get('title', 'Source')} ({s.get('url', 'URL unavailable')}): "
+            f"{s['snippet'][:300]}"
             for s in sources[:5]
         ])
 
