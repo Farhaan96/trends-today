@@ -20,8 +20,8 @@ export const organizationSchema: OrganizationSchema = {
   logo: {
     '@type': 'ImageObject',
     url: 'https://www.trendstoday.ca/images/logo.png',
-    width: 400,
-    height: 100,
+    width: 512,
+    height: 512,
   },
   description:
     'Useful local reporting for Vancouver, Metro Vancouver, and the Fraser Valley.',
