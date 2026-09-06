@@ -102,8 +102,7 @@ export default function CinematicHome({
               <h1 id="cover-heading">
                 Good things.
                 <br />
-                Close to{' '}
-                <br />
+                Close to <br />
                 home.
               </h1>
               <p className="cover__deck">{lead.description}</p>
@@ -188,8 +187,7 @@ export default function CinematicHome({
         <section className="travel-brief" aria-labelledby="travel-heading">
           <div className="travel-brief__inner">
             <h2 id="travel-heading">
-              Before you{' '}
-              <br />
+              Before you <br />
               head out.
             </h2>
             {transit.map((story) => (
