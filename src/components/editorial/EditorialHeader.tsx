@@ -1,15 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import {
+  Bars3Icon,
+  XMarkIcon,
+  MagnifyingGlassIcon,
+} from '@heroicons/react/24/outline';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const navigation = [
-  { name: 'Local News', href: '/local-news' },
+  { name: 'Local news', href: '/local-news' },
+  { name: 'Things to do', href: '/things-to-do' },
+  { name: 'Food & drink', href: '/food-drink' },
   { name: 'Transit', href: '/transit' },
-  { name: 'Things to Do', href: '/things-to-do' },
-  { name: 'Food & Drink', href: '/food-drink' },
   { name: 'Housing', href: '/housing' },
   { name: 'Sports', href: '/sports' },
 ];
@@ -18,84 +22,90 @@ export default function EditorialHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [editionDate, setEditionDate] = useState('');
   const pathname = usePathname();
-
   useEffect(() => setIsMenuOpen(false), [pathname]);
   useEffect(() => {
-    setEditionDate(
-      new Intl.DateTimeFormat('en-CA', {
-        weekday: 'long',
-        month: 'long',
-        day: 'numeric',
-        timeZone: 'America/Vancouver',
-      }).format(new Date())
-    );
+    const refresh = () =>
+      setEditionDate(
+        new Intl.DateTimeFormat('en-CA', {
+          weekday: 'long',
+          month: 'long',
+          day: 'numeric',
+          timeZone: 'America/Vancouver',
+        }).format(new Date())
+      );
+    refresh();
+    const timer = setInterval(refresh, 60_000);
+    return () => clearInterval(timer);
   }, []);
-
   return (
-    <header className="site-header">
+    <header
+      className="tt-header"
+      onKeyDown={(event) => {
+        if (event.key === 'Escape') setIsMenuOpen(false);
+      }}
+    >
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
-      <div className="site-header__bar">
-        <Link href="/" className="site-wordmark" aria-label="Trends Today home">
-          <span className="site-wordmark__mark" aria-hidden="true">
-            T
-          </span>
-          <span>Trends Today</span>
+      <div className="tt-header__inner">
+        <Link href="/" className="tt-wordmark" aria-label="Trends Today home">
+          trends today<span>.</span>
         </Link>
-
-        <nav className="site-nav" aria-label="Primary navigation">
-          {navigation.map((item) => {
-            const active =
-              pathname === item.href || pathname.startsWith(`${item.href}/`);
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={
-                  active ? 'site-nav__link is-active' : 'site-nav__link'
-                }
-                aria-current={active ? 'page' : undefined}
-              >
-                {item.name}
-              </Link>
-            );
-          })}
+        <nav className="tt-nav" aria-label="Primary navigation">
+          {navigation.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={
+                pathname === item.href || pathname.startsWith(`${item.href}/`)
+                  ? 'page'
+                  : undefined
+              }
+            >
+              {item.name}
+            </Link>
+          ))}
         </nav>
-
+        <Link
+          href="/#discover"
+          className="tt-search"
+          aria-label="Search local stories"
+        >
+          <MagnifyingGlassIcon />
+        </Link>
+        <div className="tt-edition" aria-label="Publication edition">
+          <span>Lower Mainland edition</span>
+          <span>{editionDate || 'Vancouver to the Fraser Valley'}</span>
+        </div>
         <button
           type="button"
-          className="site-menu-button"
+          className="tt-menu"
           onClick={() => setIsMenuOpen((open) => !open)}
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         >
-          {isMenuOpen ? (
-            <XMarkIcon aria-hidden="true" />
-          ) : (
-            <Bars3Icon aria-hidden="true" />
-          )}
+          {isMenuOpen ? <XMarkIcon /> : <Bars3Icon />}
         </button>
       </div>
-
-      <div className="site-edition" aria-label="Publication edition">
-        <span>Lower Mainland</span>
-        <span>{editionDate || ' '}</span>
-        <span>Vancouver to the Fraser Valley</span>
-      </div>
-
       {isMenuOpen && (
         <nav
           id="mobile-navigation"
-          className="mobile-nav"
+          className="tt-mobile-nav"
           aria-label="Mobile navigation"
         >
           {navigation.map((item) => (
-            <Link key={item.name} href={item.href} className="mobile-nav__link">
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setIsMenuOpen(false)}
+            >
               {item.name}
             </Link>
           ))}
+          <Link href="/#discover" onClick={() => setIsMenuOpen(false)}>
+            Search stories
+          </Link>
         </nav>
       )}
     </header>
