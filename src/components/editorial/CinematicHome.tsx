@@ -102,7 +102,7 @@ export default function CinematicHome({
               <h1 id="cover-heading">
                 Good things.
                 <br />
-                Close to
+                Close to{' '}
                 <br />
                 home.
               </h1>
@@ -188,7 +188,7 @@ export default function CinematicHome({
         <section className="travel-brief" aria-labelledby="travel-heading">
           <div className="travel-brief__inner">
             <h2 id="travel-heading">
-              Before you
+              Before you{' '}
               <br />
               head out.
             </h2>

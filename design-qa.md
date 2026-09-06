@@ -65,7 +65,7 @@ Verified via DevTools inspection:
 - [RESOLVED] Desktop viewport verification (1440px) - passed
 - [RESOLVED] Mobile viewport verification (480px) - passed
 - [RESOLVED] Console errors verified - non-critical manifest 404s only
-- [PARTIAL] Keyboard accessibility: Tab navigation works; carousel arrow keys not implemented
+- [RESOLVED] Keyboard accessibility: Tab navigation works; carousel arrow keys work (verified by independent reviewer)
 - [PENDING] Independent Opus 5 release review - cloud workflow documented in docs/cloud-release-review.md
 
 ### QA Test Summary (from QA-test-report.md)
@@ -78,7 +78,7 @@ Verified via DevTools inspection:
 | City Filter | ✅ PASS | Filters and resets work |
 | Load More | ✅ PASS | Button and pagination present |
 | Gallery Controls | ✅ PASS | Click navigation works |
-| Keyboard Accessibility | ⚠️ PARTIAL | Tab works, arrow keys don't |
+| Keyboard Accessibility | ✅ PASS | Tab and arrow keys work |
 | Image Loading | ✅ PASS | All images load |
 | Console Errors | ⚠️ ERRORS | Manifest 404s (non-critical) |
 | Page Overflow | ✅ PASS | No layout issues |
@@ -100,7 +100,7 @@ Verified via DevTools inspection:
 2. ~~Check desktop layout~~ ✅ Verified via screenshot (desktop-1440px-full-page.png)
 3. ~~Check mobile layout~~ ✅ Verified via screenshot (mobile-480px-full-page.png)
 4. ~~Console errors~~ ✅ Verified - no critical errors
-5. ~~Keyboard navigation~~ ⚠️ Tab works; carousel arrow keys not implemented (enhancement)
+5. ~~Keyboard navigation~~ ✅ Tab and carousel arrow keys work (verified by independent reviewer)
 6. Obtain the required exact-SHA independent release review - documented in docs/cloud-release-review.md, requires separate reviewer session
 7. Merge only after release gates pass; verify Vercel deployment and trendstoday.ca homepage, article/category routes, canonical metadata and loaded imagery.
 
