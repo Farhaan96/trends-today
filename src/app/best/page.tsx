@@ -133,25 +133,22 @@ export default async function BestPage() {
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {popularCategories.map((category, index) => (
-            <Link
+            <div
               key={index}
-              href={`/best/${category.title.toLowerCase().replace(/\s+/g, '-').replace('2025', '').slice(0, -1)}`}
-              className="group"
+              className="bg-white rounded-xl shadow-sm border hover:shadow-lg transition-all duration-300"
             >
-              <div className="bg-white rounded-xl shadow-sm border hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                <div
-                  className={`${category.color} h-24 rounded-t-xl flex items-center justify-center`}
-                >
-                  <span className="text-4xl">{category.icon}</span>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600">
-                    {category.title}
-                  </h3>
-                  <p className="text-gray-900">{category.description}</p>
-                </div>
+              <div
+                className={`${category.color} h-24 rounded-t-xl flex items-center justify-center`}
+              >
+                <span className="text-4xl">{category.icon}</span>
               </div>
-            </Link>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  {category.title}
+                </h3>
+                <p className="text-gray-900">{category.description}</p>
+              </div>
+            </div>
           ))}
         </div>
       </section>
@@ -272,41 +269,23 @@ export default async function BestPage() {
             <h3 className="text-2xl font-bold text-green-800 mb-2">
               Under $100
             </h3>
-            <p className="text-green-700 mb-4">
+            <p className="text-green-700">
               Budget-friendly options that don&apos;t compromise on quality
             </p>
-            <Link
-              href="/best/budget"
-              className="text-green-600 hover:text-green-800 font-medium"
-            >
-              View Budget Picks →
-            </Link>
           </div>
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
             <h3 className="text-2xl font-bold text-blue-800 mb-2">
               $100 - $500
             </h3>
-            <p className="text-blue-700 mb-4">
+            <p className="text-blue-700">
               Mid-range products with the best value proposition
             </p>
-            <Link
-              href="/best/mid-range"
-              className="text-blue-600 hover:text-blue-800 font-medium"
-            >
-              View Mid-Range →
-            </Link>
           </div>
           <div className="bg-purple-50 border border-purple-200 rounded-lg p-6 text-center">
             <h3 className="text-2xl font-bold text-purple-800 mb-2">$500+</h3>
-            <p className="text-purple-700 mb-4">
+            <p className="text-purple-700">
               Premium products for enthusiasts and professionals
             </p>
-            <Link
-              href="/best/premium"
-              className="text-purple-600 hover:text-purple-800 font-medium"
-            >
-              View Premium →
-            </Link>
           </div>
         </div>
       </section>

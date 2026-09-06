@@ -303,40 +303,6 @@ export default async function ComparePage() {
         </div>
       </section>
 
-      {/* Popular Comparisons List */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">
-          Most Popular Comparisons
-        </h2>
-        <div className="grid md:grid-cols-2 gap-4">
-          {[
-            'iPhone 15 Pro vs Samsung Galaxy S24 Ultra',
-            'MacBook Air M2 vs Dell XPS 13',
-            'PlayStation 5 vs Xbox Series X',
-            'AirPods Pro vs Sony WH-1000XM5',
-            'iPad Pro vs Microsoft Surface Pro',
-            'Google Pixel 8 Pro vs iPhone 15 Pro',
-            'Nintendo Switch vs Steam Deck',
-            'MacBook Pro vs ThinkPad X1 Carbon',
-          ].map((comparison, index) => (
-            <div
-              key={index}
-              className="bg-white border rounded-lg p-4 hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-medium text-gray-900">{comparison}</span>
-                <Link
-                  href={`/compare/${comparison.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="text-blue-600 hover:text-blue-800"
-                >
-                  Compare →
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Stats */}
       <section className="bg-gray-50 rounded-xl p-8 text-center">
         <div className="grid md:grid-cols-4 gap-6">
