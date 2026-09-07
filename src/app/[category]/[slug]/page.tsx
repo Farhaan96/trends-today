@@ -8,8 +8,8 @@ import ArticleJsonLd from '@/components/seo/ArticleJsonLd';
 import { BreadcrumbSchema } from '@/components/seo/SchemaMarkup';
 import { SmartRelatedArticles } from '@/components/article/RelatedArticles';
 import MoreFromAuthor from '@/components/content/MoreFromAuthor';
-import { formatArticleDate, formatArticleDateTime } from '@/lib/editorial';
 import EditorialImage from '@/components/editorial/EditorialImage';
+import PublishDate from '@/components/editorial/PublishDate';
 import { CONTENT_CATEGORIES, getCategoryLabel } from '@/lib/categories';
 import {
   getNewsroomProfileByName,
@@ -202,7 +202,15 @@ export default async function ArticlePage({
 
           {description && <p className="article-deck">{description}</p>}
 
-          {/* Meta below title, above image (left-aligned; category first) */}
+          {/* Prominent publish date near title */}
+          <PublishDate
+            publishedAt={
+              article.publishedAt || article.frontmatter?.publishedAt
+            }
+            modifiedAt={article.frontmatter?.modifiedAt}
+            className="article-publish-date"
+          />
+
           {/* Meta below title, above image (left-aligned; category first) */}
           <div className="article-meta-wrap">
             <div className="article-meta">
@@ -233,15 +241,6 @@ export default async function ArticlePage({
                   </Link>
                 </span>
               )}
-              <span>
-                {locality
-                  ? formatArticleDateTime(
-                      article.publishedAt || article.frontmatter?.publishedAt
-                    )
-                  : formatArticleDate(
-                      article.publishedAt || article.frontmatter?.publishedAt
-                    )}
-              </span>
               {formattedReadingTime && <span>{formattedReadingTime}</span>}
             </div>
           </div>
