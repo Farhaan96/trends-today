@@ -1,0 +1,53 @@
+{
+  "issue": "COS-908",
+  "capturedAt": "2026-08-18T21:39:49Z",
+  "source": {
+    "name": "City of Surrey",
+    "title": "Filipino Fest returns to Museum of Surrey",
+    "url": "https://www.surrey.ca/news-events/news/filipino-fest-returns-museum-of-surrey",
+    "effectiveUrl": "https://www.surrey.ca/news-events/news/filipino-fest-returns-museum-of-surrey",
+    "authority": "sole-authoritative-source",
+    "publishedDate": "2026-08-13",
+    "httpStatus": 200,
+    "snapshotBytes": 98008,
+    "snapshotSha256": "6cba586df7ba048e4b5cbfeb2ebf7863cbd459f5d8f3502a1ba58fe7bae4e811"
+  },
+  "verifiedClaims": {
+    "event": "Filipino Fest",
+    "date": "2026-09-12",
+    "hours": "11 a.m. to 4 p.m.",
+    "location": "Museum of Surrey, 17710 56A Ave., Surrey",
+    "admission": "free",
+    "audience": "family-friendly",
+    "performers": [
+      "Glisha",
+      "The Kuyas",
+      "Raffy Swap One",
+      "Red Filos",
+      "Mabuhay Arnis",
+      "Grupo Ilocano Association of BC"
+    ],
+    "foodVendors": [
+      "Cake It Easy",
+      "Nanay Kitchen",
+      "Dale's Food Products",
+      "Kasalo",
+      "Timplado Filipino Street Food Truck"
+    ],
+    "activities": [
+      "cultural performances",
+      "traditional music and dance",
+      "cultural displays",
+      "photo opportunities",
+      "textile exhibits",
+      "children's activities",
+      "artisan vendors"
+    ]
+  },
+  "editorialBoundary": {
+    "secondarySourcesUsed": false,
+    "inventedClaimsAdded": false,
+    "artifactStatus": "release-candidate",
+    "publicationAuthorized": false
+  }
+}
