@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Discover Lower Mainland story candidates from curated primary sources."""
+"""Discover Lower Mainland story candidates from curated evidence and lead sources."""
 
 import os
 import json
@@ -11,6 +11,13 @@ from typing import List, Dict
 from urllib.parse import urljoin, urlparse
 import requests
 from pathlib import Path
+
+from source_policy import (
+    automated_access_approved,
+    canonical_http_url,
+    configured_source_for_url,
+    robots_allows,
+)
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -26,12 +33,15 @@ class HeadlineLinkParser(HTMLParser):
         super().__init__()
         self.links = []
         self._href = None
+        self._title = None
         self._text = []
 
     def handle_starttag(self, tag, attrs):
         if tag.lower() != 'a':
             return
-        self._href = dict(attrs).get('href')
+        attributes = dict(attrs)
+        self._href = attributes.get('href')
+        self._title = attributes.get('title')
         self._text = []
 
     def handle_data(self, data):
@@ -40,21 +50,25 @@ class HeadlineLinkParser(HTMLParser):
 
     def handle_endtag(self, tag):
         if tag.lower() == 'a' and self._href is not None:
-            text = re.sub(r'\s+', ' ', ' '.join(self._text)).strip()
-            if text:
-                self.links.append((text, self._href))
+            visible_text = re.sub(r'\s+', ' ', ' '.join(self._text)).strip()
+            title_text = re.sub(r'\s+', ' ', self._title or '').strip()
+            if visible_text or title_text:
+                self.links.append((visible_text, self._href, title_text))
             self._href = None
+            self._title = None
             self._text = []
 
 class TopicDiscovery:
     def __init__(self):
         self.perplexity_key = os.getenv('PERPLEXITY_API_KEY')
         self.google_key = os.getenv('GOOGLE_API_KEY')
+        self.google_cse_id = os.getenv('GOOGLE_CSE_ID')
         self.cache_dir = Path('.cache/topics')
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.recent_posts = self._load_recent_posts()
         self.source_config = self._load_source_config()
         self.last_source_scan = []
+        self._robots_cache = {}
 
     def _load_source_config(self) -> Dict:
         with SOURCE_CONFIG.open(encoding='utf-8') as handle:
@@ -65,6 +79,10 @@ class TopicDiscovery:
         return [
             source for source in self.source_config.get('sources', [])
             if source.get('discoveryEnabled')
+            and (
+                source.get('tier') == 'primary'
+                or automated_access_approved(source.get('url'), self.source_config)
+            )
         ]
         
     def _load_recent_posts(self, days=7) -> set:
@@ -87,8 +105,46 @@ class TopicDiscovery:
         topic_slug = topic.lower().replace(' ', '-')[:50]
         return any(slug in topic_slug or topic_slug in slug for slug in self.recent_posts)
 
+    def _resolve_locality(self, *texts: object) -> str:
+        """Return a configured locality only when the result itself supports it."""
+        blob = ' '.join(str(text or '') for text in texts).lower()
+        excluded_phrases = {
+            str(phrase).lower()
+            for phrase in (
+                self.source_config
+                .get('searchDiscovery', {})
+                .get('localityExclusions', [])
+            )
+        }
+        if any(phrase in blob for phrase in excluded_phrases):
+            return ''
+        for locality in sorted(
+            self._approved_search_localities(),
+            key=len,
+            reverse=True,
+        ):
+            if re.search(
+                rf'(?<!\w){re.escape(locality.lower())}(?!\w)',
+                blob,
+            ):
+                return locality
+        return ''
+
+    def _approved_search_localities(self) -> List[str]:
+        approved = list(self.source_config.get('localities', []))
+        approved.extend(
+            self.source_config
+            .get('searchDiscovery', {})
+            .get('approvedRegionalLabels', [])
+        )
+        return [
+            str(locality).strip()
+            for locality in approved
+            if str(locality).strip()
+        ]
+
     def discover_official_pages(self, count: int = 30) -> List[Dict]:
-        """Pull candidate links directly from configured primary-source listings."""
+        """Pull candidate links directly from configured local-source listings."""
         source_batches = []
         scan_rows = []
         seen_urls = set()
@@ -98,6 +154,20 @@ class TopicDiscovery:
         }
         for source in self.discovery_sources:
             try:
+                discovery_role = source.get('discoveryRole', 'evidence')
+                if not robots_allows(
+                    source['url'],
+                    'TrendsTodayLocalDesk/1.0',
+                    requests.get,
+                    self._robots_cache,
+                ):
+                    scan_rows.append(self._source_scan_row(
+                        source,
+                        None,
+                        0,
+                        'robots policy disallows automated access',
+                    ))
+                    continue
                 response = requests.get(
                     source['url'],
                     timeout=12,
@@ -119,7 +189,14 @@ class TopicDiscovery:
                 max_per_source = int(source.get('maxCandidatesPerSweep', 4))
                 minimum_title_length = int(source.get('minimumTitleLength', 28))
                 maximum_title_length = int(source.get('maximumTitleLength', 180))
-                for title, href in parser.links:
+                for visible_title, href, title_attribute in parser.links:
+                    title = (
+                        title_attribute or visible_title
+                        if discovery_role == 'lead'
+                        else visible_title
+                    )
+                    if not title:
+                        continue
                     normalized = (
                         title.strip(' -|')
                         .replace('\u2013', '-')
@@ -132,6 +209,7 @@ class TopicDiscovery:
                         or len(normalized) > maximum_title_length
                         or normalized.startswith('/')
                         or normalized.lower() in ignored
+                        or not self._matches_title_inclusion(source, normalized)
                         or self._matches_title_exclusion(source, normalized)
                         or self._is_duplicate(normalized)
                         or not self._matches_source_link(source, candidate_url)
@@ -141,9 +219,14 @@ class TopicDiscovery:
                     seen_urls.add(candidate_url)
                     source_topics.append({
                         'title': normalized,
-                        'source': 'primary_source_page',
+                        'source': (
+                            'secondary_lead_page'
+                            if discovery_role == 'lead'
+                            else 'primary_source_page'
+                        ),
                         'sourceName': source['name'],
                         'sourceTier': source['tier'],
+                        'discoveryRole': discovery_role,
                         'url': candidate_url,
                         'locality': source['locality'],
                         'category': source.get('category', source['desks'][0]),
@@ -163,7 +246,7 @@ class TopicDiscovery:
                     'accepted candidates' if source_topics else 'no matching candidate links',
                 ))
             except Exception as exc:
-                logger.warning('Primary source scan failed for %s: %s', source['name'], exc)
+                logger.warning('Source scan failed for %s: %s', source['name'], exc)
                 scan_rows.append(self._source_scan_row(source, None, 0, str(exc)))
         self.last_source_scan = scan_rows
 
@@ -177,7 +260,7 @@ class TopicDiscovery:
                         break
             if len(topics) >= count:
                 break
-        logger.info('Found %s candidates on primary source pages', len(topics))
+        logger.info('Found %s candidates on configured source pages', len(topics))
         return topics[:count]
 
     @staticmethod
@@ -232,6 +315,11 @@ class TopicDiscovery:
             return False
 
         return bool(include_patterns or include_regex)
+
+    @staticmethod
+    def _matches_title_inclusion(source: Dict, title: str) -> bool:
+        include_regex = source.get('includeTitleRegex')
+        return not include_regex or bool(re.search(include_regex, title, re.IGNORECASE))
 
     @staticmethod
     def _matches_title_exclusion(source: Dict, title: str) -> bool:
@@ -292,7 +380,11 @@ class TopicDiscovery:
             ),
         )
     
-    def discover_perplexity(self, count: int = 20) -> List[Dict]:
+    def discover_perplexity(
+        self,
+        count: int = 20,
+        local_changes_only: bool = False,
+    ) -> List[Dict]:
         """Find recent Lower Mainland updates that the primary-page scan missed."""
         if not self.perplexity_key:
             logger.warning("No Perplexity API key, skipping")
@@ -312,12 +404,26 @@ class TopicDiscovery:
                         'content': (
                             f'List {count} verifiable updates from the last 36 hours that matter '
                             'to people in Metro Vancouver or the Fraser Valley. Cover civic news, '
-                            'transit and roads, weather, events, restaurant openings or closures, '
-                            'housing and development, and local sports. Prefer primary sources and '
+                            'transit and roads, weather, events, restaurant changes, local retail '
+                            'and business openings, closures, relocations, closing sales, major '
+                            'renovations, and long-running neighbourhood institutions that are '
+                            'changing, plus housing, development, and local sports. Include useful '
+                            'non-event changes that residents would tell a neighbour about. Treat '
+                            'local-publication coverage and community sightings as discovery leads '
+                            'only; prefer items with a business announcement, official current '
+                            'store page, property or lease document, municipal record, or another '
+                            'primary source available for independent verification. Prefer primary '
+                            'sources and '
                             'name the affected municipality in every title. Exclude national stories '
                             'without a direct Lower Mainland impact and exclude rumours. '
-                            'Return only sentence-case article titles, one per '
-                            'line, no numbering, no commentary.'
+                            + (
+                                'Return only local retail and business openings, closures, '
+                                'relocations, closing sales, renovations, or long-running '
+                                'neighbourhood institutions that are changing. '
+                                if local_changes_only else ''
+                            )
+                            + 'Return one item per line as Municipality | sentence-case '
+                            'article title, with no numbering or commentary.'
                         )
                     }],
                     'temperature': 0.8,
@@ -329,12 +435,36 @@ class TopicDiscovery:
             if response.status_code == 200:
                 content = response.json()['choices'][0]['message']['content']
                 topics = []
+                allowed_localities = {
+                    str(locality).lower()
+                    for locality in self.source_config.get('localities', [])
+                }
+                allowed_localities.update({
+                    'lower mainland', 'metro vancouver', 'fraser valley',
+                })
                 for line in content.strip().split('\n'):
                     line = line.strip().lstrip('0123456789.-) ')
-                    if line and not self._is_duplicate(line):
+                    parts = [part.strip() for part in line.split('|', 1)]
+                    if len(parts) != 2:
+                        continue
+                    locality, title = parts
+                    if (
+                        title
+                        and locality.lower() in allowed_localities
+                        and not self._is_duplicate(title)
+                    ):
                         topics.append({
-                            'title': line,
+                            'title': title,
                             'source': 'perplexity',
+                            'sourceTier': 'secondary',
+                            'discoveryRole': 'lead',
+                            'locality': locality,
+                            'category': 'local-news' if local_changes_only else None,
+                            'storyType': 'reported-update',
+                            'sourceTopic': (
+                                'local business and retail changes'
+                                if local_changes_only else 'general local updates'
+                            ),
                             'discovered_at': datetime.now().isoformat()
                         })
                 
@@ -346,28 +476,37 @@ class TopicDiscovery:
         
         return []
     
-    def discover_google_news(self, count: int = 20) -> List[Dict]:
+    def discover_google_news(
+        self,
+        count: int = 20,
+        categories: List[str] = None,
+        source_name: str = 'google_search',
+        source_topic: str = 'general local updates',
+    ) -> List[Dict]:
         """Use search as a fallback for local candidates."""
-        if not self.google_key:
-            logger.warning("No Google API key, skipping")
+        if not self.google_key or not self.google_cse_id:
+            logger.warning("Google API key or CSE ID unavailable, skipping")
             return []
         
         try:
-            categories = [
+            categories = categories or [
                 'Lower Mainland local news',
                 'Metro Vancouver transit road closure weather',
-                'Vancouver Surrey Burnaby Richmond events opening closing',
+                'Vancouver Surrey Burnaby Richmond events',
+                'Metro Vancouver retail store local business opening closing relocation closing sale',
+                'Vancouver neighbourhood business new location major renovation long-running shop',
                 'Metro Vancouver housing development council',
                 'Vancouver local sports update',
             ]
             topics = []
+            seen_result_keys = set()
             
             for category in categories:
                 response = requests.get(
                     'https://www.googleapis.com/customsearch/v1',
                     params={
                         'key': self.google_key,
-                        'cx': '017576662512468239146:omuauf_lfve',  # Google's news search engine
+                        'cx': self.google_cse_id,
                         'q': f'{category} {datetime.now().strftime("%Y-%m-%d")}',
                         'num': 5,
                         'sort': 'date'
@@ -380,34 +519,110 @@ class TopicDiscovery:
                     for item in items:
                         title = item.get('title', '')
                         if title and not self._is_duplicate(title):
+                            source_url = item.get('link')
+                            result_key = (
+                                canonical_http_url(source_url)
+                                or re.sub(r'\W+', ' ', title.lower()).strip()
+                            )
+                            if result_key in seen_result_keys:
+                                continue
+                            configured_source = configured_source_for_url(
+                                source_url,
+                                self.source_config,
+                            )
+                            configured_locality = (
+                                str(configured_source.get('locality', '')).strip()
+                                if configured_source else ''
+                            )
+                            approved_localities = {
+                                locality.lower()
+                                for locality in self._approved_search_localities()
+                            }
+                            locality = (
+                                configured_locality
+                                if configured_locality.lower() in approved_localities
+                                else ''
+                            ) or self._resolve_locality(
+                                title,
+                                item.get('snippet'),
+                                source_url,
+                            )
+                            if not locality:
+                                logger.info(
+                                    'Skipping search result without an approved locality: %s',
+                                    title,
+                                )
+                                continue
+                            source_tier = (
+                                configured_source.get('tier')
+                                if configured_source else 'secondary'
+                            )
                             topics.append({
                                 'title': title,
-                                'source': 'google_news',
-                                'url': item.get('link'),
-                                'locality': 'Lower Mainland',
+                                'source': source_name,
+                                'sourceTier': source_tier,
+                                'discoveryRole': (
+                                    'evidence'
+                                    if source_tier == 'primary' else 'lead'
+                                ),
+                                'url': source_url,
+                                'locality': locality,
                                 'category': 'local-news',
                                 'storyType': 'reported-update',
+                                'sourceTopic': source_topic,
                                 'discovered_at': datetime.now().isoformat()
                             })
+                            seen_result_keys.add(result_key)
             
-            logger.info(f"Found {len(topics)} topics from Google News")
+            logger.info(f"Found {len(topics)} topics from Google Custom Search")
             return topics[:count]
             
         except Exception as e:
-            logger.error(f"Google News error: {e}")
+            logger.error(f"Google Custom Search error: {e}")
         
         return []
+
+    def discover_local_changes(self, count: int = 8) -> List[Dict]:
+        """Reserve a search-backed lane for useful non-event business changes."""
+        settings = self.source_config.get('searchDiscovery', {})
+        if not settings.get('enabled', False) or count <= 0:
+            return []
+        queries = [
+            str(query).strip()
+            for query in settings.get('localChangeQueries', [])
+            if str(query).strip()
+        ]
+        topics = self.discover_google_news(
+            count,
+            categories=queries,
+            source_name='google_local_change',
+            source_topic='local business and retail changes',
+        ) if queries else []
+        if len(topics) < count:
+            topics.extend(
+                self.discover_perplexity(
+                    count - len(topics),
+                    local_changes_only=True,
+                )
+            )
+        return topics[:count]
     
     def discover_feeds(self, count: int = 20) -> List[Dict]:
         """Backward-compatible alias for the curated local source scan."""
         return self.discover_official_pages(count)
     
     def discover(self, target: int = 50) -> List[Dict]:
-        """Scan primary local sources first, then fill gaps with search."""
-        all_topics = []
-        
+        """Reserve local-change leads, then fill the queue with primary sources."""
+        search_settings = self.source_config.get('searchDiscovery', {})
+        local_change_limit = min(
+            target,
+            int(search_settings.get('reservedLocalChangeCandidates', 0)),
+        )
+        local_changes = self.discover_local_changes(local_change_limit)
         official_limit = int(self.source_config.get('officialCandidateLimit', target))
-        all_topics.extend(self.discover_official_pages(min(target, official_limit)))
+        official_topics = self.discover_official_pages(min(target, official_limit))
+        all_topics = list(local_changes)
+        all_topics.extend(official_topics[:max(0, target - len(all_topics))])
         
         if len(all_topics) < target:
             all_topics.extend(

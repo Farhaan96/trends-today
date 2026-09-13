@@ -1,10 +1,12 @@
 {
-  "version": 2,
+  "version": 3,
   "updatedAt": "2026-07-25",
   "region": "Lower Mainland, British Columbia",
   "officialCandidateLimit": 60,
   "localities": [
     "Vancouver",
+    "North Vancouver",
+    "West Vancouver",
     "Surrey",
     "Burnaby",
     "Richmond",
@@ -28,6 +30,39 @@
     "housing",
     "sports"
   ],
+  "leadSourcePolicy": {
+    "secondaryCoverageMayOnlyOpenResearch": true,
+    "primarySourceRequiredBeforeQualification": true,
+    "independentAngleRequired": true,
+    "competitorCopyMayNotBeRepublishedOrCloselyParaphrased": true,
+    "directFetchRequiresConfiguredAccessAndRobotsApproval": true
+  },
+  "searchDiscovery": {
+    "enabled": true,
+    "reservedLocalChangeCandidates": 8,
+    "providers": ["Google Custom Search", "Perplexity"],
+    "sourceTier": "secondary",
+    "discoveryRole": "lead",
+    "googleCseScopeRequirement": "Lower Mainland and Fraser Valley sources only",
+    "approvedRegionalLabels": [
+      "Lower Mainland",
+      "Metro Vancouver",
+      "Fraser Valley"
+    ],
+    "localityExclusions": [
+      "Surrey, England",
+      "Surrey England",
+      "Delta Air Lines",
+      "Delta Airlines",
+      "Richmond, Virginia",
+      "Richmond, VA"
+    ],
+    "localChangeQueries": [
+      "Metro Vancouver retail store local business opening closing relocation closing sale",
+      "Vancouver neighbourhood business new location major renovation long-running shop",
+      "Surrey Burnaby Richmond Coquitlam retailer storefront liquidation shutters"
+    ]
+  },
   "sources": [
     {
       "name": "City of Vancouver news",
