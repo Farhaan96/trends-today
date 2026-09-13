@@ -1,0 +1,28 @@
+{
+  "retrievedAt": "2026-08-03T16:00:02.4332816Z",
+  "source": "City of Coquitlam",
+  "sourceUrl": "https://www.coquitlam.ca/m/newsflash/Home/Detail/2008",
+  "httpStatus": 200,
+  "contentType": "text/html; charset=utf-8",
+  "contentLength": 107068,
+  "responseBodySha256": "4c1f5e94003cdfd91e7711e8c0d1aa9d97a48cdbf164e3852363a81341fcbb62",
+  "lastModified": null,
+  "etag": null,
+  "currentSourceState": {
+    "title": "Update - Road Work - Como Lake Avenue between Blue Mountain Street and North Road",
+    "where": "Como Lake Avenue between Blue Mountain Street and North Road",
+    "when": "Wednesday, July 29 to Saturday, August 1 (weather permitting)",
+    "hours": "9 a.m. to 3 p.m.",
+    "trafficImpact": "Single lane in each direction during active construction",
+    "postedDate": "2026-07-27"
+  },
+  "asPublishedSourceEvidence": {
+    "sourceQueue": "artifacts/editorial/research/2026-07-27-1230-source-queue.json",
+    "researchedCandidate": "artifacts/editorial/research/2026-07-27-1230-researched-candidates.json",
+    "capturedTitle": "Road Work - Como Lake Avenue between Clarke Road and North Road",
+    "capturedWhere": "Como Lake Avenue between Clarke Road and North Road",
+    "capturedWhen": "Wednesday, July 29 to Friday, August 7, excluding Sunday, August 2 and Monday, August 3"
+  },
+  "finding": "The stable City URL changed after Trends Today's July 27 capture. The article matched the primary source when published but is stale against the source's current state.",
+  "unknown": "The City page does not establish whether the change was a correction, a scope reduction, or early completion. No cause is inferred."
+}
