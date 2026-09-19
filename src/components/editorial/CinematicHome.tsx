@@ -198,6 +198,9 @@ export default function CinematicHome({
                   <ArrowRightIcon />
                 </Link>
                 <p className="travel-brief__description">{story.description}</p>
+                <time dateTime={story.publishedAt}>
+                  {date(story.publishedAt)}
+                </time>
               </article>
             ))}
           </div>
@@ -263,9 +266,9 @@ export default function CinematicHome({
               if (offset > events.length / 2) offset -= events.length;
               const poster = editorialPoster(story);
               return (
-                <button
+                <Link
                   key={story.href}
-                  type="button"
+                  href={story.href}
                   className={`event-poster ${offset === 0 ? 'is-selected' : ''}`}
                   style={
                     {
@@ -274,11 +277,9 @@ export default function CinematicHome({
                       zIndex: 10 - Math.abs(offset),
                     } as CSSProperties
                   }
-                  aria-label={`Select ${story.title}`}
-                  aria-pressed={offset === 0}
+                  aria-label={story.title}
                   tabIndex={Math.abs(offset) > 1 ? -1 : 0}
                   aria-hidden={Math.abs(offset) > 1 || undefined}
-                  onClick={() => setSelected(itemIndex)}
                 >
                   {poster ? (
                     <Image
@@ -296,7 +297,13 @@ export default function CinematicHome({
                       <ArrowRightIcon />
                     </div>
                   )}
-                </button>
+                  <time
+                    className="event-poster__date"
+                    dateTime={story.publishedAt}
+                  >
+                    {date(story.publishedAt)}
+                  </time>
+                </Link>
               );
             })}
           </div>
