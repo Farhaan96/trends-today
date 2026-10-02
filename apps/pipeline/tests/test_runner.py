@@ -8,10 +8,14 @@ PIPELINE_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PIPELINE_DIR))
 
 from runner import (  # noqa: E402
+    apply_source_tiers,
     eligible_candidates_from_payload,
     primary_source_urls_for_topic,
     requires_manual_approval,
     has_manual_approval,
+    resolve_category,
+    resolve_story_type,
+    remove_discovery_lead_sources,
     seed_urls_for_topic,
 )
 
@@ -48,6 +52,133 @@ class RunnerSourceTests(unittest.TestCase):
         self.assertEqual(
             {'https://city.example/news/update'},
             primary_source_urls_for_topic(topic),
+        )
+
+    def test_discovery_lead_is_not_retrieved_or_treated_as_primary(self):
+        topic = {
+            'sourceUrl': 'https://publication.example/vancouver/store-closing',
+            'sourceTier': 'secondary',
+            'discoveryRole': 'lead',
+            'evidence': {
+                'primarySourceUrls': [
+                    'https://www.publication.example/vancouver/store-closing',
+                    'https://retailer.example/store/vancouver',
+                ],
+                'sourceUrls': [
+                    'https://publication.example/vancouver/store-closing',
+                    'https://city.example/permits/store-renovation',
+                ],
+            },
+        }
+
+        self.assertEqual(
+            [
+                'https://retailer.example/store/vancouver',
+                'https://city.example/permits/store-renovation',
+            ],
+            seed_urls_for_topic(topic),
+        )
+        self.assertEqual(
+            {'https://retailer.example/store/vancouver'},
+            primary_source_urls_for_topic(topic),
+        )
+
+    def test_scheme_less_lead_url_cannot_be_primary_or_retrieved(self):
+        topic = {
+            'sourceUrl': 'https://publication.example/vancouver/store-closing',
+            'sourceTier': 'secondary',
+            'discoveryRole': 'lead',
+            'evidence': {
+                'primarySourceUrls': [
+                    'publication.example/vancouver/store-closing',
+                ],
+                'sourceUrls': [
+                    'publication.example/vancouver/store-closing',
+                ],
+            },
+        }
+
+        self.assertEqual([], seed_urls_for_topic(topic))
+        self.assertEqual(set(), primary_source_urls_for_topic(topic))
+
+    def test_lead_subdomain_does_not_block_independent_parent_domain(self):
+        topic = {
+            'sourceUrl': 'https://blog.example.com/store-closing',
+            'sourceTier': 'secondary',
+            'discoveryRole': 'lead',
+            'evidence': {
+                'primarySourceUrls': ['https://example.com/official-notice'],
+            },
+        }
+
+        self.assertEqual(
+            ['https://example.com/official-notice'],
+            seed_urls_for_topic(topic),
+        )
+        self.assertEqual(
+            {'https://example.com/official-notice'},
+            primary_source_urls_for_topic(topic),
+        )
+
+    def test_query_keyed_sibling_page_is_not_marked_primary(self):
+        topic = {
+            'sourceTier': 'primary',
+            'evidence': {
+                'primarySourceUrls': [
+                    'https://www.coquitlam.ca/Calendar.aspx?EID=1234',
+                ],
+            },
+        }
+        sources = [{
+            'url': 'https://www.coquitlam.ca/Calendar.aspx?EID=9999',
+        }, {
+            'url': (
+                'https://coquitlam.ca/Calendar.aspx?EID=1234&utm_source=search'
+            ),
+        }]
+
+        apply_source_tiers(sources, topic)
+
+        self.assertEqual(
+            ['secondary', 'primary'],
+            [source['tier'] for source in sources],
+        )
+
+    def test_unparseable_primary_url_cannot_mark_url_less_sources_primary(self):
+        topic = {
+            'evidence': {
+                'primarySourceUrls': ['https://city.example:99999/notice'],
+            },
+        }
+        sources = [
+            {'url': ''},
+            {},
+            {'url': 'mailto:tips@city.example'},
+        ]
+
+        apply_source_tiers(sources, topic)
+
+        self.assertEqual(
+            ['secondary', 'secondary', 'secondary'],
+            [source['tier'] for source in sources],
+        )
+
+    def test_search_fallback_cannot_reintroduce_discovery_lead_domain(self):
+        topic = {
+            'sourceTier': 'secondary',
+            'url': 'https://publication.example/vancouver/store-closing',
+        }
+        sources = [{
+            'url': 'https://publication.example/vancouver/context',
+        }, {
+            'url': 'https://retailer.example/store/vancouver',
+        }]
+
+        filtered = remove_discovery_lead_sources(sources, topic)
+
+        self.assertEqual(
+            ['https://retailer.example/store/vancouver'],
+            [source['url'] for source in filtered],
         )
 
     def test_sensitive_story_signal_requires_manual_approval(self):
@@ -117,6 +248,95 @@ class RunnerEligibilityTests(unittest.TestCase):
     def test_invalid_payload_is_rejected(self):
         with self.assertRaises(ValueError):
             eligible_candidates_from_payload({'results': 'not-a-list'})
+
+
+class RunnerCategoryTests(unittest.TestCase):
+    def test_non_food_store_closing_routes_to_local_news(self):
+        topic = {
+            'title': 'Vancouver Sport Chek store set to close after nearly 20 years'
+        }
+
+        self.assertEqual('local-news', resolve_category(topic, {}))
+
+    def test_restaurant_opening_stays_in_food_and_drink(self):
+        topic = {'title': 'Family-run Vancouver restaurant opening in Kitsilano'}
+
+        self.assertEqual('food-drink', resolve_category(topic, {}))
+
+    def test_explicit_researched_category_still_wins(self):
+        topic = {
+            'title': 'Neighbourhood cafe closes after 20 years',
+            'category': 'local-news',
+        }
+
+        self.assertEqual('local-news', resolve_category(topic, {}))
+
+    def test_public_hearing_routes_to_housing_not_food_and_drink(self):
+        topic = {'title': 'Public hearing set for Vancouver rezoning proposal'}
+
+        self.assertEqual('housing', resolve_category(topic, {}))
+
+    def test_public_consultation_defaults_to_local_news(self):
+        topic = {'title': 'Public consultation opens on Richmond community plan'}
+
+        self.assertEqual('local-news', resolve_category(topic, {}))
+
+    def test_actual_pub_closing_routes_to_food_and_drink(self):
+        topic = {'title': 'Long-running Vancouver pub closes at end of month'}
+
+        self.assertEqual('food-drink', resolve_category(topic, {}))
+
+    def test_retail_space_phrase_does_not_route_to_space(self):
+        topic = {
+            'title': 'Longtime Gastown shop vacates retail space after 40 years'
+        }
+
+        self.assertEqual('local-news', resolve_category(topic, {}))
+
+    def test_non_local_topic_defaults_to_legacy_story_contract(self):
+        self.assertEqual('legacy', resolve_story_type({}, 'science'))
+        self.assertEqual(
+            'reported-update',
+            resolve_story_type({}, 'local-news'),
+        )
+
+    def test_business_change_signal_outweighs_generic_weekend_or_event(self):
+        self.assertEqual(
+            'local-news',
+            resolve_category({
+                'title': (
+                    'Gastown shop closing sale runs this weekend'
+                ),
+            }, {}),
+        )
+        self.assertEqual(
+            'local-news',
+            resolve_category({
+                'title': (
+                    'Surrey hardware store shutters after farewell event'
+                ),
+            }, {}),
+        )
+        self.assertEqual(
+            'food-drink',
+            resolve_category({
+                'title': 'New Westminster bakery announces new location',
+            }, {}),
+        )
+
+    def test_plural_category_keywords_still_route_to_their_desks(self):
+        self.assertEqual(
+            'things-to-do',
+            resolve_category({'title': 'Vancouver summer events guide'}, {}),
+        )
+        self.assertEqual(
+            'things-to-do',
+            resolve_category({'title': 'Richmond festivals return this month'}, {}),
+        )
+        self.assertEqual(
+            'food-drink',
+            resolve_category({'title': 'New restaurants opening in Coquitlam'}, {}),
+        )
 
 
 if __name__ == '__main__':

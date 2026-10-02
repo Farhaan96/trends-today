@@ -17,6 +17,7 @@ ARTICLE_CATEGORIES = LOCAL_CATEGORIES | {
 }
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CONTENT_BUSINESS_CONFIG = REPO_ROOT / 'config' / 'content-business.json'
+LOCAL_SOURCE_CONFIG = REPO_ROOT / 'config' / 'local-news-sources.json'
 
 
 @dataclass(frozen=True)
@@ -33,6 +34,19 @@ def _valid_source_urls(sources: List[Dict]) -> List[str]:
         if parsed.scheme in {'http', 'https'} and parsed.netloc:
             urls.append(url)
     return list(dict.fromkeys(urls))
+
+
+def _approved_localities() -> set:
+    config = json.loads(LOCAL_SOURCE_CONFIG.read_text(encoding='utf-8'))
+    values = list(config.get('localities', []))
+    values.extend(
+        config.get('searchDiscovery', {}).get('approvedRegionalLabels', [])
+    )
+    return {
+        str(value).strip().lower()
+        for value in values
+        if str(value).strip()
+    }
 
 
 def _load_contract(config_path: Path = None) -> Dict:
@@ -137,12 +151,12 @@ def validate_release_candidate(
     words = len(body.split())
     source_urls = _valid_source_urls(sources)
     category = str(article.get('category', '')).lower()
-    is_local = category in LOCAL_CATEGORIES
-    story_type = str(
-        article.get('storyType')
-        or article.get('story_type')
-        or ('reported-update' if is_local else 'legacy')
-    )
+    locality = str(article.get('locality', '')).strip()
+    declared_story_type = str(
+        article.get('storyType') or article.get('story_type') or ''
+    ).strip()
+    is_local = category in LOCAL_CATEGORIES or bool(locality)
+    story_type = declared_story_type or ('reported-update' if is_local else 'legacy')
     contract = _load_contract(config_path)
     story_contracts = contract['editorial']['storyTypes']
     story_contract = story_contracts.get(story_type, story_contracts['legacy'])
@@ -196,8 +210,10 @@ def validate_release_candidate(
         errors.append(f'only {len(source_urls)} valid source URLs; {minimum_sources} required')
     if is_local and not primary_sources:
         errors.append('at least one primary source is required for local stories')
-    if is_local and not str(article.get('locality', '')).strip():
+    if is_local and not locality:
         errors.append('Lower Mainland locality is required')
+    if is_local and locality and locality.lower() not in _approved_localities():
+        errors.append('locality is not in the approved Lower Mainland coverage area')
     if is_local and not str(article.get('lengthRationale', '')).strip():
         errors.append('length rationale is required for local stories')
     if is_local:
