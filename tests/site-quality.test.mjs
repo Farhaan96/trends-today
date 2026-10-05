@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import matter from 'gray-matter';
@@ -13,9 +14,9 @@ const require = createRequire(import.meta.url);
 const root = new URL('../', import.meta.url);
 const read = (path) => readFileSync(new URL(path, root), 'utf8');
 
-function loadSource(path) {
-  const { outputText } = ts.transpileModule(read(path), {
-    fileName: fileURLToPath(new URL(path, root)),
+function loadSource(sourcePath, overrides = {}) {
+  const { outputText } = ts.transpileModule(read(sourcePath), {
+    fileName: fileURLToPath(new URL(sourcePath, root)),
     compilerOptions: {
       module: ts.ModuleKind.CommonJS,
       jsx: ts.JsxEmit.ReactJSX,
@@ -24,6 +25,7 @@ function loadSource(path) {
   });
   const sourceModule = { exports: {} };
   const sourceRequire = (name) => {
+    if (Object.hasOwn(overrides, name)) return overrides[name];
     if (name === 'next/script') {
       return function ScriptStub() {
         return null;
@@ -42,6 +44,35 @@ function loadSource(path) {
     sourceModule.exports
   );
   return sourceModule.exports;
+}
+
+function fixtureFileSystem(fixtures) {
+  const files = new Map(
+    Object.entries(fixtures).map(([name, content]) => [
+      path.join(process.cwd(), 'content', name),
+      content,
+    ])
+  );
+  const directories = new Set([...files.keys()].map(path.dirname));
+  return {
+    existsSync: (name) => directories.has(name) || files.has(name),
+    readdirSync: (directory) =>
+      [...files.keys()]
+        .filter((name) => path.dirname(name) === directory)
+        .map((name) => path.basename(name)),
+    readFileSync: (name) => {
+      assert.ok(files.has(name), `Unexpected fixture read: ${name}`);
+      return files.get(name);
+    },
+  };
+}
+
+async function hubHrefs(sourcePath, fixtures) {
+  const page = await loadSource(sourcePath, {
+    fs: fixtureFileSystem(fixtures),
+  }).default();
+  const html = renderToStaticMarkup(page);
+  return [...html.matchAll(/href="([^"]+)"/g)].map(([, href]) => href).sort();
 }
 
 test('legacy redirects preserve their hubs without capturing real article paths', async () => {
@@ -72,15 +103,33 @@ test('legacy redirects preserve their hubs without capturing real article paths'
   }
 });
 
-test('rendered hubs do not advertise known missing destinations', async () => {
-  const redirects = await loadSource('next.config.ts').default.redirects();
-  const deadPaths = new Set(redirects.map((item) => item.source));
-  for (const path of ['src/app/best/page.tsx', 'src/app/compare/page.tsx']) {
-    const page = await loadSource(path).default();
-    const html = renderToStaticMarkup(page);
-    for (const [, href] of html.matchAll(/href="([^"]+)"/g)) {
-      assert.ok(!deadPaths.has(href), `Dead hub destination: ${href}`);
-    }
+test('empty hubs do not invent article destinations', async () => {
+  for (const sourcePath of [
+    'src/app/best/page.tsx',
+    'src/app/compare/page.tsx',
+  ]) {
+    assert.deepEqual(await hubHrefs(sourcePath, {}), [], sourcePath);
+  }
+});
+
+test('populated hubs link only to their MDX content', async () => {
+  const fixture = (title) => `---\ntitle: ${title}\n---\nSynthetic fixture.`;
+  const fixtures = {
+    'best/fixture-guide.mdx': fixture('Synthetic buying guide'),
+    'best/ignored.json': '{"title":"Ignored JSON fixture"}',
+    'compare/fixture-comparison.mdx': fixture('Synthetic comparison'),
+    'comparisons/fixture-alternate.mdx': fixture('Synthetic alternate'),
+  };
+  for (const [sourcePath, expected] of [
+    ['src/app/best/page.tsx', ['/best/fixture-guide']],
+    [
+      'src/app/compare/page.tsx',
+      ['/compare/fixture-alternate', '/compare/fixture-comparison'],
+    ],
+  ]) {
+    const hrefs = await hubHrefs(sourcePath, fixtures);
+    assert.ok(hrefs.length > 0, `No fixture links rendered: ${sourcePath}`);
+    assert.deepEqual(hrefs, expected, sourcePath);
   }
 });
 
