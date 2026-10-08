@@ -1,0 +1,91 @@
+[
+  {
+    "title": "SkyTrain Overnight Testing: Hours, Noise and Purpose",
+    "lane": "daily-local-utility",
+    "storyType": "bulletin",
+    "locality": "Metro Vancouver",
+    "confidence": "high-primary-source-confidence",
+    "evidence": {
+      "sourceUrls": [
+        "https://www.translink.ca/news/2026/september/skytrain%20begins%20overnight%20testing%20ahead%20of%20%20major%20network%20expansion",
+        "https://buzzer.translink.ca/2026/09/the-future-of-skytrain-new-operations-control-centre/",
+        "https://surreylangleyskytrain.gov.bc.ca/project-overview/"
+      ],
+      "primarySourceUrls": [
+        "https://www.translink.ca/news/2026/september/skytrain%20begins%20overnight%20testing%20ahead%20of%20%20major%20network%20expansion",
+        "https://buzzer.translink.ca/2026/09/the-future-of-skytrain-new-operations-control-centre/",
+        "https://surreylangleyskytrain.gov.bc.ca/project-overview/"
+      ],
+      "demandEvidence": "TransLink began a five-month overnight program on October 3 that can create recurring noise questions for residents near rotating Expo and Millennium line sections.",
+      "readerImpact": "Residents can identify the three confirmed overnight windows, understand the two stated noise-reduction measures, and avoid mistaking empty trains for added passenger service.",
+      "freshnessEvidence": "The primary TransLink release is dated September 29, 2026, and the program began October 3, 2026.",
+      "uniqueAngleEvidence": "A concise resident-first schedule and noise explainer separates confirmed network-wide hours from the street-level rotation schedule that the release does not provide.",
+      "cashProgressHypothesis": "Measure article-level returning-reader sessions as the nearest attributable audience asset. App CTA clicks and downstream activation remain unavailable because no app promotion fits this transit bulletin; do not force a CTA. Revenue remains unavailable until ad or sponsor attribution exists.",
+      "sourceCaptures": [
+        {
+          "capturedAt": "2026-10-05T15:57:49Z",
+          "url": "https://www.translink.ca/news/2026/september/skytrain%20begins%20overnight%20testing%20ahead%20of%20%20major%20network%20expansion",
+          "title": "SkyTrain begins overnight testing ahead of major network expansion",
+          "published": "2026-09-29",
+          "excerpts": [
+            "Starting Oct. 3, SkyTrain cars will run overnight on weekends and some Mondays for approximately five months, to prepare for major network expansions.",
+            "Over the next five months, all types of SkyTrain cars will undergo overnight testing on sections of the Expo and Millennium lines.",
+            "Testing will take place outside regular service hours, with no customers aboard and no disruptions or reductions to regular SkyTrain service.",
+            "Test trains will operate in different sections of the Expo and Millennium lines over approximately five months, during the following overnight hours: Saturdays from 1:45 to 5:45 a.m.; Sundays from 1:45 to 6:45 a.m.; Mondays from 12:45 to 4:45 a.m.",
+            "The testing will prepare TransLink's new, state-of-the-art, 40,000-square-foot Operations Control Centre to manage SkyTrain service as the network expands.",
+            "During testing, the new centre will gradually take control of trains and test a range of operations, including regular daily service, routine maintenance, and emergency response.",
+            "This marks the first expansion of SkyTrain's operations control space since 1985, despite the network growing to approximately four times its original size.",
+            "Residents near the affected sections of the Expo and Millennium lines may hear trains operating along the guideway during hours when they would not normally be running.",
+            "Testing will rotate between locations across Metro Vancouver, rather than taking place in the same area every night. Alarms and announcements will also be suspended wherever possible to reduce noise."
+          ]
+        },
+        {
+          "capturedAt": "2026-10-05T15:57:49Z",
+          "url": "https://buzzer.translink.ca/2026/09/the-future-of-skytrain-new-operations-control-centre/",
+          "title": "The future of SkyTrain: A sneak peek at our new Operations Control Centre",
+          "published": "2026-09-17",
+          "excerpts": [
+            "If you've ridden the SkyTrain past Edmonds Station in Burnaby recently, you may have noticed a mysterious-looking building wrapped in stainless steel.",
+            "That's why we're building a new state-of-the-art Operations Control Centre, near SkyTrain's primary Operations and Maintenance Centre.",
+            "This new facility is critical to operating the Millennium and Expo Line extensions (the Broadway Subway and Surrey Langley SkyTrain).",
+            "Opening in 2027."
+          ]
+        },
+        {
+          "capturedAt": "2026-10-05T15:57:49Z",
+          "url": "https://surreylangleyskytrain.gov.bc.ca/project-overview/",
+          "title": "Project Overview - Surrey Langley SkyTrain",
+          "excerpts": [
+            "Named the Dave Barrett Extension, it includes eight stations and three transit exchanges.",
+            "The current anticipated in-service date is late 2029."
+          ]
+        }
+      ],
+      "imageEvidence": {
+        "capturedAt": "2026-10-05T15:57:49Z",
+        "apiQueryUrl": "https://commons.wikimedia.org/w/api.php?action=query&titles=File%3ASkyTrain+Mark+2+326.jpg&prop=imageinfo&iiprop=url%7Csize%7Cextmetadata&format=json",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:SkyTrain_Mark_2_326.jpg",
+        "sourceOriginalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/74/SkyTrain_Mark_2_326.jpg",
+        "creator": "Exp691",
+        "credit": "Own work",
+        "workTitle": "SkyTrain Mark 2 326",
+        "description": "SkyTrain Mark 2 #326 approaches Braid Station",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceSha256": "d2ef825378a0a0eeb7c07a3852301001200611a934a3fcfb1bbb83c7854da5e3",
+        "publishedAssetSha256": "3de0d78f6851925872a3a6729a947eb41719b22cfddb9d23d519bc41c684ddfb",
+        "transformation": "Cropped and resized from 3720x2480 JPEG to 1600x900 AVIF without adding or removing depicted elements.",
+        "relevance": "The image shows TransLink SkyTrain Mark II train 326 approaching Braid Station on the Expo Line network covered by the overnight testing bulletin."
+      }
+    },
+    "ratings": {
+      "localRelevance": 5,
+      "readerUtility": 4,
+      "freshness": 4,
+      "evidenceStrength": 5,
+      "uniqueAngle": 3,
+      "repeatVisitPotential": 3,
+      "speedToUsefulDraft": 5
+    }
+  }
+]
