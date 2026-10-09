@@ -57,8 +57,8 @@ export default function ArticleJsonLd({
       logo: {
         '@type': 'ImageObject',
         url: 'https://www.trendstoday.ca/images/logo.png',
-        width: 400,
-        height: 100,
+        width: 1024,
+        height: 1024,
       },
       url: 'https://www.trendstoday.ca',
     },
@@ -130,8 +130,8 @@ export function NewsArticleJsonLd({
       logo: {
         '@type': 'ImageObject',
         url: 'https://www.trendstoday.ca/images/logo.png',
-        width: 400,
-        height: 100,
+        width: 1024,
+        height: 1024,
       },
       url: 'https://www.trendstoday.ca',
     },
@@ -196,8 +196,8 @@ export function BlogPostingJsonLd(props: ArticleJsonLdProps) {
       logo: {
         '@type': 'ImageObject',
         url: 'https://www.trendstoday.ca/images/logo.png',
-        width: 400,
-        height: 100,
+        width: 1024,
+        height: 1024,
       },
       url: 'https://www.trendstoday.ca',
     },
