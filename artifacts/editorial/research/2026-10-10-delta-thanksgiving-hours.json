@@ -1,0 +1,98 @@
+[
+  {
+    "title": "Delta Thanksgiving 2026: Closures, Trash and Transit",
+    "lane": "daily-local-utility",
+    "storyType": "reported-update",
+    "locality": "Delta",
+    "confidence": "high-primary-source-confidence",
+    "evidence": {
+      "sourceUrls": [
+        "https://www.delta.ca/community-culture/happening-delta/news/2026-thanksgiving-day-hours-operation",
+        "https://www.delta.ca/services/garbage-recycling/collection-schedule",
+        "https://www.translink.ca/schedules-and-maps/service-changes"
+      ],
+      "primarySourceUrls": [
+        "https://www.delta.ca/community-culture/happening-delta/news/2026-thanksgiving-day-hours-operation",
+        "https://www.delta.ca/services/garbage-recycling/collection-schedule",
+        "https://www.translink.ca/schedules-and-maps/service-changes"
+      ],
+      "demandEvidence": "Thanksgiving Monday is October 12, 2026. Delta published its facility schedule on October 9, while the City collection page and TransLink holiday notice document two additional changes residents must plan around.",
+      "readerImpact": "Delta residents can see which civic facilities are open or closed, move curbside collection one day later for the rest of the week, and plan for Sunday/holiday transit service and one-zone holiday fares.",
+      "freshnessEvidence": "The City of Delta facility notice is dated October 9, 2026, three days before Thanksgiving. TransLink's active service-change page names Monday, October 12, and Delta's current 2026 collection page states the statutory-holiday delay rule.",
+      "uniqueAngleEvidence": "The City notice covers buildings but not the collection shift or regional transit schedule. A single Delta-first checklist connects all three official changes without making readers search separate agencies.",
+      "cashProgressHypothesis": "Measure article-level returning-reader sessions, direct sessions, search impressions, clicks and engaged sessions at 7 and 28 days as the nearest attributable audience assets. The repeat-use activation hypothesis is that a complete holiday-service checklist earns return visits for future Delta closures and collection changes. App CTA clicks remain unavailable because no Farhaan app naturally serves this civic task, so no app promotion should be forced. Ad revenue, sponsor inquiries, content cost and contribution remain unavailable until those providers expose article-level attribution.",
+      "duplicatePrevention": {
+        "topicValidator": "passed; unique topic across 244 existing articles",
+        "semanticSimilarity": "passed; highest similarity 0% against the local-news inventory",
+        "crossCategory": "passed; no overlap detected",
+        "categorySaturation": "passed; one recent local-news article and no oversaturated topics",
+        "keywordOverlap": "60%; not high overlap",
+        "checkedAt": "2026-10-10T15:34:40Z"
+      },
+      "imageEvidence": {
+        "capturedAt": "2026-10-10T15:34:40Z",
+        "apiQueryUrl": "https://commons.wikimedia.org/w/api.php?action=query&titles=File%3ABridge%20Street%20%26%20Delta%20Street.jpg&prop=imageinfo&iiprop=url%7Csize%7Cextmetadata&format=json",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bridge_Street_%26_Delta_Street.jpg",
+        "sourceOriginalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/56/Bridge_Street_%26_Delta_Street.jpg",
+        "creator": "Jeff Hitchcock",
+        "credit": "https://www.flickr.com/photos/arbron/38198602006/",
+        "workTitle": "Bridge Street & Delta Street",
+        "description": "Bridge Street and Delta Street in Ladner, Delta, British Columbia",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "sourceSha256": "fb529fa6d539f9a299d4a52f93b16d5e3d5a564fe6eae2256290faf316d374af",
+        "publishedAssetSha256": "3662fc894afb671155e99b2b14c91e2f005e2af4aa894b9ac91695ebf6826d9a",
+        "transformation": "Auto-oriented, centre-cropped and resized from 4899x3245 JPEG to 1600x900 AVIF without adding or removing depicted elements.",
+        "relevance": "The image shows a recognizable Ladner streetscape within Delta, grounding a citywide Thanksgiving civic-services checklist in the community it serves."
+      },
+      "sourceCaptures": [
+        {
+          "capturedAt": "2026-10-10T15:34:40Z",
+          "url": "https://www.delta.ca/community-culture/happening-delta/news/2026-thanksgiving-day-hours-operation",
+          "title": "2026 Thanksgiving Day Hours of Operation",
+          "published": "2026-10-09",
+          "excerpts": [
+            "Monday, October 12 is the Thanksgiving Day holiday.",
+            "Delta City Hall and the Delta Community Animal Shelter are closed.",
+            "Delta Parks, Recreation & Culture facilities are open for regular hours of operation.",
+            "Douglas J. Husband Discovery Centre is open noon to 5 p.m.",
+            "North Delta Recreation Centre is open for regular hours, but its Municipal Services Office is closed.",
+            "Tsawwassen Arts Centre, North Delta Centre for the Arts, McKee Seniors Recreation Centre and Kennedy Seniors Recreation Centre are closed."
+          ]
+        },
+        {
+          "capturedAt": "2026-10-10T15:34:40Z",
+          "url": "https://www.delta.ca/services/garbage-recycling/collection-schedule",
+          "title": "Collection Schedule",
+          "excerpts": [
+            "Garbage, recycling, and Green Can materials are collected every week and must be curbside by 7 a.m. on the designated collection day.",
+            "Following a statutory holiday, collection is delayed by one day for the remainder of that week only.",
+            "When Monday is a statutory holiday, Monday collection moves to Tuesday, Wednesday collection moves to Thursday, and Thursday collection moves to Friday.",
+            "Regular collection days resume the following week."
+          ]
+        },
+        {
+          "capturedAt": "2026-10-10T15:34:40Z",
+          "url": "https://www.translink.ca/schedules-and-maps/service-changes",
+          "title": "Service Changes",
+          "excerpts": [
+            "On Thanksgiving Day, Monday, October 12, bus, SkyTrain and SeaBus operate on a Sunday/holiday schedule.",
+            "West Coast Express does not operate.",
+            "The TransLink Customer Service Centre, Access Transit Customer Care Office and Lost Property Office are closed.",
+            "Holiday fares are in effect, so one-zone fare is enough for travel across all zones.",
+            "Regular weekday service and fares return Tuesday, October 13."
+          ]
+        }
+      ]
+    },
+    "ratings": {
+      "localRelevance": 5,
+      "readerUtility": 5,
+      "freshness": 5,
+      "evidenceStrength": 5,
+      "uniqueAngle": 4,
+      "repeatVisitPotential": 4,
+      "speedToUsefulDraft": 5
+    }
+  }
+]
