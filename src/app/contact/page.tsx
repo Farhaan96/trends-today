@@ -1,9 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 export default function ContactPage() {
+  const [readiness, setReadiness] = useState<'checking' | 'ready' | 'disabled'>(
+    'checking'
+  );
+  const inboxReady = readiness === 'ready';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,6 +17,22 @@ export default function ContactPage() {
   });
 
   const [draftOpened, setDraftOpened] = useState(false);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch('/api/inbox/readiness', {
+      cache: 'no-store',
+      signal: controller.signal,
+    })
+      .then(async (response) => {
+        if (!response.ok) return false;
+        const result = (await response.json()) as { ready?: boolean };
+        return result.ready === true;
+      })
+      .then((ready) => setReadiness(ready ? 'ready' : 'disabled'))
+      .catch(() => setReadiness('disabled'));
+    return () => controller.abort();
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -27,6 +47,7 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!inboxReady) return;
     const subjectLabels: Record<string, string> = {
       general: 'General inquiry',
       feedback: 'Reader feedback',
@@ -106,7 +127,11 @@ export default function ContactPage() {
                 <span className="text-2xl mr-4">📧</span>
                 <div>
                   <h3 className="font-semibold">Email</h3>
-                  <p className="text-gray-600">hello@trendstoday.ca</p>
+                  <p className="text-gray-600">
+                    {inboxReady
+                      ? 'hello@trendstoday.ca'
+                      : 'Contact activation in progress'}
+                  </p>
                 </div>
               </div>
 
@@ -139,12 +164,19 @@ export default function ContactPage() {
                 We keep editorial coverage separate from paid partnerships and
                 clearly label commercial work.
               </p>
-              <a
-                href="mailto:hello@trendstoday.ca?subject=%5BTrends%20Today%5D%20Advertising%20or%20sponsorship%20inquiry"
-                className="mt-3 inline-block text-sm font-semibold text-blue-700 underline"
-              >
-                Email hello@trendstoday.ca
-              </a>
+              {inboxReady ? (
+                <a
+                  href="mailto:hello@trendstoday.ca?subject=%5BTrends%20Today%5D%20Advertising%20or%20sponsorship%20inquiry"
+                  className="mt-3 inline-block text-sm font-semibold text-blue-700 underline"
+                >
+                  Email hello@trendstoday.ca
+                </a>
+              ) : (
+                <p className="mt-3 text-sm font-semibold text-amber-800">
+                  Contact opens only after provider, DNS, persistence, and the
+                  end-to-end release test are verified.
+                </p>
+              )}
             </div>
           </div>
 
@@ -268,15 +300,21 @@ export default function ContactPage() {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 via-purple-600 to-blue-700 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all transform hover:scale-[1.02]"
+                disabled={!inboxReady}
+                className="w-full bg-gradient-to-r from-blue-500 via-purple-600 to-blue-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all transform hover:scale-[1.02]"
               >
-                Open Email Draft
+                {readiness === 'checking'
+                  ? 'Checking contact readiness…'
+                  : inboxReady
+                    ? 'Open Email Draft'
+                    : 'Contact activation in progress'}
               </button>
             </form>
 
             <p className="text-xs text-gray-500 mt-4">
-              * Required fields. This form opens your email app and does not
-              transmit or store your message on this website. See our{' '}
+              * Required fields. Once readiness is verified, this form opens
+              your email app and does not transmit or store your message on this
+              website. See our{' '}
               <Link
                 href="/privacy"
                 className="text-blue-600 hover:text-blue-800 underline"
