@@ -2,7 +2,7 @@
   "generatedAt": "2026-10-10T15:35:05.464301+00:00",
   "results": [
     {
-      "title": "Delta Thanksgiving 2026: Closures, Trash and Transit",
+      "title": "Delta Thanksgiving 2026: Closures, Garbage and Transit",
       "lane": "daily-local-utility",
       "score": 97.0,
       "decision": "brief",
@@ -11,7 +11,7 @@
         "Meets the current evidence and opportunity thresholds"
       ],
       "candidate": {
-        "title": "Delta Thanksgiving 2026: Closures, Trash and Transit",
+        "title": "Delta Thanksgiving 2026: Closures, Garbage and Transit",
         "lane": "daily-local-utility",
         "storyType": "reported-update",
         "locality": "Delta",
