@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "enabled": false,
+  "killSwitch": {
+    "disabled": true,
+    "disabledReason": "Initial deployment - awaiting PR #184 independent review and negative-path test completion",
+    "disabledAt": null,
+    "disabledBy": null
+  },
+  "autoMergeEnabled": false,
+  "targetModel": "claude-opus-5-thinking-medium",
+  "timeoutMinutes": {
+    "reviewDispatch": 5,
+    "reviewCompletion": 30,
+    "deploymentWait": 10,
+    "liveVerification": 15
+  },
+  "retryPolicy": {
+    "maxRetries": 2,
+    "retryDelayMs": 5000,
+    "exponentialBackoff": true
+  },
+  "costCeilings": {
+    "maxDailyReviews": 10,
+    "maxDailyMerges": 6,
+    "warningThresholdPercent": 80
+  },
+  "eligiblePRLabels": ["ready-for-release", "codex-automation"],
+  "excludedPRLabels": ["do-not-merge", "wip", "blocked", "needs-review"],
+  "sensitiveKeywords": [
+    "crime",
+    "death",
+    "injury",
+    "emergency",
+    "missing person",
+    "allegation",
+    "leaked",
+    "sponsored",
+    "private person",
+    "police",
+    "arrest",
+    "victim",
+    "deceased",
+    "fatality"
+  ],
+  "ownerGatedCategories": [
+    "sponsored",
+    "branded",
+    "supported",
+    "commercial"
+  ]
+}
