@@ -1,0 +1,47 @@
+{
+  "capturedAt": "2026-10-11T15:52:29Z",
+  "purpose": "Publication-day recheck for the exact Delta Thanksgiving 2026 release candidate",
+  "candidatePath": "artifacts/editorial/release-candidates/local-news/delta-thanksgiving-hours-2026.mdx",
+  "candidateSha256": "52e3e41ac79d902f42d63b8ec83d72e06dc3bd0fd113d3dd5352db0b6a693836",
+  "sources": [
+    {
+      "url": "https://www.delta.ca/community-culture/happening-delta/news/2026-thanksgiving-day-hours-operation",
+      "title": "2026 Thanksgiving Day Hours of Operation",
+      "published": "2026-10-09",
+      "recheckedAt": "2026-10-11T15:52:29Z",
+      "excerpts": [
+        "Monday, October 12 is the Thanksgiving Day holiday.",
+        "Delta City Hall and the Delta Community Animal Shelter are closed.",
+        "Delta Parks, Recreation & Culture facilities are open for regular hours of operation.",
+        "Douglas J. Husband Discovery Centre is open 12 - 5 pm.",
+        "North Delta Recreation Centre is open for regular hours of operation, Municipal Services Office will be closed.",
+        "Tsawwassen Arts Centre, North Delta Centre for the Arts, McKee Seniors Recreation Centre and Kennedy Seniors Recreation Centre are closed."
+      ]
+    },
+    {
+      "url": "https://www.delta.ca/services/garbage-recycling/collection-schedule",
+      "title": "Collection Schedule",
+      "recheckedAt": "2026-10-11T15:52:29Z",
+      "excerpts": [
+        "Garbage, recycling, and Green Can materials are collected every week.",
+        "Materials must be placed curbside by 7:00 am on your designated collection day.",
+        "Following a statutory holiday, garbage and recycling collection will be delayed by one day for the remainder of that week only; regular collection days will resume the following week.",
+        "If Monday is a statutory holiday, Monday collection will be moved to Tuesday, Wednesday collection will be moved to Thursday, and Thursday collection will be moved to Friday."
+      ]
+    },
+    {
+      "url": "https://www.translink.ca/schedules-and-maps/service-changes",
+      "title": "Service Changes",
+      "recheckedAt": "2026-10-11T15:52:29Z",
+      "excerpts": [
+        "Thanksgiving Day: Monday, Oct. 12.",
+        "Bus, SkyTrain, and SeaBus services will operate on a Sunday/holiday schedule.",
+        "West Coast Express will not operate.",
+        "The TransLink Customer Service Centre, Access Transit Customer Care Office and Lost Property Office will be closed.",
+        "Holiday fares will be in effect. You only need a 1-Zone fare to travel across all zones.",
+        "Service returns to regular weekday schedules for all modes on Tuesday, Oct. 13. Regular fares will be in effect."
+      ]
+    }
+  ],
+  "result": "No material source drift found since the 2026-10-10 research capture."
+}
