@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "ed7d2eba7c4e412b9c6e7cdaafc43739d906c1c83288ef985a0abeb7b2df2cde",
+  "repositorySha": "f2060a47c06f4313f6e689048fc7136942ef6fcd",
+  "reviewedAt": "2026-10-13T15:38:05.306821+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "01a135e8-f248-7f53-8f36-a1bdfec44765",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The descent rule is materially overgeneralized. The cited Grouse Mountain guidance places \u201cDownhill hiking is not permitted\u201d in its Grouse Grind instructions, but the candidate expands this to \u201cAnyone who reaches the mountaintop by an open uphill trail must buy\u201d a Download Ticket and states broadly that \u201chikers need a paid gondola or Skyride download.\u201d The cited material does not establish that every other open uphill route, including the BCMC Route, carries the same no-hiking-down rule. Narrow the claim to the Grouse Grind or add authoritative support for the broader rule."
+  ],
+  "summary": "The exact candidate and repository hashes were verified, and the article contains zero em dashes. It is clear, useful, scannable and strongly localized, but the unsupported expansion of the Grouse Grind descent restriction to anyone using any open uphill trail blocks release."
+}
