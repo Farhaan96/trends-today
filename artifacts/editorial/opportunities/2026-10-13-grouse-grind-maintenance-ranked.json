@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-10-13T15:33:47.199772+00:00",
+  "results": [
+    {
+      "title": "Grouse Grind Closed for Maintenance: What to Know",
+      "lane": "daily-local-utility",
+      "score": 97.0,
+      "decision": "brief",
+      "confidence": "high-primary-source-confidence",
+      "reasons": [
+        "Meets the current evidence and opportunity thresholds"
+      ],
+      "candidate": {
+        "title": "Grouse Grind Closed for Maintenance: What to Know",
+        "lane": "daily-local-utility",
+        "storyType": "reported-update",
+        "locality": "North Vancouver",
+        "confidence": "high-primary-source-confidence",
+        "evidence": {
+          "sourceUrls": [
+            "https://metrovancouver.org/services/regional-parks/park-alerts-and-notices",
+            "https://metrovancouver.org/services/regional-parks/park/grouse-mountain-regional-park",
+            "https://www.grousemountain.com/grousegrind",
+            "https://www.translink.ca/schedules-and-maps/route/236/direction/0/schedule"
+          ],
+          "primarySourceUrls": [
+            "https://metrovancouver.org/services/regional-parks/park-alerts-and-notices",
+            "https://metrovancouver.org/services/regional-parks/park/grouse-mountain-regional-park",
+            "https://www.grousemountain.com/grousegrind",
+            "https://www.translink.ca/schedules-and-maps/route/236/direction/0/schedule"
+          ],
+          "demandEvidence": "Metro Vancouver's current parks advisory says the Grouse Grind is closed seven days a week for annual maintenance and trail upgrades. The October 13 source listing gave an October 13 to November 10 maintenance window, creating immediate trip-planning demand.",
+          "readerImpact": "North Shore hikers can avoid arriving for a closed trail, understand that the BCMC Route is a separate challenging option rather than a like-for-like easy detour, and plan the required gondola or Skyride descent and Route 236 access.",
+          "freshnessEvidence": "The closure became current on October 13, 2026. Metro Vancouver's active park page and park-alert page were rechecked on October 13, and both show the Grouse Grind closed for maintenance.",
+          "uniqueAngleEvidence": "No existing Trends Today article covers the Grouse Grind or BCMC Route. The article combines the closure, the official alternative's difficulty and dog rule, downhill restriction, paid download requirement, park hours and direct transit access into one practical checklist.",
+          "cashProgressHypothesis": "Measure article-level search impressions, clicks, engaged sessions, direct sessions and returning-reader sessions at 7 and 28 days. The repeat-use hypothesis is that a timely closure guide earns future visits for North Shore trail and park updates. App CTA clicks remain unavailable because no Farhaan app naturally serves this hiking task, so no app promotion will be forced. Ad revenue, sponsor inquiries, content cost and contribution remain unavailable until article-level attribution is exposed.",
+          "duplicatePrevention": {
+            "topicValidator": "passed; unique topic across 245 existing articles",
+            "semanticSimilarity": "passed; highest similarity 0% against the local-news inventory",
+            "crossCategory": "passed; no overlap detected",
+            "categorySaturation": "passed; two recent local-news articles and no oversaturated topics",
+            "checkedAt": "2026-10-13T15:31:00Z"
+          },
+          "sourceCaptures": [
+            {
+              "capturedAt": "2026-10-13T15:31:00Z",
+              "url": "https://metrovancouver.org/services/regional-parks/park-alerts-and-notices",
+              "title": "Park Alerts and Notices",
+              "excerpts": [
+                "Grouse Grind Trail closed for maintenance.",
+                "The Grouse Grind Trail is currently closed for annual maintenance and trail upgrades.",
+                "The closure is in effect seven days a week while work is underway."
+              ]
+            },
+            {
+              "capturedAt": "2026-10-13T15:31:00Z",
+              "url": "https://metrovancouver.org/services/regional-parks/park/grouse-mountain-regional-park",
+              "title": "Grouse Mountain Regional Park",
+              "excerpts": [
+                "The Grouse Grind is 2.5 km one way with 800 m elevation gain and a challenging rating.",
+                "The BCMC Route is 2.9 km with 750 m elevation gain, a challenging rating and a more rustic trail surface.",
+                "Dogs are not allowed on the Grouse Grind or BCMC Route.",
+                "October 2 to October 15 park hours are 7:00 a.m. to 4:30 p.m."
+              ]
+            },
+            {
+              "capturedAt": "2026-10-13T15:31:00Z",
+              "url": "https://www.grousemountain.com/grousegrind",
+              "title": "The Grouse Grind",
+              "excerpts": [
+                "Downhill hiking is not permitted.",
+                "Hikers must purchase a Download Ticket for a Red Skyride or Blue Grouse Gondola trip down.",
+                "The first download for hikers is daily at 7:30 a.m."
+              ]
+            },
+            {
+              "capturedAt": "2026-10-13T15:31:00Z",
+              "url": "https://www.translink.ca/schedules-and-maps/route/236/direction/0/schedule",
+              "title": "236 Grouse Mountain",
+              "excerpts": [
+                "Route 236 runs from Lonsdale Quay to Grouse Mountain.",
+                "The Grouse Mountain terminus is stop 54290 at Skyride."
+              ]
+            }
+          ]
+        },
+        "ratings": {
+          "localRelevance": 5,
+          "readerUtility": 5,
+          "freshness": 5,
+          "evidenceStrength": 5,
+          "uniqueAngle": 4,
+          "repeatVisitPotential": 4,
+          "speedToUsefulDraft": 5
+        }
+      }
+    }
+  ]
+}
