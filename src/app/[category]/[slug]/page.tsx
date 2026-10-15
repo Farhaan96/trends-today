@@ -11,6 +11,7 @@ import MoreFromAuthor from '@/components/content/MoreFromAuthor';
 import EditorialImage from '@/components/editorial/EditorialImage';
 import PublishDate from '@/components/editorial/PublishDate';
 import { CONTENT_CATEGORIES, getCategoryLabel } from '@/lib/categories';
+import { contentUpdatedValue } from '@/lib/freshness';
 import {
   getNewsroomProfileByName,
   getNewsroomProfileId,
@@ -77,7 +78,11 @@ export async function generateMetadata({
       url,
       publishedTime: article.publishedAt || article.frontmatter?.publishedAt,
       modifiedTime:
-        article.frontmatter?.modifiedAt ||
+        contentUpdatedValue({
+          updatedAt: article.frontmatter?.updatedAt,
+          publishedAt: article.frontmatter?.publishedAt,
+          datePublished: article.frontmatter?.datePublished,
+        }) ||
         article.publishedAt ||
         article.frontmatter?.publishedAt,
       authors: [
@@ -127,8 +132,13 @@ export default async function ArticlePage({
   const title = article.title || article.frontmatter?.title;
   const description = article.description || article.frontmatter?.description;
   const image = article.image || article.frontmatter?.image;
-  const publishedAt = article.publishedAt || article.frontmatter?.publishedAt;
-  const modifiedAt = article.frontmatter?.modifiedAt || publishedAt;
+  const publishedAt = article.frontmatter?.publishedAt || article.publishedAt;
+  const modifiedAt =
+    contentUpdatedValue({
+      updatedAt: article.frontmatter?.updatedAt,
+      publishedAt: article.frontmatter?.publishedAt,
+      datePublished: article.frontmatter?.datePublished,
+    }) || publishedAt;
   const rawAuthor = article.author || article.frontmatter?.author;
   const rawAuthorName =
     typeof rawAuthor === 'string'
@@ -204,10 +214,8 @@ export default async function ArticlePage({
 
           {/* Prominent publish date near title */}
           <PublishDate
-            publishedAt={
-              article.publishedAt || article.frontmatter?.publishedAt
-            }
-            modifiedAt={article.frontmatter?.modifiedAt}
+            publishedAt={publishedAt}
+            modifiedAt={modifiedAt}
             className="article-publish-date"
           />
 

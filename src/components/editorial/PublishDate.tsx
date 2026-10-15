@@ -1,7 +1,4 @@
-import {
-  formatArticleDateWithWeekday,
-  datesAreDifferent,
-} from '@/lib/editorial';
+import { formatArticleDateWithWeekday } from '@/lib/editorial';
 
 interface PublishDateProps {
   publishedAt?: string;
@@ -22,7 +19,12 @@ export default function PublishDate({
   if (!publishedAt) return null;
 
   const formattedPublishDate = formatArticleDateWithWeekday(publishedAt);
-  const showUpdated = datesAreDifferent(publishedAt, modifiedAt);
+  const publishedTime = Date.parse(publishedAt);
+  const modifiedTime = modifiedAt ? Date.parse(modifiedAt) : Number.NaN;
+  const showUpdated =
+    Number.isFinite(publishedTime) &&
+    Number.isFinite(modifiedTime) &&
+    publishedTime !== modifiedTime;
   const formattedModifiedDate = showUpdated
     ? formatArticleDateWithWeekday(modifiedAt)
     : null;

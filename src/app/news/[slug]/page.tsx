@@ -12,6 +12,7 @@ import StructuredData from '@/components/seo/StructuredData';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import MDXImage from '@/components/mdx/MDXImage';
 import { getCategoryStyles } from '@/lib/categories';
+import { contentUpdatedValue } from '@/lib/freshness';
 import UtterancesComments from '@/components/engagement/UtterancesComments';
 
 interface NewsPageProps {
@@ -140,7 +141,12 @@ export default async function NewsPage({ params }: NewsPageProps) {
       ? `https://www.trendstoday.ca${frontmatter.image}`
       : undefined,
     datePublished: frontmatter.publishedAt,
-    dateModified: frontmatter.updatedAt || frontmatter.publishedAt,
+    dateModified:
+      contentUpdatedValue({
+        updatedAt: frontmatter.updatedAt,
+        publishedAt: frontmatter.publishedAt,
+        datePublished: frontmatter.datePublished,
+      }) || frontmatter.publishedAt,
     author: {
       '@type': 'Person',
       name:
