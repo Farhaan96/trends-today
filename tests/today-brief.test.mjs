@@ -196,6 +196,25 @@ test('the shipped file has no placeholder bullets', () => {
   assert.equal(brief.mode, 'latest');
 });
 
+test('category chips use the six live section routes', () => {
+  const header = readFileSync(
+    new URL('../src/components/editorial/EditorialHeader.tsx', import.meta.url),
+    'utf8'
+  );
+  const chips = [
+    ['Local news', '/local-news'],
+    ['Things to do', '/things-to-do'],
+    ['Food & drink', '/food-drink'],
+    ['Transit', '/transit'],
+    ['Housing', '/housing'],
+    ['Sports', '/sports'],
+  ];
+  for (const [label, href] of chips) {
+    assert.equal(header.includes(`name: '${label}'`), true);
+    assert.equal(header.includes(`href: '${href}'`), true);
+  }
+});
+
 test('the Today block renders after the homepage cover heading', () => {
   const page = readFileSync(
     new URL('../src/app/page.tsx', import.meta.url),

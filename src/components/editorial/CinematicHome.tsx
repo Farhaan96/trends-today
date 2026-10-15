@@ -108,8 +108,7 @@ export default function CinematicHome({
             <div className="cover__copy">
               <p className="eyebrow">Your Lower Mainland, today</p>
               <h1 id="cover-heading">
-                Good things.
-                <br />
+                Good things. <br />
                 Close to <br />
                 home.
               </h1>

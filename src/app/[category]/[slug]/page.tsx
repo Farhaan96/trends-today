@@ -10,6 +10,7 @@ import { SmartRelatedArticles } from '@/components/article/RelatedArticles';
 import MoreFromAuthor from '@/components/content/MoreFromAuthor';
 import EditorialImage from '@/components/editorial/EditorialImage';
 import PublishDate from '@/components/editorial/PublishDate';
+import { formatArticleDateWithWeekday } from '@/lib/editorial';
 import { CONTENT_CATEGORIES, getCategoryLabel } from '@/lib/categories';
 import { contentUpdatedValue } from '@/lib/freshness';
 import {
@@ -252,6 +253,14 @@ export default async function ArticlePage({
                 </span>
               )}
               {formattedReadingTime && <span>{formattedReadingTime}</span>}
+              {publishedAt ? (
+                <time
+                  className="article-meta__published"
+                  dateTime={publishedAt}
+                >
+                  Published {formatArticleDateWithWeekday(publishedAt)}
+                </time>
+              ) : null}
             </div>
           </div>
 
@@ -269,6 +278,7 @@ export default async function ArticlePage({
 
       {/* Article Content */}
       <div className="site-shell article-content-shell">
+        {description ? <p className="article-dek-body">{description}</p> : null}
         {needsSourceRefresh && (
           <aside className="article-archive-notice">
             <p className="article-method__eyebrow">Archive transparency</p>
