@@ -61,16 +61,60 @@ test('feed keeps the newest 50 live posts and drops drafts', () => {
   );
 });
 
-test('updatedAt outranks an older publishedAt', () => {
-  const [item] = selectRssItems([
+test('updatedAt and modifiedAt change order while pubDate stays the publish date', () => {
+  const items = selectRssItems([
     live(3, { publishedAt: '2026-01-01T00:00:00Z' }),
     live(4, {
       publishedAt: '2026-02-01T00:00:00Z',
+      modifiedAt: '2026-09-01T00:00:00Z',
       updatedAt: '2026-10-14T13:58:00Z',
     }),
+    live(5, {
+      publishedAt: '2026-03-01T00:00:00Z',
+      modifiedAt: '2026-08-01T00:00:00Z',
+    }),
   ]);
-  assert.equal(item.link, 'https://trendstoday.ca/transit/story-4');
-  assert.equal(item.pubDate, new Date('2026-10-14T13:58:00Z').toUTCString());
+  assert.deepEqual(
+    items.map((item) => item.link),
+    [
+      'https://trendstoday.ca/transit/story-4',
+      'https://trendstoday.ca/transit/story-5',
+      'https://trendstoday.ca/transit/story-3',
+    ]
+  );
+  assert.equal(
+    items[0].pubDate,
+    new Date('2026-02-01T00:00:00Z').toUTCString()
+  );
+  assert.equal(
+    items[1].pubDate,
+    new Date('2026-03-01T00:00:00Z').toUTCString()
+  );
+  const xml = buildRssFeed([
+    live(3, { publishedAt: '2026-01-01T00:00:00Z' }),
+    live(5, {
+      publishedAt: '2026-03-01T00:00:00Z',
+      modifiedAt: '2026-10-14T13:58:00Z',
+    }),
+  ]);
+  assert.match(
+    xml,
+    new RegExp(
+      `<lastBuildDate>${new Date('2026-10-14T13:58:00Z').toUTCString()}</lastBuildDate>`
+    )
+  );
+  assert.match(
+    xml,
+    new RegExp(
+      `<pubDate>${new Date('2026-03-01T00:00:00Z').toUTCString()}</pubDate>`
+    )
+  );
+  assert.equal(
+    xml.includes(
+      `<pubDate>${new Date('2026-10-14T13:58:00Z').toUTCString()}</pubDate>`
+    ),
+    false
+  );
 });
 
 test('RSS 2.0 document includes title, link, pubDate, description, and category', () => {

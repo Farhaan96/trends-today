@@ -13,6 +13,7 @@ export async function GET() {
     slug: article.slug,
     status: article.frontmatter?.status,
     updatedAt: article.frontmatter?.updatedAt,
+    modifiedAt: article.frontmatter?.modifiedAt,
     publishedAt: article.frontmatter?.publishedAt,
     datePublished: article.frontmatter?.datePublished,
   }));

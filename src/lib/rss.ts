@@ -8,6 +8,7 @@ export interface RssSource {
   slug?: unknown;
   status?: unknown;
   updatedAt?: unknown;
+  modifiedAt?: unknown;
   publishedAt?: unknown;
   datePublished?: unknown;
 }
@@ -37,13 +38,19 @@ export function isLiveRssStatus(status: unknown): boolean {
   return value === '' || value === 'published';
 }
 
-/** updatedAt when present, otherwise publishedAt, then datePublished. */
-export function rssUpdatedValue(source: RssSource): string | undefined {
+/** First parseable value wins: updatedAt, modifiedAt, publishedAt, datePublished. */
+export function rssFreshnessValue(source: RssSource): string | undefined {
   return (
     timestamp(source.updatedAt) ||
+    timestamp(source.modifiedAt) ||
     timestamp(source.publishedAt) ||
     timestamp(source.datePublished)
   );
+}
+
+/** Item pubDate stays the publish date, not a later revision. */
+export function rssPublishValue(source: RssSource): string | undefined {
+  return timestamp(source.publishedAt) || timestamp(source.datePublished);
 }
 
 function xmlEscape(value: string): string {
@@ -64,30 +71,39 @@ export function canonicalPostUrl(category: string, slug: string): string {
   return `${CANONICAL_ORIGIN}/${path}`;
 }
 
-export function selectRssItems(
-  sources: RssSource[],
-  limit = RSS_ITEM_LIMIT
-): RssItem[] {
+interface RankedRssItem extends RssItem {
+  sortTime: number;
+}
+
+export function rankRssItems(sources: RssSource[]): RankedRssItem[] {
   return sources
     .flatMap((source) => {
       if (!isLiveRssStatus(source.status)) return [];
       const title = cleanText(source.title);
       const category = cleanText(source.category);
       const slug = cleanText(source.slug);
-      const updated = rssUpdatedValue(source);
-      if (!title || !category || !slug || !updated) return [];
+      const freshness = rssFreshnessValue(source);
+      const published = rssPublishValue(source);
+      if (!title || !category || !slug || !freshness || !published) return [];
       return [
         {
           title,
           link: canonicalPostUrl(category, slug),
-          pubDate: new Date(updated).toUTCString(),
+          pubDate: new Date(published).toUTCString(),
           description: cleanText(source.description),
           category,
-          sortTime: Date.parse(updated),
+          sortTime: Date.parse(freshness),
         },
       ];
     })
-    .sort((a, b) => b.sortTime - a.sortTime)
+    .sort((a, b) => b.sortTime - a.sortTime);
+}
+
+export function selectRssItems(
+  sources: RssSource[],
+  limit = RSS_ITEM_LIMIT
+): RssItem[] {
+  return rankRssItems(sources)
     .slice(0, limit)
     .map((item) => ({
       title: item.title,
@@ -98,7 +114,7 @@ export function selectRssItems(
     }));
 }
 
-export function renderRss(items: RssItem[]): string {
+export function renderRss(items: RssItem[], lastBuildDate?: string): string {
   const itemXml = items
     .map(
       (item) => `    <item>
@@ -110,6 +126,9 @@ export function renderRss(items: RssItem[]): string {
     </item>`
     )
     .join('\n');
+  const lastBuild = lastBuildDate
+    ? `    <lastBuildDate>${xmlEscape(lastBuildDate)}</lastBuildDate>\n`
+    : '';
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
@@ -117,7 +136,7 @@ export function renderRss(items: RssItem[]): string {
     <title>Trends Today</title>
     <link>${CANONICAL_ORIGIN}</link>
     <description>Local news, transit, events, food, housing, and sports from Vancouver and the Lower Mainland.</description>
-${itemXml}
+${lastBuild}${itemXml}
   </channel>
 </rss>
 `;
@@ -127,5 +146,18 @@ export function buildRssFeed(
   sources: RssSource[],
   limit = RSS_ITEM_LIMIT
 ): string {
-  return renderRss(selectRssItems(sources, limit));
+  const ranked = rankRssItems(sources).slice(0, limit);
+  const lastBuildDate = ranked[0]
+    ? new Date(ranked[0].sortTime).toUTCString()
+    : undefined;
+  return renderRss(
+    ranked.map((item) => ({
+      title: item.title,
+      link: item.link,
+      pubDate: item.pubDate,
+      description: item.description,
+      category: item.category,
+    })),
+    lastBuildDate
+  );
 }
