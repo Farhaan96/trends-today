@@ -102,6 +102,17 @@ button:disabled {
 .tt-edition span {
   display: block;
 }
+.tt-freshness {
+  margin: 0;
+  padding: 0 40px 12px;
+  color: #f6f1e2;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+.tt-freshness time {
+  font-variant-numeric: tabular-nums;
+}
 .tt-menu {
   display: none;
   color: var(--tt-paper);
@@ -884,6 +895,10 @@ button:disabled {
   }
 }
 @media (max-width: 800px) {
+  .tt-freshness {
+    padding: 0 20px 10px;
+    font-size: 12px;
+  }
   .tt-nav {
     display: none;
   }
@@ -1072,6 +1087,12 @@ button:disabled {
   }
 }
 @media (max-width: 480px) {
+  .tt-freshness {
+    display: block;
+    padding: 0 16px 10px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
   .tt-edition {
     display: none;
   }

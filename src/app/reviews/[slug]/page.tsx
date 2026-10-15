@@ -12,6 +12,7 @@ import StructuredData from '@/components/seo/StructuredData';
 import ImageWithFallback from '@/components/ui/ImageWithFallback';
 import MDXImage from '@/components/mdx/MDXImage';
 import { getCategoryStyles } from '@/lib/categories';
+import { contentUpdatedValue } from '@/lib/freshness';
 import UtterancesComments from '@/components/engagement/UtterancesComments';
 
 interface ReviewPageProps {
@@ -150,7 +151,13 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
           : frontmatter.author?.name) || 'Trends Today Editorial',
     },
     datePublished: frontmatter.publishedAt,
-    dateModified: frontmatter.updatedAt || frontmatter.publishedAt,
+    dateModified:
+      contentUpdatedValue({
+        updatedAt: frontmatter.updatedAt,
+        modifiedAt: frontmatter.modifiedAt,
+        publishedAt: frontmatter.publishedAt,
+        datePublished: frontmatter.datePublished,
+      }) || frontmatter.publishedAt,
     reviewRating: frontmatter.rating
       ? {
           '@type': 'Rating',
@@ -355,7 +362,14 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
             <AuthorBox
               author={frontmatter.author}
               publishedAt={frontmatter.publishedAt}
-              lastUpdated={frontmatter.updatedAt}
+              lastUpdated={
+                contentUpdatedValue({
+                  updatedAt: frontmatter.updatedAt,
+                  modifiedAt: frontmatter.modifiedAt,
+                  publishedAt: frontmatter.publishedAt,
+                  datePublished: frontmatter.datePublished,
+                }) || frontmatter.updatedAt
+              }
             />
           )}
 

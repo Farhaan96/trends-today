@@ -2,6 +2,22 @@ const fs = require('fs');
 const nodePath = require('path');
 const matter = require('gray-matter');
 
+function contentTimestamp(data) {
+  if (!data) return undefined;
+  for (const value of [
+    data.updatedAt,
+    data.modifiedAt,
+    data.publishedAt,
+    data.datePublished,
+  ]) {
+    if (typeof value !== 'string') continue;
+    const trimmed = value.trim();
+    if (!trimmed || !Number.isFinite(Date.parse(trimmed))) continue;
+    return new Date(trimmed).toISOString();
+  }
+  return undefined;
+}
+
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: 'https://www.trendstoday.ca',
@@ -33,6 +49,7 @@ module.exports = {
   ],
   transform: async (config, path) => {
     const articleMatch = path.match(/^\/([^/]+)\/([^/]+)$/);
+    let contentLastmod;
     if (articleMatch) {
       const articlePath = nodePath.join(
         process.cwd(),
@@ -48,6 +65,7 @@ module.exports = {
         ) {
           return null;
         }
+        contentLastmod = contentTimestamp(data);
       }
     }
 
@@ -90,7 +108,7 @@ module.exports = {
       loc: path,
       changefreq,
       priority: Math.round(priority * 10) / 10,
-      lastmod: new Date().toISOString(),
+      lastmod: contentLastmod || new Date().toISOString(),
     };
   },
   robotsTxtOptions: {
