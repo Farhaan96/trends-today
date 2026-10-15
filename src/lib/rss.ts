@@ -1,4 +1,4 @@
-const CANONICAL_ORIGIN = 'https://trendstoday.ca';
+const CANONICAL_ORIGIN = 'https://www.trendstoday.ca';
 export const RSS_ITEM_LIMIT = 50;
 
 export interface RssSource {
@@ -120,6 +120,7 @@ export function renderRss(items: RssItem[], lastBuildDate?: string): string {
       (item) => `    <item>
       <title>${xmlEscape(item.title)}</title>
       <link>${xmlEscape(item.link)}</link>
+      <guid isPermaLink="true">${xmlEscape(item.link)}</guid>
       <pubDate>${xmlEscape(item.pubDate)}</pubDate>
       <description>${xmlEscape(item.description)}</description>
       <category>${xmlEscape(item.category)}</category>
