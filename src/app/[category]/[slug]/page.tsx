@@ -265,7 +265,13 @@ export default async function ArticlePage({
           </div>
 
           {/* Large square hero image */}
-          <div className="article-hero">
+          <div
+            className={
+              article.frontmatter?.imageSourceType === 'generated'
+                ? 'article-hero article-hero--labeled'
+                : 'article-hero'
+            }
+          >
             <EditorialImage
               src={article.image || article.frontmatter?.image || undefined}
               alt={article.title || article.frontmatter?.title || 'Article'}
