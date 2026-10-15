@@ -1319,8 +1319,8 @@ button:disabled {
     display: flex;
     flex-direction: column;
     min-height: 0;
-    gap: 4px;
-    padding: 0 16px 2px;
+    gap: 2px;
+    padding: 0 16px 0;
   }
   .cover__copy > .eyebrow {
     display: none;
@@ -1359,7 +1359,7 @@ button:disabled {
     position: relative;
     inset: auto;
     width: 100%;
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 17 / 9;
     overflow: hidden;
   }
   .cover__caption {
@@ -1369,7 +1369,7 @@ button:disabled {
     left: auto;
     width: 100%;
     display: block;
-    margin-top: 8px;
+    margin-top: 4px;
     padding: 0;
     background: transparent;
     box-shadow: none;
@@ -1377,17 +1377,22 @@ button:disabled {
     color: var(--tt-paper);
   }
   .cover__caption h2 {
-    font-size: 22px;
-    line-height: 26px;
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 17px;
+    line-height: 20px;
     color: var(--tt-paper);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
   .cover__caption .eyebrow {
+    margin-bottom: 2px;
     color: var(--tt-lime);
   }
   .cover__stamp {
     border: 0;
     padding: 0;
-    margin-top: 4px;
+    margin-top: 0;
   }
   .cover__stamp time {
     color: #f6f1e2;
@@ -1395,10 +1400,11 @@ button:disabled {
     font-weight: 500;
   }
   .cover__credit {
-    margin: 6px 0 0;
+    margin: 2px 0 0;
+    line-height: 1.25;
   }
   .today-brief__inner {
-    padding: 4px 16px 0;
+    padding: 2px 16px 0;
   }
   .today-brief h2 {
     font-size: 16px;
