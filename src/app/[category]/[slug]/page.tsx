@@ -14,6 +14,11 @@ import { formatArticleDateWithWeekday } from '@/lib/editorial';
 import { CONTENT_CATEGORIES, getCategoryLabel } from '@/lib/categories';
 import { contentUpdatedValue } from '@/lib/freshness';
 import {
+  GENERATED_ILLUSTRATION_CAPTION,
+  illustrationImageAlt,
+  isGeneratedIllustration,
+} from '@/lib/illustration-caption';
+import {
   getNewsroomProfileByName,
   getNewsroomProfileId,
   normalizeAuthorName,
@@ -61,6 +66,12 @@ export async function generateMetadata({
   const title = article.title || article.frontmatter?.title;
   const description = article.description || article.frontmatter?.description;
   const image = article.image || article.frontmatter?.image;
+  const imageAlt = illustrationImageAlt(
+    article.frontmatter?.imageAlt,
+    title,
+    article.frontmatter?.imageAttribution,
+    article.frontmatter?.imageSourceType
+  );
   const url = `https://www.trendstoday.ca/${category}/${slug}`;
   const needsSourceRefresh =
     article.frontmatter?.archiveReviewStatus ===
@@ -100,7 +111,7 @@ export async function generateMetadata({
           url: image || '/images/placeholder.jpg',
           width: 1200,
           height: 630,
-          alt: title,
+          alt: imageAlt,
         },
       ],
     },
@@ -134,6 +145,16 @@ export default async function ArticlePage({
   const title = article.title || article.frontmatter?.title;
   const description = article.description || article.frontmatter?.description;
   const image = article.image || article.frontmatter?.image;
+  const generatedIllustration = isGeneratedIllustration(
+    article.frontmatter?.imageAttribution,
+    article.frontmatter?.imageSourceType
+  );
+  const imageAlt = illustrationImageAlt(
+    article.frontmatter?.imageAlt,
+    title,
+    article.frontmatter?.imageAttribution,
+    article.frontmatter?.imageSourceType
+  );
   const publishedAt = article.frontmatter?.publishedAt || article.publishedAt;
   const modifiedAt =
     contentUpdatedValue({
@@ -274,11 +295,16 @@ export default async function ArticlePage({
           >
             <EditorialImage
               src={article.image || article.frontmatter?.image || undefined}
-              alt={article.title || article.frontmatter?.title || 'Article'}
+              alt={imageAlt}
               priority
               sizes="(max-width: 768px) 100vw, 1024px"
             />
           </div>
+          {generatedIllustration ? (
+            <p className="article-hero-caption">
+              {GENERATED_ILLUSTRATION_CAPTION}
+            </p>
+          ) : null}
         </div>
       </header>
 
@@ -335,6 +361,12 @@ export default async function ArticlePage({
                 href: `/${a.category}/${a.slug}`,
                 publishedAt: a.publishedAt || a.frontmatter?.publishedAt,
                 image: a.image || a.frontmatter?.image,
+                imageAlt: illustrationImageAlt(
+                  a.frontmatter?.imageAlt,
+                  a.title || a.frontmatter?.title,
+                  a.frontmatter?.imageAttribution,
+                  a.frontmatter?.imageSourceType
+                ),
                 category: a.category,
                 readingTime: a.frontmatter?.readingTime || '2',
               }));

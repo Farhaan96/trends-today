@@ -815,6 +815,13 @@ button:disabled {
   width: calc(100% - 24px) !important;
   height: 100% !important;
 }
+.article-hero-caption {
+  margin: 8px 0 0;
+  color: #102b23;
+  background: #f6f1e2;
+  font-size: 13px;
+  line-height: 1.4;
+}
 .article-content-shell {
   padding-top: 18px;
 }
@@ -1451,7 +1458,7 @@ button:disabled {
     padding-bottom: 4px;
   }
   .article-title {
-    margin-top: 18px;
+    margin-top: 12px;
     font-size: 30px;
     line-height: 34px;
     letter-spacing: -0.6px;
@@ -1463,7 +1470,7 @@ button:disabled {
     font-size: 16px;
     line-height: 24px;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
   }
   .article-publish-date {
     display: none;
