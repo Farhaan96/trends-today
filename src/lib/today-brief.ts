@@ -14,6 +14,7 @@ export interface TodayPost {
   title: string;
   category: string;
   updatedAt?: unknown;
+  modifiedAt?: unknown;
   publishedAt?: unknown;
   datePublished?: unknown;
   status?: unknown;
@@ -73,6 +74,7 @@ export function isLiveBriefStatus(status: unknown): boolean {
 export function briefUpdatedValue(post: TodayPost): string | undefined {
   return (
     timestamp(post.updatedAt) ||
+    timestamp(post.modifiedAt) ||
     timestamp(post.publishedAt) ||
     timestamp(post.datePublished)
   );

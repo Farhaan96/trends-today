@@ -131,6 +131,62 @@ test('a stale file falls back to dated live posts instead of today copy', () => 
   assert.equal(brief.items[0].dateLabel, 'Oct 8');
 });
 
+test('fallback order uses modifiedAt ahead of publishedAt', () => {
+  const brief = buildTodayBrief({
+    file: { date: '2026-01-01', items: [] },
+    posts: [
+      ...posts,
+      {
+        href: '/transit/older-revised',
+        title: 'Revised road notice',
+        category: 'transit',
+        status: 'published',
+        publishedAt: '2026-01-02T15:00:00Z',
+        modifiedAt: '2026-10-14T13:58:00Z',
+      },
+    ],
+    now,
+  });
+  assert.equal(brief.mode, 'latest');
+  assert.equal(brief.items[0].href, '/transit/older-revised');
+  assert.equal(brief.items[0].dateTime, '2026-10-14T13:58:00Z');
+  assert.equal(brief.items[0].dateLabel, 'Oct 14');
+});
+
+test('updatedAt still outranks modifiedAt in the fallback', () => {
+  const brief = buildTodayBrief({
+    file: null,
+    posts: [
+      {
+        href: '/transit/revised',
+        title: 'Revised notice',
+        category: 'transit',
+        status: 'published',
+        publishedAt: '2026-01-02T15:00:00Z',
+        modifiedAt: '2026-10-10T13:58:00Z',
+        updatedAt: '2026-10-14T13:58:00Z',
+      },
+      {
+        href: '/housing/one',
+        title: 'Housing one',
+        category: 'housing',
+        status: 'published',
+        publishedAt: '2026-10-01T15:00:00Z',
+      },
+      {
+        href: '/sports/two',
+        title: 'Sports two',
+        category: 'sports',
+        status: 'published',
+        publishedAt: '2026-09-01T15:00:00Z',
+      },
+    ],
+    now,
+  });
+  assert.equal(brief.items[0].href, '/transit/revised');
+  assert.equal(brief.items[0].dateTime, '2026-10-14T13:58:00Z');
+});
+
 test('the shipped file has no placeholder bullets', () => {
   const file = JSON.parse(
     readFileSync(new URL('../content/today.json', import.meta.url), 'utf8')

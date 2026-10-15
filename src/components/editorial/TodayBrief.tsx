@@ -24,6 +24,7 @@ export default async function TodayBrief() {
     title: article.frontmatter?.title || article.title,
     category: article.category,
     updatedAt: article.frontmatter?.updatedAt,
+    modifiedAt: article.frontmatter?.modifiedAt,
     publishedAt: article.frontmatter?.publishedAt,
     datePublished: article.frontmatter?.datePublished,
     status: article.frontmatter?.status,
