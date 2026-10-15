@@ -142,25 +142,35 @@ test('drafts and other unpublished statuses are not live', () => {
 
 test('relative wording follows the story age and avoids dashes', () => {
   assert.equal(
+    formatRelativeUpdate('2026-10-15T14:52:29Z', '2026-10-15T15:52:29Z'),
+    'Updated 1 hour ago'
+  );
+  assert.equal(
     formatRelativeUpdate('2026-10-15T13:52:29Z', '2026-10-15T15:52:29Z'),
-    'Updated 2 h ago'
+    'Updated 2 hours ago'
   );
   assert.equal(
     formatRelativeUpdate('2026-10-15T15:40:29Z', '2026-10-15T15:52:29Z'),
     'Updated 12 min ago'
   );
   assert.equal(
+    formatRelativeUpdate('2026-10-14T15:52:29Z', '2026-10-15T15:52:29Z'),
+    'Updated 1 day ago'
+  );
+  assert.equal(
     formatRelativeUpdate('2026-10-11T15:52:29Z', '2026-10-15T15:52:29Z'),
-    'Updated 4 d ago'
+    'Updated 4 days ago'
   );
   assert.equal(
     formatRelativeUpdate('2026-10-15T15:52:00Z', '2026-10-15T15:52:29Z'),
     'Updated just now'
   );
   for (const label of [
-    'Updated 2 h ago',
+    'Updated 1 hour ago',
+    'Updated 2 hours ago',
     'Updated 12 min ago',
-    'Updated 4 d ago',
+    'Updated 1 day ago',
+    'Updated 4 days ago',
     'Updated just now',
   ]) {
     assert.equal(/[—–]/.test(label), false);

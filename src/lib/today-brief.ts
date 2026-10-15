@@ -51,9 +51,9 @@ const LOCAL_CATEGORIES = new Set([
 
 const CATEGORY_LABELS: Record<string, string> = {
   transit: 'Transit',
-  'local-news': 'News',
-  'things-to-do': 'Events',
-  'food-drink': 'Food',
+  'local-news': 'Local news',
+  'things-to-do': 'Things to do',
+  'food-drink': 'Food & drink',
   housing: 'Housing',
   sports: 'Sports',
 };
@@ -120,7 +120,7 @@ function formatStoryDay(iso: string): string {
 }
 
 function categoryLabel(category: string): string {
-  return CATEGORY_LABELS[category] || 'News';
+  return CATEGORY_LABELS[category] || 'Local news';
 }
 
 function livePosts(posts: TodayPost[]): TodayPost[] {

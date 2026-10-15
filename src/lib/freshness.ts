@@ -149,7 +149,9 @@ export function formatRelativeUpdate(
   if (minutes < 1) return 'Updated just now';
   if (minutes < 60) return `Updated ${minutes} min ago`;
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `Updated ${hours} h ago`;
+  if (hours < 24) {
+    return hours === 1 ? 'Updated 1 hour ago' : `Updated ${hours} hours ago`;
+  }
   const days = Math.floor(hours / 24);
-  return `Updated ${days} d ago`;
+  return days === 1 ? 'Updated 1 day ago' : `Updated ${days} days ago`;
 }

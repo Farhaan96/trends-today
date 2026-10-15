@@ -196,6 +196,40 @@ test('the shipped file has no placeholder bullets', () => {
   assert.equal(brief.mode, 'latest');
 });
 
+test('fallback labels match the section chips', () => {
+  const brief = buildTodayBrief({
+    file: null,
+    posts: [
+      {
+        href: '/local-news/a',
+        title: 'Civic note',
+        category: 'local-news',
+        status: 'published',
+        publishedAt: '2026-10-10T15:00:00Z',
+      },
+      {
+        href: '/things-to-do/b',
+        title: 'Park walk',
+        category: 'things-to-do',
+        status: 'published',
+        publishedAt: '2026-10-09T15:00:00Z',
+      },
+      {
+        href: '/food-drink/c',
+        title: 'Ramen',
+        category: 'food-drink',
+        status: 'published',
+        publishedAt: '2026-10-08T15:00:00Z',
+      },
+    ],
+    now,
+  });
+  assert.deepEqual(
+    brief.items.map((item) => item.label),
+    ['Local news', 'Things to do', 'Food & drink']
+  );
+});
+
 test('category chips use the six live section routes', () => {
   const header = readFileSync(
     new URL('../src/components/editorial/EditorialHeader.tsx', import.meta.url),
