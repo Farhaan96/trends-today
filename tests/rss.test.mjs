@@ -21,12 +21,17 @@ const live = (index, extra = {}) => ({
   ...extra,
 });
 
-test('canonical links use the apex trendstoday.ca host', () => {
+test('canonical links use the www.trendstoday.ca host', () => {
   assert.equal(
     canonicalPostUrl('local-news', 'delta-thanksgiving-hours-2026'),
-    'https://trendstoday.ca/local-news/delta-thanksgiving-hours-2026'
+    'https://www.trendstoday.ca/local-news/delta-thanksgiving-hours-2026'
   );
-  assert.equal(canonicalPostUrl('food-drink', 'a&b').includes('www.'), false);
+  assert.equal(
+    canonicalPostUrl('food-drink', 'a&b').startsWith(
+      'https://www.trendstoday.ca/'
+    ),
+    true
+  );
 });
 
 test('feed keeps the newest 50 live posts and drops drafts', () => {
@@ -49,8 +54,8 @@ test('feed keeps the newest 50 live posts and drops drafts', () => {
   ];
   const items = selectRssItems(sources);
   assert.equal(items.length, 50);
-  assert.equal(items[0].link, 'https://trendstoday.ca/transit/story-55');
-  assert.equal(items.at(-1).link, 'https://trendstoday.ca/transit/story-6');
+  assert.equal(items[0].link, 'https://www.trendstoday.ca/transit/story-55');
+  assert.equal(items.at(-1).link, 'https://www.trendstoday.ca/transit/story-6');
   assert.equal(
     items.some((item) => item.link.includes('draft-story')),
     false
@@ -77,9 +82,9 @@ test('updatedAt and modifiedAt change order while pubDate stays the publish date
   assert.deepEqual(
     items.map((item) => item.link),
     [
-      'https://trendstoday.ca/transit/story-4',
-      'https://trendstoday.ca/transit/story-5',
-      'https://trendstoday.ca/transit/story-3',
+      'https://www.trendstoday.ca/transit/story-4',
+      'https://www.trendstoday.ca/transit/story-5',
+      'https://www.trendstoday.ca/transit/story-3',
     ]
   );
   assert.equal(
@@ -132,14 +137,19 @@ test('RSS 2.0 document includes title, link, pubDate, description, and category'
   assert.match(xml, /<title>SkyTrain &amp; Expo<\/title>/);
   assert.match(
     xml,
-    /<link>https:\/\/trendstoday\.ca\/transit\/skytrain<\/link>/
+    /<link>https:\/\/www\.trendstoday\.ca\/transit\/skytrain<\/link>/
   );
+  assert.match(
+    xml,
+    /<guid isPermaLink="true">https:\/\/www\.trendstoday\.ca\/transit\/skytrain<\/guid>/
+  );
+  assert.match(xml, /<link>https:\/\/www\.trendstoday\.ca<\/link>/);
   assert.match(xml, /<pubDate>.+<\/pubDate>/);
   assert.match(
     xml,
     /<description>Hours &lt;confirmed&gt; for &quot;riders&quot;<\/description>/
   );
   assert.match(xml, /<category>transit<\/category>/);
-  assert.equal(xml.includes('www.trendstoday.ca'), false);
+  assert.equal(xml.includes('https://trendstoday.ca/'), false);
   assert.equal(xml.includes('newsletter'), false);
 });
