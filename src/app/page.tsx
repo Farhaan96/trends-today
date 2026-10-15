@@ -38,8 +38,9 @@ export default async function HomePage() {
   return (
     <div className="site-page">
       <StructuredData data={getAllBaseSchemas()} />
-      <TodayBrief />
-      <CinematicHome stories={stories} asOf={new Date().toISOString()} />
+      <CinematicHome stories={stories} asOf={new Date().toISOString()}>
+        <TodayBrief />
+      </CinematicHome>
     </div>
   );
 }
