@@ -18,7 +18,11 @@ const navigation = [
   { name: 'Sports', href: '/sports' },
 ];
 
-export default function EditorialHeader() {
+export default function EditorialHeader({
+  freshness,
+}: {
+  freshness?: { iso: string; label: string } | null;
+}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [editionDate, setEditionDate] = useState('');
   const pathname = usePathname();
@@ -88,6 +92,11 @@ export default function EditorialHeader() {
           {isMenuOpen ? <XMarkIcon /> : <Bars3Icon />}
         </button>
       </div>
+      {freshness?.iso && freshness.label ? (
+        <p className="tt-freshness">
+          <time dateTime={freshness.iso}>{freshness.label}</time>
+        </p>
+      ) : null}
       {isMenuOpen && (
         <nav
           id="mobile-navigation"

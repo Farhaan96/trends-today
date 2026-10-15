@@ -4,7 +4,7 @@ import localFont from 'next/font/local';
 import Link from 'next/link';
 import './globals.css';
 import './cinematic.css';
-import EditorialHeader from '@/components/editorial/EditorialHeader';
+import SiteHeader from '@/components/editorial/SiteHeader';
 import {
   OrganizationSchema,
   WebsiteSchema,
@@ -93,13 +93,6 @@ export const metadata: Metadata = {
     creator: '@trendstoday',
     images: ['/images/twitter-card.jpg'],
   },
-  alternates: {
-    types: {
-      'application/rss+xml': [
-        { url: '/feed.xml', title: 'Trends Today RSS Feed' },
-      ],
-    },
-  },
   verification: {
     google: 'oAPJEjeNfe8VZk1Fal5AslDln72irXfaV2-sAzVFYbM',
   },
@@ -162,10 +155,16 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          href="/rss.xml"
+          title="Trends Today"
+        />
       </head>
 
       <body className="site-body">
-        <EditorialHeader />
+        <SiteHeader />
         <main id="main-content" className="site-main">
           {children}
         </main>
@@ -191,6 +190,7 @@ export default function RootLayout({
               <Link href="/privacy">Privacy</Link>
               <Link href="/advertise">Advertise</Link>
               <Link href="/contact">Contact</Link>
+              <Link href="/rss.xml">RSS</Link>
             </nav>
           </div>
           <div className="site-shell site-footer__legal">
