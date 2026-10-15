@@ -53,7 +53,12 @@ export default async function TodayBrief() {
               <Link href={item.href} className="today-brief__link">
                 <span className="today-brief__thumb">
                   {item.image ? (
-                    <Image src={item.image} alt="" width={96} height={64} />
+                    <Image
+                      src={item.image}
+                      alt={item.imageAlt || ''}
+                      width={96}
+                      height={64}
+                    />
                   ) : null}
                 </span>
                 <span className="today-brief__body">

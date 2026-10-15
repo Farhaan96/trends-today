@@ -134,6 +134,16 @@ export function formatEditionDate(
   return `${weekday} ${month} ${day}`;
 }
 
+/** Absolute stamp used as the server-rendered fallback. */
+export function formatAbsoluteStamp(
+  iso: string,
+  timeZone = 'America/Vancouver'
+): string | null {
+  const edition = formatEditionDate(iso, timeZone);
+  if (!edition) return null;
+  return `Updated ${edition}`;
+}
+
 /**
  * Age of a story instant. The wording never names a calendar day, so it
  * cannot claim a date newer than the story.

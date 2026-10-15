@@ -1,8 +1,8 @@
 import { cache } from 'react';
 import { getAllArticles } from '@/lib/article-utils';
 import {
+  formatAbsoluteStamp,
   formatEditionDate,
-  formatRelativeUpdate,
   isLivePostStatus,
   pickNewestUpdatedIso,
   type FreshnessFields,
@@ -33,7 +33,7 @@ export const getSiteFreshness = cache(
     const iso = pickNewestUpdatedIso(posts);
 
     if (!iso) return null;
-    const label = formatRelativeUpdate(iso, new Date());
+    const label = formatAbsoluteStamp(iso);
     const editionDate = formatEditionDate(iso);
     if (!label || !editionDate) return null;
     if (/[—–]/.test(`${label} ${editionDate}`)) return null;

@@ -1292,7 +1292,7 @@ button:disabled {
     flex-direction: column;
     min-height: 0;
     gap: 4px;
-    padding: 0 16px 6px;
+    padding: 0 16px 2px;
   }
   .cover__copy > .eyebrow {
     display: none;
@@ -1360,15 +1360,15 @@ button:disabled {
     margin: 6px 0 0;
   }
   .today-brief__inner {
-    padding: 4px 16px 8px;
+    padding: 4px 16px 0;
   }
   .today-brief h2 {
     font-size: 16px;
     line-height: 18px;
-    margin-bottom: 2px;
+    margin-bottom: 0;
   }
   .today-brief ul {
-    gap: 4px;
+    gap: 2px;
   }
   .today-brief li:nth-child(n + 4) {
     display: none;
@@ -1394,6 +1394,13 @@ button:disabled {
     font-size: 17px;
     line-height: 22px;
     font-weight: 650;
+  }
+  .today-brief__label {
+    line-height: 13px;
+  }
+  .today-brief__date {
+    margin-top: 2px;
+    line-height: 16px;
   }
   .article-header {
     padding-top: 4px;
@@ -1436,5 +1443,8 @@ button:disabled {
   .article-dek-body {
     display: block;
     margin: 0 0 16px;
+    color: var(--color-text);
+    font-size: 16px;
+    line-height: 1.5;
   }
 }

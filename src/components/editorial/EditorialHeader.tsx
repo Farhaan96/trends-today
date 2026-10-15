@@ -8,6 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import RelativeStamp from '@/components/editorial/RelativeStamp';
 
 const navigation = [
   { name: 'Local news', href: '/local-news' },
@@ -79,7 +80,7 @@ export default function EditorialHeader({
       </div>
       {freshness?.iso && freshness.label ? (
         <p className="tt-freshness">
-          <time dateTime={freshness.iso}>{freshness.label}</time>
+          <RelativeStamp iso={freshness.iso} absolute={freshness.label} />
         </p>
       ) : null}
       <nav className="tt-chips" aria-label="Sections">
