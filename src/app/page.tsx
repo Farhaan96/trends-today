@@ -3,6 +3,7 @@ import StructuredData from '@/components/seo/StructuredData';
 import { getAllBaseSchemas } from '@/lib/schema';
 import { getAllPosts } from '@/lib/content';
 import CinematicHome from '@/components/editorial/CinematicHome';
+import TodayBrief from '@/components/editorial/TodayBrief';
 import { isLocalNewsCategory } from '@/lib/categories';
 
 export const revalidate = 900;
@@ -37,6 +38,7 @@ export default async function HomePage() {
   return (
     <div className="site-page">
       <StructuredData data={getAllBaseSchemas()} />
+      <TodayBrief />
       <CinematicHome stories={stories} asOf={new Date().toISOString()} />
     </div>
   );
