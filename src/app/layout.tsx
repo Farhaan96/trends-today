@@ -4,7 +4,7 @@ import localFont from 'next/font/local';
 import Link from 'next/link';
 import './globals.css';
 import './cinematic.css';
-import EditorialHeader from '@/components/editorial/EditorialHeader';
+import SiteHeader from '@/components/editorial/SiteHeader';
 import {
   OrganizationSchema,
   WebsiteSchema,
@@ -165,7 +165,7 @@ export default function RootLayout({
       </head>
 
       <body className="site-body">
-        <EditorialHeader />
+        <SiteHeader />
         <main id="main-content" className="site-main">
           {children}
         </main>
