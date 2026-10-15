@@ -154,6 +154,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
     dateModified:
       contentUpdatedValue({
         updatedAt: frontmatter.updatedAt,
+        modifiedAt: frontmatter.modifiedAt,
         publishedAt: frontmatter.publishedAt,
         datePublished: frontmatter.datePublished,
       }) || frontmatter.publishedAt,
@@ -361,7 +362,14 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
             <AuthorBox
               author={frontmatter.author}
               publishedAt={frontmatter.publishedAt}
-              lastUpdated={frontmatter.updatedAt}
+              lastUpdated={
+                contentUpdatedValue({
+                  updatedAt: frontmatter.updatedAt,
+                  modifiedAt: frontmatter.modifiedAt,
+                  publishedAt: frontmatter.publishedAt,
+                  datePublished: frontmatter.datePublished,
+                }) || frontmatter.updatedAt
+              }
             />
           )}
 

@@ -1,5 +1,6 @@
 export interface FreshnessFields {
   updatedAt?: unknown;
+  modifiedAt?: unknown;
   publishedAt?: unknown;
   datePublished?: unknown;
 }
@@ -29,14 +30,15 @@ function cleanTimestamp(value: unknown): string | undefined {
 
 /**
  * Timestamp used for the public "Updated" stamp and Article JSON-LD
- * dateModified. updatedAt wins when it is present and parseable. Otherwise
- * the value is publishedAt, then datePublished.
+ * dateModified. First parseable value wins: updatedAt, modifiedAt,
+ * publishedAt, then datePublished.
  */
 export function contentUpdatedValue(
   fields: FreshnessFields
 ): string | undefined {
   return (
     cleanTimestamp(fields.updatedAt) ||
+    cleanTimestamp(fields.modifiedAt) ||
     cleanTimestamp(fields.publishedAt) ||
     cleanTimestamp(fields.datePublished)
   );

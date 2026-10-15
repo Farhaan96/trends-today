@@ -80,6 +80,7 @@ export async function generateMetadata({
       modifiedTime:
         contentUpdatedValue({
           updatedAt: article.frontmatter?.updatedAt,
+          modifiedAt: article.frontmatter?.modifiedAt,
           publishedAt: article.frontmatter?.publishedAt,
           datePublished: article.frontmatter?.datePublished,
         }) ||
@@ -136,6 +137,7 @@ export default async function ArticlePage({
   const modifiedAt =
     contentUpdatedValue({
       updatedAt: article.frontmatter?.updatedAt,
+      modifiedAt: article.frontmatter?.modifiedAt,
       publishedAt: article.frontmatter?.publishedAt,
       datePublished: article.frontmatter?.datePublished,
     }) || publishedAt;

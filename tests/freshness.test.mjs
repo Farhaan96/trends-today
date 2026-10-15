@@ -43,6 +43,54 @@ test('updatedAt wins over publishedAt when it is present', () => {
   );
 });
 
+test('modifiedAt is used when updatedAt is absent', () => {
+  assert.equal(
+    contentUpdatedValue({
+      modifiedAt: '2026-07-23T18:15:00-07:00',
+      publishedAt: '2025-09-19T06:23:55.000Z',
+    }),
+    '2026-07-23T18:15:00-07:00'
+  );
+  assert.equal(
+    contentUpdatedValue({
+      updatedAt: '2026-10-14T06:58:00-07:00',
+      modifiedAt: '2026-07-23T18:15:00-07:00',
+      publishedAt: '2026-01-01T00:00:00Z',
+    }),
+    '2026-10-14T06:58:00-07:00'
+  );
+});
+
+test('blank or invalid modifiedAt falls through to publishedAt', () => {
+  assert.equal(
+    contentUpdatedValue({
+      modifiedAt: '   ',
+      publishedAt: '2026-10-08T08:53:04-07:00',
+    }),
+    '2026-10-08T08:53:04-07:00'
+  );
+  assert.equal(
+    contentUpdatedValue({
+      modifiedAt: 'not-a-date',
+      publishedAt: '2026-10-08T08:53:04-07:00',
+    }),
+    '2026-10-08T08:53:04-07:00'
+  );
+});
+
+test('newest live timestamp can come from modifiedAt', () => {
+  assert.equal(
+    pickNewestUpdatedIso([
+      { publishedAt: '2026-10-08T08:53:04-07:00' },
+      {
+        publishedAt: '2025-09-01T00:00:00Z',
+        modifiedAt: '2026-10-14T06:58:00-07:00',
+      },
+    ]),
+    '2026-10-14T06:58:00-07:00'
+  );
+});
+
 test('publishedAt is used when updatedAt is missing or blank', () => {
   assert.equal(
     contentUpdatedValue({

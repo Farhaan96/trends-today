@@ -22,6 +22,7 @@ export const getSiteFreshness = cache(
       if (!isLivePostStatus(frontmatter.status)) continue;
       posts.push({
         updatedAt: frontmatter.updatedAt,
+        modifiedAt: frontmatter.modifiedAt,
         publishedAt: frontmatter.publishedAt,
         datePublished: frontmatter.datePublished,
       });
