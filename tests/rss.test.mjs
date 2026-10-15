@@ -133,7 +133,14 @@ test('RSS 2.0 document includes title, link, pubDate, description, and category'
       publishedAt: '2026-10-08T15:53:04Z',
     },
   ]);
-  assert.match(xml, /<rss version="2.0">/);
+  assert.match(
+    xml,
+    /<rss version="2.0" xmlns:atom="http:\/\/www.w3.org\/2005\/Atom">/
+  );
+  assert.match(
+    xml,
+    /<atom:link rel="self" href="https:\/\/www\.trendstoday\.ca\/rss\.xml" type="application\/rss\+xml" \/>/
+  );
   assert.match(xml, /<title>SkyTrain &amp; Expo<\/title>/);
   assert.match(
     xml,

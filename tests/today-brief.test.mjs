@@ -196,6 +196,25 @@ test('the shipped file has no placeholder bullets', () => {
   assert.equal(brief.mode, 'latest');
 });
 
+test('the Today block renders after the homepage cover heading', () => {
+  const page = readFileSync(
+    new URL('../src/app/page.tsx', import.meta.url),
+    'utf8'
+  );
+  const home = readFileSync(
+    new URL('../src/components/editorial/CinematicHome.tsx', import.meta.url),
+    'utf8'
+  );
+  const open = page.indexOf('<CinematicHome');
+  const brief = page.indexOf('<TodayBrief />');
+  const close = page.indexOf('</CinematicHome>');
+  assert.ok(open !== -1 && brief > open && close > brief);
+  const cover = home.indexOf('id="cover-heading"');
+  const slot = home.indexOf('{children}');
+  const nextSection = home.indexOf('travel-brief');
+  assert.ok(cover !== -1 && slot > cover && nextSection > slot);
+});
+
 test('homepage metadata is limited to the existing canonical path', () => {
   const source = readFileSync(
     new URL('../src/app/page.tsx', import.meta.url),

@@ -1,6 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -22,9 +28,11 @@ import {
 export default function CinematicHome({
   stories,
   asOf,
+  children,
 }: {
   stories: LocalStory[];
   asOf: string;
+  children?: ReactNode;
 }) {
   const [now, setNow] = useState(asOf);
   const [selected, setSelected] = useState(1);
@@ -182,6 +190,8 @@ export default function CinematicHome({
           </div>
         </section>
       )}
+
+      {children}
 
       {transit.length > 0 && (
         <section className="travel-brief" aria-labelledby="travel-heading">
