@@ -108,8 +108,7 @@ export default function CinematicHome({
             <div className="cover__copy">
               <p className="eyebrow">Your Lower Mainland, today</p>
               <h1 id="cover-heading">
-                Good things.
-                <br />
+                Good things. <br />
                 Close to <br />
                 home.
               </h1>
@@ -159,16 +158,18 @@ export default function CinematicHome({
                 className="cover__frame"
                 aria-label={lead.title}
               >
-                {lead.image && (
-                  <Image
-                    src={lead.image}
-                    alt={lead.imageAlt || lead.title}
-                    fill
-                    priority
-                    sizes="(max-width: 760px) 100vw, 67vw"
-                    className="cover__image"
-                  />
-                )}
+                <span className="cover__media">
+                  {lead.image && (
+                    <Image
+                      src={lead.image}
+                      alt={lead.imageAlt || lead.title}
+                      fill
+                      priority
+                      sizes="(max-width: 760px) 100vw, 67vw"
+                      className="cover__image"
+                    />
+                  )}
+                </span>
                 <div className="cover__caption">
                   <div className="cover__stamp">
                     <span>Latest story</span>

@@ -13,6 +13,8 @@ export interface TodayPost {
   href: string;
   title: string;
   category: string;
+  image?: string;
+  imageAlt?: string;
   updatedAt?: unknown;
   modifiedAt?: unknown;
   publishedAt?: unknown;
@@ -24,6 +26,8 @@ export interface TodayBullet {
   label: string;
   text: string;
   href: string;
+  image?: string;
+  imageAlt?: string;
   dateTime?: string;
   dateLabel?: string;
 }
@@ -47,9 +51,9 @@ const LOCAL_CATEGORIES = new Set([
 
 const CATEGORY_LABELS: Record<string, string> = {
   transit: 'Transit',
-  'local-news': 'News',
-  'things-to-do': 'Events',
-  'food-drink': 'Food',
+  'local-news': 'Local news',
+  'things-to-do': 'Things to do',
+  'food-drink': 'Food & drink',
   housing: 'Housing',
   sports: 'Sports',
 };
@@ -116,7 +120,7 @@ function formatStoryDay(iso: string): string {
 }
 
 function categoryLabel(category: string): string {
-  return CATEGORY_LABELS[category] || 'News';
+  return CATEGORY_LABELS[category] || 'Local news';
 }
 
 function livePosts(posts: TodayPost[]): TodayPost[] {
@@ -145,14 +149,17 @@ function latestBullets(posts: TodayPost[]): TodayBullet[] {
       label: categoryLabel(post.category),
       text: clean(post.title),
       href: clean(post.href),
+      image: clean(post.image) || undefined,
+      imageAlt: clean(post.imageAlt) || undefined,
       dateTime: iso,
       dateLabel: formatStoryDay(iso),
     };
   });
 }
 
-function fileItems(file: TodayFile, liveHrefs: Set<string>): TodayBullet[] {
+function fileItems(file: TodayFile, posts: TodayPost[]): TodayBullet[] {
   if (!Array.isArray(file.items)) return [];
+  const live = new Map(livePosts(posts).map((post) => [post.href, post]));
   const items: TodayBullet[] = [];
   for (const raw of file.items) {
     if (!raw || typeof raw !== 'object') continue;
@@ -160,10 +167,18 @@ function fileItems(file: TodayFile, liveHrefs: Set<string>): TodayBullet[] {
     const label = clean(item.label);
     const text = clean(item.text);
     const href = clean(item.href);
-    if (!label || !text || !href.startsWith('/') || !liveHrefs.has(href)) {
-      continue;
-    }
-    items.push({ label, text, href });
+    const post = live.get(href);
+    if (!label || !text || !post) continue;
+    const iso = briefUpdatedValue(post);
+    items.push({
+      label,
+      text,
+      href,
+      image: clean(post.image) || undefined,
+      imageAlt: clean(post.imageAlt) || undefined,
+      dateTime: iso,
+      dateLabel: iso ? formatStoryDay(iso) : undefined,
+    });
     if (items.length === 5) break;
   }
   return items;
@@ -176,9 +191,8 @@ export function buildTodayBrief(input: {
 }): TodayBriefModel {
   const today = vancouverDateKey(input.now);
   const fileDate = clean(input.file?.date);
-  const liveHrefs = new Set(livePosts(input.posts).map((post) => post.href));
   const curated =
-    input.file && fileDate === today ? fileItems(input.file, liveHrefs) : [];
+    input.file && fileDate === today ? fileItems(input.file, input.posts) : [];
 
   if (curated.length >= 3) {
     return {

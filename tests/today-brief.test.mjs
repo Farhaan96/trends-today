@@ -196,6 +196,59 @@ test('the shipped file has no placeholder bullets', () => {
   assert.equal(brief.mode, 'latest');
 });
 
+test('fallback labels match the section chips', () => {
+  const brief = buildTodayBrief({
+    file: null,
+    posts: [
+      {
+        href: '/local-news/a',
+        title: 'Civic note',
+        category: 'local-news',
+        status: 'published',
+        publishedAt: '2026-10-10T15:00:00Z',
+      },
+      {
+        href: '/things-to-do/b',
+        title: 'Park walk',
+        category: 'things-to-do',
+        status: 'published',
+        publishedAt: '2026-10-09T15:00:00Z',
+      },
+      {
+        href: '/food-drink/c',
+        title: 'Ramen',
+        category: 'food-drink',
+        status: 'published',
+        publishedAt: '2026-10-08T15:00:00Z',
+      },
+    ],
+    now,
+  });
+  assert.deepEqual(
+    brief.items.map((item) => item.label),
+    ['Local news', 'Things to do', 'Food & drink']
+  );
+});
+
+test('category chips use the six live section routes', () => {
+  const header = readFileSync(
+    new URL('../src/components/editorial/EditorialHeader.tsx', import.meta.url),
+    'utf8'
+  );
+  const chips = [
+    ['Local news', '/local-news'],
+    ['Things to do', '/things-to-do'],
+    ['Food & drink', '/food-drink'],
+    ['Transit', '/transit'],
+    ['Housing', '/housing'],
+    ['Sports', '/sports'],
+  ];
+  for (const [label, href] of chips) {
+    assert.equal(header.includes(`name: '${label}'`), true);
+    assert.equal(header.includes(`href: '${href}'`), true);
+  }
+});
+
 test('the Today block renders after the homepage cover heading', () => {
   const page = readFileSync(
     new URL('../src/app/page.tsx', import.meta.url),

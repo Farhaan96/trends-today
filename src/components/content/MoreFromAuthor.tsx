@@ -21,6 +21,7 @@ interface Article {
   href: string;
   publishedAt: string;
   image?: string;
+  imageAlt?: string;
   category: string;
   readingTime: string | number;
 }
@@ -65,7 +66,7 @@ export default function MoreFromAuthor({
               <div className="author-more__media">
                 <Image
                   src={article.image}
-                  alt={article.title}
+                  alt={article.imageAlt?.trim() || article.title}
                   fill
                   className="object-cover editorial-image"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

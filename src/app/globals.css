@@ -1144,6 +1144,11 @@ img,
   margin-top: 1.5rem;
 }
 
+.article-dek-body,
+.article-meta__published {
+  display: none;
+}
+
 .article-meta-wrap {
   margin: 2rem 0 1.5rem;
   border-top: 1px solid var(--color-border);
