@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T15:34:43.318950+00:00",
+  "generatedAt": "2026-10-18T15:34:35.674245+00:00",
   "results": [
     {
       "title": "Grouse Grind Closed for Maintenance: What to Know",
@@ -31,19 +31,19 @@
           ],
           "demandEvidence": "Metro Vancouver's current parks advisory says the Grouse Grind is closed from October 13 to November 10 for annual maintenance work, creating immediate trip-planning demand for North Shore hikers.",
           "readerImpact": "North Shore hikers can avoid arriving for a closed trail, understand that the BCMC Route remains open but is a separate challenging option rather than a like-for-like easy detour, and plan transit and route-specific descent arrangements.",
-          "freshnessEvidence": "Metro Vancouver's active park-alert page and Grouse Mountain Resort's current notice were rechecked on October 16, 2026, and confirm the Grouse Grind closure through November 10.",
+          "freshnessEvidence": "Metro Vancouver's active park-alert page and Grouse Mountain Resort's current notice were rechecked on October 18, 2026, and confirm the Grouse Grind closure through November 10.",
           "uniqueAngleEvidence": "No existing Trends Today article covers the Grouse Grind or BCMC Route. The article combines the dated closure, the BCMC Route's open status, difficulty and dog rule, route-specific descent guidance, park status and direct transit access into one practical checklist.",
           "cashProgressHypothesis": "Measure article-level search impressions, clicks, engaged sessions, direct sessions and returning-reader sessions at 7 and 28 days. The repeat-use hypothesis is that a timely closure guide earns future visits for North Shore trail and park updates. App CTA clicks remain unavailable because no Farhaan app naturally serves this hiking task, so no app promotion will be forced. Ad revenue, sponsor inquiries, content cost and contribution remain unavailable until article-level attribution is exposed.",
           "duplicatePrevention": {
-            "topicValidator": "passed; unique topic across 245 existing articles",
+            "topicValidator": "passed; unique topic across 251 existing articles",
             "semanticSimilarity": "passed; highest similarity 0% against the local-news inventory",
             "crossCategory": "passed; no overlap detected",
             "categorySaturation": "passed; two recent local-news articles and no oversaturated topics",
-            "checkedAt": "2026-10-16T15:31:22Z"
+            "checkedAt": "2026-10-18T15:33:58Z"
           },
           "sourceCaptures": [
             {
-              "capturedAt": "2026-10-16T15:31:22Z",
+              "capturedAt": "2026-10-18T15:33:58Z",
               "url": "https://metrovancouver.org/services/regional-parks/park-alerts-and-notices",
               "title": "Park Alerts and Notices",
               "excerpts": [
