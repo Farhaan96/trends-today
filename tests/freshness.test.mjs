@@ -9,7 +9,9 @@ const compiled = ts.transpileModule(
 ).outputText;
 const {
   contentUpdatedValue,
+  formatEditionDate,
   formatFreshnessStamp,
+  formatRelativeUpdate,
   isLivePostStatus,
   pickNewestUpdatedIso,
 } = await import(
@@ -136,6 +138,72 @@ test('drafts and other unpublished statuses are not live', () => {
   assert.equal(isLivePostStatus('draft'), false);
   assert.equal(isLivePostStatus('review'), false);
   assert.equal(isLivePostStatus('pending'), false);
+});
+
+test('relative wording follows the story age and avoids dashes', () => {
+  assert.equal(
+    formatRelativeUpdate('2026-10-15T14:52:29Z', '2026-10-15T15:52:29Z'),
+    'Updated 1 hour ago'
+  );
+  assert.equal(
+    formatRelativeUpdate('2026-10-15T13:52:29Z', '2026-10-15T15:52:29Z'),
+    'Updated 2 hours ago'
+  );
+  assert.equal(
+    formatRelativeUpdate('2026-10-15T15:40:29Z', '2026-10-15T15:52:29Z'),
+    'Updated 12 min ago'
+  );
+  assert.equal(
+    formatRelativeUpdate('2026-10-14T15:52:29Z', '2026-10-15T15:52:29Z'),
+    'Updated 1 day ago'
+  );
+  assert.equal(
+    formatRelativeUpdate('2026-10-11T15:52:29Z', '2026-10-15T15:52:29Z'),
+    'Updated 4 days ago'
+  );
+  assert.equal(
+    formatRelativeUpdate('2026-10-15T15:52:00Z', '2026-10-15T15:52:29Z'),
+    'Updated just now'
+  );
+  for (const label of [
+    'Updated 1 hour ago',
+    'Updated 2 hours ago',
+    'Updated 12 min ago',
+    'Updated 1 day ago',
+    'Updated 4 days ago',
+    'Updated just now',
+  ]) {
+    assert.equal(/[—–]/.test(label), false);
+  }
+});
+
+test('edition date is the story day, not a later clock day', () => {
+  const story = '2026-10-11T08:52:29-07:00';
+  assert.equal(formatEditionDate(story), 'Sun Oct 11');
+  assert.notEqual(
+    formatEditionDate(story),
+    formatEditionDate('2026-10-14T12:00:00-07:00')
+  );
+});
+
+test('home date color clears 4.5:1 on the cream background', () => {
+  const css = readFileSync(
+    new URL('../src/app/cinematic.css', import.meta.url),
+    'utf8'
+  );
+  assert.equal(css.includes('#3c4640'), true);
+  const linear = (channel) => {
+    const value = channel / 255;
+    return value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+  };
+  const luminance = ([red, green, blue]) =>
+    0.2126 * linear(red) + 0.7152 * linear(green) + 0.0722 * linear(blue);
+  const foreground = luminance([60, 70, 64]);
+  const background = luminance([246, 241, 226]);
+  const ratio =
+    (Math.max(foreground, background) + 0.05) /
+    (Math.min(foreground, background) + 0.05);
+  assert.equal(ratio >= 4.5, true);
 });
 
 test('unparseable input does not invent a stamp', () => {

@@ -114,3 +114,54 @@ export function formatFreshnessStamp(
 
   return `Updated ${hour}:${minute} ${period} PT, ${weekday} ${month} ${day}`;
 }
+
+/** Story calendar day in Pacific time, for the edition line. */
+export function formatEditionDate(
+  iso: string,
+  timeZone = 'America/Vancouver'
+): string | null {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return null;
+  const parts = vancouverParts(date, timeZone);
+  const weekday =
+    WEEKDAYS.find((item) => parts.weekday.startsWith(item)) ||
+    parts.weekday.replace(/\./g, '');
+  const month =
+    MONTHS.find((item) => parts.month.startsWith(item)) ||
+    parts.month.replace(/\./g, '');
+  const day = String(Number(parts.day));
+  if (!weekday || !month || !day || day === 'NaN') return null;
+  return `${weekday} ${month} ${day}`;
+}
+
+/** Absolute stamp used as the server-rendered fallback. */
+export function formatAbsoluteStamp(
+  iso: string,
+  timeZone = 'America/Vancouver'
+): string | null {
+  const edition = formatEditionDate(iso, timeZone);
+  if (!edition) return null;
+  return `Updated ${edition}`;
+}
+
+/**
+ * Age of a story instant. The wording never names a calendar day, so it
+ * cannot claim a date newer than the story.
+ */
+export function formatRelativeUpdate(
+  iso: string,
+  now: string | Date
+): string | null {
+  const then = Date.parse(iso);
+  const current = now instanceof Date ? now.getTime() : Date.parse(now);
+  if (!Number.isFinite(then) || !Number.isFinite(current)) return null;
+  const minutes = Math.max(0, Math.floor((current - then) / 60000));
+  if (minutes < 1) return 'Updated just now';
+  if (minutes < 60) return `Updated ${minutes} min ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) {
+    return hours === 1 ? 'Updated 1 hour ago' : `Updated ${hours} hours ago`;
+  }
+  const days = Math.floor(hours / 24);
+  return days === 1 ? 'Updated 1 day ago' : `Updated ${days} days ago`;
+}

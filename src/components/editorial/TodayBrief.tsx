@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getAllArticles } from '@/lib/article-utils';
 import {
   buildTodayBrief,
@@ -23,6 +24,8 @@ export default async function TodayBrief() {
     href: `/${article.category}/${article.slug}`,
     title: article.frontmatter?.title || article.title,
     category: article.category,
+    image: article.frontmatter?.image || article.image,
+    imageAlt: article.frontmatter?.imageAlt,
     updatedAt: article.frontmatter?.updatedAt,
     modifiedAt: article.frontmatter?.modifiedAt,
     publishedAt: article.frontmatter?.publishedAt,
@@ -47,13 +50,28 @@ export default async function TodayBrief() {
         <ul>
           {brief.items.map((item) => (
             <li key={`${item.href}-${item.text}`}>
-              <Link href={item.href}>
-                <span className="today-brief__label">{item.label}</span>
-                <span className="today-brief__text">
-                  {item.dateTime && item.dateLabel ? (
-                    <time dateTime={item.dateTime}>{item.dateLabel}</time>
+              <Link href={item.href} className="today-brief__link">
+                <span className="today-brief__thumb">
+                  {item.image ? (
+                    <Image
+                      src={item.image}
+                      alt={item.imageAlt || ''}
+                      width={96}
+                      height={64}
+                    />
                   ) : null}
-                  {item.text}
+                </span>
+                <span className="today-brief__body">
+                  <span className="today-brief__label">{item.label}</span>
+                  <span className="today-brief__headline">{item.text}</span>
+                  {item.dateTime && item.dateLabel ? (
+                    <time
+                      className="today-brief__date"
+                      dateTime={item.dateTime}
+                    >
+                      {item.dateLabel}
+                    </time>
+                  ) : null}
                 </span>
               </Link>
             </li>

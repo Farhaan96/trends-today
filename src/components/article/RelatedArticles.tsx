@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { formatArticleDate } from '@/lib/editorial';
+import { illustrationImageAlt } from '@/lib/illustration-caption';
 
 interface Article {
   slug: string;
@@ -14,6 +15,9 @@ interface Article {
     category?: string;
     publishedAt?: string;
     description?: string;
+    imageAlt?: string;
+    imageAttribution?: string;
+    imageSourceType?: string;
     keywords?: string[];
     tags?: string[];
   };
@@ -71,7 +75,12 @@ export default function RelatedArticles({
                   {articleImage ? (
                     <Image
                       src={articleImage}
-                      alt={articleTitle || 'Article'}
+                      alt={illustrationImageAlt(
+                        article.frontmatter?.imageAlt,
+                        articleTitle,
+                        article.frontmatter?.imageAttribution,
+                        article.frontmatter?.imageSourceType
+                      )}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

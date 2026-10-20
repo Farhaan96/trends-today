@@ -8,6 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import RelativeStamp from '@/components/editorial/RelativeStamp';
 
 const navigation = [
   { name: 'Local news', href: '/local-news' },
@@ -21,26 +22,11 @@ const navigation = [
 export default function EditorialHeader({
   freshness,
 }: {
-  freshness?: { iso: string; label: string } | null;
+  freshness?: { iso: string; label: string; editionDate?: string } | null;
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [editionDate, setEditionDate] = useState('');
   const pathname = usePathname();
   useEffect(() => setIsMenuOpen(false), [pathname]);
-  useEffect(() => {
-    const refresh = () =>
-      setEditionDate(
-        new Intl.DateTimeFormat('en-CA', {
-          weekday: 'long',
-          month: 'long',
-          day: 'numeric',
-          timeZone: 'America/Vancouver',
-        }).format(new Date())
-      );
-    refresh();
-    const timer = setInterval(refresh, 60_000);
-    return () => clearInterval(timer);
-  }, []);
   return (
     <header
       className="tt-header"
@@ -79,7 +65,7 @@ export default function EditorialHeader({
         </Link>
         <div className="tt-edition" aria-label="Publication edition">
           <span>Lower Mainland edition</span>
-          <span>{editionDate || 'Vancouver to the Fraser Valley'}</span>
+          {freshness?.editionDate ? <span>{freshness.editionDate}</span> : null}
         </div>
         <button
           type="button"
@@ -94,9 +80,24 @@ export default function EditorialHeader({
       </div>
       {freshness?.iso && freshness.label ? (
         <p className="tt-freshness">
-          <time dateTime={freshness.iso}>{freshness.label}</time>
+          <RelativeStamp iso={freshness.iso} absolute={freshness.label} />
         </p>
       ) : null}
+      <nav className="tt-chips" aria-label="Sections">
+        {navigation.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            aria-current={
+              pathname === item.href || pathname.startsWith(`${item.href}/`)
+                ? 'page'
+                : undefined
+            }
+          >
+            {item.name}
+          </Link>
+        ))}
+      </nav>
       {isMenuOpen && (
         <nav
           id="mobile-navigation"
