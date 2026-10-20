@@ -809,6 +809,7 @@ button:disabled {
 }
 .article-hero--map {
   background: #e6e1d4;
+  max-height: 330px;
 }
 .article-hero--map .editorial-image {
   object-fit: contain !important;

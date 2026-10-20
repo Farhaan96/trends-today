@@ -18,7 +18,6 @@ import {
   isContainedCivicHero,
   isGeneratedIllustration,
 } from '@/lib/illustration-caption';
-import { localImageSize } from '@/lib/local-image-size';
 import {
   getNewsroomProfileByName,
   getNewsroomProfileId,
@@ -160,7 +159,6 @@ export default async function ArticlePage({
     article.frontmatter?.imageSourceType,
     image
   );
-  const heroSize = containedHero ? await localImageSize(image) : null;
   const heroClassName = [
     'article-hero',
     article.frontmatter?.imageSourceType === 'generated'
@@ -306,14 +304,7 @@ export default async function ArticlePage({
           </div>
 
           {/* Large square hero image */}
-          <div
-            className={heroClassName}
-            style={
-              heroSize
-                ? { aspectRatio: `${heroSize.width} / ${heroSize.height}` }
-                : undefined
-            }
-          >
+          <div className={heroClassName}>
             <EditorialImage
               src={article.image || article.frontmatter?.image || undefined}
               alt={imageAlt}
