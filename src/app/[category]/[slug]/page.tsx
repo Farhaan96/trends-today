@@ -15,8 +15,10 @@ import { contentUpdatedValue } from '@/lib/freshness';
 import {
   GENERATED_ILLUSTRATION_CAPTION,
   illustrationImageAlt,
+  isContainedCivicHero,
   isGeneratedIllustration,
 } from '@/lib/illustration-caption';
+import { localImageSize } from '@/lib/local-image-size';
 import {
   getNewsroomProfileByName,
   getNewsroomProfileId,
@@ -154,6 +156,20 @@ export default async function ArticlePage({
     article.frontmatter?.imageAttribution,
     article.frontmatter?.imageSourceType
   );
+  const containedHero = isContainedCivicHero(
+    article.frontmatter?.imageSourceType,
+    image
+  );
+  const heroSize = containedHero ? await localImageSize(image) : null;
+  const heroClassName = [
+    'article-hero',
+    article.frontmatter?.imageSourceType === 'generated'
+      ? 'article-hero--labeled'
+      : '',
+    containedHero ? 'article-hero--map' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
   const publishedAt = article.frontmatter?.publishedAt || article.publishedAt;
   const modifiedAt =
     contentUpdatedValue({
@@ -291,10 +307,11 @@ export default async function ArticlePage({
 
           {/* Large square hero image */}
           <div
-            className={
-              article.frontmatter?.imageSourceType === 'generated'
-                ? 'article-hero article-hero--labeled'
-                : 'article-hero'
+            className={heroClassName}
+            style={
+              heroSize
+                ? { aspectRatio: `${heroSize.width} / ${heroSize.height}` }
+                : undefined
             }
           >
             <EditorialImage

@@ -8,6 +8,29 @@ const EXEMPT_SOURCE_TYPES = new Set([
   'official-source',
 ]);
 
+export function isContainedCivicHero(
+  sourceType?: unknown,
+  imageSrc?: unknown
+): boolean {
+  const source = String(sourceType || '')
+    .trim()
+    .toLowerCase();
+  const src = String(imageSrc || '')
+    .trim()
+    .toLowerCase();
+  if (source === 'generated' || source.includes('photo')) return false;
+  if (
+    source === 'official' ||
+    source.includes('map') ||
+    source.includes('logo') ||
+    source.includes('civic') ||
+    source === 'official-source'
+  ) {
+    return true;
+  }
+  return /(?:^|[/_-])map(?:[./_-]|$)|route-design/.test(src);
+}
+
 export function isGeneratedIllustration(
   attribution: unknown,
   sourceType?: unknown

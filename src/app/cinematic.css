@@ -807,6 +807,13 @@ button:disabled {
 .article-hero {
   aspect-ratio: 16/7.5;
 }
+.article-hero--map {
+  background: #e6e1d4;
+}
+.article-hero--map .editorial-image {
+  object-fit: contain !important;
+  object-position: center center !important;
+}
 .article-hero--labeled .editorial-image {
   object-fit: contain;
   object-position: center;
@@ -1486,13 +1493,12 @@ button:disabled {
     letter-spacing: -0.6px;
   }
   .article-deck {
-    display: -webkit-box;
+    display: block;
     margin-top: 6px;
-    overflow: hidden;
+    overflow: visible;
     font-size: 16px;
     line-height: 24px;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: unset;
   }
   .article-publish-date {
     display: none;
