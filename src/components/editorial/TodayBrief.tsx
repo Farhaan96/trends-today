@@ -18,7 +18,11 @@ function readTodayFile(): TodayFile | null {
   }
 }
 
-export default async function TodayBrief() {
+export default async function TodayBrief({
+  excludeHref,
+}: {
+  excludeHref?: string;
+}) {
   const articles = await getAllArticles();
   const posts: TodayPost[] = articles.map((article) => ({
     href: `/${article.category}/${article.slug}`,
@@ -36,6 +40,7 @@ export default async function TodayBrief() {
     file: readTodayFile(),
     posts,
     now: new Date().toISOString(),
+    excludeHref,
   });
 
   if (brief.items.length < 3) return null;

@@ -39,7 +39,7 @@ export default async function HomePage() {
     <div className="site-page">
       <StructuredData data={getAllBaseSchemas()} />
       <CinematicHome stories={stories} asOf={new Date().toISOString()}>
-        <TodayBrief />
+        <TodayBrief excludeHref={stories[0]?.href} />
       </CinematicHome>
     </div>
   );

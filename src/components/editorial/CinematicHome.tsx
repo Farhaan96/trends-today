@@ -106,12 +106,8 @@ export default function CinematicHome({
         <section className="cover" aria-labelledby="cover-heading" ref={hero}>
           <div className="cover__inner">
             <div className="cover__copy">
-              <p className="eyebrow">Your Lower Mainland, today</p>
-              <h1 id="cover-heading">
-                Good things. <br />
-                Close to <br />
-                home.
-              </h1>
+              <p className="eyebrow">{getCategoryLabel(lead.category)}</p>
+              <h1 id="cover-heading">{lead.title}</h1>
               <p className="cover__deck">{lead.description}</p>
               <Link href={lead.href} className="cover__read">
                 <span className="arrow-disc">
@@ -203,6 +199,17 @@ export default function CinematicHome({
             </h2>
             {transit.map((story) => (
               <article key={story.href}>
+                {story.image ? (
+                  <span className="story-thumb">
+                    <Image
+                      src={story.image}
+                      alt={story.imageAlt || ''}
+                      width={480}
+                      height={320}
+                      sizes="(max-width: 640px) 96px, 33vw"
+                    />
+                  </span>
+                ) : null}
                 <p className="eyebrow">{storyCity(story)}</p>
                 <Link href={story.href}>
                   <h3>{story.title}</h3>
@@ -411,6 +418,17 @@ export default function CinematicHome({
         <div className="neighbourhood-grid">
           {results.slice(0, count).map((story) => (
             <article key={story.href}>
+              {story.image ? (
+                <span className="story-thumb">
+                  <Image
+                    src={story.image}
+                    alt={story.imageAlt || ''}
+                    width={480}
+                    height={320}
+                    sizes="(max-width: 640px) 96px, 33vw"
+                  />
+                </span>
+              ) : null}
               <p className="eyebrow">
                 {storyCity(story)}
                 <span>{getCategoryLabel(story.category)}</span>
