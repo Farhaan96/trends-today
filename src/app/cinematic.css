@@ -807,24 +807,31 @@ button:disabled {
 .article-hero {
   aspect-ratio: 16/7.5;
 }
+.article-hero:not(.article-hero--map) {
+  aspect-ratio: 16 / 9;
+  max-height: none;
+}
+.article-hero:not(.article-hero--map) .editorial-image {
+  object-fit: cover !important;
+  object-position: center center !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
 .article-hero--map {
   background: #e6e1d4;
-  max-height: 330px;
 }
 .article-hero--map .editorial-image {
   object-fit: contain !important;
   object-position: center center !important;
 }
-.article-hero--labeled .editorial-image {
-  object-fit: contain;
-  object-position: center;
-  border-radius: 0;
-  top: 0 !important;
-  bottom: 0 !important;
-  left: 12px !important;
-  right: auto !important;
-  width: calc(100% - 24px) !important;
-  height: 100% !important;
+@media (min-width: 641px) {
+  .article-hero--map {
+    max-height: 330px;
+  }
 }
 .article-figure {
   max-width: 720px;
@@ -1143,6 +1150,10 @@ button:disabled {
   }
   .article-hero {
     aspect-ratio: 16/10;
+  }
+  .article-hero:not(.article-hero--map) {
+    aspect-ratio: 16 / 9;
+    max-height: none;
   }
 }
 @media (max-width: 480px) {
@@ -1520,6 +1531,12 @@ button:disabled {
   .article-hero {
     margin-top: 6px;
     aspect-ratio: 16 / 9;
+  }
+  .article-hero:not(.article-hero--map) {
+    max-height: none;
+  }
+  .article-hero--map {
+    max-height: none;
   }
   .article-dek-body {
     display: block;

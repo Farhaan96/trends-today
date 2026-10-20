@@ -161,9 +161,6 @@ export default async function ArticlePage({
   );
   const heroClassName = [
     'article-hero',
-    article.frontmatter?.imageSourceType === 'generated'
-      ? 'article-hero--labeled'
-      : '',
     containedHero ? 'article-hero--map' : '',
   ]
     .filter(Boolean)
