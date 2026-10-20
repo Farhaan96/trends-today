@@ -26,14 +26,14 @@ export function illustrationImageAlt(
   sourceType?: unknown
 ): string {
   const fallback = String(title || '').trim() || 'Article';
-  const cleaned = (String(imageAlt || '').trim() || fallback).replace(
-    /[—–]/g,
-    ','
-  );
+  const cleaned = (String(imageAlt || '').trim() || fallback)
+    .replace(/[—–]/g, ',')
+    .replace(/^generated\b.*?illustration of\s+/i, '');
   if (!isGeneratedIllustration(attribution, sourceType)) return cleaned;
   const prefix = 'Generated illustration of';
   if (cleaned.toLowerCase().startsWith(prefix.toLowerCase())) {
     return prefix + cleaned.slice(prefix.length);
   }
-  return `${prefix} ${cleaned.charAt(0).toLowerCase()}${cleaned.slice(1)}`;
+  const rest = cleaned.charAt(0).toLowerCase() + cleaned.slice(1);
+  return `${prefix} ${rest}`;
 }

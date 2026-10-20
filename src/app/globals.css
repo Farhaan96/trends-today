@@ -7,8 +7,8 @@
   --color-text: #171714;
   --color-text-soft: #625f58;
   --color-border: #cdc7bc;
-  --color-accent: #d83a31;
-  --color-accent-strong: #a6241e;
+  --color-accent: #a3261b;
+  --color-accent-strong: #8e1e16;
   --color-on-accent: #fffaf4;
   --color-background: var(--color-bg);
   --color-foreground: var(--color-text);
@@ -1156,14 +1156,14 @@ img,
 }
 
 .article-meta {
-  min-height: 3.25rem;
+  min-height: 0;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.45rem 1.5rem;
-  color: var(--color-text-soft);
-  font-size: 0.76rem;
-  font-weight: 650;
+  gap: 0.35rem 0.7rem;
+  color: #4b5850;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .article-category,
