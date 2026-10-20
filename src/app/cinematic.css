@@ -1388,11 +1388,7 @@ button:disabled {
     display: none;
   }
   .cover__deck {
-    display: -webkit-box;
-    margin-top: 8px;
-    font-size: 15px;
-    line-height: 22px;
-    -webkit-line-clamp: 2;
+    display: none;
   }
   .cover__read,
   .cover__signature,
@@ -1418,7 +1414,7 @@ button:disabled {
     position: relative;
     inset: auto;
     width: 100%;
-    aspect-ratio: 17 / 9;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
   }
   .cover__caption {
@@ -1427,8 +1423,8 @@ button:disabled {
     bottom: auto;
     left: auto;
     width: 100%;
-    display: block;
-    margin-top: 4px;
+    display: none;
+    margin-top: 0;
     padding: 0;
     background: transparent;
     box-shadow: none;
@@ -1463,7 +1459,7 @@ button:disabled {
     line-height: 1.35;
   }
   .today-brief__inner {
-    padding: 2px 16px 0;
+    padding: 0 16px 0;
   }
   .today-brief h2 {
     font-size: 16px;
@@ -1471,7 +1467,7 @@ button:disabled {
     margin-bottom: 0;
   }
   .today-brief ul {
-    gap: 2px;
+    gap: 0;
   }
   .today-brief li:nth-child(n + 4) {
     display: none;
@@ -1496,11 +1492,17 @@ button:disabled {
   .today-brief__headline {
     display: -webkit-box;
     overflow: hidden;
-    font-size: 17px;
-    line-height: 22px;
+    font-size: 16px;
+    line-height: 20px;
     font-weight: 650;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+  }
+  .today-brief__date {
+    margin-top: 0;
+  }
+  .cover__copy {
+    margin-top: 4px;
   }
   .neighbourhood-grid article,
   .travel-brief article {
