@@ -161,14 +161,12 @@ export default function EditorialArticleList({
           <ArticleCard
             article={normalizeArticle(featuredPost)}
             variant="lead"
-            priority
           />
           <div className="lead-layout__rail">
             {secondPost && (
               <ArticleCard
                 article={normalizeArticle(secondPost)}
                 variant="compact"
-                priority
               />
             )}
             {thirdPost && (
