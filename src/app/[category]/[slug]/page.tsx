@@ -219,6 +219,28 @@ export default async function ArticlePage({
   const needsSourceRefresh =
     archiveReviewStatus === 'format-reviewed-needs-source-refresh';
 
+  // Stories already shown in "More from" are not repeated in Related stories.
+  const moreFromAuthorName = (() => {
+    const currentAuthor = article.author || article.frontmatter?.author;
+    return typeof currentAuthor === 'string'
+      ? currentAuthor
+      : currentAuthor?.name || currentAuthor;
+  })();
+  const moreFromAuthorSlugs = new Set(
+    moreFromAuthorName
+      ? allArticles
+          .filter((a) => {
+            const articleAuthor =
+              a.author?.name ||
+              a.frontmatter?.author?.name ||
+              a.frontmatter?.author;
+            return articleAuthor === moreFromAuthorName && a.slug !== slug;
+          })
+          .slice(0, 3)
+          .map((a) => a.slug)
+      : []
+  );
+
   return (
     <article className="article-page">
       {/* Structured Data */}
@@ -396,7 +418,9 @@ export default async function ArticlePage({
           category: categoryKey,
           frontmatter: article.frontmatter,
         }}
-        allArticles={allArticles}
+        allArticles={allArticles.filter(
+          (a) => !moreFromAuthorSlugs.has(a.slug)
+        )}
         maxArticles={3}
         className="article-related"
       />
