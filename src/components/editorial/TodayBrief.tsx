@@ -8,6 +8,7 @@ import {
   type TodayFile,
   type TodayPost,
 } from '@/lib/today-brief';
+import { illustrationImageAlt } from '@/lib/illustration-caption';
 
 function readTodayFile(): TodayFile | null {
   try {
@@ -25,7 +26,12 @@ export default async function TodayBrief() {
     title: article.frontmatter?.title || article.title,
     category: article.category,
     image: article.frontmatter?.image || article.image,
-    imageAlt: article.frontmatter?.imageAlt,
+    imageAlt: illustrationImageAlt(
+      article.frontmatter?.imageAlt,
+      article.frontmatter?.title || article.title,
+      article.frontmatter?.imageAttribution,
+      article.frontmatter?.imageSourceType
+    ),
     updatedAt: article.frontmatter?.updatedAt,
     modifiedAt: article.frontmatter?.modifiedAt,
     publishedAt: article.frontmatter?.publishedAt,

@@ -6,6 +6,7 @@ export interface LocalStory {
   image?: string;
   imageAlt?: string;
   imageAttribution?: string;
+  imageSourceType?: string;
   publishedAt?: string;
   eventEndDate?: string;
   locality?: string;

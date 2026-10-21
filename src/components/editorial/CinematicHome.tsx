@@ -24,6 +24,11 @@ import {
   storyCity,
   editorialPoster,
 } from '@/lib/cinematic-feed';
+import {
+  GENERATED_ILLUSTRATION_CAPTION,
+  illustrationImageAlt,
+  isGeneratedIllustration,
+} from '@/lib/illustration-caption';
 
 export default function CinematicHome({
   stories,
@@ -47,6 +52,9 @@ export default function CinematicHome({
   const index = events.length ? selected % events.length : 0;
   const current = events[index];
   const lead = stories[0];
+  const generatedLead = lead
+    ? isGeneratedIllustration(lead.imageAttribution, lead.imageSourceType)
+    : false;
   const transit = stories
     .filter((story) => story.category === 'transit')
     .slice(0, 2);
@@ -162,7 +170,12 @@ export default function CinematicHome({
                   {lead.image && (
                     <Image
                       src={lead.image}
-                      alt={lead.imageAlt || lead.title}
+                      alt={illustrationImageAlt(
+                        lead.imageAlt,
+                        lead.title,
+                        lead.imageAttribution,
+                        lead.imageSourceType
+                      )}
                       fill
                       priority
                       sizes="(max-width: 760px) 100vw, 67vw"
@@ -184,9 +197,13 @@ export default function CinematicHome({
                   <ArrowRightIcon />
                 </div>
               </Link>
-              {lead.imageAttribution && (
+              {generatedLead ? (
+                <p className="cover__generated-caption">
+                  {GENERATED_ILLUSTRATION_CAPTION}
+                </p>
+              ) : lead.imageAttribution ? (
                 <p className="cover__credit">{lead.imageAttribution}</p>
-              )}
+              ) : null}
             </div>
           </div>
         </section>
