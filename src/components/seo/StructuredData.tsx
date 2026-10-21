@@ -1,12 +1,12 @@
+import JsonLdScript from '@/components/seo/JsonLdScript';
+import { isLayoutBaseSchemaGraph } from '@/lib/schema-urls';
+
 interface StructuredDataProps {
   data: Record<string, unknown>;
 }
 
 export default function StructuredData({ data }: StructuredDataProps) {
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
+  if (isLayoutBaseSchemaGraph(data)) return null;
+
+  return <JsonLdScript data={data} />;
 }
