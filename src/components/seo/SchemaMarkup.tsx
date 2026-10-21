@@ -1,4 +1,4 @@
-import Script from 'next/script';
+import JsonLdScript from '@/components/seo/JsonLdScript';
 
 interface SchemaMarkupProps {
   schema: any;
@@ -6,16 +6,7 @@ interface SchemaMarkupProps {
 }
 
 export default function SchemaMarkup({ schema, id }: SchemaMarkupProps) {
-  return (
-    <Script
-      id={id || 'schema-markup'}
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(schema, null, 0),
-      }}
-      strategy="beforeInteractive"
-    />
-  );
+  return <JsonLdScript id={id || 'schema-markup'} data={schema} />;
 }
 
 // Article Schema Component

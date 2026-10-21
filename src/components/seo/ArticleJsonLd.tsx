@@ -1,4 +1,4 @@
-import Script from 'next/script';
+import JsonLdScript from '@/components/seo/JsonLdScript';
 
 interface Author {
   name: string;
@@ -83,16 +83,7 @@ export default function ArticleJsonLd({
   // Remove undefined values
   const cleanSchema = JSON.parse(JSON.stringify(schema));
 
-  return (
-    <Script
-      id="article-structured-data"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(cleanSchema, null, 0),
-      }}
-      strategy="beforeInteractive"
-    />
-  );
+  return <JsonLdScript id="article-structured-data" data={cleanSchema} />;
 }
 
 /**
@@ -158,16 +149,7 @@ export function NewsArticleJsonLd({
   // Remove undefined values
   const cleanSchema = JSON.parse(JSON.stringify(schema));
 
-  return (
-    <Script
-      id="news-article-structured-data"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(cleanSchema, null, 0),
-      }}
-      strategy="beforeInteractive"
-    />
-  );
+  return <JsonLdScript id="news-article-structured-data" data={cleanSchema} />;
 }
 
 /**
@@ -222,14 +204,5 @@ export function BlogPostingJsonLd(props: ArticleJsonLdProps) {
   // Remove undefined values
   const cleanSchema = JSON.parse(JSON.stringify(schema));
 
-  return (
-    <Script
-      id="blog-posting-structured-data"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(cleanSchema, null, 0),
-      }}
-      strategy="beforeInteractive"
-    />
-  );
+  return <JsonLdScript id="blog-posting-structured-data" data={cleanSchema} />;
 }
