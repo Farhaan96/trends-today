@@ -23,6 +23,7 @@ import {
   filterStories,
   storyCity,
   editorialPoster,
+  coverImageFit,
 } from '@/lib/cinematic-feed';
 
 export default function CinematicHome({
@@ -41,20 +42,22 @@ export default function CinematicHome({
   const [count, setCount] = useState(9);
   const hero = useRef<HTMLDivElement>(null);
   const swipe = useRef<number | null>(null);
-  const events = activeEvents(stories, now)
-    .filter((story) => story.href !== stories[0]?.href)
-    .slice(0, 6);
+  const lead = stories[0];
+  const supplementalStories = stories.filter(
+    (story) => story.href !== lead?.href
+  );
+  const events = activeEvents(supplementalStories, now).slice(0, 6);
   const index = events.length ? selected % events.length : 0;
   const current = events[index];
-  const lead = stories[0];
-  const transit = stories
+  const leadImageFit = lead ? coverImageFit(lead) : 'cover';
+  const transit = supplementalStories
     .filter((story) => story.category === 'transit')
     .slice(0, 2);
   const cities = [
     'All cities',
-    ...Array.from(new Set(stories.map(storyCity))).filter(Boolean),
+    ...Array.from(new Set(supplementalStories.map(storyCity))).filter(Boolean),
   ];
-  const results = filterStories(stories, city, query);
+  const results = filterStories(supplementalStories, city, query);
   const pagination = paginateItems(stories, 1, 12, '').pagination;
 
   useEffect(() => {
@@ -154,7 +157,7 @@ export default function CinematicHome({
                 className="cover__frame"
                 aria-label={lead.title}
               >
-                <span className="cover__media">
+                <span className="cover__media" data-image-fit={leadImageFit}>
                   {lead.image && (
                     <Image
                       src={lead.image}
@@ -162,7 +165,7 @@ export default function CinematicHome({
                       fill
                       priority
                       sizes="(max-width: 760px) 100vw, 67vw"
-                      className="cover__image"
+                      className={`cover__image cover__image--${leadImageFit}`}
                     />
                   )}
                 </span>
@@ -175,7 +178,6 @@ export default function CinematicHome({
                   </div>
                   <div>
                     <span className="eyebrow">{storyCity(lead)}</span>
-                    <h2>{lead.title}</h2>
                   </div>
                   <ArrowRightIcon />
                 </div>
@@ -399,9 +401,9 @@ export default function CinematicHome({
           </div>
           <label className="story-search">
             <MagnifyingGlassIcon />
-            <span className="sr-only">Search local stories</span>
             <input
               type="search"
+              aria-label="Search local stories"
               value={query}
               placeholder="Find a local story"
               onChange={(event) => {

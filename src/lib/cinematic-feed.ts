@@ -6,10 +6,17 @@ export interface LocalStory {
   image?: string;
   imageAlt?: string;
   imageAttribution?: string;
+  imageSourceType?: string;
   publishedAt?: string;
   eventEndDate?: string;
   locality?: string;
   city?: string;
+}
+
+export function coverImageFit(story: LocalStory): 'contain' | 'cover' {
+  return story.imageSourceType?.trim().toLowerCase() === 'official-map'
+    ? 'contain'
+    : 'cover';
 }
 
 export function storyCity(story: LocalStory): string {

@@ -28,6 +28,7 @@ export default async function HomePage() {
       image: post.frontmatter.image,
       imageAlt: post.frontmatter.imageAlt,
       imageAttribution: post.frontmatter.imageAttribution,
+      imageSourceType: post.frontmatter.imageSourceType,
       publishedAt:
         post.frontmatter.publishedAt || post.frontmatter.datePublished,
       eventEndDate: post.frontmatter.eventEndDate,
