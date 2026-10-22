@@ -14,7 +14,7 @@ import { formatArticleDateWithWeekday } from '@/lib/editorial';
 import { CONTENT_CATEGORIES, getCategoryLabel } from '@/lib/categories';
 import { contentUpdatedValue } from '@/lib/freshness';
 import {
-  GENERATED_ILLUSTRATION_CAPTION,
+  generatedImageCaption,
   illustrationImageAlt,
   isGeneratedIllustration,
 } from '@/lib/illustration-caption';
@@ -70,7 +70,8 @@ export async function generateMetadata({
     article.frontmatter?.imageAlt,
     title,
     article.frontmatter?.imageAttribution,
-    article.frontmatter?.imageSourceType
+    article.frontmatter?.imageSourceType,
+    article.frontmatter?.heroStyle
   );
   const url = `https://www.trendstoday.ca/${category}/${slug}`;
   const needsSourceRefresh =
@@ -153,7 +154,8 @@ export default async function ArticlePage({
     article.frontmatter?.imageAlt,
     title,
     article.frontmatter?.imageAttribution,
-    article.frontmatter?.imageSourceType
+    article.frontmatter?.imageSourceType,
+    article.frontmatter?.heroStyle
   );
   const publishedAt = article.frontmatter?.publishedAt || article.publishedAt;
   const modifiedAt =
@@ -302,7 +304,10 @@ export default async function ArticlePage({
           </div>
           {generatedIllustration ? (
             <p className="article-hero-caption">
-              {GENERATED_ILLUSTRATION_CAPTION}
+              {generatedImageCaption(
+                article.frontmatter?.heroStyle,
+                article.frontmatter?.locality || article.frontmatter?.city
+              )}
             </p>
           ) : null}
         </div>
@@ -365,7 +370,8 @@ export default async function ArticlePage({
                   a.frontmatter?.imageAlt,
                   a.title || a.frontmatter?.title,
                   a.frontmatter?.imageAttribution,
-                  a.frontmatter?.imageSourceType
+                  a.frontmatter?.imageSourceType,
+                  a.frontmatter?.heroStyle
                 ),
                 category: a.category,
                 readingTime: a.frontmatter?.readingTime || '2',

@@ -7,6 +7,7 @@ export interface LocalStory {
   imageAlt?: string;
   imageAttribution?: string;
   imageSourceType?: string;
+  heroStyle?: 'photoreal';
   publishedAt?: string;
   eventEndDate?: string;
   locality?: string;

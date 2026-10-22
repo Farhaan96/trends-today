@@ -30,7 +30,8 @@ export default async function TodayBrief() {
       article.frontmatter?.imageAlt,
       article.frontmatter?.title || article.title,
       article.frontmatter?.imageAttribution,
-      article.frontmatter?.imageSourceType
+      article.frontmatter?.imageSourceType,
+      article.frontmatter?.heroStyle
     ),
     updatedAt: article.frontmatter?.updatedAt,
     modifiedAt: article.frontmatter?.modifiedAt,

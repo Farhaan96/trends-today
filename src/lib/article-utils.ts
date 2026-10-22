@@ -2,6 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { CONTENT_CATEGORIES } from './categories';
+import {
+  type ArticleFrontmatter,
+  validateArticleFrontmatter,
+} from './article-frontmatter';
 
 const contentDirectory = path.join(process.cwd(), 'content');
 
@@ -26,7 +30,7 @@ export interface Article {
   };
   content: string;
   mdxContent: string;
-  frontmatter: any;
+  frontmatter: ArticleFrontmatter;
 }
 
 export async function getAllArticles(): Promise<Article[]> {
@@ -48,7 +52,8 @@ export async function getAllArticles(): Promise<Article[]> {
     for (const file of files) {
       const filePath = path.join(categoryPath, file);
       const fileContent = fs.readFileSync(filePath, 'utf-8');
-      const { data, content } = matter(fileContent);
+      const { data: rawFrontmatter, content } = matter(fileContent);
+      const data = validateArticleFrontmatter(rawFrontmatter, filePath);
       if (!isPublished(data)) continue;
 
       articles.push({
@@ -92,7 +97,8 @@ export async function getArticleBySlug(
   }
 
   const fileContent = fs.readFileSync(filePath, 'utf-8');
-  const { data, content } = matter(fileContent);
+  const { data: rawFrontmatter, content } = matter(fileContent);
+  const data = validateArticleFrontmatter(rawFrontmatter, filePath);
   if (!isPublished(data)) return null;
 
   return {
@@ -131,7 +137,8 @@ export async function getArticlesByCategory(
   for (const file of files) {
     const filePath = path.join(categoryPath, file);
     const fileContent = fs.readFileSync(filePath, 'utf-8');
-    const { data, content } = matter(fileContent);
+    const { data: rawFrontmatter, content } = matter(fileContent);
+    const data = validateArticleFrontmatter(rawFrontmatter, filePath);
     if (!isPublished(data)) continue;
 
     articles.push({

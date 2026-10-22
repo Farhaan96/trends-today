@@ -2,10 +2,14 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { CONTENT_CATEGORIES } from './categories';
+import {
+  type ArticleFrontmatter,
+  validateArticleFrontmatter,
+} from './article-frontmatter';
 
 export interface Article {
   slug: string;
-  frontmatter: any;
+  frontmatter: ArticleFrontmatter;
   type: 'news' | 'reviews' | 'comparisons' | 'guides' | 'best';
   href: string;
   category?: string;
@@ -43,10 +47,13 @@ async function getArticlesFromDir(
         let frontmatter;
         if (file.endsWith('.mdx')) {
           const { data } = matter(fileContent);
-          frontmatter = data;
+          frontmatter = validateArticleFrontmatter(data, filePath);
         } else {
           // For JSON files, parse the entire content
-          frontmatter = JSON.parse(fileContent);
+          frontmatter = validateArticleFrontmatter(
+            JSON.parse(fileContent),
+            filePath
+          );
         }
 
         return {
@@ -129,10 +136,13 @@ export async function getArticle(
 
     let frontmatter;
     if (isJson) {
-      frontmatter = JSON.parse(fileContent);
+      frontmatter = validateArticleFrontmatter(
+        JSON.parse(fileContent),
+        filePathToUse
+      );
     } else {
       const { data } = matter(fileContent);
-      frontmatter = data;
+      frontmatter = validateArticleFrontmatter(data, filePathToUse);
     }
 
     return {
@@ -218,7 +228,8 @@ async function getArticlesFromCategoryDir(
       .map((file) => {
         const filePath = path.join(contentDir, file);
         const fileContent = fs.readFileSync(filePath, 'utf-8');
-        const { data } = matter(fileContent);
+        const { data: rawFrontmatter } = matter(fileContent);
+        const data = validateArticleFrontmatter(rawFrontmatter, filePath);
 
         return {
           slug: file.replace('.mdx', ''),

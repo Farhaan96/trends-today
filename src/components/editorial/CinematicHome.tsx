@@ -25,7 +25,7 @@ import {
   editorialPoster,
 } from '@/lib/cinematic-feed';
 import {
-  GENERATED_ILLUSTRATION_CAPTION,
+  generatedImageCaption,
   illustrationImageAlt,
   isGeneratedIllustration,
 } from '@/lib/illustration-caption';
@@ -174,7 +174,8 @@ export default function CinematicHome({
                         lead.imageAlt,
                         lead.title,
                         lead.imageAttribution,
-                        lead.imageSourceType
+                        lead.imageSourceType,
+                        lead.heroStyle
                       )}
                       fill
                       priority
@@ -199,7 +200,10 @@ export default function CinematicHome({
               </Link>
               {generatedLead ? (
                 <p className="cover__generated-caption">
-                  {GENERATED_ILLUSTRATION_CAPTION}
+                  {generatedImageCaption(
+                    lead.heroStyle,
+                    lead.locality || lead.city
+                  )}
                 </p>
               ) : lead.imageAttribution ? (
                 <p className="cover__credit">{lead.imageAttribution}</p>

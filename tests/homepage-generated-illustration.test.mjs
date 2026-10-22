@@ -11,7 +11,11 @@ const helperSource = readFileSync(
 const compiledHelper = ts.transpileModule(helperSource, {
   compilerOptions: { module: ts.ModuleKind.ESNext },
 }).outputText;
-const { GENERATED_ILLUSTRATION_CAPTION, illustrationImageAlt } = await import(
+const {
+  GENERATED_ILLUSTRATION_CAPTION,
+  generatedImageCaption,
+  illustrationImageAlt,
+} = await import(
   'data:text/javascript;base64,' +
     Buffer.from(compiledHelper).toString('base64')
 );
@@ -23,7 +27,7 @@ const guideSlugs = [
   'central-park-burnaby-day-trip-guide-2026',
 ];
 
-test('the four generated guide alts store exactly one disclosure prefix', () => {
+test('the four photoreal guides opt in and store exactly one disclosure prefix', () => {
   for (const slug of guideSlugs) {
     const article = matter(
       readFileSync(
@@ -32,9 +36,10 @@ test('the four generated guide alts store exactly one disclosure prefix', () => 
       )
     ).data;
 
-    assert.match(article.imageAlt, /^Generated illustration of\s+\S/);
+    assert.equal(article.heroStyle, 'photoreal');
+    assert.match(article.imageAlt, /^AI-generated image of\s+\S/);
     assert.equal(
-      (article.imageAlt.match(/Generated illustration of/gi) || []).length,
+      (article.imageAlt.match(/AI-generated image of/gi) || []).length,
       1,
       `${slug} frontmatter`
     );
@@ -43,12 +48,13 @@ test('the four generated guide alts store exactly one disclosure prefix', () => 
       article.imageAlt,
       article.title,
       article.imageAttribution,
-      article.imageSourceType
+      article.imageSourceType,
+      article.heroStyle
     );
 
-    assert.match(alt, /^Generated illustration of\s+\S/);
+    assert.match(alt, /^AI-generated image of\s+\S/);
     assert.equal(
-      (alt.match(/Generated illustration of/gi) || []).length,
+      (alt.match(/AI-generated image of/gi) || []).length,
       1,
       `${slug} rendered alt`
     );
@@ -63,6 +69,40 @@ test('the alt helper does not double-prefix an already disclosed illustration', 
     'generated'
   );
   assert.equal(alt, 'Generated illustration of a marsh at sunrise');
+});
+
+test('the alt helper switches prefixes without double-prefixing photoreal alts', () => {
+  assert.equal(
+    illustrationImageAlt(
+      'Generated illustration of a marsh at sunrise',
+      'Marsh guide',
+      'Generated editorial image for Trends Today',
+      'generated',
+      'photoreal'
+    ),
+    'AI-generated image of a marsh at sunrise'
+  );
+  assert.equal(
+    illustrationImageAlt(
+      'AI-generated image of a marsh at sunrise',
+      'Marsh guide',
+      'Generated editorial image for Trends Today',
+      'generated',
+      'photoreal'
+    ),
+    'AI-generated image of a marsh at sunrise'
+  );
+});
+
+test('caption text branches on heroStyle and uses the place name', () => {
+  assert.equal(
+    generatedImageCaption('photoreal', 'Coquitlam'),
+    'AI-generated image, not a photo of Coquitlam.'
+  );
+  assert.equal(
+    generatedImageCaption(undefined, 'Coquitlam'),
+    'Generated illustration by Trends Today, not a photo.'
+  );
 });
 
 test('homepage cover and brief thumbnails use the shared alt helper', () => {
@@ -89,10 +129,7 @@ test('the generated homepage cover has the exact visible HTML caption', () => {
   const caption = cover.indexOf('className="cover__generated-caption"');
 
   assert.ok(frame !== -1 && frameClose > frame && caption > frameClose);
-  assert.match(
-    cover.slice(caption, caption + 180),
-    /GENERATED_ILLUSTRATION_CAPTION/
-  );
+  assert.match(cover.slice(caption, caption + 180), /generatedImageCaption/);
   assert.equal(
     GENERATED_ILLUSTRATION_CAPTION,
     'Generated illustration by Trends Today, not a photo.'

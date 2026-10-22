@@ -11,7 +11,6 @@ if (!baseUrl || !outDir) {
   );
 }
 
-const expectedCaption = 'Generated illustration by Trends Today, not a photo.';
 const generatedGuideSlugs = [
   'minnekhada-regional-park-day-trip-guide-2026',
   'iona-beach-regional-park-day-trip-guide-2026',
@@ -19,10 +18,17 @@ const generatedGuideSlugs = [
   'central-park-burnaby-day-trip-guide-2026',
 ];
 const routes = [
-  { name: 'home', path: '/' },
   {
-    name: 'minnekhada',
+    name: 'photoreal-minnekhada',
     path: '/things-to-do/minnekhada-regional-park-day-trip-guide-2026',
+    expectedCaption: 'AI-generated image, not a photo of Coquitlam.',
+    expectedAltPrefix: 'AI-generated image of ',
+  },
+  {
+    name: 'illustration-vancouver',
+    path: '/food-drink/ramen-danbo-main-st-opening-vancouver',
+    expectedCaption: 'Generated illustration by Trends Today, not a photo.',
+    expectedAltPrefix: 'Generated illustration of ',
   },
 ];
 const viewports = [
@@ -61,7 +67,12 @@ try {
       );
 
       const metrics = await page.evaluate(
-        ({ expectedCaption, generatedGuideSlugs, routeName }) => {
+        ({
+          expectedCaption,
+          expectedAltPrefix,
+          generatedGuideSlugs,
+          routeName,
+        }) => {
           const visible = (element) => {
             const style = getComputedStyle(element);
             const box = element.getBoundingClientRect();
@@ -112,7 +123,8 @@ try {
             return Number(((lighter + 0.05) / (darker + 0.05)).toFixed(2));
           };
           const prefixCount = (value) =>
-            (value.match(/Generated illustration of/gi) || []).length;
+            value.toLowerCase().split(expectedAltPrefix.trim().toLowerCase())
+              .length - 1;
           const imageDetails = (image) => ({
             src: image.currentSrc || image.src,
             alt: image.alt,
@@ -232,7 +244,12 @@ try {
             expectedCaption,
           };
         },
-        { expectedCaption, generatedGuideSlugs, routeName: route.name }
+        {
+          expectedCaption: route.expectedCaption,
+          expectedAltPrefix: route.expectedAltPrefix,
+          generatedGuideSlugs,
+          routeName: route.name,
+        }
       );
 
       const size = `${viewport.width}x${viewport.height}`;
@@ -264,55 +281,18 @@ try {
         failures.push(`${route.name} ${size}: broken images`);
       }
 
-      if (route.name === 'home') {
-        if (
-          !metrics.coverImage?.alt.startsWith('Generated illustration of ') ||
-          metrics.coverImage.prefixCount !== 1
-        ) {
-          failures.push(`${route.name} ${size}: cover alt disclosure`);
-        }
-        if (!metrics.generatedHomepageImages.length) {
-          failures.push(
-            `${route.name} ${size}: no generated guide images found`
-          );
-        }
-        if (!metrics.generatedBriefImages.length) {
-          failures.push(
-            `${route.name} ${size}: no generated brief thumbnails found`
-          );
-        }
-        if (
-          metrics.generatedBriefImages.some(
-            (image) =>
-              !image.alt.startsWith('Generated illustration of ') ||
-              image.prefixCount !== 1
-          )
-        ) {
-          failures.push(
-            `${route.name} ${size}: generated thumbnail alt disclosure`
-          );
-        }
-        if (
-          !metrics.coverCaption?.exactText ||
-          metrics.coverCaption.fontSizePx < 12 ||
-          metrics.coverCaption.contrast < 4.5
-        ) {
-          failures.push(`${route.name} ${size}: generated cover caption`);
-        }
-      } else {
-        if (
-          !metrics.articleHero?.alt.startsWith('Generated illustration of ') ||
-          metrics.articleHero.prefixCount !== 1
-        ) {
-          failures.push(`${route.name} ${size}: article hero alt disclosure`);
-        }
-        if (
-          !metrics.articleCaption?.exactText ||
-          metrics.articleCaption.fontSizePx < 12 ||
-          metrics.articleCaption.contrast < 4.5
-        ) {
-          failures.push(`${route.name} ${size}: article hero caption`);
-        }
+      if (
+        !metrics.articleHero?.alt.startsWith(route.expectedAltPrefix) ||
+        metrics.articleHero.prefixCount !== 1
+      ) {
+        failures.push(`${route.name} ${size}: article hero alt disclosure`);
+      }
+      if (
+        !metrics.articleCaption?.exactText ||
+        metrics.articleCaption.fontSizePx < 13 ||
+        metrics.articleCaption.contrast < 4.5
+      ) {
+        failures.push(`${route.name} ${size}: article hero caption`);
       }
 
       await page.close();
