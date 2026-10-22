@@ -26,6 +26,7 @@ import {
 } from '@/lib/cinematic-feed';
 import {
   generatedImageCaption,
+  illustrationPlaceName,
   illustrationImageAlt,
   isGeneratedIllustration,
 } from '@/lib/illustration-caption';
@@ -202,7 +203,7 @@ export default function CinematicHome({
                 <p className="cover__generated-caption">
                   {generatedImageCaption(
                     lead.heroStyle,
-                    lead.locality || lead.city
+                    illustrationPlaceName(lead)
                   )}
                 </p>
               ) : lead.imageAttribution ? (

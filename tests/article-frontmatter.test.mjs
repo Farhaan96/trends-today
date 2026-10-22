@@ -20,9 +20,24 @@ test('heroStyle accepts photoreal or an absent value', () => {
     undefined
   );
   assert.equal(
-    validateArticleFrontmatter({ title: 'Photo', heroStyle: 'photoreal' })
-      .heroStyle,
+    validateArticleFrontmatter({
+      title: 'Photo',
+      heroStyle: 'photoreal',
+      heroPlace: 'Example Regional Park',
+    }).heroStyle,
     'photoreal'
+  );
+  assert.equal(
+    validateArticleFrontmatter({ heroPlace: 'Example Regional Park' })
+      .heroPlace,
+    'Example Regional Park'
+  );
+});
+
+test('heroPlace rejects unsupported values', () => {
+  assert.throws(
+    () => validateArticleFrontmatter({ heroPlace: 42 }, 'fixture.mdx'),
+    /Invalid heroPlace in fixture\.mdx/
   );
 });
 

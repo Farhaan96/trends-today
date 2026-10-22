@@ -15,6 +15,7 @@ const {
   GENERATED_ILLUSTRATION_CAPTION,
   generatedImageCaption,
   illustrationImageAlt,
+  illustrationPlaceName,
 } = await import(
   'data:text/javascript;base64,' +
     Buffer.from(compiledHelper).toString('base64')
@@ -26,6 +27,15 @@ const guideSlugs = [
   'burnaby-mountain-conservation-area-day-trip-guide-2026',
   'central-park-burnaby-day-trip-guide-2026',
 ];
+const guidePlaces = new Map([
+  ['minnekhada-regional-park-day-trip-guide-2026', 'Minnekhada Regional Park'],
+  ['iona-beach-regional-park-day-trip-guide-2026', 'Iona Beach Regional Park'],
+  [
+    'burnaby-mountain-conservation-area-day-trip-guide-2026',
+    'Burnaby Mountain Conservation Area',
+  ],
+  ['central-park-burnaby-day-trip-guide-2026', 'Central Park'],
+]);
 
 test('the four photoreal guides opt in and store exactly one disclosure prefix', () => {
   for (const slug of guideSlugs) {
@@ -37,6 +47,11 @@ test('the four photoreal guides opt in and store exactly one disclosure prefix',
     ).data;
 
     assert.equal(article.heroStyle, 'photoreal');
+    assert.equal(article.heroPlace, guidePlaces.get(slug));
+    assert.equal(
+      generatedImageCaption(article.heroStyle, illustrationPlaceName(article)),
+      `AI-generated image, not a photo of ${guidePlaces.get(slug)}.`
+    );
     assert.match(article.imageAlt, /^AI-generated image of\s+\S/);
     assert.equal(
       (article.imageAlt.match(/AI-generated image of/gi) || []).length,
@@ -94,15 +109,19 @@ test('the alt helper switches prefixes without double-prefixing photoreal alts',
   );
 });
 
-test('caption text branches on heroStyle and uses the place name', () => {
+test('caption text branches on heroStyle and uses the park name', () => {
   assert.equal(
-    generatedImageCaption('photoreal', 'Coquitlam'),
-    'AI-generated image, not a photo of Coquitlam.'
+    generatedImageCaption('photoreal', 'Minnekhada Regional Park'),
+    'AI-generated image, not a photo of Minnekhada Regional Park.'
   );
   assert.equal(
     generatedImageCaption(undefined, 'Coquitlam'),
     'Generated illustration by Trends Today, not a photo.'
   );
+});
+
+test('caption place falls back to the city when no park name is available', () => {
+  assert.equal(illustrationPlaceName({ locality: 'Coquitlam' }), 'Coquitlam');
 });
 
 test('homepage cover and brief thumbnails use the shared alt helper', () => {

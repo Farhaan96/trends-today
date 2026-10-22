@@ -53,3 +53,37 @@ export function generatedImageCaption(
   const placeName = String(place || '').trim() || 'this place';
   return `AI-generated image, not a photo of ${placeName}.`;
 }
+
+export function illustrationPlaceName(frontmatter: {
+  heroPlace?: unknown;
+  location?: unknown;
+  seo?: unknown;
+  locality?: unknown;
+  city?: unknown;
+}): unknown {
+  const location = frontmatter.location;
+  const structuredLocation =
+    typeof location === 'string'
+      ? location
+      : location && typeof location === 'object'
+        ? (location as { name?: unknown }).name
+        : undefined;
+  const seo = frontmatter.seo;
+  const primaryKeyword =
+    seo && typeof seo === 'object'
+      ? (seo as { primaryKeyword?: unknown }).primaryKeyword
+      : undefined;
+  const structuredParkName = /(?:park|conservation area)$/i.test(
+    String(primaryKeyword || '').trim()
+  )
+    ? primaryKeyword
+    : undefined;
+
+  return (
+    frontmatter.heroPlace ||
+    structuredLocation ||
+    structuredParkName ||
+    frontmatter.locality ||
+    frontmatter.city
+  );
+}

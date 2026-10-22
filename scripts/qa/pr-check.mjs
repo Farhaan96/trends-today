@@ -21,7 +21,8 @@ const routes = [
   {
     name: 'photoreal-minnekhada',
     path: '/things-to-do/minnekhada-regional-park-day-trip-guide-2026',
-    expectedCaption: 'AI-generated image, not a photo of Coquitlam.',
+    expectedCaption:
+      'AI-generated image, not a photo of Minnekhada Regional Park.',
     expectedAltPrefix: 'AI-generated image of ',
   },
   {

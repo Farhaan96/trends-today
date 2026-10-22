@@ -16,6 +16,7 @@ import { contentUpdatedValue } from '@/lib/freshness';
 import {
   generatedImageCaption,
   illustrationImageAlt,
+  illustrationPlaceName,
   isGeneratedIllustration,
 } from '@/lib/illustration-caption';
 import {
@@ -306,7 +307,7 @@ export default async function ArticlePage({
             <p className="article-hero-caption">
               {generatedImageCaption(
                 article.frontmatter?.heroStyle,
-                article.frontmatter?.locality || article.frontmatter?.city
+                illustrationPlaceName(article.frontmatter)
               )}
             </p>
           ) : null}
