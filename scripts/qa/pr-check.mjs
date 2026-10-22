@@ -161,7 +161,7 @@ try {
             .filter(Number.isFinite);
           const bodyCopy = [
             ...document.querySelectorAll(
-              '.cover__deck, .today-brief__headline, .travel-brief__description, .weekend__heading > div:last-child > p, .neighbourhood-grid article > p:not(.eyebrow), .discovery-empty > p, .site-footer__statement'
+              '.cover__deck, .today-brief__headline, .travel-brief__description, .weekend__heading > div:last-child > p, .neighbourhood-card__body > p:not(.eyebrow), .discovery-empty > p, .site-footer__statement'
             ),
           ]
             .filter(
@@ -264,6 +264,113 @@ try {
           const latestLinks = [
             ...document.querySelectorAll('.today-brief__link'),
           ].filter(visible);
+          const rounded = (value) => Math.round(value * 100) / 100;
+          const cardSections = [
+            {
+              name: 'Latest',
+              selector: '.today-brief__link',
+              body: '.today-brief__body',
+              headline: '.today-brief__headline',
+              thumbnail: '.today-brief__thumb',
+            },
+            {
+              name: 'Travel',
+              selector: '.travel-brief article',
+              body: '.travel-brief__body',
+              headline: 'h3',
+              thumbnail: '.story-thumb',
+            },
+            {
+              name: 'Neighbourhood',
+              selector: '.neighbourhood-grid article',
+              body: '.neighbourhood-card__body',
+              headline: 'h3',
+              thumbnail: '.story-thumb',
+            },
+          ].map((section) => ({
+            name: section.name,
+            cards: [...document.querySelectorAll(section.selector)]
+              .filter(visible)
+              .map((card) => {
+                const body = card.querySelector(section.body);
+                const headline = card.querySelector(section.headline);
+                const lineHeight = headline
+                  ? Number.parseFloat(getComputedStyle(headline).lineHeight)
+                  : 0;
+                return {
+                  width: rounded(card.getBoundingClientRect().width),
+                  textWidth: body
+                    ? rounded(body.getBoundingClientRect().width)
+                    : 0,
+                  hasThumbnail: visible(card.querySelector(section.thumbnail)),
+                  headlineLines:
+                    headline && lineHeight
+                      ? Math.ceil(
+                          headline.getBoundingClientRect().height / lineHeight
+                        )
+                      : 0,
+                  gridTemplateColumns:
+                    getComputedStyle(card).gridTemplateColumns,
+                };
+              }),
+          }));
+          const pillBoxes = [
+            ...document.querySelectorAll('.city-filters button'),
+          ]
+            .filter(visible)
+            .map((pill) => {
+              const rect = pill.getBoundingClientRect();
+              const range = document.createRange();
+              range.selectNodeContents(pill);
+              const textRect = range.getBoundingClientRect();
+              const style = getComputedStyle(pill);
+              const paddingLeft = Number.parseFloat(style.paddingLeft);
+              const paddingRight = Number.parseFloat(style.paddingRight);
+              return {
+                text: pill.textContent?.trim() || '',
+                left: rounded(rect.left),
+                right: rounded(rect.right),
+                top: rounded(rect.top),
+                bottom: rounded(rect.bottom),
+                width: rounded(rect.width),
+                height: rounded(rect.height),
+                clientWidth: pill.clientWidth,
+                scrollWidth: pill.scrollWidth,
+                labelWidth: rounded(textRect.width),
+                paddingLeft: rounded(paddingLeft),
+                paddingRight: rounded(paddingRight),
+                textBox: {
+                  left: rounded(textRect.left),
+                  right: rounded(textRect.right),
+                  top: rounded(textRect.top),
+                  bottom: rounded(textRect.bottom),
+                },
+              };
+            });
+          const overlappingPills = pillBoxes.flatMap((pill, index) =>
+            pillBoxes.slice(index + 1).flatMap((other) => {
+              const boxesOverlap =
+                pill.left < other.right &&
+                pill.right > other.left &&
+                pill.top < other.bottom &&
+                pill.bottom > other.top;
+              const textRangesOverlap =
+                pill.textBox.left < other.textBox.right &&
+                pill.textBox.right > other.textBox.left &&
+                pill.textBox.top < other.textBox.bottom &&
+                pill.textBox.bottom > other.textBox.top;
+              return boxesOverlap || textRangesOverlap
+                ? [
+                    `${pill.text} / ${other.text} (${[
+                      boxesOverlap ? 'boxes' : '',
+                      textRangesOverlap ? 'text ranges' : '',
+                    ]
+                      .filter(Boolean)
+                      .join(' + ')})`,
+                  ]
+                : [];
+            })
+          );
           const leadHref = document
             .querySelector('.cover__frame')
             ?.getAttribute('href');
@@ -282,6 +389,7 @@ try {
               (heading) => heading === h1Text
             ).length,
             coverFrame: box('.cover__frame'),
+            coverCaption: box('.cover__caption'),
             coverMedia: mediaBox,
             coverContentWidth:
               contentWidth === null
@@ -332,6 +440,12 @@ try {
                 getComputedStyle(link.querySelector('.today-brief__headline'))
                   .webkitLineClamp
             ),
+            latestGridTemplateColumns: latestLinks.map(
+              (link) => getComputedStyle(link).gridTemplateColumns
+            ),
+            cardSections,
+            pillBoxes,
+            overlappingPills,
             latestDates,
           };
         },
@@ -418,9 +532,70 @@ try {
           metrics.latestSkipsLead,
           true
         );
+        check(
+          `${prefix}: Latest uses a 96px thumbnail column`,
+          metrics.latestGridTemplateColumns.length > 0 &&
+            metrics.latestGridTemplateColumns.every(
+              (columns) => Math.abs(Number.parseFloat(columns) - 96) <= 0.1
+            ),
+          metrics.latestGridTemplateColumns,
+          'first computed grid track is 96px'
+        );
+        check(
+          `${prefix}: city pills are at least 44px in both dimensions`,
+          metrics.pillBoxes.length > 0 &&
+            metrics.pillBoxes.every(
+              (pill) => pill.width >= 44 && pill.height >= 44
+            ),
+          metrics.pillBoxes,
+          'all widths and heights >= 44px'
+        );
+        check(
+          `${prefix}: city pill boxes and text ranges do not overlap`,
+          metrics.overlappingPills.length === 0,
+          metrics.overlappingPills,
+          []
+        );
+        check(
+          `${prefix}: city pill labels fit their intrinsic padded widths`,
+          metrics.pillBoxes.length > 0 &&
+            metrics.pillBoxes.every(
+              (pill) =>
+                pill.scrollWidth <= pill.clientWidth &&
+                pill.width + 0.5 >=
+                  pill.labelWidth + pill.paddingLeft + pill.paddingRight
+            ),
+          metrics.pillBoxes,
+          'scrollWidth <= clientWidth and width >= Range text width + horizontal padding'
+        );
       }
 
       if (route.name === 'home' && viewport.width <= 430) {
+        for (const section of metrics.cardSections) {
+          check(
+            `${prefix}: ${section.name} cards have usable phone columns`,
+            section.cards.length > 0 &&
+              section.cards.every(
+                (card) =>
+                  card.width >= 280 &&
+                  card.textWidth >= (card.hasThumbnail ? 200 : 280) &&
+                  (!card.hasThumbnail ||
+                    Math.abs(
+                      Number.parseFloat(card.gridTemplateColumns) - 96
+                    ) <= 0.1)
+              ),
+            section.cards,
+            'card >= 280px; text >= 200px with 96px thumbnail or >= 280px without one'
+          );
+          check(
+            `${prefix}: ${section.name} headlines use at most four lines`,
+            section.cards.every(
+              (card) => card.headlineLines > 0 && card.headlineLines <= 4
+            ),
+            section.cards.map((card) => card.headlineLines),
+            '1-4 lines per headline'
+          );
+        }
         check(
           `${prefix}: tap targets are at least 44px`,
           metrics.tapTargetsUnder44.length === 0,
@@ -480,6 +655,30 @@ try {
           Math.abs(metrics.headlineToLatestGapPx - 20) <= 1,
           metrics.headlineToLatestGapPx,
           '20 +/- 1'
+        );
+      }
+
+      if (route.name === 'home' && viewport.width === 768) {
+        check(
+          `${prefix}: cover caption stays inside the viewport`,
+          metrics.coverCaption !== null &&
+            metrics.coverCaption.left >= 0 &&
+            metrics.coverCaption.right <= viewport.width &&
+            metrics.coverCaption.top >= metrics.coverMedia.bottom,
+          metrics.coverCaption,
+          'inside 768px viewport and below cover media'
+        );
+        const latest = metrics.cardSections.find(
+          (section) => section.name === 'Latest'
+        );
+        check(
+          `${prefix}: Latest text column is not squeezed`,
+          latest?.cards.length > 0 &&
+            latest.cards.every(
+              (card) => card.textWidth >= 280 && card.hasThumbnail
+            ),
+          latest?.cards,
+          'visible thumbnails and text columns >= 280px'
         );
       }
 

@@ -212,15 +212,19 @@ export default function CinematicHome({
                     />
                   </span>
                 ) : null}
-                <p className="eyebrow">{storyCity(story)}</p>
-                <Link href={story.href}>
-                  <h3>{story.title}</h3>
-                  <ArrowRightIcon />
-                </Link>
-                <p className="travel-brief__description">{story.description}</p>
-                <time dateTime={story.publishedAt}>
-                  {date(story.publishedAt)}
-                </time>
+                <div className="travel-brief__body">
+                  <p className="eyebrow">{storyCity(story)}</p>
+                  <Link href={story.href}>
+                    <h3>{story.title}</h3>
+                    <ArrowRightIcon />
+                  </Link>
+                  <p className="travel-brief__description">
+                    {story.description}
+                  </p>
+                  <time dateTime={story.publishedAt}>
+                    {date(story.publishedAt)}
+                  </time>
+                </div>
               </article>
             ))}
           </div>
@@ -431,22 +435,24 @@ export default function CinematicHome({
                   />
                 </span>
               ) : null}
-              <p className="eyebrow">
-                {storyCity(story)}
-                <span>{getCategoryLabel(story.category)}</span>
-              </p>
-              <Link href={story.href}>
-                <h3>{story.title}</h3>
-                <ArrowRightIcon />
-              </Link>
-              <p>{story.description}</p>
-              <time dateTime={story.publishedAt}>
-                {date(story.publishedAt)}
-              </time>
-              {story.eventEndDate &&
-                Date.parse(story.eventEndDate) < Date.parse(now) && (
-                  <span className="ended-label">Past event</span>
-                )}
+              <div className="neighbourhood-card__body">
+                <p className="eyebrow">
+                  {storyCity(story)}
+                  <span>{getCategoryLabel(story.category)}</span>
+                </p>
+                <Link href={story.href}>
+                  <h3>{story.title}</h3>
+                  <ArrowRightIcon />
+                </Link>
+                <p>{story.description}</p>
+                <time dateTime={story.publishedAt}>
+                  {date(story.publishedAt)}
+                </time>
+                {story.eventEndDate &&
+                  Date.parse(story.eventEndDate) < Date.parse(now) && (
+                    <span className="ended-label">Past event</span>
+                  )}
+              </div>
             </article>
           ))}
         </div>
