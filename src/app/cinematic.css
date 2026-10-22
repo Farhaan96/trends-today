@@ -868,6 +868,9 @@ button:disabled {
   font-size: 13px;
   line-height: 1.4;
 }
+.article-meta__author .article-author-link {
+  color: var(--color-text);
+}
 .article-content-shell {
   padding-top: 18px;
 }
@@ -1535,7 +1538,31 @@ button:disabled {
   }
   .article-meta {
     min-height: 0;
-    gap: 4px 10px;
+    display: flex;
+    max-height: 88px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 10px;
+    overflow: hidden;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .article-meta > :not(.article-meta__author) {
+    flex: 0 0 auto;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .article-meta__author {
+    display: flex;
+    order: 2;
+    flex: 0 0 100%;
+    min-height: 44px;
+    align-items: center;
+  }
+  .article-meta__author .article-author-link {
+    padding-inline: 8px;
+    margin-inline: -8px;
   }
   .article-hero {
     margin-top: 6px;
@@ -1554,6 +1581,7 @@ button:disabled {
     display: inline-flex;
     min-height: 44px;
     align-items: center;
+    animation: none;
   }
   .site-body:has(.article-page) .tt-chips a {
     height: 44px;

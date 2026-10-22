@@ -50,7 +50,7 @@ await themeProbe.close();
 const darkModeSupported =
   darkTokens.colorScheme.includes('dark') &&
   JSON.stringify(lightTokens) !== JSON.stringify(darkTokens);
-const themes = darkModeSupported ? ['light', 'dark'] : ['light'];
+const themes = ['light', 'dark'];
 const results = {
   baseUrl,
   articlePath,
@@ -245,6 +245,9 @@ try {
             ? parseColor(authorButtonStyle.backgroundColor)
             : null;
           const hero = document.querySelector('.article-hero');
+          const articleMeta = document.querySelector('.article-meta');
+          const metaAuthor = document.querySelector('.article-meta__author');
+          const metaAuthorLink = metaAuthor?.querySelector('a');
           const heroImage = hero?.querySelector('img');
           const heroBox = hero?.getBoundingClientRect();
           const bodyText = [...document.querySelectorAll('.prose p, .prose li')]
@@ -362,6 +365,35 @@ try {
                   text: authorButton.textContent.trim(),
                 }
               : { found: false },
+            articleMeta:
+              articleMeta && metaAuthor
+                ? {
+                    fontSize: Number.parseFloat(
+                      getComputedStyle(articleMeta).fontSize
+                    ),
+                    detailsBottom: Math.max(
+                      ...[...articleMeta.children]
+                        .filter((child) => child !== metaAuthor)
+                        .map((child) => child.getBoundingClientRect().bottom)
+                    ),
+                    authorBox: metaAuthor.getBoundingClientRect().toJSON(),
+                    authorTapBox:
+                      metaAuthorLink?.getBoundingClientRect().toJSON() || null,
+                    authorContrast: metaAuthorLink
+                      ? contrast(
+                          parseColor(getComputedStyle(metaAuthorLink).color),
+                          effectiveBackground(metaAuthorLink)
+                        )
+                      : null,
+                    detailsLineCount: new Set(
+                      [...articleMeta.children]
+                        .filter((child) => child !== metaAuthor)
+                        .map((child) =>
+                          Math.round(child.getBoundingClientRect().top)
+                        )
+                    ).size,
+                  }
+                : null,
             accentContrast,
             accentContrastFailures: accentContrast.filter(
               (entry) => entry.ratio < entry.requiredRatio
@@ -464,6 +496,29 @@ for (const run of results.runs) {
 const phoneArticleRuns = articleRuns.filter((run) => run.viewport.width <= 430);
 assert.ok(phoneArticleRuns.length > 0, 'expected phone article QA results');
 for (const run of phoneArticleRuns) {
+  assert.ok(
+    run.metrics.articleMeta,
+    `article meta missing at ${run.viewport.width}x${run.viewport.height}`
+  );
+  assert.equal(
+    run.metrics.articleMeta.fontSize,
+    13,
+    `article meta must be 13px at ${run.viewport.width}x${run.viewport.height}`
+  );
+  assert.equal(
+    run.metrics.articleMeta.detailsLineCount,
+    1,
+    `article details must occupy one line at ${run.viewport.width}x${run.viewport.height}`
+  );
+  assert.ok(
+    run.metrics.articleMeta.authorBox.top >=
+      run.metrics.articleMeta.detailsBottom,
+    `article author must have its own line at ${run.viewport.width}x${run.viewport.height}`
+  );
+  assert.ok(
+    run.metrics.articleMeta.authorTapBox?.height >= 44,
+    `article author target is shorter than 44px at ${run.viewport.width}x${run.viewport.height}`
+  );
   assert.deepEqual(
     run.metrics.tapTargets.below44px,
     [],
@@ -477,13 +532,21 @@ for (const run of phoneArticleRuns) {
 }
 
 for (const run of articleRuns) {
+  assert.ok(
+    run.metrics.articleMeta,
+    `article meta missing at ${run.viewport.width}x${run.viewport.height}`
+  );
+  assert.ok(
+    run.metrics.articleMeta.authorContrast >= 7,
+    `article author contrast is ${run.metrics.articleMeta.authorContrast}:1 at ${run.viewport.width}x${run.viewport.height}`
+  );
   assert.equal(
     run.metrics.authorButton.found,
     true,
     `author button missing at ${run.viewport.width}x${run.viewport.height}`
   );
   assert.ok(
-    run.metrics.authorButton.contrast >= 4.5,
+    run.metrics.authorButton.contrast >= 7,
     `author button contrast is ${run.metrics.authorButton.contrast}:1 at ${run.viewport.width}x${run.viewport.height}`
   );
   assert.equal(

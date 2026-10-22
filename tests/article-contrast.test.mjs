@@ -136,7 +136,7 @@ test('desktop photo/generated article hero is capped below the 720px QA flag', (
 test('phone article text and controls meet the browser QA floors', () => {
   assert.match(
     cinematicCss,
-    /\.site-body:has\(\.article-page\) \.tt-wordmark\s*\{[\s\S]*?min-height:\s*44px;/
+    /\.site-body:has\(\.article-page\) \.tt-wordmark\s*\{[\s\S]*?min-height:\s*44px;[\s\S]*?animation:\s*none;/
   );
   assert.match(
     cinematicCss,
@@ -153,5 +153,17 @@ test('phone article text and controls meet the browser QA floors', () => {
   assert.match(
     cinematicCss,
     /\.site-main:has\(> \.article-page\) \+ \.site-footer \.site-footer__links a\s*\{[\s\S]*?min-height:\s*44px;/
+  );
+  assert.match(
+    cinematicCss,
+    /\.article-meta\s*\{[\s\S]*?display:\s*flex;[\s\S]*?font-size:\s*13px;/
+  );
+  assert.match(
+    cinematicCss,
+    /\.article-meta__author\s*\{[\s\S]*?min-height:\s*44px;/
+  );
+  assert.match(
+    cinematicCss,
+    /\.article-meta__author \.article-author-link\s*\{[\s\S]*?color:\s*var\(--color-text\);/
   );
 });

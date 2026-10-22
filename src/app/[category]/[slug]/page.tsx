@@ -281,7 +281,7 @@ export default async function ArticlePage({
                 {category.name}
               </Link>
               {locality && <span>{locality}</span>}
-              <span className="font-medium">
+              <span className="article-meta__author font-medium">
                 {authorId ? (
                   <Link
                     href={`/author/${authorId}`}
