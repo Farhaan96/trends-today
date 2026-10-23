@@ -23,6 +23,7 @@ import {
   filterStories,
   storyCity,
   editorialPoster,
+  coverImageFit,
 } from '@/lib/cinematic-feed';
 
 export default function CinematicHome({
@@ -41,20 +42,22 @@ export default function CinematicHome({
   const [count, setCount] = useState(9);
   const hero = useRef<HTMLDivElement>(null);
   const swipe = useRef<number | null>(null);
-  const events = activeEvents(stories, now)
-    .filter((story) => story.href !== stories[0]?.href)
-    .slice(0, 6);
+  const lead = stories[0];
+  const supplementalStories = stories.filter(
+    (story) => story.href !== lead?.href
+  );
+  const events = activeEvents(supplementalStories, now).slice(0, 6);
   const index = events.length ? selected % events.length : 0;
   const current = events[index];
-  const lead = stories[0];
-  const transit = stories
+  const leadImageFit = lead ? coverImageFit(lead) : 'cover';
+  const transit = supplementalStories
     .filter((story) => story.category === 'transit')
     .slice(0, 2);
   const cities = [
     'All cities',
-    ...Array.from(new Set(stories.map(storyCity))).filter(Boolean),
+    ...Array.from(new Set(supplementalStories.map(storyCity))).filter(Boolean),
   ];
-  const results = filterStories(stories, city, query);
+  const results = filterStories(supplementalStories, city, query);
   const pagination = paginateItems(stories, 1, 12, '').pagination;
 
   useEffect(() => {
@@ -106,12 +109,8 @@ export default function CinematicHome({
         <section className="cover" aria-labelledby="cover-heading" ref={hero}>
           <div className="cover__inner">
             <div className="cover__copy">
-              <p className="eyebrow">Your Lower Mainland, today</p>
-              <h1 id="cover-heading">
-                Good things. <br />
-                Close to <br />
-                home.
-              </h1>
+              <p className="eyebrow">{getCategoryLabel(lead.category)}</p>
+              <h1 id="cover-heading">{lead.title}</h1>
               <p className="cover__deck">{lead.description}</p>
               <Link href={lead.href} className="cover__read">
                 <span className="arrow-disc">
@@ -158,7 +157,7 @@ export default function CinematicHome({
                 className="cover__frame"
                 aria-label={lead.title}
               >
-                <span className="cover__media">
+                <span className="cover__media" data-image-fit={leadImageFit}>
                   {lead.image && (
                     <Image
                       src={lead.image}
@@ -166,7 +165,7 @@ export default function CinematicHome({
                       fill
                       priority
                       sizes="(max-width: 760px) 100vw, 67vw"
-                      className="cover__image"
+                      className={`cover__image cover__image--${leadImageFit}`}
                     />
                   )}
                 </span>
@@ -179,7 +178,6 @@ export default function CinematicHome({
                   </div>
                   <div>
                     <span className="eyebrow">{storyCity(lead)}</span>
-                    <h2>{lead.title}</h2>
                   </div>
                   <ArrowRightIcon />
                 </div>
@@ -203,15 +201,30 @@ export default function CinematicHome({
             </h2>
             {transit.map((story) => (
               <article key={story.href}>
-                <p className="eyebrow">{storyCity(story)}</p>
-                <Link href={story.href}>
-                  <h3>{story.title}</h3>
-                  <ArrowRightIcon />
-                </Link>
-                <p className="travel-brief__description">{story.description}</p>
-                <time dateTime={story.publishedAt}>
-                  {date(story.publishedAt)}
-                </time>
+                {story.image ? (
+                  <span className="story-thumb">
+                    <Image
+                      src={story.image}
+                      alt={story.imageAlt || ''}
+                      width={480}
+                      height={320}
+                      sizes="(max-width: 640px) 96px, 33vw"
+                    />
+                  </span>
+                ) : null}
+                <div className="travel-brief__body">
+                  <p className="eyebrow">{storyCity(story)}</p>
+                  <Link href={story.href}>
+                    <h3>{story.title}</h3>
+                    <ArrowRightIcon />
+                  </Link>
+                  <p className="travel-brief__description">
+                    {story.description}
+                  </p>
+                  <time dateTime={story.publishedAt}>
+                    {date(story.publishedAt)}
+                  </time>
+                </div>
               </article>
             ))}
           </div>
@@ -392,9 +405,9 @@ export default function CinematicHome({
           </div>
           <label className="story-search">
             <MagnifyingGlassIcon />
-            <span className="sr-only">Search local stories</span>
             <input
               type="search"
+              aria-label="Search local stories"
               value={query}
               placeholder="Find a local story"
               onChange={(event) => {
@@ -411,22 +424,35 @@ export default function CinematicHome({
         <div className="neighbourhood-grid">
           {results.slice(0, count).map((story) => (
             <article key={story.href}>
-              <p className="eyebrow">
-                {storyCity(story)}
-                <span>{getCategoryLabel(story.category)}</span>
-              </p>
-              <Link href={story.href}>
-                <h3>{story.title}</h3>
-                <ArrowRightIcon />
-              </Link>
-              <p>{story.description}</p>
-              <time dateTime={story.publishedAt}>
-                {date(story.publishedAt)}
-              </time>
-              {story.eventEndDate &&
-                Date.parse(story.eventEndDate) < Date.parse(now) && (
-                  <span className="ended-label">Past event</span>
-                )}
+              {story.image ? (
+                <span className="story-thumb">
+                  <Image
+                    src={story.image}
+                    alt={story.imageAlt || ''}
+                    width={480}
+                    height={320}
+                    sizes="(max-width: 640px) 96px, 33vw"
+                  />
+                </span>
+              ) : null}
+              <div className="neighbourhood-card__body">
+                <p className="eyebrow">
+                  {storyCity(story)}
+                  <span>{getCategoryLabel(story.category)}</span>
+                </p>
+                <Link href={story.href}>
+                  <h3>{story.title}</h3>
+                  <ArrowRightIcon />
+                </Link>
+                <p>{story.description}</p>
+                <time dateTime={story.publishedAt}>
+                  {date(story.publishedAt)}
+                </time>
+                {story.eventEndDate &&
+                  Date.parse(story.eventEndDate) < Date.parse(now) && (
+                    <span className="ended-label">Past event</span>
+                  )}
+              </div>
             </article>
           ))}
         </div>
