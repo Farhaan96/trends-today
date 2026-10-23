@@ -1,5 +1,8 @@
+import type { HeroStyle } from './article-frontmatter';
+
 export const GENERATED_ILLUSTRATION_CAPTION =
   'Generated illustration by Trends Today, not a photo.';
+export const PHOTOREAL_ALT_PREFIX = 'AI-generated image of';
 
 const EXEMPT_SOURCE_TYPES = new Set([
   'official-photo',
@@ -23,17 +26,64 @@ export function illustrationImageAlt(
   imageAlt: unknown,
   title: unknown,
   attribution: unknown,
-  sourceType?: unknown
+  sourceType?: unknown,
+  heroStyle?: HeroStyle
 ): string {
   const fallback = String(title || '').trim() || 'Article';
-  const cleaned = (String(imageAlt || '').trim() || fallback).replace(
-    /[—–]/g,
-    ','
-  );
+  const cleaned = (String(imageAlt || '').trim() || fallback)
+    .replace(/[—–]/g, ',')
+    .replace(/^(?:generated\b.*?illustration|ai-generated image) of\s+/i, '');
   if (!isGeneratedIllustration(attribution, sourceType)) return cleaned;
-  const prefix = 'Generated illustration of';
+  const prefix =
+    heroStyle === 'photoreal'
+      ? PHOTOREAL_ALT_PREFIX
+      : 'Generated illustration of';
   if (cleaned.toLowerCase().startsWith(prefix.toLowerCase())) {
     return prefix + cleaned.slice(prefix.length);
   }
-  return `${prefix} ${cleaned.charAt(0).toLowerCase()}${cleaned.slice(1)}`;
+  const rest = cleaned.charAt(0).toLowerCase() + cleaned.slice(1);
+  return `${prefix} ${rest}`;
+}
+
+export function generatedImageCaption(
+  heroStyle: HeroStyle | undefined,
+  place: unknown
+): string {
+  if (heroStyle !== 'photoreal') return GENERATED_ILLUSTRATION_CAPTION;
+  const placeName = String(place || '').trim() || 'this place';
+  return `AI-generated image, not a photo of ${placeName}.`;
+}
+
+export function illustrationPlaceName(frontmatter: {
+  heroPlace?: unknown;
+  location?: unknown;
+  seo?: unknown;
+  locality?: unknown;
+  city?: unknown;
+}): unknown {
+  const location = frontmatter.location;
+  const structuredLocation =
+    typeof location === 'string'
+      ? location
+      : location && typeof location === 'object'
+        ? (location as { name?: unknown }).name
+        : undefined;
+  const seo = frontmatter.seo;
+  const primaryKeyword =
+    seo && typeof seo === 'object'
+      ? (seo as { primaryKeyword?: unknown }).primaryKeyword
+      : undefined;
+  const structuredParkName = /(?:park|conservation area)$/i.test(
+    String(primaryKeyword || '').trim()
+  )
+    ? primaryKeyword
+    : undefined;
+
+  return (
+    frontmatter.heroPlace ||
+    structuredLocation ||
+    structuredParkName ||
+    frontmatter.locality ||
+    frontmatter.city
+  );
 }

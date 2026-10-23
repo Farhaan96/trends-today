@@ -18,6 +18,7 @@ interface Article {
     imageAlt?: string;
     imageAttribution?: string;
     imageSourceType?: string;
+    heroStyle?: 'photoreal';
     keywords?: string[];
     tags?: string[];
   };
@@ -79,7 +80,8 @@ export default function RelatedArticles({
                         article.frontmatter?.imageAlt,
                         articleTitle,
                         article.frontmatter?.imageAttribution,
-                        article.frontmatter?.imageSourceType
+                        article.frontmatter?.imageSourceType,
+                        article.frontmatter?.heroStyle
                       )}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"

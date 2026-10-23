@@ -51,6 +51,7 @@ next-env.d.ts
 
 # local artifacts
 /screenshots/
+/qa-screenshots/
 /test-results/
 /playwright-report/
 /.playwright-cli/
