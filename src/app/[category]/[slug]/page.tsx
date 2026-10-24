@@ -10,12 +10,12 @@ import { SmartRelatedArticles } from '@/components/article/RelatedArticles';
 import MoreFromAuthor from '@/components/content/MoreFromAuthor';
 import EditorialImage from '@/components/editorial/EditorialImage';
 import PublishDate from '@/components/editorial/PublishDate';
-import { formatArticleDateWithWeekday } from '@/lib/editorial';
 import { CONTENT_CATEGORIES, getCategoryLabel } from '@/lib/categories';
 import { contentUpdatedValue } from '@/lib/freshness';
 import {
   GENERATED_ILLUSTRATION_CAPTION,
   illustrationImageAlt,
+  isContainedCivicHero,
   isGeneratedIllustration,
 } from '@/lib/illustration-caption';
 import {
@@ -155,6 +155,16 @@ export default async function ArticlePage({
     article.frontmatter?.imageAttribution,
     article.frontmatter?.imageSourceType
   );
+  const containedHero = isContainedCivicHero(
+    article.frontmatter?.imageSourceType,
+    image
+  );
+  const heroClassName = [
+    'article-hero',
+    containedHero ? 'article-hero--map' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
   const publishedAt = article.frontmatter?.publishedAt || article.publishedAt;
   const modifiedAt =
     contentUpdatedValue({
@@ -209,6 +219,28 @@ export default async function ArticlePage({
   const needsSourceRefresh =
     archiveReviewStatus === 'format-reviewed-needs-source-refresh';
 
+  // Stories already shown in "More from" are not repeated in Related stories.
+  const moreFromAuthorName = (() => {
+    const currentAuthor = article.author || article.frontmatter?.author;
+    return typeof currentAuthor === 'string'
+      ? currentAuthor
+      : currentAuthor?.name || currentAuthor;
+  })();
+  const moreFromAuthorSlugs = new Set(
+    moreFromAuthorName
+      ? allArticles
+          .filter((a) => {
+            const articleAuthor =
+              a.author?.name ||
+              a.frontmatter?.author?.name ||
+              a.frontmatter?.author;
+            return articleAuthor === moreFromAuthorName && a.slug !== slug;
+          })
+          .slice(0, 3)
+          .map((a) => a.slug)
+      : []
+  );
+
   return (
     <article className="article-page">
       {/* Structured Data */}
@@ -236,7 +268,6 @@ export default async function ArticlePage({
 
           {description && <p className="article-deck">{description}</p>}
 
-          {/* Prominent publish date near title */}
           <PublishDate
             publishedAt={publishedAt}
             modifiedAt={modifiedAt}
@@ -250,7 +281,7 @@ export default async function ArticlePage({
                 {category.name}
               </Link>
               {locality && <span>{locality}</span>}
-              <span className="font-medium">
+              <span className="article-meta__author font-medium">
                 {authorId ? (
                   <Link
                     href={`/author/${authorId}`}
@@ -273,26 +304,26 @@ export default async function ArticlePage({
                   </Link>
                 </span>
               )}
-              {formattedReadingTime && <span>{formattedReadingTime}</span>}
-              {publishedAt ? (
-                <time
-                  className="article-meta__published"
-                  dateTime={publishedAt}
-                >
-                  Published {formatArticleDateWithWeekday(publishedAt)}
-                </time>
+              {publishedAt || formattedReadingTime ? (
+                <span className="article-meta__when">
+                  {publishedAt ? (
+                    <time dateTime={publishedAt}>
+                      {new Intl.DateTimeFormat('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        timeZone: 'America/Vancouver',
+                      }).format(new Date(publishedAt))}
+                    </time>
+                  ) : null}
+                  {publishedAt && formattedReadingTime ? ' · ' : null}
+                  {formattedReadingTime}
+                </span>
               ) : null}
             </div>
           </div>
 
           {/* Large square hero image */}
-          <div
-            className={
-              article.frontmatter?.imageSourceType === 'generated'
-                ? 'article-hero article-hero--labeled'
-                : 'article-hero'
-            }
-          >
+          <div className={heroClassName}>
             <EditorialImage
               src={article.image || article.frontmatter?.image || undefined}
               alt={imageAlt}
@@ -310,7 +341,6 @@ export default async function ArticlePage({
 
       {/* Article Content */}
       <div className="site-shell article-content-shell">
-        {description ? <p className="article-dek-body">{description}</p> : null}
         {needsSourceRefresh && (
           <aside className="article-archive-notice">
             <p className="article-method__eyebrow">Archive transparency</p>
@@ -388,7 +418,9 @@ export default async function ArticlePage({
           category: categoryKey,
           frontmatter: article.frontmatter,
         }}
-        allArticles={allArticles}
+        allArticles={allArticles.filter(
+          (a) => !moreFromAuthorSlugs.has(a.slug)
+        )}
         maxArticles={3}
         className="article-related"
       />
