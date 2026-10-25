@@ -10,6 +10,14 @@ const cinematicCss = readFileSync(
   new URL('../src/app/cinematic.css', import.meta.url),
   'utf8'
 );
+const articlePage = readFileSync(
+  new URL('../src/app/[category]/[slug]/page.tsx', import.meta.url),
+  'utf8'
+);
+const browserQa = readFileSync(
+  new URL('../scripts/qa/pr-check.mjs', import.meta.url),
+  'utf8'
+);
 
 function rootTokenBlocks(css) {
   const blocks = [...css.matchAll(/(?:^|\n)\s*:root\s*\{([\s\S]*?)\n\s*\}/g)];
@@ -166,4 +174,20 @@ test('phone article text and controls meet the browser QA floors', () => {
     cinematicCss,
     /\.article-meta__author \.article-author-link\s*\{[\s\S]*?color:\s*var\(--color-text\);/
   );
+});
+
+test('article meta stays unclipped and inset with a spaced separator', () => {
+  const phoneMeta = cinematicCss.match(/\.article-meta\s*\{([\s\S]*?)\n\s*\}/);
+  const phoneAuthorLink = cinematicCss.match(
+    /\.article-meta__author \.article-author-link\s*\{([\s\S]*?)\n\s*\}/
+  );
+
+  assert.ok(phoneMeta, 'expected the phone article meta rule');
+  assert.doesNotMatch(phoneMeta[1], /max-height\s*:/);
+  assert.ok(phoneAuthorLink, 'expected the phone author-link rule');
+  assert.doesNotMatch(phoneAuthorLink[1], /margin-inline\s*:\s*-/);
+  assert.ok(articlePage.includes("? '\\u00a0·\\u00a0' : null"));
+  assert.ok(browserQa.includes('articleMeta.scrollHeight'));
+  assert.ok(browserQa.includes('authorTapBox?.left >= 10'));
+  assert.ok(browserQa.includes('/\\S\\s+·\\s+\\S/'));
 });
