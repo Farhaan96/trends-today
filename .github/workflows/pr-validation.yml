@@ -44,8 +44,8 @@ jobs:
       - name: Production build
         run: npm run build
 
-      - name: Run feed tests
-        run: node tests/cinematic-feed.test.mjs
+      - name: Run Node tests
+        run: npm run test:node
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
