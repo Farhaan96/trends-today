@@ -320,6 +320,16 @@ button:disabled {
   text-align: right;
   margin: 38px 2px 0;
 }
+.cover__generated-caption {
+  width: fit-content;
+  margin: 30px 2px 0 auto;
+  padding: 4px 6px;
+  color: #f6f1e2;
+  background: #071c17;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: right;
+}
 .travel-brief {
   background: var(--tt-paper);
   position: relative;
@@ -1409,6 +1419,9 @@ button:disabled {
   .cover__credit {
     margin: 2px 0 0;
     line-height: 1.25;
+  }
+  .cover__generated-caption {
+    margin: 2px 0 0 auto;
   }
   .today-brief__inner {
     padding: 2px 16px 0;
