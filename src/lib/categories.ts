@@ -9,8 +9,11 @@ export type CategoryKey =
   | 'culture'
   | 'psychology'
   | 'technology'
+  | 'tech'
   | 'health'
   | 'space'
+  | 'money'
+  | 'facts'
   | 'lifestyle';
 
 export const LOCAL_NEWS_CATEGORIES: CategoryKey[] = [
@@ -27,8 +30,11 @@ export const LEGACY_CATEGORIES: CategoryKey[] = [
   'culture',
   'psychology',
   'technology',
+  'tech',
   'health',
   'space',
+  'money',
+  'facts',
 ];
 
 export const CONTENT_CATEGORIES: CategoryKey[] = [
@@ -51,8 +57,11 @@ const categoryLabels: Record<CategoryKey, string> = {
   culture: 'Culture',
   psychology: 'Psychology',
   technology: 'Technology',
+  tech: 'Technology',
   health: 'Health',
   space: 'Space',
+  money: 'Money',
+  facts: 'Facts',
   lifestyle: 'Lifestyle',
 };
 
@@ -117,6 +126,11 @@ const styles: Record<CategoryKey, Style> = {
     text: 'text-indigo-600',
     headerBg: 'bg-gradient-to-r from-blue-600/10 to-indigo-600/10',
   },
+  tech: {
+    badge: 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white',
+    text: 'text-indigo-600',
+    headerBg: 'bg-gradient-to-r from-blue-600/10 to-indigo-600/10',
+  },
   health: {
     badge: 'bg-gradient-to-r from-emerald-500 to-green-600 text-white',
     text: 'text-emerald-600',
@@ -126,6 +140,16 @@ const styles: Record<CategoryKey, Style> = {
     badge: 'bg-gradient-to-r from-indigo-600 to-fuchsia-700 text-white',
     text: 'text-indigo-700',
     headerBg: 'bg-gradient-to-r from-indigo-600/10 to-fuchsia-700/10',
+  },
+  money: {
+    badge: 'bg-gradient-to-r from-emerald-600 to-teal-700 text-white',
+    text: 'text-emerald-700',
+    headerBg: 'bg-gradient-to-r from-emerald-600/10 to-teal-700/10',
+  },
+  facts: {
+    badge: 'bg-gradient-to-r from-amber-500 to-orange-600 text-white',
+    text: 'text-amber-700',
+    headerBg: 'bg-gradient-to-r from-amber-500/10 to-orange-600/10',
   },
   lifestyle: {
     badge: 'bg-gradient-to-r from-rose-500 to-orange-500 text-white',
@@ -168,11 +192,16 @@ export function getCategoryDescription(input?: string): string {
     case 'psychology':
       return 'Human behavior, cognition, and the surprising science of the mind.';
     case 'technology':
+    case 'tech':
       return 'Gadgets, AI, and innovations changing how we live and work.';
     case 'health':
       return 'Wellness, medicine, and evidence-based advice for better living.';
     case 'space':
       return 'Astronomy, exploration, and the science of our universe.';
+    case 'money':
+      return 'Personal finance, markets, and the forces shaping everyday money.';
+    case 'facts':
+      return 'Evidence-backed facts and explanations about the world around us.';
     case 'lifestyle':
       return 'Ideas, habits, and trends for living smarter every day.';
     default:

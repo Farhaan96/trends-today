@@ -2,14 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { CONTENT_CATEGORIES } from './categories';
+import { isPublishedFrontmatter } from './article-policy';
 
 const contentDirectory = path.join(process.cwd(), 'content');
 
 function isPublished(frontmatter: Record<string, unknown>): boolean {
-  const status = String(frontmatter.status || '')
-    .trim()
-    .toLowerCase();
-  return !status || status === 'published';
+  return isPublishedFrontmatter(frontmatter);
 }
 
 export interface Article {

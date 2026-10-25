@@ -14,6 +14,10 @@ import { formatArticleDateWithWeekday } from '@/lib/editorial';
 import { CONTENT_CATEGORIES, getCategoryLabel } from '@/lib/categories';
 import { contentUpdatedValue } from '@/lib/freshness';
 import {
+  canonicalArticleUrl,
+  isNoindexFrontmatter,
+} from '@/lib/article-policy';
+import {
   GENERATED_ILLUSTRATION_CAPTION,
   illustrationImageAlt,
   isGeneratedIllustration,
@@ -72,10 +76,8 @@ export async function generateMetadata({
     article.frontmatter?.imageAttribution,
     article.frontmatter?.imageSourceType
   );
-  const url = `https://www.trendstoday.ca/${category}/${slug}`;
-  const needsSourceRefresh =
-    article.frontmatter?.archiveReviewStatus ===
-    'format-reviewed-needs-source-refresh';
+  const url = canonicalArticleUrl(category, slug);
+  const noindex = isNoindexFrontmatter(article.frontmatter);
 
   return {
     title,
@@ -122,7 +124,7 @@ export async function generateMetadata({
       images: [image || '/images/placeholder.jpg'],
     },
     robots: {
-      index: !needsSourceRefresh,
+      index: !noindex,
       follow: true,
     },
   };
@@ -178,7 +180,7 @@ export default async function ArticlePage({
         type: authorProfile.entityType,
       }
     : rawAuthor || { name: authorName };
-  const url = `https://www.trendstoday.ca/${categoryKey}/${slug}`;
+  const url = canonicalArticleUrl(categoryKey, slug);
 
   // Breadcrumb data
   const breadcrumbs = [
@@ -317,8 +319,7 @@ export default async function ArticlePage({
             <p>
               This article received a July 2026 readability and source-display
               pass, but its underlying claims have not yet received a fresh
-              source review. It is temporarily excluded from search indexing.
-              Check the linked sources for current information.
+              source review. Check the linked sources for current information.
             </p>
           </aside>
         )}

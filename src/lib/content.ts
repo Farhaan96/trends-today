@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { CONTENT_CATEGORIES } from './categories';
+import { isPublishedFrontmatter } from './article-policy';
 
 export interface Article {
   slug: string;
@@ -56,6 +57,7 @@ async function getArticlesFromDir(
           href: `/${type}/${file.replace(/\.(mdx|json)$/, '')}`,
         };
       })
+      .filter((article) => isPublishedFrontmatter(article.frontmatter))
       .filter((article) => article.frontmatter.title); // Only include articles with titles
     // Remove sorting here - will be sorted globally in getAllPosts()
 
@@ -228,6 +230,7 @@ async function getArticlesFromCategoryDir(
           category: category,
         };
       })
+      .filter((article) => isPublishedFrontmatter(article.frontmatter))
       .filter((article) => article.frontmatter.title); // Only include articles with titles
     // Remove sorting here - will be sorted globally in getAllPosts()
 
