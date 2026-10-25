@@ -4,6 +4,8 @@ import test from 'node:test';
 
 const require = createRequire(import.meta.url);
 const config = require('../next-sitemap.config.js');
+const { articleLastmod } = require('../src/lib/article-policy.js');
+const { readArticle } = require('../scripts/sitemap-articles.js');
 
 test('sitemap lastmod ignores modifiedAt and uses publishedAt', async () => {
   const result = await config.transform(
@@ -32,4 +34,22 @@ test('sitemap lastmod uses publishedAt when modifiedAt is absent', async () => {
     result.lastmod,
     new Date('2026-10-08T08:53:04-07:00').toISOString()
   );
+});
+
+test('PR 293 updatedAt values take precedence for indexable articles', async () => {
+  const expected = '2026-10-25T17:50:00.000Z';
+  const articles = [
+    ['science', 'antarctica-ice-wall-theories-facts', false],
+    ['things-to-do', 'fall-farmers-markets-metro-vancouver-2026', true],
+    ['things-to-do', 'pumpkin-patches-corn-mazes-near-vancouver-2026', true],
+  ];
+
+  for (const [category, slug, indexable] of articles) {
+    const article = readArticle(category, slug);
+    assert.ok(article);
+    assert.equal(articleLastmod(article.data), expected);
+    const result = await config.transform(config, `/${category}/${slug}`);
+    if (indexable) assert.equal(result.lastmod, expected);
+    else assert.equal(result, null);
+  }
 });

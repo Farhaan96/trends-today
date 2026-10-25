@@ -14,6 +14,7 @@ const {
   canonicalArticleUrl,
   selectNewsArticles,
 } = require('../src/lib/article-policy.js');
+const { buildNewsSitemap } = require('../src/lib/news-sitemap.js');
 const { getSitemapArticles } = require('../scripts/sitemap-articles.js');
 const contentDir = path.resolve('content');
 
@@ -38,7 +39,7 @@ function sitemapEntries() {
   };
 }
 
-function independentlyPublishedArticles() {
+function independentlyClassifiedArticles() {
   const articles = [];
   for (const category of ARTICLE_CATEGORIES) {
     const dir = path.join(contentDir, category);
@@ -55,25 +56,33 @@ function independentlyPublishedArticles() {
         (status && status !== 'published') ||
         /draft\s*\(do not merge\)/i.test(String(data.title || ''));
       const noindex =
+        data.archiveReviewStatus === 'format-reviewed-needs-source-refresh' ||
         data.noindex === true ||
         data.index === false ||
         data.seo?.noindex === true ||
         robots?.index === false ||
         (typeof robots === 'string' && /noindex/i.test(robots));
-      if (!draft && !noindex) {
-        articles.push({
-          category,
-          slug: file.slice(0, -4),
-          data,
-        });
-      }
+      articles.push({
+        category,
+        slug: file.slice(0, -4),
+        data,
+        draft: Boolean(draft),
+        noindex,
+      });
     }
   }
   return articles;
 }
 
+function independentlyIndexablePublishedArticles() {
+  return independentlyClassifiedArticles().filter(
+    ({ draft, noindex }) => !draft && !noindex
+  );
+}
+
 test('sitemap article entries exactly cover every published indexable article', () => {
-  const expected = independentlyPublishedArticles();
+  const inventory = independentlyClassifiedArticles();
+  const expected = inventory.filter(({ draft, noindex }) => !draft && !noindex);
   const { sitemap, entries } = sitemapEntries();
   const locs = entries.map(({ loc }) => loc);
   assert.equal(locs.length, (sitemap.match(/<loc>/g) || []).length);
@@ -86,9 +95,25 @@ test('sitemap article entries exactly cover every published indexable article', 
     expected.map(({ category, slug }) => canonicalArticleUrl(category, slug))
   );
   const actualUrls = new Set(articleEntries.map(({ loc }) => loc));
+  const missing = [...expectedUrls].filter((url) => !actualUrls.has(url));
+  const extra = [...actualUrls].filter((url) => !expectedUrls.has(url));
+  const noindexUrls = new Set(
+    inventory
+      .filter(({ draft, noindex }) => !draft && noindex)
+      .map(({ category, slug }) => canonicalArticleUrl(category, slug))
+  );
 
   assert.equal(articleEntries.length, expected.length);
-  assert.deepEqual(actualUrls, expectedUrls);
+  assert.deepEqual(
+    [...actualUrls].sort(),
+    [...expectedUrls].sort(),
+    `missing: ${missing.join(', ') || 'none'}; extra: ${extra.join(', ') || 'none'}`
+  );
+  assert.equal(
+    [...actualUrls].filter((url) => noindexUrls.has(url)).length,
+    0,
+    'sitemap must not overlap published noindex articles'
+  );
   for (const loc of locs) {
     assert.match(loc, /^https:\/\/www\.trendstoday\.ca(?:\/|$)/);
     assert.ok(
@@ -115,7 +140,7 @@ test('lastmod never uses the build clock or unsupported metadata fields', () => 
   const generatedSecond = Math.floor(
     fs.statSync('public/sitemap.xml').mtimeMs / 1000
   );
-  const expected = independentlyPublishedArticles();
+  const expected = independentlyIndexablePublishedArticles();
   const sourceCounts = new Map();
   for (const { data } of expected) {
     const value = expectedLastmod(data);
@@ -153,6 +178,18 @@ test('runtime code cannot import the build-only scanner', () => {
   assert.doesNotMatch(
     purePolicy,
     /(?:from\s+|require\()['"](?:node:)?(?:fs|path)['"]|gray-matter|process\.cwd|readdirSync/
+  );
+  const articlePage = fs.readFileSync(
+    'src/app/[category]/[slug]/page.tsx',
+    'utf8'
+  );
+  assert.match(
+    articlePage,
+    /articleNeedsSourceRefresh\(article\.frontmatter\)/
+  );
+  assert.doesNotMatch(
+    articlePage,
+    /archiveReviewStatus\s*===\s*['"]format-reviewed-needs-source-refresh/
   );
 });
 
@@ -222,6 +259,11 @@ test('drafts and noindex fixtures never enter either sitemap', () => {
     robots: { index: false },
     publishedAt: '2026-10-25T12:00:00Z',
   });
+  write('needs-source-refresh', {
+    title: 'Needs source refresh',
+    archiveReviewStatus: 'format-reviewed-needs-source-refresh',
+    publishedAt: '2026-10-25T12:00:00Z',
+  });
 
   const published = getSitemapArticles(root);
   assert.deepEqual(
@@ -236,6 +278,49 @@ test('drafts and noindex fixtures never enter either sitemap', () => {
       ({ slug }) => slug
     ),
     ['recent']
+  );
+});
+
+test('news sitemap URL set exactly covers recent indexable articles', () => {
+  const now = Date.now();
+  const cutoff = now - 2 * 24 * 60 * 60 * 1000;
+  const inventory = independentlyClassifiedArticles();
+  const expected = inventory.filter(({ data, draft, noindex }) => {
+    const published = instant(data.publishedAt);
+    return (
+      !draft &&
+      !noindex &&
+      published !== undefined &&
+      published >= cutoff &&
+      published <= now
+    );
+  });
+  const xml = buildNewsSitemap(
+    inventory.map(({ category, slug, data }) => ({
+      category,
+      slug,
+      title: data.title,
+      frontmatter: data,
+    })),
+    now
+  );
+  const expectedUrls = new Set(
+    expected.map(({ category, slug }) => canonicalArticleUrl(category, slug))
+  );
+  const actualUrls = new Set(
+    [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, loc]) => loc)
+  );
+  const noindexUrls = new Set(
+    inventory
+      .filter(({ draft, noindex }) => !draft && noindex)
+      .map(({ category, slug }) => canonicalArticleUrl(category, slug))
+  );
+
+  assert.deepEqual([...actualUrls].sort(), [...expectedUrls].sort());
+  assert.equal(
+    [...actualUrls].filter((url) => noindexUrls.has(url)).length,
+    0,
+    'news sitemap must not overlap published noindex articles'
   );
 });
 

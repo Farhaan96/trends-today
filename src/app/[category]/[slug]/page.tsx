@@ -16,6 +16,7 @@ import { contentUpdatedValue } from '@/lib/freshness';
 import {
   canonicalArticleUrl,
   isNoindexFrontmatter,
+  needsSourceRefresh as articleNeedsSourceRefresh,
 } from '@/lib/article-policy';
 import {
   GENERATED_ILLUSTRATION_CAPTION,
@@ -205,11 +206,7 @@ export default async function ArticlePage({
   const reportingMethod = article.frontmatter?.reportingMethod as
     | string
     | undefined;
-  const archiveReviewStatus = article.frontmatter?.archiveReviewStatus as
-    | string
-    | undefined;
-  const needsSourceRefresh =
-    archiveReviewStatus === 'format-reviewed-needs-source-refresh';
+  const needsSourceRefresh = articleNeedsSourceRefresh(article.frontmatter);
 
   return (
     <article className="article-page">

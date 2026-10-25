@@ -36,9 +36,14 @@ function isPublishedFrontmatter(data = {}) {
   );
 }
 
+function needsSourceRefresh(data = {}) {
+  return data.archiveReviewStatus === 'format-reviewed-needs-source-refresh';
+}
+
 function isNoindexFrontmatter(data = {}) {
   const robots = data.robots ?? data.seo?.robots;
   return (
+    needsSourceRefresh(data) ||
     data.noindex === true ||
     data.index === false ||
     data.seo?.noindex === true ||
@@ -87,5 +92,6 @@ module.exports = {
   canonicalArticleUrl,
   isNoindexFrontmatter,
   isPublishedFrontmatter,
+  needsSourceRefresh,
   selectNewsArticles,
 };
