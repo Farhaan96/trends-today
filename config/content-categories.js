@@ -1,7 +1,7 @@
 /**
  * Content Categories Configuration
  * Optimized for long-tail keyword targeting and Le Ravi-style content
- * 6 Core Categories: Science, Culture, Psychology, Technology, Health, Space
+ * 7 Core Categories: Science, Culture, Psychology, Technology, Health, Money, Space
  */
 
 module.exports = {
@@ -149,6 +149,35 @@ module.exports = {
         'The {common_food} That Doctors Say You Should Never Eat',
         'This {simple_habit} Adds 10 Years to Your Life',
         'The Hidden Health Risk in {everyday_item} No One Talks About',
+      ],
+    },
+
+    // Money & Personal Finance
+    money: {
+      name: 'Money',
+      slug: 'money',
+      description:
+        'Personal finance, taxes, benefits, saving, and practical money decisions',
+      keywords: [
+        'Canadian personal finance',
+        'TFSA contribution room',
+        'tax credits and benefits',
+        'saving money in Canada',
+        'cost of living guide',
+      ],
+      longTailPatterns: [
+        'how {money_topic} works in Canada and who qualifies',
+        '{tax_or_benefit} rules and deadlines explained',
+        'how much {account_or_benefit} room you have in {year}',
+        'what {financial_change} means for your monthly budget',
+        'steps to claim {credit_or_benefit} in Canada',
+      ],
+      aiImageStyle:
+        'clean personal finance visualization, Canadian currency details, household budgeting, understated editorial still life',
+      curiosityGapHeadlines: [
+        'What the New {money_rule} Means for Your Wallet',
+        'The {account_or_benefit} Deadline Canadians Need to Know',
+        'How Much {money_topic} You Can Claim in {year}',
       ],
     },
 

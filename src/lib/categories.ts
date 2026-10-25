@@ -10,6 +10,7 @@ export type CategoryKey =
   | 'psychology'
   | 'technology'
   | 'health'
+  | 'money'
   | 'space'
   | 'lifestyle';
 
@@ -34,6 +35,7 @@ export const LEGACY_CATEGORIES: CategoryKey[] = [
 export const CONTENT_CATEGORIES: CategoryKey[] = [
   ...LOCAL_NEWS_CATEGORIES,
   ...LEGACY_CATEGORIES,
+  'money',
 ];
 
 export function isLocalNewsCategory(input?: string): boolean {
@@ -52,6 +54,7 @@ const categoryLabels: Record<CategoryKey, string> = {
   psychology: 'Psychology',
   technology: 'Technology',
   health: 'Health',
+  money: 'Money',
   space: 'Space',
   lifestyle: 'Lifestyle',
 };
@@ -122,6 +125,11 @@ const styles: Record<CategoryKey, Style> = {
     text: 'text-emerald-600',
     headerBg: 'bg-gradient-to-r from-emerald-500/10 to-green-600/10',
   },
+  money: {
+    badge: 'bg-gradient-to-r from-amber-500 to-emerald-600 text-white',
+    text: 'text-emerald-700',
+    headerBg: 'bg-gradient-to-r from-amber-500/10 to-emerald-600/10',
+  },
   space: {
     badge: 'bg-gradient-to-r from-indigo-600 to-fuchsia-700 text-white',
     text: 'text-indigo-700',
@@ -171,6 +179,8 @@ export function getCategoryDescription(input?: string): string {
       return 'Gadgets, AI, and innovations changing how we live and work.';
     case 'health':
       return 'Wellness, medicine, and evidence-based advice for better living.';
+    case 'money':
+      return 'Personal finance, taxes, benefits, saving, and practical money decisions.';
     case 'space':
       return 'Astronomy, exploration, and the science of our universe.';
     case 'lifestyle':
