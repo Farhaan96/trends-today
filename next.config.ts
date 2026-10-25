@@ -1,10 +1,6 @@
 import type { NextConfig } from 'next';
-import { redirectRules } from './src/lib/redirects';
 
 const nextConfig: NextConfig = {
-  async redirects() {
-    return redirectRules;
-  },
   // The compare index reads MDX from content/ at build/runtime. Next's file
   // tracer otherwise treats process.cwd() as unconstrained and copies every
   // public image into this function, even though Vercel serves public/ as

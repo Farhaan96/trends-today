@@ -17,7 +17,6 @@ const {
   selectNewsArticles,
 } = require('../src/lib/article-policy.js');
 const { buildNewsSitemap } = require('../src/lib/news-sitemap.js');
-const { redirectRules } = require('../src/lib/redirects.js');
 const { getSitemapArticles } = require('../scripts/sitemap-articles.js');
 const contentDir = path.resolve('content');
 
@@ -344,35 +343,6 @@ test('needs-source-refresh matches only the exact archive status', () => {
     assert.equal(needsSourceRefresh(data), false);
     assert.equal(isNoindexFrontmatter(data), false);
   }
-});
-
-test('legacy fear-extinction slug redirects permanently to the renamed file', () => {
-  assert.deepEqual(
-    redirectRules.find(
-      ({ source }) =>
-        source ===
-        '/psychology/fear-extinction-therapy-erases-phobias-neural-level'
-    ),
-    {
-      source: '/psychology/fear-extinction-therapy-erases-phobias-neural-level',
-      destination: '/psychology/how-the-brain-unlearns-fear',
-      statusCode: 301,
-    }
-  );
-  assert.match(
-    fs.readFileSync('next.config.ts', 'utf8'),
-    /async redirects\(\)[\s\S]*return redirectRules/
-  );
-  assert.equal(
-    fs.existsSync('content/psychology/how-the-brain-unlearns-fear.mdx'),
-    true
-  );
-  assert.equal(
-    fs.existsSync(
-      'content/psychology/fear-extinction-therapy-erases-phobias-neural-level.mdx'
-    ),
-    false
-  );
 });
 
 test('news sitemap URL set exactly covers recent indexable articles', () => {
