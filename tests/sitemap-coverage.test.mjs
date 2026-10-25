@@ -10,11 +10,33 @@ const require = createRequire(import.meta.url);
 const config = require('../next-sitemap.config.js');
 const {
   ARTICLE_CATEGORIES,
+  articleLastmod,
   canonicalArticleUrl,
-  getSitemapArticles,
   selectNewsArticles,
 } = require('../src/lib/article-policy.js');
+const { getSitemapArticles } = require('../scripts/sitemap-articles.js');
 const contentDir = path.resolve('content');
+
+function instant(value) {
+  const parsed = value instanceof Date ? value.getTime() : Date.parse(value);
+  return Number.isFinite(parsed) ? parsed : undefined;
+}
+
+function expectedLastmod(data) {
+  return instant(data.updatedAt) ?? instant(data.publishedAt);
+}
+
+function sitemapEntries() {
+  const sitemap = fs.readFileSync('public/sitemap.xml', 'utf8');
+  const blocks = [...sitemap.matchAll(/<url>(.*?)<\/url>/gs)];
+  return {
+    sitemap,
+    entries: blocks.map(([, block]) => ({
+      loc: block.match(/<loc>([^<]*)<\/loc>/)?.[1] || '',
+      lastmod: block.match(/<lastmod>([^<]*)<\/lastmod>/)?.[1],
+    })),
+  };
+}
 
 function independentlyPublishedArticles() {
   const articles = [];
@@ -52,15 +74,10 @@ function independentlyPublishedArticles() {
 
 test('sitemap article entries exactly cover every published indexable article', () => {
   const expected = independentlyPublishedArticles();
-  const sitemap = fs.readFileSync('public/sitemap.xml', 'utf8');
-  const locs = [...sitemap.matchAll(/<loc>([^<]*)<\/loc>/g)].map(
-    ([, loc]) => loc
-  );
+  const { sitemap, entries } = sitemapEntries();
+  const locs = entries.map(({ loc }) => loc);
   assert.equal(locs.length, (sitemap.match(/<loc>/g) || []).length);
   assert.ok(locs.every((loc) => loc.trim()));
-  const entries = [
-    ...sitemap.matchAll(/<url><loc>([^<]*)<\/loc><lastmod>([^<]*)/g),
-  ].map(([, loc, lastmod]) => ({ loc, lastmod }));
   const articleEntries = entries.filter(({ loc }) => {
     const [, category, slug, extra] = new URL(loc).pathname.split('/');
     return ARTICLE_CATEGORIES.includes(category) && slug && !extra;
@@ -84,14 +101,59 @@ test('sitemap article entries exactly cover every published indexable article', 
       ({ category, slug }) => canonicalArticleUrl(category, slug) === entry.loc
     );
     assert.ok(article);
-    const expectedLastmod = new Date(
-      article.data.updatedAt ||
-        article.data.modifiedAt ||
-        article.data.publishedAt ||
-        article.data.datePublished
-    ).toISOString();
-    assert.equal(entry.lastmod, expectedLastmod);
+    const sourceInstant = expectedLastmod(article.data);
+    if (sourceInstant === undefined) assert.equal(entry.lastmod, undefined);
+    else assert.equal(Date.parse(entry.lastmod), sourceInstant);
   }
+  for (const entry of entries.filter((entry) => !actualUrls.has(entry.loc))) {
+    assert.equal(entry.lastmod, undefined, `${entry.loc} is not an article`);
+  }
+});
+
+test('lastmod never uses the build clock or unsupported metadata fields', () => {
+  const { entries } = sitemapEntries();
+  const generatedSecond = Math.floor(
+    fs.statSync('public/sitemap.xml').mtimeMs / 1000
+  );
+  const expected = independentlyPublishedArticles();
+  const sourceCounts = new Map();
+  for (const { data } of expected) {
+    const value = expectedLastmod(data);
+    if (value !== undefined)
+      sourceCounts.set(value, (sourceCounts.get(value) || 0) + 1);
+  }
+  const sitemapCounts = new Map();
+  for (const { lastmod } of entries) {
+    if (!lastmod) continue;
+    const value = Date.parse(lastmod);
+    assert.notEqual(Math.floor(value / 1000), generatedSecond);
+    sitemapCounts.set(value, (sitemapCounts.get(value) || 0) + 1);
+  }
+  for (const [value, count] of sitemapCounts) {
+    if (count > 5) assert.equal(count, sourceCounts.get(value));
+  }
+  assert.equal(config.autoLastmod, false);
+  assert.doesNotMatch(
+    fs.readFileSync('next-sitemap.config.js', 'utf8'),
+    /new Date\s*\(|Date\.now\s*\(/
+  );
+});
+
+test('runtime code cannot import the build-only scanner', () => {
+  const sourceFiles = ['src/app', 'src/lib'].flatMap((root) =>
+    fs
+      .readdirSync(root, { recursive: true })
+      .filter((file) => /\.[cm]?[jt]sx?$/.test(file))
+      .map((file) => path.join(root, file))
+  );
+  for (const file of sourceFiles) {
+    assert.doesNotMatch(fs.readFileSync(file, 'utf8'), /sitemap-articles/);
+  }
+  const purePolicy = fs.readFileSync('src/lib/article-policy.js', 'utf8');
+  assert.doesNotMatch(
+    purePolicy,
+    /(?:from\s+|require\()['"](?:node:)?(?:fs|path)['"]|gray-matter|process\.cwd|readdirSync/
+  );
 });
 
 test('sitemap excludes non-pages and covers every supported news category', () => {
@@ -135,7 +197,12 @@ test('drafts and noindex fixtures never enter either sitemap', () => {
     publishedAt: '2026-10-24T12:00:00Z',
     updatedAt: '2026-10-25T12:00:00Z',
   });
-  write('old', { title: 'Old', publishedAt: '2026-10-20T12:00:00Z' });
+  write('old', {
+    title: 'Old',
+    publishedAt: '2026-10-20T12:00:00Z',
+    modifiedAt: '2026-10-25T12:00:00Z',
+  });
+  write('undated', { title: 'Undated' });
   write('status-draft', {
     title: 'Status draft',
     status: 'draft',
@@ -159,13 +226,30 @@ test('drafts and noindex fixtures never enter either sitemap', () => {
   const published = getSitemapArticles(root);
   assert.deepEqual(
     published.map(({ slug }) => slug),
-    ['old', 'recent']
+    ['old', 'recent', 'undated']
   );
+  assert.equal(published[0].lastmod, '2026-10-20T12:00:00.000Z');
   assert.equal(published[1].lastmod, '2026-10-25T12:00:00.000Z');
+  assert.equal(published[2].lastmod, undefined);
   assert.deepEqual(
     selectNewsArticles(published, Date.parse('2026-10-26T00:00:00Z')).map(
       ({ slug }) => slug
     ),
     ['recent']
+  );
+});
+
+test('lastmod compares date offsets as instants', () => {
+  assert.equal(
+    Date.parse(articleLastmod({ publishedAt: '2026-07-24T06:45:00-07:00' })),
+    Date.parse('2026-07-24T13:45:00Z')
+  );
+  assert.equal(
+    articleLastmod({
+      publishedAt: '2026-07-24T06:45:00-07:00',
+      modifiedAt: '2026-10-25T00:00:00Z',
+      dateModified: '2026-10-25T00:00:00Z',
+    }),
+    '2026-07-24T13:45:00.000Z'
   );
 });

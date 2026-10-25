@@ -1,11 +1,13 @@
 const {
   ARTICLE_CATEGORIES,
   canonicalArticleUrl,
-  getSitemapArticles,
   isNoindexFrontmatter,
   isPublishedFrontmatter,
-  readArticle,
 } = require('./src/lib/article-policy');
+const {
+  getSitemapArticles,
+  readArticle,
+} = require('./scripts/sitemap-articles');
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
@@ -15,6 +17,7 @@ module.exports = {
   changefreq: 'daily',
   priority: 0.7,
   sitemapSize: 5000,
+  autoLastmod: false,
   exclude: [
     '/api/*',
     '/admin/*',
@@ -84,20 +87,24 @@ module.exports = {
       changefreq = 'monthly';
     }
 
-    return {
+    const entry = {
       loc,
       changefreq,
       priority: Math.round(priority * 10) / 10,
-      lastmod: contentLastmod || new Date().toISOString(),
     };
+    if (contentLastmod) entry.lastmod = contentLastmod;
+    return entry;
   },
   additionalPaths: async () =>
-    getSitemapArticles().map((article) => ({
-      loc: canonicalArticleUrl(article.category, article.slug),
-      changefreq: 'weekly',
-      priority: 0.6,
-      lastmod: article.lastmod,
-    })),
+    getSitemapArticles().map((article) => {
+      const entry = {
+        loc: canonicalArticleUrl(article.category, article.slug),
+        changefreq: 'weekly',
+        priority: 0.6,
+      };
+      if (article.lastmod) entry.lastmod = article.lastmod;
+      return entry;
+    }),
   robotsTxtOptions: {
     policies: [
       {

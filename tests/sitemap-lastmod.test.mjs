@@ -5,7 +5,7 @@ import test from 'node:test';
 const require = createRequire(import.meta.url);
 const config = require('../next-sitemap.config.js');
 
-test('sitemap lastmod prefers modifiedAt over an earlier publishedAt', async () => {
+test('sitemap lastmod ignores modifiedAt and uses publishedAt', async () => {
   const result = await config.transform(
     config,
     '/local-news/coquitlam-partington-creek-wildlife-corridor'
@@ -13,8 +13,14 @@ test('sitemap lastmod prefers modifiedAt over an earlier publishedAt', async () 
   assert.ok(result);
   assert.equal(
     result.lastmod,
-    new Date('2026-08-28T08:00:00-07:00').toISOString()
+    new Date('2026-07-27T14:45:00-07:00').toISOString()
   );
+});
+
+test('sitemap leaves lastmod off non-article pages', async () => {
+  const result = await config.transform(config, '/about');
+  assert.ok(result);
+  assert.equal(result.lastmod, undefined);
 });
 
 test('sitemap lastmod uses publishedAt when modifiedAt is absent', async () => {
