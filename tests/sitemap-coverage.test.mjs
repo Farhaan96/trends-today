@@ -12,9 +12,12 @@ const {
   ARTICLE_CATEGORIES,
   articleLastmod,
   canonicalArticleUrl,
+  isNoindexFrontmatter,
+  needsSourceRefresh,
   selectNewsArticles,
 } = require('../src/lib/article-policy.js');
 const { buildNewsSitemap } = require('../src/lib/news-sitemap.js');
+const { redirectRules } = require('../src/lib/redirects.js');
 const { getSitemapArticles } = require('../scripts/sitemap-articles.js');
 const contentDir = path.resolve('content');
 
@@ -193,6 +196,20 @@ test('runtime code cannot import the build-only scanner', () => {
   );
 });
 
+test('archive transparency banner matches main inside its shared-rule gate', () => {
+  const page = fs.readFileSync('src/app/[category]/[slug]/page.tsx', 'utf8');
+  const gated = page.match(
+    /\{needsSourceRefresh && \(\s*<aside className="article-archive-notice">([\s\S]*?)<\/aside>\s*\)\}/
+  );
+  assert.ok(gated, 'archive notice must remain gated by needsSourceRefresh');
+  const paragraphs = [...gated[1].matchAll(/<p(?:\s[^>]*)?>([\s\S]*?)<\/p>/g)];
+  const banner = paragraphs.at(-1)?.[1].replace(/\s+/g, ' ').trim();
+  assert.equal(
+    banner,
+    'This article received a July 2026 readability and source-display pass, but its underlying claims have not yet received a fresh source review. It is temporarily excluded from search indexing. Check the linked sources for current information.'
+  );
+});
+
 test('sitemap excludes non-pages and covers every supported news category', () => {
   for (const route of [
     '/search',
@@ -259,25 +276,102 @@ test('drafts and noindex fixtures never enter either sitemap', () => {
     robots: { index: false },
     publishedAt: '2026-10-25T12:00:00Z',
   });
-  write('needs-source-refresh', {
+  const needsReview = {
     title: 'Needs source refresh',
     archiveReviewStatus: 'format-reviewed-needs-source-refresh',
     publishedAt: '2026-10-25T12:00:00Z',
-  });
+  };
+  const sourceRefreshed = {
+    title: 'Source refreshed',
+    archiveReviewStatus: 'source-refreshed',
+    publishedAt: '2026-10-25T12:00:00Z',
+  };
+  write('needs-source-refresh', needsReview);
+  write('source-refreshed', sourceRefreshed);
+
+  assert.equal(needsSourceRefresh(needsReview), true);
+  assert.equal(!isNoindexFrontmatter(needsReview), false);
+  assert.equal(needsSourceRefresh(sourceRefreshed), false);
+  assert.equal(!isNoindexFrontmatter(sourceRefreshed), true);
 
   const published = getSitemapArticles(root);
   assert.deepEqual(
     published.map(({ slug }) => slug),
-    ['old', 'recent', 'undated']
+    ['old', 'recent', 'source-refreshed', 'undated']
   );
   assert.equal(published[0].lastmod, '2026-10-20T12:00:00.000Z');
   assert.equal(published[1].lastmod, '2026-10-25T12:00:00.000Z');
-  assert.equal(published[2].lastmod, undefined);
+  assert.equal(published[2].lastmod, '2026-10-25T12:00:00.000Z');
+  assert.equal(published[3].lastmod, undefined);
   assert.deepEqual(
     selectNewsArticles(published, Date.parse('2026-10-26T00:00:00Z')).map(
       ({ slug }) => slug
     ),
-    ['recent']
+    ['recent', 'source-refreshed']
+  );
+
+  const newsXml = buildNewsSitemap(
+    [
+      {
+        category: 'science',
+        slug: 'needs-source-refresh',
+        title: needsReview.title,
+        frontmatter: needsReview,
+      },
+      {
+        category: 'science',
+        slug: 'source-refreshed',
+        title: sourceRefreshed.title,
+        frontmatter: sourceRefreshed,
+      },
+    ],
+    Date.parse('2026-10-26T00:00:00Z')
+  );
+  assert.doesNotMatch(newsXml, /\/needs-source-refresh<\/loc>/);
+  assert.match(newsXml, /\/source-refreshed<\/loc>/);
+});
+
+test('needs-source-refresh matches only the exact archive status', () => {
+  for (const archiveReviewStatus of [
+    'needs-source-refresh',
+    'format-reviewed-needs-source-refresh ',
+    'FORMAT-REVIEWED-NEEDS-SOURCE-REFRESH',
+    'format-reviewed',
+    undefined,
+    'source-refreshed',
+  ]) {
+    const data = { archiveReviewStatus };
+    assert.equal(needsSourceRefresh(data), false);
+    assert.equal(isNoindexFrontmatter(data), false);
+  }
+});
+
+test('legacy fear-extinction slug redirects permanently to the renamed file', () => {
+  assert.deepEqual(
+    redirectRules.find(
+      ({ source }) =>
+        source ===
+        '/psychology/fear-extinction-therapy-erases-phobias-neural-level'
+    ),
+    {
+      source: '/psychology/fear-extinction-therapy-erases-phobias-neural-level',
+      destination: '/psychology/how-the-brain-unlearns-fear',
+      statusCode: 301,
+    }
+  );
+  assert.match(
+    fs.readFileSync('next.config.ts', 'utf8'),
+    /async redirects\(\)[\s\S]*return redirectRules/
+  );
+  assert.equal(
+    fs.existsSync('content/psychology/how-the-brain-unlearns-fear.mdx'),
+    true
+  );
+  assert.equal(
+    fs.existsSync(
+      'content/psychology/fear-extinction-therapy-erases-phobias-neural-level.mdx'
+    ),
+    false
   );
 });
 

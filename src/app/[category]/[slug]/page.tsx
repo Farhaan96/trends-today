@@ -316,7 +316,8 @@ export default async function ArticlePage({
             <p>
               This article received a July 2026 readability and source-display
               pass, but its underlying claims have not yet received a fresh
-              source review. Check the linked sources for current information.
+              source review. It is temporarily excluded from search indexing.
+              Check the linked sources for current information.
             </p>
           </aside>
         )}
