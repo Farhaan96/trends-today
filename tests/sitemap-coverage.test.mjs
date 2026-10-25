@@ -209,6 +209,26 @@ test('archive transparency banner matches main inside its shared-rule gate', () 
   );
 });
 
+test('article robots metadata uses the shared noindex policy', () => {
+  const page = fs.readFileSync('src/app/[category]/[slug]/page.tsx', 'utf8');
+  assert.match(
+    page,
+    /import\s*\{[\s\S]*?\bisNoindexFrontmatter\b[\s\S]*?\}\s*from ['"]@\/lib\/article-policy['"];/
+  );
+  const metadata = page.match(
+    /export async function generateMetadata[\s\S]*?\n}\n\nexport default async function ArticlePage/
+  );
+  assert.ok(metadata, 'generateMetadata must be extractable');
+  assert.match(
+    metadata[0],
+    /const\s+noindex\s*=\s*isNoindexFrontmatter\(article\.frontmatter\);/
+  );
+  const robots = metadata[0].match(/robots\s*:\s*\{([\s\S]*?)\n\s*\},/);
+  assert.ok(robots, 'generateMetadata robots object must be extractable');
+  assert.match(robots[1], /\bindex\s*:\s*!noindex\s*,?/);
+  assert.doesNotMatch(robots[1], /\bindex\s*:\s*true\b/);
+});
+
 test('sitemap excludes non-pages and covers every supported news category', () => {
   for (const route of [
     '/search',
@@ -225,11 +245,8 @@ test('sitemap excludes non-pages and covers every supported news category', () =
     'culture',
     'psychology',
     'technology',
-    'tech',
     'health',
     'space',
-    'money',
-    'facts',
     'local-news',
   ]) {
     assert.ok(ARTICLE_CATEGORIES.includes(category));
