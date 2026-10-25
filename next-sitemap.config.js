@@ -1,22 +1,13 @@
-const fs = require('fs');
-const nodePath = require('path');
-const matter = require('gray-matter');
-
-function contentTimestamp(data) {
-  if (!data) return undefined;
-  for (const value of [
-    data.updatedAt,
-    data.modifiedAt,
-    data.publishedAt,
-    data.datePublished,
-  ]) {
-    if (typeof value !== 'string') continue;
-    const trimmed = value.trim();
-    if (!trimmed || !Number.isFinite(Date.parse(trimmed))) continue;
-    return new Date(trimmed).toISOString();
-  }
-  return undefined;
-}
+const {
+  ARTICLE_CATEGORIES,
+  canonicalArticleUrl,
+  isNoindexFrontmatter,
+  isPublishedFrontmatter,
+} = require('./src/lib/article-policy');
+const {
+  getSitemapArticles,
+  readArticle,
+} = require('./scripts/sitemap-articles');
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
@@ -26,6 +17,7 @@ module.exports = {
   changefreq: 'daily',
   priority: 0.7,
   sitemapSize: 5000,
+  autoLastmod: false,
   exclude: [
     '/api/*',
     '/admin/*',
@@ -33,40 +25,31 @@ module.exports = {
     '/subscribe',
     '/_next/*',
     '/images/*',
-    '/science',
-    '/science/*',
-    '/technology',
-    '/technology/*',
-    '/health',
-    '/health/*',
-    '/psychology',
-    '/psychology/*',
-    '/space',
-    '/space/*',
-    '/culture',
-    '/culture/*',
+    '/assets/*',
+    '/search',
+    '/search/*',
+    '/robots.txt',
+    '/rss.xml',
+    '/feed',
+    '/feed/*',
+    '/news-sitemap.xml',
     '/compare/iphone-15-pro-vs-samsung-galaxy-s24',
   ],
   transform: async (config, path) => {
     const articleMatch = path.match(/^\/([^/]+)\/([^/]+)$/);
     let contentLastmod;
-    if (articleMatch) {
-      const articlePath = nodePath.join(
-        process.cwd(),
-        'content',
-        articleMatch[1],
-        `${articleMatch[2]}.mdx`
-      );
-      if (fs.existsSync(articlePath)) {
-        const source = fs.readFileSync(articlePath, 'utf8');
-        const { data } = matter(source);
-        if (
-          data.archiveReviewStatus === 'format-reviewed-needs-source-refresh'
-        ) {
-          return null;
-        }
-        contentLastmod = contentTimestamp(data);
+    let loc = path;
+    if (articleMatch && ARTICLE_CATEGORIES.includes(articleMatch[1])) {
+      const article = readArticle(articleMatch[1], articleMatch[2]);
+      if (
+        article &&
+        (!isPublishedFrontmatter(article.data) ||
+          isNoindexFrontmatter(article.data))
+      ) {
+        return null;
       }
+      contentLastmod = article?.lastmod;
+      if (article) loc = canonicalArticleUrl(article.category, article.slug);
     }
 
     // Custom priorities based on page type
@@ -104,13 +87,24 @@ module.exports = {
       changefreq = 'monthly';
     }
 
-    return {
-      loc: path,
+    const entry = {
+      loc,
       changefreq,
       priority: Math.round(priority * 10) / 10,
-      lastmod: contentLastmod || new Date().toISOString(),
     };
+    if (contentLastmod) entry.lastmod = contentLastmod;
+    return entry;
   },
+  additionalPaths: async () =>
+    getSitemapArticles().map((article) => {
+      const entry = {
+        loc: canonicalArticleUrl(article.category, article.slug),
+        changefreq: 'weekly',
+        priority: 0.6,
+      };
+      if (article.lastmod) entry.lastmod = article.lastmod;
+      return entry;
+    }),
   robotsTxtOptions: {
     policies: [
       {

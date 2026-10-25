@@ -14,6 +14,11 @@ import { formatArticleDateWithWeekday } from '@/lib/editorial';
 import { CONTENT_CATEGORIES, getCategoryLabel } from '@/lib/categories';
 import { contentUpdatedValue } from '@/lib/freshness';
 import {
+  canonicalArticleUrl,
+  isNoindexFrontmatter,
+  needsSourceRefresh as articleNeedsSourceRefresh,
+} from '@/lib/article-policy';
+import {
   GENERATED_ILLUSTRATION_CAPTION,
   illustrationImageAlt,
   isGeneratedIllustration,
@@ -72,10 +77,8 @@ export async function generateMetadata({
     article.frontmatter?.imageAttribution,
     article.frontmatter?.imageSourceType
   );
-  const url = `https://www.trendstoday.ca/${category}/${slug}`;
-  const needsSourceRefresh =
-    article.frontmatter?.archiveReviewStatus ===
-    'format-reviewed-needs-source-refresh';
+  const url = canonicalArticleUrl(category, slug);
+  const noindex = isNoindexFrontmatter(article.frontmatter);
 
   return {
     title,
@@ -122,7 +125,7 @@ export async function generateMetadata({
       images: [image || '/images/placeholder.jpg'],
     },
     robots: {
-      index: !needsSourceRefresh,
+      index: !noindex,
       follow: true,
     },
   };
@@ -178,7 +181,7 @@ export default async function ArticlePage({
         type: authorProfile.entityType,
       }
     : rawAuthor || { name: authorName };
-  const url = `https://www.trendstoday.ca/${categoryKey}/${slug}`;
+  const url = canonicalArticleUrl(categoryKey, slug);
 
   // Breadcrumb data
   const breadcrumbs = [
@@ -203,11 +206,7 @@ export default async function ArticlePage({
   const reportingMethod = article.frontmatter?.reportingMethod as
     | string
     | undefined;
-  const archiveReviewStatus = article.frontmatter?.archiveReviewStatus as
-    | string
-    | undefined;
-  const needsSourceRefresh =
-    archiveReviewStatus === 'format-reviewed-needs-source-refresh';
+  const needsSourceRefresh = articleNeedsSourceRefresh(article.frontmatter);
 
   return (
     <article className="article-page">

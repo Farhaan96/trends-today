@@ -24,6 +24,7 @@
     "validate:images": "node -e \"const {ImageQualityAssurance} = require('./lib/image-quality-seo'); const qa = new ImageQualityAssurance(); qa.validateImageBatch(process.argv.slice(2)).then(console.log);\"",
     "fix:duplicates": "node scripts/fix-duplicate-images.js",
     "test:mcp": "node scripts/test-mcp.js",
+    "test": "node --test tests/*.test.mjs",
     "test:dalle": "node scripts/test-dalle-mcp.js",
     "generate:dalle": "node scripts/generate-dalle-images.js",
     "sitemaps": "next-sitemap",
