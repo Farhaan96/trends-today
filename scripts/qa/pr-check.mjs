@@ -294,21 +294,40 @@ try {
               .map((card) => {
                 const body = card.querySelector(section.body);
                 const headline = card.querySelector(section.headline);
+                const headlineStyle = headline
+                  ? getComputedStyle(headline)
+                  : null;
                 const lineHeight = headline
-                  ? Number.parseFloat(getComputedStyle(headline).lineHeight)
+                  ? Number.parseFloat(headlineStyle.lineHeight)
                   : 0;
+                const cardRect = card.getBoundingClientRect();
+                const bodyRect = body?.getBoundingClientRect();
+                const thumbnail = card.querySelector(section.thumbnail);
+                const thumbnailRect = visible(thumbnail)
+                  ? thumbnail.getBoundingClientRect()
+                  : null;
                 return {
-                  width: rounded(card.getBoundingClientRect().width),
-                  textWidth: body
-                    ? rounded(body.getBoundingClientRect().width)
-                    : 0,
-                  hasThumbnail: visible(card.querySelector(section.thumbnail)),
+                  width: rounded(cardRect.width),
+                  textWidth: bodyRect ? rounded(bodyRect.width) : 0,
+                  hasThumbnail: Boolean(thumbnailRect),
+                  thumbnailAboveText: Boolean(
+                    thumbnailRect &&
+                      bodyRect &&
+                      thumbnailRect.bottom <= bodyRect.top + 1
+                  ),
                   headlineLines:
                     headline && lineHeight
                       ? Math.ceil(
                           headline.getBoundingClientRect().height / lineHeight
                         )
                       : 0,
+                  headlineFullyVisible: Boolean(
+                    headline &&
+                      headline.scrollHeight <= headline.clientHeight + 1 &&
+                      headline.scrollWidth <= headline.clientWidth + 1
+                  ),
+                  headlineLineClamp: headlineStyle?.webkitLineClamp || '',
+                  headlineTextOverflow: headlineStyle?.textOverflow || '',
                   gridTemplateColumns:
                     getComputedStyle(card).gridTemplateColumns,
                 };
@@ -507,6 +526,14 @@ try {
           metrics.headline,
           'scrollHeight <= clientHeight'
         );
+        if (viewport.width <= 430) {
+          check(
+            `${prefix}: cover title is no larger than 31px`,
+            Number.parseFloat(metrics.headline?.fontSize) <= 31,
+            metrics.headline?.fontSize,
+            '<= 31px'
+          );
+        }
         check(
           `${prefix}: correct cover object-fit`,
           metrics.coverObjectFit === metrics.expectedCoverObjectFit,
@@ -578,23 +605,35 @@ try {
               section.cards.every(
                 (card) =>
                   card.width >= 280 &&
-                  card.textWidth >= (card.hasThumbnail ? 200 : 280) &&
-                  (!card.hasThumbnail ||
-                    Math.abs(
-                      Number.parseFloat(card.gridTemplateColumns) - 96
-                    ) <= 0.1)
+                  (section.name === 'Latest'
+                    ? card.textWidth >= 200 &&
+                      card.hasThumbnail &&
+                      Math.abs(
+                        Number.parseFloat(card.gridTemplateColumns) - 96
+                      ) <= 0.1
+                    : card.textWidth >= 280 &&
+                      (!card.hasThumbnail || card.thumbnailAboveText))
               ),
             section.cards,
-            'card >= 280px; text >= 200px with 96px thumbnail or >= 280px without one'
+            section.name === 'Latest'
+              ? 'card >= 280px; text >= 200px beside a 96px thumbnail'
+              : 'card and text >= 280px; thumbnail absent or stacked above text'
           );
-          check(
-            `${prefix}: ${section.name} headlines use at most four lines`,
-            section.cards.every(
-              (card) => card.headlineLines > 0 && card.headlineLines <= 4
-            ),
-            section.cards.map((card) => card.headlineLines),
-            '1-4 lines per headline'
-          );
+          if (section.name !== 'Latest') {
+            check(
+              `${prefix}: ${section.name} headlines are fully readable`,
+              section.cards.every(
+                (card) =>
+                  card.headlineLines > 0 &&
+                  card.headlineFullyVisible &&
+                  (card.headlineLineClamp === 'none' ||
+                    card.headlineLineClamp === 'unset') &&
+                  card.headlineTextOverflow !== 'ellipsis'
+              ),
+              section.cards,
+              'fully visible; no line clamp or ellipsis'
+            );
+          }
         }
         check(
           `${prefix}: tap targets are at least 44px`,

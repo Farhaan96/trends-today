@@ -67,19 +67,34 @@ test('phone homepage controls and type meet the mobile QA floors', () => {
   assert.doesNotMatch(component, /className="sr-only">Search local stories/);
 });
 
-test('phone story rows preserve a useful text column beside 96px thumbnails', () => {
+test('phone travel and neighbourhood cards stack full-width unclamped headlines', () => {
   const phoneCss = css.slice(css.indexOf('@media (max-width: 640px)'));
   assert.match(component, /className="travel-brief__body"/);
   assert.match(component, /className="neighbourhood-card__body"/);
   assert.match(
     phoneCss,
-    /\.neighbourhood-grid article,[\s\S]*\.travel-brief article\s*{[^}]*grid-template-columns:\s*96px minmax\(0, 1fr\)/s
+    /\.neighbourhood-grid article,[\s\S]*\.travel-brief article\s*{[^}]*grid-template-columns:\s*minmax\(0, 1fr\)/s
   );
   assert.match(
     phoneCss,
     /\.travel-brief__inner,[\s\S]*\.neighbourhood-grid\s*{[^}]*grid-template-columns:\s*1fr/s
   );
-  assert.match(phoneCss, /-webkit-line-clamp:\s*4/);
+  assert.match(
+    phoneCss,
+    /\.travel-brief h3,[\s\S]*\.neighbourhood-grid h3\s*{[^}]*overflow:\s*visible[^}]*text-overflow:\s*clip[^}]*-webkit-line-clamp:\s*unset/s
+  );
+  assert.match(
+    phoneCss,
+    /\.story-thumb\s*{[^}]*width:\s*100%[^}]*aspect-ratio:\s*3\s*\/\s*2/s
+  );
+});
+
+test('phone cover title uses the reviewed 30px/34px typography', () => {
+  const phoneCss = css.slice(css.indexOf('@media (max-width: 640px)'));
+  assert.match(
+    phoneCss,
+    /\.cover h1\s*{[^}]*font-size:\s*30px[^}]*line-height:\s*34px/s
+  );
 });
 
 test('Latest and city filters use the required responsive dimensions', () => {

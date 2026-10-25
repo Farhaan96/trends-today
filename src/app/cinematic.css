@@ -1400,8 +1400,8 @@ button:disabled {
     display: block;
     overflow: visible;
     -webkit-line-clamp: unset;
-    font-size: 32px;
-    line-height: 36px;
+    font-size: 30px;
+    line-height: 34px;
     letter-spacing: -0.6px;
     margin: 0;
   }
@@ -1528,7 +1528,7 @@ button:disabled {
   .neighbourhood-grid article,
   .travel-brief article {
     display: grid;
-    grid-template-columns: 96px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 10px;
     align-items: start;
   }
@@ -1553,15 +1553,15 @@ button:disabled {
   }
   .travel-brief h3,
   .neighbourhood-grid h3 {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
+    display: block;
+    overflow: visible;
+    text-overflow: clip;
+    -webkit-line-clamp: unset;
   }
   .story-thumb {
-    width: 96px;
-    height: 96px;
-    aspect-ratio: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
   }
   .today-brief__label {
     display: block;
