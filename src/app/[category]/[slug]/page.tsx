@@ -315,7 +315,7 @@ export default async function ArticlePage({
                       }).format(new Date(publishedAt))}
                     </time>
                   ) : null}
-                  {publishedAt && formattedReadingTime ? ' · ' : null}
+                  {publishedAt && formattedReadingTime ? '\u00a0·\u00a0' : null}
                   {formattedReadingTime}
                 </span>
               ) : null}

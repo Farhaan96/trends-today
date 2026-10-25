@@ -248,6 +248,7 @@ try {
           const articleMeta = document.querySelector('.article-meta');
           const metaAuthor = document.querySelector('.article-meta__author');
           const metaAuthorLink = metaAuthor?.querySelector('a');
+          const metaWhen = document.querySelector('.article-meta__when');
           const heroImage = hero?.querySelector('img');
           const heroBox = hero?.getBoundingClientRect();
           const bodyText = [...document.querySelectorAll('.prose p, .prose li')]
@@ -371,6 +372,8 @@ try {
                     fontSize: Number.parseFloat(
                       getComputedStyle(articleMeta).fontSize
                     ),
+                    clientHeight: articleMeta.clientHeight,
+                    scrollHeight: articleMeta.scrollHeight,
                     detailsBottom: Math.max(
                       ...[...articleMeta.children]
                         .filter((child) => child !== metaAuthor)
@@ -379,6 +382,7 @@ try {
                     authorBox: metaAuthor.getBoundingClientRect().toJSON(),
                     authorTapBox:
                       metaAuthorLink?.getBoundingClientRect().toJSON() || null,
+                    whenText: metaWhen?.textContent || '',
                     authorContrast: metaAuthorLink
                       ? contrast(
                           parseColor(getComputedStyle(metaAuthorLink).color),
@@ -519,6 +523,10 @@ for (const run of phoneArticleRuns) {
     run.metrics.articleMeta.authorTapBox?.height >= 44,
     `article author target is shorter than 44px at ${run.viewport.width}x${run.viewport.height}`
   );
+  assert.ok(
+    run.metrics.articleMeta.authorTapBox?.left >= 10,
+    `article author starts before the 10px side margin at ${run.viewport.width}x${run.viewport.height}`
+  );
   assert.deepEqual(
     run.metrics.tapTargets.below44px,
     [],
@@ -539,6 +547,16 @@ for (const run of articleRuns) {
   assert.ok(
     run.metrics.articleMeta.authorContrast >= 7,
     `article author contrast is ${run.metrics.articleMeta.authorContrast}:1 at ${run.viewport.width}x${run.viewport.height}`
+  );
+  assert.ok(
+    run.metrics.articleMeta.scrollHeight <=
+      run.metrics.articleMeta.clientHeight,
+    `article meta is clipped (${run.metrics.articleMeta.scrollHeight}px scroll height versus ${run.metrics.articleMeta.clientHeight}px client height) at ${run.viewport.width}x${run.viewport.height}`
+  );
+  assert.match(
+    run.metrics.articleMeta.whenText,
+    /\S\s+·\s+\S/,
+    `article date/read-time separator needs spaces on both sides at ${run.viewport.width}x${run.viewport.height}`
   );
   assert.equal(
     run.metrics.authorButton.found,

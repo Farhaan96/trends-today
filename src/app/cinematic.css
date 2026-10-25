@@ -1539,7 +1539,6 @@ button:disabled {
   .article-meta {
     min-height: 0;
     display: flex;
-    max-height: 88px;
     flex-wrap: wrap;
     align-items: center;
     gap: 0 10px;
@@ -1562,7 +1561,6 @@ button:disabled {
   }
   .article-meta__author .article-author-link {
     padding-inline: 8px;
-    margin-inline: -8px;
   }
   .article-hero {
     margin-top: 6px;
