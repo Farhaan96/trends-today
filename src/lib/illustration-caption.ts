@@ -8,6 +8,29 @@ const EXEMPT_SOURCE_TYPES = new Set([
   'official-source',
 ]);
 
+export function isContainedCivicHero(
+  sourceType?: unknown,
+  imageSrc?: unknown
+): boolean {
+  const source = String(sourceType || '')
+    .trim()
+    .toLowerCase();
+  const src = String(imageSrc || '')
+    .trim()
+    .toLowerCase();
+  if (source === 'generated' || source.includes('photo')) return false;
+  if (
+    source === 'official' ||
+    source.includes('map') ||
+    source.includes('logo') ||
+    source.includes('civic') ||
+    source === 'official-source'
+  ) {
+    return true;
+  }
+  return /(?:^|[/_-])map(?:[./_-]|$)|route-design/.test(src);
+}
+
 export function isGeneratedIllustration(
   attribution: unknown,
   sourceType?: unknown
@@ -26,14 +49,14 @@ export function illustrationImageAlt(
   sourceType?: unknown
 ): string {
   const fallback = String(title || '').trim() || 'Article';
-  const cleaned = (String(imageAlt || '').trim() || fallback).replace(
-    /[—–]/g,
-    ','
-  );
+  const cleaned = (String(imageAlt || '').trim() || fallback)
+    .replace(/[—–]/g, ',')
+    .replace(/^generated\b.*?illustration of\s+/i, '');
   if (!isGeneratedIllustration(attribution, sourceType)) return cleaned;
   const prefix = 'Generated illustration of';
   if (cleaned.toLowerCase().startsWith(prefix.toLowerCase())) {
     return prefix + cleaned.slice(prefix.length);
   }
-  return `${prefix} ${cleaned.charAt(0).toLowerCase()}${cleaned.slice(1)}`;
+  const rest = cleaned.charAt(0).toLowerCase() + cleaned.slice(1);
+  return `${prefix} ${rest}`;
 }
