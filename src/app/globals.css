@@ -2354,15 +2354,20 @@ img,
 .related-civic__ended li {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.25rem 0.75rem;
-  padding: 0.55rem 0;
+  align-items: center;
+  column-gap: 0.75rem;
+  padding: 0;
   border-top: 1px solid var(--color-border);
   font-size: 0.95rem;
   line-height: 1.4;
 }
 
+/* Each ended link is a tap target of at least 44px, text centred. */
 .related-civic__ended a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.35rem 0;
   color: var(--color-text);
   text-decoration: underline;
   text-underline-offset: 2px;
@@ -2372,6 +2377,12 @@ img,
   color: var(--color-text-soft);
   font-size: 0.8rem;
   white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .related-civic__ended span {
+    padding-bottom: 0.5rem;
+  }
 }
 
 @media (max-width: 700px) {

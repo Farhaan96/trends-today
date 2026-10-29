@@ -197,6 +197,35 @@ export function openingText(mdx: string): string {
   return out.join('\n');
 }
 
+const PACIFIC_PARTS = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'America/Vancouver',
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hourCycle: 'h23',
+});
+
+/**
+ * 23:59:59 America/Vancouver on a YYYY-MM-DD date, DST-correct from the
+ * runtime's time zone data: PDT (-07:00) or PST (-08:00), whichever applies
+ * at that moment (BC stays on -07:00 after March 8, 2026 in tzdata 2026e).
+ */
+export function pacificEndOfDay(ymd: string): number {
+  for (const offset of ['-07:00', '-08:00']) {
+    const time = Date.parse(`${ymd}T23:59:59${offset}`);
+    if (!Number.isFinite(time)) return NaN;
+    const parts = Object.fromEntries(
+      PACIFIC_PARTS.formatToParts(new Date(time)).map((p) => [p.type, p.value])
+    );
+    const local = `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}`;
+    if (local === `${ymd}T23:59:59`) return time;
+  }
+  return NaN;
+}
+
 export type ClosureStatus = 'current' | 'ended' | 'undated';
 
 /**
@@ -211,8 +240,9 @@ export function closureStatus(
     return 'undated';
   const raw = eventEndDate.trim();
   // A date with no time means the whole day in Pacific time.
-  const value = /^\d{4}-\d{2}-\d{2}$/.test(raw) ? `${raw}T23:59:59-08:00` : raw;
-  const end = Date.parse(value);
+  const end = /^\d{4}-\d{2}-\d{2}$/.test(raw)
+    ? pacificEndOfDay(raw)
+    : Date.parse(raw);
   if (!Number.isFinite(end)) return 'undated';
   return end >= now ? 'current' : 'ended';
 }

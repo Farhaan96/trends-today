@@ -12,6 +12,7 @@ const {
   extractNextSection,
   formatPacificDay,
   isCivicCategory,
+  pacificEndOfDay,
   splitCivicRelated,
   trimRepeatedWhatToKnow,
 } = await import(
@@ -138,4 +139,49 @@ test('Pacific dates do not roll over to the next UTC day', () => {
   assert.equal(formatPacificDay('2026-11-10T22:00:00-07:00'), 'Nov 10, 2026');
   assert.equal(formatPacificDay('2026-12-20'), 'Dec 20, 2026');
   assert.equal(/[—–]/.test(formatPacificDay('2026-12-20')), false);
+});
+
+test('a bare end date runs through 23:59:59 Vancouver time, DST-correct', () => {
+  // Summer 2025: PDT, -07:00. Winter 2025: PST, -08:00.
+  assert.equal(
+    pacificEndOfDay('2025-07-15'),
+    Date.parse('2025-07-15T23:59:59-07:00')
+  );
+  assert.equal(
+    pacificEndOfDay('2025-12-20'),
+    Date.parse('2025-12-20T23:59:59-08:00')
+  );
+  // Clock change days end in the new offset.
+  assert.equal(
+    pacificEndOfDay('2025-03-09'),
+    Date.parse('2025-03-09T23:59:59-07:00')
+  );
+  assert.equal(
+    pacificEndOfDay('2025-11-02'),
+    Date.parse('2025-11-02T23:59:59-08:00')
+  );
+  // Whatever the runtime's tz data says for later dates (BC stays on -07:00
+  // after March 8, 2026 in tzdata 2026e), the end is 23:59:59 local.
+  const local = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Vancouver',
+    dateStyle: 'short',
+    timeStyle: 'medium',
+    hourCycle: 'h23',
+  });
+  for (const day of ['2026-07-15', '2026-11-08', '2026-12-20']) {
+    assert.equal(
+      local.format(new Date(pacificEndOfDay(day))),
+      `${day}, 23:59:59`
+    );
+  }
+  // Still current at 11:30 p.m. PDT on a summer end date, ended just after.
+  assert.equal(
+    closureStatus('2025-07-15', Date.parse('2025-07-15T23:30:00-07:00')),
+    'current'
+  );
+  assert.equal(
+    closureStatus('2025-07-15', Date.parse('2025-07-16T00:00:30-07:00')),
+    'ended'
+  );
+  assert.ok(Number.isNaN(pacificEndOfDay('2026-13-40')));
 });
