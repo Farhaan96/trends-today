@@ -186,12 +186,9 @@ test('a bare end date runs through 23:59:59 Vancouver time, DST-correct', () => 
   assert.ok(Number.isNaN(pacificEndOfDay('2026-13-40')));
 });
 
-test('Holdom flips from current to ended at 3 p.m. PT on Oct 31, 2026', () => {
+test('Holdom fixture flips from current to ended at 3 p.m. PT on Oct 31, 2026', () => {
   const mdx = readFileSync(
-    new URL(
-      '../content/transit/burnaby-holdom-overpass-goring-single-lane-october-2026.mdx',
-      import.meta.url
-    ),
+    new URL('./fixtures/holdom-fixed-end.mdx', import.meta.url),
     'utf8'
   );
   const end = /^eventEndDate:\s*'([^']+)'/m.exec(mdx)?.[1];
