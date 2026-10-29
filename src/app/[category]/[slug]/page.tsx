@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { getArticleBySlug, getAllArticles } from '@/lib/article-utils';
 import ArticleContent from '@/components/article/ArticleContent';
 import ArticleHighlights from '@/components/article/ArticleHighlights';
+import ArticleNextUp from '@/components/article/ArticleNextUp';
 import ArticleJsonLd from '@/components/seo/ArticleJsonLd';
 import { BreadcrumbSchema } from '@/components/seo/SchemaMarkup';
 import { SmartRelatedArticles } from '@/components/article/RelatedArticles';
@@ -23,6 +24,12 @@ import {
   illustrationImageAlt,
   isGeneratedIllustration,
 } from '@/lib/illustration-caption';
+import {
+  extractNextSection,
+  isCivicCategory,
+  openingText,
+  trimRepeatedWhatToKnow,
+} from '@/lib/civic-article';
 import {
   getNewsroomProfileByName,
   getNewsroomProfileId,
@@ -208,6 +215,24 @@ export default async function ArticlePage({
     | undefined;
   const needsSourceRefresh = articleNeedsSourceRefresh(article.frontmatter);
 
+  // Civic pages (Local News, Transit): lift the "What closes next" style
+  // section under the dek, and leave out "What to know" lines that a block
+  // above already says. Article prose is moved or skipped whole, never edited.
+  const rawBody: string = article.content || article.mdxContent || '';
+  const civic = isCivicCategory(categoryKey);
+  const { section: nextSection, rest: bodyWithoutNext } = civic
+    ? extractNextSection(rawBody)
+    : { section: null, rest: rawBody };
+  const articleBody = civic
+    ? trimRepeatedWhatToKnow(bodyWithoutNext, [
+        title,
+        description,
+        ...(needsSourceRefresh ? [] : highlights || []),
+        nextSection || '',
+        openingText(bodyWithoutNext),
+      ]).mdx
+    : rawBody;
+
   return (
     <article className="article-page">
       {/* Structured Data */}
@@ -234,6 +259,8 @@ export default async function ArticlePage({
           </h1>
 
           {description && <p className="article-deck">{description}</p>}
+
+          <ArticleNextUp section={nextSection} />
 
           {/* Prominent publish date near title */}
           <PublishDate
@@ -324,7 +351,7 @@ export default async function ArticlePage({
         <ArticleHighlights
           highlights={needsSourceRefresh ? undefined : highlights}
         />
-        <ArticleContent content={article.content || article.mdxContent} />
+        <ArticleContent content={articleBody} />
         {reportingMethod && (
           <aside className="article-method" aria-labelledby="reporting-method">
             <p className="article-method__eyebrow">Transparency</p>
@@ -389,6 +416,7 @@ export default async function ArticlePage({
         }}
         allArticles={allArticles}
         maxArticles={3}
+        civic={civic}
         className="article-related"
       />
     </article>

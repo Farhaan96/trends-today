@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { formatArticleDate } from '@/lib/editorial';
 import { illustrationImageAlt } from '@/lib/illustration-caption';
+import { formatPacificDay, splitCivicRelated } from '@/lib/civic-article';
 
 interface Article {
   slug: string;
@@ -20,6 +21,7 @@ interface Article {
     imageSourceType?: string;
     keywords?: string[];
     tags?: string[];
+    eventEndDate?: string;
   };
 }
 
@@ -136,6 +138,110 @@ interface SmartRelatedArticlesProps {
   allArticles: Article[];
   maxArticles?: number;
   className?: string;
+  /** Civic pages lead with current closures and list ended ones below. */
+  civic?: boolean;
+  /** Reference time for current vs ended; defaults to render time. */
+  now?: number;
+}
+
+function articleHref(article: Article, fallbackCategory: string) {
+  const category =
+    article.category || article.frontmatter?.category || fallbackCategory;
+  return `/${category}/${article.slug}`;
+}
+
+/**
+ * Civic related stories: current or upcoming closures as small cards of equal
+ * size, then ended closures as plain links lower down.
+ */
+function CivicRelatedArticles({
+  cards,
+  ended,
+  currentCategory,
+}: {
+  cards: Article[];
+  ended: Article[];
+  currentCategory: string;
+}) {
+  if (cards.length === 0 && ended.length === 0) return null;
+
+  return (
+    <section
+      className="article-related-civic"
+      aria-labelledby="related-civic-title"
+    >
+      <div className="site-shell">
+        <h2 id="related-civic-title">Related Articles</h2>
+        {cards.length > 0 && (
+          <ul className="related-civic__cards">
+            {cards.map((article) => {
+              const articleTitle =
+                article.title || article.frontmatter?.title || '';
+              const articleImage = article.image || article.frontmatter?.image;
+              const endDate = article.frontmatter?.eventEndDate;
+              const through = formatPacificDay(endDate);
+              return (
+                <li key={article.slug}>
+                  <Link
+                    href={articleHref(article, currentCategory)}
+                    className="related-civic__card"
+                  >
+                    <div className="related-civic__media">
+                      {articleImage ? (
+                        <Image
+                          src={articleImage}
+                          alt={illustrationImageAlt(
+                            article.frontmatter?.imageAlt,
+                            articleTitle,
+                            article.frontmatter?.imageAttribution,
+                            article.frontmatter?.imageSourceType
+                          )}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 700px) 7rem, 20rem"
+                        />
+                      ) : null}
+                    </div>
+                    <div className="related-civic__body">
+                      {through ? (
+                        <p className="related-civic__status">
+                          Through {through}
+                        </p>
+                      ) : null}
+                      <h3>{articleTitle}</h3>
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+
+        {ended.length > 0 && (
+          <div className="related-civic__ended">
+            <h3>Already ended</h3>
+            <ul>
+              {ended.map((article) => {
+                const articleTitle =
+                  article.title || article.frontmatter?.title || '';
+                const endedOn = formatPacificDay(
+                  article.frontmatter?.eventEndDate
+                );
+                return (
+                  <li key={article.slug}>
+                    <Link href={articleHref(article, currentCategory)}>
+                      {articleTitle}
+                    </Link>
+                    {endedOn ? <span>Ended {endedOn}</span> : null}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+    </section>
+  );
 }
 
 export function SmartRelatedArticles({
@@ -143,6 +249,8 @@ export function SmartRelatedArticles({
   allArticles,
   maxArticles = 3,
   className = '',
+  civic = false,
+  now,
 }: SmartRelatedArticlesProps) {
   const currentCategory =
     currentArticle.category || currentArticle.frontmatter?.category;
@@ -152,7 +260,7 @@ export function SmartRelatedArticles({
   const currentTags = currentArticle.frontmatter?.tags || [];
 
   // Filter and score related articles
-  const relatedArticles = allArticles
+  const scoredArticles = allArticles
     .filter((article) => {
       // Exclude current article
       if (article.slug === currentArticle.slug) return false;
@@ -205,7 +313,31 @@ export function SmartRelatedArticles({
       return { article, score };
     })
     .filter(({ score }) => score > 0)
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => b.score - a.score);
+
+  if (civic) {
+    const { cards, ended } = splitCivicRelated(
+      scoredArticles.map(({ article, score }) => ({
+        article,
+        score,
+        slug: article.slug,
+        eventEndDate: article.frontmatter?.eventEndDate,
+      })),
+      now ?? Date.now(),
+      maxArticles
+    );
+    if (cards.length > 0 || ended.length > 0) {
+      return (
+        <CivicRelatedArticles
+          cards={cards.map(({ article }) => article)}
+          ended={ended.map(({ article }) => article)}
+          currentCategory={currentCategory || ''}
+        />
+      );
+    }
+  }
+
+  const relatedArticles = scoredArticles
     .slice(0, maxArticles)
     .map(({ article }) => article);
 
