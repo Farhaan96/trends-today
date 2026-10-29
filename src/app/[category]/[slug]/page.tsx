@@ -216,10 +216,6 @@ export default async function ArticlePage({
   const locality = article.frontmatter?.locality as string | undefined;
   const editor = article.frontmatter?.editor as string | undefined;
   const highlights = article.frontmatter?.highlights as string[] | undefined;
-  const headsUp =
-    typeof article.frontmatter?.headsUp === 'string'
-      ? article.frontmatter.headsUp.trim()
-      : '';
   const reportingMethod = article.frontmatter?.reportingMethod as
     | string
     | undefined;
@@ -269,8 +265,6 @@ export default async function ArticlePage({
           </h1>
 
           {description && <p className="article-deck">{description}</p>}
-
-          {headsUp ? <p className="article-heads-up">{headsUp}</p> : null}
 
           <ArticleNextUp section={nextSection} />
 
