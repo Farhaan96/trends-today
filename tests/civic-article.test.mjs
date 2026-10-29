@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import test from 'node:test';
 import ts from 'typescript';
+import matter from 'gray-matter';
 
 const compiled = ts.transpileModule(
   readFileSync(new URL('../src/lib/civic-article.ts', import.meta.url), 'utf8'),
@@ -13,6 +14,7 @@ const {
   formatPacificDay,
   isCivicCategory,
   isOngoingUndated,
+  ongoingFlagProblems,
   pacificEndOfDay,
   splitCivicRelated,
   trimRepeatedWhatToKnow,
@@ -141,7 +143,12 @@ test('ongoing undated stories sort after dated current, before undated filler', 
   const { cards, ended } = splitCivicRelated(
     [
       { slug: 'filler', score: 50 },
-      { slug: 'ongoing', score: 40, ongoing: true },
+      {
+        slug: 'ongoing',
+        score: 40,
+        ongoing: true,
+        ongoingReviewBy: '2026-11-30',
+      },
       { slug: 'nov', score: 10, eventEndDate: '2026-11-08' },
       { slug: 'oct', score: 20, eventEndDate: '2026-10-15T22:00:00-07:00' },
     ],
@@ -165,7 +172,12 @@ test('ongoing stories stay within the max of 3 current cards', () => {
       { slug: 'a', score: 1, eventEndDate: '2026-11-01' },
       { slug: 'b', score: 2, eventEndDate: '2026-11-02' },
       { slug: 'c', score: 3, eventEndDate: '2026-11-03' },
-      { slug: 'ongoing', score: 99, ongoing: true },
+      {
+        slug: 'ongoing',
+        score: 99,
+        ongoing: true,
+        ongoingReviewBy: '2026-11-30',
+      },
     ],
     now,
     3
@@ -193,7 +205,10 @@ test('undated stories without the flag are unchanged', () => {
   );
   assert.equal(isOngoingUndated({ ongoing: false }, now), false);
   assert.equal(isOngoingUndated({}, now), false);
-  assert.equal(isOngoingUndated({ ongoing: true }, now), true);
+  assert.equal(
+    isOngoingUndated({ ongoing: true, ongoingReviewBy: '2026-11-30' }, now),
+    true
+  );
 });
 
 test('a past eventEndDate wins over ongoing: true', () => {
@@ -204,6 +219,7 @@ test('a past eventEndDate wins over ongoing: true', () => {
         slug: 'flagged-ended',
         score: 50,
         ongoing: true,
+        ongoingReviewBy: '2026-11-30',
         eventEndDate: '2026-10-15T22:00:00-07:00',
       },
       { slug: 'nov', score: 1, eventEndDate: '2026-11-08' },
@@ -221,11 +237,118 @@ test('a past eventEndDate wins over ongoing: true', () => {
   );
   assert.equal(
     isOngoingUndated(
-      { ongoing: true, eventEndDate: '2026-10-15T22:00:00-07:00' },
+      {
+        ongoing: true,
+        ongoingReviewBy: '2026-11-30',
+        eventEndDate: '2026-10-15T22:00:00-07:00',
+      },
       now
     ),
     false
   );
+});
+
+test('ongoing needs a review date that has not passed (Vancouver end of day)', () => {
+  const base = { ongoing: true };
+  const at = (iso) => Date.parse(iso);
+  // Future review date: ongoing.
+  assert.equal(
+    isOngoingUndated(
+      { ...base, ongoingReviewBy: '2026-11-30' },
+      at('2026-10-29T09:00:00-07:00')
+    ),
+    true
+  );
+  // Last second of the review day still counts; the next second does not.
+  // (Offset comes from the runtime's tz data, as in the end-of-day test.)
+  const reviewEnd = pacificEndOfDay('2026-11-30');
+  assert.equal(
+    isOngoingUndated({ ...base, ongoingReviewBy: '2026-11-30' }, reviewEnd),
+    true
+  );
+  assert.equal(
+    isOngoingUndated(
+      { ...base, ongoingReviewBy: '2026-11-30' },
+      reviewEnd + 1000
+    ),
+    false
+  );
+  // Past, missing or invalid review date: plain undated.
+  const now = at('2026-10-29T09:00:00-07:00');
+  assert.equal(
+    isOngoingUndated({ ...base, ongoingReviewBy: '2026-10-01' }, now),
+    false
+  );
+  assert.equal(isOngoingUndated(base, now), false);
+  assert.equal(
+    isOngoingUndated({ ...base, ongoingReviewBy: '2026-13-40' }, now),
+    false
+  );
+  assert.equal(
+    isOngoingUndated({ ...base, ongoingReviewBy: 'fall 2026' }, now),
+    false
+  );
+  // An unquoted YAML date parses to a Date and still works.
+  assert.equal(
+    isOngoingUndated(
+      { ...base, ongoingReviewBy: new Date('2026-11-30T00:00:00Z') },
+      now
+    ),
+    true
+  );
+});
+
+test('flagged stories with a missing or past review date sort as undated filler', () => {
+  const now = Date.parse('2026-10-29T09:00:00-07:00');
+  const { cards } = splitCivicRelated(
+    [
+      { slug: 'missing', score: 40, ongoing: true },
+      { slug: 'past', score: 30, ongoing: true, ongoingReviewBy: '2026-10-01' },
+      { slug: 'filler', score: 50 },
+      { slug: 'nov', score: 10, eventEndDate: '2026-11-08' },
+    ],
+    now,
+    3
+  );
+  assert.deepEqual(
+    cards.map((item) => item.slug),
+    ['nov', 'filler', 'missing']
+  );
+});
+
+test('ongoing flag check rejects an article without a valid ongoingReviewBy', () => {
+  const read = (name) =>
+    matter(readFileSync(new URL(`./fixtures/${name}`, import.meta.url), 'utf8'))
+      .data;
+  assert.deepEqual(ongoingFlagProblems(read('ongoing-with-review.mdx')), []);
+  assert.deepEqual(ongoingFlagProblems(read('ongoing-missing-review.mdx')), [
+    'ongoing: true needs ongoingReviewBy (YYYY-MM-DD)',
+  ]);
+  assert.deepEqual(
+    ongoingFlagProblems({ ongoing: true, ongoingReviewBy: 'fall 2026' }),
+    ['ongoingReviewBy must be a valid YYYY-MM-DD date']
+  );
+  assert.deepEqual(ongoingFlagProblems({ status: 'published' }), []);
+});
+
+test('every content article with ongoing: true has a valid ongoingReviewBy', () => {
+  const root = new URL('../content/', import.meta.url);
+  const problems = [];
+  let flagged = 0;
+  for (const category of readdirSync(root, { withFileTypes: true })) {
+    if (!category.isDirectory()) continue;
+    const dir = new URL(`${category.name}/`, root);
+    for (const file of readdirSync(dir)) {
+      if (!file.endsWith('.mdx')) continue;
+      const { data } = matter(readFileSync(new URL(file, dir), 'utf8'));
+      if (data.ongoing === true) flagged += 1;
+      for (const problem of ongoingFlagProblems(data)) {
+        problems.push(`content/${category.name}/${file}: ${problem}`);
+      }
+    }
+  }
+  assert.deepEqual(problems, []);
+  assert.ok(flagged >= 1, 'expected at least the Holdom article to be flagged');
 });
 
 test('Pacific dates do not roll over to the next UTC day', () => {

@@ -268,19 +268,59 @@ export interface RelatedCandidate {
   eventEndDate?: string;
   /** Explicit `ongoing: true` frontmatter: still in effect, no firm end date. */
   ongoing?: boolean;
+  /**
+   * Required with `ongoing: true`: YYYY-MM-DD review date (not an end date,
+   * never shown to readers). The flag stops counting after that Pacific day.
+   */
+  ongoingReviewBy?: string | Date;
+}
+
+/** YYYY-MM-DD from frontmatter; YAML may parse an unquoted date to a Date. */
+function reviewDay(value: unknown): string | undefined {
+  if (value instanceof Date) {
+    return Number.isNaN(value.getTime())
+      ? undefined
+      : value.toISOString().slice(0, 10);
+  }
+  if (typeof value !== 'string') return undefined;
+  const raw = value.trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(raw)) return undefined;
+  return Number.isFinite(pacificEndOfDay(raw)) ? raw : undefined;
+}
+
+/** End of the review day in Vancouver time, or NaN if missing or invalid. */
+export function ongoingReviewEnd(value: unknown): number {
+  const day = reviewDay(value);
+  return day ? pacificEndOfDay(day) : NaN;
 }
 
 /**
- * An undated story flagged `ongoing: true` counts as current. A parseable
- * eventEndDate always wins, so a past end date is still "ended".
+ * An undated story flagged `ongoing: true` counts as current only while its
+ * `ongoingReviewBy` day (Vancouver time) has not passed. A missing, invalid
+ * or past review date makes it plain undated. A parseable eventEndDate always
+ * wins, so a past end date is still "ended".
  */
 export function isOngoingUndated(
-  item: Pick<RelatedCandidate, 'eventEndDate' | 'ongoing'>,
+  item: Pick<RelatedCandidate, 'eventEndDate' | 'ongoing' | 'ongoingReviewBy'>,
   now: number
 ): boolean {
-  return (
-    item.ongoing === true && closureStatus(item.eventEndDate, now) === 'undated'
-  );
+  if (item.ongoing !== true) return false;
+  if (closureStatus(item.eventEndDate, now) !== 'undated') return false;
+  const review = ongoingReviewEnd(item.ongoingReviewBy);
+  return Number.isFinite(review) && review >= now;
+}
+
+/**
+ * Frontmatter check for the content test: an article with `ongoing: true`
+ * must carry a valid `ongoingReviewBy` (YYYY-MM-DD).
+ */
+export function ongoingFlagProblems(data: Record<string, unknown>): string[] {
+  if (data.ongoing !== true) return [];
+  if (data.ongoingReviewBy === undefined || data.ongoingReviewBy === '')
+    return ['ongoing: true needs ongoingReviewBy (YYYY-MM-DD)'];
+  if (!Number.isFinite(ongoingReviewEnd(data.ongoingReviewBy)))
+    return ['ongoingReviewBy must be a valid YYYY-MM-DD date'];
+  return [];
 }
 
 /**

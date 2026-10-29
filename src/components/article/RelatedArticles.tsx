@@ -27,6 +27,7 @@ interface Article {
     tags?: string[];
     eventEndDate?: string;
     ongoing?: boolean;
+    ongoingReviewBy?: string;
   };
 }
 
@@ -191,6 +192,7 @@ function CivicRelatedArticles({
                 {
                   eventEndDate: endDate,
                   ongoing: article.frontmatter?.ongoing,
+                  ongoingReviewBy: article.frontmatter?.ongoingReviewBy,
                 },
                 now
               )
@@ -346,6 +348,7 @@ export function SmartRelatedArticles({
         slug: article.slug,
         eventEndDate: article.frontmatter?.eventEndDate,
         ongoing: article.frontmatter?.ongoing,
+        ongoingReviewBy: article.frontmatter?.ongoingReviewBy,
       })),
       renderNow,
       maxArticles
