@@ -2185,3 +2185,229 @@ img,
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Civic article pages: next change under the dek */
+.article-next-up {
+  max-width: 48rem;
+  margin: 1.25rem 0 0;
+  padding: 0.9rem 1.1rem;
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.article-next-up h2 {
+  margin: 0 0 0.45rem;
+  color: var(--color-accent-strong);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.article-next-up ul {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.article-next-up li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.article-next-up li::before {
+  content: '';
+  position: absolute;
+  top: 0.6em;
+  left: 0;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.article-next-up p {
+  margin: 0.55rem 0 0;
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+}
+
+.article-next-up a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .article-next-up {
+    margin-top: 10px;
+    padding: 10px 12px;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .article-next-up p {
+    font-size: 14px;
+  }
+}
+
+/* Civic article pages: current closures as small equal cards, ended below */
+.article-related-civic {
+  padding: 2.5rem 0 3rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.article-related-civic h2 {
+  margin: 0 0 1.25rem;
+  color: var(--color-text);
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.related-civic__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.related-civic__cards > li {
+  display: flex;
+}
+
+.related-civic__card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.related-civic__card:hover h3 {
+  text-decoration: underline;
+}
+
+.related-civic__media {
+  position: relative;
+  flex: none;
+  aspect-ratio: 2 / 1;
+  background: var(--color-surface-strong);
+}
+
+.related-civic__body {
+  padding: 0.75rem 0.9rem 0.9rem;
+}
+
+.related-civic__status {
+  margin: 0 0 0.3rem;
+  color: var(--color-accent-strong);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.related-civic__body h3 {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.related-civic__ended {
+  margin-top: 2rem;
+}
+
+.related-civic__ended h3 {
+  margin: 0 0 0.5rem;
+  color: var(--color-text-soft);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.related-civic__ended ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.related-civic__ended li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0.75rem;
+  padding: 0;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Each ended link is a tap target of at least 44px, text centred. */
+.related-civic__ended a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.35rem 0;
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.related-civic__ended span {
+  color: var(--color-text-soft);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .related-civic__ended span {
+    padding-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .related-civic__cards {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .related-civic__card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .related-civic__media {
+    width: 7rem;
+    aspect-ratio: 4 / 3;
+  }
+
+  .related-civic__body {
+    flex: 1;
+    min-width: 0;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .related-civic__body h3 {
+    font-size: 0.95rem;
+  }
+}
