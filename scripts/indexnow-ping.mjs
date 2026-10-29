@@ -139,7 +139,7 @@ async function main() {
     host: HOST,
     key: KEY,
     keyLocation: KEY_LOCATION,
-    urlList: [...live, `${SITE_URL}/sitemap.xml`],
+    urlList: live,
   };
   console.log(`IndexNow payload:\n${JSON.stringify(body, null, 2)}`);
   if (DRY_RUN) {
