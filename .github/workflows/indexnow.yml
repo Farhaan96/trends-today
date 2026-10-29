@@ -1,0 +1,78 @@
+name: IndexNow Ping
+
+# Runs when Vercel reports a deployment as successful. Only Production
+# deployments of a commit on main ping IndexNow; previews and PRs are ignored.
+on:
+  deployment_status:
+
+permissions:
+  contents: read
+  deployments: read
+
+concurrency:
+  group: indexnow-${{ github.event.deployment.sha }}
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    if: >-
+      github.event.deployment_status.state == 'success' &&
+      github.event.deployment.environment == 'Production'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      # Public by design: served at https://www.trendstoday.ca/<key>.txt
+      INDEXNOW_KEY: 7ca86737e2d21d13797d1f17aec2f1b6
+      DEPLOY_SHA: ${{ github.event.deployment.sha }}
+      DEPLOY_ID: ${{ github.event.deployment.id }}
+
+    steps:
+      - name: Checkout deployed commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.deployment.sha }}
+          fetch-depth: 0
+
+      - name: Confirm deployed commit is on main
+        id: guard
+        run: |
+          git fetch -q origin main
+          if git merge-base --is-ancestor "$DEPLOY_SHA" origin/main; then
+            echo "on_main=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::$DEPLOY_SHA is not on main; skipping IndexNow."
+            echo "on_main=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Find changed article files
+        if: steps.guard.outputs.on_main == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Diff against the previous Production deployment; fall back to parent.
+          PREV=$(gh api "repos/${{ github.repository }}/deployments?environment=Production&per_page=20" \
+            --jq "[.[] | select(.id < $DEPLOY_ID) | .sha][0] // empty" || true)
+          if [ -z "$PREV" ] || ! git cat-file -e "$PREV^{commit}" 2>/dev/null \
+            || ! git merge-base --is-ancestor "$PREV" "$DEPLOY_SHA"; then
+            PREV="$DEPLOY_SHA~1"
+          fi
+          git diff --name-only --diff-filter=AMR "$PREV" "$DEPLOY_SHA" -- 'content/**/*.mdx' > changed-files.txt || true
+          echo "Changed article files $PREV..$DEPLOY_SHA:"
+          cat changed-files.txt
+          if [ -s changed-files.txt ]; then echo "HAS_CHANGES=true" >> "$GITHUB_ENV"; fi
+
+      - name: Setup Node.js
+        if: env.HAS_CHANGES == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        if: env.HAS_CHANGES == 'true'
+        run: npm ci --ignore-scripts
+
+      - name: Wait for URLs and ping IndexNow
+        if: env.HAS_CHANGES == 'true'
+        continue-on-error: true
+        run: xargs -a changed-files.txt node scripts/indexnow-ping.mjs
