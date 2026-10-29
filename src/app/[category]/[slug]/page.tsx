@@ -37,6 +37,11 @@ import {
   normalizeAuthorName,
 } from '@/lib/newsroom';
 
+// Incremental static regeneration for every article page (the whole
+// [category]/[slug] route, not only civic pages). Each regeneration re-runs
+// this page, so civic Related cards re-check current vs ended closures.
+export const revalidate = 3600;
+
 const categoryConfig = Object.fromEntries(
   CONTENT_CATEGORIES.map((category) => [
     category,
