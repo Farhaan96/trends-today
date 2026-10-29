@@ -266,13 +266,29 @@ export interface RelatedCandidate {
   slug: string;
   score: number;
   eventEndDate?: string;
+  /** Explicit `ongoing: true` frontmatter: still in effect, no firm end date. */
+  ongoing?: boolean;
+}
+
+/**
+ * An undated story flagged `ongoing: true` counts as current. A parseable
+ * eventEndDate always wins, so a past end date is still "ended".
+ */
+export function isOngoingUndated(
+  item: Pick<RelatedCandidate, 'eventEndDate' | 'ongoing'>,
+  now: number
+): boolean {
+  return (
+    item.ongoing === true && closureStatus(item.eventEndDate, now) === 'undated'
+  );
 }
 
 /**
  * Split scored related articles for a civic page: current or upcoming
- * closures lead as cards (filled with undated related stories if there are
- * not enough), and ended closures are kept as links further down, newest
- * end date first.
+ * closures lead as cards (dated ones first, then undated stories flagged
+ * `ongoing: true`, then other undated related stories if there are not
+ * enough), and ended closures are kept as links further down, newest end
+ * date first.
  */
 export function splitCivicRelated<T extends RelatedCandidate>(
   scored: T[],
@@ -284,8 +300,11 @@ export function splitCivicRelated<T extends RelatedCandidate>(
   const current = byScore.filter(
     (item) => closureStatus(item.eventEndDate, now) === 'current'
   );
+  const ongoing = byScore.filter((item) => isOngoingUndated(item, now));
   const undated = byScore.filter(
-    (item) => closureStatus(item.eventEndDate, now) === 'undated'
+    (item) =>
+      closureStatus(item.eventEndDate, now) === 'undated' &&
+      !isOngoingUndated(item, now)
   );
   const ended = byScore
     .filter((item) => closureStatus(item.eventEndDate, now) === 'ended')
@@ -299,6 +318,6 @@ export function splitCivicRelated<T extends RelatedCandidate>(
       (a, b) =>
         Date.parse(b.eventEndDate || '') - Date.parse(a.eventEndDate || '')
     );
-  const cards = [...current, ...undated].slice(0, maxCards);
+  const cards = [...current, ...ongoing, ...undated].slice(0, maxCards);
   return { cards, ended };
 }

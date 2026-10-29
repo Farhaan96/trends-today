@@ -12,6 +12,7 @@ const {
   extractNextSection,
   formatPacificDay,
   isCivicCategory,
+  isOngoingUndated,
   pacificEndOfDay,
   splitCivicRelated,
   trimRepeatedWhatToKnow,
@@ -132,6 +133,98 @@ test('current closures lead, ended ones are kept for the list below', () => {
   assert.deepEqual(
     ended.map((item) => item.slug),
     ['oct', 'sept']
+  );
+});
+
+test('ongoing undated stories sort after dated current, before undated filler', () => {
+  const now = Date.parse('2026-10-29T09:00:00-07:00');
+  const { cards, ended } = splitCivicRelated(
+    [
+      { slug: 'filler', score: 50 },
+      { slug: 'ongoing', score: 40, ongoing: true },
+      { slug: 'nov', score: 10, eventEndDate: '2026-11-08' },
+      { slug: 'oct', score: 20, eventEndDate: '2026-10-15T22:00:00-07:00' },
+    ],
+    now,
+    3
+  );
+  assert.deepEqual(
+    cards.map((item) => item.slug),
+    ['nov', 'ongoing', 'filler']
+  );
+  assert.deepEqual(
+    ended.map((item) => item.slug),
+    ['oct']
+  );
+});
+
+test('ongoing stories stay within the max of 3 current cards', () => {
+  const now = Date.parse('2026-10-29T09:00:00-07:00');
+  const { cards } = splitCivicRelated(
+    [
+      { slug: 'a', score: 1, eventEndDate: '2026-11-01' },
+      { slug: 'b', score: 2, eventEndDate: '2026-11-02' },
+      { slug: 'c', score: 3, eventEndDate: '2026-11-03' },
+      { slug: 'ongoing', score: 99, ongoing: true },
+    ],
+    now,
+    3
+  );
+  assert.deepEqual(
+    cards.map((item) => item.slug),
+    ['c', 'b', 'a']
+  );
+});
+
+test('undated stories without the flag are unchanged', () => {
+  const now = Date.parse('2026-10-29T09:00:00-07:00');
+  const { cards } = splitCivicRelated(
+    [
+      { slug: 'u1', score: 9 },
+      { slug: 'u2', score: 7, ongoing: false },
+      { slug: 'nov', score: 1, eventEndDate: '2026-11-08' },
+    ],
+    now,
+    3
+  );
+  assert.deepEqual(
+    cards.map((item) => item.slug),
+    ['nov', 'u1', 'u2']
+  );
+  assert.equal(isOngoingUndated({ ongoing: false }, now), false);
+  assert.equal(isOngoingUndated({}, now), false);
+  assert.equal(isOngoingUndated({ ongoing: true }, now), true);
+});
+
+test('a past eventEndDate wins over ongoing: true', () => {
+  const now = Date.parse('2026-10-29T09:00:00-07:00');
+  const { cards, ended } = splitCivicRelated(
+    [
+      {
+        slug: 'flagged-ended',
+        score: 50,
+        ongoing: true,
+        eventEndDate: '2026-10-15T22:00:00-07:00',
+      },
+      { slug: 'nov', score: 1, eventEndDate: '2026-11-08' },
+    ],
+    now,
+    3
+  );
+  assert.deepEqual(
+    cards.map((item) => item.slug),
+    ['nov']
+  );
+  assert.deepEqual(
+    ended.map((item) => item.slug),
+    ['flagged-ended']
+  );
+  assert.equal(
+    isOngoingUndated(
+      { ongoing: true, eventEndDate: '2026-10-15T22:00:00-07:00' },
+      now
+    ),
+    false
   );
 });
 
