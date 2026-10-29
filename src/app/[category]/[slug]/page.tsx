@@ -5,6 +5,7 @@ import { getArticleBySlug, getAllArticles } from '@/lib/article-utils';
 import ArticleContent from '@/components/article/ArticleContent';
 import ArticleHighlights from '@/components/article/ArticleHighlights';
 import ArticleNextUp from '@/components/article/ArticleNextUp';
+import CivicPageEvents from '@/components/analytics/CivicPageEvents';
 import ArticleJsonLd from '@/components/seo/ArticleJsonLd';
 import { BreadcrumbSchema } from '@/components/seo/SchemaMarkup';
 import { SmartRelatedArticles } from '@/components/article/RelatedArticles';
@@ -419,6 +420,7 @@ export default async function ArticlePage({
         civic={civic}
         className="article-related"
       />
+      {civic ? <CivicPageEvents /> : null}
     </article>
   );
 }

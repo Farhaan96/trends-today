@@ -185,6 +185,7 @@ function CivicRelatedArticles({
                   <Link
                     href={articleHref(article, currentCategory)}
                     className="related-civic__card"
+                    data-card-status={endDate ? 'current' : 'undated'}
                   >
                     <div className="related-civic__media">
                       {articleImage ? (
@@ -229,7 +230,10 @@ function CivicRelatedArticles({
                 );
                 return (
                   <li key={article.slug}>
-                    <Link href={articleHref(article, currentCategory)}>
+                    <Link
+                      href={articleHref(article, currentCategory)}
+                      data-card-status="ended"
+                    >
                       {articleTitle}
                     </Link>
                     {endedOn ? <span>Ended {endedOn}</span> : null}
