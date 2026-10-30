@@ -2,7 +2,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { formatArticleDate } from '@/lib/editorial';
 import { illustrationImageAlt } from '@/lib/illustration-caption';
-import { formatPacificDay, splitCivicRelated } from '@/lib/civic-article';
+import {
+  formatPacificDay,
+  isOngoingUndated,
+  splitCivicRelated,
+} from '@/lib/civic-article';
 
 interface Article {
   slug: string;
@@ -22,6 +26,8 @@ interface Article {
     keywords?: string[];
     tags?: string[];
     eventEndDate?: string;
+    ongoing?: boolean;
+    ongoingReviewBy?: string;
   };
 }
 
@@ -158,10 +164,12 @@ function CivicRelatedArticles({
   cards,
   ended,
   currentCategory,
+  now,
 }: {
   cards: Article[];
   ended: Article[];
   currentCategory: string;
+  now: number;
 }) {
   if (cards.length === 0 && ended.length === 0) return null;
 
@@ -180,12 +188,24 @@ function CivicRelatedArticles({
               const articleImage = article.image || article.frontmatter?.image;
               const endDate = article.frontmatter?.eventEndDate;
               const through = formatPacificDay(endDate);
+              const cardStatus = isOngoingUndated(
+                {
+                  eventEndDate: endDate,
+                  ongoing: article.frontmatter?.ongoing,
+                  ongoingReviewBy: article.frontmatter?.ongoingReviewBy,
+                },
+                now
+              )
+                ? 'ongoing'
+                : endDate
+                  ? 'current'
+                  : 'undated';
               return (
                 <li key={article.slug}>
                   <Link
                     href={articleHref(article, currentCategory)}
                     className="related-civic__card"
-                    data-card-status={endDate ? 'current' : 'undated'}
+                    data-card-status={cardStatus}
                   >
                     <div className="related-civic__media">
                       {articleImage ? (
@@ -320,14 +340,17 @@ export function SmartRelatedArticles({
     .sort((a, b) => b.score - a.score);
 
   if (civic) {
+    const renderNow = now ?? Date.now();
     const { cards, ended } = splitCivicRelated(
       scoredArticles.map(({ article, score }) => ({
         article,
         score,
         slug: article.slug,
         eventEndDate: article.frontmatter?.eventEndDate,
+        ongoing: article.frontmatter?.ongoing,
+        ongoingReviewBy: article.frontmatter?.ongoingReviewBy,
       })),
-      now ?? Date.now(),
+      renderNow,
       maxArticles
     );
     if (cards.length > 0 || ended.length > 0) {
@@ -336,6 +359,7 @@ export function SmartRelatedArticles({
           cards={cards.map(({ article }) => article)}
           ended={ended.map(({ article }) => article)}
           currentCategory={currentCategory || ''}
+          now={renderNow}
         />
       );
     }
