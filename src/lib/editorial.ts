@@ -15,7 +15,8 @@ export function formatArticleDate(value?: string): string {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
-    timeZone: 'UTC',
+    // Pacific day, not UTC: evening posts land after midnight UTC.
+    timeZone: 'America/Vancouver',
   }).format(date);
 }
 
