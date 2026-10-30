@@ -1140,6 +1140,21 @@ img,
   line-height: 1.55;
 }
 
+.article-heads-up {
+  max-width: 48rem;
+  margin: 1rem 0 0;
+  padding-left: 0.85rem;
+  border-left: 3px solid currentColor;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.article-heads-up strong {
+  font-weight: 700;
+}
+
 .article-publish-date {
   margin-top: 1.5rem;
 }
