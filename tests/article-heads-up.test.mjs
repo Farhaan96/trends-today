@@ -31,8 +31,12 @@ test('headsUp renders after the dek and before the hero image', () => {
 test('the no-fall-back article sets headsUp once, not in the body', () => {
   const [, frontmatter, ...rest] = article.split(/^---$/m);
   const body = rest.join('---');
-  assert.match(frontmatter, /^headsUp: "Heads up, most of BC: .+"$/m);
-  assert.match(frontmatter, /^headsUpNote: "The Province says Golden .+"$/m);
+  assert.match(frontmatter, /^headsUp: "Heads up, BC: .+"$/m);
+  assert.match(
+    frontmatter,
+    /^headsUpNote: "Golden and the East Kootenay .+"$/m
+  );
+  assert.doesNotMatch(body, /Heads up, BC:/);
   assert.doesNotMatch(body, /Heads up, most of BC/);
   assert.doesNotMatch(body, /Golden falls back one last time on Nov\. 1\./);
   assert.doesNotMatch(article, /[\u2013\u2014]/);
