@@ -165,7 +165,7 @@ export default function CinematicHome({
                       alt={lead.imageAlt || lead.title}
                       fill
                       priority
-                      sizes="(max-width: 760px) 100vw, 67vw"
+                      sizes="(max-width: 640px) 100vw, 720px"
                       className="cover__image"
                     />
                   )}
@@ -297,6 +297,7 @@ export default function CinematicHome({
                       src={poster}
                       alt=""
                       fill
+                      loading="lazy"
                       sizes="(max-width: 760px) 65vw, 30vw"
                       draggable={false}
                     />

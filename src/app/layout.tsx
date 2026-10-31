@@ -17,6 +17,7 @@ const sans = localFont({
   src: '../../public/fonts/editorial-a.woff2',
   variable: '--font-ui',
   display: 'swap',
+  preload: false,
   weight: '400 700',
   fallback: ['system-ui', '-apple-system', 'sans-serif'],
 });
@@ -24,6 +25,7 @@ const display = localFont({
   src: '../../public/fonts/editorial-b.woff2',
   variable: '--font-editorial',
   display: 'swap',
+  preload: true,
   weight: '400 700',
   fallback: ['Georgia', 'serif'],
 });
