@@ -20,9 +20,11 @@ import StoryThumb from '@/components/editorial/StoryThumb';
 import { paginateItems } from '@/lib/pagination';
 import {
   type LocalStory,
+  ALL_CITIES,
   activeEvents,
   filterStories,
-  rankedStoryCities,
+  splitCityFilters,
+  splitFeaturedStories,
   storyCity,
   editorialPoster,
 } from '@/lib/cinematic-feed';
@@ -38,7 +40,7 @@ export default function CinematicHome({
 }) {
   const [now, setNow] = useState(asOf);
   const [selected, setSelected] = useState(1);
-  const [city, setCity] = useState('All cities');
+  const [city, setCity] = useState(ALL_CITIES);
   const [citiesExpanded, setCitiesExpanded] = useState(false);
   const [query, setQuery] = useState('');
   const [count, setCount] = useState(9);
@@ -53,24 +55,17 @@ export default function CinematicHome({
   const transit = stories
     .filter((story) => story.category === 'transit')
     .slice(0, 2);
-  const rankedCities = rankedStoryCities(stories);
-  const topCities = rankedCities.slice(0, 7);
-  const selectedExtraCity =
-    city !== 'All cities' && !topCities.includes(city) ? city : undefined;
-  const visibleCities = selectedExtraCity
-    ? [...topCities, selectedExtraCity]
-    : topCities;
-  const extraCities = rankedCities.filter(
-    (item) => !visibleCities.includes(item)
+  const { visible: visibleCities, extra: extraCities } = splitCityFilters(
+    stories,
+    city
   );
   const results = filterStories(stories, city, query);
-  const featuredStories = results.slice(0, 4);
-  const featuredLead = featuredStories[0];
-  const secondaryStories = featuredStories.slice(1);
-  const gridStories = results.slice(
-    featuredStories.length,
-    featuredStories.length + count
-  );
+  const {
+    lead: featuredLead,
+    secondaries: secondaryStories,
+    grid: gridStories,
+    hasMore,
+  } = splitFeaturedStories(results, count);
   const pagination = paginateItems(stories, 1, 12, '').pagination;
 
   useEffect(() => {
@@ -226,7 +221,7 @@ export default function CinematicHome({
                     title={story.title}
                     category={story.category}
                     className="travel-brief__thumb"
-                    sizes="(max-width: 800px) 45vw, 30vw"
+                    sizes="(max-width: 560px) calc(100vw - 44px), (max-width: 800px) 45vw, 30vw"
                   />
                   <span className="eyebrow">{storyCity(story)}</span>
                   <span className="travel-brief__title-row">
@@ -404,41 +399,44 @@ export default function CinematicHome({
             role="group"
             aria-label="Filter by city"
           >
-            <button
-              type="button"
-              aria-pressed={city === 'All cities'}
-              onClick={() => {
-                setCity('All cities');
-                setCount(9);
-              }}
-            >
-              All cities
-            </button>
-            {visibleCities.map((item) => (
+            <div className="city-filters__row">
               <button
                 type="button"
-                key={item}
-                aria-pressed={city === item}
+                aria-pressed={city === ALL_CITIES}
                 onClick={() => {
-                  setCity(item);
+                  setCity(ALL_CITIES);
                   setCount(9);
                 }}
               >
-                {item}
+                {ALL_CITIES}
               </button>
-            ))}
-            {extraCities.length > 0 && (
-              <button
-                type="button"
-                className="city-filters__toggle"
-                aria-expanded={citiesExpanded}
-                aria-controls="extra-city-filters"
-                onClick={() => setCitiesExpanded((value) => !value)}
-              >
-                {citiesExpanded ? 'Fewer cities' : 'More cities'}
-              </button>
-            )}
-            <span
+              {visibleCities.map((item) => (
+                <button
+                  type="button"
+                  key={item}
+                  aria-pressed={city === item}
+                  onClick={() => {
+                    setCity(item);
+                    setCount(9);
+                  }}
+                >
+                  {item}
+                </button>
+              ))}
+              {extraCities.length > 0 && (
+                <button
+                  type="button"
+                  className="city-filters__toggle"
+                  aria-expanded={citiesExpanded}
+                  aria-controls="extra-city-filters"
+                  onClick={() => setCitiesExpanded((value) => !value)}
+                >
+                  {citiesExpanded ? 'Fewer cities' : 'More cities'}
+                  <span className="city-filters__caret" aria-hidden="true" />
+                </button>
+              )}
+            </div>
+            <div
               id="extra-city-filters"
               className="city-filters__extra"
               hidden={!citiesExpanded}
@@ -456,7 +454,7 @@ export default function CinematicHome({
                   {item}
                 </button>
               ))}
-            </span>
+            </div>
           </div>
           <label className="story-search">
             <MagnifyingGlassIcon />
@@ -474,12 +472,15 @@ export default function CinematicHome({
         </div>
         <p className="result-count" role="status">
           {results.length} {results.length === 1 ? 'story' : 'stories'}
-          {city !== 'All cities' ? ` in ${city}` : ' from across the region'}
+          {city !== ALL_CITIES ? ` in ${city}` : ' from across the region'}
         </p>
         {featuredLead && (
           <div className="neighbourhood-feature">
             <article className="neighbourhood-lead">
-              <Link href={featuredLead.href}>
+              <Link
+                href={featuredLead.href}
+                className="neighbourhood-lead__link"
+              >
                 <StoryThumb
                   image={featuredLead.image}
                   imageAlt={featuredLead.imageAlt}
@@ -496,9 +497,12 @@ export default function CinematicHome({
                 <span className="neighbourhood-lead__description">
                   {featuredLead.description}
                 </span>
-                <time dateTime={featuredLead.publishedAt}>
-                  {date(featuredLead.publishedAt)}
-                </time>
+                <span className="neighbourhood-lead__meta">
+                  <time dateTime={featuredLead.publishedAt}>
+                    {date(featuredLead.publishedAt)}
+                  </time>
+                  <ArrowRightIcon />
+                </span>
               </Link>
             </article>
             {secondaryStories.length > 0 && (
@@ -512,7 +516,7 @@ export default function CinematicHome({
                         title={story.title}
                         category={story.category}
                         className="neighbourhood-secondary__thumb"
-                        sizes="(max-width: 480px) 36vw, (max-width: 800px) 30vw, 16vw"
+                        sizes="(max-width: 480px) 38vw, (max-width: 800px) 30vw, 16vw"
                       />
                       <span className="neighbourhood-secondary__body">
                         <span className="eyebrow">{storyCity(story)}</span>
@@ -528,40 +532,42 @@ export default function CinematicHome({
             )}
           </div>
         )}
-        <div className="neighbourhood-grid">
-          {gridStories.map((story) => (
-            <article key={story.href}>
-              <Link href={story.href} className="neighbourhood-card">
-                <StoryThumb
-                  image={story.image}
-                  imageAlt={story.imageAlt}
-                  title={story.title}
-                  category={story.category}
-                  className="neighbourhood-card__thumb"
-                  sizes="(max-width: 480px) calc(100vw - 44px), (max-width: 800px) 45vw, 30vw"
-                />
-                <span className="eyebrow">
-                  {storyCity(story)}
-                  <span>{getCategoryLabel(story.category)}</span>
-                </span>
-                <h3>{story.title}</h3>
-                <span className="neighbourhood-card__description">
-                  {story.description}
-                </span>
-                <span className="neighbourhood-card__meta">
-                  <time dateTime={story.publishedAt}>
-                    {date(story.publishedAt)}
-                  </time>
-                  {story.eventEndDate &&
-                    Date.parse(story.eventEndDate) < Date.parse(now) && (
-                      <span className="ended-label">Past event</span>
-                    )}
-                  <ArrowRightIcon />
-                </span>
-              </Link>
-            </article>
-          ))}
-        </div>
+        {gridStories.length > 0 && (
+          <div className="neighbourhood-grid">
+            {gridStories.map((story) => (
+              <article key={story.href}>
+                <Link href={story.href} className="neighbourhood-card">
+                  <StoryThumb
+                    image={story.image}
+                    imageAlt={story.imageAlt}
+                    title={story.title}
+                    category={story.category}
+                    className="neighbourhood-card__thumb"
+                    sizes="(max-width: 480px) calc(100vw - 44px), (max-width: 800px) 45vw, 30vw"
+                  />
+                  <span className="eyebrow">
+                    {storyCity(story)}
+                    <span>{getCategoryLabel(story.category)}</span>
+                  </span>
+                  <h3>{story.title}</h3>
+                  <span className="neighbourhood-card__description">
+                    {story.description}
+                  </span>
+                  <span className="neighbourhood-card__meta">
+                    <time dateTime={story.publishedAt}>
+                      {date(story.publishedAt)}
+                    </time>
+                    {story.eventEndDate &&
+                      Date.parse(story.eventEndDate) < Date.parse(now) && (
+                        <span className="ended-label">Past event</span>
+                      )}
+                    <ArrowRightIcon />
+                  </span>
+                </Link>
+              </article>
+            ))}
+          </div>
+        )}
         {results.length === 0 && (
           <div className="discovery-empty">
             <h3>No stories found.</h3>
@@ -569,7 +575,7 @@ export default function CinematicHome({
             <button
               type="button"
               onClick={() => {
-                setCity('All cities');
+                setCity(ALL_CITIES);
                 setQuery('');
               }}
             >
@@ -577,7 +583,7 @@ export default function CinematicHome({
             </button>
           </div>
         )}
-        {featuredStories.length + count < results.length && (
+        {hasMore && (
           <button
             type="button"
             className="more-stories"

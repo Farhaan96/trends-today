@@ -56,6 +56,56 @@ export function rankedStoryCities(stories: LocalStory[]): string[] {
     .map(([city]) => city);
 }
 
+export const ALL_CITIES = 'All cities';
+
+export interface CityFilterSplit {
+  visible: string[];
+  extra: string[];
+}
+
+// The filter row shows the busiest cities and hides the long tail behind a
+// toggle. A city that is already selected stays visible even when it sits in
+// the hidden tail, so the active filter never disappears from the row.
+export function splitCityFilters(
+  stories: LocalStory[],
+  selected: string,
+  limit = 7
+): CityFilterSplit {
+  const ranked = rankedStoryCities(stories);
+  const top = ranked.slice(0, limit);
+  const visible =
+    selected !== ALL_CITIES &&
+    ranked.includes(selected) &&
+    !top.includes(selected)
+      ? [...top, selected]
+      : top;
+  return { visible, extra: ranked.filter((city) => !visible.includes(city)) };
+}
+
+export interface FeaturedSplit {
+  lead?: LocalStory;
+  secondaries: LocalStory[];
+  grid: LocalStory[];
+  hasMore: boolean;
+}
+
+// The image led lead plus its secondaries come off the top of the filtered
+// results and the grid picks up straight after them, so no story is shown
+// twice in the same section.
+export function splitFeaturedStories(
+  results: LocalStory[],
+  gridCount: number,
+  featureSize = 4
+): FeaturedSplit {
+  const featured = results.slice(0, featureSize);
+  return {
+    lead: featured[0],
+    secondaries: featured.slice(1),
+    grid: results.slice(featured.length, featured.length + gridCount),
+    hasMore: featured.length + gridCount < results.length,
+  };
+}
+
 // Navigation artwork is tied to these exact event editions. New stories use
 // their own editable title and date; they never inherit an old event poster.
 const posters: Record<string, string> = {
