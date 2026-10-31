@@ -34,7 +34,7 @@ test('the no-fall-back article sets headsUp once, not in the body', () => {
   assert.match(frontmatter, /^headsUp: "Heads up, BC: .+"$/m);
   assert.match(
     frontmatter,
-    /^headsUpNote: "Cranbrook, Fernie, Sparwood, Invermere, Kimberley, Radium Hot Springs, Elkford and Golden stay on UTC-6, an hour ahead of the rest of BC\."$/m
+    /^headsUpNote: "Places that stay on UTC-6, an hour ahead of the rest of BC, include Cranbrook, Fernie, Sparwood, Invermere, Kimberley, Radium Hot Springs, Elkford, Golden and rural Golden \(CSRD Electoral Area A\)\."$/m
   );
   assert.doesNotMatch(body, /Heads up, BC:/);
   assert.doesNotMatch(body, /Heads up, most of BC/);
