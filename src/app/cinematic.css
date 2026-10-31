@@ -368,15 +368,39 @@ button:disabled {
   margin-left: auto;
 }
 .cover__credit {
-  font-size: 9px;
+  position: relative;
+  font-size: 12px;
+  line-height: 16px;
+  min-height: 32px;
   color: #e1e2cd;
   text-align: right;
   margin: 38px 2px 0;
 }
-/* The short credit is the phone line. Wider screens carry the full credit,
-   and the article page keeps its own full credit line. */
+/* Short credit by default; the full credit swaps in only where it fits in
+   two lines (measured by the hidden probe). The article page keeps its own
+   full credit line. */
 .cover__credit-short {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cover__credit-full {
   display: none;
+}
+.cover__credit--full .cover__credit-short {
+  display: none;
+}
+.cover__credit--full .cover__credit-full {
+  display: block;
+}
+.cover__credit-probe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 .story-thumb {
   position: relative;
@@ -1404,7 +1428,6 @@ a:hover .story-thumb--straight .story-thumb__image {
   }
   .cover__credit {
     margin-top: 28px;
-    font-size: 9px;
   }
   .travel-brief__inner {
     grid-template-columns: 1fr 1fr;
@@ -1954,18 +1977,8 @@ a:hover .story-thumb--straight .story-thumb__image {
      full on the article page. */
   .cover__credit {
     margin: 6px 0 0;
-    font-size: 12px;
-    line-height: 16px;
+    min-height: 16px;
     text-align: left;
-  }
-  .cover__credit-short {
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-  .cover__credit-full {
-    display: none;
   }
   .travel-brief__inner {
     grid-template-columns: minmax(0, 1fr);

@@ -48,6 +48,9 @@ export default function CinematicHome({
   const [count, setCount] = useState(9);
   const hero = useRef<HTMLDivElement>(null);
   const swipe = useRef<number | null>(null);
+  const credit = useRef<HTMLParagraphElement>(null);
+  const creditProbe = useRef<HTMLSpanElement>(null);
+  const [creditFull, setCreditFull] = useState(false);
   const plan = planHomepage({
     stories,
     latestHrefs,
@@ -84,6 +87,26 @@ export default function CinematicHome({
     ? homepageImage(featuredLead)
     : undefined;
   const pagination = paginateItems(stories, 1, 12, '').pagination;
+
+  // The hero credit starts as the short one line form. Where the full credit
+  // fits in two lines at 12px it swaps in; the box reserves two lines either
+  // way, so the swap never moves anything.
+  useEffect(() => {
+    const box = credit.current;
+    const probe = creditProbe.current;
+    if (!box || !probe) return;
+    const check = () => {
+      const lineHeight = parseFloat(getComputedStyle(probe).lineHeight) || 16;
+      setCreditFull(
+        window.matchMedia('(min-width: 641px)').matches &&
+          probe.getBoundingClientRect().height <= lineHeight * 2 + 1
+      );
+    };
+    check();
+    const observer = new ResizeObserver(check);
+    observer.observe(box);
+    return () => observer.disconnect();
+  }, [lead?.imageAttribution]);
 
   useEffect(() => {
     setNow(new Date().toISOString());
@@ -251,12 +274,23 @@ export default function CinematicHome({
                 </div>
               </Link>
               {lead.imageAttribution && (
-                <p className="cover__credit" title={lead.imageAttribution}>
-                  {/* Phones get the short credit on one readable line, with
-                      the full credit on the title attribute and on the
-                      article. From 641px up the full credit shows. */}
+                <p
+                  ref={credit}
+                  className={`cover__credit${creditFull ? ' cover__credit--full' : ''}`}
+                  title={lead.imageAttribution}
+                >
+                  {/* The short credit is one readable line. The full credit
+                      shows only where it fits in two lines; it is always on
+                      the title attribute and on the article page. */}
                   <span className="cover__credit-short">{leadCreditShort}</span>
                   <span className="cover__credit-full">
+                    {lead.imageAttribution}
+                  </span>
+                  <span
+                    ref={creditProbe}
+                    className="cover__credit-probe"
+                    aria-hidden="true"
+                  >
                     {lead.imageAttribution}
                   </span>
                 </p>
