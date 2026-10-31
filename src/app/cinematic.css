@@ -267,6 +267,53 @@ button:disabled {
   object-fit: cover;
   object-position: 50% 48%;
 }
+/* An official map leads the page whole, with its legend and its detour routes
+   intact. The caption drops below the artwork instead of sitting on top of
+   it, so nothing covers the key. */
+.cover__frame.cover__frame--contain {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  background: var(--tt-paper);
+}
+.cover__frame--contain .cover__media {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  aspect-ratio: 15 / 7;
+  overflow: hidden;
+}
+.cover__frame--contain .cover__caption {
+  position: static;
+  width: 100%;
+  box-shadow: none;
+}
+.cover__media--contain {
+  background: #f1ecdd;
+}
+.cover__media--contain .cover__image {
+  object-fit: contain;
+  object-position: center;
+}
+.cover__media--fallback {
+  background: var(--tt-ink);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #ffffff00 0 16px,
+    #ffffff14 16px 32px
+  );
+  color: var(--tt-lime);
+}
+.cover__fallback {
+  padding: clamp(20px, 3vw, 44px);
+}
+.cover__fallback .story-thumb__label {
+  font-size: clamp(28px, 3.4vw, 50px);
+}
+.cover__fallback .story-thumb__mark {
+  margin-bottom: auto;
+  font-size: clamp(15px, 1.5vw, 22px);
+}
 .cover__caption {
   position: absolute;
   bottom: -20px;
@@ -336,11 +383,43 @@ button:disabled {
 a:hover .story-thumb__image {
   transform: scale(1.03);
 }
+/* Official maps, data cards and logos are shown whole. A legend or a source
+   line at the edge of the artwork must never be cropped away. */
+.story-thumb--contain {
+  background: var(--tt-paper);
+}
+.story-thumb--contain .story-thumb__image {
+  object-fit: contain;
+  object-position: center;
+}
+a:hover .story-thumb--contain .story-thumb__image {
+  transform: none;
+}
 .story-thumb--photo::after {
   content: '';
   position: absolute;
   inset: 0;
   box-shadow: inset 0 0 0 1px #071c1714;
+  pointer-events: none;
+}
+/* Every generated image carries a legible label, in brand colours, over the
+   bottom left corner of its own thumbnail. */
+.story-thumb__illustration {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  z-index: 2;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--tt-lime);
+  box-shadow: 0 1px 4px #071c1759;
+  color: var(--tt-ink);
+  font-family: var(--font-ui), sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
   pointer-events: none;
 }
 .story-thumb__fallback {
@@ -352,47 +431,90 @@ a:hover .story-thumb__image {
   gap: 9px;
   padding: clamp(12px, 1.4vw, 20px);
 }
+/* A civic story with no usable art gets a deliberate branded category card,
+   built from the masthead, a rule and the section name. */
+.story-thumb--card {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #ffffff00 0 14px,
+    #ffffff17 14px 28px
+  );
+}
+.story-thumb--card::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 6px;
+  background: var(--tt-coral);
+}
+.story-thumb--coral::before,
+.story-thumb--accent::before {
+  background: var(--tt-ink);
+}
+.story-thumb--lime,
+.story-thumb--surface {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #07171700 0 14px,
+    #07171714 14px 28px
+  );
+}
+.story-thumb--card .story-thumb__mark {
+  margin-bottom: auto;
+}
 .story-thumb__rule {
   display: block;
-  width: 34px;
-  height: 2px;
+  width: 42px;
+  height: 3px;
   background: currentcolor;
-  opacity: 0.75;
+  opacity: 0.85;
 }
 .story-thumb__label {
   display: block;
-  font-size: clamp(11px, 1vw, 14px);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  line-height: 1.2;
-  text-transform: uppercase;
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: clamp(17px, 2.1vw, 27px);
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  line-height: 1.05;
+  text-transform: none;
 }
 .story-thumb__mark {
   display: block;
   font-family: var(--font-ui), sans-serif;
-  font-size: 10px;
-  letter-spacing: -0.2px;
+  font-size: clamp(11px, 1.1vw, 15px);
+  font-weight: 700;
+  letter-spacing: -0.6px;
   line-height: 1;
-  opacity: 0.6;
+  opacity: 0.72;
+}
+.story-thumb__mark::after {
+  content: '.';
+  color: var(--tt-coral);
+}
+.story-thumb--coral .story-thumb__mark::after,
+.story-thumb--accent .story-thumb__mark::after {
+  color: inherit;
 }
 .story-thumb--ink {
-  background: var(--tt-ink);
+  background-color: var(--tt-ink);
   color: var(--tt-lime);
 }
 .story-thumb--lime {
-  background: var(--tt-lime);
+  background-color: var(--tt-lime);
   color: var(--tt-ink);
 }
 .story-thumb--coral {
-  background: var(--tt-coral);
+  background-color: var(--tt-coral);
   color: var(--tt-ink);
 }
 .story-thumb--accent {
-  background: var(--color-accent);
+  background-color: var(--color-accent);
   color: var(--tt-paper);
 }
 .story-thumb--surface {
-  background: var(--color-surface-strong);
+  background-color: var(--color-surface-strong);
   color: var(--tt-ink);
   box-shadow: inset 0 0 0 1px #071c1726;
 }
@@ -698,20 +820,24 @@ a:hover .story-thumb__image {
 .city-filters__extra[hidden] {
   display: none;
 }
+/* Every chip and the toggle keep a 44px touch target at every width. */
 .city-filters button {
-  padding: 8px 14px;
-  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
   border: 0;
   border-radius: 25px;
-  font-size: 12px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.2;
   background: transparent;
   color: var(--tt-ink);
   white-space: nowrap;
 }
 .city-filters .city-filters__toggle {
-  display: inline-flex;
   gap: 8px;
-  align-items: center;
   border: 1px solid var(--color-border);
   padding-inline: 15px;
   color: var(--color-accent-strong);
@@ -793,6 +919,18 @@ a:hover .story-thumb__image {
 .neighbourhood-lead__thumb {
   aspect-ratio: 16 / 9;
 }
+.neighbourhood-lead__thumb .story-thumb__fallback {
+  padding: clamp(18px, 2vw, 30px);
+}
+.neighbourhood-lead__thumb .story-thumb__label {
+  font-size: clamp(26px, 3vw, 44px);
+}
+.neighbourhood-lead__thumb .story-thumb__mark {
+  font-size: clamp(13px, 1.3vw, 18px);
+}
+.neighbourhood-lead__thumb .story-thumb__rule {
+  width: 56px;
+}
 .neighbourhood-lead .eyebrow {
   display: block;
   margin: 17px 0 9px;
@@ -869,8 +1007,8 @@ a:hover .story-thumb__image {
 }
 .neighbourhood-secondary a {
   display: grid;
-  grid-template-columns: minmax(118px, 42%) minmax(0, 1fr);
-  gap: 16px;
+  grid-template-columns: minmax(132px, 47%) minmax(0, 1fr);
+  gap: 14px;
   align-items: start;
 }
 .neighbourhood-secondary__thumb {
@@ -897,19 +1035,19 @@ a:hover .story-thumb__image {
 .neighbourhood-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 30px 36px;
-  margin-top: 30px;
+  gap: 28px 32px;
+  margin-top: 28px;
 }
 .neighbourhood-grid article {
   border-bottom: 1px solid var(--color-border);
-  padding-bottom: 25px;
+  padding-bottom: 20px;
 }
 .neighbourhood-grid .eyebrow {
   display: block;
   letter-spacing: 0.7px;
   color: var(--color-accent-strong);
   font-size: 10px;
-  margin: 12px 0 9px;
+  margin: 11px 0 7px;
 }
 .neighbourhood-grid .eyebrow span {
   margin-left: 10px;
@@ -931,8 +1069,8 @@ a:hover .story-thumb__image {
   font-family: var(--font-editorial), Georgia, serif;
   font-weight: 500;
   line-height: 1.1;
-  font-size: 27px;
-  letter-spacing: -0.6px;
+  font-size: clamp(21px, 1.75vw, 25px);
+  letter-spacing: -0.5px;
   margin: 0;
 }
 .neighbourhood-grid a:hover h3,
@@ -950,11 +1088,11 @@ a:hover .story-thumb__image {
   width: 18px;
 }
 .neighbourhood-card__description {
-  margin: 10px 0 13px;
+  margin: 8px 0 10px;
   display: -webkit-box;
   overflow: hidden;
   font-size: 13px;
-  line-height: 1.55;
+  line-height: 1.5;
   color: #536454;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -1380,7 +1518,7 @@ a:hover .story-thumb__image {
     box-shadow: -10px 0 10px 4px var(--color-bg);
   }
   .city-filters button {
-    padding: 9px 13px;
+    padding-inline: 14px;
   }
   .story-search {
     max-width: 100%;
@@ -1558,7 +1696,7 @@ a:hover .story-thumb__image {
 }
 .today-brief__link {
   display: grid;
-  grid-template-columns: minmax(108px, 36%) minmax(0, 1fr);
+  grid-template-columns: minmax(128px, 44%) minmax(0, 1fr);
   gap: 14px;
   align-items: start;
   min-width: 0;
@@ -1568,6 +1706,19 @@ a:hover .story-thumb__image {
 }
 .today-brief__thumb {
   aspect-ratio: 3 / 2;
+}
+/* The newest item leads the band with a full width picture, the way a news
+   front page opens. The rest stay compact so the band never buries the
+   stories under it. */
+.today-brief li:first-child .today-brief__link {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+.today-brief li:first-child .today-brief__thumb {
+  aspect-ratio: 16 / 9;
+}
+.today-brief li:first-child .today-brief__headline {
+  font-size: 25px;
 }
 .today-brief__body {
   min-width: 0;
@@ -1602,9 +1753,17 @@ a:hover .story-thumb__image {
   .today-brief ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .today-brief__link {
+  .today-brief__link,
+  .today-brief li:first-child .today-brief__link {
     grid-template-columns: minmax(0, 1fr);
     gap: 12px;
+  }
+  .today-brief__thumb,
+  .today-brief li:first-child .today-brief__thumb {
+    aspect-ratio: 16 / 9;
+  }
+  .today-brief li:first-child .today-brief__headline {
+    font-size: 20px;
   }
 }
 /* From the unfolded-phone width up, the four latest items sit in one tidy
@@ -1614,8 +1773,9 @@ a:hover .story-thumb__image {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 22px 22px;
   }
-  .today-brief__headline {
-    font-size: 18px;
+  .today-brief__headline,
+  .today-brief li:first-child .today-brief__headline {
+    font-size: 19px;
   }
 }
 @media (max-width: 640px) {
@@ -1719,6 +1879,17 @@ a:hover .story-thumb__image {
     aspect-ratio: 17 / 9;
     overflow: hidden;
   }
+  .cover__frame.cover__frame--contain {
+    background: none;
+  }
+  .cover__media--contain,
+  .cover__frame--contain .cover__media {
+    aspect-ratio: 15 / 7;
+  }
+  .cover__frame--contain .cover__caption {
+    margin-top: 4px;
+    padding: 0;
+  }
   .cover__caption {
     position: static;
     right: auto;
@@ -1815,7 +1986,7 @@ a:hover .story-thumb__image {
     padding-top: 13px;
   }
   .today-brief__link {
-    grid-template-columns: minmax(104px, 36%) minmax(0, 1fr);
+    grid-template-columns: minmax(124px, 44%) minmax(0, 1fr);
     gap: 12px;
     align-items: start;
   }
@@ -1823,6 +1994,10 @@ a:hover .story-thumb__image {
     margin-top: 4px;
     font-size: 18px;
     line-height: 1.2;
+  }
+  .today-brief li:first-child .today-brief__headline {
+    font-size: 23px;
+    line-height: 1.12;
   }
   .today-brief__label {
     line-height: 13px;

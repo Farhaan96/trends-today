@@ -16,9 +16,36 @@ export interface LocalStory {
   city?: string;
 }
 
+export type ImageFit = 'cover' | 'contain';
+
 export interface HomepageImageResult {
   src?: string;
   illustration: boolean;
+  fit: ImageFit;
+}
+
+// Official maps, data cards and logos carry readable detail at the edges, such
+// as a map legend or a source line. Cropping them loses that detail, so they
+// are always shown whole on a neutral panel. Photographs and illustrations
+// have no edge detail to protect and keep filling their box.
+const CONTAIN_SOURCE_TYPES = new Set([
+  'official-map',
+  'official-source',
+  'official-logo',
+  'official-document',
+  'data-card',
+  'chart',
+  'diagram',
+  'infographic',
+  'map',
+  'screenshot',
+]);
+
+export function imageFit(sourceType?: string): ImageFit {
+  const source = String(sourceType || '')
+    .trim()
+    .toLowerCase();
+  return CONTAIN_SOURCE_TYPES.has(source) ? 'contain' : 'cover';
 }
 
 export function homepageImage(
@@ -28,19 +55,20 @@ export function homepageImage(
   >
 ): HomepageImageResult {
   const image = story.image?.trim() || undefined;
+  const fit = imageFit(story.imageSourceType);
   const generated = isGeneratedIllustration(
     story.imageAttribution,
     story.imageSourceType
   );
-  if (!generated) return { src: image, illustration: false };
+  if (!generated) return { src: image, illustration: false, fit };
 
   const allowsIllustration =
     story.category === 'things-to-do' ||
     story.storyType?.trim().toLowerCase().startsWith('evergreen') === true;
   if (allowsIllustration) {
-    return { src: image, illustration: true };
+    return { src: image, illustration: true, fit };
   }
-  return { src: undefined, illustration: false };
+  return { src: undefined, illustration: false, fit };
 }
 
 export function storyCity(story: LocalStory): string {
@@ -97,20 +125,23 @@ export interface CityFilterSplit {
 // The filter row shows the busiest cities and hides the long tail behind a
 // toggle. A city that is already selected stays visible even when it sits in
 // the hidden tail, so the active filter never disappears from the row.
+// Stories with no city or locality fall back to "Regional". That bucket never
+// takes a top slot, but it stays reachable at the end of the hidden tail.
 export function splitCityFilters(
   stories: LocalStory[],
   selected: string,
   limit = 6
 ): CityFilterSplit {
   const ranked = rankedStoryCities(stories);
+  const all = stories.some((story) => storyCity(story) === 'Regional')
+    ? [...ranked, 'Regional']
+    : ranked;
   const top = ranked.slice(0, limit);
   const visible =
-    selected !== ALL_CITIES &&
-    ranked.includes(selected) &&
-    !top.includes(selected)
+    selected !== ALL_CITIES && all.includes(selected) && !top.includes(selected)
       ? [...top, selected]
       : top;
-  return { visible, extra: ranked.filter((city) => !visible.includes(city)) };
+  return { visible, extra: all.filter((city) => !visible.includes(city)) };
 }
 
 export interface FeaturedSplit {

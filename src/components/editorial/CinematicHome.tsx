@@ -191,16 +191,30 @@ export default function CinematicHome({
             >
               <Link
                 href={lead.href}
-                className="cover__frame"
+                className={`cover__frame ${
+                  leadImage?.src && leadImage.fit === 'contain'
+                    ? 'cover__frame--contain'
+                    : ''
+                }`.trim()}
                 aria-label={lead.title}
               >
                 <span
-                  className={`cover__media ${leadImage?.src ? '' : 'cover__media--fallback'}`}
+                  className={[
+                    'cover__media',
+                    leadImage?.src ? '' : 'cover__media--fallback',
+                    leadImage?.src && leadImage.fit === 'contain'
+                      ? 'cover__media--contain'
+                      : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
                 >
                   {leadImage?.src ? (
+                    // The headline sits in the caption inside this link, so
+                    // the cover art is decorative.
                     <Image
                       src={leadImage.src}
-                      alt={lead.imageAlt || lead.title}
+                      alt=""
                       fill
                       priority
                       sizes="(max-width: 760px) 100vw, 67vw"
@@ -211,15 +225,17 @@ export default function CinematicHome({
                       className="story-thumb__fallback cover__fallback"
                       aria-hidden="true"
                     >
+                      <span className="story-thumb__mark">trends today</span>
                       <span className="story-thumb__rule" />
                       <span className="story-thumb__label">
                         {getCategoryLabel(lead.category)}
                       </span>
-                      <span className="story-thumb__mark">Trends Today</span>
                     </span>
                   )}
                   {leadImage?.src && leadImage.illustration && (
-                    <span className="story-thumb__label">Illustration</span>
+                    <span className="story-thumb__illustration">
+                      Illustration
+                    </span>
                   )}
                 </span>
                 <div className="cover__caption">
@@ -260,18 +276,17 @@ export default function CinematicHome({
                   <Link href={story.href} className="travel-brief__link">
                     <StoryThumb
                       image={image.src}
-                      imageAlt={story.imageAlt}
-                      title={story.title}
                       category={story.category}
                       illustration={image.illustration}
+                      fit={image.fit}
                       className="travel-brief__thumb"
                       sizes="(max-width: 560px) calc(100vw - 44px), (max-width: 800px) 45vw, 30vw"
                     />
                     <span className="eyebrow">{storyCity(story)}</span>
-                    <span className="travel-brief__title-row">
+                    <div className="travel-brief__title-row">
                       <h3>{story.title}</h3>
                       <ArrowRightIcon />
-                    </span>
+                    </div>
                     <span className="travel-brief__description">
                       {story.description}
                     </span>
@@ -528,10 +543,9 @@ export default function CinematicHome({
               >
                 <StoryThumb
                   image={featuredLeadImage?.src}
-                  imageAlt={featuredLead.imageAlt}
-                  title={featuredLead.title}
                   category={featuredLead.category}
                   illustration={featuredLeadImage?.illustration}
+                  fit={featuredLeadImage?.fit}
                   className="neighbourhood-lead__thumb"
                   sizes="(max-width: 800px) calc(100vw - 44px), 58vw"
                 />
@@ -560,20 +574,19 @@ export default function CinematicHome({
                       <Link href={story.href}>
                         <StoryThumb
                           image={image.src}
-                          imageAlt={story.imageAlt}
-                          title={story.title}
                           category={story.category}
                           illustration={image.illustration}
+                          fit={image.fit}
                           className="neighbourhood-secondary__thumb"
-                          sizes="(max-width: 480px) 38vw, (max-width: 800px) 30vw, 16vw"
+                          sizes="(max-width: 480px) 44vw, (max-width: 800px) 30vw, 18vw"
                         />
-                        <span className="neighbourhood-secondary__body">
+                        <div className="neighbourhood-secondary__body">
                           <span className="eyebrow">{storyCity(story)}</span>
                           <h3>{story.title}</h3>
                           <time dateTime={story.publishedAt}>
                             {date(story.publishedAt)}
                           </time>
-                        </span>
+                        </div>
                       </Link>
                     </article>
                   );
@@ -591,10 +604,9 @@ export default function CinematicHome({
                   <Link href={story.href} className="neighbourhood-card">
                     <StoryThumb
                       image={image.src}
-                      imageAlt={story.imageAlt}
-                      title={story.title}
                       category={story.category}
                       illustration={image.illustration}
+                      fit={image.fit}
                       className="neighbourhood-card__thumb"
                       sizes="(max-width: 480px) calc(100vw - 44px), (max-width: 800px) 45vw, 30vw"
                     />

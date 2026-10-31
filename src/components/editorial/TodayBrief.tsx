@@ -16,19 +16,22 @@ export default function TodayBrief({ brief }: { brief: TodayBriefModel }) {
           ) : null}
         </div>
         <ul>
-          {brief.items.map((item) => {
+          {brief.items.map((item, index) => {
             const image = homepageImage(item);
             return (
               <li key={`${item.href}-${item.text}`}>
                 <Link href={item.href} className="today-brief__link">
                   <StoryThumb
                     image={image.src}
-                    imageAlt={item.imageAlt}
-                    title={item.text}
                     category={item.category}
                     illustration={image.illustration}
+                    fit={image.fit}
                     className="today-brief__thumb"
-                    sizes="(max-width: 639px) 36vw, (max-width: 959px) 46vw, 24vw"
+                    sizes={
+                      index === 0
+                        ? '(max-width: 639px) calc(100vw - 32px), (max-width: 959px) 46vw, 24vw'
+                        : '(max-width: 639px) 46vw, (max-width: 959px) 46vw, 24vw'
+                    }
                   />
                   <span className="today-brief__body">
                     <span className="today-brief__label">{item.label}</span>

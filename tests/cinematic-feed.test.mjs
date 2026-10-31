@@ -108,6 +108,17 @@ test('cities rank by story count with stable alphabetical ties', () => {
 test('the collapsed city row keeps the busiest cities', () => {
   assert.deepEqual(splitCityFilters(sample, 'All cities', 1), {
     visible: ['Surrey'],
+    extra: ['Burnaby', 'Regional'],
+  });
+});
+test('the regional bucket stays reachable behind the More toggle', () => {
+  const withoutRegional = sample.filter((story) => story !== sample[3]);
+  assert.deepEqual(splitCityFilters(withoutRegional, 'All cities', 1), {
+    visible: ['Surrey'],
+    extra: ['Burnaby'],
+  });
+  assert.deepEqual(splitCityFilters(sample, 'Regional', 1), {
+    visible: ['Surrey', 'Regional'],
     extra: ['Burnaby'],
   });
 });
@@ -142,11 +153,11 @@ test('the default city row contains exactly the top six cities', () => {
 test('a selected city stays in the row even when it is in the hidden tail', () => {
   assert.deepEqual(splitCityFilters(sample, 'Burnaby', 1), {
     visible: ['Surrey', 'Burnaby'],
-    extra: [],
+    extra: ['Regional'],
   });
   assert.deepEqual(splitCityFilters(sample, 'Nanaimo', 1), {
     visible: ['Surrey'],
-    extra: ['Burnaby'],
+    extra: ['Burnaby', 'Regional'],
   });
 });
 test('the lead block and the grid never show the same story twice', () => {
@@ -185,7 +196,7 @@ test('homepage image policy hides generated news art', () => {
       image: '/generated-news.jpg',
       imageAttribution: 'AI generated illustration for Trends Today',
     }),
-    { src: undefined, illustration: false }
+    { src: undefined, illustration: false, fit: 'cover' }
   );
 });
 
@@ -196,7 +207,7 @@ test('homepage image policy labels generated things to do art', () => {
       image: '/generated-event.jpg',
       imageAttribution: 'Generated editorial image for Trends Today',
     }),
-    { src: '/generated-event.jpg', illustration: true }
+    { src: '/generated-event.jpg', illustration: true, fit: 'cover' }
   );
 });
 
@@ -208,7 +219,7 @@ test('homepage image policy labels generated evergreen art', () => {
       imageAttribution: 'Generative image for Trends Today',
       storyType: 'evergreen-planner',
     }),
-    { src: '/generated-guide.jpg', illustration: true }
+    { src: '/generated-guide.jpg', illustration: true, fit: 'cover' }
   );
 });
 
@@ -220,7 +231,7 @@ test('official maps stay real images when attribution says generated', () => {
       imageAttribution: 'Generated from an official city map',
       imageSourceType: 'official-map',
     }),
-    { src: '/official-map.jpg', illustration: false }
+    { src: '/official-map.jpg', illustration: false, fit: 'contain' }
   );
 });
 
@@ -228,7 +239,46 @@ test('homepage image policy returns no source when there is no image', () => {
   assert.deepEqual(homepageImage({ category: 'local-news' }), {
     src: undefined,
     illustration: false,
+    fit: 'cover',
   });
+});
+
+test('official maps, data cards and logos are never cropped', () => {
+  for (const imageSourceType of [
+    'official-map',
+    'Official-Source',
+    'data-card',
+    'official-logo',
+  ]) {
+    assert.equal(
+      homepageImage({
+        category: 'local-news',
+        image: '/official.jpg',
+        imageSourceType,
+      }).fit,
+      'contain',
+      `${imageSourceType} must be shown whole`
+    );
+  }
+});
+
+test('photographs and labelled illustrations keep filling their box', () => {
+  for (const imageSourceType of [
+    'official-photo',
+    'licensed-photo',
+    'generated',
+    undefined,
+  ]) {
+    assert.equal(
+      homepageImage({
+        category: 'things-to-do',
+        image: '/photo.jpg',
+        imageSourceType,
+      }).fit,
+      'cover',
+      `${imageSourceType} may be cropped to its box`
+    );
+  }
 });
 
 test('travel stories skip exclusions and fall through in source order', () => {
