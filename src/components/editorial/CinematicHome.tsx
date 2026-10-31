@@ -16,11 +16,13 @@ import {
 } from '@heroicons/react/24/outline';
 import { getCategoryLabel } from '@/lib/categories';
 import { SubtlePaginationLinks } from '@/components/ui/PaginationLinks';
+import StoryThumb from '@/components/editorial/StoryThumb';
 import { paginateItems } from '@/lib/pagination';
 import {
   type LocalStory,
   activeEvents,
   filterStories,
+  rankedStoryCities,
   storyCity,
   editorialPoster,
 } from '@/lib/cinematic-feed';
@@ -37,6 +39,7 @@ export default function CinematicHome({
   const [now, setNow] = useState(asOf);
   const [selected, setSelected] = useState(1);
   const [city, setCity] = useState('All cities');
+  const [citiesExpanded, setCitiesExpanded] = useState(false);
   const [query, setQuery] = useState('');
   const [count, setCount] = useState(9);
   const hero = useRef<HTMLDivElement>(null);
@@ -50,11 +53,24 @@ export default function CinematicHome({
   const transit = stories
     .filter((story) => story.category === 'transit')
     .slice(0, 2);
-  const cities = [
-    'All cities',
-    ...Array.from(new Set(stories.map(storyCity))).filter(Boolean),
-  ];
+  const rankedCities = rankedStoryCities(stories);
+  const topCities = rankedCities.slice(0, 7);
+  const selectedExtraCity =
+    city !== 'All cities' && !topCities.includes(city) ? city : undefined;
+  const visibleCities = selectedExtraCity
+    ? [...topCities, selectedExtraCity]
+    : topCities;
+  const extraCities = rankedCities.filter(
+    (item) => !visibleCities.includes(item)
+  );
   const results = filterStories(stories, city, query);
+  const featuredStories = results.slice(0, 4);
+  const featuredLead = featuredStories[0];
+  const secondaryStories = featuredStories.slice(1);
+  const gridStories = results.slice(
+    featuredStories.length,
+    featuredStories.length + count
+  );
   const pagination = paginateItems(stories, 1, 12, '').pagination;
 
   useEffect(() => {
@@ -203,15 +219,27 @@ export default function CinematicHome({
             </h2>
             {transit.map((story) => (
               <article key={story.href}>
-                <p className="eyebrow">{storyCity(story)}</p>
-                <Link href={story.href}>
-                  <h3>{story.title}</h3>
-                  <ArrowRightIcon />
+                <Link href={story.href} className="travel-brief__link">
+                  <StoryThumb
+                    image={story.image}
+                    imageAlt={story.imageAlt}
+                    title={story.title}
+                    category={story.category}
+                    className="travel-brief__thumb"
+                    sizes="(max-width: 800px) 45vw, 30vw"
+                  />
+                  <span className="eyebrow">{storyCity(story)}</span>
+                  <span className="travel-brief__title-row">
+                    <h3>{story.title}</h3>
+                    <ArrowRightIcon />
+                  </span>
+                  <span className="travel-brief__description">
+                    {story.description}
+                  </span>
+                  <time dateTime={story.publishedAt}>
+                    {date(story.publishedAt)}
+                  </time>
                 </Link>
-                <p className="travel-brief__description">{story.description}</p>
-                <time dateTime={story.publishedAt}>
-                  {date(story.publishedAt)}
-                </time>
               </article>
             ))}
           </div>
@@ -376,7 +404,17 @@ export default function CinematicHome({
             role="group"
             aria-label="Filter by city"
           >
-            {cities.map((item) => (
+            <button
+              type="button"
+              aria-pressed={city === 'All cities'}
+              onClick={() => {
+                setCity('All cities');
+                setCount(9);
+              }}
+            >
+              All cities
+            </button>
+            {visibleCities.map((item) => (
               <button
                 type="button"
                 key={item}
@@ -389,6 +427,36 @@ export default function CinematicHome({
                 {item}
               </button>
             ))}
+            {extraCities.length > 0 && (
+              <button
+                type="button"
+                className="city-filters__toggle"
+                aria-expanded={citiesExpanded}
+                aria-controls="extra-city-filters"
+                onClick={() => setCitiesExpanded((value) => !value)}
+              >
+                {citiesExpanded ? 'Fewer cities' : 'More cities'}
+              </button>
+            )}
+            <span
+              id="extra-city-filters"
+              className="city-filters__extra"
+              hidden={!citiesExpanded}
+            >
+              {extraCities.map((item) => (
+                <button
+                  type="button"
+                  key={item}
+                  aria-pressed={city === item}
+                  onClick={() => {
+                    setCity(item);
+                    setCount(9);
+                  }}
+                >
+                  {item}
+                </button>
+              ))}
+            </span>
           </div>
           <label className="story-search">
             <MagnifyingGlassIcon />
@@ -408,25 +476,89 @@ export default function CinematicHome({
           {results.length} {results.length === 1 ? 'story' : 'stories'}
           {city !== 'All cities' ? ` in ${city}` : ' from across the region'}
         </p>
-        <div className="neighbourhood-grid">
-          {results.slice(0, count).map((story) => (
-            <article key={story.href}>
-              <p className="eyebrow">
-                {storyCity(story)}
-                <span>{getCategoryLabel(story.category)}</span>
-              </p>
-              <Link href={story.href}>
-                <h3>{story.title}</h3>
-                <ArrowRightIcon />
+        {featuredLead && (
+          <div className="neighbourhood-feature">
+            <article className="neighbourhood-lead">
+              <Link href={featuredLead.href}>
+                <StoryThumb
+                  image={featuredLead.image}
+                  imageAlt={featuredLead.imageAlt}
+                  title={featuredLead.title}
+                  category={featuredLead.category}
+                  className="neighbourhood-lead__thumb"
+                  sizes="(max-width: 800px) calc(100vw - 44px), 58vw"
+                />
+                <span className="eyebrow">
+                  {storyCity(featuredLead)}
+                  <span>{getCategoryLabel(featuredLead.category)}</span>
+                </span>
+                <h3>{featuredLead.title}</h3>
+                <span className="neighbourhood-lead__description">
+                  {featuredLead.description}
+                </span>
+                <time dateTime={featuredLead.publishedAt}>
+                  {date(featuredLead.publishedAt)}
+                </time>
               </Link>
-              <p>{story.description}</p>
-              <time dateTime={story.publishedAt}>
-                {date(story.publishedAt)}
-              </time>
-              {story.eventEndDate &&
-                Date.parse(story.eventEndDate) < Date.parse(now) && (
-                  <span className="ended-label">Past event</span>
-                )}
+            </article>
+            {secondaryStories.length > 0 && (
+              <div className="neighbourhood-secondary">
+                {secondaryStories.map((story) => (
+                  <article key={story.href}>
+                    <Link href={story.href}>
+                      <StoryThumb
+                        image={story.image}
+                        imageAlt={story.imageAlt}
+                        title={story.title}
+                        category={story.category}
+                        className="neighbourhood-secondary__thumb"
+                        sizes="(max-width: 480px) 36vw, (max-width: 800px) 30vw, 16vw"
+                      />
+                      <span className="neighbourhood-secondary__body">
+                        <span className="eyebrow">{storyCity(story)}</span>
+                        <h3>{story.title}</h3>
+                        <time dateTime={story.publishedAt}>
+                          {date(story.publishedAt)}
+                        </time>
+                      </span>
+                    </Link>
+                  </article>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+        <div className="neighbourhood-grid">
+          {gridStories.map((story) => (
+            <article key={story.href}>
+              <Link href={story.href} className="neighbourhood-card">
+                <StoryThumb
+                  image={story.image}
+                  imageAlt={story.imageAlt}
+                  title={story.title}
+                  category={story.category}
+                  className="neighbourhood-card__thumb"
+                  sizes="(max-width: 480px) calc(100vw - 44px), (max-width: 800px) 45vw, 30vw"
+                />
+                <span className="eyebrow">
+                  {storyCity(story)}
+                  <span>{getCategoryLabel(story.category)}</span>
+                </span>
+                <h3>{story.title}</h3>
+                <span className="neighbourhood-card__description">
+                  {story.description}
+                </span>
+                <span className="neighbourhood-card__meta">
+                  <time dateTime={story.publishedAt}>
+                    {date(story.publishedAt)}
+                  </time>
+                  {story.eventEndDate &&
+                    Date.parse(story.eventEndDate) < Date.parse(now) && (
+                      <span className="ended-label">Past event</span>
+                    )}
+                  <ArrowRightIcon />
+                </span>
+              </Link>
             </article>
           ))}
         </div>
@@ -445,7 +577,7 @@ export default function CinematicHome({
             </button>
           </div>
         )}
-        {count < results.length && (
+        {featuredStories.length + count < results.length && (
           <button
             type="button"
             className="more-stories"

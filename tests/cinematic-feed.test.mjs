@@ -9,10 +9,15 @@ const compiled = ts.transpileModule(
   ),
   { compilerOptions: { module: ts.ModuleKind.ESNext } }
 ).outputText;
-const { activeEvents, filterStories, editorialPoster, storyCity } =
-  await import(
-    'data:text/javascript;base64,' + Buffer.from(compiled).toString('base64')
-  );
+const {
+  activeEvents,
+  filterStories,
+  editorialPoster,
+  rankedStoryCities,
+  storyCity,
+} = await import(
+  'data:text/javascript;base64,' + Buffer.from(compiled).toString('base64')
+);
 const now = '2026-09-05T20:00:00Z';
 const sample = [
   {
@@ -70,4 +75,15 @@ test('no stale event poster is reused for a different edition', () => {
 test('explicit city wins over locality with safe regional fallback', () => {
   assert.equal(storyCity({ ...sample[0], city: 'Langley' }), 'Langley');
   assert.equal(storyCity(sample[3]), 'Regional');
+});
+test('cities rank by story count with stable alphabetical ties', () => {
+  assert.deepEqual(
+    rankedStoryCities([
+      ...sample,
+      { ...sample[0], href: '/things-to-do/surrey-second' },
+      { ...sample[1], href: '/things-to-do/burnaby-second' },
+      { ...sample[3], href: '/things-to-do/regional-second' },
+    ]),
+    ['Surrey', 'Burnaby']
+  );
 });

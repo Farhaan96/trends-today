@@ -41,6 +41,21 @@ export function filterStories(
   );
 }
 
+export function rankedStoryCities(stories: LocalStory[]): string[] {
+  const counts = new Map<string, number>();
+  for (const story of stories) {
+    const city = storyCity(story);
+    if (city === 'Regional') continue;
+    counts.set(city, (counts.get(city) || 0) + 1);
+  }
+  return Array.from(counts.entries())
+    .sort(
+      ([cityA, countA], [cityB, countB]) =>
+        countB - countA || cityA.localeCompare(cityB, 'en-CA')
+    )
+    .map(([city]) => city);
+}
+
 // Navigation artwork is tied to these exact event editions. New stories use
 // their own editable title and date; they never inherit an old event poster.
 const posters: Record<string, string> = {

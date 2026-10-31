@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
-import Image from 'next/image';
+import StoryThumb from '@/components/editorial/StoryThumb';
 import { getAllArticles } from '@/lib/article-utils';
 import {
   buildTodayBrief,
@@ -52,14 +52,13 @@ export default async function TodayBrief() {
             <li key={`${item.href}-${item.text}`}>
               <Link href={item.href} className="today-brief__link">
                 <span className="today-brief__thumb">
-                  {item.image ? (
-                    <Image
-                      src={item.image}
-                      alt={item.imageAlt || ''}
-                      width={96}
-                      height={64}
-                    />
-                  ) : null}
+                  <StoryThumb
+                    image={item.image}
+                    imageAlt={item.imageAlt}
+                    title={item.text}
+                    category={item.category}
+                    sizes="(max-width: 639px) 34vw, (max-width: 999px) 20vw, 12vw"
+                  />
                 </span>
                 <span className="today-brief__body">
                   <span className="today-brief__label">{item.label}</span>

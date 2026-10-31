@@ -26,6 +26,7 @@ export interface TodayBullet {
   label: string;
   text: string;
   href: string;
+  category: string;
   image?: string;
   imageAlt?: string;
   dateTime?: string;
@@ -149,6 +150,7 @@ function latestBullets(posts: TodayPost[]): TodayBullet[] {
       label: categoryLabel(post.category),
       text: clean(post.title),
       href: clean(post.href),
+      category: post.category,
       image: clean(post.image) || undefined,
       imageAlt: clean(post.imageAlt) || undefined,
       dateTime: iso,
@@ -174,6 +176,7 @@ function fileItems(file: TodayFile, posts: TodayPost[]): TodayBullet[] {
       label,
       text,
       href,
+      category: post.category,
       image: clean(post.image) || undefined,
       imageAlt: clean(post.imageAlt) || undefined,
       dateTime: iso,
