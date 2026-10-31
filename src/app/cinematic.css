@@ -197,21 +197,12 @@ button:disabled {
   font-weight: 500;
   margin: 26px 0 27px;
 }
-.cover__deck {
-  max-width: 31ch;
-  line-height: 1.5;
-  font-size: 16px;
-  margin: 0 0 25px;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
 .cover__read {
   color: var(--tt-lime);
   display: inline-flex;
   align-items: center;
   gap: 15px;
+  margin-top: 25px;
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
@@ -267,26 +258,41 @@ button:disabled {
   object-fit: cover;
   object-position: 50% 48%;
 }
-/* An official map leads the page whole, with its legend and its detour routes
-   intact. The caption drops below the artwork instead of sitting on top of
-   it, so nothing covers the key. */
-.cover__frame.cover__frame--contain {
+/* An official map or photo leads the page whole, with its legend and its
+   detour routes intact. The headline card drops below the artwork at every
+   width instead of sitting on top of it, so nothing covers the key. */
+.cover__frame.cover__frame--contain,
+.cover__frame.cover__frame--straight {
   display: flex;
   flex-direction: column;
   height: auto;
   background: var(--tt-paper);
 }
-.cover__frame--contain .cover__media {
+.cover__frame--contain .cover__media,
+.cover__frame--straight .cover__media {
   position: relative;
   inset: auto;
   width: 100%;
-  aspect-ratio: 15 / 7;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
 }
-.cover__frame--contain .cover__caption {
+.cover__frame--contain .cover__media {
+  aspect-ratio: 15 / 7;
+}
+.cover__frame--contain .cover__caption,
+.cover__frame--straight .cover__caption {
   position: static;
   width: 100%;
   box-shadow: none;
+}
+/* Official source visuals sit straight. No tilt, no rotation, no 3D nudge on
+   the frame, the headline card or the stage, at any width. The tilted print
+   look is kept for generated and evergreen art. */
+.cover__frame.cover__frame--straight,
+.cover__frame--straight .cover__caption,
+.cover__stage.cover__stage--straight {
+  transform: none;
+  transform-style: flat;
 }
 .cover__media--contain {
   background: #f1ecdd;
@@ -367,6 +373,11 @@ button:disabled {
   text-align: right;
   margin: 38px 2px 0;
 }
+/* The short credit is the phone line. Wider screens carry the full credit,
+   and the article page keeps its own full credit line. */
+.cover__credit-short {
+  display: none;
+}
 .story-thumb {
   position: relative;
   display: block;
@@ -393,6 +404,12 @@ a:hover .story-thumb__image {
   object-position: center;
 }
 a:hover .story-thumb--contain .story-thumb__image {
+  transform: none;
+}
+/* Official source art on a card sits straight and still: no tilt, no
+   rotation, and no hover push that would shift its edges. */
+.story-thumb--straight .story-thumb__image,
+a:hover .story-thumb--straight .story-thumb__image {
   transform: none;
 }
 .story-thumb--photo::after {
@@ -1366,12 +1383,6 @@ a:hover .story-thumb--contain .story-thumb__image {
   .cover h1 br:nth-child(2) {
     display: none;
   }
-  .cover__deck {
-    max-width: 52ch;
-    font-size: 15px;
-    -webkit-line-clamp: 3;
-    margin-bottom: 18px;
-  }
   .cover__signature {
     display: none;
   }
@@ -1832,26 +1843,37 @@ a:hover .story-thumb--contain .story-thumb__image {
     border-color: var(--tt-lime);
     color: var(--tt-ink);
   }
+  /* The hero column stretches to the screen, so a long credit or headline
+     can never push the map wider than the viewport. */
   .cover__inner {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     min-height: 0;
     gap: 2px;
-    padding: 0 16px 0;
+    padding: 0 16px 12px;
+  }
+  .cover__copy,
+  .cover__stage {
+    min-width: 0;
   }
   .cover__copy > .eyebrow {
     display: none;
   }
+  /* On a phone the standing tagline costs two lines above the news, so it
+     stays as the page heading for assistive technology only and the map and
+     the headline start higher. */
   .cover h1 {
-    font-size: 36px;
-    line-height: 40px;
-    letter-spacing: -1px;
-    margin: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(50%);
   }
-  .cover h1 br {
-    display: none;
-  }
-  .cover__deck,
   .cover__read,
   .cover__signature,
   .cover__caption > svg {
@@ -1927,9 +1949,23 @@ a:hover .story-thumb--contain .story-thumb__image {
     font-size: 13px;
     font-weight: 500;
   }
+  /* One readable line on a phone, trimmed with an ellipsis if the source name
+     still runs long. The full credit stays on the title attribute here and in
+     full on the article page. */
   .cover__credit {
-    margin: 2px 0 0;
-    line-height: 1.25;
+    margin: 6px 0 0;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: left;
+  }
+  .cover__credit-short {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .cover__credit-full {
+    display: none;
   }
   .travel-brief__inner {
     grid-template-columns: minmax(0, 1fr);

@@ -328,6 +328,30 @@ test('the Today block renders after the homepage cover heading', () => {
   assert.ok(cover !== -1 && slot > cover && nextSection > slot);
 });
 
+test('the hero keeps official source art straight and credits it short', () => {
+  const home = readFileSync(
+    new URL('../src/components/editorial/CinematicHome.tsx', import.meta.url),
+    'utf8'
+  );
+  const css = readFileSync(
+    new URL('../src/app/cinematic.css', import.meta.url),
+    'utf8'
+  );
+  assert.match(home, /leadStraight = leadImage\?\.straight === true/);
+  assert.match(home, /cover__frame--straight/);
+  assert.match(home, /cover__stage--straight/);
+  assert.match(
+    home,
+    /leadStraight \|\|\s*\n?\s*event\.pointerType !== 'mouse'/
+  );
+  assert.match(home, /shortImageCredit\(/);
+  const straightRule = css.slice(
+    css.indexOf('.cover__frame.cover__frame--straight,')
+  );
+  assert.match(straightRule.slice(0, 200), /transform: none/);
+  assert.ok(css.includes('.cover__frame--straight .cover__caption'));
+});
+
 test('homepage metadata is limited to the existing canonical path', () => {
   const source = readFileSync(
     new URL('../src/app/page.tsx', import.meta.url),

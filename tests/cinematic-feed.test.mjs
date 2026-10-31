@@ -28,9 +28,11 @@ const {
   filterStories,
   editorialPoster,
   homepageImage,
+  isStraightSource,
   planHomepage,
   pickTravelStories,
   rankedStoryCities,
+  shortImageCredit,
   splitCityFilters,
   splitFeaturedStories,
   storyCity,
@@ -197,7 +199,7 @@ test('homepage image policy hides generated news art', () => {
       image: '/generated-news.jpg',
       imageAttribution: 'AI generated illustration for Trends Today',
     }),
-    { src: undefined, illustration: false, fit: 'cover' }
+    { src: undefined, illustration: false, fit: 'cover', straight: false }
   );
 });
 
@@ -208,7 +210,12 @@ test('homepage image policy labels generated things to do art', () => {
       image: '/generated-event.jpg',
       imageAttribution: 'Generated editorial image for Trends Today',
     }),
-    { src: '/generated-event.jpg', illustration: true, fit: 'cover' }
+    {
+      src: '/generated-event.jpg',
+      illustration: true,
+      fit: 'cover',
+      straight: false,
+    }
   );
 });
 
@@ -220,7 +227,12 @@ test('homepage image policy labels generated evergreen art', () => {
       imageAttribution: 'Generative image for Trends Today',
       storyType: 'evergreen-planner',
     }),
-    { src: '/generated-guide.jpg', illustration: true, fit: 'cover' }
+    {
+      src: '/generated-guide.jpg',
+      illustration: true,
+      fit: 'cover',
+      straight: false,
+    }
   );
 });
 
@@ -232,7 +244,12 @@ test('official maps stay real images when attribution says generated', () => {
       imageAttribution: 'Generated from an official city map',
       imageSourceType: 'official-map',
     }),
-    { src: '/official-map.jpg', illustration: false, fit: 'contain' }
+    {
+      src: '/official-map.jpg',
+      illustration: false,
+      fit: 'contain',
+      straight: true,
+    }
   );
 });
 
@@ -241,7 +258,89 @@ test('homepage image policy returns no source when there is no image', () => {
     src: undefined,
     illustration: false,
     fit: 'cover',
+    straight: false,
   });
+});
+
+test('official source visuals are flagged straight, generated art is not', () => {
+  for (const imageSourceType of [
+    'official-map',
+    'Official-Photo',
+    'official-source',
+    'official-logo',
+    'data-card',
+    'civic-map',
+    'map',
+  ]) {
+    assert.equal(
+      isStraightSource(imageSourceType),
+      true,
+      `${imageSourceType} must sit straight`
+    );
+    assert.equal(
+      homepageImage({
+        category: 'local-news',
+        image: '/official.jpg',
+        imageSourceType,
+      }).straight,
+      true,
+      `${imageSourceType} must sit straight on the homepage`
+    );
+  }
+  assert.equal(isStraightSource('generated'), false);
+  assert.equal(isStraightSource(undefined), false);
+  assert.equal(
+    homepageImage({
+      category: 'things-to-do',
+      image: '/generated-event.jpg',
+      imageSourceType: 'generated',
+      imageAttribution: 'Generated editorial image for Trends Today',
+    }).straight,
+    false
+  );
+  assert.equal(
+    homepageImage({
+      category: 'local-news',
+      image: '/photo.jpg',
+      imageSourceType: 'licensed-photo',
+      imageAttribution: 'Photo by a local contributor',
+    }).straight,
+    true
+  );
+});
+
+test('the short hero credit fits one line from the fields already there', () => {
+  assert.equal(
+    shortImageCredit(
+      'BC Ministry of Transportation and Transit, Fraser Valley Highway 1 Corridor Improvement Program traffic notification map, posted October 28, 2026 (gov.bc.ca), from the official PDF',
+      'official-map'
+    ),
+    'Map: BC Ministry of Transportation and Transit (gov.bc.ca)'
+  );
+  assert.equal(
+    shortImageCredit(
+      'City of Coquitlam CivicAlert location map (newsflash detail 2058 / DocumentCenter/View/20721)',
+      'official-map'
+    ),
+    'Map: City of Coquitlam CivicAlert location map'
+  );
+  assert.equal(
+    shortImageCredit(
+      'Vancouver Fraser Port Authority, Holdom Overpass Project traffic impacts map ("Holdom Goring Kingsland SLAT", portvancouver.com, October 2026 update dated October 15, 2026)',
+      'official-map'
+    ),
+    'Map: Vancouver Fraser Port Authority (portvancouver.com)'
+  );
+  assert.equal(
+    shortImageCredit('TransLink station photo, August 2026', 'official-photo'),
+    'Photo: TransLink station photo'
+  );
+  assert.equal(
+    shortImageCredit('Generated editorial image for Trends Today', 'generated'),
+    'Image: Generated editorial image for Trends Today'
+  );
+  assert.equal(shortImageCredit('', 'official-map'), '');
+  assert.equal(shortImageCredit(undefined, undefined), '');
 });
 
 test('official maps, data cards and logos are never cropped', () => {

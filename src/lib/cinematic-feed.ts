@@ -22,6 +22,7 @@ export interface HomepageImageResult {
   src?: string;
   illustration: boolean;
   fit: ImageFit;
+  straight: boolean;
 }
 
 // Official maps, data cards and logos carry readable detail at the edges, such
@@ -41,11 +42,78 @@ const CONTAIN_SOURCE_TYPES = new Set([
   'screenshot',
 ]);
 
-export function imageFit(sourceType?: string): ImageFit {
-  const source = String(sourceType || '')
+function normalizedSourceType(sourceType?: string): string {
+  return String(sourceType || '')
     .trim()
     .toLowerCase();
-  return CONTAIN_SOURCE_TYPES.has(source) ? 'contain' : 'cover';
+}
+
+export function imageFit(sourceType?: string): ImageFit {
+  return CONTAIN_SOURCE_TYPES.has(normalizedSourceType(sourceType))
+    ? 'contain'
+    : 'cover';
+}
+
+// An official source visual is a document, not a print on a wall: a ministry
+// map, a civic photo, a logo, a data card. It sits straight, with no tilt,
+// rotation or 3D nudge, so a legend or a source line stays square and legible.
+// Only generated or evergreen art keeps the tilted look.
+const STRAIGHT_SOURCE_TYPES = new Set([
+  'data-card',
+  'chart',
+  'diagram',
+  'infographic',
+  'screenshot',
+  'licensed-photo',
+  'photo',
+]);
+
+export function isStraightSource(sourceType?: string): boolean {
+  const source = normalizedSourceType(sourceType);
+  if (!source) return false;
+  if (source.startsWith('official')) return true;
+  if (source.includes('map')) return true;
+  return STRAIGHT_SOURCE_TYPES.has(source);
+}
+
+const CREDIT_DOMAIN = /^[a-z0-9][a-z0-9-]*(?:\.[a-z0-9-]+)*\.[a-z]{2,6}$/i;
+
+// The hero credit has to fit one readable line on a phone. It is built only
+// from the fields the story already carries: a prefix for the kind of visual,
+// the source name up to the first comma, and the domain the source published
+// it on when the attribution names one. Nothing is invented, and the full
+// credit stays on wider screens and on the article page.
+export function shortImageCredit(
+  attribution?: string,
+  sourceType?: string
+): string {
+  const text = String(attribution || '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (!text) return '';
+  const source = normalizedSourceType(sourceType);
+  const prefix = source.includes('map')
+    ? 'Map:'
+    : source.includes('photo')
+      ? 'Photo:'
+      : 'Image:';
+  const name =
+    (text.split(',')[0] || text)
+      .replace(/\([^)]*\)?/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim() || text;
+  let domain = '';
+  for (const group of text.match(/\(([^)]*)\)/g) || []) {
+    const token = group
+      .slice(1, -1)
+      .split(/[\s,;"']+/)
+      .find((candidate) => CREDIT_DOMAIN.test(candidate));
+    if (token) {
+      domain = token;
+      break;
+    }
+  }
+  return domain ? `${prefix} ${name} (${domain})` : `${prefix} ${name}`;
 }
 
 export function homepageImage(
@@ -56,19 +124,27 @@ export function homepageImage(
 ): HomepageImageResult {
   const image = story.image?.trim() || undefined;
   const fit = imageFit(story.imageSourceType);
+  const official = isStraightSource(story.imageSourceType);
   const generated = isGeneratedIllustration(
     story.imageAttribution,
     story.imageSourceType
   );
-  if (!generated) return { src: image, illustration: false, fit };
+  if (!generated) {
+    return {
+      src: image,
+      illustration: false,
+      fit,
+      straight: official || !!image,
+    };
+  }
 
   const allowsIllustration =
     story.category === 'things-to-do' ||
     story.storyType?.trim().toLowerCase().startsWith('evergreen') === true;
   if (allowsIllustration) {
-    return { src: image, illustration: true, fit };
+    return { src: image, illustration: true, fit, straight: official };
   }
-  return { src: undefined, illustration: false, fit };
+  return { src: undefined, illustration: false, fit, straight: official };
 }
 
 export function storyCity(story: LocalStory): string {

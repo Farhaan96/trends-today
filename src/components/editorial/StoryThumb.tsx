@@ -22,6 +22,7 @@ export default function StoryThumb({
   priority = false,
   illustration = false,
   fit = 'cover',
+  straight = false,
 }: {
   image?: string;
   category: string;
@@ -30,6 +31,7 @@ export default function StoryThumb({
   priority?: boolean;
   illustration?: boolean;
   fit?: ImageFit;
+  straight?: boolean;
 }) {
   const classes = [
     'story-thumb',
@@ -37,6 +39,8 @@ export default function StoryThumb({
       ? 'story-thumb--photo'
       : `story-thumb--card ${fallbackTones[category] || 'story-thumb--ink'}`,
     image && fit === 'contain' ? 'story-thumb--contain' : '',
+    // Official source art is never tilted, rotated or nudged on hover.
+    image && straight ? 'story-thumb--straight' : '',
     className,
   ]
     .filter(Boolean)

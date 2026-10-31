@@ -23,6 +23,7 @@ import {
   ALL_CITIES,
   homepageImage,
   planHomepage,
+  shortImageCredit,
   splitCityFilters,
   storyCity,
   editorialPoster,
@@ -69,6 +70,12 @@ export default function CinematicHome({
   const index = events.length ? selected % events.length : 0;
   const current = events[index];
   const leadImage = lead ? homepageImage(lead) : undefined;
+  // An official map or photo leads the page square: the pointer tilt and the
+  // scroll parallax stay off so nothing skews the artwork or its legend.
+  const leadStraight = leadImage?.straight === true;
+  const leadCreditShort = lead
+    ? shortImageCredit(lead.imageAttribution, lead.imageSourceType)
+    : '';
   const { visible: visibleCities, extra: extraCities } = splitCityFilters(
     stories,
     city
@@ -133,7 +140,6 @@ export default function CinematicHome({
                 Close to <br />
                 home.
               </h1>
-              <p className="cover__deck">{lead.description}</p>
               <Link href={lead.href} className="cover__read">
                 <span className="arrow-disc">
                   <ArrowRightIcon />
@@ -152,9 +158,12 @@ export default function CinematicHome({
               </p>
             </div>
             <div
-              className="cover__stage"
+              className={`cover__stage ${
+                leadStraight ? 'cover__stage--straight' : ''
+              }`.trim()}
               onPointerMove={(event) => {
                 if (
+                  leadStraight ||
                   event.pointerType !== 'mouse' ||
                   window.matchMedia('(prefers-reduced-motion: reduce)').matches
                 )
@@ -176,11 +185,15 @@ export default function CinematicHome({
             >
               <Link
                 href={lead.href}
-                className={`cover__frame ${
+                className={[
+                  'cover__frame',
                   leadImage?.src && leadImage.fit === 'contain'
                     ? 'cover__frame--contain'
-                    : ''
-                }`.trim()}
+                    : '',
+                  leadStraight ? 'cover__frame--straight' : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
                 aria-label={lead.title}
               >
                 <span
@@ -238,7 +251,15 @@ export default function CinematicHome({
                 </div>
               </Link>
               {lead.imageAttribution && (
-                <p className="cover__credit">{lead.imageAttribution}</p>
+                <p className="cover__credit" title={lead.imageAttribution}>
+                  {/* Phones get the short credit on one readable line, with
+                      the full credit on the title attribute and on the
+                      article. From 641px up the full credit shows. */}
+                  <span className="cover__credit-short">{leadCreditShort}</span>
+                  <span className="cover__credit-full">
+                    {lead.imageAttribution}
+                  </span>
+                </p>
               )}
             </div>
           </div>
@@ -264,6 +285,7 @@ export default function CinematicHome({
                       category={story.category}
                       illustration={image.illustration}
                       fit={image.fit}
+                      straight={image.straight}
                       className="travel-brief__thumb"
                       sizes="(max-width: 560px) calc(100vw - 44px), (max-width: 800px) 45vw, 30vw"
                     />
@@ -532,6 +554,7 @@ export default function CinematicHome({
                   category={featuredLead.category}
                   illustration={featuredLeadImage?.illustration}
                   fit={featuredLeadImage?.fit}
+                  straight={featuredLeadImage?.straight}
                   className="neighbourhood-lead__thumb"
                   sizes="(max-width: 800px) calc(100vw - 44px), 58vw"
                 />
@@ -563,6 +586,7 @@ export default function CinematicHome({
                           category={story.category}
                           illustration={image.illustration}
                           fit={image.fit}
+                          straight={image.straight}
                           className="neighbourhood-secondary__thumb"
                           sizes="(max-width: 480px) 44vw, (max-width: 800px) 30vw, 18vw"
                         />
@@ -593,6 +617,7 @@ export default function CinematicHome({
                       category={story.category}
                       illustration={image.illustration}
                       fit={image.fit}
+                      straight={image.straight}
                       className="neighbourhood-card__thumb"
                       sizes="(max-width: 480px) calc(100vw - 44px), (max-width: 800px) 45vw, 30vw"
                     />

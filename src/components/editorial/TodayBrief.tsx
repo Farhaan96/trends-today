@@ -26,6 +26,7 @@ export default function TodayBrief({ brief }: { brief: TodayBriefModel }) {
                     category={item.category}
                     illustration={image.illustration}
                     fit={image.fit}
+                    straight={image.straight}
                     className="today-brief__thumb"
                     sizes={
                       index === 0
