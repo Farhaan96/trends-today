@@ -78,6 +78,7 @@ export default function EditorialHeader({
           {isMenuOpen ? <XMarkIcon /> : <Bars3Icon />}
         </button>
       </div>
+      <p className="tt-slogan">Good things, close to home</p>
       {freshness?.iso && freshness.label ? (
         <p className="tt-freshness">
           <RelativeStamp iso={freshness.iso} absolute={freshness.label} />

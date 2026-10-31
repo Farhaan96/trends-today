@@ -259,7 +259,7 @@ test('the Today block renders after the homepage cover heading', () => {
     'utf8'
   );
   const open = page.indexOf('<CinematicHome');
-  const brief = page.indexOf('<TodayBrief />');
+  const brief = page.indexOf('<TodayBrief');
   const close = page.indexOf('</CinematicHome>');
   assert.ok(open !== -1 && brief > open && close > brief);
   const cover = home.indexOf('id="cover-heading"');

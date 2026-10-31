@@ -139,8 +139,11 @@ function livePosts(posts: TodayPost[]): TodayPost[] {
     );
 }
 
-function latestBullets(posts: TodayPost[]): TodayBullet[] {
-  const live = livePosts(posts);
+function latestBullets(
+  posts: TodayPost[],
+  excludeHref?: string
+): TodayBullet[] {
+  const live = livePosts(posts).filter((post) => post.href !== excludeHref);
   const local = live.filter((post) => LOCAL_CATEGORIES.has(post.category));
   const chosen = (local.length >= 3 ? local : live).slice(0, 4);
   return chosen.map((post) => {
@@ -188,11 +191,13 @@ export function buildTodayBrief(input: {
   file: TodayFile | null;
   posts: TodayPost[];
   now: string | Date;
+  excludeHref?: string;
 }): TodayBriefModel {
   const today = vancouverDateKey(input.now);
   const fileDate = clean(input.file?.date);
-  const curated =
-    input.file && fileDate === today ? fileItems(input.file, input.posts) : [];
+  const curated = (
+    input.file && fileDate === today ? fileItems(input.file, input.posts) : []
+  ).filter((item) => item.href !== input.excludeHref);
 
   if (curated.length >= 3) {
     return {
@@ -207,6 +212,6 @@ export function buildTodayBrief(input: {
   return {
     mode: 'latest',
     heading: 'Latest in the Lower Mainland',
-    items: latestBullets(input.posts),
+    items: latestBullets(input.posts, input.excludeHref),
   };
 }
