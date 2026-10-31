@@ -20,6 +20,7 @@ export default function StoryThumb({
   className = '',
   sizes,
   priority = false,
+  illustration = false,
 }: {
   image?: string;
   imageAlt?: string;
@@ -28,6 +29,7 @@ export default function StoryThumb({
   className?: string;
   sizes: string;
   priority?: boolean;
+  illustration?: boolean;
 }) {
   const classes = [
     'story-thumb',
@@ -42,14 +44,19 @@ export default function StoryThumb({
   return (
     <span className={classes}>
       {image ? (
-        <Image
-          src={image}
-          alt={imageAlt || title}
-          fill
-          sizes={sizes}
-          priority={priority}
-          className="story-thumb__image"
-        />
+        <>
+          <Image
+            src={image}
+            alt={imageAlt || title}
+            fill
+            sizes={sizes}
+            priority={priority}
+            className="story-thumb__image"
+          />
+          {illustration && (
+            <span className="story-thumb__label">Illustration</span>
+          )}
+        </>
       ) : (
         <span className="story-thumb__fallback" aria-hidden="true">
           <span className="story-thumb__rule" />

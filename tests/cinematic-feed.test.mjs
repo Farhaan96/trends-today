@@ -2,17 +2,33 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import ts from 'typescript';
-const compiled = ts.transpileModule(
+const illustrationCompiled = ts.transpileModule(
+  readFileSync(
+    new URL('../src/lib/illustration-caption.ts', import.meta.url),
+    'utf8'
+  ),
+  { compilerOptions: { module: ts.ModuleKind.ESNext } }
+).outputText;
+const illustrationUrl =
+  'data:text/javascript;base64,' +
+  Buffer.from(illustrationCompiled).toString('base64');
+let compiled = ts.transpileModule(
   readFileSync(
     new URL('../src/lib/cinematic-feed.ts', import.meta.url),
     'utf8'
   ),
   { compilerOptions: { module: ts.ModuleKind.ESNext } }
 ).outputText;
+compiled = compiled.replace(
+  /(['"])\.\/illustration-caption\1/,
+  JSON.stringify(illustrationUrl)
+);
 const {
   activeEvents,
   filterStories,
   editorialPoster,
+  homepageImage,
+  pickTravelStories,
   rankedStoryCities,
   splitCityFilters,
   splitFeaturedStories,
@@ -95,6 +111,34 @@ test('the collapsed city row keeps the busiest cities', () => {
     extra: ['Burnaby'],
   });
 });
+test('the default city row contains exactly the top six cities', () => {
+  const cities = [
+    'Vancouver',
+    'Surrey',
+    'Burnaby',
+    'Richmond',
+    'Coquitlam',
+    'Delta',
+    'Langley',
+    'New Westminster',
+  ].map((locality, index) => ({
+    href: `/local-news/city-${index}`,
+    category: 'local-news',
+    title: locality,
+    locality,
+  }));
+  const split = splitCityFilters(cities, 'All cities');
+  assert.equal(split.visible.length, 6);
+  assert.deepEqual(split.visible, [
+    'Burnaby',
+    'Coquitlam',
+    'Delta',
+    'Langley',
+    'New Westminster',
+    'Richmond',
+  ]);
+  assert.deepEqual(split.extra, ['Surrey', 'Vancouver']);
+});
 test('a selected city stays in the row even when it is in the hidden tail', () => {
   assert.deepEqual(splitCityFilters(sample, 'Burnaby', 1), {
     visible: ['Surrey', 'Burnaby'],
@@ -111,13 +155,19 @@ test('the lead block and the grid never show the same story twice', () => {
   assert.deepEqual(split.secondaries, [sample[1], sample[2], sample[3]]);
   assert.deepEqual(split.grid, []);
   assert.equal(split.hasMore, false);
-  const wide = splitFeaturedStories([...sample, ...sample], 2);
-  assert.deepEqual(
-    wide.grid,
-    [sample[0], sample[1]],
-    'the grid resumes after the featured stories'
-  );
-  assert.equal(wide.hasMore, true);
+  const additional = [
+    { ...sample[0], href: '/things-to-do/fifth', title: 'Fifth' },
+    { ...sample[0], href: '/things-to-do/sixth', title: 'Sixth' },
+  ];
+  const wide = splitFeaturedStories([...sample, ...additional], 2);
+  assert.deepEqual(wide.grid, additional);
+  assert.equal(wide.hasMore, false);
+});
+test('featured exclusions do not remove stories from the grid', () => {
+  const split = splitFeaturedStories(sample, 2, new Set([sample[0].href]));
+  assert.equal(split.lead, sample[1]);
+  assert.deepEqual(split.secondaries, [sample[2], sample[3]]);
+  assert.deepEqual(split.grid, [sample[0]]);
 });
 test('an empty result set yields no lead and nothing more to load', () => {
   assert.deepEqual(splitFeaturedStories([], 9), {
@@ -126,4 +176,88 @@ test('an empty result set yields no lead and nothing more to load', () => {
     grid: [],
     hasMore: false,
   });
+});
+
+test('homepage image policy hides generated news art', () => {
+  assert.deepEqual(
+    homepageImage({
+      category: 'local-news',
+      image: '/generated-news.jpg',
+      imageAttribution: 'AI generated illustration for Trends Today',
+    }),
+    { src: undefined, illustration: false }
+  );
+});
+
+test('homepage image policy labels generated things to do art', () => {
+  assert.deepEqual(
+    homepageImage({
+      category: 'things-to-do',
+      image: '/generated-event.jpg',
+      imageAttribution: 'Generated editorial image for Trends Today',
+    }),
+    { src: '/generated-event.jpg', illustration: true }
+  );
+});
+
+test('homepage image policy labels generated evergreen art', () => {
+  assert.deepEqual(
+    homepageImage({
+      category: 'local-news',
+      image: '/generated-guide.jpg',
+      imageAttribution: 'Generative image for Trends Today',
+      storyType: 'evergreen-planner',
+    }),
+    { src: '/generated-guide.jpg', illustration: true }
+  );
+});
+
+test('official maps stay real images when attribution says generated', () => {
+  assert.deepEqual(
+    homepageImage({
+      category: 'transit',
+      image: '/official-map.jpg',
+      imageAttribution: 'Generated from an official city map',
+      imageSourceType: 'official-map',
+    }),
+    { src: '/official-map.jpg', illustration: false }
+  );
+});
+
+test('homepage image policy returns no source when there is no image', () => {
+  assert.deepEqual(homepageImage({ category: 'local-news' }), {
+    src: undefined,
+    illustration: false,
+  });
+});
+
+test('travel stories skip exclusions and fall through in source order', () => {
+  const travel = [
+    { href: '/transit/one', category: 'transit', title: 'One' },
+    { href: '/local-news/not-travel', category: 'local-news', title: 'News' },
+    { href: '/transit/two', category: 'transit', title: 'Two' },
+    { href: '/transit/three', category: 'transit', title: 'Three' },
+  ];
+  assert.deepEqual(
+    pickTravelStories(travel, new Set(['/transit/one']), 2).map(
+      (story) => story.href
+    ),
+    ['/transit/two', '/transit/three']
+  );
+});
+
+test('travel stories return fewer when needed and never repeat', () => {
+  const repeated = {
+    href: '/transit/repeated',
+    category: 'transit',
+    title: 'Repeated',
+  };
+  assert.deepEqual(
+    pickTravelStories(
+      [repeated, repeated, { ...repeated }, sample[0]],
+      new Set(),
+      3
+    ).map((story) => story.href),
+    ['/transit/repeated']
+  );
 });

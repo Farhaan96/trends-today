@@ -23,6 +23,8 @@ import {
   ALL_CITIES,
   activeEvents,
   filterStories,
+  homepageImage,
+  pickTravelStories,
   splitCityFilters,
   splitFeaturedStories,
   storyCity,
@@ -32,10 +34,12 @@ import {
 export default function CinematicHome({
   stories,
   asOf,
+  latestHrefs,
   children,
 }: {
   stories: LocalStory[];
   asOf: string;
+  latestHrefs: string[];
   children?: ReactNode;
 }) {
   const [now, setNow] = useState(asOf);
@@ -52,20 +56,41 @@ export default function CinematicHome({
   const index = events.length ? selected % events.length : 0;
   const current = events[index];
   const lead = stories[0];
-  const transit = stories
-    .filter((story) => story.category === 'transit')
-    .slice(0, 2);
+  const leadImage = lead ? homepageImage(lead) : undefined;
+  const defaultFeatureExclusions = new Set([
+    ...(lead ? [lead.href] : []),
+    ...latestHrefs,
+  ]);
+  const defaultFeatured = splitFeaturedStories(
+    stories,
+    0,
+    defaultFeatureExclusions
+  );
+  const travelExclusions = new Set([
+    ...defaultFeatureExclusions,
+    ...(defaultFeatured.lead ? [defaultFeatured.lead.href] : []),
+    ...defaultFeatured.secondaries.map((story) => story.href),
+  ]);
+  const transit = pickTravelStories(stories, travelExclusions);
   const { visible: visibleCities, extra: extraCities } = splitCityFilters(
     stories,
     city
   );
   const results = filterStories(stories, city, query);
+  const isDefaultView = city === ALL_CITIES && query.trim() === '';
   const {
     lead: featuredLead,
     secondaries: secondaryStories,
     grid: gridStories,
     hasMore,
-  } = splitFeaturedStories(results, count);
+  } = splitFeaturedStories(
+    results,
+    count,
+    isDefaultView ? defaultFeatureExclusions : new Set()
+  );
+  const featuredLeadImage = featuredLead
+    ? homepageImage(featuredLead)
+    : undefined;
   const pagination = paginateItems(stories, 1, 12, '').pagination;
 
   useEffect(() => {
@@ -169,16 +194,32 @@ export default function CinematicHome({
                 className="cover__frame"
                 aria-label={lead.title}
               >
-                <span className="cover__media">
-                  {lead.image && (
+                <span
+                  className={`cover__media ${leadImage?.src ? '' : 'cover__media--fallback'}`}
+                >
+                  {leadImage?.src ? (
                     <Image
-                      src={lead.image}
+                      src={leadImage.src}
                       alt={lead.imageAlt || lead.title}
                       fill
                       priority
                       sizes="(max-width: 760px) 100vw, 67vw"
                       className="cover__image"
                     />
+                  ) : (
+                    <span
+                      className="story-thumb__fallback cover__fallback"
+                      aria-hidden="true"
+                    >
+                      <span className="story-thumb__rule" />
+                      <span className="story-thumb__label">
+                        {getCategoryLabel(lead.category)}
+                      </span>
+                      <span className="story-thumb__mark">Trends Today</span>
+                    </span>
+                  )}
+                  {leadImage?.src && leadImage.illustration && (
+                    <span className="story-thumb__label">Illustration</span>
                   )}
                 </span>
                 <div className="cover__caption">
@@ -212,31 +253,35 @@ export default function CinematicHome({
               Before you <br />
               head out.
             </h2>
-            {transit.map((story) => (
-              <article key={story.href}>
-                <Link href={story.href} className="travel-brief__link">
-                  <StoryThumb
-                    image={story.image}
-                    imageAlt={story.imageAlt}
-                    title={story.title}
-                    category={story.category}
-                    className="travel-brief__thumb"
-                    sizes="(max-width: 560px) calc(100vw - 44px), (max-width: 800px) 45vw, 30vw"
-                  />
-                  <span className="eyebrow">{storyCity(story)}</span>
-                  <span className="travel-brief__title-row">
-                    <h3>{story.title}</h3>
-                    <ArrowRightIcon />
-                  </span>
-                  <span className="travel-brief__description">
-                    {story.description}
-                  </span>
-                  <time dateTime={story.publishedAt}>
-                    {date(story.publishedAt)}
-                  </time>
-                </Link>
-              </article>
-            ))}
+            {transit.map((story) => {
+              const image = homepageImage(story);
+              return (
+                <article key={story.href}>
+                  <Link href={story.href} className="travel-brief__link">
+                    <StoryThumb
+                      image={image.src}
+                      imageAlt={story.imageAlt}
+                      title={story.title}
+                      category={story.category}
+                      illustration={image.illustration}
+                      className="travel-brief__thumb"
+                      sizes="(max-width: 560px) calc(100vw - 44px), (max-width: 800px) 45vw, 30vw"
+                    />
+                    <span className="eyebrow">{storyCity(story)}</span>
+                    <span className="travel-brief__title-row">
+                      <h3>{story.title}</h3>
+                      <ArrowRightIcon />
+                    </span>
+                    <span className="travel-brief__description">
+                      {story.description}
+                    </span>
+                    <time dateTime={story.publishedAt}>
+                      {date(story.publishedAt)}
+                    </time>
+                  </Link>
+                </article>
+              );
+            })}
           </div>
         </section>
       )}
@@ -482,10 +527,11 @@ export default function CinematicHome({
                 className="neighbourhood-lead__link"
               >
                 <StoryThumb
-                  image={featuredLead.image}
+                  image={featuredLeadImage?.src}
                   imageAlt={featuredLead.imageAlt}
                   title={featuredLead.title}
                   category={featuredLead.category}
+                  illustration={featuredLeadImage?.illustration}
                   className="neighbourhood-lead__thumb"
                   sizes="(max-width: 800px) calc(100vw - 44px), 58vw"
                 />
@@ -507,65 +553,73 @@ export default function CinematicHome({
             </article>
             {secondaryStories.length > 0 && (
               <div className="neighbourhood-secondary">
-                {secondaryStories.map((story) => (
-                  <article key={story.href}>
-                    <Link href={story.href}>
-                      <StoryThumb
-                        image={story.image}
-                        imageAlt={story.imageAlt}
-                        title={story.title}
-                        category={story.category}
-                        className="neighbourhood-secondary__thumb"
-                        sizes="(max-width: 480px) 38vw, (max-width: 800px) 30vw, 16vw"
-                      />
-                      <span className="neighbourhood-secondary__body">
-                        <span className="eyebrow">{storyCity(story)}</span>
-                        <h3>{story.title}</h3>
-                        <time dateTime={story.publishedAt}>
-                          {date(story.publishedAt)}
-                        </time>
-                      </span>
-                    </Link>
-                  </article>
-                ))}
+                {secondaryStories.map((story) => {
+                  const image = homepageImage(story);
+                  return (
+                    <article key={story.href}>
+                      <Link href={story.href}>
+                        <StoryThumb
+                          image={image.src}
+                          imageAlt={story.imageAlt}
+                          title={story.title}
+                          category={story.category}
+                          illustration={image.illustration}
+                          className="neighbourhood-secondary__thumb"
+                          sizes="(max-width: 480px) 38vw, (max-width: 800px) 30vw, 16vw"
+                        />
+                        <span className="neighbourhood-secondary__body">
+                          <span className="eyebrow">{storyCity(story)}</span>
+                          <h3>{story.title}</h3>
+                          <time dateTime={story.publishedAt}>
+                            {date(story.publishedAt)}
+                          </time>
+                        </span>
+                      </Link>
+                    </article>
+                  );
+                })}
               </div>
             )}
           </div>
         )}
         {gridStories.length > 0 && (
           <div className="neighbourhood-grid">
-            {gridStories.map((story) => (
-              <article key={story.href}>
-                <Link href={story.href} className="neighbourhood-card">
-                  <StoryThumb
-                    image={story.image}
-                    imageAlt={story.imageAlt}
-                    title={story.title}
-                    category={story.category}
-                    className="neighbourhood-card__thumb"
-                    sizes="(max-width: 480px) calc(100vw - 44px), (max-width: 800px) 45vw, 30vw"
-                  />
-                  <span className="eyebrow">
-                    {storyCity(story)}
-                    <span>{getCategoryLabel(story.category)}</span>
-                  </span>
-                  <h3>{story.title}</h3>
-                  <span className="neighbourhood-card__description">
-                    {story.description}
-                  </span>
-                  <span className="neighbourhood-card__meta">
-                    <time dateTime={story.publishedAt}>
-                      {date(story.publishedAt)}
-                    </time>
-                    {story.eventEndDate &&
-                      Date.parse(story.eventEndDate) < Date.parse(now) && (
-                        <span className="ended-label">Past event</span>
-                      )}
-                    <ArrowRightIcon />
-                  </span>
-                </Link>
-              </article>
-            ))}
+            {gridStories.map((story) => {
+              const image = homepageImage(story);
+              return (
+                <article key={story.href}>
+                  <Link href={story.href} className="neighbourhood-card">
+                    <StoryThumb
+                      image={image.src}
+                      imageAlt={story.imageAlt}
+                      title={story.title}
+                      category={story.category}
+                      illustration={image.illustration}
+                      className="neighbourhood-card__thumb"
+                      sizes="(max-width: 480px) calc(100vw - 44px), (max-width: 800px) 45vw, 30vw"
+                    />
+                    <span className="eyebrow">
+                      {storyCity(story)}
+                      <span>{getCategoryLabel(story.category)}</span>
+                    </span>
+                    <h3>{story.title}</h3>
+                    <span className="neighbourhood-card__description">
+                      {story.description}
+                    </span>
+                    <span className="neighbourhood-card__meta">
+                      <time dateTime={story.publishedAt}>
+                        {date(story.publishedAt)}
+                      </time>
+                      {story.eventEndDate &&
+                        Date.parse(story.eventEndDate) < Date.parse(now) && (
+                          <span className="ended-label">Past event</span>
+                        )}
+                      <ArrowRightIcon />
+                    </span>
+                  </Link>
+                </article>
+              );
+            })}
           </div>
         )}
         {results.length === 0 && (

@@ -1,3 +1,5 @@
+import { isGeneratedIllustration } from './illustration-caption';
+
 export interface LocalStory {
   href: string;
   title: string;
@@ -6,10 +8,39 @@ export interface LocalStory {
   image?: string;
   imageAlt?: string;
   imageAttribution?: string;
+  imageSourceType?: string;
+  storyType?: string;
   publishedAt?: string;
   eventEndDate?: string;
   locality?: string;
   city?: string;
+}
+
+export interface HomepageImageResult {
+  src?: string;
+  illustration: boolean;
+}
+
+export function homepageImage(
+  story: Pick<
+    LocalStory,
+    'category' | 'image' | 'imageAttribution' | 'imageSourceType' | 'storyType'
+  >
+): HomepageImageResult {
+  const image = story.image?.trim() || undefined;
+  const generated = isGeneratedIllustration(
+    story.imageAttribution,
+    story.imageSourceType
+  );
+  if (!generated) return { src: image, illustration: false };
+
+  const allowsIllustration =
+    story.category === 'things-to-do' ||
+    story.storyType?.trim().toLowerCase().startsWith('evergreen') === true;
+  if (allowsIllustration) {
+    return { src: image, illustration: true };
+  }
+  return { src: undefined, illustration: false };
 }
 
 export function storyCity(story: LocalStory): string {
@@ -69,7 +100,7 @@ export interface CityFilterSplit {
 export function splitCityFilters(
   stories: LocalStory[],
   selected: string,
-  limit = 7
+  limit = 6
 ): CityFilterSplit {
   const ranked = rankedStoryCities(stories);
   const top = ranked.slice(0, limit);
@@ -95,15 +126,56 @@ export interface FeaturedSplit {
 export function splitFeaturedStories(
   results: LocalStory[],
   gridCount: number,
+  excludeHrefs: ReadonlySet<string> = new Set(),
   featureSize = 4
 ): FeaturedSplit {
-  const featured = results.slice(0, featureSize);
+  const featured: LocalStory[] = [];
+  const featuredHrefs = new Set<string>();
+  for (const story of results) {
+    if (excludeHrefs.has(story.href) || featuredHrefs.has(story.href)) continue;
+    featured.push(story);
+    featuredHrefs.add(story.href);
+    if (featured.length === featureSize) break;
+  }
+
+  const remaining: LocalStory[] = [];
+  const usedHrefs = new Set(featuredHrefs);
+  for (const story of results) {
+    if (usedHrefs.has(story.href)) continue;
+    remaining.push(story);
+    usedHrefs.add(story.href);
+  }
+
   return {
     lead: featured[0],
     secondaries: featured.slice(1),
-    grid: results.slice(featured.length, featured.length + gridCount),
-    hasMore: featured.length + gridCount < results.length,
+    grid: remaining.slice(0, gridCount),
+    hasMore: gridCount < remaining.length,
   };
+}
+
+export function pickTravelStories(
+  stories: LocalStory[],
+  excludeHrefs: ReadonlySet<string>,
+  limit = 2
+): LocalStory[] {
+  const picked: LocalStory[] = [];
+  const seen = new Set<string>();
+  const safeLimit = Math.max(0, Math.floor(limit));
+  if (safeLimit === 0) return picked;
+  for (const story of stories) {
+    if (
+      story.category !== 'transit' ||
+      excludeHrefs.has(story.href) ||
+      seen.has(story.href)
+    ) {
+      continue;
+    }
+    picked.push(story);
+    seen.add(story.href);
+    if (picked.length === safeLimit) break;
+  }
+  return picked;
 }
 
 // Navigation artwork is tied to these exact event editions. New stories use

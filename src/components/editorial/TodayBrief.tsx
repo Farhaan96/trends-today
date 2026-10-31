@@ -1,43 +1,9 @@
-import fs from 'fs';
-import path from 'path';
 import Link from 'next/link';
 import StoryThumb from '@/components/editorial/StoryThumb';
-import { getAllArticles } from '@/lib/article-utils';
-import {
-  buildTodayBrief,
-  type TodayFile,
-  type TodayPost,
-} from '@/lib/today-brief';
+import { homepageImage } from '@/lib/cinematic-feed';
+import type { TodayBriefModel } from '@/lib/today-brief';
 
-function readTodayFile(): TodayFile | null {
-  try {
-    const filePath = path.join(process.cwd(), 'content', 'today.json');
-    return JSON.parse(fs.readFileSync(filePath, 'utf8')) as TodayFile;
-  } catch {
-    return null;
-  }
-}
-
-export default async function TodayBrief() {
-  const articles = await getAllArticles();
-  const posts: TodayPost[] = articles.map((article) => ({
-    href: `/${article.category}/${article.slug}`,
-    title: article.frontmatter?.title || article.title,
-    category: article.category,
-    image: article.frontmatter?.image || article.image,
-    imageAlt: article.frontmatter?.imageAlt,
-    updatedAt: article.frontmatter?.updatedAt,
-    modifiedAt: article.frontmatter?.modifiedAt,
-    publishedAt: article.frontmatter?.publishedAt,
-    datePublished: article.frontmatter?.datePublished,
-    status: article.frontmatter?.status,
-  }));
-  const brief = buildTodayBrief({
-    file: readTodayFile(),
-    posts,
-    now: new Date().toISOString(),
-  });
-
+export default function TodayBrief({ brief }: { brief: TodayBriefModel }) {
   if (brief.items.length < 3) return null;
 
   return (
@@ -50,32 +16,36 @@ export default async function TodayBrief() {
           ) : null}
         </div>
         <ul>
-          {brief.items.map((item) => (
-            <li key={`${item.href}-${item.text}`}>
-              <Link href={item.href} className="today-brief__link">
-                <StoryThumb
-                  image={item.image}
-                  imageAlt={item.imageAlt}
-                  title={item.text}
-                  category={item.category}
-                  className="today-brief__thumb"
-                  sizes="(max-width: 639px) 36vw, (max-width: 959px) 46vw, 24vw"
-                />
-                <span className="today-brief__body">
-                  <span className="today-brief__label">{item.label}</span>
-                  <span className="today-brief__headline">{item.text}</span>
-                  {item.dateTime && item.dateLabel ? (
-                    <time
-                      className="today-brief__date"
-                      dateTime={item.dateTime}
-                    >
-                      {item.dateLabel}
-                    </time>
-                  ) : null}
-                </span>
-              </Link>
-            </li>
-          ))}
+          {brief.items.map((item) => {
+            const image = homepageImage(item);
+            return (
+              <li key={`${item.href}-${item.text}`}>
+                <Link href={item.href} className="today-brief__link">
+                  <StoryThumb
+                    image={image.src}
+                    imageAlt={item.imageAlt}
+                    title={item.text}
+                    category={item.category}
+                    illustration={image.illustration}
+                    className="today-brief__thumb"
+                    sizes="(max-width: 639px) 36vw, (max-width: 959px) 46vw, 24vw"
+                  />
+                  <span className="today-brief__body">
+                    <span className="today-brief__label">{item.label}</span>
+                    <span className="today-brief__headline">{item.text}</span>
+                    {item.dateTime && item.dateLabel ? (
+                      <time
+                        className="today-brief__date"
+                        dateTime={item.dateTime}
+                      >
+                        {item.dateLabel}
+                      </time>
+                    ) : null}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>
