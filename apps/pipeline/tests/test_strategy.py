@@ -55,6 +55,70 @@ class StrategyTests(unittest.TestCase):
         self.assertEqual('repair', result.decision)
         self.assertIn('Evidence strength is below the release threshold', result.reasons)
 
+    def test_secondary_lead_cannot_qualify_without_primary_source(self):
+        candidate = self.candidate()
+        candidate['evidence']['sourceUrls'] = [
+            'https://publication.example/vancouver/store-closing',
+            'https://context.example/neighbourhood',
+        ]
+        candidate['evidence']['primarySourceUrls'] = []
+
+        result = score_candidate(candidate)
+
+        self.assertEqual('repair', result.decision)
+        self.assertIn('No primary source recorded', result.reasons)
+
+    def test_secondary_lead_cannot_self_declare_as_primary_source(self):
+        candidate = self.candidate()
+        candidate['discoveryRole'] = 'lead'
+        candidate['sourceUrl'] = 'https://publication.example/vancouver/store-closing'
+        candidate['evidence']['sourceUrls'] = [
+            'https://publication.example/vancouver/store-closing',
+            'https://context.example/neighbourhood',
+        ]
+        candidate['evidence']['primarySourceUrls'] = [
+            'https://www.publication.example/vancouver/store-closing',
+        ]
+
+        result = score_candidate(candidate)
+
+        self.assertEqual('repair', result.decision)
+        self.assertIn(
+            'Discovery-lead domain cannot be used as a primary source',
+            result.reasons,
+        )
+        self.assertIn('No primary source recorded', result.reasons)
+
+    def test_secondary_tier_without_role_still_cannot_self_declare_primary(self):
+        candidate = self.candidate()
+        candidate['sourceTier'] = 'secondary'
+        candidate['url'] = 'https://publication.example/store-closing'
+        candidate['evidence']['primarySourceUrls'] = [
+            'https://publication.example/store-closing',
+        ]
+
+        result = score_candidate(candidate)
+
+        self.assertEqual('repair', result.decision)
+        self.assertIn(
+            'Discovery-lead domain cannot be used as a primary source',
+            result.reasons,
+        )
+
+    def test_scheme_less_primary_source_is_rejected(self):
+        candidate = self.candidate()
+        candidate['evidence']['primarySourceUrls'] = [
+            'city.example/official-notice',
+        ]
+
+        result = score_candidate(candidate)
+
+        self.assertEqual('repair', result.decision)
+        self.assertIn(
+            'Primary source URLs must use http or https',
+            result.reasons,
+        )
+
     def test_missing_locality_blocks_publication(self):
         candidate = self.candidate()
         candidate['locality'] = ''
@@ -87,6 +151,24 @@ class StrategyTests(unittest.TestCase):
         self.assertEqual('reported-update', queue[0]['storyType'])
         self.assertIn('skipReasonIfUnqualified', queue[0])
         self.assertIn('primary-source support', queue[0]['skipReasonIfUnqualified'])
+
+    def test_research_queue_preserves_secondary_discovery_lead_boundary(self):
+        queue = build_research_queue([{
+            'title': 'Longtime Vancouver store set to close',
+            'sourceName': 'Local publication leads',
+            'sourceTier': 'secondary',
+            'discoveryRole': 'lead',
+            'url': 'https://publication.example/vancouver/store-closing',
+            'locality': 'Vancouver',
+            'category': 'local-news',
+        }])
+
+        self.assertEqual('secondary', queue[0]['sourceTier'])
+        self.assertEqual('lead', queue[0]['discoveryRole'])
+        self.assertIn(
+            'independent reporting angle not copied from a discovery lead',
+            queue[0]['requiredEvidence'],
+        )
 
 
 if __name__ == '__main__':
