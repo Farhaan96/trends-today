@@ -1,0 +1,70 @@
+{
+  "generatedAt": "2026-07-28T14:45:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-28-1430",
+  "sourceQueue": "artifacts/editorial/research/2026-07-28-1430-source-queue.json",
+  "summary": {
+    "sourceQueueCount": 58,
+    "newUrlsVersus1230": 1,
+    "qualifiedCount": 1,
+    "rejectedOrHeldCount": 57
+  },
+  "qualified": [
+    {
+      "title": "Richmond election voter registration closes Aug. 18",
+      "reason": "Fresh official Richmond civic-service notice with clear voter action dates and accessible-voting utility."
+    }
+  ],
+  "rejectedOrHeld": [
+    {
+      "bucket": "duplicates or already-covered queue",
+      "examples": [
+        "2026 BC Day Holiday Hours of Operation",
+        "Coquitlam Protecting Key Wildlife Corridor along Partington Creek",
+        "Road Work - Como Lake Avenue between Clarke Road and North Road",
+        "Thursday Artist Talk: Panjabi Tour with Keerat Kaur",
+        "Community Picnic at Adams Road Park"
+      ],
+      "reason": "Already published in recent sweeps or already reviewed in the active release-candidate inventory."
+    },
+    {
+      "bucket": "thin or low-utility event listings",
+      "examples": [
+        "Fired Up for Football - free Foosball tables in Recreation Facilities",
+        "Downtown's Front Yard: Lawn Games at the Pier",
+        "Intro to Hand Embroidery Workshop",
+        "City Hall Illumination - Green - Canadian Injury Prevention Day"
+      ],
+      "reason": "Did not provide enough distinct Lower Mainland reader utility beyond a basic event-calendar listing."
+    },
+    {
+      "bucket": "manual-approval or reputational risk",
+      "examples": [
+        "BC Supreme Court Decision - Impact on Property Titles",
+        "Richmond Olympic Oval Corporation - Performance & Forensic Audits",
+        "Mayor's statement on Metro Vancouver governance reform"
+      ],
+      "reason": "Legal, audit, governance or reputational context requires a stronger reporting plan or owner-approved risk posture."
+    },
+    {
+      "bucket": "sports items below local utility bar",
+      "examples": [
+        "WFC2 claim penalty shootout win on the road in St. Louis",
+        "Emerging O-Line Giving The Lions An Extra Push",
+        "Kevin Lankinen and Linus Karlsson Join Canucks Insider Podcast to Discuss Offseason Work Jul 25, 2026"
+      ],
+      "reason": "Official but not enough practical Lower Mainland reader impact for this sweep."
+    }
+  ],
+  "missingDiscovery": [
+    {
+      "provider": "Perplexity",
+      "status": "unavailable",
+      "reason": "PERPLEXITY_API_KEY unavailable."
+    },
+    {
+      "provider": "Google Custom Search",
+      "status": "unavailable",
+      "reason": "GOOGLE_API_KEY unavailable."
+    }
+  ]
+}
