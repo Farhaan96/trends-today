@@ -267,6 +267,53 @@ button:disabled {
   object-fit: cover;
   object-position: 50% 48%;
 }
+/* An official map leads the page whole, with its legend and its detour routes
+   intact. The caption drops below the artwork instead of sitting on top of
+   it, so nothing covers the key. */
+.cover__frame.cover__frame--contain {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  background: var(--tt-paper);
+}
+.cover__frame--contain .cover__media {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  aspect-ratio: 15 / 7;
+  overflow: hidden;
+}
+.cover__frame--contain .cover__caption {
+  position: static;
+  width: 100%;
+  box-shadow: none;
+}
+.cover__media--contain {
+  background: #f1ecdd;
+}
+.cover__media--contain .cover__image {
+  object-fit: contain;
+  object-position: center;
+}
+.cover__media--fallback {
+  background: var(--tt-ink);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #ffffff00 0 16px,
+    #ffffff14 16px 32px
+  );
+  color: var(--tt-lime);
+}
+.cover__fallback {
+  padding: clamp(20px, 3vw, 44px);
+}
+.cover__fallback .story-thumb__label {
+  font-size: clamp(28px, 3.4vw, 50px);
+}
+.cover__fallback .story-thumb__mark {
+  margin-bottom: auto;
+  font-size: clamp(15px, 1.5vw, 22px);
+}
 .cover__caption {
   position: absolute;
   bottom: -20px;
@@ -320,6 +367,157 @@ button:disabled {
   text-align: right;
   margin: 38px 2px 0;
 }
+.story-thumb {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--color-surface-strong);
+}
+.story-thumb__image {
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+a:hover .story-thumb__image {
+  transform: scale(1.03);
+}
+/* Official maps, data cards and logos are shown whole. A legend or a source
+   line at the edge of the artwork must never be cropped away. */
+.story-thumb--contain {
+  background: var(--tt-paper);
+}
+.story-thumb--contain .story-thumb__image {
+  object-fit: contain;
+  object-position: center;
+}
+a:hover .story-thumb--contain .story-thumb__image {
+  transform: none;
+}
+.story-thumb--photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 1px #071c1714;
+  pointer-events: none;
+}
+/* Every generated image carries a legible label, in brand colours, over the
+   bottom left corner of its own thumbnail. */
+.story-thumb__illustration {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  z-index: 2;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--tt-lime);
+  box-shadow: 0 1px 4px #071c1759;
+  color: var(--tt-ink);
+  font-family: var(--font-ui), sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.story-thumb__fallback {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 9px;
+  padding: clamp(12px, 1.4vw, 20px);
+}
+/* A civic story with no usable art gets a deliberate branded category card,
+   built from the masthead, a rule and the section name. */
+.story-thumb--card {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #ffffff00 0 14px,
+    #ffffff17 14px 28px
+  );
+}
+.story-thumb--card::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 6px;
+  background: var(--tt-coral);
+}
+.story-thumb--coral::before,
+.story-thumb--accent::before {
+  background: var(--tt-ink);
+}
+.story-thumb--lime,
+.story-thumb--surface {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #07171700 0 14px,
+    #07171714 14px 28px
+  );
+}
+.story-thumb--card .story-thumb__mark {
+  margin-bottom: auto;
+}
+.story-thumb__rule {
+  display: block;
+  width: 42px;
+  height: 3px;
+  background: currentcolor;
+  opacity: 0.85;
+}
+.story-thumb__label {
+  display: block;
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: clamp(17px, 2.1vw, 27px);
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  line-height: 1.05;
+  text-transform: none;
+}
+.story-thumb__mark {
+  display: block;
+  font-family: var(--font-ui), sans-serif;
+  font-size: clamp(11px, 1.1vw, 15px);
+  font-weight: 700;
+  letter-spacing: -0.6px;
+  line-height: 1;
+  opacity: 0.72;
+}
+.story-thumb__mark::after {
+  content: '.';
+  color: var(--tt-coral);
+}
+.story-thumb--coral .story-thumb__mark::after,
+.story-thumb--accent .story-thumb__mark::after {
+  color: inherit;
+}
+.story-thumb--ink {
+  background-color: var(--tt-ink);
+  color: var(--tt-lime);
+}
+.story-thumb--lime {
+  background-color: var(--tt-lime);
+  color: var(--tt-ink);
+}
+.story-thumb--coral {
+  background-color: var(--tt-coral);
+  color: var(--tt-ink);
+}
+.story-thumb--accent {
+  background-color: var(--color-accent);
+  color: var(--tt-paper);
+}
+.story-thumb--surface {
+  background-color: var(--color-surface-strong);
+  color: var(--tt-ink);
+  box-shadow: inset 0 0 0 1px #071c1726;
+}
 .travel-brief {
   background: var(--tt-paper);
   position: relative;
@@ -346,16 +544,26 @@ button:disabled {
   padding-left: 32px;
 }
 .travel-brief article .eyebrow {
+  display: block;
   color: var(--color-accent-strong);
   font-size: 9px;
   margin-bottom: 6px;
 }
 .travel-brief article a {
   color: inherit;
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+.travel-brief__thumb {
+  aspect-ratio: 3 / 2;
+  margin-bottom: 14px;
+}
+.travel-brief__title-row {
   display: flex;
   align-items: center;
   gap: 15px;
-  text-decoration: none;
 }
 .travel-brief h3 {
   font-family: var(--font-editorial), Georgia, serif;
@@ -593,19 +801,59 @@ button:disabled {
 }
 .city-filters {
   display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.city-filters__row,
+.city-filters__extra {
+  display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  flex: 1;
+  min-width: 0;
 }
+.city-filters__extra {
+  padding-top: 8px;
+  border-top: 1px dashed var(--color-border);
+}
+.city-filters__extra[hidden] {
+  display: none;
+}
+/* Every chip and the toggle keep a 44px touch target at every width. */
 .city-filters button {
-  padding: 9px 14px;
-  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
   border: 0;
   border-radius: 25px;
-  font-size: 12px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.2;
   background: transparent;
   color: var(--tt-ink);
   white-space: nowrap;
+}
+.city-filters .city-filters__toggle {
+  gap: 8px;
+  border: 1px solid var(--color-border);
+  padding-inline: 15px;
+  color: var(--color-accent-strong);
+  font-weight: 600;
+}
+.city-filters__caret {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentcolor;
+  border-bottom: 1.5px solid currentcolor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.city-filters__toggle[aria-expanded='true'] .city-filters__caret {
+  transform: translateY(1px) rotate(225deg);
 }
 .city-filters button[aria-pressed='true'] {
   background: var(--tt-ink);
@@ -614,6 +862,10 @@ button:disabled {
 .city-filters button:hover {
   background: #dfe5ca;
   color: var(--tt-ink);
+}
+.city-filters .city-filters__toggle:hover {
+  background: #dfe5ca;
+  color: var(--color-accent-strong);
 }
 .story-search {
   display: flex;
@@ -643,21 +895,159 @@ button:disabled {
   color: #5d6b5f;
   margin: 18px 0 0;
 }
+.neighbourhood-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.72fr) minmax(290px, 1fr);
+  gap: 38px;
+  margin-top: 24px;
+  padding-bottom: 34px;
+  border-bottom: 1px solid var(--color-border);
+}
+.neighbourhood-feature article,
+.neighbourhood-feature a,
+.neighbourhood-secondary__body {
+  min-width: 0;
+}
+.neighbourhood-feature a {
+  color: inherit;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.neighbourhood-lead__link {
+  display: block;
+}
+.neighbourhood-lead__thumb {
+  aspect-ratio: 16 / 9;
+}
+.neighbourhood-lead__thumb .story-thumb__fallback {
+  padding: clamp(18px, 2vw, 30px);
+}
+.neighbourhood-lead__thumb .story-thumb__label {
+  font-size: clamp(26px, 3vw, 44px);
+}
+.neighbourhood-lead__thumb .story-thumb__mark {
+  font-size: clamp(13px, 1.3vw, 18px);
+}
+.neighbourhood-lead__thumb .story-thumb__rule {
+  width: 56px;
+}
+.neighbourhood-lead .eyebrow {
+  display: block;
+  margin: 17px 0 9px;
+  color: var(--color-accent-strong);
+}
+.neighbourhood-lead .eyebrow span {
+  margin-left: 10px;
+  color: #5b685a;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.neighbourhood-lead h3 {
+  margin: 0;
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: clamp(29px, 3vw, 44px);
+  font-weight: 500;
+  letter-spacing: -1.2px;
+  line-height: 1.04;
+}
+.neighbourhood-lead__link:hover h3 {
+  color: var(--color-accent-strong);
+}
+.neighbourhood-lead__description {
+  display: -webkit-box;
+  margin: 13px 0 15px;
+  max-width: 62ch;
+  overflow: hidden;
+  color: #536454;
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.neighbourhood-lead__meta {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.neighbourhood-lead__meta svg {
+  width: 18px;
+  color: var(--color-accent);
+}
+.neighbourhood-feature time {
+  color: #3c4640;
+  font-size: 13px;
+  font-weight: 500;
+}
+.neighbourhood-secondary {
+  display: grid;
+  grid-auto-rows: 1fr;
+  gap: 18px;
+  align-content: stretch;
+  padding-left: 38px;
+  border-left: 1px solid var(--color-border);
+}
+.neighbourhood-secondary article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--color-border);
+}
+.neighbourhood-secondary article:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+/* The column divides into equal cells so its rules line up against the lead.
+   With only one or two secondaries there is nothing to balance, so those sit
+   at the top of the column instead of floating in the middle. */
+.neighbourhood-secondary article:only-child,
+.neighbourhood-secondary article:nth-child(1):nth-last-child(2),
+.neighbourhood-secondary article:nth-child(2):nth-last-child(1) {
+  justify-content: flex-start;
+}
+.neighbourhood-secondary a {
+  display: grid;
+  grid-template-columns: minmax(132px, 47%) minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+.neighbourhood-secondary__thumb {
+  aspect-ratio: 3 / 2;
+}
+.neighbourhood-secondary .eyebrow {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-accent-strong);
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+.neighbourhood-secondary h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: clamp(18px, 1.55vw, 23px);
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  line-height: 1.12;
+}
+.neighbourhood-secondary a:hover h3 {
+  color: var(--color-accent-strong);
+}
 .neighbourhood-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 30px 36px;
-  margin-top: 22px;
+  gap: 28px 32px;
+  margin-top: 28px;
 }
 .neighbourhood-grid article {
   border-bottom: 1px solid var(--color-border);
-  padding-bottom: 25px;
+  padding-bottom: 20px;
 }
 .neighbourhood-grid .eyebrow {
+  display: block;
   letter-spacing: 0.7px;
   color: var(--color-accent-strong);
   font-size: 10px;
-  margin-bottom: 9px;
+  margin: 11px 0 7px;
 }
 .neighbourhood-grid .eyebrow span {
   margin-left: 10px;
@@ -666,38 +1056,46 @@ button:disabled {
   text-transform: none;
 }
 .neighbourhood-grid a {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+  display: block;
+  min-width: 0;
   color: inherit;
   text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.neighbourhood-card__thumb {
+  aspect-ratio: 3 / 2;
 }
 .neighbourhood-grid h3 {
   font-family: var(--font-editorial), Georgia, serif;
   font-weight: 500;
   line-height: 1.1;
-  font-size: 27px;
-  letter-spacing: -0.6px;
+  font-size: clamp(21px, 1.75vw, 25px);
+  letter-spacing: -0.5px;
   margin: 0;
 }
 .neighbourhood-grid a:hover h3,
 .travel-brief a:hover h3 {
   color: var(--color-accent-strong);
 }
+.neighbourhood-card__meta {
+  display: flex;
+  align-items: center;
+  min-height: 22px;
+}
 .neighbourhood-grid svg {
   color: var(--color-accent);
   margin-left: auto;
   width: 18px;
 }
-.neighbourhood-grid article > p:not(.eyebrow) {
-  font-size: 13px;
-  line-height: 1.55;
-  color: #536454;
+.neighbourhood-card__description {
+  margin: 8px 0 10px;
   display: -webkit-box;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #536454;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin: 10px 0 13px;
 }
 .neighbourhood-grid time {
   font-size: 13px;
@@ -1065,19 +1463,62 @@ button:disabled {
     font-size: 49px;
     line-height: 1;
   }
+  .neighbourhood-feature {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+  }
+  .neighbourhood-secondary {
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--color-border);
+    padding-top: 24px;
+  }
+  .neighbourhood-secondary article,
+  .neighbourhood-secondary article:last-child {
+    padding: 0;
+    border-bottom: 0;
+  }
+  .neighbourhood-secondary a {
+    display: block;
+  }
+  .neighbourhood-secondary__body {
+    display: block;
+    margin-top: 10px;
+  }
   .discovery-tools {
     margin-top: 23px;
     gap: 12px;
   }
   .city-filters {
     flex-basis: 100%;
-    gap: 4px;
+  }
+  .city-filters__row {
+    position: relative;
     flex-wrap: nowrap;
+    gap: 4px;
     overflow-x: auto;
-    padding-bottom: 8px;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+  .city-filters__row::-webkit-scrollbar {
+    display: none;
+  }
+  .city-filters__row > * {
+    flex: 0 0 auto;
+  }
+  /* Pin the toggle to the right edge so it stays reachable while the
+     city chips scroll sideways underneath it. */
+  .city-filters .city-filters__toggle {
+    position: sticky;
+    right: 0;
+    margin-left: auto;
+    background: var(--color-bg);
+    box-shadow: -10px 0 10px 4px var(--color-bg);
   }
   .city-filters button {
-    padding: 10px 12px;
+    padding-inline: 14px;
   }
   .story-search {
     max-width: 100%;
@@ -1162,7 +1603,7 @@ button:disabled {
   .neighbourhood-grid {
     grid-template-columns: 1fr;
   }
-  .neighbourhood-grid article > p:not(.eyebrow) {
+  .neighbourhood-card__description {
     -webkit-line-clamp: 3;
   }
   .travel-brief h3 {
@@ -1215,39 +1656,72 @@ button:disabled {
 .today-brief__inner {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 22px 40px 18px;
+  padding: 28px 45px 34px;
+}
+.today-brief__head {
+  display: flex;
+  gap: 12px 28px;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 .today-brief h2 {
-  margin: 0 0 6px;
+  margin: 0;
   font-family: var(--font-editorial), Georgia, serif;
   font-size: clamp(28px, 4vw, 42px);
   font-weight: 500;
   letter-spacing: -1px;
   line-height: 1.05;
 }
-.today-brief__inner > time {
-  display: block;
-  margin: 0 0 14px;
-  font-size: 13px;
-  letter-spacing: 0.04em;
+.today-brief__head > time {
+  color: var(--color-accent-strong);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 .today-brief ul {
   display: grid;
-  gap: 10px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 22px 28px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
+.today-brief li {
+  min-width: 0;
+  padding-top: 15px;
+  border-top: 1px solid var(--color-border);
+}
 .today-brief__link {
   display: grid;
-  grid-template-columns: 92px minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: minmax(128px, 44%) minmax(0, 1fr);
+  gap: 14px;
   align-items: start;
+  min-width: 0;
   color: inherit;
   text-decoration: none;
+  overflow-wrap: anywhere;
 }
 .today-brief__thumb {
-  display: none;
+  aspect-ratio: 3 / 2;
+}
+/* The newest item leads the band with a full width picture, the way a news
+   front page opens. The rest stay compact so the band never buries the
+   stories under it. */
+.today-brief li:first-child .today-brief__link {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+.today-brief li:first-child .today-brief__thumb {
+  aspect-ratio: 16 / 9;
+}
+.today-brief li:first-child .today-brief__headline {
+  font-size: 25px;
+}
+.today-brief__body {
+  min-width: 0;
 }
 .today-brief__label {
   color: #aa3025;
@@ -1258,15 +1732,51 @@ button:disabled {
 }
 .today-brief__headline {
   display: block;
-  font-size: 16px;
-  line-height: 1.35;
+  margin-top: 5px;
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  line-height: 1.15;
+}
+.today-brief__link:hover .today-brief__headline {
+  color: var(--color-accent-strong);
 }
 .today-brief__date {
   display: block;
-  margin-top: 4px;
+  margin-top: 7px;
   color: #3c4640;
   font-size: 13px;
   font-weight: 500;
+}
+@media (min-width: 640px) {
+  .today-brief ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .today-brief__link,
+  .today-brief li:first-child .today-brief__link {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .today-brief__thumb,
+  .today-brief li:first-child .today-brief__thumb {
+    aspect-ratio: 16 / 9;
+  }
+  .today-brief li:first-child .today-brief__headline {
+    font-size: 20px;
+  }
+}
+/* From the unfolded-phone width up, the four latest items sit in one tidy
+   row so the band never grows into a wall that buries the stories below. */
+@media (min-width: 960px) {
+  .today-brief ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px 22px;
+  }
+  .today-brief__headline,
+  .today-brief li:first-child .today-brief__headline {
+    font-size: 19px;
+  }
 }
 @media (max-width: 640px) {
   .tt-header__inner {
@@ -1369,6 +1879,17 @@ button:disabled {
     aspect-ratio: 17 / 9;
     overflow: hidden;
   }
+  .cover__frame.cover__frame--contain {
+    background: none;
+  }
+  .cover__media--contain,
+  .cover__frame--contain .cover__media {
+    aspect-ratio: 15 / 7;
+  }
+  .cover__frame--contain .cover__caption {
+    margin-top: 4px;
+    padding: 0;
+  }
   .cover__caption {
     position: static;
     right: auto;
@@ -1410,47 +1931,79 @@ button:disabled {
     margin: 2px 0 0;
     line-height: 1.25;
   }
+  .travel-brief__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+  .travel-brief h2 {
+    font-size: 38px;
+  }
+  .travel-brief article + article {
+    padding-left: 0;
+    padding-top: 22px;
+    border-left: 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .travel-brief__description {
+    display: -webkit-box;
+  }
+  .neighbourhood-secondary {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding-top: 20px;
+  }
+  .neighbourhood-secondary article,
+  .neighbourhood-secondary article:last-child {
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .neighbourhood-secondary article:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+  .neighbourhood-secondary a {
+    display: grid;
+    grid-template-columns: minmax(108px, 38%) minmax(0, 1fr);
+    gap: 13px;
+  }
+  .neighbourhood-secondary__body {
+    margin-top: 0;
+  }
   .today-brief__inner {
-    padding: 2px 16px 0;
+    padding: 18px 16px 22px;
+  }
+  .today-brief__head {
+    margin-bottom: 14px;
   }
   .today-brief h2 {
-    font-size: 16px;
-    line-height: 18px;
-    margin-bottom: 0;
+    font-size: 24px;
+    line-height: 1.05;
   }
   .today-brief ul {
-    gap: 2px;
+    gap: 14px;
   }
-  .today-brief li:nth-child(n + 4) {
-    display: none;
+  .today-brief li {
+    padding-top: 13px;
   }
   .today-brief__link {
-    grid-template-columns: 96px minmax(0, 1fr);
-    gap: 10px;
+    grid-template-columns: minmax(124px, 44%) minmax(0, 1fr);
+    gap: 12px;
     align-items: start;
   }
-  .today-brief__thumb {
-    display: block;
-    width: 96px;
-    height: 64px;
-    overflow: hidden;
-    background: #e9e4d5;
-  }
-  .today-brief__thumb img {
-    width: 96px;
-    height: 64px;
-    object-fit: cover;
-  }
   .today-brief__headline {
-    font-size: 17px;
-    line-height: 22px;
-    font-weight: 650;
+    margin-top: 4px;
+    font-size: 18px;
+    line-height: 1.2;
+  }
+  .today-brief li:first-child .today-brief__headline {
+    font-size: 23px;
+    line-height: 1.12;
   }
   .today-brief__label {
     line-height: 13px;
   }
   .today-brief__date {
-    margin-top: 2px;
+    margin-top: 5px;
     line-height: 16px;
   }
   .article-header {

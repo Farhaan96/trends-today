@@ -15,6 +15,9 @@ export interface TodayPost {
   category: string;
   image?: string;
   imageAlt?: string;
+  imageAttribution?: string;
+  imageSourceType?: string;
+  storyType?: string;
   updatedAt?: unknown;
   modifiedAt?: unknown;
   publishedAt?: unknown;
@@ -26,8 +29,12 @@ export interface TodayBullet {
   label: string;
   text: string;
   href: string;
+  category: string;
   image?: string;
   imageAlt?: string;
+  imageAttribution?: string;
+  imageSourceType?: string;
+  storyType?: string;
   dateTime?: string;
   dateLabel?: string;
 }
@@ -149,8 +156,12 @@ function latestBullets(posts: TodayPost[]): TodayBullet[] {
       label: categoryLabel(post.category),
       text: clean(post.title),
       href: clean(post.href),
+      category: post.category,
       image: clean(post.image) || undefined,
       imageAlt: clean(post.imageAlt) || undefined,
+      imageAttribution: clean(post.imageAttribution) || undefined,
+      imageSourceType: clean(post.imageSourceType) || undefined,
+      storyType: clean(post.storyType) || undefined,
       dateTime: iso,
       dateLabel: formatStoryDay(iso),
     };
@@ -174,8 +185,12 @@ function fileItems(file: TodayFile, posts: TodayPost[]): TodayBullet[] {
       label,
       text,
       href,
+      category: post.category,
       image: clean(post.image) || undefined,
       imageAlt: clean(post.imageAlt) || undefined,
+      imageAttribution: clean(post.imageAttribution) || undefined,
+      imageSourceType: clean(post.imageSourceType) || undefined,
+      storyType: clean(post.storyType) || undefined,
       dateTime: iso,
       dateLabel: iso ? formatStoryDay(iso) : undefined,
     });
