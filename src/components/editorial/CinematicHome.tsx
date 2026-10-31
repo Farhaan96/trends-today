@@ -21,12 +21,9 @@ import { paginateItems } from '@/lib/pagination';
 import {
   type LocalStory,
   ALL_CITIES,
-  activeEvents,
-  filterStories,
   homepageImage,
-  pickTravelStories,
+  planHomepage,
   splitCityFilters,
-  splitFeaturedStories,
   storyCity,
   editorialPoster,
 } from '@/lib/cinematic-feed';
@@ -50,43 +47,31 @@ export default function CinematicHome({
   const [count, setCount] = useState(9);
   const hero = useRef<HTMLDivElement>(null);
   const swipe = useRef<number | null>(null);
-  const events = activeEvents(stories, now)
-    .filter((story) => story.href !== stories[0]?.href)
-    .slice(0, 6);
+  const plan = planHomepage({
+    stories,
+    latestHrefs,
+    now,
+    city,
+    query,
+    count,
+  });
+  const {
+    hero: lead,
+    travel: transit,
+    events,
+    resultCount,
+    allMatchingShownAbove,
+    featuredLead,
+    secondaryStories,
+    gridStories,
+    hasMore,
+  } = plan;
   const index = events.length ? selected % events.length : 0;
   const current = events[index];
-  const lead = stories[0];
   const leadImage = lead ? homepageImage(lead) : undefined;
-  const defaultFeatureExclusions = new Set([
-    ...(lead ? [lead.href] : []),
-    ...latestHrefs,
-  ]);
-  const defaultFeatured = splitFeaturedStories(
-    stories,
-    0,
-    defaultFeatureExclusions
-  );
-  const travelExclusions = new Set([
-    ...defaultFeatureExclusions,
-    ...(defaultFeatured.lead ? [defaultFeatured.lead.href] : []),
-    ...defaultFeatured.secondaries.map((story) => story.href),
-  ]);
-  const transit = pickTravelStories(stories, travelExclusions);
   const { visible: visibleCities, extra: extraCities } = splitCityFilters(
     stories,
     city
-  );
-  const results = filterStories(stories, city, query);
-  const isDefaultView = city === ALL_CITIES && query.trim() === '';
-  const {
-    lead: featuredLead,
-    secondaries: secondaryStories,
-    grid: gridStories,
-    hasMore,
-  } = splitFeaturedStories(
-    results,
-    count,
-    isDefaultView ? defaultFeatureExclusions : new Set()
   );
   const featuredLeadImage = featuredLead
     ? homepageImage(featuredLead)
@@ -531,8 +516,9 @@ export default function CinematicHome({
           </label>
         </div>
         <p className="result-count" role="status">
-          {results.length} {results.length === 1 ? 'story' : 'stories'}
+          {resultCount} {resultCount === 1 ? 'story' : 'stories'}
           {city !== ALL_CITIES ? ` in ${city}` : ' from across the region'}
+          {allMatchingShownAbove && '. All matching stories are shown above.'}
         </p>
         {featuredLead && (
           <div className="neighbourhood-feature">
@@ -634,7 +620,7 @@ export default function CinematicHome({
             })}
           </div>
         )}
-        {results.length === 0 && (
+        {resultCount === 0 && (
           <div className="discovery-empty">
             <h3>No stories found.</h3>
             <p>Try another city or a shorter search.</p>

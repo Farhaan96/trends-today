@@ -17,10 +17,7 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const asOf = new Date().toISOString();
-  const [posts, brief] = await Promise.all([
-    getAllPosts(),
-    getTodayBriefData(asOf),
-  ]);
+  const posts = await getAllPosts();
   const stories = posts
     .filter((post) =>
       isLocalNewsCategory(post.category || post.frontmatter.category)
@@ -41,6 +38,10 @@ export default async function HomePage() {
       locality: post.frontmatter.locality,
       city: post.frontmatter.city,
     }));
+  const heroHref = stories[0]?.href;
+  const brief = await getTodayBriefData(asOf, {
+    excludeHrefs: heroHref ? [heroHref] : [],
+  });
 
   return (
     <div className="site-page">

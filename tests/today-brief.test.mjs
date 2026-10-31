@@ -93,7 +93,67 @@ test('a file dated today renders 3 to 5 live links and a dated heading', () => {
     brief.items.map((item) => item.href),
     ['/transit/skytrain', '/housing/surrey-targets', '/food-drink/ramen']
   );
-  assert.equal(/[—–]/.test(JSON.stringify(brief)), false);
+  assert.equal(/[\u2013\u2014]/.test(JSON.stringify(brief)), false);
+});
+
+test('curated mode excludes the hero and backfills to the same cap', () => {
+  const curatedPosts = Array.from({ length: 6 }, (_, index) => ({
+    href: `/local-news/curated-${index + 1}`,
+    title: `Curated story ${index + 1}`,
+    category: 'local-news',
+    status: 'published',
+    publishedAt: `2026-10-${String(14 - index).padStart(2, '0')}T15:00:00Z`,
+  }));
+  const file = {
+    date: '2026-10-14',
+    items: curatedPosts.map((post, index) => ({
+      label: 'News',
+      text: `Curated summary ${index + 1}`,
+      href: post.href,
+    })),
+  };
+  const original = buildTodayBrief({ file, posts: curatedPosts, now });
+  const excluded = buildTodayBrief({
+    file,
+    posts: curatedPosts,
+    now,
+    excludeHrefs: [curatedPosts[0].href],
+  });
+
+  assert.equal(original.mode, 'today');
+  assert.equal(excluded.mode, 'today');
+  assert.equal(excluded.items.length, original.items.length);
+  assert.equal(
+    excluded.items.some((item) => item.href === curatedPosts[0].href),
+    false
+  );
+  assert.equal(excluded.items.at(-1).href, curatedPosts[5].href);
+});
+
+test('latest mode excludes the hero and backfills to four items', () => {
+  const latestPosts = Array.from({ length: 5 }, (_, index) => ({
+    href: `/local-news/latest-${index + 1}`,
+    title: `Latest story ${index + 1}`,
+    category: 'local-news',
+    status: 'published',
+    publishedAt: `2026-10-${String(14 - index).padStart(2, '0')}T15:00:00Z`,
+  }));
+  const original = buildTodayBrief({ file: null, posts: latestPosts, now });
+  const excluded = buildTodayBrief({
+    file: null,
+    posts: latestPosts,
+    now,
+    excludeHrefs: [latestPosts[0].href],
+  });
+
+  assert.equal(original.mode, 'latest');
+  assert.equal(excluded.mode, 'latest');
+  assert.equal(original.items.length, 4);
+  assert.equal(excluded.items.length, original.items.length);
+  assert.deepEqual(
+    excluded.items.map((item) => item.href),
+    latestPosts.slice(1).map((post) => post.href)
+  );
 });
 
 test('a stale file falls back to dated live posts instead of today copy', () => {

@@ -18,7 +18,8 @@ export function readTodayFile(): TodayFile | null {
 }
 
 export async function getTodayBriefData(
-  now: string | Date = new Date()
+  now: string | Date = new Date(),
+  options: { excludeHrefs?: Iterable<string> } = {}
 ): Promise<TodayBriefModel> {
   const articles = await getAllArticles();
   const posts: TodayPost[] = articles.map((article) => ({
@@ -41,5 +42,6 @@ export async function getTodayBriefData(
     file: readTodayFile(),
     posts,
     now,
+    excludeHrefs: options.excludeHrefs,
   });
 }

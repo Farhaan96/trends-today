@@ -28,6 +28,7 @@ const {
   filterStories,
   editorialPoster,
   homepageImage,
+  planHomepage,
   pickTravelStories,
   rankedStoryCities,
   splitCityFilters,
@@ -310,4 +311,172 @@ test('travel stories return fewer when needed and never repeat', () => {
     ).map((story) => story.href),
     ['/transit/repeated']
   );
+});
+
+const homepageStories = [
+  {
+    href: '/local-news/hero',
+    category: 'local-news',
+    title: 'Claimed match hero',
+    locality: 'Surrey',
+  },
+  {
+    href: '/housing/latest-one',
+    category: 'housing',
+    title: 'Claimed match latest',
+    locality: 'Surrey',
+  },
+  {
+    href: '/food-drink/latest-two',
+    category: 'food-drink',
+    title: 'Latest two',
+    locality: 'Vancouver',
+  },
+  {
+    href: '/local-news/feature-one',
+    category: 'local-news',
+    title: 'Filtered match feature one',
+    locality: 'Surrey',
+  },
+  {
+    href: '/transit/feature-two',
+    category: 'transit',
+    title: 'Filtered match feature two',
+    locality: 'Surrey',
+  },
+  {
+    href: '/local-news/feature-three',
+    category: 'local-news',
+    title: 'Feature three',
+    locality: 'Burnaby',
+  },
+  {
+    href: '/local-news/feature-four',
+    category: 'local-news',
+    title: 'Feature four',
+    locality: 'Burnaby',
+  },
+  {
+    href: '/transit/travel-one',
+    category: 'transit',
+    title: 'Claimed match travel one',
+    locality: 'Surrey',
+  },
+  {
+    href: '/transit/travel-two',
+    category: 'transit',
+    title: 'Travel two',
+    locality: 'Vancouver',
+  },
+  {
+    href: '/things-to-do/event-one',
+    category: 'things-to-do',
+    title: 'Claimed match event',
+    locality: 'Surrey',
+    eventEndDate: '2026-09-10T23:59:00-07:00',
+  },
+  {
+    href: '/things-to-do/event-two',
+    category: 'things-to-do',
+    title: 'Event two',
+    locality: 'Vancouver',
+    eventEndDate: '2026-09-10T23:59:00-07:00',
+  },
+  ...Array.from({ length: 4 }, (_, index) => ({
+    href: `/local-news/grid-${index + 1}`,
+    category: 'local-news',
+    title: `Filtered match grid ${index + 1}`,
+    locality: 'Surrey',
+  })),
+];
+
+function homepagePlan(overrides = {}) {
+  return planHomepage({
+    stories: homepageStories,
+    latestHrefs: ['/housing/latest-one', '/food-drink/latest-two'],
+    now,
+    city: 'All cities',
+    query: '',
+    count: 2,
+    ...overrides,
+  });
+}
+
+function storyHrefs(stories) {
+  return stories.map((story) => story.href);
+}
+
+test('the default homepage plan claims each story exactly once', () => {
+  const first = homepagePlan();
+  const sections = [
+    first.hero.href,
+    ...first.latestHrefs,
+    ...storyHrefs(first.travel),
+    ...storyHrefs(first.events),
+    first.featuredLead.href,
+    ...storyHrefs(first.secondaryStories),
+    ...storyHrefs(first.gridStories),
+  ];
+  assert.equal(new Set(sections).size, sections.length);
+  assert.equal(
+    first.gridStories.some((story) => first.shownAboveHrefs.has(story.href)),
+    false
+  );
+
+  const loaded = homepagePlan({ count: 4 });
+  const firstPage = storyHrefs(first.gridStories);
+  const secondPage = storyHrefs(loaded.gridStories.slice(firstPage.length));
+  assert.equal(new Set([...firstPage, ...secondPage]).size, 4);
+
+  const complete = homepagePlan({ count: 100 });
+  const completeSections = [
+    complete.hero.href,
+    ...complete.latestHrefs,
+    ...storyHrefs(complete.travel),
+    ...storyHrefs(complete.events),
+    complete.featuredLead.href,
+    ...storyHrefs(complete.secondaryStories),
+    ...storyHrefs(complete.gridStories),
+  ];
+  assert.deepEqual(
+    new Set(completeSections),
+    new Set(storyHrefs(homepageStories))
+  );
+  assert.equal(completeSections.length, homepageStories.length);
+});
+
+test('city and query filters keep matching stories unique', () => {
+  const filtered = homepagePlan({ city: 'Surrey', query: 'match', count: 9 });
+  const matching = new Set(storyHrefs(filtered.results));
+  const matchingSections = [
+    filtered.hero,
+    ...filtered.travel,
+    ...filtered.events,
+    filtered.featuredLead,
+    ...filtered.secondaryStories,
+    ...filtered.gridStories,
+  ]
+    .filter(Boolean)
+    .map((story) => story.href)
+    .filter((href) => matching.has(href));
+  matchingSections.push(
+    ...filtered.latestHrefs.filter((href) => matching.has(href))
+  );
+
+  assert.equal(new Set(matchingSections).size, matchingSections.length);
+  assert.deepEqual(new Set(matchingSections), matching);
+  assert.equal(filtered.allMatchingShownAbove, false);
+  assert.equal(filtered.hasMore, false);
+});
+
+test('a filter fully claimed above returns the status flag', () => {
+  const filtered = homepagePlan({
+    city: 'Surrey',
+    query: 'claimed',
+    count: 9,
+  });
+  assert.equal(filtered.resultCount, 4);
+  assert.equal(filtered.allMatchingShownAbove, true);
+  assert.equal(filtered.featuredLead, undefined);
+  assert.deepEqual(filtered.gridStories, []);
 });

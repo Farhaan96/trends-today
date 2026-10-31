@@ -209,6 +209,99 @@ export function pickTravelStories(
   return picked;
 }
 
+export interface HomepagePlanInput {
+  stories: LocalStory[];
+  latestHrefs: Iterable<string>;
+  now: string;
+  city: string;
+  query: string;
+  count: number;
+}
+
+export interface HomepagePlan {
+  hero?: LocalStory;
+  latestHrefs: string[];
+  travel: LocalStory[];
+  events: LocalStory[];
+  results: LocalStory[];
+  resultCount: number;
+  allMatchingShownAbove: boolean;
+  featuredLead?: LocalStory;
+  secondaryStories: LocalStory[];
+  gridStories: LocalStory[];
+  grid: LocalStory[];
+  hasMore: boolean;
+  shownAboveHrefs: Set<string>;
+}
+
+function uniqueStories(stories: LocalStory[]): LocalStory[] {
+  const seen = new Set<string>();
+  return stories.filter((story) => {
+    if (!story.href || seen.has(story.href)) return false;
+    seen.add(story.href);
+    return true;
+  });
+}
+
+export function planHomepage(input: HomepagePlanInput): HomepagePlan {
+  const stories = uniqueStories(input.stories);
+  const hero = stories[0];
+  const shownAboveHrefs = new Set<string>();
+  if (hero) shownAboveHrefs.add(hero.href);
+
+  const latestHrefs: string[] = [];
+  for (const href of input.latestHrefs) {
+    if (!href || shownAboveHrefs.has(href)) continue;
+    latestHrefs.push(href);
+    shownAboveHrefs.add(href);
+  }
+
+  const reservedFeatured = splitFeaturedStories(stories, 0, shownAboveHrefs);
+  const travelExclusions = new Set(shownAboveHrefs);
+  if (reservedFeatured.lead) {
+    travelExclusions.add(reservedFeatured.lead.href);
+  }
+  for (const story of reservedFeatured.secondaries) {
+    travelExclusions.add(story.href);
+  }
+
+  const travel = pickTravelStories(stories, travelExclusions);
+  for (const story of travel) shownAboveHrefs.add(story.href);
+
+  const events = activeEvents(stories, input.now)
+    .filter((story) => !shownAboveHrefs.has(story.href))
+    .slice(0, 6);
+  for (const story of events) shownAboveHrefs.add(story.href);
+
+  const results = filterStories(stories, input.city, input.query);
+  const availableResults = results.filter(
+    (story) => !shownAboveHrefs.has(story.href)
+  );
+  const allMatchingShownAbove =
+    results.length > 0 && availableResults.length === 0;
+  const featured = availableResults.slice(0, 4);
+  for (const story of featured) shownAboveHrefs.add(story.href);
+
+  const grid = results.filter((story) => !shownAboveHrefs.has(story.href));
+  const count = Math.max(0, Math.floor(input.count));
+
+  return {
+    hero,
+    latestHrefs,
+    travel,
+    events,
+    results,
+    resultCount: results.length,
+    allMatchingShownAbove,
+    featuredLead: featured[0],
+    secondaryStories: featured.slice(1),
+    gridStories: grid.slice(0, count),
+    grid,
+    hasMore: count < grid.length,
+    shownAboveHrefs,
+  };
+}
+
 // Navigation artwork is tied to these exact event editions. New stories use
 // their own editable title and date; they never inherit an old event poster.
 const posters: Record<string, string> = {
