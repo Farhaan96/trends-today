@@ -15,6 +15,9 @@ export interface TodayPost {
   category: string;
   image?: string;
   imageAlt?: string;
+  imageAttribution?: string;
+  imageSourceType?: string;
+  storyType?: string;
   updatedAt?: unknown;
   modifiedAt?: unknown;
   publishedAt?: unknown;
@@ -26,8 +29,12 @@ export interface TodayBullet {
   label: string;
   text: string;
   href: string;
+  category: string;
   image?: string;
   imageAlt?: string;
+  imageAttribution?: string;
+  imageSourceType?: string;
+  storyType?: string;
   dateTime?: string;
   dateLabel?: string;
 }
@@ -139,8 +146,17 @@ function livePosts(posts: TodayPost[]): TodayPost[] {
     );
 }
 
-function latestBullets(posts: TodayPost[]): TodayBullet[] {
-  const live = livePosts(posts);
+function latestBullets(
+  posts: TodayPost[],
+  excludeHrefs: ReadonlySet<string>
+): TodayBullet[] {
+  const seen = new Set<string>();
+  const live = livePosts(posts).filter((post) => {
+    const href = clean(post.href);
+    if (excludeHrefs.has(href) || seen.has(href)) return false;
+    seen.add(href);
+    return true;
+  });
   const local = live.filter((post) => LOCAL_CATEGORIES.has(post.category));
   const chosen = (local.length >= 3 ? local : live).slice(0, 4);
   return chosen.map((post) => {
@@ -149,18 +165,27 @@ function latestBullets(posts: TodayPost[]): TodayBullet[] {
       label: categoryLabel(post.category),
       text: clean(post.title),
       href: clean(post.href),
+      category: post.category,
       image: clean(post.image) || undefined,
       imageAlt: clean(post.imageAlt) || undefined,
+      imageAttribution: clean(post.imageAttribution) || undefined,
+      imageSourceType: clean(post.imageSourceType) || undefined,
+      storyType: clean(post.storyType) || undefined,
       dateTime: iso,
       dateLabel: formatStoryDay(iso),
     };
   });
 }
 
-function fileItems(file: TodayFile, posts: TodayPost[]): TodayBullet[] {
+function fileItems(
+  file: TodayFile,
+  posts: TodayPost[],
+  excludeHrefs: ReadonlySet<string>
+): TodayBullet[] {
   if (!Array.isArray(file.items)) return [];
   const live = new Map(livePosts(posts).map((post) => [post.href, post]));
   const items: TodayBullet[] = [];
+  const seen = new Set<string>();
   for (const raw of file.items) {
     if (!raw || typeof raw !== 'object') continue;
     const item = raw as TodayFileItem;
@@ -168,14 +193,21 @@ function fileItems(file: TodayFile, posts: TodayPost[]): TodayBullet[] {
     const text = clean(item.text);
     const href = clean(item.href);
     const post = live.get(href);
-    if (!label || !text || !post) continue;
+    if (!label || !text || !post || excludeHrefs.has(href) || seen.has(href)) {
+      continue;
+    }
+    seen.add(href);
     const iso = briefUpdatedValue(post);
     items.push({
       label,
       text,
       href,
+      category: post.category,
       image: clean(post.image) || undefined,
       imageAlt: clean(post.imageAlt) || undefined,
+      imageAttribution: clean(post.imageAttribution) || undefined,
+      imageSourceType: clean(post.imageSourceType) || undefined,
+      storyType: clean(post.storyType) || undefined,
       dateTime: iso,
       dateLabel: iso ? formatStoryDay(iso) : undefined,
     });
@@ -188,11 +220,15 @@ export function buildTodayBrief(input: {
   file: TodayFile | null;
   posts: TodayPost[];
   now: string | Date;
+  excludeHrefs?: Iterable<string>;
 }): TodayBriefModel {
   const today = vancouverDateKey(input.now);
   const fileDate = clean(input.file?.date);
+  const excludeHrefs = new Set(input.excludeHrefs || []);
   const curated =
-    input.file && fileDate === today ? fileItems(input.file, input.posts) : [];
+    input.file && fileDate === today
+      ? fileItems(input.file, input.posts, excludeHrefs)
+      : [];
 
   if (curated.length >= 3) {
     return {
@@ -207,6 +243,6 @@ export function buildTodayBrief(input: {
   return {
     mode: 'latest',
     heading: 'Latest in the Lower Mainland',
-    items: latestBullets(input.posts),
+    items: latestBullets(input.posts, excludeHrefs),
   };
 }
