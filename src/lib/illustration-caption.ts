@@ -32,8 +32,18 @@ export function illustrationImageAlt(
   );
   if (!isGeneratedIllustration(attribution, sourceType)) return cleaned;
   const prefix = 'Generated illustration of';
-  if (cleaned.toLowerCase().startsWith(prefix.toLowerCase())) {
-    return prefix + cleaned.slice(prefix.length);
-  }
-  return `${prefix} ${cleaned.charAt(0).toLowerCase()}${cleaned.slice(1)}`;
+  // Drop any label the author already wrote, so the prefix never doubles
+  // (e.g. "AI-generated illustration of ...", "Generated editorial illustration of ...").
+  const subject =
+    cleaned
+      .replace(
+        /^(?:an?\s+)?(?:(?:ai[-\s]?)?generated\s+)?(?:editorial\s+)?illustration\s+of\s+/i,
+        ''
+      )
+      .trim() || cleaned;
+  // Lowercase only a leading article, so proper nouns like "Trout Lake" keep their capital.
+  const lead = /^(?:a|an|the)\b/i.test(subject)
+    ? subject.charAt(0).toLowerCase() + subject.slice(1)
+    : subject;
+  return `${prefix} ${lead}`;
 }
