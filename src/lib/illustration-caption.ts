@@ -34,16 +34,15 @@ export function illustrationImageAlt(
   const prefix = 'Generated illustration of';
   // Drop any label the author already wrote, so the prefix never doubles
   // (e.g. "AI-generated illustration of ...", "Generated editorial illustration of ...").
-  const subject =
-    cleaned
-      .replace(
-        /^(?:an?\s+)?(?:(?:ai[-\s]?)?generated\s+)?(?:editorial\s+)?illustration\s+of\s+/i,
-        ''
-      )
-      .trim() || cleaned;
-  // Lowercase only a leading article, so proper nouns like "Trout Lake" keep their capital.
-  const lead = /^(?:a|an|the)\b/i.test(subject)
-    ? subject.charAt(0).toLowerCase() + subject.slice(1)
-    : subject;
+  const label =
+    /^(?:an?\s+)?(?:labell?ed\s+)?(?:(?:ai[-\s]?)?generated\s+)?(?:editorial\s+)?(?:illustration|watercolou?r)\s+of\s+/i;
+  const stripped = cleaned.replace(label, '').trim();
+  // When the author wrote "... illustration of X", X is already cased for the
+  // middle of a sentence, so keep it as written (proper nouns stay capitalized).
+  // Otherwise keep the existing behaviour of lowercasing the first letter.
+  const lead =
+    stripped && stripped !== cleaned
+      ? stripped
+      : cleaned.charAt(0).toLowerCase() + cleaned.slice(1);
   return `${prefix} ${lead}`;
 }

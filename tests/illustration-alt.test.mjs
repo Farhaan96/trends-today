@@ -47,3 +47,18 @@ test('keeps proper nouns capitalized', () => {
     'Generated illustration of Trout Lake in John Hendry Park'
   );
 });
+
+test('lowercases a common-noun opener and strips watercolor labels', () => {
+  assert.equal(
+    gen('Moving boxes outside a building'),
+    'Generated illustration of moving boxes outside a building'
+  );
+  assert.equal(
+    gen('Japanese festival scene'),
+    'Generated illustration of japanese festival scene'
+  );
+  assert.equal(
+    gen('Labeled editorial watercolor of Lynn Canyon suspension bridge'),
+    'Generated illustration of Lynn Canyon suspension bridge'
+  );
+});
