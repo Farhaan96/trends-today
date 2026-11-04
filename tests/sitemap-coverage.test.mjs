@@ -29,15 +29,23 @@ function expectedLastmod(data) {
   return instant(data.updatedAt) ?? instant(data.publishedAt);
 }
 
-function sitemapEntries() {
-  const sitemap = fs.readFileSync('public/sitemap.xml', 'utf8');
-  const blocks = [...sitemap.matchAll(/<url>(.*?)<\/url>/gs)];
+// Build the article entries the same way `next-sitemap` does at deploy time
+// (config.additionalPaths), instead of reading the committed
+// public/sitemap.xml, which is gitignored build output and goes stale between
+// commits while the live sitemap is regenerated on every deploy.
+async function sitemapEntries() {
+  const generatedSecond = Math.floor(Date.now() / 1000);
+  const generated = await config.additionalPaths(config);
+  const sitemap = generated
+    .map(
+      ({ loc, lastmod }) =>
+        `<url><loc>${loc}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</url>`
+    )
+    .join('\n');
   return {
     sitemap,
-    entries: blocks.map(([, block]) => ({
-      loc: block.match(/<loc>([^<]*)<\/loc>/)?.[1] || '',
-      lastmod: block.match(/<lastmod>([^<]*)<\/lastmod>/)?.[1],
-    })),
+    generatedSecond,
+    entries: generated.map(({ loc, lastmod }) => ({ loc: loc || '', lastmod })),
   };
 }
 
@@ -82,10 +90,10 @@ function independentlyIndexablePublishedArticles() {
   );
 }
 
-test('sitemap article entries exactly cover every published indexable article', () => {
+test('sitemap article entries exactly cover every published indexable article', async () => {
   const inventory = independentlyClassifiedArticles();
   const expected = inventory.filter(({ draft, noindex }) => !draft && !noindex);
-  const { sitemap, entries } = sitemapEntries();
+  const { sitemap, entries } = await sitemapEntries();
   const locs = entries.map(({ loc }) => loc);
   assert.equal(locs.length, (sitemap.match(/<loc>/g) || []).length);
   assert.ok(locs.every((loc) => loc.trim()));
@@ -137,11 +145,8 @@ test('sitemap article entries exactly cover every published indexable article', 
   }
 });
 
-test('lastmod never uses the build clock or unsupported metadata fields', () => {
-  const { entries } = sitemapEntries();
-  const generatedSecond = Math.floor(
-    fs.statSync('public/sitemap.xml').mtimeMs / 1000
-  );
+test('lastmod never uses the build clock or unsupported metadata fields', async () => {
+  const { entries, generatedSecond } = await sitemapEntries();
   const expected = independentlyIndexablePublishedArticles();
   const sourceCounts = new Map();
   for (const { data } of expected) {
