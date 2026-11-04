@@ -32,8 +32,17 @@ export function illustrationImageAlt(
   );
   if (!isGeneratedIllustration(attribution, sourceType)) return cleaned;
   const prefix = 'Generated illustration of';
-  if (cleaned.toLowerCase().startsWith(prefix.toLowerCase())) {
-    return prefix + cleaned.slice(prefix.length);
-  }
-  return `${prefix} ${cleaned.charAt(0).toLowerCase()}${cleaned.slice(1)}`;
+  // Drop any label the author already wrote, so the prefix never doubles
+  // (e.g. "AI-generated illustration of ...", "Generated editorial illustration of ...").
+  const label =
+    /^(?:an?\s+)?(?:labell?ed\s+)?(?:(?:ai[-\s]?)?generated\s+)?(?:editorial\s+)?(?:illustration|watercolou?r)\s+of\s+/i;
+  const stripped = cleaned.replace(label, '').trim();
+  // When the author wrote "... illustration of X", X is already cased for the
+  // middle of a sentence, so keep it as written (proper nouns stay capitalized).
+  // Otherwise keep the existing behaviour of lowercasing the first letter.
+  const lead =
+    stripped && stripped !== cleaned
+      ? stripped
+      : cleaned.charAt(0).toLowerCase() + cleaned.slice(1);
+  return `${prefix} ${lead}`;
 }
