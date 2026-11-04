@@ -344,7 +344,7 @@ export default async function ArticlePage({
               src={article.image || article.frontmatter?.image || undefined}
               alt={imageAlt}
               priority
-              sizes="(max-width: 768px) 100vw, 1024px"
+              sizes="(max-width: 640px) 100vw, 720px"
             />
           </div>
           {generatedIllustration ? (

@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
   },
   // Allow remote images used by dynamic fallbacks (Unsplash/Pexels)
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'images.pexels.com' },
