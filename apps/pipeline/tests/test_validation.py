@@ -172,6 +172,76 @@ class ValidationTests(unittest.TestCase):
             )
             self.assertTrue(result.passed, result.errors)
 
+    def test_locality_keeps_primary_source_gate_after_category_misroute(self):
+        article = self.article()
+        article.update({
+            'category': 'space',
+            'locality': 'Richmond',
+            'storyType': 'reported-update',
+            **self.local_metadata(),
+        })
+        sources = [
+            {'url': source['url'], 'tier': 'secondary'}
+            for source in self.sources()
+        ]
+
+        result = validate_release_candidate(
+            article,
+            sources,
+            {'slug': 'richmond-store-change'},
+            {'path': '/images/store.webp'},
+        )
+
+        self.assertFalse(result.passed)
+        self.assertIn(
+            'at least one primary source is required for local stories',
+            result.errors,
+        )
+
+    def test_non_local_reported_update_does_not_gain_local_requirements(self):
+        article = self.article()
+        article.update({
+            'category': 'science',
+            'storyType': 'reported-update',
+        })
+
+        result = validate_release_candidate(
+            article,
+            self.sources(),
+            {'slug': 'science-update'},
+            {'path': '/images/science.webp'},
+        )
+
+        self.assertNotIn(
+            'at least one primary source is required for local stories',
+            result.errors,
+        )
+        self.assertNotIn('Lower Mainland locality is required', result.errors)
+
+    def test_unapproved_locality_cannot_clear_local_release_gate(self):
+        article = self.article()
+        article.update({
+            'category': 'local-news',
+            'locality': 'Toronto',
+            'storyType': 'reported-update',
+            **self.local_metadata(),
+        })
+
+        result = validate_release_candidate(
+            article,
+            [
+                {'url': 'https://a.example/source', 'tier': 'primary'},
+                {'url': 'https://b.example/source', 'tier': 'secondary'},
+            ],
+            {'slug': 'toronto-store-change'},
+            {'path': '/images/store.webp'},
+        )
+
+        self.assertIn(
+            'locality is not in the approved Lower Mainland coverage area',
+            result.errors,
+        )
+
     def test_local_location_promise_requires_concrete_directory(self):
         article = {
             'title': 'Where to cool down in Surrey',
