@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "BLOCKERS",
+  "candidateSha256": "b18438a78ea5231a083c086d02e2e9832a0edff71dc2c278bf9fe4b7f66b7602",
+  "repositorySha": "b55079c7028555625ad0e89f5281151d6f7f1186",
+  "reviewedAt": "2026-07-28T21:43:26.088295+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "019faaad-b7c6-7ab0-a6d1-585784ef688d",
+  "scores": {
+    "engagement": 3,
+    "factualSupport": 3,
+    "formatting": 5,
+    "quality": 3,
+    "readability": 4
+  },
+  "proseEmDashCount": 0,
+  "blockers": [
+    "The title and description incorrectly frame Aug. 18 as the voter-registration closing date. Richmond's cited elections page says resident electors may register through Elections BC until Aug. 18 but may also register when they vote; non-resident property electors follow a separate registration process.",
+    "The opening calls Oct. 17 a \"new election date,\" but the cited material does not establish that the date was newly announced. This manufactures freshness around the central fact.",
+    "The close is flat and partially repetitive: it repeats the registration instruction, then vaguely tells readers to watch the elections page instead of ending with the most useful supported next step, including the ability to register when voting."
+  ],
+  "summary": "BLOCKERS. The artifact hash and repository SHA match, and authorial prose contains no em dashes. The MDX is clean and readable, but the central deadline framing materially overstates Aug. 18, while the unsupported \"new election date\" lead and weak close require revision."
+}
