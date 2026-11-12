@@ -155,7 +155,7 @@ export default async function CategoryPaginatedPage({
           <p className="empty-state">No articles found on this page.</p>
         ) : (
           <div className="category-grid">
-            {pageArticles.map((article, index) => {
+            {pageArticles.map((article) => {
               const href = `/${key}/${article.slug}`;
               const img = (article.image || article.frontmatter?.image) as
                 | string
@@ -172,7 +172,7 @@ export default async function CategoryPaginatedPage({
                       <EditorialImage
                         src={img}
                         alt={atitle}
-                        priority={index === 0}
+                        priority={false}
                         sizes="(max-width: 1024px) 100vw, 50vw"
                       />
                     </div>

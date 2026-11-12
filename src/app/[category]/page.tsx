@@ -82,7 +82,7 @@ export default async function CategoryPage({
           <p className="empty-state">No articles in this category yet.</p>
         ) : (
           <div className="category-grid">
-            {pageArticles.map((article, index) => {
+            {pageArticles.map((article) => {
               const href = `/${key}/${article.slug}`;
               const img = (article.image || article.frontmatter?.image) as
                 | string
@@ -99,7 +99,7 @@ export default async function CategoryPage({
                       <EditorialImage
                         src={img}
                         alt={atitle}
-                        priority={index === 0}
+                        priority={false}
                         sizes="(max-width: 1024px) 100vw, 50vw"
                       />
                     </div>
