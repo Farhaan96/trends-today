@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-07-28T14:45:00-07:00",
+  "runId": "run-trends-today-daily-publisher-2026-07-28-1430",
+  "sourceStatus": "available",
+  "extracts": [
+    {
+      "title": "Richmond Election October 17",
+      "url": "https://www.richmond.ca/city-hall/news/2026/rmdelection28jul2026.htm",
+      "sourceName": "City of Richmond news",
+      "sourceTier": "primary",
+      "httpStatus": 200,
+      "checkedAt": "2026-07-28T14:40:00-07:00",
+      "factsUsed": [
+        "The City of Richmond notice is dated July 28, 2026.",
+        "The 2026 General Local and School Election is scheduled for Saturday, October 17, 2026.",
+        "The election will choose one Mayor, eight Councillors and seven School Board Trustees.",
+        "Eligible Richmond residents are encouraged to register through Elections BC until Tuesday, August 18.",
+        "The city points residents to an Am I on the Voters List search tool.",
+        "Advance voting is listed for October 3, 7, 8, 9 and 10.",
+        "Accessible options listed by the city include curb-side voting, mail ballots and an accessible ballot-marking device at City Hall during advance voting."
+      ]
+    },
+    {
+      "title": "Local Government Elections",
+      "url": "https://www.richmond.ca/city-hall/elections.htm",
+      "sourceName": "City of Richmond elections page",
+      "sourceTier": "primary",
+      "httpStatus": 200,
+      "checkedAt": "2026-07-28T14:40:00-07:00",
+      "factsUsed": [
+        "The elections page is the City of Richmond hub for where, when and how to vote.",
+        "The July 28 notice directs residents to the elections page for further election information.",
+        "Resident electors can register in advance through Elections BC until August 18, 2026.",
+        "The elections page says voters may register when they vote by bringing two separate pieces of ID that together include name and residential address, with one including a signature.",
+        "Non-resident property electors are directed to contact the Richmond Elections Office before voting.",
+        "The elections page lists advance voting places and a Where Do I Vote tool for General Voting Day.",
+        "Mail ballot online applications open September 15, according to the elections page."
+      ]
+    }
+  ]
+}
