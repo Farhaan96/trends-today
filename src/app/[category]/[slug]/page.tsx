@@ -171,6 +171,16 @@ export default async function ArticlePage({
     article.frontmatter?.imageAttribution,
     article.frontmatter?.imageSourceType
   );
+  const imageAttribution = article.frontmatter?.imageAttribution as
+    | string
+    | undefined;
+  const imageSourceUrl = article.frontmatter?.imageSourceUrl as
+    | string
+    | undefined;
+  const imageLicense = article.frontmatter?.imageLicense as string | undefined;
+  const imageLicenseUrl = article.frontmatter?.imageLicenseUrl as
+    | string
+    | undefined;
   const publishedAt = article.frontmatter?.publishedAt || article.publishedAt;
   const modifiedAt =
     contentUpdatedValue({
@@ -350,6 +360,26 @@ export default async function ArticlePage({
           {generatedIllustration ? (
             <p className="article-hero-caption">
               {GENERATED_ILLUSTRATION_CAPTION}
+            </p>
+          ) : null}
+          {!generatedIllustration && imageAttribution ? (
+            <p className="article-hero-caption">
+              Photo:{' '}
+              {imageSourceUrl ? (
+                <a href={imageSourceUrl}>{imageAttribution}</a>
+              ) : (
+                imageAttribution
+              )}
+              {imageLicense ? (
+                <>
+                  {' · '}
+                  {imageLicenseUrl ? (
+                    <a href={imageLicenseUrl}>{imageLicense}</a>
+                  ) : (
+                    imageLicense
+                  )}
+                </>
+              ) : null}
             </p>
           ) : null}
         </div>

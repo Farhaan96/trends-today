@@ -334,12 +334,14 @@ def eligible_candidate(digest=None, *, repository_sha=HEAD_SHA):
             'blockers': [],
             'proseEmDashCount': 0,
         },
-        'claudeReview': {
+        'codexReview': {
             'verdict': 'NO BLOCKERS',
             'candidateSha256': digest,
             'repositorySha': repository_sha,
-            'reviewer': 'claude',
-            'modelUsed': 'claude-opus-5',
+            'reviewer': 'codex',
+            'modelUsed': 'gpt-5.6-sol',
+            'reviewBackend': 'codex-cli-oauth',
+            'reviewRunId': 'thread_release_test',
         },
     }
 
@@ -1046,11 +1048,11 @@ class CandidateEligibilityTests(unittest.TestCase):
 
     def test_review_bound_to_a_different_candidate_is_ineligible(self):
         candidate = eligible_candidate()
-        candidate['claudeReview']['candidateSha256'] = 'b' * 64
+        candidate['codexReview']['candidateSha256'] = 'b' * 64
         evaluation = evaluate(candidate)
         self.assertEqual('ineligible', evaluation['status'])
         self.assertIn(
-            'claude review is not bound to the exact candidate SHA-256',
+            'codex review is not bound to the exact candidate SHA-256',
             evaluation['reasons'],
         )
 
@@ -1061,12 +1063,12 @@ class CandidateEligibilityTests(unittest.TestCase):
         self.assertEqual('ineligible', evaluation['status'])
         self.assertIn('gpt editorial score readability is below 4', evaluation['reasons'])
 
-    def test_non_opus_release_review_is_ineligible(self):
+    def test_unauthorized_codex_release_model_is_ineligible(self):
         candidate = eligible_candidate()
-        candidate['claudeReview']['modelUsed'] = 'claude-sonnet-5'
+        candidate['codexReview']['modelUsed'] = 'gpt-5.5'
         evaluation = evaluate(candidate)
         self.assertEqual('ineligible', evaluation['status'])
-        self.assertIn('release review must use claude-opus-5', evaluation['reasons'])
+        self.assertIn('release review must use gpt-5.6-sol', evaluation['reasons'])
 
     def test_failed_deterministic_validation_is_ineligible(self):
         candidate = eligible_candidate()
@@ -1153,7 +1155,7 @@ class CandidateFileProofTests(unittest.TestCase):
         )
         self.assertIn('gpt review is not bound to the exact candidate SHA-256', evaluation['reasons'])
         self.assertIn(
-            'claude review is not bound to the exact candidate SHA-256',
+            'codex review is not bound to the exact candidate SHA-256',
             evaluation['reasons'],
         )
 
@@ -1178,7 +1180,7 @@ class CandidateFileProofTests(unittest.TestCase):
         self.assertEqual('ineligible', evaluation['status'])
         for reason in (
             'gpt review is not bound to the exact candidate SHA-256',
-            'claude review is not bound to the exact candidate SHA-256',
+            'codex review is not bound to the exact candidate SHA-256',
         ):
             self.assertIn(reason, evaluation['reasons'])
 
@@ -1193,12 +1195,12 @@ class RepositoryShaBindingTests(unittest.TestCase):
         self.assertEqual('ineligible', evaluation['status'])
         self.assertIn('gpt review is missing repositorySha', evaluation['reasons'])
 
-    def test_a_claude_review_without_repository_sha_cannot_qualify(self):
+    def test_a_codex_review_without_repository_sha_cannot_qualify(self):
         candidate = eligible_candidate()
-        candidate['claudeReview']['repositorySha'] = '   '
+        candidate['codexReview']['repositorySha'] = '   '
         evaluation = evaluate(candidate)
         self.assertEqual('ineligible', evaluation['status'])
-        self.assertIn('claude review is missing repositorySha', evaluation['reasons'])
+        self.assertIn('codex review is missing repositorySha', evaluation['reasons'])
 
     def test_a_gpt_review_for_a_different_head_cannot_qualify(self):
         candidate = eligible_candidate()
@@ -1207,13 +1209,13 @@ class RepositoryShaBindingTests(unittest.TestCase):
         self.assertEqual('ineligible', evaluation['status'])
         self.assertIn('gpt review was created for a different repository SHA', evaluation['reasons'])
 
-    def test_a_claude_review_for_a_different_head_cannot_qualify(self):
+    def test_a_codex_review_for_a_different_head_cannot_qualify(self):
         candidate = eligible_candidate()
-        candidate['claudeReview']['repositorySha'] = 'e' * 40
+        candidate['codexReview']['repositorySha'] = 'e' * 40
         evaluation = evaluate(candidate)
         self.assertEqual('ineligible', evaluation['status'])
         self.assertIn(
-            'claude review was created for a different repository SHA',
+            'codex review was created for a different repository SHA',
             evaluation['reasons'],
         )
 
@@ -1223,7 +1225,7 @@ class RepositoryShaBindingTests(unittest.TestCase):
         self.assertEqual('ineligible', evaluation['status'])
         self.assertIn('gpt review was created for a different repository SHA', evaluation['reasons'])
         self.assertIn(
-            'claude review was created for a different repository SHA',
+            'codex review was created for a different repository SHA',
             evaluation['reasons'],
         )
 

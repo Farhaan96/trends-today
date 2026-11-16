@@ -80,12 +80,14 @@ class PublisherTests(unittest.TestCase):
         review.parent.mkdir(parents=True, exist_ok=True)
         review.write_text(json.dumps({
             'version': 1,
-            'reviewer': 'claude',
+            'reviewer': 'codex',
             'verdict': verdict,
             'candidateSha256': digest or candidate_sha256(candidate),
             'reviewedAt': '2026-07-14T20:00:00+00:00',
             'repositorySha': 'a' * 40,
-            'modelUsed': 'claude-opus-5',
+            'modelUsed': 'gpt-5.6-sol',
+            'reviewBackend': 'codex-cli-oauth',
+            'reviewRunId': 'thread_release_test',
         }), encoding='utf-8')
         return review
 
@@ -187,9 +189,9 @@ class PublisherTests(unittest.TestCase):
             promoted = destination.read_text(encoding='utf-8')
             self.assertEqual(candidate_body, promoted.split('---', 2)[2])
             self.assertIn('candidateSha256:', promoted)
-            self.assertIn('reviewedBy: "claude"', promoted)
+            self.assertIn('reviewedBy: "codex"', promoted)
             self.assertIn('reviewVerdict: "NO BLOCKERS"', promoted)
-            self.assertIn('reviewModel: "claude-opus-5"', promoted)
+            self.assertIn('reviewModel: "gpt-5.6-sol"', promoted)
             self.assertIn('editorialReviewVerdict: "PASS"', promoted)
             self.assertIn('editorialReviewModel: "gpt-5.6-sol"', promoted)
 
@@ -376,7 +378,7 @@ class PublisherTests(unittest.TestCase):
             self.assertIn('Useful copy.', content)
             self.assertNotIn('Old body.', content)
 
-    def test_promotion_rejects_claude_blockers(self):
+    def test_promotion_rejects_codex_blockers(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             publisher = Publisher(mode='candidate', repo_root=root)

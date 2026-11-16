@@ -24,8 +24,10 @@ Mainland operating contract overrides the legacy national-tech instructions.
 - Follow `docs/cloud-release-handoff.md` for the initial migration and PR #184
   pilot. Keep one implementation writer per branch. An implementation agent is
   not its own independent reviewer.
-- A machine location is not a review credential. Moving execution to cloud does
-  not remove exact-SHA Opus 5 independent review, truthful model/run provenance,
-  deterministic checks, or live verification. Unavailable gates remain blocked.
+- A machine location is not a review credential. Independent release review uses
+  authenticated Codex with reviewer `codex` and model `gpt-5.6-sol`, bound to the
+  exact candidate SHA-256 and repository SHA. The separate GPT editorial gate,
+  deterministic checks, and live verification remain required. Unavailable gates
+  remain blocked.
 - Respect each environment's browser, network, and approval policies. Do not
   proxy a blocked browser endpoint or weaken access controls to obtain evidence.

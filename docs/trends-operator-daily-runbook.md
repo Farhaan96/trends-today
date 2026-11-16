@@ -63,7 +63,7 @@ story on a repair day.
   or configuration. Never substitute an estimate for the missing values.
 - `candidate-eligibility`: review evidence was supplied but does not bind to the
   exact candidate file on disk or to the current repository HEAD. Repair the
-  candidate and obtain fresh GPT and Claude reviews at the current SHA.
+  candidate and obtain fresh GPT and Codex reviews at the current SHA.
 
 ### 2. `qualify`
 
@@ -128,9 +128,9 @@ requires, in this order and unchanged:
 1. deterministic validation (`apps/pipeline/validation.py`);
 2. an exact-candidate GPT editorial review, every score at least 4 of 5, zero
    blockers, zero prose em dashes (`apps/pipeline/gpt_review.py`);
-3. an exact-candidate Claude release review returning `NO BLOCKERS` on
-   `claude-opus-5`, bound to the same SHA-256 and repository SHA
-   (`apps/pipeline/claude_review.py`);
+3. an exact-candidate Codex release review returning `NO BLOCKERS` from the
+   authenticated Codex CLI with reviewer `codex` and model `gpt-5.6-sol`, bound
+   to the same SHA-256 and repository SHA (`apps/pipeline/codex_review.py`);
 4. promotion through `promote_candidate`, which re-verifies both reviews;
 5. clean checks, merge, deployment, and live browser verification.
 
@@ -171,17 +171,20 @@ unverifiable repository state never qualifies.
     "blockers": [],
     "proseEmDashCount": 0
   },
-  "claudeReview": {
+  "codexReview": {
     "verdict": "NO BLOCKERS",
     "candidateSha256": "<same digest>",
     "repositorySha": "<same HEAD>",
-    "modelUsed": "claude-opus-5"
+    "reviewer": "codex",
+    "modelUsed": "gpt-5.6-sol",
+    "reviewBackend": "codex-cli-oauth",
+    "reviewRunId": "<Codex thread ID>"
   }
 }
 ```
 
 Because both reviews bind to HEAD, any new commit invalidates the evidence.
-Repair the candidate and obtain fresh GPT and Claude reviews at the new SHA.
+Repair the candidate and obtain fresh GPT and Codex reviews at the new SHA.
 
 ## Reading the measurement block
 

@@ -13,7 +13,7 @@ The current business constraint is activation and retention measurement, not raw
 - **Triggers:** scheduled source sweeps at 06:30, 08:30, 10:30, 12:30, 14:30, 16:30, and 18:30 America/Vancouver; manual owner request.
 - **Schedule authority:** the active Codex automations are authoritative for the seven sweeps, 09:00 daily pulse, and Monday 08:30 weekly review. The repository GitHub Actions are separate read-only research/scorecard jobs, not the publication scheduler.
 - **Inputs:** configured primary sources, candidate URLs, locality, desk, prior coverage, source timestamps, and published-article index.
-- **Autonomous work:** discovery, deduplication, evidence gathering, scoring, briefing, drafting, original image preparation, factual checks, editorial checks, SEO checks, brand-safety classification, exact-candidate GPT review, and exact-candidate Opus 5 review.
+- **Autonomous work:** discovery, deduplication, evidence gathering, scoring, briefing, drafting, original image preparation, factual checks, editorial checks, SEO checks, brand-safety classification, exact-candidate GPT review, and exact-candidate Codex review.
 - **Output:** a qualified release candidate or an auditable skip. Zero candidates and a daily-ceiling skip are valid outcomes.
 - **Routine release:** exact-reviewed qualified candidates may be promoted, merged, deployed, and browser-verified autonomously.
 
@@ -54,7 +54,7 @@ An editorial candidate must pass, in order:
 7. Original or appropriately licensed image with provenance, subject match, alt text, and no placeholder.
 8. SEO validation: unique title/description, canonical, structured data truth, crawlable source anchors, sitemap compatibility, and no unsupported identity/contact fields.
 9. Exact-candidate GPT editorial review.
-10. Exact-SHA Opus 5 independent review for architecture or release decisions.
+10. Authenticated Codex independent review using reviewer `codex` and model `gpt-5.6-sol`, bound to the exact candidate SHA-256 and repository SHA.
 11. Deterministic tests and clean diff.
 12. Clean issue-branch checks, guarded merge/deployment, and live browser verification with rollback evidence.
 
@@ -141,7 +141,7 @@ Repair the narrowest broken dependency, rerun deterministic checks, and obtain a
 
 ## Dependency-ordered roadmap
 
-1. **Control plane:** reconcile existing schedules with autonomous qualified publication, Opus 5-only independent review, mutation logging, rollback evidence, and explicit commercial/provider/data gates.
+1. **Control plane:** reconcile existing schedules with autonomous qualified publication, Codex independent review, mutation logging, rollback evidence, and explicit commercial/provider/data gates.
 2. **Truth repair:** resolve production structured-data identity/contact claims and stale SEO utilities without inventing facts.
 3. **Measurement contract:** unify Vercel, GA4, Search Console, cost, and availability states behind read-only adapters.
 4. **Outcome briefs:** generate daily and weekly artifacts from the contract, including sync and automation health.
@@ -153,7 +153,7 @@ Repair the narrowest broken dependency, rerun deterministic checks, and obtain a
 ## First reversible implementation slice
 
 - **Baseline:** the three existing schedules are active, but the editorial and weekly prompts still name obsolete Fable-first review policy and do not share one explicit audit/rollback contract.
-- **Changed variable:** reconcile those schedules in place around qualified autonomous release, Opus 5-only review, fail-closed stop rules, action logs, and daily/weekly outcome briefs.
+- **Changed variable:** reconcile those schedules in place around qualified autonomous release, Codex review, fail-closed stop rules, action logs, and daily/weekly outcome briefs.
 - **Success:** zero duplicate jobs; every qualifying release records exact review, PR, deployment, browser-verification, cost, and rollback evidence; every skip or failure records a truthful reason.
 - **Guardrails:** zero quota-filling stories; zero uncertain claims; zero unavailable metrics reported as zero; zero automated advertiser/sponsor replies, pricing, terms, commitments, billing, provider changes, or production-data mutations.
 - **Review:** after the first seven scheduled sweeps and the next weekly brief.

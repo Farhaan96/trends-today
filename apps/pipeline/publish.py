@@ -10,7 +10,7 @@ from datetime import datetime
 from typing import Dict
 from abc import ABC, abstractmethod
 
-from review import verify_claude_review, verify_gpt_review
+from review import verify_codex_review, verify_gpt_review
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -54,7 +54,7 @@ class MDXStaticPublisher(PublisherAdapter):
 
     Candidate mode writes outside the live ``content`` tree. Direct production
     writes are disabled; an exact candidate must be promoted with accepted GPT
-    editorial and Claude release-review artifacts.
+    editorial and Codex release-review artifacts.
     """
 
     VALID_CATEGORIES = {
@@ -237,7 +237,7 @@ def promote_candidate(
     repo_root: Path = None,
     replace_existing: bool = False,
 ) -> Path:
-    """Promote only after exact GPT editorial and Claude release reviews pass."""
+    """Promote only after exact GPT editorial and Codex release reviews pass."""
     root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
     source = Path(candidate_path).resolve()
     gpt_review, gpt_digest, _, gpt_review_relative = verify_gpt_review(
@@ -245,7 +245,7 @@ def promote_candidate(
         gpt_review_path,
         root,
     )
-    review, digest, relative, review_relative = verify_claude_review(
+    review, digest, relative, review_relative = verify_codex_review(
         source,
         review_path,
         root,

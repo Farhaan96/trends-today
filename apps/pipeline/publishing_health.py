@@ -78,7 +78,7 @@ GPT_SCORE_FIELDS = (
     'formatting',
     'engagement',
 )
-APPROVED_RELEASE_MODEL = 'claude-opus-5'
+APPROVED_RELEASE_MODEL = 'gpt-5.6-sol'
 DECISION_PERIOD_MATURITY_DAYS = {'day7': 7, 'day28': 28}
 # An editorial article draft is identified by branch convention, not by being an
 # open pull request. Infrastructure, review-evidence, and monitored-inbox pull
@@ -796,15 +796,21 @@ def evaluate_candidate_eligibility(
         if gpt.get('proseEmDashCount') != 0:
             reasons.append('gpt review reported an em dash in article prose')
 
-    claude = candidate.get('claudeReview')
-    if not isinstance(claude, dict):
-        reasons.append('claude release review evidence is missing')
+    codex = candidate.get('codexReview')
+    if not isinstance(codex, dict):
+        reasons.append('codex release review evidence is missing')
     else:
-        if claude.get('verdict') != 'NO BLOCKERS':
-            reasons.append('claude release review did not return NO BLOCKERS')
-        reasons.extend(_binding_reasons('claude review', claude, file_digest, head))
-        if str(claude.get('modelUsed') or '').strip().lower() != APPROVED_RELEASE_MODEL:
+        if codex.get('verdict') != 'NO BLOCKERS':
+            reasons.append('codex release review did not return NO BLOCKERS')
+        reasons.extend(_binding_reasons('codex review', codex, file_digest, head))
+        if str(codex.get('reviewer') or '').strip().lower() != 'codex':
+            reasons.append('independent release reviewer must be codex')
+        if str(codex.get('modelUsed') or '').strip().lower() != APPROVED_RELEASE_MODEL:
             reasons.append(f'release review must use {APPROVED_RELEASE_MODEL}')
+        if codex.get('reviewBackend') != 'codex-cli-oauth':
+            reasons.append('codex release review must use the authenticated CLI backend')
+        if not str(codex.get('reviewRunId') or '').strip():
+            reasons.append('codex release review is missing reviewRunId')
 
     return {
         'status': 'ineligible' if reasons else 'eligible',
@@ -885,7 +891,7 @@ def _decide(
     if candidate['status'] == 'eligible':
         return {
             'action': 'qualify',
-            'reason': 'one exact-reviewed candidate has complete GPT and Claude release evidence',
+            'reason': 'one exact-reviewed candidate has complete GPT and Codex release evidence',
             'candidatePath': candidate['candidatePath'],
             'failedChecks': [],
             'warnings': warnings,

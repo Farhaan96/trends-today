@@ -271,7 +271,7 @@ class ContentPipeline:
                 })
                 return False
 
-            # 7. Stage the exact candidate for GPT editorial and Claude release reviews.
+            # 7. Stage the exact candidate for GPT editorial and Codex release reviews.
             success = self.publisher.publish(article, seo, image)
             if success:
                 self.stats['articles_staged'] += 1
@@ -358,7 +358,7 @@ def main():
     parser.add_argument('--candidate-file', type=Path, help='Ranked JSON from strategy.py')
     parser.add_argument('--release-candidate', type=Path, help='Exact staged MDX file to promote')
     parser.add_argument('--gpt-review-file', type=Path, help='Passing GPT editorial review for the exact candidate')
-    parser.add_argument('--review-file', type=Path, help='Accepted Claude review JSON for the exact candidate')
+    parser.add_argument('--review-file', type=Path, help='Accepted Codex review JSON for the exact candidate')
     parser.add_argument(
         '--replace-existing',
         action='store_true',

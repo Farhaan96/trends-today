@@ -25,12 +25,15 @@ def _relative_file(path: Path, root: Path, label: str) -> Path:
     return relative
 
 
-def verify_claude_review(
+APPROVED_RELEASE_MODEL = 'gpt-5.6-sol'
+
+
+def verify_codex_review(
     candidate_path: Path,
     review_path: Path,
     repo_root: Path,
 ) -> Tuple[Dict, str, Path, Path]:
-    """Require a NO BLOCKERS Claude review bound to the exact candidate hash."""
+    """Require a NO BLOCKERS Codex review bound to the candidate and repository."""
     root = Path(repo_root).resolve()
     candidate_root = root / 'artifacts' / 'editorial' / 'release-candidates'
     review_root = root / 'artifacts' / 'editorial' / 'reviews'
@@ -52,18 +55,22 @@ def verify_claude_review(
     digest = candidate_sha256(candidate_path)
     if review.get('version') != 1:
         raise ValueError('Review artifact version must be 1')
-    if str(review.get('reviewer', '')).lower() != 'claude':
-        raise ValueError('Independent reviewer must be Claude')
+    if str(review.get('reviewer', '')).lower() != 'codex':
+        raise ValueError('Independent reviewer must be Codex')
     if review.get('verdict') != 'NO BLOCKERS':
-        raise PermissionError('Claude review must return NO BLOCKERS')
+        raise PermissionError('Codex review must return NO BLOCKERS')
     if review.get('candidateSha256') != digest:
         raise PermissionError('Review artifact does not match the exact candidate SHA-256')
     if not str(review.get('reviewedAt', '')).strip():
         raise ValueError('Review artifact is missing reviewedAt')
     if not str(review.get('repositorySha', '')).strip():
         raise ValueError('Review artifact is missing repositorySha')
-    if str(review.get('modelUsed', '')).strip().lower() != 'claude-opus-5':
-        raise PermissionError('Independent release review must use claude-opus-5')
+    if str(review.get('modelUsed', '')).strip().lower() != APPROVED_RELEASE_MODEL:
+        raise PermissionError(f'Independent release review must use {APPROVED_RELEASE_MODEL}')
+    if review.get('reviewBackend') != 'codex-cli-oauth':
+        raise ValueError('Codex review is missing the authenticated CLI backend')
+    if not str(review.get('reviewRunId', '')).strip():
+        raise ValueError('Codex review is missing reviewRunId')
 
     git_head = subprocess.run(
         ['git', 'rev-parse', 'HEAD'],

@@ -40,12 +40,11 @@ assume those PRs have landed, or edit either active CollisionOS branch.
    reduced motion, image loading, console errors and page overflow. Compare real
    implementation screenshots with `docs/design/approved-homepage.webp` and fix
    visible mismatches. Keep reporting/source content and existing article routes.
-4. Move independent release review off the fixed Windows PowerShell path while
-   preserving the repository's exact-SHA Opus 5 model and reviewer separation.
-   Use an existing authorized cloud model runtime. Verify actual model and run
-   metadata; never relabel a different model or manufacture a NO BLOCKERS receipt.
-   If access or the required model is unavailable, record the precise blocker.
-   Keep Windows as an optional fallback, not a dependency of the cloud path.
+4. Use authenticated Codex for independent release review with reviewer `codex`
+   and model `gpt-5.6-sol`, bound to the exact candidate SHA-256 and repository
+   SHA. Verify actual model and run metadata; never relabel a different model or
+   manufacture a NO BLOCKERS receipt. If access is unavailable, record the
+   precise blocker.
 5. Bind cloud evidence to repository, PR head, clean tree SHA, CI run URL/ID,
    artifact SHA-256 hashes, reviewer identity/session/model and verdict. Reject
    stale heads, missing/failed checks, dirty source, missing review provenance,
