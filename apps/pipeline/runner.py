@@ -39,6 +39,13 @@ VALID_CATEGORIES = {
     'local-news', 'transit', 'things-to-do', 'food-drink', 'housing', 'sports',
 }
 
+MAX_ARTICLES_PER_RUN = 1
+
+
+def bounded_run_limits(limit: int, batch_size: int) -> tuple[int, int]:
+    """Enforce the executable one-article ceiling for every runner caller."""
+    return min(max(limit, 0), MAX_ARTICLES_PER_RUN), min(max(batch_size, 1), 1)
+
 
 def seed_urls_for_topic(topic: Dict) -> List[str]:
     """Preserve the reviewed research URLs when retrieving candidate sources."""
@@ -302,8 +309,9 @@ class ContentPipeline:
         
         logger.info(f"Publication log: {json.dumps(log_entry)}")
     
-    def run(self, limit: int = 3, batch_size: int = 1, topics: List[Dict] = None):
+    def run(self, limit: int = 1, batch_size: int = 1, topics: List[Dict] = None):
         """Run the pipeline for specified number of articles"""
+        limit, batch_size = bounded_run_limits(limit, batch_size)
         logger.info(f"Starting pipeline: {limit} articles in batches of {batch_size}")
         
         # Discover topics
@@ -353,7 +361,7 @@ def main():
         choices=['research', 'candidate', 'promote'],
         default='research',
     )
-    parser.add_argument('--limit', type=int, default=3, help='Maximum topics to process')
+    parser.add_argument('--limit', type=int, default=1, help='Maximum topics to process (capped at 1)')
     parser.add_argument('--batch-size', type=int, default=1, help='Topics per batch')
     parser.add_argument('--candidate-file', type=Path, help='Ranked JSON from strategy.py')
     parser.add_argument('--release-candidate', type=Path, help='Exact staged MDX file to promote')
@@ -366,6 +374,7 @@ def main():
     )
     parser.add_argument('--output', type=Path, help='Research queue output path')
     args = parser.parse_args()
+    args.limit, args.batch_size = bounded_run_limits(args.limit, args.batch_size)
 
     # Load environment variables
     from dotenv import load_dotenv
@@ -420,7 +429,7 @@ def main():
     pipeline.run(
         limit=min(args.limit, len(eligible)),
         batch_size=args.batch_size,
-        topics=eligible[:args.limit],
+        topics=eligible[:1],
     )
 
 if __name__ == '__main__':

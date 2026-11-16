@@ -3,6 +3,7 @@
 
 import hashlib
 import json
+import re
 import subprocess
 from pathlib import Path
 from typing import Dict, Tuple
@@ -26,6 +27,10 @@ def _relative_file(path: Path, root: Path, label: str) -> Path:
 
 
 APPROVED_RELEASE_MODEL = 'gpt-5.6-sol'
+CODEX_THREAD_ID_PATTERN = re.compile(
+    r'^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$',
+    re.IGNORECASE,
+)
 
 
 def verify_codex_review(
@@ -69,8 +74,9 @@ def verify_codex_review(
         raise PermissionError(f'Independent release review must use {APPROVED_RELEASE_MODEL}')
     if review.get('reviewBackend') != 'codex-cli-oauth':
         raise ValueError('Codex review is missing the authenticated CLI backend')
-    if not str(review.get('reviewRunId', '')).strip():
-        raise ValueError('Codex review is missing reviewRunId')
+    review_run_id = str(review.get('reviewRunId', '')).strip()
+    if not CODEX_THREAD_ID_PATTERN.fullmatch(review_run_id):
+        raise ValueError('Codex reviewRunId must be a Codex CLI thread ID')
 
     git_head = subprocess.run(
         ['git', 'rev-parse', 'HEAD'],

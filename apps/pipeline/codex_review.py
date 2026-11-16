@@ -7,11 +7,15 @@ import os
 import shutil
 import subprocess
 import tempfile
-import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-from review import APPROVED_RELEASE_MODEL, candidate_sha256, verify_codex_review
+from review import (
+    APPROVED_RELEASE_MODEL,
+    CODEX_THREAD_ID_PATTERN,
+    candidate_sha256,
+    verify_codex_review,
+)
 
 
 REVIEW_SCHEMA = {
@@ -141,6 +145,9 @@ def run_review(
                 run_id = event['thread_id']
                 break
 
+        if not isinstance(run_id, str) or not CODEX_THREAD_ID_PATTERN.fullmatch(run_id):
+            raise RuntimeError('Codex CLI did not emit a valid thread.started thread_id')
+
     artifact = {
         'version': 1,
         'reviewer': 'codex',
@@ -150,7 +157,7 @@ def run_review(
         'reviewedAt': datetime.now(timezone.utc).isoformat(),
         'modelUsed': model,
         'reviewBackend': 'codex-cli-oauth',
-        'reviewRunId': run_id or f'local-{uuid.uuid4()}',
+        'reviewRunId': run_id,
         'blockers': result['blockers'],
         'summary': result['summary'],
     }

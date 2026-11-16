@@ -8,6 +8,7 @@ PIPELINE_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PIPELINE_DIR))
 
 from runner import (  # noqa: E402
+    bounded_run_limits,
     eligible_candidates_from_payload,
     primary_source_urls_for_topic,
     requires_manual_approval,
@@ -89,6 +90,10 @@ class RunnerSourceTests(unittest.TestCase):
 
 
 class RunnerEligibilityTests(unittest.TestCase):
+    def test_runner_caps_limit_and_batch_size_to_one(self):
+        self.assertEqual((1, 1), bounded_run_limits(3, 3))
+        self.assertEqual((0, 1), bounded_run_limits(0, 0))
+
     def test_only_brief_decisions_are_eligible(self):
         payload = {
             'results': [

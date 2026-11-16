@@ -6,9 +6,11 @@ import json
 import logging
 import re
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict
 from abc import ABC, abstractmethod
+from urllib.parse import urlparse
+from zoneinfo import ZoneInfo
 
 from review import verify_codex_review, verify_gpt_review
 
@@ -40,6 +42,54 @@ REJECTED_IMAGE_SOURCE_TYPES = {
     'unrelated',
     'invented',
 }
+
+PUBLICATION_TIMEZONE = ZoneInfo('America/Vancouver')
+
+
+def _frontmatter_value(frontmatter: str, field: str) -> str:
+    match = re.search(rf'^{re.escape(field)}:\s*(.*)$', frontmatter, re.MULTILINE)
+    return match.group(1).strip().strip('"\'').strip() if match else ''
+
+
+def _valid_http_url(value: str) -> bool:
+    parsed = urlparse(value)
+    return (
+        parsed.scheme.lower() in {'http', 'https'}
+        and bool(parsed.netloc and parsed.hostname)
+        and not any(character.isspace() for character in value)
+    )
+
+
+def _promotion_time(value: datetime = None) -> datetime:
+    current = value or datetime.now(timezone.utc)
+    if current.tzinfo is None:
+        raise ValueError('Promotion time must be timezone-aware')
+    return current
+
+
+def _enforce_daily_promotion_ceiling(root: Path, promotion_time: datetime) -> None:
+    target_day = promotion_time.astimezone(PUBLICATION_TIMEZONE).date()
+    content_root = root / 'content'
+    if not content_root.exists():
+        return
+    for published_path in content_root.glob('*/*.mdx'):
+        text = published_path.read_text(encoding='utf-8')
+        match = re.match(r'^---\s*\n(.*?)\n---\s*\n', text, re.DOTALL)
+        if not match:
+            continue
+        promoted_at = _frontmatter_value(match.group(1), 'promotedAt')
+        if not promoted_at:
+            continue
+        try:
+            recorded = datetime.fromisoformat(promoted_at.replace('Z', '+00:00'))
+        except ValueError:
+            raise ValueError(f'Published article has malformed promotedAt: {published_path}')
+        if recorded.tzinfo is None:
+            raise ValueError(f'Published article has timezone-naive promotedAt: {published_path}')
+        if recorded.astimezone(PUBLICATION_TIMEZONE).date() == target_day:
+            raise PermissionError(
+                f'Daily promotion ceiling already reached for {target_day} America/Vancouver'
+            )
 
 class PublisherAdapter(ABC):
     """Base publisher adapter interface"""
@@ -92,6 +142,9 @@ class MDXStaticPublisher(PublisherAdapter):
                 'image': image['path'],
                 'imageAlt': image['alt'],
                 'imageAttribution': image.get('attribution', ''),
+                'imageSourceUrl': image.get('sourceUrl', ''),
+                'imageLicense': image.get('license', ''),
+                'imageLicenseUrl': image.get('licenseUrl', ''),
                 'imageSourceType': image.get('sourceType', ''),
                 'imageRelevanceConfirmed': bool(image.get('relevanceConfirmed', False)),
                 'tags': article.get('tags', ['technology']),
@@ -236,6 +289,7 @@ def promote_candidate(
     gpt_review_path: Path,
     repo_root: Path = None,
     replace_existing: bool = False,
+    now: datetime = None,
 ) -> Path:
     """Promote only after exact GPT editorial and Codex release reviews pass."""
     root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
@@ -268,10 +322,7 @@ def promote_candidate(
     if not image_value.strip('"\'').strip():
         raise ValueError('Candidate has a blank or whitespace-only image')
 
-    source_type_match = re.search(r'^imageSourceType:\s*(.*)$', frontmatter, re.MULTILINE)
-    image_source_type = (
-        source_type_match.group(1).strip().strip('"\'').strip().lower() if source_type_match else ''
-    )
+    image_source_type = _frontmatter_value(frontmatter, 'imageSourceType').lower()
     if not image_source_type or image_source_type in REJECTED_IMAGE_SOURCE_TYPES:
         raise ValueError(
             'Candidate hero image must be an official/licensed source visual '
@@ -285,12 +336,19 @@ def promote_candidate(
     if not relevance_match or relevance_match.group(1) != 'true':
         raise ValueError('Candidate hero image relevance to the story has not been confirmed')
 
-    attribution_match = re.search(r'^imageAttribution:\s*(.*)$', frontmatter, re.MULTILINE)
-    image_attribution = (
-        attribution_match.group(1).strip().strip('"\'').strip() if attribution_match else ''
-    )
+    image_attribution = _frontmatter_value(frontmatter, 'imageAttribution')
     if not image_attribution:
         raise ValueError('Candidate hero image is missing required source attribution')
+    if image_source_type == 'licensed-photo':
+        image_source_url = _frontmatter_value(frontmatter, 'imageSourceUrl')
+        image_license = _frontmatter_value(frontmatter, 'imageLicense')
+        image_license_url = _frontmatter_value(frontmatter, 'imageLicenseUrl')
+        if not _valid_http_url(image_source_url):
+            raise ValueError('Licensed photo requires a valid HTTP(S) imageSourceUrl')
+        if not image_license:
+            raise ValueError('Licensed photo requires a non-empty imageLicense')
+        if not _valid_http_url(image_license_url):
+            raise ValueError('Licensed photo requires a valid HTTP(S) imageLicenseUrl')
 
     source_config_path = root / 'config' / 'local-news-sources.json'
     source_config = json.loads(source_config_path.read_text(encoding='utf-8'))
@@ -331,6 +389,8 @@ def promote_candidate(
         and not commercial_approval_recorded
     ):
         raise PermissionError('Commercial candidate requires recorded owner approval')
+    promotion_time = _promotion_time(now)
+    _enforce_daily_promotion_ceiling(root, promotion_time)
     review_metadata = (
         'status: "published"\n'
         f'editorialReviewedBy: {json.dumps(gpt_review["reviewer"], ensure_ascii=False)}\n'
@@ -343,7 +403,7 @@ def promote_candidate(
         f'reviewModel: {json.dumps(review["modelUsed"], ensure_ascii=False)}\n'
         f'reviewArtifact: {json.dumps(review_relative.as_posix(), ensure_ascii=False)}\n'
         f'candidateSha256: "{digest}"\n'
-        f'promotedAt: "{datetime.now().isoformat()}"'
+        f'promotedAt: "{promotion_time.isoformat()}"'
     )
     promoted = re.sub(
         r'^status:\s*["\']?release-candidate["\']?\s*$',

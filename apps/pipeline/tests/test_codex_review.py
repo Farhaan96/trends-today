@@ -17,6 +17,7 @@ from review import candidate_sha256, verify_codex_review  # noqa: E402
 class CodexReviewTests(unittest.TestCase):
     DIGEST = 'a' * 64
     REPOSITORY_SHA = 'b' * 40
+    THREAD_ID = '019a8f5e-6f5d-7a21-8d9c-52e8b09d9a70'
 
     def result(self, **overrides):
         value = {
@@ -86,7 +87,7 @@ class CodexReviewTests(unittest.TestCase):
                 return subprocess.CompletedProcess(
                     command,
                     0,
-                    stdout=json.dumps({'type': 'thread.started', 'thread_id': 'thread_123'}),
+                    stdout=json.dumps({'type': 'thread.started', 'thread_id': self.THREAD_ID}),
                     stderr='',
                 )
 
@@ -106,7 +107,53 @@ class CodexReviewTests(unittest.TestCase):
             self.assertEqual(digest, artifact['candidateSha256'])
             self.assertEqual(self.REPOSITORY_SHA, artifact['repositorySha'])
             self.assertEqual('codex-cli-oauth', artifact['reviewBackend'])
-            self.assertEqual('thread_123', artifact['reviewRunId'])
+            self.assertEqual(self.THREAD_ID, artifact['reviewRunId'])
+
+    def test_run_review_fails_closed_without_codex_thread_id(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            candidate = root / 'artifacts/editorial/release-candidates/science/story.mdx'
+            candidate.parent.mkdir(parents=True)
+            candidate.write_text('Body.\n', encoding='utf-8')
+            digest = candidate_sha256(candidate)
+
+            def fake_run(command, **kwargs):
+                if command[:3] == ['git', 'rev-parse', 'HEAD']:
+                    return subprocess.CompletedProcess(command, 0, stdout=self.REPOSITORY_SHA, stderr='')
+                output_path = Path(command[command.index('--output-last-message') + 1])
+                output_path.write_text(json.dumps(self.result(
+                    candidateSha256=digest,
+                )), encoding='utf-8')
+                return subprocess.CompletedProcess(command, 0, stdout='', stderr='')
+
+            with (
+                patch('codex_review.shutil.which', return_value='codex'),
+                patch('codex_review.subprocess.run', side_effect=fake_run),
+            ):
+                with self.assertRaisesRegex(RuntimeError, 'valid thread.started thread_id'):
+                    run_review(candidate, root)
+
+    def test_verifier_rejects_forged_run_id(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            candidate = root / 'artifacts/editorial/release-candidates/science/story.mdx'
+            candidate.parent.mkdir(parents=True)
+            candidate.write_text('Body.\n', encoding='utf-8')
+            review = root / 'artifacts/editorial/reviews/science/story.json'
+            review.parent.mkdir(parents=True)
+            review.write_text(json.dumps({
+                'version': 1,
+                'reviewer': 'codex',
+                'verdict': 'NO BLOCKERS',
+                'candidateSha256': candidate_sha256(candidate),
+                'repositorySha': self.REPOSITORY_SHA,
+                'reviewedAt': '2026-11-16T12:00:00+00:00',
+                'modelUsed': 'gpt-5.6-sol',
+                'reviewBackend': 'codex-cli-oauth',
+                'reviewRunId': 'local-forged',
+            }), encoding='utf-8')
+            with self.assertRaisesRegex(ValueError, 'Codex CLI thread ID'):
+                verify_codex_review(candidate, review, root)
 
     def test_verifier_rejects_missing_authenticated_run_provenance(self):
         with tempfile.TemporaryDirectory() as temp:

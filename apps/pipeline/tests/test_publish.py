@@ -3,6 +3,7 @@ import tempfile
 import unittest
 import json
 import re
+from datetime import datetime, timezone
 from unittest.mock import patch
 from pathlib import Path
 
@@ -75,8 +76,18 @@ class PublisherTests(unittest.TestCase):
         image.update(overrides)
         return image
 
+    def licensed_image(self, **overrides):
+        image = self.official_image(
+            sourceType='licensed-photo',
+            sourceUrl='https://commons.wikimedia.org/wiki/File:Example.jpg',
+            license='CC BY 4.0',
+            licenseUrl='https://creativecommons.org/licenses/by/4.0/',
+        )
+        image.update(overrides)
+        return image
+
     def write_review(self, root, candidate, verdict='NO BLOCKERS', digest=None):
-        review = root / 'artifacts/editorial/reviews/science/candidate-title.review.json'
+        review = root / f'artifacts/editorial/reviews/science/{candidate.stem}.review.json'
         review.parent.mkdir(parents=True, exist_ok=True)
         review.write_text(json.dumps({
             'version': 1,
@@ -87,12 +98,12 @@ class PublisherTests(unittest.TestCase):
             'repositorySha': 'a' * 40,
             'modelUsed': 'gpt-5.6-sol',
             'reviewBackend': 'codex-cli-oauth',
-            'reviewRunId': 'thread_release_test',
+            'reviewRunId': '019a8f5e-6f5d-7a21-8d9c-52e8b09d9a70',
         }), encoding='utf-8')
         return review
 
     def write_gpt_review(self, root, candidate, **overrides):
-        review = root / 'artifacts/editorial/reviews/gpt/science/candidate-title.review.json'
+        review = root / f'artifacts/editorial/reviews/gpt/science/{candidate.stem}.review.json'
         review.parent.mkdir(parents=True, exist_ok=True)
         payload = {
             'version': 1,
@@ -308,6 +319,84 @@ class PublisherTests(unittest.TestCase):
                 git_run.return_value.stdout = 'a' * 40
                 destination = self.promote(root, candidate, review)
             self.assertTrue(destination.exists())
+
+    def test_licensed_photo_promotion_requires_complete_link_metadata(self):
+        invalid_fields = {
+            'sourceUrl': ['', 'ftp://example.com/photo.jpg'],
+            'license': [''],
+            'licenseUrl': ['', '/licenses/by/4.0'],
+        }
+        for field, invalid_values in invalid_fields.items():
+            for invalid_value in invalid_values:
+                with self.subTest(field=field, value=invalid_value):
+                    with tempfile.TemporaryDirectory() as temp:
+                        root = Path(temp)
+                        publisher = Publisher(mode='candidate', repo_root=root)
+                        self.assertTrue(publisher.publish(
+                            self.article(),
+                            {'slug': 'candidate-title', 'meta_description': 'Candidate description', 'internal_links': []},
+                            self.licensed_image(**{field: invalid_value}),
+                        ))
+                        candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
+                        self.write_source_config(root)
+                        review = self.write_review(root, candidate)
+                        with patch('review.subprocess.run') as git_run:
+                            git_run.return_value.returncode = 0
+                            git_run.return_value.stdout = 'a' * 40
+                            with self.assertRaisesRegex(ValueError, 'Licensed photo requires'):
+                                self.promote(root, candidate, review)
+
+    def test_licensed_photo_promotion_preserves_link_metadata(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            publisher = Publisher(mode='candidate', repo_root=root)
+            self.assertTrue(publisher.publish(
+                self.article(),
+                {'slug': 'candidate-title', 'meta_description': 'Candidate description', 'internal_links': []},
+                self.licensed_image(),
+            ))
+            candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
+            self.write_source_config(root)
+            review = self.write_review(root, candidate)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                destination = self.promote(root, candidate, review)
+            promoted = destination.read_text(encoding='utf-8')
+            self.assertIn('imageSourceUrl: "https://commons.wikimedia.org/wiki/File:Example.jpg"', promoted)
+            self.assertIn('imageLicense: "CC BY 4.0"', promoted)
+            self.assertIn('imageLicenseUrl: "https://creativecommons.org/licenses/by/4.0/"', promoted)
+
+    def test_promotion_enforces_one_article_per_vancouver_calendar_day(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            publisher = Publisher(mode='candidate', repo_root=root)
+            self.write_source_config(root)
+            candidates = []
+            for slug in ('candidate-one', 'candidate-two'):
+                self.assertTrue(publisher.publish(
+                    self.article(),
+                    {'slug': slug, 'meta_description': 'Candidate description', 'internal_links': []},
+                    self.official_image(),
+                ))
+                candidate = root / f'artifacts/editorial/release-candidates/science/{slug}.mdx'
+                candidates.append((candidate, self.write_review(root, candidate)))
+
+            promotion_time = datetime(2026, 11, 16, 18, 0, tzinfo=timezone.utc)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                first_gpt = self.write_gpt_review(root, candidates[0][0])
+                promote_candidate(
+                    candidates[0][0], candidates[0][1], first_gpt,
+                    repo_root=root, now=promotion_time,
+                )
+                second_gpt = self.write_gpt_review(root, candidates[1][0])
+                with self.assertRaisesRegex(PermissionError, 'Daily promotion ceiling'):
+                    promote_candidate(
+                        candidates[1][0], candidates[1][1], second_gpt,
+                        repo_root=root, now=promotion_time,
+                    )
 
     def test_promotion_rejects_review_for_different_candidate_hash(self):
         with tempfile.TemporaryDirectory() as temp:
