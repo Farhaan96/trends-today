@@ -366,7 +366,6 @@ def main():
     parser.add_argument('--candidate-file', type=Path, help='Ranked JSON from strategy.py')
     parser.add_argument('--release-candidate', type=Path, help='Exact staged MDX file to promote')
     parser.add_argument('--gpt-review-file', type=Path, help='Passing GPT editorial review for the exact candidate')
-    parser.add_argument('--review-file', type=Path, help='Accepted Codex review JSON for the exact candidate')
     parser.add_argument(
         '--replace-existing',
         action='store_true',
@@ -401,13 +400,10 @@ def main():
     if args.mode == 'promote':
         if not args.release_candidate:
             parser.error('promote mode requires --release-candidate')
-        if not args.review_file:
-            parser.error('promote mode requires --review-file')
         if not args.gpt_review_file:
             parser.error('promote mode requires --gpt-review-file')
         destination = promote_candidate(
             args.release_candidate,
-            args.review_file,
             args.gpt_review_file,
             replace_existing=args.replace_existing,
         )

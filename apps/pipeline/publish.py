@@ -5,6 +5,9 @@ import os
 import json
 import logging
 import re
+import tempfile
+import time
+from contextlib import contextmanager
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Dict
@@ -12,6 +15,7 @@ from abc import ABC, abstractmethod
 from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
+from codex_review import run_review as run_codex_review
 from review import verify_codex_review, verify_gpt_review
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(message)s')
@@ -51,6 +55,17 @@ def _frontmatter_value(frontmatter: str, field: str) -> str:
     return match.group(1).strip().strip('"\'').strip() if match else ''
 
 
+def _frontmatter_values(frontmatter: str, field: str) -> list[str]:
+    return [
+        value.strip().strip('"\'').strip()
+        for value in re.findall(
+            rf'^{re.escape(field)}:\s*(.*)$',
+            frontmatter,
+            re.MULTILINE,
+        )
+    ]
+
+
 def _valid_http_url(value: str) -> bool:
     parsed = urlparse(value)
     return (
@@ -67,6 +82,31 @@ def _promotion_time(value: datetime = None) -> datetime:
     return current
 
 
+def _published_day(frontmatter: str, published_path: Path):
+    """Return the trusted publication day, rejecting ambiguous metadata."""
+    for field in ('promotedAt', 'publishedAt', 'datePublished'):
+        values = _frontmatter_values(frontmatter, field)
+        if len(values) > 1:
+            raise ValueError(f'Published article has duplicate {field}: {published_path}')
+        if not values:
+            continue
+        value = values[0]
+        try:
+            recorded = datetime.fromisoformat(value.replace('Z', '+00:00'))
+        except ValueError as exc:
+            raise ValueError(
+                f'Published article has malformed {field}: {published_path}'
+            ) from exc
+        if field == 'promotedAt' and recorded.tzinfo is None:
+            raise ValueError(
+                f'Published article has timezone-naive promotedAt: {published_path}'
+            )
+        if recorded.tzinfo is None:
+            recorded = recorded.replace(tzinfo=PUBLICATION_TIMEZONE)
+        return recorded.astimezone(PUBLICATION_TIMEZONE).date()
+    return None
+
+
 def _enforce_daily_promotion_ceiling(root: Path, promotion_time: datetime) -> None:
     target_day = promotion_time.astimezone(PUBLICATION_TIMEZONE).date()
     content_root = root / 'content'
@@ -77,19 +117,120 @@ def _enforce_daily_promotion_ceiling(root: Path, promotion_time: datetime) -> No
         match = re.match(r'^---\s*\n(.*?)\n---\s*\n', text, re.DOTALL)
         if not match:
             continue
-        promoted_at = _frontmatter_value(match.group(1), 'promotedAt')
-        if not promoted_at:
-            continue
-        try:
-            recorded = datetime.fromisoformat(promoted_at.replace('Z', '+00:00'))
-        except ValueError:
-            raise ValueError(f'Published article has malformed promotedAt: {published_path}')
-        if recorded.tzinfo is None:
-            raise ValueError(f'Published article has timezone-naive promotedAt: {published_path}')
-        if recorded.astimezone(PUBLICATION_TIMEZONE).date() == target_day:
+        if _published_day(match.group(1), published_path) == target_day:
             raise PermissionError(
                 f'Daily promotion ceiling already reached for {target_day} America/Vancouver'
             )
+
+
+@contextmanager
+def _promotion_lock(root: Path, timeout_seconds: float = 30.0):
+    """Hold one repository-wide promotion lock across processes."""
+    lock_path = root / 'artifacts' / 'editorial' / '.promotion.lock'
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    lock_file = open(lock_path, 'a+b')
+    try:
+        lock_file.seek(0, os.SEEK_END)
+        if lock_file.tell() == 0:
+            lock_file.write(b'\0')
+            lock_file.flush()
+        deadline = time.monotonic() + timeout_seconds
+        if os.name == 'nt':
+            import msvcrt
+
+            while True:
+                try:
+                    lock_file.seek(0)
+                    msvcrt.locking(lock_file.fileno(), msvcrt.LK_NBLCK, 1)
+                    break
+                except OSError:
+                    if time.monotonic() >= deadline:
+                        raise TimeoutError('Timed out waiting for the promotion lock')
+                    time.sleep(0.05)
+        else:
+            import fcntl
+
+            fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            lock_file.seek(0)
+            if os.name == 'nt':
+                msvcrt.locking(lock_file.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                fcntl.flock(lock_file.fileno(), fcntl.LOCK_UN)
+    finally:
+        lock_file.close()
+
+
+def _atomic_write(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode='w',
+            encoding='utf-8',
+            dir=path.parent,
+            prefix=f'.{path.name}.',
+            suffix='.tmp',
+            delete=False,
+        ) as handle:
+            handle.write(content)
+            handle.flush()
+            os.fsync(handle.fileno())
+            temporary = Path(handle.name)
+        os.replace(temporary, path)
+    finally:
+        if temporary is not None and temporary.exists():
+            temporary.unlink()
+
+
+def _commit_promotion(
+    root: Path,
+    destination: Path,
+    promoted: str,
+    promotion_time: datetime,
+    candidate_frontmatter: str,
+    replace_existing: bool,
+) -> None:
+    """Atomically enforce the daily cap and write one promoted article."""
+    with _promotion_lock(root):
+        _enforce_daily_promotion_ceiling(root, promotion_time)
+        if destination.exists():
+            if not replace_existing:
+                raise FileExistsError(f'Refusing to overwrite existing article: {destination}')
+            existing = destination.read_text(encoding='utf-8')
+            existing_frontmatter_match = re.match(
+                r'^---\s*\n(.*?)\n---\s*\n',
+                existing,
+                re.DOTALL,
+            )
+            if not existing_frontmatter_match:
+                raise ValueError('Existing article frontmatter is missing or malformed')
+            existing_frontmatter = existing_frontmatter_match.group(1)
+            if not re.search(
+                r'^status:\s*["\']?published["\']?\s*$',
+                existing_frontmatter,
+                re.MULTILINE,
+            ):
+                raise PermissionError('Only an existing published article may be revised')
+            existing_slug = re.search(
+                r'^slug:\s*["\']?([^"\'\n]+)["\']?\s*$',
+                existing_frontmatter,
+                re.MULTILINE,
+            )
+            candidate_slug = re.search(
+                r'^slug:\s*["\']?([^"\'\n]+)["\']?\s*$',
+                candidate_frontmatter,
+                re.MULTILINE,
+            )
+            if (
+                not existing_slug
+                or not candidate_slug
+                or existing_slug.group(1).strip() != candidate_slug.group(1).strip()
+            ):
+                raise PermissionError('Revision candidate slug must match the published article')
+        _atomic_write(destination, promoted)
 
 class PublisherAdapter(ABC):
     """Base publisher adapter interface"""
@@ -285,27 +426,27 @@ class Publisher:
 
 def promote_candidate(
     candidate_path: Path,
-    review_path: Path,
     gpt_review_path: Path,
     repo_root: Path = None,
     replace_existing: bool = False,
     now: datetime = None,
+    review_path: Path = None,
 ) -> Path:
-    """Promote only after exact GPT editorial and Codex release reviews pass."""
+    """Promote after GPT review and an internally invoked authenticated Codex gate."""
     root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
     source = Path(candidate_path).resolve()
+    if review_path is not None:
+        raise PermissionError(
+            'External Codex review artifacts are not accepted; promotion runs the trusted gate'
+        )
     gpt_review, gpt_digest, _, gpt_review_relative = verify_gpt_review(
         source,
         gpt_review_path,
         root,
     )
-    review, digest, relative, review_relative = verify_codex_review(
-        source,
-        review_path,
-        root,
-    )
-    if gpt_digest != digest:
-        raise PermissionError('Editorial and release reviews do not cover the same candidate')
+    digest = gpt_digest
+    candidate_root = root.resolve() / 'artifacts' / 'editorial' / 'release-candidates'
+    relative = source.relative_to(candidate_root)
     category = relative.parts[0]
     if category not in MDXStaticPublisher.VALID_CATEGORIES:
         raise ValueError(f'Unsupported category: {category}')
@@ -317,6 +458,27 @@ def promote_candidate(
     frontmatter = frontmatter_match.group(1)
     if not re.search(r'^status:\s*["\']?release-candidate["\']?\s*$', frontmatter, re.MULTILINE):
         raise ValueError('File is not marked as a release candidate')
+    promotion_fields = {
+        'promotedAt',
+        'candidateSha256',
+        'reviewedBy',
+        'reviewVerdict',
+        'reviewModel',
+        'reviewArtifact',
+        'editorialReviewedBy',
+        'editorialReviewVerdict',
+        'editorialReviewModel',
+        'editorialReviewScores',
+        'editorialReviewArtifact',
+    }
+    supplied_promotion_fields = [
+        field for field in promotion_fields if _frontmatter_values(frontmatter, field)
+    ]
+    if supplied_promotion_fields:
+        raise ValueError(
+            'Candidate contains reserved promotion metadata: '
+            + ', '.join(sorted(supplied_promotion_fields))
+        )
     image_match = re.search(r'^image:\s*(.*)$', frontmatter, re.MULTILINE)
     image_value = image_match.group(1).strip() if image_match else ''
     if not image_value.strip('"\'').strip():
@@ -389,8 +551,15 @@ def promote_candidate(
         and not commercial_approval_recorded
     ):
         raise PermissionError('Commercial candidate requires recorded owner approval')
+    trusted_review_path = run_codex_review(source, root)
+    review, codex_digest, codex_relative, review_relative = verify_codex_review(
+        source,
+        trusted_review_path,
+        root,
+    )
+    if codex_digest != digest or codex_relative != relative:
+        raise PermissionError('Editorial and release reviews do not cover the same candidate')
     promotion_time = _promotion_time(now)
-    _enforce_daily_promotion_ceiling(root, promotion_time)
     review_metadata = (
         'status: "published"\n'
         f'editorialReviewedBy: {json.dumps(gpt_review["reviewer"], ensure_ascii=False)}\n'
@@ -414,42 +583,14 @@ def promote_candidate(
     )
 
     destination = root / 'content' / category / relative.name
-    if destination.exists():
-        if not replace_existing:
-            raise FileExistsError(f'Refusing to overwrite existing article: {destination}')
-        existing = destination.read_text(encoding='utf-8')
-        existing_frontmatter_match = re.match(
-            r'^---\s*\n(.*?)\n---\s*\n',
-            existing,
-            re.DOTALL,
-        )
-        if not existing_frontmatter_match:
-            raise ValueError('Existing article frontmatter is missing or malformed')
-        existing_frontmatter = existing_frontmatter_match.group(1)
-        if not re.search(
-            r'^status:\s*["\']?published["\']?\s*$',
-            existing_frontmatter,
-            re.MULTILINE,
-        ):
-            raise PermissionError('Only an existing published article may be revised')
-        existing_slug = re.search(
-            r'^slug:\s*["\']?([^"\'\n]+)["\']?\s*$',
-            existing_frontmatter,
-            re.MULTILINE,
-        )
-        candidate_slug = re.search(
-            r'^slug:\s*["\']?([^"\'\n]+)["\']?\s*$',
-            frontmatter,
-            re.MULTILINE,
-        )
-        if (
-            not existing_slug
-            or not candidate_slug
-            or existing_slug.group(1).strip() != candidate_slug.group(1).strip()
-        ):
-            raise PermissionError('Revision candidate slug must match the published article')
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(promoted, encoding='utf-8')
+    _commit_promotion(
+        root,
+        destination,
+        promoted,
+        promotion_time,
+        frontmatter,
+        replace_existing,
+    )
     logger.info('Promoted reviewed candidate %s to %s', source, destination)
     return destination
 

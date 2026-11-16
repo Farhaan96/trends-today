@@ -2,6 +2,7 @@ import sys
 import tempfile
 import unittest
 import json
+import multiprocessing
 import re
 from datetime import datetime, timezone
 from unittest.mock import patch
@@ -11,8 +12,42 @@ from pathlib import Path
 PIPELINE_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PIPELINE_DIR))
 
-from publish import Publisher, promote_candidate  # noqa: E402
+from publish import Publisher, _commit_promotion, _promotion_lock, promote_candidate  # noqa: E402
 from review import candidate_sha256  # noqa: E402
+
+
+def _hold_promotion_lock_and_publish(root_value, ready, release):
+    root = Path(root_value)
+    destination = root / 'content/science/first.mdx'
+    with _promotion_lock(root):
+        ready.set()
+        if not release.wait(10):
+            raise TimeoutError('Test release event was not set')
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text(
+            '---\nstatus: published\npublishedAt: "2026-11-16T10:00:00-08:00"\n'
+            'slug: first\n---\n\nFirst.\n',
+            encoding='utf-8',
+        )
+
+
+def _attempt_concurrent_commit(root_value, attempting, result_path_value):
+    root = Path(root_value)
+    attempting.set()
+    try:
+        _commit_promotion(
+            root,
+            root / 'content/science/second.mdx',
+            '---\nstatus: published\npromotedAt: "2026-11-16T18:00:00+00:00"\n'
+            'slug: second\n---\n\nSecond.\n',
+            datetime(2026, 11, 16, 18, 0, tzinfo=timezone.utc),
+            'slug: second',
+            False,
+        )
+    except PermissionError:
+        Path(result_path_value).write_text('ceiling-enforced', encoding='utf-8')
+    else:
+        Path(result_path_value).write_text('unexpected-promotion', encoding='utf-8')
 
 
 class PublisherTests(unittest.TestCase):
@@ -99,6 +134,7 @@ class PublisherTests(unittest.TestCase):
             'modelUsed': 'gpt-5.6-sol',
             'reviewBackend': 'codex-cli-oauth',
             'reviewRunId': '019a8f5e-6f5d-7a21-8d9c-52e8b09d9a70',
+            'blockers': [],
         }), encoding='utf-8')
         return review
 
@@ -132,7 +168,8 @@ class PublisherTests(unittest.TestCase):
 
     def promote(self, root, candidate, review, **gpt_overrides):
         gpt_review = self.write_gpt_review(root, candidate, **gpt_overrides)
-        return promote_candidate(candidate, review, gpt_review, repo_root=root)
+        with patch('publish.run_codex_review', return_value=review):
+            return promote_candidate(candidate, gpt_review, repo_root=root)
 
     def write_source_config(self, root, keywords=None):
         config = root / 'config/local-news-sources.json'
@@ -173,7 +210,7 @@ class PublisherTests(unittest.TestCase):
                 git_run.return_value.returncode = 0
                 git_run.return_value.stdout = 'a' * 40
                 with self.assertRaisesRegex(PermissionError, 'disabled'):
-                    promote_candidate(candidate, review, gpt_review, repo_root=root)
+                    promote_candidate(candidate, gpt_review, repo_root=root)
 
     def test_direct_production_mode_is_disabled(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -387,18 +424,141 @@ class PublisherTests(unittest.TestCase):
                 git_run.return_value.returncode = 0
                 git_run.return_value.stdout = 'a' * 40
                 first_gpt = self.write_gpt_review(root, candidates[0][0])
-                promote_candidate(
-                    candidates[0][0], candidates[0][1], first_gpt,
-                    repo_root=root, now=promotion_time,
-                )
-                second_gpt = self.write_gpt_review(root, candidates[1][0])
-                with self.assertRaisesRegex(PermissionError, 'Daily promotion ceiling'):
+                with patch('publish.run_codex_review', return_value=candidates[0][1]):
                     promote_candidate(
-                        candidates[1][0], candidates[1][1], second_gpt,
+                        candidates[0][0], first_gpt,
+                        repo_root=root, now=promotion_time,
+                    )
+                second_gpt = self.write_gpt_review(root, candidates[1][0])
+                with (
+                    patch('publish.run_codex_review', return_value=candidates[1][1]),
+                    self.assertRaisesRegex(PermissionError, 'Daily promotion ceiling'),
+                ):
+                    promote_candidate(
+                        candidates[1][0], second_gpt,
                         repo_root=root, now=promotion_time,
                     )
 
-    def test_promotion_rejects_review_for_different_candidate_hash(self):
+    def test_daily_ceiling_rejects_duplicate_promoted_at(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            published = root / 'content/science/already-published.mdx'
+            published.parent.mkdir(parents=True)
+            published.write_text(
+                '---\nstatus: published\n'
+                'promotedAt: "2026-11-15T18:00:00+00:00"\n'
+                'promotedAt: "2026-11-16T18:00:00+00:00"\n'
+                '---\n\nBody.\n',
+                encoding='utf-8',
+            )
+            with self.assertRaisesRegex(ValueError, 'duplicate promotedAt'):
+                _commit_promotion(
+                    root,
+                    root / 'content/science/new.mdx',
+                    '---\nstatus: published\nslug: new\n---\n',
+                    datetime(2026, 11, 16, 18, 0, tzinfo=timezone.utc),
+                    'slug: new',
+                    False,
+                )
+
+    def test_promotion_rejects_candidate_supplied_duplicate_promoted_at(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            publisher = Publisher(mode='candidate', repo_root=root)
+            self.assertTrue(publisher.publish(
+                self.article(),
+                {'slug': 'candidate-title', 'meta_description': 'Candidate description', 'internal_links': []},
+                self.official_image(),
+            ))
+            candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
+            candidate.write_text(
+                candidate.read_text(encoding='utf-8').replace(
+                    'status: "release-candidate"',
+                    'promotedAt: "2026-11-15T18:00:00+00:00"\n'
+                    'promotedAt: "2026-11-16T18:00:00+00:00"\n'
+                    'status: "release-candidate"',
+                ),
+                encoding='utf-8',
+            )
+            self.write_source_config(root)
+            review = self.write_review(root, candidate)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                with self.assertRaisesRegex(ValueError, 'reserved promotion metadata'):
+                    self.promote(root, candidate, review)
+
+    def test_daily_ceiling_uses_published_at_when_promoted_at_is_missing(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            published = root / 'content/science/already-published.mdx'
+            published.parent.mkdir(parents=True)
+            published.write_text(
+                '---\nstatus: published\n'
+                'publishedAt: "2026-11-16T07:00:00-08:00"\n'
+                '---\n\nBody.\n',
+                encoding='utf-8',
+            )
+            with self.assertRaisesRegex(PermissionError, 'Daily promotion ceiling'):
+                _commit_promotion(
+                    root,
+                    root / 'content/science/new.mdx',
+                    '---\nstatus: published\nslug: new\n---\n',
+                    datetime(2026, 11, 16, 18, 0, tzinfo=timezone.utc),
+                    'slug: new',
+                    False,
+                )
+
+    def test_daily_ceiling_uses_date_published_when_other_dates_are_missing(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            published = root / 'content/science/already-published.mdx'
+            published.parent.mkdir(parents=True)
+            published.write_text(
+                '---\nstatus: published\n'
+                'datePublished: "2026-11-16"\n'
+                '---\n\nBody.\n',
+                encoding='utf-8',
+            )
+            with self.assertRaisesRegex(PermissionError, 'Daily promotion ceiling'):
+                _commit_promotion(
+                    root,
+                    root / 'content/science/new.mdx',
+                    '---\nstatus: published\nslug: new\n---\n',
+                    datetime(2026, 11, 16, 18, 0, tzinfo=timezone.utc),
+                    'slug: new',
+                    False,
+                )
+
+    def test_concurrent_promotion_rechecks_ceiling_under_cross_process_lock(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            result_path = root / 'concurrent-result.txt'
+            context = multiprocessing.get_context('spawn')
+            ready = context.Event()
+            release = context.Event()
+            attempting = context.Event()
+            first = context.Process(
+                target=_hold_promotion_lock_and_publish,
+                args=(str(root), ready, release),
+            )
+            second = context.Process(
+                target=_attempt_concurrent_commit,
+                args=(str(root), attempting, str(result_path)),
+            )
+            first.start()
+            self.assertTrue(ready.wait(10))
+            second.start()
+            self.assertTrue(attempting.wait(10))
+            release.set()
+            first.join(15)
+            second.join(15)
+            self.assertEqual(0, first.exitcode)
+            self.assertEqual(0, second.exitcode)
+            self.assertEqual('ceiling-enforced', result_path.read_text(encoding='utf-8'))
+            self.assertFalse((root / 'content/science/second.mdx').exists())
+
+    def test_promotion_rejects_supplied_codex_review_artifact(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             publisher = Publisher(mode='candidate', repo_root=root)
@@ -411,8 +571,13 @@ class PublisherTests(unittest.TestCase):
             self.write_source_config(root)
             review = self.write_review(root, candidate, digest='0' * 64)
             gpt_review = self.write_gpt_review(root, candidate)
-            with self.assertRaises(PermissionError):
-                promote_candidate(candidate, review, gpt_review, repo_root=root)
+            with self.assertRaisesRegex(PermissionError, 'External Codex review artifacts'):
+                promote_candidate(
+                    candidate,
+                    gpt_review,
+                    repo_root=root,
+                    review_path=review,
+                )
 
     def test_revision_promotion_requires_explicit_replace(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -446,21 +611,19 @@ class PublisherTests(unittest.TestCase):
             with patch('review.subprocess.run') as git_run:
                 git_run.return_value.returncode = 0
                 git_run.return_value.stdout = 'a' * 40
-                with self.assertRaises(FileExistsError):
-                    promote_candidate(
+                with (
+                    patch('publish.run_codex_review', return_value=review),
+                    self.assertRaises(FileExistsError),
+                ):
+                    promote_candidate(candidate, gpt_review, repo_root=root)
+
+                with patch('publish.run_codex_review', return_value=review):
+                    promoted = promote_candidate(
                         candidate,
-                        review,
                         gpt_review,
                         repo_root=root,
+                        replace_existing=True,
                     )
-
-                promoted = promote_candidate(
-                    candidate,
-                    review,
-                    gpt_review,
-                    repo_root=root,
-                    replace_existing=True,
-                )
 
             content = promoted.read_text(encoding='utf-8')
             self.assertIn('status: "published"', content)
@@ -474,14 +637,16 @@ class PublisherTests(unittest.TestCase):
             publisher.publish(
                 self.article(),
                 {'slug': 'candidate-title', 'meta_description': 'Candidate description', 'internal_links': []},
-                {'path': '/images/candidate.webp', 'alt': 'Candidate image'},
+                self.official_image(),
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
             self.write_source_config(root)
             review = self.write_review(root, candidate, verdict='BLOCKERS')
-            gpt_review = self.write_gpt_review(root, candidate)
-            with self.assertRaises(PermissionError):
-                promote_candidate(candidate, review, gpt_review, repo_root=root)
+            with patch('review.subprocess.run') as git_run:
+                git_run.return_value.returncode = 0
+                git_run.return_value.stdout = 'a' * 40
+                with self.assertRaises(PermissionError):
+                    self.promote(root, candidate, review)
 
     def test_promotion_rejects_low_gpt_editorial_score(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -528,7 +693,6 @@ class PublisherTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 promote_candidate(
                     outside,
-                    root / 'missing-review.json',
                     root / 'missing-gpt-review.json',
                     repo_root=root,
                 )

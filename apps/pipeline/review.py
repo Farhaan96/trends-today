@@ -64,6 +64,8 @@ def verify_codex_review(
         raise ValueError('Independent reviewer must be Codex')
     if review.get('verdict') != 'NO BLOCKERS':
         raise PermissionError('Codex review must return NO BLOCKERS')
+    if review.get('blockers') != []:
+        raise PermissionError('Codex review must have exactly zero blockers')
     if review.get('candidateSha256') != digest:
         raise PermissionError('Review artifact does not match the exact candidate SHA-256')
     if not str(review.get('reviewedAt', '')).strip():

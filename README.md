@@ -49,13 +49,13 @@ Generate autonomous release candidates only from rows with `decision=brief`:
 python apps/pipeline/runner.py candidate --candidate-file reports/editorial/ranked-candidates.json --limit 1
 ```
 
-Run the GPT editorial gate, then the independent Claude release review, and
-promote the exact candidate only after both artifacts pass:
+Run the GPT editorial gate, then promote through the trusted gate. Promotion invokes
+the authenticated Codex CLI release review itself; externally supplied Codex review
+artifacts are not accepted:
 
 ```powershell
 python apps/pipeline/gpt_review.py artifacts/editorial/release-candidates/science/example.mdx
-python apps/pipeline/claude_review.py artifacts/editorial/release-candidates/science/example.mdx
-python apps/pipeline/runner.py promote --release-candidate artifacts/editorial/release-candidates/science/example.mdx --gpt-review-file artifacts/editorial/reviews/gpt/science/example.<sha-prefix>.json --review-file artifacts/editorial/reviews/science/example.<sha-prefix>.json
+python apps/pipeline/runner.py promote --release-candidate artifacts/editorial/release-candidates/science/example.mdx --gpt-review-file artifacts/editorial/reviews/gpt/science/example.<sha-prefix>.json
 ```
 
 The GPT gate prefers the Responses API when `OPENAI_API_KEY` is available and

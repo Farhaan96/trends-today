@@ -151,6 +151,7 @@ class CodexReviewTests(unittest.TestCase):
                 'modelUsed': 'gpt-5.6-sol',
                 'reviewBackend': 'codex-cli-oauth',
                 'reviewRunId': 'local-forged',
+                'blockers': [],
             }), encoding='utf-8')
             with self.assertRaisesRegex(ValueError, 'Codex CLI thread ID'):
                 verify_codex_review(candidate, review, root)
@@ -171,8 +172,32 @@ class CodexReviewTests(unittest.TestCase):
                 'repositorySha': self.REPOSITORY_SHA,
                 'reviewedAt': '2026-11-16T12:00:00+00:00',
                 'modelUsed': 'gpt-5.6-sol',
+                'blockers': [],
             }), encoding='utf-8')
             with self.assertRaisesRegex(ValueError, 'authenticated CLI backend'):
+                verify_codex_review(candidate, review, root)
+
+    def test_verifier_requires_blockers_to_be_exactly_empty(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            candidate = root / 'artifacts/editorial/release-candidates/science/story.mdx'
+            candidate.parent.mkdir(parents=True)
+            candidate.write_text('Body.\n', encoding='utf-8')
+            review = root / 'artifacts/editorial/reviews/science/story.json'
+            review.parent.mkdir(parents=True)
+            review.write_text(json.dumps({
+                'version': 1,
+                'reviewer': 'codex',
+                'verdict': 'NO BLOCKERS',
+                'candidateSha256': candidate_sha256(candidate),
+                'repositorySha': self.REPOSITORY_SHA,
+                'reviewedAt': '2026-11-16T12:00:00+00:00',
+                'modelUsed': 'gpt-5.6-sol',
+                'reviewBackend': 'codex-cli-oauth',
+                'reviewRunId': self.THREAD_ID,
+                'blockers': ['forged artifact hid this blocker behind its verdict'],
+            }), encoding='utf-8')
+            with self.assertRaisesRegex(PermissionError, 'exactly zero blockers'):
                 verify_codex_review(candidate, review, root)
 
 
