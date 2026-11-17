@@ -97,27 +97,34 @@ def _published_day(frontmatter: str, published_path: Path):
             raise ValueError(
                 f'Published article has malformed {field}: {published_path}'
             ) from exc
-        if field == 'promotedAt' and recorded.tzinfo is None:
-            raise ValueError(
-                f'Published article has timezone-naive promotedAt: {published_path}'
-            )
         if recorded.tzinfo is None:
             recorded = recorded.replace(tzinfo=PUBLICATION_TIMEZONE)
         return recorded.astimezone(PUBLICATION_TIMEZONE).date()
     return None
 
 
-def _enforce_daily_promotion_ceiling(root: Path, promotion_time: datetime) -> None:
+def _enforce_daily_promotion_ceiling(
+    root: Path, promotion_time: datetime, excluded_path: Path = None
+) -> None:
     target_day = promotion_time.astimezone(PUBLICATION_TIMEZONE).date()
     content_root = root / 'content'
     if not content_root.exists():
         return
     for published_path in content_root.glob('*/*.mdx'):
-        text = published_path.read_text(encoding='utf-8')
-        match = re.match(r'^---\s*\n(.*?)\n---\s*\n', text, re.DOTALL)
-        if not match:
+        if excluded_path is not None and published_path.resolve() == excluded_path.resolve():
             continue
-        if _published_day(match.group(1), published_path) == target_day:
+        text = published_path.read_text(encoding='utf-8')
+        match = re.match(r'^\ufeff?---\s*\n(.*?)\n---\s*\n', text, re.DOTALL)
+        if not match:
+            raise ValueError(
+                f'Published article has missing or malformed frontmatter: {published_path}'
+            )
+        published_day = _published_day(match.group(1), published_path)
+        if published_day is None:
+            raise ValueError(
+                f'Published article has no valid publication date: {published_path}'
+            )
+        if published_day == target_day:
             raise PermissionError(
                 f'Daily promotion ceiling already reached for {target_day} America/Vancouver'
             )
@@ -195,10 +202,14 @@ def _commit_promotion(
 ) -> None:
     """Atomically enforce the daily cap and write one promoted article."""
     with _promotion_lock(root):
-        _enforce_daily_promotion_ceiling(root, promotion_time)
+        if destination.exists() and not replace_existing:
+            raise FileExistsError(f'Refusing to overwrite existing article: {destination}')
+        _enforce_daily_promotion_ceiling(
+            root,
+            promotion_time,
+            destination if replace_existing else None,
+        )
         if destination.exists():
-            if not replace_existing:
-                raise FileExistsError(f'Refusing to overwrite existing article: {destination}')
             existing = destination.read_text(encoding='utf-8')
             existing_frontmatter_match = re.match(
                 r'^---\s*\n(.*?)\n---\s*\n',
