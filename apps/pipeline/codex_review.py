@@ -122,7 +122,6 @@ def run_review(
             input=prompt,
             capture_output=True,
             text=True,
-            timeout=300,
         )
         if completed.returncode != 0 or not output_path.is_file():
             raise RuntimeError(

@@ -98,6 +98,8 @@ class CodexReviewTests(unittest.TestCase):
                 output = run_review(candidate, root)
 
             command = codex_run.call_args_list[1].args[0]
+            review_call_kwargs = codex_run.call_args_list[1].kwargs
+            self.assertNotIn('timeout', review_call_kwargs)
             self.assertIn('--sandbox', command)
             self.assertIn('read-only', command)
             self.assertIn('--ephemeral', command)
