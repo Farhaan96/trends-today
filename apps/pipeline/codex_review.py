@@ -2,9 +2,9 @@
 """Run the authorized Codex CLI release review for an exact candidate."""
 
 import argparse
+import hashlib
 import json
 import os
-import shutil
 import subprocess
 import tempfile
 from datetime import datetime, timezone
@@ -61,19 +61,44 @@ def validate_codex_result(result: dict, digest: str, repository_sha: str) -> dic
     return result
 
 
+def _resolve_authenticated_codex(env: dict[str, str]) -> tuple[Path, str]:
+    """Bind review execution to an operator-approved CLI binary and OAuth login."""
+    raw_path = str(env.get('CODEX_RELEASE_CLI') or '').strip()
+    expected_digest = str(env.get('CODEX_RELEASE_CLI_SHA256') or '').strip().lower()
+    if not raw_path or len(expected_digest) != 64:
+        raise RuntimeError(
+            'Release review requires CODEX_RELEASE_CLI and CODEX_RELEASE_CLI_SHA256'
+        )
+    executable = Path(raw_path).expanduser().resolve()
+    if not executable.is_file():
+        raise RuntimeError('Configured Codex release CLI is not an existing file')
+    observed_digest = hashlib.sha256(executable.read_bytes()).hexdigest()
+    if observed_digest != expected_digest:
+        raise RuntimeError('Configured Codex release CLI checksum did not match')
+    login = subprocess.run(
+        [str(executable), 'login', 'status'],
+        capture_output=True,
+        text=True,
+    )
+    if login.returncode != 0 or login.stdout.strip() != 'Logged in using ChatGPT':
+        raise RuntimeError('Codex release CLI is not authenticated with ChatGPT OAuth')
+    return executable, observed_digest
+
+
 def run_review(
     candidate: Path,
     repo_root: Path,
     model: str = APPROVED_RELEASE_MODEL,
+    env: dict[str, str] | None = None,
 ) -> Path:
     root = repo_root.resolve()
     relative = _candidate_relative(candidate, root)
     if model.strip().lower() != APPROVED_RELEASE_MODEL:
         raise PermissionError(f'Release review must use {APPROVED_RELEASE_MODEL}')
 
-    codex_bin = shutil.which('codex')
-    if not codex_bin:
-        raise RuntimeError('Release review requires an authenticated Codex CLI')
+    codex_bin, codex_bin_sha256 = _resolve_authenticated_codex(
+        os.environ if env is None else env
+    )
 
     digest = candidate_sha256(candidate)
     repository_sha = subprocess.run(
@@ -102,7 +127,7 @@ def run_review(
         schema_path.write_text(json.dumps(REVIEW_SCHEMA), encoding='utf-8')
         completed = subprocess.run(
             [
-                codex_bin,
+                str(codex_bin),
                 'exec',
                 '--ephemeral',
                 '--ignore-user-config',
@@ -156,6 +181,8 @@ def run_review(
         'reviewedAt': datetime.now(timezone.utc).isoformat(),
         'modelUsed': model,
         'reviewBackend': 'codex-cli-oauth',
+        'authenticationStatus': 'chatgpt-oauth',
+        'codexCliSha256': codex_bin_sha256,
         'reviewRunId': run_id,
         'blockers': result['blockers'],
         'summary': result['summary'],

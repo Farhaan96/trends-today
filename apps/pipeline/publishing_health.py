@@ -810,6 +810,11 @@ def evaluate_candidate_eligibility(
             reasons.append(f'release review must use {APPROVED_RELEASE_MODEL}')
         if codex.get('reviewBackend') != 'codex-cli-oauth':
             reasons.append('codex release review must use the authenticated CLI backend')
+        if codex.get('authenticationStatus') != 'chatgpt-oauth':
+            reasons.append('codex release review is missing observed ChatGPT OAuth authentication')
+        cli_digest = str(codex.get('codexCliSha256') or '').strip().lower()
+        if len(cli_digest) != 64 or not all(character in '0123456789abcdef' for character in cli_digest):
+            reasons.append('codex release review is missing the verified CLI checksum')
         review_run_id = str(codex.get('reviewRunId') or '').strip()
         if not CODEX_THREAD_ID_PATTERN.fullmatch(review_run_id):
             reasons.append('codex release review is missing a valid reviewRunId')

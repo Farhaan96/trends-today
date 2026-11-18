@@ -26,7 +26,7 @@ Requirements:
 
 ```powershell
 npm ci
-python -m pip install requests python-dotenv tzdata
+python -m pip install -r requirements.txt
 ```
 
 ## Operating commands
@@ -79,7 +79,7 @@ npm run typecheck
 npm run build
 ```
 
-A release candidate is blocked when it has fewer than three valid source URLs, uncited sources, unsupported length or structure, an em dash in authorial prose, no SEO slug, or a placeholder image. Promotion also requires a passing exact-candidate GPT scorecard for factual support, quality, readability, formatting, and engagement, followed by the independent Claude release review.
+A release candidate is blocked when it has fewer than three valid source URLs, uncited sources, unsupported length or structure, an em dash in authorial prose, no SEO slug, or a placeholder image. Promotion also requires a passing exact-candidate GPT scorecard for factual support, quality, readability, formatting, and engagement, followed by an authenticated Codex CLI review using `gpt-5.6-sol` that returns `NO BLOCKERS` for the exact candidate and repository hashes.
 
 ## Active project structure
 

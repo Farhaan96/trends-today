@@ -12,5 +12,9 @@ else
   npm install
 fi
 
+if command -v python >/dev/null 2>&1; then
+  python -m pip install -r requirements.txt
+fi
+
 # Setup only; browser verification runs in the authorized cloud environment.
 npx --no-install playwright install --with-deps chromium

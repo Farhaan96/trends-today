@@ -76,6 +76,11 @@ def verify_codex_review(
         raise PermissionError(f'Independent release review must use {APPROVED_RELEASE_MODEL}')
     if review.get('reviewBackend') != 'codex-cli-oauth':
         raise ValueError('Codex review is missing the authenticated CLI backend')
+    if review.get('authenticationStatus') != 'chatgpt-oauth':
+        raise ValueError('Codex review is missing observed ChatGPT OAuth authentication')
+    cli_digest = str(review.get('codexCliSha256', '')).strip().lower()
+    if len(cli_digest) != 64 or not all(character in '0123456789abcdef' for character in cli_digest):
+        raise ValueError('Codex review is missing the verified CLI checksum')
     review_run_id = str(review.get('reviewRunId', '')).strip()
     if not CODEX_THREAD_ID_PATTERN.fullmatch(review_run_id):
         raise ValueError('Codex reviewRunId must be a Codex CLI thread ID')

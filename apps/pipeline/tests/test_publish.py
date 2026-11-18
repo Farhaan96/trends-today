@@ -133,6 +133,8 @@ class PublisherTests(unittest.TestCase):
             'repositorySha': 'a' * 40,
             'modelUsed': 'gpt-5.6-sol',
             'reviewBackend': 'codex-cli-oauth',
+            'authenticationStatus': 'chatgpt-oauth',
+            'codexCliSha256': 'c' * 64,
             'reviewRunId': '019a8f5e-6f5d-7a21-8d9c-52e8b09d9a70',
             'blockers': [],
         }), encoding='utf-8')

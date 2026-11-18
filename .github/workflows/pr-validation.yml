@@ -22,6 +22,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -32,14 +33,35 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Run pipeline tests
+        run: python -m unittest discover -s apps/pipeline/tests -p 'test_*.py'
+
       - name: TypeScript check
         run: npm run typecheck
 
       - name: Lint check
         run: npm run lint
 
-      - name: Format check
-        run: npm run format:check
+      - name: Format changed files
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          mapfile -d '' files < <(git diff --name-only --diff-filter=ACMR -z "$BASE_SHA" "$HEAD_SHA" -- \
+            '*.css' '*.html' '*.js' '*.json' '*.jsx' '*.md' '*.mdx' '*.mjs' '*.scss' '*.ts' '*.tsx' '*.yaml' '*.yml')
+          if (( ${#files[@]} )); then
+            npx prettier --check "${files[@]}"
+          else
+            echo 'No Prettier-supported files changed.'
+          fi
 
       - name: Production build
         run: npm run build

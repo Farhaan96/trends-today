@@ -70,7 +70,15 @@ class CodexReviewTests(unittest.TestCase):
             )
             digest = candidate_sha256(candidate)
 
+            codex = root / 'approved-codex'
+            codex.write_text('trusted test cli', encoding='utf-8')
+            codex_digest = candidate_sha256(codex)
+
             def fake_run(command, **kwargs):
+                if command[1:] == ['login', 'status']:
+                    return subprocess.CompletedProcess(
+                        command, 0, stdout='Logged in using ChatGPT\n', stderr=''
+                    )
                 if command[:3] == ['git', 'rev-parse', 'HEAD']:
                     return subprocess.CompletedProcess(command, 0, stdout=self.REPOSITORY_SHA, stderr='')
                 output_path = Path(command[command.index('--output-last-message') + 1])
@@ -91,14 +99,14 @@ class CodexReviewTests(unittest.TestCase):
                     stderr='',
                 )
 
-            with (
-                patch('codex_review.shutil.which', return_value='codex'),
-                patch('codex_review.subprocess.run', side_effect=fake_run) as codex_run,
-            ):
-                output = run_review(candidate, root)
+            with patch('codex_review.subprocess.run', side_effect=fake_run) as codex_run:
+                output = run_review(candidate, root, env={
+                    'CODEX_RELEASE_CLI': str(codex),
+                    'CODEX_RELEASE_CLI_SHA256': codex_digest,
+                })
 
-            command = codex_run.call_args_list[1].args[0]
-            review_call_kwargs = codex_run.call_args_list[1].kwargs
+            command = codex_run.call_args_list[2].args[0]
+            review_call_kwargs = codex_run.call_args_list[2].kwargs
             self.assertNotIn('timeout', review_call_kwargs)
             self.assertIn('--sandbox', command)
             self.assertIn('read-only', command)
@@ -109,6 +117,8 @@ class CodexReviewTests(unittest.TestCase):
             self.assertEqual(digest, artifact['candidateSha256'])
             self.assertEqual(self.REPOSITORY_SHA, artifact['repositorySha'])
             self.assertEqual('codex-cli-oauth', artifact['reviewBackend'])
+            self.assertEqual('chatgpt-oauth', artifact['authenticationStatus'])
+            self.assertEqual(codex_digest, artifact['codexCliSha256'])
             self.assertEqual(self.THREAD_ID, artifact['reviewRunId'])
 
     def test_run_review_fails_closed_without_codex_thread_id(self):
@@ -119,7 +129,15 @@ class CodexReviewTests(unittest.TestCase):
             candidate.write_text('Body.\n', encoding='utf-8')
             digest = candidate_sha256(candidate)
 
+            codex = root / 'approved-codex'
+            codex.write_text('trusted test cli', encoding='utf-8')
+            codex_digest = candidate_sha256(codex)
+
             def fake_run(command, **kwargs):
+                if command[1:] == ['login', 'status']:
+                    return subprocess.CompletedProcess(
+                        command, 0, stdout='Logged in using ChatGPT\n', stderr=''
+                    )
                 if command[:3] == ['git', 'rev-parse', 'HEAD']:
                     return subprocess.CompletedProcess(command, 0, stdout=self.REPOSITORY_SHA, stderr='')
                 output_path = Path(command[command.index('--output-last-message') + 1])
@@ -128,12 +146,12 @@ class CodexReviewTests(unittest.TestCase):
                 )), encoding='utf-8')
                 return subprocess.CompletedProcess(command, 0, stdout='', stderr='')
 
-            with (
-                patch('codex_review.shutil.which', return_value='codex'),
-                patch('codex_review.subprocess.run', side_effect=fake_run),
-            ):
+            with patch('codex_review.subprocess.run', side_effect=fake_run):
                 with self.assertRaisesRegex(RuntimeError, 'valid thread.started thread_id'):
-                    run_review(candidate, root)
+                    run_review(candidate, root, env={
+                        'CODEX_RELEASE_CLI': str(codex),
+                        'CODEX_RELEASE_CLI_SHA256': codex_digest,
+                    })
 
     def test_verifier_rejects_forged_run_id(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -152,6 +170,8 @@ class CodexReviewTests(unittest.TestCase):
                 'reviewedAt': '2026-11-16T12:00:00+00:00',
                 'modelUsed': 'gpt-5.6-sol',
                 'reviewBackend': 'codex-cli-oauth',
+                'authenticationStatus': 'chatgpt-oauth',
+                'codexCliSha256': 'c' * 64,
                 'reviewRunId': 'local-forged',
                 'blockers': [],
             }), encoding='utf-8')
@@ -196,6 +216,8 @@ class CodexReviewTests(unittest.TestCase):
                 'reviewedAt': '2026-11-16T12:00:00+00:00',
                 'modelUsed': 'gpt-5.6-sol',
                 'reviewBackend': 'codex-cli-oauth',
+                'authenticationStatus': 'chatgpt-oauth',
+                'codexCliSha256': 'c' * 64,
                 'reviewRunId': self.THREAD_ID,
                 'blockers': ['forged artifact hid this blocker behind its verdict'],
             }), encoding='utf-8')
