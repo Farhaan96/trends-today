@@ -341,7 +341,7 @@ def eligible_candidate(digest=None, *, repository_sha=HEAD_SHA):
             'reviewer': 'codex',
             'modelUsed': 'gpt-5.6-sol',
             'reviewBackend': 'codex-cli-oauth',
-            'reviewRunId': 'thread_release_test',
+            'reviewRunId': '019a8f5e-6f5d-7a21-8d9c-52e8b09d9a70',
         },
     }
 
@@ -1069,6 +1069,16 @@ class CandidateEligibilityTests(unittest.TestCase):
         evaluation = evaluate(candidate)
         self.assertEqual('ineligible', evaluation['status'])
         self.assertIn('release review must use gpt-5.6-sol', evaluation['reasons'])
+
+    def test_invalid_codex_review_run_id_is_ineligible(self):
+        candidate = eligible_candidate()
+        candidate['codexReview']['reviewRunId'] = 'forged-review-id'
+        evaluation = evaluate(candidate)
+        self.assertEqual('ineligible', evaluation['status'])
+        self.assertIn(
+            'codex release review is missing a valid reviewRunId',
+            evaluation['reasons'],
+        )
 
     def test_failed_deterministic_validation_is_ineligible(self):
         candidate = eligible_candidate()

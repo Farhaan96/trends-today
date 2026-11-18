@@ -12,7 +12,7 @@ The operating model, constraints, experiment, portfolio, and scorecard are docum
 
 Research, scoring, drafting, QA, image work, SEO validation, and repair can run autonomously. The default output is a release candidate under `artifacts/editorial/release-candidates/`, outside the live Next.js content tree.
 
-Public promotion is autonomous only after a GPT editorial scorecard passes for the exact candidate and an independent Claude review returns `NO BLOCKERS` for the same SHA-256. Both artifacts are recorded in published frontmatter. Scheduled GitHub workflows only produce research and scorecard artifacts; the operator performs the reviewed promotion and measurement loop.
+Public promotion is autonomous only after a GPT editorial scorecard passes for the exact candidate and an independent Codex review returns `NO BLOCKERS` for the same SHA-256. Both artifacts are recorded in published frontmatter. Scheduled GitHub workflows only produce research and scorecard artifacts; the operator performs the reviewed promotion and measurement loop.
 
 ## Setup
 
@@ -20,13 +20,13 @@ Requirements:
 
 - Node.js 20+
 - Python 3.10+
-- `requests` and `python-dotenv` for the research pipeline
+- `requests`, `python-dotenv`, and `tzdata` for the research and publication pipelines
 - the API keys needed by the selected research providers
-- a signed-in local Claude CLI for the configured drafting and independent-review paths
+- a signed-in local Codex CLI for the independent release-review path
 
 ```powershell
 npm ci
-python -m pip install requests python-dotenv
+python -m pip install requests python-dotenv tzdata
 ```
 
 ## Operating commands

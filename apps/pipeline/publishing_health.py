@@ -42,6 +42,7 @@ from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 
 from metrics import build_metrics_summary, period_label_for
+from review import CODEX_THREAD_ID_PATTERN
 from vercel_analytics import discover_articles
 
 
@@ -809,8 +810,9 @@ def evaluate_candidate_eligibility(
             reasons.append(f'release review must use {APPROVED_RELEASE_MODEL}')
         if codex.get('reviewBackend') != 'codex-cli-oauth':
             reasons.append('codex release review must use the authenticated CLI backend')
-        if not str(codex.get('reviewRunId') or '').strip():
-            reasons.append('codex release review is missing reviewRunId')
+        review_run_id = str(codex.get('reviewRunId') or '').strip()
+        if not CODEX_THREAD_ID_PATTERN.fullmatch(review_run_id):
+            reasons.append('codex release review is missing a valid reviewRunId')
 
     return {
         'status': 'ineligible' if reasons else 'eligible',
