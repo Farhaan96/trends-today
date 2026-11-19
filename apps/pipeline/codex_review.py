@@ -90,11 +90,37 @@ def run_review(
     repo_root: Path,
     model: str = APPROVED_RELEASE_MODEL,
     env: dict[str, str] | None = None,
+    *,
+    release_head: bool = False,
+    published_article: Path | None = None,
+    output_dir: Path | None = None,
 ) -> Path:
     root = repo_root.resolve()
     relative = _candidate_relative(candidate, root)
     if model.strip().lower() != APPROVED_RELEASE_MODEL:
         raise PermissionError(f'Release review must use {APPROVED_RELEASE_MODEL}')
+    if release_head:
+        if published_article is None or output_dir is None:
+            raise ValueError('Release-head review requires --published-article and --output-dir')
+        published = Path(published_article).resolve()
+        try:
+            published_relative = published.relative_to((root / 'content').resolve())
+        except ValueError as exc:
+            raise ValueError('Published article must be inside content/') from exc
+        if not published.is_file() or len(published_relative.parts) != 2:
+            raise ValueError('Published article must be an existing content/<category>/<slug>.mdx')
+        clean = subprocess.run(
+            ['git', 'status', '--porcelain', '--untracked-files=all'],
+            cwd=root,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+        if clean.strip():
+            raise PermissionError('Release-head review requires a clean repository worktree')
+    else:
+        published = None
+        published_relative = None
 
     codex_bin, codex_bin_sha256 = _resolve_authenticated_codex(
         os.environ if env is None else env
@@ -109,6 +135,19 @@ def run_review(
         text=True,
     ).stdout.strip()
     candidate_text = candidate.read_text(encoding='utf-8')
+    release_context = ''
+    if release_head:
+        published_text = published.read_text(encoding='utf-8')
+        if f'candidateSha256: "{digest}"' not in published_text:
+            raise PermissionError(
+                'Published article does not preserve the exact candidate SHA-256 provenance'
+            )
+        release_context = (
+            '\nThis is the final clean release HEAD. Review the promoted article and repository '
+            'state as well as the staged candidate. The repository SHA in your result must '
+            'identify this exact deployable commit.\n'
+            f'Published article: {published_relative.as_posix()}\n\n{published_text}\n'
+        )
     prompt = (
         'Act as the independent release reviewer, not the implementation writer. '
         'Review only the exact candidate below for factual support and source use, unsupported '
@@ -118,6 +157,7 @@ def run_review(
         f'Candidate SHA-256: {digest}\n'
         f'Repository SHA: {repository_sha}\n\n'
         f'{candidate_text}'
+        f'{release_context}'
     )
 
     with tempfile.TemporaryDirectory(prefix='trends-codex-release-review-') as temp:
@@ -174,6 +214,7 @@ def run_review(
 
     artifact = {
         'version': 1,
+        'scope': 'release-head' if release_head else 'candidate',
         'reviewer': 'codex',
         'verdict': result['verdict'],
         'candidateSha256': result['candidateSha256'],
@@ -187,17 +228,38 @@ def run_review(
         'blockers': result['blockers'],
         'summary': result['summary'],
     }
-    output = (
-        root
-        / 'artifacts'
-        / 'editorial'
-        / 'reviews'
-        / relative.parent
-        / f'{relative.stem}.{digest[:12]}.json'
-    )
+    if release_head:
+        observed_head = subprocess.run(
+            ['git', 'rev-parse', 'HEAD'],
+            cwd=root,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        observed_status = subprocess.run(
+            ['git', 'status', '--porcelain', '--untracked-files=all'],
+            cwd=root,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+        if observed_head != repository_sha or observed_status.strip():
+            raise PermissionError('Repository changed during the release-head review')
+        output_root = Path(output_dir).expanduser().resolve()
+        try:
+            output_root.relative_to(root)
+        except ValueError:
+            pass
+        else:
+            raise ValueError('Release-head review output must be outside the repository')
+    else:
+        output_root = root / 'artifacts' / 'editorial' / 'reviews'
+
+    output = output_root / relative.parent / f'{relative.stem}.{digest[:12]}.json'
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(artifact, indent=2) + '\n', encoding='utf-8')
-    verify_codex_review(candidate, output, root)
+    if not release_head:
+        verify_codex_review(candidate, output, root)
     return output
 
 
@@ -209,8 +271,22 @@ def main() -> None:
         '--model',
         default=os.getenv('CODEX_RELEASE_REVIEW_MODEL', APPROVED_RELEASE_MODEL),
     )
+    parser.add_argument(
+        '--release-head',
+        action='store_true',
+        help='Attest the final clean deployable commit after promotion is committed',
+    )
+    parser.add_argument('--published-article', type=Path)
+    parser.add_argument('--output-dir', type=Path)
     args = parser.parse_args()
-    output = run_review(args.candidate, args.repo_root, args.model)
+    output = run_review(
+        args.candidate,
+        args.repo_root,
+        args.model,
+        release_head=args.release_head,
+        published_article=args.published_article,
+        output_dir=args.output_dir,
+    )
     print(f'Codex release review accepted: {output}')
 
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Stage MDX release candidates and promote independently reviewed articles."""
 
+import errno
 import os
 import json
 import logging
@@ -157,7 +158,20 @@ def _promotion_lock(root: Path, timeout_seconds: float = 30.0):
         else:
             import fcntl
 
-            fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX)
+            while True:
+                try:
+                    fcntl.flock(
+                        lock_file.fileno(),
+                        fcntl.LOCK_EX | fcntl.LOCK_NB,
+                    )
+                    break
+                except OSError as exc:
+                    if exc.errno not in {errno.EACCES, errno.EAGAIN}:
+                        raise
+                    remaining = deadline - time.monotonic()
+                    if remaining <= 0:
+                        raise TimeoutError('Timed out waiting for the promotion lock')
+                    time.sleep(min(0.05, remaining))
         try:
             yield
         finally:

@@ -153,6 +153,32 @@ class CodexReviewTests(unittest.TestCase):
                         'CODEX_RELEASE_CLI_SHA256': codex_digest,
                     })
 
+    def test_release_head_review_rejects_dirty_worktree_before_codex(self):
+        with tempfile.TemporaryDirectory() as temp, tempfile.TemporaryDirectory() as output_temp:
+            root = Path(temp)
+            candidate = root / 'artifacts/editorial/release-candidates/science/story.mdx'
+            candidate.parent.mkdir(parents=True)
+            candidate.write_text('Body.\n', encoding='utf-8')
+            published = root / 'content/science/story.mdx'
+            published.parent.mkdir(parents=True)
+            published.write_text(
+                f'---\nstatus: published\ncandidateSha256: "{candidate_sha256(candidate)}"\n'
+                '---\n\nBody.\n',
+                encoding='utf-8',
+            )
+            dirty = subprocess.CompletedProcess(
+                ['git', 'status'], 0, stdout='?? untracked.txt\n', stderr=''
+            )
+            with patch('codex_review.subprocess.run', return_value=dirty):
+                with self.assertRaisesRegex(PermissionError, 'clean repository worktree'):
+                    run_review(
+                        candidate,
+                        root,
+                        release_head=True,
+                        published_article=published,
+                        output_dir=Path(output_temp),
+                    )
+
     def test_verifier_rejects_forged_run_id(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

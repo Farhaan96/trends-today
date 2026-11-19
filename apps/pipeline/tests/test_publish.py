@@ -3,7 +3,9 @@ import tempfile
 import unittest
 import json
 import multiprocessing
+import os
 import re
+import time
 from datetime import datetime, timezone
 from unittest.mock import patch
 from pathlib import Path
@@ -559,6 +561,30 @@ class PublisherTests(unittest.TestCase):
             self.assertEqual(0, second.exitcode)
             self.assertEqual('ceiling-enforced', result_path.read_text(encoding='utf-8'))
             self.assertFalse((root / 'content/science/second.mdx').exists())
+
+    @unittest.skipIf(os.name == 'nt', 'POSIX flock timeout coverage runs on Linux CI')
+    def test_posix_promotion_lock_honours_timeout(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            context = multiprocessing.get_context('spawn')
+            ready = context.Event()
+            release = context.Event()
+            holder = context.Process(
+                target=_hold_promotion_lock_and_publish,
+                args=(str(root), ready, release),
+            )
+            holder.start()
+            self.assertTrue(ready.wait(10))
+            started = time.monotonic()
+            try:
+                with self.assertRaisesRegex(TimeoutError, 'promotion lock'):
+                    with _promotion_lock(root, timeout_seconds=0.1):
+                        self.fail('Contended lock should not have been acquired')
+            finally:
+                release.set()
+                holder.join(15)
+            self.assertLess(time.monotonic() - started, 2.0)
+            self.assertEqual(0, holder.exitcode)
 
     def test_promotion_rejects_supplied_codex_review_artifact(self):
         with tempfile.TemporaryDirectory() as temp:

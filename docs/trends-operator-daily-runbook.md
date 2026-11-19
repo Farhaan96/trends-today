@@ -183,8 +183,17 @@ unverifiable repository state never qualifies.
 }
 ```
 
-Because both reviews bind to HEAD, any new commit invalidates the evidence.
-Repair the candidate and obtain fresh GPT and Codex reviews at the new SHA.
+Because both candidate reviews bind to HEAD, any new commit invalidates that evidence.
+Repair the candidate and obtain fresh GPT and Codex candidate reviews at the new SHA.
+
+Promotion creates the public article on the release branch, so the resulting commit must receive
+a second Codex `release-head` attestation before it can become `main`. Run
+`apps/pipeline/codex_review.py` with `--release-head`, `--published-article`, and an
+`--output-dir` outside the repository. This gate requires a clean worktree, verifies that the
+published article preserves the exact candidate SHA-256, binds `NO BLOCKERS` to the final
+repository SHA, and fails if HEAD or the worktree changes during review. The reviewed branch
+must then be fast-forwarded to `main` without changing that SHA; any merge strategy that creates
+a different commit requires a fresh release-head attestation before deployment.
 
 ## Reading the measurement block
 
