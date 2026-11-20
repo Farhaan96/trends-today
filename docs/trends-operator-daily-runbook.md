@@ -191,9 +191,15 @@ a second Codex `release-head` attestation before it can become `main`. Run
 `apps/pipeline/codex_review.py` with `--release-head`, `--published-article`, and an
 `--output-dir` outside the repository. This gate requires a clean worktree, verifies that the
 published article preserves the exact candidate SHA-256, binds `NO BLOCKERS` to the final
-repository SHA, and fails if HEAD or the worktree changes during review. The reviewed branch
-must then be fast-forwarded to `main` without changing that SHA; any merge strategy that creates
-a different commit requires a fresh release-head attestation before deployment.
+repository SHA, and fails if HEAD or the worktree changes during review. Then run
+`apps/pipeline/release_head_status.py` with that external artifact, the exact candidate,
+the published article, a durable `--target-url`, and `GITHUB_TOKEN`. The status publisher
+revalidates the clean HEAD, artifact provenance and published candidate hash before creating
+the `release-head-attestation` status on that exact commit. `main` branch protection requires
+both `validate` and `release-head-gate`; the latter fails every public-content PR until it sees
+that exact-head status. The reviewed branch must then be merged without changing that SHA;
+any merge strategy that creates a different commit requires a fresh release-head attestation
+before deployment.
 
 ## Reading the measurement block
 

@@ -10,6 +10,10 @@ const candidate = fs.readFileSync(
 const config = JSON.parse(
   fs.readFileSync('config/content-business.json', 'utf8')
 );
+const validationWorkflow = fs.readFileSync(
+  '.github/workflows/pr-validation.yml',
+  'utf8'
+);
 
 test('licensed hero credit renders linked source and licence near the hero', () => {
   const heroCredit = page.match(
@@ -44,4 +48,11 @@ test('release config keeps GPT editorial review and authorizes one Codex-reviewe
   assert.equal(config.release.reviewModel, 'gpt-5.6-sol');
   assert.equal(config.release.reviewBackend, 'codex-cli-oauth');
   assert.equal(config.release.maximumArticlesPerDailyRun, 1);
+});
+
+test('PR validation blocks public content without exact-head attestation', () => {
+  assert.match(validationWorkflow, /release-head-gate:/);
+  assert.match(validationWorkflow, /release-head-attestation/);
+  assert.match(validationWorkflow, /changesPublicContent/);
+  assert.match(validationWorkflow, /core\.setFailed/);
 });

@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
+  statuses: read
 
 concurrency:
   group: pr-${{ github.head_ref || github.ref }}
@@ -89,3 +91,43 @@ jobs:
           echo "- **Head SHA:** \`${{ github.event.pull_request.head.sha }}\`" >> $GITHUB_STEP_SUMMARY
           echo "- **Branch:** \`${{ github.head_ref }}\`" >> $GITHUB_STEP_SUMMARY
           echo "- **Validated at:** $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_STEP_SUMMARY
+
+  release-head-gate:
+    name: release-head-gate
+    runs-on: ubuntu-latest
+    needs: validate
+    timeout-minutes: 5
+
+    steps:
+      - name: Require external Codex attestation for public content
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              per_page: 100,
+            });
+            const changesPublicContent = files.some(({ filename }) =>
+              /^content\/[^/]+\/[^/]+\.mdx$/.test(filename)
+            );
+            if (!changesPublicContent) {
+              core.notice('No public MDX changed; release-head attestation is not applicable.');
+              return;
+            }
+            const { data } = await github.rest.repos.getCombinedStatusForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.payload.pull_request.head.sha,
+            });
+            const attestation = data.statuses.find(
+              ({ context, state }) => context === 'release-head-attestation' && state === 'success'
+            );
+            if (!attestation) {
+              core.setFailed(
+                'Public content changed, but this exact PR head has no successful release-head-attestation status.'
+              );
+              return;
+            }
+            core.notice(`Accepted release-head attestation: ${attestation.target_url || 'no target URL'}`);
