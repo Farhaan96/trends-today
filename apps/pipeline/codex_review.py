@@ -80,7 +80,8 @@ def _resolve_authenticated_codex(env: dict[str, str]) -> tuple[Path, str]:
         capture_output=True,
         text=True,
     )
-    if login.returncode != 0 or login.stdout.strip() != 'Logged in using ChatGPT':
+    login_status = (login.stdout or login.stderr).strip()
+    if login.returncode != 0 or login_status != 'Logged in using ChatGPT':
         raise RuntimeError('Codex release CLI is not authenticated with ChatGPT OAuth')
     return executable, observed_digest
 
