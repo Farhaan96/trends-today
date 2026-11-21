@@ -77,7 +77,7 @@ class CodexReviewTests(unittest.TestCase):
             def fake_run(command, **kwargs):
                 if command[1:] == ['login', 'status']:
                     return subprocess.CompletedProcess(
-                        command, 0, stdout='Logged in using ChatGPT\n', stderr=''
+                        command, 0, stdout='', stderr='Logged in using ChatGPT\n'
                     )
                 if command[:3] == ['git', 'rev-parse', 'HEAD']:
                     return subprocess.CompletedProcess(command, 0, stdout=self.REPOSITORY_SHA, stderr='')
@@ -136,7 +136,7 @@ class CodexReviewTests(unittest.TestCase):
             def fake_run(command, **kwargs):
                 if command[1:] == ['login', 'status']:
                     return subprocess.CompletedProcess(
-                        command, 0, stdout='Logged in using ChatGPT\n', stderr=''
+                        command, 0, stdout='', stderr='Logged in using ChatGPT\n'
                     )
                 if command[:3] == ['git', 'rev-parse', 'HEAD']:
                     return subprocess.CompletedProcess(command, 0, stdout=self.REPOSITORY_SHA, stderr='')
