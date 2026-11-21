@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "scope": "candidate",
+  "reviewer": "codex",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "1dbbf575975f475c21798b413de606d065ace3bc8b60925a6f748f0b814e0ef1",
+  "repositorySha": "f35dd1ad0b6d418bd45a1c1a2e4a41b3fecf67ff",
+  "reviewedAt": "2026-11-21T16:03:06.949542+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "authenticationStatus": "chatgpt-oauth",
+  "codexCliSha256": "4f91ae86895ff124760d70ed1630e2354ca874765c9bb61ae524b600327efc17",
+  "reviewRunId": "01a1fed7-a835-7bc2-a859-cb2c246d32ed",
+  "blockers": [],
+  "summary": "Exact candidate and repository hashes verified. City of Delta primary sources support the dates, hours, locations, 7 p.m. lightings, free event entry, shared activities, North Delta skating, food trucks, and $5 Home Alone 2 screening with popcorn. The title, metadata, structure, and practical planning guidance fit the article. The referenced image exists, visually matches Ladner Village, and includes appropriate CC BY 2.0 provenance, attribution, modification disclosure, alt text, and licensing fields. No material unsupported claim or reputational or legal risk requires correction."
+}

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "1dbbf575975f475c21798b413de606d065ace3bc8b60925a6f748f0b814e0ef1",
+  "repositorySha": "f35dd1ad0b6d418bd45a1c1a2e4a41b3fecf67ff",
+  "reviewedAt": "2026-11-21T15:59:52.661087+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "01a1fed5-0349-7b62-b12f-6425a94e771e",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 4,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "The concise local bulletin is well supported by the cited City of Delta materials, clearly compares both events, surfaces optional costs, and ends with an actionable choice. The MDX is scannable and includes a useful Sources section."
+}
