@@ -231,6 +231,13 @@ class PublisherTests(unittest.TestCase):
                 self.official_image(),
             )
             candidate = root / 'artifacts/editorial/release-candidates/science/candidate-title.mdx'
+            candidate.write_text(
+                candidate.read_text(encoding='utf-8').replace(
+                    'status: "release-candidate"',
+                    'status: "release-candidate"\ndraft: true',
+                ),
+                encoding='utf-8',
+            )
             candidate_body = candidate.read_text(encoding='utf-8').split('---', 2)[2]
             self.write_source_config(root)
             review = self.write_review(root, candidate)
@@ -246,6 +253,8 @@ class PublisherTests(unittest.TestCase):
             self.assertIn('reviewModel: "gpt-5.6-sol"', promoted)
             self.assertIn('editorialReviewVerdict: "PASS"', promoted)
             self.assertIn('editorialReviewModel: "gpt-5.6-sol"', promoted)
+            self.assertIn('draft: false', promoted)
+            self.assertNotIn('draft: true', promoted)
 
     def test_promotion_rejects_blank_image_frontmatter(self):
         with tempfile.TemporaryDirectory() as temp:
