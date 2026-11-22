@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "scope": "candidate",
+  "reviewer": "codex",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "a57c92cb8b0c24e2fcbb3fd310e070589d8ba9ee44a4b523c51fad08d32f4e8a",
+  "repositorySha": "411a838ac5555ef14603925adeaa944eb1eba1f8",
+  "reviewedAt": "2026-11-22T16:10:16.517779+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "authenticationStatus": "chatgpt-oauth",
+  "codexCliSha256": "acc5006ac6f1b0385a74fdb2342dcb78e59e2710be0b428bea868a45df876796",
+  "reviewRunId": "01a20404-2f4b-7d10-9c6c-4389f1a508e8",
+  "blockers": [],
+  "summary": "Exact candidate and repository hashes verified. The dates, times, locations, admission, activities, movie details, and planning advice are supported by the cited City of Delta sources. Title and metadata fit the article, the structure is concise and useful, and the licensed Ladner image exists, matches its alt text, and has appropriate provenance. No material factual, source, image, legal, or reputational correction is required."
+}

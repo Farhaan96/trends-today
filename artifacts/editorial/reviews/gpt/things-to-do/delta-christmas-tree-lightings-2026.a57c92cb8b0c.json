@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "a57c92cb8b0c24e2fcbb3fd310e070589d8ba9ee44a4b523c51fad08d32f4e8a",
+  "repositorySha": "411a838ac5555ef14603925adeaa944eb1eba1f8",
+  "reviewedAt": "2026-11-22T15:56:32.240583+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "01a203f6-b3b6-74c0-9942-2b748c99137c",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "PASS. The candidate is concise, locally useful, well structured, and supported by the cited City of Delta materials. Its lead establishes the dates and reader value immediately, while the close gives readers a practical choice between the two events. No unsupported hype, material repetition, formatting defect, or authorial em dash was found."
+}
