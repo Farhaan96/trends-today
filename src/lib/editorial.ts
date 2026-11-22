@@ -1,5 +1,18 @@
 export type EditorialAuthor = string | { name?: string } | undefined;
 
+const BC_PERMANENT_PACIFIC_START = Date.parse('2026-03-08T10:00:00Z');
+
+/**
+ * B.C. stays on UTC-7 after the final March 8, 2026 clock change.
+ * Use a fixed-offset IANA zone for those instants so older ICU/tzdata cannot
+ * incorrectly apply the former November fallback.
+ */
+export function vancouverTimeZoneFor(date: Date): string {
+  return date.getTime() >= BC_PERMANENT_PACIFIC_START
+    ? 'Etc/GMT+7'
+    : 'America/Vancouver';
+}
+
 export function getAuthorName(author: EditorialAuthor): string {
   if (typeof author === 'string') return author;
   return author?.name || 'Trends Today Editorial';
@@ -16,7 +29,7 @@ export function formatArticleDate(value?: string): string {
     day: 'numeric',
     year: 'numeric',
     // Pacific day, not UTC: evening posts land after midnight UTC.
-    timeZone: 'America/Vancouver',
+    timeZone: vancouverTimeZoneFor(date),
   }).format(date);
 }
 
@@ -31,7 +44,7 @@ export function formatArticleDateTime(value?: string): string {
     day: 'numeric',
     hour: 'numeric',
     minute: '2-digit',
-    timeZone: 'America/Vancouver',
+    timeZone: vancouverTimeZoneFor(date),
   }).format(date);
 }
 
@@ -50,7 +63,7 @@ export function formatArticleDateWithWeekday(value?: string): string {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
-    timeZone: 'America/Vancouver',
+    timeZone: vancouverTimeZoneFor(date),
   }).format(date);
 }
 
