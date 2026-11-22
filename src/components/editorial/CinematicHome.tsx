@@ -14,6 +14,7 @@ import {
   ArrowLeftIcon,
   MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
+import { formatArticleDate } from '@/lib/editorial';
 import { getCategoryLabel } from '@/lib/categories';
 import { SubtlePaginationLinks } from '@/components/ui/PaginationLinks';
 import StoryThumb from '@/components/editorial/StoryThumb';
@@ -142,14 +143,7 @@ export default function CinematicHome({
     setSelected((value) =>
       events.length ? (value + delta + events.length) % events.length : 0
     );
-  const date = (value?: string) =>
-    value && Number.isFinite(Date.parse(value))
-      ? new Intl.DateTimeFormat('en-CA', {
-          month: 'short',
-          day: 'numeric',
-          timeZone: 'America/Vancouver',
-        }).format(new Date(value))
-      : '';
+  const date = (value?: string) => formatArticleDate(value);
 
   return (
     <div className="cinematic-home">

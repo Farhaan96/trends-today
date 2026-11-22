@@ -21,6 +21,9 @@ test('formatArticleDate uses the Vancouver day, not the UTC day', () => {
   // 06:30 UTC on Jan 1 is still Dec 31 in Vancouver (UTC-7 or UTC-8).
   assert.equal(formatArticleDate('2027-01-01T06:30:00Z'), 'Dec 31, 2026');
   assert.equal(formatArticleDate('2026-10-31T08:10:00-07:00'), 'Oct 31, 2026');
+  // B.C. remains on UTC-7 after Nov. 1, 2026. Older runtime tzdata
+  // incorrectly renders this instant as Nov. 26 under America/Vancouver.
+  assert.equal(formatArticleDate('2026-11-27T07:30:00Z'), 'Nov 27, 2026');
 });
 
 test('formatArticleDate returns an empty string for missing or bad input', () => {
