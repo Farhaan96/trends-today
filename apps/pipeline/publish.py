@@ -607,6 +607,13 @@ def promote_candidate(
         flags=re.MULTILINE,
     )
 
+    promoted = re.sub(
+        r'^draft:\s*true\s*$',
+        'draft: false',
+        promoted,
+        flags=re.MULTILINE | re.IGNORECASE,
+    )
+
     destination = root / 'content' / category / relative.name
     _commit_promotion(
         root,
