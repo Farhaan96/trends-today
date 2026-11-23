@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "reviewer": "openai-gpt",
+  "verdict": "PASS",
+  "candidateSha256": "fa3079f3d2ad42db0f1f489549ef2552ab04076ca056d34789d8357f060571ba",
+  "repositorySha": "ef1d4ba7e35f274b4f04f0281ca2269f73e9bb61",
+  "reviewedAt": "2026-11-23T15:49:16.777628+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "reviewRunId": "01a20915-d5c7-73e2-b4c0-f0a49668eaf6",
+  "scores": {
+    "engagement": 4,
+    "factualSupport": 5,
+    "formatting": 5,
+    "quality": 4,
+    "readability": 5
+  },
+  "proseEmDashCount": 0,
+  "blockers": [],
+  "summary": "Strict second editorial gate passed. The candidate and repository hashes match, the material claims are supported by the cited sources, the MDX is clear and scannable, and the authorial prose contains no em dashes."
+}

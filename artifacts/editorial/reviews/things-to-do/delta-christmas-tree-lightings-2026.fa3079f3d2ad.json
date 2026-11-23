@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "scope": "candidate",
+  "reviewer": "codex",
+  "verdict": "NO BLOCKERS",
+  "candidateSha256": "fa3079f3d2ad42db0f1f489549ef2552ab04076ca056d34789d8357f060571ba",
+  "repositorySha": "ef1d4ba7e35f274b4f04f0281ca2269f73e9bb61",
+  "reviewedAt": "2026-11-23T15:52:14.576582+00:00",
+  "modelUsed": "gpt-5.6-sol",
+  "reviewBackend": "codex-cli-oauth",
+  "authenticationStatus": "chatgpt-oauth",
+  "codexCliSha256": "acc5006ac6f1b0385a74fdb2342dcb78e59e2710be0b428bea868a45df876796",
+  "reviewRunId": "01a20919-bf69-7742-907e-52782f2ed015",
+  "blockers": [],
+  "summary": "Exact candidate identity verified. Primary sources support the material claims, title/meta fit the article, structure is useful and concise, and the licensed image has relevant subject matter, valid provenance, attribution, alt text, and license metadata. No material factual, editorial, reputational, or legal correction is required. The targeted release-gate tests passed."
+}
